@@ -195,22 +195,6 @@ func (s *GetAllHostsResponseDtoResponseItem) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *GetAllUsersV2ResponseDtoResponseUsersItem) setDefaults() {
-	{
-		val := GetAllUsersV2ResponseDtoResponseUsersItemStatus("ACTIVE")
-		s.Status.SetTo(val)
-	}
-	{
-		val := int(0)
-		s.TrafficLimitBytes.SetTo(val)
-	}
-	{
-		val := GetAllUsersV2ResponseDtoResponseUsersItemTrafficLimitStrategy("NO_RESET")
-		s.TrafficLimitStrategy.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
 func (s *GetOneHostResponseDtoResponse) setDefaults() {
 	{
 		val := bool(false)
