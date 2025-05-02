@@ -2474,10 +2474,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetInboundsResponseDto"
-                  }
+                  "$ref": "#/components/schemas/GetInboundsResponseDto"
                 }
               }
             }
@@ -2505,10 +2502,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetFullInboundsResponseDto"
-                  }
+                  "$ref": "#/components/schemas/GetInboundsResponseDto"
                 }
               }
             }

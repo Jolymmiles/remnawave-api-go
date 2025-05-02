@@ -1294,7 +1294,7 @@ func decodeInboundsBulkActionsControllerRemoveInboundFromUsersResponse(resp *htt
 	return res, validate.UnexpectedStatusCode(resp.StatusCode)
 }
 
-func decodeInboundsControllerGetFullInboundsResponse(resp *http.Response) (res []GetFullInboundsResponseDto, _ error) {
+func decodeInboundsControllerGetFullInboundsResponse(resp *http.Response) (res *GetInboundsResponseDto, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
@@ -1310,17 +1310,9 @@ func decodeInboundsControllerGetFullInboundsResponse(resp *http.Response) (res [
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response []GetFullInboundsResponseDto
+			var response GetInboundsResponseDto
 			if err := func() error {
-				response = make([]GetFullInboundsResponseDto, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem GetFullInboundsResponseDto
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					response = append(response, elem)
-					return nil
-				}); err != nil {
+				if err := response.Decode(d); err != nil {
 					return err
 				}
 				if err := d.Skip(); err != io.EOF {
@@ -1337,31 +1329,14 @@ func decodeInboundsControllerGetFullInboundsResponse(resp *http.Response) (res [
 			}
 			// Validate response.
 			if err := func() error {
-				if response == nil {
-					return errors.New("nil is invalid value")
-				}
-				var failures []validate.FieldError
-				for i, elem := range response {
-					if err := func() error {
-						if err := elem.Validate(); err != nil {
-							return err
-						}
-						return nil
-					}(); err != nil {
-						failures = append(failures, validate.FieldError{
-							Name:  fmt.Sprintf("[%d]", i),
-							Error: err,
-						})
-					}
-				}
-				if len(failures) > 0 {
-					return &validate.Error{Fields: failures}
+				if err := response.Validate(); err != nil {
+					return err
 				}
 				return nil
 			}(); err != nil {
 				return res, errors.Wrap(err, "validate")
 			}
-			return response, nil
+			return &response, nil
 		default:
 			return res, validate.InvalidContentType(ct)
 		}
@@ -1369,7 +1344,7 @@ func decodeInboundsControllerGetFullInboundsResponse(resp *http.Response) (res [
 	return res, validate.UnexpectedStatusCode(resp.StatusCode)
 }
 
-func decodeInboundsControllerGetInboundsResponse(resp *http.Response) (res []GetInboundsResponseDto, _ error) {
+func decodeInboundsControllerGetInboundsResponse(resp *http.Response) (res *GetInboundsResponseDto, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
@@ -1385,17 +1360,9 @@ func decodeInboundsControllerGetInboundsResponse(resp *http.Response) (res []Get
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response []GetInboundsResponseDto
+			var response GetInboundsResponseDto
 			if err := func() error {
-				response = make([]GetInboundsResponseDto, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem GetInboundsResponseDto
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					response = append(response, elem)
-					return nil
-				}); err != nil {
+				if err := response.Decode(d); err != nil {
 					return err
 				}
 				if err := d.Skip(); err != io.EOF {
@@ -1412,31 +1379,14 @@ func decodeInboundsControllerGetInboundsResponse(resp *http.Response) (res []Get
 			}
 			// Validate response.
 			if err := func() error {
-				if response == nil {
-					return errors.New("nil is invalid value")
-				}
-				var failures []validate.FieldError
-				for i, elem := range response {
-					if err := func() error {
-						if err := elem.Validate(); err != nil {
-							return err
-						}
-						return nil
-					}(); err != nil {
-						failures = append(failures, validate.FieldError{
-							Name:  fmt.Sprintf("[%d]", i),
-							Error: err,
-						})
-					}
-				}
-				if len(failures) > 0 {
-					return &validate.Error{Fields: failures}
+				if err := response.Validate(); err != nil {
+					return err
 				}
 				return nil
 			}(); err != nil {
 				return res, errors.Wrap(err, "validate")
 			}
-			return response, nil
+			return &response, nil
 		default:
 			return res, validate.InvalidContentType(ct)
 		}

@@ -230,13 +230,13 @@ type Invoker interface {
 	// Get full inbounds.
 	//
 	// GET /api/inbounds/full
-	InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) ([]GetFullInboundsResponseDto, error)
+	InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) (*GetInboundsResponseDto, error)
 	// InboundsControllerGetInbounds invokes InboundsController_getInbounds operation.
 	//
 	// Get inbounds.
 	//
 	// GET /api/inbounds
-	InboundsControllerGetInbounds(ctx context.Context, options ...RequestOption) ([]GetInboundsResponseDto, error)
+	InboundsControllerGetInbounds(ctx context.Context, options ...RequestOption) (*GetInboundsResponseDto, error)
 	// KeygenControllerGenerateKey invokes KeygenController_generateKey operation.
 	//
 	// Get SSL_CERT for Remnawave Node.
@@ -2755,12 +2755,12 @@ func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromUsers(ctx con
 // Get full inbounds.
 //
 // GET /api/inbounds/full
-func (c *Client) InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) ([]GetFullInboundsResponseDto, error) {
+func (c *Client) InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) (*GetInboundsResponseDto, error) {
 	res, err := c.sendInboundsControllerGetFullInbounds(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsControllerGetFullInbounds(ctx context.Context, requestOptions ...RequestOption) (res []GetFullInboundsResponseDto, err error) {
+func (c *Client) sendInboundsControllerGetFullInbounds(ctx context.Context, requestOptions ...RequestOption) (res *GetInboundsResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2842,12 +2842,12 @@ func (c *Client) sendInboundsControllerGetFullInbounds(ctx context.Context, requ
 // Get inbounds.
 //
 // GET /api/inbounds
-func (c *Client) InboundsControllerGetInbounds(ctx context.Context, options ...RequestOption) ([]GetInboundsResponseDto, error) {
+func (c *Client) InboundsControllerGetInbounds(ctx context.Context, options ...RequestOption) (*GetInboundsResponseDto, error) {
 	res, err := c.sendInboundsControllerGetInbounds(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsControllerGetInbounds(ctx context.Context, requestOptions ...RequestOption) (res []GetInboundsResponseDto, err error) {
+func (c *Client) sendInboundsControllerGetInbounds(ctx context.Context, requestOptions ...RequestOption) (res *GetInboundsResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
