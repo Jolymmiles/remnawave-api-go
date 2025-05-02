@@ -35,16 +35,6 @@ remapi.UsersControllerGetUserByTelegramIdParams{TelegramId: 123456789})
 | **Remnawave JWT token** | Obtainable in the panel |
 
 
-## Contributing
-
-Bug-fixes, doc updates and new examples are welcome.
-
-```bash
-go vet ./...
-go test ./...
-golangci-lint run
-```
-
 ---
 
 ## Donation Methods
