@@ -1,4 +1,4 @@
-module remnawave-api-go
+module github.com/Jolymmiles/remnawave-api-go
 
 go 1.24
 
