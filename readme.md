@@ -60,6 +60,6 @@ golangci-lint run
 
 ## License
 
-[MIT](LICENSE) — free to use; a ★ on GitHub is always appreciated!
+[MIT](LICENSE.MD) — free to use; a ★ on GitHub is always appreciated!
 
 
