@@ -9624,1104 +9624,6 @@ func (s *CreateUserRequestDtoTrafficLimitStrategy) UnmarshalJSON(data []byte) er
 }
 
 // Encode implements json.Marshaler.
-func (s *CreateUserResponseDto) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CreateUserResponseDto) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("response")
-		s.Response.Encode(e)
-	}
-}
-
-var jsonFieldsNameOfCreateUserResponseDto = [1]string{
-	0: "response",
-}
-
-// Decode decodes CreateUserResponseDto from json.
-func (s *CreateUserResponseDto) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDto to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "response":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				if err := s.Response.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"response\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CreateUserResponseDto")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000001,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCreateUserResponseDto) {
-					name = jsonFieldsNameOfCreateUserResponseDto[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CreateUserResponseDto) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDto) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CreateUserResponseDtoResponse) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CreateUserResponseDtoResponse) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("uuid")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.FieldStart("subscriptionUuid")
-		json.EncodeUUID(e, s.SubscriptionUuid)
-	}
-	{
-		e.FieldStart("shortUuid")
-		e.Str(s.ShortUuid)
-	}
-	{
-		e.FieldStart("username")
-		e.Str(s.Username)
-	}
-	{
-		if s.Status.Set {
-			e.FieldStart("status")
-			s.Status.Encode(e)
-		}
-	}
-	{
-		e.FieldStart("usedTrafficBytes")
-		e.Float64(s.UsedTrafficBytes)
-	}
-	{
-		e.FieldStart("lifetimeUsedTrafficBytes")
-		e.Float64(s.LifetimeUsedTrafficBytes)
-	}
-	{
-		if s.TrafficLimitBytes.Set {
-			e.FieldStart("trafficLimitBytes")
-			s.TrafficLimitBytes.Encode(e)
-		}
-	}
-	{
-		if s.TrafficLimitStrategy.Set {
-			e.FieldStart("trafficLimitStrategy")
-			s.TrafficLimitStrategy.Encode(e)
-		}
-	}
-	{
-		e.FieldStart("subLastUserAgent")
-		s.SubLastUserAgent.Encode(e)
-	}
-	{
-		e.FieldStart("subLastOpenedAt")
-		s.SubLastOpenedAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("expireAt")
-		json.EncodeDateTime(e, s.ExpireAt)
-	}
-	{
-		e.FieldStart("onlineAt")
-		s.OnlineAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("subRevokedAt")
-		s.SubRevokedAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("lastTrafficResetAt")
-		s.LastTrafficResetAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("trojanPassword")
-		e.Str(s.TrojanPassword)
-	}
-	{
-		e.FieldStart("vlessUuid")
-		json.EncodeUUID(e, s.VlessUuid)
-	}
-	{
-		e.FieldStart("ssPassword")
-		e.Str(s.SsPassword)
-	}
-	{
-		e.FieldStart("description")
-		s.Description.Encode(e)
-	}
-	{
-		e.FieldStart("telegramId")
-		s.TelegramId.Encode(e)
-	}
-	{
-		e.FieldStart("email")
-		s.Email.Encode(e)
-	}
-	{
-		e.FieldStart("hwidDeviceLimit")
-		s.HwidDeviceLimit.Encode(e)
-	}
-	{
-		e.FieldStart("createdAt")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
-	{
-		e.FieldStart("updatedAt")
-		json.EncodeDateTime(e, s.UpdatedAt)
-	}
-	{
-		e.FieldStart("activeUserInbounds")
-		e.ArrStart()
-		for _, elem := range s.ActiveUserInbounds {
-			elem.Encode(e)
-		}
-		e.ArrEnd()
-	}
-	{
-		e.FieldStart("subscriptionUrl")
-		e.Str(s.SubscriptionUrl)
-	}
-	{
-		e.FieldStart("lastConnectedNode")
-		s.LastConnectedNode.Encode(e)
-	}
-	{
-		e.FieldStart("happ")
-		s.Happ.Encode(e)
-	}
-}
-
-var jsonFieldsNameOfCreateUserResponseDtoResponse = [28]string{
-	0:  "uuid",
-	1:  "subscriptionUuid",
-	2:  "shortUuid",
-	3:  "username",
-	4:  "status",
-	5:  "usedTrafficBytes",
-	6:  "lifetimeUsedTrafficBytes",
-	7:  "trafficLimitBytes",
-	8:  "trafficLimitStrategy",
-	9:  "subLastUserAgent",
-	10: "subLastOpenedAt",
-	11: "expireAt",
-	12: "onlineAt",
-	13: "subRevokedAt",
-	14: "lastTrafficResetAt",
-	15: "trojanPassword",
-	16: "vlessUuid",
-	17: "ssPassword",
-	18: "description",
-	19: "telegramId",
-	20: "email",
-	21: "hwidDeviceLimit",
-	22: "createdAt",
-	23: "updatedAt",
-	24: "activeUserInbounds",
-	25: "subscriptionUrl",
-	26: "lastConnectedNode",
-	27: "happ",
-}
-
-// Decode decodes CreateUserResponseDtoResponse from json.
-func (s *CreateUserResponseDtoResponse) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDtoResponse to nil")
-	}
-	var requiredBitSet [4]uint8
-	s.setDefaults()
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "uuid":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
-		case "subscriptionUuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.SubscriptionUuid = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscriptionUuid\"")
-			}
-		case "shortUuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.ShortUuid = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"shortUuid\"")
-			}
-		case "username":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Username = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"username\"")
-			}
-		case "status":
-			if err := func() error {
-				s.Status.Reset()
-				if err := s.Status.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"status\"")
-			}
-		case "usedTrafficBytes":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Float64()
-				s.UsedTrafficBytes = float64(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"usedTrafficBytes\"")
-			}
-		case "lifetimeUsedTrafficBytes":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Float64()
-				s.LifetimeUsedTrafficBytes = float64(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"lifetimeUsedTrafficBytes\"")
-			}
-		case "trafficLimitBytes":
-			if err := func() error {
-				s.TrafficLimitBytes.Reset()
-				if err := s.TrafficLimitBytes.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"trafficLimitBytes\"")
-			}
-		case "trafficLimitStrategy":
-			if err := func() error {
-				s.TrafficLimitStrategy.Reset()
-				if err := s.TrafficLimitStrategy.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"trafficLimitStrategy\"")
-			}
-		case "subLastUserAgent":
-			requiredBitSet[1] |= 1 << 1
-			if err := func() error {
-				if err := s.SubLastUserAgent.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subLastUserAgent\"")
-			}
-		case "subLastOpenedAt":
-			requiredBitSet[1] |= 1 << 2
-			if err := func() error {
-				if err := s.SubLastOpenedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subLastOpenedAt\"")
-			}
-		case "expireAt":
-			requiredBitSet[1] |= 1 << 3
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.ExpireAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"expireAt\"")
-			}
-		case "onlineAt":
-			requiredBitSet[1] |= 1 << 4
-			if err := func() error {
-				if err := s.OnlineAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"onlineAt\"")
-			}
-		case "subRevokedAt":
-			requiredBitSet[1] |= 1 << 5
-			if err := func() error {
-				if err := s.SubRevokedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subRevokedAt\"")
-			}
-		case "lastTrafficResetAt":
-			requiredBitSet[1] |= 1 << 6
-			if err := func() error {
-				if err := s.LastTrafficResetAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"lastTrafficResetAt\"")
-			}
-		case "trojanPassword":
-			requiredBitSet[1] |= 1 << 7
-			if err := func() error {
-				v, err := d.Str()
-				s.TrojanPassword = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"trojanPassword\"")
-			}
-		case "vlessUuid":
-			requiredBitSet[2] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.VlessUuid = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"vlessUuid\"")
-			}
-		case "ssPassword":
-			requiredBitSet[2] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.SsPassword = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"ssPassword\"")
-			}
-		case "description":
-			requiredBitSet[2] |= 1 << 2
-			if err := func() error {
-				if err := s.Description.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "telegramId":
-			requiredBitSet[2] |= 1 << 3
-			if err := func() error {
-				if err := s.TelegramId.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"telegramId\"")
-			}
-		case "email":
-			requiredBitSet[2] |= 1 << 4
-			if err := func() error {
-				if err := s.Email.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"email\"")
-			}
-		case "hwidDeviceLimit":
-			requiredBitSet[2] |= 1 << 5
-			if err := func() error {
-				if err := s.HwidDeviceLimit.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"hwidDeviceLimit\"")
-			}
-		case "createdAt":
-			requiredBitSet[2] |= 1 << 6
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"createdAt\"")
-			}
-		case "updatedAt":
-			requiredBitSet[2] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.UpdatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"updatedAt\"")
-			}
-		case "activeUserInbounds":
-			requiredBitSet[3] |= 1 << 0
-			if err := func() error {
-				s.ActiveUserInbounds = make([]CreateUserResponseDtoResponseActiveUserInboundsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem CreateUserResponseDtoResponseActiveUserInboundsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.ActiveUserInbounds = append(s.ActiveUserInbounds, elem)
-					return nil
-				}); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"activeUserInbounds\"")
-			}
-		case "subscriptionUrl":
-			requiredBitSet[3] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.SubscriptionUrl = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscriptionUrl\"")
-			}
-		case "lastConnectedNode":
-			requiredBitSet[3] |= 1 << 2
-			if err := func() error {
-				if err := s.LastConnectedNode.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"lastConnectedNode\"")
-			}
-		case "happ":
-			requiredBitSet[3] |= 1 << 3
-			if err := func() error {
-				if err := s.Happ.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"happ\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CreateUserResponseDtoResponse")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [4]uint8{
-		0b01101111,
-		0b11111110,
-		0b11111111,
-		0b00001111,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCreateUserResponseDtoResponse) {
-					name = jsonFieldsNameOfCreateUserResponseDtoResponse[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CreateUserResponseDtoResponse) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDtoResponse) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("uuid")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.FieldStart("tag")
-		e.Str(s.Tag)
-	}
-	{
-		e.FieldStart("type")
-		e.Str(s.Type)
-	}
-	{
-		e.FieldStart("network")
-		s.Network.Encode(e)
-	}
-	{
-		e.FieldStart("security")
-		s.Security.Encode(e)
-	}
-}
-
-var jsonFieldsNameOfCreateUserResponseDtoResponseActiveUserInboundsItem = [5]string{
-	0: "uuid",
-	1: "tag",
-	2: "type",
-	3: "network",
-	4: "security",
-}
-
-// Decode decodes CreateUserResponseDtoResponseActiveUserInboundsItem from json.
-func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDtoResponseActiveUserInboundsItem to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "uuid":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
-		case "tag":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.Tag = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"tag\"")
-			}
-		case "type":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Type = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"type\"")
-			}
-		case "network":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				if err := s.Network.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"network\"")
-			}
-		case "security":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				if err := s.Security.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"security\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CreateUserResponseDtoResponseActiveUserInboundsItem")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00011111,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCreateUserResponseDtoResponseActiveUserInboundsItem) {
-					name = jsonFieldsNameOfCreateUserResponseDtoResponseActiveUserInboundsItem[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CreateUserResponseDtoResponseHapp) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CreateUserResponseDtoResponseHapp) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("cryptoLink")
-		e.Str(s.CryptoLink)
-	}
-}
-
-var jsonFieldsNameOfCreateUserResponseDtoResponseHapp = [1]string{
-	0: "cryptoLink",
-}
-
-// Decode decodes CreateUserResponseDtoResponseHapp from json.
-func (s *CreateUserResponseDtoResponseHapp) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDtoResponseHapp to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "cryptoLink":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.CryptoLink = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"cryptoLink\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CreateUserResponseDtoResponseHapp")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000001,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCreateUserResponseDtoResponseHapp) {
-					name = jsonFieldsNameOfCreateUserResponseDtoResponseHapp[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CreateUserResponseDtoResponseHapp) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDtoResponseHapp) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CreateUserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CreateUserResponseDtoResponseLastConnectedNode) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("connectedAt")
-		json.EncodeDateTime(e, s.ConnectedAt)
-	}
-	{
-		e.FieldStart("nodeName")
-		e.Str(s.NodeName)
-	}
-}
-
-var jsonFieldsNameOfCreateUserResponseDtoResponseLastConnectedNode = [2]string{
-	0: "connectedAt",
-	1: "nodeName",
-}
-
-// Decode decodes CreateUserResponseDtoResponseLastConnectedNode from json.
-func (s *CreateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDtoResponseLastConnectedNode to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "connectedAt":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.ConnectedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"connectedAt\"")
-			}
-		case "nodeName":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.NodeName = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"nodeName\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CreateUserResponseDtoResponseLastConnectedNode")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000011,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCreateUserResponseDtoResponseLastConnectedNode) {
-					name = jsonFieldsNameOfCreateUserResponseDtoResponseLastConnectedNode[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CreateUserResponseDtoResponseLastConnectedNode) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDtoResponseLastConnectedNode) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes CreateUserResponseDtoResponseStatus as json.
-func (s CreateUserResponseDtoResponseStatus) Encode(e *jx.Encoder) {
-	e.Str(string(s))
-}
-
-// Decode decodes CreateUserResponseDtoResponseStatus from json.
-func (s *CreateUserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDtoResponseStatus to nil")
-	}
-	v, err := d.StrBytes()
-	if err != nil {
-		return err
-	}
-	// Try to use constant string.
-	switch CreateUserResponseDtoResponseStatus(v) {
-	case CreateUserResponseDtoResponseStatusACTIVE:
-		*s = CreateUserResponseDtoResponseStatusACTIVE
-	case CreateUserResponseDtoResponseStatusDISABLED:
-		*s = CreateUserResponseDtoResponseStatusDISABLED
-	case CreateUserResponseDtoResponseStatusLIMITED:
-		*s = CreateUserResponseDtoResponseStatusLIMITED
-	case CreateUserResponseDtoResponseStatusEXPIRED:
-		*s = CreateUserResponseDtoResponseStatusEXPIRED
-	default:
-		*s = CreateUserResponseDtoResponseStatus(v)
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s CreateUserResponseDtoResponseStatus) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDtoResponseStatus) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes CreateUserResponseDtoResponseTrafficLimitStrategy as json.
-func (s CreateUserResponseDtoResponseTrafficLimitStrategy) Encode(e *jx.Encoder) {
-	e.Str(string(s))
-}
-
-// Decode decodes CreateUserResponseDtoResponseTrafficLimitStrategy from json.
-func (s *CreateUserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CreateUserResponseDtoResponseTrafficLimitStrategy to nil")
-	}
-	v, err := d.StrBytes()
-	if err != nil {
-		return err
-	}
-	// Try to use constant string.
-	switch CreateUserResponseDtoResponseTrafficLimitStrategy(v) {
-	case CreateUserResponseDtoResponseTrafficLimitStrategyNORESET:
-		*s = CreateUserResponseDtoResponseTrafficLimitStrategyNORESET
-	case CreateUserResponseDtoResponseTrafficLimitStrategyDAY:
-		*s = CreateUserResponseDtoResponseTrafficLimitStrategyDAY
-	case CreateUserResponseDtoResponseTrafficLimitStrategyWEEK:
-		*s = CreateUserResponseDtoResponseTrafficLimitStrategyWEEK
-	case CreateUserResponseDtoResponseTrafficLimitStrategyMONTH:
-		*s = CreateUserResponseDtoResponseTrafficLimitStrategyMONTH
-	default:
-		*s = CreateUserResponseDtoResponseTrafficLimitStrategy(v)
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s CreateUserResponseDtoResponseTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CreateUserResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
 func (s *DeleteApiTokenResponseDto) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -28928,9 +27830,9 @@ func (s *GetUserByTelegramIdResponseDto) Decode(d *jx.Decoder) error {
 		case "response":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				s.Response = make([]GetUserByTelegramIdResponseDtoResponseItem, 0)
+				s.Response = make([]UserResponseDto, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem GetUserByTelegramIdResponseDtoResponseItem
+					var elem UserResponseDto
 					if err := elem.Decode(d); err != nil {
 						return err
 					}
@@ -28995,1010 +27897,6 @@ func (s *GetUserByTelegramIdResponseDto) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *GetUserByTelegramIdResponseDto) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetUserByTelegramIdResponseDtoResponseItem) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("uuid")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.FieldStart("subscriptionUuid")
-		json.EncodeUUID(e, s.SubscriptionUuid)
-	}
-	{
-		e.FieldStart("shortUuid")
-		e.Str(s.ShortUuid)
-	}
-	{
-		e.FieldStart("username")
-		e.Str(s.Username)
-	}
-	{
-		if s.Status.Set {
-			e.FieldStart("status")
-			s.Status.Encode(e)
-		}
-	}
-	{
-		e.FieldStart("usedTrafficBytes")
-		e.Float64(s.UsedTrafficBytes)
-	}
-	{
-		e.FieldStart("lifetimeUsedTrafficBytes")
-		e.Float64(s.LifetimeUsedTrafficBytes)
-	}
-	{
-		if s.TrafficLimitBytes.Set {
-			e.FieldStart("trafficLimitBytes")
-			s.TrafficLimitBytes.Encode(e)
-		}
-	}
-	{
-		if s.TrafficLimitStrategy.Set {
-			e.FieldStart("trafficLimitStrategy")
-			s.TrafficLimitStrategy.Encode(e)
-		}
-	}
-	{
-		e.FieldStart("subLastUserAgent")
-		s.SubLastUserAgent.Encode(e)
-	}
-	{
-		e.FieldStart("subLastOpenedAt")
-		s.SubLastOpenedAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("expireAt")
-		json.EncodeDateTime(e, s.ExpireAt)
-	}
-	{
-		e.FieldStart("onlineAt")
-		s.OnlineAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("subRevokedAt")
-		s.SubRevokedAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("lastTrafficResetAt")
-		s.LastTrafficResetAt.Encode(e, json.EncodeDateTime)
-	}
-	{
-		e.FieldStart("trojanPassword")
-		e.Str(s.TrojanPassword)
-	}
-	{
-		e.FieldStart("vlessUuid")
-		json.EncodeUUID(e, s.VlessUuid)
-	}
-	{
-		e.FieldStart("ssPassword")
-		e.Str(s.SsPassword)
-	}
-	{
-		e.FieldStart("description")
-		s.Description.Encode(e)
-	}
-	{
-		e.FieldStart("telegramId")
-		s.TelegramId.Encode(e)
-	}
-	{
-		e.FieldStart("email")
-		s.Email.Encode(e)
-	}
-	{
-		e.FieldStart("hwidDeviceLimit")
-		s.HwidDeviceLimit.Encode(e)
-	}
-	{
-		e.FieldStart("createdAt")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
-	{
-		e.FieldStart("updatedAt")
-		json.EncodeDateTime(e, s.UpdatedAt)
-	}
-	{
-		e.FieldStart("activeUserInbounds")
-		e.ArrStart()
-		for _, elem := range s.ActiveUserInbounds {
-			elem.Encode(e)
-		}
-		e.ArrEnd()
-	}
-	{
-		e.FieldStart("subscriptionUrl")
-		e.Str(s.SubscriptionUrl)
-	}
-	{
-		e.FieldStart("lastConnectedNode")
-		s.LastConnectedNode.Encode(e)
-	}
-	{
-		e.FieldStart("happ")
-		s.Happ.Encode(e)
-	}
-}
-
-var jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItem = [28]string{
-	0:  "uuid",
-	1:  "subscriptionUuid",
-	2:  "shortUuid",
-	3:  "username",
-	4:  "status",
-	5:  "usedTrafficBytes",
-	6:  "lifetimeUsedTrafficBytes",
-	7:  "trafficLimitBytes",
-	8:  "trafficLimitStrategy",
-	9:  "subLastUserAgent",
-	10: "subLastOpenedAt",
-	11: "expireAt",
-	12: "onlineAt",
-	13: "subRevokedAt",
-	14: "lastTrafficResetAt",
-	15: "trojanPassword",
-	16: "vlessUuid",
-	17: "ssPassword",
-	18: "description",
-	19: "telegramId",
-	20: "email",
-	21: "hwidDeviceLimit",
-	22: "createdAt",
-	23: "updatedAt",
-	24: "activeUserInbounds",
-	25: "subscriptionUrl",
-	26: "lastConnectedNode",
-	27: "happ",
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItem from json.
-func (s *GetUserByTelegramIdResponseDtoResponseItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetUserByTelegramIdResponseDtoResponseItem to nil")
-	}
-	var requiredBitSet [4]uint8
-	s.setDefaults()
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "uuid":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
-		case "subscriptionUuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.SubscriptionUuid = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscriptionUuid\"")
-			}
-		case "shortUuid":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.ShortUuid = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"shortUuid\"")
-			}
-		case "username":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Str()
-				s.Username = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"username\"")
-			}
-		case "status":
-			if err := func() error {
-				s.Status.Reset()
-				if err := s.Status.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"status\"")
-			}
-		case "usedTrafficBytes":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Float64()
-				s.UsedTrafficBytes = float64(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"usedTrafficBytes\"")
-			}
-		case "lifetimeUsedTrafficBytes":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Float64()
-				s.LifetimeUsedTrafficBytes = float64(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"lifetimeUsedTrafficBytes\"")
-			}
-		case "trafficLimitBytes":
-			if err := func() error {
-				s.TrafficLimitBytes.Reset()
-				if err := s.TrafficLimitBytes.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"trafficLimitBytes\"")
-			}
-		case "trafficLimitStrategy":
-			if err := func() error {
-				s.TrafficLimitStrategy.Reset()
-				if err := s.TrafficLimitStrategy.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"trafficLimitStrategy\"")
-			}
-		case "subLastUserAgent":
-			requiredBitSet[1] |= 1 << 1
-			if err := func() error {
-				if err := s.SubLastUserAgent.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subLastUserAgent\"")
-			}
-		case "subLastOpenedAt":
-			requiredBitSet[1] |= 1 << 2
-			if err := func() error {
-				if err := s.SubLastOpenedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subLastOpenedAt\"")
-			}
-		case "expireAt":
-			requiredBitSet[1] |= 1 << 3
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.ExpireAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"expireAt\"")
-			}
-		case "onlineAt":
-			requiredBitSet[1] |= 1 << 4
-			if err := func() error {
-				if err := s.OnlineAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"onlineAt\"")
-			}
-		case "subRevokedAt":
-			requiredBitSet[1] |= 1 << 5
-			if err := func() error {
-				if err := s.SubRevokedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subRevokedAt\"")
-			}
-		case "lastTrafficResetAt":
-			requiredBitSet[1] |= 1 << 6
-			if err := func() error {
-				if err := s.LastTrafficResetAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"lastTrafficResetAt\"")
-			}
-		case "trojanPassword":
-			requiredBitSet[1] |= 1 << 7
-			if err := func() error {
-				v, err := d.Str()
-				s.TrojanPassword = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"trojanPassword\"")
-			}
-		case "vlessUuid":
-			requiredBitSet[2] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.VlessUuid = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"vlessUuid\"")
-			}
-		case "ssPassword":
-			requiredBitSet[2] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.SsPassword = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"ssPassword\"")
-			}
-		case "description":
-			requiredBitSet[2] |= 1 << 2
-			if err := func() error {
-				if err := s.Description.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"description\"")
-			}
-		case "telegramId":
-			requiredBitSet[2] |= 1 << 3
-			if err := func() error {
-				if err := s.TelegramId.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"telegramId\"")
-			}
-		case "email":
-			requiredBitSet[2] |= 1 << 4
-			if err := func() error {
-				if err := s.Email.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"email\"")
-			}
-		case "hwidDeviceLimit":
-			requiredBitSet[2] |= 1 << 5
-			if err := func() error {
-				if err := s.HwidDeviceLimit.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"hwidDeviceLimit\"")
-			}
-		case "createdAt":
-			requiredBitSet[2] |= 1 << 6
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"createdAt\"")
-			}
-		case "updatedAt":
-			requiredBitSet[2] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.UpdatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"updatedAt\"")
-			}
-		case "activeUserInbounds":
-			requiredBitSet[3] |= 1 << 0
-			if err := func() error {
-				s.ActiveUserInbounds = make([]GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.ActiveUserInbounds = append(s.ActiveUserInbounds, elem)
-					return nil
-				}); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"activeUserInbounds\"")
-			}
-		case "subscriptionUrl":
-			requiredBitSet[3] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.SubscriptionUrl = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscriptionUrl\"")
-			}
-		case "lastConnectedNode":
-			requiredBitSet[3] |= 1 << 2
-			if err := func() error {
-				if err := s.LastConnectedNode.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"lastConnectedNode\"")
-			}
-		case "happ":
-			requiredBitSet[3] |= 1 << 3
-			if err := func() error {
-				if err := s.Happ.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"happ\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode GetUserByTelegramIdResponseDtoResponseItem")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [4]uint8{
-		0b01101111,
-		0b11111110,
-		0b11111111,
-		0b00001111,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItem) {
-					name = jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItem[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItem) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("uuid")
-		json.EncodeUUID(e, s.UUID)
-	}
-	{
-		e.FieldStart("tag")
-		e.Str(s.Tag)
-	}
-	{
-		e.FieldStart("type")
-		e.Str(s.Type)
-	}
-	{
-		e.FieldStart("network")
-		s.Network.Encode(e)
-	}
-	{
-		e.FieldStart("security")
-		s.Security.Encode(e)
-	}
-}
-
-var jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem = [5]string{
-	0: "uuid",
-	1: "tag",
-	2: "type",
-	3: "network",
-	4: "security",
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem from json.
-func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "uuid":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.UUID = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"uuid\"")
-			}
-		case "tag":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.Tag = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"tag\"")
-			}
-		case "type":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				v, err := d.Str()
-				s.Type = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"type\"")
-			}
-		case "network":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				if err := s.Network.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"network\"")
-			}
-		case "security":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				if err := s.Security.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"security\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00011111,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) {
-					name = jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("cryptoLink")
-		e.Str(s.CryptoLink)
-	}
-}
-
-var jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemHapp = [1]string{
-	0: "cryptoLink",
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemHapp from json.
-func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetUserByTelegramIdResponseDtoResponseItemHapp to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "cryptoLink":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.CryptoLink = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"cryptoLink\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode GetUserByTelegramIdResponseDtoResponseItemHapp")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000001,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemHapp) {
-					name = jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemHapp[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("connectedAt")
-		json.EncodeDateTime(e, s.ConnectedAt)
-	}
-	{
-		e.FieldStart("nodeName")
-		e.Str(s.NodeName)
-	}
-}
-
-var jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode = [2]string{
-	0: "connectedAt",
-	1: "nodeName",
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode from json.
-func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "connectedAt":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.ConnectedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"connectedAt\"")
-			}
-		case "nodeName":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.NodeName = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"nodeName\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000011,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) {
-					name = jsonFieldsNameOfGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes GetUserByTelegramIdResponseDtoResponseItemStatus as json.
-func (s GetUserByTelegramIdResponseDtoResponseItemStatus) Encode(e *jx.Encoder) {
-	e.Str(string(s))
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemStatus from json.
-func (s *GetUserByTelegramIdResponseDtoResponseItemStatus) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetUserByTelegramIdResponseDtoResponseItemStatus to nil")
-	}
-	v, err := d.StrBytes()
-	if err != nil {
-		return err
-	}
-	// Try to use constant string.
-	switch GetUserByTelegramIdResponseDtoResponseItemStatus(v) {
-	case GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE:
-		*s = GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE
-	case GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED:
-		*s = GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED
-	case GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED:
-		*s = GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED
-	case GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED:
-		*s = GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED
-	default:
-		*s = GetUserByTelegramIdResponseDtoResponseItemStatus(v)
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s GetUserByTelegramIdResponseDtoResponseItemStatus) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemStatus) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy as json.
-func (s GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Encode(e *jx.Encoder) {
-	e.Str(string(s))
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy from json.
-func (s *GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy to nil")
-	}
-	v, err := d.StrBytes()
-	if err != nil {
-		return err
-	}
-	// Try to use constant string.
-	switch GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy(v) {
-	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET:
-		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET
-	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY:
-		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY
-	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK:
-		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK
-	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH:
-		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH
-	default:
-		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy(v)
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -33129,50 +31027,6 @@ func (s *NilActivateAllInboundsResponseDtoResponseLastConnectedNode) UnmarshalJS
 	return s.Decode(d)
 }
 
-// Encode encodes CreateUserResponseDtoResponseLastConnectedNode as json.
-func (o NilCreateUserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
-	if o.Null {
-		e.Null()
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes CreateUserResponseDtoResponseLastConnectedNode from json.
-func (o *NilCreateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode NilCreateUserResponseDtoResponseLastConnectedNode to nil")
-	}
-	if d.Next() == jx.Null {
-		if err := d.Null(); err != nil {
-			return err
-		}
-
-		var v CreateUserResponseDtoResponseLastConnectedNode
-		o.Value = v
-		o.Null = true
-		return nil
-	}
-	o.Null = false
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s NilCreateUserResponseDtoResponseLastConnectedNode) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NilCreateUserResponseDtoResponseLastConnectedNode) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
 // Encode encodes time.Time as json.
 func (o NilDateTime) Encode(e *jx.Encoder, format func(*jx.Encoder, time.Time)) {
 	if o.Null {
@@ -33574,50 +31428,6 @@ func (s *NilGetUserBySubscriptionUuidResponseDtoResponseLastConnectedNode) Unmar
 	return s.Decode(d)
 }
 
-// Encode encodes GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode as json.
-func (o NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) Encode(e *jx.Encoder) {
-	if o.Null {
-		e.Null()
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode from json.
-func (o *NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode to nil")
-	}
-	if d.Next() == jx.Null {
-		if err := d.Null(); err != nil {
-			return err
-		}
-
-		var v GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode
-		o.Value = v
-		o.Null = true
-		return nil
-	}
-	o.Null = false
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
 // Encode encodes GetUserByUsernameResponseDtoResponseLastConnectedNode as json.
 func (o NilGetUserByUsernameResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
 	if o.Null {
@@ -33931,8 +31741,8 @@ func (s *NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders) 
 	return s.Decode(d)
 }
 
-// Encode encodes UpdateUserResponseDtoResponseLastConnectedNode as json.
-func (o NilUpdateUserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
+// Encode encodes UserResponseDtoResponseLastConnectedNode as json.
+func (o NilUserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
 	if o.Null {
 		e.Null()
 		return
@@ -33940,17 +31750,17 @@ func (o NilUpdateUserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder)
 	o.Value.Encode(e)
 }
 
-// Decode decodes UpdateUserResponseDtoResponseLastConnectedNode from json.
-func (o *NilUpdateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseLastConnectedNode from json.
+func (o *NilUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) error {
 	if o == nil {
-		return errors.New("invalid: unable to decode NilUpdateUserResponseDtoResponseLastConnectedNode to nil")
+		return errors.New("invalid: unable to decode NilUserResponseDtoResponseLastConnectedNode to nil")
 	}
 	if d.Next() == jx.Null {
 		if err := d.Null(); err != nil {
 			return err
 		}
 
-		var v UpdateUserResponseDtoResponseLastConnectedNode
+		var v UserResponseDtoResponseLastConnectedNode
 		o.Value = v
 		o.Null = true
 		return nil
@@ -33963,14 +31773,14 @@ func (o *NilUpdateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s NilUpdateUserResponseDtoResponseLastConnectedNode) MarshalJSON() ([]byte, error) {
+func (s NilUserResponseDtoResponseLastConnectedNode) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NilUpdateUserResponseDtoResponseLastConnectedNode) UnmarshalJSON(data []byte) error {
+func (s *NilUserResponseDtoResponseLastConnectedNode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -34435,72 +32245,6 @@ func (s OptCreateUserRequestDtoStatus) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptCreateUserRequestDtoStatus) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes CreateUserResponseDtoResponseStatus as json.
-func (o OptCreateUserResponseDtoResponseStatus) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	e.Str(string(o.Value))
-}
-
-// Decode decodes CreateUserResponseDtoResponseStatus from json.
-func (o *OptCreateUserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptCreateUserResponseDtoResponseStatus to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptCreateUserResponseDtoResponseStatus) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptCreateUserResponseDtoResponseStatus) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes CreateUserResponseDtoResponseTrafficLimitStrategy as json.
-func (o OptCreateUserResponseDtoResponseTrafficLimitStrategy) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	e.Str(string(o.Value))
-}
-
-// Decode decodes CreateUserResponseDtoResponseTrafficLimitStrategy from json.
-func (o *OptCreateUserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptCreateUserResponseDtoResponseTrafficLimitStrategy to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptCreateUserResponseDtoResponseTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptCreateUserResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -35033,72 +32777,6 @@ func (s OptGetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy) Mar
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptGetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes GetUserByTelegramIdResponseDtoResponseItemStatus as json.
-func (o OptGetUserByTelegramIdResponseDtoResponseItemStatus) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	e.Str(string(o.Value))
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemStatus from json.
-func (o *OptGetUserByTelegramIdResponseDtoResponseItemStatus) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptGetUserByTelegramIdResponseDtoResponseItemStatus to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptGetUserByTelegramIdResponseDtoResponseItemStatus) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptGetUserByTelegramIdResponseDtoResponseItemStatus) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy as json.
-func (o OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	e.Str(string(o.Value))
-}
-
-// Decode decodes GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy from json.
-func (o *OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -36002,18 +33680,18 @@ func (s *OptUpdateUserRequestDtoTrafficLimitStrategy) UnmarshalJSON(data []byte)
 	return s.Decode(d)
 }
 
-// Encode encodes UpdateUserResponseDtoResponseStatus as json.
-func (o OptUpdateUserResponseDtoResponseStatus) Encode(e *jx.Encoder) {
+// Encode encodes UserResponseDtoResponseStatus as json.
+func (o OptUserResponseDtoResponseStatus) Encode(e *jx.Encoder) {
 	if !o.Set {
 		return
 	}
 	e.Str(string(o.Value))
 }
 
-// Decode decodes UpdateUserResponseDtoResponseStatus from json.
-func (o *OptUpdateUserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseStatus from json.
+func (o *OptUserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
 	if o == nil {
-		return errors.New("invalid: unable to decode OptUpdateUserResponseDtoResponseStatus to nil")
+		return errors.New("invalid: unable to decode OptUserResponseDtoResponseStatus to nil")
 	}
 	o.Set = true
 	if err := o.Value.Decode(d); err != nil {
@@ -36023,30 +33701,30 @@ func (o *OptUpdateUserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s OptUpdateUserResponseDtoResponseStatus) MarshalJSON() ([]byte, error) {
+func (s OptUserResponseDtoResponseStatus) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptUpdateUserResponseDtoResponseStatus) UnmarshalJSON(data []byte) error {
+func (s *OptUserResponseDtoResponseStatus) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
-// Encode encodes UpdateUserResponseDtoResponseTrafficLimitStrategy as json.
-func (o OptUpdateUserResponseDtoResponseTrafficLimitStrategy) Encode(e *jx.Encoder) {
+// Encode encodes UserResponseDtoResponseTrafficLimitStrategy as json.
+func (o OptUserResponseDtoResponseTrafficLimitStrategy) Encode(e *jx.Encoder) {
 	if !o.Set {
 		return
 	}
 	e.Str(string(o.Value))
 }
 
-// Decode decodes UpdateUserResponseDtoResponseTrafficLimitStrategy from json.
-func (o *OptUpdateUserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseTrafficLimitStrategy from json.
+func (o *OptUserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Decoder) error {
 	if o == nil {
-		return errors.New("invalid: unable to decode OptUpdateUserResponseDtoResponseTrafficLimitStrategy to nil")
+		return errors.New("invalid: unable to decode OptUserResponseDtoResponseTrafficLimitStrategy to nil")
 	}
 	o.Set = true
 	if err := o.Value.Decode(d); err != nil {
@@ -36056,14 +33734,14 @@ func (o *OptUpdateUserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Deco
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s OptUpdateUserResponseDtoResponseTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
+func (s OptUserResponseDtoResponseTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptUpdateUserResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
+func (s *OptUserResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -46017,28 +43695,28 @@ func (s *UpdateUserRequestDtoTrafficLimitStrategy) UnmarshalJSON(data []byte) er
 }
 
 // Encode implements json.Marshaler.
-func (s *UpdateUserResponseDto) Encode(e *jx.Encoder) {
+func (s *UserResponseDto) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *UpdateUserResponseDto) encodeFields(e *jx.Encoder) {
+func (s *UserResponseDto) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("response")
 		s.Response.Encode(e)
 	}
 }
 
-var jsonFieldsNameOfUpdateUserResponseDto = [1]string{
+var jsonFieldsNameOfUserResponseDto = [1]string{
 	0: "response",
 }
 
-// Decode decodes UpdateUserResponseDto from json.
-func (s *UpdateUserResponseDto) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDto from json.
+func (s *UserResponseDto) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDto to nil")
+		return errors.New("invalid: unable to decode UserResponseDto to nil")
 	}
 	var requiredBitSet [1]uint8
 
@@ -46059,7 +43737,7 @@ func (s *UpdateUserResponseDto) Decode(d *jx.Decoder) error {
 		}
 		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode UpdateUserResponseDto")
+		return errors.Wrap(err, "decode UserResponseDto")
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
@@ -46076,8 +43754,8 @@ func (s *UpdateUserResponseDto) Decode(d *jx.Decoder) error {
 				bitIdx := bits.TrailingZeros8(result)
 				fieldIdx := i*8 + bitIdx
 				var name string
-				if fieldIdx < len(jsonFieldsNameOfUpdateUserResponseDto) {
-					name = jsonFieldsNameOfUpdateUserResponseDto[fieldIdx]
+				if fieldIdx < len(jsonFieldsNameOfUserResponseDto) {
+					name = jsonFieldsNameOfUserResponseDto[fieldIdx]
 				} else {
 					name = strconv.Itoa(fieldIdx)
 				}
@@ -46098,27 +43776,27 @@ func (s *UpdateUserResponseDto) Decode(d *jx.Decoder) error {
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *UpdateUserResponseDto) MarshalJSON() ([]byte, error) {
+func (s *UserResponseDto) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDto) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDto) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
 // Encode implements json.Marshaler.
-func (s *UpdateUserResponseDtoResponse) Encode(e *jx.Encoder) {
+func (s *UserResponseDtoResponse) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *UpdateUserResponseDtoResponse) encodeFields(e *jx.Encoder) {
+func (s *UserResponseDtoResponse) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("uuid")
 		json.EncodeUUID(e, s.UUID)
@@ -46243,7 +43921,7 @@ func (s *UpdateUserResponseDtoResponse) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfUpdateUserResponseDtoResponse = [28]string{
+var jsonFieldsNameOfUserResponseDtoResponse = [28]string{
 	0:  "uuid",
 	1:  "subscriptionUuid",
 	2:  "shortUuid",
@@ -46274,10 +43952,10 @@ var jsonFieldsNameOfUpdateUserResponseDtoResponse = [28]string{
 	27: "happ",
 }
 
-// Decode decodes UpdateUserResponseDtoResponse from json.
-func (s *UpdateUserResponseDtoResponse) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponse from json.
+func (s *UserResponseDtoResponse) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDtoResponse to nil")
+		return errors.New("invalid: unable to decode UserResponseDtoResponse to nil")
 	}
 	var requiredBitSet [4]uint8
 	s.setDefaults()
@@ -46551,9 +44229,9 @@ func (s *UpdateUserResponseDtoResponse) Decode(d *jx.Decoder) error {
 		case "activeUserInbounds":
 			requiredBitSet[3] |= 1 << 0
 			if err := func() error {
-				s.ActiveUserInbounds = make([]UpdateUserResponseDtoResponseActiveUserInboundsItem, 0)
+				s.ActiveUserInbounds = make([]UserResponseDtoResponseActiveUserInboundsItem, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UpdateUserResponseDtoResponseActiveUserInboundsItem
+					var elem UserResponseDtoResponseActiveUserInboundsItem
 					if err := elem.Decode(d); err != nil {
 						return err
 					}
@@ -46603,7 +44281,7 @@ func (s *UpdateUserResponseDtoResponse) Decode(d *jx.Decoder) error {
 		}
 		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode UpdateUserResponseDtoResponse")
+		return errors.Wrap(err, "decode UserResponseDtoResponse")
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
@@ -46623,8 +44301,8 @@ func (s *UpdateUserResponseDtoResponse) Decode(d *jx.Decoder) error {
 				bitIdx := bits.TrailingZeros8(result)
 				fieldIdx := i*8 + bitIdx
 				var name string
-				if fieldIdx < len(jsonFieldsNameOfUpdateUserResponseDtoResponse) {
-					name = jsonFieldsNameOfUpdateUserResponseDtoResponse[fieldIdx]
+				if fieldIdx < len(jsonFieldsNameOfUserResponseDtoResponse) {
+					name = jsonFieldsNameOfUserResponseDtoResponse[fieldIdx]
 				} else {
 					name = strconv.Itoa(fieldIdx)
 				}
@@ -46645,27 +44323,27 @@ func (s *UpdateUserResponseDtoResponse) Decode(d *jx.Decoder) error {
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *UpdateUserResponseDtoResponse) MarshalJSON() ([]byte, error) {
+func (s *UserResponseDtoResponse) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDtoResponse) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDtoResponse) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
 // Encode implements json.Marshaler.
-func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) Encode(e *jx.Encoder) {
+func (s *UserResponseDtoResponseActiveUserInboundsItem) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) encodeFields(e *jx.Encoder) {
+func (s *UserResponseDtoResponseActiveUserInboundsItem) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("uuid")
 		json.EncodeUUID(e, s.UUID)
@@ -46688,7 +44366,7 @@ func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) encodeFields(e *jx
 	}
 }
 
-var jsonFieldsNameOfUpdateUserResponseDtoResponseActiveUserInboundsItem = [5]string{
+var jsonFieldsNameOfUserResponseDtoResponseActiveUserInboundsItem = [5]string{
 	0: "uuid",
 	1: "tag",
 	2: "type",
@@ -46696,10 +44374,10 @@ var jsonFieldsNameOfUpdateUserResponseDtoResponseActiveUserInboundsItem = [5]str
 	4: "security",
 }
 
-// Decode decodes UpdateUserResponseDtoResponseActiveUserInboundsItem from json.
-func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseActiveUserInboundsItem from json.
+func (s *UserResponseDtoResponseActiveUserInboundsItem) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDtoResponseActiveUserInboundsItem to nil")
+		return errors.New("invalid: unable to decode UserResponseDtoResponseActiveUserInboundsItem to nil")
 	}
 	var requiredBitSet [1]uint8
 
@@ -46766,7 +44444,7 @@ func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) Decode(d *jx.Decod
 		}
 		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode UpdateUserResponseDtoResponseActiveUserInboundsItem")
+		return errors.Wrap(err, "decode UserResponseDtoResponseActiveUserInboundsItem")
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
@@ -46783,8 +44461,8 @@ func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) Decode(d *jx.Decod
 				bitIdx := bits.TrailingZeros8(result)
 				fieldIdx := i*8 + bitIdx
 				var name string
-				if fieldIdx < len(jsonFieldsNameOfUpdateUserResponseDtoResponseActiveUserInboundsItem) {
-					name = jsonFieldsNameOfUpdateUserResponseDtoResponseActiveUserInboundsItem[fieldIdx]
+				if fieldIdx < len(jsonFieldsNameOfUserResponseDtoResponseActiveUserInboundsItem) {
+					name = jsonFieldsNameOfUserResponseDtoResponseActiveUserInboundsItem[fieldIdx]
 				} else {
 					name = strconv.Itoa(fieldIdx)
 				}
@@ -46805,41 +44483,41 @@ func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) Decode(d *jx.Decod
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) MarshalJSON() ([]byte, error) {
+func (s *UserResponseDtoResponseActiveUserInboundsItem) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDtoResponseActiveUserInboundsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
 // Encode implements json.Marshaler.
-func (s *UpdateUserResponseDtoResponseHapp) Encode(e *jx.Encoder) {
+func (s *UserResponseDtoResponseHapp) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *UpdateUserResponseDtoResponseHapp) encodeFields(e *jx.Encoder) {
+func (s *UserResponseDtoResponseHapp) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("cryptoLink")
 		e.Str(s.CryptoLink)
 	}
 }
 
-var jsonFieldsNameOfUpdateUserResponseDtoResponseHapp = [1]string{
+var jsonFieldsNameOfUserResponseDtoResponseHapp = [1]string{
 	0: "cryptoLink",
 }
 
-// Decode decodes UpdateUserResponseDtoResponseHapp from json.
-func (s *UpdateUserResponseDtoResponseHapp) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseHapp from json.
+func (s *UserResponseDtoResponseHapp) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDtoResponseHapp to nil")
+		return errors.New("invalid: unable to decode UserResponseDtoResponseHapp to nil")
 	}
 	var requiredBitSet [1]uint8
 
@@ -46862,7 +44540,7 @@ func (s *UpdateUserResponseDtoResponseHapp) Decode(d *jx.Decoder) error {
 		}
 		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode UpdateUserResponseDtoResponseHapp")
+		return errors.Wrap(err, "decode UserResponseDtoResponseHapp")
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
@@ -46879,8 +44557,8 @@ func (s *UpdateUserResponseDtoResponseHapp) Decode(d *jx.Decoder) error {
 				bitIdx := bits.TrailingZeros8(result)
 				fieldIdx := i*8 + bitIdx
 				var name string
-				if fieldIdx < len(jsonFieldsNameOfUpdateUserResponseDtoResponseHapp) {
-					name = jsonFieldsNameOfUpdateUserResponseDtoResponseHapp[fieldIdx]
+				if fieldIdx < len(jsonFieldsNameOfUserResponseDtoResponseHapp) {
+					name = jsonFieldsNameOfUserResponseDtoResponseHapp[fieldIdx]
 				} else {
 					name = strconv.Itoa(fieldIdx)
 				}
@@ -46901,27 +44579,27 @@ func (s *UpdateUserResponseDtoResponseHapp) Decode(d *jx.Decoder) error {
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *UpdateUserResponseDtoResponseHapp) MarshalJSON() ([]byte, error) {
+func (s *UserResponseDtoResponseHapp) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDtoResponseHapp) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDtoResponseHapp) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
 // Encode implements json.Marshaler.
-func (s *UpdateUserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
+func (s *UserResponseDtoResponseLastConnectedNode) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *UpdateUserResponseDtoResponseLastConnectedNode) encodeFields(e *jx.Encoder) {
+func (s *UserResponseDtoResponseLastConnectedNode) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("connectedAt")
 		json.EncodeDateTime(e, s.ConnectedAt)
@@ -46932,15 +44610,15 @@ func (s *UpdateUserResponseDtoResponseLastConnectedNode) encodeFields(e *jx.Enco
 	}
 }
 
-var jsonFieldsNameOfUpdateUserResponseDtoResponseLastConnectedNode = [2]string{
+var jsonFieldsNameOfUserResponseDtoResponseLastConnectedNode = [2]string{
 	0: "connectedAt",
 	1: "nodeName",
 }
 
-// Decode decodes UpdateUserResponseDtoResponseLastConnectedNode from json.
-func (s *UpdateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseLastConnectedNode from json.
+func (s *UserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDtoResponseLastConnectedNode to nil")
+		return errors.New("invalid: unable to decode UserResponseDtoResponseLastConnectedNode to nil")
 	}
 	var requiredBitSet [1]uint8
 
@@ -46975,7 +44653,7 @@ func (s *UpdateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) e
 		}
 		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode UpdateUserResponseDtoResponseLastConnectedNode")
+		return errors.Wrap(err, "decode UserResponseDtoResponseLastConnectedNode")
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
@@ -46992,8 +44670,8 @@ func (s *UpdateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) e
 				bitIdx := bits.TrailingZeros8(result)
 				fieldIdx := i*8 + bitIdx
 				var name string
-				if fieldIdx < len(jsonFieldsNameOfUpdateUserResponseDtoResponseLastConnectedNode) {
-					name = jsonFieldsNameOfUpdateUserResponseDtoResponseLastConnectedNode[fieldIdx]
+				if fieldIdx < len(jsonFieldsNameOfUserResponseDtoResponseLastConnectedNode) {
+					name = jsonFieldsNameOfUserResponseDtoResponseLastConnectedNode[fieldIdx]
 				} else {
 					name = strconv.Itoa(fieldIdx)
 				}
@@ -47014,102 +44692,102 @@ func (s *UpdateUserResponseDtoResponseLastConnectedNode) Decode(d *jx.Decoder) e
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *UpdateUserResponseDtoResponseLastConnectedNode) MarshalJSON() ([]byte, error) {
+func (s *UserResponseDtoResponseLastConnectedNode) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDtoResponseLastConnectedNode) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDtoResponseLastConnectedNode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
-// Encode encodes UpdateUserResponseDtoResponseStatus as json.
-func (s UpdateUserResponseDtoResponseStatus) Encode(e *jx.Encoder) {
+// Encode encodes UserResponseDtoResponseStatus as json.
+func (s UserResponseDtoResponseStatus) Encode(e *jx.Encoder) {
 	e.Str(string(s))
 }
 
-// Decode decodes UpdateUserResponseDtoResponseStatus from json.
-func (s *UpdateUserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseStatus from json.
+func (s *UserResponseDtoResponseStatus) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDtoResponseStatus to nil")
+		return errors.New("invalid: unable to decode UserResponseDtoResponseStatus to nil")
 	}
 	v, err := d.StrBytes()
 	if err != nil {
 		return err
 	}
 	// Try to use constant string.
-	switch UpdateUserResponseDtoResponseStatus(v) {
-	case UpdateUserResponseDtoResponseStatusACTIVE:
-		*s = UpdateUserResponseDtoResponseStatusACTIVE
-	case UpdateUserResponseDtoResponseStatusDISABLED:
-		*s = UpdateUserResponseDtoResponseStatusDISABLED
-	case UpdateUserResponseDtoResponseStatusLIMITED:
-		*s = UpdateUserResponseDtoResponseStatusLIMITED
-	case UpdateUserResponseDtoResponseStatusEXPIRED:
-		*s = UpdateUserResponseDtoResponseStatusEXPIRED
+	switch UserResponseDtoResponseStatus(v) {
+	case UserResponseDtoResponseStatusACTIVE:
+		*s = UserResponseDtoResponseStatusACTIVE
+	case UserResponseDtoResponseStatusDISABLED:
+		*s = UserResponseDtoResponseStatusDISABLED
+	case UserResponseDtoResponseStatusLIMITED:
+		*s = UserResponseDtoResponseStatusLIMITED
+	case UserResponseDtoResponseStatusEXPIRED:
+		*s = UserResponseDtoResponseStatusEXPIRED
 	default:
-		*s = UpdateUserResponseDtoResponseStatus(v)
+		*s = UserResponseDtoResponseStatus(v)
 	}
 
 	return nil
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s UpdateUserResponseDtoResponseStatus) MarshalJSON() ([]byte, error) {
+func (s UserResponseDtoResponseStatus) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDtoResponseStatus) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDtoResponseStatus) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
 
-// Encode encodes UpdateUserResponseDtoResponseTrafficLimitStrategy as json.
-func (s UpdateUserResponseDtoResponseTrafficLimitStrategy) Encode(e *jx.Encoder) {
+// Encode encodes UserResponseDtoResponseTrafficLimitStrategy as json.
+func (s UserResponseDtoResponseTrafficLimitStrategy) Encode(e *jx.Encoder) {
 	e.Str(string(s))
 }
 
-// Decode decodes UpdateUserResponseDtoResponseTrafficLimitStrategy from json.
-func (s *UpdateUserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Decoder) error {
+// Decode decodes UserResponseDtoResponseTrafficLimitStrategy from json.
+func (s *UserResponseDtoResponseTrafficLimitStrategy) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode UpdateUserResponseDtoResponseTrafficLimitStrategy to nil")
+		return errors.New("invalid: unable to decode UserResponseDtoResponseTrafficLimitStrategy to nil")
 	}
 	v, err := d.StrBytes()
 	if err != nil {
 		return err
 	}
 	// Try to use constant string.
-	switch UpdateUserResponseDtoResponseTrafficLimitStrategy(v) {
-	case UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET:
-		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET
-	case UpdateUserResponseDtoResponseTrafficLimitStrategyDAY:
-		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyDAY
-	case UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK:
-		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK
-	case UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH:
-		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH
+	switch UserResponseDtoResponseTrafficLimitStrategy(v) {
+	case UserResponseDtoResponseTrafficLimitStrategyNORESET:
+		*s = UserResponseDtoResponseTrafficLimitStrategyNORESET
+	case UserResponseDtoResponseTrafficLimitStrategyDAY:
+		*s = UserResponseDtoResponseTrafficLimitStrategyDAY
+	case UserResponseDtoResponseTrafficLimitStrategyWEEK:
+		*s = UserResponseDtoResponseTrafficLimitStrategyWEEK
+	case UserResponseDtoResponseTrafficLimitStrategyMONTH:
+		*s = UserResponseDtoResponseTrafficLimitStrategyMONTH
 	default:
-		*s = UpdateUserResponseDtoResponseTrafficLimitStrategy(v)
+		*s = UserResponseDtoResponseTrafficLimitStrategy(v)
 	}
 
 	return nil
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s UpdateUserResponseDtoResponseTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
+func (s UserResponseDtoResponseTrafficLimitStrategy) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UpdateUserResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
+func (s *UserResponseDtoResponseTrafficLimitStrategy) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }

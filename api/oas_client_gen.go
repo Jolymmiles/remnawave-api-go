@@ -432,7 +432,7 @@ type Invoker interface {
 	// Create a new user.
 	//
 	// POST /api/users
-	UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*CreateUserResponseDto, error)
+	UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*UserResponseDto, error)
 	// UsersControllerDeleteUser invokes UsersController_deleteUser operation.
 	//
 	// Delete user.
@@ -510,7 +510,7 @@ type Invoker interface {
 	// Update a user.
 	//
 	// POST /api/users/update
-	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UpdateUserResponseDto, error)
+	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UserResponseDto, error)
 	// UsersStatsControllerGetUserUsageByRange invokes UsersStatsController_getUserUsageByRange operation.
 	//
 	// Get user usage by range.
@@ -6122,12 +6122,12 @@ func (c *Client) sendUsersControllerActivateAllInbounds(ctx context.Context, par
 // Create a new user.
 //
 // POST /api/users
-func (c *Client) UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*CreateUserResponseDto, error) {
+func (c *Client) UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*UserResponseDto, error) {
 	res, err := c.sendUsersControllerCreateUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, requestOptions ...RequestOption) (res *CreateUserResponseDto, err error) {
+func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, requestOptions ...RequestOption) (res *UserResponseDto, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -7500,12 +7500,12 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 // Update a user.
 //
 // POST /api/users/update
-func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UpdateUserResponseDto, error) {
+func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UserResponseDto, error) {
 	res, err := c.sendUsersControllerUpdateUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, requestOptions ...RequestOption) (res *UpdateUserResponseDto, err error) {
+func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, requestOptions ...RequestOption) (res *UserResponseDto, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {

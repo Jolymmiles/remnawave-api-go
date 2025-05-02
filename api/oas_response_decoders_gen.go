@@ -3087,7 +3087,7 @@ func decodeUsersControllerActivateAllInboundsResponse(resp *http.Response) (res 
 	return res, validate.UnexpectedStatusCode(resp.StatusCode)
 }
 
-func decodeUsersControllerCreateUserResponse(resp *http.Response) (res *CreateUserResponseDto, _ error) {
+func decodeUsersControllerCreateUserResponse(resp *http.Response) (res *UserResponseDto, _ error) {
 	switch resp.StatusCode {
 	case 201:
 		// Code 201.
@@ -3103,7 +3103,7 @@ func decodeUsersControllerCreateUserResponse(resp *http.Response) (res *CreateUs
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response CreateUserResponseDto
+			var response UserResponseDto
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3761,7 +3761,7 @@ func decodeUsersControllerRevokeUserSubscriptionResponse(resp *http.Response) (r
 	return res, validate.UnexpectedStatusCode(resp.StatusCode)
 }
 
-func decodeUsersControllerUpdateUserResponse(resp *http.Response) (res *UpdateUserResponseDto, _ error) {
+func decodeUsersControllerUpdateUserResponse(resp *http.Response) (res *UserResponseDto, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
@@ -3777,7 +3777,7 @@ func decodeUsersControllerUpdateUserResponse(resp *http.Response) (res *UpdateUs
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UpdateUserResponseDto
+			var response UserResponseDto
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
