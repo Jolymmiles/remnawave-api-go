@@ -1,4 +1,4 @@
-module awesomeProject4
+module remnawave-api-go
 
 go 1.24
 
