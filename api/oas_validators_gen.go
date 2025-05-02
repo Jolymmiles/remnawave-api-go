@@ -6843,30 +6843,7 @@ func (s UpdateUserRequestDtoTrafficLimitStrategy) Validate() error {
 	}
 }
 
-func (s *UserResponseDto) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Response.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "response",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *UserResponseDtoResponse) Validate() error {
+func (s *UserDto) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6973,7 +6950,7 @@ func (s *UserResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s UserResponseDtoResponseStatus) Validate() error {
+func (s UserDtoStatus) Validate() error {
 	switch s {
 	case "ACTIVE":
 		return nil
@@ -6988,7 +6965,7 @@ func (s UserResponseDtoResponseStatus) Validate() error {
 	}
 }
 
-func (s UserResponseDtoResponseTrafficLimitStrategy) Validate() error {
+func (s UserDtoTrafficLimitStrategy) Validate() error {
 	switch s {
 	case "NO_RESET":
 		return nil
@@ -7001,4 +6978,27 @@ func (s UserResponseDtoResponseTrafficLimitStrategy) Validate() error {
 	default:
 		return errors.Errorf("invalid value: %v", s)
 	}
+}
+
+func (s *UserResponseDto) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.Response.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "response",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
 }
