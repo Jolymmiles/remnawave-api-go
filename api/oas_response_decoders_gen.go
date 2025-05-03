@@ -1693,7 +1693,7 @@ func decodeNodesControllerEnableNodeResponse(resp *http.Response) (res []EnableN
 	return res, validate.UnexpectedStatusCode(resp.StatusCode)
 }
 
-func decodeNodesControllerGetAllNodesResponse(resp *http.Response) (res []GetAllNodesResponseDto, _ error) {
+func decodeNodesControllerGetAllNodesResponse(resp *http.Response) (res *GetAllNodesResponseDto, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
@@ -1709,17 +1709,9 @@ func decodeNodesControllerGetAllNodesResponse(resp *http.Response) (res []GetAll
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response []GetAllNodesResponseDto
+			var response GetAllNodesResponseDto
 			if err := func() error {
-				response = make([]GetAllNodesResponseDto, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem GetAllNodesResponseDto
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					response = append(response, elem)
-					return nil
-				}); err != nil {
+				if err := response.Decode(d); err != nil {
 					return err
 				}
 				if err := d.Skip(); err != io.EOF {
@@ -1736,31 +1728,14 @@ func decodeNodesControllerGetAllNodesResponse(resp *http.Response) (res []GetAll
 			}
 			// Validate response.
 			if err := func() error {
-				if response == nil {
-					return errors.New("nil is invalid value")
-				}
-				var failures []validate.FieldError
-				for i, elem := range response {
-					if err := func() error {
-						if err := elem.Validate(); err != nil {
-							return err
-						}
-						return nil
-					}(); err != nil {
-						failures = append(failures, validate.FieldError{
-							Name:  fmt.Sprintf("[%d]", i),
-							Error: err,
-						})
-					}
-				}
-				if len(failures) > 0 {
-					return &validate.Error{Fields: failures}
+				if err := response.Validate(); err != nil {
+					return err
 				}
 				return nil
 			}(); err != nil {
 				return res, errors.Wrap(err, "validate")
 			}
-			return response, nil
+			return &response, nil
 		default:
 			return res, validate.InvalidContentType(ct)
 		}

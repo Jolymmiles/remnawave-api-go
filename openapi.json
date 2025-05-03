@@ -1468,10 +1468,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetAllNodesResponseDto"
-                  }
+                  "$ref": "#/components/schemas/GetAllNodesResponseDto"
                 }
               }
             }

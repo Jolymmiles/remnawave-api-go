@@ -272,7 +272,7 @@ type Invoker interface {
 	// Get all nodes.
 	//
 	// GET /api/nodes/get-all
-	NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) ([]GetAllNodesResponseDto, error)
+	NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) (*GetAllNodesResponseDto, error)
 	// NodesControllerGetOneNode invokes NodesController_getOneNode operation.
 	//
 	// Get one node.
@@ -3430,12 +3430,12 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 // Get all nodes.
 //
 // GET /api/nodes/get-all
-func (c *Client) NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) ([]GetAllNodesResponseDto, error) {
+func (c *Client) NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) (*GetAllNodesResponseDto, error) {
 	res, err := c.sendNodesControllerGetAllNodes(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOptions ...RequestOption) (res []GetAllNodesResponseDto, err error) {
+func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOptions ...RequestOption) (res *GetAllNodesResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
