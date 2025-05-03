@@ -13,16 +13,32 @@ The client is generated with [**ogen**](https://github.com/ogen-go/ogen):
 **TL;DR**
 
 ```bash
-go get github.com/Jolymmiles/remnawave-api-go
+go get github.com/Jolymmiles/remnawave-api-go@latest
 ````
 
 ```go
-cli, _ := remapi.NewClient(
-"https://remna.st/api",
-remapi.StaticToken("YOUR_JWT"), // built-in SecuritySource
+
+
+import (
+	"context"
+	"fmt"
+	remapi "github.com/Jolymmiles/remnawave-api-go/api"
 )
-u, _ := cli.UsersControllerGetUserByTelegramId(ctx,
-remapi.UsersControllerGetUserByTelegramIdParams{TelegramId: 123456789})
+
+func main() {
+	ctx := context.Background()
+
+	rclient, _ := remapi.NewClient(
+		"https://remna.st/api",       //server url
+		remapi.StaticToken{Token: "JWT_TOKEN"}, //your JWT token
+	)
+
+	resp, err := rclient.NodesControllerGetAllNodes(ctx)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(resp)
+}
 ```
 
 ---
