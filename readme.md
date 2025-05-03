@@ -29,7 +29,7 @@ func main() {
 	ctx := context.Background()
 
 	rclient, _ := remapi.NewClient(
-		"https://remna.st/api",       //server url
+		"https://example.com",       //server url
 		remapi.StaticToken{Token: "JWT_TOKEN"}, //your JWT token
 	)
 
