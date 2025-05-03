@@ -1,7 +1,12 @@
-# remnawave-api-go
+# Remnawave GO SDK
 
-**remnawave-api-go** is a slim, type-safe Go SDK for the public REST API  
-of [Remnawave](https://remna.st/api).
+
+[![Stars](https://img.shields.io/github/stars/Jolymmiles/remnawave-api-go.svg?style=social)](https://github.com/Jolymmiles/remnawave-api-go/stargazers)
+[![Forks](https://img.shields.io/github/forks/Jolymmiles/remnawave-api-go.svg?style=social)](https://github.com/Jolymmiles/remnawave-api-go/network/members)
+[![Issues](https://img.shields.io/github/issues/Jolymmiles/remnawave-api-go.svg)](https://github.com/Jolymmiles/remnawave-api-go/issues)
+
+A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
+Library checked with Remnawave **[v1.5.7](https://github.com/remnawave/panel/releases/tag/1.5.7)**
 
 The client is generated with [**ogen**](https://github.com/ogen-go/ogen):
 
