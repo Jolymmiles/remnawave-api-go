@@ -83,67 +83,73 @@ func trimTrailingSlashes(u *url.URL) {
 type Invoker interface {
 	// ApiTokensControllerCreate invokes ApiTokensController_create operation.
 	//
-	// This endpoint is forbidden to use via "API-key". It can be used only admin JWT-token.
+	// This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.
 	//
-	// POST /api/tokens/create
+	// POST /api/tokens
 	ApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto, options ...RequestOption) (*CreateApiTokenResponseDto, error)
 	// ApiTokensControllerDelete invokes ApiTokensController_delete operation.
 	//
-	// This endpoint is forbidden to use via "API-key". It can be used only admin JWT-token.
+	// This endpoint is forbidden to use via "API-key". It can be used only with an admin JWT-token.
 	//
-	// DELETE /api/tokens/delete/{uuid}
+	// DELETE /api/tokens/{uuid}
 	ApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams, options ...RequestOption) (*DeleteApiTokenResponseDto, error)
 	// ApiTokensControllerFindAll invokes ApiTokensController_findAll operation.
 	//
-	// This endpoint is forbidden to use via "API-key". It can be used only admin JWT-token.
+	// This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.
 	//
 	// GET /api/tokens
 	ApiTokensControllerFindAll(ctx context.Context, options ...RequestOption) (*FindAllApiTokensResponseDto, error)
 	// AuthControllerGetStatus invokes AuthController_getStatus operation.
 	//
-	// Get status of the system.
+	// Get the status of the authentication.
 	//
 	// GET /api/auth/status
 	AuthControllerGetStatus(ctx context.Context, options ...RequestOption) (*GetStatusResponseDtoStatusCode, error)
 	// AuthControllerLogin invokes AuthController_login operation.
 	//
-	// Login to the system.
+	// Login as superadmin.
 	//
 	// POST /api/auth/login
 	AuthControllerLogin(ctx context.Context, request *LoginRequestDto, options ...RequestOption) (AuthControllerLoginRes, error)
 	// AuthControllerRegister invokes AuthController_register operation.
 	//
-	// Register to the system.
+	// Register as superadmin.
 	//
 	// POST /api/auth/register
 	AuthControllerRegister(ctx context.Context, request *RegisterRequestDto, options ...RequestOption) (AuthControllerRegisterRes, error)
+	// AuthControllerTelegramCallback invokes AuthController_telegramCallback operation.
+	//
+	// Callback from Telegram OAuth2.
+	//
+	// POST /api/auth/oauth2/tg/callback
+	AuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, options ...RequestOption) (*TelegramCallbackResponseDtoStatusCode, error)
 	// HostsBulkActionsControllerDeleteHosts invokes HostsBulkActionsController_deleteHosts operation.
 	//
-	// Delete many hosts.
+	// Delete hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/delete
 	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto, options ...RequestOption) (*BulkDeleteHostsResponseDto, error)
 	// HostsBulkActionsControllerDisableHosts invokes HostsBulkActionsController_disableHosts operation.
 	//
-	// Disable many hosts.
+	// Disable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/disable
 	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto, options ...RequestOption) (*BulkDisableHostsResponseDto, error)
 	// HostsBulkActionsControllerEnableHosts invokes HostsBulkActionsController_enableHosts operation.
 	//
-	// Enable many hosts.
+	// Enable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/enable
 	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto, options ...RequestOption) (*BulkEnableHostsResponseDto, error)
 	// HostsBulkActionsControllerSetInboundToHosts invokes HostsBulkActionsController_setInboundToHosts operation.
 	//
-	// Set inbound to many hosts.
+	// Set inbound to hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/set-inbound
 	HostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto, options ...RequestOption) (*SetInboundToManyHostsResponseDto, error)
 	// HostsBulkActionsControllerSetPortToHosts invokes HostsBulkActionsController_setPortToHosts operation.
 	//
-	// Set port to many hosts.
+	// Set port to hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/set-port
 	HostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto, options ...RequestOption) (*SetPortToManyHostsResponseDto, error)
@@ -151,47 +157,47 @@ type Invoker interface {
 	//
 	// Create a new host.
 	//
-	// POST /api/hosts/create
+	// POST /api/hosts
 	HostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto, options ...RequestOption) (*CreateHostResponseDto, error)
 	// HostsControllerDeleteHost invokes HostsController_deleteHost operation.
 	//
-	// Delete host.
+	// Delete a host by UUID.
 	//
-	// DELETE /api/hosts/delete/{uuid}
+	// DELETE /api/hosts/{uuid}
 	HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams, options ...RequestOption) (HostsControllerDeleteHostRes, error)
 	// HostsControllerGetAllHosts invokes HostsController_getAllHosts operation.
 	//
 	// Get all hosts.
 	//
-	// GET /api/hosts/all
+	// GET /api/hosts
 	HostsControllerGetAllHosts(ctx context.Context, options ...RequestOption) (*GetAllHostsResponseDto, error)
 	// HostsControllerGetOneHost invokes HostsController_getOneHost operation.
 	//
-	// Get one host by uuid.
+	// Get a host by UUID.
 	//
-	// GET /api/hosts/get-one/{uuid}
+	// GET /api/hosts/{uuid}
 	HostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams, options ...RequestOption) (*GetOneHostResponseDto, error)
 	// HostsControllerReorderHosts invokes HostsController_reorderHosts operation.
 	//
 	// Reorder hosts.
 	//
-	// POST /api/hosts/reorder
+	// POST /api/hosts/actions/reorder
 	HostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto, options ...RequestOption) (*ReorderHostResponseDto, error)
 	// HostsControllerUpdateHost invokes HostsController_updateHost operation.
 	//
 	// Update a host.
 	//
-	// POST /api/hosts/update
+	// PATCH /api/hosts
 	HostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto, options ...RequestOption) (*UpdateHostResponseDto, error)
 	// HwidUserDevicesControllerCreateUserHwidDevice invokes HwidUserDevicesController_createUserHwidDevice operation.
 	//
-	// Create user HWID device.
+	// Create a user HWID device.
 	//
-	// POST /api/hwid/devices/create
+	// POST /api/hwid/devices
 	HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto, options ...RequestOption) (*CreateUserHwidDeviceResponseDto, error)
 	// HwidUserDevicesControllerDeleteUserHwidDevice invokes HwidUserDevicesController_deleteUserHwidDevice operation.
 	//
-	// Delete user HWID device.
+	// Delete a user HWID device.
 	//
 	// POST /api/hwid/devices/delete
 	HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto, options ...RequestOption) (*DeleteUserHwidDeviceResponseDto, error)
@@ -199,38 +205,38 @@ type Invoker interface {
 	//
 	// Get user HWID devices.
 	//
-	// GET /api/hwid/devices/get/{userUuid}
+	// GET /api/hwid/devices/{userUuid}
 	HwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams, options ...RequestOption) (*GetUserHwidDevicesResponseDto, error)
 	// InboundsBulkActionsControllerAddInboundToNodes invokes InboundsBulkActionsController_addInboundToNodes operation.
 	//
-	// Add inbound to all nodes.
+	// Add inbound to nodes.
 	//
 	// POST /api/inbounds/bulk/add-to-nodes
-	InboundsBulkActionsControllerAddInboundToNodes(ctx context.Context, request *AddInboundToNodesRequestDto, options ...RequestOption) ([]AddInboundToNodesResponseDto, error)
+	InboundsBulkActionsControllerAddInboundToNodes(ctx context.Context, request *AddInboundToNodesRequestDto, options ...RequestOption) (*AddInboundToNodesResponseDto, error)
 	// InboundsBulkActionsControllerAddInboundToUsers invokes InboundsBulkActionsController_addInboundToUsers operation.
 	//
 	// Add inbound to users.
 	//
 	// POST /api/inbounds/bulk/add-to-users
-	InboundsBulkActionsControllerAddInboundToUsers(ctx context.Context, request *AddInboundToUsersRequestDto, options ...RequestOption) ([]AddInboundToUsersResponseDto, error)
+	InboundsBulkActionsControllerAddInboundToUsers(ctx context.Context, request *AddInboundToUsersRequestDto, options ...RequestOption) (*AddInboundToUsersResponseDto, error)
 	// InboundsBulkActionsControllerRemoveInboundFromNodes invokes InboundsBulkActionsController_removeInboundFromNodes operation.
 	//
-	// Remove inbound from all nodes.
+	// Remove inbound from nodes.
 	//
 	// POST /api/inbounds/bulk/remove-from-nodes
-	InboundsBulkActionsControllerRemoveInboundFromNodes(ctx context.Context, request *RemoveInboundFromNodesRequestDto, options ...RequestOption) ([]RemoveInboundFromNodesResponseDto, error)
+	InboundsBulkActionsControllerRemoveInboundFromNodes(ctx context.Context, request *RemoveInboundFromNodesRequestDto, options ...RequestOption) (*RemoveInboundFromNodesResponseDto, error)
 	// InboundsBulkActionsControllerRemoveInboundFromUsers invokes InboundsBulkActionsController_removeInboundFromUsers operation.
 	//
 	// Remove inbound from users.
 	//
 	// POST /api/inbounds/bulk/remove-from-users
-	InboundsBulkActionsControllerRemoveInboundFromUsers(ctx context.Context, request *RemoveInboundFromUsersRequestDto, options ...RequestOption) ([]RemoveInboundFromUsersResponseDto, error)
+	InboundsBulkActionsControllerRemoveInboundFromUsers(ctx context.Context, request *RemoveInboundFromUsersRequestDto, options ...RequestOption) (*RemoveInboundFromUsersResponseDto, error)
 	// InboundsControllerGetFullInbounds invokes InboundsController_getFullInbounds operation.
 	//
-	// Get full inbounds.
+	// Get inbounds with full details.
 	//
 	// GET /api/inbounds/full
-	InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) (*GetInboundsResponseDto, error)
+	InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) (*GetFullInboundsResponseDto, error)
 	// InboundsControllerGetInbounds invokes InboundsController_getInbounds operation.
 	//
 	// Get inbounds.
@@ -241,68 +247,68 @@ type Invoker interface {
 	//
 	// Get SSL_CERT for Remnawave Node.
 	//
-	// GET /api/keygen/get
+	// GET /api/keygen
 	KeygenControllerGenerateKey(ctx context.Context, options ...RequestOption) (*GetPubKeyResponseDto, error)
 	// NodesControllerCreateNode invokes NodesController_createNode operation.
 	//
 	// Create a new node.
 	//
-	// POST /api/nodes/create
+	// POST /api/nodes
 	NodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto, options ...RequestOption) (*CreateNodeResponseDto, error)
 	// NodesControllerDeleteNode invokes NodesController_deleteNode operation.
 	//
-	// Delete node.
+	// Delete a node.
 	//
-	// DELETE /api/nodes/delete/{uuid}
-	NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, options ...RequestOption) ([]DeleteNodeResponseDto, error)
+	// DELETE /api/nodes/{uuid}
+	NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, options ...RequestOption) (*DeleteNodeResponseDto, error)
 	// NodesControllerDisableNode invokes NodesController_disableNode operation.
 	//
-	// Disable node.
+	// Disable a node.
 	//
-	// PATCH /api/nodes/disable/{uuid}
-	NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, options ...RequestOption) ([]DisableNodeResponseDto, error)
+	// POST /api/nodes/{uuid}/actions/disable
+	NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, options ...RequestOption) (*DisableNodeResponseDto, error)
 	// NodesControllerEnableNode invokes NodesController_enableNode operation.
 	//
-	// Enable node to further use.
+	// Enable a node.
 	//
-	// PATCH /api/nodes/enable/{uuid}
-	NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, options ...RequestOption) ([]EnableNodeResponseDto, error)
+	// POST /api/nodes/{uuid}/actions/enable
+	NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, options ...RequestOption) (*EnableNodeResponseDto, error)
 	// NodesControllerGetAllNodes invokes NodesController_getAllNodes operation.
 	//
 	// Get all nodes.
 	//
-	// GET /api/nodes/get-all
+	// GET /api/nodes
 	NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) (*GetAllNodesResponseDto, error)
 	// NodesControllerGetOneNode invokes NodesController_getOneNode operation.
 	//
-	// Get one node.
+	// Get node by UUID.
 	//
-	// GET /api/nodes/get-one/{uuid}
-	NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, options ...RequestOption) ([]GetOneNodeResponseDto, error)
+	// GET /api/nodes/{uuid}
+	NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, options ...RequestOption) (*GetOneNodeResponseDto, error)
 	// NodesControllerReorderNodes invokes NodesController_reorderNodes operation.
 	//
 	// Reorder nodes.
 	//
-	// POST /api/nodes/reorder
+	// POST /api/nodes/actions/reorder
 	NodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto, options ...RequestOption) (*ReorderNodeResponseDto, error)
 	// NodesControllerRestartAllNodes invokes NodesController_restartAllNodes operation.
 	//
 	// Restart all nodes.
 	//
-	// PATCH /api/nodes/restart-all
-	NodesControllerRestartAllNodes(ctx context.Context, options ...RequestOption) ([]RestartNodeResponseDto, error)
+	// POST /api/nodes/actions/restart-all
+	NodesControllerRestartAllNodes(ctx context.Context, options ...RequestOption) (*RestartAllNodesResponseDto, error)
 	// NodesControllerRestartNode invokes NodesController_restartNode operation.
 	//
 	// Restart node.
 	//
-	// GET /api/nodes/restart/{uuid}
-	NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, options ...RequestOption) ([]RestartNodeResponseDto, error)
+	// POST /api/nodes/{uuid}/actions/restart
+	NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, options ...RequestOption) (*RestartNodeResponseDto, error)
 	// NodesControllerUpdateNode invokes NodesController_updateNode operation.
 	//
 	// Update node.
 	//
-	// POST /api/nodes/update
-	NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, options ...RequestOption) ([]UpdateNodeResponseDto, error)
+	// PATCH /api/nodes
+	NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, options ...RequestOption) (*UpdateNodeResponseDto, error)
 	// NodesUsageHistoryControllerGetNodesUsageByRange invokes NodesUsageHistoryController_getNodesUsageByRange operation.
 	//
 	// Get nodes usage by range.
@@ -311,9 +317,9 @@ type Invoker interface {
 	NodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams, options ...RequestOption) (*GetNodesUsageByRangeResponseDto, error)
 	// NodesUserUsageHistoryControllerGetNodeUserUsage invokes NodesUserUsageHistoryController_getNodeUserUsage operation.
 	//
-	// Get node users usage by range and node uuid.
+	// Get node user usage by range and Node UUID.
 	//
-	// GET /api/nodes/usage/users/range/{uuid}
+	// GET /api/nodes/usage/{uuid}/users/range
 	NodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams, options ...RequestOption) (*GetNodeUserUsageByRangeResponseDto, error)
 	// NodesUserUsageHistoryControllerGetNodesRealtimeUsage invokes NodesUserUsageHistoryController_getNodesRealtimeUsage operation.
 	//
@@ -331,6 +337,8 @@ type Invoker interface {
 	SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams, options ...RequestOption) error
 	// SubscriptionControllerGetSubscriptionInfoByShortUuid invokes SubscriptionController_getSubscriptionInfoByShortUuid operation.
 	//
+	// Get Subscription Info by Short UUID.
+	//
 	// GET /api/sub/{shortUuid}/info
 	SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams, options ...RequestOption) (*GetSubscriptionInfoResponseDto, error)
 	// SubscriptionControllerGetSubscriptionWithType invokes SubscriptionController_getSubscriptionWithType operation.
@@ -339,37 +347,55 @@ type Invoker interface {
 	SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams, options ...RequestOption) error
 	// SubscriptionSettingsControllerGetSettings invokes SubscriptionSettingsController_getSettings operation.
 	//
-	// Get Subscription Settings.
+	// Get subscription settings.
 	//
-	// GET /api/subscription-settings/get
+	// GET /api/subscription-settings
 	SubscriptionSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (*GetSubscriptionSettingsResponseDto, error)
 	// SubscriptionSettingsControllerUpdateSettings invokes SubscriptionSettingsController_updateSettings operation.
 	//
-	// Update Subscription Settings.
+	// Update subscription settings.
 	//
-	// POST /api/subscription-settings/update
+	// PATCH /api/subscription-settings
 	SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto, options ...RequestOption) (*UpdateSubscriptionSettingsResponseDto, error)
+	// SubscriptionTemplateControllerGetTemplate invokes SubscriptionTemplateController_getTemplate operation.
+	//
+	// Get subscription template.
+	//
+	// GET /api/subscription-templates/{templateType}
+	SubscriptionTemplateControllerGetTemplate(ctx context.Context, params SubscriptionTemplateControllerGetTemplateParams, options ...RequestOption) (*GetTemplateResponseDto, error)
 	// SubscriptionTemplateControllerUpdateTemplate invokes SubscriptionTemplateController_updateTemplate operation.
 	//
-	// Update Template.
+	// Update subscription template.
 	//
-	// POST /api/subscription-templates/update-template
+	// PUT /api/subscription-templates
 	SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, options ...RequestOption) (*UpdateTemplateResponseDto, error)
+	// SubscriptionsControllerGetAllSubscriptions invokes SubscriptionsController_getAllSubscriptions operation.
+	//
+	// Get all subscriptions.
+	//
+	// GET /api/subscriptions
+	SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, options ...RequestOption) (*GetAllSubscriptionsResponseDto, error)
+	// SubscriptionsControllerGetSubscriptionByUsername invokes SubscriptionsController_getSubscriptionByUsername operation.
+	//
+	// Get subscription by username.
+	//
+	// GET /api/subscriptions/by-username/{username}
+	SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUsernameRes, error)
 	// SystemControllerGetBandwidthStats invokes SystemController_getBandwidthStats operation.
 	//
-	// Get System Bandwidth Statistics.
+	// Get Bandwidth Stats.
 	//
-	// GET /api/system/bandwidth
+	// GET /api/system/stats/bandwidth
 	SystemControllerGetBandwidthStats(ctx context.Context, options ...RequestOption) (*GetBandwidthStatsResponseDto, error)
 	// SystemControllerGetNodesStatistics invokes SystemController_getNodesStatistics operation.
 	//
 	// Get Nodes Statistics.
 	//
-	// GET /api/system/statistics/nodes
+	// GET /api/system/stats/nodes
 	SystemControllerGetNodesStatistics(ctx context.Context, options ...RequestOption) (*GetNodesStatisticsResponseDto, error)
 	// SystemControllerGetStats invokes SystemController_getStats operation.
 	//
-	// Get System Stats.
+	// Get Stats.
 	//
 	// GET /api/system/stats
 	SystemControllerGetStats(ctx context.Context, options ...RequestOption) (*GetStatsResponseDto, error)
@@ -377,7 +403,7 @@ type Invoker interface {
 	//
 	// Bulk reset all users traffic.
 	//
-	// PATCH /api/users/bulk/all/reset-traffic
+	// POST /api/users/bulk/all/reset-traffic
 	UsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context, options ...RequestOption) (*BulkAllResetTrafficUsersResponseDto, error)
 	// UsersBulkActionsControllerBulkDeleteUsers invokes UsersBulkActionsController_bulkDeleteUsers operation.
 	//
@@ -393,13 +419,13 @@ type Invoker interface {
 	UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto, options ...RequestOption) (*BulkDeleteUsersByStatusResponseDto, error)
 	// UsersBulkActionsControllerBulkResetUserTraffic invokes UsersBulkActionsController_bulkResetUserTraffic operation.
 	//
-	// Bulk reset user traffic.
+	// Bulk reset traffic users by UUIDs.
 	//
 	// POST /api/users/bulk/reset-traffic
 	UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto, options ...RequestOption) (*BulkResetTrafficUsersResponseDto, error)
 	// UsersBulkActionsControllerBulkRevokeUsersSubscription invokes UsersBulkActionsController_bulkRevokeUsersSubscription operation.
 	//
-	// Bulk revoke users subscription.
+	// Revoke users subscription by User UUIDs.
 	//
 	// POST /api/users/bulk/revoke-subscription
 	UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto, options ...RequestOption) (*BulkRevokeUsersSubscriptionResponseDto, error)
@@ -411,13 +437,13 @@ type Invoker interface {
 	UsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto, options ...RequestOption) (*BulkAllUpdateUsersResponseDto, error)
 	// UsersBulkActionsControllerBulkUpdateUsers invokes UsersBulkActionsController_bulkUpdateUsers operation.
 	//
-	// Bulk update users.
+	// Bulk update users by UUIDs.
 	//
 	// POST /api/users/bulk/update
 	UsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto, options ...RequestOption) (*BulkUpdateUsersResponseDto, error)
 	// UsersBulkActionsControllerBulkUpdateUsersInbounds invokes UsersBulkActionsController_bulkUpdateUsersInbounds operation.
 	//
-	// Bulk update users inbounds.
+	// Bulk update users inbounds by UUIDs.
 	//
 	// POST /api/users/bulk/update-inbounds
 	UsersBulkActionsControllerBulkUpdateUsersInbounds(ctx context.Context, request *BulkUpdateUsersInboundsRequestDto, options ...RequestOption) (*BulkUpdateUsersInboundsResponseDto, error)
@@ -425,109 +451,121 @@ type Invoker interface {
 	//
 	// Activate all inbounds.
 	//
-	// PATCH /api/users/activate-all-inbounds/{uuid}
+	// POST /api/users/{uuid}/actions/activate-all-inbounds
 	UsersControllerActivateAllInbounds(ctx context.Context, params UsersControllerActivateAllInboundsParams, options ...RequestOption) (UsersControllerActivateAllInboundsRes, error)
 	// UsersControllerCreateUser invokes UsersController_createUser operation.
 	//
 	// Create a new user.
 	//
 	// POST /api/users
-	UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*UserResponseDto, error)
+	UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*CreateUserResponseDto, error)
 	// UsersControllerDeleteUser invokes UsersController_deleteUser operation.
 	//
 	// Delete user.
 	//
-	// DELETE /api/users/delete/{uuid}
+	// DELETE /api/users/{uuid}
 	UsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams, options ...RequestOption) (UsersControllerDeleteUserRes, error)
 	// UsersControllerDisableUser invokes UsersController_disableUser operation.
 	//
 	// Disable user.
 	//
-	// PATCH /api/users/disable/{uuid}
+	// POST /api/users/{uuid}/actions/disable
 	UsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams, options ...RequestOption) (UsersControllerDisableUserRes, error)
 	// UsersControllerEnableUser invokes UsersController_enableUser operation.
 	//
 	// Enable user.
 	//
-	// PATCH /api/users/enable/{uuid}
+	// POST /api/users/{uuid}/actions/enable
 	UsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams, options ...RequestOption) (UsersControllerEnableUserRes, error)
-	// UsersControllerGetAllUsersV2 invokes UsersController_getAllUsersV2 operation.
+	// UsersControllerGetAllTags invokes UsersController_getAllTags operation.
+	//
+	// Get all existing user tags.
+	//
+	// GET /api/users/tags
+	UsersControllerGetAllTags(ctx context.Context, options ...RequestOption) (*GetAllTagsResponseDto, error)
+	// UsersControllerGetAllUsers invokes UsersController_getAllUsers operation.
 	//
 	// Get all users.
 	//
-	// GET /api/users/v2
-	UsersControllerGetAllUsersV2(ctx context.Context, params UsersControllerGetAllUsersV2Params, options ...RequestOption) (*GetAllUsersV2ResponseDto, error)
+	// GET /api/users
+	UsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams, options ...RequestOption) (*GetAllUsersResponseDto, error)
 	// UsersControllerGetUserByShortUuid invokes UsersController_getUserByShortUuid operation.
 	//
-	// Get user by short UUID.
+	// Get user by Short UUID.
 	//
-	// GET /api/users/short-uuid/{shortUuid}
+	// GET /api/users/by-short-uuid/{shortUuid}
 	UsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams, options ...RequestOption) (UsersControllerGetUserByShortUuidRes, error)
 	// UsersControllerGetUserBySubscriptionUuid invokes UsersController_getUserBySubscriptionUuid operation.
 	//
 	// Get user by subscription UUID.
 	//
-	// GET /api/users/sub-uuid/{subscriptionUuid}
+	// GET /api/users/by-subscription-uuid/{subscriptionUuid}
 	UsersControllerGetUserBySubscriptionUuid(ctx context.Context, params UsersControllerGetUserBySubscriptionUuidParams, options ...RequestOption) (UsersControllerGetUserBySubscriptionUuidRes, error)
 	// UsersControllerGetUserByTelegramId invokes UsersController_getUserByTelegramId operation.
 	//
 	// Get users by telegram ID.
 	//
-	// GET /api/users/tg/{telegramId}
+	// GET /api/users/by-telegram-id/{telegramId}
 	UsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams, options ...RequestOption) (UsersControllerGetUserByTelegramIdRes, error)
 	// UsersControllerGetUserByUsername invokes UsersController_getUserByUsername operation.
 	//
 	// Get user by username.
 	//
-	// GET /api/users/username/{username}
+	// GET /api/users/by-username/{username}
 	UsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams, options ...RequestOption) (UsersControllerGetUserByUsernameRes, error)
 	// UsersControllerGetUserByUuid invokes UsersController_getUserByUuid operation.
 	//
 	// Get user by UUID.
 	//
-	// GET /api/users/uuid/{uuid}
+	// GET /api/users/{uuid}
 	UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams, options ...RequestOption) (UsersControllerGetUserByUuidRes, error)
 	// UsersControllerGetUsersByEmail invokes UsersController_getUsersByEmail operation.
 	//
 	// Get users by email.
 	//
-	// GET /api/users/email/{email}
+	// GET /api/users/by-email/{email}
 	UsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams, options ...RequestOption) (UsersControllerGetUsersByEmailRes, error)
+	// UsersControllerGetUsersByTag invokes UsersController_getUsersByTag operation.
+	//
+	// Get users by tag.
+	//
+	// GET /api/users/by-tag/{tag}
+	UsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams, options ...RequestOption) (UsersControllerGetUsersByTagRes, error)
 	// UsersControllerResetUserTraffic invokes UsersController_resetUserTraffic operation.
 	//
 	// Reset user traffic.
 	//
-	// PATCH /api/users/reset-traffic/{uuid}
+	// POST /api/users/{uuid}/actions/reset-traffic
 	UsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams, options ...RequestOption) (UsersControllerResetUserTrafficRes, error)
 	// UsersControllerRevokeUserSubscription invokes UsersController_revokeUserSubscription operation.
 	//
 	// Revoke user subscription.
 	//
-	// PATCH /api/users/revoke/{uuid}
+	// POST /api/users/{uuid}/actions/revoke
 	UsersControllerRevokeUserSubscription(ctx context.Context, params UsersControllerRevokeUserSubscriptionParams, options ...RequestOption) (UsersControllerRevokeUserSubscriptionRes, error)
 	// UsersControllerUpdateUser invokes UsersController_updateUser operation.
 	//
 	// Update a user.
 	//
-	// POST /api/users/update
-	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UserResponseDto, error)
+	// PATCH /api/users
+	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UpdateUserResponseDto, error)
 	// UsersStatsControllerGetUserUsageByRange invokes UsersStatsController_getUserUsageByRange operation.
 	//
 	// Get user usage by range.
 	//
-	// GET /api/users/stats/usage/range/{uuid}
+	// GET /api/users/stats/usage/{uuid}/range
 	UsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams, options ...RequestOption) (UsersStatsControllerGetUserUsageByRangeRes, error)
 	// XrayConfigControllerGetConfig invokes XrayConfigController_getConfig operation.
 	//
-	// Get Xray Config.
+	// Get XRay config.
 	//
-	// GET /api/xray/get-config
+	// GET /api/xray
 	XrayConfigControllerGetConfig(ctx context.Context, options ...RequestOption) (XrayConfigControllerGetConfigRes, error)
 	// XrayConfigControllerUpdateConfig invokes XrayConfigController_updateConfig operation.
 	//
-	// Update Xray Config.
+	// Update XRay config.
 	//
-	// POST /api/xray/update-config
+	// PUT /api/xray
 	XrayConfigControllerUpdateConfig(ctx context.Context, request *UpdateConfigRequestDto, options ...RequestOption) (XrayConfigControllerUpdateConfigRes, error)
 }
 
@@ -559,9 +597,9 @@ func NewClient(serverURL string, sec SecuritySource, opts ...ClientOption) (*Cli
 
 // ApiTokensControllerCreate invokes ApiTokensController_create operation.
 //
-// This endpoint is forbidden to use via "API-key". It can be used only admin JWT-token.
+// This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.
 //
-// POST /api/tokens/create
+// POST /api/tokens
 func (c *Client) ApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto, options ...RequestOption) (*CreateApiTokenResponseDto, error) {
 	res, err := c.sendApiTokensControllerCreate(ctx, request, options...)
 	return res, err
@@ -581,7 +619,7 @@ func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *Cre
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/tokens/create"
+	pathParts[0] = "/api/tokens"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -649,9 +687,9 @@ func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *Cre
 
 // ApiTokensControllerDelete invokes ApiTokensController_delete operation.
 //
-// This endpoint is forbidden to use via "API-key". It can be used only admin JWT-token.
+// This endpoint is forbidden to use via "API-key". It can be used only with an admin JWT-token.
 //
-// DELETE /api/tokens/delete/{uuid}
+// DELETE /api/tokens/{uuid}
 func (c *Client) ApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams, options ...RequestOption) (*DeleteApiTokenResponseDto, error) {
 	res, err := c.sendApiTokensControllerDelete(ctx, params, options...)
 	return res, err
@@ -671,7 +709,7 @@ func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTo
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/tokens/delete/"
+	pathParts[0] = "/api/tokens/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -754,7 +792,7 @@ func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTo
 
 // ApiTokensControllerFindAll invokes ApiTokensController_findAll operation.
 //
-// This endpoint is forbidden to use via "API-key". It can be used only admin JWT-token.
+// This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.
 //
 // GET /api/tokens
 func (c *Client) ApiTokensControllerFindAll(ctx context.Context, options ...RequestOption) (*FindAllApiTokensResponseDto, error) {
@@ -841,7 +879,7 @@ func (c *Client) sendApiTokensControllerFindAll(ctx context.Context, requestOpti
 
 // AuthControllerGetStatus invokes AuthController_getStatus operation.
 //
-// Get status of the system.
+// Get the status of the authentication.
 //
 // GET /api/auth/status
 func (c *Client) AuthControllerGetStatus(ctx context.Context, options ...RequestOption) (*GetStatusResponseDtoStatusCode, error) {
@@ -895,7 +933,7 @@ func (c *Client) sendAuthControllerGetStatus(ctx context.Context, requestOptions
 
 // AuthControllerLogin invokes AuthController_login operation.
 //
-// Login to the system.
+// Login as superadmin.
 //
 // POST /api/auth/login
 func (c *Client) AuthControllerLogin(ctx context.Context, request *LoginRequestDto, options ...RequestOption) (AuthControllerLoginRes, error) {
@@ -952,7 +990,7 @@ func (c *Client) sendAuthControllerLogin(ctx context.Context, request *LoginRequ
 
 // AuthControllerRegister invokes AuthController_register operation.
 //
-// Register to the system.
+// Register as superadmin.
 //
 // POST /api/auth/register
 func (c *Client) AuthControllerRegister(ctx context.Context, request *RegisterRequestDto, options ...RequestOption) (AuthControllerRegisterRes, error) {
@@ -1016,9 +1054,75 @@ func (c *Client) sendAuthControllerRegister(ctx context.Context, request *Regist
 	return result, nil
 }
 
+// AuthControllerTelegramCallback invokes AuthController_telegramCallback operation.
+//
+// Callback from Telegram OAuth2.
+//
+// POST /api/auth/oauth2/tg/callback
+func (c *Client) AuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, options ...RequestOption) (*TelegramCallbackResponseDtoStatusCode, error) {
+	res, err := c.sendAuthControllerTelegramCallback(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendAuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, requestOptions ...RequestOption) (res *TelegramCallbackResponseDtoStatusCode, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/auth/oauth2/tg/callback"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeAuthControllerTelegramCallbackRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeAuthControllerTelegramCallbackResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // HostsBulkActionsControllerDeleteHosts invokes HostsBulkActionsController_deleteHosts operation.
 //
-// Delete many hosts.
+// Delete hosts by UUIDs.
 //
 // POST /api/hosts/bulk/delete
 func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto, options ...RequestOption) (*BulkDeleteHostsResponseDto, error) {
@@ -1117,7 +1221,7 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 
 // HostsBulkActionsControllerDisableHosts invokes HostsBulkActionsController_disableHosts operation.
 //
-// Disable many hosts.
+// Disable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/disable
 func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto, options ...RequestOption) (*BulkDisableHostsResponseDto, error) {
@@ -1216,7 +1320,7 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 
 // HostsBulkActionsControllerEnableHosts invokes HostsBulkActionsController_enableHosts operation.
 //
-// Enable many hosts.
+// Enable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/enable
 func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto, options ...RequestOption) (*BulkEnableHostsResponseDto, error) {
@@ -1315,7 +1419,7 @@ func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, 
 
 // HostsBulkActionsControllerSetInboundToHosts invokes HostsBulkActionsController_setInboundToHosts operation.
 //
-// Set inbound to many hosts.
+// Set inbound to hosts by UUIDs.
 //
 // POST /api/hosts/bulk/set-inbound
 func (c *Client) HostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto, options ...RequestOption) (*SetInboundToManyHostsResponseDto, error) {
@@ -1414,7 +1518,7 @@ func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Con
 
 // HostsBulkActionsControllerSetPortToHosts invokes HostsBulkActionsController_setPortToHosts operation.
 //
-// Set port to many hosts.
+// Set port to hosts by UUIDs.
 //
 // POST /api/hosts/bulk/set-port
 func (c *Client) HostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto, options ...RequestOption) (*SetPortToManyHostsResponseDto, error) {
@@ -1515,7 +1619,7 @@ func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Contex
 //
 // Create a new host.
 //
-// POST /api/hosts/create
+// POST /api/hosts
 func (c *Client) HostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto, options ...RequestOption) (*CreateHostResponseDto, error) {
 	res, err := c.sendHostsControllerCreateHost(ctx, request, options...)
 	return res, err
@@ -1544,7 +1648,7 @@ func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *Cre
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/hosts/create"
+	pathParts[0] = "/api/hosts"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -1612,9 +1716,9 @@ func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *Cre
 
 // HostsControllerDeleteHost invokes HostsController_deleteHost operation.
 //
-// Delete host.
+// Delete a host by UUID.
 //
-// DELETE /api/hosts/delete/{uuid}
+// DELETE /api/hosts/{uuid}
 func (c *Client) HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams, options ...RequestOption) (HostsControllerDeleteHostRes, error) {
 	res, err := c.sendHostsControllerDeleteHost(ctx, params, options...)
 	return res, err
@@ -1634,7 +1738,7 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/hosts/delete/"
+	pathParts[0] = "/api/hosts/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -1719,7 +1823,7 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 //
 // Get all hosts.
 //
-// GET /api/hosts/all
+// GET /api/hosts
 func (c *Client) HostsControllerGetAllHosts(ctx context.Context, options ...RequestOption) (*GetAllHostsResponseDto, error) {
 	res, err := c.sendHostsControllerGetAllHosts(ctx, options...)
 	return res, err
@@ -1739,7 +1843,7 @@ func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context, requestOpti
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/hosts/all"
+	pathParts[0] = "/api/hosts"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -1804,9 +1908,9 @@ func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context, requestOpti
 
 // HostsControllerGetOneHost invokes HostsController_getOneHost operation.
 //
-// Get one host by uuid.
+// Get a host by UUID.
 //
-// GET /api/hosts/get-one/{uuid}
+// GET /api/hosts/{uuid}
 func (c *Client) HostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams, options ...RequestOption) (*GetOneHostResponseDto, error) {
 	res, err := c.sendHostsControllerGetOneHost(ctx, params, options...)
 	return res, err
@@ -1826,7 +1930,7 @@ func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params Hosts
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/hosts/get-one/"
+	pathParts[0] = "/api/hosts/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -1911,7 +2015,7 @@ func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params Hosts
 //
 // Reorder hosts.
 //
-// POST /api/hosts/reorder
+// POST /api/hosts/actions/reorder
 func (c *Client) HostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto, options ...RequestOption) (*ReorderHostResponseDto, error) {
 	res, err := c.sendHostsControllerReorderHosts(ctx, request, options...)
 	return res, err
@@ -1940,7 +2044,7 @@ func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *R
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/hosts/reorder"
+	pathParts[0] = "/api/hosts/actions/reorder"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -2010,7 +2114,7 @@ func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *R
 //
 // Update a host.
 //
-// POST /api/hosts/update
+// PATCH /api/hosts
 func (c *Client) HostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto, options ...RequestOption) (*UpdateHostResponseDto, error) {
 	res, err := c.sendHostsControllerUpdateHost(ctx, request, options...)
 	return res, err
@@ -2039,10 +2143,10 @@ func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *Upd
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/hosts/update"
+	pathParts[0] = "/api/hosts"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "POST", u)
+	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -2107,9 +2211,9 @@ func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *Upd
 
 // HwidUserDevicesControllerCreateUserHwidDevice invokes HwidUserDevicesController_createUserHwidDevice operation.
 //
-// Create user HWID device.
+// Create a user HWID device.
 //
-// POST /api/hwid/devices/create
+// POST /api/hwid/devices
 func (c *Client) HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto, options ...RequestOption) (*CreateUserHwidDeviceResponseDto, error) {
 	res, err := c.sendHwidUserDevicesControllerCreateUserHwidDevice(ctx, request, options...)
 	return res, err
@@ -2129,7 +2233,7 @@ func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.C
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/hwid/devices/create"
+	pathParts[0] = "/api/hwid/devices"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -2197,7 +2301,7 @@ func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.C
 
 // HwidUserDevicesControllerDeleteUserHwidDevice invokes HwidUserDevicesController_deleteUserHwidDevice operation.
 //
-// Delete user HWID device.
+// Delete a user HWID device.
 //
 // POST /api/hwid/devices/delete
 func (c *Client) HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto, options ...RequestOption) (*DeleteUserHwidDeviceResponseDto, error) {
@@ -2289,7 +2393,7 @@ func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.C
 //
 // Get user HWID devices.
 //
-// GET /api/hwid/devices/get/{userUuid}
+// GET /api/hwid/devices/{userUuid}
 func (c *Client) HwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams, options ...RequestOption) (*GetUserHwidDevicesResponseDto, error) {
 	res, err := c.sendHwidUserDevicesControllerGetUserHwidDevices(ctx, params, options...)
 	return res, err
@@ -2309,7 +2413,7 @@ func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Con
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/hwid/devices/get/"
+	pathParts[0] = "/api/hwid/devices/"
 	{
 		// Encode "userUuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -2392,15 +2496,15 @@ func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Con
 
 // InboundsBulkActionsControllerAddInboundToNodes invokes InboundsBulkActionsController_addInboundToNodes operation.
 //
-// Add inbound to all nodes.
+// Add inbound to nodes.
 //
 // POST /api/inbounds/bulk/add-to-nodes
-func (c *Client) InboundsBulkActionsControllerAddInboundToNodes(ctx context.Context, request *AddInboundToNodesRequestDto, options ...RequestOption) ([]AddInboundToNodesResponseDto, error) {
+func (c *Client) InboundsBulkActionsControllerAddInboundToNodes(ctx context.Context, request *AddInboundToNodesRequestDto, options ...RequestOption) (*AddInboundToNodesResponseDto, error) {
 	res, err := c.sendInboundsBulkActionsControllerAddInboundToNodes(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsBulkActionsControllerAddInboundToNodes(ctx context.Context, request *AddInboundToNodesRequestDto, requestOptions ...RequestOption) (res []AddInboundToNodesResponseDto, err error) {
+func (c *Client) sendInboundsBulkActionsControllerAddInboundToNodes(ctx context.Context, request *AddInboundToNodesRequestDto, requestOptions ...RequestOption) (res *AddInboundToNodesResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2485,12 +2589,12 @@ func (c *Client) sendInboundsBulkActionsControllerAddInboundToNodes(ctx context.
 // Add inbound to users.
 //
 // POST /api/inbounds/bulk/add-to-users
-func (c *Client) InboundsBulkActionsControllerAddInboundToUsers(ctx context.Context, request *AddInboundToUsersRequestDto, options ...RequestOption) ([]AddInboundToUsersResponseDto, error) {
+func (c *Client) InboundsBulkActionsControllerAddInboundToUsers(ctx context.Context, request *AddInboundToUsersRequestDto, options ...RequestOption) (*AddInboundToUsersResponseDto, error) {
 	res, err := c.sendInboundsBulkActionsControllerAddInboundToUsers(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsBulkActionsControllerAddInboundToUsers(ctx context.Context, request *AddInboundToUsersRequestDto, requestOptions ...RequestOption) (res []AddInboundToUsersResponseDto, err error) {
+func (c *Client) sendInboundsBulkActionsControllerAddInboundToUsers(ctx context.Context, request *AddInboundToUsersRequestDto, requestOptions ...RequestOption) (res *AddInboundToUsersResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2572,15 +2676,15 @@ func (c *Client) sendInboundsBulkActionsControllerAddInboundToUsers(ctx context.
 
 // InboundsBulkActionsControllerRemoveInboundFromNodes invokes InboundsBulkActionsController_removeInboundFromNodes operation.
 //
-// Remove inbound from all nodes.
+// Remove inbound from nodes.
 //
 // POST /api/inbounds/bulk/remove-from-nodes
-func (c *Client) InboundsBulkActionsControllerRemoveInboundFromNodes(ctx context.Context, request *RemoveInboundFromNodesRequestDto, options ...RequestOption) ([]RemoveInboundFromNodesResponseDto, error) {
+func (c *Client) InboundsBulkActionsControllerRemoveInboundFromNodes(ctx context.Context, request *RemoveInboundFromNodesRequestDto, options ...RequestOption) (*RemoveInboundFromNodesResponseDto, error) {
 	res, err := c.sendInboundsBulkActionsControllerRemoveInboundFromNodes(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromNodes(ctx context.Context, request *RemoveInboundFromNodesRequestDto, requestOptions ...RequestOption) (res []RemoveInboundFromNodesResponseDto, err error) {
+func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromNodes(ctx context.Context, request *RemoveInboundFromNodesRequestDto, requestOptions ...RequestOption) (res *RemoveInboundFromNodesResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2665,12 +2769,12 @@ func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromNodes(ctx con
 // Remove inbound from users.
 //
 // POST /api/inbounds/bulk/remove-from-users
-func (c *Client) InboundsBulkActionsControllerRemoveInboundFromUsers(ctx context.Context, request *RemoveInboundFromUsersRequestDto, options ...RequestOption) ([]RemoveInboundFromUsersResponseDto, error) {
+func (c *Client) InboundsBulkActionsControllerRemoveInboundFromUsers(ctx context.Context, request *RemoveInboundFromUsersRequestDto, options ...RequestOption) (*RemoveInboundFromUsersResponseDto, error) {
 	res, err := c.sendInboundsBulkActionsControllerRemoveInboundFromUsers(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromUsers(ctx context.Context, request *RemoveInboundFromUsersRequestDto, requestOptions ...RequestOption) (res []RemoveInboundFromUsersResponseDto, err error) {
+func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromUsers(ctx context.Context, request *RemoveInboundFromUsersRequestDto, requestOptions ...RequestOption) (res *RemoveInboundFromUsersResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2752,15 +2856,15 @@ func (c *Client) sendInboundsBulkActionsControllerRemoveInboundFromUsers(ctx con
 
 // InboundsControllerGetFullInbounds invokes InboundsController_getFullInbounds operation.
 //
-// Get full inbounds.
+// Get inbounds with full details.
 //
 // GET /api/inbounds/full
-func (c *Client) InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) (*GetInboundsResponseDto, error) {
+func (c *Client) InboundsControllerGetFullInbounds(ctx context.Context, options ...RequestOption) (*GetFullInboundsResponseDto, error) {
 	res, err := c.sendInboundsControllerGetFullInbounds(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendInboundsControllerGetFullInbounds(ctx context.Context, requestOptions ...RequestOption) (res *GetInboundsResponseDto, err error) {
+func (c *Client) sendInboundsControllerGetFullInbounds(ctx context.Context, requestOptions ...RequestOption) (res *GetFullInboundsResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2928,7 +3032,7 @@ func (c *Client) sendInboundsControllerGetInbounds(ctx context.Context, requestO
 //
 // Get SSL_CERT for Remnawave Node.
 //
-// GET /api/keygen/get
+// GET /api/keygen
 func (c *Client) KeygenControllerGenerateKey(ctx context.Context, options ...RequestOption) (*GetPubKeyResponseDto, error) {
 	res, err := c.sendKeygenControllerGenerateKey(ctx, options...)
 	return res, err
@@ -2948,7 +3052,7 @@ func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context, requestOpt
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/keygen/get"
+	pathParts[0] = "/api/keygen"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -3015,7 +3119,7 @@ func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context, requestOpt
 //
 // Create a new node.
 //
-// POST /api/nodes/create
+// POST /api/nodes
 func (c *Client) NodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto, options ...RequestOption) (*CreateNodeResponseDto, error) {
 	res, err := c.sendNodesControllerCreateNode(ctx, request, options...)
 	return res, err
@@ -3044,7 +3148,7 @@ func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *Cre
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/nodes/create"
+	pathParts[0] = "/api/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -3112,15 +3216,15 @@ func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *Cre
 
 // NodesControllerDeleteNode invokes NodesController_deleteNode operation.
 //
-// Delete node.
+// Delete a node.
 //
-// DELETE /api/nodes/delete/{uuid}
-func (c *Client) NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, options ...RequestOption) ([]DeleteNodeResponseDto, error) {
+// DELETE /api/nodes/{uuid}
+func (c *Client) NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, options ...RequestOption) (*DeleteNodeResponseDto, error) {
 	res, err := c.sendNodesControllerDeleteNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, requestOptions ...RequestOption) (res []DeleteNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, requestOptions ...RequestOption) (res *DeleteNodeResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -3134,7 +3238,7 @@ func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params Nodes
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/nodes/delete/"
+	pathParts[0] = "/api/nodes/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -3217,15 +3321,15 @@ func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params Nodes
 
 // NodesControllerDisableNode invokes NodesController_disableNode operation.
 //
-// Disable node.
+// Disable a node.
 //
-// PATCH /api/nodes/disable/{uuid}
-func (c *Client) NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, options ...RequestOption) ([]DisableNodeResponseDto, error) {
+// POST /api/nodes/{uuid}/actions/disable
+func (c *Client) NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, options ...RequestOption) (*DisableNodeResponseDto, error) {
 	res, err := c.sendNodesControllerDisableNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, requestOptions ...RequestOption) (res []DisableNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, requestOptions ...RequestOption) (res *DisableNodeResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -3238,8 +3342,8 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/nodes/disable/"
+	var pathParts [3]string
+	pathParts[0] = "/api/nodes/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -3258,9 +3362,10 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/disable"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -3322,15 +3427,15 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 
 // NodesControllerEnableNode invokes NodesController_enableNode operation.
 //
-// Enable node to further use.
+// Enable a node.
 //
-// PATCH /api/nodes/enable/{uuid}
-func (c *Client) NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, options ...RequestOption) ([]EnableNodeResponseDto, error) {
+// POST /api/nodes/{uuid}/actions/enable
+func (c *Client) NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, options ...RequestOption) (*EnableNodeResponseDto, error) {
 	res, err := c.sendNodesControllerEnableNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, requestOptions ...RequestOption) (res []EnableNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, requestOptions ...RequestOption) (res *EnableNodeResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -3343,8 +3448,8 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/nodes/enable/"
+	var pathParts [3]string
+	pathParts[0] = "/api/nodes/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -3363,9 +3468,10 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/enable"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -3429,7 +3535,7 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 //
 // Get all nodes.
 //
-// GET /api/nodes/get-all
+// GET /api/nodes
 func (c *Client) NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) (*GetAllNodesResponseDto, error) {
 	res, err := c.sendNodesControllerGetAllNodes(ctx, options...)
 	return res, err
@@ -3449,7 +3555,7 @@ func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOpti
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/nodes/get-all"
+	pathParts[0] = "/api/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -3514,15 +3620,15 @@ func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOpti
 
 // NodesControllerGetOneNode invokes NodesController_getOneNode operation.
 //
-// Get one node.
+// Get node by UUID.
 //
-// GET /api/nodes/get-one/{uuid}
-func (c *Client) NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, options ...RequestOption) ([]GetOneNodeResponseDto, error) {
+// GET /api/nodes/{uuid}
+func (c *Client) NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, options ...RequestOption) (*GetOneNodeResponseDto, error) {
 	res, err := c.sendNodesControllerGetOneNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, requestOptions ...RequestOption) (res []GetOneNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, requestOptions ...RequestOption) (res *GetOneNodeResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -3536,7 +3642,7 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/nodes/get-one/"
+	pathParts[0] = "/api/nodes/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -3621,7 +3727,7 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 //
 // Reorder nodes.
 //
-// POST /api/nodes/reorder
+// POST /api/nodes/actions/reorder
 func (c *Client) NodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto, options ...RequestOption) (*ReorderNodeResponseDto, error) {
 	res, err := c.sendNodesControllerReorderNodes(ctx, request, options...)
 	return res, err
@@ -3650,7 +3756,7 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/nodes/reorder"
+	pathParts[0] = "/api/nodes/actions/reorder"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -3720,13 +3826,13 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 //
 // Restart all nodes.
 //
-// PATCH /api/nodes/restart-all
-func (c *Client) NodesControllerRestartAllNodes(ctx context.Context, options ...RequestOption) ([]RestartNodeResponseDto, error) {
+// POST /api/nodes/actions/restart-all
+func (c *Client) NodesControllerRestartAllNodes(ctx context.Context, options ...RequestOption) (*RestartAllNodesResponseDto, error) {
 	res, err := c.sendNodesControllerRestartAllNodes(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, requestOptions ...RequestOption) (res []RestartNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, requestOptions ...RequestOption) (res *RestartAllNodesResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -3740,10 +3846,10 @@ func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/nodes/restart-all"
+	pathParts[0] = "/api/nodes/actions/restart-all"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -3807,13 +3913,13 @@ func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request
 //
 // Restart node.
 //
-// GET /api/nodes/restart/{uuid}
-func (c *Client) NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, options ...RequestOption) ([]RestartNodeResponseDto, error) {
+// POST /api/nodes/{uuid}/actions/restart
+func (c *Client) NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, options ...RequestOption) (*RestartNodeResponseDto, error) {
 	res, err := c.sendNodesControllerRestartNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, requestOptions ...RequestOption) (res []RestartNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, requestOptions ...RequestOption) (res *RestartNodeResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -3826,8 +3932,8 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/nodes/restart/"
+	var pathParts [3]string
+	pathParts[0] = "/api/nodes/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -3846,9 +3952,10 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/restart"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "GET", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -3912,13 +4019,13 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 //
 // Update node.
 //
-// POST /api/nodes/update
-func (c *Client) NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, options ...RequestOption) ([]UpdateNodeResponseDto, error) {
+// PATCH /api/nodes
+func (c *Client) NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, options ...RequestOption) (*UpdateNodeResponseDto, error) {
 	res, err := c.sendNodesControllerUpdateNode(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, requestOptions ...RequestOption) (res []UpdateNodeResponseDto, err error) {
+func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, requestOptions ...RequestOption) (res *UpdateNodeResponseDto, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3941,10 +4048,10 @@ func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *Upd
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/nodes/update"
+	pathParts[0] = "/api/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "POST", u)
+	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -4127,9 +4234,9 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 
 // NodesUserUsageHistoryControllerGetNodeUserUsage invokes NodesUserUsageHistoryController_getNodeUserUsage operation.
 //
-// Get node users usage by range and node uuid.
+// Get node user usage by range and Node UUID.
 //
-// GET /api/nodes/usage/users/range/{uuid}
+// GET /api/nodes/usage/{uuid}/users/range
 func (c *Client) NodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams, options ...RequestOption) (*GetNodeUserUsageByRangeResponseDto, error) {
 	res, err := c.sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx, params, options...)
 	return res, err
@@ -4148,8 +4255,8 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/nodes/usage/users/range/"
+	var pathParts [3]string
+	pathParts[0] = "/api/nodes/usage/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -4168,6 +4275,7 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/users/range"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	q := uri.NewQueryEncoder()
@@ -4509,6 +4617,8 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx conte
 
 // SubscriptionControllerGetSubscriptionInfoByShortUuid invokes SubscriptionController_getSubscriptionInfoByShortUuid operation.
 //
+// Get Subscription Info by Short UUID.
+//
 // GET /api/sub/{shortUuid}/info
 func (c *Client) SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams, options ...RequestOption) (*GetSubscriptionInfoResponseDto, error) {
 	res, err := c.sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params, options...)
@@ -4688,9 +4798,9 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.C
 
 // SubscriptionSettingsControllerGetSettings invokes SubscriptionSettingsController_getSettings operation.
 //
-// Get Subscription Settings.
+// Get subscription settings.
 //
-// GET /api/subscription-settings/get
+// GET /api/subscription-settings
 func (c *Client) SubscriptionSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (*GetSubscriptionSettingsResponseDto, error) {
 	res, err := c.sendSubscriptionSettingsControllerGetSettings(ctx, options...)
 	return res, err
@@ -4710,7 +4820,7 @@ func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Conte
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/subscription-settings/get"
+	pathParts[0] = "/api/subscription-settings"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -4775,9 +4885,9 @@ func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Conte
 
 // SubscriptionSettingsControllerUpdateSettings invokes SubscriptionSettingsController_updateSettings operation.
 //
-// Update Subscription Settings.
+// Update subscription settings.
 //
-// POST /api/subscription-settings/update
+// PATCH /api/subscription-settings
 func (c *Client) SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto, options ...RequestOption) (*UpdateSubscriptionSettingsResponseDto, error) {
 	res, err := c.sendSubscriptionSettingsControllerUpdateSettings(ctx, request, options...)
 	return res, err
@@ -4806,10 +4916,10 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/subscription-settings/update"
+	pathParts[0] = "/api/subscription-settings"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "POST", u)
+	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -4872,11 +4982,116 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 	return result, nil
 }
 
+// SubscriptionTemplateControllerGetTemplate invokes SubscriptionTemplateController_getTemplate operation.
+//
+// Get subscription template.
+//
+// GET /api/subscription-templates/{templateType}
+func (c *Client) SubscriptionTemplateControllerGetTemplate(ctx context.Context, params SubscriptionTemplateControllerGetTemplateParams, options ...RequestOption) (*GetTemplateResponseDto, error) {
+	res, err := c.sendSubscriptionTemplateControllerGetTemplate(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateControllerGetTemplate(ctx context.Context, params SubscriptionTemplateControllerGetTemplateParams, requestOptions ...RequestOption) (res *GetTemplateResponseDto, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/subscription-templates/"
+	{
+		// Encode "templateType" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "templateType",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(string(params.TemplateType)))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerGetTemplateOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionTemplateControllerGetTemplateResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SubscriptionTemplateControllerUpdateTemplate invokes SubscriptionTemplateController_updateTemplate operation.
 //
-// Update Template.
+// Update subscription template.
 //
-// POST /api/subscription-templates/update-template
+// PUT /api/subscription-templates
 func (c *Client) SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, options ...RequestOption) (*UpdateTemplateResponseDto, error) {
 	res, err := c.sendSubscriptionTemplateControllerUpdateTemplate(ctx, request, options...)
 	return res, err
@@ -4905,10 +5120,10 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/subscription-templates/update-template"
+	pathParts[0] = "/api/subscription-templates"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "POST", u)
+	r, err := ht.NewRequest(ctx, "PUT", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -4971,11 +5186,240 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 	return result, nil
 }
 
+// SubscriptionsControllerGetAllSubscriptions invokes SubscriptionsController_getAllSubscriptions operation.
+//
+// Get all subscriptions.
+//
+// GET /api/subscriptions
+func (c *Client) SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, options ...RequestOption) (*GetAllSubscriptionsResponseDto, error) {
+	res, err := c.sendSubscriptionsControllerGetAllSubscriptions(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, requestOptions ...RequestOption) (res *GetAllSubscriptionsResponseDto, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscriptions"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetAllSubscriptionsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionsControllerGetAllSubscriptionsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionsControllerGetSubscriptionByUsername invokes SubscriptionsController_getSubscriptionByUsername operation.
+//
+// Get subscription by username.
+//
+// GET /api/subscriptions/by-username/{username}
+func (c *Client) SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
+	res, err := c.sendSubscriptionsControllerGetSubscriptionByUsername(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetSubscriptionByUsernameRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/subscriptions/by-username/"
+	{
+		// Encode "username" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "username",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.Username))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetSubscriptionByUsernameOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionsControllerGetSubscriptionByUsernameResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SystemControllerGetBandwidthStats invokes SystemController_getBandwidthStats operation.
 //
-// Get System Bandwidth Statistics.
+// Get Bandwidth Stats.
 //
-// GET /api/system/bandwidth
+// GET /api/system/stats/bandwidth
 func (c *Client) SystemControllerGetBandwidthStats(ctx context.Context, options ...RequestOption) (*GetBandwidthStatsResponseDto, error) {
 	res, err := c.sendSystemControllerGetBandwidthStats(ctx, options...)
 	return res, err
@@ -4995,7 +5439,7 @@ func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context, requ
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/system/bandwidth"
+	pathParts[0] = "/api/system/stats/bandwidth"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -5062,7 +5506,7 @@ func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context, requ
 //
 // Get Nodes Statistics.
 //
-// GET /api/system/statistics/nodes
+// GET /api/system/stats/nodes
 func (c *Client) SystemControllerGetNodesStatistics(ctx context.Context, options ...RequestOption) (*GetNodesStatisticsResponseDto, error) {
 	res, err := c.sendSystemControllerGetNodesStatistics(ctx, options...)
 	return res, err
@@ -5082,7 +5526,7 @@ func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context, req
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/system/statistics/nodes"
+	pathParts[0] = "/api/system/stats/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -5147,7 +5591,7 @@ func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context, req
 
 // SystemControllerGetStats invokes SystemController_getStats operation.
 //
-// Get System Stats.
+// Get Stats.
 //
 // GET /api/system/stats
 func (c *Client) SystemControllerGetStats(ctx context.Context, options ...RequestOption) (*GetStatsResponseDto, error) {
@@ -5236,7 +5680,7 @@ func (c *Client) sendSystemControllerGetStats(ctx context.Context, requestOption
 //
 // Bulk reset all users traffic.
 //
-// PATCH /api/users/bulk/all/reset-traffic
+// POST /api/users/bulk/all/reset-traffic
 func (c *Client) UsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context, options ...RequestOption) (*BulkAllResetTrafficUsersResponseDto, error) {
 	res, err := c.sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx, options...)
 	return res, err
@@ -5259,7 +5703,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx conte
 	pathParts[0] = "/api/users/bulk/all/reset-traffic"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -5519,7 +5963,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 
 // UsersBulkActionsControllerBulkResetUserTraffic invokes UsersBulkActionsController_bulkResetUserTraffic operation.
 //
-// Bulk reset user traffic.
+// Bulk reset traffic users by UUIDs.
 //
 // POST /api/users/bulk/reset-traffic
 func (c *Client) UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto, options ...RequestOption) (*BulkResetTrafficUsersResponseDto, error) {
@@ -5618,7 +6062,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.
 
 // UsersBulkActionsControllerBulkRevokeUsersSubscription invokes UsersBulkActionsController_bulkRevokeUsersSubscription operation.
 //
-// Bulk revoke users subscription.
+// Revoke users subscription by User UUIDs.
 //
 // POST /api/users/bulk/revoke-subscription
 func (c *Client) UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto, options ...RequestOption) (*BulkRevokeUsersSubscriptionResponseDto, error) {
@@ -5816,7 +6260,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Co
 
 // UsersBulkActionsControllerBulkUpdateUsers invokes UsersBulkActionsController_bulkUpdateUsers operation.
 //
-// Bulk update users.
+// Bulk update users by UUIDs.
 //
 // POST /api/users/bulk/update
 func (c *Client) UsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto, options ...RequestOption) (*BulkUpdateUsersResponseDto, error) {
@@ -5915,7 +6359,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Conte
 
 // UsersBulkActionsControllerBulkUpdateUsersInbounds invokes UsersBulkActionsController_bulkUpdateUsersInbounds operation.
 //
-// Bulk update users inbounds.
+// Bulk update users inbounds by UUIDs.
 //
 // POST /api/users/bulk/update-inbounds
 func (c *Client) UsersBulkActionsControllerBulkUpdateUsersInbounds(ctx context.Context, request *BulkUpdateUsersInboundsRequestDto, options ...RequestOption) (*BulkUpdateUsersInboundsResponseDto, error) {
@@ -6016,7 +6460,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInbounds(ctx conte
 //
 // Activate all inbounds.
 //
-// PATCH /api/users/activate-all-inbounds/{uuid}
+// POST /api/users/{uuid}/actions/activate-all-inbounds
 func (c *Client) UsersControllerActivateAllInbounds(ctx context.Context, params UsersControllerActivateAllInboundsParams, options ...RequestOption) (UsersControllerActivateAllInboundsRes, error) {
 	res, err := c.sendUsersControllerActivateAllInbounds(ctx, params, options...)
 	return res, err
@@ -6035,8 +6479,8 @@ func (c *Client) sendUsersControllerActivateAllInbounds(ctx context.Context, par
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/activate-all-inbounds/"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6055,9 +6499,10 @@ func (c *Client) sendUsersControllerActivateAllInbounds(ctx context.Context, par
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/activate-all-inbounds"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -6122,12 +6567,12 @@ func (c *Client) sendUsersControllerActivateAllInbounds(ctx context.Context, par
 // Create a new user.
 //
 // POST /api/users
-func (c *Client) UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*UserResponseDto, error) {
+func (c *Client) UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (*CreateUserResponseDto, error) {
 	res, err := c.sendUsersControllerCreateUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, requestOptions ...RequestOption) (res *UserResponseDto, err error) {
+func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, requestOptions ...RequestOption) (res *CreateUserResponseDto, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6220,7 +6665,7 @@ func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *Cre
 //
 // Delete user.
 //
-// DELETE /api/users/delete/{uuid}
+// DELETE /api/users/{uuid}
 func (c *Client) UsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams, options ...RequestOption) (UsersControllerDeleteUserRes, error) {
 	res, err := c.sendUsersControllerDeleteUser(ctx, params, options...)
 	return res, err
@@ -6240,7 +6685,7 @@ func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params Users
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/delete/"
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6325,7 +6770,7 @@ func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params Users
 //
 // Disable user.
 //
-// PATCH /api/users/disable/{uuid}
+// POST /api/users/{uuid}/actions/disable
 func (c *Client) UsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams, options ...RequestOption) (UsersControllerDisableUserRes, error) {
 	res, err := c.sendUsersControllerDisableUser(ctx, params, options...)
 	return res, err
@@ -6344,8 +6789,8 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/disable/"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6364,9 +6809,10 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/disable"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -6430,7 +6876,7 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 //
 // Enable user.
 //
-// PATCH /api/users/enable/{uuid}
+// POST /api/users/{uuid}/actions/enable
 func (c *Client) UsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams, options ...RequestOption) (UsersControllerEnableUserRes, error) {
 	res, err := c.sendUsersControllerEnableUser(ctx, params, options...)
 	return res, err
@@ -6449,8 +6895,8 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/enable/"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6469,9 +6915,10 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/enable"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -6531,17 +6978,17 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 	return result, nil
 }
 
-// UsersControllerGetAllUsersV2 invokes UsersController_getAllUsersV2 operation.
+// UsersControllerGetAllTags invokes UsersController_getAllTags operation.
 //
-// Get all users.
+// Get all existing user tags.
 //
-// GET /api/users/v2
-func (c *Client) UsersControllerGetAllUsersV2(ctx context.Context, params UsersControllerGetAllUsersV2Params, options ...RequestOption) (*GetAllUsersV2ResponseDto, error) {
-	res, err := c.sendUsersControllerGetAllUsersV2(ctx, params, options...)
+// GET /api/users/tags
+func (c *Client) UsersControllerGetAllTags(ctx context.Context, options ...RequestOption) (*GetAllTagsResponseDto, error) {
+	res, err := c.sendUsersControllerGetAllTags(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetAllUsersV2(ctx context.Context, params UsersControllerGetAllUsersV2Params, requestOptions ...RequestOption) (res *GetAllUsersV2ResponseDto, err error) {
+func (c *Client) sendUsersControllerGetAllTags(ctx context.Context, requestOptions ...RequestOption) (res *GetAllTagsResponseDto, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -6555,7 +7002,94 @@ func (c *Client) sendUsersControllerGetAllUsersV2(ctx context.Context, params Us
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/users/v2"
+	pathParts[0] = "/api/users/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, UsersControllerGetAllTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeUsersControllerGetAllTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// UsersControllerGetAllUsers invokes UsersController_getAllUsers operation.
+//
+// Get all users.
+//
+// GET /api/users
+func (c *Client) UsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams, options ...RequestOption) (*GetAllUsersResponseDto, error) {
+	res, err := c.sendUsersControllerGetAllUsers(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams, requestOptions ...RequestOption) (res *GetAllUsersResponseDto, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/users"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	q := uri.NewQueryEncoder()
@@ -6605,7 +7139,7 @@ func (c *Client) sendUsersControllerGetAllUsersV2(ctx context.Context, params Us
 		var satisfied bitset
 		{
 
-			switch err := c.securityAuthorization(ctx, UsersControllerGetAllUsersV2Operation, r); {
+			switch err := c.securityAuthorization(ctx, UsersControllerGetAllUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -6647,7 +7181,7 @@ func (c *Client) sendUsersControllerGetAllUsersV2(ctx context.Context, params Us
 		return res, errors.Wrap(err, "edit response")
 	}
 
-	result, err := decodeUsersControllerGetAllUsersV2Response(resp)
+	result, err := decodeUsersControllerGetAllUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -6657,9 +7191,9 @@ func (c *Client) sendUsersControllerGetAllUsersV2(ctx context.Context, params Us
 
 // UsersControllerGetUserByShortUuid invokes UsersController_getUserByShortUuid operation.
 //
-// Get user by short UUID.
+// Get user by Short UUID.
 //
-// GET /api/users/short-uuid/{shortUuid}
+// GET /api/users/by-short-uuid/{shortUuid}
 func (c *Client) UsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams, options ...RequestOption) (UsersControllerGetUserByShortUuidRes, error) {
 	res, err := c.sendUsersControllerGetUserByShortUuid(ctx, params, options...)
 	return res, err
@@ -6679,7 +7213,7 @@ func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, para
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/short-uuid/"
+	pathParts[0] = "/api/users/by-short-uuid/"
 	{
 		// Encode "shortUuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6764,7 +7298,7 @@ func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, para
 //
 // Get user by subscription UUID.
 //
-// GET /api/users/sub-uuid/{subscriptionUuid}
+// GET /api/users/by-subscription-uuid/{subscriptionUuid}
 func (c *Client) UsersControllerGetUserBySubscriptionUuid(ctx context.Context, params UsersControllerGetUserBySubscriptionUuidParams, options ...RequestOption) (UsersControllerGetUserBySubscriptionUuidRes, error) {
 	res, err := c.sendUsersControllerGetUserBySubscriptionUuid(ctx, params, options...)
 	return res, err
@@ -6784,7 +7318,7 @@ func (c *Client) sendUsersControllerGetUserBySubscriptionUuid(ctx context.Contex
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/sub-uuid/"
+	pathParts[0] = "/api/users/by-subscription-uuid/"
 	{
 		// Encode "subscriptionUuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6869,7 +7403,7 @@ func (c *Client) sendUsersControllerGetUserBySubscriptionUuid(ctx context.Contex
 //
 // Get users by telegram ID.
 //
-// GET /api/users/tg/{telegramId}
+// GET /api/users/by-telegram-id/{telegramId}
 func (c *Client) UsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams, options ...RequestOption) (UsersControllerGetUserByTelegramIdRes, error) {
 	res, err := c.sendUsersControllerGetUserByTelegramId(ctx, params, options...)
 	return res, err
@@ -6889,7 +7423,7 @@ func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, par
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/tg/"
+	pathParts[0] = "/api/users/by-telegram-id/"
 	{
 		// Encode "telegramId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -6974,7 +7508,7 @@ func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, par
 //
 // Get user by username.
 //
-// GET /api/users/username/{username}
+// GET /api/users/by-username/{username}
 func (c *Client) UsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams, options ...RequestOption) (UsersControllerGetUserByUsernameRes, error) {
 	res, err := c.sendUsersControllerGetUserByUsername(ctx, params, options...)
 	return res, err
@@ -6994,7 +7528,7 @@ func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, param
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/username/"
+	pathParts[0] = "/api/users/by-username/"
 	{
 		// Encode "username" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -7079,7 +7613,7 @@ func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, param
 //
 // Get user by UUID.
 //
-// GET /api/users/uuid/{uuid}
+// GET /api/users/{uuid}
 func (c *Client) UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams, options ...RequestOption) (UsersControllerGetUserByUuidRes, error) {
 	res, err := c.sendUsersControllerGetUserByUuid(ctx, params, options...)
 	return res, err
@@ -7099,7 +7633,7 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/uuid/"
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -7184,7 +7718,7 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 //
 // Get users by email.
 //
-// GET /api/users/email/{email}
+// GET /api/users/by-email/{email}
 func (c *Client) UsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams, options ...RequestOption) (UsersControllerGetUsersByEmailRes, error) {
 	res, err := c.sendUsersControllerGetUsersByEmail(ctx, params, options...)
 	return res, err
@@ -7204,7 +7738,7 @@ func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params 
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/email/"
+	pathParts[0] = "/api/users/by-email/"
 	{
 		// Encode "email" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -7285,11 +7819,116 @@ func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params 
 	return result, nil
 }
 
+// UsersControllerGetUsersByTag invokes UsersController_getUsersByTag operation.
+//
+// Get users by tag.
+//
+// GET /api/users/by-tag/{tag}
+func (c *Client) UsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams, options ...RequestOption) (UsersControllerGetUsersByTagRes, error) {
+	res, err := c.sendUsersControllerGetUsersByTag(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams, requestOptions ...RequestOption) (res UsersControllerGetUsersByTagRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/users/by-tag/"
+	{
+		// Encode "tag" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "tag",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.Tag))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, UsersControllerGetUsersByTagOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeUsersControllerGetUsersByTagResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // UsersControllerResetUserTraffic invokes UsersController_resetUserTraffic operation.
 //
 // Reset user traffic.
 //
-// PATCH /api/users/reset-traffic/{uuid}
+// POST /api/users/{uuid}/actions/reset-traffic
 func (c *Client) UsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams, options ...RequestOption) (UsersControllerResetUserTrafficRes, error) {
 	res, err := c.sendUsersControllerResetUserTraffic(ctx, params, options...)
 	return res, err
@@ -7308,8 +7947,8 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/reset-traffic/"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -7328,9 +7967,10 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/reset-traffic"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -7394,7 +8034,7 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 //
 // Revoke user subscription.
 //
-// PATCH /api/users/revoke/{uuid}
+// POST /api/users/{uuid}/actions/revoke
 func (c *Client) UsersControllerRevokeUserSubscription(ctx context.Context, params UsersControllerRevokeUserSubscriptionParams, options ...RequestOption) (UsersControllerRevokeUserSubscriptionRes, error) {
 	res, err := c.sendUsersControllerRevokeUserSubscription(ctx, params, options...)
 	return res, err
@@ -7413,8 +8053,8 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/revoke/"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -7433,9 +8073,10 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/actions/revoke"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PATCH", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -7499,13 +8140,13 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 //
 // Update a user.
 //
-// POST /api/users/update
-func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UserResponseDto, error) {
+// PATCH /api/users
+func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (*UpdateUserResponseDto, error) {
 	res, err := c.sendUsersControllerUpdateUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, requestOptions ...RequestOption) (res *UserResponseDto, err error) {
+func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, requestOptions ...RequestOption) (res *UpdateUserResponseDto, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -7528,10 +8169,10 @@ func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *Upd
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/users/update"
+	pathParts[0] = "/api/users"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "POST", u)
+	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -7598,7 +8239,7 @@ func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *Upd
 //
 // Get user usage by range.
 //
-// GET /api/users/stats/usage/range/{uuid}
+// GET /api/users/stats/usage/{uuid}/range
 func (c *Client) UsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams, options ...RequestOption) (UsersStatsControllerGetUserUsageByRangeRes, error) {
 	res, err := c.sendUsersStatsControllerGetUserUsageByRange(ctx, params, options...)
 	return res, err
@@ -7617,8 +8258,8 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/stats/usage/range/"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/stats/usage/"
 	{
 		// Encode "uuid" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
@@ -7637,6 +8278,7 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 		}
 		pathParts[1] = encoded
 	}
+	pathParts[2] = "/range"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	q := uri.NewQueryEncoder()
@@ -7732,9 +8374,9 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 
 // XrayConfigControllerGetConfig invokes XrayConfigController_getConfig operation.
 //
-// Get Xray Config.
+// Get XRay config.
 //
-// GET /api/xray/get-config
+// GET /api/xray
 func (c *Client) XrayConfigControllerGetConfig(ctx context.Context, options ...RequestOption) (XrayConfigControllerGetConfigRes, error) {
 	res, err := c.sendXrayConfigControllerGetConfig(ctx, options...)
 	return res, err
@@ -7754,7 +8396,7 @@ func (c *Client) sendXrayConfigControllerGetConfig(ctx context.Context, requestO
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/xray/get-config"
+	pathParts[0] = "/api/xray"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -7819,9 +8461,9 @@ func (c *Client) sendXrayConfigControllerGetConfig(ctx context.Context, requestO
 
 // XrayConfigControllerUpdateConfig invokes XrayConfigController_updateConfig operation.
 //
-// Update Xray Config.
+// Update XRay config.
 //
-// POST /api/xray/update-config
+// PUT /api/xray
 func (c *Client) XrayConfigControllerUpdateConfig(ctx context.Context, request *UpdateConfigRequestDto, options ...RequestOption) (XrayConfigControllerUpdateConfigRes, error) {
 	res, err := c.sendXrayConfigControllerUpdateConfig(ctx, request, options...)
 	return res, err
@@ -7841,10 +8483,10 @@ func (c *Client) sendXrayConfigControllerUpdateConfig(ctx context.Context, reque
 	}
 	u = uri.Clone(u)
 	var pathParts [1]string
-	pathParts[0] = "/api/xray/update-config"
+	pathParts[0] = "/api/xray"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "POST", u)
+	r, err := ht.NewRequest(ctx, "PUT", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}

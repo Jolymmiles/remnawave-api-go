@@ -147,6 +147,22 @@ func (s *CreateUserRequestDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
+func (s *CreateUserResponseDtoResponse) setDefaults() {
+	{
+		val := CreateUserResponseDtoResponseStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := CreateUserResponseDtoResponseTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
 func (s *DisableUserResponseDtoResponse) setDefaults() {
 	{
 		val := DisableUserResponseDtoResponseStatus("ACTIVE")
@@ -191,6 +207,22 @@ func (s *GetAllHostsResponseDtoResponseItem) setDefaults() {
 	{
 		val := GetAllHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetAllUsersResponseDtoResponseUsersItem) setDefaults() {
+	{
+		val := GetAllUsersResponseDtoResponseUsersItemStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
 	}
 }
 
@@ -254,6 +286,38 @@ func (s *GetUserBySubscriptionUuidResponseDtoResponse) setDefaults() {
 	}
 	{
 		val := GetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetUserByTagResponseDtoResponseItem) setDefaults() {
+	{
+		val := GetUserByTagResponseDtoResponseItemStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetUserByTagResponseDtoResponseItemTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) setDefaults() {
+	{
+		val := GetUserByTelegramIdResponseDtoResponseItemStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 }
@@ -383,9 +447,9 @@ func (s *UpdateUserRequestDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *UserDto) setDefaults() {
+func (s *UpdateUserResponseDtoResponse) setDefaults() {
 	{
-		val := UserDtoStatus("ACTIVE")
+		val := UpdateUserResponseDtoResponseStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 	{
@@ -393,7 +457,7 @@ func (s *UserDto) setDefaults() {
 		s.TrafficLimitBytes.SetTo(val)
 	}
 	{
-		val := UserDtoTrafficLimitStrategy("NO_RESET")
+		val := UpdateUserResponseDtoResponseTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 }

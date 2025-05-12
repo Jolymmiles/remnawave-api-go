@@ -11,6 +11,7 @@ import (
 
 var regexMap = map[string]ogenregex.Regexp{
 	"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{24,}$": ogenregex.MustCompile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{24,}$"),
+	"^[A-Z0-9_]+$":     ogenregex.MustCompile("^[A-Z0-9_]+$"),
 	"^[a-zA-Z0-9_-]+$": ogenregex.MustCompile("^[a-zA-Z0-9_-]+$"),
 }
 

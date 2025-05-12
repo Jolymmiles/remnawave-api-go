@@ -108,6 +108,26 @@ type SubscriptionControllerGetSubscriptionWithTypeParams struct {
 	ShortUuid string
 }
 
+// SubscriptionTemplateControllerGetTemplateParams is parameters of SubscriptionTemplateController_getTemplate operation.
+type SubscriptionTemplateControllerGetTemplateParams struct {
+	// Template type.
+	TemplateType SubscriptionTemplateControllerGetTemplateTemplateType
+}
+
+// SubscriptionsControllerGetAllSubscriptionsParams is parameters of SubscriptionsController_getAllSubscriptions operation.
+type SubscriptionsControllerGetAllSubscriptionsParams struct {
+	// Number of subscriptions to return, no more than 500.
+	Size OptFloat64
+	// Start index (offset) of the users to return, default is 0.
+	Start OptFloat64
+}
+
+// SubscriptionsControllerGetSubscriptionByUsernameParams is parameters of SubscriptionsController_getSubscriptionByUsername operation.
+type SubscriptionsControllerGetSubscriptionByUsernameParams struct {
+	// Username of the user.
+	Username string
+}
+
 // UsersControllerActivateAllInboundsParams is parameters of UsersController_activateAllInbounds operation.
 type UsersControllerActivateAllInboundsParams struct {
 	// UUID of the user.
@@ -132,8 +152,8 @@ type UsersControllerEnableUserParams struct {
 	UUID string
 }
 
-// UsersControllerGetAllUsersV2Params is parameters of UsersController_getAllUsersV2 operation.
-type UsersControllerGetAllUsersV2Params struct {
+// UsersControllerGetAllUsersParams is parameters of UsersController_getAllUsers operation.
+type UsersControllerGetAllUsersParams struct {
 	// Page size for pagination.
 	Size OptFloat64
 	// Offset for pagination.
@@ -174,6 +194,12 @@ type UsersControllerGetUserByUuidParams struct {
 type UsersControllerGetUsersByEmailParams struct {
 	// Email of the user.
 	Email string
+}
+
+// UsersControllerGetUsersByTagParams is parameters of UsersController_getUsersByTag operation.
+type UsersControllerGetUsersByTagParams struct {
+	// Tag of the user.
+	Tag string
 }
 
 // UsersControllerResetUserTrafficParams is parameters of UsersController_resetUserTraffic operation.

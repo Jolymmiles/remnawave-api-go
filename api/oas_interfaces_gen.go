@@ -13,6 +13,10 @@ type HostsControllerDeleteHostRes interface {
 	hostsControllerDeleteHostRes()
 }
 
+type SubscriptionsControllerGetSubscriptionByUsernameRes interface {
+	subscriptionsControllerGetSubscriptionByUsernameRes()
+}
+
 type UsersControllerActivateAllInboundsRes interface {
 	usersControllerActivateAllInboundsRes()
 }
@@ -51,6 +55,10 @@ type UsersControllerGetUserByUuidRes interface {
 
 type UsersControllerGetUsersByEmailRes interface {
 	usersControllerGetUsersByEmailRes()
+}
+
+type UsersControllerGetUsersByTagRes interface {
+	usersControllerGetUsersByTagRes()
 }
 
 type UsersControllerResetUserTrafficRes interface {

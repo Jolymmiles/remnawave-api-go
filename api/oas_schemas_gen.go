@@ -48,6 +48,7 @@ type ActivateAllInboundsResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                      `json:"vlessUuid"`
 	SsPassword           string                                                         `json:"ssPassword"`
 	Description          NilString                                                      `json:"description"`
+	Tag                  NilString                                                      `json:"tag"`
 	TelegramId           NilInt                                                         `json:"telegramId"`
 	Email                NilString                                                      `json:"email"`
 	HwidDeviceLimit      NilInt                                                         `json:"hwidDeviceLimit"`
@@ -152,6 +153,11 @@ func (s *ActivateAllInboundsResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *ActivateAllInboundsResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *ActivateAllInboundsResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -292,6 +298,11 @@ func (s *ActivateAllInboundsResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *ActivateAllInboundsResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *ActivateAllInboundsResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -766,6 +777,7 @@ type BulkAllUpdateUsersRequestDto struct {
 	Description OptNilString `json:"description"`
 	TelegramId  OptNilInt    `json:"telegramId"`
 	Email       OptNilString `json:"email"`
+	Tag         OptNilString `json:"tag"`
 }
 
 // GetStatus returns the value of Status.
@@ -803,6 +815,11 @@ func (s *BulkAllUpdateUsersRequestDto) GetEmail() OptNilString {
 	return s.Email
 }
 
+// GetTag returns the value of Tag.
+func (s *BulkAllUpdateUsersRequestDto) GetTag() OptNilString {
+	return s.Tag
+}
+
 // SetStatus sets the value of Status.
 func (s *BulkAllUpdateUsersRequestDto) SetStatus(val OptBulkAllUpdateUsersRequestDtoStatus) {
 	s.Status = val
@@ -836,6 +853,11 @@ func (s *BulkAllUpdateUsersRequestDto) SetTelegramId(val OptNilInt) {
 // SetEmail sets the value of Email.
 func (s *BulkAllUpdateUsersRequestDto) SetEmail(val OptNilString) {
 	s.Email = val
+}
+
+// SetTag sets the value of Tag.
+func (s *BulkAllUpdateUsersRequestDto) SetTag(val OptNilString) {
+	s.Tag = val
 }
 
 type BulkAllUpdateUsersRequestDtoStatus string
@@ -2039,6 +2061,7 @@ type BulkUpdateUsersRequestDtoFields struct {
 	Description OptNilString `json:"description"`
 	TelegramId  OptNilInt    `json:"telegramId"`
 	Email       OptNilString `json:"email"`
+	Tag         OptNilString `json:"tag"`
 }
 
 // GetStatus returns the value of Status.
@@ -2076,6 +2099,11 @@ func (s *BulkUpdateUsersRequestDtoFields) GetEmail() OptNilString {
 	return s.Email
 }
 
+// GetTag returns the value of Tag.
+func (s *BulkUpdateUsersRequestDtoFields) GetTag() OptNilString {
+	return s.Tag
+}
+
 // SetStatus sets the value of Status.
 func (s *BulkUpdateUsersRequestDtoFields) SetStatus(val OptBulkUpdateUsersRequestDtoFieldsStatus) {
 	s.Status = val
@@ -2109,6 +2137,11 @@ func (s *BulkUpdateUsersRequestDtoFields) SetTelegramId(val OptNilInt) {
 // SetEmail sets the value of Email.
 func (s *BulkUpdateUsersRequestDtoFields) SetEmail(val OptNilString) {
 	s.Email = val
+}
+
+// SetTag sets the value of Tag.
+func (s *BulkUpdateUsersRequestDtoFields) SetTag(val OptNilString) {
+	s.Tag = val
 }
 
 type BulkUpdateUsersRequestDtoFieldsStatus string
@@ -3595,10 +3628,11 @@ type CreateUserRequestDto struct {
 	// Date format: 2025-01-17T15:38:45.065Z.
 	CreatedAt OptDateTime `json:"createdAt"`
 	// Date format: 2025-01-17T15:38:45.065Z.
-	LastTrafficResetAt OptDateTime `json:"lastTrafficResetAt"`
-	Description        OptString   `json:"description"`
-	TelegramId         OptInt      `json:"telegramId"`
-	Email              OptString   `json:"email"`
+	LastTrafficResetAt OptDateTime  `json:"lastTrafficResetAt"`
+	Description        OptString    `json:"description"`
+	Tag                OptNilString `json:"tag"`
+	TelegramId         OptInt       `json:"telegramId"`
+	Email              OptString    `json:"email"`
 	// Device limit.
 	HwidDeviceLimit     OptInt  `json:"hwidDeviceLimit"`
 	ActivateAllInbounds OptBool `json:"activateAllInbounds"`
@@ -3672,6 +3706,11 @@ func (s *CreateUserRequestDto) GetLastTrafficResetAt() OptDateTime {
 // GetDescription returns the value of Description.
 func (s *CreateUserRequestDto) GetDescription() OptString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *CreateUserRequestDto) GetTag() OptNilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -3762,6 +3801,11 @@ func (s *CreateUserRequestDto) SetLastTrafficResetAt(val OptDateTime) {
 // SetDescription sets the value of Description.
 func (s *CreateUserRequestDto) SetDescription(val OptString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *CreateUserRequestDto) SetTag(val OptNilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -3889,6 +3933,552 @@ func (s *CreateUserRequestDtoTrafficLimitStrategy) UnmarshalText(data []byte) er
 		return nil
 	case CreateUserRequestDtoTrafficLimitStrategyMONTH:
 		*s = CreateUserRequestDtoTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/CreateUserResponseDto
+type CreateUserResponseDto struct {
+	Response CreateUserResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *CreateUserResponseDto) GetResponse() CreateUserResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *CreateUserResponseDto) SetResponse(val CreateUserResponseDtoResponse) {
+	s.Response = val
+}
+
+type CreateUserResponseDtoResponse struct {
+	UUID                     uuid.UUID                              `json:"uuid"`
+	SubscriptionUuid         uuid.UUID                              `json:"subscriptionUuid"`
+	ShortUuid                string                                 `json:"shortUuid"`
+	Username                 string                                 `json:"username"`
+	Status                   OptCreateUserResponseDtoResponseStatus `json:"status"`
+	UsedTrafficBytes         float64                                `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                 `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy OptCreateUserResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
+	SubLastUserAgent     NilString                                             `json:"subLastUserAgent"`
+	SubLastOpenedAt      NilDateTime                                           `json:"subLastOpenedAt"`
+	ExpireAt             time.Time                                             `json:"expireAt"`
+	OnlineAt             NilDateTime                                           `json:"onlineAt"`
+	SubRevokedAt         NilDateTime                                           `json:"subRevokedAt"`
+	LastTrafficResetAt   NilDateTime                                           `json:"lastTrafficResetAt"`
+	TrojanPassword       string                                                `json:"trojanPassword"`
+	VlessUuid            uuid.UUID                                             `json:"vlessUuid"`
+	SsPassword           string                                                `json:"ssPassword"`
+	Description          NilString                                             `json:"description"`
+	Tag                  NilString                                             `json:"tag"`
+	TelegramId           NilInt                                                `json:"telegramId"`
+	Email                NilString                                             `json:"email"`
+	HwidDeviceLimit      NilInt                                                `json:"hwidDeviceLimit"`
+	CreatedAt            time.Time                                             `json:"createdAt"`
+	UpdatedAt            time.Time                                             `json:"updatedAt"`
+	ActiveUserInbounds   []CreateUserResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
+	SubscriptionUrl      string                                                `json:"subscriptionUrl"`
+	LastConnectedNode    NilCreateUserResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
+	Happ                 CreateUserResponseDtoResponseHapp                     `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateUserResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetSubscriptionUuid returns the value of SubscriptionUuid.
+func (s *CreateUserResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
+	return s.SubscriptionUuid
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *CreateUserResponseDtoResponse) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *CreateUserResponseDtoResponse) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *CreateUserResponseDtoResponse) GetStatus() OptCreateUserResponseDtoResponseStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *CreateUserResponseDtoResponse) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *CreateUserResponseDtoResponse) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *CreateUserResponseDtoResponse) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *CreateUserResponseDtoResponse) GetTrafficLimitStrategy() OptCreateUserResponseDtoResponseTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *CreateUserResponseDtoResponse) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *CreateUserResponseDtoResponse) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *CreateUserResponseDtoResponse) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *CreateUserResponseDtoResponse) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *CreateUserResponseDtoResponse) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *CreateUserResponseDtoResponse) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *CreateUserResponseDtoResponse) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *CreateUserResponseDtoResponse) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *CreateUserResponseDtoResponse) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *CreateUserResponseDtoResponse) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *CreateUserResponseDtoResponse) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *CreateUserResponseDtoResponse) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *CreateUserResponseDtoResponse) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *CreateUserResponseDtoResponse) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CreateUserResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CreateUserResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveUserInbounds returns the value of ActiveUserInbounds.
+func (s *CreateUserResponseDtoResponse) GetActiveUserInbounds() []CreateUserResponseDtoResponseActiveUserInboundsItem {
+	return s.ActiveUserInbounds
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *CreateUserResponseDtoResponse) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *CreateUserResponseDtoResponse) GetLastConnectedNode() NilCreateUserResponseDtoResponseLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *CreateUserResponseDtoResponse) GetHapp() CreateUserResponseDtoResponseHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateUserResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetSubscriptionUuid sets the value of SubscriptionUuid.
+func (s *CreateUserResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
+	s.SubscriptionUuid = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *CreateUserResponseDtoResponse) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *CreateUserResponseDtoResponse) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *CreateUserResponseDtoResponse) SetStatus(val OptCreateUserResponseDtoResponseStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *CreateUserResponseDtoResponse) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *CreateUserResponseDtoResponse) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *CreateUserResponseDtoResponse) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *CreateUserResponseDtoResponse) SetTrafficLimitStrategy(val OptCreateUserResponseDtoResponseTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *CreateUserResponseDtoResponse) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *CreateUserResponseDtoResponse) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *CreateUserResponseDtoResponse) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *CreateUserResponseDtoResponse) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *CreateUserResponseDtoResponse) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *CreateUserResponseDtoResponse) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *CreateUserResponseDtoResponse) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *CreateUserResponseDtoResponse) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *CreateUserResponseDtoResponse) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *CreateUserResponseDtoResponse) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *CreateUserResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *CreateUserResponseDtoResponse) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *CreateUserResponseDtoResponse) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *CreateUserResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CreateUserResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CreateUserResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveUserInbounds sets the value of ActiveUserInbounds.
+func (s *CreateUserResponseDtoResponse) SetActiveUserInbounds(val []CreateUserResponseDtoResponseActiveUserInboundsItem) {
+	s.ActiveUserInbounds = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *CreateUserResponseDtoResponse) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *CreateUserResponseDtoResponse) SetLastConnectedNode(val NilCreateUserResponseDtoResponseLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *CreateUserResponseDtoResponse) SetHapp(val CreateUserResponseDtoResponseHapp) {
+	s.Happ = val
+}
+
+type CreateUserResponseDtoResponseActiveUserInboundsItem struct {
+	UUID     uuid.UUID `json:"uuid"`
+	Tag      string    `json:"tag"`
+	Type     string    `json:"type"`
+	Network  NilString `json:"network"`
+	Security NilString `json:"security"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTag returns the value of Tag.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTag sets the value of Tag.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *CreateUserResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+type CreateUserResponseDtoResponseHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *CreateUserResponseDtoResponseHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *CreateUserResponseDtoResponseHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type CreateUserResponseDtoResponseLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *CreateUserResponseDtoResponseLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *CreateUserResponseDtoResponseLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *CreateUserResponseDtoResponseLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *CreateUserResponseDtoResponseLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+type CreateUserResponseDtoResponseStatus string
+
+const (
+	CreateUserResponseDtoResponseStatusACTIVE   CreateUserResponseDtoResponseStatus = "ACTIVE"
+	CreateUserResponseDtoResponseStatusDISABLED CreateUserResponseDtoResponseStatus = "DISABLED"
+	CreateUserResponseDtoResponseStatusLIMITED  CreateUserResponseDtoResponseStatus = "LIMITED"
+	CreateUserResponseDtoResponseStatusEXPIRED  CreateUserResponseDtoResponseStatus = "EXPIRED"
+)
+
+// AllValues returns all CreateUserResponseDtoResponseStatus values.
+func (CreateUserResponseDtoResponseStatus) AllValues() []CreateUserResponseDtoResponseStatus {
+	return []CreateUserResponseDtoResponseStatus{
+		CreateUserResponseDtoResponseStatusACTIVE,
+		CreateUserResponseDtoResponseStatusDISABLED,
+		CreateUserResponseDtoResponseStatusLIMITED,
+		CreateUserResponseDtoResponseStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CreateUserResponseDtoResponseStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case CreateUserResponseDtoResponseStatusACTIVE:
+		return []byte(s), nil
+	case CreateUserResponseDtoResponseStatusDISABLED:
+		return []byte(s), nil
+	case CreateUserResponseDtoResponseStatusLIMITED:
+		return []byte(s), nil
+	case CreateUserResponseDtoResponseStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CreateUserResponseDtoResponseStatus) UnmarshalText(data []byte) error {
+	switch CreateUserResponseDtoResponseStatus(data) {
+	case CreateUserResponseDtoResponseStatusACTIVE:
+		*s = CreateUserResponseDtoResponseStatusACTIVE
+		return nil
+	case CreateUserResponseDtoResponseStatusDISABLED:
+		*s = CreateUserResponseDtoResponseStatusDISABLED
+		return nil
+	case CreateUserResponseDtoResponseStatusLIMITED:
+		*s = CreateUserResponseDtoResponseStatusLIMITED
+		return nil
+	case CreateUserResponseDtoResponseStatusEXPIRED:
+		*s = CreateUserResponseDtoResponseStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type CreateUserResponseDtoResponseTrafficLimitStrategy string
+
+const (
+	CreateUserResponseDtoResponseTrafficLimitStrategyNORESET CreateUserResponseDtoResponseTrafficLimitStrategy = "NO_RESET"
+	CreateUserResponseDtoResponseTrafficLimitStrategyDAY     CreateUserResponseDtoResponseTrafficLimitStrategy = "DAY"
+	CreateUserResponseDtoResponseTrafficLimitStrategyWEEK    CreateUserResponseDtoResponseTrafficLimitStrategy = "WEEK"
+	CreateUserResponseDtoResponseTrafficLimitStrategyMONTH   CreateUserResponseDtoResponseTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all CreateUserResponseDtoResponseTrafficLimitStrategy values.
+func (CreateUserResponseDtoResponseTrafficLimitStrategy) AllValues() []CreateUserResponseDtoResponseTrafficLimitStrategy {
+	return []CreateUserResponseDtoResponseTrafficLimitStrategy{
+		CreateUserResponseDtoResponseTrafficLimitStrategyNORESET,
+		CreateUserResponseDtoResponseTrafficLimitStrategyDAY,
+		CreateUserResponseDtoResponseTrafficLimitStrategyWEEK,
+		CreateUserResponseDtoResponseTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CreateUserResponseDtoResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case CreateUserResponseDtoResponseTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case CreateUserResponseDtoResponseTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case CreateUserResponseDtoResponseTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case CreateUserResponseDtoResponseTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CreateUserResponseDtoResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch CreateUserResponseDtoResponseTrafficLimitStrategy(data) {
+	case CreateUserResponseDtoResponseTrafficLimitStrategyNORESET:
+		*s = CreateUserResponseDtoResponseTrafficLimitStrategyNORESET
+		return nil
+	case CreateUserResponseDtoResponseTrafficLimitStrategyDAY:
+		*s = CreateUserResponseDtoResponseTrafficLimitStrategyDAY
+		return nil
+	case CreateUserResponseDtoResponseTrafficLimitStrategyWEEK:
+		*s = CreateUserResponseDtoResponseTrafficLimitStrategyWEEK
+		return nil
+	case CreateUserResponseDtoResponseTrafficLimitStrategyMONTH:
+		*s = CreateUserResponseDtoResponseTrafficLimitStrategyMONTH
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -4555,6 +5145,7 @@ type DisableUserResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                              `json:"vlessUuid"`
 	SsPassword           string                                                 `json:"ssPassword"`
 	Description          NilString                                              `json:"description"`
+	Tag                  NilString                                              `json:"tag"`
 	TelegramId           NilInt                                                 `json:"telegramId"`
 	Email                NilString                                              `json:"email"`
 	HwidDeviceLimit      NilInt                                                 `json:"hwidDeviceLimit"`
@@ -4659,6 +5250,11 @@ func (s *DisableUserResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *DisableUserResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *DisableUserResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -4799,6 +5395,11 @@ func (s *DisableUserResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *DisableUserResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *DisableUserResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -5476,6 +6077,7 @@ type EnableUserResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                             `json:"vlessUuid"`
 	SsPassword           string                                                `json:"ssPassword"`
 	Description          NilString                                             `json:"description"`
+	Tag                  NilString                                             `json:"tag"`
 	TelegramId           NilInt                                                `json:"telegramId"`
 	Email                NilString                                             `json:"email"`
 	HwidDeviceLimit      NilInt                                                `json:"hwidDeviceLimit"`
@@ -5580,6 +6182,11 @@ func (s *EnableUserResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *EnableUserResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *EnableUserResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -5720,6 +6327,11 @@ func (s *EnableUserResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *EnableUserResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *EnableUserResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -6735,44 +7347,925 @@ func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) SetSecurity(val
 	s.Security = val
 }
 
-// Ref: #/components/schemas/GetAllUsersV2ResponseDto
-type GetAllUsersV2ResponseDto struct {
-	Response GetAllUsersV2ResponseDtoResponse `json:"response"`
+// Ref: #/components/schemas/GetAllSubscriptionsResponseDto
+type GetAllSubscriptionsResponseDto struct {
+	Response GetAllSubscriptionsResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetAllUsersV2ResponseDto) GetResponse() GetAllUsersV2ResponseDtoResponse {
+func (s *GetAllSubscriptionsResponseDto) GetResponse() GetAllSubscriptionsResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetAllUsersV2ResponseDto) SetResponse(val GetAllUsersV2ResponseDtoResponse) {
+func (s *GetAllSubscriptionsResponseDto) SetResponse(val GetAllSubscriptionsResponseDtoResponse) {
 	s.Response = val
 }
 
-type GetAllUsersV2ResponseDtoResponse struct {
-	Users []UserDto `json:"users"`
-	Total float64   `json:"total"`
+type GetAllSubscriptionsResponseDtoResponse struct {
+	Subscriptions []GetAllSubscriptionsResponseDtoResponseSubscriptionsItem `json:"subscriptions"`
+	Total         float64                                                   `json:"total"`
+}
+
+// GetSubscriptions returns the value of Subscriptions.
+func (s *GetAllSubscriptionsResponseDtoResponse) GetSubscriptions() []GetAllSubscriptionsResponseDtoResponseSubscriptionsItem {
+	return s.Subscriptions
+}
+
+// GetTotal returns the value of Total.
+func (s *GetAllSubscriptionsResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetSubscriptions sets the value of Subscriptions.
+func (s *GetAllSubscriptionsResponseDtoResponse) SetSubscriptions(val []GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) {
+	s.Subscriptions = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetAllSubscriptionsResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type GetAllSubscriptionsResponseDtoResponseSubscriptionsItem struct {
+	IsFound         bool                                                               `json:"isFound"`
+	User            GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser        `json:"user"`
+	Links           []string                                                           `json:"links"`
+	SsConfLinks     GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks `json:"ssConfLinks"`
+	SubscriptionUrl string                                                             `json:"subscriptionUrl"`
+}
+
+// GetIsFound returns the value of IsFound.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) GetIsFound() bool {
+	return s.IsFound
+}
+
+// GetUser returns the value of User.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) GetUser() GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser {
+	return s.User
+}
+
+// GetLinks returns the value of Links.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) GetLinks() []string {
+	return s.Links
+}
+
+// GetSsConfLinks returns the value of SsConfLinks.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) GetSsConfLinks() GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks {
+	return s.SsConfLinks
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// SetIsFound sets the value of IsFound.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) SetIsFound(val bool) {
+	s.IsFound = val
+}
+
+// SetUser sets the value of User.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) SetUser(val GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) {
+	s.User = val
+}
+
+// SetLinks sets the value of Links.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) SetLinks(val []string) {
+	s.Links = val
+}
+
+// SetSsConfLinks sets the value of SsConfLinks.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) SetSsConfLinks(val GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks) {
+	s.SsConfLinks = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItem) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+type GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks map[string]string
+
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks) init() GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
+}
+
+type GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser struct {
+	ShortUuid            string                                                                          `json:"shortUuid"`
+	DaysLeft             float64                                                                         `json:"daysLeft"`
+	TrafficUsed          string                                                                          `json:"trafficUsed"`
+	TrafficLimit         string                                                                          `json:"trafficLimit"`
+	Username             string                                                                          `json:"username"`
+	ExpiresAt            time.Time                                                                       `json:"expiresAt"`
+	IsActive             bool                                                                            `json:"isActive"`
+	UserStatus           GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus           `json:"userStatus"`
+	TrafficLimitStrategy GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy `json:"trafficLimitStrategy"`
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetDaysLeft returns the value of DaysLeft.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetDaysLeft() float64 {
+	return s.DaysLeft
+}
+
+// GetTrafficUsed returns the value of TrafficUsed.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTrafficUsed() string {
+	return s.TrafficUsed
+}
+
+// GetTrafficLimit returns the value of TrafficLimit.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTrafficLimit() string {
+	return s.TrafficLimit
+}
+
+// GetUsername returns the value of Username.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetUsername() string {
+	return s.Username
+}
+
+// GetExpiresAt returns the value of ExpiresAt.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetExpiresAt() time.Time {
+	return s.ExpiresAt
+}
+
+// GetIsActive returns the value of IsActive.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetIsActive() bool {
+	return s.IsActive
+}
+
+// GetUserStatus returns the value of UserStatus.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetUserStatus() GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus {
+	return s.UserStatus
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTrafficLimitStrategy() GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetDaysLeft sets the value of DaysLeft.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetDaysLeft(val float64) {
+	s.DaysLeft = val
+}
+
+// SetTrafficUsed sets the value of TrafficUsed.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTrafficUsed(val string) {
+	s.TrafficUsed = val
+}
+
+// SetTrafficLimit sets the value of TrafficLimit.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTrafficLimit(val string) {
+	s.TrafficLimit = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetExpiresAt sets the value of ExpiresAt.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetExpiresAt(val time.Time) {
+	s.ExpiresAt = val
+}
+
+// SetIsActive sets the value of IsActive.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetIsActive(val bool) {
+	s.IsActive = val
+}
+
+// SetUserStatus sets the value of UserStatus.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetUserStatus(val GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus) {
+	s.UserStatus = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTrafficLimitStrategy(val GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+type GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy string
+
+const (
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyNORESET GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy = "NO_RESET"
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyDAY     GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy = "DAY"
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyWEEK    GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy = "WEEK"
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyMONTH   GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy values.
+func (GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy) AllValues() []GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy {
+	return []GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy{
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyNORESET,
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyDAY,
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyWEEK,
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy(data) {
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyNORESET:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyNORESET
+		return nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyDAY:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyDAY
+		return nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyWEEK:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyWEEK
+		return nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyMONTH:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus string
+
+const (
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusACTIVE   GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus = "ACTIVE"
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusDISABLED GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus = "DISABLED"
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusLIMITED  GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus = "LIMITED"
+	GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusEXPIRED  GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus = "EXPIRED"
+)
+
+// AllValues returns all GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus values.
+func (GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus) AllValues() []GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus {
+	return []GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus{
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusACTIVE,
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusDISABLED,
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusLIMITED,
+		GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusACTIVE:
+		return []byte(s), nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusDISABLED:
+		return []byte(s), nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusLIMITED:
+		return []byte(s), nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus) UnmarshalText(data []byte) error {
+	switch GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus(data) {
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusACTIVE:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusACTIVE
+		return nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusDISABLED:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusDISABLED
+		return nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusLIMITED:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusLIMITED
+		return nil
+	case GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusEXPIRED:
+		*s = GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/GetAllTagsResponseDto
+type GetAllTagsResponseDto struct {
+	Response GetAllTagsResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetAllTagsResponseDto) GetResponse() GetAllTagsResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetAllTagsResponseDto) SetResponse(val GetAllTagsResponseDtoResponse) {
+	s.Response = val
+}
+
+type GetAllTagsResponseDtoResponse struct {
+	Tags []string `json:"tags"`
+}
+
+// GetTags returns the value of Tags.
+func (s *GetAllTagsResponseDtoResponse) GetTags() []string {
+	return s.Tags
+}
+
+// SetTags sets the value of Tags.
+func (s *GetAllTagsResponseDtoResponse) SetTags(val []string) {
+	s.Tags = val
+}
+
+// Ref: #/components/schemas/GetAllUsersResponseDto
+type GetAllUsersResponseDto struct {
+	Response GetAllUsersResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetAllUsersResponseDto) GetResponse() GetAllUsersResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetAllUsersResponseDto) SetResponse(val GetAllUsersResponseDtoResponse) {
+	s.Response = val
+}
+
+type GetAllUsersResponseDtoResponse struct {
+	Users []GetAllUsersResponseDtoResponseUsersItem `json:"users"`
+	Total float64                                   `json:"total"`
 }
 
 // GetUsers returns the value of Users.
-func (s *GetAllUsersV2ResponseDtoResponse) GetUsers() []UserDto {
+func (s *GetAllUsersResponseDtoResponse) GetUsers() []GetAllUsersResponseDtoResponseUsersItem {
 	return s.Users
 }
 
 // GetTotal returns the value of Total.
-func (s *GetAllUsersV2ResponseDtoResponse) GetTotal() float64 {
+func (s *GetAllUsersResponseDtoResponse) GetTotal() float64 {
 	return s.Total
 }
 
 // SetUsers sets the value of Users.
-func (s *GetAllUsersV2ResponseDtoResponse) SetUsers(val []UserDto) {
+func (s *GetAllUsersResponseDtoResponse) SetUsers(val []GetAllUsersResponseDtoResponseUsersItem) {
 	s.Users = val
 }
 
 // SetTotal sets the value of Total.
-func (s *GetAllUsersV2ResponseDtoResponse) SetTotal(val float64) {
+func (s *GetAllUsersResponseDtoResponse) SetTotal(val float64) {
 	s.Total = val
+}
+
+type GetAllUsersResponseDtoResponseUsersItem struct {
+	UUID                     uuid.UUID                                        `json:"uuid"`
+	SubscriptionUuid         uuid.UUID                                        `json:"subscriptionUuid"`
+	ShortUuid                string                                           `json:"shortUuid"`
+	Username                 string                                           `json:"username"`
+	Status                   OptGetAllUsersResponseDtoResponseUsersItemStatus `json:"status"`
+	UsedTrafficBytes         float64                                          `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                          `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                           `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy  `json:"trafficLimitStrategy"`
+	SubLastUserAgent     NilString                                                       `json:"subLastUserAgent"`
+	SubLastOpenedAt      NilDateTime                                                     `json:"subLastOpenedAt"`
+	ExpireAt             time.Time                                                       `json:"expireAt"`
+	OnlineAt             NilDateTime                                                     `json:"onlineAt"`
+	SubRevokedAt         NilDateTime                                                     `json:"subRevokedAt"`
+	LastTrafficResetAt   NilDateTime                                                     `json:"lastTrafficResetAt"`
+	TrojanPassword       string                                                          `json:"trojanPassword"`
+	VlessUuid            uuid.UUID                                                       `json:"vlessUuid"`
+	SsPassword           string                                                          `json:"ssPassword"`
+	Description          NilString                                                       `json:"description"`
+	Tag                  NilString                                                       `json:"tag"`
+	TelegramId           NilInt                                                          `json:"telegramId"`
+	Email                NilString                                                       `json:"email"`
+	HwidDeviceLimit      NilInt                                                          `json:"hwidDeviceLimit"`
+	CreatedAt            time.Time                                                       `json:"createdAt"`
+	UpdatedAt            time.Time                                                       `json:"updatedAt"`
+	ActiveUserInbounds   []GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem `json:"activeUserInbounds"`
+	SubscriptionUrl      string                                                          `json:"subscriptionUrl"`
+	LastConnectedNode    NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode     `json:"lastConnectedNode"`
+	Happ                 GetAllUsersResponseDtoResponseUsersItemHapp                     `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetSubscriptionUuid returns the value of SubscriptionUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubscriptionUuid() uuid.UUID {
+	return s.SubscriptionUuid
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetStatus() OptGetAllUsersResponseDtoResponseUsersItemStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrafficLimitStrategy() OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveUserInbounds returns the value of ActiveUserInbounds.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetActiveUserInbounds() []GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem {
+	return s.ActiveUserInbounds
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastConnectedNode() NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetHapp() GetAllUsersResponseDtoResponseUsersItemHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetSubscriptionUuid sets the value of SubscriptionUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubscriptionUuid(val uuid.UUID) {
+	s.SubscriptionUuid = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetStatus(val OptGetAllUsersResponseDtoResponseUsersItemStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrafficLimitStrategy(val OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveUserInbounds sets the value of ActiveUserInbounds.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetActiveUserInbounds(val []GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) {
+	s.ActiveUserInbounds = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastConnectedNode(val NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetHapp(val GetAllUsersResponseDtoResponseUsersItemHapp) {
+	s.Happ = val
+}
+
+type GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem struct {
+	UUID     uuid.UUID `json:"uuid"`
+	Tag      string    `json:"tag"`
+	Type     string    `json:"type"`
+	Network  NilString `json:"network"`
+	Security NilString `json:"security"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTag returns the value of Tag.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetAllUsersResponseDtoResponseUsersItemActiveUserInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+type GetAllUsersResponseDtoResponseUsersItemHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *GetAllUsersResponseDtoResponseUsersItemHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *GetAllUsersResponseDtoResponseUsersItemHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type GetAllUsersResponseDtoResponseUsersItemLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+type GetAllUsersResponseDtoResponseUsersItemStatus string
+
+const (
+	GetAllUsersResponseDtoResponseUsersItemStatusACTIVE   GetAllUsersResponseDtoResponseUsersItemStatus = "ACTIVE"
+	GetAllUsersResponseDtoResponseUsersItemStatusDISABLED GetAllUsersResponseDtoResponseUsersItemStatus = "DISABLED"
+	GetAllUsersResponseDtoResponseUsersItemStatusLIMITED  GetAllUsersResponseDtoResponseUsersItemStatus = "LIMITED"
+	GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED  GetAllUsersResponseDtoResponseUsersItemStatus = "EXPIRED"
+)
+
+// AllValues returns all GetAllUsersResponseDtoResponseUsersItemStatus values.
+func (GetAllUsersResponseDtoResponseUsersItemStatus) AllValues() []GetAllUsersResponseDtoResponseUsersItemStatus {
+	return []GetAllUsersResponseDtoResponseUsersItemStatus{
+		GetAllUsersResponseDtoResponseUsersItemStatusACTIVE,
+		GetAllUsersResponseDtoResponseUsersItemStatusDISABLED,
+		GetAllUsersResponseDtoResponseUsersItemStatusLIMITED,
+		GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetAllUsersResponseDtoResponseUsersItemStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetAllUsersResponseDtoResponseUsersItemStatusACTIVE:
+		return []byte(s), nil
+	case GetAllUsersResponseDtoResponseUsersItemStatusDISABLED:
+		return []byte(s), nil
+	case GetAllUsersResponseDtoResponseUsersItemStatusLIMITED:
+		return []byte(s), nil
+	case GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetAllUsersResponseDtoResponseUsersItemStatus) UnmarshalText(data []byte) error {
+	switch GetAllUsersResponseDtoResponseUsersItemStatus(data) {
+	case GetAllUsersResponseDtoResponseUsersItemStatusACTIVE:
+		*s = GetAllUsersResponseDtoResponseUsersItemStatusACTIVE
+		return nil
+	case GetAllUsersResponseDtoResponseUsersItemStatusDISABLED:
+		*s = GetAllUsersResponseDtoResponseUsersItemStatusDISABLED
+		return nil
+	case GetAllUsersResponseDtoResponseUsersItemStatusLIMITED:
+		*s = GetAllUsersResponseDtoResponseUsersItemStatusLIMITED
+		return nil
+	case GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED:
+		*s = GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy string
+
+const (
+	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "NO_RESET"
+	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY     GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "DAY"
+	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK    GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "WEEK"
+	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH   GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy values.
+func (GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) AllValues() []GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
+	return []GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy{
+		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET,
+		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY,
+		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK,
+		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy(data) {
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET:
+		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET
+		return nil
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY:
+		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY
+		return nil
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK:
+		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK
+		return nil
+	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH:
+		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // Ref: #/components/schemas/GetBandwidthStatsResponseDto
@@ -7057,6 +8550,175 @@ func (s *GetConfigResponseDtoResponse) GetConfig() jx.Raw {
 // SetConfig sets the value of Config.
 func (s *GetConfigResponseDtoResponse) SetConfig(val jx.Raw) {
 	s.Config = val
+}
+
+// Ref: #/components/schemas/GetFullInboundsResponseDto
+type GetFullInboundsResponseDto struct {
+	Response []GetFullInboundsResponseDtoResponseItem `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetFullInboundsResponseDto) GetResponse() []GetFullInboundsResponseDtoResponseItem {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetFullInboundsResponseDto) SetResponse(val []GetFullInboundsResponseDtoResponseItem) {
+	s.Response = val
+}
+
+type GetFullInboundsResponseDtoResponseItem struct {
+	UUID          uuid.UUID                                           `json:"uuid"`
+	Tag           string                                              `json:"tag"`
+	Type          string                                              `json:"type"`
+	Port          float64                                             `json:"port"`
+	Network       NilString                                           `json:"network"`
+	Security      NilString                                           `json:"security"`
+	RawFromConfig GetFullInboundsResponseDtoResponseItemRawFromConfig `json:"rawFromConfig"`
+	Users         GetFullInboundsResponseDtoResponseItemUsers         `json:"users"`
+	Nodes         GetFullInboundsResponseDtoResponseItemNodes         `json:"nodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetFullInboundsResponseDtoResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTag returns the value of Tag.
+func (s *GetFullInboundsResponseDtoResponseItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetFullInboundsResponseDtoResponseItem) GetType() string {
+	return s.Type
+}
+
+// GetPort returns the value of Port.
+func (s *GetFullInboundsResponseDtoResponseItem) GetPort() float64 {
+	return s.Port
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetFullInboundsResponseDtoResponseItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetFullInboundsResponseDtoResponseItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetRawFromConfig returns the value of RawFromConfig.
+func (s *GetFullInboundsResponseDtoResponseItem) GetRawFromConfig() GetFullInboundsResponseDtoResponseItemRawFromConfig {
+	return s.RawFromConfig
+}
+
+// GetUsers returns the value of Users.
+func (s *GetFullInboundsResponseDtoResponseItem) GetUsers() GetFullInboundsResponseDtoResponseItemUsers {
+	return s.Users
+}
+
+// GetNodes returns the value of Nodes.
+func (s *GetFullInboundsResponseDtoResponseItem) GetNodes() GetFullInboundsResponseDtoResponseItemNodes {
+	return s.Nodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetFullInboundsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetFullInboundsResponseDtoResponseItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetFullInboundsResponseDtoResponseItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetFullInboundsResponseDtoResponseItem) SetPort(val float64) {
+	s.Port = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetFullInboundsResponseDtoResponseItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetFullInboundsResponseDtoResponseItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetRawFromConfig sets the value of RawFromConfig.
+func (s *GetFullInboundsResponseDtoResponseItem) SetRawFromConfig(val GetFullInboundsResponseDtoResponseItemRawFromConfig) {
+	s.RawFromConfig = val
+}
+
+// SetUsers sets the value of Users.
+func (s *GetFullInboundsResponseDtoResponseItem) SetUsers(val GetFullInboundsResponseDtoResponseItemUsers) {
+	s.Users = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *GetFullInboundsResponseDtoResponseItem) SetNodes(val GetFullInboundsResponseDtoResponseItemNodes) {
+	s.Nodes = val
+}
+
+type GetFullInboundsResponseDtoResponseItemNodes struct {
+	Enabled  float64 `json:"enabled"`
+	Disabled float64 `json:"disabled"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *GetFullInboundsResponseDtoResponseItemNodes) GetEnabled() float64 {
+	return s.Enabled
+}
+
+// GetDisabled returns the value of Disabled.
+func (s *GetFullInboundsResponseDtoResponseItemNodes) GetDisabled() float64 {
+	return s.Disabled
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *GetFullInboundsResponseDtoResponseItemNodes) SetEnabled(val float64) {
+	s.Enabled = val
+}
+
+// SetDisabled sets the value of Disabled.
+func (s *GetFullInboundsResponseDtoResponseItemNodes) SetDisabled(val float64) {
+	s.Disabled = val
+}
+
+type GetFullInboundsResponseDtoResponseItemRawFromConfig struct{}
+
+type GetFullInboundsResponseDtoResponseItemUsers struct {
+	Enabled  float64 `json:"enabled"`
+	Disabled float64 `json:"disabled"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *GetFullInboundsResponseDtoResponseItemUsers) GetEnabled() float64 {
+	return s.Enabled
+}
+
+// GetDisabled returns the value of Disabled.
+func (s *GetFullInboundsResponseDtoResponseItemUsers) GetDisabled() float64 {
+	return s.Disabled
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *GetFullInboundsResponseDtoResponseItemUsers) SetEnabled(val float64) {
+	s.Enabled = val
+}
+
+// SetDisabled sets the value of Disabled.
+func (s *GetFullInboundsResponseDtoResponseItemUsers) SetDisabled(val float64) {
+	s.Disabled = val
 }
 
 // Ref: #/components/schemas/GetInboundsResponseDto
@@ -8436,8 +10098,9 @@ func (s *GetStatusResponseDto) SetResponse(val GetStatusResponseDtoResponse) {
 }
 
 type GetStatusResponseDtoResponse struct {
-	IsLoginAllowed    bool `json:"isLoginAllowed"`
-	IsRegisterAllowed bool `json:"isRegisterAllowed"`
+	IsLoginAllowed    bool                                  `json:"isLoginAllowed"`
+	IsRegisterAllowed bool                                  `json:"isRegisterAllowed"`
+	TgAuth            NilGetStatusResponseDtoResponseTgAuth `json:"tgAuth"`
 }
 
 // GetIsLoginAllowed returns the value of IsLoginAllowed.
@@ -8450,6 +10113,11 @@ func (s *GetStatusResponseDtoResponse) GetIsRegisterAllowed() bool {
 	return s.IsRegisterAllowed
 }
 
+// GetTgAuth returns the value of TgAuth.
+func (s *GetStatusResponseDtoResponse) GetTgAuth() NilGetStatusResponseDtoResponseTgAuth {
+	return s.TgAuth
+}
+
 // SetIsLoginAllowed sets the value of IsLoginAllowed.
 func (s *GetStatusResponseDtoResponse) SetIsLoginAllowed(val bool) {
 	s.IsLoginAllowed = val
@@ -8458,6 +10126,25 @@ func (s *GetStatusResponseDtoResponse) SetIsLoginAllowed(val bool) {
 // SetIsRegisterAllowed sets the value of IsRegisterAllowed.
 func (s *GetStatusResponseDtoResponse) SetIsRegisterAllowed(val bool) {
 	s.IsRegisterAllowed = val
+}
+
+// SetTgAuth sets the value of TgAuth.
+func (s *GetStatusResponseDtoResponse) SetTgAuth(val NilGetStatusResponseDtoResponseTgAuth) {
+	s.TgAuth = val
+}
+
+type GetStatusResponseDtoResponseTgAuth struct {
+	BotId float64 `json:"botId"`
+}
+
+// GetBotId returns the value of BotId.
+func (s *GetStatusResponseDtoResponseTgAuth) GetBotId() float64 {
+	return s.BotId
+}
+
+// SetBotId sets the value of BotId.
+func (s *GetStatusResponseDtoResponseTgAuth) SetBotId(val float64) {
+	s.BotId = val
 }
 
 // GetStatusResponseDtoStatusCode wraps GetStatusResponseDto with StatusCode.
@@ -8484,6 +10171,304 @@ func (s *GetStatusResponseDtoStatusCode) SetStatusCode(val int) {
 // SetResponse sets the value of Response.
 func (s *GetStatusResponseDtoStatusCode) SetResponse(val GetStatusResponseDto) {
 	s.Response = val
+}
+
+// Ref: #/components/schemas/GetSubscriptionByUsernameResponseDto
+type GetSubscriptionByUsernameResponseDto struct {
+	Response GetSubscriptionByUsernameResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetSubscriptionByUsernameResponseDto) GetResponse() GetSubscriptionByUsernameResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetSubscriptionByUsernameResponseDto) SetResponse(val GetSubscriptionByUsernameResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetSubscriptionByUsernameResponseDto) subscriptionsControllerGetSubscriptionByUsernameRes() {}
+
+type GetSubscriptionByUsernameResponseDtoResponse struct {
+	IsFound         bool                                                    `json:"isFound"`
+	User            GetSubscriptionByUsernameResponseDtoResponseUser        `json:"user"`
+	Links           []string                                                `json:"links"`
+	SsConfLinks     GetSubscriptionByUsernameResponseDtoResponseSsConfLinks `json:"ssConfLinks"`
+	SubscriptionUrl string                                                  `json:"subscriptionUrl"`
+}
+
+// GetIsFound returns the value of IsFound.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) GetIsFound() bool {
+	return s.IsFound
+}
+
+// GetUser returns the value of User.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) GetUser() GetSubscriptionByUsernameResponseDtoResponseUser {
+	return s.User
+}
+
+// GetLinks returns the value of Links.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) GetLinks() []string {
+	return s.Links
+}
+
+// GetSsConfLinks returns the value of SsConfLinks.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) GetSsConfLinks() GetSubscriptionByUsernameResponseDtoResponseSsConfLinks {
+	return s.SsConfLinks
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// SetIsFound sets the value of IsFound.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) SetIsFound(val bool) {
+	s.IsFound = val
+}
+
+// SetUser sets the value of User.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) SetUser(val GetSubscriptionByUsernameResponseDtoResponseUser) {
+	s.User = val
+}
+
+// SetLinks sets the value of Links.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) SetLinks(val []string) {
+	s.Links = val
+}
+
+// SetSsConfLinks sets the value of SsConfLinks.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) SetSsConfLinks(val GetSubscriptionByUsernameResponseDtoResponseSsConfLinks) {
+	s.SsConfLinks = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetSubscriptionByUsernameResponseDtoResponse) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+type GetSubscriptionByUsernameResponseDtoResponseSsConfLinks map[string]string
+
+func (s *GetSubscriptionByUsernameResponseDtoResponseSsConfLinks) init() GetSubscriptionByUsernameResponseDtoResponseSsConfLinks {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
+}
+
+type GetSubscriptionByUsernameResponseDtoResponseUser struct {
+	ShortUuid            string                                                               `json:"shortUuid"`
+	DaysLeft             float64                                                              `json:"daysLeft"`
+	TrafficUsed          string                                                               `json:"trafficUsed"`
+	TrafficLimit         string                                                               `json:"trafficLimit"`
+	Username             string                                                               `json:"username"`
+	ExpiresAt            time.Time                                                            `json:"expiresAt"`
+	IsActive             bool                                                                 `json:"isActive"`
+	UserStatus           GetSubscriptionByUsernameResponseDtoResponseUserUserStatus           `json:"userStatus"`
+	TrafficLimitStrategy GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy `json:"trafficLimitStrategy"`
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetDaysLeft returns the value of DaysLeft.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetDaysLeft() float64 {
+	return s.DaysLeft
+}
+
+// GetTrafficUsed returns the value of TrafficUsed.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetTrafficUsed() string {
+	return s.TrafficUsed
+}
+
+// GetTrafficLimit returns the value of TrafficLimit.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetTrafficLimit() string {
+	return s.TrafficLimit
+}
+
+// GetUsername returns the value of Username.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetUsername() string {
+	return s.Username
+}
+
+// GetExpiresAt returns the value of ExpiresAt.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetExpiresAt() time.Time {
+	return s.ExpiresAt
+}
+
+// GetIsActive returns the value of IsActive.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetIsActive() bool {
+	return s.IsActive
+}
+
+// GetUserStatus returns the value of UserStatus.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetUserStatus() GetSubscriptionByUsernameResponseDtoResponseUserUserStatus {
+	return s.UserStatus
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) GetTrafficLimitStrategy() GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetDaysLeft sets the value of DaysLeft.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetDaysLeft(val float64) {
+	s.DaysLeft = val
+}
+
+// SetTrafficUsed sets the value of TrafficUsed.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetTrafficUsed(val string) {
+	s.TrafficUsed = val
+}
+
+// SetTrafficLimit sets the value of TrafficLimit.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetTrafficLimit(val string) {
+	s.TrafficLimit = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetExpiresAt sets the value of ExpiresAt.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetExpiresAt(val time.Time) {
+	s.ExpiresAt = val
+}
+
+// SetIsActive sets the value of IsActive.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetIsActive(val bool) {
+	s.IsActive = val
+}
+
+// SetUserStatus sets the value of UserStatus.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetUserStatus(val GetSubscriptionByUsernameResponseDtoResponseUserUserStatus) {
+	s.UserStatus = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUser) SetTrafficLimitStrategy(val GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+type GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy string
+
+const (
+	GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyNORESET GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy = "NO_RESET"
+	GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyDAY     GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy = "DAY"
+	GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyWEEK    GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy = "WEEK"
+	GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyMONTH   GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy values.
+func (GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy) AllValues() []GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy {
+	return []GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy{
+		GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyNORESET,
+		GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyDAY,
+		GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyWEEK,
+		GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategy(data) {
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyNORESET:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyNORESET
+		return nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyDAY:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyDAY
+		return nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyWEEK:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyWEEK
+		return nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyMONTH:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type GetSubscriptionByUsernameResponseDtoResponseUserUserStatus string
+
+const (
+	GetSubscriptionByUsernameResponseDtoResponseUserUserStatusACTIVE   GetSubscriptionByUsernameResponseDtoResponseUserUserStatus = "ACTIVE"
+	GetSubscriptionByUsernameResponseDtoResponseUserUserStatusDISABLED GetSubscriptionByUsernameResponseDtoResponseUserUserStatus = "DISABLED"
+	GetSubscriptionByUsernameResponseDtoResponseUserUserStatusLIMITED  GetSubscriptionByUsernameResponseDtoResponseUserUserStatus = "LIMITED"
+	GetSubscriptionByUsernameResponseDtoResponseUserUserStatusEXPIRED  GetSubscriptionByUsernameResponseDtoResponseUserUserStatus = "EXPIRED"
+)
+
+// AllValues returns all GetSubscriptionByUsernameResponseDtoResponseUserUserStatus values.
+func (GetSubscriptionByUsernameResponseDtoResponseUserUserStatus) AllValues() []GetSubscriptionByUsernameResponseDtoResponseUserUserStatus {
+	return []GetSubscriptionByUsernameResponseDtoResponseUserUserStatus{
+		GetSubscriptionByUsernameResponseDtoResponseUserUserStatusACTIVE,
+		GetSubscriptionByUsernameResponseDtoResponseUserUserStatusDISABLED,
+		GetSubscriptionByUsernameResponseDtoResponseUserUserStatusLIMITED,
+		GetSubscriptionByUsernameResponseDtoResponseUserUserStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetSubscriptionByUsernameResponseDtoResponseUserUserStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusACTIVE:
+		return []byte(s), nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusDISABLED:
+		return []byte(s), nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusLIMITED:
+		return []byte(s), nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetSubscriptionByUsernameResponseDtoResponseUserUserStatus) UnmarshalText(data []byte) error {
+	switch GetSubscriptionByUsernameResponseDtoResponseUserUserStatus(data) {
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusACTIVE:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserUserStatusACTIVE
+		return nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusDISABLED:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserUserStatusDISABLED
+		return nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusLIMITED:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserUserStatusLIMITED
+		return nil
+	case GetSubscriptionByUsernameResponseDtoResponseUserUserStatusEXPIRED:
+		*s = GetSubscriptionByUsernameResponseDtoResponseUserUserStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // Ref: #/components/schemas/GetSubscriptionInfoResponseDto
@@ -8987,6 +10972,137 @@ func (s *GetSubscriptionSettingsResponseDtoResponseCustomResponseHeaders) init()
 	return m
 }
 
+// Ref: #/components/schemas/GetTemplateResponseDto
+type GetTemplateResponseDto struct {
+	Response GetTemplateResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetTemplateResponseDto) GetResponse() GetTemplateResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetTemplateResponseDto) SetResponse(val GetTemplateResponseDtoResponse) {
+	s.Response = val
+}
+
+type GetTemplateResponseDtoResponse struct {
+	UUID                uuid.UUID                                  `json:"uuid"`
+	TemplateType        GetTemplateResponseDtoResponseTemplateType `json:"templateType"`
+	TemplateJson        jx.Raw                                     `json:"templateJson"`
+	EncodedTemplateYaml NilString                                  `json:"encodedTemplateYaml"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetTemplateResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTemplateType returns the value of TemplateType.
+func (s *GetTemplateResponseDtoResponse) GetTemplateType() GetTemplateResponseDtoResponseTemplateType {
+	return s.TemplateType
+}
+
+// GetTemplateJson returns the value of TemplateJson.
+func (s *GetTemplateResponseDtoResponse) GetTemplateJson() jx.Raw {
+	return s.TemplateJson
+}
+
+// GetEncodedTemplateYaml returns the value of EncodedTemplateYaml.
+func (s *GetTemplateResponseDtoResponse) GetEncodedTemplateYaml() NilString {
+	return s.EncodedTemplateYaml
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetTemplateResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTemplateType sets the value of TemplateType.
+func (s *GetTemplateResponseDtoResponse) SetTemplateType(val GetTemplateResponseDtoResponseTemplateType) {
+	s.TemplateType = val
+}
+
+// SetTemplateJson sets the value of TemplateJson.
+func (s *GetTemplateResponseDtoResponse) SetTemplateJson(val jx.Raw) {
+	s.TemplateJson = val
+}
+
+// SetEncodedTemplateYaml sets the value of EncodedTemplateYaml.
+func (s *GetTemplateResponseDtoResponse) SetEncodedTemplateYaml(val NilString) {
+	s.EncodedTemplateYaml = val
+}
+
+type GetTemplateResponseDtoResponseTemplateType string
+
+const (
+	GetTemplateResponseDtoResponseTemplateTypeSTASH         GetTemplateResponseDtoResponseTemplateType = "STASH"
+	GetTemplateResponseDtoResponseTemplateTypeSINGBOX       GetTemplateResponseDtoResponseTemplateType = "SINGBOX"
+	GetTemplateResponseDtoResponseTemplateTypeSINGBOXLEGACY GetTemplateResponseDtoResponseTemplateType = "SINGBOX_LEGACY"
+	GetTemplateResponseDtoResponseTemplateTypeMIHOMO        GetTemplateResponseDtoResponseTemplateType = "MIHOMO"
+	GetTemplateResponseDtoResponseTemplateTypeXRAYJSON      GetTemplateResponseDtoResponseTemplateType = "XRAY_JSON"
+	GetTemplateResponseDtoResponseTemplateTypeCLASH         GetTemplateResponseDtoResponseTemplateType = "CLASH"
+)
+
+// AllValues returns all GetTemplateResponseDtoResponseTemplateType values.
+func (GetTemplateResponseDtoResponseTemplateType) AllValues() []GetTemplateResponseDtoResponseTemplateType {
+	return []GetTemplateResponseDtoResponseTemplateType{
+		GetTemplateResponseDtoResponseTemplateTypeSTASH,
+		GetTemplateResponseDtoResponseTemplateTypeSINGBOX,
+		GetTemplateResponseDtoResponseTemplateTypeSINGBOXLEGACY,
+		GetTemplateResponseDtoResponseTemplateTypeMIHOMO,
+		GetTemplateResponseDtoResponseTemplateTypeXRAYJSON,
+		GetTemplateResponseDtoResponseTemplateTypeCLASH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetTemplateResponseDtoResponseTemplateType) MarshalText() ([]byte, error) {
+	switch s {
+	case GetTemplateResponseDtoResponseTemplateTypeSTASH:
+		return []byte(s), nil
+	case GetTemplateResponseDtoResponseTemplateTypeSINGBOX:
+		return []byte(s), nil
+	case GetTemplateResponseDtoResponseTemplateTypeSINGBOXLEGACY:
+		return []byte(s), nil
+	case GetTemplateResponseDtoResponseTemplateTypeMIHOMO:
+		return []byte(s), nil
+	case GetTemplateResponseDtoResponseTemplateTypeXRAYJSON:
+		return []byte(s), nil
+	case GetTemplateResponseDtoResponseTemplateTypeCLASH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetTemplateResponseDtoResponseTemplateType) UnmarshalText(data []byte) error {
+	switch GetTemplateResponseDtoResponseTemplateType(data) {
+	case GetTemplateResponseDtoResponseTemplateTypeSTASH:
+		*s = GetTemplateResponseDtoResponseTemplateTypeSTASH
+		return nil
+	case GetTemplateResponseDtoResponseTemplateTypeSINGBOX:
+		*s = GetTemplateResponseDtoResponseTemplateTypeSINGBOX
+		return nil
+	case GetTemplateResponseDtoResponseTemplateTypeSINGBOXLEGACY:
+		*s = GetTemplateResponseDtoResponseTemplateTypeSINGBOXLEGACY
+		return nil
+	case GetTemplateResponseDtoResponseTemplateTypeMIHOMO:
+		*s = GetTemplateResponseDtoResponseTemplateTypeMIHOMO
+		return nil
+	case GetTemplateResponseDtoResponseTemplateTypeXRAYJSON:
+		*s = GetTemplateResponseDtoResponseTemplateTypeXRAYJSON
+		return nil
+	case GetTemplateResponseDtoResponseTemplateTypeCLASH:
+		*s = GetTemplateResponseDtoResponseTemplateTypeCLASH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 // Ref: #/components/schemas/GetUserByEmailResponseDto
 type GetUserByEmailResponseDto struct {
 	Response []GetUserByEmailResponseDtoResponseItem `json:"response"`
@@ -9025,6 +11141,7 @@ type GetUserByEmailResponseDtoResponseItem struct {
 	VlessUuid            uuid.UUID                                                     `json:"vlessUuid"`
 	SsPassword           string                                                        `json:"ssPassword"`
 	Description          NilString                                                     `json:"description"`
+	Tag                  NilString                                                     `json:"tag"`
 	TelegramId           NilInt                                                        `json:"telegramId"`
 	Email                NilString                                                     `json:"email"`
 	HwidDeviceLimit      NilInt                                                        `json:"hwidDeviceLimit"`
@@ -9129,6 +11246,11 @@ func (s *GetUserByEmailResponseDtoResponseItem) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *GetUserByEmailResponseDtoResponseItem) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByEmailResponseDtoResponseItem) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -9269,6 +11391,11 @@ func (s *GetUserByEmailResponseDtoResponseItem) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *GetUserByEmailResponseDtoResponseItem) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByEmailResponseDtoResponseItem) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -9562,6 +11689,7 @@ type GetUserByShortUuidResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                     `json:"vlessUuid"`
 	SsPassword           string                                                        `json:"ssPassword"`
 	Description          NilString                                                     `json:"description"`
+	Tag                  NilString                                                     `json:"tag"`
 	TelegramId           NilInt                                                        `json:"telegramId"`
 	Email                NilString                                                     `json:"email"`
 	HwidDeviceLimit      NilInt                                                        `json:"hwidDeviceLimit"`
@@ -9666,6 +11794,11 @@ func (s *GetUserByShortUuidResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *GetUserByShortUuidResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByShortUuidResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -9806,6 +11939,11 @@ func (s *GetUserByShortUuidResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *GetUserByShortUuidResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByShortUuidResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -10099,6 +12237,7 @@ type GetUserBySubscriptionUuidResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                            `json:"vlessUuid"`
 	SsPassword           string                                                               `json:"ssPassword"`
 	Description          NilString                                                            `json:"description"`
+	Tag                  NilString                                                            `json:"tag"`
 	TelegramId           NilInt                                                               `json:"telegramId"`
 	Email                NilString                                                            `json:"email"`
 	HwidDeviceLimit      NilInt                                                               `json:"hwidDeviceLimit"`
@@ -10203,6 +12342,11 @@ func (s *GetUserBySubscriptionUuidResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *GetUserBySubscriptionUuidResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserBySubscriptionUuidResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -10343,6 +12487,11 @@ func (s *GetUserBySubscriptionUuidResponseDtoResponse) SetSsPassword(val string)
 // SetDescription sets the value of Description.
 func (s *GetUserBySubscriptionUuidResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserBySubscriptionUuidResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -10598,22 +12747,1101 @@ func (s *GetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy) Unmar
 	}
 }
 
-// Ref: #/components/schemas/GetUserByTelegramIdResponseDto
-type GetUserByTelegramIdResponseDto struct {
-	Response []UserDto `json:"response"`
+// Ref: #/components/schemas/GetUserByTagResponseDto
+type GetUserByTagResponseDto struct {
+	Response []GetUserByTagResponseDtoResponseItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetUserByTelegramIdResponseDto) GetResponse() []UserDto {
+func (s *GetUserByTagResponseDto) GetResponse() []GetUserByTagResponseDtoResponseItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetUserByTelegramIdResponseDto) SetResponse(val []UserDto) {
+func (s *GetUserByTagResponseDto) SetResponse(val []GetUserByTagResponseDtoResponseItem) {
+	s.Response = val
+}
+
+func (*GetUserByTagResponseDto) usersControllerGetUsersByTagRes() {}
+
+type GetUserByTagResponseDtoResponseItem struct {
+	UUID                     uuid.UUID                                    `json:"uuid"`
+	SubscriptionUuid         uuid.UUID                                    `json:"subscriptionUuid"`
+	ShortUuid                string                                       `json:"shortUuid"`
+	Username                 string                                       `json:"username"`
+	Status                   OptGetUserByTagResponseDtoResponseItemStatus `json:"status"`
+	UsedTrafficBytes         float64                                      `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                      `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                       `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy  `json:"trafficLimitStrategy"`
+	SubLastUserAgent     NilString                                                   `json:"subLastUserAgent"`
+	SubLastOpenedAt      NilDateTime                                                 `json:"subLastOpenedAt"`
+	ExpireAt             time.Time                                                   `json:"expireAt"`
+	OnlineAt             NilDateTime                                                 `json:"onlineAt"`
+	SubRevokedAt         NilDateTime                                                 `json:"subRevokedAt"`
+	LastTrafficResetAt   NilDateTime                                                 `json:"lastTrafficResetAt"`
+	TrojanPassword       string                                                      `json:"trojanPassword"`
+	VlessUuid            uuid.UUID                                                   `json:"vlessUuid"`
+	SsPassword           string                                                      `json:"ssPassword"`
+	Description          NilString                                                   `json:"description"`
+	Tag                  NilString                                                   `json:"tag"`
+	TelegramId           NilInt                                                      `json:"telegramId"`
+	Email                NilString                                                   `json:"email"`
+	HwidDeviceLimit      NilInt                                                      `json:"hwidDeviceLimit"`
+	CreatedAt            time.Time                                                   `json:"createdAt"`
+	UpdatedAt            time.Time                                                   `json:"updatedAt"`
+	ActiveUserInbounds   []GetUserByTagResponseDtoResponseItemActiveUserInboundsItem `json:"activeUserInbounds"`
+	SubscriptionUrl      string                                                      `json:"subscriptionUrl"`
+	LastConnectedNode    NilGetUserByTagResponseDtoResponseItemLastConnectedNode     `json:"lastConnectedNode"`
+	Happ                 GetUserByTagResponseDtoResponseItemHapp                     `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserByTagResponseDtoResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetSubscriptionUuid returns the value of SubscriptionUuid.
+func (s *GetUserByTagResponseDtoResponseItem) GetSubscriptionUuid() uuid.UUID {
+	return s.SubscriptionUuid
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetUserByTagResponseDtoResponseItem) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *GetUserByTagResponseDtoResponseItem) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *GetUserByTagResponseDtoResponseItem) GetStatus() OptGetUserByTagResponseDtoResponseItemStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *GetUserByTagResponseDtoResponseItem) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *GetUserByTagResponseDtoResponseItem) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *GetUserByTagResponseDtoResponseItem) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetUserByTagResponseDtoResponseItem) GetTrafficLimitStrategy() OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *GetUserByTagResponseDtoResponseItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *GetUserByTagResponseDtoResponseItem) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *GetUserByTagResponseDtoResponseItem) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *GetUserByTagResponseDtoResponseItem) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *GetUserByTagResponseDtoResponseItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByTagResponseDtoResponseItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *GetUserByTagResponseDtoResponseItem) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *GetUserByTagResponseDtoResponseItem) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *GetUserByTagResponseDtoResponseItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveUserInbounds returns the value of ActiveUserInbounds.
+func (s *GetUserByTagResponseDtoResponseItem) GetActiveUserInbounds() []GetUserByTagResponseDtoResponseItemActiveUserInboundsItem {
+	return s.ActiveUserInbounds
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetUserByTagResponseDtoResponseItem) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *GetUserByTagResponseDtoResponseItem) GetLastConnectedNode() NilGetUserByTagResponseDtoResponseItemLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *GetUserByTagResponseDtoResponseItem) GetHapp() GetUserByTagResponseDtoResponseItemHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserByTagResponseDtoResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetSubscriptionUuid sets the value of SubscriptionUuid.
+func (s *GetUserByTagResponseDtoResponseItem) SetSubscriptionUuid(val uuid.UUID) {
+	s.SubscriptionUuid = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetUserByTagResponseDtoResponseItem) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetUserByTagResponseDtoResponseItem) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *GetUserByTagResponseDtoResponseItem) SetStatus(val OptGetUserByTagResponseDtoResponseItemStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *GetUserByTagResponseDtoResponseItem) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *GetUserByTagResponseDtoResponseItem) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *GetUserByTagResponseDtoResponseItem) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetUserByTagResponseDtoResponseItem) SetTrafficLimitStrategy(val OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *GetUserByTagResponseDtoResponseItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *GetUserByTagResponseDtoResponseItem) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *GetUserByTagResponseDtoResponseItem) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *GetUserByTagResponseDtoResponseItem) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *GetUserByTagResponseDtoResponseItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByTagResponseDtoResponseItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *GetUserByTagResponseDtoResponseItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *GetUserByTagResponseDtoResponseItem) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *GetUserByTagResponseDtoResponseItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveUserInbounds sets the value of ActiveUserInbounds.
+func (s *GetUserByTagResponseDtoResponseItem) SetActiveUserInbounds(val []GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) {
+	s.ActiveUserInbounds = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetUserByTagResponseDtoResponseItem) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *GetUserByTagResponseDtoResponseItem) SetLastConnectedNode(val NilGetUserByTagResponseDtoResponseItemLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *GetUserByTagResponseDtoResponseItem) SetHapp(val GetUserByTagResponseDtoResponseItemHapp) {
+	s.Happ = val
+}
+
+type GetUserByTagResponseDtoResponseItemActiveUserInboundsItem struct {
+	UUID     uuid.UUID `json:"uuid"`
+	Tag      string    `json:"tag"`
+	Type     string    `json:"type"`
+	Network  NilString `json:"network"`
+	Security NilString `json:"security"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+type GetUserByTagResponseDtoResponseItemHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *GetUserByTagResponseDtoResponseItemHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *GetUserByTagResponseDtoResponseItemHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type GetUserByTagResponseDtoResponseItemLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *GetUserByTagResponseDtoResponseItemLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *GetUserByTagResponseDtoResponseItemLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *GetUserByTagResponseDtoResponseItemLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *GetUserByTagResponseDtoResponseItemLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+type GetUserByTagResponseDtoResponseItemStatus string
+
+const (
+	GetUserByTagResponseDtoResponseItemStatusACTIVE   GetUserByTagResponseDtoResponseItemStatus = "ACTIVE"
+	GetUserByTagResponseDtoResponseItemStatusDISABLED GetUserByTagResponseDtoResponseItemStatus = "DISABLED"
+	GetUserByTagResponseDtoResponseItemStatusLIMITED  GetUserByTagResponseDtoResponseItemStatus = "LIMITED"
+	GetUserByTagResponseDtoResponseItemStatusEXPIRED  GetUserByTagResponseDtoResponseItemStatus = "EXPIRED"
+)
+
+// AllValues returns all GetUserByTagResponseDtoResponseItemStatus values.
+func (GetUserByTagResponseDtoResponseItemStatus) AllValues() []GetUserByTagResponseDtoResponseItemStatus {
+	return []GetUserByTagResponseDtoResponseItemStatus{
+		GetUserByTagResponseDtoResponseItemStatusACTIVE,
+		GetUserByTagResponseDtoResponseItemStatusDISABLED,
+		GetUserByTagResponseDtoResponseItemStatusLIMITED,
+		GetUserByTagResponseDtoResponseItemStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetUserByTagResponseDtoResponseItemStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetUserByTagResponseDtoResponseItemStatusACTIVE:
+		return []byte(s), nil
+	case GetUserByTagResponseDtoResponseItemStatusDISABLED:
+		return []byte(s), nil
+	case GetUserByTagResponseDtoResponseItemStatusLIMITED:
+		return []byte(s), nil
+	case GetUserByTagResponseDtoResponseItemStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetUserByTagResponseDtoResponseItemStatus) UnmarshalText(data []byte) error {
+	switch GetUserByTagResponseDtoResponseItemStatus(data) {
+	case GetUserByTagResponseDtoResponseItemStatusACTIVE:
+		*s = GetUserByTagResponseDtoResponseItemStatusACTIVE
+		return nil
+	case GetUserByTagResponseDtoResponseItemStatusDISABLED:
+		*s = GetUserByTagResponseDtoResponseItemStatusDISABLED
+		return nil
+	case GetUserByTagResponseDtoResponseItemStatusLIMITED:
+		*s = GetUserByTagResponseDtoResponseItemStatusLIMITED
+		return nil
+	case GetUserByTagResponseDtoResponseItemStatusEXPIRED:
+		*s = GetUserByTagResponseDtoResponseItemStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type GetUserByTagResponseDtoResponseItemTrafficLimitStrategy string
+
+const (
+	GetUserByTagResponseDtoResponseItemTrafficLimitStrategyNORESET GetUserByTagResponseDtoResponseItemTrafficLimitStrategy = "NO_RESET"
+	GetUserByTagResponseDtoResponseItemTrafficLimitStrategyDAY     GetUserByTagResponseDtoResponseItemTrafficLimitStrategy = "DAY"
+	GetUserByTagResponseDtoResponseItemTrafficLimitStrategyWEEK    GetUserByTagResponseDtoResponseItemTrafficLimitStrategy = "WEEK"
+	GetUserByTagResponseDtoResponseItemTrafficLimitStrategyMONTH   GetUserByTagResponseDtoResponseItemTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetUserByTagResponseDtoResponseItemTrafficLimitStrategy values.
+func (GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) AllValues() []GetUserByTagResponseDtoResponseItemTrafficLimitStrategy {
+	return []GetUserByTagResponseDtoResponseItemTrafficLimitStrategy{
+		GetUserByTagResponseDtoResponseItemTrafficLimitStrategyNORESET,
+		GetUserByTagResponseDtoResponseItemTrafficLimitStrategyDAY,
+		GetUserByTagResponseDtoResponseItemTrafficLimitStrategyWEEK,
+		GetUserByTagResponseDtoResponseItemTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetUserByTagResponseDtoResponseItemTrafficLimitStrategy(data) {
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyNORESET:
+		*s = GetUserByTagResponseDtoResponseItemTrafficLimitStrategyNORESET
+		return nil
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyDAY:
+		*s = GetUserByTagResponseDtoResponseItemTrafficLimitStrategyDAY
+		return nil
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyWEEK:
+		*s = GetUserByTagResponseDtoResponseItemTrafficLimitStrategyWEEK
+		return nil
+	case GetUserByTagResponseDtoResponseItemTrafficLimitStrategyMONTH:
+		*s = GetUserByTagResponseDtoResponseItemTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/GetUserByTelegramIdResponseDto
+type GetUserByTelegramIdResponseDto struct {
+	Response []GetUserByTelegramIdResponseDtoResponseItem `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetUserByTelegramIdResponseDto) GetResponse() []GetUserByTelegramIdResponseDtoResponseItem {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetUserByTelegramIdResponseDto) SetResponse(val []GetUserByTelegramIdResponseDtoResponseItem) {
 	s.Response = val
 }
 
 func (*GetUserByTelegramIdResponseDto) usersControllerGetUserByTelegramIdRes() {}
+
+type GetUserByTelegramIdResponseDtoResponseItem struct {
+	UUID                     uuid.UUID                                           `json:"uuid"`
+	SubscriptionUuid         uuid.UUID                                           `json:"subscriptionUuid"`
+	ShortUuid                string                                              `json:"shortUuid"`
+	Username                 string                                              `json:"username"`
+	Status                   OptGetUserByTelegramIdResponseDtoResponseItemStatus `json:"status"`
+	UsedTrafficBytes         float64                                             `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                             `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                              `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy  `json:"trafficLimitStrategy"`
+	SubLastUserAgent     NilString                                                          `json:"subLastUserAgent"`
+	SubLastOpenedAt      NilDateTime                                                        `json:"subLastOpenedAt"`
+	ExpireAt             time.Time                                                          `json:"expireAt"`
+	OnlineAt             NilDateTime                                                        `json:"onlineAt"`
+	SubRevokedAt         NilDateTime                                                        `json:"subRevokedAt"`
+	LastTrafficResetAt   NilDateTime                                                        `json:"lastTrafficResetAt"`
+	TrojanPassword       string                                                             `json:"trojanPassword"`
+	VlessUuid            uuid.UUID                                                          `json:"vlessUuid"`
+	SsPassword           string                                                             `json:"ssPassword"`
+	Description          NilString                                                          `json:"description"`
+	Tag                  NilString                                                          `json:"tag"`
+	TelegramId           NilInt                                                             `json:"telegramId"`
+	Email                NilString                                                          `json:"email"`
+	HwidDeviceLimit      NilInt                                                             `json:"hwidDeviceLimit"`
+	CreatedAt            time.Time                                                          `json:"createdAt"`
+	UpdatedAt            time.Time                                                          `json:"updatedAt"`
+	ActiveUserInbounds   []GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem `json:"activeUserInbounds"`
+	SubscriptionUrl      string                                                             `json:"subscriptionUrl"`
+	LastConnectedNode    NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode     `json:"lastConnectedNode"`
+	Happ                 GetUserByTelegramIdResponseDtoResponseItemHapp                     `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetSubscriptionUuid returns the value of SubscriptionUuid.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetSubscriptionUuid() uuid.UUID {
+	return s.SubscriptionUuid
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetStatus() OptGetUserByTelegramIdResponseDtoResponseItemStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetTrafficLimitStrategy() OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveUserInbounds returns the value of ActiveUserInbounds.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetActiveUserInbounds() []GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem {
+	return s.ActiveUserInbounds
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetLastConnectedNode() NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) GetHapp() GetUserByTelegramIdResponseDtoResponseItemHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetSubscriptionUuid sets the value of SubscriptionUuid.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetSubscriptionUuid(val uuid.UUID) {
+	s.SubscriptionUuid = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetStatus(val OptGetUserByTelegramIdResponseDtoResponseItemStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetTrafficLimitStrategy(val OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveUserInbounds sets the value of ActiveUserInbounds.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetActiveUserInbounds(val []GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) {
+	s.ActiveUserInbounds = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetLastConnectedNode(val NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) SetHapp(val GetUserByTelegramIdResponseDtoResponseItemHapp) {
+	s.Happ = val
+}
+
+type GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem struct {
+	UUID     uuid.UUID `json:"uuid"`
+	Tag      string    `json:"tag"`
+	Type     string    `json:"type"`
+	Network  NilString `json:"network"`
+	Security NilString `json:"security"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetUserByTelegramIdResponseDtoResponseItemActiveUserInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+type GetUserByTelegramIdResponseDtoResponseItemHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *GetUserByTelegramIdResponseDtoResponseItemHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+type GetUserByTelegramIdResponseDtoResponseItemStatus string
+
+const (
+	GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE   GetUserByTelegramIdResponseDtoResponseItemStatus = "ACTIVE"
+	GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED GetUserByTelegramIdResponseDtoResponseItemStatus = "DISABLED"
+	GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED  GetUserByTelegramIdResponseDtoResponseItemStatus = "LIMITED"
+	GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED  GetUserByTelegramIdResponseDtoResponseItemStatus = "EXPIRED"
+)
+
+// AllValues returns all GetUserByTelegramIdResponseDtoResponseItemStatus values.
+func (GetUserByTelegramIdResponseDtoResponseItemStatus) AllValues() []GetUserByTelegramIdResponseDtoResponseItemStatus {
+	return []GetUserByTelegramIdResponseDtoResponseItemStatus{
+		GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE,
+		GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED,
+		GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED,
+		GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetUserByTelegramIdResponseDtoResponseItemStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE:
+		return []byte(s), nil
+	case GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED:
+		return []byte(s), nil
+	case GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED:
+		return []byte(s), nil
+	case GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetUserByTelegramIdResponseDtoResponseItemStatus) UnmarshalText(data []byte) error {
+	switch GetUserByTelegramIdResponseDtoResponseItemStatus(data) {
+	case GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE:
+		*s = GetUserByTelegramIdResponseDtoResponseItemStatusACTIVE
+		return nil
+	case GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED:
+		*s = GetUserByTelegramIdResponseDtoResponseItemStatusDISABLED
+		return nil
+	case GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED:
+		*s = GetUserByTelegramIdResponseDtoResponseItemStatusLIMITED
+		return nil
+	case GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED:
+		*s = GetUserByTelegramIdResponseDtoResponseItemStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy string
+
+const (
+	GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy = "NO_RESET"
+	GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY     GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy = "DAY"
+	GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK    GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy = "WEEK"
+	GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH   GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy values.
+func (GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) AllValues() []GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy {
+	return []GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy{
+		GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET,
+		GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY,
+		GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK,
+		GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy(data) {
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET:
+		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyNORESET
+		return nil
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY:
+		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyDAY
+		return nil
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK:
+		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyWEEK
+		return nil
+	case GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH:
+		*s = GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
 
 // Ref: #/components/schemas/GetUserByUsernameResponseDto
 type GetUserByUsernameResponseDto struct {
@@ -10653,6 +13881,7 @@ type GetUserByUsernameResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                    `json:"vlessUuid"`
 	SsPassword           string                                                       `json:"ssPassword"`
 	Description          NilString                                                    `json:"description"`
+	Tag                  NilString                                                    `json:"tag"`
 	TelegramId           NilInt                                                       `json:"telegramId"`
 	Email                NilString                                                    `json:"email"`
 	HwidDeviceLimit      NilInt                                                       `json:"hwidDeviceLimit"`
@@ -10757,6 +13986,11 @@ func (s *GetUserByUsernameResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *GetUserByUsernameResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByUsernameResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -10897,6 +14131,11 @@ func (s *GetUserByUsernameResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *GetUserByUsernameResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByUsernameResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -11190,6 +14429,7 @@ type GetUserByUuidResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                `json:"vlessUuid"`
 	SsPassword           string                                                   `json:"ssPassword"`
 	Description          NilString                                                `json:"description"`
+	Tag                  NilString                                                `json:"tag"`
 	TelegramId           NilInt                                                   `json:"telegramId"`
 	Email                NilString                                                `json:"email"`
 	HwidDeviceLimit      NilInt                                                   `json:"hwidDeviceLimit"`
@@ -11294,6 +14534,11 @@ func (s *GetUserByUuidResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *GetUserByUuidResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByUuidResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -11434,6 +14679,11 @@ func (s *GetUserByUuidResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *GetUserByUuidResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByUuidResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -12003,6 +15253,51 @@ func (o NilActivateAllInboundsResponseDtoResponseLastConnectedNode) Or(d Activat
 	return d
 }
 
+// NewNilCreateUserResponseDtoResponseLastConnectedNode returns new NilCreateUserResponseDtoResponseLastConnectedNode with value set to v.
+func NewNilCreateUserResponseDtoResponseLastConnectedNode(v CreateUserResponseDtoResponseLastConnectedNode) NilCreateUserResponseDtoResponseLastConnectedNode {
+	return NilCreateUserResponseDtoResponseLastConnectedNode{
+		Value: v,
+	}
+}
+
+// NilCreateUserResponseDtoResponseLastConnectedNode is nullable CreateUserResponseDtoResponseLastConnectedNode.
+type NilCreateUserResponseDtoResponseLastConnectedNode struct {
+	Value CreateUserResponseDtoResponseLastConnectedNode
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilCreateUserResponseDtoResponseLastConnectedNode) SetTo(v CreateUserResponseDtoResponseLastConnectedNode) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilCreateUserResponseDtoResponseLastConnectedNode) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilCreateUserResponseDtoResponseLastConnectedNode) SetToNull() {
+	o.Null = true
+	var v CreateUserResponseDtoResponseLastConnectedNode
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilCreateUserResponseDtoResponseLastConnectedNode) Get() (v CreateUserResponseDtoResponseLastConnectedNode, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilCreateUserResponseDtoResponseLastConnectedNode) Or(d CreateUserResponseDtoResponseLastConnectedNode) CreateUserResponseDtoResponseLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilDateTime returns new NilDateTime with value set to v.
 func NewNilDateTime(v time.Time) NilDateTime {
 	return NilDateTime{
@@ -12177,6 +15472,96 @@ func (o NilFloat64) Get() (v float64, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o NilFloat64) Or(d float64) float64 {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode returns new NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode with value set to v.
+func NewNilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode(v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
+	return NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode{
+		Value: v,
+	}
+}
+
+// NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode is nullable GetAllUsersResponseDtoResponseUsersItemLastConnectedNode.
+type NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode struct {
+	Value GetAllUsersResponseDtoResponseUsersItemLastConnectedNode
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetTo(v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetToNull() {
+	o.Null = true
+	var v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Get() (v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Or(d GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetStatusResponseDtoResponseTgAuth returns new NilGetStatusResponseDtoResponseTgAuth with value set to v.
+func NewNilGetStatusResponseDtoResponseTgAuth(v GetStatusResponseDtoResponseTgAuth) NilGetStatusResponseDtoResponseTgAuth {
+	return NilGetStatusResponseDtoResponseTgAuth{
+		Value: v,
+	}
+}
+
+// NilGetStatusResponseDtoResponseTgAuth is nullable GetStatusResponseDtoResponseTgAuth.
+type NilGetStatusResponseDtoResponseTgAuth struct {
+	Value GetStatusResponseDtoResponseTgAuth
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetStatusResponseDtoResponseTgAuth) SetTo(v GetStatusResponseDtoResponseTgAuth) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetStatusResponseDtoResponseTgAuth) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetStatusResponseDtoResponseTgAuth) SetToNull() {
+	o.Null = true
+	var v GetStatusResponseDtoResponseTgAuth
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetStatusResponseDtoResponseTgAuth) Get() (v GetStatusResponseDtoResponseTgAuth, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetStatusResponseDtoResponseTgAuth) Or(d GetStatusResponseDtoResponseTgAuth) GetStatusResponseDtoResponseTgAuth {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -12361,6 +15746,96 @@ func (o NilGetUserBySubscriptionUuidResponseDtoResponseLastConnectedNode) Get() 
 
 // Or returns value if set, or given parameter if does not.
 func (o NilGetUserBySubscriptionUuidResponseDtoResponseLastConnectedNode) Or(d GetUserBySubscriptionUuidResponseDtoResponseLastConnectedNode) GetUserBySubscriptionUuidResponseDtoResponseLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetUserByTagResponseDtoResponseItemLastConnectedNode returns new NilGetUserByTagResponseDtoResponseItemLastConnectedNode with value set to v.
+func NewNilGetUserByTagResponseDtoResponseItemLastConnectedNode(v GetUserByTagResponseDtoResponseItemLastConnectedNode) NilGetUserByTagResponseDtoResponseItemLastConnectedNode {
+	return NilGetUserByTagResponseDtoResponseItemLastConnectedNode{
+		Value: v,
+	}
+}
+
+// NilGetUserByTagResponseDtoResponseItemLastConnectedNode is nullable GetUserByTagResponseDtoResponseItemLastConnectedNode.
+type NilGetUserByTagResponseDtoResponseItemLastConnectedNode struct {
+	Value GetUserByTagResponseDtoResponseItemLastConnectedNode
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetUserByTagResponseDtoResponseItemLastConnectedNode) SetTo(v GetUserByTagResponseDtoResponseItemLastConnectedNode) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetUserByTagResponseDtoResponseItemLastConnectedNode) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetUserByTagResponseDtoResponseItemLastConnectedNode) SetToNull() {
+	o.Null = true
+	var v GetUserByTagResponseDtoResponseItemLastConnectedNode
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetUserByTagResponseDtoResponseItemLastConnectedNode) Get() (v GetUserByTagResponseDtoResponseItemLastConnectedNode, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetUserByTagResponseDtoResponseItemLastConnectedNode) Or(d GetUserByTagResponseDtoResponseItemLastConnectedNode) GetUserByTagResponseDtoResponseItemLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode returns new NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode with value set to v.
+func NewNilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode(v GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode {
+	return NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode{
+		Value: v,
+	}
+}
+
+// NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode is nullable GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode.
+type NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode struct {
+	Value GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) SetTo(v GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) SetToNull() {
+	o.Null = true
+	var v GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) Get() (v GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) Or(d GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode) GetUserByTelegramIdResponseDtoResponseItemLastConnectedNode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -12684,37 +16159,37 @@ func (o NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders) O
 	return d
 }
 
-// NewNilUserDtoLastConnectedNode returns new NilUserDtoLastConnectedNode with value set to v.
-func NewNilUserDtoLastConnectedNode(v UserDtoLastConnectedNode) NilUserDtoLastConnectedNode {
-	return NilUserDtoLastConnectedNode{
+// NewNilUpdateUserResponseDtoResponseLastConnectedNode returns new NilUpdateUserResponseDtoResponseLastConnectedNode with value set to v.
+func NewNilUpdateUserResponseDtoResponseLastConnectedNode(v UpdateUserResponseDtoResponseLastConnectedNode) NilUpdateUserResponseDtoResponseLastConnectedNode {
+	return NilUpdateUserResponseDtoResponseLastConnectedNode{
 		Value: v,
 	}
 }
 
-// NilUserDtoLastConnectedNode is nullable UserDtoLastConnectedNode.
-type NilUserDtoLastConnectedNode struct {
-	Value UserDtoLastConnectedNode
+// NilUpdateUserResponseDtoResponseLastConnectedNode is nullable UpdateUserResponseDtoResponseLastConnectedNode.
+type NilUpdateUserResponseDtoResponseLastConnectedNode struct {
+	Value UpdateUserResponseDtoResponseLastConnectedNode
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilUserDtoLastConnectedNode) SetTo(v UserDtoLastConnectedNode) {
+func (o *NilUpdateUserResponseDtoResponseLastConnectedNode) SetTo(v UpdateUserResponseDtoResponseLastConnectedNode) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilUserDtoLastConnectedNode) IsNull() bool { return o.Null }
+func (o NilUpdateUserResponseDtoResponseLastConnectedNode) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilUserDtoLastConnectedNode) SetToNull() {
+func (o *NilUpdateUserResponseDtoResponseLastConnectedNode) SetToNull() {
 	o.Null = true
-	var v UserDtoLastConnectedNode
+	var v UpdateUserResponseDtoResponseLastConnectedNode
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilUserDtoLastConnectedNode) Get() (v UserDtoLastConnectedNode, ok bool) {
+func (o NilUpdateUserResponseDtoResponseLastConnectedNode) Get() (v UpdateUserResponseDtoResponseLastConnectedNode, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -12722,7 +16197,7 @@ func (o NilUserDtoLastConnectedNode) Get() (v UserDtoLastConnectedNode, ok bool)
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilUserDtoLastConnectedNode) Or(d UserDtoLastConnectedNode) UserDtoLastConnectedNode {
+func (o NilUpdateUserResponseDtoResponseLastConnectedNode) Or(d UpdateUserResponseDtoResponseLastConnectedNode) UpdateUserResponseDtoResponseLastConnectedNode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13373,6 +16848,98 @@ func (o OptCreateUserRequestDtoStatus) Or(d CreateUserRequestDtoStatus) CreateUs
 	return d
 }
 
+// NewOptCreateUserResponseDtoResponseStatus returns new OptCreateUserResponseDtoResponseStatus with value set to v.
+func NewOptCreateUserResponseDtoResponseStatus(v CreateUserResponseDtoResponseStatus) OptCreateUserResponseDtoResponseStatus {
+	return OptCreateUserResponseDtoResponseStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateUserResponseDtoResponseStatus is optional CreateUserResponseDtoResponseStatus.
+type OptCreateUserResponseDtoResponseStatus struct {
+	Value CreateUserResponseDtoResponseStatus
+	Set   bool
+}
+
+// IsSet returns true if OptCreateUserResponseDtoResponseStatus was set.
+func (o OptCreateUserResponseDtoResponseStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateUserResponseDtoResponseStatus) Reset() {
+	var v CreateUserResponseDtoResponseStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateUserResponseDtoResponseStatus) SetTo(v CreateUserResponseDtoResponseStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateUserResponseDtoResponseStatus) Get() (v CreateUserResponseDtoResponseStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateUserResponseDtoResponseStatus) Or(d CreateUserResponseDtoResponseStatus) CreateUserResponseDtoResponseStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptCreateUserResponseDtoResponseTrafficLimitStrategy returns new OptCreateUserResponseDtoResponseTrafficLimitStrategy with value set to v.
+func NewOptCreateUserResponseDtoResponseTrafficLimitStrategy(v CreateUserResponseDtoResponseTrafficLimitStrategy) OptCreateUserResponseDtoResponseTrafficLimitStrategy {
+	return OptCreateUserResponseDtoResponseTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateUserResponseDtoResponseTrafficLimitStrategy is optional CreateUserResponseDtoResponseTrafficLimitStrategy.
+type OptCreateUserResponseDtoResponseTrafficLimitStrategy struct {
+	Value CreateUserResponseDtoResponseTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptCreateUserResponseDtoResponseTrafficLimitStrategy was set.
+func (o OptCreateUserResponseDtoResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateUserResponseDtoResponseTrafficLimitStrategy) Reset() {
+	var v CreateUserResponseDtoResponseTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateUserResponseDtoResponseTrafficLimitStrategy) SetTo(v CreateUserResponseDtoResponseTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateUserResponseDtoResponseTrafficLimitStrategy) Get() (v CreateUserResponseDtoResponseTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateUserResponseDtoResponseTrafficLimitStrategy) Or(d CreateUserResponseDtoResponseTrafficLimitStrategy) CreateUserResponseDtoResponseTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptDateTime returns new OptDateTime with value set to v.
 func NewOptDateTime(v time.Time) OptDateTime {
 	return OptDateTime{
@@ -13689,6 +17256,98 @@ func (o OptGetAllHostsResponseDtoResponseItemSecurityLayer) Get() (v GetAllHosts
 
 // Or returns value if set, or given parameter if does not.
 func (o OptGetAllHostsResponseDtoResponseItemSecurityLayer) Or(d GetAllHostsResponseDtoResponseItemSecurityLayer) GetAllHostsResponseDtoResponseItemSecurityLayer {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetAllUsersResponseDtoResponseUsersItemStatus returns new OptGetAllUsersResponseDtoResponseUsersItemStatus with value set to v.
+func NewOptGetAllUsersResponseDtoResponseUsersItemStatus(v GetAllUsersResponseDtoResponseUsersItemStatus) OptGetAllUsersResponseDtoResponseUsersItemStatus {
+	return OptGetAllUsersResponseDtoResponseUsersItemStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetAllUsersResponseDtoResponseUsersItemStatus is optional GetAllUsersResponseDtoResponseUsersItemStatus.
+type OptGetAllUsersResponseDtoResponseUsersItemStatus struct {
+	Value GetAllUsersResponseDtoResponseUsersItemStatus
+	Set   bool
+}
+
+// IsSet returns true if OptGetAllUsersResponseDtoResponseUsersItemStatus was set.
+func (o OptGetAllUsersResponseDtoResponseUsersItemStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetAllUsersResponseDtoResponseUsersItemStatus) Reset() {
+	var v GetAllUsersResponseDtoResponseUsersItemStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetAllUsersResponseDtoResponseUsersItemStatus) SetTo(v GetAllUsersResponseDtoResponseUsersItemStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetAllUsersResponseDtoResponseUsersItemStatus) Get() (v GetAllUsersResponseDtoResponseUsersItemStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetAllUsersResponseDtoResponseUsersItemStatus) Or(d GetAllUsersResponseDtoResponseUsersItemStatus) GetAllUsersResponseDtoResponseUsersItemStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy returns new OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy with value set to v.
+func NewOptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy(v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
+	return OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy is optional GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy.
+type OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy struct {
+	Value GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy was set.
+func (o OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Reset() {
+	var v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) SetTo(v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Get() (v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Or(d GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -14013,6 +17672,190 @@ func (o OptGetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy) Get
 
 // Or returns value if set, or given parameter if does not.
 func (o OptGetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy) Or(d GetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy) GetUserBySubscriptionUuidResponseDtoResponseTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetUserByTagResponseDtoResponseItemStatus returns new OptGetUserByTagResponseDtoResponseItemStatus with value set to v.
+func NewOptGetUserByTagResponseDtoResponseItemStatus(v GetUserByTagResponseDtoResponseItemStatus) OptGetUserByTagResponseDtoResponseItemStatus {
+	return OptGetUserByTagResponseDtoResponseItemStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetUserByTagResponseDtoResponseItemStatus is optional GetUserByTagResponseDtoResponseItemStatus.
+type OptGetUserByTagResponseDtoResponseItemStatus struct {
+	Value GetUserByTagResponseDtoResponseItemStatus
+	Set   bool
+}
+
+// IsSet returns true if OptGetUserByTagResponseDtoResponseItemStatus was set.
+func (o OptGetUserByTagResponseDtoResponseItemStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetUserByTagResponseDtoResponseItemStatus) Reset() {
+	var v GetUserByTagResponseDtoResponseItemStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetUserByTagResponseDtoResponseItemStatus) SetTo(v GetUserByTagResponseDtoResponseItemStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetUserByTagResponseDtoResponseItemStatus) Get() (v GetUserByTagResponseDtoResponseItemStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetUserByTagResponseDtoResponseItemStatus) Or(d GetUserByTagResponseDtoResponseItemStatus) GetUserByTagResponseDtoResponseItemStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy returns new OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy with value set to v.
+func NewOptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy(v GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy {
+	return OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy is optional GetUserByTagResponseDtoResponseItemTrafficLimitStrategy.
+type OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy struct {
+	Value GetUserByTagResponseDtoResponseItemTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy was set.
+func (o OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) Reset() {
+	var v GetUserByTagResponseDtoResponseItemTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) SetTo(v GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) Get() (v GetUserByTagResponseDtoResponseItemTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) Or(d GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) GetUserByTagResponseDtoResponseItemTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetUserByTelegramIdResponseDtoResponseItemStatus returns new OptGetUserByTelegramIdResponseDtoResponseItemStatus with value set to v.
+func NewOptGetUserByTelegramIdResponseDtoResponseItemStatus(v GetUserByTelegramIdResponseDtoResponseItemStatus) OptGetUserByTelegramIdResponseDtoResponseItemStatus {
+	return OptGetUserByTelegramIdResponseDtoResponseItemStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetUserByTelegramIdResponseDtoResponseItemStatus is optional GetUserByTelegramIdResponseDtoResponseItemStatus.
+type OptGetUserByTelegramIdResponseDtoResponseItemStatus struct {
+	Value GetUserByTelegramIdResponseDtoResponseItemStatus
+	Set   bool
+}
+
+// IsSet returns true if OptGetUserByTelegramIdResponseDtoResponseItemStatus was set.
+func (o OptGetUserByTelegramIdResponseDtoResponseItemStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetUserByTelegramIdResponseDtoResponseItemStatus) Reset() {
+	var v GetUserByTelegramIdResponseDtoResponseItemStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetUserByTelegramIdResponseDtoResponseItemStatus) SetTo(v GetUserByTelegramIdResponseDtoResponseItemStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetUserByTelegramIdResponseDtoResponseItemStatus) Get() (v GetUserByTelegramIdResponseDtoResponseItemStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetUserByTelegramIdResponseDtoResponseItemStatus) Or(d GetUserByTelegramIdResponseDtoResponseItemStatus) GetUserByTelegramIdResponseDtoResponseItemStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy returns new OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy with value set to v.
+func NewOptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy(v GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy {
+	return OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy is optional GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy.
+type OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy struct {
+	Value GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy was set.
+func (o OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Reset() {
+	var v GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) SetTo(v GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Get() (v GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) Or(d GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy) GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -15225,38 +19068,38 @@ func (o OptUpdateUserRequestDtoTrafficLimitStrategy) Or(d UpdateUserRequestDtoTr
 	return d
 }
 
-// NewOptUserDtoStatus returns new OptUserDtoStatus with value set to v.
-func NewOptUserDtoStatus(v UserDtoStatus) OptUserDtoStatus {
-	return OptUserDtoStatus{
+// NewOptUpdateUserResponseDtoResponseStatus returns new OptUpdateUserResponseDtoResponseStatus with value set to v.
+func NewOptUpdateUserResponseDtoResponseStatus(v UpdateUserResponseDtoResponseStatus) OptUpdateUserResponseDtoResponseStatus {
+	return OptUpdateUserResponseDtoResponseStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserDtoStatus is optional UserDtoStatus.
-type OptUserDtoStatus struct {
-	Value UserDtoStatus
+// OptUpdateUserResponseDtoResponseStatus is optional UpdateUserResponseDtoResponseStatus.
+type OptUpdateUserResponseDtoResponseStatus struct {
+	Value UpdateUserResponseDtoResponseStatus
 	Set   bool
 }
 
-// IsSet returns true if OptUserDtoStatus was set.
-func (o OptUserDtoStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateUserResponseDtoResponseStatus was set.
+func (o OptUpdateUserResponseDtoResponseStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserDtoStatus) Reset() {
-	var v UserDtoStatus
+func (o *OptUpdateUserResponseDtoResponseStatus) Reset() {
+	var v UpdateUserResponseDtoResponseStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserDtoStatus) SetTo(v UserDtoStatus) {
+func (o *OptUpdateUserResponseDtoResponseStatus) SetTo(v UpdateUserResponseDtoResponseStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserDtoStatus) Get() (v UserDtoStatus, ok bool) {
+func (o OptUpdateUserResponseDtoResponseStatus) Get() (v UpdateUserResponseDtoResponseStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15264,45 +19107,45 @@ func (o OptUserDtoStatus) Get() (v UserDtoStatus, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserDtoStatus) Or(d UserDtoStatus) UserDtoStatus {
+func (o OptUpdateUserResponseDtoResponseStatus) Or(d UpdateUserResponseDtoResponseStatus) UpdateUserResponseDtoResponseStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUserDtoTrafficLimitStrategy returns new OptUserDtoTrafficLimitStrategy with value set to v.
-func NewOptUserDtoTrafficLimitStrategy(v UserDtoTrafficLimitStrategy) OptUserDtoTrafficLimitStrategy {
-	return OptUserDtoTrafficLimitStrategy{
+// NewOptUpdateUserResponseDtoResponseTrafficLimitStrategy returns new OptUpdateUserResponseDtoResponseTrafficLimitStrategy with value set to v.
+func NewOptUpdateUserResponseDtoResponseTrafficLimitStrategy(v UpdateUserResponseDtoResponseTrafficLimitStrategy) OptUpdateUserResponseDtoResponseTrafficLimitStrategy {
+	return OptUpdateUserResponseDtoResponseTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserDtoTrafficLimitStrategy is optional UserDtoTrafficLimitStrategy.
-type OptUserDtoTrafficLimitStrategy struct {
-	Value UserDtoTrafficLimitStrategy
+// OptUpdateUserResponseDtoResponseTrafficLimitStrategy is optional UpdateUserResponseDtoResponseTrafficLimitStrategy.
+type OptUpdateUserResponseDtoResponseTrafficLimitStrategy struct {
+	Value UpdateUserResponseDtoResponseTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptUserDtoTrafficLimitStrategy was set.
-func (o OptUserDtoTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateUserResponseDtoResponseTrafficLimitStrategy was set.
+func (o OptUpdateUserResponseDtoResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserDtoTrafficLimitStrategy) Reset() {
-	var v UserDtoTrafficLimitStrategy
+func (o *OptUpdateUserResponseDtoResponseTrafficLimitStrategy) Reset() {
+	var v UpdateUserResponseDtoResponseTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserDtoTrafficLimitStrategy) SetTo(v UserDtoTrafficLimitStrategy) {
+func (o *OptUpdateUserResponseDtoResponseTrafficLimitStrategy) SetTo(v UpdateUserResponseDtoResponseTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserDtoTrafficLimitStrategy) Get() (v UserDtoTrafficLimitStrategy, ok bool) {
+func (o OptUpdateUserResponseDtoResponseTrafficLimitStrategy) Get() (v UpdateUserResponseDtoResponseTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15310,7 +19153,7 @@ func (o OptUserDtoTrafficLimitStrategy) Get() (v UserDtoTrafficLimitStrategy, ok
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserDtoTrafficLimitStrategy) Or(d UserDtoTrafficLimitStrategy) UserDtoTrafficLimitStrategy {
+func (o OptUpdateUserResponseDtoResponseTrafficLimitStrategy) Or(d UpdateUserResponseDtoResponseTrafficLimitStrategy) UpdateUserResponseDtoResponseTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16019,6 +19862,7 @@ type ResetUserTrafficResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                   `json:"vlessUuid"`
 	SsPassword           string                                                      `json:"ssPassword"`
 	Description          NilString                                                   `json:"description"`
+	Tag                  NilString                                                   `json:"tag"`
 	TelegramId           NilInt                                                      `json:"telegramId"`
 	Email                NilString                                                   `json:"email"`
 	HwidDeviceLimit      NilInt                                                      `json:"hwidDeviceLimit"`
@@ -16123,6 +19967,11 @@ func (s *ResetUserTrafficResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *ResetUserTrafficResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *ResetUserTrafficResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -16263,6 +20112,11 @@ func (s *ResetUserTrafficResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *ResetUserTrafficResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *ResetUserTrafficResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -16518,6 +20372,35 @@ func (s *ResetUserTrafficResponseDtoResponseTrafficLimitStrategy) UnmarshalText(
 	}
 }
 
+// Ref: #/components/schemas/RestartAllNodesResponseDto
+type RestartAllNodesResponseDto struct {
+	Response RestartAllNodesResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *RestartAllNodesResponseDto) GetResponse() RestartAllNodesResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *RestartAllNodesResponseDto) SetResponse(val RestartAllNodesResponseDtoResponse) {
+	s.Response = val
+}
+
+type RestartAllNodesResponseDtoResponse struct {
+	EventSent bool `json:"eventSent"`
+}
+
+// GetEventSent returns the value of EventSent.
+func (s *RestartAllNodesResponseDtoResponse) GetEventSent() bool {
+	return s.EventSent
+}
+
+// SetEventSent sets the value of EventSent.
+func (s *RestartAllNodesResponseDtoResponse) SetEventSent(val bool) {
+	s.EventSent = val
+}
+
 // Ref: #/components/schemas/RestartNodeResponseDto
 type RestartNodeResponseDto struct {
 	Response RestartNodeResponseDtoResponse `json:"response"`
@@ -16585,6 +20468,7 @@ type RevokeUserSubscriptionResponseDtoResponse struct {
 	VlessUuid            uuid.UUID                                                         `json:"vlessUuid"`
 	SsPassword           string                                                            `json:"ssPassword"`
 	Description          NilString                                                         `json:"description"`
+	Tag                  NilString                                                         `json:"tag"`
 	TelegramId           NilInt                                                            `json:"telegramId"`
 	Email                NilString                                                         `json:"email"`
 	HwidDeviceLimit      NilInt                                                            `json:"hwidDeviceLimit"`
@@ -16689,6 +20573,11 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) GetSsPassword() string {
 // GetDescription returns the value of Description.
 func (s *RevokeUserSubscriptionResponseDtoResponse) GetDescription() NilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *RevokeUserSubscriptionResponseDtoResponse) GetTag() NilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -16829,6 +20718,11 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) SetSsPassword(val string) {
 // SetDescription sets the value of Description.
 func (s *RevokeUserSubscriptionResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *RevokeUserSubscriptionResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -17682,6 +21576,261 @@ type SubscriptionControllerGetSubscriptionOK struct{}
 
 // SubscriptionControllerGetSubscriptionWithTypeOK is response for SubscriptionControllerGetSubscriptionWithType operation.
 type SubscriptionControllerGetSubscriptionWithTypeOK struct{}
+
+type SubscriptionTemplateControllerGetTemplateTemplateType string
+
+const (
+	SubscriptionTemplateControllerGetTemplateTemplateTypeSTASH         SubscriptionTemplateControllerGetTemplateTemplateType = "STASH"
+	SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOX       SubscriptionTemplateControllerGetTemplateTemplateType = "SINGBOX"
+	SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOXLEGACY SubscriptionTemplateControllerGetTemplateTemplateType = "SINGBOX_LEGACY"
+	SubscriptionTemplateControllerGetTemplateTemplateTypeMIHOMO        SubscriptionTemplateControllerGetTemplateTemplateType = "MIHOMO"
+	SubscriptionTemplateControllerGetTemplateTemplateTypeXRAYJSON      SubscriptionTemplateControllerGetTemplateTemplateType = "XRAY_JSON"
+	SubscriptionTemplateControllerGetTemplateTemplateTypeCLASH         SubscriptionTemplateControllerGetTemplateTemplateType = "CLASH"
+)
+
+// AllValues returns all SubscriptionTemplateControllerGetTemplateTemplateType values.
+func (SubscriptionTemplateControllerGetTemplateTemplateType) AllValues() []SubscriptionTemplateControllerGetTemplateTemplateType {
+	return []SubscriptionTemplateControllerGetTemplateTemplateType{
+		SubscriptionTemplateControllerGetTemplateTemplateTypeSTASH,
+		SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOX,
+		SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOXLEGACY,
+		SubscriptionTemplateControllerGetTemplateTemplateTypeMIHOMO,
+		SubscriptionTemplateControllerGetTemplateTemplateTypeXRAYJSON,
+		SubscriptionTemplateControllerGetTemplateTemplateTypeCLASH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s SubscriptionTemplateControllerGetTemplateTemplateType) MarshalText() ([]byte, error) {
+	switch s {
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeSTASH:
+		return []byte(s), nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOX:
+		return []byte(s), nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOXLEGACY:
+		return []byte(s), nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeMIHOMO:
+		return []byte(s), nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeXRAYJSON:
+		return []byte(s), nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeCLASH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *SubscriptionTemplateControllerGetTemplateTemplateType) UnmarshalText(data []byte) error {
+	switch SubscriptionTemplateControllerGetTemplateTemplateType(data) {
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeSTASH:
+		*s = SubscriptionTemplateControllerGetTemplateTemplateTypeSTASH
+		return nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOX:
+		*s = SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOX
+		return nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOXLEGACY:
+		*s = SubscriptionTemplateControllerGetTemplateTemplateTypeSINGBOXLEGACY
+		return nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeMIHOMO:
+		*s = SubscriptionTemplateControllerGetTemplateTemplateTypeMIHOMO
+		return nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeXRAYJSON:
+		*s = SubscriptionTemplateControllerGetTemplateTemplateTypeXRAYJSON
+		return nil
+	case SubscriptionTemplateControllerGetTemplateTemplateTypeCLASH:
+		*s = SubscriptionTemplateControllerGetTemplateTemplateTypeCLASH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type SubscriptionsControllerGetSubscriptionByUsernameNotFound struct {
+	Timestamp OptDateTime `json:"timestamp"`
+	Path      OptString   `json:"path"`
+	Message   OptString   `json:"message"`
+	ErrorCode OptString   `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) GetTimestamp() OptDateTime {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) SetTimestamp(val OptDateTime) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionsControllerGetSubscriptionByUsernameNotFound) subscriptionsControllerGetSubscriptionByUsernameRes() {
+}
+
+// Ref: #/components/schemas/TelegramCallbackRequestDto
+type TelegramCallbackRequestDto struct {
+	ID        float64   `json:"id"`
+	FirstName string    `json:"first_name"`
+	LastName  OptString `json:"last_name"`
+	Username  OptString `json:"username"`
+	PhotoURL  OptString `json:"photo_url"`
+	AuthDate  float64   `json:"auth_date"`
+	Hash      string    `json:"hash"`
+}
+
+// GetID returns the value of ID.
+func (s *TelegramCallbackRequestDto) GetID() float64 {
+	return s.ID
+}
+
+// GetFirstName returns the value of FirstName.
+func (s *TelegramCallbackRequestDto) GetFirstName() string {
+	return s.FirstName
+}
+
+// GetLastName returns the value of LastName.
+func (s *TelegramCallbackRequestDto) GetLastName() OptString {
+	return s.LastName
+}
+
+// GetUsername returns the value of Username.
+func (s *TelegramCallbackRequestDto) GetUsername() OptString {
+	return s.Username
+}
+
+// GetPhotoURL returns the value of PhotoURL.
+func (s *TelegramCallbackRequestDto) GetPhotoURL() OptString {
+	return s.PhotoURL
+}
+
+// GetAuthDate returns the value of AuthDate.
+func (s *TelegramCallbackRequestDto) GetAuthDate() float64 {
+	return s.AuthDate
+}
+
+// GetHash returns the value of Hash.
+func (s *TelegramCallbackRequestDto) GetHash() string {
+	return s.Hash
+}
+
+// SetID sets the value of ID.
+func (s *TelegramCallbackRequestDto) SetID(val float64) {
+	s.ID = val
+}
+
+// SetFirstName sets the value of FirstName.
+func (s *TelegramCallbackRequestDto) SetFirstName(val string) {
+	s.FirstName = val
+}
+
+// SetLastName sets the value of LastName.
+func (s *TelegramCallbackRequestDto) SetLastName(val OptString) {
+	s.LastName = val
+}
+
+// SetUsername sets the value of Username.
+func (s *TelegramCallbackRequestDto) SetUsername(val OptString) {
+	s.Username = val
+}
+
+// SetPhotoURL sets the value of PhotoURL.
+func (s *TelegramCallbackRequestDto) SetPhotoURL(val OptString) {
+	s.PhotoURL = val
+}
+
+// SetAuthDate sets the value of AuthDate.
+func (s *TelegramCallbackRequestDto) SetAuthDate(val float64) {
+	s.AuthDate = val
+}
+
+// SetHash sets the value of Hash.
+func (s *TelegramCallbackRequestDto) SetHash(val string) {
+	s.Hash = val
+}
+
+// Ref: #/components/schemas/TelegramCallbackResponseDto
+type TelegramCallbackResponseDto struct {
+	Response TelegramCallbackResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *TelegramCallbackResponseDto) GetResponse() TelegramCallbackResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *TelegramCallbackResponseDto) SetResponse(val TelegramCallbackResponseDtoResponse) {
+	s.Response = val
+}
+
+type TelegramCallbackResponseDtoResponse struct {
+	AccessToken string `json:"accessToken"`
+}
+
+// GetAccessToken returns the value of AccessToken.
+func (s *TelegramCallbackResponseDtoResponse) GetAccessToken() string {
+	return s.AccessToken
+}
+
+// SetAccessToken sets the value of AccessToken.
+func (s *TelegramCallbackResponseDtoResponse) SetAccessToken(val string) {
+	s.AccessToken = val
+}
+
+// TelegramCallbackResponseDtoStatusCode wraps TelegramCallbackResponseDto with StatusCode.
+type TelegramCallbackResponseDtoStatusCode struct {
+	StatusCode int
+	Response   TelegramCallbackResponseDto
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *TelegramCallbackResponseDtoStatusCode) GetStatusCode() int {
+	return s.StatusCode
+}
+
+// GetResponse returns the value of Response.
+func (s *TelegramCallbackResponseDtoStatusCode) GetResponse() TelegramCallbackResponseDto {
+	return s.Response
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *TelegramCallbackResponseDtoStatusCode) SetStatusCode(val int) {
+	s.StatusCode = val
+}
+
+// SetResponse sets the value of Response.
+func (s *TelegramCallbackResponseDtoStatusCode) SetResponse(val TelegramCallbackResponseDto) {
+	s.Response = val
+}
 
 // Ref: #/components/schemas/UpdateConfigRequestDto
 type UpdateConfigRequestDto struct{}
@@ -19447,6 +23596,7 @@ type UpdateUserRequestDto struct {
 	// Expiration date: 2025-01-17T15:38:45.065Z.
 	ExpireAt        OptDateTime  `json:"expireAt"`
 	Description     OptNilString `json:"description"`
+	Tag             OptNilString `json:"tag"`
 	TelegramId      OptNilInt    `json:"telegramId"`
 	Email           OptNilString `json:"email"`
 	HwidDeviceLimit OptNilInt    `json:"hwidDeviceLimit"`
@@ -19485,6 +23635,11 @@ func (s *UpdateUserRequestDto) GetExpireAt() OptDateTime {
 // GetDescription returns the value of Description.
 func (s *UpdateUserRequestDto) GetDescription() OptNilString {
 	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *UpdateUserRequestDto) GetTag() OptNilString {
+	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
@@ -19535,6 +23690,11 @@ func (s *UpdateUserRequestDto) SetExpireAt(val OptDateTime) {
 // SetDescription sets the value of Description.
 func (s *UpdateUserRequestDto) SetDescription(val OptNilString) {
 	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UpdateUserRequestDto) SetTag(val OptNilString) {
+	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
@@ -19663,320 +23823,345 @@ func (s *UpdateUserRequestDtoTrafficLimitStrategy) UnmarshalText(data []byte) er
 	}
 }
 
-// Ref: #/components/schemas/UserDto
-type UserDto struct {
-	UUID                     uuid.UUID        `json:"uuid"`
-	SubscriptionUuid         uuid.UUID        `json:"subscriptionUuid"`
-	ShortUuid                string           `json:"shortUuid"`
-	Username                 string           `json:"username"`
-	Status                   OptUserDtoStatus `json:"status"`
-	UsedTrafficBytes         float64          `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64          `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt           `json:"trafficLimitBytes"`
+// Ref: #/components/schemas/UpdateUserResponseDto
+type UpdateUserResponseDto struct {
+	Response UpdateUserResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *UpdateUserResponseDto) GetResponse() UpdateUserResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *UpdateUserResponseDto) SetResponse(val UpdateUserResponseDtoResponse) {
+	s.Response = val
+}
+
+type UpdateUserResponseDtoResponse struct {
+	UUID                     uuid.UUID                              `json:"uuid"`
+	SubscriptionUuid         uuid.UUID                              `json:"subscriptionUuid"`
+	ShortUuid                string                                 `json:"shortUuid"`
+	Username                 string                                 `json:"username"`
+	Status                   OptUpdateUserResponseDtoResponseStatus `json:"status"`
+	UsedTrafficBytes         float64                                `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                 `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptUserDtoTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                       `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                     `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                       `json:"expireAt"`
-	OnlineAt             NilDateTime                     `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                     `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                     `json:"lastTrafficResetAt"`
-	TrojanPassword       string                          `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                       `json:"vlessUuid"`
-	SsPassword           string                          `json:"ssPassword"`
-	Description          NilString                       `json:"description"`
-	TelegramId           NilInt                          `json:"telegramId"`
-	Email                NilString                       `json:"email"`
-	HwidDeviceLimit      NilInt                          `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                       `json:"createdAt"`
-	UpdatedAt            time.Time                       `json:"updatedAt"`
-	ActiveUserInbounds   []UserDtoActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                          `json:"subscriptionUrl"`
-	LastConnectedNode    NilUserDtoLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 UserDtoHapp                     `json:"happ"`
+	TrafficLimitStrategy OptUpdateUserResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
+	SubLastUserAgent     NilString                                             `json:"subLastUserAgent"`
+	SubLastOpenedAt      NilDateTime                                           `json:"subLastOpenedAt"`
+	ExpireAt             time.Time                                             `json:"expireAt"`
+	OnlineAt             NilDateTime                                           `json:"onlineAt"`
+	SubRevokedAt         NilDateTime                                           `json:"subRevokedAt"`
+	LastTrafficResetAt   NilDateTime                                           `json:"lastTrafficResetAt"`
+	TrojanPassword       string                                                `json:"trojanPassword"`
+	VlessUuid            uuid.UUID                                             `json:"vlessUuid"`
+	SsPassword           string                                                `json:"ssPassword"`
+	Description          NilString                                             `json:"description"`
+	Tag                  NilString                                             `json:"tag"`
+	TelegramId           NilInt                                                `json:"telegramId"`
+	Email                NilString                                             `json:"email"`
+	HwidDeviceLimit      NilInt                                                `json:"hwidDeviceLimit"`
+	CreatedAt            time.Time                                             `json:"createdAt"`
+	UpdatedAt            time.Time                                             `json:"updatedAt"`
+	ActiveUserInbounds   []UpdateUserResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
+	SubscriptionUrl      string                                                `json:"subscriptionUrl"`
+	LastConnectedNode    NilUpdateUserResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
+	Happ                 UpdateUserResponseDtoResponseHapp                     `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UserDto) GetUUID() uuid.UUID {
+func (s *UpdateUserResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *UserDto) GetSubscriptionUuid() uuid.UUID {
+func (s *UpdateUserResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
 	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
-func (s *UserDto) GetShortUuid() string {
+func (s *UpdateUserResponseDtoResponse) GetShortUuid() string {
 	return s.ShortUuid
 }
 
 // GetUsername returns the value of Username.
-func (s *UserDto) GetUsername() string {
+func (s *UpdateUserResponseDtoResponse) GetUsername() string {
 	return s.Username
 }
 
 // GetStatus returns the value of Status.
-func (s *UserDto) GetStatus() OptUserDtoStatus {
+func (s *UpdateUserResponseDtoResponse) GetStatus() OptUpdateUserResponseDtoResponseStatus {
 	return s.Status
 }
 
 // GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *UserDto) GetUsedTrafficBytes() float64 {
+func (s *UpdateUserResponseDtoResponse) GetUsedTrafficBytes() float64 {
 	return s.UsedTrafficBytes
 }
 
 // GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *UserDto) GetLifetimeUsedTrafficBytes() float64 {
+func (s *UpdateUserResponseDtoResponse) GetLifetimeUsedTrafficBytes() float64 {
 	return s.LifetimeUsedTrafficBytes
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UserDto) GetTrafficLimitBytes() OptInt {
+func (s *UpdateUserResponseDtoResponse) GetTrafficLimitBytes() OptInt {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *UserDto) GetTrafficLimitStrategy() OptUserDtoTrafficLimitStrategy {
+func (s *UpdateUserResponseDtoResponse) GetTrafficLimitStrategy() OptUpdateUserResponseDtoResponseTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
 // GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *UserDto) GetSubLastUserAgent() NilString {
+func (s *UpdateUserResponseDtoResponse) GetSubLastUserAgent() NilString {
 	return s.SubLastUserAgent
 }
 
 // GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *UserDto) GetSubLastOpenedAt() NilDateTime {
+func (s *UpdateUserResponseDtoResponse) GetSubLastOpenedAt() NilDateTime {
 	return s.SubLastOpenedAt
 }
 
 // GetExpireAt returns the value of ExpireAt.
-func (s *UserDto) GetExpireAt() time.Time {
+func (s *UpdateUserResponseDtoResponse) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
 // GetOnlineAt returns the value of OnlineAt.
-func (s *UserDto) GetOnlineAt() NilDateTime {
+func (s *UpdateUserResponseDtoResponse) GetOnlineAt() NilDateTime {
 	return s.OnlineAt
 }
 
 // GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *UserDto) GetSubRevokedAt() NilDateTime {
+func (s *UpdateUserResponseDtoResponse) GetSubRevokedAt() NilDateTime {
 	return s.SubRevokedAt
 }
 
 // GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *UserDto) GetLastTrafficResetAt() NilDateTime {
+func (s *UpdateUserResponseDtoResponse) GetLastTrafficResetAt() NilDateTime {
 	return s.LastTrafficResetAt
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
-func (s *UserDto) GetTrojanPassword() string {
+func (s *UpdateUserResponseDtoResponse) GetTrojanPassword() string {
 	return s.TrojanPassword
 }
 
 // GetVlessUuid returns the value of VlessUuid.
-func (s *UserDto) GetVlessUuid() uuid.UUID {
+func (s *UpdateUserResponseDtoResponse) GetVlessUuid() uuid.UUID {
 	return s.VlessUuid
 }
 
 // GetSsPassword returns the value of SsPassword.
-func (s *UserDto) GetSsPassword() string {
+func (s *UpdateUserResponseDtoResponse) GetSsPassword() string {
 	return s.SsPassword
 }
 
 // GetDescription returns the value of Description.
-func (s *UserDto) GetDescription() NilString {
+func (s *UpdateUserResponseDtoResponse) GetDescription() NilString {
 	return s.Description
 }
 
+// GetTag returns the value of Tag.
+func (s *UpdateUserResponseDtoResponse) GetTag() NilString {
+	return s.Tag
+}
+
 // GetTelegramId returns the value of TelegramId.
-func (s *UserDto) GetTelegramId() NilInt {
+func (s *UpdateUserResponseDtoResponse) GetTelegramId() NilInt {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *UserDto) GetEmail() NilString {
+func (s *UpdateUserResponseDtoResponse) GetEmail() NilString {
 	return s.Email
 }
 
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UserDto) GetHwidDeviceLimit() NilInt {
+func (s *UpdateUserResponseDtoResponse) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *UserDto) GetCreatedAt() time.Time {
+func (s *UpdateUserResponseDtoResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *UserDto) GetUpdatedAt() time.Time {
+func (s *UpdateUserResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
 // GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *UserDto) GetActiveUserInbounds() []UserDtoActiveUserInboundsItem {
+func (s *UpdateUserResponseDtoResponse) GetActiveUserInbounds() []UpdateUserResponseDtoResponseActiveUserInboundsItem {
 	return s.ActiveUserInbounds
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *UserDto) GetSubscriptionUrl() string {
+func (s *UpdateUserResponseDtoResponse) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
 // GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *UserDto) GetLastConnectedNode() NilUserDtoLastConnectedNode {
+func (s *UpdateUserResponseDtoResponse) GetLastConnectedNode() NilUpdateUserResponseDtoResponseLastConnectedNode {
 	return s.LastConnectedNode
 }
 
 // GetHapp returns the value of Happ.
-func (s *UserDto) GetHapp() UserDtoHapp {
+func (s *UpdateUserResponseDtoResponse) GetHapp() UpdateUserResponseDtoResponseHapp {
 	return s.Happ
 }
 
 // SetUUID sets the value of UUID.
-func (s *UserDto) SetUUID(val uuid.UUID) {
+func (s *UpdateUserResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *UserDto) SetSubscriptionUuid(val uuid.UUID) {
+func (s *UpdateUserResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
 	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
-func (s *UserDto) SetShortUuid(val string) {
+func (s *UpdateUserResponseDtoResponse) SetShortUuid(val string) {
 	s.ShortUuid = val
 }
 
 // SetUsername sets the value of Username.
-func (s *UserDto) SetUsername(val string) {
+func (s *UpdateUserResponseDtoResponse) SetUsername(val string) {
 	s.Username = val
 }
 
 // SetStatus sets the value of Status.
-func (s *UserDto) SetStatus(val OptUserDtoStatus) {
+func (s *UpdateUserResponseDtoResponse) SetStatus(val OptUpdateUserResponseDtoResponseStatus) {
 	s.Status = val
 }
 
 // SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *UserDto) SetUsedTrafficBytes(val float64) {
+func (s *UpdateUserResponseDtoResponse) SetUsedTrafficBytes(val float64) {
 	s.UsedTrafficBytes = val
 }
 
 // SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *UserDto) SetLifetimeUsedTrafficBytes(val float64) {
+func (s *UpdateUserResponseDtoResponse) SetLifetimeUsedTrafficBytes(val float64) {
 	s.LifetimeUsedTrafficBytes = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UserDto) SetTrafficLimitBytes(val OptInt) {
+func (s *UpdateUserResponseDtoResponse) SetTrafficLimitBytes(val OptInt) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *UserDto) SetTrafficLimitStrategy(val OptUserDtoTrafficLimitStrategy) {
+func (s *UpdateUserResponseDtoResponse) SetTrafficLimitStrategy(val OptUpdateUserResponseDtoResponseTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
 // SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *UserDto) SetSubLastUserAgent(val NilString) {
+func (s *UpdateUserResponseDtoResponse) SetSubLastUserAgent(val NilString) {
 	s.SubLastUserAgent = val
 }
 
 // SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *UserDto) SetSubLastOpenedAt(val NilDateTime) {
+func (s *UpdateUserResponseDtoResponse) SetSubLastOpenedAt(val NilDateTime) {
 	s.SubLastOpenedAt = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
-func (s *UserDto) SetExpireAt(val time.Time) {
+func (s *UpdateUserResponseDtoResponse) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
 // SetOnlineAt sets the value of OnlineAt.
-func (s *UserDto) SetOnlineAt(val NilDateTime) {
+func (s *UpdateUserResponseDtoResponse) SetOnlineAt(val NilDateTime) {
 	s.OnlineAt = val
 }
 
 // SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *UserDto) SetSubRevokedAt(val NilDateTime) {
+func (s *UpdateUserResponseDtoResponse) SetSubRevokedAt(val NilDateTime) {
 	s.SubRevokedAt = val
 }
 
 // SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *UserDto) SetLastTrafficResetAt(val NilDateTime) {
+func (s *UpdateUserResponseDtoResponse) SetLastTrafficResetAt(val NilDateTime) {
 	s.LastTrafficResetAt = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
-func (s *UserDto) SetTrojanPassword(val string) {
+func (s *UpdateUserResponseDtoResponse) SetTrojanPassword(val string) {
 	s.TrojanPassword = val
 }
 
 // SetVlessUuid sets the value of VlessUuid.
-func (s *UserDto) SetVlessUuid(val uuid.UUID) {
+func (s *UpdateUserResponseDtoResponse) SetVlessUuid(val uuid.UUID) {
 	s.VlessUuid = val
 }
 
 // SetSsPassword sets the value of SsPassword.
-func (s *UserDto) SetSsPassword(val string) {
+func (s *UpdateUserResponseDtoResponse) SetSsPassword(val string) {
 	s.SsPassword = val
 }
 
 // SetDescription sets the value of Description.
-func (s *UserDto) SetDescription(val NilString) {
+func (s *UpdateUserResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
 }
 
+// SetTag sets the value of Tag.
+func (s *UpdateUserResponseDtoResponse) SetTag(val NilString) {
+	s.Tag = val
+}
+
 // SetTelegramId sets the value of TelegramId.
-func (s *UserDto) SetTelegramId(val NilInt) {
+func (s *UpdateUserResponseDtoResponse) SetTelegramId(val NilInt) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *UserDto) SetEmail(val NilString) {
+func (s *UpdateUserResponseDtoResponse) SetEmail(val NilString) {
 	s.Email = val
 }
 
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UserDto) SetHwidDeviceLimit(val NilInt) {
+func (s *UpdateUserResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *UserDto) SetCreatedAt(val time.Time) {
+func (s *UpdateUserResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *UserDto) SetUpdatedAt(val time.Time) {
+func (s *UpdateUserResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
 // SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *UserDto) SetActiveUserInbounds(val []UserDtoActiveUserInboundsItem) {
+func (s *UpdateUserResponseDtoResponse) SetActiveUserInbounds(val []UpdateUserResponseDtoResponseActiveUserInboundsItem) {
 	s.ActiveUserInbounds = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *UserDto) SetSubscriptionUrl(val string) {
+func (s *UpdateUserResponseDtoResponse) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
 }
 
 // SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *UserDto) SetLastConnectedNode(val NilUserDtoLastConnectedNode) {
+func (s *UpdateUserResponseDtoResponse) SetLastConnectedNode(val NilUpdateUserResponseDtoResponseLastConnectedNode) {
 	s.LastConnectedNode = val
 }
 
 // SetHapp sets the value of Happ.
-func (s *UserDto) SetHapp(val UserDtoHapp) {
+func (s *UpdateUserResponseDtoResponse) SetHapp(val UpdateUserResponseDtoResponseHapp) {
 	s.Happ = val
 }
 
-type UserDtoActiveUserInboundsItem struct {
+type UpdateUserResponseDtoResponseActiveUserInboundsItem struct {
 	UUID     uuid.UUID `json:"uuid"`
 	Tag      string    `json:"tag"`
 	Type     string    `json:"type"`
@@ -19985,123 +24170,123 @@ type UserDtoActiveUserInboundsItem struct {
 }
 
 // GetUUID returns the value of UUID.
-func (s *UserDtoActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetTag returns the value of Tag.
-func (s *UserDtoActiveUserInboundsItem) GetTag() string {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *UserDtoActiveUserInboundsItem) GetType() string {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *UserDtoActiveUserInboundsItem) GetNetwork() NilString {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *UserDtoActiveUserInboundsItem) GetSecurity() NilString {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
 // SetUUID sets the value of UUID.
-func (s *UserDtoActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetTag sets the value of Tag.
-func (s *UserDtoActiveUserInboundsItem) SetTag(val string) {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *UserDtoActiveUserInboundsItem) SetType(val string) {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *UserDtoActiveUserInboundsItem) SetNetwork(val NilString) {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *UserDtoActiveUserInboundsItem) SetSecurity(val NilString) {
+func (s *UpdateUserResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
 }
 
-type UserDtoHapp struct {
+type UpdateUserResponseDtoResponseHapp struct {
 	CryptoLink string `json:"cryptoLink"`
 }
 
 // GetCryptoLink returns the value of CryptoLink.
-func (s *UserDtoHapp) GetCryptoLink() string {
+func (s *UpdateUserResponseDtoResponseHapp) GetCryptoLink() string {
 	return s.CryptoLink
 }
 
 // SetCryptoLink sets the value of CryptoLink.
-func (s *UserDtoHapp) SetCryptoLink(val string) {
+func (s *UpdateUserResponseDtoResponseHapp) SetCryptoLink(val string) {
 	s.CryptoLink = val
 }
 
-type UserDtoLastConnectedNode struct {
+type UpdateUserResponseDtoResponseLastConnectedNode struct {
 	ConnectedAt time.Time `json:"connectedAt"`
 	NodeName    string    `json:"nodeName"`
 }
 
 // GetConnectedAt returns the value of ConnectedAt.
-func (s *UserDtoLastConnectedNode) GetConnectedAt() time.Time {
+func (s *UpdateUserResponseDtoResponseLastConnectedNode) GetConnectedAt() time.Time {
 	return s.ConnectedAt
 }
 
 // GetNodeName returns the value of NodeName.
-func (s *UserDtoLastConnectedNode) GetNodeName() string {
+func (s *UpdateUserResponseDtoResponseLastConnectedNode) GetNodeName() string {
 	return s.NodeName
 }
 
 // SetConnectedAt sets the value of ConnectedAt.
-func (s *UserDtoLastConnectedNode) SetConnectedAt(val time.Time) {
+func (s *UpdateUserResponseDtoResponseLastConnectedNode) SetConnectedAt(val time.Time) {
 	s.ConnectedAt = val
 }
 
 // SetNodeName sets the value of NodeName.
-func (s *UserDtoLastConnectedNode) SetNodeName(val string) {
+func (s *UpdateUserResponseDtoResponseLastConnectedNode) SetNodeName(val string) {
 	s.NodeName = val
 }
 
-type UserDtoStatus string
+type UpdateUserResponseDtoResponseStatus string
 
 const (
-	UserDtoStatusACTIVE   UserDtoStatus = "ACTIVE"
-	UserDtoStatusDISABLED UserDtoStatus = "DISABLED"
-	UserDtoStatusLIMITED  UserDtoStatus = "LIMITED"
-	UserDtoStatusEXPIRED  UserDtoStatus = "EXPIRED"
+	UpdateUserResponseDtoResponseStatusACTIVE   UpdateUserResponseDtoResponseStatus = "ACTIVE"
+	UpdateUserResponseDtoResponseStatusDISABLED UpdateUserResponseDtoResponseStatus = "DISABLED"
+	UpdateUserResponseDtoResponseStatusLIMITED  UpdateUserResponseDtoResponseStatus = "LIMITED"
+	UpdateUserResponseDtoResponseStatusEXPIRED  UpdateUserResponseDtoResponseStatus = "EXPIRED"
 )
 
-// AllValues returns all UserDtoStatus values.
-func (UserDtoStatus) AllValues() []UserDtoStatus {
-	return []UserDtoStatus{
-		UserDtoStatusACTIVE,
-		UserDtoStatusDISABLED,
-		UserDtoStatusLIMITED,
-		UserDtoStatusEXPIRED,
+// AllValues returns all UpdateUserResponseDtoResponseStatus values.
+func (UpdateUserResponseDtoResponseStatus) AllValues() []UpdateUserResponseDtoResponseStatus {
+	return []UpdateUserResponseDtoResponseStatus{
+		UpdateUserResponseDtoResponseStatusACTIVE,
+		UpdateUserResponseDtoResponseStatusDISABLED,
+		UpdateUserResponseDtoResponseStatusLIMITED,
+		UpdateUserResponseDtoResponseStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UserDtoStatus) MarshalText() ([]byte, error) {
+func (s UpdateUserResponseDtoResponseStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case UserDtoStatusACTIVE:
+	case UpdateUserResponseDtoResponseStatusACTIVE:
 		return []byte(s), nil
-	case UserDtoStatusDISABLED:
+	case UpdateUserResponseDtoResponseStatusDISABLED:
 		return []byte(s), nil
-	case UserDtoStatusLIMITED:
+	case UpdateUserResponseDtoResponseStatusLIMITED:
 		return []byte(s), nil
-	case UserDtoStatusEXPIRED:
+	case UpdateUserResponseDtoResponseStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -20109,19 +24294,19 @@ func (s UserDtoStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UserDtoStatus) UnmarshalText(data []byte) error {
-	switch UserDtoStatus(data) {
-	case UserDtoStatusACTIVE:
-		*s = UserDtoStatusACTIVE
+func (s *UpdateUserResponseDtoResponseStatus) UnmarshalText(data []byte) error {
+	switch UpdateUserResponseDtoResponseStatus(data) {
+	case UpdateUserResponseDtoResponseStatusACTIVE:
+		*s = UpdateUserResponseDtoResponseStatusACTIVE
 		return nil
-	case UserDtoStatusDISABLED:
-		*s = UserDtoStatusDISABLED
+	case UpdateUserResponseDtoResponseStatusDISABLED:
+		*s = UpdateUserResponseDtoResponseStatusDISABLED
 		return nil
-	case UserDtoStatusLIMITED:
-		*s = UserDtoStatusLIMITED
+	case UpdateUserResponseDtoResponseStatusLIMITED:
+		*s = UpdateUserResponseDtoResponseStatusLIMITED
 		return nil
-	case UserDtoStatusEXPIRED:
-		*s = UserDtoStatusEXPIRED
+	case UpdateUserResponseDtoResponseStatusEXPIRED:
+		*s = UpdateUserResponseDtoResponseStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -20129,35 +24314,35 @@ func (s *UserDtoStatus) UnmarshalText(data []byte) error {
 }
 
 // Available reset periods.
-type UserDtoTrafficLimitStrategy string
+type UpdateUserResponseDtoResponseTrafficLimitStrategy string
 
 const (
-	UserDtoTrafficLimitStrategyNORESET UserDtoTrafficLimitStrategy = "NO_RESET"
-	UserDtoTrafficLimitStrategyDAY     UserDtoTrafficLimitStrategy = "DAY"
-	UserDtoTrafficLimitStrategyWEEK    UserDtoTrafficLimitStrategy = "WEEK"
-	UserDtoTrafficLimitStrategyMONTH   UserDtoTrafficLimitStrategy = "MONTH"
+	UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET UpdateUserResponseDtoResponseTrafficLimitStrategy = "NO_RESET"
+	UpdateUserResponseDtoResponseTrafficLimitStrategyDAY     UpdateUserResponseDtoResponseTrafficLimitStrategy = "DAY"
+	UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK    UpdateUserResponseDtoResponseTrafficLimitStrategy = "WEEK"
+	UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH   UpdateUserResponseDtoResponseTrafficLimitStrategy = "MONTH"
 )
 
-// AllValues returns all UserDtoTrafficLimitStrategy values.
-func (UserDtoTrafficLimitStrategy) AllValues() []UserDtoTrafficLimitStrategy {
-	return []UserDtoTrafficLimitStrategy{
-		UserDtoTrafficLimitStrategyNORESET,
-		UserDtoTrafficLimitStrategyDAY,
-		UserDtoTrafficLimitStrategyWEEK,
-		UserDtoTrafficLimitStrategyMONTH,
+// AllValues returns all UpdateUserResponseDtoResponseTrafficLimitStrategy values.
+func (UpdateUserResponseDtoResponseTrafficLimitStrategy) AllValues() []UpdateUserResponseDtoResponseTrafficLimitStrategy {
+	return []UpdateUserResponseDtoResponseTrafficLimitStrategy{
+		UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET,
+		UpdateUserResponseDtoResponseTrafficLimitStrategyDAY,
+		UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK,
+		UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UserDtoTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s UpdateUserResponseDtoResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case UserDtoTrafficLimitStrategyNORESET:
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case UserDtoTrafficLimitStrategyDAY:
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case UserDtoTrafficLimitStrategyWEEK:
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case UserDtoTrafficLimitStrategyMONTH:
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -20165,38 +24350,23 @@ func (s UserDtoTrafficLimitStrategy) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UserDtoTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch UserDtoTrafficLimitStrategy(data) {
-	case UserDtoTrafficLimitStrategyNORESET:
-		*s = UserDtoTrafficLimitStrategyNORESET
+func (s *UpdateUserResponseDtoResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch UpdateUserResponseDtoResponseTrafficLimitStrategy(data) {
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET:
+		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyNORESET
 		return nil
-	case UserDtoTrafficLimitStrategyDAY:
-		*s = UserDtoTrafficLimitStrategyDAY
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyDAY:
+		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyDAY
 		return nil
-	case UserDtoTrafficLimitStrategyWEEK:
-		*s = UserDtoTrafficLimitStrategyWEEK
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK:
+		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyWEEK
 		return nil
-	case UserDtoTrafficLimitStrategyMONTH:
-		*s = UserDtoTrafficLimitStrategyMONTH
+	case UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH:
+		*s = UpdateUserResponseDtoResponseTrafficLimitStrategyMONTH
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
-}
-
-// Ref: #/components/schemas/UserResponseDto
-type UserResponseDto struct {
-	Response UserDto `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *UserResponseDto) GetResponse() UserDto {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *UserResponseDto) SetResponse(val UserDto) {
-	s.Response = val
 }
 
 // UsersControllerActivateAllInboundsNotFound is response for UsersControllerActivateAllInbounds operation.
@@ -20249,6 +24419,11 @@ func (*UsersControllerGetUserByUuidNotFound) usersControllerGetUserByUuidRes() {
 type UsersControllerGetUsersByEmailNotFound struct{}
 
 func (*UsersControllerGetUsersByEmailNotFound) usersControllerGetUsersByEmailRes() {}
+
+// UsersControllerGetUsersByTagNotFound is response for UsersControllerGetUsersByTag operation.
+type UsersControllerGetUsersByTagNotFound struct{}
+
+func (*UsersControllerGetUsersByTagNotFound) usersControllerGetUsersByTagRes() {}
 
 // UsersControllerResetUserTrafficNotFound is response for UsersControllerResetUserTraffic operation.
 type UsersControllerResetUserTrafficNotFound struct{}
