@@ -19592,7 +19592,6 @@ func (s *UserResponseDto) SetResponse(val UserDto) {
 
 func (*UserResponseDto) usersControllerGetUserByShortUuidRes()        {}
 func (*UserResponseDto) usersControllerGetUserBySubscriptionUuidRes() {}
-func (*UserResponseDto) usersControllerGetUserByTelegramIdRes()       {}
 func (*UserResponseDto) usersControllerGetUserByUsernameRes()         {}
 func (*UserResponseDto) usersControllerGetUsersByEmailRes()           {}
 
@@ -19631,6 +19630,10 @@ func (*UsersControllerGetUserBySubscriptionUuidNotFound) usersControllerGetUserB
 type UsersControllerGetUserByTelegramIdNotFound struct{}
 
 func (*UsersControllerGetUserByTelegramIdNotFound) usersControllerGetUserByTelegramIdRes() {}
+
+type UsersControllerGetUserByTelegramIdOKApplicationJSON jx.Raw
+
+func (*UsersControllerGetUserByTelegramIdOKApplicationJSON) usersControllerGetUserByTelegramIdRes() {}
 
 // UsersControllerGetUserByUsernameNotFound is response for UsersControllerGetUserByUsername operation.
 type UsersControllerGetUserByUsernameNotFound struct{}
