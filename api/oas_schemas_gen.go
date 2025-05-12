@@ -19631,10 +19631,6 @@ type UsersControllerGetUserByTelegramIdNotFound struct{}
 
 func (*UsersControllerGetUserByTelegramIdNotFound) usersControllerGetUserByTelegramIdRes() {}
 
-type UsersControllerGetUserByTelegramIdOKApplicationJSON jx.Raw
-
-func (*UsersControllerGetUserByTelegramIdOKApplicationJSON) usersControllerGetUserByTelegramIdRes() {}
-
 // UsersControllerGetUserByUsernameNotFound is response for UsersControllerGetUserByUsername operation.
 type UsersControllerGetUserByUsernameNotFound struct{}
 
@@ -19664,6 +19660,23 @@ func (*UsersControllerResetUserTrafficNotFound) usersControllerResetUserTrafficR
 type UsersControllerRevokeUserSubscriptionNotFound struct{}
 
 func (*UsersControllerRevokeUserSubscriptionNotFound) usersControllerRevokeUserSubscriptionRes() {}
+
+// Ref: #/components/schemas/UsersDto
+type UsersDto struct {
+	Response []UserDto `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *UsersDto) GetResponse() []UserDto {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *UsersDto) SetResponse(val []UserDto) {
+	s.Response = val
+}
+
+func (*UsersDto) usersControllerGetUserByTelegramIdRes() {}
 
 // UsersStatsControllerGetUserUsageByRangeNotFound is response for UsersStatsControllerGetUserUsageByRange operation.
 type UsersStatsControllerGetUserUsageByRangeNotFound struct{}

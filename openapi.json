@@ -528,14 +528,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "response": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/UserDto"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/UsersDto"
                 }
               }
             }
@@ -3909,6 +3902,20 @@
             "required": [
               "isDeleted"
             ]
+          }
+        },
+        "required": [
+          "response"
+        ]
+      },
+      "UsersDto": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDto"
+            }
           }
         },
         "required": [

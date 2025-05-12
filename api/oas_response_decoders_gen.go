@@ -3454,7 +3454,7 @@ func decodeUsersControllerGetUserByTelegramIdResponse(resp *http.Response) (res 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserByTelegramIdOKApplicationJSON
+			var response UsersDto
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3470,6 +3470,15 @@ func decodeUsersControllerGetUserByTelegramIdResponse(resp *http.Response) (res 
 					Err:         err,
 				}
 				return res, err
+			}
+			// Validate response.
+			if err := func() error {
+				if err := response.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return res, errors.Wrap(err, "validate")
 			}
 			return &response, nil
 		default:
