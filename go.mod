@@ -9,8 +9,6 @@ require (
 	github.com/ogen-go/ogen v1.14.0
 )
 
-retract v2.0.0
-
 require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/fatih/color v1.18.0 // indirect
