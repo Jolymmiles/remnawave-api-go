@@ -6,7 +6,7 @@
 [![Issues](https://img.shields.io/github/issues/Jolymmiles/remnawave-api-go.svg)](https://github.com/Jolymmiles/remnawave-api-go/issues)
 
 A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
-Library checked with Remnawave **[v1.5.7](https://github.com/remnawave/panel/releases/tag/1.5.7)**
+Library checked with Remnawave **[v2.0.0](https://github.com/remnawave/panel/releases/tag/1.5.7)**
 
 The client is generated with [**ogen**](https://github.com/ogen-go/ogen):
 
