@@ -9,9 +9,7 @@ require (
 	github.com/ogen-go/ogen v1.12.0
 )
 
-retract (
-    v2.0.0
-)
+retract v1.5.7
 
 require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
