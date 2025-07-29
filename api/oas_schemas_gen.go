@@ -3,6 +3,7 @@
 package api
 
 import (
+	"net/url"
 	"time"
 
 	"github.com/go-faster/errors"
@@ -10,641 +11,281 @@ import (
 	"github.com/google/uuid"
 )
 
-// Ref: #/components/schemas/ActivateAllInboundsResponseDto
-type ActivateAllInboundsResponseDto struct {
-	Response ActivateAllInboundsResponseDtoResponse `json:"response"`
+// Ref: #/components/schemas/AddUsersToInternalSquadResponseDto
+type AddUsersToInternalSquadResponseDto struct {
+	Response AddUsersToInternalSquadResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *ActivateAllInboundsResponseDto) GetResponse() ActivateAllInboundsResponseDtoResponse {
+func (s *AddUsersToInternalSquadResponseDto) GetResponse() AddUsersToInternalSquadResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *ActivateAllInboundsResponseDto) SetResponse(val ActivateAllInboundsResponseDtoResponse) {
+func (s *AddUsersToInternalSquadResponseDto) SetResponse(val AddUsersToInternalSquadResponseDtoResponse) {
 	s.Response = val
 }
 
-func (*ActivateAllInboundsResponseDto) usersControllerActivateAllInboundsRes() {}
+func (*AddUsersToInternalSquadResponseDto) internalSquadControllerAddUsersToInternalSquadRes() {}
 
-type ActivateAllInboundsResponseDtoResponse struct {
-	UUID                     uuid.UUID                                       `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                                       `json:"subscriptionUuid"`
-	ShortUuid                string                                          `json:"shortUuid"`
-	Username                 string                                          `json:"username"`
-	Status                   OptActivateAllInboundsResponseDtoResponseStatus `json:"status"`
-	UsedTrafficBytes         float64                                         `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                                         `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                                          `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                                      `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                                    `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                                      `json:"expireAt"`
-	OnlineAt             NilDateTime                                                    `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                                    `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                                    `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                         `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                                      `json:"vlessUuid"`
-	SsPassword           string                                                         `json:"ssPassword"`
-	Description          NilString                                                      `json:"description"`
-	Tag                  NilString                                                      `json:"tag"`
-	TelegramId           NilInt                                                         `json:"telegramId"`
-	Email                NilString                                                      `json:"email"`
-	HwidDeviceLimit      NilInt                                                         `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                                      `json:"createdAt"`
-	UpdatedAt            time.Time                                                      `json:"updatedAt"`
-	ActiveUserInbounds   []ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                         `json:"subscriptionUrl"`
-	LastConnectedNode    NilActivateAllInboundsResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 ActivateAllInboundsResponseDtoResponseHapp                     `json:"happ"`
+type AddUsersToInternalSquadResponseDtoResponse struct {
+	EventSent bool `json:"eventSent"`
 }
 
-// GetUUID returns the value of UUID.
-func (s *ActivateAllInboundsResponseDtoResponse) GetUUID() uuid.UUID {
-	return s.UUID
+// GetEventSent returns the value of EventSent.
+func (s *AddUsersToInternalSquadResponseDtoResponse) GetEventSent() bool {
+	return s.EventSent
 }
 
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *ActivateAllInboundsResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
+// SetEventSent sets the value of EventSent.
+func (s *AddUsersToInternalSquadResponseDtoResponse) SetEventSent(val bool) {
+	s.EventSent = val
 }
 
-// GetShortUuid returns the value of ShortUuid.
-func (s *ActivateAllInboundsResponseDtoResponse) GetShortUuid() string {
-	return s.ShortUuid
+type ApiTokensControllerCreateInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
 }
 
-// GetUsername returns the value of Username.
-func (s *ActivateAllInboundsResponseDtoResponse) GetUsername() string {
-	return s.Username
+// GetTimestamp returns the value of Timestamp.
+func (s *ApiTokensControllerCreateInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
 }
 
-// GetStatus returns the value of Status.
-func (s *ActivateAllInboundsResponseDtoResponse) GetStatus() OptActivateAllInboundsResponseDtoResponseStatus {
-	return s.Status
+// GetPath returns the value of Path.
+func (s *ApiTokensControllerCreateInternalServerError) GetPath() OptString {
+	return s.Path
 }
 
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *ActivateAllInboundsResponseDtoResponse) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
+// GetMessage returns the value of Message.
+func (s *ApiTokensControllerCreateInternalServerError) GetMessage() OptString {
+	return s.Message
 }
 
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *ActivateAllInboundsResponseDtoResponse) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
+// GetErrorCode returns the value of ErrorCode.
+func (s *ApiTokensControllerCreateInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
 }
 
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *ActivateAllInboundsResponseDtoResponse) GetTrafficLimitBytes() OptInt {
-	return s.TrafficLimitBytes
+// SetTimestamp sets the value of Timestamp.
+func (s *ApiTokensControllerCreateInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
 }
 
-// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *ActivateAllInboundsResponseDtoResponse) GetTrafficLimitStrategy() OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy {
-	return s.TrafficLimitStrategy
+// SetPath sets the value of Path.
+func (s *ApiTokensControllerCreateInternalServerError) SetPath(val OptString) {
+	s.Path = val
 }
 
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *ActivateAllInboundsResponseDtoResponse) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
+// SetMessage sets the value of Message.
+func (s *ApiTokensControllerCreateInternalServerError) SetMessage(val OptString) {
+	s.Message = val
 }
 
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
+// SetErrorCode sets the value of ErrorCode.
+func (s *ApiTokensControllerCreateInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
-// GetExpireAt returns the value of ExpireAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetOnlineAt returns the value of OnlineAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
-}
-
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
-}
-
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
-}
-
-// GetTrojanPassword returns the value of TrojanPassword.
-func (s *ActivateAllInboundsResponseDtoResponse) GetTrojanPassword() string {
-	return s.TrojanPassword
-}
-
-// GetVlessUuid returns the value of VlessUuid.
-func (s *ActivateAllInboundsResponseDtoResponse) GetVlessUuid() uuid.UUID {
-	return s.VlessUuid
-}
-
-// GetSsPassword returns the value of SsPassword.
-func (s *ActivateAllInboundsResponseDtoResponse) GetSsPassword() string {
-	return s.SsPassword
-}
-
-// GetDescription returns the value of Description.
-func (s *ActivateAllInboundsResponseDtoResponse) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *ActivateAllInboundsResponseDtoResponse) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *ActivateAllInboundsResponseDtoResponse) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *ActivateAllInboundsResponseDtoResponse) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *ActivateAllInboundsResponseDtoResponse) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *ActivateAllInboundsResponseDtoResponse) GetActiveUserInbounds() []ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem {
-	return s.ActiveUserInbounds
-}
-
-// GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *ActivateAllInboundsResponseDtoResponse) GetSubscriptionUrl() string {
-	return s.SubscriptionUrl
-}
-
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *ActivateAllInboundsResponseDtoResponse) GetLastConnectedNode() NilActivateAllInboundsResponseDtoResponseLastConnectedNode {
-	return s.LastConnectedNode
-}
-
-// GetHapp returns the value of Happ.
-func (s *ActivateAllInboundsResponseDtoResponse) GetHapp() ActivateAllInboundsResponseDtoResponseHapp {
-	return s.Happ
-}
-
-// SetUUID sets the value of UUID.
-func (s *ActivateAllInboundsResponseDtoResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *ActivateAllInboundsResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
-}
-
-// SetShortUuid sets the value of ShortUuid.
-func (s *ActivateAllInboundsResponseDtoResponse) SetShortUuid(val string) {
-	s.ShortUuid = val
-}
-
-// SetUsername sets the value of Username.
-func (s *ActivateAllInboundsResponseDtoResponse) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetStatus sets the value of Status.
-func (s *ActivateAllInboundsResponseDtoResponse) SetStatus(val OptActivateAllInboundsResponseDtoResponseStatus) {
-	s.Status = val
-}
-
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *ActivateAllInboundsResponseDtoResponse) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *ActivateAllInboundsResponseDtoResponse) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *ActivateAllInboundsResponseDtoResponse) SetTrafficLimitBytes(val OptInt) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *ActivateAllInboundsResponseDtoResponse) SetTrafficLimitStrategy(val OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) {
-	s.TrafficLimitStrategy = val
-}
+func (*ApiTokensControllerCreateInternalServerError) apiTokensControllerCreateRes() {}
 
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *ActivateAllInboundsResponseDtoResponse) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
+type ApiTokensControllerDeleteInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
 }
 
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
+// GetTimestamp returns the value of Timestamp.
+func (s *ApiTokensControllerDeleteInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
 }
 
-// SetExpireAt sets the value of ExpireAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
+// GetPath returns the value of Path.
+func (s *ApiTokensControllerDeleteInternalServerError) GetPath() OptString {
+	return s.Path
 }
 
-// SetOnlineAt sets the value of OnlineAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
+// GetMessage returns the value of Message.
+func (s *ApiTokensControllerDeleteInternalServerError) GetMessage() OptString {
+	return s.Message
 }
 
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
+// GetErrorCode returns the value of ErrorCode.
+func (s *ApiTokensControllerDeleteInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
 }
 
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
+// SetTimestamp sets the value of Timestamp.
+func (s *ApiTokensControllerDeleteInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
 }
 
-// SetTrojanPassword sets the value of TrojanPassword.
-func (s *ActivateAllInboundsResponseDtoResponse) SetTrojanPassword(val string) {
-	s.TrojanPassword = val
+// SetPath sets the value of Path.
+func (s *ApiTokensControllerDeleteInternalServerError) SetPath(val OptString) {
+	s.Path = val
 }
 
-// SetVlessUuid sets the value of VlessUuid.
-func (s *ActivateAllInboundsResponseDtoResponse) SetVlessUuid(val uuid.UUID) {
-	s.VlessUuid = val
+// SetMessage sets the value of Message.
+func (s *ApiTokensControllerDeleteInternalServerError) SetMessage(val OptString) {
+	s.Message = val
 }
 
-// SetSsPassword sets the value of SsPassword.
-func (s *ActivateAllInboundsResponseDtoResponse) SetSsPassword(val string) {
-	s.SsPassword = val
+// SetErrorCode sets the value of ErrorCode.
+func (s *ApiTokensControllerDeleteInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
-// SetDescription sets the value of Description.
-func (s *ActivateAllInboundsResponseDtoResponse) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *ActivateAllInboundsResponseDtoResponse) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *ActivateAllInboundsResponseDtoResponse) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *ActivateAllInboundsResponseDtoResponse) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *ActivateAllInboundsResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *ActivateAllInboundsResponseDtoResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *ActivateAllInboundsResponseDtoResponse) SetActiveUserInbounds(val []ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
-}
-
-// SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *ActivateAllInboundsResponseDtoResponse) SetSubscriptionUrl(val string) {
-	s.SubscriptionUrl = val
-}
-
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *ActivateAllInboundsResponseDtoResponse) SetLastConnectedNode(val NilActivateAllInboundsResponseDtoResponseLastConnectedNode) {
-	s.LastConnectedNode = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *ActivateAllInboundsResponseDtoResponse) SetHapp(val ActivateAllInboundsResponseDtoResponseHapp) {
-	s.Happ = val
-}
-
-type ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetTag returns the value of Tag.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
+func (*ApiTokensControllerDeleteInternalServerError) apiTokensControllerDeleteRes() {}
 
-// GetType returns the value of Type.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) GetType() string {
-	return s.Type
+type ApiTokensControllerFindAllInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
 }
 
-// GetNetwork returns the value of Network.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
+// GetTimestamp returns the value of Timestamp.
+func (s *ApiTokensControllerFindAllInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
 }
 
-// GetSecurity returns the value of Security.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetPath returns the value of Path.
+func (s *ApiTokensControllerFindAllInternalServerError) GetPath() OptString {
+	return s.Path
 }
 
-// SetUUID sets the value of UUID.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
+// GetMessage returns the value of Message.
+func (s *ApiTokensControllerFindAllInternalServerError) GetMessage() OptString {
+	return s.Message
 }
 
-// SetTag sets the value of Tag.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
+// GetErrorCode returns the value of ErrorCode.
+func (s *ApiTokensControllerFindAllInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
 }
 
-// SetType sets the value of Type.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
+// SetTimestamp sets the value of Timestamp.
+func (s *ApiTokensControllerFindAllInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
 }
 
-// SetNetwork sets the value of Network.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
+// SetPath sets the value of Path.
+func (s *ApiTokensControllerFindAllInternalServerError) SetPath(val OptString) {
+	s.Path = val
 }
 
-// SetSecurity sets the value of Security.
-func (s *ActivateAllInboundsResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetMessage sets the value of Message.
+func (s *ApiTokensControllerFindAllInternalServerError) SetMessage(val OptString) {
+	s.Message = val
 }
 
-type ActivateAllInboundsResponseDtoResponseHapp struct {
-	CryptoLink string `json:"cryptoLink"`
+// SetErrorCode sets the value of ErrorCode.
+func (s *ApiTokensControllerFindAllInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
-// GetCryptoLink returns the value of CryptoLink.
-func (s *ActivateAllInboundsResponseDtoResponseHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *ActivateAllInboundsResponseDtoResponseHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type ActivateAllInboundsResponseDtoResponseLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *ActivateAllInboundsResponseDtoResponseLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *ActivateAllInboundsResponseDtoResponseLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *ActivateAllInboundsResponseDtoResponseLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *ActivateAllInboundsResponseDtoResponseLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
+func (*ApiTokensControllerFindAllInternalServerError) apiTokensControllerFindAllRes() {}
 
-type ActivateAllInboundsResponseDtoResponseStatus string
-
-const (
-	ActivateAllInboundsResponseDtoResponseStatusACTIVE   ActivateAllInboundsResponseDtoResponseStatus = "ACTIVE"
-	ActivateAllInboundsResponseDtoResponseStatusDISABLED ActivateAllInboundsResponseDtoResponseStatus = "DISABLED"
-	ActivateAllInboundsResponseDtoResponseStatusLIMITED  ActivateAllInboundsResponseDtoResponseStatus = "LIMITED"
-	ActivateAllInboundsResponseDtoResponseStatusEXPIRED  ActivateAllInboundsResponseDtoResponseStatus = "EXPIRED"
-)
-
-// AllValues returns all ActivateAllInboundsResponseDtoResponseStatus values.
-func (ActivateAllInboundsResponseDtoResponseStatus) AllValues() []ActivateAllInboundsResponseDtoResponseStatus {
-	return []ActivateAllInboundsResponseDtoResponseStatus{
-		ActivateAllInboundsResponseDtoResponseStatusACTIVE,
-		ActivateAllInboundsResponseDtoResponseStatusDISABLED,
-		ActivateAllInboundsResponseDtoResponseStatusLIMITED,
-		ActivateAllInboundsResponseDtoResponseStatusEXPIRED,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s ActivateAllInboundsResponseDtoResponseStatus) MarshalText() ([]byte, error) {
-	switch s {
-	case ActivateAllInboundsResponseDtoResponseStatusACTIVE:
-		return []byte(s), nil
-	case ActivateAllInboundsResponseDtoResponseStatusDISABLED:
-		return []byte(s), nil
-	case ActivateAllInboundsResponseDtoResponseStatusLIMITED:
-		return []byte(s), nil
-	case ActivateAllInboundsResponseDtoResponseStatusEXPIRED:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *ActivateAllInboundsResponseDtoResponseStatus) UnmarshalText(data []byte) error {
-	switch ActivateAllInboundsResponseDtoResponseStatus(data) {
-	case ActivateAllInboundsResponseDtoResponseStatusACTIVE:
-		*s = ActivateAllInboundsResponseDtoResponseStatusACTIVE
-		return nil
-	case ActivateAllInboundsResponseDtoResponseStatusDISABLED:
-		*s = ActivateAllInboundsResponseDtoResponseStatusDISABLED
-		return nil
-	case ActivateAllInboundsResponseDtoResponseStatusLIMITED:
-		*s = ActivateAllInboundsResponseDtoResponseStatusLIMITED
-		return nil
-	case ActivateAllInboundsResponseDtoResponseStatusEXPIRED:
-		*s = ActivateAllInboundsResponseDtoResponseStatusEXPIRED
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// Available reset periods.
-type ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy string
-
-const (
-	ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyNORESET ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy = "NO_RESET"
-	ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyDAY     ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy = "DAY"
-	ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyWEEK    ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy = "WEEK"
-	ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyMONTH   ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy = "MONTH"
-)
-
-// AllValues returns all ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy values.
-func (ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) AllValues() []ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy {
-	return []ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy{
-		ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyNORESET,
-		ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyDAY,
-		ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyWEEK,
-		ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyMONTH,
-	}
+type AuthControllerGetStatusInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
 }
 
-// MarshalText implements encoding.TextMarshaler.
-func (s ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
-	switch s {
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyNORESET:
-		return []byte(s), nil
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyDAY:
-		return []byte(s), nil
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyWEEK:
-		return []byte(s), nil
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyMONTH:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
+// GetTimestamp returns the value of Timestamp.
+func (s *AuthControllerGetStatusInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
 }
 
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy(data) {
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyNORESET:
-		*s = ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyNORESET
-		return nil
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyDAY:
-		*s = ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyDAY
-		return nil
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyWEEK:
-		*s = ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyWEEK
-		return nil
-	case ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyMONTH:
-		*s = ActivateAllInboundsResponseDtoResponseTrafficLimitStrategyMONTH
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
+// GetPath returns the value of Path.
+func (s *AuthControllerGetStatusInternalServerError) GetPath() OptString {
+	return s.Path
 }
 
-// Ref: #/components/schemas/AddInboundToNodesRequestDto
-type AddInboundToNodesRequestDto struct {
-	InboundUuid uuid.UUID `json:"inboundUuid"`
+// GetMessage returns the value of Message.
+func (s *AuthControllerGetStatusInternalServerError) GetMessage() OptString {
+	return s.Message
 }
 
-// GetInboundUuid returns the value of InboundUuid.
-func (s *AddInboundToNodesRequestDto) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
+// GetErrorCode returns the value of ErrorCode.
+func (s *AuthControllerGetStatusInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
 }
 
-// SetInboundUuid sets the value of InboundUuid.
-func (s *AddInboundToNodesRequestDto) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
+// SetTimestamp sets the value of Timestamp.
+func (s *AuthControllerGetStatusInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
 }
 
-// Ref: #/components/schemas/AddInboundToNodesResponseDto
-type AddInboundToNodesResponseDto struct {
-	Response AddInboundToNodesResponseDtoResponse `json:"response"`
+// SetPath sets the value of Path.
+func (s *AuthControllerGetStatusInternalServerError) SetPath(val OptString) {
+	s.Path = val
 }
 
-// GetResponse returns the value of Response.
-func (s *AddInboundToNodesResponseDto) GetResponse() AddInboundToNodesResponseDtoResponse {
-	return s.Response
+// SetMessage sets the value of Message.
+func (s *AuthControllerGetStatusInternalServerError) SetMessage(val OptString) {
+	s.Message = val
 }
 
-// SetResponse sets the value of Response.
-func (s *AddInboundToNodesResponseDto) SetResponse(val AddInboundToNodesResponseDtoResponse) {
-	s.Response = val
+// SetErrorCode sets the value of ErrorCode.
+func (s *AuthControllerGetStatusInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
-type AddInboundToNodesResponseDtoResponse struct {
-	IsSuccess bool `json:"isSuccess"`
-}
-
-// GetIsSuccess returns the value of IsSuccess.
-func (s *AddInboundToNodesResponseDtoResponse) GetIsSuccess() bool {
-	return s.IsSuccess
-}
+func (*AuthControllerGetStatusInternalServerError) authControllerGetStatusRes() {}
 
-// SetIsSuccess sets the value of IsSuccess.
-func (s *AddInboundToNodesResponseDtoResponse) SetIsSuccess(val bool) {
-	s.IsSuccess = val
+type AuthControllerLoginInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
 }
 
-// Ref: #/components/schemas/AddInboundToUsersRequestDto
-type AddInboundToUsersRequestDto struct {
-	InboundUuid uuid.UUID `json:"inboundUuid"`
+// GetTimestamp returns the value of Timestamp.
+func (s *AuthControllerLoginInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
 }
 
-// GetInboundUuid returns the value of InboundUuid.
-func (s *AddInboundToUsersRequestDto) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
+// GetPath returns the value of Path.
+func (s *AuthControllerLoginInternalServerError) GetPath() OptString {
+	return s.Path
 }
 
-// SetInboundUuid sets the value of InboundUuid.
-func (s *AddInboundToUsersRequestDto) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
+// GetMessage returns the value of Message.
+func (s *AuthControllerLoginInternalServerError) GetMessage() OptString {
+	return s.Message
 }
 
-// Ref: #/components/schemas/AddInboundToUsersResponseDto
-type AddInboundToUsersResponseDto struct {
-	Response AddInboundToUsersResponseDtoResponse `json:"response"`
+// GetErrorCode returns the value of ErrorCode.
+func (s *AuthControllerLoginInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
 }
 
-// GetResponse returns the value of Response.
-func (s *AddInboundToUsersResponseDto) GetResponse() AddInboundToUsersResponseDtoResponse {
-	return s.Response
+// SetTimestamp sets the value of Timestamp.
+func (s *AuthControllerLoginInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
 }
 
-// SetResponse sets the value of Response.
-func (s *AddInboundToUsersResponseDto) SetResponse(val AddInboundToUsersResponseDtoResponse) {
-	s.Response = val
+// SetPath sets the value of Path.
+func (s *AuthControllerLoginInternalServerError) SetPath(val OptString) {
+	s.Path = val
 }
 
-type AddInboundToUsersResponseDtoResponse struct {
-	IsSuccess bool `json:"isSuccess"`
+// SetMessage sets the value of Message.
+func (s *AuthControllerLoginInternalServerError) SetMessage(val OptString) {
+	s.Message = val
 }
 
-// GetIsSuccess returns the value of IsSuccess.
-func (s *AddInboundToUsersResponseDtoResponse) GetIsSuccess() bool {
-	return s.IsSuccess
+// SetErrorCode sets the value of ErrorCode.
+func (s *AuthControllerLoginInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
-// SetIsSuccess sets the value of IsSuccess.
-func (s *AddInboundToUsersResponseDtoResponse) SetIsSuccess(val bool) {
-	s.IsSuccess = val
-}
+func (*AuthControllerLoginInternalServerError) authControllerLoginRes() {}
 
 type AuthControllerLoginUnauthorized struct {
 	StatusCode OptFloat64 `json:"statusCode"`
@@ -684,6 +325,104 @@ func (s *AuthControllerLoginUnauthorized) SetError(val OptString) {
 
 func (*AuthControllerLoginUnauthorized) authControllerLoginRes() {}
 
+type AuthControllerOauth2AuthorizeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *AuthControllerOauth2AuthorizeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*AuthControllerOauth2AuthorizeInternalServerError) authControllerOauth2AuthorizeRes() {}
+
+type AuthControllerOauth2CallbackInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *AuthControllerOauth2CallbackInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerOauth2CallbackInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerOauth2CallbackInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *AuthControllerOauth2CallbackInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *AuthControllerOauth2CallbackInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerOauth2CallbackInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerOauth2CallbackInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *AuthControllerOauth2CallbackInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*AuthControllerOauth2CallbackInternalServerError) authControllerOauth2CallbackRes() {}
+
 type AuthControllerRegisterForbidden struct {
 	StatusCode OptFloat64 `json:"statusCode"`
 	Message    OptString  `json:"message"`
@@ -722,8 +461,107 @@ func (s *AuthControllerRegisterForbidden) SetError(val OptString) {
 
 func (*AuthControllerRegisterForbidden) authControllerRegisterRes() {}
 
+type AuthControllerRegisterInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *AuthControllerRegisterInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerRegisterInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerRegisterInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *AuthControllerRegisterInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *AuthControllerRegisterInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerRegisterInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerRegisterInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *AuthControllerRegisterInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*AuthControllerRegisterInternalServerError) authControllerRegisterRes() {}
+
+type AuthControllerTelegramCallbackInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *AuthControllerTelegramCallbackInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerTelegramCallbackInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerTelegramCallbackInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *AuthControllerTelegramCallbackInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *AuthControllerTelegramCallbackInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerTelegramCallbackInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerTelegramCallbackInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *AuthControllerTelegramCallbackInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*AuthControllerTelegramCallbackInternalServerError) authControllerTelegramCallbackRes() {}
+
 type Authorization struct {
 	Token string
+	Roles []string
 }
 
 // GetToken returns the value of Token.
@@ -731,9 +569,19 @@ func (s *Authorization) GetToken() string {
 	return s.Token
 }
 
+// GetRoles returns the value of Roles.
+func (s *Authorization) GetRoles() []string {
+	return s.Roles
+}
+
 // SetToken sets the value of Token.
 func (s *Authorization) SetToken(val string) {
 	s.Token = val
+}
+
+// SetRoles sets the value of Roles.
+func (s *Authorization) SetRoles(val []string) {
+	s.Roles = val
 }
 
 // Ref: #/components/schemas/BulkAllResetTrafficUsersResponseDto
@@ -750,6 +598,8 @@ func (s *BulkAllResetTrafficUsersResponseDto) GetResponse() BulkAllResetTrafficU
 func (s *BulkAllResetTrafficUsersResponseDto) SetResponse(val BulkAllResetTrafficUsersResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*BulkAllResetTrafficUsersResponseDto) usersBulkActionsControllerBulkAllResetUserTrafficRes() {}
 
 type BulkAllResetTrafficUsersResponseDtoResponse struct {
 	EventSent bool `json:"eventSent"`
@@ -986,6 +836,8 @@ func (s *BulkAllUpdateUsersResponseDto) SetResponse(val BulkAllUpdateUsersRespon
 	s.Response = val
 }
 
+func (*BulkAllUpdateUsersResponseDto) usersBulkActionsControllerBulkUpdateAllUsersRes() {}
+
 type BulkAllUpdateUsersResponseDtoResponse struct {
 	EventSent bool `json:"eventSent"`
 }
@@ -1030,32 +882,29 @@ func (s *BulkDeleteHostsResponseDto) SetResponse(val []BulkDeleteHostsResponseDt
 	s.Response = val
 }
 
+func (*BulkDeleteHostsResponseDto) hostsBulkActionsControllerDeleteHostsRes() {}
+
 type BulkDeleteHostsResponseDtoResponseItem struct {
-	UUID             uuid.UUID                                              `json:"uuid"`
-	InboundUuid      uuid.UUID                                              `json:"inboundUuid"`
-	ViewPosition     int                                                    `json:"viewPosition"`
-	Remark           string                                                 `json:"remark"`
-	Address          string                                                 `json:"address"`
-	Port             int                                                    `json:"port"`
-	Path             NilString                                              `json:"path"`
-	Sni              NilString                                              `json:"sni"`
-	Host             NilString                                              `json:"host"`
-	Alpn             NilString                                              `json:"alpn"`
-	Fingerprint      NilString                                              `json:"fingerprint"`
-	AllowInsecure    OptBool                                                `json:"allowInsecure"`
-	IsDisabled       OptBool                                                `json:"isDisabled"`
-	SecurityLayer    OptBulkDeleteHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                                 `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                              `json:"uuid"`
+	ViewPosition      int                                                    `json:"viewPosition"`
+	Remark            string                                                 `json:"remark"`
+	Address           string                                                 `json:"address"`
+	Port              int                                                    `json:"port"`
+	Path              NilString                                              `json:"path"`
+	Sni               NilString                                              `json:"sni"`
+	Host              NilString                                              `json:"host"`
+	Alpn              NilString                                              `json:"alpn"`
+	Fingerprint       NilString                                              `json:"fingerprint"`
+	IsDisabled        OptBool                                                `json:"isDisabled"`
+	SecurityLayer     OptBulkDeleteHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                                 `json:"xHttpExtraParams"`
+	Inbound           BulkDeleteHostsResponseDtoResponseItemInbound          `json:"inbound"`
+	ServerDescription NilString                                              `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *BulkDeleteHostsResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *BulkDeleteHostsResponseDtoResponseItem) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -1103,11 +952,6 @@ func (s *BulkDeleteHostsResponseDtoResponseItem) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *BulkDeleteHostsResponseDtoResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *BulkDeleteHostsResponseDtoResponseItem) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -1123,14 +967,19 @@ func (s *BulkDeleteHostsResponseDtoResponseItem) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *BulkDeleteHostsResponseDtoResponseItem) GetInbound() BulkDeleteHostsResponseDtoResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *BulkDeleteHostsResponseDtoResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *BulkDeleteHostsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *BulkDeleteHostsResponseDtoResponseItem) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -1178,11 +1027,6 @@ func (s *BulkDeleteHostsResponseDtoResponseItem) SetFingerprint(val NilString) {
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *BulkDeleteHostsResponseDtoResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *BulkDeleteHostsResponseDtoResponseItem) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -1196,6 +1040,41 @@ func (s *BulkDeleteHostsResponseDtoResponseItem) SetSecurityLayer(val OptBulkDel
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *BulkDeleteHostsResponseDtoResponseItem) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *BulkDeleteHostsResponseDtoResponseItem) SetInbound(val BulkDeleteHostsResponseDtoResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *BulkDeleteHostsResponseDtoResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type BulkDeleteHostsResponseDtoResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *BulkDeleteHostsResponseDtoResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *BulkDeleteHostsResponseDtoResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *BulkDeleteHostsResponseDtoResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *BulkDeleteHostsResponseDtoResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type BulkDeleteHostsResponseDtoResponseItemSecurityLayer string
@@ -1331,6 +1210,8 @@ func (s *BulkDeleteUsersByStatusResponseDto) SetResponse(val BulkDeleteUsersBySt
 	s.Response = val
 }
 
+func (*BulkDeleteUsersByStatusResponseDto) usersBulkActionsControllerBulkDeleteUsersByStatusRes() {}
+
 type BulkDeleteUsersByStatusResponseDtoResponse struct {
 	AffectedRows float64 `json:"affectedRows"`
 }
@@ -1374,6 +1255,8 @@ func (s *BulkDeleteUsersResponseDto) GetResponse() BulkDeleteUsersResponseDtoRes
 func (s *BulkDeleteUsersResponseDto) SetResponse(val BulkDeleteUsersResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*BulkDeleteUsersResponseDto) usersBulkActionsControllerBulkDeleteUsersRes() {}
 
 type BulkDeleteUsersResponseDtoResponse struct {
 	AffectedRows float64 `json:"affectedRows"`
@@ -1419,32 +1302,29 @@ func (s *BulkDisableHostsResponseDto) SetResponse(val []BulkDisableHostsResponse
 	s.Response = val
 }
 
+func (*BulkDisableHostsResponseDto) hostsBulkActionsControllerDisableHostsRes() {}
+
 type BulkDisableHostsResponseDtoResponseItem struct {
-	UUID             uuid.UUID                                               `json:"uuid"`
-	InboundUuid      uuid.UUID                                               `json:"inboundUuid"`
-	ViewPosition     int                                                     `json:"viewPosition"`
-	Remark           string                                                  `json:"remark"`
-	Address          string                                                  `json:"address"`
-	Port             int                                                     `json:"port"`
-	Path             NilString                                               `json:"path"`
-	Sni              NilString                                               `json:"sni"`
-	Host             NilString                                               `json:"host"`
-	Alpn             NilString                                               `json:"alpn"`
-	Fingerprint      NilString                                               `json:"fingerprint"`
-	AllowInsecure    OptBool                                                 `json:"allowInsecure"`
-	IsDisabled       OptBool                                                 `json:"isDisabled"`
-	SecurityLayer    OptBulkDisableHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                                  `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                               `json:"uuid"`
+	ViewPosition      int                                                     `json:"viewPosition"`
+	Remark            string                                                  `json:"remark"`
+	Address           string                                                  `json:"address"`
+	Port              int                                                     `json:"port"`
+	Path              NilString                                               `json:"path"`
+	Sni               NilString                                               `json:"sni"`
+	Host              NilString                                               `json:"host"`
+	Alpn              NilString                                               `json:"alpn"`
+	Fingerprint       NilString                                               `json:"fingerprint"`
+	IsDisabled        OptBool                                                 `json:"isDisabled"`
+	SecurityLayer     OptBulkDisableHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                                  `json:"xHttpExtraParams"`
+	Inbound           BulkDisableHostsResponseDtoResponseItemInbound          `json:"inbound"`
+	ServerDescription NilString                                               `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *BulkDisableHostsResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *BulkDisableHostsResponseDtoResponseItem) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -1492,11 +1372,6 @@ func (s *BulkDisableHostsResponseDtoResponseItem) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *BulkDisableHostsResponseDtoResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *BulkDisableHostsResponseDtoResponseItem) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -1512,14 +1387,19 @@ func (s *BulkDisableHostsResponseDtoResponseItem) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *BulkDisableHostsResponseDtoResponseItem) GetInbound() BulkDisableHostsResponseDtoResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *BulkDisableHostsResponseDtoResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *BulkDisableHostsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *BulkDisableHostsResponseDtoResponseItem) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -1567,11 +1447,6 @@ func (s *BulkDisableHostsResponseDtoResponseItem) SetFingerprint(val NilString) 
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *BulkDisableHostsResponseDtoResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *BulkDisableHostsResponseDtoResponseItem) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -1585,6 +1460,41 @@ func (s *BulkDisableHostsResponseDtoResponseItem) SetSecurityLayer(val OptBulkDi
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *BulkDisableHostsResponseDtoResponseItem) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *BulkDisableHostsResponseDtoResponseItem) SetInbound(val BulkDisableHostsResponseDtoResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *BulkDisableHostsResponseDtoResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type BulkDisableHostsResponseDtoResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *BulkDisableHostsResponseDtoResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *BulkDisableHostsResponseDtoResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *BulkDisableHostsResponseDtoResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *BulkDisableHostsResponseDtoResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type BulkDisableHostsResponseDtoResponseItemSecurityLayer string
@@ -1665,32 +1575,29 @@ func (s *BulkEnableHostsResponseDto) SetResponse(val []BulkEnableHostsResponseDt
 	s.Response = val
 }
 
+func (*BulkEnableHostsResponseDto) hostsBulkActionsControllerEnableHostsRes() {}
+
 type BulkEnableHostsResponseDtoResponseItem struct {
-	UUID             uuid.UUID                                              `json:"uuid"`
-	InboundUuid      uuid.UUID                                              `json:"inboundUuid"`
-	ViewPosition     int                                                    `json:"viewPosition"`
-	Remark           string                                                 `json:"remark"`
-	Address          string                                                 `json:"address"`
-	Port             int                                                    `json:"port"`
-	Path             NilString                                              `json:"path"`
-	Sni              NilString                                              `json:"sni"`
-	Host             NilString                                              `json:"host"`
-	Alpn             NilString                                              `json:"alpn"`
-	Fingerprint      NilString                                              `json:"fingerprint"`
-	AllowInsecure    OptBool                                                `json:"allowInsecure"`
-	IsDisabled       OptBool                                                `json:"isDisabled"`
-	SecurityLayer    OptBulkEnableHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                                 `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                              `json:"uuid"`
+	ViewPosition      int                                                    `json:"viewPosition"`
+	Remark            string                                                 `json:"remark"`
+	Address           string                                                 `json:"address"`
+	Port              int                                                    `json:"port"`
+	Path              NilString                                              `json:"path"`
+	Sni               NilString                                              `json:"sni"`
+	Host              NilString                                              `json:"host"`
+	Alpn              NilString                                              `json:"alpn"`
+	Fingerprint       NilString                                              `json:"fingerprint"`
+	IsDisabled        OptBool                                                `json:"isDisabled"`
+	SecurityLayer     OptBulkEnableHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                                 `json:"xHttpExtraParams"`
+	Inbound           BulkEnableHostsResponseDtoResponseItemInbound          `json:"inbound"`
+	ServerDescription NilString                                              `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *BulkEnableHostsResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *BulkEnableHostsResponseDtoResponseItem) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -1738,11 +1645,6 @@ func (s *BulkEnableHostsResponseDtoResponseItem) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *BulkEnableHostsResponseDtoResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *BulkEnableHostsResponseDtoResponseItem) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -1758,14 +1660,19 @@ func (s *BulkEnableHostsResponseDtoResponseItem) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *BulkEnableHostsResponseDtoResponseItem) GetInbound() BulkEnableHostsResponseDtoResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *BulkEnableHostsResponseDtoResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *BulkEnableHostsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *BulkEnableHostsResponseDtoResponseItem) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -1813,11 +1720,6 @@ func (s *BulkEnableHostsResponseDtoResponseItem) SetFingerprint(val NilString) {
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *BulkEnableHostsResponseDtoResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *BulkEnableHostsResponseDtoResponseItem) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -1831,6 +1733,41 @@ func (s *BulkEnableHostsResponseDtoResponseItem) SetSecurityLayer(val OptBulkEna
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *BulkEnableHostsResponseDtoResponseItem) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *BulkEnableHostsResponseDtoResponseItem) SetInbound(val BulkEnableHostsResponseDtoResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *BulkEnableHostsResponseDtoResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type BulkEnableHostsResponseDtoResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *BulkEnableHostsResponseDtoResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *BulkEnableHostsResponseDtoResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *BulkEnableHostsResponseDtoResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *BulkEnableHostsResponseDtoResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type BulkEnableHostsResponseDtoResponseItemSecurityLayer string
@@ -1911,6 +1848,8 @@ func (s *BulkResetTrafficUsersResponseDto) SetResponse(val BulkResetTrafficUsers
 	s.Response = val
 }
 
+func (*BulkResetTrafficUsersResponseDto) usersBulkActionsControllerBulkResetUserTrafficRes() {}
+
 type BulkResetTrafficUsersResponseDtoResponse struct {
 	AffectedRows float64 `json:"affectedRows"`
 }
@@ -1955,6 +1894,9 @@ func (s *BulkRevokeUsersSubscriptionResponseDto) SetResponse(val BulkRevokeUsers
 	s.Response = val
 }
 
+func (*BulkRevokeUsersSubscriptionResponseDto) usersBulkActionsControllerBulkRevokeUsersSubscriptionRes() {
+}
+
 type BulkRevokeUsersSubscriptionResponseDtoResponse struct {
 	AffectedRows float64 `json:"affectedRows"`
 }
@@ -1966,61 +1908,6 @@ func (s *BulkRevokeUsersSubscriptionResponseDtoResponse) GetAffectedRows() float
 
 // SetAffectedRows sets the value of AffectedRows.
 func (s *BulkRevokeUsersSubscriptionResponseDtoResponse) SetAffectedRows(val float64) {
-	s.AffectedRows = val
-}
-
-// Ref: #/components/schemas/BulkUpdateUsersInboundsRequestDto
-type BulkUpdateUsersInboundsRequestDto struct {
-	Uuids              []uuid.UUID `json:"uuids"`
-	ActiveUserInbounds []uuid.UUID `json:"activeUserInbounds"`
-}
-
-// GetUuids returns the value of Uuids.
-func (s *BulkUpdateUsersInboundsRequestDto) GetUuids() []uuid.UUID {
-	return s.Uuids
-}
-
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *BulkUpdateUsersInboundsRequestDto) GetActiveUserInbounds() []uuid.UUID {
-	return s.ActiveUserInbounds
-}
-
-// SetUuids sets the value of Uuids.
-func (s *BulkUpdateUsersInboundsRequestDto) SetUuids(val []uuid.UUID) {
-	s.Uuids = val
-}
-
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *BulkUpdateUsersInboundsRequestDto) SetActiveUserInbounds(val []uuid.UUID) {
-	s.ActiveUserInbounds = val
-}
-
-// Ref: #/components/schemas/BulkUpdateUsersInboundsResponseDto
-type BulkUpdateUsersInboundsResponseDto struct {
-	Response BulkUpdateUsersInboundsResponseDtoResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *BulkUpdateUsersInboundsResponseDto) GetResponse() BulkUpdateUsersInboundsResponseDtoResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *BulkUpdateUsersInboundsResponseDto) SetResponse(val BulkUpdateUsersInboundsResponseDtoResponse) {
-	s.Response = val
-}
-
-type BulkUpdateUsersInboundsResponseDtoResponse struct {
-	AffectedRows float64 `json:"affectedRows"`
-}
-
-// GetAffectedRows returns the value of AffectedRows.
-func (s *BulkUpdateUsersInboundsResponseDtoResponse) GetAffectedRows() float64 {
-	return s.AffectedRows
-}
-
-// SetAffectedRows sets the value of AffectedRows.
-func (s *BulkUpdateUsersInboundsResponseDtoResponse) SetAffectedRows(val float64) {
 	s.AffectedRows = val
 }
 
@@ -2270,6 +2157,8 @@ func (s *BulkUpdateUsersResponseDto) SetResponse(val BulkUpdateUsersResponseDtoR
 	s.Response = val
 }
 
+func (*BulkUpdateUsersResponseDto) usersBulkActionsControllerBulkUpdateUsersRes() {}
+
 type BulkUpdateUsersResponseDtoResponse struct {
 	AffectedRows float64 `json:"affectedRows"`
 }
@@ -2284,10 +2173,453 @@ func (s *BulkUpdateUsersResponseDtoResponse) SetAffectedRows(val float64) {
 	s.AffectedRows = val
 }
 
+// Ref: #/components/schemas/BulkUpdateUsersSquadsRequestDto
+type BulkUpdateUsersSquadsRequestDto struct {
+	Uuids                []uuid.UUID `json:"uuids"`
+	ActiveInternalSquads []uuid.UUID `json:"activeInternalSquads"`
+}
+
+// GetUuids returns the value of Uuids.
+func (s *BulkUpdateUsersSquadsRequestDto) GetUuids() []uuid.UUID {
+	return s.Uuids
+}
+
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *BulkUpdateUsersSquadsRequestDto) GetActiveInternalSquads() []uuid.UUID {
+	return s.ActiveInternalSquads
+}
+
+// SetUuids sets the value of Uuids.
+func (s *BulkUpdateUsersSquadsRequestDto) SetUuids(val []uuid.UUID) {
+	s.Uuids = val
+}
+
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *BulkUpdateUsersSquadsRequestDto) SetActiveInternalSquads(val []uuid.UUID) {
+	s.ActiveInternalSquads = val
+}
+
+// Ref: #/components/schemas/BulkUpdateUsersSquadsResponseDto
+type BulkUpdateUsersSquadsResponseDto struct {
+	Response BulkUpdateUsersSquadsResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *BulkUpdateUsersSquadsResponseDto) GetResponse() BulkUpdateUsersSquadsResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *BulkUpdateUsersSquadsResponseDto) SetResponse(val BulkUpdateUsersSquadsResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*BulkUpdateUsersSquadsResponseDto) usersBulkActionsControllerBulkUpdateUsersInternalSquadsRes() {
+}
+
+type BulkUpdateUsersSquadsResponseDtoResponse struct {
+	AffectedRows float64 `json:"affectedRows"`
+}
+
+// GetAffectedRows returns the value of AffectedRows.
+func (s *BulkUpdateUsersSquadsResponseDtoResponse) GetAffectedRows() float64 {
+	return s.AffectedRows
+}
+
+// SetAffectedRows sets the value of AffectedRows.
+func (s *BulkUpdateUsersSquadsResponseDtoResponse) SetAffectedRows(val float64) {
+	s.AffectedRows = val
+}
+
+// ConfigProfileControllerCreateConfigProfileConflict is response for ConfigProfileControllerCreateConfigProfile operation.
+type ConfigProfileControllerCreateConfigProfileConflict struct{}
+
+func (*ConfigProfileControllerCreateConfigProfileConflict) configProfileControllerCreateConfigProfileRes() {
+}
+
+type ConfigProfileControllerCreateConfigProfileInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerCreateConfigProfileInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerCreateConfigProfileInternalServerError) configProfileControllerCreateConfigProfileRes() {
+}
+
+type ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError) configProfileControllerDeleteConfigProfileByUuidRes() {
+}
+
+// ConfigProfileControllerDeleteConfigProfileByUuidNotFound is response for ConfigProfileControllerDeleteConfigProfileByUuid operation.
+type ConfigProfileControllerDeleteConfigProfileByUuidNotFound struct{}
+
+func (*ConfigProfileControllerDeleteConfigProfileByUuidNotFound) configProfileControllerDeleteConfigProfileByUuidRes() {
+}
+
+type ConfigProfileControllerGetAllInboundsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerGetAllInboundsInternalServerError) configProfileControllerGetAllInboundsRes() {
+}
+
+type ConfigProfileControllerGetConfigProfileByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerGetConfigProfileByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerGetConfigProfileByUuidInternalServerError) configProfileControllerGetConfigProfileByUuidRes() {
+}
+
+// ConfigProfileControllerGetConfigProfileByUuidNotFound is response for ConfigProfileControllerGetConfigProfileByUuid operation.
+type ConfigProfileControllerGetConfigProfileByUuidNotFound struct{}
+
+func (*ConfigProfileControllerGetConfigProfileByUuidNotFound) configProfileControllerGetConfigProfileByUuidRes() {
+}
+
+type ConfigProfileControllerGetConfigProfilesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerGetConfigProfilesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerGetConfigProfilesInternalServerError) configProfileControllerGetConfigProfilesRes() {
+}
+
+type ConfigProfileControllerGetInboundsByProfileUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) configProfileControllerGetInboundsByProfileUuidRes() {
+}
+
+// ConfigProfileControllerGetInboundsByProfileUuidNotFound is response for ConfigProfileControllerGetInboundsByProfileUuid operation.
+type ConfigProfileControllerGetInboundsByProfileUuidNotFound struct{}
+
+func (*ConfigProfileControllerGetInboundsByProfileUuidNotFound) configProfileControllerGetInboundsByProfileUuidRes() {
+}
+
+// ConfigProfileControllerUpdateConfigProfileConflict is response for ConfigProfileControllerUpdateConfigProfile operation.
+type ConfigProfileControllerUpdateConfigProfileConflict struct{}
+
+func (*ConfigProfileControllerUpdateConfigProfileConflict) configProfileControllerUpdateConfigProfileRes() {
+}
+
+type ConfigProfileControllerUpdateConfigProfileInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerUpdateConfigProfileInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerUpdateConfigProfileInternalServerError) configProfileControllerUpdateConfigProfileRes() {
+}
+
+// ConfigProfileControllerUpdateConfigProfileNotFound is response for ConfigProfileControllerUpdateConfigProfile operation.
+type ConfigProfileControllerUpdateConfigProfileNotFound struct{}
+
+func (*ConfigProfileControllerUpdateConfigProfileNotFound) configProfileControllerUpdateConfigProfileRes() {
+}
+
 // Ref: #/components/schemas/CreateApiTokenRequestDto
 type CreateApiTokenRequestDto struct {
-	TokenName        string    `json:"tokenName"`
-	TokenDescription NilString `json:"tokenDescription"`
+	TokenName string `json:"tokenName"`
 }
 
 // GetTokenName returns the value of TokenName.
@@ -2295,19 +2627,9 @@ func (s *CreateApiTokenRequestDto) GetTokenName() string {
 	return s.TokenName
 }
 
-// GetTokenDescription returns the value of TokenDescription.
-func (s *CreateApiTokenRequestDto) GetTokenDescription() NilString {
-	return s.TokenDescription
-}
-
 // SetTokenName sets the value of TokenName.
 func (s *CreateApiTokenRequestDto) SetTokenName(val string) {
 	s.TokenName = val
-}
-
-// SetTokenDescription sets the value of TokenDescription.
-func (s *CreateApiTokenRequestDto) SetTokenDescription(val NilString) {
-	s.TokenDescription = val
 }
 
 // Ref: #/components/schemas/CreateApiTokenResponseDto
@@ -2324,6 +2646,8 @@ func (s *CreateApiTokenResponseDto) GetResponse() CreateApiTokenResponseDtoRespo
 func (s *CreateApiTokenResponseDto) SetResponse(val CreateApiTokenResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*CreateApiTokenResponseDto) apiTokensControllerCreateRes() {}
 
 type CreateApiTokenResponseDtoResponse struct {
 	Token string `json:"token"`
@@ -2350,26 +2674,278 @@ func (s *CreateApiTokenResponseDtoResponse) SetUUID(val string) {
 	s.UUID = val
 }
 
-// Ref: #/components/schemas/CreateHostRequestDto
-type CreateHostRequestDto struct {
-	InboundUuid      uuid.UUID                             `json:"inboundUuid"`
-	Remark           string                                `json:"remark"`
-	Address          string                                `json:"address"`
-	Port             int                                   `json:"port"`
-	Path             OptString                             `json:"path"`
-	Sni              OptString                             `json:"sni"`
-	Host             OptString                             `json:"host"`
-	Alpn             OptNilCreateHostRequestDtoAlpn        `json:"alpn"`
-	Fingerprint      OptNilCreateHostRequestDtoFingerprint `json:"fingerprint"`
-	AllowInsecure    OptBool                               `json:"allowInsecure"`
-	IsDisabled       OptBool                               `json:"isDisabled"`
-	SecurityLayer    OptCreateHostRequestDtoSecurityLayer  `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                `json:"xHttpExtraParams"`
+// Ref: #/components/schemas/CreateConfigProfileRequestDto
+type CreateConfigProfileRequestDto struct {
+	Name   string                              `json:"name"`
+	Config CreateConfigProfileRequestDtoConfig `json:"config"`
 }
 
-// GetInboundUuid returns the value of InboundUuid.
-func (s *CreateHostRequestDto) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
+// GetName returns the value of Name.
+func (s *CreateConfigProfileRequestDto) GetName() string {
+	return s.Name
+}
+
+// GetConfig returns the value of Config.
+func (s *CreateConfigProfileRequestDto) GetConfig() CreateConfigProfileRequestDtoConfig {
+	return s.Config
+}
+
+// SetName sets the value of Name.
+func (s *CreateConfigProfileRequestDto) SetName(val string) {
+	s.Name = val
+}
+
+// SetConfig sets the value of Config.
+func (s *CreateConfigProfileRequestDto) SetConfig(val CreateConfigProfileRequestDtoConfig) {
+	s.Config = val
+}
+
+type CreateConfigProfileRequestDtoConfig struct{}
+
+// Ref: #/components/schemas/CreateConfigProfileResponseDto
+type CreateConfigProfileResponseDto struct {
+	Response CreateConfigProfileResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *CreateConfigProfileResponseDto) GetResponse() CreateConfigProfileResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *CreateConfigProfileResponseDto) SetResponse(val CreateConfigProfileResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*CreateConfigProfileResponseDto) configProfileControllerCreateConfigProfileRes() {}
+
+type CreateConfigProfileResponseDtoResponse struct {
+	UUID      uuid.UUID                                            `json:"uuid"`
+	Name      string                                               `json:"name"`
+	Config    jx.Raw                                               `json:"config"`
+	Inbounds  []CreateConfigProfileResponseDtoResponseInboundsItem `json:"inbounds"`
+	Nodes     []CreateConfigProfileResponseDtoResponseNodesItem    `json:"nodes"`
+	CreatedAt time.Time                                            `json:"createdAt"`
+	UpdatedAt time.Time                                            `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateConfigProfileResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateConfigProfileResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetConfig returns the value of Config.
+func (s *CreateConfigProfileResponseDtoResponse) GetConfig() jx.Raw {
+	return s.Config
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *CreateConfigProfileResponseDtoResponse) GetInbounds() []CreateConfigProfileResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// GetNodes returns the value of Nodes.
+func (s *CreateConfigProfileResponseDtoResponse) GetNodes() []CreateConfigProfileResponseDtoResponseNodesItem {
+	return s.Nodes
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CreateConfigProfileResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CreateConfigProfileResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateConfigProfileResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateConfigProfileResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetConfig sets the value of Config.
+func (s *CreateConfigProfileResponseDtoResponse) SetConfig(val jx.Raw) {
+	s.Config = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *CreateConfigProfileResponseDtoResponse) SetInbounds(val []CreateConfigProfileResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *CreateConfigProfileResponseDtoResponse) SetNodes(val []CreateConfigProfileResponseDtoResponseNodesItem) {
+	s.Nodes = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CreateConfigProfileResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CreateConfigProfileResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type CreateConfigProfileResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *CreateConfigProfileResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type CreateConfigProfileResponseDtoResponseNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateConfigProfileResponseDtoResponseNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateConfigProfileResponseDtoResponseNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *CreateConfigProfileResponseDtoResponseNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateConfigProfileResponseDtoResponseNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateConfigProfileResponseDtoResponseNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *CreateConfigProfileResponseDtoResponseNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/CreateHostRequestDto
+type CreateHostRequestDto struct {
+	Inbound           CreateHostRequestDtoInbound           `json:"inbound"`
+	Remark            string                                `json:"remark"`
+	Address           string                                `json:"address"`
+	Port              int                                   `json:"port"`
+	Path              OptString                             `json:"path"`
+	Sni               OptString                             `json:"sni"`
+	Host              OptString                             `json:"host"`
+	Alpn              OptNilCreateHostRequestDtoAlpn        `json:"alpn"`
+	Fingerprint       OptNilCreateHostRequestDtoFingerprint `json:"fingerprint"`
+	IsDisabled        OptBool                               `json:"isDisabled"`
+	SecurityLayer     OptCreateHostRequestDtoSecurityLayer  `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                `json:"xHttpExtraParams"`
+	ServerDescription OptNilString                          `json:"serverDescription"`
+}
+
+// GetInbound returns the value of Inbound.
+func (s *CreateHostRequestDto) GetInbound() CreateHostRequestDtoInbound {
+	return s.Inbound
 }
 
 // GetRemark returns the value of Remark.
@@ -2412,11 +2988,6 @@ func (s *CreateHostRequestDto) GetFingerprint() OptNilCreateHostRequestDtoFinger
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *CreateHostRequestDto) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *CreateHostRequestDto) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -2432,9 +3003,14 @@ func (s *CreateHostRequestDto) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
-// SetInboundUuid sets the value of InboundUuid.
-func (s *CreateHostRequestDto) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
+// GetServerDescription returns the value of ServerDescription.
+func (s *CreateHostRequestDto) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// SetInbound sets the value of Inbound.
+func (s *CreateHostRequestDto) SetInbound(val CreateHostRequestDtoInbound) {
+	s.Inbound = val
 }
 
 // SetRemark sets the value of Remark.
@@ -2477,11 +3053,6 @@ func (s *CreateHostRequestDto) SetFingerprint(val OptNilCreateHostRequestDtoFing
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *CreateHostRequestDto) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *CreateHostRequestDto) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -2495,6 +3066,11 @@ func (s *CreateHostRequestDto) SetSecurityLayer(val OptCreateHostRequestDtoSecur
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *CreateHostRequestDto) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *CreateHostRequestDto) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
 }
 
 type CreateHostRequestDtoAlpn string
@@ -2656,6 +3232,31 @@ func (s *CreateHostRequestDtoFingerprint) UnmarshalText(data []byte) error {
 	}
 }
 
+type CreateHostRequestDtoInbound struct {
+	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *CreateHostRequestDtoInbound) GetConfigProfileUuid() uuid.UUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *CreateHostRequestDtoInbound) GetConfigProfileInboundUuid() uuid.UUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *CreateHostRequestDtoInbound) SetConfigProfileUuid(val uuid.UUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *CreateHostRequestDtoInbound) SetConfigProfileInboundUuid(val uuid.UUID) {
+	s.ConfigProfileInboundUuid = val
+}
+
 type CreateHostRequestDtoSecurityLayer string
 
 const (
@@ -2719,32 +3320,29 @@ func (s *CreateHostResponseDto) SetResponse(val CreateHostResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*CreateHostResponseDto) hostsControllerCreateHostRes() {}
+
 type CreateHostResponseDtoResponse struct {
-	UUID             uuid.UUID                                     `json:"uuid"`
-	InboundUuid      uuid.UUID                                     `json:"inboundUuid"`
-	ViewPosition     int                                           `json:"viewPosition"`
-	Remark           string                                        `json:"remark"`
-	Address          string                                        `json:"address"`
-	Port             int                                           `json:"port"`
-	Path             NilString                                     `json:"path"`
-	Sni              NilString                                     `json:"sni"`
-	Host             NilString                                     `json:"host"`
-	Alpn             NilString                                     `json:"alpn"`
-	Fingerprint      NilString                                     `json:"fingerprint"`
-	AllowInsecure    OptBool                                       `json:"allowInsecure"`
-	IsDisabled       OptBool                                       `json:"isDisabled"`
-	SecurityLayer    OptCreateHostResponseDtoResponseSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                        `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                     `json:"uuid"`
+	ViewPosition      int                                           `json:"viewPosition"`
+	Remark            string                                        `json:"remark"`
+	Address           string                                        `json:"address"`
+	Port              int                                           `json:"port"`
+	Path              NilString                                     `json:"path"`
+	Sni               NilString                                     `json:"sni"`
+	Host              NilString                                     `json:"host"`
+	Alpn              NilString                                     `json:"alpn"`
+	Fingerprint       NilString                                     `json:"fingerprint"`
+	IsDisabled        OptBool                                       `json:"isDisabled"`
+	SecurityLayer     OptCreateHostResponseDtoResponseSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                        `json:"xHttpExtraParams"`
+	Inbound           CreateHostResponseDtoResponseInbound          `json:"inbound"`
+	ServerDescription NilString                                     `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *CreateHostResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *CreateHostResponseDtoResponse) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -2792,11 +3390,6 @@ func (s *CreateHostResponseDtoResponse) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *CreateHostResponseDtoResponse) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *CreateHostResponseDtoResponse) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -2812,14 +3405,19 @@ func (s *CreateHostResponseDtoResponse) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *CreateHostResponseDtoResponse) GetInbound() CreateHostResponseDtoResponseInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *CreateHostResponseDtoResponse) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *CreateHostResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *CreateHostResponseDtoResponse) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -2867,11 +3465,6 @@ func (s *CreateHostResponseDtoResponse) SetFingerprint(val NilString) {
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *CreateHostResponseDtoResponse) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *CreateHostResponseDtoResponse) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -2885,6 +3478,41 @@ func (s *CreateHostResponseDtoResponse) SetSecurityLayer(val OptCreateHostRespon
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *CreateHostResponseDtoResponse) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *CreateHostResponseDtoResponse) SetInbound(val CreateHostResponseDtoResponseInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *CreateHostResponseDtoResponse) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type CreateHostResponseDtoResponseInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *CreateHostResponseDtoResponseInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *CreateHostResponseDtoResponseInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *CreateHostResponseDtoResponseInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *CreateHostResponseDtoResponseInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type CreateHostResponseDtoResponseSecurityLayer string
@@ -2935,18 +3563,987 @@ func (s *CreateHostResponseDtoResponseSecurityLayer) UnmarshalText(data []byte) 
 	}
 }
 
+// Ref: #/components/schemas/CreateInfraBillingHistoryRecordRequestDto
+type CreateInfraBillingHistoryRecordRequestDto struct {
+	ProviderUuid uuid.UUID `json:"providerUuid"`
+	Amount       float64   `json:"amount"`
+	// Billing date. Format: 2025-01-17T15:38:45.065Z.
+	BilledAt time.Time `json:"billedAt"`
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateInfraBillingHistoryRecordRequestDto) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetAmount returns the value of Amount.
+func (s *CreateInfraBillingHistoryRecordRequestDto) GetAmount() float64 {
+	return s.Amount
+}
+
+// GetBilledAt returns the value of BilledAt.
+func (s *CreateInfraBillingHistoryRecordRequestDto) GetBilledAt() time.Time {
+	return s.BilledAt
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateInfraBillingHistoryRecordRequestDto) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *CreateInfraBillingHistoryRecordRequestDto) SetAmount(val float64) {
+	s.Amount = val
+}
+
+// SetBilledAt sets the value of BilledAt.
+func (s *CreateInfraBillingHistoryRecordRequestDto) SetBilledAt(val time.Time) {
+	s.BilledAt = val
+}
+
+// Ref: #/components/schemas/CreateInfraBillingHistoryRecordResponseDto
+type CreateInfraBillingHistoryRecordResponseDto struct {
+	Response CreateInfraBillingHistoryRecordResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *CreateInfraBillingHistoryRecordResponseDto) GetResponse() CreateInfraBillingHistoryRecordResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *CreateInfraBillingHistoryRecordResponseDto) SetResponse(val CreateInfraBillingHistoryRecordResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*CreateInfraBillingHistoryRecordResponseDto) infraBillingControllerCreateInfraBillingHistoryRecordRes() {
+}
+
+type CreateInfraBillingHistoryRecordResponseDtoResponse struct {
+	Records []CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem `json:"records"`
+	Total   float64                                                         `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponse) GetRecords() []CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponse) SetRecords(val []CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem struct {
+	UUID         uuid.UUID                                                             `json:"uuid"`
+	ProviderUuid uuid.UUID                                                             `json:"providerUuid"`
+	Amount       float64                                                               `json:"amount"`
+	BilledAt     time.Time                                                             `json:"billedAt"`
+	Provider     CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider `json:"provider"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetAmount returns the value of Amount.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) GetAmount() float64 {
+	return s.Amount
+}
+
+// GetBilledAt returns the value of BilledAt.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) GetBilledAt() time.Time {
+	return s.BilledAt
+}
+
+// GetProvider returns the value of Provider.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) GetProvider() CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider {
+	return s.Provider
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) SetAmount(val float64) {
+	s.Amount = val
+}
+
+// SetBilledAt sets the value of BilledAt.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) SetBilledAt(val time.Time) {
+	s.BilledAt = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItem) SetProvider(val CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) {
+	s.Provider = val
+}
+
+type CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *CreateInfraBillingHistoryRecordResponseDtoResponseRecordsItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// Ref: #/components/schemas/CreateInfraBillingNodeRequestDto
+type CreateInfraBillingNodeRequestDto struct {
+	ProviderUuid uuid.UUID `json:"providerUuid"`
+	NodeUuid     uuid.UUID `json:"nodeUuid"`
+	// Next billing date. Format: 2025-01-17T15:38:45.065Z.
+	NextBillingAt OptDateTime `json:"nextBillingAt"`
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateInfraBillingNodeRequestDto) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *CreateInfraBillingNodeRequestDto) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetNextBillingAt returns the value of NextBillingAt.
+func (s *CreateInfraBillingNodeRequestDto) GetNextBillingAt() OptDateTime {
+	return s.NextBillingAt
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateInfraBillingNodeRequestDto) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *CreateInfraBillingNodeRequestDto) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetNextBillingAt sets the value of NextBillingAt.
+func (s *CreateInfraBillingNodeRequestDto) SetNextBillingAt(val OptDateTime) {
+	s.NextBillingAt = val
+}
+
+// Ref: #/components/schemas/CreateInfraBillingNodeResponseDto
+type CreateInfraBillingNodeResponseDto struct {
+	Response CreateInfraBillingNodeResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *CreateInfraBillingNodeResponseDto) GetResponse() CreateInfraBillingNodeResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *CreateInfraBillingNodeResponseDto) SetResponse(val CreateInfraBillingNodeResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*CreateInfraBillingNodeResponseDto) infraBillingControllerCreateInfraBillingNodeRes() {}
+
+type CreateInfraBillingNodeResponseDtoResponse struct {
+	TotalBillingNodes          float64                                                              `json:"totalBillingNodes"`
+	BillingNodes               []CreateInfraBillingNodeResponseDtoResponseBillingNodesItem          `json:"billingNodes"`
+	AvailableBillingNodes      []CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem `json:"availableBillingNodes"`
+	TotalAvailableBillingNodes float64                                                              `json:"totalAvailableBillingNodes"`
+	Stats                      CreateInfraBillingNodeResponseDtoResponseStats                       `json:"stats"`
+}
+
+// GetTotalBillingNodes returns the value of TotalBillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) GetTotalBillingNodes() float64 {
+	return s.TotalBillingNodes
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) GetBillingNodes() []CreateInfraBillingNodeResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// GetAvailableBillingNodes returns the value of AvailableBillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) GetAvailableBillingNodes() []CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem {
+	return s.AvailableBillingNodes
+}
+
+// GetTotalAvailableBillingNodes returns the value of TotalAvailableBillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) GetTotalAvailableBillingNodes() float64 {
+	return s.TotalAvailableBillingNodes
+}
+
+// GetStats returns the value of Stats.
+func (s *CreateInfraBillingNodeResponseDtoResponse) GetStats() CreateInfraBillingNodeResponseDtoResponseStats {
+	return s.Stats
+}
+
+// SetTotalBillingNodes sets the value of TotalBillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) SetTotalBillingNodes(val float64) {
+	s.TotalBillingNodes = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) SetBillingNodes(val []CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+// SetAvailableBillingNodes sets the value of AvailableBillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) SetAvailableBillingNodes(val []CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) {
+	s.AvailableBillingNodes = val
+}
+
+// SetTotalAvailableBillingNodes sets the value of TotalAvailableBillingNodes.
+func (s *CreateInfraBillingNodeResponseDtoResponse) SetTotalAvailableBillingNodes(val float64) {
+	s.TotalAvailableBillingNodes = val
+}
+
+// SetStats sets the value of Stats.
+func (s *CreateInfraBillingNodeResponseDtoResponse) SetStats(val CreateInfraBillingNodeResponseDtoResponseStats) {
+	s.Stats = val
+}
+
+type CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *CreateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type CreateInfraBillingNodeResponseDtoResponseBillingNodesItem struct {
+	UUID          uuid.UUID                                                         `json:"uuid"`
+	NodeUuid      uuid.UUID                                                         `json:"nodeUuid"`
+	ProviderUuid  uuid.UUID                                                         `json:"providerUuid"`
+	Provider      CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider `json:"provider"`
+	Node          CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode     `json:"node"`
+	NextBillingAt time.Time                                                         `json:"nextBillingAt"`
+	CreatedAt     time.Time                                                         `json:"createdAt"`
+	UpdatedAt     time.Time                                                         `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetProvider() CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider {
+	return s.Provider
+}
+
+// GetNode returns the value of Node.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetNode() CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode {
+	return s.Node
+}
+
+// GetNextBillingAt returns the value of NextBillingAt.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetNextBillingAt() time.Time {
+	return s.NextBillingAt
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetProvider(val CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) {
+	s.Provider = val
+}
+
+// SetNode sets the value of Node.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetNode(val CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) {
+	s.Node = val
+}
+
+// SetNextBillingAt sets the value of NextBillingAt.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetNextBillingAt(val time.Time) {
+	s.NextBillingAt = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	LoginUrl    NilString `json:"loginUrl"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *CreateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+type CreateInfraBillingNodeResponseDtoResponseStats struct {
+	UpcomingNodesCount   float64 `json:"upcomingNodesCount"`
+	CurrentMonthPayments float64 `json:"currentMonthPayments"`
+	TotalSpent           float64 `json:"totalSpent"`
+}
+
+// GetUpcomingNodesCount returns the value of UpcomingNodesCount.
+func (s *CreateInfraBillingNodeResponseDtoResponseStats) GetUpcomingNodesCount() float64 {
+	return s.UpcomingNodesCount
+}
+
+// GetCurrentMonthPayments returns the value of CurrentMonthPayments.
+func (s *CreateInfraBillingNodeResponseDtoResponseStats) GetCurrentMonthPayments() float64 {
+	return s.CurrentMonthPayments
+}
+
+// GetTotalSpent returns the value of TotalSpent.
+func (s *CreateInfraBillingNodeResponseDtoResponseStats) GetTotalSpent() float64 {
+	return s.TotalSpent
+}
+
+// SetUpcomingNodesCount sets the value of UpcomingNodesCount.
+func (s *CreateInfraBillingNodeResponseDtoResponseStats) SetUpcomingNodesCount(val float64) {
+	s.UpcomingNodesCount = val
+}
+
+// SetCurrentMonthPayments sets the value of CurrentMonthPayments.
+func (s *CreateInfraBillingNodeResponseDtoResponseStats) SetCurrentMonthPayments(val float64) {
+	s.CurrentMonthPayments = val
+}
+
+// SetTotalSpent sets the value of TotalSpent.
+func (s *CreateInfraBillingNodeResponseDtoResponseStats) SetTotalSpent(val float64) {
+	s.TotalSpent = val
+}
+
+// Ref: #/components/schemas/CreateInfraProviderRequestDto
+type CreateInfraProviderRequestDto struct {
+	Name        string `json:"name"`
+	FaviconLink OptURI `json:"faviconLink"`
+	LoginUrl    OptURI `json:"loginUrl"`
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraProviderRequestDto) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *CreateInfraProviderRequestDto) GetFaviconLink() OptURI {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *CreateInfraProviderRequestDto) GetLoginUrl() OptURI {
+	return s.LoginUrl
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraProviderRequestDto) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *CreateInfraProviderRequestDto) SetFaviconLink(val OptURI) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *CreateInfraProviderRequestDto) SetLoginUrl(val OptURI) {
+	s.LoginUrl = val
+}
+
+// Ref: #/components/schemas/CreateInfraProviderResponseDto
+type CreateInfraProviderResponseDto struct {
+	Response CreateInfraProviderResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *CreateInfraProviderResponseDto) GetResponse() CreateInfraProviderResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *CreateInfraProviderResponseDto) SetResponse(val CreateInfraProviderResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*CreateInfraProviderResponseDto) infraBillingControllerCreateInfraProviderRes() {}
+
+type CreateInfraProviderResponseDtoResponse struct {
+	UUID           uuid.UUID                                                `json:"uuid"`
+	Name           string                                                   `json:"name"`
+	FaviconLink    NilString                                                `json:"faviconLink"`
+	LoginUrl       NilString                                                `json:"loginUrl"`
+	CreatedAt      time.Time                                                `json:"createdAt"`
+	UpdatedAt      time.Time                                                `json:"updatedAt"`
+	BillingHistory CreateInfraProviderResponseDtoResponseBillingHistory     `json:"billingHistory"`
+	BillingNodes   []CreateInfraProviderResponseDtoResponseBillingNodesItem `json:"billingNodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInfraProviderResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraProviderResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *CreateInfraProviderResponseDtoResponse) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *CreateInfraProviderResponseDtoResponse) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CreateInfraProviderResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CreateInfraProviderResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetBillingHistory returns the value of BillingHistory.
+func (s *CreateInfraProviderResponseDtoResponse) GetBillingHistory() CreateInfraProviderResponseDtoResponseBillingHistory {
+	return s.BillingHistory
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *CreateInfraProviderResponseDtoResponse) GetBillingNodes() []CreateInfraProviderResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInfraProviderResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraProviderResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *CreateInfraProviderResponseDtoResponse) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *CreateInfraProviderResponseDtoResponse) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CreateInfraProviderResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CreateInfraProviderResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetBillingHistory sets the value of BillingHistory.
+func (s *CreateInfraProviderResponseDtoResponse) SetBillingHistory(val CreateInfraProviderResponseDtoResponseBillingHistory) {
+	s.BillingHistory = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *CreateInfraProviderResponseDtoResponse) SetBillingNodes(val []CreateInfraProviderResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+type CreateInfraProviderResponseDtoResponseBillingHistory struct {
+	TotalAmount float64 `json:"totalAmount"`
+	TotalBills  float64 `json:"totalBills"`
+}
+
+// GetTotalAmount returns the value of TotalAmount.
+func (s *CreateInfraProviderResponseDtoResponseBillingHistory) GetTotalAmount() float64 {
+	return s.TotalAmount
+}
+
+// GetTotalBills returns the value of TotalBills.
+func (s *CreateInfraProviderResponseDtoResponseBillingHistory) GetTotalBills() float64 {
+	return s.TotalBills
+}
+
+// SetTotalAmount sets the value of TotalAmount.
+func (s *CreateInfraProviderResponseDtoResponseBillingHistory) SetTotalAmount(val float64) {
+	s.TotalAmount = val
+}
+
+// SetTotalBills sets the value of TotalBills.
+func (s *CreateInfraProviderResponseDtoResponseBillingHistory) SetTotalBills(val float64) {
+	s.TotalBills = val
+}
+
+type CreateInfraProviderResponseDtoResponseBillingNodesItem struct {
+	NodeUuid    uuid.UUID `json:"nodeUuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *CreateInfraProviderResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetName returns the value of Name.
+func (s *CreateInfraProviderResponseDtoResponseBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *CreateInfraProviderResponseDtoResponseBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *CreateInfraProviderResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInfraProviderResponseDtoResponseBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *CreateInfraProviderResponseDtoResponseBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/CreateInternalSquadRequestDto
+type CreateInternalSquadRequestDto struct {
+	Name     string      `json:"name"`
+	Inbounds []uuid.UUID `json:"inbounds"`
+}
+
+// GetName returns the value of Name.
+func (s *CreateInternalSquadRequestDto) GetName() string {
+	return s.Name
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *CreateInternalSquadRequestDto) GetInbounds() []uuid.UUID {
+	return s.Inbounds
+}
+
+// SetName sets the value of Name.
+func (s *CreateInternalSquadRequestDto) SetName(val string) {
+	s.Name = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *CreateInternalSquadRequestDto) SetInbounds(val []uuid.UUID) {
+	s.Inbounds = val
+}
+
+// Ref: #/components/schemas/CreateInternalSquadResponseDto
+type CreateInternalSquadResponseDto struct {
+	Response CreateInternalSquadResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *CreateInternalSquadResponseDto) GetResponse() CreateInternalSquadResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *CreateInternalSquadResponseDto) SetResponse(val CreateInternalSquadResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*CreateInternalSquadResponseDto) internalSquadControllerCreateInternalSquadRes() {}
+
+type CreateInternalSquadResponseDtoResponse struct {
+	UUID      uuid.UUID                                            `json:"uuid"`
+	Name      string                                               `json:"name"`
+	Info      CreateInternalSquadResponseDtoResponseInfo           `json:"info"`
+	Inbounds  []CreateInternalSquadResponseDtoResponseInboundsItem `json:"inbounds"`
+	CreatedAt time.Time                                            `json:"createdAt"`
+	UpdatedAt time.Time                                            `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInternalSquadResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateInternalSquadResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetInfo returns the value of Info.
+func (s *CreateInternalSquadResponseDtoResponse) GetInfo() CreateInternalSquadResponseDtoResponseInfo {
+	return s.Info
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *CreateInternalSquadResponseDtoResponse) GetInbounds() []CreateInternalSquadResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CreateInternalSquadResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CreateInternalSquadResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInternalSquadResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateInternalSquadResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetInfo sets the value of Info.
+func (s *CreateInternalSquadResponseDtoResponse) SetInfo(val CreateInternalSquadResponseDtoResponseInfo) {
+	s.Info = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *CreateInternalSquadResponseDtoResponse) SetInbounds(val []CreateInternalSquadResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CreateInternalSquadResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CreateInternalSquadResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type CreateInternalSquadResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *CreateInternalSquadResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type CreateInternalSquadResponseDtoResponseInfo struct {
+	MembersCount  float64 `json:"membersCount"`
+	InboundsCount float64 `json:"inboundsCount"`
+}
+
+// GetMembersCount returns the value of MembersCount.
+func (s *CreateInternalSquadResponseDtoResponseInfo) GetMembersCount() float64 {
+	return s.MembersCount
+}
+
+// GetInboundsCount returns the value of InboundsCount.
+func (s *CreateInternalSquadResponseDtoResponseInfo) GetInboundsCount() float64 {
+	return s.InboundsCount
+}
+
+// SetMembersCount sets the value of MembersCount.
+func (s *CreateInternalSquadResponseDtoResponseInfo) SetMembersCount(val float64) {
+	s.MembersCount = val
+}
+
+// SetInboundsCount sets the value of InboundsCount.
+func (s *CreateInternalSquadResponseDtoResponseInfo) SetInboundsCount(val float64) {
+	s.InboundsCount = val
+}
+
 // Ref: #/components/schemas/CreateNodeRequestDto
 type CreateNodeRequestDto struct {
-	Name                    string      `json:"name"`
-	Address                 string      `json:"address"`
-	Port                    OptInt      `json:"port"`
-	IsTrafficTrackingActive OptBool     `json:"isTrafficTrackingActive"`
-	TrafficLimitBytes       OptInt      `json:"trafficLimitBytes"`
-	NotifyPercent           OptInt      `json:"notifyPercent"`
-	TrafficResetDay         OptInt      `json:"trafficResetDay"`
-	ExcludedInbounds        []uuid.UUID `json:"excludedInbounds"`
-	CountryCode             OptString   `json:"countryCode"`
-	ConsumptionMultiplier   OptFloat64  `json:"consumptionMultiplier"`
+	Name                    string                            `json:"name"`
+	Address                 string                            `json:"address"`
+	Port                    OptInt                            `json:"port"`
+	IsTrafficTrackingActive OptBool                           `json:"isTrafficTrackingActive"`
+	TrafficLimitBytes       OptInt                            `json:"trafficLimitBytes"`
+	NotifyPercent           OptInt                            `json:"notifyPercent"`
+	TrafficResetDay         OptInt                            `json:"trafficResetDay"`
+	CountryCode             OptString                         `json:"countryCode"`
+	ConsumptionMultiplier   OptFloat64                        `json:"consumptionMultiplier"`
+	ConfigProfile           CreateNodeRequestDtoConfigProfile `json:"configProfile"`
+	ProviderUuid            OptNilUUID                        `json:"providerUuid"`
 }
 
 // GetName returns the value of Name.
@@ -2984,11 +4581,6 @@ func (s *CreateNodeRequestDto) GetTrafficResetDay() OptInt {
 	return s.TrafficResetDay
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *CreateNodeRequestDto) GetExcludedInbounds() []uuid.UUID {
-	return s.ExcludedInbounds
-}
-
 // GetCountryCode returns the value of CountryCode.
 func (s *CreateNodeRequestDto) GetCountryCode() OptString {
 	return s.CountryCode
@@ -2997,6 +4589,16 @@ func (s *CreateNodeRequestDto) GetCountryCode() OptString {
 // GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
 func (s *CreateNodeRequestDto) GetConsumptionMultiplier() OptFloat64 {
 	return s.ConsumptionMultiplier
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *CreateNodeRequestDto) GetConfigProfile() CreateNodeRequestDtoConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateNodeRequestDto) GetProviderUuid() OptNilUUID {
+	return s.ProviderUuid
 }
 
 // SetName sets the value of Name.
@@ -3034,11 +4636,6 @@ func (s *CreateNodeRequestDto) SetTrafficResetDay(val OptInt) {
 	s.TrafficResetDay = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *CreateNodeRequestDto) SetExcludedInbounds(val []uuid.UUID) {
-	s.ExcludedInbounds = val
-}
-
 // SetCountryCode sets the value of CountryCode.
 func (s *CreateNodeRequestDto) SetCountryCode(val OptString) {
 	s.CountryCode = val
@@ -3047,6 +4644,41 @@ func (s *CreateNodeRequestDto) SetCountryCode(val OptString) {
 // SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
 func (s *CreateNodeRequestDto) SetConsumptionMultiplier(val OptFloat64) {
 	s.ConsumptionMultiplier = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *CreateNodeRequestDto) SetConfigProfile(val CreateNodeRequestDtoConfigProfile) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
+	s.ProviderUuid = val
+}
+
+type CreateNodeRequestDtoConfigProfile struct {
+	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *CreateNodeRequestDtoConfigProfile) GetActiveConfigProfileUuid() uuid.UUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *CreateNodeRequestDtoConfigProfile) GetActiveInbounds() []uuid.UUID {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *CreateNodeRequestDtoConfigProfile) SetActiveConfigProfileUuid(val uuid.UUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *CreateNodeRequestDtoConfigProfile) SetActiveInbounds(val []uuid.UUID) {
+	s.ActiveInbounds = val
 }
 
 // Ref: #/components/schemas/CreateNodeResponseDto
@@ -3064,35 +4696,40 @@ func (s *CreateNodeResponseDto) SetResponse(val CreateNodeResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*CreateNodeResponseDto) nodesControllerCreateNodeRes() {}
+
 type CreateNodeResponseDtoResponse struct {
-	UUID                    uuid.UUID                                           `json:"uuid"`
-	Name                    string                                              `json:"name"`
-	Address                 string                                              `json:"address"`
-	Port                    NilInt                                              `json:"port"`
-	IsConnected             bool                                                `json:"isConnected"`
-	IsDisabled              bool                                                `json:"isDisabled"`
-	IsConnecting            bool                                                `json:"isConnecting"`
-	IsNodeOnline            bool                                                `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                         `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                           `json:"lastStatusMessage"`
-	XrayVersion             NilString                                           `json:"xrayVersion"`
-	XrayUptime              string                                              `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                              `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                          `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                          `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                              `json:"notifyPercent"`
-	UsersOnline             NilInt                                              `json:"usersOnline"`
-	ViewPosition            int                                                 `json:"viewPosition"`
-	CountryCode             string                                              `json:"countryCode"`
-	ConsumptionMultiplier   float64                                             `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                              `json:"cpuCount"`
-	CpuModel                NilString                                           `json:"cpuModel"`
-	TotalRam                NilString                                           `json:"totalRam"`
-	CreatedAt               time.Time                                           `json:"createdAt"`
-	UpdatedAt               time.Time                                           `json:"updatedAt"`
-	ExcludedInbounds        []CreateNodeResponseDtoResponseExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                  `json:"uuid"`
+	Name                    string                                     `json:"name"`
+	Address                 string                                     `json:"address"`
+	Port                    NilInt                                     `json:"port"`
+	IsConnected             bool                                       `json:"isConnected"`
+	IsDisabled              bool                                       `json:"isDisabled"`
+	IsConnecting            bool                                       `json:"isConnecting"`
+	IsNodeOnline            bool                                       `json:"isNodeOnline"`
+	IsXrayRunning           bool                                       `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                  `json:"lastStatusMessage"`
+	XrayVersion             NilString                                  `json:"xrayVersion"`
+	NodeVersion             NilString                                  `json:"nodeVersion"`
+	XrayUptime              string                                     `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                       `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                     `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                 `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                 `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                     `json:"notifyPercent"`
+	UsersOnline             NilInt                                     `json:"usersOnline"`
+	ViewPosition            int                                        `json:"viewPosition"`
+	CountryCode             string                                     `json:"countryCode"`
+	ConsumptionMultiplier   float64                                    `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                     `json:"cpuCount"`
+	CpuModel                NilString                                  `json:"cpuModel"`
+	TotalRam                NilString                                  `json:"totalRam"`
+	CreatedAt               time.Time                                  `json:"createdAt"`
+	UpdatedAt               time.Time                                  `json:"updatedAt"`
+	ConfigProfile           CreateNodeResponseDtoResponseConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                    `json:"providerUuid"`
+	Provider                NilCreateNodeResponseDtoResponseProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -3153,6 +4790,11 @@ func (s *CreateNodeResponseDtoResponse) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *CreateNodeResponseDtoResponse) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *CreateNodeResponseDtoResponse) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -3230,9 +4872,19 @@ func (s *CreateNodeResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *CreateNodeResponseDtoResponse) GetExcludedInbounds() []CreateNodeResponseDtoResponseExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *CreateNodeResponseDtoResponse) GetConfigProfile() CreateNodeResponseDtoResponseConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateNodeResponseDtoResponse) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *CreateNodeResponseDtoResponse) GetProvider() NilCreateNodeResponseDtoResponseProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -3293,6 +4945,11 @@ func (s *CreateNodeResponseDtoResponse) SetLastStatusMessage(val NilString) {
 // SetXrayVersion sets the value of XrayVersion.
 func (s *CreateNodeResponseDtoResponse) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *CreateNodeResponseDtoResponse) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -3370,67 +5027,204 @@ func (s *CreateNodeResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *CreateNodeResponseDtoResponse) SetExcludedInbounds(val []CreateNodeResponseDtoResponseExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *CreateNodeResponseDtoResponse) SetConfigProfile(val CreateNodeResponseDtoResponseConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type CreateNodeResponseDtoResponseExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateNodeResponseDtoResponse) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *CreateNodeResponseDtoResponse) SetProvider(val NilCreateNodeResponseDtoResponseProvider) {
+	s.Provider = val
+}
+
+type CreateNodeResponseDtoResponseConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                        `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *CreateNodeResponseDtoResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *CreateNodeResponseDtoResponseConfigProfile) GetActiveInbounds() []CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *CreateNodeResponseDtoResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *CreateNodeResponseDtoResponseConfigProfile) SetActiveInbounds(val []CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) GetTag() string {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) GetType() string {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) GetNetwork() NilString {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) GetSecurity() NilString {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) SetTag(val string) {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) SetType(val string) {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *CreateNodeResponseDtoResponseExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *CreateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type CreateNodeResponseDtoResponseProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *CreateNodeResponseDtoResponseProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *CreateNodeResponseDtoResponseProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *CreateNodeResponseDtoResponseProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *CreateNodeResponseDtoResponseProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CreateNodeResponseDtoResponseProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CreateNodeResponseDtoResponseProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *CreateNodeResponseDtoResponseProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *CreateNodeResponseDtoResponseProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *CreateNodeResponseDtoResponseProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *CreateNodeResponseDtoResponseProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CreateNodeResponseDtoResponseProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CreateNodeResponseDtoResponseProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/CreateUserHwidDeviceRequestDto
@@ -3505,20 +5299,47 @@ func (s *CreateUserHwidDeviceRequestDto) SetUserAgent(val OptString) {
 
 // Ref: #/components/schemas/CreateUserHwidDeviceResponseDto
 type CreateUserHwidDeviceResponseDto struct {
-	Response []CreateUserHwidDeviceResponseDtoResponseItem `json:"response"`
+	Response CreateUserHwidDeviceResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *CreateUserHwidDeviceResponseDto) GetResponse() []CreateUserHwidDeviceResponseDtoResponseItem {
+func (s *CreateUserHwidDeviceResponseDto) GetResponse() CreateUserHwidDeviceResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *CreateUserHwidDeviceResponseDto) SetResponse(val []CreateUserHwidDeviceResponseDtoResponseItem) {
+func (s *CreateUserHwidDeviceResponseDto) SetResponse(val CreateUserHwidDeviceResponseDtoResponse) {
 	s.Response = val
 }
 
-type CreateUserHwidDeviceResponseDtoResponseItem struct {
+func (*CreateUserHwidDeviceResponseDto) hwidUserDevicesControllerCreateUserHwidDeviceRes() {}
+
+type CreateUserHwidDeviceResponseDtoResponse struct {
+	Total   float64                                              `json:"total"`
+	Devices []CreateUserHwidDeviceResponseDtoResponseDevicesItem `json:"devices"`
+}
+
+// GetTotal returns the value of Total.
+func (s *CreateUserHwidDeviceResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetDevices returns the value of Devices.
+func (s *CreateUserHwidDeviceResponseDtoResponse) GetDevices() []CreateUserHwidDeviceResponseDtoResponseDevicesItem {
+	return s.Devices
+}
+
+// SetTotal sets the value of Total.
+func (s *CreateUserHwidDeviceResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetDevices sets the value of Devices.
+func (s *CreateUserHwidDeviceResponseDtoResponse) SetDevices(val []CreateUserHwidDeviceResponseDtoResponseDevicesItem) {
+	s.Devices = val
+}
+
+type CreateUserHwidDeviceResponseDtoResponseDevicesItem struct {
 	Hwid        string    `json:"hwid"`
 	UserUuid    uuid.UUID `json:"userUuid"`
 	Platform    NilString `json:"platform"`
@@ -3530,112 +5351,123 @@ type CreateUserHwidDeviceResponseDtoResponseItem struct {
 }
 
 // GetHwid returns the value of Hwid.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetHwid() string {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetHwid() string {
 	return s.Hwid
 }
 
 // GetUserUuid returns the value of UserUuid.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetUserUuid() uuid.UUID {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetUserUuid() uuid.UUID {
 	return s.UserUuid
 }
 
 // GetPlatform returns the value of Platform.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetPlatform() NilString {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetPlatform() NilString {
 	return s.Platform
 }
 
 // GetOsVersion returns the value of OsVersion.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetOsVersion() NilString {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetOsVersion() NilString {
 	return s.OsVersion
 }
 
 // GetDeviceModel returns the value of DeviceModel.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetDeviceModel() NilString {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetDeviceModel() NilString {
 	return s.DeviceModel
 }
 
 // GetUserAgent returns the value of UserAgent.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetUserAgent() NilString {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetUserAgent() NilString {
 	return s.UserAgent
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetCreatedAt() time.Time {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) GetUpdatedAt() time.Time {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
 // SetHwid sets the value of Hwid.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetHwid(val string) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetHwid(val string) {
 	s.Hwid = val
 }
 
 // SetUserUuid sets the value of UserUuid.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetUserUuid(val uuid.UUID) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetUserUuid(val uuid.UUID) {
 	s.UserUuid = val
 }
 
 // SetPlatform sets the value of Platform.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetPlatform(val NilString) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetPlatform(val NilString) {
 	s.Platform = val
 }
 
 // SetOsVersion sets the value of OsVersion.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetOsVersion(val NilString) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetOsVersion(val NilString) {
 	s.OsVersion = val
 }
 
 // SetDeviceModel sets the value of DeviceModel.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetDeviceModel(val NilString) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetDeviceModel(val NilString) {
 	s.DeviceModel = val
 }
 
 // SetUserAgent sets the value of UserAgent.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetUserAgent(val NilString) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetUserAgent(val NilString) {
 	s.UserAgent = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetCreatedAt(val time.Time) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *CreateUserHwidDeviceResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
+func (s *CreateUserHwidDeviceResponseDtoResponseDevicesItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/CreateUserRequestDto
 type CreateUserRequestDto struct {
-	Username         string                        `json:"username"`
-	Status           OptCreateUserRequestDtoStatus `json:"status"`
-	SubscriptionUuid OptUUID                       `json:"subscriptionUuid"`
-	ShortUuid        OptString                     `json:"shortUuid"`
-	TrojanPassword   OptString                     `json:"trojanPassword"`
-	VlessUuid        OptUUID                       `json:"vlessUuid"`
-	SsPassword       OptString                     `json:"ssPassword"`
-	// Traffic limit in bytes. 0 - unlimited.
+	// Unique username for the user. Required. Must be 6-36 characters long and contain only letters,
+	// numbers, underscores and dashes.
+	Username string `json:"username"`
+	// Optional. User account status. Defaults to ACTIVE.
+	Status OptCreateUserRequestDtoStatus `json:"status"`
+	// Optional. Short UUID identifier for the user.
+	ShortUuid OptString `json:"shortUuid"`
+	// Optional. Password for Trojan protocol. Must be 8-32 characters.
+	TrojanPassword OptString `json:"trojanPassword"`
+	// Optional. UUID for VLESS protocol. Must be a valid UUID format.
+	VlessUuid OptUUID `json:"vlessUuid"`
+	// Optional. Password for Shadowsocks protocol. Must be 8-32 characters.
+	SsPassword OptString `json:"ssPassword"`
+	// Optional. Traffic limit in bytes. Set to 0 for unlimited traffic.
 	TrafficLimitBytes OptInt `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy CreateUserRequestDtoTrafficLimitStrategy `json:"trafficLimitStrategy"`
-	ActiveUserInbounds   []uuid.UUID                              `json:"activeUserInbounds"`
-	// Date format: 2025-01-17T15:38:45.065Z.
+	TrafficLimitStrategy OptCreateUserRequestDtoTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	// Account expiration date. Required. Format: 2025-01-17T15:38:45.065Z.
 	ExpireAt time.Time `json:"expireAt"`
-	// Date format: 2025-01-17T15:38:45.065Z.
+	// Optional. Account creation date. Format: 2025-01-17T15:38:45.065Z.
 	CreatedAt OptDateTime `json:"createdAt"`
-	// Date format: 2025-01-17T15:38:45.065Z.
-	LastTrafficResetAt OptDateTime  `json:"lastTrafficResetAt"`
-	Description        OptString    `json:"description"`
-	Tag                OptNilString `json:"tag"`
-	TelegramId         OptInt       `json:"telegramId"`
-	Email              OptString    `json:"email"`
-	// Device limit.
-	HwidDeviceLimit     OptInt  `json:"hwidDeviceLimit"`
-	ActivateAllInbounds OptBool `json:"activateAllInbounds"`
+	// Optional. Date of last traffic reset. Format: 2025-01-17T15:38:45.065Z.
+	LastTrafficResetAt OptDateTime `json:"lastTrafficResetAt"`
+	// Optional. Additional notes or description for the user account.
+	Description OptString `json:"description"`
+	// Optional. User tag for categorization. Max 16 characters, uppercase letters, numbers and
+	// underscores only.
+	Tag OptNilString `json:"tag"`
+	// Optional. Telegram user ID for notifications. Must be an integer.
+	TelegramId OptNilInt `json:"telegramId"`
+	// Optional. User email address. Must be a valid email format.
+	Email OptNilString `json:"email"`
+	// Optional. Maximum number of hardware devices allowed. Must be a positive integer.
+	HwidDeviceLimit OptInt `json:"hwidDeviceLimit"`
+	// Optional. Array of UUIDs representing enabled internal squads.
+	ActiveInternalSquads []uuid.UUID `json:"activeInternalSquads"`
 }
 
 // GetUsername returns the value of Username.
@@ -3646,11 +5478,6 @@ func (s *CreateUserRequestDto) GetUsername() string {
 // GetStatus returns the value of Status.
 func (s *CreateUserRequestDto) GetStatus() OptCreateUserRequestDtoStatus {
 	return s.Status
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *CreateUserRequestDto) GetSubscriptionUuid() OptUUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -3679,13 +5506,8 @@ func (s *CreateUserRequestDto) GetTrafficLimitBytes() OptInt {
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *CreateUserRequestDto) GetTrafficLimitStrategy() CreateUserRequestDtoTrafficLimitStrategy {
+func (s *CreateUserRequestDto) GetTrafficLimitStrategy() OptCreateUserRequestDtoTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
-}
-
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *CreateUserRequestDto) GetActiveUserInbounds() []uuid.UUID {
-	return s.ActiveUserInbounds
 }
 
 // GetExpireAt returns the value of ExpireAt.
@@ -3714,12 +5536,12 @@ func (s *CreateUserRequestDto) GetTag() OptNilString {
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *CreateUserRequestDto) GetTelegramId() OptInt {
+func (s *CreateUserRequestDto) GetTelegramId() OptNilInt {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *CreateUserRequestDto) GetEmail() OptString {
+func (s *CreateUserRequestDto) GetEmail() OptNilString {
 	return s.Email
 }
 
@@ -3728,9 +5550,9 @@ func (s *CreateUserRequestDto) GetHwidDeviceLimit() OptInt {
 	return s.HwidDeviceLimit
 }
 
-// GetActivateAllInbounds returns the value of ActivateAllInbounds.
-func (s *CreateUserRequestDto) GetActivateAllInbounds() OptBool {
-	return s.ActivateAllInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *CreateUserRequestDto) GetActiveInternalSquads() []uuid.UUID {
+	return s.ActiveInternalSquads
 }
 
 // SetUsername sets the value of Username.
@@ -3741,11 +5563,6 @@ func (s *CreateUserRequestDto) SetUsername(val string) {
 // SetStatus sets the value of Status.
 func (s *CreateUserRequestDto) SetStatus(val OptCreateUserRequestDtoStatus) {
 	s.Status = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *CreateUserRequestDto) SetSubscriptionUuid(val OptUUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -3774,13 +5591,8 @@ func (s *CreateUserRequestDto) SetTrafficLimitBytes(val OptInt) {
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *CreateUserRequestDto) SetTrafficLimitStrategy(val CreateUserRequestDtoTrafficLimitStrategy) {
+func (s *CreateUserRequestDto) SetTrafficLimitStrategy(val OptCreateUserRequestDtoTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
-}
-
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *CreateUserRequestDto) SetActiveUserInbounds(val []uuid.UUID) {
-	s.ActiveUserInbounds = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
@@ -3809,12 +5621,12 @@ func (s *CreateUserRequestDto) SetTag(val OptNilString) {
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *CreateUserRequestDto) SetTelegramId(val OptInt) {
+func (s *CreateUserRequestDto) SetTelegramId(val OptNilInt) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *CreateUserRequestDto) SetEmail(val OptString) {
+func (s *CreateUserRequestDto) SetEmail(val OptNilString) {
 	s.Email = val
 }
 
@@ -3823,11 +5635,12 @@ func (s *CreateUserRequestDto) SetHwidDeviceLimit(val OptInt) {
 	s.HwidDeviceLimit = val
 }
 
-// SetActivateAllInbounds sets the value of ActivateAllInbounds.
-func (s *CreateUserRequestDto) SetActivateAllInbounds(val OptBool) {
-	s.ActivateAllInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *CreateUserRequestDto) SetActiveInternalSquads(val []uuid.UUID) {
+	s.ActiveInternalSquads = val
 }
 
+// Optional. User account status. Defaults to ACTIVE.
 type CreateUserRequestDtoStatus string
 
 const (
@@ -3954,6 +5767,39 @@ func (s *DeleteApiTokenResponseDto) SetResponse(val bool) {
 	s.Response = val
 }
 
+func (*DeleteApiTokenResponseDto) apiTokensControllerDeleteRes() {}
+
+// Ref: #/components/schemas/DeleteConfigProfileResponseDto
+type DeleteConfigProfileResponseDto struct {
+	Response DeleteConfigProfileResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *DeleteConfigProfileResponseDto) GetResponse() DeleteConfigProfileResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *DeleteConfigProfileResponseDto) SetResponse(val DeleteConfigProfileResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*DeleteConfigProfileResponseDto) configProfileControllerDeleteConfigProfileByUuidRes() {}
+
+type DeleteConfigProfileResponseDtoResponse struct {
+	IsDeleted bool `json:"isDeleted"`
+}
+
+// GetIsDeleted returns the value of IsDeleted.
+func (s *DeleteConfigProfileResponseDtoResponse) GetIsDeleted() bool {
+	return s.IsDeleted
+}
+
+// SetIsDeleted sets the value of IsDeleted.
+func (s *DeleteConfigProfileResponseDtoResponse) SetIsDeleted(val bool) {
+	s.IsDeleted = val
+}
+
 // Ref: #/components/schemas/DeleteHostResponseDto
 type DeleteHostResponseDto struct {
 	Response DeleteHostResponseDtoResponse `json:"response"`
@@ -3985,6 +5831,527 @@ func (s *DeleteHostResponseDtoResponse) SetIsDeleted(val bool) {
 	s.IsDeleted = val
 }
 
+// Ref: #/components/schemas/DeleteInfraBillingHistoryRecordByUuidResponseDto
+type DeleteInfraBillingHistoryRecordByUuidResponseDto struct {
+	Response DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDto) GetResponse() DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDto) SetResponse(val DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*DeleteInfraBillingHistoryRecordByUuidResponseDto) infraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes() {
+}
+
+type DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse struct {
+	Records []DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem `json:"records"`
+	Total   float64                                                               `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse) GetRecords() []DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse) SetRecords(val []DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem struct {
+	UUID         uuid.UUID                                                                   `json:"uuid"`
+	ProviderUuid uuid.UUID                                                                   `json:"providerUuid"`
+	Amount       float64                                                                     `json:"amount"`
+	BilledAt     time.Time                                                                   `json:"billedAt"`
+	Provider     DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider `json:"provider"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetAmount returns the value of Amount.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) GetAmount() float64 {
+	return s.Amount
+}
+
+// GetBilledAt returns the value of BilledAt.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) GetBilledAt() time.Time {
+	return s.BilledAt
+}
+
+// GetProvider returns the value of Provider.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) GetProvider() DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider {
+	return s.Provider
+}
+
+// SetUUID sets the value of UUID.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) SetAmount(val float64) {
+	s.Amount = val
+}
+
+// SetBilledAt sets the value of BilledAt.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) SetBilledAt(val time.Time) {
+	s.BilledAt = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItem) SetProvider(val DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) {
+	s.Provider = val
+}
+
+type DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *DeleteInfraBillingHistoryRecordByUuidResponseDtoResponseRecordsItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// Ref: #/components/schemas/DeleteInfraBillingNodeByUuidResponseDto
+type DeleteInfraBillingNodeByUuidResponseDto struct {
+	Response DeleteInfraBillingNodeByUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *DeleteInfraBillingNodeByUuidResponseDto) GetResponse() DeleteInfraBillingNodeByUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *DeleteInfraBillingNodeByUuidResponseDto) SetResponse(val DeleteInfraBillingNodeByUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*DeleteInfraBillingNodeByUuidResponseDto) infraBillingControllerDeleteInfraBillingNodeByUuidRes() {
+}
+
+type DeleteInfraBillingNodeByUuidResponseDtoResponse struct {
+	TotalBillingNodes          float64                                                                    `json:"totalBillingNodes"`
+	BillingNodes               []DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem          `json:"billingNodes"`
+	AvailableBillingNodes      []DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem `json:"availableBillingNodes"`
+	TotalAvailableBillingNodes float64                                                                    `json:"totalAvailableBillingNodes"`
+	Stats                      DeleteInfraBillingNodeByUuidResponseDtoResponseStats                       `json:"stats"`
+}
+
+// GetTotalBillingNodes returns the value of TotalBillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) GetTotalBillingNodes() float64 {
+	return s.TotalBillingNodes
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) GetBillingNodes() []DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// GetAvailableBillingNodes returns the value of AvailableBillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) GetAvailableBillingNodes() []DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem {
+	return s.AvailableBillingNodes
+}
+
+// GetTotalAvailableBillingNodes returns the value of TotalAvailableBillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) GetTotalAvailableBillingNodes() float64 {
+	return s.TotalAvailableBillingNodes
+}
+
+// GetStats returns the value of Stats.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) GetStats() DeleteInfraBillingNodeByUuidResponseDtoResponseStats {
+	return s.Stats
+}
+
+// SetTotalBillingNodes sets the value of TotalBillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) SetTotalBillingNodes(val float64) {
+	s.TotalBillingNodes = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) SetBillingNodes(val []DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+// SetAvailableBillingNodes sets the value of AvailableBillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) SetAvailableBillingNodes(val []DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) {
+	s.AvailableBillingNodes = val
+}
+
+// SetTotalAvailableBillingNodes sets the value of TotalAvailableBillingNodes.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) SetTotalAvailableBillingNodes(val float64) {
+	s.TotalAvailableBillingNodes = val
+}
+
+// SetStats sets the value of Stats.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponse) SetStats(val DeleteInfraBillingNodeByUuidResponseDtoResponseStats) {
+	s.Stats = val
+}
+
+type DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseAvailableBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem struct {
+	UUID          uuid.UUID                                                               `json:"uuid"`
+	NodeUuid      uuid.UUID                                                               `json:"nodeUuid"`
+	ProviderUuid  uuid.UUID                                                               `json:"providerUuid"`
+	Provider      DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider `json:"provider"`
+	Node          DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode     `json:"node"`
+	NextBillingAt time.Time                                                               `json:"nextBillingAt"`
+	CreatedAt     time.Time                                                               `json:"createdAt"`
+	UpdatedAt     time.Time                                                               `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetProvider() DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider {
+	return s.Provider
+}
+
+// GetNode returns the value of Node.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetNode() DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode {
+	return s.Node
+}
+
+// GetNextBillingAt returns the value of NextBillingAt.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetNextBillingAt() time.Time {
+	return s.NextBillingAt
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetProvider(val DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) {
+	s.Provider = val
+}
+
+// SetNode sets the value of Node.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetNode(val DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) {
+	s.Node = val
+}
+
+// SetNextBillingAt sets the value of NextBillingAt.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetNextBillingAt(val time.Time) {
+	s.NextBillingAt = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	LoginUrl    NilString `json:"loginUrl"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseBillingNodesItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+type DeleteInfraBillingNodeByUuidResponseDtoResponseStats struct {
+	UpcomingNodesCount   float64 `json:"upcomingNodesCount"`
+	CurrentMonthPayments float64 `json:"currentMonthPayments"`
+	TotalSpent           float64 `json:"totalSpent"`
+}
+
+// GetUpcomingNodesCount returns the value of UpcomingNodesCount.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseStats) GetUpcomingNodesCount() float64 {
+	return s.UpcomingNodesCount
+}
+
+// GetCurrentMonthPayments returns the value of CurrentMonthPayments.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseStats) GetCurrentMonthPayments() float64 {
+	return s.CurrentMonthPayments
+}
+
+// GetTotalSpent returns the value of TotalSpent.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseStats) GetTotalSpent() float64 {
+	return s.TotalSpent
+}
+
+// SetUpcomingNodesCount sets the value of UpcomingNodesCount.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseStats) SetUpcomingNodesCount(val float64) {
+	s.UpcomingNodesCount = val
+}
+
+// SetCurrentMonthPayments sets the value of CurrentMonthPayments.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseStats) SetCurrentMonthPayments(val float64) {
+	s.CurrentMonthPayments = val
+}
+
+// SetTotalSpent sets the value of TotalSpent.
+func (s *DeleteInfraBillingNodeByUuidResponseDtoResponseStats) SetTotalSpent(val float64) {
+	s.TotalSpent = val
+}
+
+// Ref: #/components/schemas/DeleteInfraProviderByUuidResponseDto
+type DeleteInfraProviderByUuidResponseDto struct {
+	Response DeleteInfraProviderByUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *DeleteInfraProviderByUuidResponseDto) GetResponse() DeleteInfraProviderByUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *DeleteInfraProviderByUuidResponseDto) SetResponse(val DeleteInfraProviderByUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*DeleteInfraProviderByUuidResponseDto) infraBillingControllerDeleteInfraProviderByUuidRes() {}
+
+type DeleteInfraProviderByUuidResponseDtoResponse struct {
+	IsDeleted bool `json:"isDeleted"`
+}
+
+// GetIsDeleted returns the value of IsDeleted.
+func (s *DeleteInfraProviderByUuidResponseDtoResponse) GetIsDeleted() bool {
+	return s.IsDeleted
+}
+
+// SetIsDeleted sets the value of IsDeleted.
+func (s *DeleteInfraProviderByUuidResponseDtoResponse) SetIsDeleted(val bool) {
+	s.IsDeleted = val
+}
+
+// Ref: #/components/schemas/DeleteInternalSquadResponseDto
+type DeleteInternalSquadResponseDto struct {
+	Response DeleteInternalSquadResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *DeleteInternalSquadResponseDto) GetResponse() DeleteInternalSquadResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *DeleteInternalSquadResponseDto) SetResponse(val DeleteInternalSquadResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*DeleteInternalSquadResponseDto) internalSquadControllerDeleteInternalSquadRes() {}
+
+type DeleteInternalSquadResponseDtoResponse struct {
+	IsDeleted bool `json:"isDeleted"`
+}
+
+// GetIsDeleted returns the value of IsDeleted.
+func (s *DeleteInternalSquadResponseDtoResponse) GetIsDeleted() bool {
+	return s.IsDeleted
+}
+
+// SetIsDeleted sets the value of IsDeleted.
+func (s *DeleteInternalSquadResponseDtoResponse) SetIsDeleted(val bool) {
+	s.IsDeleted = val
+}
+
 // Ref: #/components/schemas/DeleteNodeResponseDto
 type DeleteNodeResponseDto struct {
 	Response DeleteNodeResponseDtoResponse `json:"response"`
@@ -3999,6 +6366,8 @@ func (s *DeleteNodeResponseDto) GetResponse() DeleteNodeResponseDtoResponse {
 func (s *DeleteNodeResponseDto) SetResponse(val DeleteNodeResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*DeleteNodeResponseDto) nodesControllerDeleteNodeRes() {}
 
 type DeleteNodeResponseDtoResponse struct {
 	IsDeleted bool `json:"isDeleted"`
@@ -4042,20 +6411,47 @@ func (s *DeleteUserHwidDeviceRequestDto) SetHwid(val string) {
 
 // Ref: #/components/schemas/DeleteUserHwidDeviceResponseDto
 type DeleteUserHwidDeviceResponseDto struct {
-	Response []DeleteUserHwidDeviceResponseDtoResponseItem `json:"response"`
+	Response DeleteUserHwidDeviceResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *DeleteUserHwidDeviceResponseDto) GetResponse() []DeleteUserHwidDeviceResponseDtoResponseItem {
+func (s *DeleteUserHwidDeviceResponseDto) GetResponse() DeleteUserHwidDeviceResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *DeleteUserHwidDeviceResponseDto) SetResponse(val []DeleteUserHwidDeviceResponseDtoResponseItem) {
+func (s *DeleteUserHwidDeviceResponseDto) SetResponse(val DeleteUserHwidDeviceResponseDtoResponse) {
 	s.Response = val
 }
 
-type DeleteUserHwidDeviceResponseDtoResponseItem struct {
+func (*DeleteUserHwidDeviceResponseDto) hwidUserDevicesControllerDeleteUserHwidDeviceRes() {}
+
+type DeleteUserHwidDeviceResponseDtoResponse struct {
+	Total   float64                                              `json:"total"`
+	Devices []DeleteUserHwidDeviceResponseDtoResponseDevicesItem `json:"devices"`
+}
+
+// GetTotal returns the value of Total.
+func (s *DeleteUserHwidDeviceResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetDevices returns the value of Devices.
+func (s *DeleteUserHwidDeviceResponseDtoResponse) GetDevices() []DeleteUserHwidDeviceResponseDtoResponseDevicesItem {
+	return s.Devices
+}
+
+// SetTotal sets the value of Total.
+func (s *DeleteUserHwidDeviceResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetDevices sets the value of Devices.
+func (s *DeleteUserHwidDeviceResponseDtoResponse) SetDevices(val []DeleteUserHwidDeviceResponseDtoResponseDevicesItem) {
+	s.Devices = val
+}
+
+type DeleteUserHwidDeviceResponseDtoResponseDevicesItem struct {
 	Hwid        string    `json:"hwid"`
 	UserUuid    uuid.UUID `json:"userUuid"`
 	Platform    NilString `json:"platform"`
@@ -4067,82 +6463,82 @@ type DeleteUserHwidDeviceResponseDtoResponseItem struct {
 }
 
 // GetHwid returns the value of Hwid.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetHwid() string {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetHwid() string {
 	return s.Hwid
 }
 
 // GetUserUuid returns the value of UserUuid.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetUserUuid() uuid.UUID {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetUserUuid() uuid.UUID {
 	return s.UserUuid
 }
 
 // GetPlatform returns the value of Platform.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetPlatform() NilString {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetPlatform() NilString {
 	return s.Platform
 }
 
 // GetOsVersion returns the value of OsVersion.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetOsVersion() NilString {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetOsVersion() NilString {
 	return s.OsVersion
 }
 
 // GetDeviceModel returns the value of DeviceModel.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetDeviceModel() NilString {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetDeviceModel() NilString {
 	return s.DeviceModel
 }
 
 // GetUserAgent returns the value of UserAgent.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetUserAgent() NilString {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetUserAgent() NilString {
 	return s.UserAgent
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetCreatedAt() time.Time {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) GetUpdatedAt() time.Time {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
 // SetHwid sets the value of Hwid.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetHwid(val string) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetHwid(val string) {
 	s.Hwid = val
 }
 
 // SetUserUuid sets the value of UserUuid.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetUserUuid(val uuid.UUID) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetUserUuid(val uuid.UUID) {
 	s.UserUuid = val
 }
 
 // SetPlatform sets the value of Platform.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetPlatform(val NilString) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetPlatform(val NilString) {
 	s.Platform = val
 }
 
 // SetOsVersion sets the value of OsVersion.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetOsVersion(val NilString) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetOsVersion(val NilString) {
 	s.OsVersion = val
 }
 
 // SetDeviceModel sets the value of DeviceModel.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetDeviceModel(val NilString) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetDeviceModel(val NilString) {
 	s.DeviceModel = val
 }
 
 // SetUserAgent sets the value of UserAgent.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetUserAgent(val NilString) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetUserAgent(val NilString) {
 	s.UserAgent = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetCreatedAt(val time.Time) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *DeleteUserHwidDeviceResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
+func (s *DeleteUserHwidDeviceResponseDtoResponseDevicesItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
@@ -4192,35 +6588,40 @@ func (s *DisableNodeResponseDto) SetResponse(val DisableNodeResponseDtoResponse)
 	s.Response = val
 }
 
+func (*DisableNodeResponseDto) nodesControllerDisableNodeRes() {}
+
 type DisableNodeResponseDtoResponse struct {
-	UUID                    uuid.UUID                                            `json:"uuid"`
-	Name                    string                                               `json:"name"`
-	Address                 string                                               `json:"address"`
-	Port                    NilInt                                               `json:"port"`
-	IsConnected             bool                                                 `json:"isConnected"`
-	IsDisabled              bool                                                 `json:"isDisabled"`
-	IsConnecting            bool                                                 `json:"isConnecting"`
-	IsNodeOnline            bool                                                 `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                 `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                          `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                            `json:"lastStatusMessage"`
-	XrayVersion             NilString                                            `json:"xrayVersion"`
-	XrayUptime              string                                               `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                 `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                               `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                           `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                           `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                               `json:"notifyPercent"`
-	UsersOnline             NilInt                                               `json:"usersOnline"`
-	ViewPosition            int                                                  `json:"viewPosition"`
-	CountryCode             string                                               `json:"countryCode"`
-	ConsumptionMultiplier   float64                                              `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                               `json:"cpuCount"`
-	CpuModel                NilString                                            `json:"cpuModel"`
-	TotalRam                NilString                                            `json:"totalRam"`
-	CreatedAt               time.Time                                            `json:"createdAt"`
-	UpdatedAt               time.Time                                            `json:"updatedAt"`
-	ExcludedInbounds        []DisableNodeResponseDtoResponseExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                   `json:"uuid"`
+	Name                    string                                      `json:"name"`
+	Address                 string                                      `json:"address"`
+	Port                    NilInt                                      `json:"port"`
+	IsConnected             bool                                        `json:"isConnected"`
+	IsDisabled              bool                                        `json:"isDisabled"`
+	IsConnecting            bool                                        `json:"isConnecting"`
+	IsNodeOnline            bool                                        `json:"isNodeOnline"`
+	IsXrayRunning           bool                                        `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                 `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                   `json:"lastStatusMessage"`
+	XrayVersion             NilString                                   `json:"xrayVersion"`
+	NodeVersion             NilString                                   `json:"nodeVersion"`
+	XrayUptime              string                                      `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                        `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                      `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                  `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                  `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                      `json:"notifyPercent"`
+	UsersOnline             NilInt                                      `json:"usersOnline"`
+	ViewPosition            int                                         `json:"viewPosition"`
+	CountryCode             string                                      `json:"countryCode"`
+	ConsumptionMultiplier   float64                                     `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                      `json:"cpuCount"`
+	CpuModel                NilString                                   `json:"cpuModel"`
+	TotalRam                NilString                                   `json:"totalRam"`
+	CreatedAt               time.Time                                   `json:"createdAt"`
+	UpdatedAt               time.Time                                   `json:"updatedAt"`
+	ConfigProfile           DisableNodeResponseDtoResponseConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                     `json:"providerUuid"`
+	Provider                NilDisableNodeResponseDtoResponseProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -4281,6 +6682,11 @@ func (s *DisableNodeResponseDtoResponse) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *DisableNodeResponseDtoResponse) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *DisableNodeResponseDtoResponse) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -4358,9 +6764,19 @@ func (s *DisableNodeResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *DisableNodeResponseDtoResponse) GetExcludedInbounds() []DisableNodeResponseDtoResponseExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *DisableNodeResponseDtoResponse) GetConfigProfile() DisableNodeResponseDtoResponseConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *DisableNodeResponseDtoResponse) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *DisableNodeResponseDtoResponse) GetProvider() NilDisableNodeResponseDtoResponseProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -4421,6 +6837,11 @@ func (s *DisableNodeResponseDtoResponse) SetLastStatusMessage(val NilString) {
 // SetXrayVersion sets the value of XrayVersion.
 func (s *DisableNodeResponseDtoResponse) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *DisableNodeResponseDtoResponse) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -4498,67 +6919,204 @@ func (s *DisableNodeResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *DisableNodeResponseDtoResponse) SetExcludedInbounds(val []DisableNodeResponseDtoResponseExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *DisableNodeResponseDtoResponse) SetConfigProfile(val DisableNodeResponseDtoResponseConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type DisableNodeResponseDtoResponseExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *DisableNodeResponseDtoResponse) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *DisableNodeResponseDtoResponse) SetProvider(val NilDisableNodeResponseDtoResponseProvider) {
+	s.Provider = val
+}
+
+type DisableNodeResponseDtoResponseConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                         `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *DisableNodeResponseDtoResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *DisableNodeResponseDtoResponseConfigProfile) GetActiveInbounds() []DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *DisableNodeResponseDtoResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *DisableNodeResponseDtoResponseConfigProfile) SetActiveInbounds(val []DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) GetTag() string {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) GetType() string {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) GetNetwork() NilString {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) GetSecurity() NilString {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) SetTag(val string) {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) SetType(val string) {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *DisableNodeResponseDtoResponseExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *DisableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type DisableNodeResponseDtoResponseProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *DisableNodeResponseDtoResponseProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *DisableNodeResponseDtoResponseProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *DisableNodeResponseDtoResponseProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *DisableNodeResponseDtoResponseProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *DisableNodeResponseDtoResponseProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *DisableNodeResponseDtoResponseProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *DisableNodeResponseDtoResponseProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *DisableNodeResponseDtoResponseProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *DisableNodeResponseDtoResponseProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *DisableNodeResponseDtoResponseProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *DisableNodeResponseDtoResponseProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *DisableNodeResponseDtoResponseProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/DisableUserResponseDto
@@ -4580,7 +7138,6 @@ func (*DisableUserResponseDto) usersControllerDisableUserRes() {}
 
 type DisableUserResponseDtoResponse struct {
 	UUID                     uuid.UUID                               `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                               `json:"subscriptionUuid"`
 	ShortUuid                string                                  `json:"shortUuid"`
 	Username                 string                                  `json:"username"`
 	Status                   OptDisableUserResponseDtoResponseStatus `json:"status"`
@@ -4588,37 +7145,34 @@ type DisableUserResponseDtoResponse struct {
 	LifetimeUsedTrafficBytes float64                                 `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt                                  `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptDisableUserResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                              `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                            `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                              `json:"expireAt"`
-	OnlineAt             NilDateTime                                            `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                            `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                            `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                 `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                              `json:"vlessUuid"`
-	SsPassword           string                                                 `json:"ssPassword"`
-	Description          NilString                                              `json:"description"`
-	Tag                  NilString                                              `json:"tag"`
-	TelegramId           NilInt                                                 `json:"telegramId"`
-	Email                NilString                                              `json:"email"`
-	HwidDeviceLimit      NilInt                                                 `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                              `json:"createdAt"`
-	UpdatedAt            time.Time                                              `json:"updatedAt"`
-	ActiveUserInbounds   []DisableUserResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                 `json:"subscriptionUrl"`
-	LastConnectedNode    NilDisableUserResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 DisableUserResponseDtoResponseHapp                     `json:"happ"`
+	TrafficLimitStrategy   OptDisableUserResponseDtoResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                                `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                              `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                                `json:"expireAt"`
+	OnlineAt               NilDateTime                                              `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                              `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                              `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                   `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                                `json:"vlessUuid"`
+	SsPassword             string                                                   `json:"ssPassword"`
+	Description            NilString                                                `json:"description"`
+	Tag                    NilString                                                `json:"tag"`
+	TelegramId             NilInt                                                   `json:"telegramId"`
+	Email                  NilString                                                `json:"email"`
+	HwidDeviceLimit        NilInt                                                   `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                              `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                   `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                                `json:"createdAt"`
+	UpdatedAt              time.Time                                                `json:"updatedAt"`
+	ActiveInternalSquads   []DisableUserResponseDtoResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                   `json:"subscriptionUrl"`
+	LastConnectedNode      NilDisableUserResponseDtoResponseLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   DisableUserResponseDtoResponseHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *DisableUserResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *DisableUserResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -4726,6 +7280,16 @@ func (s *DisableUserResponseDtoResponse) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
 }
 
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *DisableUserResponseDtoResponse) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *DisableUserResponseDtoResponse) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *DisableUserResponseDtoResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -4736,9 +7300,9 @@ func (s *DisableUserResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *DisableUserResponseDtoResponse) GetActiveUserInbounds() []DisableUserResponseDtoResponseActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *DisableUserResponseDtoResponse) GetActiveInternalSquads() []DisableUserResponseDtoResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
@@ -4759,11 +7323,6 @@ func (s *DisableUserResponseDtoResponse) GetHapp() DisableUserResponseDtoRespons
 // SetUUID sets the value of UUID.
 func (s *DisableUserResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *DisableUserResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -4871,6 +7430,16 @@ func (s *DisableUserResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
 }
 
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *DisableUserResponseDtoResponse) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *DisableUserResponseDtoResponse) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *DisableUserResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -4881,9 +7450,9 @@ func (s *DisableUserResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *DisableUserResponseDtoResponse) SetActiveUserInbounds(val []DisableUserResponseDtoResponseActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *DisableUserResponseDtoResponse) SetActiveInternalSquads(val []DisableUserResponseDtoResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
@@ -4901,62 +7470,29 @@ func (s *DisableUserResponseDtoResponse) SetHapp(val DisableUserResponseDtoRespo
 	s.Happ = val
 }
 
-type DisableUserResponseDtoResponseActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type DisableUserResponseDtoResponseActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *DisableUserResponseDtoResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *DisableUserResponseDtoResponseActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *DisableUserResponseDtoResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *DisableUserResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetName sets the value of Name.
+func (s *DisableUserResponseDtoResponseActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
 type DisableUserResponseDtoResponseHapp struct {
@@ -5124,35 +7660,40 @@ func (s *EnableNodeResponseDto) SetResponse(val EnableNodeResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*EnableNodeResponseDto) nodesControllerEnableNodeRes() {}
+
 type EnableNodeResponseDtoResponse struct {
-	UUID                    uuid.UUID                                           `json:"uuid"`
-	Name                    string                                              `json:"name"`
-	Address                 string                                              `json:"address"`
-	Port                    NilInt                                              `json:"port"`
-	IsConnected             bool                                                `json:"isConnected"`
-	IsDisabled              bool                                                `json:"isDisabled"`
-	IsConnecting            bool                                                `json:"isConnecting"`
-	IsNodeOnline            bool                                                `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                         `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                           `json:"lastStatusMessage"`
-	XrayVersion             NilString                                           `json:"xrayVersion"`
-	XrayUptime              string                                              `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                              `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                          `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                          `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                              `json:"notifyPercent"`
-	UsersOnline             NilInt                                              `json:"usersOnline"`
-	ViewPosition            int                                                 `json:"viewPosition"`
-	CountryCode             string                                              `json:"countryCode"`
-	ConsumptionMultiplier   float64                                             `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                              `json:"cpuCount"`
-	CpuModel                NilString                                           `json:"cpuModel"`
-	TotalRam                NilString                                           `json:"totalRam"`
-	CreatedAt               time.Time                                           `json:"createdAt"`
-	UpdatedAt               time.Time                                           `json:"updatedAt"`
-	ExcludedInbounds        []EnableNodeResponseDtoResponseExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                  `json:"uuid"`
+	Name                    string                                     `json:"name"`
+	Address                 string                                     `json:"address"`
+	Port                    NilInt                                     `json:"port"`
+	IsConnected             bool                                       `json:"isConnected"`
+	IsDisabled              bool                                       `json:"isDisabled"`
+	IsConnecting            bool                                       `json:"isConnecting"`
+	IsNodeOnline            bool                                       `json:"isNodeOnline"`
+	IsXrayRunning           bool                                       `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                  `json:"lastStatusMessage"`
+	XrayVersion             NilString                                  `json:"xrayVersion"`
+	NodeVersion             NilString                                  `json:"nodeVersion"`
+	XrayUptime              string                                     `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                       `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                     `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                 `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                 `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                     `json:"notifyPercent"`
+	UsersOnline             NilInt                                     `json:"usersOnline"`
+	ViewPosition            int                                        `json:"viewPosition"`
+	CountryCode             string                                     `json:"countryCode"`
+	ConsumptionMultiplier   float64                                    `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                     `json:"cpuCount"`
+	CpuModel                NilString                                  `json:"cpuModel"`
+	TotalRam                NilString                                  `json:"totalRam"`
+	CreatedAt               time.Time                                  `json:"createdAt"`
+	UpdatedAt               time.Time                                  `json:"updatedAt"`
+	ConfigProfile           EnableNodeResponseDtoResponseConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                    `json:"providerUuid"`
+	Provider                NilEnableNodeResponseDtoResponseProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -5213,6 +7754,11 @@ func (s *EnableNodeResponseDtoResponse) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *EnableNodeResponseDtoResponse) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *EnableNodeResponseDtoResponse) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -5290,9 +7836,19 @@ func (s *EnableNodeResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *EnableNodeResponseDtoResponse) GetExcludedInbounds() []EnableNodeResponseDtoResponseExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *EnableNodeResponseDtoResponse) GetConfigProfile() EnableNodeResponseDtoResponseConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *EnableNodeResponseDtoResponse) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *EnableNodeResponseDtoResponse) GetProvider() NilEnableNodeResponseDtoResponseProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -5353,6 +7909,11 @@ func (s *EnableNodeResponseDtoResponse) SetLastStatusMessage(val NilString) {
 // SetXrayVersion sets the value of XrayVersion.
 func (s *EnableNodeResponseDtoResponse) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *EnableNodeResponseDtoResponse) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -5430,67 +7991,204 @@ func (s *EnableNodeResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *EnableNodeResponseDtoResponse) SetExcludedInbounds(val []EnableNodeResponseDtoResponseExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *EnableNodeResponseDtoResponse) SetConfigProfile(val EnableNodeResponseDtoResponseConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type EnableNodeResponseDtoResponseExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *EnableNodeResponseDtoResponse) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *EnableNodeResponseDtoResponse) SetProvider(val NilEnableNodeResponseDtoResponseProvider) {
+	s.Provider = val
+}
+
+type EnableNodeResponseDtoResponseConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                        `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *EnableNodeResponseDtoResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *EnableNodeResponseDtoResponseConfigProfile) GetActiveInbounds() []EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *EnableNodeResponseDtoResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *EnableNodeResponseDtoResponseConfigProfile) SetActiveInbounds(val []EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) GetTag() string {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) GetType() string {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) GetNetwork() NilString {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) GetSecurity() NilString {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) SetTag(val string) {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) SetType(val string) {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *EnableNodeResponseDtoResponseExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *EnableNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type EnableNodeResponseDtoResponseProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *EnableNodeResponseDtoResponseProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *EnableNodeResponseDtoResponseProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *EnableNodeResponseDtoResponseProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *EnableNodeResponseDtoResponseProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *EnableNodeResponseDtoResponseProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *EnableNodeResponseDtoResponseProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *EnableNodeResponseDtoResponseProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *EnableNodeResponseDtoResponseProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *EnableNodeResponseDtoResponseProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *EnableNodeResponseDtoResponseProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *EnableNodeResponseDtoResponseProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *EnableNodeResponseDtoResponseProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/EnableUserResponseDto
@@ -5512,7 +8210,6 @@ func (*EnableUserResponseDto) usersControllerEnableUserRes() {}
 
 type EnableUserResponseDtoResponse struct {
 	UUID                     uuid.UUID                              `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                              `json:"subscriptionUuid"`
 	ShortUuid                string                                 `json:"shortUuid"`
 	Username                 string                                 `json:"username"`
 	Status                   OptEnableUserResponseDtoResponseStatus `json:"status"`
@@ -5520,37 +8217,34 @@ type EnableUserResponseDtoResponse struct {
 	LifetimeUsedTrafficBytes float64                                `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt                                 `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptEnableUserResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                             `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                           `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                             `json:"expireAt"`
-	OnlineAt             NilDateTime                                           `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                           `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                           `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                             `json:"vlessUuid"`
-	SsPassword           string                                                `json:"ssPassword"`
-	Description          NilString                                             `json:"description"`
-	Tag                  NilString                                             `json:"tag"`
-	TelegramId           NilInt                                                `json:"telegramId"`
-	Email                NilString                                             `json:"email"`
-	HwidDeviceLimit      NilInt                                                `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                             `json:"createdAt"`
-	UpdatedAt            time.Time                                             `json:"updatedAt"`
-	ActiveUserInbounds   []EnableUserResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                `json:"subscriptionUrl"`
-	LastConnectedNode    NilEnableUserResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 EnableUserResponseDtoResponseHapp                     `json:"happ"`
+	TrafficLimitStrategy   OptEnableUserResponseDtoResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                               `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                             `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                               `json:"expireAt"`
+	OnlineAt               NilDateTime                                             `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                             `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                             `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                  `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                               `json:"vlessUuid"`
+	SsPassword             string                                                  `json:"ssPassword"`
+	Description            NilString                                               `json:"description"`
+	Tag                    NilString                                               `json:"tag"`
+	TelegramId             NilInt                                                  `json:"telegramId"`
+	Email                  NilString                                               `json:"email"`
+	HwidDeviceLimit        NilInt                                                  `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                             `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                  `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                               `json:"createdAt"`
+	UpdatedAt              time.Time                                               `json:"updatedAt"`
+	ActiveInternalSquads   []EnableUserResponseDtoResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                  `json:"subscriptionUrl"`
+	LastConnectedNode      NilEnableUserResponseDtoResponseLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   EnableUserResponseDtoResponseHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *EnableUserResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *EnableUserResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -5658,6 +8352,16 @@ func (s *EnableUserResponseDtoResponse) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
 }
 
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *EnableUserResponseDtoResponse) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *EnableUserResponseDtoResponse) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *EnableUserResponseDtoResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -5668,9 +8372,9 @@ func (s *EnableUserResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *EnableUserResponseDtoResponse) GetActiveUserInbounds() []EnableUserResponseDtoResponseActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *EnableUserResponseDtoResponse) GetActiveInternalSquads() []EnableUserResponseDtoResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
@@ -5691,11 +8395,6 @@ func (s *EnableUserResponseDtoResponse) GetHapp() EnableUserResponseDtoResponseH
 // SetUUID sets the value of UUID.
 func (s *EnableUserResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *EnableUserResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -5803,6 +8502,16 @@ func (s *EnableUserResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
 }
 
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *EnableUserResponseDtoResponse) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *EnableUserResponseDtoResponse) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *EnableUserResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -5813,9 +8522,9 @@ func (s *EnableUserResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *EnableUserResponseDtoResponse) SetActiveUserInbounds(val []EnableUserResponseDtoResponseActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *EnableUserResponseDtoResponse) SetActiveInternalSquads(val []EnableUserResponseDtoResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
@@ -5833,62 +8542,29 @@ func (s *EnableUserResponseDtoResponse) SetHapp(val EnableUserResponseDtoRespons
 	s.Happ = val
 }
 
-type EnableUserResponseDtoResponseActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type EnableUserResponseDtoResponseActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *EnableUserResponseDtoResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *EnableUserResponseDtoResponseActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *EnableUserResponseDtoResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *EnableUserResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetName sets the value of Name.
+func (s *EnableUserResponseDtoResponseActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
 type EnableUserResponseDtoResponseHapp struct {
@@ -6056,6 +8732,8 @@ func (s *FindAllApiTokensResponseDto) SetResponse(val FindAllApiTokensResponseDt
 	s.Response = val
 }
 
+func (*FindAllApiTokensResponseDto) apiTokensControllerFindAllRes() {}
+
 type FindAllApiTokensResponseDtoResponse struct {
 	ApiKeys []FindAllApiTokensResponseDtoResponseApiKeysItem `json:"apiKeys"`
 	Docs    FindAllApiTokensResponseDtoResponseDocs          `json:"docs"`
@@ -6082,12 +8760,11 @@ func (s *FindAllApiTokensResponseDtoResponse) SetDocs(val FindAllApiTokensRespon
 }
 
 type FindAllApiTokensResponseDtoResponseApiKeysItem struct {
-	UUID             uuid.UUID `json:"uuid"`
-	Token            string    `json:"token"`
-	TokenName        string    `json:"tokenName"`
-	TokenDescription NilString `json:"tokenDescription"`
-	CreatedAt        time.Time `json:"createdAt"`
-	UpdatedAt        time.Time `json:"updatedAt"`
+	UUID      uuid.UUID `json:"uuid"`
+	Token     string    `json:"token"`
+	TokenName string    `json:"tokenName"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // GetUUID returns the value of UUID.
@@ -6103,11 +8780,6 @@ func (s *FindAllApiTokensResponseDtoResponseApiKeysItem) GetToken() string {
 // GetTokenName returns the value of TokenName.
 func (s *FindAllApiTokensResponseDtoResponseApiKeysItem) GetTokenName() string {
 	return s.TokenName
-}
-
-// GetTokenDescription returns the value of TokenDescription.
-func (s *FindAllApiTokensResponseDtoResponseApiKeysItem) GetTokenDescription() NilString {
-	return s.TokenDescription
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -6133,11 +8805,6 @@ func (s *FindAllApiTokensResponseDtoResponseApiKeysItem) SetToken(val string) {
 // SetTokenName sets the value of TokenName.
 func (s *FindAllApiTokensResponseDtoResponseApiKeysItem) SetTokenName(val string) {
 	s.TokenName = val
-}
-
-// SetTokenDescription sets the value of TokenDescription.
-func (s *FindAllApiTokensResponseDtoResponseApiKeysItem) SetTokenDescription(val NilString) {
-	s.TokenDescription = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
@@ -6201,32 +8868,29 @@ func (s *GetAllHostsResponseDto) SetResponse(val []GetAllHostsResponseDtoRespons
 	s.Response = val
 }
 
+func (*GetAllHostsResponseDto) hostsControllerGetAllHostsRes() {}
+
 type GetAllHostsResponseDtoResponseItem struct {
-	UUID             uuid.UUID                                          `json:"uuid"`
-	InboundUuid      uuid.UUID                                          `json:"inboundUuid"`
-	ViewPosition     int                                                `json:"viewPosition"`
-	Remark           string                                             `json:"remark"`
-	Address          string                                             `json:"address"`
-	Port             int                                                `json:"port"`
-	Path             NilString                                          `json:"path"`
-	Sni              NilString                                          `json:"sni"`
-	Host             NilString                                          `json:"host"`
-	Alpn             NilString                                          `json:"alpn"`
-	Fingerprint      NilString                                          `json:"fingerprint"`
-	AllowInsecure    OptBool                                            `json:"allowInsecure"`
-	IsDisabled       OptBool                                            `json:"isDisabled"`
-	SecurityLayer    OptGetAllHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                             `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                          `json:"uuid"`
+	ViewPosition      int                                                `json:"viewPosition"`
+	Remark            string                                             `json:"remark"`
+	Address           string                                             `json:"address"`
+	Port              int                                                `json:"port"`
+	Path              NilString                                          `json:"path"`
+	Sni               NilString                                          `json:"sni"`
+	Host              NilString                                          `json:"host"`
+	Alpn              NilString                                          `json:"alpn"`
+	Fingerprint       NilString                                          `json:"fingerprint"`
+	IsDisabled        OptBool                                            `json:"isDisabled"`
+	SecurityLayer     OptGetAllHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                             `json:"xHttpExtraParams"`
+	Inbound           GetAllHostsResponseDtoResponseItemInbound          `json:"inbound"`
+	ServerDescription NilString                                          `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *GetAllHostsResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *GetAllHostsResponseDtoResponseItem) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -6274,11 +8938,6 @@ func (s *GetAllHostsResponseDtoResponseItem) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *GetAllHostsResponseDtoResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *GetAllHostsResponseDtoResponseItem) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -6294,14 +8953,19 @@ func (s *GetAllHostsResponseDtoResponseItem) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *GetAllHostsResponseDtoResponseItem) GetInbound() GetAllHostsResponseDtoResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *GetAllHostsResponseDtoResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *GetAllHostsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *GetAllHostsResponseDtoResponseItem) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -6349,11 +9013,6 @@ func (s *GetAllHostsResponseDtoResponseItem) SetFingerprint(val NilString) {
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *GetAllHostsResponseDtoResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *GetAllHostsResponseDtoResponseItem) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -6367,6 +9026,41 @@ func (s *GetAllHostsResponseDtoResponseItem) SetSecurityLayer(val OptGetAllHosts
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *GetAllHostsResponseDtoResponseItem) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *GetAllHostsResponseDtoResponseItem) SetInbound(val GetAllHostsResponseDtoResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *GetAllHostsResponseDtoResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type GetAllHostsResponseDtoResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *GetAllHostsResponseDtoResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *GetAllHostsResponseDtoResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *GetAllHostsResponseDtoResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *GetAllHostsResponseDtoResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type GetAllHostsResponseDtoResponseItemSecurityLayer string
@@ -6417,6 +9111,139 @@ func (s *GetAllHostsResponseDtoResponseItemSecurityLayer) UnmarshalText(data []b
 	}
 }
 
+// Ref: #/components/schemas/GetAllInboundsResponseDto
+type GetAllInboundsResponseDto struct {
+	Response GetAllInboundsResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetAllInboundsResponseDto) GetResponse() GetAllInboundsResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetAllInboundsResponseDto) SetResponse(val GetAllInboundsResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetAllInboundsResponseDto) configProfileControllerGetAllInboundsRes() {}
+
+type GetAllInboundsResponseDtoResponse struct {
+	Total    float64                                         `json:"total"`
+	Inbounds []GetAllInboundsResponseDtoResponseInboundsItem `json:"inbounds"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetAllInboundsResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *GetAllInboundsResponseDtoResponse) GetInbounds() []GetAllInboundsResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// SetTotal sets the value of Total.
+func (s *GetAllInboundsResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *GetAllInboundsResponseDtoResponse) SetInbounds(val []GetAllInboundsResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+type GetAllInboundsResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetAllInboundsResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
 // Ref: #/components/schemas/GetAllNodesResponseDto
 type GetAllNodesResponseDto struct {
 	Response []GetAllNodesResponseDtoResponseItem `json:"response"`
@@ -6432,35 +9259,40 @@ func (s *GetAllNodesResponseDto) SetResponse(val []GetAllNodesResponseDtoRespons
 	s.Response = val
 }
 
+func (*GetAllNodesResponseDto) nodesControllerGetAllNodesRes() {}
+
 type GetAllNodesResponseDtoResponseItem struct {
-	UUID                    uuid.UUID                                                `json:"uuid"`
-	Name                    string                                                   `json:"name"`
-	Address                 string                                                   `json:"address"`
-	Port                    NilInt                                                   `json:"port"`
-	IsConnected             bool                                                     `json:"isConnected"`
-	IsDisabled              bool                                                     `json:"isDisabled"`
-	IsConnecting            bool                                                     `json:"isConnecting"`
-	IsNodeOnline            bool                                                     `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                     `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                              `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                                `json:"lastStatusMessage"`
-	XrayVersion             NilString                                                `json:"xrayVersion"`
-	XrayUptime              string                                                   `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                     `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                                   `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                               `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                               `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                                   `json:"notifyPercent"`
-	UsersOnline             NilInt                                                   `json:"usersOnline"`
-	ViewPosition            int                                                      `json:"viewPosition"`
-	CountryCode             string                                                   `json:"countryCode"`
-	ConsumptionMultiplier   float64                                                  `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                                   `json:"cpuCount"`
-	CpuModel                NilString                                                `json:"cpuModel"`
-	TotalRam                NilString                                                `json:"totalRam"`
-	CreatedAt               time.Time                                                `json:"createdAt"`
-	UpdatedAt               time.Time                                                `json:"updatedAt"`
-	ExcludedInbounds        []GetAllNodesResponseDtoResponseItemExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                       `json:"uuid"`
+	Name                    string                                          `json:"name"`
+	Address                 string                                          `json:"address"`
+	Port                    NilInt                                          `json:"port"`
+	IsConnected             bool                                            `json:"isConnected"`
+	IsDisabled              bool                                            `json:"isDisabled"`
+	IsConnecting            bool                                            `json:"isConnecting"`
+	IsNodeOnline            bool                                            `json:"isNodeOnline"`
+	IsXrayRunning           bool                                            `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                     `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                       `json:"lastStatusMessage"`
+	XrayVersion             NilString                                       `json:"xrayVersion"`
+	NodeVersion             NilString                                       `json:"nodeVersion"`
+	XrayUptime              string                                          `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                            `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                          `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                      `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                      `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                          `json:"notifyPercent"`
+	UsersOnline             NilInt                                          `json:"usersOnline"`
+	ViewPosition            int                                             `json:"viewPosition"`
+	CountryCode             string                                          `json:"countryCode"`
+	ConsumptionMultiplier   float64                                         `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                          `json:"cpuCount"`
+	CpuModel                NilString                                       `json:"cpuModel"`
+	TotalRam                NilString                                       `json:"totalRam"`
+	CreatedAt               time.Time                                       `json:"createdAt"`
+	UpdatedAt               time.Time                                       `json:"updatedAt"`
+	ConfigProfile           GetAllNodesResponseDtoResponseItemConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                         `json:"providerUuid"`
+	Provider                NilGetAllNodesResponseDtoResponseItemProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -6521,6 +9353,11 @@ func (s *GetAllNodesResponseDtoResponseItem) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *GetAllNodesResponseDtoResponseItem) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *GetAllNodesResponseDtoResponseItem) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -6598,9 +9435,19 @@ func (s *GetAllNodesResponseDtoResponseItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *GetAllNodesResponseDtoResponseItem) GetExcludedInbounds() []GetAllNodesResponseDtoResponseItemExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *GetAllNodesResponseDtoResponseItem) GetConfigProfile() GetAllNodesResponseDtoResponseItemConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *GetAllNodesResponseDtoResponseItem) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *GetAllNodesResponseDtoResponseItem) GetProvider() NilGetAllNodesResponseDtoResponseItemProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -6661,6 +9508,11 @@ func (s *GetAllNodesResponseDtoResponseItem) SetLastStatusMessage(val NilString)
 // SetXrayVersion sets the value of XrayVersion.
 func (s *GetAllNodesResponseDtoResponseItem) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *GetAllNodesResponseDtoResponseItem) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -6738,67 +9590,204 @@ func (s *GetAllNodesResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *GetAllNodesResponseDtoResponseItem) SetExcludedInbounds(val []GetAllNodesResponseDtoResponseItemExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *GetAllNodesResponseDtoResponseItem) SetConfigProfile(val GetAllNodesResponseDtoResponseItemConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type GetAllNodesResponseDtoResponseItemExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *GetAllNodesResponseDtoResponseItem) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *GetAllNodesResponseDtoResponseItem) SetProvider(val NilGetAllNodesResponseDtoResponseItemProvider) {
+	s.Provider = val
+}
+
+type GetAllNodesResponseDtoResponseItemConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                             `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfile) GetActiveInbounds() []GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfile) SetActiveInbounds(val []GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) GetTag() string {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) GetType() string {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) GetNetwork() NilString {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) GetSecurity() NilString {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) SetTag(val string) {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) SetType(val string) {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *GetAllNodesResponseDtoResponseItemExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetAllNodesResponseDtoResponseItemConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type GetAllNodesResponseDtoResponseItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetAllNodesResponseDtoResponseItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetAllNodesResponseDtoResponseItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *GetAllNodesResponseDtoResponseItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *GetAllNodesResponseDtoResponseItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetAllNodesResponseDtoResponseItemProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetAllNodesResponseDtoResponseItemProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetAllNodesResponseDtoResponseItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetAllNodesResponseDtoResponseItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *GetAllNodesResponseDtoResponseItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *GetAllNodesResponseDtoResponseItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetAllNodesResponseDtoResponseItemProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetAllNodesResponseDtoResponseItemProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/GetAllSubscriptionsResponseDto
@@ -6815,6 +9804,8 @@ func (s *GetAllSubscriptionsResponseDto) GetResponse() GetAllSubscriptionsRespon
 func (s *GetAllSubscriptionsResponseDto) SetResponse(val GetAllSubscriptionsResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*GetAllSubscriptionsResponseDto) subscriptionsControllerGetAllSubscriptionsRes() {}
 
 type GetAllSubscriptionsResponseDtoResponse struct {
 	Subscriptions []GetAllSubscriptionsResponseDtoResponseSubscriptionsItem `json:"subscriptions"`
@@ -7137,6 +10128,8 @@ func (s *GetAllTagsResponseDto) SetResponse(val GetAllTagsResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*GetAllTagsResponseDto) usersControllerGetAllTagsRes() {}
+
 type GetAllTagsResponseDtoResponse struct {
 	Tags []string `json:"tags"`
 }
@@ -7165,6 +10158,8 @@ func (s *GetAllUsersResponseDto) GetResponse() GetAllUsersResponseDtoResponse {
 func (s *GetAllUsersResponseDto) SetResponse(val GetAllUsersResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*GetAllUsersResponseDto) usersControllerGetAllUsersRes() {}
 
 type GetAllUsersResponseDtoResponse struct {
 	Users []UserDto `json:"users"`
@@ -7205,6 +10200,8 @@ func (s *GetBandwidthStatsResponseDto) GetResponse() GetBandwidthStatsResponseDt
 func (s *GetBandwidthStatsResponseDto) SetResponse(val GetBandwidthStatsResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*GetBandwidthStatsResponseDto) systemControllerGetBandwidthStatsRes() {}
 
 type GetBandwidthStatsResponseDtoResponse struct {
 	BandwidthLastTwoDays   GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays   `json:"bandwidthLastTwoDays"`
@@ -7444,288 +10441,1860 @@ func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) SetDifference
 	s.Difference = val
 }
 
-// Ref: #/components/schemas/GetConfigResponseDto
-type GetConfigResponseDto struct {
-	Response GetConfigResponseDtoResponse `json:"response"`
+// Ref: #/components/schemas/GetConfigProfileByUuidResponseDto
+type GetConfigProfileByUuidResponseDto struct {
+	Response GetConfigProfileByUuidResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetConfigResponseDto) GetResponse() GetConfigResponseDtoResponse {
+func (s *GetConfigProfileByUuidResponseDto) GetResponse() GetConfigProfileByUuidResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetConfigResponseDto) SetResponse(val GetConfigResponseDtoResponse) {
+func (s *GetConfigProfileByUuidResponseDto) SetResponse(val GetConfigProfileByUuidResponseDtoResponse) {
 	s.Response = val
 }
 
-func (*GetConfigResponseDto) xrayConfigControllerGetConfigRes() {}
+func (*GetConfigProfileByUuidResponseDto) configProfileControllerGetConfigProfileByUuidRes() {}
 
-type GetConfigResponseDtoResponse struct {
-	Config jx.Raw `json:"config"`
+type GetConfigProfileByUuidResponseDtoResponse struct {
+	UUID      uuid.UUID                                               `json:"uuid"`
+	Name      string                                                  `json:"name"`
+	Config    jx.Raw                                                  `json:"config"`
+	Inbounds  []GetConfigProfileByUuidResponseDtoResponseInboundsItem `json:"inbounds"`
+	Nodes     []GetConfigProfileByUuidResponseDtoResponseNodesItem    `json:"nodes"`
+	CreatedAt time.Time                                               `json:"createdAt"`
+	UpdatedAt time.Time                                               `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetName() string {
+	return s.Name
 }
 
 // GetConfig returns the value of Config.
-func (s *GetConfigResponseDtoResponse) GetConfig() jx.Raw {
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetConfig() jx.Raw {
 	return s.Config
 }
 
-// SetConfig sets the value of Config.
-func (s *GetConfigResponseDtoResponse) SetConfig(val jx.Raw) {
-	s.Config = val
-}
-
-// Ref: #/components/schemas/GetFullInboundsResponseDto
-type GetFullInboundsResponseDto struct {
-	Response []GetFullInboundsResponseDtoResponseItem `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *GetFullInboundsResponseDto) GetResponse() []GetFullInboundsResponseDtoResponseItem {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *GetFullInboundsResponseDto) SetResponse(val []GetFullInboundsResponseDtoResponseItem) {
-	s.Response = val
-}
-
-type GetFullInboundsResponseDtoResponseItem struct {
-	UUID          uuid.UUID                                           `json:"uuid"`
-	Tag           string                                              `json:"tag"`
-	Type          string                                              `json:"type"`
-	Port          float64                                             `json:"port"`
-	Network       NilString                                           `json:"network"`
-	Security      NilString                                           `json:"security"`
-	RawFromConfig GetFullInboundsResponseDtoResponseItemRawFromConfig `json:"rawFromConfig"`
-	Users         GetFullInboundsResponseDtoResponseItemUsers         `json:"users"`
-	Nodes         GetFullInboundsResponseDtoResponseItemNodes         `json:"nodes"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetFullInboundsResponseDtoResponseItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetTag returns the value of Tag.
-func (s *GetFullInboundsResponseDtoResponseItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *GetFullInboundsResponseDtoResponseItem) GetType() string {
-	return s.Type
-}
-
-// GetPort returns the value of Port.
-func (s *GetFullInboundsResponseDtoResponseItem) GetPort() float64 {
-	return s.Port
-}
-
-// GetNetwork returns the value of Network.
-func (s *GetFullInboundsResponseDtoResponseItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *GetFullInboundsResponseDtoResponseItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetRawFromConfig returns the value of RawFromConfig.
-func (s *GetFullInboundsResponseDtoResponseItem) GetRawFromConfig() GetFullInboundsResponseDtoResponseItemRawFromConfig {
-	return s.RawFromConfig
-}
-
-// GetUsers returns the value of Users.
-func (s *GetFullInboundsResponseDtoResponseItem) GetUsers() GetFullInboundsResponseDtoResponseItemUsers {
-	return s.Users
+// GetInbounds returns the value of Inbounds.
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetInbounds() []GetConfigProfileByUuidResponseDtoResponseInboundsItem {
+	return s.Inbounds
 }
 
 // GetNodes returns the value of Nodes.
-func (s *GetFullInboundsResponseDtoResponseItem) GetNodes() GetFullInboundsResponseDtoResponseItemNodes {
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetNodes() []GetConfigProfileByUuidResponseDtoResponseNodesItem {
 	return s.Nodes
 }
 
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetConfigProfileByUuidResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
 // SetUUID sets the value of UUID.
-func (s *GetFullInboundsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *GetFullInboundsResponseDtoResponseItem) SetTag(val string) {
-	s.Tag = val
+// SetName sets the value of Name.
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetName(val string) {
+	s.Name = val
 }
 
-// SetType sets the value of Type.
-func (s *GetFullInboundsResponseDtoResponseItem) SetType(val string) {
-	s.Type = val
+// SetConfig sets the value of Config.
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetConfig(val jx.Raw) {
+	s.Config = val
 }
 
-// SetPort sets the value of Port.
-func (s *GetFullInboundsResponseDtoResponseItem) SetPort(val float64) {
-	s.Port = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *GetFullInboundsResponseDtoResponseItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *GetFullInboundsResponseDtoResponseItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetRawFromConfig sets the value of RawFromConfig.
-func (s *GetFullInboundsResponseDtoResponseItem) SetRawFromConfig(val GetFullInboundsResponseDtoResponseItemRawFromConfig) {
-	s.RawFromConfig = val
-}
-
-// SetUsers sets the value of Users.
-func (s *GetFullInboundsResponseDtoResponseItem) SetUsers(val GetFullInboundsResponseDtoResponseItemUsers) {
-	s.Users = val
+// SetInbounds sets the value of Inbounds.
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetInbounds(val []GetConfigProfileByUuidResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
 }
 
 // SetNodes sets the value of Nodes.
-func (s *GetFullInboundsResponseDtoResponseItem) SetNodes(val GetFullInboundsResponseDtoResponseItemNodes) {
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetNodes(val []GetConfigProfileByUuidResponseDtoResponseNodesItem) {
 	s.Nodes = val
 }
 
-type GetFullInboundsResponseDtoResponseItemNodes struct {
-	Enabled  float64 `json:"enabled"`
-	Disabled float64 `json:"disabled"`
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
 }
 
-// GetEnabled returns the value of Enabled.
-func (s *GetFullInboundsResponseDtoResponseItemNodes) GetEnabled() float64 {
-	return s.Enabled
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetConfigProfileByUuidResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
-// GetDisabled returns the value of Disabled.
-func (s *GetFullInboundsResponseDtoResponseItemNodes) GetDisabled() float64 {
-	return s.Disabled
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *GetFullInboundsResponseDtoResponseItemNodes) SetEnabled(val float64) {
-	s.Enabled = val
-}
-
-// SetDisabled sets the value of Disabled.
-func (s *GetFullInboundsResponseDtoResponseItemNodes) SetDisabled(val float64) {
-	s.Disabled = val
-}
-
-type GetFullInboundsResponseDtoResponseItemRawFromConfig struct{}
-
-type GetFullInboundsResponseDtoResponseItemUsers struct {
-	Enabled  float64 `json:"enabled"`
-	Disabled float64 `json:"disabled"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *GetFullInboundsResponseDtoResponseItemUsers) GetEnabled() float64 {
-	return s.Enabled
-}
-
-// GetDisabled returns the value of Disabled.
-func (s *GetFullInboundsResponseDtoResponseItemUsers) GetDisabled() float64 {
-	return s.Disabled
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *GetFullInboundsResponseDtoResponseItemUsers) SetEnabled(val float64) {
-	s.Enabled = val
-}
-
-// SetDisabled sets the value of Disabled.
-func (s *GetFullInboundsResponseDtoResponseItemUsers) SetDisabled(val float64) {
-	s.Disabled = val
-}
-
-// Ref: #/components/schemas/GetInboundsResponseDto
-type GetInboundsResponseDto struct {
-	Response []GetInboundsResponseDtoResponseItem `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *GetInboundsResponseDto) GetResponse() []GetInboundsResponseDtoResponseItem {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *GetInboundsResponseDto) SetResponse(val []GetInboundsResponseDtoResponseItem) {
-	s.Response = val
-}
-
-type GetInboundsResponseDtoResponseItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Port     float64   `json:"port"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type GetConfigProfileByUuidResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *GetInboundsResponseDtoResponseItem) GetUUID() uuid.UUID {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *GetInboundsResponseDtoResponseItem) GetTag() string {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *GetInboundsResponseDtoResponseItem) GetType() string {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetType() string {
 	return s.Type
 }
 
-// GetPort returns the value of Port.
-func (s *GetInboundsResponseDtoResponseItem) GetPort() float64 {
-	return s.Port
-}
-
 // GetNetwork returns the value of Network.
-func (s *GetInboundsResponseDtoResponseItem) GetNetwork() NilString {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *GetInboundsResponseDtoResponseItem) GetSecurity() NilString {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *GetInboundsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *GetInboundsResponseDtoResponseItem) SetTag(val string) {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *GetInboundsResponseDtoResponseItem) SetType(val string) {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
-// SetPort sets the value of Port.
-func (s *GetInboundsResponseDtoResponseItem) SetPort(val float64) {
-	s.Port = val
-}
-
 // SetNetwork sets the value of Network.
-func (s *GetInboundsResponseDtoResponseItem) SetNetwork(val NilString) {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *GetInboundsResponseDtoResponseItem) SetSecurity(val NilString) {
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetConfigProfileByUuidResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type GetConfigProfileByUuidResponseDtoResponseNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetConfigProfileByUuidResponseDtoResponseNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetConfigProfileByUuidResponseDtoResponseNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetConfigProfileByUuidResponseDtoResponseNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetConfigProfileByUuidResponseDtoResponseNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetConfigProfileByUuidResponseDtoResponseNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetConfigProfileByUuidResponseDtoResponseNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/GetConfigProfilesResponseDto
+type GetConfigProfilesResponseDto struct {
+	Response GetConfigProfilesResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetConfigProfilesResponseDto) GetResponse() GetConfigProfilesResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetConfigProfilesResponseDto) SetResponse(val GetConfigProfilesResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetConfigProfilesResponseDto) configProfileControllerGetConfigProfilesRes() {}
+
+type GetConfigProfilesResponseDtoResponse struct {
+	Total          float64                                                  `json:"total"`
+	ConfigProfiles []GetConfigProfilesResponseDtoResponseConfigProfilesItem `json:"configProfiles"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetConfigProfilesResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetConfigProfiles returns the value of ConfigProfiles.
+func (s *GetConfigProfilesResponseDtoResponse) GetConfigProfiles() []GetConfigProfilesResponseDtoResponseConfigProfilesItem {
+	return s.ConfigProfiles
+}
+
+// SetTotal sets the value of Total.
+func (s *GetConfigProfilesResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetConfigProfiles sets the value of ConfigProfiles.
+func (s *GetConfigProfilesResponseDtoResponse) SetConfigProfiles(val []GetConfigProfilesResponseDtoResponseConfigProfilesItem) {
+	s.ConfigProfiles = val
+}
+
+type GetConfigProfilesResponseDtoResponseConfigProfilesItem struct {
+	UUID      uuid.UUID                                                            `json:"uuid"`
+	Name      string                                                               `json:"name"`
+	Config    jx.Raw                                                               `json:"config"`
+	Inbounds  []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem `json:"inbounds"`
+	Nodes     []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem    `json:"nodes"`
+	CreatedAt time.Time                                                            `json:"createdAt"`
+	UpdatedAt time.Time                                                            `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetName() string {
+	return s.Name
+}
+
+// GetConfig returns the value of Config.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetConfig() jx.Raw {
+	return s.Config
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetInbounds() []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem {
+	return s.Inbounds
+}
+
+// GetNodes returns the value of Nodes.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetNodes() []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem {
+	return s.Nodes
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetConfig sets the value of Config.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetConfig(val jx.Raw) {
+	s.Config = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetInbounds(val []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetNodes(val []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) {
+	s.Nodes = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/GetInboundsByProfileUuidResponseDto
+type GetInboundsByProfileUuidResponseDto struct {
+	Response GetInboundsByProfileUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInboundsByProfileUuidResponseDto) GetResponse() GetInboundsByProfileUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInboundsByProfileUuidResponseDto) SetResponse(val GetInboundsByProfileUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInboundsByProfileUuidResponseDto) configProfileControllerGetInboundsByProfileUuidRes() {}
+
+type GetInboundsByProfileUuidResponseDtoResponse struct {
+	Total    float64                                                   `json:"total"`
+	Inbounds []GetInboundsByProfileUuidResponseDtoResponseInboundsItem `json:"inbounds"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetInboundsByProfileUuidResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *GetInboundsByProfileUuidResponseDtoResponse) GetInbounds() []GetInboundsByProfileUuidResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// SetTotal sets the value of Total.
+func (s *GetInboundsByProfileUuidResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *GetInboundsByProfileUuidResponseDtoResponse) SetInbounds(val []GetInboundsByProfileUuidResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+type GetInboundsByProfileUuidResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetInboundsByProfileUuidResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+// Ref: #/components/schemas/GetInfraBillingHistoryRecordsResponseDto
+type GetInfraBillingHistoryRecordsResponseDto struct {
+	Response GetInfraBillingHistoryRecordsResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInfraBillingHistoryRecordsResponseDto) GetResponse() GetInfraBillingHistoryRecordsResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInfraBillingHistoryRecordsResponseDto) SetResponse(val GetInfraBillingHistoryRecordsResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInfraBillingHistoryRecordsResponseDto) infraBillingControllerGetInfraBillingHistoryRecordsRes() {
+}
+
+type GetInfraBillingHistoryRecordsResponseDtoResponse struct {
+	Records []GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem `json:"records"`
+	Total   float64                                                       `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponse) GetRecords() []GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponse) SetRecords(val []GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem struct {
+	UUID         uuid.UUID                                                           `json:"uuid"`
+	ProviderUuid uuid.UUID                                                           `json:"providerUuid"`
+	Amount       float64                                                             `json:"amount"`
+	BilledAt     time.Time                                                           `json:"billedAt"`
+	Provider     GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider `json:"provider"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetAmount returns the value of Amount.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) GetAmount() float64 {
+	return s.Amount
+}
+
+// GetBilledAt returns the value of BilledAt.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) GetBilledAt() time.Time {
+	return s.BilledAt
+}
+
+// GetProvider returns the value of Provider.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) GetProvider() GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider {
+	return s.Provider
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) SetAmount(val float64) {
+	s.Amount = val
+}
+
+// SetBilledAt sets the value of BilledAt.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) SetBilledAt(val time.Time) {
+	s.BilledAt = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItem) SetProvider(val GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) {
+	s.Provider = val
+}
+
+type GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *GetInfraBillingHistoryRecordsResponseDtoResponseRecordsItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// Ref: #/components/schemas/GetInfraBillingNodesResponseDto
+type GetInfraBillingNodesResponseDto struct {
+	Response GetInfraBillingNodesResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInfraBillingNodesResponseDto) GetResponse() GetInfraBillingNodesResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInfraBillingNodesResponseDto) SetResponse(val GetInfraBillingNodesResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInfraBillingNodesResponseDto) infraBillingControllerGetBillingNodesRes() {}
+
+type GetInfraBillingNodesResponseDtoResponse struct {
+	TotalBillingNodes          float64                                                            `json:"totalBillingNodes"`
+	BillingNodes               []GetInfraBillingNodesResponseDtoResponseBillingNodesItem          `json:"billingNodes"`
+	AvailableBillingNodes      []GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem `json:"availableBillingNodes"`
+	TotalAvailableBillingNodes float64                                                            `json:"totalAvailableBillingNodes"`
+	Stats                      GetInfraBillingNodesResponseDtoResponseStats                       `json:"stats"`
+}
+
+// GetTotalBillingNodes returns the value of TotalBillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) GetTotalBillingNodes() float64 {
+	return s.TotalBillingNodes
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) GetBillingNodes() []GetInfraBillingNodesResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// GetAvailableBillingNodes returns the value of AvailableBillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) GetAvailableBillingNodes() []GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem {
+	return s.AvailableBillingNodes
+}
+
+// GetTotalAvailableBillingNodes returns the value of TotalAvailableBillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) GetTotalAvailableBillingNodes() float64 {
+	return s.TotalAvailableBillingNodes
+}
+
+// GetStats returns the value of Stats.
+func (s *GetInfraBillingNodesResponseDtoResponse) GetStats() GetInfraBillingNodesResponseDtoResponseStats {
+	return s.Stats
+}
+
+// SetTotalBillingNodes sets the value of TotalBillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) SetTotalBillingNodes(val float64) {
+	s.TotalBillingNodes = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) SetBillingNodes(val []GetInfraBillingNodesResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+// SetAvailableBillingNodes sets the value of AvailableBillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) SetAvailableBillingNodes(val []GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) {
+	s.AvailableBillingNodes = val
+}
+
+// SetTotalAvailableBillingNodes sets the value of TotalAvailableBillingNodes.
+func (s *GetInfraBillingNodesResponseDtoResponse) SetTotalAvailableBillingNodes(val float64) {
+	s.TotalAvailableBillingNodes = val
+}
+
+// SetStats sets the value of Stats.
+func (s *GetInfraBillingNodesResponseDtoResponse) SetStats(val GetInfraBillingNodesResponseDtoResponseStats) {
+	s.Stats = val
+}
+
+type GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetInfraBillingNodesResponseDtoResponseAvailableBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type GetInfraBillingNodesResponseDtoResponseBillingNodesItem struct {
+	UUID          uuid.UUID                                                       `json:"uuid"`
+	NodeUuid      uuid.UUID                                                       `json:"nodeUuid"`
+	ProviderUuid  uuid.UUID                                                       `json:"providerUuid"`
+	Provider      GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider `json:"provider"`
+	Node          GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode     `json:"node"`
+	NextBillingAt time.Time                                                       `json:"nextBillingAt"`
+	CreatedAt     time.Time                                                       `json:"createdAt"`
+	UpdatedAt     time.Time                                                       `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetProvider() GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider {
+	return s.Provider
+}
+
+// GetNode returns the value of Node.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetNode() GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode {
+	return s.Node
+}
+
+// GetNextBillingAt returns the value of NextBillingAt.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetNextBillingAt() time.Time {
+	return s.NextBillingAt
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetProvider(val GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) {
+	s.Provider = val
+}
+
+// SetNode sets the value of Node.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetNode(val GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) {
+	s.Node = val
+}
+
+// SetNextBillingAt sets the value of NextBillingAt.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetNextBillingAt(val time.Time) {
+	s.NextBillingAt = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	LoginUrl    NilString `json:"loginUrl"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *GetInfraBillingNodesResponseDtoResponseBillingNodesItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+type GetInfraBillingNodesResponseDtoResponseStats struct {
+	UpcomingNodesCount   float64 `json:"upcomingNodesCount"`
+	CurrentMonthPayments float64 `json:"currentMonthPayments"`
+	TotalSpent           float64 `json:"totalSpent"`
+}
+
+// GetUpcomingNodesCount returns the value of UpcomingNodesCount.
+func (s *GetInfraBillingNodesResponseDtoResponseStats) GetUpcomingNodesCount() float64 {
+	return s.UpcomingNodesCount
+}
+
+// GetCurrentMonthPayments returns the value of CurrentMonthPayments.
+func (s *GetInfraBillingNodesResponseDtoResponseStats) GetCurrentMonthPayments() float64 {
+	return s.CurrentMonthPayments
+}
+
+// GetTotalSpent returns the value of TotalSpent.
+func (s *GetInfraBillingNodesResponseDtoResponseStats) GetTotalSpent() float64 {
+	return s.TotalSpent
+}
+
+// SetUpcomingNodesCount sets the value of UpcomingNodesCount.
+func (s *GetInfraBillingNodesResponseDtoResponseStats) SetUpcomingNodesCount(val float64) {
+	s.UpcomingNodesCount = val
+}
+
+// SetCurrentMonthPayments sets the value of CurrentMonthPayments.
+func (s *GetInfraBillingNodesResponseDtoResponseStats) SetCurrentMonthPayments(val float64) {
+	s.CurrentMonthPayments = val
+}
+
+// SetTotalSpent sets the value of TotalSpent.
+func (s *GetInfraBillingNodesResponseDtoResponseStats) SetTotalSpent(val float64) {
+	s.TotalSpent = val
+}
+
+// Ref: #/components/schemas/GetInfraProviderByUuidResponseDto
+type GetInfraProviderByUuidResponseDto struct {
+	Response GetInfraProviderByUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInfraProviderByUuidResponseDto) GetResponse() GetInfraProviderByUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInfraProviderByUuidResponseDto) SetResponse(val GetInfraProviderByUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInfraProviderByUuidResponseDto) infraBillingControllerGetInfraProviderByUuidRes() {}
+
+type GetInfraProviderByUuidResponseDtoResponse struct {
+	UUID           uuid.UUID                                                   `json:"uuid"`
+	Name           string                                                      `json:"name"`
+	FaviconLink    NilString                                                   `json:"faviconLink"`
+	LoginUrl       NilString                                                   `json:"loginUrl"`
+	CreatedAt      time.Time                                                   `json:"createdAt"`
+	UpdatedAt      time.Time                                                   `json:"updatedAt"`
+	BillingHistory GetInfraProviderByUuidResponseDtoResponseBillingHistory     `json:"billingHistory"`
+	BillingNodes   []GetInfraProviderByUuidResponseDtoResponseBillingNodesItem `json:"billingNodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetBillingHistory returns the value of BillingHistory.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetBillingHistory() GetInfraProviderByUuidResponseDtoResponseBillingHistory {
+	return s.BillingHistory
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *GetInfraProviderByUuidResponseDtoResponse) GetBillingNodes() []GetInfraProviderByUuidResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetBillingHistory sets the value of BillingHistory.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetBillingHistory(val GetInfraProviderByUuidResponseDtoResponseBillingHistory) {
+	s.BillingHistory = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *GetInfraProviderByUuidResponseDtoResponse) SetBillingNodes(val []GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+type GetInfraProviderByUuidResponseDtoResponseBillingHistory struct {
+	TotalAmount float64 `json:"totalAmount"`
+	TotalBills  float64 `json:"totalBills"`
+}
+
+// GetTotalAmount returns the value of TotalAmount.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingHistory) GetTotalAmount() float64 {
+	return s.TotalAmount
+}
+
+// GetTotalBills returns the value of TotalBills.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingHistory) GetTotalBills() float64 {
+	return s.TotalBills
+}
+
+// SetTotalAmount sets the value of TotalAmount.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingHistory) SetTotalAmount(val float64) {
+	s.TotalAmount = val
+}
+
+// SetTotalBills sets the value of TotalBills.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingHistory) SetTotalBills(val float64) {
+	s.TotalBills = val
+}
+
+type GetInfraProviderByUuidResponseDtoResponseBillingNodesItem struct {
+	NodeUuid    uuid.UUID `json:"nodeUuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetInfraProviderByUuidResponseDtoResponseBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/GetInfraProvidersResponseDto
+type GetInfraProvidersResponseDto struct {
+	Response GetInfraProvidersResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInfraProvidersResponseDto) GetResponse() GetInfraProvidersResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInfraProvidersResponseDto) SetResponse(val GetInfraProvidersResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInfraProvidersResponseDto) infraBillingControllerGetInfraProvidersRes() {}
+
+type GetInfraProvidersResponseDtoResponse struct {
+	Total     float64                                             `json:"total"`
+	Providers []GetInfraProvidersResponseDtoResponseProvidersItem `json:"providers"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetInfraProvidersResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetProviders returns the value of Providers.
+func (s *GetInfraProvidersResponseDtoResponse) GetProviders() []GetInfraProvidersResponseDtoResponseProvidersItem {
+	return s.Providers
+}
+
+// SetTotal sets the value of Total.
+func (s *GetInfraProvidersResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetProviders sets the value of Providers.
+func (s *GetInfraProvidersResponseDtoResponse) SetProviders(val []GetInfraProvidersResponseDtoResponseProvidersItem) {
+	s.Providers = val
+}
+
+type GetInfraProvidersResponseDtoResponseProvidersItem struct {
+	UUID           uuid.UUID                                                           `json:"uuid"`
+	Name           string                                                              `json:"name"`
+	FaviconLink    NilString                                                           `json:"faviconLink"`
+	LoginUrl       NilString                                                           `json:"loginUrl"`
+	CreatedAt      time.Time                                                           `json:"createdAt"`
+	UpdatedAt      time.Time                                                           `json:"updatedAt"`
+	BillingHistory GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory     `json:"billingHistory"`
+	BillingNodes   []GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem `json:"billingNodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetBillingHistory returns the value of BillingHistory.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetBillingHistory() GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory {
+	return s.BillingHistory
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetBillingNodes() []GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem {
+	return s.BillingNodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetBillingHistory sets the value of BillingHistory.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetBillingHistory(val GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) {
+	s.BillingHistory = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetBillingNodes(val []GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+type GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory struct {
+	TotalAmount float64 `json:"totalAmount"`
+	TotalBills  float64 `json:"totalBills"`
+}
+
+// GetTotalAmount returns the value of TotalAmount.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) GetTotalAmount() float64 {
+	return s.TotalAmount
+}
+
+// GetTotalBills returns the value of TotalBills.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) GetTotalBills() float64 {
+	return s.TotalBills
+}
+
+// SetTotalAmount sets the value of TotalAmount.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) SetTotalAmount(val float64) {
+	s.TotalAmount = val
+}
+
+// SetTotalBills sets the value of TotalBills.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) SetTotalBills(val float64) {
+	s.TotalBills = val
+}
+
+type GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem struct {
+	NodeUuid    uuid.UUID `json:"nodeUuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetName returns the value of Name.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/GetInternalSquadByUuidResponseDto
+type GetInternalSquadByUuidResponseDto struct {
+	Response GetInternalSquadByUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInternalSquadByUuidResponseDto) GetResponse() GetInternalSquadByUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInternalSquadByUuidResponseDto) SetResponse(val GetInternalSquadByUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInternalSquadByUuidResponseDto) internalSquadControllerGetInternalSquadByUuidRes() {}
+
+type GetInternalSquadByUuidResponseDtoResponse struct {
+	UUID      uuid.UUID                                               `json:"uuid"`
+	Name      string                                                  `json:"name"`
+	Info      GetInternalSquadByUuidResponseDtoResponseInfo           `json:"info"`
+	Inbounds  []GetInternalSquadByUuidResponseDtoResponseInboundsItem `json:"inbounds"`
+	CreatedAt time.Time                                               `json:"createdAt"`
+	UpdatedAt time.Time                                               `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInternalSquadByUuidResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInternalSquadByUuidResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetInfo returns the value of Info.
+func (s *GetInternalSquadByUuidResponseDtoResponse) GetInfo() GetInternalSquadByUuidResponseDtoResponseInfo {
+	return s.Info
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *GetInternalSquadByUuidResponseDtoResponse) GetInbounds() []GetInternalSquadByUuidResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetInternalSquadByUuidResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetInternalSquadByUuidResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInternalSquadByUuidResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInternalSquadByUuidResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetInfo sets the value of Info.
+func (s *GetInternalSquadByUuidResponseDtoResponse) SetInfo(val GetInternalSquadByUuidResponseDtoResponseInfo) {
+	s.Info = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *GetInternalSquadByUuidResponseDtoResponse) SetInbounds(val []GetInternalSquadByUuidResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetInternalSquadByUuidResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetInternalSquadByUuidResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type GetInternalSquadByUuidResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetInternalSquadByUuidResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type GetInternalSquadByUuidResponseDtoResponseInfo struct {
+	MembersCount  float64 `json:"membersCount"`
+	InboundsCount float64 `json:"inboundsCount"`
+}
+
+// GetMembersCount returns the value of MembersCount.
+func (s *GetInternalSquadByUuidResponseDtoResponseInfo) GetMembersCount() float64 {
+	return s.MembersCount
+}
+
+// GetInboundsCount returns the value of InboundsCount.
+func (s *GetInternalSquadByUuidResponseDtoResponseInfo) GetInboundsCount() float64 {
+	return s.InboundsCount
+}
+
+// SetMembersCount sets the value of MembersCount.
+func (s *GetInternalSquadByUuidResponseDtoResponseInfo) SetMembersCount(val float64) {
+	s.MembersCount = val
+}
+
+// SetInboundsCount sets the value of InboundsCount.
+func (s *GetInternalSquadByUuidResponseDtoResponseInfo) SetInboundsCount(val float64) {
+	s.InboundsCount = val
+}
+
+// Ref: #/components/schemas/GetInternalSquadsResponseDto
+type GetInternalSquadsResponseDto struct {
+	Response GetInternalSquadsResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetInternalSquadsResponseDto) GetResponse() GetInternalSquadsResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetInternalSquadsResponseDto) SetResponse(val GetInternalSquadsResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetInternalSquadsResponseDto) internalSquadControllerGetInternalSquadsRes() {}
+
+type GetInternalSquadsResponseDtoResponse struct {
+	Total          float64                                                  `json:"total"`
+	InternalSquads []GetInternalSquadsResponseDtoResponseInternalSquadsItem `json:"internalSquads"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetInternalSquadsResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetInternalSquads returns the value of InternalSquads.
+func (s *GetInternalSquadsResponseDtoResponse) GetInternalSquads() []GetInternalSquadsResponseDtoResponseInternalSquadsItem {
+	return s.InternalSquads
+}
+
+// SetTotal sets the value of Total.
+func (s *GetInternalSquadsResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetInternalSquads sets the value of InternalSquads.
+func (s *GetInternalSquadsResponseDtoResponse) SetInternalSquads(val []GetInternalSquadsResponseDtoResponseInternalSquadsItem) {
+	s.InternalSquads = val
+}
+
+type GetInternalSquadsResponseDtoResponseInternalSquadsItem struct {
+	UUID      uuid.UUID                                                            `json:"uuid"`
+	Name      string                                                               `json:"name"`
+	Info      GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo           `json:"info"`
+	Inbounds  []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem `json:"inbounds"`
+	CreatedAt time.Time                                                            `json:"createdAt"`
+	UpdatedAt time.Time                                                            `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetName() string {
+	return s.Name
+}
+
+// GetInfo returns the value of Info.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetInfo() GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo {
+	return s.Info
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetInbounds() []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem {
+	return s.Inbounds
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetInfo sets the value of Info.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetInfo(val GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) {
+	s.Info = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetInbounds(val []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo struct {
+	MembersCount  float64 `json:"membersCount"`
+	InboundsCount float64 `json:"inboundsCount"`
+}
+
+// GetMembersCount returns the value of MembersCount.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) GetMembersCount() float64 {
+	return s.MembersCount
+}
+
+// GetInboundsCount returns the value of InboundsCount.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) GetInboundsCount() float64 {
+	return s.InboundsCount
+}
+
+// SetMembersCount sets the value of MembersCount.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) SetMembersCount(val float64) {
+	s.MembersCount = val
+}
+
+// SetInboundsCount sets the value of InboundsCount.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) SetInboundsCount(val float64) {
+	s.InboundsCount = val
 }
 
 // Ref: #/components/schemas/GetNodeUserUsageByRangeResponseDto
@@ -7742,6 +12311,8 @@ func (s *GetNodeUserUsageByRangeResponseDto) GetResponse() []GetNodeUserUsageByR
 func (s *GetNodeUserUsageByRangeResponseDto) SetResponse(val []GetNodeUserUsageByRangeResponseDtoResponseItem) {
 	s.Response = val
 }
+
+func (*GetNodeUserUsageByRangeResponseDto) nodesUserUsageHistoryControllerGetNodeUserUsageRes() {}
 
 type GetNodeUserUsageByRangeResponseDtoResponseItem struct {
 	UserUuid uuid.UUID `json:"userUuid"`
@@ -7801,6 +12372,189 @@ func (s *GetNodeUserUsageByRangeResponseDtoResponseItem) SetDate(val string) {
 	s.Date = val
 }
 
+// Ref: #/components/schemas/GetNodesMetricsResponseDto
+type GetNodesMetricsResponseDto struct {
+	Response GetNodesMetricsResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetNodesMetricsResponseDto) GetResponse() GetNodesMetricsResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetNodesMetricsResponseDto) SetResponse(val GetNodesMetricsResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetNodesMetricsResponseDto) systemControllerGetNodesMetricsRes() {}
+
+type GetNodesMetricsResponseDtoResponse struct {
+	Nodes []GetNodesMetricsResponseDtoResponseNodesItem `json:"nodes"`
+}
+
+// GetNodes returns the value of Nodes.
+func (s *GetNodesMetricsResponseDtoResponse) GetNodes() []GetNodesMetricsResponseDtoResponseNodesItem {
+	return s.Nodes
+}
+
+// SetNodes sets the value of Nodes.
+func (s *GetNodesMetricsResponseDtoResponse) SetNodes(val []GetNodesMetricsResponseDtoResponseNodesItem) {
+	s.Nodes = val
+}
+
+type GetNodesMetricsResponseDtoResponseNodesItem struct {
+	NodeUuid       string                                                          `json:"nodeUuid"`
+	NodeName       string                                                          `json:"nodeName"`
+	CountryEmoji   string                                                          `json:"countryEmoji"`
+	ProviderName   string                                                          `json:"providerName"`
+	UsersOnline    float64                                                         `json:"usersOnline"`
+	InboundsStats  []GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem  `json:"inboundsStats"`
+	OutboundsStats []GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem `json:"outboundsStats"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetNodeUuid() string {
+	return s.NodeUuid
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetNodeName() string {
+	return s.NodeName
+}
+
+// GetCountryEmoji returns the value of CountryEmoji.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetCountryEmoji() string {
+	return s.CountryEmoji
+}
+
+// GetProviderName returns the value of ProviderName.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetProviderName() string {
+	return s.ProviderName
+}
+
+// GetUsersOnline returns the value of UsersOnline.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetUsersOnline() float64 {
+	return s.UsersOnline
+}
+
+// GetInboundsStats returns the value of InboundsStats.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetInboundsStats() []GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem {
+	return s.InboundsStats
+}
+
+// GetOutboundsStats returns the value of OutboundsStats.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetOutboundsStats() []GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem {
+	return s.OutboundsStats
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetNodeUuid(val string) {
+	s.NodeUuid = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+// SetCountryEmoji sets the value of CountryEmoji.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetCountryEmoji(val string) {
+	s.CountryEmoji = val
+}
+
+// SetProviderName sets the value of ProviderName.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetProviderName(val string) {
+	s.ProviderName = val
+}
+
+// SetUsersOnline sets the value of UsersOnline.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetUsersOnline(val float64) {
+	s.UsersOnline = val
+}
+
+// SetInboundsStats sets the value of InboundsStats.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetInboundsStats(val []GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) {
+	s.InboundsStats = val
+}
+
+// SetOutboundsStats sets the value of OutboundsStats.
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetOutboundsStats(val []GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) {
+	s.OutboundsStats = val
+}
+
+type GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem struct {
+	Tag      string `json:"tag"`
+	Upload   string `json:"upload"`
+	Download string `json:"download"`
+}
+
+// GetTag returns the value of Tag.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetUpload returns the value of Upload.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) GetUpload() string {
+	return s.Upload
+}
+
+// GetDownload returns the value of Download.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) GetDownload() string {
+	return s.Download
+}
+
+// SetTag sets the value of Tag.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetUpload sets the value of Upload.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) SetUpload(val string) {
+	s.Upload = val
+}
+
+// SetDownload sets the value of Download.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) SetDownload(val string) {
+	s.Download = val
+}
+
+type GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem struct {
+	Tag      string `json:"tag"`
+	Upload   string `json:"upload"`
+	Download string `json:"download"`
+}
+
+// GetTag returns the value of Tag.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetUpload returns the value of Upload.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) GetUpload() string {
+	return s.Upload
+}
+
+// GetDownload returns the value of Download.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) GetDownload() string {
+	return s.Download
+}
+
+// SetTag sets the value of Tag.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetUpload sets the value of Upload.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) SetUpload(val string) {
+	s.Upload = val
+}
+
+// SetDownload sets the value of Download.
+func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) SetDownload(val string) {
+	s.Download = val
+}
+
 // Ref: #/components/schemas/GetNodesRealtimeUsageResponseDto
 type GetNodesRealtimeUsageResponseDto struct {
 	Response []GetNodesRealtimeUsageResponseDtoResponseItem `json:"response"`
@@ -7815,6 +12569,8 @@ func (s *GetNodesRealtimeUsageResponseDto) GetResponse() []GetNodesRealtimeUsage
 func (s *GetNodesRealtimeUsageResponseDto) SetResponse(val []GetNodesRealtimeUsageResponseDtoResponseItem) {
 	s.Response = val
 }
+
+func (*GetNodesRealtimeUsageResponseDto) nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes() {}
 
 type GetNodesRealtimeUsageResponseDtoResponseItem struct {
 	NodeUuid         uuid.UUID `json:"nodeUuid"`
@@ -7933,6 +12689,8 @@ func (s *GetNodesStatisticsResponseDto) SetResponse(val GetNodesStatisticsRespon
 	s.Response = val
 }
 
+func (*GetNodesStatisticsResponseDto) systemControllerGetNodesStatisticsRes() {}
+
 type GetNodesStatisticsResponseDtoResponse struct {
 	LastSevenDays []GetNodesStatisticsResponseDtoResponseLastSevenDaysItem `json:"lastSevenDays"`
 }
@@ -7997,6 +12755,8 @@ func (s *GetNodesUsageByRangeResponseDto) GetResponse() []GetNodesUsageByRangeRe
 func (s *GetNodesUsageByRangeResponseDto) SetResponse(val []GetNodesUsageByRangeResponseDtoResponseItem) {
 	s.Response = val
 }
+
+func (*GetNodesUsageByRangeResponseDto) nodesUsageHistoryControllerGetNodesUsageByRangeRes() {}
 
 type GetNodesUsageByRangeResponseDtoResponseItem struct {
 	NodeUuid                   uuid.UUID `json:"nodeUuid"`
@@ -8115,32 +12875,29 @@ func (s *GetOneHostResponseDto) SetResponse(val GetOneHostResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*GetOneHostResponseDto) hostsControllerGetOneHostRes() {}
+
 type GetOneHostResponseDtoResponse struct {
-	UUID             uuid.UUID                                     `json:"uuid"`
-	InboundUuid      uuid.UUID                                     `json:"inboundUuid"`
-	ViewPosition     int                                           `json:"viewPosition"`
-	Remark           string                                        `json:"remark"`
-	Address          string                                        `json:"address"`
-	Port             int                                           `json:"port"`
-	Path             NilString                                     `json:"path"`
-	Sni              NilString                                     `json:"sni"`
-	Host             NilString                                     `json:"host"`
-	Alpn             NilString                                     `json:"alpn"`
-	Fingerprint      NilString                                     `json:"fingerprint"`
-	AllowInsecure    OptBool                                       `json:"allowInsecure"`
-	IsDisabled       OptBool                                       `json:"isDisabled"`
-	SecurityLayer    OptGetOneHostResponseDtoResponseSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                        `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                     `json:"uuid"`
+	ViewPosition      int                                           `json:"viewPosition"`
+	Remark            string                                        `json:"remark"`
+	Address           string                                        `json:"address"`
+	Port              int                                           `json:"port"`
+	Path              NilString                                     `json:"path"`
+	Sni               NilString                                     `json:"sni"`
+	Host              NilString                                     `json:"host"`
+	Alpn              NilString                                     `json:"alpn"`
+	Fingerprint       NilString                                     `json:"fingerprint"`
+	IsDisabled        OptBool                                       `json:"isDisabled"`
+	SecurityLayer     OptGetOneHostResponseDtoResponseSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                        `json:"xHttpExtraParams"`
+	Inbound           GetOneHostResponseDtoResponseInbound          `json:"inbound"`
+	ServerDescription NilString                                     `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *GetOneHostResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *GetOneHostResponseDtoResponse) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -8188,11 +12945,6 @@ func (s *GetOneHostResponseDtoResponse) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *GetOneHostResponseDtoResponse) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *GetOneHostResponseDtoResponse) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -8208,14 +12960,19 @@ func (s *GetOneHostResponseDtoResponse) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *GetOneHostResponseDtoResponse) GetInbound() GetOneHostResponseDtoResponseInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *GetOneHostResponseDtoResponse) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *GetOneHostResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *GetOneHostResponseDtoResponse) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -8263,11 +13020,6 @@ func (s *GetOneHostResponseDtoResponse) SetFingerprint(val NilString) {
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *GetOneHostResponseDtoResponse) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *GetOneHostResponseDtoResponse) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -8281,6 +13033,41 @@ func (s *GetOneHostResponseDtoResponse) SetSecurityLayer(val OptGetOneHostRespon
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *GetOneHostResponseDtoResponse) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *GetOneHostResponseDtoResponse) SetInbound(val GetOneHostResponseDtoResponseInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *GetOneHostResponseDtoResponse) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type GetOneHostResponseDtoResponseInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *GetOneHostResponseDtoResponseInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *GetOneHostResponseDtoResponseInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *GetOneHostResponseDtoResponseInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *GetOneHostResponseDtoResponseInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type GetOneHostResponseDtoResponseSecurityLayer string
@@ -8346,35 +13133,40 @@ func (s *GetOneNodeResponseDto) SetResponse(val GetOneNodeResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*GetOneNodeResponseDto) nodesControllerGetOneNodeRes() {}
+
 type GetOneNodeResponseDtoResponse struct {
-	UUID                    uuid.UUID                                           `json:"uuid"`
-	Name                    string                                              `json:"name"`
-	Address                 string                                              `json:"address"`
-	Port                    NilInt                                              `json:"port"`
-	IsConnected             bool                                                `json:"isConnected"`
-	IsDisabled              bool                                                `json:"isDisabled"`
-	IsConnecting            bool                                                `json:"isConnecting"`
-	IsNodeOnline            bool                                                `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                         `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                           `json:"lastStatusMessage"`
-	XrayVersion             NilString                                           `json:"xrayVersion"`
-	XrayUptime              string                                              `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                              `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                          `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                          `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                              `json:"notifyPercent"`
-	UsersOnline             NilInt                                              `json:"usersOnline"`
-	ViewPosition            int                                                 `json:"viewPosition"`
-	CountryCode             string                                              `json:"countryCode"`
-	ConsumptionMultiplier   float64                                             `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                              `json:"cpuCount"`
-	CpuModel                NilString                                           `json:"cpuModel"`
-	TotalRam                NilString                                           `json:"totalRam"`
-	CreatedAt               time.Time                                           `json:"createdAt"`
-	UpdatedAt               time.Time                                           `json:"updatedAt"`
-	ExcludedInbounds        []GetOneNodeResponseDtoResponseExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                  `json:"uuid"`
+	Name                    string                                     `json:"name"`
+	Address                 string                                     `json:"address"`
+	Port                    NilInt                                     `json:"port"`
+	IsConnected             bool                                       `json:"isConnected"`
+	IsDisabled              bool                                       `json:"isDisabled"`
+	IsConnecting            bool                                       `json:"isConnecting"`
+	IsNodeOnline            bool                                       `json:"isNodeOnline"`
+	IsXrayRunning           bool                                       `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                  `json:"lastStatusMessage"`
+	XrayVersion             NilString                                  `json:"xrayVersion"`
+	NodeVersion             NilString                                  `json:"nodeVersion"`
+	XrayUptime              string                                     `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                       `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                     `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                 `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                 `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                     `json:"notifyPercent"`
+	UsersOnline             NilInt                                     `json:"usersOnline"`
+	ViewPosition            int                                        `json:"viewPosition"`
+	CountryCode             string                                     `json:"countryCode"`
+	ConsumptionMultiplier   float64                                    `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                     `json:"cpuCount"`
+	CpuModel                NilString                                  `json:"cpuModel"`
+	TotalRam                NilString                                  `json:"totalRam"`
+	CreatedAt               time.Time                                  `json:"createdAt"`
+	UpdatedAt               time.Time                                  `json:"updatedAt"`
+	ConfigProfile           GetOneNodeResponseDtoResponseConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                    `json:"providerUuid"`
+	Provider                NilGetOneNodeResponseDtoResponseProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -8435,6 +13227,11 @@ func (s *GetOneNodeResponseDtoResponse) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *GetOneNodeResponseDtoResponse) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *GetOneNodeResponseDtoResponse) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -8512,9 +13309,19 @@ func (s *GetOneNodeResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *GetOneNodeResponseDtoResponse) GetExcludedInbounds() []GetOneNodeResponseDtoResponseExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *GetOneNodeResponseDtoResponse) GetConfigProfile() GetOneNodeResponseDtoResponseConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *GetOneNodeResponseDtoResponse) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *GetOneNodeResponseDtoResponse) GetProvider() NilGetOneNodeResponseDtoResponseProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -8575,6 +13382,11 @@ func (s *GetOneNodeResponseDtoResponse) SetLastStatusMessage(val NilString) {
 // SetXrayVersion sets the value of XrayVersion.
 func (s *GetOneNodeResponseDtoResponse) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *GetOneNodeResponseDtoResponse) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -8652,67 +13464,204 @@ func (s *GetOneNodeResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *GetOneNodeResponseDtoResponse) SetExcludedInbounds(val []GetOneNodeResponseDtoResponseExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *GetOneNodeResponseDtoResponse) SetConfigProfile(val GetOneNodeResponseDtoResponseConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type GetOneNodeResponseDtoResponseExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *GetOneNodeResponseDtoResponse) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *GetOneNodeResponseDtoResponse) SetProvider(val NilGetOneNodeResponseDtoResponseProvider) {
+	s.Provider = val
+}
+
+type GetOneNodeResponseDtoResponseConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                        `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *GetOneNodeResponseDtoResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *GetOneNodeResponseDtoResponseConfigProfile) GetActiveInbounds() []GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *GetOneNodeResponseDtoResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *GetOneNodeResponseDtoResponseConfigProfile) SetActiveInbounds(val []GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) GetTag() string {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) GetType() string {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) GetNetwork() NilString {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) GetSecurity() NilString {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) SetTag(val string) {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) SetType(val string) {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *GetOneNodeResponseDtoResponseExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *GetOneNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type GetOneNodeResponseDtoResponseProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetOneNodeResponseDtoResponseProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetOneNodeResponseDtoResponseProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *GetOneNodeResponseDtoResponseProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *GetOneNodeResponseDtoResponseProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetOneNodeResponseDtoResponseProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetOneNodeResponseDtoResponseProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetOneNodeResponseDtoResponseProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetOneNodeResponseDtoResponseProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *GetOneNodeResponseDtoResponseProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *GetOneNodeResponseDtoResponseProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetOneNodeResponseDtoResponseProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetOneNodeResponseDtoResponseProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/GetPubKeyResponseDto
@@ -8730,6 +13679,8 @@ func (s *GetPubKeyResponseDto) SetResponse(val GetPubKeyResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*GetPubKeyResponseDto) keygenControllerGenerateKeyRes() {}
+
 type GetPubKeyResponseDtoResponse struct {
 	PubKey string `json:"pubKey"`
 }
@@ -8742,6 +13693,661 @@ func (s *GetPubKeyResponseDtoResponse) GetPubKey() string {
 // SetPubKey sets the value of PubKey.
 func (s *GetPubKeyResponseDtoResponse) SetPubKey(val string) {
 	s.PubKey = val
+}
+
+// Ref: #/components/schemas/GetRawSubscriptionByShortUuidResponseDto
+type GetRawSubscriptionByShortUuidResponseDto struct {
+	Response GetRawSubscriptionByShortUuidResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetRawSubscriptionByShortUuidResponseDto) GetResponse() GetRawSubscriptionByShortUuidResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetRawSubscriptionByShortUuidResponseDto) SetResponse(val GetRawSubscriptionByShortUuidResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetRawSubscriptionByShortUuidResponseDto) subscriptionControllerGetRawSubscriptionByShortUuidRes() {
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponse struct {
+	User            GetRawSubscriptionByShortUuidResponseDtoResponseUser           `json:"user"`
+	SubscriptionUrl string                                                         `json:"subscriptionUrl"`
+	RawHosts        []GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem `json:"rawHosts"`
+	Headers         GetRawSubscriptionByShortUuidResponseDtoResponseHeaders        `json:"headers"`
+	IsHwidLimited   bool                                                           `json:"isHwidLimited"`
+}
+
+// GetUser returns the value of User.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetUser() GetRawSubscriptionByShortUuidResponseDtoResponseUser {
+	return s.User
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetRawHosts returns the value of RawHosts.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetRawHosts() []GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem {
+	return s.RawHosts
+}
+
+// GetHeaders returns the value of Headers.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetHeaders() GetRawSubscriptionByShortUuidResponseDtoResponseHeaders {
+	return s.Headers
+}
+
+// GetIsHwidLimited returns the value of IsHwidLimited.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetIsHwidLimited() bool {
+	return s.IsHwidLimited
+}
+
+// SetUser sets the value of User.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetUser(val GetRawSubscriptionByShortUuidResponseDtoResponseUser) {
+	s.User = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetRawHosts sets the value of RawHosts.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetRawHosts(val []GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) {
+	s.RawHosts = val
+}
+
+// SetHeaders sets the value of Headers.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetHeaders(val GetRawSubscriptionByShortUuidResponseDtoResponseHeaders) {
+	s.Headers = val
+}
+
+// SetIsHwidLimited sets the value of IsHwidLimited.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetIsHwidLimited(val bool) {
+	s.IsHwidLimited = val
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseHeaders map[string]string
+
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseHeaders) init() GetRawSubscriptionByShortUuidResponseDtoResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem struct {
+	Address           OptNilString                                                                       `json:"address"`
+	Alpn              OptNilString                                                                       `json:"alpn"`
+	Fingerprint       OptNilString                                                                       `json:"fingerprint"`
+	Host              OptNilString                                                                       `json:"host"`
+	Network           OptNilString                                                                       `json:"network"`
+	Password          OptNilString                                                                       `json:"password"`
+	Path              OptNilString                                                                       `json:"path"`
+	PublicKey         OptNilString                                                                       `json:"publicKey"`
+	Port              OptNilFloat64                                                                      `json:"port"`
+	Protocol          OptNilString                                                                       `json:"protocol"`
+	Remark            OptNilString                                                                       `json:"remark"`
+	ShortId           OptNilString                                                                       `json:"shortId"`
+	Sni               OptNilString                                                                       `json:"sni"`
+	SpiderX           OptNilString                                                                       `json:"spiderX"`
+	TLS               OptNilString                                                                       `json:"tls"`
+	HeaderType        OptNilString                                                                       `json:"headerType"`
+	AdditionalParams  OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams `json:"additionalParams"`
+	XHttpExtraParams  OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams    `json:"xHttpExtraParams"`
+	ServerDescription OptNilString                                                                       `json:"serverDescription"`
+	Flow              OptNilString                                                                       `json:"flow"`
+	ProtocolOptions   OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions  `json:"protocolOptions"`
+}
+
+// GetAddress returns the value of Address.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetAddress() OptNilString {
+	return s.Address
+}
+
+// GetAlpn returns the value of Alpn.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetAlpn() OptNilString {
+	return s.Alpn
+}
+
+// GetFingerprint returns the value of Fingerprint.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetFingerprint() OptNilString {
+	return s.Fingerprint
+}
+
+// GetHost returns the value of Host.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetHost() OptNilString {
+	return s.Host
+}
+
+// GetNetwork returns the value of Network.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetNetwork() OptNilString {
+	return s.Network
+}
+
+// GetPassword returns the value of Password.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetPassword() OptNilString {
+	return s.Password
+}
+
+// GetPath returns the value of Path.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetPath() OptNilString {
+	return s.Path
+}
+
+// GetPublicKey returns the value of PublicKey.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetPublicKey() OptNilString {
+	return s.PublicKey
+}
+
+// GetPort returns the value of Port.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetPort() OptNilFloat64 {
+	return s.Port
+}
+
+// GetProtocol returns the value of Protocol.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetProtocol() OptNilString {
+	return s.Protocol
+}
+
+// GetRemark returns the value of Remark.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetRemark() OptNilString {
+	return s.Remark
+}
+
+// GetShortId returns the value of ShortId.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetShortId() OptNilString {
+	return s.ShortId
+}
+
+// GetSni returns the value of Sni.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetSni() OptNilString {
+	return s.Sni
+}
+
+// GetSpiderX returns the value of SpiderX.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetSpiderX() OptNilString {
+	return s.SpiderX
+}
+
+// GetTLS returns the value of TLS.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetTLS() OptNilString {
+	return s.TLS
+}
+
+// GetHeaderType returns the value of HeaderType.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetHeaderType() OptNilString {
+	return s.HeaderType
+}
+
+// GetAdditionalParams returns the value of AdditionalParams.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetAdditionalParams() OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams {
+	return s.AdditionalParams
+}
+
+// GetXHttpExtraParams returns the value of XHttpExtraParams.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetXHttpExtraParams() OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams {
+	return s.XHttpExtraParams
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetFlow returns the value of Flow.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetFlow() OptNilString {
+	return s.Flow
+}
+
+// GetProtocolOptions returns the value of ProtocolOptions.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetProtocolOptions() OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions {
+	return s.ProtocolOptions
+}
+
+// SetAddress sets the value of Address.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetAddress(val OptNilString) {
+	s.Address = val
+}
+
+// SetAlpn sets the value of Alpn.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetAlpn(val OptNilString) {
+	s.Alpn = val
+}
+
+// SetFingerprint sets the value of Fingerprint.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetFingerprint(val OptNilString) {
+	s.Fingerprint = val
+}
+
+// SetHost sets the value of Host.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetHost(val OptNilString) {
+	s.Host = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetNetwork(val OptNilString) {
+	s.Network = val
+}
+
+// SetPassword sets the value of Password.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetPassword(val OptNilString) {
+	s.Password = val
+}
+
+// SetPath sets the value of Path.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetPath(val OptNilString) {
+	s.Path = val
+}
+
+// SetPublicKey sets the value of PublicKey.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetPublicKey(val OptNilString) {
+	s.PublicKey = val
+}
+
+// SetPort sets the value of Port.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetPort(val OptNilFloat64) {
+	s.Port = val
+}
+
+// SetProtocol sets the value of Protocol.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetProtocol(val OptNilString) {
+	s.Protocol = val
+}
+
+// SetRemark sets the value of Remark.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetRemark(val OptNilString) {
+	s.Remark = val
+}
+
+// SetShortId sets the value of ShortId.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetShortId(val OptNilString) {
+	s.ShortId = val
+}
+
+// SetSni sets the value of Sni.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetSni(val OptNilString) {
+	s.Sni = val
+}
+
+// SetSpiderX sets the value of SpiderX.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetSpiderX(val OptNilString) {
+	s.SpiderX = val
+}
+
+// SetTLS sets the value of TLS.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetTLS(val OptNilString) {
+	s.TLS = val
+}
+
+// SetHeaderType sets the value of HeaderType.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetHeaderType(val OptNilString) {
+	s.HeaderType = val
+}
+
+// SetAdditionalParams sets the value of AdditionalParams.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetAdditionalParams(val OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) {
+	s.AdditionalParams = val
+}
+
+// SetXHttpExtraParams sets the value of XHttpExtraParams.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetXHttpExtraParams(val OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) {
+	s.XHttpExtraParams = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetFlow sets the value of Flow.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetFlow(val OptNilString) {
+	s.Flow = val
+}
+
+// SetProtocolOptions sets the value of ProtocolOptions.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetProtocolOptions(val OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) {
+	s.ProtocolOptions = val
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams struct {
+	Mode            OptNilString  `json:"mode"`
+	HeartbeatPeriod OptNilFloat64 `json:"heartbeatPeriod"`
+}
+
+// GetMode returns the value of Mode.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) GetMode() OptNilString {
+	return s.Mode
+}
+
+// GetHeartbeatPeriod returns the value of HeartbeatPeriod.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) GetHeartbeatPeriod() OptNilFloat64 {
+	return s.HeartbeatPeriod
+}
+
+// SetMode sets the value of Mode.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) SetMode(val OptNilString) {
+	s.Mode = val
+}
+
+// SetHeartbeatPeriod sets the value of HeartbeatPeriod.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) SetHeartbeatPeriod(val OptNilFloat64) {
+	s.HeartbeatPeriod = val
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions struct {
+	Ss OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs `json:"ss"`
+}
+
+// GetSs returns the value of Ss.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) GetSs() OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs {
+	return s.Ss
+}
+
+// SetSs sets the value of Ss.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) SetSs(val OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) {
+	s.Ss = val
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs struct {
+	Method OptNilString `json:"method"`
+}
+
+// GetMethod returns the value of Method.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) GetMethod() OptNilString {
+	return s.Method
+}
+
+// SetMethod sets the value of Method.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) SetMethod(val OptNilString) {
+	s.Method = val
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams struct{}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseUser struct {
+	ShortUuid            string                                                                   `json:"shortUuid"`
+	DaysLeft             float64                                                                  `json:"daysLeft"`
+	TrafficUsed          string                                                                   `json:"trafficUsed"`
+	TrafficLimit         string                                                                   `json:"trafficLimit"`
+	Username             string                                                                   `json:"username"`
+	ExpiresAt            time.Time                                                                `json:"expiresAt"`
+	IsActive             bool                                                                     `json:"isActive"`
+	UserStatus           GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus           `json:"userStatus"`
+	TrafficLimitStrategy GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy `json:"trafficLimitStrategy"`
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetDaysLeft returns the value of DaysLeft.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetDaysLeft() float64 {
+	return s.DaysLeft
+}
+
+// GetTrafficUsed returns the value of TrafficUsed.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficUsed() string {
+	return s.TrafficUsed
+}
+
+// GetTrafficLimit returns the value of TrafficLimit.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficLimit() string {
+	return s.TrafficLimit
+}
+
+// GetUsername returns the value of Username.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUsername() string {
+	return s.Username
+}
+
+// GetExpiresAt returns the value of ExpiresAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetExpiresAt() time.Time {
+	return s.ExpiresAt
+}
+
+// GetIsActive returns the value of IsActive.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetIsActive() bool {
+	return s.IsActive
+}
+
+// GetUserStatus returns the value of UserStatus.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUserStatus() GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus {
+	return s.UserStatus
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficLimitStrategy() GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetDaysLeft sets the value of DaysLeft.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetDaysLeft(val float64) {
+	s.DaysLeft = val
+}
+
+// SetTrafficUsed sets the value of TrafficUsed.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficUsed(val string) {
+	s.TrafficUsed = val
+}
+
+// SetTrafficLimit sets the value of TrafficLimit.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficLimit(val string) {
+	s.TrafficLimit = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetExpiresAt sets the value of ExpiresAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetExpiresAt(val time.Time) {
+	s.ExpiresAt = val
+}
+
+// SetIsActive sets the value of IsActive.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetIsActive(val bool) {
+	s.IsActive = val
+}
+
+// SetUserStatus sets the value of UserStatus.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUserStatus(val GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus) {
+	s.UserStatus = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficLimitStrategy(val GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy string
+
+const (
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "NO_RESET"
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY     GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "DAY"
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK    GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "WEEK"
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH   GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy values.
+func (GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) AllValues() []GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy {
+	return []GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy{
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET,
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY,
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK,
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy(data) {
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET
+		return nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY
+		return nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK
+		return nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus string
+
+const (
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusACTIVE   GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus = "ACTIVE"
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusDISABLED GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus = "DISABLED"
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusLIMITED  GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus = "LIMITED"
+	GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusEXPIRED  GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus = "EXPIRED"
+)
+
+// AllValues returns all GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus values.
+func (GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus) AllValues() []GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus {
+	return []GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus{
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusACTIVE,
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusDISABLED,
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusLIMITED,
+		GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusACTIVE:
+		return []byte(s), nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusDISABLED:
+		return []byte(s), nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusLIMITED:
+		return []byte(s), nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus) UnmarshalText(data []byte) error {
+	switch GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatus(data) {
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusACTIVE:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusACTIVE
+		return nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusDISABLED:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusDISABLED
+		return nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusLIMITED:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusLIMITED
+		return nil
+	case GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusEXPIRED:
+		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserUserStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/GetRemnawaveHealthResponseDto
+type GetRemnawaveHealthResponseDto struct {
+	Response GetRemnawaveHealthResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetRemnawaveHealthResponseDto) GetResponse() GetRemnawaveHealthResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetRemnawaveHealthResponseDto) SetResponse(val GetRemnawaveHealthResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetRemnawaveHealthResponseDto) systemControllerGetRemnawaveHealthRes() {}
+
+type GetRemnawaveHealthResponseDtoResponse struct {
+	Pm2Stats []GetRemnawaveHealthResponseDtoResponsePm2StatsItem `json:"pm2Stats"`
+}
+
+// GetPm2Stats returns the value of Pm2Stats.
+func (s *GetRemnawaveHealthResponseDtoResponse) GetPm2Stats() []GetRemnawaveHealthResponseDtoResponsePm2StatsItem {
+	return s.Pm2Stats
+}
+
+// SetPm2Stats sets the value of Pm2Stats.
+func (s *GetRemnawaveHealthResponseDtoResponse) SetPm2Stats(val []GetRemnawaveHealthResponseDtoResponsePm2StatsItem) {
+	s.Pm2Stats = val
+}
+
+type GetRemnawaveHealthResponseDtoResponsePm2StatsItem struct {
+	Name   string `json:"name"`
+	Memory string `json:"memory"`
+	CPU    string `json:"cpu"`
+}
+
+// GetName returns the value of Name.
+func (s *GetRemnawaveHealthResponseDtoResponsePm2StatsItem) GetName() string {
+	return s.Name
+}
+
+// GetMemory returns the value of Memory.
+func (s *GetRemnawaveHealthResponseDtoResponsePm2StatsItem) GetMemory() string {
+	return s.Memory
+}
+
+// GetCPU returns the value of CPU.
+func (s *GetRemnawaveHealthResponseDtoResponsePm2StatsItem) GetCPU() string {
+	return s.CPU
+}
+
+// SetName sets the value of Name.
+func (s *GetRemnawaveHealthResponseDtoResponsePm2StatsItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetMemory sets the value of Memory.
+func (s *GetRemnawaveHealthResponseDtoResponsePm2StatsItem) SetMemory(val string) {
+	s.Memory = val
+}
+
+// SetCPU sets the value of CPU.
+func (s *GetRemnawaveHealthResponseDtoResponsePm2StatsItem) SetCPU(val string) {
+	s.CPU = val
 }
 
 // Ref: #/components/schemas/GetStatsResponseDto
@@ -8759,6 +14365,8 @@ func (s *GetStatsResponseDto) SetResponse(val GetStatsResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*GetStatsResponseDto) systemControllerGetStatsRes() {}
+
 type GetStatsResponseDtoResponse struct {
 	CPU         GetStatsResponseDtoResponseCPU         `json:"cpu"`
 	Memory      GetStatsResponseDtoResponseMemory      `json:"memory"`
@@ -8766,6 +14374,7 @@ type GetStatsResponseDtoResponse struct {
 	Timestamp   float64                                `json:"timestamp"`
 	Users       GetStatsResponseDtoResponseUsers       `json:"users"`
 	OnlineStats GetStatsResponseDtoResponseOnlineStats `json:"onlineStats"`
+	Nodes       GetStatsResponseDtoResponseNodes       `json:"nodes"`
 }
 
 // GetCPU returns the value of CPU.
@@ -8798,6 +14407,11 @@ func (s *GetStatsResponseDtoResponse) GetOnlineStats() GetStatsResponseDtoRespon
 	return s.OnlineStats
 }
 
+// GetNodes returns the value of Nodes.
+func (s *GetStatsResponseDtoResponse) GetNodes() GetStatsResponseDtoResponseNodes {
+	return s.Nodes
+}
+
 // SetCPU sets the value of CPU.
 func (s *GetStatsResponseDtoResponse) SetCPU(val GetStatsResponseDtoResponseCPU) {
 	s.CPU = val
@@ -8826,6 +14440,11 @@ func (s *GetStatsResponseDtoResponse) SetUsers(val GetStatsResponseDtoResponseUs
 // SetOnlineStats sets the value of OnlineStats.
 func (s *GetStatsResponseDtoResponse) SetOnlineStats(val GetStatsResponseDtoResponseOnlineStats) {
 	s.OnlineStats = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *GetStatsResponseDtoResponse) SetNodes(val GetStatsResponseDtoResponseNodes) {
+	s.Nodes = val
 }
 
 type GetStatsResponseDtoResponseCPU struct {
@@ -8909,6 +14528,20 @@ func (s *GetStatsResponseDtoResponseMemory) SetActive(val float64) {
 // SetAvailable sets the value of Available.
 func (s *GetStatsResponseDtoResponseMemory) SetAvailable(val float64) {
 	s.Available = val
+}
+
+type GetStatsResponseDtoResponseNodes struct {
+	TotalOnline float64 `json:"totalOnline"`
+}
+
+// GetTotalOnline returns the value of TotalOnline.
+func (s *GetStatsResponseDtoResponseNodes) GetTotalOnline() float64 {
+	return s.TotalOnline
+}
+
+// SetTotalOnline sets the value of TotalOnline.
+func (s *GetStatsResponseDtoResponseNodes) SetTotalOnline(val float64) {
+	s.TotalOnline = val
 }
 
 type GetStatsResponseDtoResponseOnlineStats struct {
@@ -9024,6 +14657,7 @@ type GetStatusResponseDtoResponse struct {
 	IsLoginAllowed    bool                                  `json:"isLoginAllowed"`
 	IsRegisterAllowed bool                                  `json:"isRegisterAllowed"`
 	TgAuth            NilGetStatusResponseDtoResponseTgAuth `json:"tgAuth"`
+	OAuth2            GetStatusResponseDtoResponseOAuth2    `json:"oauth2"`
 }
 
 // GetIsLoginAllowed returns the value of IsLoginAllowed.
@@ -9041,6 +14675,11 @@ func (s *GetStatusResponseDtoResponse) GetTgAuth() NilGetStatusResponseDtoRespon
 	return s.TgAuth
 }
 
+// GetOAuth2 returns the value of OAuth2.
+func (s *GetStatusResponseDtoResponse) GetOAuth2() GetStatusResponseDtoResponseOAuth2 {
+	return s.OAuth2
+}
+
 // SetIsLoginAllowed sets the value of IsLoginAllowed.
 func (s *GetStatusResponseDtoResponse) SetIsLoginAllowed(val bool) {
 	s.IsLoginAllowed = val
@@ -9054,6 +14693,36 @@ func (s *GetStatusResponseDtoResponse) SetIsRegisterAllowed(val bool) {
 // SetTgAuth sets the value of TgAuth.
 func (s *GetStatusResponseDtoResponse) SetTgAuth(val NilGetStatusResponseDtoResponseTgAuth) {
 	s.TgAuth = val
+}
+
+// SetOAuth2 sets the value of OAuth2.
+func (s *GetStatusResponseDtoResponse) SetOAuth2(val GetStatusResponseDtoResponseOAuth2) {
+	s.OAuth2 = val
+}
+
+type GetStatusResponseDtoResponseOAuth2 struct {
+	Providers GetStatusResponseDtoResponseOAuth2Providers `json:"providers"`
+}
+
+// GetProviders returns the value of Providers.
+func (s *GetStatusResponseDtoResponseOAuth2) GetProviders() GetStatusResponseDtoResponseOAuth2Providers {
+	return s.Providers
+}
+
+// SetProviders sets the value of Providers.
+func (s *GetStatusResponseDtoResponseOAuth2) SetProviders(val GetStatusResponseDtoResponseOAuth2Providers) {
+	s.Providers = val
+}
+
+type GetStatusResponseDtoResponseOAuth2Providers map[string]bool
+
+func (s *GetStatusResponseDtoResponseOAuth2Providers) init() GetStatusResponseDtoResponseOAuth2Providers {
+	m := *s
+	if m == nil {
+		m = map[string]bool{}
+		*s = m
+	}
+	return m
 }
 
 type GetStatusResponseDtoResponseTgAuth struct {
@@ -9095,6 +14764,8 @@ func (s *GetStatusResponseDtoStatusCode) SetStatusCode(val int) {
 func (s *GetStatusResponseDtoStatusCode) SetResponse(val GetStatusResponseDto) {
 	s.Response = val
 }
+
+func (*GetStatusResponseDtoStatusCode) authControllerGetStatusRes() {}
 
 // Ref: #/components/schemas/GetSubscriptionByUsernameResponseDto
 type GetSubscriptionByUsernameResponseDto struct {
@@ -9409,12 +15080,15 @@ func (s *GetSubscriptionInfoResponseDto) SetResponse(val GetSubscriptionInfoResp
 	s.Response = val
 }
 
+func (*GetSubscriptionInfoResponseDto) subscriptionControllerGetSubscriptionInfoByShortUuidRes() {}
+
 type GetSubscriptionInfoResponseDtoResponse struct {
 	IsFound         bool                                              `json:"isFound"`
 	User            GetSubscriptionInfoResponseDtoResponseUser        `json:"user"`
 	Links           []string                                          `json:"links"`
 	SsConfLinks     GetSubscriptionInfoResponseDtoResponseSsConfLinks `json:"ssConfLinks"`
 	SubscriptionUrl string                                            `json:"subscriptionUrl"`
+	Happ            GetSubscriptionInfoResponseDtoResponseHapp        `json:"happ"`
 }
 
 // GetIsFound returns the value of IsFound.
@@ -9442,6 +15116,11 @@ func (s *GetSubscriptionInfoResponseDtoResponse) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
+// GetHapp returns the value of Happ.
+func (s *GetSubscriptionInfoResponseDtoResponse) GetHapp() GetSubscriptionInfoResponseDtoResponseHapp {
+	return s.Happ
+}
+
 // SetIsFound sets the value of IsFound.
 func (s *GetSubscriptionInfoResponseDtoResponse) SetIsFound(val bool) {
 	s.IsFound = val
@@ -9465,6 +15144,25 @@ func (s *GetSubscriptionInfoResponseDtoResponse) SetSsConfLinks(val GetSubscript
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
 func (s *GetSubscriptionInfoResponseDtoResponse) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *GetSubscriptionInfoResponseDtoResponse) SetHapp(val GetSubscriptionInfoResponseDtoResponseHapp) {
+	s.Happ = val
+}
+
+type GetSubscriptionInfoResponseDtoResponseHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *GetSubscriptionInfoResponseDtoResponseHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *GetSubscriptionInfoResponseDtoResponseHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
 }
 
 type GetSubscriptionInfoResponseDtoResponseSsConfLinks map[string]string
@@ -9705,6 +15403,8 @@ func (s *GetSubscriptionSettingsResponseDto) SetResponse(val GetSubscriptionSett
 	s.Response = val
 }
 
+func (*GetSubscriptionSettingsResponseDto) subscriptionSettingsControllerGetSettingsRes() {}
+
 type GetSubscriptionSettingsResponseDtoResponse struct {
 	UUID                          uuid.UUID                                                          `json:"uuid"`
 	ProfileTitle                  string                                                             `json:"profileTitle"`
@@ -9720,6 +15420,7 @@ type GetSubscriptionSettingsResponseDtoResponse struct {
 	LimitedUsersRemarks           []string                                                           `json:"limitedUsersRemarks"`
 	DisabledUsersRemarks          []string                                                           `json:"disabledUsersRemarks"`
 	CustomResponseHeaders         NilGetSubscriptionSettingsResponseDtoResponseCustomResponseHeaders `json:"customResponseHeaders"`
+	RandomizeHosts                bool                                                               `json:"randomizeHosts"`
 	CreatedAt                     time.Time                                                          `json:"createdAt"`
 	UpdatedAt                     time.Time                                                          `json:"updatedAt"`
 }
@@ -9792,6 +15493,11 @@ func (s *GetSubscriptionSettingsResponseDtoResponse) GetDisabledUsersRemarks() [
 // GetCustomResponseHeaders returns the value of CustomResponseHeaders.
 func (s *GetSubscriptionSettingsResponseDtoResponse) GetCustomResponseHeaders() NilGetSubscriptionSettingsResponseDtoResponseCustomResponseHeaders {
 	return s.CustomResponseHeaders
+}
+
+// GetRandomizeHosts returns the value of RandomizeHosts.
+func (s *GetSubscriptionSettingsResponseDtoResponse) GetRandomizeHosts() bool {
+	return s.RandomizeHosts
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -9874,6 +15580,11 @@ func (s *GetSubscriptionSettingsResponseDtoResponse) SetCustomResponseHeaders(va
 	s.CustomResponseHeaders = val
 }
 
+// SetRandomizeHosts sets the value of RandomizeHosts.
+func (s *GetSubscriptionSettingsResponseDtoResponse) SetRandomizeHosts(val bool) {
+	s.RandomizeHosts = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *GetSubscriptionSettingsResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -9909,6 +15620,8 @@ func (s *GetTemplateResponseDto) GetResponse() GetTemplateResponseDtoResponse {
 func (s *GetTemplateResponseDto) SetResponse(val GetTemplateResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*GetTemplateResponseDto) subscriptionTemplateControllerGetTemplateRes() {}
 
 type GetTemplateResponseDtoResponse struct {
 	UUID                uuid.UUID                                  `json:"uuid"`
@@ -10026,6 +15739,668 @@ func (s *GetTemplateResponseDtoResponseTemplateType) UnmarshalText(data []byte) 
 	}
 }
 
+// Ref: #/components/schemas/GetUserAccessibleNodesResponseDto
+type GetUserAccessibleNodesResponseDto struct {
+	Response GetUserAccessibleNodesResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetUserAccessibleNodesResponseDto) GetResponse() GetUserAccessibleNodesResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetUserAccessibleNodesResponseDto) SetResponse(val GetUserAccessibleNodesResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*GetUserAccessibleNodesResponseDto) usersControllerGetUserAccessibleNodesRes() {}
+
+type GetUserAccessibleNodesResponseDtoResponse struct {
+	UserUuid    uuid.UUID                                                  `json:"userUuid"`
+	ActiveNodes []GetUserAccessibleNodesResponseDtoResponseActiveNodesItem `json:"activeNodes"`
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *GetUserAccessibleNodesResponseDtoResponse) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetActiveNodes returns the value of ActiveNodes.
+func (s *GetUserAccessibleNodesResponseDtoResponse) GetActiveNodes() []GetUserAccessibleNodesResponseDtoResponseActiveNodesItem {
+	return s.ActiveNodes
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *GetUserAccessibleNodesResponseDtoResponse) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetActiveNodes sets the value of ActiveNodes.
+func (s *GetUserAccessibleNodesResponseDtoResponse) SetActiveNodes(val []GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) {
+	s.ActiveNodes = val
+}
+
+type GetUserAccessibleNodesResponseDtoResponseActiveNodesItem struct {
+	UUID              uuid.UUID                                                                  `json:"uuid"`
+	NodeName          string                                                                     `json:"nodeName"`
+	CountryCode       string                                                                     `json:"countryCode"`
+	ConfigProfileUuid uuid.UUID                                                                  `json:"configProfileUuid"`
+	ConfigProfileName string                                                                     `json:"configProfileName"`
+	ActiveSquads      []GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem `json:"activeSquads"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) GetNodeName() string {
+	return s.NodeName
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) GetConfigProfileUuid() uuid.UUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileName returns the value of ConfigProfileName.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) GetConfigProfileName() string {
+	return s.ConfigProfileName
+}
+
+// GetActiveSquads returns the value of ActiveSquads.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) GetActiveSquads() []GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem {
+	return s.ActiveSquads
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) SetConfigProfileUuid(val uuid.UUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileName sets the value of ConfigProfileName.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) SetConfigProfileName(val string) {
+	s.ConfigProfileName = val
+}
+
+// SetActiveSquads sets the value of ActiveSquads.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) SetActiveSquads(val []GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem) {
+	s.ActiveSquads = val
+}
+
+type GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem struct {
+	SquadName      string   `json:"squadName"`
+	ActiveInbounds []string `json:"activeInbounds"`
+}
+
+// GetSquadName returns the value of SquadName.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem) GetSquadName() string {
+	return s.SquadName
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem) GetActiveInbounds() []string {
+	return s.ActiveInbounds
+}
+
+// SetSquadName sets the value of SquadName.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem) SetSquadName(val string) {
+	s.SquadName = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem) SetActiveInbounds(val []string) {
+	s.ActiveInbounds = val
+}
+
+// Ref: #/components/schemas/GetUserByEmailResponseDto
+type GetUserByEmailResponseDto struct {
+	Response []GetUserByEmailResponseDtoResponseItem `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetUserByEmailResponseDto) GetResponse() []GetUserByEmailResponseDtoResponseItem {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetUserByEmailResponseDto) SetResponse(val []GetUserByEmailResponseDtoResponseItem) {
+	s.Response = val
+}
+
+func (*GetUserByEmailResponseDto) usersControllerGetUsersByEmailRes() {}
+
+type GetUserByEmailResponseDtoResponseItem struct {
+	UUID                     uuid.UUID                                      `json:"uuid"`
+	ShortUuid                string                                         `json:"shortUuid"`
+	Username                 string                                         `json:"username"`
+	Status                   OptGetUserByEmailResponseDtoResponseItemStatus `json:"status"`
+	UsedTrafficBytes         float64                                        `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                        `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                         `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy   OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                                       `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                     `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                                       `json:"expireAt"`
+	OnlineAt               NilDateTime                                                     `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                                     `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                                     `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                          `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                                       `json:"vlessUuid"`
+	SsPassword             string                                                          `json:"ssPassword"`
+	Description            NilString                                                       `json:"description"`
+	Tag                    NilString                                                       `json:"tag"`
+	TelegramId             NilInt                                                          `json:"telegramId"`
+	Email                  NilString                                                       `json:"email"`
+	HwidDeviceLimit        NilInt                                                          `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                                     `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                          `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                                       `json:"createdAt"`
+	UpdatedAt              time.Time                                                       `json:"updatedAt"`
+	ActiveInternalSquads   []GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                          `json:"subscriptionUrl"`
+	LastConnectedNode      NilGetUserByEmailResponseDtoResponseItemLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   GetUserByEmailResponseDtoResponseItemHapp                       `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserByEmailResponseDtoResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *GetUserByEmailResponseDtoResponseItem) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *GetUserByEmailResponseDtoResponseItem) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *GetUserByEmailResponseDtoResponseItem) GetStatus() OptGetUserByEmailResponseDtoResponseItemStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *GetUserByEmailResponseDtoResponseItem) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *GetUserByEmailResponseDtoResponseItem) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *GetUserByEmailResponseDtoResponseItem) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *GetUserByEmailResponseDtoResponseItem) GetTrafficLimitStrategy() OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *GetUserByEmailResponseDtoResponseItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *GetUserByEmailResponseDtoResponseItem) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *GetUserByEmailResponseDtoResponseItem) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *GetUserByEmailResponseDtoResponseItem) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *GetUserByEmailResponseDtoResponseItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetUserByEmailResponseDtoResponseItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *GetUserByEmailResponseDtoResponseItem) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *GetUserByEmailResponseDtoResponseItem) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *GetUserByEmailResponseDtoResponseItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *GetUserByEmailResponseDtoResponseItem) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *GetUserByEmailResponseDtoResponseItem) GetActiveInternalSquads() []GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *GetUserByEmailResponseDtoResponseItem) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *GetUserByEmailResponseDtoResponseItem) GetLastConnectedNode() NilGetUserByEmailResponseDtoResponseItemLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *GetUserByEmailResponseDtoResponseItem) GetHapp() GetUserByEmailResponseDtoResponseItemHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserByEmailResponseDtoResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *GetUserByEmailResponseDtoResponseItem) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *GetUserByEmailResponseDtoResponseItem) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *GetUserByEmailResponseDtoResponseItem) SetStatus(val OptGetUserByEmailResponseDtoResponseItemStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *GetUserByEmailResponseDtoResponseItem) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *GetUserByEmailResponseDtoResponseItem) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *GetUserByEmailResponseDtoResponseItem) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *GetUserByEmailResponseDtoResponseItem) SetTrafficLimitStrategy(val OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *GetUserByEmailResponseDtoResponseItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *GetUserByEmailResponseDtoResponseItem) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *GetUserByEmailResponseDtoResponseItem) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *GetUserByEmailResponseDtoResponseItem) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *GetUserByEmailResponseDtoResponseItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetUserByEmailResponseDtoResponseItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *GetUserByEmailResponseDtoResponseItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *GetUserByEmailResponseDtoResponseItem) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *GetUserByEmailResponseDtoResponseItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *GetUserByEmailResponseDtoResponseItem) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetUserByEmailResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *GetUserByEmailResponseDtoResponseItem) SetActiveInternalSquads(val []GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *GetUserByEmailResponseDtoResponseItem) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *GetUserByEmailResponseDtoResponseItem) SetLastConnectedNode(val NilGetUserByEmailResponseDtoResponseItemLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *GetUserByEmailResponseDtoResponseItem) SetHapp(val GetUserByEmailResponseDtoResponseItemHapp) {
+	s.Happ = val
+}
+
+type GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem) GetName() string {
+	return s.Name
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetUserByEmailResponseDtoResponseItemActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
+}
+
+type GetUserByEmailResponseDtoResponseItemHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *GetUserByEmailResponseDtoResponseItemHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *GetUserByEmailResponseDtoResponseItemHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type GetUserByEmailResponseDtoResponseItemLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *GetUserByEmailResponseDtoResponseItemLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *GetUserByEmailResponseDtoResponseItemLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *GetUserByEmailResponseDtoResponseItemLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *GetUserByEmailResponseDtoResponseItemLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+type GetUserByEmailResponseDtoResponseItemStatus string
+
+const (
+	GetUserByEmailResponseDtoResponseItemStatusACTIVE   GetUserByEmailResponseDtoResponseItemStatus = "ACTIVE"
+	GetUserByEmailResponseDtoResponseItemStatusDISABLED GetUserByEmailResponseDtoResponseItemStatus = "DISABLED"
+	GetUserByEmailResponseDtoResponseItemStatusLIMITED  GetUserByEmailResponseDtoResponseItemStatus = "LIMITED"
+	GetUserByEmailResponseDtoResponseItemStatusEXPIRED  GetUserByEmailResponseDtoResponseItemStatus = "EXPIRED"
+)
+
+// AllValues returns all GetUserByEmailResponseDtoResponseItemStatus values.
+func (GetUserByEmailResponseDtoResponseItemStatus) AllValues() []GetUserByEmailResponseDtoResponseItemStatus {
+	return []GetUserByEmailResponseDtoResponseItemStatus{
+		GetUserByEmailResponseDtoResponseItemStatusACTIVE,
+		GetUserByEmailResponseDtoResponseItemStatusDISABLED,
+		GetUserByEmailResponseDtoResponseItemStatusLIMITED,
+		GetUserByEmailResponseDtoResponseItemStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetUserByEmailResponseDtoResponseItemStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case GetUserByEmailResponseDtoResponseItemStatusACTIVE:
+		return []byte(s), nil
+	case GetUserByEmailResponseDtoResponseItemStatusDISABLED:
+		return []byte(s), nil
+	case GetUserByEmailResponseDtoResponseItemStatusLIMITED:
+		return []byte(s), nil
+	case GetUserByEmailResponseDtoResponseItemStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetUserByEmailResponseDtoResponseItemStatus) UnmarshalText(data []byte) error {
+	switch GetUserByEmailResponseDtoResponseItemStatus(data) {
+	case GetUserByEmailResponseDtoResponseItemStatusACTIVE:
+		*s = GetUserByEmailResponseDtoResponseItemStatusACTIVE
+		return nil
+	case GetUserByEmailResponseDtoResponseItemStatusDISABLED:
+		*s = GetUserByEmailResponseDtoResponseItemStatusDISABLED
+		return nil
+	case GetUserByEmailResponseDtoResponseItemStatusLIMITED:
+		*s = GetUserByEmailResponseDtoResponseItemStatusLIMITED
+		return nil
+	case GetUserByEmailResponseDtoResponseItemStatusEXPIRED:
+		*s = GetUserByEmailResponseDtoResponseItemStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy string
+
+const (
+	GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyNORESET GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy = "NO_RESET"
+	GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyDAY     GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy = "DAY"
+	GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyWEEK    GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy = "WEEK"
+	GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyMONTH   GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy values.
+func (GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) AllValues() []GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy {
+	return []GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy{
+		GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyNORESET,
+		GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyDAY,
+		GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyWEEK,
+		GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy(data) {
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyNORESET:
+		*s = GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyNORESET
+		return nil
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyDAY:
+		*s = GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyDAY
+		return nil
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyWEEK:
+		*s = GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyWEEK
+		return nil
+	case GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyMONTH:
+		*s = GetUserByEmailResponseDtoResponseItemTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 // Ref: #/components/schemas/GetUserByTagResponseDto
 type GetUserByTagResponseDto struct {
 	Response []GetUserByTagResponseDtoResponseItem `json:"response"`
@@ -10045,7 +16420,6 @@ func (*GetUserByTagResponseDto) usersControllerGetUsersByTagRes() {}
 
 type GetUserByTagResponseDtoResponseItem struct {
 	UUID                     uuid.UUID                                    `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                                    `json:"subscriptionUuid"`
 	ShortUuid                string                                       `json:"shortUuid"`
 	Username                 string                                       `json:"username"`
 	Status                   OptGetUserByTagResponseDtoResponseItemStatus `json:"status"`
@@ -10053,37 +16427,34 @@ type GetUserByTagResponseDtoResponseItem struct {
 	LifetimeUsedTrafficBytes float64                                      `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt                                       `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                                   `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                                 `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                                   `json:"expireAt"`
-	OnlineAt             NilDateTime                                                 `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                                 `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                                 `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                      `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                                   `json:"vlessUuid"`
-	SsPassword           string                                                      `json:"ssPassword"`
-	Description          NilString                                                   `json:"description"`
-	Tag                  NilString                                                   `json:"tag"`
-	TelegramId           NilInt                                                      `json:"telegramId"`
-	Email                NilString                                                   `json:"email"`
-	HwidDeviceLimit      NilInt                                                      `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                                   `json:"createdAt"`
-	UpdatedAt            time.Time                                                   `json:"updatedAt"`
-	ActiveUserInbounds   []GetUserByTagResponseDtoResponseItemActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                      `json:"subscriptionUrl"`
-	LastConnectedNode    NilGetUserByTagResponseDtoResponseItemLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 GetUserByTagResponseDtoResponseItemHapp                     `json:"happ"`
+	TrafficLimitStrategy   OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                                     `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                   `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                                     `json:"expireAt"`
+	OnlineAt               NilDateTime                                                   `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                                   `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                                   `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                        `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                                     `json:"vlessUuid"`
+	SsPassword             string                                                        `json:"ssPassword"`
+	Description            NilString                                                     `json:"description"`
+	Tag                    NilString                                                     `json:"tag"`
+	TelegramId             NilInt                                                        `json:"telegramId"`
+	Email                  NilString                                                     `json:"email"`
+	HwidDeviceLimit        NilInt                                                        `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                                   `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                        `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                                     `json:"createdAt"`
+	UpdatedAt              time.Time                                                     `json:"updatedAt"`
+	ActiveInternalSquads   []GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                        `json:"subscriptionUrl"`
+	LastConnectedNode      NilGetUserByTagResponseDtoResponseItemLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   GetUserByTagResponseDtoResponseItemHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *GetUserByTagResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *GetUserByTagResponseDtoResponseItem) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -10191,6 +16562,16 @@ func (s *GetUserByTagResponseDtoResponseItem) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
 }
 
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *GetUserByTagResponseDtoResponseItem) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *GetUserByTagResponseDtoResponseItem) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *GetUserByTagResponseDtoResponseItem) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -10201,9 +16582,9 @@ func (s *GetUserByTagResponseDtoResponseItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *GetUserByTagResponseDtoResponseItem) GetActiveUserInbounds() []GetUserByTagResponseDtoResponseItemActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *GetUserByTagResponseDtoResponseItem) GetActiveInternalSquads() []GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
@@ -10224,11 +16605,6 @@ func (s *GetUserByTagResponseDtoResponseItem) GetHapp() GetUserByTagResponseDtoR
 // SetUUID sets the value of UUID.
 func (s *GetUserByTagResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *GetUserByTagResponseDtoResponseItem) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -10336,6 +16712,16 @@ func (s *GetUserByTagResponseDtoResponseItem) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
 }
 
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *GetUserByTagResponseDtoResponseItem) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *GetUserByTagResponseDtoResponseItem) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *GetUserByTagResponseDtoResponseItem) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -10346,9 +16732,9 @@ func (s *GetUserByTagResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *GetUserByTagResponseDtoResponseItem) SetActiveUserInbounds(val []GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *GetUserByTagResponseDtoResponseItem) SetActiveInternalSquads(val []GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
@@ -10366,62 +16752,29 @@ func (s *GetUserByTagResponseDtoResponseItem) SetHapp(val GetUserByTagResponseDt
 	s.Happ = val
 }
 
-type GetUserByTagResponseDtoResponseItemActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *GetUserByTagResponseDtoResponseItemActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetName sets the value of Name.
+func (s *GetUserByTagResponseDtoResponseItemActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
 type GetUserByTagResponseDtoResponseItemHapp struct {
@@ -10574,472 +16927,450 @@ func (s *GetUserByTagResponseDtoResponseItemTrafficLimitStrategy) UnmarshalText(
 	}
 }
 
-// Ref: #/components/schemas/GetUserByUuidResponseDto
-type GetUserByUuidResponseDto struct {
-	Response GetUserByUuidResponseDtoResponse `json:"response"`
+// Ref: #/components/schemas/GetUserByUsernameResponseDto
+type GetUserByUsernameResponseDto struct {
+	Response GetUserByUsernameResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetUserByUuidResponseDto) GetResponse() GetUserByUuidResponseDtoResponse {
+func (s *GetUserByUsernameResponseDto) GetResponse() GetUserByUsernameResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetUserByUuidResponseDto) SetResponse(val GetUserByUuidResponseDtoResponse) {
+func (s *GetUserByUsernameResponseDto) SetResponse(val GetUserByUsernameResponseDtoResponse) {
 	s.Response = val
 }
 
-func (*GetUserByUuidResponseDto) usersControllerGetUserByUuidRes() {}
+func (*GetUserByUsernameResponseDto) usersControllerGetUserByUsernameRes() {}
 
-type GetUserByUuidResponseDtoResponse struct {
-	UUID                     uuid.UUID                                 `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                                 `json:"subscriptionUuid"`
-	ShortUuid                string                                    `json:"shortUuid"`
-	Username                 string                                    `json:"username"`
-	Status                   OptGetUserByUuidResponseDtoResponseStatus `json:"status"`
-	UsedTrafficBytes         float64                                   `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                                   `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                                    `json:"trafficLimitBytes"`
+type GetUserByUsernameResponseDtoResponse struct {
+	UUID                     uuid.UUID                                     `json:"uuid"`
+	ShortUuid                string                                        `json:"shortUuid"`
+	Username                 string                                        `json:"username"`
+	Status                   OptGetUserByUsernameResponseDtoResponseStatus `json:"status"`
+	UsedTrafficBytes         float64                                       `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                                       `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                                        `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                                `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                              `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                                `json:"expireAt"`
-	OnlineAt             NilDateTime                                              `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                              `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                              `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                   `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                                `json:"vlessUuid"`
-	SsPassword           string                                                   `json:"ssPassword"`
-	Description          NilString                                                `json:"description"`
-	Tag                  NilString                                                `json:"tag"`
-	TelegramId           NilInt                                                   `json:"telegramId"`
-	Email                NilString                                                `json:"email"`
-	HwidDeviceLimit      NilInt                                                   `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                                `json:"createdAt"`
-	UpdatedAt            time.Time                                                `json:"updatedAt"`
-	ActiveUserInbounds   []GetUserByUuidResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                   `json:"subscriptionUrl"`
-	LastConnectedNode    NilGetUserByUuidResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 GetUserByUuidResponseDtoResponseHapp                     `json:"happ"`
+	TrafficLimitStrategy   OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                                      `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                    `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                                      `json:"expireAt"`
+	OnlineAt               NilDateTime                                                    `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                                    `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                                    `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                         `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                                      `json:"vlessUuid"`
+	SsPassword             string                                                         `json:"ssPassword"`
+	Description            NilString                                                      `json:"description"`
+	Tag                    NilString                                                      `json:"tag"`
+	TelegramId             NilInt                                                         `json:"telegramId"`
+	Email                  NilString                                                      `json:"email"`
+	HwidDeviceLimit        NilInt                                                         `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                                    `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                         `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                                      `json:"createdAt"`
+	UpdatedAt              time.Time                                                      `json:"updatedAt"`
+	ActiveInternalSquads   []GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                         `json:"subscriptionUrl"`
+	LastConnectedNode      NilGetUserByUsernameResponseDtoResponseLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   GetUserByUsernameResponseDtoResponseHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *GetUserByUuidResponseDtoResponse) GetUUID() uuid.UUID {
+func (s *GetUserByUsernameResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *GetUserByUuidResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
-}
-
 // GetShortUuid returns the value of ShortUuid.
-func (s *GetUserByUuidResponseDtoResponse) GetShortUuid() string {
+func (s *GetUserByUsernameResponseDtoResponse) GetShortUuid() string {
 	return s.ShortUuid
 }
 
 // GetUsername returns the value of Username.
-func (s *GetUserByUuidResponseDtoResponse) GetUsername() string {
+func (s *GetUserByUsernameResponseDtoResponse) GetUsername() string {
 	return s.Username
 }
 
 // GetStatus returns the value of Status.
-func (s *GetUserByUuidResponseDtoResponse) GetStatus() OptGetUserByUuidResponseDtoResponseStatus {
+func (s *GetUserByUsernameResponseDtoResponse) GetStatus() OptGetUserByUsernameResponseDtoResponseStatus {
 	return s.Status
 }
 
 // GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *GetUserByUuidResponseDtoResponse) GetUsedTrafficBytes() float64 {
+func (s *GetUserByUsernameResponseDtoResponse) GetUsedTrafficBytes() float64 {
 	return s.UsedTrafficBytes
 }
 
 // GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *GetUserByUuidResponseDtoResponse) GetLifetimeUsedTrafficBytes() float64 {
+func (s *GetUserByUsernameResponseDtoResponse) GetLifetimeUsedTrafficBytes() float64 {
 	return s.LifetimeUsedTrafficBytes
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *GetUserByUuidResponseDtoResponse) GetTrafficLimitBytes() OptInt {
+func (s *GetUserByUsernameResponseDtoResponse) GetTrafficLimitBytes() OptInt {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *GetUserByUuidResponseDtoResponse) GetTrafficLimitStrategy() OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy {
+func (s *GetUserByUsernameResponseDtoResponse) GetTrafficLimitStrategy() OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
 // GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *GetUserByUuidResponseDtoResponse) GetSubLastUserAgent() NilString {
+func (s *GetUserByUsernameResponseDtoResponse) GetSubLastUserAgent() NilString {
 	return s.SubLastUserAgent
 }
 
 // GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *GetUserByUuidResponseDtoResponse) GetSubLastOpenedAt() NilDateTime {
+func (s *GetUserByUsernameResponseDtoResponse) GetSubLastOpenedAt() NilDateTime {
 	return s.SubLastOpenedAt
 }
 
 // GetExpireAt returns the value of ExpireAt.
-func (s *GetUserByUuidResponseDtoResponse) GetExpireAt() time.Time {
+func (s *GetUserByUsernameResponseDtoResponse) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
 // GetOnlineAt returns the value of OnlineAt.
-func (s *GetUserByUuidResponseDtoResponse) GetOnlineAt() NilDateTime {
+func (s *GetUserByUsernameResponseDtoResponse) GetOnlineAt() NilDateTime {
 	return s.OnlineAt
 }
 
 // GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *GetUserByUuidResponseDtoResponse) GetSubRevokedAt() NilDateTime {
+func (s *GetUserByUsernameResponseDtoResponse) GetSubRevokedAt() NilDateTime {
 	return s.SubRevokedAt
 }
 
 // GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *GetUserByUuidResponseDtoResponse) GetLastTrafficResetAt() NilDateTime {
+func (s *GetUserByUsernameResponseDtoResponse) GetLastTrafficResetAt() NilDateTime {
 	return s.LastTrafficResetAt
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
-func (s *GetUserByUuidResponseDtoResponse) GetTrojanPassword() string {
+func (s *GetUserByUsernameResponseDtoResponse) GetTrojanPassword() string {
 	return s.TrojanPassword
 }
 
 // GetVlessUuid returns the value of VlessUuid.
-func (s *GetUserByUuidResponseDtoResponse) GetVlessUuid() uuid.UUID {
+func (s *GetUserByUsernameResponseDtoResponse) GetVlessUuid() uuid.UUID {
 	return s.VlessUuid
 }
 
 // GetSsPassword returns the value of SsPassword.
-func (s *GetUserByUuidResponseDtoResponse) GetSsPassword() string {
+func (s *GetUserByUsernameResponseDtoResponse) GetSsPassword() string {
 	return s.SsPassword
 }
 
 // GetDescription returns the value of Description.
-func (s *GetUserByUuidResponseDtoResponse) GetDescription() NilString {
+func (s *GetUserByUsernameResponseDtoResponse) GetDescription() NilString {
 	return s.Description
 }
 
 // GetTag returns the value of Tag.
-func (s *GetUserByUuidResponseDtoResponse) GetTag() NilString {
+func (s *GetUserByUsernameResponseDtoResponse) GetTag() NilString {
 	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *GetUserByUuidResponseDtoResponse) GetTelegramId() NilInt {
+func (s *GetUserByUsernameResponseDtoResponse) GetTelegramId() NilInt {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *GetUserByUuidResponseDtoResponse) GetEmail() NilString {
+func (s *GetUserByUsernameResponseDtoResponse) GetEmail() NilString {
 	return s.Email
 }
 
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *GetUserByUuidResponseDtoResponse) GetHwidDeviceLimit() NilInt {
+func (s *GetUserByUsernameResponseDtoResponse) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
 }
 
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *GetUserByUsernameResponseDtoResponse) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *GetUserByUsernameResponseDtoResponse) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
 // GetCreatedAt returns the value of CreatedAt.
-func (s *GetUserByUuidResponseDtoResponse) GetCreatedAt() time.Time {
+func (s *GetUserByUsernameResponseDtoResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetUserByUuidResponseDtoResponse) GetUpdatedAt() time.Time {
+func (s *GetUserByUsernameResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *GetUserByUuidResponseDtoResponse) GetActiveUserInbounds() []GetUserByUuidResponseDtoResponseActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *GetUserByUsernameResponseDtoResponse) GetActiveInternalSquads() []GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *GetUserByUuidResponseDtoResponse) GetSubscriptionUrl() string {
+func (s *GetUserByUsernameResponseDtoResponse) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
 // GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *GetUserByUuidResponseDtoResponse) GetLastConnectedNode() NilGetUserByUuidResponseDtoResponseLastConnectedNode {
+func (s *GetUserByUsernameResponseDtoResponse) GetLastConnectedNode() NilGetUserByUsernameResponseDtoResponseLastConnectedNode {
 	return s.LastConnectedNode
 }
 
 // GetHapp returns the value of Happ.
-func (s *GetUserByUuidResponseDtoResponse) GetHapp() GetUserByUuidResponseDtoResponseHapp {
+func (s *GetUserByUsernameResponseDtoResponse) GetHapp() GetUserByUsernameResponseDtoResponseHapp {
 	return s.Happ
 }
 
 // SetUUID sets the value of UUID.
-func (s *GetUserByUuidResponseDtoResponse) SetUUID(val uuid.UUID) {
+func (s *GetUserByUsernameResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *GetUserByUuidResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
-}
-
 // SetShortUuid sets the value of ShortUuid.
-func (s *GetUserByUuidResponseDtoResponse) SetShortUuid(val string) {
+func (s *GetUserByUsernameResponseDtoResponse) SetShortUuid(val string) {
 	s.ShortUuid = val
 }
 
 // SetUsername sets the value of Username.
-func (s *GetUserByUuidResponseDtoResponse) SetUsername(val string) {
+func (s *GetUserByUsernameResponseDtoResponse) SetUsername(val string) {
 	s.Username = val
 }
 
 // SetStatus sets the value of Status.
-func (s *GetUserByUuidResponseDtoResponse) SetStatus(val OptGetUserByUuidResponseDtoResponseStatus) {
+func (s *GetUserByUsernameResponseDtoResponse) SetStatus(val OptGetUserByUsernameResponseDtoResponseStatus) {
 	s.Status = val
 }
 
 // SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *GetUserByUuidResponseDtoResponse) SetUsedTrafficBytes(val float64) {
+func (s *GetUserByUsernameResponseDtoResponse) SetUsedTrafficBytes(val float64) {
 	s.UsedTrafficBytes = val
 }
 
 // SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *GetUserByUuidResponseDtoResponse) SetLifetimeUsedTrafficBytes(val float64) {
+func (s *GetUserByUsernameResponseDtoResponse) SetLifetimeUsedTrafficBytes(val float64) {
 	s.LifetimeUsedTrafficBytes = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *GetUserByUuidResponseDtoResponse) SetTrafficLimitBytes(val OptInt) {
+func (s *GetUserByUsernameResponseDtoResponse) SetTrafficLimitBytes(val OptInt) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *GetUserByUuidResponseDtoResponse) SetTrafficLimitStrategy(val OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) {
+func (s *GetUserByUsernameResponseDtoResponse) SetTrafficLimitStrategy(val OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
 // SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *GetUserByUuidResponseDtoResponse) SetSubLastUserAgent(val NilString) {
+func (s *GetUserByUsernameResponseDtoResponse) SetSubLastUserAgent(val NilString) {
 	s.SubLastUserAgent = val
 }
 
 // SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *GetUserByUuidResponseDtoResponse) SetSubLastOpenedAt(val NilDateTime) {
+func (s *GetUserByUsernameResponseDtoResponse) SetSubLastOpenedAt(val NilDateTime) {
 	s.SubLastOpenedAt = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
-func (s *GetUserByUuidResponseDtoResponse) SetExpireAt(val time.Time) {
+func (s *GetUserByUsernameResponseDtoResponse) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
 // SetOnlineAt sets the value of OnlineAt.
-func (s *GetUserByUuidResponseDtoResponse) SetOnlineAt(val NilDateTime) {
+func (s *GetUserByUsernameResponseDtoResponse) SetOnlineAt(val NilDateTime) {
 	s.OnlineAt = val
 }
 
 // SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *GetUserByUuidResponseDtoResponse) SetSubRevokedAt(val NilDateTime) {
+func (s *GetUserByUsernameResponseDtoResponse) SetSubRevokedAt(val NilDateTime) {
 	s.SubRevokedAt = val
 }
 
 // SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *GetUserByUuidResponseDtoResponse) SetLastTrafficResetAt(val NilDateTime) {
+func (s *GetUserByUsernameResponseDtoResponse) SetLastTrafficResetAt(val NilDateTime) {
 	s.LastTrafficResetAt = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
-func (s *GetUserByUuidResponseDtoResponse) SetTrojanPassword(val string) {
+func (s *GetUserByUsernameResponseDtoResponse) SetTrojanPassword(val string) {
 	s.TrojanPassword = val
 }
 
 // SetVlessUuid sets the value of VlessUuid.
-func (s *GetUserByUuidResponseDtoResponse) SetVlessUuid(val uuid.UUID) {
+func (s *GetUserByUsernameResponseDtoResponse) SetVlessUuid(val uuid.UUID) {
 	s.VlessUuid = val
 }
 
 // SetSsPassword sets the value of SsPassword.
-func (s *GetUserByUuidResponseDtoResponse) SetSsPassword(val string) {
+func (s *GetUserByUsernameResponseDtoResponse) SetSsPassword(val string) {
 	s.SsPassword = val
 }
 
 // SetDescription sets the value of Description.
-func (s *GetUserByUuidResponseDtoResponse) SetDescription(val NilString) {
+func (s *GetUserByUsernameResponseDtoResponse) SetDescription(val NilString) {
 	s.Description = val
 }
 
 // SetTag sets the value of Tag.
-func (s *GetUserByUuidResponseDtoResponse) SetTag(val NilString) {
+func (s *GetUserByUsernameResponseDtoResponse) SetTag(val NilString) {
 	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *GetUserByUuidResponseDtoResponse) SetTelegramId(val NilInt) {
+func (s *GetUserByUsernameResponseDtoResponse) SetTelegramId(val NilInt) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *GetUserByUuidResponseDtoResponse) SetEmail(val NilString) {
+func (s *GetUserByUsernameResponseDtoResponse) SetEmail(val NilString) {
 	s.Email = val
 }
 
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *GetUserByUuidResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
+func (s *GetUserByUsernameResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
 }
 
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *GetUserByUsernameResponseDtoResponse) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *GetUserByUsernameResponseDtoResponse) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
-func (s *GetUserByUuidResponseDtoResponse) SetCreatedAt(val time.Time) {
+func (s *GetUserByUsernameResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetUserByUuidResponseDtoResponse) SetUpdatedAt(val time.Time) {
+func (s *GetUserByUsernameResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *GetUserByUuidResponseDtoResponse) SetActiveUserInbounds(val []GetUserByUuidResponseDtoResponseActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *GetUserByUsernameResponseDtoResponse) SetActiveInternalSquads(val []GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *GetUserByUuidResponseDtoResponse) SetSubscriptionUrl(val string) {
+func (s *GetUserByUsernameResponseDtoResponse) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
 }
 
 // SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *GetUserByUuidResponseDtoResponse) SetLastConnectedNode(val NilGetUserByUuidResponseDtoResponseLastConnectedNode) {
+func (s *GetUserByUsernameResponseDtoResponse) SetLastConnectedNode(val NilGetUserByUsernameResponseDtoResponseLastConnectedNode) {
 	s.LastConnectedNode = val
 }
 
 // SetHapp sets the value of Happ.
-func (s *GetUserByUuidResponseDtoResponse) SetHapp(val GetUserByUuidResponseDtoResponseHapp) {
+func (s *GetUserByUsernameResponseDtoResponse) SetHapp(val GetUserByUsernameResponseDtoResponseHapp) {
 	s.Happ = val
 }
 
-type GetUserByUuidResponseDtoResponseActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
+// SetName sets the value of Name.
+func (s *GetUserByUsernameResponseDtoResponseActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
-// SetType sets the value of Type.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *GetUserByUuidResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-type GetUserByUuidResponseDtoResponseHapp struct {
+type GetUserByUsernameResponseDtoResponseHapp struct {
 	CryptoLink string `json:"cryptoLink"`
 }
 
 // GetCryptoLink returns the value of CryptoLink.
-func (s *GetUserByUuidResponseDtoResponseHapp) GetCryptoLink() string {
+func (s *GetUserByUsernameResponseDtoResponseHapp) GetCryptoLink() string {
 	return s.CryptoLink
 }
 
 // SetCryptoLink sets the value of CryptoLink.
-func (s *GetUserByUuidResponseDtoResponseHapp) SetCryptoLink(val string) {
+func (s *GetUserByUsernameResponseDtoResponseHapp) SetCryptoLink(val string) {
 	s.CryptoLink = val
 }
 
-type GetUserByUuidResponseDtoResponseLastConnectedNode struct {
+type GetUserByUsernameResponseDtoResponseLastConnectedNode struct {
 	ConnectedAt time.Time `json:"connectedAt"`
 	NodeName    string    `json:"nodeName"`
 }
 
 // GetConnectedAt returns the value of ConnectedAt.
-func (s *GetUserByUuidResponseDtoResponseLastConnectedNode) GetConnectedAt() time.Time {
+func (s *GetUserByUsernameResponseDtoResponseLastConnectedNode) GetConnectedAt() time.Time {
 	return s.ConnectedAt
 }
 
 // GetNodeName returns the value of NodeName.
-func (s *GetUserByUuidResponseDtoResponseLastConnectedNode) GetNodeName() string {
+func (s *GetUserByUsernameResponseDtoResponseLastConnectedNode) GetNodeName() string {
 	return s.NodeName
 }
 
 // SetConnectedAt sets the value of ConnectedAt.
-func (s *GetUserByUuidResponseDtoResponseLastConnectedNode) SetConnectedAt(val time.Time) {
+func (s *GetUserByUsernameResponseDtoResponseLastConnectedNode) SetConnectedAt(val time.Time) {
 	s.ConnectedAt = val
 }
 
 // SetNodeName sets the value of NodeName.
-func (s *GetUserByUuidResponseDtoResponseLastConnectedNode) SetNodeName(val string) {
+func (s *GetUserByUsernameResponseDtoResponseLastConnectedNode) SetNodeName(val string) {
 	s.NodeName = val
 }
 
-type GetUserByUuidResponseDtoResponseStatus string
+type GetUserByUsernameResponseDtoResponseStatus string
 
 const (
-	GetUserByUuidResponseDtoResponseStatusACTIVE   GetUserByUuidResponseDtoResponseStatus = "ACTIVE"
-	GetUserByUuidResponseDtoResponseStatusDISABLED GetUserByUuidResponseDtoResponseStatus = "DISABLED"
-	GetUserByUuidResponseDtoResponseStatusLIMITED  GetUserByUuidResponseDtoResponseStatus = "LIMITED"
-	GetUserByUuidResponseDtoResponseStatusEXPIRED  GetUserByUuidResponseDtoResponseStatus = "EXPIRED"
+	GetUserByUsernameResponseDtoResponseStatusACTIVE   GetUserByUsernameResponseDtoResponseStatus = "ACTIVE"
+	GetUserByUsernameResponseDtoResponseStatusDISABLED GetUserByUsernameResponseDtoResponseStatus = "DISABLED"
+	GetUserByUsernameResponseDtoResponseStatusLIMITED  GetUserByUsernameResponseDtoResponseStatus = "LIMITED"
+	GetUserByUsernameResponseDtoResponseStatusEXPIRED  GetUserByUsernameResponseDtoResponseStatus = "EXPIRED"
 )
 
-// AllValues returns all GetUserByUuidResponseDtoResponseStatus values.
-func (GetUserByUuidResponseDtoResponseStatus) AllValues() []GetUserByUuidResponseDtoResponseStatus {
-	return []GetUserByUuidResponseDtoResponseStatus{
-		GetUserByUuidResponseDtoResponseStatusACTIVE,
-		GetUserByUuidResponseDtoResponseStatusDISABLED,
-		GetUserByUuidResponseDtoResponseStatusLIMITED,
-		GetUserByUuidResponseDtoResponseStatusEXPIRED,
+// AllValues returns all GetUserByUsernameResponseDtoResponseStatus values.
+func (GetUserByUsernameResponseDtoResponseStatus) AllValues() []GetUserByUsernameResponseDtoResponseStatus {
+	return []GetUserByUsernameResponseDtoResponseStatus{
+		GetUserByUsernameResponseDtoResponseStatusACTIVE,
+		GetUserByUsernameResponseDtoResponseStatusDISABLED,
+		GetUserByUsernameResponseDtoResponseStatusLIMITED,
+		GetUserByUsernameResponseDtoResponseStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s GetUserByUuidResponseDtoResponseStatus) MarshalText() ([]byte, error) {
+func (s GetUserByUsernameResponseDtoResponseStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case GetUserByUuidResponseDtoResponseStatusACTIVE:
+	case GetUserByUsernameResponseDtoResponseStatusACTIVE:
 		return []byte(s), nil
-	case GetUserByUuidResponseDtoResponseStatusDISABLED:
+	case GetUserByUsernameResponseDtoResponseStatusDISABLED:
 		return []byte(s), nil
-	case GetUserByUuidResponseDtoResponseStatusLIMITED:
+	case GetUserByUsernameResponseDtoResponseStatusLIMITED:
 		return []byte(s), nil
-	case GetUserByUuidResponseDtoResponseStatusEXPIRED:
+	case GetUserByUsernameResponseDtoResponseStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -11047,19 +17378,19 @@ func (s GetUserByUuidResponseDtoResponseStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetUserByUuidResponseDtoResponseStatus) UnmarshalText(data []byte) error {
-	switch GetUserByUuidResponseDtoResponseStatus(data) {
-	case GetUserByUuidResponseDtoResponseStatusACTIVE:
-		*s = GetUserByUuidResponseDtoResponseStatusACTIVE
+func (s *GetUserByUsernameResponseDtoResponseStatus) UnmarshalText(data []byte) error {
+	switch GetUserByUsernameResponseDtoResponseStatus(data) {
+	case GetUserByUsernameResponseDtoResponseStatusACTIVE:
+		*s = GetUserByUsernameResponseDtoResponseStatusACTIVE
 		return nil
-	case GetUserByUuidResponseDtoResponseStatusDISABLED:
-		*s = GetUserByUuidResponseDtoResponseStatusDISABLED
+	case GetUserByUsernameResponseDtoResponseStatusDISABLED:
+		*s = GetUserByUsernameResponseDtoResponseStatusDISABLED
 		return nil
-	case GetUserByUuidResponseDtoResponseStatusLIMITED:
-		*s = GetUserByUuidResponseDtoResponseStatusLIMITED
+	case GetUserByUsernameResponseDtoResponseStatusLIMITED:
+		*s = GetUserByUsernameResponseDtoResponseStatusLIMITED
 		return nil
-	case GetUserByUuidResponseDtoResponseStatusEXPIRED:
-		*s = GetUserByUuidResponseDtoResponseStatusEXPIRED
+	case GetUserByUsernameResponseDtoResponseStatusEXPIRED:
+		*s = GetUserByUsernameResponseDtoResponseStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -11067,35 +17398,35 @@ func (s *GetUserByUuidResponseDtoResponseStatus) UnmarshalText(data []byte) erro
 }
 
 // Available reset periods.
-type GetUserByUuidResponseDtoResponseTrafficLimitStrategy string
+type GetUserByUsernameResponseDtoResponseTrafficLimitStrategy string
 
 const (
-	GetUserByUuidResponseDtoResponseTrafficLimitStrategyNORESET GetUserByUuidResponseDtoResponseTrafficLimitStrategy = "NO_RESET"
-	GetUserByUuidResponseDtoResponseTrafficLimitStrategyDAY     GetUserByUuidResponseDtoResponseTrafficLimitStrategy = "DAY"
-	GetUserByUuidResponseDtoResponseTrafficLimitStrategyWEEK    GetUserByUuidResponseDtoResponseTrafficLimitStrategy = "WEEK"
-	GetUserByUuidResponseDtoResponseTrafficLimitStrategyMONTH   GetUserByUuidResponseDtoResponseTrafficLimitStrategy = "MONTH"
+	GetUserByUsernameResponseDtoResponseTrafficLimitStrategyNORESET GetUserByUsernameResponseDtoResponseTrafficLimitStrategy = "NO_RESET"
+	GetUserByUsernameResponseDtoResponseTrafficLimitStrategyDAY     GetUserByUsernameResponseDtoResponseTrafficLimitStrategy = "DAY"
+	GetUserByUsernameResponseDtoResponseTrafficLimitStrategyWEEK    GetUserByUsernameResponseDtoResponseTrafficLimitStrategy = "WEEK"
+	GetUserByUsernameResponseDtoResponseTrafficLimitStrategyMONTH   GetUserByUsernameResponseDtoResponseTrafficLimitStrategy = "MONTH"
 )
 
-// AllValues returns all GetUserByUuidResponseDtoResponseTrafficLimitStrategy values.
-func (GetUserByUuidResponseDtoResponseTrafficLimitStrategy) AllValues() []GetUserByUuidResponseDtoResponseTrafficLimitStrategy {
-	return []GetUserByUuidResponseDtoResponseTrafficLimitStrategy{
-		GetUserByUuidResponseDtoResponseTrafficLimitStrategyNORESET,
-		GetUserByUuidResponseDtoResponseTrafficLimitStrategyDAY,
-		GetUserByUuidResponseDtoResponseTrafficLimitStrategyWEEK,
-		GetUserByUuidResponseDtoResponseTrafficLimitStrategyMONTH,
+// AllValues returns all GetUserByUsernameResponseDtoResponseTrafficLimitStrategy values.
+func (GetUserByUsernameResponseDtoResponseTrafficLimitStrategy) AllValues() []GetUserByUsernameResponseDtoResponseTrafficLimitStrategy {
+	return []GetUserByUsernameResponseDtoResponseTrafficLimitStrategy{
+		GetUserByUsernameResponseDtoResponseTrafficLimitStrategyNORESET,
+		GetUserByUsernameResponseDtoResponseTrafficLimitStrategyDAY,
+		GetUserByUsernameResponseDtoResponseTrafficLimitStrategyWEEK,
+		GetUserByUsernameResponseDtoResponseTrafficLimitStrategyMONTH,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s GetUserByUuidResponseDtoResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s GetUserByUsernameResponseDtoResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyNORESET:
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyDAY:
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyWEEK:
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyMONTH:
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyMONTH:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -11103,19 +17434,19 @@ func (s GetUserByUuidResponseDtoResponseTrafficLimitStrategy) MarshalText() ([]b
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetUserByUuidResponseDtoResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch GetUserByUuidResponseDtoResponseTrafficLimitStrategy(data) {
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyNORESET:
-		*s = GetUserByUuidResponseDtoResponseTrafficLimitStrategyNORESET
+func (s *GetUserByUsernameResponseDtoResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch GetUserByUsernameResponseDtoResponseTrafficLimitStrategy(data) {
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyNORESET:
+		*s = GetUserByUsernameResponseDtoResponseTrafficLimitStrategyNORESET
 		return nil
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyDAY:
-		*s = GetUserByUuidResponseDtoResponseTrafficLimitStrategyDAY
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyDAY:
+		*s = GetUserByUsernameResponseDtoResponseTrafficLimitStrategyDAY
 		return nil
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyWEEK:
-		*s = GetUserByUuidResponseDtoResponseTrafficLimitStrategyWEEK
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyWEEK:
+		*s = GetUserByUsernameResponseDtoResponseTrafficLimitStrategyWEEK
 		return nil
-	case GetUserByUuidResponseDtoResponseTrafficLimitStrategyMONTH:
-		*s = GetUserByUuidResponseDtoResponseTrafficLimitStrategyMONTH
+	case GetUserByUsernameResponseDtoResponseTrafficLimitStrategyMONTH:
+		*s = GetUserByUsernameResponseDtoResponseTrafficLimitStrategyMONTH
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -11124,20 +17455,47 @@ func (s *GetUserByUuidResponseDtoResponseTrafficLimitStrategy) UnmarshalText(dat
 
 // Ref: #/components/schemas/GetUserHwidDevicesResponseDto
 type GetUserHwidDevicesResponseDto struct {
-	Response []GetUserHwidDevicesResponseDtoResponseItem `json:"response"`
+	Response GetUserHwidDevicesResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetUserHwidDevicesResponseDto) GetResponse() []GetUserHwidDevicesResponseDtoResponseItem {
+func (s *GetUserHwidDevicesResponseDto) GetResponse() GetUserHwidDevicesResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetUserHwidDevicesResponseDto) SetResponse(val []GetUserHwidDevicesResponseDtoResponseItem) {
+func (s *GetUserHwidDevicesResponseDto) SetResponse(val GetUserHwidDevicesResponseDtoResponse) {
 	s.Response = val
 }
 
-type GetUserHwidDevicesResponseDtoResponseItem struct {
+func (*GetUserHwidDevicesResponseDto) hwidUserDevicesControllerGetUserHwidDevicesRes() {}
+
+type GetUserHwidDevicesResponseDtoResponse struct {
+	Total   float64                                            `json:"total"`
+	Devices []GetUserHwidDevicesResponseDtoResponseDevicesItem `json:"devices"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetUserHwidDevicesResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetDevices returns the value of Devices.
+func (s *GetUserHwidDevicesResponseDtoResponse) GetDevices() []GetUserHwidDevicesResponseDtoResponseDevicesItem {
+	return s.Devices
+}
+
+// SetTotal sets the value of Total.
+func (s *GetUserHwidDevicesResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetDevices sets the value of Devices.
+func (s *GetUserHwidDevicesResponseDtoResponse) SetDevices(val []GetUserHwidDevicesResponseDtoResponseDevicesItem) {
+	s.Devices = val
+}
+
+type GetUserHwidDevicesResponseDtoResponseDevicesItem struct {
 	Hwid        string    `json:"hwid"`
 	UserUuid    uuid.UUID `json:"userUuid"`
 	Platform    NilString `json:"platform"`
@@ -11149,82 +17507,82 @@ type GetUserHwidDevicesResponseDtoResponseItem struct {
 }
 
 // GetHwid returns the value of Hwid.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetHwid() string {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetHwid() string {
 	return s.Hwid
 }
 
 // GetUserUuid returns the value of UserUuid.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetUserUuid() uuid.UUID {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetUserUuid() uuid.UUID {
 	return s.UserUuid
 }
 
 // GetPlatform returns the value of Platform.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetPlatform() NilString {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetPlatform() NilString {
 	return s.Platform
 }
 
 // GetOsVersion returns the value of OsVersion.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetOsVersion() NilString {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetOsVersion() NilString {
 	return s.OsVersion
 }
 
 // GetDeviceModel returns the value of DeviceModel.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetDeviceModel() NilString {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetDeviceModel() NilString {
 	return s.DeviceModel
 }
 
 // GetUserAgent returns the value of UserAgent.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetUserAgent() NilString {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetUserAgent() NilString {
 	return s.UserAgent
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetCreatedAt() time.Time {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) GetUpdatedAt() time.Time {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
 // SetHwid sets the value of Hwid.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetHwid(val string) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetHwid(val string) {
 	s.Hwid = val
 }
 
 // SetUserUuid sets the value of UserUuid.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetUserUuid(val uuid.UUID) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetUserUuid(val uuid.UUID) {
 	s.UserUuid = val
 }
 
 // SetPlatform sets the value of Platform.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetPlatform(val NilString) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetPlatform(val NilString) {
 	s.Platform = val
 }
 
 // SetOsVersion sets the value of OsVersion.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetOsVersion(val NilString) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetOsVersion(val NilString) {
 	s.OsVersion = val
 }
 
 // SetDeviceModel sets the value of DeviceModel.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetDeviceModel(val NilString) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetDeviceModel(val NilString) {
 	s.DeviceModel = val
 }
 
 // SetUserAgent sets the value of UserAgent.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetUserAgent(val NilString) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetUserAgent(val NilString) {
 	s.UserAgent = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetCreatedAt(val time.Time) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetUserHwidDevicesResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
+func (s *GetUserHwidDevicesResponseDtoResponseDevicesItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
@@ -11303,10 +17661,1745 @@ func (s *GetUserUsageByRangeResponseDtoResponseItem) SetDate(val string) {
 	s.Date = val
 }
 
+type HostsBulkActionsControllerDeleteHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsBulkActionsControllerDeleteHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsBulkActionsControllerDeleteHostsInternalServerError) hostsBulkActionsControllerDeleteHostsRes() {
+}
+
+type HostsBulkActionsControllerDisableHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsBulkActionsControllerDisableHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsBulkActionsControllerDisableHostsInternalServerError) hostsBulkActionsControllerDisableHostsRes() {
+}
+
+type HostsBulkActionsControllerEnableHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsBulkActionsControllerEnableHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsBulkActionsControllerEnableHostsInternalServerError) hostsBulkActionsControllerEnableHostsRes() {
+}
+
+type HostsBulkActionsControllerSetInboundToHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsBulkActionsControllerSetInboundToHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsBulkActionsControllerSetInboundToHostsInternalServerError) hostsBulkActionsControllerSetInboundToHostsRes() {
+}
+
+type HostsBulkActionsControllerSetPortToHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsBulkActionsControllerSetPortToHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsBulkActionsControllerSetPortToHostsInternalServerError) hostsBulkActionsControllerSetPortToHostsRes() {
+}
+
+type HostsControllerCreateHostInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsControllerCreateHostInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerCreateHostInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerCreateHostInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsControllerCreateHostInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsControllerCreateHostInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerCreateHostInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerCreateHostInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsControllerCreateHostInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsControllerCreateHostInternalServerError) hostsControllerCreateHostRes() {}
+
+type HostsControllerDeleteHostInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsControllerDeleteHostInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerDeleteHostInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerDeleteHostInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsControllerDeleteHostInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsControllerDeleteHostInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerDeleteHostInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerDeleteHostInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsControllerDeleteHostInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsControllerDeleteHostInternalServerError) hostsControllerDeleteHostRes() {}
+
 // HostsControllerDeleteHostNotFound is response for HostsControllerDeleteHost operation.
 type HostsControllerDeleteHostNotFound struct{}
 
 func (*HostsControllerDeleteHostNotFound) hostsControllerDeleteHostRes() {}
+
+type HostsControllerGetAllHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsControllerGetAllHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerGetAllHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerGetAllHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsControllerGetAllHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsControllerGetAllHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerGetAllHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerGetAllHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsControllerGetAllHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsControllerGetAllHostsInternalServerError) hostsControllerGetAllHostsRes() {}
+
+type HostsControllerGetOneHostInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsControllerGetOneHostInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerGetOneHostInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerGetOneHostInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsControllerGetOneHostInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsControllerGetOneHostInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerGetOneHostInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerGetOneHostInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsControllerGetOneHostInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsControllerGetOneHostInternalServerError) hostsControllerGetOneHostRes() {}
+
+type HostsControllerReorderHostsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsControllerReorderHostsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerReorderHostsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerReorderHostsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsControllerReorderHostsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsControllerReorderHostsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerReorderHostsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerReorderHostsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsControllerReorderHostsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsControllerReorderHostsInternalServerError) hostsControllerReorderHostsRes() {}
+
+type HostsControllerUpdateHostInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HostsControllerUpdateHostInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerUpdateHostInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerUpdateHostInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HostsControllerUpdateHostInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HostsControllerUpdateHostInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerUpdateHostInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerUpdateHostInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HostsControllerUpdateHostInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HostsControllerUpdateHostInternalServerError) hostsControllerUpdateHostRes() {}
+
+type HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) hwidUserDevicesControllerCreateUserHwidDeviceRes() {
+}
+
+type HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) hwidUserDevicesControllerDeleteUserHwidDeviceRes() {
+}
+
+type HwidUserDevicesControllerGetUserHwidDevicesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*HwidUserDevicesControllerGetUserHwidDevicesInternalServerError) hwidUserDevicesControllerGetUserHwidDevicesRes() {
+}
+
+type InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError) infraBillingControllerCreateInfraBillingHistoryRecordRes() {
+}
+
+type InfraBillingControllerCreateInfraBillingNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerCreateInfraBillingNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerCreateInfraBillingNodeInternalServerError) infraBillingControllerCreateInfraBillingNodeRes() {
+}
+
+type InfraBillingControllerCreateInfraProviderInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerCreateInfraProviderInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerCreateInfraProviderInternalServerError) infraBillingControllerCreateInfraProviderRes() {
+}
+
+type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError) infraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes() {
+}
+
+type InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) infraBillingControllerDeleteInfraBillingNodeByUuidRes() {
+}
+
+type InfraBillingControllerDeleteInfraProviderByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) infraBillingControllerDeleteInfraProviderByUuidRes() {
+}
+
+type InfraBillingControllerGetBillingNodesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerGetBillingNodesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerGetBillingNodesInternalServerError) infraBillingControllerGetBillingNodesRes() {
+}
+
+type InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) infraBillingControllerGetInfraBillingHistoryRecordsRes() {
+}
+
+type InfraBillingControllerGetInfraProviderByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerGetInfraProviderByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerGetInfraProviderByUuidInternalServerError) infraBillingControllerGetInfraProviderByUuidRes() {
+}
+
+// InfraBillingControllerGetInfraProviderByUuidNotFound is response for InfraBillingControllerGetInfraProviderByUuid operation.
+type InfraBillingControllerGetInfraProviderByUuidNotFound struct{}
+
+func (*InfraBillingControllerGetInfraProviderByUuidNotFound) infraBillingControllerGetInfraProviderByUuidRes() {
+}
+
+type InfraBillingControllerGetInfraProvidersInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerGetInfraProvidersInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerGetInfraProvidersInternalServerError) infraBillingControllerGetInfraProvidersRes() {
+}
+
+type InfraBillingControllerUpdateInfraBillingNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerUpdateInfraBillingNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerUpdateInfraBillingNodeInternalServerError) infraBillingControllerUpdateInfraBillingNodeRes() {
+}
+
+type InfraBillingControllerUpdateInfraProviderInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InfraBillingControllerUpdateInfraProviderInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InfraBillingControllerUpdateInfraProviderInternalServerError) infraBillingControllerUpdateInfraProviderRes() {
+}
+
+type InternalSquadControllerAddUsersToInternalSquadInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerAddUsersToInternalSquadInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerAddUsersToInternalSquadInternalServerError) internalSquadControllerAddUsersToInternalSquadRes() {
+}
+
+// InternalSquadControllerAddUsersToInternalSquadNotFound is response for InternalSquadControllerAddUsersToInternalSquad operation.
+type InternalSquadControllerAddUsersToInternalSquadNotFound struct{}
+
+func (*InternalSquadControllerAddUsersToInternalSquadNotFound) internalSquadControllerAddUsersToInternalSquadRes() {
+}
+
+// InternalSquadControllerCreateInternalSquadConflict is response for InternalSquadControllerCreateInternalSquad operation.
+type InternalSquadControllerCreateInternalSquadConflict struct{}
+
+func (*InternalSquadControllerCreateInternalSquadConflict) internalSquadControllerCreateInternalSquadRes() {
+}
+
+type InternalSquadControllerCreateInternalSquadInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerCreateInternalSquadInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerCreateInternalSquadInternalServerError) internalSquadControllerCreateInternalSquadRes() {
+}
+
+type InternalSquadControllerDeleteInternalSquadInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerDeleteInternalSquadInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerDeleteInternalSquadInternalServerError) internalSquadControllerDeleteInternalSquadRes() {
+}
+
+// InternalSquadControllerDeleteInternalSquadNotFound is response for InternalSquadControllerDeleteInternalSquad operation.
+type InternalSquadControllerDeleteInternalSquadNotFound struct{}
+
+func (*InternalSquadControllerDeleteInternalSquadNotFound) internalSquadControllerDeleteInternalSquadRes() {
+}
+
+type InternalSquadControllerGetInternalSquadByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerGetInternalSquadByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerGetInternalSquadByUuidInternalServerError) internalSquadControllerGetInternalSquadByUuidRes() {
+}
+
+type InternalSquadControllerGetInternalSquadsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerGetInternalSquadsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerGetInternalSquadsInternalServerError) internalSquadControllerGetInternalSquadsRes() {
+}
+
+type InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) internalSquadControllerRemoveUsersFromInternalSquadRes() {
+}
+
+// InternalSquadControllerRemoveUsersFromInternalSquadNotFound is response for InternalSquadControllerRemoveUsersFromInternalSquad operation.
+type InternalSquadControllerRemoveUsersFromInternalSquadNotFound struct{}
+
+func (*InternalSquadControllerRemoveUsersFromInternalSquadNotFound) internalSquadControllerRemoveUsersFromInternalSquadRes() {
+}
+
+// InternalSquadControllerUpdateInternalSquadConflict is response for InternalSquadControllerUpdateInternalSquad operation.
+type InternalSquadControllerUpdateInternalSquadConflict struct{}
+
+func (*InternalSquadControllerUpdateInternalSquadConflict) internalSquadControllerUpdateInternalSquadRes() {
+}
+
+type InternalSquadControllerUpdateInternalSquadInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerUpdateInternalSquadInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerUpdateInternalSquadInternalServerError) internalSquadControllerUpdateInternalSquadRes() {
+}
+
+// InternalSquadControllerUpdateInternalSquadNotFound is response for InternalSquadControllerUpdateInternalSquad operation.
+type InternalSquadControllerUpdateInternalSquadNotFound struct{}
+
+func (*InternalSquadControllerUpdateInternalSquadNotFound) internalSquadControllerUpdateInternalSquadRes() {
+}
+
+type KeygenControllerGenerateKeyInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *KeygenControllerGenerateKeyInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *KeygenControllerGenerateKeyInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *KeygenControllerGenerateKeyInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *KeygenControllerGenerateKeyInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *KeygenControllerGenerateKeyInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *KeygenControllerGenerateKeyInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *KeygenControllerGenerateKeyInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *KeygenControllerGenerateKeyInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*KeygenControllerGenerateKeyInternalServerError) keygenControllerGenerateKeyRes() {}
 
 // Ref: #/components/schemas/LoginRequestDto
 type LoginRequestDto struct {
@@ -11391,37 +19484,37 @@ func (s *LoginResponseDtoStatusCode) SetResponse(val LoginResponseDto) {
 
 func (*LoginResponseDtoStatusCode) authControllerLoginRes() {}
 
-// NewNilActivateAllInboundsResponseDtoResponseLastConnectedNode returns new NilActivateAllInboundsResponseDtoResponseLastConnectedNode with value set to v.
-func NewNilActivateAllInboundsResponseDtoResponseLastConnectedNode(v ActivateAllInboundsResponseDtoResponseLastConnectedNode) NilActivateAllInboundsResponseDtoResponseLastConnectedNode {
-	return NilActivateAllInboundsResponseDtoResponseLastConnectedNode{
+// NewNilCreateNodeResponseDtoResponseProvider returns new NilCreateNodeResponseDtoResponseProvider with value set to v.
+func NewNilCreateNodeResponseDtoResponseProvider(v CreateNodeResponseDtoResponseProvider) NilCreateNodeResponseDtoResponseProvider {
+	return NilCreateNodeResponseDtoResponseProvider{
 		Value: v,
 	}
 }
 
-// NilActivateAllInboundsResponseDtoResponseLastConnectedNode is nullable ActivateAllInboundsResponseDtoResponseLastConnectedNode.
-type NilActivateAllInboundsResponseDtoResponseLastConnectedNode struct {
-	Value ActivateAllInboundsResponseDtoResponseLastConnectedNode
+// NilCreateNodeResponseDtoResponseProvider is nullable CreateNodeResponseDtoResponseProvider.
+type NilCreateNodeResponseDtoResponseProvider struct {
+	Value CreateNodeResponseDtoResponseProvider
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilActivateAllInboundsResponseDtoResponseLastConnectedNode) SetTo(v ActivateAllInboundsResponseDtoResponseLastConnectedNode) {
+func (o *NilCreateNodeResponseDtoResponseProvider) SetTo(v CreateNodeResponseDtoResponseProvider) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilActivateAllInboundsResponseDtoResponseLastConnectedNode) IsNull() bool { return o.Null }
+func (o NilCreateNodeResponseDtoResponseProvider) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilActivateAllInboundsResponseDtoResponseLastConnectedNode) SetToNull() {
+func (o *NilCreateNodeResponseDtoResponseProvider) SetToNull() {
 	o.Null = true
-	var v ActivateAllInboundsResponseDtoResponseLastConnectedNode
+	var v CreateNodeResponseDtoResponseProvider
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilActivateAllInboundsResponseDtoResponseLastConnectedNode) Get() (v ActivateAllInboundsResponseDtoResponseLastConnectedNode, ok bool) {
+func (o NilCreateNodeResponseDtoResponseProvider) Get() (v CreateNodeResponseDtoResponseProvider, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -11429,7 +19522,7 @@ func (o NilActivateAllInboundsResponseDtoResponseLastConnectedNode) Get() (v Act
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilActivateAllInboundsResponseDtoResponseLastConnectedNode) Or(d ActivateAllInboundsResponseDtoResponseLastConnectedNode) ActivateAllInboundsResponseDtoResponseLastConnectedNode {
+func (o NilCreateNodeResponseDtoResponseProvider) Or(d CreateNodeResponseDtoResponseProvider) CreateNodeResponseDtoResponseProvider {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -11481,6 +19574,51 @@ func (o NilDateTime) Or(d time.Time) time.Time {
 	return d
 }
 
+// NewNilDisableNodeResponseDtoResponseProvider returns new NilDisableNodeResponseDtoResponseProvider with value set to v.
+func NewNilDisableNodeResponseDtoResponseProvider(v DisableNodeResponseDtoResponseProvider) NilDisableNodeResponseDtoResponseProvider {
+	return NilDisableNodeResponseDtoResponseProvider{
+		Value: v,
+	}
+}
+
+// NilDisableNodeResponseDtoResponseProvider is nullable DisableNodeResponseDtoResponseProvider.
+type NilDisableNodeResponseDtoResponseProvider struct {
+	Value DisableNodeResponseDtoResponseProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilDisableNodeResponseDtoResponseProvider) SetTo(v DisableNodeResponseDtoResponseProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilDisableNodeResponseDtoResponseProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilDisableNodeResponseDtoResponseProvider) SetToNull() {
+	o.Null = true
+	var v DisableNodeResponseDtoResponseProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilDisableNodeResponseDtoResponseProvider) Get() (v DisableNodeResponseDtoResponseProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilDisableNodeResponseDtoResponseProvider) Or(d DisableNodeResponseDtoResponseProvider) DisableNodeResponseDtoResponseProvider {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilDisableUserResponseDtoResponseLastConnectedNode returns new NilDisableUserResponseDtoResponseLastConnectedNode with value set to v.
 func NewNilDisableUserResponseDtoResponseLastConnectedNode(v DisableUserResponseDtoResponseLastConnectedNode) NilDisableUserResponseDtoResponseLastConnectedNode {
 	return NilDisableUserResponseDtoResponseLastConnectedNode{
@@ -11520,6 +19658,51 @@ func (o NilDisableUserResponseDtoResponseLastConnectedNode) Get() (v DisableUser
 
 // Or returns value if set, or given parameter if does not.
 func (o NilDisableUserResponseDtoResponseLastConnectedNode) Or(d DisableUserResponseDtoResponseLastConnectedNode) DisableUserResponseDtoResponseLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilEnableNodeResponseDtoResponseProvider returns new NilEnableNodeResponseDtoResponseProvider with value set to v.
+func NewNilEnableNodeResponseDtoResponseProvider(v EnableNodeResponseDtoResponseProvider) NilEnableNodeResponseDtoResponseProvider {
+	return NilEnableNodeResponseDtoResponseProvider{
+		Value: v,
+	}
+}
+
+// NilEnableNodeResponseDtoResponseProvider is nullable EnableNodeResponseDtoResponseProvider.
+type NilEnableNodeResponseDtoResponseProvider struct {
+	Value EnableNodeResponseDtoResponseProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilEnableNodeResponseDtoResponseProvider) SetTo(v EnableNodeResponseDtoResponseProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilEnableNodeResponseDtoResponseProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilEnableNodeResponseDtoResponseProvider) SetToNull() {
+	o.Null = true
+	var v EnableNodeResponseDtoResponseProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilEnableNodeResponseDtoResponseProvider) Get() (v EnableNodeResponseDtoResponseProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilEnableNodeResponseDtoResponseProvider) Or(d EnableNodeResponseDtoResponseProvider) EnableNodeResponseDtoResponseProvider {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -11610,6 +19793,96 @@ func (o NilFloat64) Get() (v float64, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o NilFloat64) Or(d float64) float64 {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetAllNodesResponseDtoResponseItemProvider returns new NilGetAllNodesResponseDtoResponseItemProvider with value set to v.
+func NewNilGetAllNodesResponseDtoResponseItemProvider(v GetAllNodesResponseDtoResponseItemProvider) NilGetAllNodesResponseDtoResponseItemProvider {
+	return NilGetAllNodesResponseDtoResponseItemProvider{
+		Value: v,
+	}
+}
+
+// NilGetAllNodesResponseDtoResponseItemProvider is nullable GetAllNodesResponseDtoResponseItemProvider.
+type NilGetAllNodesResponseDtoResponseItemProvider struct {
+	Value GetAllNodesResponseDtoResponseItemProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetAllNodesResponseDtoResponseItemProvider) SetTo(v GetAllNodesResponseDtoResponseItemProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetAllNodesResponseDtoResponseItemProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetAllNodesResponseDtoResponseItemProvider) SetToNull() {
+	o.Null = true
+	var v GetAllNodesResponseDtoResponseItemProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetAllNodesResponseDtoResponseItemProvider) Get() (v GetAllNodesResponseDtoResponseItemProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetAllNodesResponseDtoResponseItemProvider) Or(d GetAllNodesResponseDtoResponseItemProvider) GetAllNodesResponseDtoResponseItemProvider {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetOneNodeResponseDtoResponseProvider returns new NilGetOneNodeResponseDtoResponseProvider with value set to v.
+func NewNilGetOneNodeResponseDtoResponseProvider(v GetOneNodeResponseDtoResponseProvider) NilGetOneNodeResponseDtoResponseProvider {
+	return NilGetOneNodeResponseDtoResponseProvider{
+		Value: v,
+	}
+}
+
+// NilGetOneNodeResponseDtoResponseProvider is nullable GetOneNodeResponseDtoResponseProvider.
+type NilGetOneNodeResponseDtoResponseProvider struct {
+	Value GetOneNodeResponseDtoResponseProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetOneNodeResponseDtoResponseProvider) SetTo(v GetOneNodeResponseDtoResponseProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetOneNodeResponseDtoResponseProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetOneNodeResponseDtoResponseProvider) SetToNull() {
+	o.Null = true
+	var v GetOneNodeResponseDtoResponseProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetOneNodeResponseDtoResponseProvider) Get() (v GetOneNodeResponseDtoResponseProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetOneNodeResponseDtoResponseProvider) Or(d GetOneNodeResponseDtoResponseProvider) GetOneNodeResponseDtoResponseProvider {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -11708,6 +19981,51 @@ func (o NilGetSubscriptionSettingsResponseDtoResponseCustomResponseHeaders) Or(d
 	return d
 }
 
+// NewNilGetUserByEmailResponseDtoResponseItemLastConnectedNode returns new NilGetUserByEmailResponseDtoResponseItemLastConnectedNode with value set to v.
+func NewNilGetUserByEmailResponseDtoResponseItemLastConnectedNode(v GetUserByEmailResponseDtoResponseItemLastConnectedNode) NilGetUserByEmailResponseDtoResponseItemLastConnectedNode {
+	return NilGetUserByEmailResponseDtoResponseItemLastConnectedNode{
+		Value: v,
+	}
+}
+
+// NilGetUserByEmailResponseDtoResponseItemLastConnectedNode is nullable GetUserByEmailResponseDtoResponseItemLastConnectedNode.
+type NilGetUserByEmailResponseDtoResponseItemLastConnectedNode struct {
+	Value GetUserByEmailResponseDtoResponseItemLastConnectedNode
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetUserByEmailResponseDtoResponseItemLastConnectedNode) SetTo(v GetUserByEmailResponseDtoResponseItemLastConnectedNode) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetUserByEmailResponseDtoResponseItemLastConnectedNode) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilGetUserByEmailResponseDtoResponseItemLastConnectedNode) SetToNull() {
+	o.Null = true
+	var v GetUserByEmailResponseDtoResponseItemLastConnectedNode
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetUserByEmailResponseDtoResponseItemLastConnectedNode) Get() (v GetUserByEmailResponseDtoResponseItemLastConnectedNode, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetUserByEmailResponseDtoResponseItemLastConnectedNode) Or(d GetUserByEmailResponseDtoResponseItemLastConnectedNode) GetUserByEmailResponseDtoResponseItemLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilGetUserByTagResponseDtoResponseItemLastConnectedNode returns new NilGetUserByTagResponseDtoResponseItemLastConnectedNode with value set to v.
 func NewNilGetUserByTagResponseDtoResponseItemLastConnectedNode(v GetUserByTagResponseDtoResponseItemLastConnectedNode) NilGetUserByTagResponseDtoResponseItemLastConnectedNode {
 	return NilGetUserByTagResponseDtoResponseItemLastConnectedNode{
@@ -11753,37 +20071,37 @@ func (o NilGetUserByTagResponseDtoResponseItemLastConnectedNode) Or(d GetUserByT
 	return d
 }
 
-// NewNilGetUserByUuidResponseDtoResponseLastConnectedNode returns new NilGetUserByUuidResponseDtoResponseLastConnectedNode with value set to v.
-func NewNilGetUserByUuidResponseDtoResponseLastConnectedNode(v GetUserByUuidResponseDtoResponseLastConnectedNode) NilGetUserByUuidResponseDtoResponseLastConnectedNode {
-	return NilGetUserByUuidResponseDtoResponseLastConnectedNode{
+// NewNilGetUserByUsernameResponseDtoResponseLastConnectedNode returns new NilGetUserByUsernameResponseDtoResponseLastConnectedNode with value set to v.
+func NewNilGetUserByUsernameResponseDtoResponseLastConnectedNode(v GetUserByUsernameResponseDtoResponseLastConnectedNode) NilGetUserByUsernameResponseDtoResponseLastConnectedNode {
+	return NilGetUserByUsernameResponseDtoResponseLastConnectedNode{
 		Value: v,
 	}
 }
 
-// NilGetUserByUuidResponseDtoResponseLastConnectedNode is nullable GetUserByUuidResponseDtoResponseLastConnectedNode.
-type NilGetUserByUuidResponseDtoResponseLastConnectedNode struct {
-	Value GetUserByUuidResponseDtoResponseLastConnectedNode
+// NilGetUserByUsernameResponseDtoResponseLastConnectedNode is nullable GetUserByUsernameResponseDtoResponseLastConnectedNode.
+type NilGetUserByUsernameResponseDtoResponseLastConnectedNode struct {
+	Value GetUserByUsernameResponseDtoResponseLastConnectedNode
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilGetUserByUuidResponseDtoResponseLastConnectedNode) SetTo(v GetUserByUuidResponseDtoResponseLastConnectedNode) {
+func (o *NilGetUserByUsernameResponseDtoResponseLastConnectedNode) SetTo(v GetUserByUsernameResponseDtoResponseLastConnectedNode) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilGetUserByUuidResponseDtoResponseLastConnectedNode) IsNull() bool { return o.Null }
+func (o NilGetUserByUsernameResponseDtoResponseLastConnectedNode) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilGetUserByUuidResponseDtoResponseLastConnectedNode) SetToNull() {
+func (o *NilGetUserByUsernameResponseDtoResponseLastConnectedNode) SetToNull() {
 	o.Null = true
-	var v GetUserByUuidResponseDtoResponseLastConnectedNode
+	var v GetUserByUsernameResponseDtoResponseLastConnectedNode
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilGetUserByUuidResponseDtoResponseLastConnectedNode) Get() (v GetUserByUuidResponseDtoResponseLastConnectedNode, ok bool) {
+func (o NilGetUserByUsernameResponseDtoResponseLastConnectedNode) Get() (v GetUserByUsernameResponseDtoResponseLastConnectedNode, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -11791,7 +20109,7 @@ func (o NilGetUserByUuidResponseDtoResponseLastConnectedNode) Get() (v GetUserBy
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilGetUserByUuidResponseDtoResponseLastConnectedNode) Or(d GetUserByUuidResponseDtoResponseLastConnectedNode) GetUserByUuidResponseDtoResponseLastConnectedNode {
+func (o NilGetUserByUsernameResponseDtoResponseLastConnectedNode) Or(d GetUserByUsernameResponseDtoResponseLastConnectedNode) GetUserByUsernameResponseDtoResponseLastConnectedNode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -11837,6 +20155,51 @@ func (o NilInt) Get() (v int, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o NilInt) Or(d int) int {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilReorderNodeResponseDtoResponseItemProvider returns new NilReorderNodeResponseDtoResponseItemProvider with value set to v.
+func NewNilReorderNodeResponseDtoResponseItemProvider(v ReorderNodeResponseDtoResponseItemProvider) NilReorderNodeResponseDtoResponseItemProvider {
+	return NilReorderNodeResponseDtoResponseItemProvider{
+		Value: v,
+	}
+}
+
+// NilReorderNodeResponseDtoResponseItemProvider is nullable ReorderNodeResponseDtoResponseItemProvider.
+type NilReorderNodeResponseDtoResponseItemProvider struct {
+	Value ReorderNodeResponseDtoResponseItemProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilReorderNodeResponseDtoResponseItemProvider) SetTo(v ReorderNodeResponseDtoResponseItemProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilReorderNodeResponseDtoResponseItemProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilReorderNodeResponseDtoResponseItemProvider) SetToNull() {
+	o.Null = true
+	var v ReorderNodeResponseDtoResponseItemProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilReorderNodeResponseDtoResponseItemProvider) Get() (v ReorderNodeResponseDtoResponseItemProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilReorderNodeResponseDtoResponseItemProvider) Or(d ReorderNodeResponseDtoResponseItemProvider) ReorderNodeResponseDtoResponseItemProvider {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -11978,6 +20341,141 @@ func (o NilString) Or(d string) string {
 	return d
 }
 
+// NewNilURI returns new NilURI with value set to v.
+func NewNilURI(v url.URL) NilURI {
+	return NilURI{
+		Value: v,
+	}
+}
+
+// NilURI is nullable url.URL.
+type NilURI struct {
+	Value url.URL
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilURI) SetTo(v url.URL) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilURI) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilURI) SetToNull() {
+	o.Null = true
+	var v url.URL
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilURI) Get() (v url.URL, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilURI) Or(d url.URL) url.URL {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilUUID returns new NilUUID with value set to v.
+func NewNilUUID(v uuid.UUID) NilUUID {
+	return NilUUID{
+		Value: v,
+	}
+}
+
+// NilUUID is nullable uuid.UUID.
+type NilUUID struct {
+	Value uuid.UUID
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilUUID) SetTo(v uuid.UUID) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilUUID) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilUUID) SetToNull() {
+	o.Null = true
+	var v uuid.UUID
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilUUID) Get() (v uuid.UUID, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilUUID) Or(d uuid.UUID) uuid.UUID {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilUpdateNodeResponseDtoResponseProvider returns new NilUpdateNodeResponseDtoResponseProvider with value set to v.
+func NewNilUpdateNodeResponseDtoResponseProvider(v UpdateNodeResponseDtoResponseProvider) NilUpdateNodeResponseDtoResponseProvider {
+	return NilUpdateNodeResponseDtoResponseProvider{
+		Value: v,
+	}
+}
+
+// NilUpdateNodeResponseDtoResponseProvider is nullable UpdateNodeResponseDtoResponseProvider.
+type NilUpdateNodeResponseDtoResponseProvider struct {
+	Value UpdateNodeResponseDtoResponseProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilUpdateNodeResponseDtoResponseProvider) SetTo(v UpdateNodeResponseDtoResponseProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilUpdateNodeResponseDtoResponseProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilUpdateNodeResponseDtoResponseProvider) SetToNull() {
+	o.Null = true
+	var v UpdateNodeResponseDtoResponseProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilUpdateNodeResponseDtoResponseProvider) Get() (v UpdateNodeResponseDtoResponseProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilUpdateNodeResponseDtoResponseProvider) Or(d UpdateNodeResponseDtoResponseProvider) UpdateNodeResponseDtoResponseProvider {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders returns new NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders with value set to v.
 func NewNilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders(v UpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders) NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders {
 	return NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders{
@@ -12070,97 +20568,907 @@ func (o NilUserDtoLastConnectedNode) Or(d UserDtoLastConnectedNode) UserDtoLastC
 	return d
 }
 
-// NewOptActivateAllInboundsResponseDtoResponseStatus returns new OptActivateAllInboundsResponseDtoResponseStatus with value set to v.
-func NewOptActivateAllInboundsResponseDtoResponseStatus(v ActivateAllInboundsResponseDtoResponseStatus) OptActivateAllInboundsResponseDtoResponseStatus {
-	return OptActivateAllInboundsResponseDtoResponseStatus{
-		Value: v,
-		Set:   true,
+type NodesControllerCreateNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerCreateNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerCreateNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerCreateNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerCreateNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerCreateNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerCreateNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerCreateNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerCreateNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerCreateNodeInternalServerError) nodesControllerCreateNodeRes() {}
+
+type NodesControllerDeleteNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerDeleteNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerDeleteNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerDeleteNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerDeleteNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerDeleteNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerDeleteNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerDeleteNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerDeleteNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerDeleteNodeInternalServerError) nodesControllerDeleteNodeRes() {}
+
+type NodesControllerDisableNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerDisableNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerDisableNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerDisableNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerDisableNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerDisableNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerDisableNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerDisableNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerDisableNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerDisableNodeInternalServerError) nodesControllerDisableNodeRes() {}
+
+type NodesControllerEnableNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerEnableNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerEnableNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerEnableNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerEnableNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerEnableNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerEnableNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerEnableNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerEnableNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerEnableNodeInternalServerError) nodesControllerEnableNodeRes() {}
+
+type NodesControllerGetAllNodesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerGetAllNodesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerGetAllNodesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetAllNodesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerGetAllNodesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerGetAllNodesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerGetAllNodesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetAllNodesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerGetAllNodesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerGetAllNodesInternalServerError) nodesControllerGetAllNodesRes() {}
+
+type NodesControllerGetOneNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerGetOneNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerGetOneNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetOneNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerGetOneNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerGetOneNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerGetOneNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetOneNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerGetOneNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerGetOneNodeInternalServerError) nodesControllerGetOneNodeRes() {}
+
+type NodesControllerReorderNodesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerReorderNodesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerReorderNodesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerReorderNodesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerReorderNodesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerReorderNodesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerReorderNodesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerReorderNodesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerReorderNodesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerReorderNodesInternalServerError) nodesControllerReorderNodesRes() {}
+
+type NodesControllerRestartAllNodesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerRestartAllNodesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerRestartAllNodesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerRestartAllNodesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerRestartAllNodesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerRestartAllNodesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerRestartAllNodesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerRestartAllNodesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerRestartAllNodesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerRestartAllNodesInternalServerError) nodesControllerRestartAllNodesRes() {}
+
+type NodesControllerRestartNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerRestartNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerRestartNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerRestartNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerRestartNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerRestartNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerRestartNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerRestartNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerRestartNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerRestartNodeInternalServerError) nodesControllerRestartNodeRes() {}
+
+type NodesControllerUpdateNodeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerUpdateNodeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerUpdateNodeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerUpdateNodeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerUpdateNodeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerUpdateNodeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerUpdateNodeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerUpdateNodeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerUpdateNodeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerUpdateNodeInternalServerError) nodesControllerUpdateNodeRes() {}
+
+type NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) nodesUsageHistoryControllerGetNodesUsageByRangeRes() {
+}
+
+type NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) nodesUserUsageHistoryControllerGetNodeUserUsageRes() {
+}
+
+type NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError) nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes() {
+}
+
+// Ref: #/components/schemas/OAuth2AuthorizeRequestDto
+type OAuth2AuthorizeRequestDto struct {
+	Provider OAuth2AuthorizeRequestDtoProvider `json:"provider"`
+}
+
+// GetProvider returns the value of Provider.
+func (s *OAuth2AuthorizeRequestDto) GetProvider() OAuth2AuthorizeRequestDtoProvider {
+	return s.Provider
+}
+
+// SetProvider sets the value of Provider.
+func (s *OAuth2AuthorizeRequestDto) SetProvider(val OAuth2AuthorizeRequestDtoProvider) {
+	s.Provider = val
+}
+
+type OAuth2AuthorizeRequestDtoProvider string
+
+const (
+	OAuth2AuthorizeRequestDtoProviderGithub   OAuth2AuthorizeRequestDtoProvider = "github"
+	OAuth2AuthorizeRequestDtoProviderPocketid OAuth2AuthorizeRequestDtoProvider = "pocketid"
+	OAuth2AuthorizeRequestDtoProviderYandex   OAuth2AuthorizeRequestDtoProvider = "yandex"
+)
+
+// AllValues returns all OAuth2AuthorizeRequestDtoProvider values.
+func (OAuth2AuthorizeRequestDtoProvider) AllValues() []OAuth2AuthorizeRequestDtoProvider {
+	return []OAuth2AuthorizeRequestDtoProvider{
+		OAuth2AuthorizeRequestDtoProviderGithub,
+		OAuth2AuthorizeRequestDtoProviderPocketid,
+		OAuth2AuthorizeRequestDtoProviderYandex,
 	}
 }
 
-// OptActivateAllInboundsResponseDtoResponseStatus is optional ActivateAllInboundsResponseDtoResponseStatus.
-type OptActivateAllInboundsResponseDtoResponseStatus struct {
-	Value ActivateAllInboundsResponseDtoResponseStatus
-	Set   bool
-}
-
-// IsSet returns true if OptActivateAllInboundsResponseDtoResponseStatus was set.
-func (o OptActivateAllInboundsResponseDtoResponseStatus) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptActivateAllInboundsResponseDtoResponseStatus) Reset() {
-	var v ActivateAllInboundsResponseDtoResponseStatus
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptActivateAllInboundsResponseDtoResponseStatus) SetTo(v ActivateAllInboundsResponseDtoResponseStatus) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptActivateAllInboundsResponseDtoResponseStatus) Get() (v ActivateAllInboundsResponseDtoResponseStatus, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptActivateAllInboundsResponseDtoResponseStatus) Or(d ActivateAllInboundsResponseDtoResponseStatus) ActivateAllInboundsResponseDtoResponseStatus {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy returns new OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy with value set to v.
-func NewOptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy(v ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy {
-	return OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy{
-		Value: v,
-		Set:   true,
+// MarshalText implements encoding.TextMarshaler.
+func (s OAuth2AuthorizeRequestDtoProvider) MarshalText() ([]byte, error) {
+	switch s {
+	case OAuth2AuthorizeRequestDtoProviderGithub:
+		return []byte(s), nil
+	case OAuth2AuthorizeRequestDtoProviderPocketid:
+		return []byte(s), nil
+	case OAuth2AuthorizeRequestDtoProviderYandex:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
 	}
 }
 
-// OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy is optional ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy.
-type OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy struct {
-	Value ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy
-	Set   bool
-}
-
-// IsSet returns true if OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy was set.
-func (o OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) Reset() {
-	var v ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) SetTo(v ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) Get() (v ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy, ok bool) {
-	if !o.Set {
-		return v, false
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *OAuth2AuthorizeRequestDtoProvider) UnmarshalText(data []byte) error {
+	switch OAuth2AuthorizeRequestDtoProvider(data) {
+	case OAuth2AuthorizeRequestDtoProviderGithub:
+		*s = OAuth2AuthorizeRequestDtoProviderGithub
+		return nil
+	case OAuth2AuthorizeRequestDtoProviderPocketid:
+		*s = OAuth2AuthorizeRequestDtoProviderPocketid
+		return nil
+	case OAuth2AuthorizeRequestDtoProviderYandex:
+		*s = OAuth2AuthorizeRequestDtoProviderYandex
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
 	}
-	return o.Value, true
 }
 
-// Or returns value if set, or given parameter if does not.
-func (o OptActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) Or(d ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy) ActivateAllInboundsResponseDtoResponseTrafficLimitStrategy {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
+// Ref: #/components/schemas/OAuth2AuthorizeResponseDto
+type OAuth2AuthorizeResponseDto struct {
+	Response OAuth2AuthorizeResponseDtoResponse `json:"response"`
 }
+
+// GetResponse returns the value of Response.
+func (s *OAuth2AuthorizeResponseDto) GetResponse() OAuth2AuthorizeResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *OAuth2AuthorizeResponseDto) SetResponse(val OAuth2AuthorizeResponseDtoResponse) {
+	s.Response = val
+}
+
+type OAuth2AuthorizeResponseDtoResponse struct {
+	AuthorizationUrl NilURI `json:"authorizationUrl"`
+}
+
+// GetAuthorizationUrl returns the value of AuthorizationUrl.
+func (s *OAuth2AuthorizeResponseDtoResponse) GetAuthorizationUrl() NilURI {
+	return s.AuthorizationUrl
+}
+
+// SetAuthorizationUrl sets the value of AuthorizationUrl.
+func (s *OAuth2AuthorizeResponseDtoResponse) SetAuthorizationUrl(val NilURI) {
+	s.AuthorizationUrl = val
+}
+
+// OAuth2AuthorizeResponseDtoStatusCode wraps OAuth2AuthorizeResponseDto with StatusCode.
+type OAuth2AuthorizeResponseDtoStatusCode struct {
+	StatusCode int
+	Response   OAuth2AuthorizeResponseDto
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *OAuth2AuthorizeResponseDtoStatusCode) GetStatusCode() int {
+	return s.StatusCode
+}
+
+// GetResponse returns the value of Response.
+func (s *OAuth2AuthorizeResponseDtoStatusCode) GetResponse() OAuth2AuthorizeResponseDto {
+	return s.Response
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *OAuth2AuthorizeResponseDtoStatusCode) SetStatusCode(val int) {
+	s.StatusCode = val
+}
+
+// SetResponse sets the value of Response.
+func (s *OAuth2AuthorizeResponseDtoStatusCode) SetResponse(val OAuth2AuthorizeResponseDto) {
+	s.Response = val
+}
+
+func (*OAuth2AuthorizeResponseDtoStatusCode) authControllerOauth2AuthorizeRes() {}
+
+// Ref: #/components/schemas/OAuth2CallbackRequestDto
+type OAuth2CallbackRequestDto struct {
+	Provider OAuth2CallbackRequestDtoProvider `json:"provider"`
+	Code     string                           `json:"code"`
+	State    string                           `json:"state"`
+}
+
+// GetProvider returns the value of Provider.
+func (s *OAuth2CallbackRequestDto) GetProvider() OAuth2CallbackRequestDtoProvider {
+	return s.Provider
+}
+
+// GetCode returns the value of Code.
+func (s *OAuth2CallbackRequestDto) GetCode() string {
+	return s.Code
+}
+
+// GetState returns the value of State.
+func (s *OAuth2CallbackRequestDto) GetState() string {
+	return s.State
+}
+
+// SetProvider sets the value of Provider.
+func (s *OAuth2CallbackRequestDto) SetProvider(val OAuth2CallbackRequestDtoProvider) {
+	s.Provider = val
+}
+
+// SetCode sets the value of Code.
+func (s *OAuth2CallbackRequestDto) SetCode(val string) {
+	s.Code = val
+}
+
+// SetState sets the value of State.
+func (s *OAuth2CallbackRequestDto) SetState(val string) {
+	s.State = val
+}
+
+type OAuth2CallbackRequestDtoProvider string
+
+const (
+	OAuth2CallbackRequestDtoProviderGithub   OAuth2CallbackRequestDtoProvider = "github"
+	OAuth2CallbackRequestDtoProviderPocketid OAuth2CallbackRequestDtoProvider = "pocketid"
+	OAuth2CallbackRequestDtoProviderYandex   OAuth2CallbackRequestDtoProvider = "yandex"
+)
+
+// AllValues returns all OAuth2CallbackRequestDtoProvider values.
+func (OAuth2CallbackRequestDtoProvider) AllValues() []OAuth2CallbackRequestDtoProvider {
+	return []OAuth2CallbackRequestDtoProvider{
+		OAuth2CallbackRequestDtoProviderGithub,
+		OAuth2CallbackRequestDtoProviderPocketid,
+		OAuth2CallbackRequestDtoProviderYandex,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s OAuth2CallbackRequestDtoProvider) MarshalText() ([]byte, error) {
+	switch s {
+	case OAuth2CallbackRequestDtoProviderGithub:
+		return []byte(s), nil
+	case OAuth2CallbackRequestDtoProviderPocketid:
+		return []byte(s), nil
+	case OAuth2CallbackRequestDtoProviderYandex:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *OAuth2CallbackRequestDtoProvider) UnmarshalText(data []byte) error {
+	switch OAuth2CallbackRequestDtoProvider(data) {
+	case OAuth2CallbackRequestDtoProviderGithub:
+		*s = OAuth2CallbackRequestDtoProviderGithub
+		return nil
+	case OAuth2CallbackRequestDtoProviderPocketid:
+		*s = OAuth2CallbackRequestDtoProviderPocketid
+		return nil
+	case OAuth2CallbackRequestDtoProviderYandex:
+		*s = OAuth2CallbackRequestDtoProviderYandex
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/OAuth2CallbackResponseDto
+type OAuth2CallbackResponseDto struct {
+	Response OAuth2CallbackResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *OAuth2CallbackResponseDto) GetResponse() OAuth2CallbackResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *OAuth2CallbackResponseDto) SetResponse(val OAuth2CallbackResponseDtoResponse) {
+	s.Response = val
+}
+
+type OAuth2CallbackResponseDtoResponse struct {
+	AccessToken string `json:"accessToken"`
+}
+
+// GetAccessToken returns the value of AccessToken.
+func (s *OAuth2CallbackResponseDtoResponse) GetAccessToken() string {
+	return s.AccessToken
+}
+
+// SetAccessToken sets the value of AccessToken.
+func (s *OAuth2CallbackResponseDtoResponse) SetAccessToken(val string) {
+	s.AccessToken = val
+}
+
+// OAuth2CallbackResponseDtoStatusCode wraps OAuth2CallbackResponseDto with StatusCode.
+type OAuth2CallbackResponseDtoStatusCode struct {
+	StatusCode int
+	Response   OAuth2CallbackResponseDto
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *OAuth2CallbackResponseDtoStatusCode) GetStatusCode() int {
+	return s.StatusCode
+}
+
+// GetResponse returns the value of Response.
+func (s *OAuth2CallbackResponseDtoStatusCode) GetResponse() OAuth2CallbackResponseDto {
+	return s.Response
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *OAuth2CallbackResponseDtoStatusCode) SetStatusCode(val int) {
+	s.StatusCode = val
+}
+
+// SetResponse sets the value of Response.
+func (s *OAuth2CallbackResponseDtoStatusCode) SetResponse(val OAuth2CallbackResponseDto) {
+	s.Response = val
+}
+
+func (*OAuth2CallbackResponseDtoStatusCode) authControllerOauth2CallbackRes() {}
 
 // NewOptBool returns new OptBool with value set to v.
 func NewOptBool(v bool) OptBool {
@@ -12714,6 +22022,52 @@ func (o OptCreateUserRequestDtoStatus) Or(d CreateUserRequestDtoStatus) CreateUs
 	return d
 }
 
+// NewOptCreateUserRequestDtoTrafficLimitStrategy returns new OptCreateUserRequestDtoTrafficLimitStrategy with value set to v.
+func NewOptCreateUserRequestDtoTrafficLimitStrategy(v CreateUserRequestDtoTrafficLimitStrategy) OptCreateUserRequestDtoTrafficLimitStrategy {
+	return OptCreateUserRequestDtoTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateUserRequestDtoTrafficLimitStrategy is optional CreateUserRequestDtoTrafficLimitStrategy.
+type OptCreateUserRequestDtoTrafficLimitStrategy struct {
+	Value CreateUserRequestDtoTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptCreateUserRequestDtoTrafficLimitStrategy was set.
+func (o OptCreateUserRequestDtoTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateUserRequestDtoTrafficLimitStrategy) Reset() {
+	var v CreateUserRequestDtoTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateUserRequestDtoTrafficLimitStrategy) SetTo(v CreateUserRequestDtoTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateUserRequestDtoTrafficLimitStrategy) Get() (v CreateUserRequestDtoTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateUserRequestDtoTrafficLimitStrategy) Or(d CreateUserRequestDtoTrafficLimitStrategy) CreateUserRequestDtoTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptDateTime returns new OptDateTime with value set to v.
 func NewOptDateTime(v time.Time) OptDateTime {
 	return OptDateTime{
@@ -13082,6 +22436,146 @@ func (o OptGetOneHostResponseDtoResponseSecurityLayer) Or(d GetOneHostResponseDt
 	return d
 }
 
+// NewOptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams returns new OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams with value set to v.
+func NewOptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams(v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams {
+	return OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams is optional *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams.
+type OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams struct {
+	Value *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams
+	Set   bool
+}
+
+// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams was set.
+func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) IsSet() bool {
+	return o.Set
+}
+
+// Reset unsets value.
+func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Reset() {
+	var v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) SetTo(v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Get() (v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Or(d *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetUserByEmailResponseDtoResponseItemStatus returns new OptGetUserByEmailResponseDtoResponseItemStatus with value set to v.
+func NewOptGetUserByEmailResponseDtoResponseItemStatus(v GetUserByEmailResponseDtoResponseItemStatus) OptGetUserByEmailResponseDtoResponseItemStatus {
+	return OptGetUserByEmailResponseDtoResponseItemStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetUserByEmailResponseDtoResponseItemStatus is optional GetUserByEmailResponseDtoResponseItemStatus.
+type OptGetUserByEmailResponseDtoResponseItemStatus struct {
+	Value GetUserByEmailResponseDtoResponseItemStatus
+	Set   bool
+}
+
+// IsSet returns true if OptGetUserByEmailResponseDtoResponseItemStatus was set.
+func (o OptGetUserByEmailResponseDtoResponseItemStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetUserByEmailResponseDtoResponseItemStatus) Reset() {
+	var v GetUserByEmailResponseDtoResponseItemStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetUserByEmailResponseDtoResponseItemStatus) SetTo(v GetUserByEmailResponseDtoResponseItemStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetUserByEmailResponseDtoResponseItemStatus) Get() (v GetUserByEmailResponseDtoResponseItemStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetUserByEmailResponseDtoResponseItemStatus) Or(d GetUserByEmailResponseDtoResponseItemStatus) GetUserByEmailResponseDtoResponseItemStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy returns new OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy with value set to v.
+func NewOptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy(v GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy {
+	return OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy is optional GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy.
+type OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy struct {
+	Value GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy was set.
+func (o OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) Reset() {
+	var v GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) SetTo(v GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) Get() (v GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) Or(d GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy) GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptGetUserByTagResponseDtoResponseItemStatus returns new OptGetUserByTagResponseDtoResponseItemStatus with value set to v.
 func NewOptGetUserByTagResponseDtoResponseItemStatus(v GetUserByTagResponseDtoResponseItemStatus) OptGetUserByTagResponseDtoResponseItemStatus {
 	return OptGetUserByTagResponseDtoResponseItemStatus{
@@ -13174,38 +22668,38 @@ func (o OptGetUserByTagResponseDtoResponseItemTrafficLimitStrategy) Or(d GetUser
 	return d
 }
 
-// NewOptGetUserByUuidResponseDtoResponseStatus returns new OptGetUserByUuidResponseDtoResponseStatus with value set to v.
-func NewOptGetUserByUuidResponseDtoResponseStatus(v GetUserByUuidResponseDtoResponseStatus) OptGetUserByUuidResponseDtoResponseStatus {
-	return OptGetUserByUuidResponseDtoResponseStatus{
+// NewOptGetUserByUsernameResponseDtoResponseStatus returns new OptGetUserByUsernameResponseDtoResponseStatus with value set to v.
+func NewOptGetUserByUsernameResponseDtoResponseStatus(v GetUserByUsernameResponseDtoResponseStatus) OptGetUserByUsernameResponseDtoResponseStatus {
+	return OptGetUserByUsernameResponseDtoResponseStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptGetUserByUuidResponseDtoResponseStatus is optional GetUserByUuidResponseDtoResponseStatus.
-type OptGetUserByUuidResponseDtoResponseStatus struct {
-	Value GetUserByUuidResponseDtoResponseStatus
+// OptGetUserByUsernameResponseDtoResponseStatus is optional GetUserByUsernameResponseDtoResponseStatus.
+type OptGetUserByUsernameResponseDtoResponseStatus struct {
+	Value GetUserByUsernameResponseDtoResponseStatus
 	Set   bool
 }
 
-// IsSet returns true if OptGetUserByUuidResponseDtoResponseStatus was set.
-func (o OptGetUserByUuidResponseDtoResponseStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptGetUserByUsernameResponseDtoResponseStatus was set.
+func (o OptGetUserByUsernameResponseDtoResponseStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptGetUserByUuidResponseDtoResponseStatus) Reset() {
-	var v GetUserByUuidResponseDtoResponseStatus
+func (o *OptGetUserByUsernameResponseDtoResponseStatus) Reset() {
+	var v GetUserByUsernameResponseDtoResponseStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptGetUserByUuidResponseDtoResponseStatus) SetTo(v GetUserByUuidResponseDtoResponseStatus) {
+func (o *OptGetUserByUsernameResponseDtoResponseStatus) SetTo(v GetUserByUsernameResponseDtoResponseStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptGetUserByUuidResponseDtoResponseStatus) Get() (v GetUserByUuidResponseDtoResponseStatus, ok bool) {
+func (o OptGetUserByUsernameResponseDtoResponseStatus) Get() (v GetUserByUsernameResponseDtoResponseStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -13213,45 +22707,45 @@ func (o OptGetUserByUuidResponseDtoResponseStatus) Get() (v GetUserByUuidRespons
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptGetUserByUuidResponseDtoResponseStatus) Or(d GetUserByUuidResponseDtoResponseStatus) GetUserByUuidResponseDtoResponseStatus {
+func (o OptGetUserByUsernameResponseDtoResponseStatus) Or(d GetUserByUsernameResponseDtoResponseStatus) GetUserByUsernameResponseDtoResponseStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptGetUserByUuidResponseDtoResponseTrafficLimitStrategy returns new OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy with value set to v.
-func NewOptGetUserByUuidResponseDtoResponseTrafficLimitStrategy(v GetUserByUuidResponseDtoResponseTrafficLimitStrategy) OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy {
-	return OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy{
+// NewOptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy returns new OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy with value set to v.
+func NewOptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy(v GetUserByUsernameResponseDtoResponseTrafficLimitStrategy) OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy {
+	return OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy is optional GetUserByUuidResponseDtoResponseTrafficLimitStrategy.
-type OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy struct {
-	Value GetUserByUuidResponseDtoResponseTrafficLimitStrategy
+// OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy is optional GetUserByUsernameResponseDtoResponseTrafficLimitStrategy.
+type OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy struct {
+	Value GetUserByUsernameResponseDtoResponseTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy was set.
-func (o OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy was set.
+func (o OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) Reset() {
-	var v GetUserByUuidResponseDtoResponseTrafficLimitStrategy
+func (o *OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy) Reset() {
+	var v GetUserByUsernameResponseDtoResponseTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) SetTo(v GetUserByUuidResponseDtoResponseTrafficLimitStrategy) {
+func (o *OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy) SetTo(v GetUserByUsernameResponseDtoResponseTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) Get() (v GetUserByUuidResponseDtoResponseTrafficLimitStrategy, ok bool) {
+func (o OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy) Get() (v GetUserByUsernameResponseDtoResponseTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -13259,7 +22753,7 @@ func (o OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) Get() (v GetUse
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptGetUserByUuidResponseDtoResponseTrafficLimitStrategy) Or(d GetUserByUuidResponseDtoResponseTrafficLimitStrategy) GetUserByUuidResponseDtoResponseTrafficLimitStrategy {
+func (o OptGetUserByUsernameResponseDtoResponseTrafficLimitStrategy) Or(d GetUserByUsernameResponseDtoResponseTrafficLimitStrategy) GetUserByUsernameResponseDtoResponseTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13438,6 +22932,270 @@ func (o OptNilCreateHostRequestDtoFingerprint) Or(d CreateHostRequestDtoFingerpr
 	return d
 }
 
+// NewOptNilFloat64 returns new OptNilFloat64 with value set to v.
+func NewOptNilFloat64(v float64) OptNilFloat64 {
+	return OptNilFloat64{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilFloat64 is optional nullable float64.
+type OptNilFloat64 struct {
+	Value float64
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilFloat64 was set.
+func (o OptNilFloat64) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilFloat64) Reset() {
+	var v float64
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilFloat64) SetTo(v float64) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilFloat64) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilFloat64) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v float64
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilFloat64) Get() (v float64, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilFloat64) Or(d float64) float64 {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams returns new OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams with value set to v.
+func NewOptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams {
+	return OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams is optional nullable GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams.
+type OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams struct {
+	Value GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams was set.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) IsSet() bool {
+	return o.Set
+}
+
+// Reset unsets value.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) Reset() {
+	var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions returns new OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions with value set to v.
+func NewOptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions {
+	return OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions is optional nullable GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions.
+type OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions struct {
+	Value GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions was set.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) IsSet() bool {
+	return o.Set
+}
+
+// Reset unsets value.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) Reset() {
+	var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions) GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs returns new OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs with value set to v.
+func NewOptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs {
+	return OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs is optional nullable GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs.
+type OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs struct {
+	Value GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs was set.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) IsSet() bool {
+	return o.Set
+}
+
+// Reset unsets value.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) Reset() {
+	var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptNilInt returns new OptNilInt with value set to v.
 func NewOptNilInt(v int) OptNilInt {
 	return OptNilInt{
@@ -13558,6 +23316,132 @@ func (o OptNilString) Get() (v string, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptNilString) Or(d string) string {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilURI returns new OptNilURI with value set to v.
+func NewOptNilURI(v url.URL) OptNilURI {
+	return OptNilURI{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilURI is optional nullable url.URL.
+type OptNilURI struct {
+	Value url.URL
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilURI was set.
+func (o OptNilURI) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilURI) Reset() {
+	var v url.URL
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilURI) SetTo(v url.URL) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilURI) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilURI) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v url.URL
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilURI) Get() (v url.URL, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilURI) Or(d url.URL) url.URL {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilUUID returns new OptNilUUID with value set to v.
+func NewOptNilUUID(v uuid.UUID) OptNilUUID {
+	return OptNilUUID{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilUUID is optional nullable uuid.UUID.
+type OptNilUUID struct {
+	Value uuid.UUID
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilUUID was set.
+func (o OptNilUUID) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilUUID) Reset() {
+	var v uuid.UUID
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilUUID) SetTo(v uuid.UUID) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilUUID) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilUUID) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v uuid.UUID
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilUUID) Get() (v uuid.UUID, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilUUID) Or(d uuid.UUID) uuid.UUID {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -14012,6 +23896,52 @@ func (o OptString) Or(d string) string {
 	return d
 }
 
+// NewOptURI returns new OptURI with value set to v.
+func NewOptURI(v url.URL) OptURI {
+	return OptURI{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptURI is optional url.URL.
+type OptURI struct {
+	Value url.URL
+	Set   bool
+}
+
+// IsSet returns true if OptURI was set.
+func (o OptURI) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptURI) Reset() {
+	var v url.URL
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptURI) SetTo(v url.URL) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptURI) Get() (v url.URL, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptURI) Or(d url.URL) url.URL {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptUUID returns new OptUUID with value set to v.
 func NewOptUUID(v uuid.UUID) OptUUID {
 	return OptUUID{
@@ -14052,6 +23982,52 @@ func (o OptUUID) Get() (v uuid.UUID, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUpdateHostRequestDtoInbound returns new OptUpdateHostRequestDtoInbound with value set to v.
+func NewOptUpdateHostRequestDtoInbound(v UpdateHostRequestDtoInbound) OptUpdateHostRequestDtoInbound {
+	return OptUpdateHostRequestDtoInbound{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateHostRequestDtoInbound is optional UpdateHostRequestDtoInbound.
+type OptUpdateHostRequestDtoInbound struct {
+	Value UpdateHostRequestDtoInbound
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateHostRequestDtoInbound was set.
+func (o OptUpdateHostRequestDtoInbound) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateHostRequestDtoInbound) Reset() {
+	var v UpdateHostRequestDtoInbound
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateHostRequestDtoInbound) SetTo(v UpdateHostRequestDtoInbound) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateHostRequestDtoInbound) Get() (v UpdateHostRequestDtoInbound, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateHostRequestDtoInbound) Or(d UpdateHostRequestDtoInbound) UpdateHostRequestDtoInbound {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -14144,6 +24120,52 @@ func (o OptUpdateHostResponseDtoResponseSecurityLayer) Get() (v UpdateHostRespon
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUpdateHostResponseDtoResponseSecurityLayer) Or(d UpdateHostResponseDtoResponseSecurityLayer) UpdateHostResponseDtoResponseSecurityLayer {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUpdateNodeRequestDtoConfigProfile returns new OptUpdateNodeRequestDtoConfigProfile with value set to v.
+func NewOptUpdateNodeRequestDtoConfigProfile(v UpdateNodeRequestDtoConfigProfile) OptUpdateNodeRequestDtoConfigProfile {
+	return OptUpdateNodeRequestDtoConfigProfile{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateNodeRequestDtoConfigProfile is optional UpdateNodeRequestDtoConfigProfile.
+type OptUpdateNodeRequestDtoConfigProfile struct {
+	Value UpdateNodeRequestDtoConfigProfile
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateNodeRequestDtoConfigProfile was set.
+func (o OptUpdateNodeRequestDtoConfigProfile) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateNodeRequestDtoConfigProfile) Reset() {
+	var v UpdateNodeRequestDtoConfigProfile
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateNodeRequestDtoConfigProfile) SetTo(v UpdateNodeRequestDtoConfigProfile) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateNodeRequestDtoConfigProfile) Get() (v UpdateNodeRequestDtoConfigProfile, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateNodeRequestDtoConfigProfile) Or(d UpdateNodeRequestDtoConfigProfile) UpdateNodeRequestDtoConfigProfile {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -14463,92 +24485,36 @@ func (s *RegisterResponseDtoStatusCode) SetResponse(val RegisterResponseDto) {
 
 func (*RegisterResponseDtoStatusCode) authControllerRegisterRes() {}
 
-// Ref: #/components/schemas/RemoveInboundFromNodesRequestDto
-type RemoveInboundFromNodesRequestDto struct {
-	InboundUuid uuid.UUID `json:"inboundUuid"`
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *RemoveInboundFromNodesRequestDto) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *RemoveInboundFromNodesRequestDto) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
-}
-
-// Ref: #/components/schemas/RemoveInboundFromNodesResponseDto
-type RemoveInboundFromNodesResponseDto struct {
-	Response RemoveInboundFromNodesResponseDtoResponse `json:"response"`
+// Ref: #/components/schemas/RemoveUsersFromInternalSquadResponseDto
+type RemoveUsersFromInternalSquadResponseDto struct {
+	Response RemoveUsersFromInternalSquadResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *RemoveInboundFromNodesResponseDto) GetResponse() RemoveInboundFromNodesResponseDtoResponse {
+func (s *RemoveUsersFromInternalSquadResponseDto) GetResponse() RemoveUsersFromInternalSquadResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *RemoveInboundFromNodesResponseDto) SetResponse(val RemoveInboundFromNodesResponseDtoResponse) {
+func (s *RemoveUsersFromInternalSquadResponseDto) SetResponse(val RemoveUsersFromInternalSquadResponseDtoResponse) {
 	s.Response = val
 }
 
-type RemoveInboundFromNodesResponseDtoResponse struct {
-	IsSuccess bool `json:"isSuccess"`
+func (*RemoveUsersFromInternalSquadResponseDto) internalSquadControllerRemoveUsersFromInternalSquadRes() {
 }
 
-// GetIsSuccess returns the value of IsSuccess.
-func (s *RemoveInboundFromNodesResponseDtoResponse) GetIsSuccess() bool {
-	return s.IsSuccess
+type RemoveUsersFromInternalSquadResponseDtoResponse struct {
+	EventSent bool `json:"eventSent"`
 }
 
-// SetIsSuccess sets the value of IsSuccess.
-func (s *RemoveInboundFromNodesResponseDtoResponse) SetIsSuccess(val bool) {
-	s.IsSuccess = val
+// GetEventSent returns the value of EventSent.
+func (s *RemoveUsersFromInternalSquadResponseDtoResponse) GetEventSent() bool {
+	return s.EventSent
 }
 
-// Ref: #/components/schemas/RemoveInboundFromUsersRequestDto
-type RemoveInboundFromUsersRequestDto struct {
-	InboundUuid uuid.UUID `json:"inboundUuid"`
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *RemoveInboundFromUsersRequestDto) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *RemoveInboundFromUsersRequestDto) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
-}
-
-// Ref: #/components/schemas/RemoveInboundFromUsersResponseDto
-type RemoveInboundFromUsersResponseDto struct {
-	Response RemoveInboundFromUsersResponseDtoResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *RemoveInboundFromUsersResponseDto) GetResponse() RemoveInboundFromUsersResponseDtoResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *RemoveInboundFromUsersResponseDto) SetResponse(val RemoveInboundFromUsersResponseDtoResponse) {
-	s.Response = val
-}
-
-type RemoveInboundFromUsersResponseDtoResponse struct {
-	IsSuccess bool `json:"isSuccess"`
-}
-
-// GetIsSuccess returns the value of IsSuccess.
-func (s *RemoveInboundFromUsersResponseDtoResponse) GetIsSuccess() bool {
-	return s.IsSuccess
-}
-
-// SetIsSuccess sets the value of IsSuccess.
-func (s *RemoveInboundFromUsersResponseDtoResponse) SetIsSuccess(val bool) {
-	s.IsSuccess = val
+// SetEventSent sets the value of EventSent.
+func (s *RemoveUsersFromInternalSquadResponseDtoResponse) SetEventSent(val bool) {
+	s.EventSent = val
 }
 
 // Ref: #/components/schemas/ReorderHostRequestDto
@@ -14605,6 +24571,8 @@ func (s *ReorderHostResponseDto) GetResponse() ReorderHostResponseDtoResponse {
 func (s *ReorderHostResponseDto) SetResponse(val ReorderHostResponseDtoResponse) {
 	s.Response = val
 }
+
+func (*ReorderHostResponseDto) hostsControllerReorderHostsRes() {}
 
 type ReorderHostResponseDtoResponse struct {
 	IsUpdated bool `json:"isUpdated"`
@@ -14675,35 +24643,40 @@ func (s *ReorderNodeResponseDto) SetResponse(val []ReorderNodeResponseDtoRespons
 	s.Response = val
 }
 
+func (*ReorderNodeResponseDto) nodesControllerReorderNodesRes() {}
+
 type ReorderNodeResponseDtoResponseItem struct {
-	UUID                    uuid.UUID                                                `json:"uuid"`
-	Name                    string                                                   `json:"name"`
-	Address                 string                                                   `json:"address"`
-	Port                    NilInt                                                   `json:"port"`
-	IsConnected             bool                                                     `json:"isConnected"`
-	IsDisabled              bool                                                     `json:"isDisabled"`
-	IsConnecting            bool                                                     `json:"isConnecting"`
-	IsNodeOnline            bool                                                     `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                     `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                              `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                                `json:"lastStatusMessage"`
-	XrayVersion             NilString                                                `json:"xrayVersion"`
-	XrayUptime              string                                                   `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                     `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                                   `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                               `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                               `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                                   `json:"notifyPercent"`
-	UsersOnline             NilInt                                                   `json:"usersOnline"`
-	ViewPosition            int                                                      `json:"viewPosition"`
-	CountryCode             string                                                   `json:"countryCode"`
-	ConsumptionMultiplier   float64                                                  `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                                   `json:"cpuCount"`
-	CpuModel                NilString                                                `json:"cpuModel"`
-	TotalRam                NilString                                                `json:"totalRam"`
-	CreatedAt               time.Time                                                `json:"createdAt"`
-	UpdatedAt               time.Time                                                `json:"updatedAt"`
-	ExcludedInbounds        []ReorderNodeResponseDtoResponseItemExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                       `json:"uuid"`
+	Name                    string                                          `json:"name"`
+	Address                 string                                          `json:"address"`
+	Port                    NilInt                                          `json:"port"`
+	IsConnected             bool                                            `json:"isConnected"`
+	IsDisabled              bool                                            `json:"isDisabled"`
+	IsConnecting            bool                                            `json:"isConnecting"`
+	IsNodeOnline            bool                                            `json:"isNodeOnline"`
+	IsXrayRunning           bool                                            `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                     `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                       `json:"lastStatusMessage"`
+	XrayVersion             NilString                                       `json:"xrayVersion"`
+	NodeVersion             NilString                                       `json:"nodeVersion"`
+	XrayUptime              string                                          `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                            `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                          `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                      `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                      `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                          `json:"notifyPercent"`
+	UsersOnline             NilInt                                          `json:"usersOnline"`
+	ViewPosition            int                                             `json:"viewPosition"`
+	CountryCode             string                                          `json:"countryCode"`
+	ConsumptionMultiplier   float64                                         `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                          `json:"cpuCount"`
+	CpuModel                NilString                                       `json:"cpuModel"`
+	TotalRam                NilString                                       `json:"totalRam"`
+	CreatedAt               time.Time                                       `json:"createdAt"`
+	UpdatedAt               time.Time                                       `json:"updatedAt"`
+	ConfigProfile           ReorderNodeResponseDtoResponseItemConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                         `json:"providerUuid"`
+	Provider                NilReorderNodeResponseDtoResponseItemProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -14764,6 +24737,11 @@ func (s *ReorderNodeResponseDtoResponseItem) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *ReorderNodeResponseDtoResponseItem) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *ReorderNodeResponseDtoResponseItem) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -14841,9 +24819,19 @@ func (s *ReorderNodeResponseDtoResponseItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *ReorderNodeResponseDtoResponseItem) GetExcludedInbounds() []ReorderNodeResponseDtoResponseItemExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *ReorderNodeResponseDtoResponseItem) GetConfigProfile() ReorderNodeResponseDtoResponseItemConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *ReorderNodeResponseDtoResponseItem) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *ReorderNodeResponseDtoResponseItem) GetProvider() NilReorderNodeResponseDtoResponseItemProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -14904,6 +24892,11 @@ func (s *ReorderNodeResponseDtoResponseItem) SetLastStatusMessage(val NilString)
 // SetXrayVersion sets the value of XrayVersion.
 func (s *ReorderNodeResponseDtoResponseItem) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *ReorderNodeResponseDtoResponseItem) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -14981,67 +24974,204 @@ func (s *ReorderNodeResponseDtoResponseItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *ReorderNodeResponseDtoResponseItem) SetExcludedInbounds(val []ReorderNodeResponseDtoResponseItemExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *ReorderNodeResponseDtoResponseItem) SetConfigProfile(val ReorderNodeResponseDtoResponseItemConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type ReorderNodeResponseDtoResponseItemExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *ReorderNodeResponseDtoResponseItem) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *ReorderNodeResponseDtoResponseItem) SetProvider(val NilReorderNodeResponseDtoResponseItemProvider) {
+	s.Provider = val
+}
+
+type ReorderNodeResponseDtoResponseItemConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                             `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfile) GetActiveInbounds() []ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfile) SetActiveInbounds(val []ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) GetTag() string {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) GetType() string {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) GetNetwork() NilString {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) GetSecurity() NilString {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) SetTag(val string) {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) SetType(val string) {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *ReorderNodeResponseDtoResponseItemExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *ReorderNodeResponseDtoResponseItemConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type ReorderNodeResponseDtoResponseItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *ReorderNodeResponseDtoResponseItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *ReorderNodeResponseDtoResponseItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *ReorderNodeResponseDtoResponseItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *ReorderNodeResponseDtoResponseItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *ReorderNodeResponseDtoResponseItemProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *ReorderNodeResponseDtoResponseItemProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *ReorderNodeResponseDtoResponseItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *ReorderNodeResponseDtoResponseItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *ReorderNodeResponseDtoResponseItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *ReorderNodeResponseDtoResponseItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *ReorderNodeResponseDtoResponseItemProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *ReorderNodeResponseDtoResponseItemProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/ResetUserTrafficResponseDto
@@ -15063,7 +25193,6 @@ func (*ResetUserTrafficResponseDto) usersControllerResetUserTrafficRes() {}
 
 type ResetUserTrafficResponseDtoResponse struct {
 	UUID                     uuid.UUID                                    `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                                    `json:"subscriptionUuid"`
 	ShortUuid                string                                       `json:"shortUuid"`
 	Username                 string                                       `json:"username"`
 	Status                   OptResetUserTrafficResponseDtoResponseStatus `json:"status"`
@@ -15071,37 +25200,34 @@ type ResetUserTrafficResponseDtoResponse struct {
 	LifetimeUsedTrafficBytes float64                                      `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt                                       `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptResetUserTrafficResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                                   `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                                 `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                                   `json:"expireAt"`
-	OnlineAt             NilDateTime                                                 `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                                 `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                                 `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                      `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                                   `json:"vlessUuid"`
-	SsPassword           string                                                      `json:"ssPassword"`
-	Description          NilString                                                   `json:"description"`
-	Tag                  NilString                                                   `json:"tag"`
-	TelegramId           NilInt                                                      `json:"telegramId"`
-	Email                NilString                                                   `json:"email"`
-	HwidDeviceLimit      NilInt                                                      `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                                   `json:"createdAt"`
-	UpdatedAt            time.Time                                                   `json:"updatedAt"`
-	ActiveUserInbounds   []ResetUserTrafficResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                      `json:"subscriptionUrl"`
-	LastConnectedNode    NilResetUserTrafficResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 ResetUserTrafficResponseDtoResponseHapp                     `json:"happ"`
+	TrafficLimitStrategy   OptResetUserTrafficResponseDtoResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                                     `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                   `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                                     `json:"expireAt"`
+	OnlineAt               NilDateTime                                                   `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                                   `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                                   `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                        `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                                     `json:"vlessUuid"`
+	SsPassword             string                                                        `json:"ssPassword"`
+	Description            NilString                                                     `json:"description"`
+	Tag                    NilString                                                     `json:"tag"`
+	TelegramId             NilInt                                                        `json:"telegramId"`
+	Email                  NilString                                                     `json:"email"`
+	HwidDeviceLimit        NilInt                                                        `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                                   `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                        `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                                     `json:"createdAt"`
+	UpdatedAt              time.Time                                                     `json:"updatedAt"`
+	ActiveInternalSquads   []ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                        `json:"subscriptionUrl"`
+	LastConnectedNode      NilResetUserTrafficResponseDtoResponseLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   ResetUserTrafficResponseDtoResponseHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *ResetUserTrafficResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *ResetUserTrafficResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -15209,6 +25335,16 @@ func (s *ResetUserTrafficResponseDtoResponse) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
 }
 
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *ResetUserTrafficResponseDtoResponse) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *ResetUserTrafficResponseDtoResponse) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *ResetUserTrafficResponseDtoResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -15219,9 +25355,9 @@ func (s *ResetUserTrafficResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *ResetUserTrafficResponseDtoResponse) GetActiveUserInbounds() []ResetUserTrafficResponseDtoResponseActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *ResetUserTrafficResponseDtoResponse) GetActiveInternalSquads() []ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
@@ -15242,11 +25378,6 @@ func (s *ResetUserTrafficResponseDtoResponse) GetHapp() ResetUserTrafficResponse
 // SetUUID sets the value of UUID.
 func (s *ResetUserTrafficResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *ResetUserTrafficResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -15354,6 +25485,16 @@ func (s *ResetUserTrafficResponseDtoResponse) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
 }
 
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *ResetUserTrafficResponseDtoResponse) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *ResetUserTrafficResponseDtoResponse) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *ResetUserTrafficResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -15364,9 +25505,9 @@ func (s *ResetUserTrafficResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *ResetUserTrafficResponseDtoResponse) SetActiveUserInbounds(val []ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *ResetUserTrafficResponseDtoResponse) SetActiveInternalSquads(val []ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
@@ -15384,62 +25525,29 @@ func (s *ResetUserTrafficResponseDtoResponse) SetHapp(val ResetUserTrafficRespon
 	s.Happ = val
 }
 
-type ResetUserTrafficResponseDtoResponseActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *ResetUserTrafficResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetName sets the value of Name.
+func (s *ResetUserTrafficResponseDtoResponseActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
 type ResetUserTrafficResponseDtoResponseHapp struct {
@@ -15607,6 +25715,8 @@ func (s *RestartAllNodesResponseDto) SetResponse(val RestartAllNodesResponseDtoR
 	s.Response = val
 }
 
+func (*RestartAllNodesResponseDto) nodesControllerRestartAllNodesRes() {}
+
 type RestartAllNodesResponseDtoResponse struct {
 	EventSent bool `json:"eventSent"`
 }
@@ -15636,6 +25746,8 @@ func (s *RestartNodeResponseDto) SetResponse(val RestartNodeResponseDtoResponse)
 	s.Response = val
 }
 
+func (*RestartNodeResponseDto) nodesControllerRestartNodeRes() {}
+
 type RestartNodeResponseDtoResponse struct {
 	EventSent bool `json:"eventSent"`
 }
@@ -15648,6 +25760,23 @@ func (s *RestartNodeResponseDtoResponse) GetEventSent() bool {
 // SetEventSent sets the value of EventSent.
 func (s *RestartNodeResponseDtoResponse) SetEventSent(val bool) {
 	s.EventSent = val
+}
+
+// Ref: #/components/schemas/RevokeUserSubscriptionBodyDto
+type RevokeUserSubscriptionBodyDto struct {
+	// Optional. If not provided, a new short UUID will be generated by Remnawave. Please note that it is
+	// strongly recommended to allow Remnawave to generate the short UUID.
+	ShortUuid OptString `json:"shortUuid"`
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *RevokeUserSubscriptionBodyDto) GetShortUuid() OptString {
+	return s.ShortUuid
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *RevokeUserSubscriptionBodyDto) SetShortUuid(val OptString) {
+	s.ShortUuid = val
 }
 
 // Ref: #/components/schemas/RevokeUserSubscriptionResponseDto
@@ -15669,7 +25798,6 @@ func (*RevokeUserSubscriptionResponseDto) usersControllerRevokeUserSubscriptionR
 
 type RevokeUserSubscriptionResponseDtoResponse struct {
 	UUID                     uuid.UUID                                          `json:"uuid"`
-	SubscriptionUuid         uuid.UUID                                          `json:"subscriptionUuid"`
 	ShortUuid                string                                             `json:"shortUuid"`
 	Username                 string                                             `json:"username"`
 	Status                   OptRevokeUserSubscriptionResponseDtoResponseStatus `json:"status"`
@@ -15677,37 +25805,34 @@ type RevokeUserSubscriptionResponseDtoResponse struct {
 	LifetimeUsedTrafficBytes float64                                            `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt                                             `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptRevokeUserSubscriptionResponseDtoResponseTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                                                         `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                                                       `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                                                         `json:"expireAt"`
-	OnlineAt             NilDateTime                                                       `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                                                       `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                                                       `json:"lastTrafficResetAt"`
-	TrojanPassword       string                                                            `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                                                         `json:"vlessUuid"`
-	SsPassword           string                                                            `json:"ssPassword"`
-	Description          NilString                                                         `json:"description"`
-	Tag                  NilString                                                         `json:"tag"`
-	TelegramId           NilInt                                                            `json:"telegramId"`
-	Email                NilString                                                         `json:"email"`
-	HwidDeviceLimit      NilInt                                                            `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                                                         `json:"createdAt"`
-	UpdatedAt            time.Time                                                         `json:"updatedAt"`
-	ActiveUserInbounds   []RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                                                            `json:"subscriptionUrl"`
-	LastConnectedNode    NilRevokeUserSubscriptionResponseDtoResponseLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 RevokeUserSubscriptionResponseDtoResponseHapp                     `json:"happ"`
+	TrafficLimitStrategy   OptRevokeUserSubscriptionResponseDtoResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                                           `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                         `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                                           `json:"expireAt"`
+	OnlineAt               NilDateTime                                                         `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                                         `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                                         `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                                              `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                                           `json:"vlessUuid"`
+	SsPassword             string                                                              `json:"ssPassword"`
+	Description            NilString                                                           `json:"description"`
+	Tag                    NilString                                                           `json:"tag"`
+	TelegramId             NilInt                                                              `json:"telegramId"`
+	Email                  NilString                                                           `json:"email"`
+	HwidDeviceLimit        NilInt                                                              `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                                         `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                                              `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                                           `json:"createdAt"`
+	UpdatedAt              time.Time                                                           `json:"updatedAt"`
+	ActiveInternalSquads   []RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                                                              `json:"subscriptionUrl"`
+	LastConnectedNode      NilRevokeUserSubscriptionResponseDtoResponseLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   RevokeUserSubscriptionResponseDtoResponseHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *RevokeUserSubscriptionResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *RevokeUserSubscriptionResponseDtoResponse) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -15815,6 +25940,16 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) GetHwidDeviceLimit() NilInt 
 	return s.HwidDeviceLimit
 }
 
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *RevokeUserSubscriptionResponseDtoResponse) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *RevokeUserSubscriptionResponseDtoResponse) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *RevokeUserSubscriptionResponseDtoResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -15825,9 +25960,9 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *RevokeUserSubscriptionResponseDtoResponse) GetActiveUserInbounds() []RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *RevokeUserSubscriptionResponseDtoResponse) GetActiveInternalSquads() []RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
@@ -15848,11 +25983,6 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) GetHapp() RevokeUserSubscrip
 // SetUUID sets the value of UUID.
 func (s *RevokeUserSubscriptionResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *RevokeUserSubscriptionResponseDtoResponse) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -15960,6 +26090,16 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) SetHwidDeviceLimit(val NilIn
 	s.HwidDeviceLimit = val
 }
 
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *RevokeUserSubscriptionResponseDtoResponse) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *RevokeUserSubscriptionResponseDtoResponse) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *RevokeUserSubscriptionResponseDtoResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -15970,9 +26110,9 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) SetUpdatedAt(val time.Time) 
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *RevokeUserSubscriptionResponseDtoResponse) SetActiveUserInbounds(val []RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *RevokeUserSubscriptionResponseDtoResponse) SetActiveInternalSquads(val []RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
@@ -15990,62 +26130,29 @@ func (s *RevokeUserSubscriptionResponseDtoResponse) SetHapp(val RevokeUserSubscr
 	s.Happ = val
 }
 
-type RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *RevokeUserSubscriptionResponseDtoResponseActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetName sets the value of Name.
+func (s *RevokeUserSubscriptionResponseDtoResponseActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
 type RevokeUserSubscriptionResponseDtoResponseHapp struct {
@@ -16200,8 +26307,9 @@ func (s *RevokeUserSubscriptionResponseDtoResponseTrafficLimitStrategy) Unmarsha
 
 // Ref: #/components/schemas/SetInboundToManyHostsRequestDto
 type SetInboundToManyHostsRequestDto struct {
-	Uuids       []uuid.UUID `json:"uuids"`
-	InboundUuid uuid.UUID   `json:"inboundUuid"`
+	Uuids                    []uuid.UUID `json:"uuids"`
+	ConfigProfileUuid        uuid.UUID   `json:"configProfileUuid"`
+	ConfigProfileInboundUuid uuid.UUID   `json:"configProfileInboundUuid"`
 }
 
 // GetUuids returns the value of Uuids.
@@ -16209,9 +26317,14 @@ func (s *SetInboundToManyHostsRequestDto) GetUuids() []uuid.UUID {
 	return s.Uuids
 }
 
-// GetInboundUuid returns the value of InboundUuid.
-func (s *SetInboundToManyHostsRequestDto) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *SetInboundToManyHostsRequestDto) GetConfigProfileUuid() uuid.UUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *SetInboundToManyHostsRequestDto) GetConfigProfileInboundUuid() uuid.UUID {
+	return s.ConfigProfileInboundUuid
 }
 
 // SetUuids sets the value of Uuids.
@@ -16219,9 +26332,14 @@ func (s *SetInboundToManyHostsRequestDto) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
-// SetInboundUuid sets the value of InboundUuid.
-func (s *SetInboundToManyHostsRequestDto) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *SetInboundToManyHostsRequestDto) SetConfigProfileUuid(val uuid.UUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *SetInboundToManyHostsRequestDto) SetConfigProfileInboundUuid(val uuid.UUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 // Ref: #/components/schemas/SetInboundToManyHostsResponseDto
@@ -16239,32 +26357,29 @@ func (s *SetInboundToManyHostsResponseDto) SetResponse(val []SetInboundToManyHos
 	s.Response = val
 }
 
+func (*SetInboundToManyHostsResponseDto) hostsBulkActionsControllerSetInboundToHostsRes() {}
+
 type SetInboundToManyHostsResponseDtoResponseItem struct {
-	UUID             uuid.UUID                                                    `json:"uuid"`
-	InboundUuid      uuid.UUID                                                    `json:"inboundUuid"`
-	ViewPosition     int                                                          `json:"viewPosition"`
-	Remark           string                                                       `json:"remark"`
-	Address          string                                                       `json:"address"`
-	Port             int                                                          `json:"port"`
-	Path             NilString                                                    `json:"path"`
-	Sni              NilString                                                    `json:"sni"`
-	Host             NilString                                                    `json:"host"`
-	Alpn             NilString                                                    `json:"alpn"`
-	Fingerprint      NilString                                                    `json:"fingerprint"`
-	AllowInsecure    OptBool                                                      `json:"allowInsecure"`
-	IsDisabled       OptBool                                                      `json:"isDisabled"`
-	SecurityLayer    OptSetInboundToManyHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                                       `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                                    `json:"uuid"`
+	ViewPosition      int                                                          `json:"viewPosition"`
+	Remark            string                                                       `json:"remark"`
+	Address           string                                                       `json:"address"`
+	Port              int                                                          `json:"port"`
+	Path              NilString                                                    `json:"path"`
+	Sni               NilString                                                    `json:"sni"`
+	Host              NilString                                                    `json:"host"`
+	Alpn              NilString                                                    `json:"alpn"`
+	Fingerprint       NilString                                                    `json:"fingerprint"`
+	IsDisabled        OptBool                                                      `json:"isDisabled"`
+	SecurityLayer     OptSetInboundToManyHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                                       `json:"xHttpExtraParams"`
+	Inbound           SetInboundToManyHostsResponseDtoResponseItemInbound          `json:"inbound"`
+	ServerDescription NilString                                                    `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *SetInboundToManyHostsResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *SetInboundToManyHostsResponseDtoResponseItem) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -16312,11 +26427,6 @@ func (s *SetInboundToManyHostsResponseDtoResponseItem) GetFingerprint() NilStrin
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *SetInboundToManyHostsResponseDtoResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *SetInboundToManyHostsResponseDtoResponseItem) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -16332,14 +26442,19 @@ func (s *SetInboundToManyHostsResponseDtoResponseItem) GetXHttpExtraParams() jx.
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *SetInboundToManyHostsResponseDtoResponseItem) GetInbound() SetInboundToManyHostsResponseDtoResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *SetInboundToManyHostsResponseDtoResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *SetInboundToManyHostsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *SetInboundToManyHostsResponseDtoResponseItem) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -16387,11 +26502,6 @@ func (s *SetInboundToManyHostsResponseDtoResponseItem) SetFingerprint(val NilStr
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *SetInboundToManyHostsResponseDtoResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *SetInboundToManyHostsResponseDtoResponseItem) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -16405,6 +26515,41 @@ func (s *SetInboundToManyHostsResponseDtoResponseItem) SetSecurityLayer(val OptS
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *SetInboundToManyHostsResponseDtoResponseItem) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *SetInboundToManyHostsResponseDtoResponseItem) SetInbound(val SetInboundToManyHostsResponseDtoResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *SetInboundToManyHostsResponseDtoResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type SetInboundToManyHostsResponseDtoResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *SetInboundToManyHostsResponseDtoResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *SetInboundToManyHostsResponseDtoResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *SetInboundToManyHostsResponseDtoResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *SetInboundToManyHostsResponseDtoResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type SetInboundToManyHostsResponseDtoResponseItemSecurityLayer string
@@ -16496,32 +26641,29 @@ func (s *SetPortToManyHostsResponseDto) SetResponse(val []SetPortToManyHostsResp
 	s.Response = val
 }
 
+func (*SetPortToManyHostsResponseDto) hostsBulkActionsControllerSetPortToHostsRes() {}
+
 type SetPortToManyHostsResponseDtoResponseItem struct {
-	UUID             uuid.UUID                                                 `json:"uuid"`
-	InboundUuid      uuid.UUID                                                 `json:"inboundUuid"`
-	ViewPosition     int                                                       `json:"viewPosition"`
-	Remark           string                                                    `json:"remark"`
-	Address          string                                                    `json:"address"`
-	Port             int                                                       `json:"port"`
-	Path             NilString                                                 `json:"path"`
-	Sni              NilString                                                 `json:"sni"`
-	Host             NilString                                                 `json:"host"`
-	Alpn             NilString                                                 `json:"alpn"`
-	Fingerprint      NilString                                                 `json:"fingerprint"`
-	AllowInsecure    OptBool                                                   `json:"allowInsecure"`
-	IsDisabled       OptBool                                                   `json:"isDisabled"`
-	SecurityLayer    OptSetPortToManyHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                                    `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                                 `json:"uuid"`
+	ViewPosition      int                                                       `json:"viewPosition"`
+	Remark            string                                                    `json:"remark"`
+	Address           string                                                    `json:"address"`
+	Port              int                                                       `json:"port"`
+	Path              NilString                                                 `json:"path"`
+	Sni               NilString                                                 `json:"sni"`
+	Host              NilString                                                 `json:"host"`
+	Alpn              NilString                                                 `json:"alpn"`
+	Fingerprint       NilString                                                 `json:"fingerprint"`
+	IsDisabled        OptBool                                                   `json:"isDisabled"`
+	SecurityLayer     OptSetPortToManyHostsResponseDtoResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                                    `json:"xHttpExtraParams"`
+	Inbound           SetPortToManyHostsResponseDtoResponseItemInbound          `json:"inbound"`
+	ServerDescription NilString                                                 `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *SetPortToManyHostsResponseDtoResponseItem) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *SetPortToManyHostsResponseDtoResponseItem) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -16569,11 +26711,6 @@ func (s *SetPortToManyHostsResponseDtoResponseItem) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *SetPortToManyHostsResponseDtoResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *SetPortToManyHostsResponseDtoResponseItem) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -16589,14 +26726,19 @@ func (s *SetPortToManyHostsResponseDtoResponseItem) GetXHttpExtraParams() jx.Raw
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *SetPortToManyHostsResponseDtoResponseItem) GetInbound() SetPortToManyHostsResponseDtoResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *SetPortToManyHostsResponseDtoResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *SetPortToManyHostsResponseDtoResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *SetPortToManyHostsResponseDtoResponseItem) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -16644,11 +26786,6 @@ func (s *SetPortToManyHostsResponseDtoResponseItem) SetFingerprint(val NilString
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *SetPortToManyHostsResponseDtoResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *SetPortToManyHostsResponseDtoResponseItem) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -16662,6 +26799,41 @@ func (s *SetPortToManyHostsResponseDtoResponseItem) SetSecurityLayer(val OptSetP
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *SetPortToManyHostsResponseDtoResponseItem) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *SetPortToManyHostsResponseDtoResponseItem) SetInbound(val SetPortToManyHostsResponseDtoResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *SetPortToManyHostsResponseDtoResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type SetPortToManyHostsResponseDtoResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *SetPortToManyHostsResponseDtoResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *SetPortToManyHostsResponseDtoResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *SetPortToManyHostsResponseDtoResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *SetPortToManyHostsResponseDtoResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type SetPortToManyHostsResponseDtoResponseItemSecurityLayer string
@@ -16710,6 +26882,56 @@ func (s *SetPortToManyHostsResponseDtoResponseItemSecurityLayer) UnmarshalText(d
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
+}
+
+type SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionControllerGetRawSubscriptionByShortUuidInternalServerError) subscriptionControllerGetRawSubscriptionByShortUuidRes() {
 }
 
 type SubscriptionControllerGetSubscriptionByClientTypeClientType string
@@ -16791,11 +27013,211 @@ func (s *SubscriptionControllerGetSubscriptionByClientTypeClientType) UnmarshalT
 // SubscriptionControllerGetSubscriptionByClientTypeOK is response for SubscriptionControllerGetSubscriptionByClientType operation.
 type SubscriptionControllerGetSubscriptionByClientTypeOK struct{}
 
+type SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError) subscriptionControllerGetSubscriptionInfoByShortUuidRes() {
+}
+
 // SubscriptionControllerGetSubscriptionOK is response for SubscriptionControllerGetSubscription operation.
 type SubscriptionControllerGetSubscriptionOK struct{}
 
 // SubscriptionControllerGetSubscriptionWithTypeOK is response for SubscriptionControllerGetSubscriptionWithType operation.
 type SubscriptionControllerGetSubscriptionWithTypeOK struct{}
+
+type SubscriptionSettingsControllerGetSettingsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionSettingsControllerGetSettingsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionSettingsControllerGetSettingsInternalServerError) subscriptionSettingsControllerGetSettingsRes() {
+}
+
+type SubscriptionSettingsControllerUpdateSettingsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionSettingsControllerUpdateSettingsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionSettingsControllerUpdateSettingsInternalServerError) subscriptionSettingsControllerUpdateSettingsRes() {
+}
+
+type SubscriptionTemplateControllerGetTemplateInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionTemplateControllerGetTemplateInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionTemplateControllerGetTemplateInternalServerError) subscriptionTemplateControllerGetTemplateRes() {
+}
 
 type SubscriptionTemplateControllerGetTemplateTemplateType string
 
@@ -16866,6 +27288,156 @@ func (s *SubscriptionTemplateControllerGetTemplateTemplateType) UnmarshalText(da
 	}
 }
 
+type SubscriptionTemplateControllerUpdateTemplateInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionTemplateControllerUpdateTemplateInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionTemplateControllerUpdateTemplateInternalServerError) subscriptionTemplateControllerUpdateTemplateRes() {
+}
+
+type SubscriptionsControllerGetAllSubscriptionsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionsControllerGetAllSubscriptionsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionsControllerGetAllSubscriptionsInternalServerError) subscriptionsControllerGetAllSubscriptionsRes() {
+}
+
+type SubscriptionsControllerGetSubscriptionByUsernameInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionsControllerGetSubscriptionByUsernameInternalServerError) subscriptionsControllerGetSubscriptionByUsernameRes() {
+}
+
 type SubscriptionsControllerGetSubscriptionByUsernameNotFound struct {
 	Timestamp OptDateTime `json:"timestamp"`
 	Path      OptString   `json:"path"`
@@ -16915,6 +27487,253 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameNotFound) SetErrorCode(
 
 func (*SubscriptionsControllerGetSubscriptionByUsernameNotFound) subscriptionsControllerGetSubscriptionByUsernameRes() {
 }
+
+type SystemControllerGetBandwidthStatsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SystemControllerGetBandwidthStatsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SystemControllerGetBandwidthStatsInternalServerError) systemControllerGetBandwidthStatsRes() {}
+
+type SystemControllerGetNodesMetricsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SystemControllerGetNodesMetricsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetNodesMetricsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetNodesMetricsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SystemControllerGetNodesMetricsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SystemControllerGetNodesMetricsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetNodesMetricsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetNodesMetricsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SystemControllerGetNodesMetricsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SystemControllerGetNodesMetricsInternalServerError) systemControllerGetNodesMetricsRes() {}
+
+type SystemControllerGetNodesStatisticsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SystemControllerGetNodesStatisticsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SystemControllerGetNodesStatisticsInternalServerError) systemControllerGetNodesStatisticsRes() {
+}
+
+type SystemControllerGetRemnawaveHealthInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SystemControllerGetRemnawaveHealthInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SystemControllerGetRemnawaveHealthInternalServerError) systemControllerGetRemnawaveHealthRes() {
+}
+
+type SystemControllerGetStatsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SystemControllerGetStatsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetStatsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetStatsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SystemControllerGetStatsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SystemControllerGetStatsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetStatsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetStatsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SystemControllerGetStatsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SystemControllerGetStatsInternalServerError) systemControllerGetStatsRes() {}
 
 // Ref: #/components/schemas/TelegramCallbackRequestDto
 type TelegramCallbackRequestDto struct {
@@ -17052,56 +27871,276 @@ func (s *TelegramCallbackResponseDtoStatusCode) SetResponse(val TelegramCallback
 	s.Response = val
 }
 
-// Ref: #/components/schemas/UpdateConfigRequestDto
-type UpdateConfigRequestDto struct{}
+func (*TelegramCallbackResponseDtoStatusCode) authControllerTelegramCallbackRes() {}
 
-// Ref: #/components/schemas/UpdateConfigResponseDto
-type UpdateConfigResponseDto struct {
-	Response UpdateConfigResponseDtoResponse `json:"response"`
+// Ref: #/components/schemas/UpdateConfigProfileRequestDto
+type UpdateConfigProfileRequestDto struct {
+	UUID   uuid.UUID                           `json:"uuid"`
+	Config UpdateConfigProfileRequestDtoConfig `json:"config"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateConfigProfileRequestDto) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetConfig returns the value of Config.
+func (s *UpdateConfigProfileRequestDto) GetConfig() UpdateConfigProfileRequestDtoConfig {
+	return s.Config
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateConfigProfileRequestDto) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetConfig sets the value of Config.
+func (s *UpdateConfigProfileRequestDto) SetConfig(val UpdateConfigProfileRequestDtoConfig) {
+	s.Config = val
+}
+
+type UpdateConfigProfileRequestDtoConfig struct{}
+
+// Ref: #/components/schemas/UpdateConfigProfileResponseDto
+type UpdateConfigProfileResponseDto struct {
+	Response UpdateConfigProfileResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *UpdateConfigResponseDto) GetResponse() UpdateConfigResponseDtoResponse {
+func (s *UpdateConfigProfileResponseDto) GetResponse() UpdateConfigProfileResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *UpdateConfigResponseDto) SetResponse(val UpdateConfigResponseDtoResponse) {
+func (s *UpdateConfigProfileResponseDto) SetResponse(val UpdateConfigProfileResponseDtoResponse) {
 	s.Response = val
 }
 
-func (*UpdateConfigResponseDto) xrayConfigControllerUpdateConfigRes() {}
+func (*UpdateConfigProfileResponseDto) configProfileControllerUpdateConfigProfileRes() {}
 
-type UpdateConfigResponseDtoResponse struct {
-	Config jx.Raw `json:"config"`
+type UpdateConfigProfileResponseDtoResponse struct {
+	UUID      uuid.UUID                                            `json:"uuid"`
+	Name      string                                               `json:"name"`
+	Config    jx.Raw                                               `json:"config"`
+	Inbounds  []UpdateConfigProfileResponseDtoResponseInboundsItem `json:"inbounds"`
+	Nodes     []UpdateConfigProfileResponseDtoResponseNodesItem    `json:"nodes"`
+	CreatedAt time.Time                                            `json:"createdAt"`
+	UpdatedAt time.Time                                            `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateConfigProfileResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateConfigProfileResponseDtoResponse) GetName() string {
+	return s.Name
 }
 
 // GetConfig returns the value of Config.
-func (s *UpdateConfigResponseDtoResponse) GetConfig() jx.Raw {
+func (s *UpdateConfigProfileResponseDtoResponse) GetConfig() jx.Raw {
 	return s.Config
 }
 
+// GetInbounds returns the value of Inbounds.
+func (s *UpdateConfigProfileResponseDtoResponse) GetInbounds() []UpdateConfigProfileResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// GetNodes returns the value of Nodes.
+func (s *UpdateConfigProfileResponseDtoResponse) GetNodes() []UpdateConfigProfileResponseDtoResponseNodesItem {
+	return s.Nodes
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UpdateConfigProfileResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UpdateConfigProfileResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateConfigProfileResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateConfigProfileResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
 // SetConfig sets the value of Config.
-func (s *UpdateConfigResponseDtoResponse) SetConfig(val jx.Raw) {
+func (s *UpdateConfigProfileResponseDtoResponse) SetConfig(val jx.Raw) {
 	s.Config = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *UpdateConfigProfileResponseDtoResponse) SetInbounds(val []UpdateConfigProfileResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *UpdateConfigProfileResponseDtoResponse) SetNodes(val []UpdateConfigProfileResponseDtoResponseNodesItem) {
+	s.Nodes = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UpdateConfigProfileResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UpdateConfigProfileResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type UpdateConfigProfileResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *UpdateConfigProfileResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type UpdateConfigProfileResponseDtoResponseNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateConfigProfileResponseDtoResponseNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateConfigProfileResponseDtoResponseNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UpdateConfigProfileResponseDtoResponseNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateConfigProfileResponseDtoResponseNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateConfigProfileResponseDtoResponseNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UpdateConfigProfileResponseDtoResponseNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
 }
 
 // Ref: #/components/schemas/UpdateHostRequestDto
 type UpdateHostRequestDto struct {
-	UUID             uuid.UUID                             `json:"uuid"`
-	InboundUuid      OptUUID                               `json:"inboundUuid"`
-	Remark           OptString                             `json:"remark"`
-	Address          OptString                             `json:"address"`
-	Port             OptInt                                `json:"port"`
-	Path             OptString                             `json:"path"`
-	Sni              OptString                             `json:"sni"`
-	Host             OptString                             `json:"host"`
-	Alpn             OptNilUpdateHostRequestDtoAlpn        `json:"alpn"`
-	Fingerprint      OptNilUpdateHostRequestDtoFingerprint `json:"fingerprint"`
-	AllowInsecure    OptBool                               `json:"allowInsecure"`
-	IsDisabled       OptBool                               `json:"isDisabled"`
-	SecurityLayer    OptUpdateHostRequestDtoSecurityLayer  `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                             `json:"uuid"`
+	Inbound           OptUpdateHostRequestDtoInbound        `json:"inbound"`
+	Remark            OptString                             `json:"remark"`
+	Address           OptString                             `json:"address"`
+	Port              OptInt                                `json:"port"`
+	Path              OptString                             `json:"path"`
+	Sni               OptString                             `json:"sni"`
+	Host              OptString                             `json:"host"`
+	Alpn              OptNilUpdateHostRequestDtoAlpn        `json:"alpn"`
+	Fingerprint       OptNilUpdateHostRequestDtoFingerprint `json:"fingerprint"`
+	IsDisabled        OptBool                               `json:"isDisabled"`
+	SecurityLayer     OptUpdateHostRequestDtoSecurityLayer  `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                `json:"xHttpExtraParams"`
+	ServerDescription OptNilString                          `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
@@ -17109,9 +28148,9 @@ func (s *UpdateHostRequestDto) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetInboundUuid returns the value of InboundUuid.
-func (s *UpdateHostRequestDto) GetInboundUuid() OptUUID {
-	return s.InboundUuid
+// GetInbound returns the value of Inbound.
+func (s *UpdateHostRequestDto) GetInbound() OptUpdateHostRequestDtoInbound {
+	return s.Inbound
 }
 
 // GetRemark returns the value of Remark.
@@ -17154,11 +28193,6 @@ func (s *UpdateHostRequestDto) GetFingerprint() OptNilUpdateHostRequestDtoFinger
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *UpdateHostRequestDto) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *UpdateHostRequestDto) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -17174,14 +28208,19 @@ func (s *UpdateHostRequestDto) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetServerDescription returns the value of ServerDescription.
+func (s *UpdateHostRequestDto) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateHostRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetInboundUuid sets the value of InboundUuid.
-func (s *UpdateHostRequestDto) SetInboundUuid(val OptUUID) {
-	s.InboundUuid = val
+// SetInbound sets the value of Inbound.
+func (s *UpdateHostRequestDto) SetInbound(val OptUpdateHostRequestDtoInbound) {
+	s.Inbound = val
 }
 
 // SetRemark sets the value of Remark.
@@ -17224,11 +28263,6 @@ func (s *UpdateHostRequestDto) SetFingerprint(val OptNilUpdateHostRequestDtoFing
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *UpdateHostRequestDto) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *UpdateHostRequestDto) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -17242,6 +28276,11 @@ func (s *UpdateHostRequestDto) SetSecurityLayer(val OptUpdateHostRequestDtoSecur
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *UpdateHostRequestDto) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *UpdateHostRequestDto) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
 }
 
 type UpdateHostRequestDtoAlpn string
@@ -17403,6 +28442,31 @@ func (s *UpdateHostRequestDtoFingerprint) UnmarshalText(data []byte) error {
 	}
 }
 
+type UpdateHostRequestDtoInbound struct {
+	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *UpdateHostRequestDtoInbound) GetConfigProfileUuid() uuid.UUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *UpdateHostRequestDtoInbound) GetConfigProfileInboundUuid() uuid.UUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *UpdateHostRequestDtoInbound) SetConfigProfileUuid(val uuid.UUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *UpdateHostRequestDtoInbound) SetConfigProfileInboundUuid(val uuid.UUID) {
+	s.ConfigProfileInboundUuid = val
+}
+
 type UpdateHostRequestDtoSecurityLayer string
 
 const (
@@ -17466,32 +28530,29 @@ func (s *UpdateHostResponseDto) SetResponse(val UpdateHostResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*UpdateHostResponseDto) hostsControllerUpdateHostRes() {}
+
 type UpdateHostResponseDtoResponse struct {
-	UUID             uuid.UUID                                     `json:"uuid"`
-	InboundUuid      uuid.UUID                                     `json:"inboundUuid"`
-	ViewPosition     int                                           `json:"viewPosition"`
-	Remark           string                                        `json:"remark"`
-	Address          string                                        `json:"address"`
-	Port             int                                           `json:"port"`
-	Path             NilString                                     `json:"path"`
-	Sni              NilString                                     `json:"sni"`
-	Host             NilString                                     `json:"host"`
-	Alpn             NilString                                     `json:"alpn"`
-	Fingerprint      NilString                                     `json:"fingerprint"`
-	AllowInsecure    OptBool                                       `json:"allowInsecure"`
-	IsDisabled       OptBool                                       `json:"isDisabled"`
-	SecurityLayer    OptUpdateHostResponseDtoResponseSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams jx.Raw                                        `json:"xHttpExtraParams"`
+	UUID              uuid.UUID                                     `json:"uuid"`
+	ViewPosition      int                                           `json:"viewPosition"`
+	Remark            string                                        `json:"remark"`
+	Address           string                                        `json:"address"`
+	Port              int                                           `json:"port"`
+	Path              NilString                                     `json:"path"`
+	Sni               NilString                                     `json:"sni"`
+	Host              NilString                                     `json:"host"`
+	Alpn              NilString                                     `json:"alpn"`
+	Fingerprint       NilString                                     `json:"fingerprint"`
+	IsDisabled        OptBool                                       `json:"isDisabled"`
+	SecurityLayer     OptUpdateHostResponseDtoResponseSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams  jx.Raw                                        `json:"xHttpExtraParams"`
+	Inbound           UpdateHostResponseDtoResponseInbound          `json:"inbound"`
+	ServerDescription NilString                                     `json:"serverDescription"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *UpdateHostResponseDtoResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetInboundUuid returns the value of InboundUuid.
-func (s *UpdateHostResponseDtoResponse) GetInboundUuid() uuid.UUID {
-	return s.InboundUuid
 }
 
 // GetViewPosition returns the value of ViewPosition.
@@ -17539,11 +28600,6 @@ func (s *UpdateHostResponseDtoResponse) GetFingerprint() NilString {
 	return s.Fingerprint
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *UpdateHostResponseDtoResponse) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
 // GetIsDisabled returns the value of IsDisabled.
 func (s *UpdateHostResponseDtoResponse) GetIsDisabled() OptBool {
 	return s.IsDisabled
@@ -17559,14 +28615,19 @@ func (s *UpdateHostResponseDtoResponse) GetXHttpExtraParams() jx.Raw {
 	return s.XHttpExtraParams
 }
 
+// GetInbound returns the value of Inbound.
+func (s *UpdateHostResponseDtoResponse) GetInbound() UpdateHostResponseDtoResponseInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *UpdateHostResponseDtoResponse) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateHostResponseDtoResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetInboundUuid sets the value of InboundUuid.
-func (s *UpdateHostResponseDtoResponse) SetInboundUuid(val uuid.UUID) {
-	s.InboundUuid = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
@@ -17614,11 +28675,6 @@ func (s *UpdateHostResponseDtoResponse) SetFingerprint(val NilString) {
 	s.Fingerprint = val
 }
 
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *UpdateHostResponseDtoResponse) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
 // SetIsDisabled sets the value of IsDisabled.
 func (s *UpdateHostResponseDtoResponse) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
@@ -17632,6 +28688,41 @@ func (s *UpdateHostResponseDtoResponse) SetSecurityLayer(val OptUpdateHostRespon
 // SetXHttpExtraParams sets the value of XHttpExtraParams.
 func (s *UpdateHostResponseDtoResponse) SetXHttpExtraParams(val jx.Raw) {
 	s.XHttpExtraParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *UpdateHostResponseDtoResponse) SetInbound(val UpdateHostResponseDtoResponseInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *UpdateHostResponseDtoResponse) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+type UpdateHostResponseDtoResponseInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *UpdateHostResponseDtoResponseInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *UpdateHostResponseDtoResponseInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *UpdateHostResponseDtoResponseInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *UpdateHostResponseDtoResponseInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 type UpdateHostResponseDtoResponseSecurityLayer string
@@ -17682,19 +28773,812 @@ func (s *UpdateHostResponseDtoResponseSecurityLayer) UnmarshalText(data []byte) 
 	}
 }
 
+// Ref: #/components/schemas/UpdateInfraBillingNodeRequestDto
+type UpdateInfraBillingNodeRequestDto struct {
+	UUID          uuid.UUID `json:"uuid"`
+	NextBillingAt time.Time `json:"nextBillingAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraBillingNodeRequestDto) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetNextBillingAt returns the value of NextBillingAt.
+func (s *UpdateInfraBillingNodeRequestDto) GetNextBillingAt() time.Time {
+	return s.NextBillingAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraBillingNodeRequestDto) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetNextBillingAt sets the value of NextBillingAt.
+func (s *UpdateInfraBillingNodeRequestDto) SetNextBillingAt(val time.Time) {
+	s.NextBillingAt = val
+}
+
+// Ref: #/components/schemas/UpdateInfraBillingNodeResponseDto
+type UpdateInfraBillingNodeResponseDto struct {
+	Response UpdateInfraBillingNodeResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *UpdateInfraBillingNodeResponseDto) GetResponse() UpdateInfraBillingNodeResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *UpdateInfraBillingNodeResponseDto) SetResponse(val UpdateInfraBillingNodeResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*UpdateInfraBillingNodeResponseDto) infraBillingControllerUpdateInfraBillingNodeRes() {}
+
+type UpdateInfraBillingNodeResponseDtoResponse struct {
+	TotalBillingNodes          float64                                                              `json:"totalBillingNodes"`
+	BillingNodes               []UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem          `json:"billingNodes"`
+	AvailableBillingNodes      []UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem `json:"availableBillingNodes"`
+	TotalAvailableBillingNodes float64                                                              `json:"totalAvailableBillingNodes"`
+	Stats                      UpdateInfraBillingNodeResponseDtoResponseStats                       `json:"stats"`
+}
+
+// GetTotalBillingNodes returns the value of TotalBillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) GetTotalBillingNodes() float64 {
+	return s.TotalBillingNodes
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) GetBillingNodes() []UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// GetAvailableBillingNodes returns the value of AvailableBillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) GetAvailableBillingNodes() []UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem {
+	return s.AvailableBillingNodes
+}
+
+// GetTotalAvailableBillingNodes returns the value of TotalAvailableBillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) GetTotalAvailableBillingNodes() float64 {
+	return s.TotalAvailableBillingNodes
+}
+
+// GetStats returns the value of Stats.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) GetStats() UpdateInfraBillingNodeResponseDtoResponseStats {
+	return s.Stats
+}
+
+// SetTotalBillingNodes sets the value of TotalBillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) SetTotalBillingNodes(val float64) {
+	s.TotalBillingNodes = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) SetBillingNodes(val []UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+// SetAvailableBillingNodes sets the value of AvailableBillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) SetAvailableBillingNodes(val []UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) {
+	s.AvailableBillingNodes = val
+}
+
+// SetTotalAvailableBillingNodes sets the value of TotalAvailableBillingNodes.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) SetTotalAvailableBillingNodes(val float64) {
+	s.TotalAvailableBillingNodes = val
+}
+
+// SetStats sets the value of Stats.
+func (s *UpdateInfraBillingNodeResponseDtoResponse) SetStats(val UpdateInfraBillingNodeResponseDtoResponseStats) {
+	s.Stats = val
+}
+
+type UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UpdateInfraBillingNodeResponseDtoResponseAvailableBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem struct {
+	UUID          uuid.UUID                                                         `json:"uuid"`
+	NodeUuid      uuid.UUID                                                         `json:"nodeUuid"`
+	ProviderUuid  uuid.UUID                                                         `json:"providerUuid"`
+	Provider      UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider `json:"provider"`
+	Node          UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode     `json:"node"`
+	NextBillingAt time.Time                                                         `json:"nextBillingAt"`
+	CreatedAt     time.Time                                                         `json:"createdAt"`
+	UpdatedAt     time.Time                                                         `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetProvider() UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider {
+	return s.Provider
+}
+
+// GetNode returns the value of Node.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetNode() UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode {
+	return s.Node
+}
+
+// GetNextBillingAt returns the value of NextBillingAt.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetNextBillingAt() time.Time {
+	return s.NextBillingAt
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetProvider(val UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) {
+	s.Provider = val
+}
+
+// SetNode sets the value of Node.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetNode(val UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) {
+	s.Node = val
+}
+
+// SetNextBillingAt sets the value of NextBillingAt.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetNextBillingAt(val time.Time) {
+	s.NextBillingAt = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	LoginUrl    NilString `json:"loginUrl"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *UpdateInfraBillingNodeResponseDtoResponseBillingNodesItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+type UpdateInfraBillingNodeResponseDtoResponseStats struct {
+	UpcomingNodesCount   float64 `json:"upcomingNodesCount"`
+	CurrentMonthPayments float64 `json:"currentMonthPayments"`
+	TotalSpent           float64 `json:"totalSpent"`
+}
+
+// GetUpcomingNodesCount returns the value of UpcomingNodesCount.
+func (s *UpdateInfraBillingNodeResponseDtoResponseStats) GetUpcomingNodesCount() float64 {
+	return s.UpcomingNodesCount
+}
+
+// GetCurrentMonthPayments returns the value of CurrentMonthPayments.
+func (s *UpdateInfraBillingNodeResponseDtoResponseStats) GetCurrentMonthPayments() float64 {
+	return s.CurrentMonthPayments
+}
+
+// GetTotalSpent returns the value of TotalSpent.
+func (s *UpdateInfraBillingNodeResponseDtoResponseStats) GetTotalSpent() float64 {
+	return s.TotalSpent
+}
+
+// SetUpcomingNodesCount sets the value of UpcomingNodesCount.
+func (s *UpdateInfraBillingNodeResponseDtoResponseStats) SetUpcomingNodesCount(val float64) {
+	s.UpcomingNodesCount = val
+}
+
+// SetCurrentMonthPayments sets the value of CurrentMonthPayments.
+func (s *UpdateInfraBillingNodeResponseDtoResponseStats) SetCurrentMonthPayments(val float64) {
+	s.CurrentMonthPayments = val
+}
+
+// SetTotalSpent sets the value of TotalSpent.
+func (s *UpdateInfraBillingNodeResponseDtoResponseStats) SetTotalSpent(val float64) {
+	s.TotalSpent = val
+}
+
+// Ref: #/components/schemas/UpdateInfraProviderRequestDto
+type UpdateInfraProviderRequestDto struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        OptString `json:"name"`
+	FaviconLink OptNilURI `json:"faviconLink"`
+	LoginUrl    OptNilURI `json:"loginUrl"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraProviderRequestDto) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInfraProviderRequestDto) GetName() OptString {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *UpdateInfraProviderRequestDto) GetFaviconLink() OptNilURI {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *UpdateInfraProviderRequestDto) GetLoginUrl() OptNilURI {
+	return s.LoginUrl
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraProviderRequestDto) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInfraProviderRequestDto) SetName(val OptString) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *UpdateInfraProviderRequestDto) SetFaviconLink(val OptNilURI) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *UpdateInfraProviderRequestDto) SetLoginUrl(val OptNilURI) {
+	s.LoginUrl = val
+}
+
+// Ref: #/components/schemas/UpdateInfraProviderResponseDto
+type UpdateInfraProviderResponseDto struct {
+	Response UpdateInfraProviderResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *UpdateInfraProviderResponseDto) GetResponse() UpdateInfraProviderResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *UpdateInfraProviderResponseDto) SetResponse(val UpdateInfraProviderResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*UpdateInfraProviderResponseDto) infraBillingControllerUpdateInfraProviderRes() {}
+
+type UpdateInfraProviderResponseDtoResponse struct {
+	UUID           uuid.UUID                                                `json:"uuid"`
+	Name           string                                                   `json:"name"`
+	FaviconLink    NilString                                                `json:"faviconLink"`
+	LoginUrl       NilString                                                `json:"loginUrl"`
+	CreatedAt      time.Time                                                `json:"createdAt"`
+	UpdatedAt      time.Time                                                `json:"updatedAt"`
+	BillingHistory UpdateInfraProviderResponseDtoResponseBillingHistory     `json:"billingHistory"`
+	BillingNodes   []UpdateInfraProviderResponseDtoResponseBillingNodesItem `json:"billingNodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInfraProviderResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInfraProviderResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *UpdateInfraProviderResponseDtoResponse) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *UpdateInfraProviderResponseDtoResponse) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UpdateInfraProviderResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UpdateInfraProviderResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetBillingHistory returns the value of BillingHistory.
+func (s *UpdateInfraProviderResponseDtoResponse) GetBillingHistory() UpdateInfraProviderResponseDtoResponseBillingHistory {
+	return s.BillingHistory
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *UpdateInfraProviderResponseDtoResponse) GetBillingNodes() []UpdateInfraProviderResponseDtoResponseBillingNodesItem {
+	return s.BillingNodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInfraProviderResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInfraProviderResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *UpdateInfraProviderResponseDtoResponse) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *UpdateInfraProviderResponseDtoResponse) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UpdateInfraProviderResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UpdateInfraProviderResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetBillingHistory sets the value of BillingHistory.
+func (s *UpdateInfraProviderResponseDtoResponse) SetBillingHistory(val UpdateInfraProviderResponseDtoResponseBillingHistory) {
+	s.BillingHistory = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *UpdateInfraProviderResponseDtoResponse) SetBillingNodes(val []UpdateInfraProviderResponseDtoResponseBillingNodesItem) {
+	s.BillingNodes = val
+}
+
+type UpdateInfraProviderResponseDtoResponseBillingHistory struct {
+	TotalAmount float64 `json:"totalAmount"`
+	TotalBills  float64 `json:"totalBills"`
+}
+
+// GetTotalAmount returns the value of TotalAmount.
+func (s *UpdateInfraProviderResponseDtoResponseBillingHistory) GetTotalAmount() float64 {
+	return s.TotalAmount
+}
+
+// GetTotalBills returns the value of TotalBills.
+func (s *UpdateInfraProviderResponseDtoResponseBillingHistory) GetTotalBills() float64 {
+	return s.TotalBills
+}
+
+// SetTotalAmount sets the value of TotalAmount.
+func (s *UpdateInfraProviderResponseDtoResponseBillingHistory) SetTotalAmount(val float64) {
+	s.TotalAmount = val
+}
+
+// SetTotalBills sets the value of TotalBills.
+func (s *UpdateInfraProviderResponseDtoResponseBillingHistory) SetTotalBills(val float64) {
+	s.TotalBills = val
+}
+
+type UpdateInfraProviderResponseDtoResponseBillingNodesItem struct {
+	NodeUuid    uuid.UUID `json:"nodeUuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *UpdateInfraProviderResponseDtoResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInfraProviderResponseDtoResponseBillingNodesItem) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UpdateInfraProviderResponseDtoResponseBillingNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *UpdateInfraProviderResponseDtoResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInfraProviderResponseDtoResponseBillingNodesItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UpdateInfraProviderResponseDtoResponseBillingNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// Ref: #/components/schemas/UpdateInternalSquadRequestDto
+type UpdateInternalSquadRequestDto struct {
+	UUID     uuid.UUID   `json:"uuid"`
+	Inbounds []uuid.UUID `json:"inbounds"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInternalSquadRequestDto) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *UpdateInternalSquadRequestDto) GetInbounds() []uuid.UUID {
+	return s.Inbounds
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInternalSquadRequestDto) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *UpdateInternalSquadRequestDto) SetInbounds(val []uuid.UUID) {
+	s.Inbounds = val
+}
+
+// Ref: #/components/schemas/UpdateInternalSquadResponseDto
+type UpdateInternalSquadResponseDto struct {
+	Response UpdateInternalSquadResponseDtoResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *UpdateInternalSquadResponseDto) GetResponse() UpdateInternalSquadResponseDtoResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *UpdateInternalSquadResponseDto) SetResponse(val UpdateInternalSquadResponseDtoResponse) {
+	s.Response = val
+}
+
+func (*UpdateInternalSquadResponseDto) internalSquadControllerUpdateInternalSquadRes() {}
+
+type UpdateInternalSquadResponseDtoResponse struct {
+	UUID      uuid.UUID                                            `json:"uuid"`
+	Name      string                                               `json:"name"`
+	Info      UpdateInternalSquadResponseDtoResponseInfo           `json:"info"`
+	Inbounds  []UpdateInternalSquadResponseDtoResponseInboundsItem `json:"inbounds"`
+	CreatedAt time.Time                                            `json:"createdAt"`
+	UpdatedAt time.Time                                            `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInternalSquadResponseDtoResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateInternalSquadResponseDtoResponse) GetName() string {
+	return s.Name
+}
+
+// GetInfo returns the value of Info.
+func (s *UpdateInternalSquadResponseDtoResponse) GetInfo() UpdateInternalSquadResponseDtoResponseInfo {
+	return s.Info
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *UpdateInternalSquadResponseDtoResponse) GetInbounds() []UpdateInternalSquadResponseDtoResponseInboundsItem {
+	return s.Inbounds
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UpdateInternalSquadResponseDtoResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UpdateInternalSquadResponseDtoResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInternalSquadResponseDtoResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateInternalSquadResponseDtoResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetInfo sets the value of Info.
+func (s *UpdateInternalSquadResponseDtoResponse) SetInfo(val UpdateInternalSquadResponseDtoResponseInfo) {
+	s.Info = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *UpdateInternalSquadResponseDtoResponse) SetInbounds(val []UpdateInternalSquadResponseDtoResponseInboundsItem) {
+	s.Inbounds = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UpdateInternalSquadResponseDtoResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UpdateInternalSquadResponseDtoResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+type UpdateInternalSquadResponseDtoResponseInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *UpdateInternalSquadResponseDtoResponseInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type UpdateInternalSquadResponseDtoResponseInfo struct {
+	MembersCount  float64 `json:"membersCount"`
+	InboundsCount float64 `json:"inboundsCount"`
+}
+
+// GetMembersCount returns the value of MembersCount.
+func (s *UpdateInternalSquadResponseDtoResponseInfo) GetMembersCount() float64 {
+	return s.MembersCount
+}
+
+// GetInboundsCount returns the value of InboundsCount.
+func (s *UpdateInternalSquadResponseDtoResponseInfo) GetInboundsCount() float64 {
+	return s.InboundsCount
+}
+
+// SetMembersCount sets the value of MembersCount.
+func (s *UpdateInternalSquadResponseDtoResponseInfo) SetMembersCount(val float64) {
+	s.MembersCount = val
+}
+
+// SetInboundsCount sets the value of InboundsCount.
+func (s *UpdateInternalSquadResponseDtoResponseInfo) SetInboundsCount(val float64) {
+	s.InboundsCount = val
+}
+
 // Ref: #/components/schemas/UpdateNodeRequestDto
 type UpdateNodeRequestDto struct {
-	UUID                    uuid.UUID   `json:"uuid"`
-	Name                    OptString   `json:"name"`
-	Address                 OptString   `json:"address"`
-	Port                    OptFloat64  `json:"port"`
-	IsTrafficTrackingActive OptBool     `json:"isTrafficTrackingActive"`
-	TrafficLimitBytes       OptFloat64  `json:"trafficLimitBytes"`
-	NotifyPercent           OptFloat64  `json:"notifyPercent"`
-	TrafficResetDay         OptFloat64  `json:"trafficResetDay"`
-	ExcludedInbounds        []uuid.UUID `json:"excludedInbounds"`
-	CountryCode             OptString   `json:"countryCode"`
-	ConsumptionMultiplier   OptFloat64  `json:"consumptionMultiplier"`
+	UUID                    uuid.UUID                            `json:"uuid"`
+	Name                    OptString                            `json:"name"`
+	Address                 OptString                            `json:"address"`
+	Port                    OptFloat64                           `json:"port"`
+	IsTrafficTrackingActive OptBool                              `json:"isTrafficTrackingActive"`
+	TrafficLimitBytes       OptFloat64                           `json:"trafficLimitBytes"`
+	NotifyPercent           OptFloat64                           `json:"notifyPercent"`
+	TrafficResetDay         OptFloat64                           `json:"trafficResetDay"`
+	CountryCode             OptString                            `json:"countryCode"`
+	ConsumptionMultiplier   OptFloat64                           `json:"consumptionMultiplier"`
+	ConfigProfile           OptUpdateNodeRequestDtoConfigProfile `json:"configProfile"`
+	ProviderUuid            OptNilUUID                           `json:"providerUuid"`
 }
 
 // GetUUID returns the value of UUID.
@@ -17737,11 +29621,6 @@ func (s *UpdateNodeRequestDto) GetTrafficResetDay() OptFloat64 {
 	return s.TrafficResetDay
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *UpdateNodeRequestDto) GetExcludedInbounds() []uuid.UUID {
-	return s.ExcludedInbounds
-}
-
 // GetCountryCode returns the value of CountryCode.
 func (s *UpdateNodeRequestDto) GetCountryCode() OptString {
 	return s.CountryCode
@@ -17750,6 +29629,16 @@ func (s *UpdateNodeRequestDto) GetCountryCode() OptString {
 // GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
 func (s *UpdateNodeRequestDto) GetConsumptionMultiplier() OptFloat64 {
 	return s.ConsumptionMultiplier
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *UpdateNodeRequestDto) GetConfigProfile() OptUpdateNodeRequestDtoConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *UpdateNodeRequestDto) GetProviderUuid() OptNilUUID {
+	return s.ProviderUuid
 }
 
 // SetUUID sets the value of UUID.
@@ -17792,11 +29681,6 @@ func (s *UpdateNodeRequestDto) SetTrafficResetDay(val OptFloat64) {
 	s.TrafficResetDay = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *UpdateNodeRequestDto) SetExcludedInbounds(val []uuid.UUID) {
-	s.ExcludedInbounds = val
-}
-
 // SetCountryCode sets the value of CountryCode.
 func (s *UpdateNodeRequestDto) SetCountryCode(val OptString) {
 	s.CountryCode = val
@@ -17805,6 +29689,41 @@ func (s *UpdateNodeRequestDto) SetCountryCode(val OptString) {
 // SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
 func (s *UpdateNodeRequestDto) SetConsumptionMultiplier(val OptFloat64) {
 	s.ConsumptionMultiplier = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *UpdateNodeRequestDto) SetConfigProfile(val OptUpdateNodeRequestDtoConfigProfile) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *UpdateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
+	s.ProviderUuid = val
+}
+
+type UpdateNodeRequestDtoConfigProfile struct {
+	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *UpdateNodeRequestDtoConfigProfile) GetActiveConfigProfileUuid() uuid.UUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *UpdateNodeRequestDtoConfigProfile) GetActiveInbounds() []uuid.UUID {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *UpdateNodeRequestDtoConfigProfile) SetActiveConfigProfileUuid(val uuid.UUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *UpdateNodeRequestDtoConfigProfile) SetActiveInbounds(val []uuid.UUID) {
+	s.ActiveInbounds = val
 }
 
 // Ref: #/components/schemas/UpdateNodeResponseDto
@@ -17822,35 +29741,40 @@ func (s *UpdateNodeResponseDto) SetResponse(val UpdateNodeResponseDtoResponse) {
 	s.Response = val
 }
 
+func (*UpdateNodeResponseDto) nodesControllerUpdateNodeRes() {}
+
 type UpdateNodeResponseDtoResponse struct {
-	UUID                    uuid.UUID                                           `json:"uuid"`
-	Name                    string                                              `json:"name"`
-	Address                 string                                              `json:"address"`
-	Port                    NilInt                                              `json:"port"`
-	IsConnected             bool                                                `json:"isConnected"`
-	IsDisabled              bool                                                `json:"isDisabled"`
-	IsConnecting            bool                                                `json:"isConnecting"`
-	IsNodeOnline            bool                                                `json:"isNodeOnline"`
-	IsXrayRunning           bool                                                `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                                         `json:"lastStatusChange"`
-	LastStatusMessage       NilString                                           `json:"lastStatusMessage"`
-	XrayVersion             NilString                                           `json:"xrayVersion"`
-	XrayUptime              string                                              `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                                `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                              `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                                          `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                                          `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                              `json:"notifyPercent"`
-	UsersOnline             NilInt                                              `json:"usersOnline"`
-	ViewPosition            int                                                 `json:"viewPosition"`
-	CountryCode             string                                              `json:"countryCode"`
-	ConsumptionMultiplier   float64                                             `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                              `json:"cpuCount"`
-	CpuModel                NilString                                           `json:"cpuModel"`
-	TotalRam                NilString                                           `json:"totalRam"`
-	CreatedAt               time.Time                                           `json:"createdAt"`
-	UpdatedAt               time.Time                                           `json:"updatedAt"`
-	ExcludedInbounds        []UpdateNodeResponseDtoResponseExcludedInboundsItem `json:"excludedInbounds"`
+	UUID                    uuid.UUID                                  `json:"uuid"`
+	Name                    string                                     `json:"name"`
+	Address                 string                                     `json:"address"`
+	Port                    NilInt                                     `json:"port"`
+	IsConnected             bool                                       `json:"isConnected"`
+	IsDisabled              bool                                       `json:"isDisabled"`
+	IsConnecting            bool                                       `json:"isConnecting"`
+	IsNodeOnline            bool                                       `json:"isNodeOnline"`
+	IsXrayRunning           bool                                       `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                                `json:"lastStatusChange"`
+	LastStatusMessage       NilString                                  `json:"lastStatusMessage"`
+	XrayVersion             NilString                                  `json:"xrayVersion"`
+	NodeVersion             NilString                                  `json:"nodeVersion"`
+	XrayUptime              string                                     `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                       `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                     `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                                 `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                                 `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                     `json:"notifyPercent"`
+	UsersOnline             NilInt                                     `json:"usersOnline"`
+	ViewPosition            int                                        `json:"viewPosition"`
+	CountryCode             string                                     `json:"countryCode"`
+	ConsumptionMultiplier   float64                                    `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                     `json:"cpuCount"`
+	CpuModel                NilString                                  `json:"cpuModel"`
+	TotalRam                NilString                                  `json:"totalRam"`
+	CreatedAt               time.Time                                  `json:"createdAt"`
+	UpdatedAt               time.Time                                  `json:"updatedAt"`
+	ConfigProfile           UpdateNodeResponseDtoResponseConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                    `json:"providerUuid"`
+	Provider                NilUpdateNodeResponseDtoResponseProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
@@ -17911,6 +29835,11 @@ func (s *UpdateNodeResponseDtoResponse) GetLastStatusMessage() NilString {
 // GetXrayVersion returns the value of XrayVersion.
 func (s *UpdateNodeResponseDtoResponse) GetXrayVersion() NilString {
 	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *UpdateNodeResponseDtoResponse) GetNodeVersion() NilString {
+	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
@@ -17988,9 +29917,19 @@ func (s *UpdateNodeResponseDtoResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetExcludedInbounds returns the value of ExcludedInbounds.
-func (s *UpdateNodeResponseDtoResponse) GetExcludedInbounds() []UpdateNodeResponseDtoResponseExcludedInboundsItem {
-	return s.ExcludedInbounds
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *UpdateNodeResponseDtoResponse) GetConfigProfile() UpdateNodeResponseDtoResponseConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *UpdateNodeResponseDtoResponse) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *UpdateNodeResponseDtoResponse) GetProvider() NilUpdateNodeResponseDtoResponseProvider {
+	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
@@ -18051,6 +29990,11 @@ func (s *UpdateNodeResponseDtoResponse) SetLastStatusMessage(val NilString) {
 // SetXrayVersion sets the value of XrayVersion.
 func (s *UpdateNodeResponseDtoResponse) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *UpdateNodeResponseDtoResponse) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
@@ -18128,67 +30072,204 @@ func (s *UpdateNodeResponseDtoResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetExcludedInbounds sets the value of ExcludedInbounds.
-func (s *UpdateNodeResponseDtoResponse) SetExcludedInbounds(val []UpdateNodeResponseDtoResponseExcludedInboundsItem) {
-	s.ExcludedInbounds = val
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *UpdateNodeResponseDtoResponse) SetConfigProfile(val UpdateNodeResponseDtoResponseConfigProfile) {
+	s.ConfigProfile = val
 }
 
-type UpdateNodeResponseDtoResponseExcludedInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *UpdateNodeResponseDtoResponse) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *UpdateNodeResponseDtoResponse) SetProvider(val NilUpdateNodeResponseDtoResponseProvider) {
+	s.Provider = val
+}
+
+type UpdateNodeResponseDtoResponseConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                        `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *UpdateNodeResponseDtoResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *UpdateNodeResponseDtoResponseConfigProfile) GetActiveInbounds() []UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *UpdateNodeResponseDtoResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *UpdateNodeResponseDtoResponseConfigProfile) SetActiveInbounds(val []UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) GetUUID() uuid.UUID {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
 // GetTag returns the value of Tag.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) GetTag() string {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) GetType() string {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) GetNetwork() NilString {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) GetSecurity() NilString {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
+// GetPort returns the value of Port.
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
 // SetUUID sets the value of UUID.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) SetUUID(val uuid.UUID) {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
 // SetTag sets the value of Tag.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) SetTag(val string) {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) SetType(val string) {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) SetNetwork(val NilString) {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *UpdateNodeResponseDtoResponseExcludedInboundsItem) SetSecurity(val NilString) {
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *UpdateNodeResponseDtoResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type UpdateNodeResponseDtoResponseProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateNodeResponseDtoResponseProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateNodeResponseDtoResponseProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *UpdateNodeResponseDtoResponseProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *UpdateNodeResponseDtoResponseProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UpdateNodeResponseDtoResponseProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UpdateNodeResponseDtoResponseProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateNodeResponseDtoResponseProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateNodeResponseDtoResponseProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *UpdateNodeResponseDtoResponseProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *UpdateNodeResponseDtoResponseProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UpdateNodeResponseDtoResponseProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UpdateNodeResponseDtoResponseProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
 }
 
 // Ref: #/components/schemas/UpdateSubscriptionSettingsRequestDto
@@ -18207,6 +30288,7 @@ type UpdateSubscriptionSettingsRequestDto struct {
 	LimitedUsersRemarks           []string                                                     `json:"limitedUsersRemarks"`
 	DisabledUsersRemarks          []string                                                     `json:"disabledUsersRemarks"`
 	CustomResponseHeaders         OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders `json:"customResponseHeaders"`
+	RandomizeHosts                OptBool                                                      `json:"randomizeHosts"`
 }
 
 // GetUUID returns the value of UUID.
@@ -18279,6 +30361,11 @@ func (s *UpdateSubscriptionSettingsRequestDto) GetCustomResponseHeaders() OptUpd
 	return s.CustomResponseHeaders
 }
 
+// GetRandomizeHosts returns the value of RandomizeHosts.
+func (s *UpdateSubscriptionSettingsRequestDto) GetRandomizeHosts() OptBool {
+	return s.RandomizeHosts
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateSubscriptionSettingsRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -18349,6 +30436,11 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetCustomResponseHeaders(val OptU
 	s.CustomResponseHeaders = val
 }
 
+// SetRandomizeHosts sets the value of RandomizeHosts.
+func (s *UpdateSubscriptionSettingsRequestDto) SetRandomizeHosts(val OptBool) {
+	s.RandomizeHosts = val
+}
+
 type UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders map[string]string
 
 func (s *UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) init() UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders {
@@ -18375,6 +30467,8 @@ func (s *UpdateSubscriptionSettingsResponseDto) SetResponse(val UpdateSubscripti
 	s.Response = val
 }
 
+func (*UpdateSubscriptionSettingsResponseDto) subscriptionSettingsControllerUpdateSettingsRes() {}
+
 type UpdateSubscriptionSettingsResponseDtoResponse struct {
 	UUID                          uuid.UUID                                                             `json:"uuid"`
 	ProfileTitle                  string                                                                `json:"profileTitle"`
@@ -18390,6 +30484,7 @@ type UpdateSubscriptionSettingsResponseDtoResponse struct {
 	LimitedUsersRemarks           []string                                                              `json:"limitedUsersRemarks"`
 	DisabledUsersRemarks          []string                                                              `json:"disabledUsersRemarks"`
 	CustomResponseHeaders         NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders `json:"customResponseHeaders"`
+	RandomizeHosts                bool                                                                  `json:"randomizeHosts"`
 	CreatedAt                     time.Time                                                             `json:"createdAt"`
 	UpdatedAt                     time.Time                                                             `json:"updatedAt"`
 }
@@ -18462,6 +30557,11 @@ func (s *UpdateSubscriptionSettingsResponseDtoResponse) GetDisabledUsersRemarks(
 // GetCustomResponseHeaders returns the value of CustomResponseHeaders.
 func (s *UpdateSubscriptionSettingsResponseDtoResponse) GetCustomResponseHeaders() NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders {
 	return s.CustomResponseHeaders
+}
+
+// GetRandomizeHosts returns the value of RandomizeHosts.
+func (s *UpdateSubscriptionSettingsResponseDtoResponse) GetRandomizeHosts() bool {
+	return s.RandomizeHosts
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -18542,6 +30642,11 @@ func (s *UpdateSubscriptionSettingsResponseDtoResponse) SetDisabledUsersRemarks(
 // SetCustomResponseHeaders sets the value of CustomResponseHeaders.
 func (s *UpdateSubscriptionSettingsResponseDtoResponse) SetCustomResponseHeaders(val NilUpdateSubscriptionSettingsResponseDtoResponseCustomResponseHeaders) {
 	s.CustomResponseHeaders = val
+}
+
+// SetRandomizeHosts sets the value of RandomizeHosts.
+func (s *UpdateSubscriptionSettingsResponseDtoResponse) SetRandomizeHosts(val bool) {
+	s.RandomizeHosts = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
@@ -18688,6 +30793,8 @@ func (s *UpdateTemplateResponseDto) SetResponse(val UpdateTemplateResponseDtoRes
 	s.Response = val
 }
 
+func (*UpdateTemplateResponseDto) subscriptionTemplateControllerUpdateTemplateRes() {}
+
 type UpdateTemplateResponseDtoResponse struct {
 	UUID                uuid.UUID                                     `json:"uuid"`
 	TemplateType        UpdateTemplateResponseDtoResponseTemplateType `json:"templateType"`
@@ -18812,14 +30919,14 @@ type UpdateUserRequestDto struct {
 	TrafficLimitBytes OptInt `json:"trafficLimitBytes"`
 	// Available reset periods.
 	TrafficLimitStrategy OptUpdateUserRequestDtoTrafficLimitStrategy `json:"trafficLimitStrategy"`
-	ActiveUserInbounds   []uuid.UUID                                 `json:"activeUserInbounds"`
 	// Expiration date: 2025-01-17T15:38:45.065Z.
-	ExpireAt        OptDateTime  `json:"expireAt"`
-	Description     OptNilString `json:"description"`
-	Tag             OptNilString `json:"tag"`
-	TelegramId      OptNilInt    `json:"telegramId"`
-	Email           OptNilString `json:"email"`
-	HwidDeviceLimit OptNilInt    `json:"hwidDeviceLimit"`
+	ExpireAt             OptDateTime  `json:"expireAt"`
+	Description          OptNilString `json:"description"`
+	Tag                  OptNilString `json:"tag"`
+	TelegramId           OptNilInt    `json:"telegramId"`
+	Email                OptNilString `json:"email"`
+	HwidDeviceLimit      OptNilInt    `json:"hwidDeviceLimit"`
+	ActiveInternalSquads []uuid.UUID  `json:"activeInternalSquads"`
 }
 
 // GetUUID returns the value of UUID.
@@ -18840,11 +30947,6 @@ func (s *UpdateUserRequestDto) GetTrafficLimitBytes() OptInt {
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
 func (s *UpdateUserRequestDto) GetTrafficLimitStrategy() OptUpdateUserRequestDtoTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
-}
-
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *UpdateUserRequestDto) GetActiveUserInbounds() []uuid.UUID {
-	return s.ActiveUserInbounds
 }
 
 // GetExpireAt returns the value of ExpireAt.
@@ -18877,6 +30979,11 @@ func (s *UpdateUserRequestDto) GetHwidDeviceLimit() OptNilInt {
 	return s.HwidDeviceLimit
 }
 
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *UpdateUserRequestDto) GetActiveInternalSquads() []uuid.UUID {
+	return s.ActiveInternalSquads
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateUserRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -18895,11 +31002,6 @@ func (s *UpdateUserRequestDto) SetTrafficLimitBytes(val OptInt) {
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
 func (s *UpdateUserRequestDto) SetTrafficLimitStrategy(val OptUpdateUserRequestDtoTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
-}
-
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *UpdateUserRequestDto) SetActiveUserInbounds(val []uuid.UUID) {
-	s.ActiveUserInbounds = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
@@ -18930,6 +31032,11 @@ func (s *UpdateUserRequestDto) SetEmail(val OptNilString) {
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
 func (s *UpdateUserRequestDto) SetHwidDeviceLimit(val OptNilInt) {
 	s.HwidDeviceLimit = val
+}
+
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *UpdateUserRequestDto) SetActiveInternalSquads(val []uuid.UUID) {
+	s.ActiveInternalSquads = val
 }
 
 type UpdateUserRequestDtoStatus string
@@ -19054,27 +31161,27 @@ type UserDto struct {
 	LifetimeUsedTrafficBytes float64          `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt           `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptUserDtoTrafficLimitStrategy  `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                       `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                     `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                       `json:"expireAt"`
-	OnlineAt             NilDateTime                     `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                     `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                     `json:"lastTrafficResetAt"`
-	TrojanPassword       string                          `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                       `json:"vlessUuid"`
-	SsPassword           string                          `json:"ssPassword"`
-	Description          NilString                       `json:"description"`
-	Tag                  OptNilString                    `json:"tag"`
-	TelegramId           NilInt                          `json:"telegramId"`
-	Email                NilString                       `json:"email"`
-	HwidDeviceLimit      NilInt                          `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                       `json:"createdAt"`
-	UpdatedAt            time.Time                       `json:"updatedAt"`
-	ActiveUserInbounds   []UserDtoActiveUserInboundsItem `json:"activeUserInbounds"`
-	SubscriptionUrl      string                          `json:"subscriptionUrl"`
-	LastConnectedNode    NilUserDtoLastConnectedNode     `json:"lastConnectedNode"`
-	Happ                 UserDtoHapp                     `json:"happ"`
+	TrafficLimitStrategy OptUserDtoTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent     NilString                         `json:"subLastUserAgent"`
+	SubLastOpenedAt      NilDateTime                       `json:"subLastOpenedAt"`
+	ExpireAt             time.Time                         `json:"expireAt"`
+	OnlineAt             NilDateTime                       `json:"onlineAt"`
+	SubRevokedAt         NilDateTime                       `json:"subRevokedAt"`
+	LastTrafficResetAt   NilDateTime                       `json:"lastTrafficResetAt"`
+	TrojanPassword       string                            `json:"trojanPassword"`
+	VlessUuid            uuid.UUID                         `json:"vlessUuid"`
+	SsPassword           string                            `json:"ssPassword"`
+	Description          NilString                         `json:"description"`
+	Tag                  OptNilString                      `json:"tag"`
+	TelegramId           NilInt                            `json:"telegramId"`
+	Email                NilString                         `json:"email"`
+	HwidDeviceLimit      NilInt                            `json:"hwidDeviceLimit"`
+	CreatedAt            time.Time                         `json:"createdAt"`
+	UpdatedAt            time.Time                         `json:"updatedAt"`
+	ActiveInternalSquads []UserDtoActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl      string                            `json:"subscriptionUrl"`
+	LastConnectedNode    NilUserDtoLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                 UserDtoHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
@@ -19202,9 +31309,9 @@ func (s *UserDto) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveUserInbounds returns the value of ActiveUserInbounds.
-func (s *UserDto) GetActiveUserInbounds() []UserDtoActiveUserInboundsItem {
-	return s.ActiveUserInbounds
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *UserDto) GetActiveInternalSquads() []UserDtoActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
@@ -19347,9 +31454,9 @@ func (s *UserDto) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveUserInbounds sets the value of ActiveUserInbounds.
-func (s *UserDto) SetActiveUserInbounds(val []UserDtoActiveUserInboundsItem) {
-	s.ActiveUserInbounds = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *UserDto) SetActiveInternalSquads(val []UserDtoActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
@@ -19367,62 +31474,29 @@ func (s *UserDto) SetHapp(val UserDtoHapp) {
 	s.Happ = val
 }
 
-type UserDtoActiveUserInboundsItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Tag      string    `json:"tag"`
-	Type     string    `json:"type"`
-	Network  NilString `json:"network"`
-	Security NilString `json:"security"`
+type UserDtoActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UserDtoActiveUserInboundsItem) GetUUID() uuid.UUID {
+func (s *UserDtoActiveInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetTag returns the value of Tag.
-func (s *UserDtoActiveUserInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *UserDtoActiveUserInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *UserDtoActiveUserInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *UserDtoActiveUserInboundsItem) GetSecurity() NilString {
-	return s.Security
+// GetName returns the value of Name.
+func (s *UserDtoActiveInternalSquadsItem) GetName() string {
+	return s.Name
 }
 
 // SetUUID sets the value of UUID.
-func (s *UserDtoActiveUserInboundsItem) SetUUID(val uuid.UUID) {
+func (s *UserDtoActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetTag sets the value of Tag.
-func (s *UserDtoActiveUserInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *UserDtoActiveUserInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *UserDtoActiveUserInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *UserDtoActiveUserInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
+// SetName sets the value of Name.
+func (s *UserDtoActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
 }
 
 type UserDtoHapp struct {
@@ -19590,40 +31664,877 @@ func (s *UserResponseDto) SetResponse(val UserDto) {
 	s.Response = val
 }
 
-func (*UserResponseDto) usersControllerGetUserByShortUuidRes()        {}
-func (*UserResponseDto) usersControllerGetUserBySubscriptionUuidRes() {}
-func (*UserResponseDto) usersControllerGetUserByUsernameRes()         {}
-func (*UserResponseDto) usersControllerGetUsersByEmailRes()           {}
+func (*UserResponseDto) usersControllerCreateUserRes()         {}
+func (*UserResponseDto) usersControllerGetUserByShortUuidRes() {}
+func (*UserResponseDto) usersControllerGetUserByUuidRes()      {}
+func (*UserResponseDto) usersControllerUpdateUserRes()         {}
 
-// UsersControllerActivateAllInboundsNotFound is response for UsersControllerActivateAllInbounds operation.
-type UsersControllerActivateAllInboundsNotFound struct{}
+type UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
 
-func (*UsersControllerActivateAllInboundsNotFound) usersControllerActivateAllInboundsRes() {}
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) usersBulkActionsControllerBulkAllResetUserTrafficRes() {
+}
+
+type UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError) usersBulkActionsControllerBulkDeleteUsersByStatusRes() {
+}
+
+type UsersBulkActionsControllerBulkDeleteUsersInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkDeleteUsersInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkDeleteUsersInternalServerError) usersBulkActionsControllerBulkDeleteUsersRes() {
+}
+
+type UsersBulkActionsControllerBulkResetUserTrafficInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) usersBulkActionsControllerBulkResetUserTrafficRes() {
+}
+
+type UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError) usersBulkActionsControllerBulkRevokeUsersSubscriptionRes() {
+}
+
+type UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) usersBulkActionsControllerBulkUpdateAllUsersRes() {
+}
+
+type UsersBulkActionsControllerBulkUpdateUsersInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkUpdateUsersInternalServerError) usersBulkActionsControllerBulkUpdateUsersRes() {
+}
+
+type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError) usersBulkActionsControllerBulkUpdateUsersInternalSquadsRes() {
+}
+
+type UsersControllerCreateUserInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerCreateUserInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerCreateUserInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerCreateUserInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerCreateUserInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerCreateUserInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerCreateUserInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerCreateUserInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerCreateUserInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerCreateUserInternalServerError) usersControllerCreateUserRes() {}
+
+type UsersControllerDeleteUserInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerDeleteUserInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerDeleteUserInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerDeleteUserInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerDeleteUserInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerDeleteUserInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerDeleteUserInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerDeleteUserInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerDeleteUserInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerDeleteUserInternalServerError) usersControllerDeleteUserRes() {}
 
 // UsersControllerDeleteUserNotFound is response for UsersControllerDeleteUser operation.
 type UsersControllerDeleteUserNotFound struct{}
 
 func (*UsersControllerDeleteUserNotFound) usersControllerDeleteUserRes() {}
 
+type UsersControllerDisableUserInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerDisableUserInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerDisableUserInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerDisableUserInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerDisableUserInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerDisableUserInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerDisableUserInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerDisableUserInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerDisableUserInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerDisableUserInternalServerError) usersControllerDisableUserRes() {}
+
 // UsersControllerDisableUserNotFound is response for UsersControllerDisableUser operation.
 type UsersControllerDisableUserNotFound struct{}
 
 func (*UsersControllerDisableUserNotFound) usersControllerDisableUserRes() {}
+
+type UsersControllerEnableUserInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerEnableUserInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerEnableUserInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerEnableUserInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerEnableUserInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerEnableUserInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerEnableUserInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerEnableUserInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerEnableUserInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerEnableUserInternalServerError) usersControllerEnableUserRes() {}
 
 // UsersControllerEnableUserNotFound is response for UsersControllerEnableUser operation.
 type UsersControllerEnableUserNotFound struct{}
 
 func (*UsersControllerEnableUserNotFound) usersControllerEnableUserRes() {}
 
+type UsersControllerGetAllTagsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetAllTagsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetAllTagsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetAllTagsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetAllTagsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetAllTagsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetAllTagsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetAllTagsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetAllTagsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetAllTagsInternalServerError) usersControllerGetAllTagsRes() {}
+
+type UsersControllerGetAllUsersInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetAllUsersInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetAllUsersInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetAllUsersInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetAllUsersInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetAllUsersInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetAllUsersInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetAllUsersInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetAllUsersInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetAllUsersInternalServerError) usersControllerGetAllUsersRes() {}
+
+type UsersControllerGetUserAccessibleNodesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUserAccessibleNodesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUserAccessibleNodesInternalServerError) usersControllerGetUserAccessibleNodesRes() {
+}
+
+// UsersControllerGetUserAccessibleNodesNotFound is response for UsersControllerGetUserAccessibleNodes operation.
+type UsersControllerGetUserAccessibleNodesNotFound struct{}
+
+func (*UsersControllerGetUserAccessibleNodesNotFound) usersControllerGetUserAccessibleNodesRes() {}
+
+type UsersControllerGetUserByShortUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUserByShortUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUserByShortUuidInternalServerError) usersControllerGetUserByShortUuidRes() {}
+
 // UsersControllerGetUserByShortUuidNotFound is response for UsersControllerGetUserByShortUuid operation.
 type UsersControllerGetUserByShortUuidNotFound struct{}
 
 func (*UsersControllerGetUserByShortUuidNotFound) usersControllerGetUserByShortUuidRes() {}
 
-// UsersControllerGetUserBySubscriptionUuidNotFound is response for UsersControllerGetUserBySubscriptionUuid operation.
-type UsersControllerGetUserBySubscriptionUuidNotFound struct{}
+type UsersControllerGetUserByTelegramIdInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
 
-func (*UsersControllerGetUserBySubscriptionUuidNotFound) usersControllerGetUserBySubscriptionUuidRes() {
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUserByTelegramIdInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUserByTelegramIdInternalServerError) usersControllerGetUserByTelegramIdRes() {
 }
 
 // UsersControllerGetUserByTelegramIdNotFound is response for UsersControllerGetUserByTelegramId operation.
@@ -19631,35 +32542,379 @@ type UsersControllerGetUserByTelegramIdNotFound struct{}
 
 func (*UsersControllerGetUserByTelegramIdNotFound) usersControllerGetUserByTelegramIdRes() {}
 
+type UsersControllerGetUserByUsernameInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUserByUsernameInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByUsernameInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByUsernameInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUserByUsernameInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUserByUsernameInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByUsernameInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByUsernameInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUserByUsernameInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUserByUsernameInternalServerError) usersControllerGetUserByUsernameRes() {}
+
 // UsersControllerGetUserByUsernameNotFound is response for UsersControllerGetUserByUsername operation.
 type UsersControllerGetUserByUsernameNotFound struct{}
 
 func (*UsersControllerGetUserByUsernameNotFound) usersControllerGetUserByUsernameRes() {}
+
+type UsersControllerGetUserByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUserByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUserByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUserByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUserByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUserByUuidInternalServerError) usersControllerGetUserByUuidRes() {}
 
 // UsersControllerGetUserByUuidNotFound is response for UsersControllerGetUserByUuid operation.
 type UsersControllerGetUserByUuidNotFound struct{}
 
 func (*UsersControllerGetUserByUuidNotFound) usersControllerGetUserByUuidRes() {}
 
+type UsersControllerGetUsersByEmailInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUsersByEmailInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUsersByEmailInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUsersByEmailInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUsersByEmailInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUsersByEmailInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUsersByEmailInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUsersByEmailInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUsersByEmailInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUsersByEmailInternalServerError) usersControllerGetUsersByEmailRes() {}
+
 // UsersControllerGetUsersByEmailNotFound is response for UsersControllerGetUsersByEmail operation.
 type UsersControllerGetUsersByEmailNotFound struct{}
 
 func (*UsersControllerGetUsersByEmailNotFound) usersControllerGetUsersByEmailRes() {}
+
+type UsersControllerGetUsersByTagInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerGetUsersByTagInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUsersByTagInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUsersByTagInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerGetUsersByTagInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerGetUsersByTagInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUsersByTagInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUsersByTagInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerGetUsersByTagInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerGetUsersByTagInternalServerError) usersControllerGetUsersByTagRes() {}
 
 // UsersControllerGetUsersByTagNotFound is response for UsersControllerGetUsersByTag operation.
 type UsersControllerGetUsersByTagNotFound struct{}
 
 func (*UsersControllerGetUsersByTagNotFound) usersControllerGetUsersByTagRes() {}
 
+type UsersControllerResetUserTrafficInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerResetUserTrafficInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerResetUserTrafficInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerResetUserTrafficInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerResetUserTrafficInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerResetUserTrafficInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerResetUserTrafficInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerResetUserTrafficInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerResetUserTrafficInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerResetUserTrafficInternalServerError) usersControllerResetUserTrafficRes() {}
+
 // UsersControllerResetUserTrafficNotFound is response for UsersControllerResetUserTraffic operation.
 type UsersControllerResetUserTrafficNotFound struct{}
 
 func (*UsersControllerResetUserTrafficNotFound) usersControllerResetUserTrafficRes() {}
 
+type UsersControllerRevokeUserSubscriptionInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerRevokeUserSubscriptionInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerRevokeUserSubscriptionInternalServerError) usersControllerRevokeUserSubscriptionRes() {
+}
+
 // UsersControllerRevokeUserSubscriptionNotFound is response for UsersControllerRevokeUserSubscription operation.
 type UsersControllerRevokeUserSubscriptionNotFound struct{}
 
 func (*UsersControllerRevokeUserSubscriptionNotFound) usersControllerRevokeUserSubscriptionRes() {}
+
+type UsersControllerUpdateUserInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersControllerUpdateUserInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerUpdateUserInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerUpdateUserInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersControllerUpdateUserInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersControllerUpdateUserInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerUpdateUserInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerUpdateUserInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersControllerUpdateUserInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersControllerUpdateUserInternalServerError) usersControllerUpdateUserRes() {}
 
 // Ref: #/components/schemas/UsersDto
 type UsersDto struct {
@@ -19678,18 +32933,58 @@ func (s *UsersDto) SetResponse(val []UserDto) {
 
 func (*UsersDto) usersControllerGetUserByTelegramIdRes() {}
 
+type UsersStatsControllerGetUserUsageByRangeInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *UsersStatsControllerGetUserUsageByRangeInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*UsersStatsControllerGetUserUsageByRangeInternalServerError) usersStatsControllerGetUserUsageByRangeRes() {
+}
+
 // UsersStatsControllerGetUserUsageByRangeNotFound is response for UsersStatsControllerGetUserUsageByRange operation.
 type UsersStatsControllerGetUserUsageByRangeNotFound struct{}
 
 func (*UsersStatsControllerGetUserUsageByRangeNotFound) usersStatsControllerGetUserUsageByRangeRes() {
 }
-
-// XrayConfigControllerGetConfigBadRequest is response for XrayConfigControllerGetConfig operation.
-type XrayConfigControllerGetConfigBadRequest struct{}
-
-func (*XrayConfigControllerGetConfigBadRequest) xrayConfigControllerGetConfigRes() {}
-
-// XrayConfigControllerUpdateConfigBadRequest is response for XrayConfigControllerUpdateConfig operation.
-type XrayConfigControllerUpdateConfigBadRequest struct{}
-
-func (*XrayConfigControllerUpdateConfigBadRequest) xrayConfigControllerUpdateConfigRes() {}
