@@ -23,7 +23,6 @@ go get github.com/Jolymmiles/remnawave-api-go@latest
 
 ```go
 
-
 import (
 	"context"
 	"fmt"
