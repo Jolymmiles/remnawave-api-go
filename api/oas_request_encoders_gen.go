@@ -39,6 +39,34 @@ func encodeAuthControllerLoginRequest(
 	return nil
 }
 
+func encodeAuthControllerOauth2AuthorizeRequest(
+	req *OAuth2AuthorizeRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeAuthControllerOauth2CallbackRequest(
+	req *OAuth2CallbackRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeAuthControllerRegisterRequest(
 	req *RegisterRequestDto,
 	r *http.Request,
@@ -55,6 +83,34 @@ func encodeAuthControllerRegisterRequest(
 
 func encodeAuthControllerTelegramCallbackRequest(
 	req *TelegramCallbackRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeConfigProfileControllerCreateConfigProfileRequest(
+	req *CreateConfigProfileRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeConfigProfileControllerUpdateConfigProfileRequest(
+	req *UpdateConfigProfileRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -207,8 +263,8 @@ func encodeHwidUserDevicesControllerDeleteUserHwidDeviceRequest(
 	return nil
 }
 
-func encodeInboundsBulkActionsControllerAddInboundToNodesRequest(
-	req *AddInboundToNodesRequestDto,
+func encodeInfraBillingControllerCreateInfraBillingHistoryRecordRequest(
+	req *CreateInfraBillingHistoryRecordRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -221,8 +277,8 @@ func encodeInboundsBulkActionsControllerAddInboundToNodesRequest(
 	return nil
 }
 
-func encodeInboundsBulkActionsControllerAddInboundToUsersRequest(
-	req *AddInboundToUsersRequestDto,
+func encodeInfraBillingControllerCreateInfraBillingNodeRequest(
+	req *CreateInfraBillingNodeRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -235,8 +291,8 @@ func encodeInboundsBulkActionsControllerAddInboundToUsersRequest(
 	return nil
 }
 
-func encodeInboundsBulkActionsControllerRemoveInboundFromNodesRequest(
-	req *RemoveInboundFromNodesRequestDto,
+func encodeInfraBillingControllerCreateInfraProviderRequest(
+	req *CreateInfraProviderRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -249,8 +305,50 @@ func encodeInboundsBulkActionsControllerRemoveInboundFromNodesRequest(
 	return nil
 }
 
-func encodeInboundsBulkActionsControllerRemoveInboundFromUsersRequest(
-	req *RemoveInboundFromUsersRequestDto,
+func encodeInfraBillingControllerUpdateInfraBillingNodeRequest(
+	req *UpdateInfraBillingNodeRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInfraBillingControllerUpdateInfraProviderRequest(
+	req *UpdateInfraProviderRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInternalSquadControllerCreateInternalSquadRequest(
+	req *CreateInternalSquadRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInternalSquadControllerUpdateInternalSquadRequest(
+	req *UpdateInternalSquadRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -417,8 +515,8 @@ func encodeUsersBulkActionsControllerBulkUpdateUsersRequest(
 	return nil
 }
 
-func encodeUsersBulkActionsControllerBulkUpdateUsersInboundsRequest(
-	req *BulkUpdateUsersInboundsRequestDto,
+func encodeUsersBulkActionsControllerBulkUpdateUsersInternalSquadsRequest(
+	req *BulkUpdateUsersSquadsRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -445,8 +543,8 @@ func encodeUsersControllerCreateUserRequest(
 	return nil
 }
 
-func encodeUsersControllerUpdateUserRequest(
-	req *UpdateUserRequestDto,
+func encodeUsersControllerRevokeUserSubscriptionRequest(
+	req *RevokeUserSubscriptionBodyDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -459,8 +557,8 @@ func encodeUsersControllerUpdateUserRequest(
 	return nil
 }
 
-func encodeXrayConfigControllerUpdateConfigRequest(
-	req *UpdateConfigRequestDto,
+func encodeUsersControllerUpdateUserRequest(
+	req *UpdateUserRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"

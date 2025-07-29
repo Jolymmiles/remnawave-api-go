@@ -12,6 +12,21 @@ type ApiTokensControllerDeleteParams struct {
 	UUID string
 }
 
+// ConfigProfileControllerDeleteConfigProfileByUuidParams is parameters of ConfigProfileController_deleteConfigProfileByUuid operation.
+type ConfigProfileControllerDeleteConfigProfileByUuidParams struct {
+	UUID string
+}
+
+// ConfigProfileControllerGetConfigProfileByUuidParams is parameters of ConfigProfileController_getConfigProfileByUuid operation.
+type ConfigProfileControllerGetConfigProfileByUuidParams struct {
+	UUID string
+}
+
+// ConfigProfileControllerGetInboundsByProfileUuidParams is parameters of ConfigProfileController_getInboundsByProfileUuid operation.
+type ConfigProfileControllerGetInboundsByProfileUuidParams struct {
+	UUID string
+}
+
 // HostsControllerDeleteHostParams is parameters of HostsController_deleteHost operation.
 type HostsControllerDeleteHostParams struct {
 	// UUID of the host.
@@ -28,6 +43,46 @@ type HostsControllerGetOneHostParams struct {
 type HwidUserDevicesControllerGetUserHwidDevicesParams struct {
 	// UUID of the user.
 	UserUuid string
+}
+
+// InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams is parameters of InfraBillingController_deleteInfraBillingHistoryRecordByUuid operation.
+type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams struct {
+	UUID string
+}
+
+// InfraBillingControllerDeleteInfraBillingNodeByUuidParams is parameters of InfraBillingController_deleteInfraBillingNodeByUuid operation.
+type InfraBillingControllerDeleteInfraBillingNodeByUuidParams struct {
+	UUID string
+}
+
+// InfraBillingControllerDeleteInfraProviderByUuidParams is parameters of InfraBillingController_deleteInfraProviderByUuid operation.
+type InfraBillingControllerDeleteInfraProviderByUuidParams struct {
+	UUID string
+}
+
+// InfraBillingControllerGetInfraProviderByUuidParams is parameters of InfraBillingController_getInfraProviderByUuid operation.
+type InfraBillingControllerGetInfraProviderByUuidParams struct {
+	UUID string
+}
+
+// InternalSquadControllerAddUsersToInternalSquadParams is parameters of InternalSquadController_addUsersToInternalSquad operation.
+type InternalSquadControllerAddUsersToInternalSquadParams struct {
+	UUID string
+}
+
+// InternalSquadControllerDeleteInternalSquadParams is parameters of InternalSquadController_deleteInternalSquad operation.
+type InternalSquadControllerDeleteInternalSquadParams struct {
+	UUID string
+}
+
+// InternalSquadControllerGetInternalSquadByUuidParams is parameters of InternalSquadController_getInternalSquadByUuid operation.
+type InternalSquadControllerGetInternalSquadByUuidParams struct {
+	UUID string
+}
+
+// InternalSquadControllerRemoveUsersFromInternalSquadParams is parameters of InternalSquadController_removeUsersFromInternalSquad operation.
+type InternalSquadControllerRemoveUsersFromInternalSquadParams struct {
+	UUID string
 }
 
 // NodesControllerDeleteNodeParams is parameters of NodesController_deleteNode operation.
@@ -76,6 +131,12 @@ type NodesUserUsageHistoryControllerGetNodeUserUsageParams struct {
 	End time.Time
 	// UUID of the node.
 	UUID string
+}
+
+// SubscriptionControllerGetRawSubscriptionByShortUuidParams is parameters of SubscriptionController_getRawSubscriptionByShortUuid operation.
+type SubscriptionControllerGetRawSubscriptionByShortUuidParams struct {
+	// Short UUID of the user.
+	ShortUuid string
 }
 
 // SubscriptionControllerGetSubscriptionParams is parameters of SubscriptionController_getSubscription operation.
@@ -128,12 +189,6 @@ type SubscriptionsControllerGetSubscriptionByUsernameParams struct {
 	Username string
 }
 
-// UsersControllerActivateAllInboundsParams is parameters of UsersController_activateAllInbounds operation.
-type UsersControllerActivateAllInboundsParams struct {
-	// UUID of the user.
-	UUID string
-}
-
 // UsersControllerDeleteUserParams is parameters of UsersController_deleteUser operation.
 type UsersControllerDeleteUserParams struct {
 	// UUID of the user.
@@ -160,16 +215,16 @@ type UsersControllerGetAllUsersParams struct {
 	Start OptFloat64
 }
 
+// UsersControllerGetUserAccessibleNodesParams is parameters of UsersController_getUserAccessibleNodes operation.
+type UsersControllerGetUserAccessibleNodesParams struct {
+	// UUID of the user.
+	UUID string
+}
+
 // UsersControllerGetUserByShortUuidParams is parameters of UsersController_getUserByShortUuid operation.
 type UsersControllerGetUserByShortUuidParams struct {
 	// Short UUID of the user.
 	ShortUuid string
-}
-
-// UsersControllerGetUserBySubscriptionUuidParams is parameters of UsersController_getUserBySubscriptionUuid operation.
-type UsersControllerGetUserBySubscriptionUuidParams struct {
-	// UUID of the subscription.
-	SubscriptionUuid string
 }
 
 // UsersControllerGetUserByTelegramIdParams is parameters of UsersController_getUserByTelegramId operation.
