@@ -10,7 +10,7 @@ require (
 )
 
 retract (
-    v1.5.7
+    v2.0.0
 )
 
 require (
