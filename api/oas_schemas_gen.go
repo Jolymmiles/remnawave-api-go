@@ -31153,7 +31153,6 @@ func (s *UpdateUserRequestDtoTrafficLimitStrategy) UnmarshalText(data []byte) er
 // Ref: #/components/schemas/UserDto
 type UserDto struct {
 	UUID                     uuid.UUID        `json:"uuid"`
-	SubscriptionUuid         uuid.UUID        `json:"subscriptionUuid"`
 	ShortUuid                string           `json:"shortUuid"`
 	Username                 string           `json:"username"`
 	Status                   OptUserDtoStatus `json:"status"`
@@ -31161,37 +31160,34 @@ type UserDto struct {
 	LifetimeUsedTrafficBytes float64          `json:"lifetimeUsedTrafficBytes"`
 	TrafficLimitBytes        OptInt           `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptUserDtoTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent     NilString                         `json:"subLastUserAgent"`
-	SubLastOpenedAt      NilDateTime                       `json:"subLastOpenedAt"`
-	ExpireAt             time.Time                         `json:"expireAt"`
-	OnlineAt             NilDateTime                       `json:"onlineAt"`
-	SubRevokedAt         NilDateTime                       `json:"subRevokedAt"`
-	LastTrafficResetAt   NilDateTime                       `json:"lastTrafficResetAt"`
-	TrojanPassword       string                            `json:"trojanPassword"`
-	VlessUuid            uuid.UUID                         `json:"vlessUuid"`
-	SsPassword           string                            `json:"ssPassword"`
-	Description          NilString                         `json:"description"`
-	Tag                  OptNilString                      `json:"tag"`
-	TelegramId           NilInt                            `json:"telegramId"`
-	Email                NilString                         `json:"email"`
-	HwidDeviceLimit      NilInt                            `json:"hwidDeviceLimit"`
-	CreatedAt            time.Time                         `json:"createdAt"`
-	UpdatedAt            time.Time                         `json:"updatedAt"`
-	ActiveInternalSquads []UserDtoActiveInternalSquadsItem `json:"activeInternalSquads"`
-	SubscriptionUrl      string                            `json:"subscriptionUrl"`
-	LastConnectedNode    NilUserDtoLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                 UserDtoHapp                       `json:"happ"`
+	TrafficLimitStrategy   OptUserDtoTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                         `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                       `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                         `json:"expireAt"`
+	OnlineAt               NilDateTime                       `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                       `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                       `json:"lastTrafficResetAt"`
+	TrojanPassword         string                            `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                         `json:"vlessUuid"`
+	SsPassword             string                            `json:"ssPassword"`
+	Description            NilString                         `json:"description"`
+	Tag                    NilString                         `json:"tag"`
+	TelegramId             NilInt                            `json:"telegramId"`
+	Email                  NilString                         `json:"email"`
+	HwidDeviceLimit        NilInt                            `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                       `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                            `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                         `json:"createdAt"`
+	UpdatedAt              time.Time                         `json:"updatedAt"`
+	ActiveInternalSquads   []UserDtoActiveInternalSquadsItem `json:"activeInternalSquads"`
+	SubscriptionUrl        string                            `json:"subscriptionUrl"`
+	LastConnectedNode      NilUserDtoLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   UserDtoHapp                       `json:"happ"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *UserDto) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetSubscriptionUuid returns the value of SubscriptionUuid.
-func (s *UserDto) GetSubscriptionUuid() uuid.UUID {
-	return s.SubscriptionUuid
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -31280,7 +31276,7 @@ func (s *UserDto) GetDescription() NilString {
 }
 
 // GetTag returns the value of Tag.
-func (s *UserDto) GetTag() OptNilString {
+func (s *UserDto) GetTag() NilString {
 	return s.Tag
 }
 
@@ -31297,6 +31293,16 @@ func (s *UserDto) GetEmail() NilString {
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
 func (s *UserDto) GetHwidDeviceLimit() NilInt {
 	return s.HwidDeviceLimit
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *UserDto) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *UserDto) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -31332,11 +31338,6 @@ func (s *UserDto) GetHapp() UserDtoHapp {
 // SetUUID sets the value of UUID.
 func (s *UserDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
-}
-
-// SetSubscriptionUuid sets the value of SubscriptionUuid.
-func (s *UserDto) SetSubscriptionUuid(val uuid.UUID) {
-	s.SubscriptionUuid = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
@@ -31425,7 +31426,7 @@ func (s *UserDto) SetDescription(val NilString) {
 }
 
 // SetTag sets the value of Tag.
-func (s *UserDto) SetTag(val OptNilString) {
+func (s *UserDto) SetTag(val NilString) {
 	s.Tag = val
 }
 
@@ -31442,6 +31443,16 @@ func (s *UserDto) SetEmail(val NilString) {
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
 func (s *UserDto) SetHwidDeviceLimit(val NilInt) {
 	s.HwidDeviceLimit = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *UserDto) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *UserDto) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.

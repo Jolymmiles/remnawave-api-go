@@ -73304,10 +73304,6 @@ func (s *UserDto) encodeFields(e *jx.Encoder) {
 		json.EncodeUUID(e, s.UUID)
 	}
 	{
-		e.FieldStart("subscriptionUuid")
-		json.EncodeUUID(e, s.SubscriptionUuid)
-	}
-	{
 		e.FieldStart("shortUuid")
 		e.Str(s.ShortUuid)
 	}
@@ -73382,10 +73378,8 @@ func (s *UserDto) encodeFields(e *jx.Encoder) {
 		s.Description.Encode(e)
 	}
 	{
-		if s.Tag.Set {
-			e.FieldStart("tag")
-			s.Tag.Encode(e)
-		}
+		e.FieldStart("tag")
+		s.Tag.Encode(e)
 	}
 	{
 		e.FieldStart("telegramId")
@@ -73398,6 +73392,16 @@ func (s *UserDto) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("hwidDeviceLimit")
 		s.HwidDeviceLimit.Encode(e)
+	}
+	{
+		e.FieldStart("firstConnectedAt")
+		s.FirstConnectedAt.Encode(e, json.EncodeDateTime)
+	}
+	{
+		if s.LastTriggeredThreshold.Set {
+			e.FieldStart("lastTriggeredThreshold")
+			s.LastTriggeredThreshold.Encode(e)
+		}
 	}
 	{
 		e.FieldStart("createdAt")
@@ -73429,36 +73433,37 @@ func (s *UserDto) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfUserDto = [29]string{
+var jsonFieldsNameOfUserDto = [30]string{
 	0:  "uuid",
-	1:  "subscriptionUuid",
-	2:  "shortUuid",
-	3:  "username",
-	4:  "status",
-	5:  "usedTrafficBytes",
-	6:  "lifetimeUsedTrafficBytes",
-	7:  "trafficLimitBytes",
-	8:  "trafficLimitStrategy",
-	9:  "subLastUserAgent",
-	10: "subLastOpenedAt",
-	11: "expireAt",
-	12: "onlineAt",
-	13: "subRevokedAt",
-	14: "lastTrafficResetAt",
-	15: "trojanPassword",
-	16: "vlessUuid",
-	17: "ssPassword",
-	18: "description",
-	19: "tag",
-	20: "telegramId",
-	21: "email",
-	22: "hwidDeviceLimit",
-	23: "createdAt",
-	24: "updatedAt",
-	25: "activeInternalSquads",
-	26: "subscriptionUrl",
-	27: "lastConnectedNode",
-	28: "happ",
+	1:  "shortUuid",
+	2:  "username",
+	3:  "status",
+	4:  "usedTrafficBytes",
+	5:  "lifetimeUsedTrafficBytes",
+	6:  "trafficLimitBytes",
+	7:  "trafficLimitStrategy",
+	8:  "subLastUserAgent",
+	9:  "subLastOpenedAt",
+	10: "expireAt",
+	11: "onlineAt",
+	12: "subRevokedAt",
+	13: "lastTrafficResetAt",
+	14: "trojanPassword",
+	15: "vlessUuid",
+	16: "ssPassword",
+	17: "description",
+	18: "tag",
+	19: "telegramId",
+	20: "email",
+	21: "hwidDeviceLimit",
+	22: "firstConnectedAt",
+	23: "lastTriggeredThreshold",
+	24: "createdAt",
+	25: "updatedAt",
+	26: "activeInternalSquads",
+	27: "subscriptionUrl",
+	28: "lastConnectedNode",
+	29: "happ",
 }
 
 // Decode decodes UserDto from json.
@@ -73483,20 +73488,8 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"uuid\"")
 			}
-		case "subscriptionUuid":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeUUID(d)
-				s.SubscriptionUuid = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"subscriptionUuid\"")
-			}
 		case "shortUuid":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
 				s.ShortUuid = string(v)
@@ -73508,7 +73501,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"shortUuid\"")
 			}
 		case "username":
-			requiredBitSet[0] |= 1 << 3
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.Username = string(v)
@@ -73530,7 +73523,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"status\"")
 			}
 		case "usedTrafficBytes":
-			requiredBitSet[0] |= 1 << 5
+			requiredBitSet[0] |= 1 << 4
 			if err := func() error {
 				v, err := d.Float64()
 				s.UsedTrafficBytes = float64(v)
@@ -73542,7 +73535,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"usedTrafficBytes\"")
 			}
 		case "lifetimeUsedTrafficBytes":
-			requiredBitSet[0] |= 1 << 6
+			requiredBitSet[0] |= 1 << 5
 			if err := func() error {
 				v, err := d.Float64()
 				s.LifetimeUsedTrafficBytes = float64(v)
@@ -73574,7 +73567,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trafficLimitStrategy\"")
 			}
 		case "subLastUserAgent":
-			requiredBitSet[1] |= 1 << 1
+			requiredBitSet[1] |= 1 << 0
 			if err := func() error {
 				if err := s.SubLastUserAgent.Decode(d); err != nil {
 					return err
@@ -73584,7 +73577,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subLastUserAgent\"")
 			}
 		case "subLastOpenedAt":
-			requiredBitSet[1] |= 1 << 2
+			requiredBitSet[1] |= 1 << 1
 			if err := func() error {
 				if err := s.SubLastOpenedAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -73594,7 +73587,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subLastOpenedAt\"")
 			}
 		case "expireAt":
-			requiredBitSet[1] |= 1 << 3
+			requiredBitSet[1] |= 1 << 2
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.ExpireAt = v
@@ -73606,7 +73599,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"expireAt\"")
 			}
 		case "onlineAt":
-			requiredBitSet[1] |= 1 << 4
+			requiredBitSet[1] |= 1 << 3
 			if err := func() error {
 				if err := s.OnlineAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -73616,7 +73609,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"onlineAt\"")
 			}
 		case "subRevokedAt":
-			requiredBitSet[1] |= 1 << 5
+			requiredBitSet[1] |= 1 << 4
 			if err := func() error {
 				if err := s.SubRevokedAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -73626,7 +73619,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subRevokedAt\"")
 			}
 		case "lastTrafficResetAt":
-			requiredBitSet[1] |= 1 << 6
+			requiredBitSet[1] |= 1 << 5
 			if err := func() error {
 				if err := s.LastTrafficResetAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -73636,7 +73629,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"lastTrafficResetAt\"")
 			}
 		case "trojanPassword":
-			requiredBitSet[1] |= 1 << 7
+			requiredBitSet[1] |= 1 << 6
 			if err := func() error {
 				v, err := d.Str()
 				s.TrojanPassword = string(v)
@@ -73648,7 +73641,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trojanPassword\"")
 			}
 		case "vlessUuid":
-			requiredBitSet[2] |= 1 << 0
+			requiredBitSet[1] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeUUID(d)
 				s.VlessUuid = v
@@ -73660,7 +73653,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"vlessUuid\"")
 			}
 		case "ssPassword":
-			requiredBitSet[2] |= 1 << 1
+			requiredBitSet[2] |= 1 << 0
 			if err := func() error {
 				v, err := d.Str()
 				s.SsPassword = string(v)
@@ -73672,7 +73665,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"ssPassword\"")
 			}
 		case "description":
-			requiredBitSet[2] |= 1 << 2
+			requiredBitSet[2] |= 1 << 1
 			if err := func() error {
 				if err := s.Description.Decode(d); err != nil {
 					return err
@@ -73682,8 +73675,8 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"description\"")
 			}
 		case "tag":
+			requiredBitSet[2] |= 1 << 2
 			if err := func() error {
-				s.Tag.Reset()
 				if err := s.Tag.Decode(d); err != nil {
 					return err
 				}
@@ -73692,7 +73685,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"tag\"")
 			}
 		case "telegramId":
-			requiredBitSet[2] |= 1 << 4
+			requiredBitSet[2] |= 1 << 3
 			if err := func() error {
 				if err := s.TelegramId.Decode(d); err != nil {
 					return err
@@ -73702,7 +73695,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"telegramId\"")
 			}
 		case "email":
-			requiredBitSet[2] |= 1 << 5
+			requiredBitSet[2] |= 1 << 4
 			if err := func() error {
 				if err := s.Email.Decode(d); err != nil {
 					return err
@@ -73712,7 +73705,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"email\"")
 			}
 		case "hwidDeviceLimit":
-			requiredBitSet[2] |= 1 << 6
+			requiredBitSet[2] |= 1 << 5
 			if err := func() error {
 				if err := s.HwidDeviceLimit.Decode(d); err != nil {
 					return err
@@ -73721,8 +73714,28 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"hwidDeviceLimit\"")
 			}
+		case "firstConnectedAt":
+			requiredBitSet[2] |= 1 << 6
+			if err := func() error {
+				if err := s.FirstConnectedAt.Decode(d, json.DecodeDateTime); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"firstConnectedAt\"")
+			}
+		case "lastTriggeredThreshold":
+			if err := func() error {
+				s.LastTriggeredThreshold.Reset()
+				if err := s.LastTriggeredThreshold.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"lastTriggeredThreshold\"")
+			}
 		case "createdAt":
-			requiredBitSet[2] |= 1 << 7
+			requiredBitSet[3] |= 1 << 0
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -73734,7 +73747,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"createdAt\"")
 			}
 		case "updatedAt":
-			requiredBitSet[3] |= 1 << 0
+			requiredBitSet[3] |= 1 << 1
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -73746,7 +73759,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"updatedAt\"")
 			}
 		case "activeInternalSquads":
-			requiredBitSet[3] |= 1 << 1
+			requiredBitSet[3] |= 1 << 2
 			if err := func() error {
 				s.ActiveInternalSquads = make([]UserDtoActiveInternalSquadsItem, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
@@ -73764,7 +73777,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"activeInternalSquads\"")
 			}
 		case "subscriptionUrl":
-			requiredBitSet[3] |= 1 << 2
+			requiredBitSet[3] |= 1 << 3
 			if err := func() error {
 				v, err := d.Str()
 				s.SubscriptionUrl = string(v)
@@ -73776,7 +73789,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subscriptionUrl\"")
 			}
 		case "lastConnectedNode":
-			requiredBitSet[3] |= 1 << 3
+			requiredBitSet[3] |= 1 << 4
 			if err := func() error {
 				if err := s.LastConnectedNode.Decode(d); err != nil {
 					return err
@@ -73786,7 +73799,7 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"lastConnectedNode\"")
 			}
 		case "happ":
-			requiredBitSet[3] |= 1 << 4
+			requiredBitSet[3] |= 1 << 5
 			if err := func() error {
 				if err := s.Happ.Decode(d); err != nil {
 					return err
@@ -73805,10 +73818,10 @@ func (s *UserDto) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [4]uint8{
-		0b01101111,
-		0b11111110,
-		0b11110111,
-		0b00011111,
+		0b00110111,
+		0b11111111,
+		0b01111111,
+		0b00111111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.

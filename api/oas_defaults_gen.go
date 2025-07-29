@@ -336,4 +336,8 @@ func (s *UserDto) setDefaults() {
 		val := UserDtoTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
+	}
 }
