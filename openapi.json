@@ -341,7 +341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetUserByUuidResponseDto"
+                  "$ref": "#/components/schemas/UserResponseDto"
                 }
               }
             }
@@ -11722,7 +11722,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "activeUserInbounds": {
+          "activeInternalSquads": {
             "type": "array",
             "items": {
               "type": "object",
@@ -11731,27 +11731,13 @@
                   "type": "string",
                   "format": "uuid"
                 },
-                "tag": {
+                "name": {
                   "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "network": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "security": {
-                  "type": "string",
-                  "nullable": true
                 }
               },
               "required": [
                 "uuid",
-                "tag",
-                "type",
-                "network",
-                "security"
+                "name"
               ]
             }
           },
@@ -11809,7 +11795,7 @@
           "hwidDeviceLimit",
           "createdAt",
           "updatedAt",
-          "activeUserInbounds",
+          "activeInternalSquads",
           "subscriptionUrl",
           "lastConnectedNode",
           "happ"
