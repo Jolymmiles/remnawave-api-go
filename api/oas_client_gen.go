@@ -4,74 +4,22 @@ package api
 
 import (
 	"context"
-	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/go-faster/errors"
 	"github.com/ogen-go/ogen/conv"
 	ht "github.com/ogen-go/ogen/http"
 	"github.com/ogen-go/ogen/ogenerrors"
+	"github.com/ogen-go/ogen/otelogen"
 	"github.com/ogen-go/ogen/uri"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/metric"
+	semconv "go.opentelemetry.io/otel/semconv/v1.37.0"
+	"go.opentelemetry.io/otel/trace"
 )
-
-type requestConfig struct {
-	Client       ht.Client
-	ServerURL    *url.URL
-	EditRequest  func(req *http.Request) error
-	EditResponse func(resp *http.Response) error
-}
-
-func (cfg *requestConfig) setDefaults(c baseClient) {
-	if cfg.Client == nil {
-		cfg.Client = c.cfg.Client
-	}
-}
-
-func (cfg *requestConfig) onRequest(req *http.Request) error {
-	if fn := cfg.EditRequest; fn != nil {
-		return fn(req)
-	}
-	return nil
-}
-
-func (cfg *requestConfig) onResponse(resp *http.Response) error {
-	if fn := cfg.EditResponse; fn != nil {
-		return fn(resp)
-	}
-	return nil
-}
-
-// RequestOption defines options for request.
-type RequestOption func(cfg *requestConfig)
-
-// WithRequestClient sets client for request.
-func WithRequestClient(client ht.Client) RequestOption {
-	return func(cfg *requestConfig) {
-		cfg.Client = client
-	}
-}
-
-// WithServerURL sets client for request.
-func WithServerURL(u *url.URL) RequestOption {
-	return func(cfg *requestConfig) {
-		cfg.ServerURL = u
-	}
-}
-
-// WithEditRequest sets function to edit request.
-func WithEditRequest(fn func(req *http.Request) error) RequestOption {
-	return func(cfg *requestConfig) {
-		cfg.EditRequest = fn
-	}
-}
-
-// WithEditResponse sets function to edit response.
-func WithEditResponse(fn func(resp *http.Response) error) RequestOption {
-	return func(cfg *requestConfig) {
-		cfg.EditResponse = fn
-	}
-}
 
 func trimTrailingSlashes(u *url.URL) {
 	u.Path = strings.TrimRight(u.Path, "/")
@@ -85,829 +33,829 @@ type Invoker interface {
 	// This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.
 	//
 	// POST /api/tokens
-	ApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto, options ...RequestOption) (ApiTokensControllerCreateRes, error)
+	ApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto) (ApiTokensControllerCreateRes, error)
 	// ApiTokensControllerDelete invokes ApiTokensController_delete operation.
 	//
 	// This endpoint is forbidden to use via "API-key". It can be used only with an admin JWT-token.
 	//
 	// DELETE /api/tokens/{uuid}
-	ApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams, options ...RequestOption) (ApiTokensControllerDeleteRes, error)
+	ApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams) (ApiTokensControllerDeleteRes, error)
 	// ApiTokensControllerFindAll invokes ApiTokensController_findAll operation.
 	//
 	// This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.
 	//
 	// GET /api/tokens
-	ApiTokensControllerFindAll(ctx context.Context, options ...RequestOption) (ApiTokensControllerFindAllRes, error)
+	ApiTokensControllerFindAll(ctx context.Context) (ApiTokensControllerFindAllRes, error)
 	// AuthControllerGetStatus invokes AuthController_getStatus operation.
 	//
 	// Get the status of the authentication.
 	//
 	// GET /api/auth/status
-	AuthControllerGetStatus(ctx context.Context, options ...RequestOption) (AuthControllerGetStatusRes, error)
+	AuthControllerGetStatus(ctx context.Context) (AuthControllerGetStatusRes, error)
 	// AuthControllerLogin invokes AuthController_login operation.
 	//
 	// Login as superadmin.
 	//
 	// POST /api/auth/login
-	AuthControllerLogin(ctx context.Context, request *LoginRequestDto, options ...RequestOption) (AuthControllerLoginRes, error)
+	AuthControllerLogin(ctx context.Context, request *LoginRequestDto) (AuthControllerLoginRes, error)
 	// AuthControllerOauth2Authorize invokes AuthController_oauth2Authorize operation.
 	//
 	// Initiate OAuth2 authorization.
 	//
 	// POST /api/auth/oauth2/authorize
-	AuthControllerOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto, options ...RequestOption) (AuthControllerOauth2AuthorizeRes, error)
+	AuthControllerOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (AuthControllerOauth2AuthorizeRes, error)
 	// AuthControllerOauth2Callback invokes AuthController_oauth2Callback operation.
 	//
 	// Callback from OAuth2.
 	//
 	// POST /api/auth/oauth2/callback
-	AuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto, options ...RequestOption) (AuthControllerOauth2CallbackRes, error)
+	AuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (AuthControllerOauth2CallbackRes, error)
 	// AuthControllerPasskeyAuthenticationOptions invokes AuthController_passkeyAuthenticationOptions operation.
 	//
 	// Get the authentication options for passkey.
 	//
 	// GET /api/auth/passkey/authentication/options
-	AuthControllerPasskeyAuthenticationOptions(ctx context.Context, options ...RequestOption) (AuthControllerPasskeyAuthenticationOptionsRes, error)
+	AuthControllerPasskeyAuthenticationOptions(ctx context.Context) (AuthControllerPasskeyAuthenticationOptionsRes, error)
 	// AuthControllerPasskeyAuthenticationVerify invokes AuthController_passkeyAuthenticationVerify operation.
 	//
 	// Verify the authentication for passkey.
 	//
 	// POST /api/auth/passkey/authentication/verify
-	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, options ...RequestOption) (AuthControllerPasskeyAuthenticationVerifyRes, error)
+	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error)
 	// AuthControllerRegister invokes AuthController_register operation.
 	//
 	// Register as superadmin.
 	//
 	// POST /api/auth/register
-	AuthControllerRegister(ctx context.Context, request *RegisterRequestDto, options ...RequestOption) (AuthControllerRegisterRes, error)
+	AuthControllerRegister(ctx context.Context, request *RegisterRequestDto) (AuthControllerRegisterRes, error)
 	// AuthControllerTelegramCallback invokes AuthController_telegramCallback operation.
 	//
 	// Callback from Telegram OAuth2.
 	//
 	// POST /api/auth/oauth2/tg/callback
-	AuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, options ...RequestOption) (AuthControllerTelegramCallbackRes, error)
+	AuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (AuthControllerTelegramCallbackRes, error)
 	// ConfigProfileControllerCreateConfigProfile invokes ConfigProfileController_createConfigProfile operation.
 	//
 	// Create config profile.
 	//
 	// POST /api/config-profiles
-	ConfigProfileControllerCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto, options ...RequestOption) (ConfigProfileControllerCreateConfigProfileRes, error)
+	ConfigProfileControllerCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto) (ConfigProfileControllerCreateConfigProfileRes, error)
 	// ConfigProfileControllerDeleteConfigProfileByUuid invokes ConfigProfileController_deleteConfigProfileByUuid operation.
 	//
 	// Delete config profile.
 	//
 	// DELETE /api/config-profiles/{uuid}
-	ConfigProfileControllerDeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams, options ...RequestOption) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error)
+	ConfigProfileControllerDeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error)
 	// ConfigProfileControllerGetAllInbounds invokes ConfigProfileController_getAllInbounds operation.
 	//
 	// Get all inbounds from all config profiles.
 	//
 	// GET /api/config-profiles/inbounds
-	ConfigProfileControllerGetAllInbounds(ctx context.Context, options ...RequestOption) (ConfigProfileControllerGetAllInboundsRes, error)
+	ConfigProfileControllerGetAllInbounds(ctx context.Context) (ConfigProfileControllerGetAllInboundsRes, error)
 	// ConfigProfileControllerGetConfigProfileByUuid invokes ConfigProfileController_getConfigProfileByUuid operation.
 	//
 	// Get config profile by uuid.
 	//
 	// GET /api/config-profiles/{uuid}
-	ConfigProfileControllerGetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams, options ...RequestOption) (ConfigProfileControllerGetConfigProfileByUuidRes, error)
+	ConfigProfileControllerGetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error)
 	// ConfigProfileControllerGetConfigProfiles invokes ConfigProfileController_getConfigProfiles operation.
 	//
 	// Get config profiles.
 	//
 	// GET /api/config-profiles
-	ConfigProfileControllerGetConfigProfiles(ctx context.Context, options ...RequestOption) (ConfigProfileControllerGetConfigProfilesRes, error)
+	ConfigProfileControllerGetConfigProfiles(ctx context.Context) (ConfigProfileControllerGetConfigProfilesRes, error)
 	// ConfigProfileControllerGetInboundsByProfileUuid invokes ConfigProfileController_getInboundsByProfileUuid operation.
 	//
 	// Get inbounds by profile uuid.
 	//
 	// GET /api/config-profiles/{uuid}/inbounds
-	ConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams, options ...RequestOption) (ConfigProfileControllerGetInboundsByProfileUuidRes, error)
+	ConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error)
 	// ConfigProfileControllerUpdateConfigProfile invokes ConfigProfileController_updateConfigProfile operation.
 	//
 	// Update Core Config in specific config profile.
 	//
 	// PATCH /api/config-profiles
-	ConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto, options ...RequestOption) (ConfigProfileControllerUpdateConfigProfileRes, error)
+	ConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileControllerUpdateConfigProfileRes, error)
 	// ExternalSquadControllerAddUsersToExternalSquad invokes ExternalSquadController_addUsersToExternalSquad operation.
 	//
 	// Add all users to external squad.
 	//
 	// POST /api/external-squads/{uuid}/bulk-actions/add-users
-	ExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams, options ...RequestOption) (ExternalSquadControllerAddUsersToExternalSquadRes, error)
+	ExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (ExternalSquadControllerAddUsersToExternalSquadRes, error)
 	// ExternalSquadControllerCreateExternalSquad invokes ExternalSquadController_createExternalSquad operation.
 	//
 	// Create external squad.
 	//
 	// POST /api/external-squads
-	ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerCreateExternalSquadRes, error)
+	ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error)
 	// ExternalSquadControllerDeleteExternalSquad invokes ExternalSquadController_deleteExternalSquad operation.
 	//
 	// Delete external squad.
 	//
 	// DELETE /api/external-squads/{uuid}
-	ExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams, options ...RequestOption) (ExternalSquadControllerDeleteExternalSquadRes, error)
+	ExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (ExternalSquadControllerDeleteExternalSquadRes, error)
 	// ExternalSquadControllerGetExternalSquadByUuid invokes ExternalSquadController_getExternalSquadByUuid operation.
 	//
 	// Get external squad by uuid.
 	//
 	// GET /api/external-squads/{uuid}
-	ExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams, options ...RequestOption) (ExternalSquadControllerGetExternalSquadByUuidRes, error)
+	ExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (ExternalSquadControllerGetExternalSquadByUuidRes, error)
 	// ExternalSquadControllerGetExternalSquads invokes ExternalSquadController_getExternalSquads operation.
 	//
 	// Get all external squads.
 	//
 	// GET /api/external-squads
-	ExternalSquadControllerGetExternalSquads(ctx context.Context, options ...RequestOption) (ExternalSquadControllerGetExternalSquadsRes, error)
+	ExternalSquadControllerGetExternalSquads(ctx context.Context) (ExternalSquadControllerGetExternalSquadsRes, error)
 	// ExternalSquadControllerRemoveUsersFromExternalSquad invokes ExternalSquadController_removeUsersFromExternalSquad operation.
 	//
 	// Delete users from external squad.
 	//
 	// DELETE /api/external-squads/{uuid}/bulk-actions/remove-users
-	ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams, options ...RequestOption) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error)
+	ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error)
 	// ExternalSquadControllerUpdateExternalSquad invokes ExternalSquadController_updateExternalSquad operation.
 	//
 	// Update external squad.
 	//
 	// PATCH /api/external-squads
-	ExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerUpdateExternalSquadRes, error)
+	ExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (ExternalSquadControllerUpdateExternalSquadRes, error)
 	// HostsBulkActionsControllerDeleteHosts invokes HostsBulkActionsController_deleteHosts operation.
 	//
 	// Delete hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/delete
-	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerDeleteHostsRes, error)
+	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error)
 	// HostsBulkActionsControllerDisableHosts invokes HostsBulkActionsController_disableHosts operation.
 	//
 	// Disable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/disable
-	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerDisableHostsRes, error)
+	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error)
 	// HostsBulkActionsControllerEnableHosts invokes HostsBulkActionsController_enableHosts operation.
 	//
 	// Enable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/enable
-	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerEnableHostsRes, error)
+	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error)
 	// HostsBulkActionsControllerSetInboundToHosts invokes HostsBulkActionsController_setInboundToHosts operation.
 	//
 	// Set inbound to hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/set-inbound
-	HostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerSetInboundToHostsRes, error)
+	HostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (HostsBulkActionsControllerSetInboundToHostsRes, error)
 	// HostsBulkActionsControllerSetPortToHosts invokes HostsBulkActionsController_setPortToHosts operation.
 	//
 	// Set port to hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/set-port
-	HostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerSetPortToHostsRes, error)
+	HostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (HostsBulkActionsControllerSetPortToHostsRes, error)
 	// HostsControllerCreateHost invokes HostsController_createHost operation.
 	//
 	// Create a new host.
 	//
 	// POST /api/hosts
-	HostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto, options ...RequestOption) (HostsControllerCreateHostRes, error)
+	HostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto) (HostsControllerCreateHostRes, error)
 	// HostsControllerDeleteHost invokes HostsController_deleteHost operation.
 	//
 	// Delete a host by UUID.
 	//
 	// DELETE /api/hosts/{uuid}
-	HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams, options ...RequestOption) (HostsControllerDeleteHostRes, error)
+	HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (HostsControllerDeleteHostRes, error)
 	// HostsControllerGetAllHostTags invokes HostsController_getAllHostTags operation.
 	//
 	// Get all existing host tags.
 	//
 	// GET /api/hosts/tags
-	HostsControllerGetAllHostTags(ctx context.Context, options ...RequestOption) (HostsControllerGetAllHostTagsRes, error)
+	HostsControllerGetAllHostTags(ctx context.Context) (HostsControllerGetAllHostTagsRes, error)
 	// HostsControllerGetAllHosts invokes HostsController_getAllHosts operation.
 	//
 	// Get all hosts.
 	//
 	// GET /api/hosts
-	HostsControllerGetAllHosts(ctx context.Context, options ...RequestOption) (HostsControllerGetAllHostsRes, error)
+	HostsControllerGetAllHosts(ctx context.Context) (HostsControllerGetAllHostsRes, error)
 	// HostsControllerGetOneHost invokes HostsController_getOneHost operation.
 	//
 	// Get a host by UUID.
 	//
 	// GET /api/hosts/{uuid}
-	HostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams, options ...RequestOption) (HostsControllerGetOneHostRes, error)
+	HostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (HostsControllerGetOneHostRes, error)
 	// HostsControllerReorderHosts invokes HostsController_reorderHosts operation.
 	//
 	// Reorder hosts.
 	//
 	// POST /api/hosts/actions/reorder
-	HostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto, options ...RequestOption) (HostsControllerReorderHostsRes, error)
+	HostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto) (HostsControllerReorderHostsRes, error)
 	// HostsControllerUpdateHost invokes HostsController_updateHost operation.
 	//
 	// Update a host.
 	//
 	// PATCH /api/hosts
-	HostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto, options ...RequestOption) (HostsControllerUpdateHostRes, error)
+	HostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto) (HostsControllerUpdateHostRes, error)
 	// HwidUserDevicesControllerCreateUserHwidDevice invokes HwidUserDevicesController_createUserHwidDevice operation.
 	//
 	// Create a user HWID device.
 	//
 	// POST /api/hwid/devices
-	HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto, options ...RequestOption) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error)
+	HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error)
 	// HwidUserDevicesControllerDeleteAllUserHwidDevices invokes HwidUserDevicesController_deleteAllUserHwidDevices operation.
 	//
 	// Delete all user HWID devices.
 	//
 	// POST /api/hwid/devices/delete-all
-	HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error)
+	HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error)
 	// HwidUserDevicesControllerDeleteUserHwidDevice invokes HwidUserDevicesController_deleteUserHwidDevice operation.
 	//
 	// Delete a user HWID device.
 	//
 	// POST /api/hwid/devices/delete
-	HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error)
+	HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error)
 	// HwidUserDevicesControllerGetAllUsers invokes HwidUserDevicesController_getAllUsers operation.
 	//
 	// Get all HWID devices.
 	//
 	// GET /api/hwid/devices
-	HwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams, options ...RequestOption) (HwidUserDevicesControllerGetAllUsersRes, error)
+	HwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (HwidUserDevicesControllerGetAllUsersRes, error)
 	// HwidUserDevicesControllerGetHwidDevicesStats invokes HwidUserDevicesController_getHwidDevicesStats operation.
 	//
 	// Get HWID devices stats.
 	//
 	// GET /api/hwid/devices/stats
-	HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context, options ...RequestOption) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error)
+	HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error)
 	// HwidUserDevicesControllerGetUserHwidDevices invokes HwidUserDevicesController_getUserHwidDevices operation.
 	//
 	// Get user HWID devices.
 	//
 	// GET /api/hwid/devices/{userUuid}
-	HwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams, options ...RequestOption) (HwidUserDevicesControllerGetUserHwidDevicesRes, error)
+	HwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (HwidUserDevicesControllerGetUserHwidDevicesRes, error)
 	// InfraBillingControllerCreateInfraBillingHistoryRecord invokes InfraBillingController_createInfraBillingHistoryRecord operation.
 	//
 	// Create infra billing history.
 	//
 	// POST /api/infra-billing/history
-	InfraBillingControllerCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto, options ...RequestOption) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error)
+	InfraBillingControllerCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error)
 	// InfraBillingControllerCreateInfraBillingNode invokes InfraBillingController_createInfraBillingNode operation.
 	//
 	// Create infra billing node.
 	//
 	// POST /api/infra-billing/nodes
-	InfraBillingControllerCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto, options ...RequestOption) (InfraBillingControllerCreateInfraBillingNodeRes, error)
+	InfraBillingControllerCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (InfraBillingControllerCreateInfraBillingNodeRes, error)
 	// InfraBillingControllerCreateInfraProvider invokes InfraBillingController_createInfraProvider operation.
 	//
 	// Create infra provider.
 	//
 	// POST /api/infra-billing/providers
-	InfraBillingControllerCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto, options ...RequestOption) (InfraBillingControllerCreateInfraProviderRes, error)
+	InfraBillingControllerCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto) (InfraBillingControllerCreateInfraProviderRes, error)
 	// InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid invokes InfraBillingController_deleteInfraBillingHistoryRecordByUuid operation.
 	//
 	// Delete infra billing history.
 	//
 	// DELETE /api/infra-billing/history/{uuid}
-	InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams, options ...RequestOption) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error)
+	InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error)
 	// InfraBillingControllerDeleteInfraBillingNodeByUuid invokes InfraBillingController_deleteInfraBillingNodeByUuid operation.
 	//
 	// Delete infra billing node.
 	//
 	// DELETE /api/infra-billing/nodes/{uuid}
-	InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams, options ...RequestOption) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error)
+	InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error)
 	// InfraBillingControllerDeleteInfraProviderByUuid invokes InfraBillingController_deleteInfraProviderByUuid operation.
 	//
 	// Delete infra provider by uuid.
 	//
 	// DELETE /api/infra-billing/providers/{uuid}
-	InfraBillingControllerDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams, options ...RequestOption) (InfraBillingControllerDeleteInfraProviderByUuidRes, error)
+	InfraBillingControllerDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (InfraBillingControllerDeleteInfraProviderByUuidRes, error)
 	// InfraBillingControllerGetBillingNodes invokes InfraBillingController_getBillingNodes operation.
 	//
 	// Get infra billing nodes.
 	//
 	// GET /api/infra-billing/nodes
-	InfraBillingControllerGetBillingNodes(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetBillingNodesRes, error)
+	InfraBillingControllerGetBillingNodes(ctx context.Context) (InfraBillingControllerGetBillingNodesRes, error)
 	// InfraBillingControllerGetInfraBillingHistoryRecords invokes InfraBillingController_getInfraBillingHistoryRecords operation.
 	//
 	// Get infra billing history.
 	//
 	// GET /api/infra-billing/history
-	InfraBillingControllerGetInfraBillingHistoryRecords(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error)
+	InfraBillingControllerGetInfraBillingHistoryRecords(ctx context.Context) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error)
 	// InfraBillingControllerGetInfraProviderByUuid invokes InfraBillingController_getInfraProviderByUuid operation.
 	//
 	// Get infra provider by uuid.
 	//
 	// GET /api/infra-billing/providers/{uuid}
-	InfraBillingControllerGetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams, options ...RequestOption) (InfraBillingControllerGetInfraProviderByUuidRes, error)
+	InfraBillingControllerGetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (InfraBillingControllerGetInfraProviderByUuidRes, error)
 	// InfraBillingControllerGetInfraProviders invokes InfraBillingController_getInfraProviders operation.
 	//
 	// Get all infra providers.
 	//
 	// GET /api/infra-billing/providers
-	InfraBillingControllerGetInfraProviders(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetInfraProvidersRes, error)
+	InfraBillingControllerGetInfraProviders(ctx context.Context) (InfraBillingControllerGetInfraProvidersRes, error)
 	// InfraBillingControllerUpdateInfraBillingNode invokes InfraBillingController_updateInfraBillingNode operation.
 	//
 	// Update infra billing nodes.
 	//
 	// PATCH /api/infra-billing/nodes
-	InfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto, options ...RequestOption) (InfraBillingControllerUpdateInfraBillingNodeRes, error)
+	InfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (InfraBillingControllerUpdateInfraBillingNodeRes, error)
 	// InfraBillingControllerUpdateInfraProvider invokes InfraBillingController_updateInfraProvider operation.
 	//
 	// Update infra provider.
 	//
 	// PATCH /api/infra-billing/providers
-	InfraBillingControllerUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto, options ...RequestOption) (InfraBillingControllerUpdateInfraProviderRes, error)
+	InfraBillingControllerUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto) (InfraBillingControllerUpdateInfraProviderRes, error)
 	// InternalSquadControllerAddUsersToInternalSquad invokes InternalSquadController_addUsersToInternalSquad operation.
 	//
 	// Add all users to internal squad.
 	//
 	// POST /api/internal-squads/{uuid}/bulk-actions/add-users
-	InternalSquadControllerAddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams, options ...RequestOption) (InternalSquadControllerAddUsersToInternalSquadRes, error)
+	InternalSquadControllerAddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (InternalSquadControllerAddUsersToInternalSquadRes, error)
 	// InternalSquadControllerCreateInternalSquad invokes InternalSquadController_createInternalSquad operation.
 	//
 	// Create internal squad.
 	//
 	// POST /api/internal-squads
-	InternalSquadControllerCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto, options ...RequestOption) (InternalSquadControllerCreateInternalSquadRes, error)
+	InternalSquadControllerCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto) (InternalSquadControllerCreateInternalSquadRes, error)
 	// InternalSquadControllerDeleteInternalSquad invokes InternalSquadController_deleteInternalSquad operation.
 	//
 	// Delete internal squad.
 	//
 	// DELETE /api/internal-squads/{uuid}
-	InternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams, options ...RequestOption) (InternalSquadControllerDeleteInternalSquadRes, error)
+	InternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (InternalSquadControllerDeleteInternalSquadRes, error)
 	// InternalSquadControllerGetInternalSquadAccessibleNodes invokes InternalSquadController_getInternalSquadAccessibleNodes operation.
 	//
 	// Get internal squad accessible nodes.
 	//
 	// GET /api/internal-squads/{uuid}/accessible-nodes
-	InternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams, options ...RequestOption) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error)
+	InternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error)
 	// InternalSquadControllerGetInternalSquadByUuid invokes InternalSquadController_getInternalSquadByUuid operation.
 	//
 	// Get internal squad by uuid.
 	//
 	// GET /api/internal-squads/{uuid}
-	InternalSquadControllerGetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams, options ...RequestOption) (InternalSquadControllerGetInternalSquadByUuidRes, error)
+	InternalSquadControllerGetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (InternalSquadControllerGetInternalSquadByUuidRes, error)
 	// InternalSquadControllerGetInternalSquads invokes InternalSquadController_getInternalSquads operation.
 	//
 	// Get all internal squads.
 	//
 	// GET /api/internal-squads
-	InternalSquadControllerGetInternalSquads(ctx context.Context, options ...RequestOption) (InternalSquadControllerGetInternalSquadsRes, error)
+	InternalSquadControllerGetInternalSquads(ctx context.Context) (InternalSquadControllerGetInternalSquadsRes, error)
 	// InternalSquadControllerRemoveUsersFromInternalSquad invokes InternalSquadController_removeUsersFromInternalSquad operation.
 	//
 	// Delete users from internal squad.
 	//
 	// DELETE /api/internal-squads/{uuid}/bulk-actions/remove-users
-	InternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams, options ...RequestOption) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error)
+	InternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error)
 	// InternalSquadControllerUpdateInternalSquad invokes InternalSquadController_updateInternalSquad operation.
 	//
 	// Update internal squad.
 	//
 	// PATCH /api/internal-squads
-	InternalSquadControllerUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto, options ...RequestOption) (InternalSquadControllerUpdateInternalSquadRes, error)
+	InternalSquadControllerUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadControllerUpdateInternalSquadRes, error)
 	// KeygenControllerGenerateKey invokes KeygenController_generateKey operation.
 	//
 	// Get SSL_CERT for Remnawave Node.
 	//
 	// GET /api/keygen
-	KeygenControllerGenerateKey(ctx context.Context, options ...RequestOption) (KeygenControllerGenerateKeyRes, error)
+	KeygenControllerGenerateKey(ctx context.Context) (KeygenControllerGenerateKeyRes, error)
 	// NodesControllerCreateNode invokes NodesController_createNode operation.
 	//
 	// Create a new node.
 	//
 	// POST /api/nodes
-	NodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto, options ...RequestOption) (NodesControllerCreateNodeRes, error)
+	NodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto) (NodesControllerCreateNodeRes, error)
 	// NodesControllerDeleteNode invokes NodesController_deleteNode operation.
 	//
 	// Delete a node.
 	//
 	// DELETE /api/nodes/{uuid}
-	NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, options ...RequestOption) (NodesControllerDeleteNodeRes, error)
+	NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (NodesControllerDeleteNodeRes, error)
 	// NodesControllerDisableNode invokes NodesController_disableNode operation.
 	//
 	// Disable a node.
 	//
 	// POST /api/nodes/{uuid}/actions/disable
-	NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, options ...RequestOption) (NodesControllerDisableNodeRes, error)
+	NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (NodesControllerDisableNodeRes, error)
 	// NodesControllerEnableNode invokes NodesController_enableNode operation.
 	//
 	// Enable a node.
 	//
 	// POST /api/nodes/{uuid}/actions/enable
-	NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, options ...RequestOption) (NodesControllerEnableNodeRes, error)
+	NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (NodesControllerEnableNodeRes, error)
 	// NodesControllerGetAllNodes invokes NodesController_getAllNodes operation.
 	//
 	// Get all nodes.
 	//
 	// GET /api/nodes
-	NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) (NodesControllerGetAllNodesRes, error)
+	NodesControllerGetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error)
 	// NodesControllerGetOneNode invokes NodesController_getOneNode operation.
 	//
 	// Get node by UUID.
 	//
 	// GET /api/nodes/{uuid}
-	NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, options ...RequestOption) (NodesControllerGetOneNodeRes, error)
+	NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error)
 	// NodesControllerReorderNodes invokes NodesController_reorderNodes operation.
 	//
 	// Reorder nodes.
 	//
 	// POST /api/nodes/actions/reorder
-	NodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto, options ...RequestOption) (NodesControllerReorderNodesRes, error)
+	NodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesControllerReorderNodesRes, error)
 	// NodesControllerRestartAllNodes invokes NodesController_restartAllNodes operation.
 	//
 	// Restart all nodes.
 	//
 	// POST /api/nodes/actions/restart-all
-	NodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto, options ...RequestOption) (NodesControllerRestartAllNodesRes, error)
+	NodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (NodesControllerRestartAllNodesRes, error)
 	// NodesControllerRestartNode invokes NodesController_restartNode operation.
 	//
 	// Restart node.
 	//
 	// POST /api/nodes/{uuid}/actions/restart
-	NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, options ...RequestOption) (NodesControllerRestartNodeRes, error)
+	NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (NodesControllerRestartNodeRes, error)
 	// NodesControllerUpdateNode invokes NodesController_updateNode operation.
 	//
 	// Update node.
 	//
 	// PATCH /api/nodes
-	NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, options ...RequestOption) (NodesControllerUpdateNodeRes, error)
+	NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto) (NodesControllerUpdateNodeRes, error)
 	// NodesUsageHistoryControllerGetNodesUsageByRange invokes NodesUsageHistoryController_getNodesUsageByRange operation.
 	//
 	// Get nodes usage by range.
 	//
 	// GET /api/nodes/usage/range
-	NodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams, options ...RequestOption) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error)
+	NodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error)
 	// NodesUserUsageHistoryControllerGetNodeUserUsage invokes NodesUserUsageHistoryController_getNodeUserUsage operation.
 	//
 	// Get node user usage by range and Node UUID.
 	//
 	// GET /api/nodes/usage/{uuid}/users/range
-	NodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams, options ...RequestOption) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error)
+	NodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error)
 	// NodesUserUsageHistoryControllerGetNodesRealtimeUsage invokes NodesUserUsageHistoryController_getNodesRealtimeUsage operation.
 	//
 	// Get nodes realtime usage.
 	//
 	// GET /api/nodes/usage/realtime
-	NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context, options ...RequestOption) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error)
+	NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error)
 	// PasskeyControllerDeletePasskey invokes PasskeyController_deletePasskey operation.
 	//
 	// Delete a passkey by ID.
 	//
 	// DELETE /api/passkeys
-	PasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto, options ...RequestOption) (PasskeyControllerDeletePasskeyRes, error)
+	PasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto) (PasskeyControllerDeletePasskeyRes, error)
 	// PasskeyControllerGetActivePasskeys invokes PasskeyController_getActivePasskeys operation.
 	//
 	// Get all passkeys.
 	//
 	// GET /api/passkeys
-	PasskeyControllerGetActivePasskeys(ctx context.Context, options ...RequestOption) (PasskeyControllerGetActivePasskeysRes, error)
+	PasskeyControllerGetActivePasskeys(ctx context.Context) (PasskeyControllerGetActivePasskeysRes, error)
 	// PasskeyControllerPasskeyRegistrationOptions invokes PasskeyController_passkeyRegistrationOptions operation.
 	//
 	// Get registration options for passkey.
 	//
 	// GET /api/passkeys/registration/options
-	PasskeyControllerPasskeyRegistrationOptions(ctx context.Context, options ...RequestOption) (PasskeyControllerPasskeyRegistrationOptionsRes, error)
+	PasskeyControllerPasskeyRegistrationOptions(ctx context.Context) (PasskeyControllerPasskeyRegistrationOptionsRes, error)
 	// PasskeyControllerPasskeyRegistrationVerify invokes PasskeyController_passkeyRegistrationVerify operation.
 	//
 	// Verify registration for passkey.
 	//
 	// POST /api/passkeys/registration/verify
-	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto, options ...RequestOption) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
+	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
 	// RemnawaveSettingsControllerGetSettings invokes RemnawaveSettingsController_getSettings operation.
 	//
 	// Get Remnawave settings.
 	//
 	// GET /api/remnawave-settings
-	RemnawaveSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (RemnawaveSettingsControllerGetSettingsRes, error)
+	RemnawaveSettingsControllerGetSettings(ctx context.Context) (RemnawaveSettingsControllerGetSettingsRes, error)
 	// RemnawaveSettingsControllerUpdateSettings invokes RemnawaveSettingsController_updateSettings operation.
 	//
 	// Update Remnawave settings.
 	//
 	// PATCH /api/remnawave-settings
-	RemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto, options ...RequestOption) (RemnawaveSettingsControllerUpdateSettingsRes, error)
+	RemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (RemnawaveSettingsControllerUpdateSettingsRes, error)
 	// SnippetsControllerCreateSnippet invokes SnippetsController_createSnippet operation.
 	//
 	// Create snippet.
 	//
 	// POST /api/snippets
-	SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto, options ...RequestOption) (SnippetsControllerCreateSnippetRes, error)
+	SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error)
 	// SnippetsControllerDeleteSnippetByName invokes SnippetsController_deleteSnippetByName operation.
 	//
 	// Delete snippet.
 	//
 	// DELETE /api/snippets
-	SnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto, options ...RequestOption) (SnippetsControllerDeleteSnippetByNameRes, error)
+	SnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto) (SnippetsControllerDeleteSnippetByNameRes, error)
 	// SnippetsControllerGetSnippets invokes SnippetsController_getSnippets operation.
 	//
 	// Get snippets.
 	//
 	// GET /api/snippets
-	SnippetsControllerGetSnippets(ctx context.Context, options ...RequestOption) (SnippetsControllerGetSnippetsRes, error)
+	SnippetsControllerGetSnippets(ctx context.Context) (SnippetsControllerGetSnippetsRes, error)
 	// SnippetsControllerUpdateSnippet invokes SnippetsController_updateSnippet operation.
 	//
 	// Update snippet.
 	//
 	// PATCH /api/snippets
-	SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto, options ...RequestOption) (SnippetsControllerUpdateSnippetRes, error)
+	SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error)
 	// SubscriptionControllerGetSubscription invokes SubscriptionController_getSubscription operation.
 	//
 	// GET /api/sub/{shortUuid}
-	SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams, options ...RequestOption) error
+	SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error
 	// SubscriptionControllerGetSubscriptionByClientType invokes SubscriptionController_getSubscriptionByClientType operation.
 	//
 	// GET /api/sub/{shortUuid}/{clientType}
-	SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams, options ...RequestOption) error
+	SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error
 	// SubscriptionControllerGetSubscriptionInfoByShortUuid invokes SubscriptionController_getSubscriptionInfoByShortUuid operation.
 	//
 	// Get Subscription Info by Short UUID.
 	//
 	// GET /api/sub/{shortUuid}/info
-	SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams, options ...RequestOption) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error)
+	SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error)
 	// SubscriptionControllerGetSubscriptionWithType invokes SubscriptionController_getSubscriptionWithType operation.
 	//
 	// GET /api/sub/outline/{shortUuid}/{type}/{encodedTag}
-	SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams, options ...RequestOption) error
+	SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error
 	// SubscriptionSettingsControllerGetSettings invokes SubscriptionSettingsController_getSettings operation.
 	//
 	// Get subscription settings.
 	//
 	// GET /api/subscription-settings
-	SubscriptionSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (SubscriptionSettingsControllerGetSettingsRes, error)
+	SubscriptionSettingsControllerGetSettings(ctx context.Context) (SubscriptionSettingsControllerGetSettingsRes, error)
 	// SubscriptionSettingsControllerUpdateSettings invokes SubscriptionSettingsController_updateSettings operation.
 	//
 	// Update subscription settings.
 	//
 	// PATCH /api/subscription-settings
-	SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto, options ...RequestOption) (SubscriptionSettingsControllerUpdateSettingsRes, error)
+	SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (SubscriptionSettingsControllerUpdateSettingsRes, error)
 	// SubscriptionTemplateControllerCreateTemplate invokes SubscriptionTemplateController_createTemplate operation.
 	//
 	// Create subscription template.
 	//
 	// POST /api/subscription-templates
-	SubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerCreateTemplateRes, error)
+	SubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (SubscriptionTemplateControllerCreateTemplateRes, error)
 	// SubscriptionTemplateControllerDeleteTemplate invokes SubscriptionTemplateController_deleteTemplate operation.
 	//
 	// Delete subscription template.
 	//
 	// DELETE /api/subscription-templates/{uuid}
-	SubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams, options ...RequestOption) (SubscriptionTemplateControllerDeleteTemplateRes, error)
+	SubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (SubscriptionTemplateControllerDeleteTemplateRes, error)
 	// SubscriptionTemplateControllerGetAllTemplates invokes SubscriptionTemplateController_getAllTemplates operation.
 	//
 	// Get all subscription templates (wihout content).
 	//
 	// GET /api/subscription-templates
-	SubscriptionTemplateControllerGetAllTemplates(ctx context.Context, options ...RequestOption) (SubscriptionTemplateControllerGetAllTemplatesRes, error)
+	SubscriptionTemplateControllerGetAllTemplates(ctx context.Context) (SubscriptionTemplateControllerGetAllTemplatesRes, error)
 	// SubscriptionTemplateControllerGetTemplateByUuid invokes SubscriptionTemplateController_getTemplateByUuid operation.
 	//
 	// Get subscription template by uuid.
 	//
 	// GET /api/subscription-templates/{uuid}
-	SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams, options ...RequestOption) (SubscriptionTemplateControllerGetTemplateByUuidRes, error)
+	SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error)
 	// SubscriptionTemplateControllerUpdateTemplate invokes SubscriptionTemplateController_updateTemplate operation.
 	//
 	// Update subscription template.
 	//
 	// PATCH /api/subscription-templates
-	SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerUpdateTemplateRes, error)
+	SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto) (SubscriptionTemplateControllerUpdateTemplateRes, error)
 	// SubscriptionsControllerGetAllSubscriptions invokes SubscriptionsController_getAllSubscriptions operation.
 	//
 	// Get all subscriptions.
 	//
 	// GET /api/subscriptions
-	SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, options ...RequestOption) (SubscriptionsControllerGetAllSubscriptionsRes, error)
+	SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (SubscriptionsControllerGetAllSubscriptionsRes, error)
 	// SubscriptionsControllerGetRawSubscriptionByShortUuid invokes SubscriptionsController_getRawSubscriptionByShortUuid operation.
 	//
 	// Get Raw Subscription by Short UUID.
 	//
 	// GET /api/subscriptions/by-short-uuid/{shortUuid}/raw
-	SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams, options ...RequestOption) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error)
+	SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error)
 	// SubscriptionsControllerGetSubscriptionByShortUuidProtected invokes SubscriptionsController_getSubscriptionByShortUuidProtected operation.
 	//
 	// Get subscription by short uuid (protected route).
 	//
 	// GET /api/subscriptions/by-short-uuid/{shortUuid}
-	SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error)
+	SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error)
 	// SubscriptionsControllerGetSubscriptionByUsername invokes SubscriptionsController_getSubscriptionByUsername operation.
 	//
 	// Get subscription by username.
 	//
 	// GET /api/subscriptions/by-username/{username}
-	SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUsernameRes, error)
+	SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (SubscriptionsControllerGetSubscriptionByUsernameRes, error)
 	// SubscriptionsControllerGetSubscriptionByUuid invokes SubscriptionsController_getSubscriptionByUuid operation.
 	//
 	// Get subscription by uuid.
 	//
 	// GET /api/subscriptions/by-uuid/{uuid}
-	SubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUuidRes, error)
+	SubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (SubscriptionsControllerGetSubscriptionByUuidRes, error)
 	// SystemControllerDebugSrrMatcher invokes SystemController_debugSrrMatcher operation.
 	//
 	// Test SRR Matcher.
 	//
 	// POST /api/system/testers/srr-matcher
-	SystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto, options ...RequestOption) (SystemControllerDebugSrrMatcherRes, error)
+	SystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (SystemControllerDebugSrrMatcherRes, error)
 	// SystemControllerEncryptHappCryptoLink invokes SystemController_encryptHappCryptoLink operation.
 	//
 	// Encrypt Happ Crypto Link.
 	//
 	// POST /api/system/tools/happ/encrypt
-	SystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto, options ...RequestOption) (SystemControllerEncryptHappCryptoLinkRes, error)
+	SystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (SystemControllerEncryptHappCryptoLinkRes, error)
 	// SystemControllerGetBandwidthStats invokes SystemController_getBandwidthStats operation.
 	//
 	// Get Bandwidth Stats.
 	//
 	// GET /api/system/stats/bandwidth
-	SystemControllerGetBandwidthStats(ctx context.Context, options ...RequestOption) (SystemControllerGetBandwidthStatsRes, error)
+	SystemControllerGetBandwidthStats(ctx context.Context) (SystemControllerGetBandwidthStatsRes, error)
 	// SystemControllerGetNodesMetrics invokes SystemController_getNodesMetrics operation.
 	//
 	// Get Nodes Metrics.
 	//
 	// GET /api/system/nodes/metrics
-	SystemControllerGetNodesMetrics(ctx context.Context, options ...RequestOption) (SystemControllerGetNodesMetricsRes, error)
+	SystemControllerGetNodesMetrics(ctx context.Context) (SystemControllerGetNodesMetricsRes, error)
 	// SystemControllerGetNodesStatistics invokes SystemController_getNodesStatistics operation.
 	//
 	// Get Nodes Statistics.
 	//
 	// GET /api/system/stats/nodes
-	SystemControllerGetNodesStatistics(ctx context.Context, options ...RequestOption) (SystemControllerGetNodesStatisticsRes, error)
+	SystemControllerGetNodesStatistics(ctx context.Context) (SystemControllerGetNodesStatisticsRes, error)
 	// SystemControllerGetRemnawaveHealth invokes SystemController_getRemnawaveHealth operation.
 	//
 	// Get Remnawave Health.
 	//
 	// GET /api/system/health
-	SystemControllerGetRemnawaveHealth(ctx context.Context, options ...RequestOption) (SystemControllerGetRemnawaveHealthRes, error)
+	SystemControllerGetRemnawaveHealth(ctx context.Context) (SystemControllerGetRemnawaveHealthRes, error)
 	// SystemControllerGetStats invokes SystemController_getStats operation.
 	//
 	// Get Stats.
 	//
 	// GET /api/system/stats
-	SystemControllerGetStats(ctx context.Context, options ...RequestOption) (SystemControllerGetStatsRes, error)
+	SystemControllerGetStats(ctx context.Context) (SystemControllerGetStatsRes, error)
 	// SystemControllerGetX25519Keypairs invokes SystemController_getX25519Keypairs operation.
 	//
 	// Generate 30 X25519 keypairs.
 	//
 	// GET /api/system/tools/x25519/generate
-	SystemControllerGetX25519Keypairs(ctx context.Context, options ...RequestOption) (SystemControllerGetX25519KeypairsRes, error)
+	SystemControllerGetX25519Keypairs(ctx context.Context) (SystemControllerGetX25519KeypairsRes, error)
 	// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory invokes UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory operation.
 	//
 	// Get all subscription request history.
 	//
 	// GET /api/subscription-request-history
-	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error)
+	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error)
 	// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats invokes UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats operation.
 	//
 	// Get subscription request history stats.
 	//
 	// GET /api/subscription-request-history/stats
-	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error)
+	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error)
 	// UsersBulkActionsControllerBulkAllResetUserTraffic invokes UsersBulkActionsController_bulkAllResetUserTraffic operation.
 	//
 	// Bulk reset all users traffic.
 	//
 	// POST /api/users/bulk/all/reset-traffic
-	UsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context, options ...RequestOption) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error)
+	UsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error)
 	// UsersBulkActionsControllerBulkDeleteUsers invokes UsersBulkActionsController_bulkDeleteUsers operation.
 	//
 	// Bulk delete users by UUIDs.
 	//
 	// POST /api/users/bulk/delete
-	UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkDeleteUsersRes, error)
+	UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error)
 	// UsersBulkActionsControllerBulkDeleteUsersByStatus invokes UsersBulkActionsController_bulkDeleteUsersByStatus operation.
 	//
 	// Bulk delete users by status.
 	//
 	// POST /api/users/bulk/delete-by-status
-	UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error)
+	UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error)
 	// UsersBulkActionsControllerBulkResetUserTraffic invokes UsersBulkActionsController_bulkResetUserTraffic operation.
 	//
 	// Bulk reset traffic users by UUIDs.
 	//
 	// POST /api/users/bulk/reset-traffic
-	UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkResetUserTrafficRes, error)
+	UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error)
 	// UsersBulkActionsControllerBulkRevokeUsersSubscription invokes UsersBulkActionsController_bulkRevokeUsersSubscription operation.
 	//
 	// Revoke users subscription by User UUIDs.
 	//
 	// POST /api/users/bulk/revoke-subscription
-	UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error)
+	UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error)
 	// UsersBulkActionsControllerBulkUpdateAllUsers invokes UsersBulkActionsController_bulkUpdateAllUsers operation.
 	//
 	// Bulk update all users.
 	//
 	// POST /api/users/bulk/all/update
-	UsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error)
+	UsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error)
 	// UsersBulkActionsControllerBulkUpdateUsers invokes UsersBulkActionsController_bulkUpdateUsers operation.
 	//
 	// Bulk update users by UUIDs.
 	//
 	// POST /api/users/bulk/update
-	UsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkUpdateUsersRes, error)
+	UsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateUsersRes, error)
 	// UsersBulkActionsControllerBulkUpdateUsersInternalSquads invokes UsersBulkActionsController_bulkUpdateUsersInternalSquads operation.
 	//
 	// Bulk update users internal squads by UUIDs.
 	//
 	// POST /api/users/bulk/update-squads
-	UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error)
+	UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error)
 	// UsersControllerCreateUser invokes UsersController_createUser operation.
 	//
 	// Create a new user.
 	//
 	// POST /api/users
-	UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (UsersControllerCreateUserRes, error)
+	UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto) (UsersControllerCreateUserRes, error)
 	// UsersControllerDeleteUser invokes UsersController_deleteUser operation.
 	//
 	// Delete user.
 	//
 	// DELETE /api/users/{uuid}
-	UsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams, options ...RequestOption) (UsersControllerDeleteUserRes, error)
+	UsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (UsersControllerDeleteUserRes, error)
 	// UsersControllerDisableUser invokes UsersController_disableUser operation.
 	//
 	// Disable user.
 	//
 	// POST /api/users/{uuid}/actions/disable
-	UsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams, options ...RequestOption) (UsersControllerDisableUserRes, error)
+	UsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams) (UsersControllerDisableUserRes, error)
 	// UsersControllerEnableUser invokes UsersController_enableUser operation.
 	//
 	// Enable user.
 	//
 	// POST /api/users/{uuid}/actions/enable
-	UsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams, options ...RequestOption) (UsersControllerEnableUserRes, error)
+	UsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams) (UsersControllerEnableUserRes, error)
 	// UsersControllerGetAllTags invokes UsersController_getAllTags operation.
 	//
 	// Get all existing user tags.
 	//
 	// GET /api/users/tags
-	UsersControllerGetAllTags(ctx context.Context, options ...RequestOption) (UsersControllerGetAllTagsRes, error)
+	UsersControllerGetAllTags(ctx context.Context) (UsersControllerGetAllTagsRes, error)
 	// UsersControllerGetAllUsers invokes UsersController_getAllUsers operation.
 	//
 	// Get all users.
 	//
 	// GET /api/users
-	UsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams, options ...RequestOption) (UsersControllerGetAllUsersRes, error)
+	UsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (UsersControllerGetAllUsersRes, error)
 	// UsersControllerGetUserAccessibleNodes invokes UsersController_getUserAccessibleNodes operation.
 	//
 	// Get user accessible nodes.
 	//
 	// GET /api/users/{uuid}/accessible-nodes
-	UsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams, options ...RequestOption) (UsersControllerGetUserAccessibleNodesRes, error)
+	UsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error)
 	// UsersControllerGetUserByShortUuid invokes UsersController_getUserByShortUuid operation.
 	//
 	// Get user by Short UUID.
 	//
 	// GET /api/users/by-short-uuid/{shortUuid}
-	UsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams, options ...RequestOption) (UsersControllerGetUserByShortUuidRes, error)
+	UsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (UsersControllerGetUserByShortUuidRes, error)
 	// UsersControllerGetUserByTelegramId invokes UsersController_getUserByTelegramId operation.
 	//
 	// Get users by telegram ID.
 	//
 	// GET /api/users/by-telegram-id/{telegramId}
-	UsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams, options ...RequestOption) (UsersControllerGetUserByTelegramIdRes, error)
+	UsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (UsersControllerGetUserByTelegramIdRes, error)
 	// UsersControllerGetUserByUsername invokes UsersController_getUserByUsername operation.
 	//
 	// Get user by username.
 	//
 	// GET /api/users/by-username/{username}
-	UsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams, options ...RequestOption) (UsersControllerGetUserByUsernameRes, error)
+	UsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (UsersControllerGetUserByUsernameRes, error)
 	// UsersControllerGetUserByUuid invokes UsersController_getUserByUuid operation.
 	//
 	// Get user by UUID.
 	//
 	// GET /api/users/{uuid}
-	UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams, options ...RequestOption) (UsersControllerGetUserByUuidRes, error)
+	UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (UsersControllerGetUserByUuidRes, error)
 	// UsersControllerGetUserSubscriptionRequestHistory invokes UsersController_getUserSubscriptionRequestHistory operation.
 	//
 	// Get user subscription request history, recent 24 records.
 	//
 	// GET /api/users/{uuid}/subscription-request-history
-	UsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams, options ...RequestOption) (UsersControllerGetUserSubscriptionRequestHistoryRes, error)
+	UsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (UsersControllerGetUserSubscriptionRequestHistoryRes, error)
 	// UsersControllerGetUsersByEmail invokes UsersController_getUsersByEmail operation.
 	//
 	// Get users by email.
 	//
 	// GET /api/users/by-email/{email}
-	UsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams, options ...RequestOption) (UsersControllerGetUsersByEmailRes, error)
+	UsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (UsersControllerGetUsersByEmailRes, error)
 	// UsersControllerGetUsersByTag invokes UsersController_getUsersByTag operation.
 	//
 	// Get users by tag.
 	//
 	// GET /api/users/by-tag/{tag}
-	UsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams, options ...RequestOption) (UsersControllerGetUsersByTagRes, error)
+	UsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (UsersControllerGetUsersByTagRes, error)
 	// UsersControllerResetUserTraffic invokes UsersController_resetUserTraffic operation.
 	//
 	// Reset user traffic.
 	//
 	// POST /api/users/{uuid}/actions/reset-traffic
-	UsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams, options ...RequestOption) (UsersControllerResetUserTrafficRes, error)
+	UsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (UsersControllerResetUserTrafficRes, error)
 	// UsersControllerRevokeUserSubscription invokes UsersController_revokeUserSubscription operation.
 	//
 	// Revoke user subscription.
 	//
 	// POST /api/users/{uuid}/actions/revoke
-	UsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams, options ...RequestOption) (UsersControllerRevokeUserSubscriptionRes, error)
+	UsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (UsersControllerRevokeUserSubscriptionRes, error)
 	// UsersControllerUpdateUser invokes UsersController_updateUser operation.
 	//
 	// Update a user by UUID or username.
 	//
 	// PATCH /api/users
-	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (UsersControllerUpdateUserRes, error)
+	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto) (UsersControllerUpdateUserRes, error)
 	// UsersStatsControllerGetUserUsageByRange invokes UsersStatsController_getUserUsageByRange operation.
 	//
 	// Get user usage by range.
 	//
 	// GET /api/users/stats/usage/{uuid}/range
-	UsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams, options ...RequestOption) (UsersStatsControllerGetUserUsageByRangeRes, error)
+	UsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (UsersStatsControllerGetUserUsageByRangeRes, error)
 }
 
 // Client implements OAS client.
@@ -936,33 +884,73 @@ func NewClient(serverURL string, sec SecuritySource, opts ...ClientOption) (*Cli
 	}, nil
 }
 
+type serverURLKey struct{}
+
+// WithServerURL sets context key to override server URL.
+func WithServerURL(ctx context.Context, u *url.URL) context.Context {
+	return context.WithValue(ctx, serverURLKey{}, u)
+}
+
+func (c *Client) requestURL(ctx context.Context) *url.URL {
+	u, ok := ctx.Value(serverURLKey{}).(*url.URL)
+	if !ok {
+		return c.serverURL
+	}
+	return u
+}
+
 // ApiTokensControllerCreate invokes ApiTokensController_create operation.
 //
 // This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.
 //
 // POST /api/tokens
-func (c *Client) ApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto, options ...RequestOption) (ApiTokensControllerCreateRes, error) {
-	res, err := c.sendApiTokensControllerCreate(ctx, request, options...)
+func (c *Client) ApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto) (ApiTokensControllerCreateRes, error) {
+	res, err := c.sendApiTokensControllerCreate(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto, requestOptions ...RequestOption) (res ApiTokensControllerCreateRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *CreateApiTokenRequestDto) (res ApiTokensControllerCreateRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ApiTokensController_create"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/tokens"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensControllerCreateOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/tokens"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -975,7 +963,7 @@ func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *Cre
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ApiTokensControllerCreateOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -1004,20 +992,14 @@ func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *Cre
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeApiTokensControllerCreateResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1031,24 +1013,48 @@ func (c *Client) sendApiTokensControllerCreate(ctx context.Context, request *Cre
 // This endpoint is forbidden to use via "API-key". It can be used only with an admin JWT-token.
 //
 // DELETE /api/tokens/{uuid}
-func (c *Client) ApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams, options ...RequestOption) (ApiTokensControllerDeleteRes, error) {
-	res, err := c.sendApiTokensControllerDelete(ctx, params, options...)
+func (c *Client) ApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams) (ApiTokensControllerDeleteRes, error) {
+	res, err := c.sendApiTokensControllerDelete(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams, requestOptions ...RequestOption) (res ApiTokensControllerDeleteRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTokensControllerDeleteParams) (res ApiTokensControllerDeleteRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ApiTokensController_delete"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/tokens/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensControllerDeleteOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/tokens/"
 	{
@@ -1071,6 +1077,7 @@ func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTo
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1080,7 +1087,7 @@ func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTo
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ApiTokensControllerDeleteOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -1109,20 +1116,14 @@ func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTo
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeApiTokensControllerDeleteResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1136,28 +1137,53 @@ func (c *Client) sendApiTokensControllerDelete(ctx context.Context, params ApiTo
 // This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.
 //
 // GET /api/tokens
-func (c *Client) ApiTokensControllerFindAll(ctx context.Context, options ...RequestOption) (ApiTokensControllerFindAllRes, error) {
-	res, err := c.sendApiTokensControllerFindAll(ctx, options...)
+func (c *Client) ApiTokensControllerFindAll(ctx context.Context) (ApiTokensControllerFindAllRes, error) {
+	res, err := c.sendApiTokensControllerFindAll(ctx)
 	return res, err
 }
 
-func (c *Client) sendApiTokensControllerFindAll(ctx context.Context, requestOptions ...RequestOption) (res ApiTokensControllerFindAllRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendApiTokensControllerFindAll(ctx context.Context) (res ApiTokensControllerFindAllRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ApiTokensController_findAll"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/tokens"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensControllerFindAllOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/tokens"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1167,7 +1193,7 @@ func (c *Client) sendApiTokensControllerFindAll(ctx context.Context, requestOpti
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ApiTokensControllerFindAllOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -1196,20 +1222,14 @@ func (c *Client) sendApiTokensControllerFindAll(ctx context.Context, requestOpti
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeApiTokensControllerFindAllResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1223,47 +1243,66 @@ func (c *Client) sendApiTokensControllerFindAll(ctx context.Context, requestOpti
 // Get the status of the authentication.
 //
 // GET /api/auth/status
-func (c *Client) AuthControllerGetStatus(ctx context.Context, options ...RequestOption) (AuthControllerGetStatusRes, error) {
-	res, err := c.sendAuthControllerGetStatus(ctx, options...)
+func (c *Client) AuthControllerGetStatus(ctx context.Context) (AuthControllerGetStatusRes, error) {
+	res, err := c.sendAuthControllerGetStatus(ctx)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerGetStatus(ctx context.Context, requestOptions ...RequestOption) (res AuthControllerGetStatusRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendAuthControllerGetStatus(ctx context.Context) (res AuthControllerGetStatusRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_getStatus"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/auth/status"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerGetStatusOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/status"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerGetStatusResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1277,28 +1316,53 @@ func (c *Client) sendAuthControllerGetStatus(ctx context.Context, requestOptions
 // Login as superadmin.
 //
 // POST /api/auth/login
-func (c *Client) AuthControllerLogin(ctx context.Context, request *LoginRequestDto, options ...RequestOption) (AuthControllerLoginRes, error) {
-	res, err := c.sendAuthControllerLogin(ctx, request, options...)
+func (c *Client) AuthControllerLogin(ctx context.Context, request *LoginRequestDto) (AuthControllerLoginRes, error) {
+	res, err := c.sendAuthControllerLogin(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerLogin(ctx context.Context, request *LoginRequestDto, requestOptions ...RequestOption) (res AuthControllerLoginRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendAuthControllerLogin(ctx context.Context, request *LoginRequestDto) (res AuthControllerLoginRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_login"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/auth/login"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerLoginOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/login"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1307,20 +1371,14 @@ func (c *Client) sendAuthControllerLogin(ctx context.Context, request *LoginRequ
 		return res, errors.Wrap(err, "encode request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerLoginResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1334,12 +1392,12 @@ func (c *Client) sendAuthControllerLogin(ctx context.Context, request *LoginRequ
 // Initiate OAuth2 authorization.
 //
 // POST /api/auth/oauth2/authorize
-func (c *Client) AuthControllerOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto, options ...RequestOption) (AuthControllerOauth2AuthorizeRes, error) {
-	res, err := c.sendAuthControllerOauth2Authorize(ctx, request, options...)
+func (c *Client) AuthControllerOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (AuthControllerOauth2AuthorizeRes, error) {
+	res, err := c.sendAuthControllerOauth2Authorize(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto, requestOptions ...RequestOption) (res AuthControllerOauth2AuthorizeRes, err error) {
+func (c *Client) sendAuthControllerOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (res AuthControllerOauth2AuthorizeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -1349,22 +1407,47 @@ func (c *Client) sendAuthControllerOauth2Authorize(ctx context.Context, request 
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_oauth2Authorize"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/auth/oauth2/authorize"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerOauth2AuthorizeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/oauth2/authorize"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1373,20 +1456,14 @@ func (c *Client) sendAuthControllerOauth2Authorize(ctx context.Context, request 
 		return res, errors.Wrap(err, "encode request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerOauth2AuthorizeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1400,12 +1477,12 @@ func (c *Client) sendAuthControllerOauth2Authorize(ctx context.Context, request 
 // Callback from OAuth2.
 //
 // POST /api/auth/oauth2/callback
-func (c *Client) AuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto, options ...RequestOption) (AuthControllerOauth2CallbackRes, error) {
-	res, err := c.sendAuthControllerOauth2Callback(ctx, request, options...)
+func (c *Client) AuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (AuthControllerOauth2CallbackRes, error) {
+	res, err := c.sendAuthControllerOauth2Callback(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto, requestOptions ...RequestOption) (res AuthControllerOauth2CallbackRes, err error) {
+func (c *Client) sendAuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (res AuthControllerOauth2CallbackRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -1415,22 +1492,47 @@ func (c *Client) sendAuthControllerOauth2Callback(ctx context.Context, request *
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_oauth2Callback"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/auth/oauth2/callback"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerOauth2CallbackOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/oauth2/callback"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1439,20 +1541,14 @@ func (c *Client) sendAuthControllerOauth2Callback(ctx context.Context, request *
 		return res, errors.Wrap(err, "encode request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerOauth2CallbackResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1466,47 +1562,66 @@ func (c *Client) sendAuthControllerOauth2Callback(ctx context.Context, request *
 // Get the authentication options for passkey.
 //
 // GET /api/auth/passkey/authentication/options
-func (c *Client) AuthControllerPasskeyAuthenticationOptions(ctx context.Context, options ...RequestOption) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
-	res, err := c.sendAuthControllerPasskeyAuthenticationOptions(ctx, options...)
+func (c *Client) AuthControllerPasskeyAuthenticationOptions(ctx context.Context) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
+	res, err := c.sendAuthControllerPasskeyAuthenticationOptions(ctx)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerPasskeyAuthenticationOptions(ctx context.Context, requestOptions ...RequestOption) (res AuthControllerPasskeyAuthenticationOptionsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendAuthControllerPasskeyAuthenticationOptions(ctx context.Context) (res AuthControllerPasskeyAuthenticationOptionsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_passkeyAuthenticationOptions"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/auth/passkey/authentication/options"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerPasskeyAuthenticationOptionsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/passkey/authentication/options"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerPasskeyAuthenticationOptionsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1520,28 +1635,53 @@ func (c *Client) sendAuthControllerPasskeyAuthenticationOptions(ctx context.Cont
 // Verify the authentication for passkey.
 //
 // POST /api/auth/passkey/authentication/verify
-func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, options ...RequestOption) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
-	res, err := c.sendAuthControllerPasskeyAuthenticationVerify(ctx, request, options...)
+func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+	res, err := c.sendAuthControllerPasskeyAuthenticationVerify(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, requestOptions ...RequestOption) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_passkeyAuthenticationVerify"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/auth/passkey/authentication/verify"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerPasskeyAuthenticationVerifyOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/passkey/authentication/verify"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1550,20 +1690,14 @@ func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Conte
 		return res, errors.Wrap(err, "encode request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerPasskeyAuthenticationVerifyResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1577,12 +1711,12 @@ func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Conte
 // Register as superadmin.
 //
 // POST /api/auth/register
-func (c *Client) AuthControllerRegister(ctx context.Context, request *RegisterRequestDto, options ...RequestOption) (AuthControllerRegisterRes, error) {
-	res, err := c.sendAuthControllerRegister(ctx, request, options...)
+func (c *Client) AuthControllerRegister(ctx context.Context, request *RegisterRequestDto) (AuthControllerRegisterRes, error) {
+	res, err := c.sendAuthControllerRegister(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerRegister(ctx context.Context, request *RegisterRequestDto, requestOptions ...RequestOption) (res AuthControllerRegisterRes, err error) {
+func (c *Client) sendAuthControllerRegister(ctx context.Context, request *RegisterRequestDto) (res AuthControllerRegisterRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -1592,22 +1726,47 @@ func (c *Client) sendAuthControllerRegister(ctx context.Context, request *Regist
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_register"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/auth/register"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerRegisterOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/register"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1616,20 +1775,14 @@ func (c *Client) sendAuthControllerRegister(ctx context.Context, request *Regist
 		return res, errors.Wrap(err, "encode request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerRegisterResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1643,12 +1796,12 @@ func (c *Client) sendAuthControllerRegister(ctx context.Context, request *Regist
 // Callback from Telegram OAuth2.
 //
 // POST /api/auth/oauth2/tg/callback
-func (c *Client) AuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, options ...RequestOption) (AuthControllerTelegramCallbackRes, error) {
-	res, err := c.sendAuthControllerTelegramCallback(ctx, request, options...)
+func (c *Client) AuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (AuthControllerTelegramCallbackRes, error) {
+	res, err := c.sendAuthControllerTelegramCallback(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, requestOptions ...RequestOption) (res AuthControllerTelegramCallbackRes, err error) {
+func (c *Client) sendAuthControllerTelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (res AuthControllerTelegramCallbackRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -1658,22 +1811,47 @@ func (c *Client) sendAuthControllerTelegramCallback(ctx context.Context, request
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("AuthController_telegramCallback"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/auth/oauth2/tg/callback"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, AuthControllerTelegramCallbackOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/auth/oauth2/tg/callback"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1682,20 +1860,14 @@ func (c *Client) sendAuthControllerTelegramCallback(ctx context.Context, request
 		return res, errors.Wrap(err, "encode request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeAuthControllerTelegramCallbackResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1709,12 +1881,12 @@ func (c *Client) sendAuthControllerTelegramCallback(ctx context.Context, request
 // Create config profile.
 //
 // POST /api/config-profiles
-func (c *Client) ConfigProfileControllerCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto, options ...RequestOption) (ConfigProfileControllerCreateConfigProfileRes, error) {
-	res, err := c.sendConfigProfileControllerCreateConfigProfile(ctx, request, options...)
+func (c *Client) ConfigProfileControllerCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto) (ConfigProfileControllerCreateConfigProfileRes, error) {
+	res, err := c.sendConfigProfileControllerCreateConfigProfile(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto, requestOptions ...RequestOption) (res ConfigProfileControllerCreateConfigProfileRes, err error) {
+func (c *Client) sendConfigProfileControllerCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto) (res ConfigProfileControllerCreateConfigProfileRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -1724,22 +1896,47 @@ func (c *Client) sendConfigProfileControllerCreateConfigProfile(ctx context.Cont
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_createConfigProfile"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/config-profiles"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerCreateConfigProfileOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/config-profiles"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1752,7 +1949,7 @@ func (c *Client) sendConfigProfileControllerCreateConfigProfile(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerCreateConfigProfileOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -1781,20 +1978,14 @@ func (c *Client) sendConfigProfileControllerCreateConfigProfile(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerCreateConfigProfileResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1808,24 +1999,48 @@ func (c *Client) sendConfigProfileControllerCreateConfigProfile(ctx context.Cont
 // Delete config profile.
 //
 // DELETE /api/config-profiles/{uuid}
-func (c *Client) ConfigProfileControllerDeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams, options ...RequestOption) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
-	res, err := c.sendConfigProfileControllerDeleteConfigProfileByUuid(ctx, params, options...)
+func (c *Client) ConfigProfileControllerDeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
+	res, err := c.sendConfigProfileControllerDeleteConfigProfileByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerDeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams, requestOptions ...RequestOption) (res ConfigProfileControllerDeleteConfigProfileByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendConfigProfileControllerDeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (res ConfigProfileControllerDeleteConfigProfileByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_deleteConfigProfileByUuid"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/config-profiles/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerDeleteConfigProfileByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/config-profiles/"
 	{
@@ -1848,6 +2063,7 @@ func (c *Client) sendConfigProfileControllerDeleteConfigProfileByUuid(ctx contex
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1857,7 +2073,7 @@ func (c *Client) sendConfigProfileControllerDeleteConfigProfileByUuid(ctx contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerDeleteConfigProfileByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -1886,20 +2102,14 @@ func (c *Client) sendConfigProfileControllerDeleteConfigProfileByUuid(ctx contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerDeleteConfigProfileByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -1913,28 +2123,53 @@ func (c *Client) sendConfigProfileControllerDeleteConfigProfileByUuid(ctx contex
 // Get all inbounds from all config profiles.
 //
 // GET /api/config-profiles/inbounds
-func (c *Client) ConfigProfileControllerGetAllInbounds(ctx context.Context, options ...RequestOption) (ConfigProfileControllerGetAllInboundsRes, error) {
-	res, err := c.sendConfigProfileControllerGetAllInbounds(ctx, options...)
+func (c *Client) ConfigProfileControllerGetAllInbounds(ctx context.Context) (ConfigProfileControllerGetAllInboundsRes, error) {
+	res, err := c.sendConfigProfileControllerGetAllInbounds(ctx)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerGetAllInbounds(ctx context.Context, requestOptions ...RequestOption) (res ConfigProfileControllerGetAllInboundsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendConfigProfileControllerGetAllInbounds(ctx context.Context) (res ConfigProfileControllerGetAllInboundsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_getAllInbounds"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/config-profiles/inbounds"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerGetAllInboundsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/config-profiles/inbounds"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -1944,7 +2179,7 @@ func (c *Client) sendConfigProfileControllerGetAllInbounds(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerGetAllInboundsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -1973,20 +2208,14 @@ func (c *Client) sendConfigProfileControllerGetAllInbounds(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerGetAllInboundsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2000,24 +2229,48 @@ func (c *Client) sendConfigProfileControllerGetAllInbounds(ctx context.Context, 
 // Get config profile by uuid.
 //
 // GET /api/config-profiles/{uuid}
-func (c *Client) ConfigProfileControllerGetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams, options ...RequestOption) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
-	res, err := c.sendConfigProfileControllerGetConfigProfileByUuid(ctx, params, options...)
+func (c *Client) ConfigProfileControllerGetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
+	res, err := c.sendConfigProfileControllerGetConfigProfileByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerGetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams, requestOptions ...RequestOption) (res ConfigProfileControllerGetConfigProfileByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendConfigProfileControllerGetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (res ConfigProfileControllerGetConfigProfileByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_getConfigProfileByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/config-profiles/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerGetConfigProfileByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/config-profiles/"
 	{
@@ -2040,6 +2293,7 @@ func (c *Client) sendConfigProfileControllerGetConfigProfileByUuid(ctx context.C
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2049,7 +2303,7 @@ func (c *Client) sendConfigProfileControllerGetConfigProfileByUuid(ctx context.C
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerGetConfigProfileByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2078,20 +2332,14 @@ func (c *Client) sendConfigProfileControllerGetConfigProfileByUuid(ctx context.C
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerGetConfigProfileByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2105,28 +2353,53 @@ func (c *Client) sendConfigProfileControllerGetConfigProfileByUuid(ctx context.C
 // Get config profiles.
 //
 // GET /api/config-profiles
-func (c *Client) ConfigProfileControllerGetConfigProfiles(ctx context.Context, options ...RequestOption) (ConfigProfileControllerGetConfigProfilesRes, error) {
-	res, err := c.sendConfigProfileControllerGetConfigProfiles(ctx, options...)
+func (c *Client) ConfigProfileControllerGetConfigProfiles(ctx context.Context) (ConfigProfileControllerGetConfigProfilesRes, error) {
+	res, err := c.sendConfigProfileControllerGetConfigProfiles(ctx)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerGetConfigProfiles(ctx context.Context, requestOptions ...RequestOption) (res ConfigProfileControllerGetConfigProfilesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendConfigProfileControllerGetConfigProfiles(ctx context.Context) (res ConfigProfileControllerGetConfigProfilesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_getConfigProfiles"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/config-profiles"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerGetConfigProfilesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/config-profiles"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2136,7 +2409,7 @@ func (c *Client) sendConfigProfileControllerGetConfigProfiles(ctx context.Contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerGetConfigProfilesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2165,20 +2438,14 @@ func (c *Client) sendConfigProfileControllerGetConfigProfiles(ctx context.Contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerGetConfigProfilesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2192,24 +2459,48 @@ func (c *Client) sendConfigProfileControllerGetConfigProfiles(ctx context.Contex
 // Get inbounds by profile uuid.
 //
 // GET /api/config-profiles/{uuid}/inbounds
-func (c *Client) ConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams, options ...RequestOption) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
-	res, err := c.sendConfigProfileControllerGetInboundsByProfileUuid(ctx, params, options...)
+func (c *Client) ConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
+	res, err := c.sendConfigProfileControllerGetInboundsByProfileUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams, requestOptions ...RequestOption) (res ConfigProfileControllerGetInboundsByProfileUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (res ConfigProfileControllerGetInboundsByProfileUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_getInboundsByProfileUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/config-profiles/{uuid}/inbounds"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerGetInboundsByProfileUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/config-profiles/"
 	{
@@ -2233,6 +2524,7 @@ func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context
 	pathParts[2] = "/inbounds"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2242,7 +2534,7 @@ func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerGetInboundsByProfileUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2271,20 +2563,14 @@ func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerGetInboundsByProfileUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2298,12 +2584,12 @@ func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context
 // Update Core Config in specific config profile.
 //
 // PATCH /api/config-profiles
-func (c *Client) ConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto, options ...RequestOption) (ConfigProfileControllerUpdateConfigProfileRes, error) {
-	res, err := c.sendConfigProfileControllerUpdateConfigProfile(ctx, request, options...)
+func (c *Client) ConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileControllerUpdateConfigProfileRes, error) {
+	res, err := c.sendConfigProfileControllerUpdateConfigProfile(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto, requestOptions ...RequestOption) (res ConfigProfileControllerUpdateConfigProfileRes, err error) {
+func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (res ConfigProfileControllerUpdateConfigProfileRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -2313,22 +2599,47 @@ func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Cont
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_updateConfigProfile"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/config-profiles"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerUpdateConfigProfileOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/config-profiles"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2341,7 +2652,7 @@ func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ConfigProfileControllerUpdateConfigProfileOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2370,20 +2681,14 @@ func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeConfigProfileControllerUpdateConfigProfileResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2397,24 +2702,48 @@ func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Cont
 // Add all users to external squad.
 //
 // POST /api/external-squads/{uuid}/bulk-actions/add-users
-func (c *Client) ExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams, options ...RequestOption) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
-	res, err := c.sendExternalSquadControllerAddUsersToExternalSquad(ctx, params, options...)
+func (c *Client) ExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerAddUsersToExternalSquad(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams, requestOptions ...RequestOption) (res ExternalSquadControllerAddUsersToExternalSquadRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (res ExternalSquadControllerAddUsersToExternalSquadRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_addUsersToExternalSquad"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/external-squads/{uuid}/bulk-actions/add-users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerAddUsersToExternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/external-squads/"
 	{
@@ -2438,6 +2767,7 @@ func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.
 	pathParts[2] = "/bulk-actions/add-users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2447,7 +2777,7 @@ func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerAddUsersToExternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2476,20 +2806,14 @@ func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerAddUsersToExternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2503,12 +2827,12 @@ func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.
 // Create external squad.
 //
 // POST /api/external-squads
-func (c *Client) ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerCreateExternalSquadRes, error) {
-	res, err := c.sendExternalSquadControllerCreateExternalSquad(ctx, request, options...)
+func (c *Client) ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerCreateExternalSquad(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto, requestOptions ...RequestOption) (res ExternalSquadControllerCreateExternalSquadRes, err error) {
+func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (res ExternalSquadControllerCreateExternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -2518,22 +2842,47 @@ func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Cont
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_createExternalSquad"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/external-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerCreateExternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/external-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2546,7 +2895,7 @@ func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerCreateExternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2575,20 +2924,14 @@ func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerCreateExternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2602,24 +2945,48 @@ func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Cont
 // Delete external squad.
 //
 // DELETE /api/external-squads/{uuid}
-func (c *Client) ExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams, options ...RequestOption) (ExternalSquadControllerDeleteExternalSquadRes, error) {
-	res, err := c.sendExternalSquadControllerDeleteExternalSquad(ctx, params, options...)
+func (c *Client) ExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (ExternalSquadControllerDeleteExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerDeleteExternalSquad(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams, requestOptions ...RequestOption) (res ExternalSquadControllerDeleteExternalSquadRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (res ExternalSquadControllerDeleteExternalSquadRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_deleteExternalSquad"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/external-squads/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerDeleteExternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/external-squads/"
 	{
@@ -2642,6 +3009,7 @@ func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Cont
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2651,7 +3019,7 @@ func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerDeleteExternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2680,20 +3048,14 @@ func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerDeleteExternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2707,24 +3069,48 @@ func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Cont
 // Get external squad by uuid.
 //
 // GET /api/external-squads/{uuid}
-func (c *Client) ExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams, options ...RequestOption) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
-	res, err := c.sendExternalSquadControllerGetExternalSquadByUuid(ctx, params, options...)
+func (c *Client) ExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
+	res, err := c.sendExternalSquadControllerGetExternalSquadByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams, requestOptions ...RequestOption) (res ExternalSquadControllerGetExternalSquadByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (res ExternalSquadControllerGetExternalSquadByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_getExternalSquadByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/external-squads/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerGetExternalSquadByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/external-squads/"
 	{
@@ -2747,6 +3133,7 @@ func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.C
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2756,7 +3143,7 @@ func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.C
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerGetExternalSquadByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2785,20 +3172,14 @@ func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.C
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerGetExternalSquadByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2812,28 +3193,53 @@ func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.C
 // Get all external squads.
 //
 // GET /api/external-squads
-func (c *Client) ExternalSquadControllerGetExternalSquads(ctx context.Context, options ...RequestOption) (ExternalSquadControllerGetExternalSquadsRes, error) {
-	res, err := c.sendExternalSquadControllerGetExternalSquads(ctx, options...)
+func (c *Client) ExternalSquadControllerGetExternalSquads(ctx context.Context) (ExternalSquadControllerGetExternalSquadsRes, error) {
+	res, err := c.sendExternalSquadControllerGetExternalSquads(ctx)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerGetExternalSquads(ctx context.Context, requestOptions ...RequestOption) (res ExternalSquadControllerGetExternalSquadsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendExternalSquadControllerGetExternalSquads(ctx context.Context) (res ExternalSquadControllerGetExternalSquadsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_getExternalSquads"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/external-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerGetExternalSquadsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/external-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2843,7 +3249,7 @@ func (c *Client) sendExternalSquadControllerGetExternalSquads(ctx context.Contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerGetExternalSquadsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2872,20 +3278,14 @@ func (c *Client) sendExternalSquadControllerGetExternalSquads(ctx context.Contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerGetExternalSquadsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -2899,24 +3299,48 @@ func (c *Client) sendExternalSquadControllerGetExternalSquads(ctx context.Contex
 // Delete users from external squad.
 //
 // DELETE /api/external-squads/{uuid}/bulk-actions/remove-users
-func (c *Client) ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams, options ...RequestOption) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
-	res, err := c.sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx, params, options...)
+func (c *Client) ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams, requestOptions ...RequestOption) (res ExternalSquadControllerRemoveUsersFromExternalSquadRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (res ExternalSquadControllerRemoveUsersFromExternalSquadRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_removeUsersFromExternalSquad"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/external-squads/{uuid}/bulk-actions/remove-users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerRemoveUsersFromExternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/external-squads/"
 	{
@@ -2940,6 +3364,7 @@ func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx con
 	pathParts[2] = "/bulk-actions/remove-users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -2949,7 +3374,7 @@ func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx con
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerRemoveUsersFromExternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -2978,20 +3403,14 @@ func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx con
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerRemoveUsersFromExternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3005,12 +3424,12 @@ func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx con
 // Update external squad.
 //
 // PATCH /api/external-squads
-func (c *Client) ExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerUpdateExternalSquadRes, error) {
-	res, err := c.sendExternalSquadControllerUpdateExternalSquad(ctx, request, options...)
+func (c *Client) ExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (ExternalSquadControllerUpdateExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerUpdateExternalSquad(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto, requestOptions ...RequestOption) (res ExternalSquadControllerUpdateExternalSquadRes, err error) {
+func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (res ExternalSquadControllerUpdateExternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3020,22 +3439,47 @@ func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Cont
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_updateExternalSquad"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/external-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerUpdateExternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/external-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3048,7 +3492,7 @@ func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, ExternalSquadControllerUpdateExternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3077,20 +3521,14 @@ func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerUpdateExternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3104,12 +3542,12 @@ func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Cont
 // Delete hosts by UUIDs.
 //
 // POST /api/hosts/bulk/delete
-func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerDeleteHostsRes, error) {
-	res, err := c.sendHostsBulkActionsControllerDeleteHosts(ctx, request, options...)
+func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error) {
+	res, err := c.sendHostsBulkActionsControllerDeleteHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto, requestOptions ...RequestOption) (res HostsBulkActionsControllerDeleteHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (res HostsBulkActionsControllerDeleteHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3119,22 +3557,47 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsBulkActionsController_deleteHosts"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts/bulk/delete"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsBulkActionsControllerDeleteHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/bulk/delete"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3147,7 +3610,7 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsBulkActionsControllerDeleteHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3176,20 +3639,14 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsBulkActionsControllerDeleteHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3203,12 +3660,12 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 // Disable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/disable
-func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerDisableHostsRes, error) {
-	res, err := c.sendHostsBulkActionsControllerDisableHosts(ctx, request, options...)
+func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error) {
+	res, err := c.sendHostsBulkActionsControllerDisableHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto, requestOptions ...RequestOption) (res HostsBulkActionsControllerDisableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (res HostsBulkActionsControllerDisableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3218,22 +3675,47 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsBulkActionsController_disableHosts"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts/bulk/disable"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsBulkActionsControllerDisableHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/bulk/disable"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3246,7 +3728,7 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsBulkActionsControllerDisableHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3275,20 +3757,14 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsBulkActionsControllerDisableHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3302,12 +3778,12 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 // Enable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/enable
-func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerEnableHostsRes, error) {
-	res, err := c.sendHostsBulkActionsControllerEnableHosts(ctx, request, options...)
+func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error) {
+	res, err := c.sendHostsBulkActionsControllerEnableHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto, requestOptions ...RequestOption) (res HostsBulkActionsControllerEnableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (res HostsBulkActionsControllerEnableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3317,22 +3793,47 @@ func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, 
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsBulkActionsController_enableHosts"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts/bulk/enable"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsBulkActionsControllerEnableHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/bulk/enable"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3345,7 +3846,7 @@ func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsBulkActionsControllerEnableHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3374,20 +3875,14 @@ func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsBulkActionsControllerEnableHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3401,12 +3896,12 @@ func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, 
 // Set inbound to hosts by UUIDs.
 //
 // POST /api/hosts/bulk/set-inbound
-func (c *Client) HostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerSetInboundToHostsRes, error) {
-	res, err := c.sendHostsBulkActionsControllerSetInboundToHosts(ctx, request, options...)
+func (c *Client) HostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (HostsBulkActionsControllerSetInboundToHostsRes, error) {
+	res, err := c.sendHostsBulkActionsControllerSetInboundToHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto, requestOptions ...RequestOption) (res HostsBulkActionsControllerSetInboundToHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (res HostsBulkActionsControllerSetInboundToHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3416,22 +3911,47 @@ func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Con
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsBulkActionsController_setInboundToHosts"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts/bulk/set-inbound"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsBulkActionsControllerSetInboundToHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/bulk/set-inbound"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3444,7 +3964,7 @@ func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Con
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsBulkActionsControllerSetInboundToHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3473,20 +3993,14 @@ func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Con
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsBulkActionsControllerSetInboundToHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3500,12 +4014,12 @@ func (c *Client) sendHostsBulkActionsControllerSetInboundToHosts(ctx context.Con
 // Set port to hosts by UUIDs.
 //
 // POST /api/hosts/bulk/set-port
-func (c *Client) HostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto, options ...RequestOption) (HostsBulkActionsControllerSetPortToHostsRes, error) {
-	res, err := c.sendHostsBulkActionsControllerSetPortToHosts(ctx, request, options...)
+func (c *Client) HostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (HostsBulkActionsControllerSetPortToHostsRes, error) {
+	res, err := c.sendHostsBulkActionsControllerSetPortToHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto, requestOptions ...RequestOption) (res HostsBulkActionsControllerSetPortToHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (res HostsBulkActionsControllerSetPortToHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3515,22 +4029,47 @@ func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Contex
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsBulkActionsController_setPortToHosts"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts/bulk/set-port"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsBulkActionsControllerSetPortToHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/bulk/set-port"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3543,7 +4082,7 @@ func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsBulkActionsControllerSetPortToHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3572,20 +4111,14 @@ func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsBulkActionsControllerSetPortToHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3599,12 +4132,12 @@ func (c *Client) sendHostsBulkActionsControllerSetPortToHosts(ctx context.Contex
 // Create a new host.
 //
 // POST /api/hosts
-func (c *Client) HostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto, options ...RequestOption) (HostsControllerCreateHostRes, error) {
-	res, err := c.sendHostsControllerCreateHost(ctx, request, options...)
+func (c *Client) HostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto) (HostsControllerCreateHostRes, error) {
+	res, err := c.sendHostsControllerCreateHost(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto, requestOptions ...RequestOption) (res HostsControllerCreateHostRes, err error) {
+func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *CreateHostRequestDto) (res HostsControllerCreateHostRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3614,22 +4147,47 @@ func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *Cre
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_createHost"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerCreateHostOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3642,7 +4200,7 @@ func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *Cre
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerCreateHostOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3671,20 +4229,14 @@ func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *Cre
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerCreateHostResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3698,24 +4250,48 @@ func (c *Client) sendHostsControllerCreateHost(ctx context.Context, request *Cre
 // Delete a host by UUID.
 //
 // DELETE /api/hosts/{uuid}
-func (c *Client) HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams, options ...RequestOption) (HostsControllerDeleteHostRes, error) {
-	res, err := c.sendHostsControllerDeleteHost(ctx, params, options...)
+func (c *Client) HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (HostsControllerDeleteHostRes, error) {
+	res, err := c.sendHostsControllerDeleteHost(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams, requestOptions ...RequestOption) (res HostsControllerDeleteHostRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (res HostsControllerDeleteHostRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_deleteHost"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/hosts/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerDeleteHostOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/hosts/"
 	{
@@ -3738,6 +4314,7 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3747,7 +4324,7 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerDeleteHostOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3776,20 +4353,14 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerDeleteHostResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3803,28 +4374,53 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 // Get all existing host tags.
 //
 // GET /api/hosts/tags
-func (c *Client) HostsControllerGetAllHostTags(ctx context.Context, options ...RequestOption) (HostsControllerGetAllHostTagsRes, error) {
-	res, err := c.sendHostsControllerGetAllHostTags(ctx, options...)
+func (c *Client) HostsControllerGetAllHostTags(ctx context.Context) (HostsControllerGetAllHostTagsRes, error) {
+	res, err := c.sendHostsControllerGetAllHostTags(ctx)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerGetAllHostTags(ctx context.Context, requestOptions ...RequestOption) (res HostsControllerGetAllHostTagsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHostsControllerGetAllHostTags(ctx context.Context) (res HostsControllerGetAllHostTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_getAllHostTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hosts/tags"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerGetAllHostTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/tags"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3834,7 +4430,7 @@ func (c *Client) sendHostsControllerGetAllHostTags(ctx context.Context, requestO
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerGetAllHostTagsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3863,20 +4459,14 @@ func (c *Client) sendHostsControllerGetAllHostTags(ctx context.Context, requestO
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerGetAllHostTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3890,28 +4480,53 @@ func (c *Client) sendHostsControllerGetAllHostTags(ctx context.Context, requestO
 // Get all hosts.
 //
 // GET /api/hosts
-func (c *Client) HostsControllerGetAllHosts(ctx context.Context, options ...RequestOption) (HostsControllerGetAllHostsRes, error) {
-	res, err := c.sendHostsControllerGetAllHosts(ctx, options...)
+func (c *Client) HostsControllerGetAllHosts(ctx context.Context) (HostsControllerGetAllHostsRes, error) {
+	res, err := c.sendHostsControllerGetAllHosts(ctx)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context, requestOptions ...RequestOption) (res HostsControllerGetAllHostsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context) (res HostsControllerGetAllHostsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_getAllHosts"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hosts"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerGetAllHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -3921,7 +4536,7 @@ func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context, requestOpti
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerGetAllHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -3950,20 +4565,14 @@ func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context, requestOpti
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerGetAllHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -3977,24 +4586,48 @@ func (c *Client) sendHostsControllerGetAllHosts(ctx context.Context, requestOpti
 // Get a host by UUID.
 //
 // GET /api/hosts/{uuid}
-func (c *Client) HostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams, options ...RequestOption) (HostsControllerGetOneHostRes, error) {
-	res, err := c.sendHostsControllerGetOneHost(ctx, params, options...)
+func (c *Client) HostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (HostsControllerGetOneHostRes, error) {
+	res, err := c.sendHostsControllerGetOneHost(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams, requestOptions ...RequestOption) (res HostsControllerGetOneHostRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (res HostsControllerGetOneHostRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_getOneHost"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hosts/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerGetOneHostOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/hosts/"
 	{
@@ -4017,6 +4650,7 @@ func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params Hosts
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4026,7 +4660,7 @@ func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params Hosts
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerGetOneHostOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4055,20 +4689,14 @@ func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params Hosts
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerGetOneHostResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4082,12 +4710,12 @@ func (c *Client) sendHostsControllerGetOneHost(ctx context.Context, params Hosts
 // Reorder hosts.
 //
 // POST /api/hosts/actions/reorder
-func (c *Client) HostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto, options ...RequestOption) (HostsControllerReorderHostsRes, error) {
-	res, err := c.sendHostsControllerReorderHosts(ctx, request, options...)
+func (c *Client) HostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto) (HostsControllerReorderHostsRes, error) {
+	res, err := c.sendHostsControllerReorderHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto, requestOptions ...RequestOption) (res HostsControllerReorderHostsRes, err error) {
+func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *ReorderHostRequestDto) (res HostsControllerReorderHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4097,22 +4725,47 @@ func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *R
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_reorderHosts"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hosts/actions/reorder"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerReorderHostsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts/actions/reorder"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4125,7 +4778,7 @@ func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *R
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerReorderHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4154,20 +4807,14 @@ func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *R
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerReorderHostsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4181,12 +4828,12 @@ func (c *Client) sendHostsControllerReorderHosts(ctx context.Context, request *R
 // Update a host.
 //
 // PATCH /api/hosts
-func (c *Client) HostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto, options ...RequestOption) (HostsControllerUpdateHostRes, error) {
-	res, err := c.sendHostsControllerUpdateHost(ctx, request, options...)
+func (c *Client) HostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto) (HostsControllerUpdateHostRes, error) {
+	res, err := c.sendHostsControllerUpdateHost(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto, requestOptions ...RequestOption) (res HostsControllerUpdateHostRes, err error) {
+func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *UpdateHostRequestDto) (res HostsControllerUpdateHostRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4196,22 +4843,47 @@ func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *Upd
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HostsController_updateHost"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/hosts"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsControllerUpdateHostOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hosts"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4224,7 +4896,7 @@ func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *Upd
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HostsControllerUpdateHostOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4253,20 +4925,14 @@ func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *Upd
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHostsControllerUpdateHostResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4280,28 +4946,53 @@ func (c *Client) sendHostsControllerUpdateHost(ctx context.Context, request *Upd
 // Create a user HWID device.
 //
 // POST /api/hwid/devices
-func (c *Client) HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto, options ...RequestOption) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error) {
-	res, err := c.sendHwidUserDevicesControllerCreateUserHwidDevice(ctx, request, options...)
+func (c *Client) HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error) {
+	res, err := c.sendHwidUserDevicesControllerCreateUserHwidDevice(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto, requestOptions ...RequestOption) (res HwidUserDevicesControllerCreateUserHwidDeviceRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (res HwidUserDevicesControllerCreateUserHwidDeviceRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_createUserHwidDevice"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hwid/devices"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerCreateUserHwidDeviceOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hwid/devices"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4314,7 +5005,7 @@ func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.C
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerCreateUserHwidDeviceOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4343,20 +5034,14 @@ func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.C
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerCreateUserHwidDeviceResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4370,28 +5055,53 @@ func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.C
 // Delete all user HWID devices.
 //
 // POST /api/hwid/devices/delete-all
-func (c *Client) HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error) {
-	res, err := c.sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx, request, options...)
+func (c *Client) HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error) {
+	res, err := c.sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto, requestOptions ...RequestOption) (res HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (res HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_deleteAllUserHwidDevices"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hwid/devices/delete-all"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerDeleteAllUserHwidDevicesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hwid/devices/delete-all"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4404,7 +5114,7 @@ func (c *Client) sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerDeleteAllUserHwidDevicesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4433,20 +5143,14 @@ func (c *Client) sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerDeleteAllUserHwidDevicesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4460,28 +5164,53 @@ func (c *Client) sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx conte
 // Delete a user HWID device.
 //
 // POST /api/hwid/devices/delete
-func (c *Client) HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error) {
-	res, err := c.sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx, request, options...)
+func (c *Client) HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error) {
+	res, err := c.sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto, requestOptions ...RequestOption) (res HwidUserDevicesControllerDeleteUserHwidDeviceRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (res HwidUserDevicesControllerDeleteUserHwidDeviceRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_deleteUserHwidDevice"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/hwid/devices/delete"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerDeleteUserHwidDeviceOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hwid/devices/delete"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4494,7 +5223,7 @@ func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.C
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerDeleteUserHwidDeviceOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4523,20 +5252,14 @@ func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.C
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerDeleteUserHwidDeviceResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4550,28 +5273,53 @@ func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.C
 // Get all HWID devices.
 //
 // GET /api/hwid/devices
-func (c *Client) HwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams, options ...RequestOption) (HwidUserDevicesControllerGetAllUsersRes, error) {
-	res, err := c.sendHwidUserDevicesControllerGetAllUsers(ctx, params, options...)
+func (c *Client) HwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (HwidUserDevicesControllerGetAllUsersRes, error) {
+	res, err := c.sendHwidUserDevicesControllerGetAllUsers(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams, requestOptions ...RequestOption) (res HwidUserDevicesControllerGetAllUsersRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (res HwidUserDevicesControllerGetAllUsersRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_getAllUsers"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hwid/devices"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerGetAllUsersOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hwid/devices"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "size" parameter.
@@ -4609,6 +5357,7 @@ func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, p
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4618,7 +5367,7 @@ func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, p
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerGetAllUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4647,20 +5396,14 @@ func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, p
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerGetAllUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4674,28 +5417,53 @@ func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, p
 // Get HWID devices stats.
 //
 // GET /api/hwid/devices/stats
-func (c *Client) HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context, options ...RequestOption) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
-	res, err := c.sendHwidUserDevicesControllerGetHwidDevicesStats(ctx, options...)
+func (c *Client) HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
+	res, err := c.sendHwidUserDevicesControllerGetHwidDevicesStats(ctx)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context, requestOptions ...RequestOption) (res HwidUserDevicesControllerGetHwidDevicesStatsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context) (res HwidUserDevicesControllerGetHwidDevicesStatsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_getHwidDevicesStats"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hwid/devices/stats"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerGetHwidDevicesStatsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/hwid/devices/stats"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4705,7 +5473,7 @@ func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerGetHwidDevicesStatsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4734,20 +5502,14 @@ func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerGetHwidDevicesStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4761,24 +5523,48 @@ func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Co
 // Get user HWID devices.
 //
 // GET /api/hwid/devices/{userUuid}
-func (c *Client) HwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams, options ...RequestOption) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
-	res, err := c.sendHwidUserDevicesControllerGetUserHwidDevices(ctx, params, options...)
+func (c *Client) HwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
+	res, err := c.sendHwidUserDevicesControllerGetUserHwidDevices(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams, requestOptions ...RequestOption) (res HwidUserDevicesControllerGetUserHwidDevicesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (res HwidUserDevicesControllerGetUserHwidDevicesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_getUserHwidDevices"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hwid/devices/{userUuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerGetUserHwidDevicesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/hwid/devices/"
 	{
@@ -4801,6 +5587,7 @@ func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Con
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4810,7 +5597,7 @@ func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Con
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerGetUserHwidDevicesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4839,20 +5626,14 @@ func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Con
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerGetUserHwidDevicesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4866,12 +5647,12 @@ func (c *Client) sendHwidUserDevicesControllerGetUserHwidDevices(ctx context.Con
 // Create infra billing history.
 //
 // POST /api/infra-billing/history
-func (c *Client) InfraBillingControllerCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto, options ...RequestOption) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error) {
-	res, err := c.sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx, request, options...)
+func (c *Client) InfraBillingControllerCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error) {
+	res, err := c.sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto, requestOptions ...RequestOption) (res InfraBillingControllerCreateInfraBillingHistoryRecordRes, err error) {
+func (c *Client) sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (res InfraBillingControllerCreateInfraBillingHistoryRecordRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4881,22 +5662,47 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx c
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_createInfraBillingHistoryRecord"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/infra-billing/history"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerCreateInfraBillingHistoryRecordOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/history"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4909,7 +5715,7 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx c
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerCreateInfraBillingHistoryRecordOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -4938,20 +5744,14 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx c
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerCreateInfraBillingHistoryRecordResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -4965,28 +5765,53 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingHistoryRecord(ctx c
 // Create infra billing node.
 //
 // POST /api/infra-billing/nodes
-func (c *Client) InfraBillingControllerCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto, options ...RequestOption) (InfraBillingControllerCreateInfraBillingNodeRes, error) {
-	res, err := c.sendInfraBillingControllerCreateInfraBillingNode(ctx, request, options...)
+func (c *Client) InfraBillingControllerCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (InfraBillingControllerCreateInfraBillingNodeRes, error) {
+	res, err := c.sendInfraBillingControllerCreateInfraBillingNode(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto, requestOptions ...RequestOption) (res InfraBillingControllerCreateInfraBillingNodeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (res InfraBillingControllerCreateInfraBillingNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_createInfraBillingNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/infra-billing/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerCreateInfraBillingNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -4999,7 +5824,7 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingNode(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerCreateInfraBillingNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5028,20 +5853,14 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingNode(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerCreateInfraBillingNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5055,12 +5874,12 @@ func (c *Client) sendInfraBillingControllerCreateInfraBillingNode(ctx context.Co
 // Create infra provider.
 //
 // POST /api/infra-billing/providers
-func (c *Client) InfraBillingControllerCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto, options ...RequestOption) (InfraBillingControllerCreateInfraProviderRes, error) {
-	res, err := c.sendInfraBillingControllerCreateInfraProvider(ctx, request, options...)
+func (c *Client) InfraBillingControllerCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto) (InfraBillingControllerCreateInfraProviderRes, error) {
+	res, err := c.sendInfraBillingControllerCreateInfraProvider(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto, requestOptions ...RequestOption) (res InfraBillingControllerCreateInfraProviderRes, err error) {
+func (c *Client) sendInfraBillingControllerCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto) (res InfraBillingControllerCreateInfraProviderRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5070,22 +5889,47 @@ func (c *Client) sendInfraBillingControllerCreateInfraProvider(ctx context.Conte
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_createInfraProvider"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/infra-billing/providers"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerCreateInfraProviderOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/providers"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5098,7 +5942,7 @@ func (c *Client) sendInfraBillingControllerCreateInfraProvider(ctx context.Conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerCreateInfraProviderOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5127,20 +5971,14 @@ func (c *Client) sendInfraBillingControllerCreateInfraProvider(ctx context.Conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerCreateInfraProviderResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5154,24 +5992,48 @@ func (c *Client) sendInfraBillingControllerCreateInfraProvider(ctx context.Conte
 // Delete infra billing history.
 //
 // DELETE /api/infra-billing/history/{uuid}
-func (c *Client) InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams, options ...RequestOption) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
-	res, err := c.sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx, params, options...)
+func (c *Client) InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
+	res, err := c.sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams, requestOptions ...RequestOption) (res InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (res InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_deleteInfraBillingHistoryRecordByUuid"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/infra-billing/history/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/infra-billing/history/"
 	{
@@ -5194,6 +6056,7 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5203,7 +6066,7 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5232,20 +6095,14 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerDeleteInfraBillingHistoryRecordByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5259,24 +6116,48 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingHistoryRecordByUuid
 // Delete infra billing node.
 //
 // DELETE /api/infra-billing/nodes/{uuid}
-func (c *Client) InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams, options ...RequestOption) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
-	res, err := c.sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx, params, options...)
+func (c *Client) InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
+	res, err := c.sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams, requestOptions ...RequestOption) (res InfraBillingControllerDeleteInfraBillingNodeByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (res InfraBillingControllerDeleteInfraBillingNodeByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_deleteInfraBillingNodeByUuid"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/infra-billing/nodes/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerDeleteInfraBillingNodeByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/infra-billing/nodes/"
 	{
@@ -5299,6 +6180,7 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx cont
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5308,7 +6190,7 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerDeleteInfraBillingNodeByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5337,20 +6219,14 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerDeleteInfraBillingNodeByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5364,24 +6240,48 @@ func (c *Client) sendInfraBillingControllerDeleteInfraBillingNodeByUuid(ctx cont
 // Delete infra provider by uuid.
 //
 // DELETE /api/infra-billing/providers/{uuid}
-func (c *Client) InfraBillingControllerDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams, options ...RequestOption) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
-	res, err := c.sendInfraBillingControllerDeleteInfraProviderByUuid(ctx, params, options...)
+func (c *Client) InfraBillingControllerDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
+	res, err := c.sendInfraBillingControllerDeleteInfraProviderByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams, requestOptions ...RequestOption) (res InfraBillingControllerDeleteInfraProviderByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (res InfraBillingControllerDeleteInfraProviderByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_deleteInfraProviderByUuid"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/infra-billing/providers/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerDeleteInfraProviderByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/infra-billing/providers/"
 	{
@@ -5404,6 +6304,7 @@ func (c *Client) sendInfraBillingControllerDeleteInfraProviderByUuid(ctx context
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5413,7 +6314,7 @@ func (c *Client) sendInfraBillingControllerDeleteInfraProviderByUuid(ctx context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerDeleteInfraProviderByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5442,20 +6343,14 @@ func (c *Client) sendInfraBillingControllerDeleteInfraProviderByUuid(ctx context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerDeleteInfraProviderByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5469,28 +6364,53 @@ func (c *Client) sendInfraBillingControllerDeleteInfraProviderByUuid(ctx context
 // Get infra billing nodes.
 //
 // GET /api/infra-billing/nodes
-func (c *Client) InfraBillingControllerGetBillingNodes(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetBillingNodesRes, error) {
-	res, err := c.sendInfraBillingControllerGetBillingNodes(ctx, options...)
+func (c *Client) InfraBillingControllerGetBillingNodes(ctx context.Context) (InfraBillingControllerGetBillingNodesRes, error) {
+	res, err := c.sendInfraBillingControllerGetBillingNodes(ctx)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerGetBillingNodes(ctx context.Context, requestOptions ...RequestOption) (res InfraBillingControllerGetBillingNodesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerGetBillingNodes(ctx context.Context) (res InfraBillingControllerGetBillingNodesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_getBillingNodes"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/infra-billing/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerGetBillingNodesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5500,7 +6420,7 @@ func (c *Client) sendInfraBillingControllerGetBillingNodes(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerGetBillingNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5529,20 +6449,14 @@ func (c *Client) sendInfraBillingControllerGetBillingNodes(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerGetBillingNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5556,28 +6470,53 @@ func (c *Client) sendInfraBillingControllerGetBillingNodes(ctx context.Context, 
 // Get infra billing history.
 //
 // GET /api/infra-billing/history
-func (c *Client) InfraBillingControllerGetInfraBillingHistoryRecords(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error) {
-	res, err := c.sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx, options...)
+func (c *Client) InfraBillingControllerGetInfraBillingHistoryRecords(ctx context.Context) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error) {
+	res, err := c.sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx context.Context, requestOptions ...RequestOption) (res InfraBillingControllerGetInfraBillingHistoryRecordsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx context.Context) (res InfraBillingControllerGetInfraBillingHistoryRecordsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_getInfraBillingHistoryRecords"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/infra-billing/history"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerGetInfraBillingHistoryRecordsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/history"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5587,7 +6526,7 @@ func (c *Client) sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx con
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerGetInfraBillingHistoryRecordsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5616,20 +6555,14 @@ func (c *Client) sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx con
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerGetInfraBillingHistoryRecordsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5643,24 +6576,48 @@ func (c *Client) sendInfraBillingControllerGetInfraBillingHistoryRecords(ctx con
 // Get infra provider by uuid.
 //
 // GET /api/infra-billing/providers/{uuid}
-func (c *Client) InfraBillingControllerGetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams, options ...RequestOption) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
-	res, err := c.sendInfraBillingControllerGetInfraProviderByUuid(ctx, params, options...)
+func (c *Client) InfraBillingControllerGetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
+	res, err := c.sendInfraBillingControllerGetInfraProviderByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerGetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams, requestOptions ...RequestOption) (res InfraBillingControllerGetInfraProviderByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerGetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (res InfraBillingControllerGetInfraProviderByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_getInfraProviderByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/infra-billing/providers/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerGetInfraProviderByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/infra-billing/providers/"
 	{
@@ -5683,6 +6640,7 @@ func (c *Client) sendInfraBillingControllerGetInfraProviderByUuid(ctx context.Co
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5692,7 +6650,7 @@ func (c *Client) sendInfraBillingControllerGetInfraProviderByUuid(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerGetInfraProviderByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5721,20 +6679,14 @@ func (c *Client) sendInfraBillingControllerGetInfraProviderByUuid(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerGetInfraProviderByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5748,28 +6700,53 @@ func (c *Client) sendInfraBillingControllerGetInfraProviderByUuid(ctx context.Co
 // Get all infra providers.
 //
 // GET /api/infra-billing/providers
-func (c *Client) InfraBillingControllerGetInfraProviders(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetInfraProvidersRes, error) {
-	res, err := c.sendInfraBillingControllerGetInfraProviders(ctx, options...)
+func (c *Client) InfraBillingControllerGetInfraProviders(ctx context.Context) (InfraBillingControllerGetInfraProvidersRes, error) {
+	res, err := c.sendInfraBillingControllerGetInfraProviders(ctx)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerGetInfraProviders(ctx context.Context, requestOptions ...RequestOption) (res InfraBillingControllerGetInfraProvidersRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInfraBillingControllerGetInfraProviders(ctx context.Context) (res InfraBillingControllerGetInfraProvidersRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_getInfraProviders"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/infra-billing/providers"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerGetInfraProvidersOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/providers"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5779,7 +6756,7 @@ func (c *Client) sendInfraBillingControllerGetInfraProviders(ctx context.Context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerGetInfraProvidersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5808,20 +6785,14 @@ func (c *Client) sendInfraBillingControllerGetInfraProviders(ctx context.Context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerGetInfraProvidersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5835,12 +6806,12 @@ func (c *Client) sendInfraBillingControllerGetInfraProviders(ctx context.Context
 // Update infra billing nodes.
 //
 // PATCH /api/infra-billing/nodes
-func (c *Client) InfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto, options ...RequestOption) (InfraBillingControllerUpdateInfraBillingNodeRes, error) {
-	res, err := c.sendInfraBillingControllerUpdateInfraBillingNode(ctx, request, options...)
+func (c *Client) InfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (InfraBillingControllerUpdateInfraBillingNodeRes, error) {
+	res, err := c.sendInfraBillingControllerUpdateInfraBillingNode(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto, requestOptions ...RequestOption) (res InfraBillingControllerUpdateInfraBillingNodeRes, err error) {
+func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (res InfraBillingControllerUpdateInfraBillingNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5850,22 +6821,47 @@ func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Co
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_updateInfraBillingNode"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/infra-billing/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerUpdateInfraBillingNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5878,7 +6874,7 @@ func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerUpdateInfraBillingNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -5907,20 +6903,14 @@ func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerUpdateInfraBillingNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -5934,12 +6924,12 @@ func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Co
 // Update infra provider.
 //
 // PATCH /api/infra-billing/providers
-func (c *Client) InfraBillingControllerUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto, options ...RequestOption) (InfraBillingControllerUpdateInfraProviderRes, error) {
-	res, err := c.sendInfraBillingControllerUpdateInfraProvider(ctx, request, options...)
+func (c *Client) InfraBillingControllerUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto) (InfraBillingControllerUpdateInfraProviderRes, error) {
+	res, err := c.sendInfraBillingControllerUpdateInfraProvider(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingControllerUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto, requestOptions ...RequestOption) (res InfraBillingControllerUpdateInfraProviderRes, err error) {
+func (c *Client) sendInfraBillingControllerUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto) (res InfraBillingControllerUpdateInfraProviderRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5949,22 +6939,47 @@ func (c *Client) sendInfraBillingControllerUpdateInfraProvider(ctx context.Conte
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBillingController_updateInfraProvider"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/infra-billing/providers"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingControllerUpdateInfraProviderOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/infra-billing/providers"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -5977,7 +6992,7 @@ func (c *Client) sendInfraBillingControllerUpdateInfraProvider(ctx context.Conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InfraBillingControllerUpdateInfraProviderOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6006,20 +7021,14 @@ func (c *Client) sendInfraBillingControllerUpdateInfraProvider(ctx context.Conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInfraBillingControllerUpdateInfraProviderResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6033,24 +7042,48 @@ func (c *Client) sendInfraBillingControllerUpdateInfraProvider(ctx context.Conte
 // Add all users to internal squad.
 //
 // POST /api/internal-squads/{uuid}/bulk-actions/add-users
-func (c *Client) InternalSquadControllerAddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams, options ...RequestOption) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
-	res, err := c.sendInternalSquadControllerAddUsersToInternalSquad(ctx, params, options...)
+func (c *Client) InternalSquadControllerAddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
+	res, err := c.sendInternalSquadControllerAddUsersToInternalSquad(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerAddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams, requestOptions ...RequestOption) (res InternalSquadControllerAddUsersToInternalSquadRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInternalSquadControllerAddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (res InternalSquadControllerAddUsersToInternalSquadRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_addUsersToInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}/bulk-actions/add-users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerAddUsersToInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/internal-squads/"
 	{
@@ -6074,6 +7107,7 @@ func (c *Client) sendInternalSquadControllerAddUsersToInternalSquad(ctx context.
 	pathParts[2] = "/bulk-actions/add-users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6083,7 +7117,7 @@ func (c *Client) sendInternalSquadControllerAddUsersToInternalSquad(ctx context.
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerAddUsersToInternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6112,20 +7146,14 @@ func (c *Client) sendInternalSquadControllerAddUsersToInternalSquad(ctx context.
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerAddUsersToInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6139,12 +7167,12 @@ func (c *Client) sendInternalSquadControllerAddUsersToInternalSquad(ctx context.
 // Create internal squad.
 //
 // POST /api/internal-squads
-func (c *Client) InternalSquadControllerCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto, options ...RequestOption) (InternalSquadControllerCreateInternalSquadRes, error) {
-	res, err := c.sendInternalSquadControllerCreateInternalSquad(ctx, request, options...)
+func (c *Client) InternalSquadControllerCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto) (InternalSquadControllerCreateInternalSquadRes, error) {
+	res, err := c.sendInternalSquadControllerCreateInternalSquad(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto, requestOptions ...RequestOption) (res InternalSquadControllerCreateInternalSquadRes, err error) {
+func (c *Client) sendInternalSquadControllerCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto) (res InternalSquadControllerCreateInternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6154,22 +7182,47 @@ func (c *Client) sendInternalSquadControllerCreateInternalSquad(ctx context.Cont
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_createInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/internal-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerCreateInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/internal-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6182,7 +7235,7 @@ func (c *Client) sendInternalSquadControllerCreateInternalSquad(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerCreateInternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6211,20 +7264,14 @@ func (c *Client) sendInternalSquadControllerCreateInternalSquad(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerCreateInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6238,24 +7285,48 @@ func (c *Client) sendInternalSquadControllerCreateInternalSquad(ctx context.Cont
 // Delete internal squad.
 //
 // DELETE /api/internal-squads/{uuid}
-func (c *Client) InternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams, options ...RequestOption) (InternalSquadControllerDeleteInternalSquadRes, error) {
-	res, err := c.sendInternalSquadControllerDeleteInternalSquad(ctx, params, options...)
+func (c *Client) InternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (InternalSquadControllerDeleteInternalSquadRes, error) {
+	res, err := c.sendInternalSquadControllerDeleteInternalSquad(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams, requestOptions ...RequestOption) (res InternalSquadControllerDeleteInternalSquadRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (res InternalSquadControllerDeleteInternalSquadRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_deleteInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerDeleteInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/internal-squads/"
 	{
@@ -6278,6 +7349,7 @@ func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Cont
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6287,7 +7359,7 @@ func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerDeleteInternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6316,20 +7388,14 @@ func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerDeleteInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6343,24 +7409,48 @@ func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Cont
 // Get internal squad accessible nodes.
 //
 // GET /api/internal-squads/{uuid}/accessible-nodes
-func (c *Client) InternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams, options ...RequestOption) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
-	res, err := c.sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx, params, options...)
+func (c *Client) InternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
+	res, err := c.sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams, requestOptions ...RequestOption) (res InternalSquadControllerGetInternalSquadAccessibleNodesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (res InternalSquadControllerGetInternalSquadAccessibleNodesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_getInternalSquadAccessibleNodes"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}/accessible-nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerGetInternalSquadAccessibleNodesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/internal-squads/"
 	{
@@ -6384,6 +7474,7 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx 
 	pathParts[2] = "/accessible-nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6393,7 +7484,7 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerGetInternalSquadAccessibleNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6422,20 +7513,14 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerGetInternalSquadAccessibleNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6449,24 +7534,48 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx 
 // Get internal squad by uuid.
 //
 // GET /api/internal-squads/{uuid}
-func (c *Client) InternalSquadControllerGetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams, options ...RequestOption) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
-	res, err := c.sendInternalSquadControllerGetInternalSquadByUuid(ctx, params, options...)
+func (c *Client) InternalSquadControllerGetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
+	res, err := c.sendInternalSquadControllerGetInternalSquadByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerGetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams, requestOptions ...RequestOption) (res InternalSquadControllerGetInternalSquadByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInternalSquadControllerGetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (res InternalSquadControllerGetInternalSquadByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_getInternalSquadByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerGetInternalSquadByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/internal-squads/"
 	{
@@ -6489,6 +7598,7 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadByUuid(ctx context.C
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6498,7 +7608,7 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadByUuid(ctx context.C
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerGetInternalSquadByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6527,20 +7637,14 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadByUuid(ctx context.C
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerGetInternalSquadByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6554,28 +7658,53 @@ func (c *Client) sendInternalSquadControllerGetInternalSquadByUuid(ctx context.C
 // Get all internal squads.
 //
 // GET /api/internal-squads
-func (c *Client) InternalSquadControllerGetInternalSquads(ctx context.Context, options ...RequestOption) (InternalSquadControllerGetInternalSquadsRes, error) {
-	res, err := c.sendInternalSquadControllerGetInternalSquads(ctx, options...)
+func (c *Client) InternalSquadControllerGetInternalSquads(ctx context.Context) (InternalSquadControllerGetInternalSquadsRes, error) {
+	res, err := c.sendInternalSquadControllerGetInternalSquads(ctx)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerGetInternalSquads(ctx context.Context, requestOptions ...RequestOption) (res InternalSquadControllerGetInternalSquadsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInternalSquadControllerGetInternalSquads(ctx context.Context) (res InternalSquadControllerGetInternalSquadsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_getInternalSquads"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/internal-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerGetInternalSquadsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/internal-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6585,7 +7714,7 @@ func (c *Client) sendInternalSquadControllerGetInternalSquads(ctx context.Contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerGetInternalSquadsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6614,20 +7743,14 @@ func (c *Client) sendInternalSquadControllerGetInternalSquads(ctx context.Contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerGetInternalSquadsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6641,24 +7764,48 @@ func (c *Client) sendInternalSquadControllerGetInternalSquads(ctx context.Contex
 // Delete users from internal squad.
 //
 // DELETE /api/internal-squads/{uuid}/bulk-actions/remove-users
-func (c *Client) InternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams, options ...RequestOption) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
-	res, err := c.sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx, params, options...)
+func (c *Client) InternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
+	res, err := c.sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams, requestOptions ...RequestOption) (res InternalSquadControllerRemoveUsersFromInternalSquadRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (res InternalSquadControllerRemoveUsersFromInternalSquadRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_removeUsersFromInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}/bulk-actions/remove-users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerRemoveUsersFromInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/internal-squads/"
 	{
@@ -6682,6 +7829,7 @@ func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx con
 	pathParts[2] = "/bulk-actions/remove-users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6691,7 +7839,7 @@ func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx con
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerRemoveUsersFromInternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6720,20 +7868,14 @@ func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx con
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerRemoveUsersFromInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6747,12 +7889,12 @@ func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx con
 // Update internal squad.
 //
 // PATCH /api/internal-squads
-func (c *Client) InternalSquadControllerUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto, options ...RequestOption) (InternalSquadControllerUpdateInternalSquadRes, error) {
-	res, err := c.sendInternalSquadControllerUpdateInternalSquad(ctx, request, options...)
+func (c *Client) InternalSquadControllerUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadControllerUpdateInternalSquadRes, error) {
+	res, err := c.sendInternalSquadControllerUpdateInternalSquad(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto, requestOptions ...RequestOption) (res InternalSquadControllerUpdateInternalSquadRes, err error) {
+func (c *Client) sendInternalSquadControllerUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (res InternalSquadControllerUpdateInternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6762,22 +7904,47 @@ func (c *Client) sendInternalSquadControllerUpdateInternalSquad(ctx context.Cont
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_updateInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/internal-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerUpdateInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/internal-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6790,7 +7957,7 @@ func (c *Client) sendInternalSquadControllerUpdateInternalSquad(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, InternalSquadControllerUpdateInternalSquadOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6819,20 +7986,14 @@ func (c *Client) sendInternalSquadControllerUpdateInternalSquad(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeInternalSquadControllerUpdateInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6846,28 +8007,53 @@ func (c *Client) sendInternalSquadControllerUpdateInternalSquad(ctx context.Cont
 // Get SSL_CERT for Remnawave Node.
 //
 // GET /api/keygen
-func (c *Client) KeygenControllerGenerateKey(ctx context.Context, options ...RequestOption) (KeygenControllerGenerateKeyRes, error) {
-	res, err := c.sendKeygenControllerGenerateKey(ctx, options...)
+func (c *Client) KeygenControllerGenerateKey(ctx context.Context) (KeygenControllerGenerateKeyRes, error) {
+	res, err := c.sendKeygenControllerGenerateKey(ctx)
 	return res, err
 }
 
-func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context, requestOptions ...RequestOption) (res KeygenControllerGenerateKeyRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context) (res KeygenControllerGenerateKeyRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("KeygenController_generateKey"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/keygen"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, KeygenControllerGenerateKeyOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/keygen"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6877,7 +8063,7 @@ func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context, requestOpt
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, KeygenControllerGenerateKeyOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -6906,20 +8092,14 @@ func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context, requestOpt
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeKeygenControllerGenerateKeyResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -6933,12 +8113,12 @@ func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context, requestOpt
 // Create a new node.
 //
 // POST /api/nodes
-func (c *Client) NodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto, options ...RequestOption) (NodesControllerCreateNodeRes, error) {
-	res, err := c.sendNodesControllerCreateNode(ctx, request, options...)
+func (c *Client) NodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto) (NodesControllerCreateNodeRes, error) {
+	res, err := c.sendNodesControllerCreateNode(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto, requestOptions ...RequestOption) (res NodesControllerCreateNodeRes, err error) {
+func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *CreateNodeRequestDto) (res NodesControllerCreateNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6948,22 +8128,47 @@ func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *Cre
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_createNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerCreateNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -6976,7 +8181,7 @@ func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *Cre
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerCreateNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7005,20 +8210,14 @@ func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *Cre
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerCreateNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7032,24 +8231,48 @@ func (c *Client) sendNodesControllerCreateNode(ctx context.Context, request *Cre
 // Delete a node.
 //
 // DELETE /api/nodes/{uuid}
-func (c *Client) NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, options ...RequestOption) (NodesControllerDeleteNodeRes, error) {
-	res, err := c.sendNodesControllerDeleteNode(ctx, params, options...)
+func (c *Client) NodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (NodesControllerDeleteNodeRes, error) {
+	res, err := c.sendNodesControllerDeleteNode(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams, requestOptions ...RequestOption) (res NodesControllerDeleteNodeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (res NodesControllerDeleteNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_deleteNode"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/nodes/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerDeleteNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/nodes/"
 	{
@@ -7072,6 +8295,7 @@ func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params Nodes
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7081,7 +8305,7 @@ func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params Nodes
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerDeleteNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7110,20 +8334,14 @@ func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params Nodes
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerDeleteNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7137,24 +8355,48 @@ func (c *Client) sendNodesControllerDeleteNode(ctx context.Context, params Nodes
 // Disable a node.
 //
 // POST /api/nodes/{uuid}/actions/disable
-func (c *Client) NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, options ...RequestOption) (NodesControllerDisableNodeRes, error) {
-	res, err := c.sendNodesControllerDisableNode(ctx, params, options...)
+func (c *Client) NodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (NodesControllerDisableNodeRes, error) {
+	res, err := c.sendNodesControllerDisableNode(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams, requestOptions ...RequestOption) (res NodesControllerDisableNodeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (res NodesControllerDisableNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_disableNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/{uuid}/actions/disable"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerDisableNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/nodes/"
 	{
@@ -7178,6 +8420,7 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 	pathParts[2] = "/actions/disable"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7187,7 +8430,7 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerDisableNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7216,20 +8459,14 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerDisableNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7243,24 +8480,48 @@ func (c *Client) sendNodesControllerDisableNode(ctx context.Context, params Node
 // Enable a node.
 //
 // POST /api/nodes/{uuid}/actions/enable
-func (c *Client) NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, options ...RequestOption) (NodesControllerEnableNodeRes, error) {
-	res, err := c.sendNodesControllerEnableNode(ctx, params, options...)
+func (c *Client) NodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (NodesControllerEnableNodeRes, error) {
+	res, err := c.sendNodesControllerEnableNode(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams, requestOptions ...RequestOption) (res NodesControllerEnableNodeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (res NodesControllerEnableNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_enableNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/{uuid}/actions/enable"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerEnableNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/nodes/"
 	{
@@ -7284,6 +8545,7 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 	pathParts[2] = "/actions/enable"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7293,7 +8555,7 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerEnableNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7322,20 +8584,14 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerEnableNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7349,28 +8605,53 @@ func (c *Client) sendNodesControllerEnableNode(ctx context.Context, params Nodes
 // Get all nodes.
 //
 // GET /api/nodes
-func (c *Client) NodesControllerGetAllNodes(ctx context.Context, options ...RequestOption) (NodesControllerGetAllNodesRes, error) {
-	res, err := c.sendNodesControllerGetAllNodes(ctx, options...)
+func (c *Client) NodesControllerGetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error) {
+	res, err := c.sendNodesControllerGetAllNodes(ctx)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOptions ...RequestOption) (res NodesControllerGetAllNodesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context) (res NodesControllerGetAllNodesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_getAllNodes"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerGetAllNodesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7380,7 +8661,7 @@ func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOpti
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerGetAllNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7409,20 +8690,14 @@ func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOpti
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerGetAllNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7436,24 +8711,48 @@ func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context, requestOpti
 // Get node by UUID.
 //
 // GET /api/nodes/{uuid}
-func (c *Client) NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, options ...RequestOption) (NodesControllerGetOneNodeRes, error) {
-	res, err := c.sendNodesControllerGetOneNode(ctx, params, options...)
+func (c *Client) NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error) {
+	res, err := c.sendNodesControllerGetOneNode(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams, requestOptions ...RequestOption) (res NodesControllerGetOneNodeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (res NodesControllerGetOneNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_getOneNode"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerGetOneNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/nodes/"
 	{
@@ -7476,6 +8775,7 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7485,7 +8785,7 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerGetOneNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7514,20 +8814,14 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerGetOneNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7541,12 +8835,12 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 // Reorder nodes.
 //
 // POST /api/nodes/actions/reorder
-func (c *Client) NodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto, options ...RequestOption) (NodesControllerReorderNodesRes, error) {
-	res, err := c.sendNodesControllerReorderNodes(ctx, request, options...)
+func (c *Client) NodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesControllerReorderNodesRes, error) {
+	res, err := c.sendNodesControllerReorderNodes(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto, requestOptions ...RequestOption) (res NodesControllerReorderNodesRes, err error) {
+func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (res NodesControllerReorderNodesRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -7556,22 +8850,47 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_reorderNodes"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/actions/reorder"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerReorderNodesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes/actions/reorder"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7584,7 +8903,7 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerReorderNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7613,20 +8932,14 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerReorderNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7640,28 +8953,53 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 // Restart all nodes.
 //
 // POST /api/nodes/actions/restart-all
-func (c *Client) NodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto, options ...RequestOption) (NodesControllerRestartAllNodesRes, error) {
-	res, err := c.sendNodesControllerRestartAllNodes(ctx, request, options...)
+func (c *Client) NodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (NodesControllerRestartAllNodesRes, error) {
+	res, err := c.sendNodesControllerRestartAllNodes(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto, requestOptions ...RequestOption) (res NodesControllerRestartAllNodesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (res NodesControllerRestartAllNodesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_restartAllNodes"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/actions/restart-all"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerRestartAllNodesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes/actions/restart-all"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7674,7 +9012,7 @@ func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerRestartAllNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7703,20 +9041,14 @@ func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerRestartAllNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7730,24 +9062,48 @@ func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request
 // Restart node.
 //
 // POST /api/nodes/{uuid}/actions/restart
-func (c *Client) NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, options ...RequestOption) (NodesControllerRestartNodeRes, error) {
-	res, err := c.sendNodesControllerRestartNode(ctx, params, options...)
+func (c *Client) NodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (NodesControllerRestartNodeRes, error) {
+	res, err := c.sendNodesControllerRestartNode(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams, requestOptions ...RequestOption) (res NodesControllerRestartNodeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (res NodesControllerRestartNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_restartNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/{uuid}/actions/restart"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerRestartNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/nodes/"
 	{
@@ -7771,6 +9127,7 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 	pathParts[2] = "/actions/restart"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7780,7 +9137,7 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerRestartNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7809,20 +9166,14 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerRestartNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7836,12 +9187,12 @@ func (c *Client) sendNodesControllerRestartNode(ctx context.Context, params Node
 // Update node.
 //
 // PATCH /api/nodes
-func (c *Client) NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, options ...RequestOption) (NodesControllerUpdateNodeRes, error) {
-	res, err := c.sendNodesControllerUpdateNode(ctx, request, options...)
+func (c *Client) NodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto) (NodesControllerUpdateNodeRes, error) {
+	res, err := c.sendNodesControllerUpdateNode(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto, requestOptions ...RequestOption) (res NodesControllerUpdateNodeRes, err error) {
+func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *UpdateNodeRequestDto) (res NodesControllerUpdateNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -7851,22 +9202,47 @@ func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *Upd
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_updateNode"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerUpdateNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7879,7 +9255,7 @@ func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *Upd
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesControllerUpdateNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -7908,20 +9284,14 @@ func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *Upd
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesControllerUpdateNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -7935,28 +9305,53 @@ func (c *Client) sendNodesControllerUpdateNode(ctx context.Context, request *Upd
 // Get nodes usage by range.
 //
 // GET /api/nodes/usage/range
-func (c *Client) NodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams, options ...RequestOption) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error) {
-	res, err := c.sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx, params, options...)
+func (c *Client) NodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error) {
+	res, err := c.sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams, requestOptions ...RequestOption) (res NodesUsageHistoryControllerGetNodesUsageByRangeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (res NodesUsageHistoryControllerGetNodesUsageByRangeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesUsageHistoryController_getNodesUsageByRange"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes/usage/range"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesUsageHistoryControllerGetNodesUsageByRangeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes/usage/range"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "start" parameter.
@@ -7988,6 +9383,7 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -7997,7 +9393,7 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesUsageHistoryControllerGetNodesUsageByRangeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8026,20 +9422,14 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesUsageHistoryControllerGetNodesUsageByRangeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8053,24 +9443,48 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 // Get node user usage by range and Node UUID.
 //
 // GET /api/nodes/usage/{uuid}/users/range
-func (c *Client) NodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams, options ...RequestOption) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error) {
-	res, err := c.sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx, params, options...)
+func (c *Client) NodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error) {
+	res, err := c.sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams, requestOptions ...RequestOption) (res NodesUserUsageHistoryControllerGetNodeUserUsageRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (res NodesUserUsageHistoryControllerGetNodeUserUsageRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesUserUsageHistoryController_getNodeUserUsage"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes/usage/{uuid}/users/range"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesUserUsageHistoryControllerGetNodeUserUsageOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/nodes/usage/"
 	{
@@ -8094,6 +9508,7 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 	pathParts[2] = "/users/range"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "start" parameter.
@@ -8125,6 +9540,7 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8134,7 +9550,7 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesUserUsageHistoryControllerGetNodeUserUsageOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8163,20 +9579,14 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesUserUsageHistoryControllerGetNodeUserUsageResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8190,28 +9600,53 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 // Get nodes realtime usage.
 //
 // GET /api/nodes/usage/realtime
-func (c *Client) NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context, options ...RequestOption) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error) {
-	res, err := c.sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx, options...)
+func (c *Client) NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error) {
+	res, err := c.sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx)
 	return res, err
 }
 
-func (c *Client) sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context, requestOptions ...RequestOption) (res NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context) (res NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesUserUsageHistoryController_getNodesRealtimeUsage"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes/usage/realtime"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesUserUsageHistoryControllerGetNodesRealtimeUsageOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/nodes/usage/realtime"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8221,7 +9656,7 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, NodesUserUsageHistoryControllerGetNodesRealtimeUsageOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8250,20 +9685,14 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeNodesUserUsageHistoryControllerGetNodesRealtimeUsageResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8277,28 +9706,53 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx co
 // Delete a passkey by ID.
 //
 // DELETE /api/passkeys
-func (c *Client) PasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto, options ...RequestOption) (PasskeyControllerDeletePasskeyRes, error) {
-	res, err := c.sendPasskeyControllerDeletePasskey(ctx, request, options...)
+func (c *Client) PasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto) (PasskeyControllerDeletePasskeyRes, error) {
+	res, err := c.sendPasskeyControllerDeletePasskey(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendPasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto, requestOptions ...RequestOption) (res PasskeyControllerDeletePasskeyRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendPasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto) (res PasskeyControllerDeletePasskeyRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("PasskeyController_deletePasskey"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/passkeys"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, PasskeyControllerDeletePasskeyOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/passkeys"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8311,7 +9765,7 @@ func (c *Client) sendPasskeyControllerDeletePasskey(ctx context.Context, request
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, PasskeyControllerDeletePasskeyOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8340,20 +9794,14 @@ func (c *Client) sendPasskeyControllerDeletePasskey(ctx context.Context, request
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodePasskeyControllerDeletePasskeyResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8367,28 +9815,53 @@ func (c *Client) sendPasskeyControllerDeletePasskey(ctx context.Context, request
 // Get all passkeys.
 //
 // GET /api/passkeys
-func (c *Client) PasskeyControllerGetActivePasskeys(ctx context.Context, options ...RequestOption) (PasskeyControllerGetActivePasskeysRes, error) {
-	res, err := c.sendPasskeyControllerGetActivePasskeys(ctx, options...)
+func (c *Client) PasskeyControllerGetActivePasskeys(ctx context.Context) (PasskeyControllerGetActivePasskeysRes, error) {
+	res, err := c.sendPasskeyControllerGetActivePasskeys(ctx)
 	return res, err
 }
 
-func (c *Client) sendPasskeyControllerGetActivePasskeys(ctx context.Context, requestOptions ...RequestOption) (res PasskeyControllerGetActivePasskeysRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendPasskeyControllerGetActivePasskeys(ctx context.Context) (res PasskeyControllerGetActivePasskeysRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("PasskeyController_getActivePasskeys"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/passkeys"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, PasskeyControllerGetActivePasskeysOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/passkeys"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8398,7 +9871,7 @@ func (c *Client) sendPasskeyControllerGetActivePasskeys(ctx context.Context, req
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, PasskeyControllerGetActivePasskeysOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8427,20 +9900,14 @@ func (c *Client) sendPasskeyControllerGetActivePasskeys(ctx context.Context, req
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodePasskeyControllerGetActivePasskeysResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8454,28 +9921,53 @@ func (c *Client) sendPasskeyControllerGetActivePasskeys(ctx context.Context, req
 // Get registration options for passkey.
 //
 // GET /api/passkeys/registration/options
-func (c *Client) PasskeyControllerPasskeyRegistrationOptions(ctx context.Context, options ...RequestOption) (PasskeyControllerPasskeyRegistrationOptionsRes, error) {
-	res, err := c.sendPasskeyControllerPasskeyRegistrationOptions(ctx, options...)
+func (c *Client) PasskeyControllerPasskeyRegistrationOptions(ctx context.Context) (PasskeyControllerPasskeyRegistrationOptionsRes, error) {
+	res, err := c.sendPasskeyControllerPasskeyRegistrationOptions(ctx)
 	return res, err
 }
 
-func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Context, requestOptions ...RequestOption) (res PasskeyControllerPasskeyRegistrationOptionsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Context) (res PasskeyControllerPasskeyRegistrationOptionsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("PasskeyController_passkeyRegistrationOptions"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/passkeys/registration/options"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, PasskeyControllerPasskeyRegistrationOptionsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/passkeys/registration/options"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8485,7 +9977,7 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Con
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, PasskeyControllerPasskeyRegistrationOptionsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8514,20 +10006,14 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Con
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodePasskeyControllerPasskeyRegistrationOptionsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8541,28 +10027,53 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Con
 // Verify registration for passkey.
 //
 // POST /api/passkeys/registration/verify
-func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto, options ...RequestOption) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
-	res, err := c.sendPasskeyControllerPasskeyRegistrationVerify(ctx, request, options...)
+func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+	res, err := c.sendPasskeyControllerPasskeyRegistrationVerify(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto, requestOptions ...RequestOption) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("PasskeyController_passkeyRegistrationVerify"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/passkeys/registration/verify"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, PasskeyControllerPasskeyRegistrationVerifyOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/passkeys/registration/verify"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8575,7 +10086,7 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, PasskeyControllerPasskeyRegistrationVerifyOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8604,20 +10115,14 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodePasskeyControllerPasskeyRegistrationVerifyResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8631,28 +10136,53 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Cont
 // Get Remnawave settings.
 //
 // GET /api/remnawave-settings
-func (c *Client) RemnawaveSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (RemnawaveSettingsControllerGetSettingsRes, error) {
-	res, err := c.sendRemnawaveSettingsControllerGetSettings(ctx, options...)
+func (c *Client) RemnawaveSettingsControllerGetSettings(ctx context.Context) (RemnawaveSettingsControllerGetSettingsRes, error) {
+	res, err := c.sendRemnawaveSettingsControllerGetSettings(ctx)
 	return res, err
 }
 
-func (c *Client) sendRemnawaveSettingsControllerGetSettings(ctx context.Context, requestOptions ...RequestOption) (res RemnawaveSettingsControllerGetSettingsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendRemnawaveSettingsControllerGetSettings(ctx context.Context) (res RemnawaveSettingsControllerGetSettingsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("RemnawaveSettingsController_getSettings"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/remnawave-settings"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, RemnawaveSettingsControllerGetSettingsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/remnawave-settings"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8662,7 +10192,7 @@ func (c *Client) sendRemnawaveSettingsControllerGetSettings(ctx context.Context,
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, RemnawaveSettingsControllerGetSettingsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8691,20 +10221,14 @@ func (c *Client) sendRemnawaveSettingsControllerGetSettings(ctx context.Context,
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeRemnawaveSettingsControllerGetSettingsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8718,12 +10242,12 @@ func (c *Client) sendRemnawaveSettingsControllerGetSettings(ctx context.Context,
 // Update Remnawave settings.
 //
 // PATCH /api/remnawave-settings
-func (c *Client) RemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto, options ...RequestOption) (RemnawaveSettingsControllerUpdateSettingsRes, error) {
-	res, err := c.sendRemnawaveSettingsControllerUpdateSettings(ctx, request, options...)
+func (c *Client) RemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (RemnawaveSettingsControllerUpdateSettingsRes, error) {
+	res, err := c.sendRemnawaveSettingsControllerUpdateSettings(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto, requestOptions ...RequestOption) (res RemnawaveSettingsControllerUpdateSettingsRes, err error) {
+func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (res RemnawaveSettingsControllerUpdateSettingsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -8733,22 +10257,47 @@ func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Conte
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("RemnawaveSettingsController_updateSettings"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/remnawave-settings"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, RemnawaveSettingsControllerUpdateSettingsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/remnawave-settings"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8761,7 +10310,7 @@ func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, RemnawaveSettingsControllerUpdateSettingsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8790,20 +10339,14 @@ func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeRemnawaveSettingsControllerUpdateSettingsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8817,12 +10360,12 @@ func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Conte
 // Create snippet.
 //
 // POST /api/snippets
-func (c *Client) SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto, options ...RequestOption) (SnippetsControllerCreateSnippetRes, error) {
-	res, err := c.sendSnippetsControllerCreateSnippet(ctx, request, options...)
+func (c *Client) SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error) {
+	res, err := c.sendSnippetsControllerCreateSnippet(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto, requestOptions ...RequestOption) (res SnippetsControllerCreateSnippetRes, err error) {
+func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (res SnippetsControllerCreateSnippetRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -8832,22 +10375,47 @@ func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, reques
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SnippetsController_createSnippet"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/snippets"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SnippetsControllerCreateSnippetOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/snippets"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8860,7 +10428,7 @@ func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, reques
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SnippetsControllerCreateSnippetOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8889,20 +10457,14 @@ func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, reques
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSnippetsControllerCreateSnippetResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -8916,12 +10478,12 @@ func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, reques
 // Delete snippet.
 //
 // DELETE /api/snippets
-func (c *Client) SnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto, options ...RequestOption) (SnippetsControllerDeleteSnippetByNameRes, error) {
-	res, err := c.sendSnippetsControllerDeleteSnippetByName(ctx, request, options...)
+func (c *Client) SnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto) (SnippetsControllerDeleteSnippetByNameRes, error) {
+	res, err := c.sendSnippetsControllerDeleteSnippetByName(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto, requestOptions ...RequestOption) (res SnippetsControllerDeleteSnippetByNameRes, err error) {
+func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto) (res SnippetsControllerDeleteSnippetByNameRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -8931,22 +10493,47 @@ func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, 
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SnippetsController_deleteSnippetByName"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/snippets"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SnippetsControllerDeleteSnippetByNameOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/snippets"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -8959,7 +10546,7 @@ func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SnippetsControllerDeleteSnippetByNameOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -8988,20 +10575,14 @@ func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSnippetsControllerDeleteSnippetByNameResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9015,28 +10596,53 @@ func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, 
 // Get snippets.
 //
 // GET /api/snippets
-func (c *Client) SnippetsControllerGetSnippets(ctx context.Context, options ...RequestOption) (SnippetsControllerGetSnippetsRes, error) {
-	res, err := c.sendSnippetsControllerGetSnippets(ctx, options...)
+func (c *Client) SnippetsControllerGetSnippets(ctx context.Context) (SnippetsControllerGetSnippetsRes, error) {
+	res, err := c.sendSnippetsControllerGetSnippets(ctx)
 	return res, err
 }
 
-func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context, requestOptions ...RequestOption) (res SnippetsControllerGetSnippetsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context) (res SnippetsControllerGetSnippetsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SnippetsController_getSnippets"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/snippets"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SnippetsControllerGetSnippetsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/snippets"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9046,7 +10652,7 @@ func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context, requestO
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SnippetsControllerGetSnippetsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9075,20 +10681,14 @@ func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context, requestO
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSnippetsControllerGetSnippetsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9102,12 +10702,12 @@ func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context, requestO
 // Update snippet.
 //
 // PATCH /api/snippets
-func (c *Client) SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto, options ...RequestOption) (SnippetsControllerUpdateSnippetRes, error) {
-	res, err := c.sendSnippetsControllerUpdateSnippet(ctx, request, options...)
+func (c *Client) SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error) {
+	res, err := c.sendSnippetsControllerUpdateSnippet(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto, requestOptions ...RequestOption) (res SnippetsControllerUpdateSnippetRes, err error) {
+func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (res SnippetsControllerUpdateSnippetRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -9117,22 +10717,47 @@ func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, reques
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SnippetsController_updateSnippet"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/snippets"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SnippetsControllerUpdateSnippetOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/snippets"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9145,7 +10770,7 @@ func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, reques
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SnippetsControllerUpdateSnippetOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9174,20 +10799,14 @@ func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, reques
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSnippetsControllerUpdateSnippetResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9199,24 +10818,48 @@ func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, reques
 // SubscriptionControllerGetSubscription invokes SubscriptionController_getSubscription operation.
 //
 // GET /api/sub/{shortUuid}
-func (c *Client) SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams, options ...RequestOption) error {
-	_, err := c.sendSubscriptionControllerGetSubscription(ctx, params, options...)
+func (c *Client) SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error {
+	_, err := c.sendSubscriptionControllerGetSubscription(ctx, params)
 	return err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams, requestOptions ...RequestOption) (res *SubscriptionControllerGetSubscriptionOK, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (res *SubscriptionControllerGetSubscriptionOK, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionController_getSubscription"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/sub/{shortUuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionControllerGetSubscriptionOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/sub/"
 	{
@@ -9239,25 +10882,20 @@ func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, 
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionControllerGetSubscriptionResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9269,24 +10907,48 @@ func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, 
 // SubscriptionControllerGetSubscriptionByClientType invokes SubscriptionController_getSubscriptionByClientType operation.
 //
 // GET /api/sub/{shortUuid}/{clientType}
-func (c *Client) SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams, options ...RequestOption) error {
-	_, err := c.sendSubscriptionControllerGetSubscriptionByClientType(ctx, params, options...)
+func (c *Client) SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error {
+	_, err := c.sendSubscriptionControllerGetSubscriptionByClientType(ctx, params)
 	return err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams, requestOptions ...RequestOption) (res *SubscriptionControllerGetSubscriptionByClientTypeOK, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (res *SubscriptionControllerGetSubscriptionByClientTypeOK, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionController_getSubscriptionByClientType"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/sub/{shortUuid}/{clientType}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionControllerGetSubscriptionByClientTypeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [4]string
 	pathParts[0] = "/api/sub/"
 	{
@@ -9328,25 +10990,20 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx conte
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionControllerGetSubscriptionByClientTypeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9360,24 +11017,48 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx conte
 // Get Subscription Info by Short UUID.
 //
 // GET /api/sub/{shortUuid}/info
-func (c *Client) SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams, options ...RequestOption) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
-	res, err := c.sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params, options...)
+func (c *Client) SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
+	res, err := c.sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams, requestOptions ...RequestOption) (res SubscriptionControllerGetSubscriptionInfoByShortUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (res SubscriptionControllerGetSubscriptionInfoByShortUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionController_getSubscriptionInfoByShortUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/sub/{shortUuid}/info"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionControllerGetSubscriptionInfoByShortUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/sub/"
 	{
@@ -9401,25 +11082,20 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx co
 	pathParts[2] = "/info"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionControllerGetSubscriptionInfoByShortUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9431,24 +11107,48 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx co
 // SubscriptionControllerGetSubscriptionWithType invokes SubscriptionController_getSubscriptionWithType operation.
 //
 // GET /api/sub/outline/{shortUuid}/{type}/{encodedTag}
-func (c *Client) SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams, options ...RequestOption) error {
-	_, err := c.sendSubscriptionControllerGetSubscriptionWithType(ctx, params, options...)
+func (c *Client) SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error {
+	_, err := c.sendSubscriptionControllerGetSubscriptionWithType(ctx, params)
 	return err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams, requestOptions ...RequestOption) (res *SubscriptionControllerGetSubscriptionWithTypeOK, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (res *SubscriptionControllerGetSubscriptionWithTypeOK, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionController_getSubscriptionWithType"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/sub/outline/{shortUuid}/{type}/{encodedTag}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionControllerGetSubscriptionWithTypeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [6]string
 	pathParts[0] = "/api/sub/outline/"
 	{
@@ -9509,25 +11209,20 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.C
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionControllerGetSubscriptionWithTypeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9541,28 +11236,53 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.C
 // Get subscription settings.
 //
 // GET /api/subscription-settings
-func (c *Client) SubscriptionSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (SubscriptionSettingsControllerGetSettingsRes, error) {
-	res, err := c.sendSubscriptionSettingsControllerGetSettings(ctx, options...)
+func (c *Client) SubscriptionSettingsControllerGetSettings(ctx context.Context) (SubscriptionSettingsControllerGetSettingsRes, error) {
+	res, err := c.sendSubscriptionSettingsControllerGetSettings(ctx)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Context, requestOptions ...RequestOption) (res SubscriptionSettingsControllerGetSettingsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Context) (res SubscriptionSettingsControllerGetSettingsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionSettingsController_getSettings"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-settings"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionSettingsControllerGetSettingsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-settings"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9572,7 +11292,7 @@ func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionSettingsControllerGetSettingsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9601,20 +11321,14 @@ func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionSettingsControllerGetSettingsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9628,12 +11342,12 @@ func (c *Client) sendSubscriptionSettingsControllerGetSettings(ctx context.Conte
 // Update subscription settings.
 //
 // PATCH /api/subscription-settings
-func (c *Client) SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto, options ...RequestOption) (SubscriptionSettingsControllerUpdateSettingsRes, error) {
-	res, err := c.sendSubscriptionSettingsControllerUpdateSettings(ctx, request, options...)
+func (c *Client) SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (SubscriptionSettingsControllerUpdateSettingsRes, error) {
+	res, err := c.sendSubscriptionSettingsControllerUpdateSettings(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto, requestOptions ...RequestOption) (res SubscriptionSettingsControllerUpdateSettingsRes, err error) {
+func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (res SubscriptionSettingsControllerUpdateSettingsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -9643,22 +11357,47 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionSettingsController_updateSettings"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/subscription-settings"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionSettingsControllerUpdateSettingsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-settings"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9671,7 +11410,7 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionSettingsControllerUpdateSettingsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9700,20 +11439,14 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionSettingsControllerUpdateSettingsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9727,12 +11460,12 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 // Create subscription template.
 //
 // POST /api/subscription-templates
-func (c *Client) SubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerCreateTemplateRes, error) {
-	res, err := c.sendSubscriptionTemplateControllerCreateTemplate(ctx, request, options...)
+func (c *Client) SubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (SubscriptionTemplateControllerCreateTemplateRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerCreateTemplate(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto, requestOptions ...RequestOption) (res SubscriptionTemplateControllerCreateTemplateRes, err error) {
+func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (res SubscriptionTemplateControllerCreateTemplateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -9742,22 +11475,47 @@ func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Co
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplateController_createTemplate"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/subscription-templates"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateControllerCreateTemplateOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-templates"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9770,7 +11528,7 @@ func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerCreateTemplateOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9799,20 +11557,14 @@ func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateControllerCreateTemplateResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9826,24 +11578,48 @@ func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Co
 // Delete subscription template.
 //
 // DELETE /api/subscription-templates/{uuid}
-func (c *Client) SubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams, options ...RequestOption) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
-	res, err := c.sendSubscriptionTemplateControllerDeleteTemplate(ctx, params, options...)
+func (c *Client) SubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerDeleteTemplate(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams, requestOptions ...RequestOption) (res SubscriptionTemplateControllerDeleteTemplateRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (res SubscriptionTemplateControllerDeleteTemplateRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplateController_deleteTemplate"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/subscription-templates/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateControllerDeleteTemplateOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/subscription-templates/"
 	{
@@ -9866,6 +11642,7 @@ func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Co
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9875,7 +11652,7 @@ func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerDeleteTemplateOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9904,20 +11681,14 @@ func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateControllerDeleteTemplateResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -9931,28 +11702,53 @@ func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Co
 // Get all subscription templates (wihout content).
 //
 // GET /api/subscription-templates
-func (c *Client) SubscriptionTemplateControllerGetAllTemplates(ctx context.Context, options ...RequestOption) (SubscriptionTemplateControllerGetAllTemplatesRes, error) {
-	res, err := c.sendSubscriptionTemplateControllerGetAllTemplates(ctx, options...)
+func (c *Client) SubscriptionTemplateControllerGetAllTemplates(ctx context.Context) (SubscriptionTemplateControllerGetAllTemplatesRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerGetAllTemplates(ctx)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerGetAllTemplates(ctx context.Context, requestOptions ...RequestOption) (res SubscriptionTemplateControllerGetAllTemplatesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionTemplateControllerGetAllTemplates(ctx context.Context) (res SubscriptionTemplateControllerGetAllTemplatesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplateController_getAllTemplates"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-templates"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateControllerGetAllTemplatesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-templates"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -9962,7 +11758,7 @@ func (c *Client) sendSubscriptionTemplateControllerGetAllTemplates(ctx context.C
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerGetAllTemplatesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -9991,20 +11787,14 @@ func (c *Client) sendSubscriptionTemplateControllerGetAllTemplates(ctx context.C
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateControllerGetAllTemplatesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10018,24 +11808,48 @@ func (c *Client) sendSubscriptionTemplateControllerGetAllTemplates(ctx context.C
 // Get subscription template by uuid.
 //
 // GET /api/subscription-templates/{uuid}
-func (c *Client) SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams, options ...RequestOption) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
-	res, err := c.sendSubscriptionTemplateControllerGetTemplateByUuid(ctx, params, options...)
+func (c *Client) SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerGetTemplateByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams, requestOptions ...RequestOption) (res SubscriptionTemplateControllerGetTemplateByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (res SubscriptionTemplateControllerGetTemplateByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplateController_getTemplateByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-templates/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateControllerGetTemplateByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/subscription-templates/"
 	{
@@ -10058,6 +11872,7 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10067,7 +11882,7 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerGetTemplateByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10096,20 +11911,14 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateControllerGetTemplateByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10123,12 +11932,12 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 // Update subscription template.
 //
 // PATCH /api/subscription-templates
-func (c *Client) SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerUpdateTemplateRes, error) {
-	res, err := c.sendSubscriptionTemplateControllerUpdateTemplate(ctx, request, options...)
+func (c *Client) SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto) (SubscriptionTemplateControllerUpdateTemplateRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerUpdateTemplate(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, requestOptions ...RequestOption) (res SubscriptionTemplateControllerUpdateTemplateRes, err error) {
+func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto) (res SubscriptionTemplateControllerUpdateTemplateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10138,22 +11947,47 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplateController_updateTemplate"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/subscription-templates"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateControllerUpdateTemplateOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-templates"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10166,7 +12000,7 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerUpdateTemplateOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10195,20 +12029,14 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateControllerUpdateTemplateResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10222,28 +12050,53 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 // Get all subscriptions.
 //
 // GET /api/subscriptions
-func (c *Client) SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, options ...RequestOption) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
-	res, err := c.sendSubscriptionsControllerGetAllSubscriptions(ctx, params, options...)
+func (c *Client) SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
+	res, err := c.sendSubscriptionsControllerGetAllSubscriptions(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetAllSubscriptionsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (res SubscriptionsControllerGetAllSubscriptionsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionsController_getAllSubscriptions"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscriptions"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsControllerGetAllSubscriptionsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscriptions"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "size" parameter.
@@ -10281,6 +12134,7 @@ func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Cont
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10290,7 +12144,7 @@ func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Cont
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetAllSubscriptionsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10319,20 +12173,14 @@ func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Cont
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionsControllerGetAllSubscriptionsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10346,24 +12194,48 @@ func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Cont
 // Get Raw Subscription by Short UUID.
 //
 // GET /api/subscriptions/by-short-uuid/{shortUuid}/raw
-func (c *Client) SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams, options ...RequestOption) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
-	res, err := c.sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, params, options...)
+func (c *Client) SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
+	res, err := c.sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetRawSubscriptionByShortUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (res SubscriptionsControllerGetRawSubscriptionByShortUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionsController_getRawSubscriptionByShortUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscriptions/by-short-uuid/{shortUuid}/raw"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsControllerGetRawSubscriptionByShortUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/subscriptions/by-short-uuid/"
 	{
@@ -10387,6 +12259,7 @@ func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx co
 	pathParts[2] = "/raw"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "withDisabledHosts" parameter.
@@ -10407,6 +12280,7 @@ func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx co
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10416,7 +12290,7 @@ func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetRawSubscriptionByShortUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10445,20 +12319,14 @@ func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionsControllerGetRawSubscriptionByShortUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10472,24 +12340,48 @@ func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx co
 // Get subscription by short uuid (protected route).
 //
 // GET /api/subscriptions/by-short-uuid/{shortUuid}
-func (c *Client) SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
-	res, err := c.sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, params, options...)
+func (c *Client) SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
+	res, err := c.sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (res SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionsController_getSubscriptionByShortUuidProtected"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscriptions/by-short-uuid/{shortUuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsControllerGetSubscriptionByShortUuidProtectedOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/subscriptions/by-short-uuid/"
 	{
@@ -10512,6 +12404,7 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10521,7 +12414,7 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetSubscriptionByShortUuidProtectedOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10550,20 +12443,14 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionsControllerGetSubscriptionByShortUuidProtectedResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10577,24 +12464,48 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(
 // Get subscription by username.
 //
 // GET /api/subscriptions/by-username/{username}
-func (c *Client) SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
-	res, err := c.sendSubscriptionsControllerGetSubscriptionByUsername(ctx, params, options...)
+func (c *Client) SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
+	res, err := c.sendSubscriptionsControllerGetSubscriptionByUsername(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetSubscriptionByUsernameRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (res SubscriptionsControllerGetSubscriptionByUsernameRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionsController_getSubscriptionByUsername"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscriptions/by-username/{username}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsControllerGetSubscriptionByUsernameOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/subscriptions/by-username/"
 	{
@@ -10617,6 +12528,7 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx contex
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10626,7 +12538,7 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetSubscriptionByUsernameOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10655,20 +12567,14 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionsControllerGetSubscriptionByUsernameResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10682,24 +12588,48 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx contex
 // Get subscription by uuid.
 //
 // GET /api/subscriptions/by-uuid/{uuid}
-func (c *Client) SubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
-	res, err := c.sendSubscriptionsControllerGetSubscriptionByUuid(ctx, params, options...)
+func (c *Client) SubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
+	res, err := c.sendSubscriptionsControllerGetSubscriptionByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetSubscriptionByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (res SubscriptionsControllerGetSubscriptionByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionsController_getSubscriptionByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscriptions/by-uuid/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsControllerGetSubscriptionByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/subscriptions/by-uuid/"
 	{
@@ -10722,6 +12652,7 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Co
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10731,7 +12662,7 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetSubscriptionByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10760,20 +12691,14 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSubscriptionsControllerGetSubscriptionByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10787,12 +12712,12 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Co
 // Test SRR Matcher.
 //
 // POST /api/system/testers/srr-matcher
-func (c *Client) SystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto, options ...RequestOption) (SystemControllerDebugSrrMatcherRes, error) {
-	res, err := c.sendSystemControllerDebugSrrMatcher(ctx, request, options...)
+func (c *Client) SystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (SystemControllerDebugSrrMatcherRes, error) {
+	res, err := c.sendSystemControllerDebugSrrMatcher(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto, requestOptions ...RequestOption) (res SystemControllerDebugSrrMatcherRes, err error) {
+func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (res SystemControllerDebugSrrMatcherRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10802,22 +12727,47 @@ func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, reques
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_debugSrrMatcher"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/system/testers/srr-matcher"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerDebugSrrMatcherOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/testers/srr-matcher"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10830,7 +12780,7 @@ func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, reques
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerDebugSrrMatcherOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10859,20 +12809,14 @@ func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, reques
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerDebugSrrMatcherResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10886,28 +12830,53 @@ func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, reques
 // Encrypt Happ Crypto Link.
 //
 // POST /api/system/tools/happ/encrypt
-func (c *Client) SystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto, options ...RequestOption) (SystemControllerEncryptHappCryptoLinkRes, error) {
-	res, err := c.sendSystemControllerEncryptHappCryptoLink(ctx, request, options...)
+func (c *Client) SystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (SystemControllerEncryptHappCryptoLinkRes, error) {
+	res, err := c.sendSystemControllerEncryptHappCryptoLink(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto, requestOptions ...RequestOption) (res SystemControllerEncryptHappCryptoLinkRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (res SystemControllerEncryptHappCryptoLinkRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_encryptHappCryptoLink"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/system/tools/happ/encrypt"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerEncryptHappCryptoLinkOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/tools/happ/encrypt"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -10920,7 +12889,7 @@ func (c *Client) sendSystemControllerEncryptHappCryptoLink(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerEncryptHappCryptoLinkOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -10949,20 +12918,14 @@ func (c *Client) sendSystemControllerEncryptHappCryptoLink(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerEncryptHappCryptoLinkResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -10976,28 +12939,53 @@ func (c *Client) sendSystemControllerEncryptHappCryptoLink(ctx context.Context, 
 // Get Bandwidth Stats.
 //
 // GET /api/system/stats/bandwidth
-func (c *Client) SystemControllerGetBandwidthStats(ctx context.Context, options ...RequestOption) (SystemControllerGetBandwidthStatsRes, error) {
-	res, err := c.sendSystemControllerGetBandwidthStats(ctx, options...)
+func (c *Client) SystemControllerGetBandwidthStats(ctx context.Context) (SystemControllerGetBandwidthStatsRes, error) {
+	res, err := c.sendSystemControllerGetBandwidthStats(ctx)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetBandwidthStatsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context) (res SystemControllerGetBandwidthStatsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_getBandwidthStats"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/stats/bandwidth"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerGetBandwidthStatsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/stats/bandwidth"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11007,7 +12995,7 @@ func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context, requ
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerGetBandwidthStatsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11036,20 +13024,14 @@ func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context, requ
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerGetBandwidthStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11063,28 +13045,53 @@ func (c *Client) sendSystemControllerGetBandwidthStats(ctx context.Context, requ
 // Get Nodes Metrics.
 //
 // GET /api/system/nodes/metrics
-func (c *Client) SystemControllerGetNodesMetrics(ctx context.Context, options ...RequestOption) (SystemControllerGetNodesMetricsRes, error) {
-	res, err := c.sendSystemControllerGetNodesMetrics(ctx, options...)
+func (c *Client) SystemControllerGetNodesMetrics(ctx context.Context) (SystemControllerGetNodesMetricsRes, error) {
+	res, err := c.sendSystemControllerGetNodesMetrics(ctx)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerGetNodesMetrics(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetNodesMetricsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerGetNodesMetrics(ctx context.Context) (res SystemControllerGetNodesMetricsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_getNodesMetrics"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/nodes/metrics"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerGetNodesMetricsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/nodes/metrics"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11094,7 +13101,7 @@ func (c *Client) sendSystemControllerGetNodesMetrics(ctx context.Context, reques
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerGetNodesMetricsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11123,20 +13130,14 @@ func (c *Client) sendSystemControllerGetNodesMetrics(ctx context.Context, reques
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerGetNodesMetricsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11150,28 +13151,53 @@ func (c *Client) sendSystemControllerGetNodesMetrics(ctx context.Context, reques
 // Get Nodes Statistics.
 //
 // GET /api/system/stats/nodes
-func (c *Client) SystemControllerGetNodesStatistics(ctx context.Context, options ...RequestOption) (SystemControllerGetNodesStatisticsRes, error) {
-	res, err := c.sendSystemControllerGetNodesStatistics(ctx, options...)
+func (c *Client) SystemControllerGetNodesStatistics(ctx context.Context) (SystemControllerGetNodesStatisticsRes, error) {
+	res, err := c.sendSystemControllerGetNodesStatistics(ctx)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetNodesStatisticsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context) (res SystemControllerGetNodesStatisticsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_getNodesStatistics"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/stats/nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerGetNodesStatisticsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/stats/nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11181,7 +13207,7 @@ func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context, req
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerGetNodesStatisticsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11210,20 +13236,14 @@ func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context, req
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerGetNodesStatisticsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11237,28 +13257,53 @@ func (c *Client) sendSystemControllerGetNodesStatistics(ctx context.Context, req
 // Get Remnawave Health.
 //
 // GET /api/system/health
-func (c *Client) SystemControllerGetRemnawaveHealth(ctx context.Context, options ...RequestOption) (SystemControllerGetRemnawaveHealthRes, error) {
-	res, err := c.sendSystemControllerGetRemnawaveHealth(ctx, options...)
+func (c *Client) SystemControllerGetRemnawaveHealth(ctx context.Context) (SystemControllerGetRemnawaveHealthRes, error) {
+	res, err := c.sendSystemControllerGetRemnawaveHealth(ctx)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerGetRemnawaveHealth(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetRemnawaveHealthRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerGetRemnawaveHealth(ctx context.Context) (res SystemControllerGetRemnawaveHealthRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_getRemnawaveHealth"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/health"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerGetRemnawaveHealthOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/health"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11268,7 +13313,7 @@ func (c *Client) sendSystemControllerGetRemnawaveHealth(ctx context.Context, req
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerGetRemnawaveHealthOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11297,20 +13342,14 @@ func (c *Client) sendSystemControllerGetRemnawaveHealth(ctx context.Context, req
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerGetRemnawaveHealthResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11324,28 +13363,53 @@ func (c *Client) sendSystemControllerGetRemnawaveHealth(ctx context.Context, req
 // Get Stats.
 //
 // GET /api/system/stats
-func (c *Client) SystemControllerGetStats(ctx context.Context, options ...RequestOption) (SystemControllerGetStatsRes, error) {
-	res, err := c.sendSystemControllerGetStats(ctx, options...)
+func (c *Client) SystemControllerGetStats(ctx context.Context) (SystemControllerGetStatsRes, error) {
+	res, err := c.sendSystemControllerGetStats(ctx)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerGetStats(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetStatsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerGetStats(ctx context.Context) (res SystemControllerGetStatsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_getStats"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/stats"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerGetStatsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/stats"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11355,7 +13419,7 @@ func (c *Client) sendSystemControllerGetStats(ctx context.Context, requestOption
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerGetStatsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11384,20 +13448,14 @@ func (c *Client) sendSystemControllerGetStats(ctx context.Context, requestOption
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerGetStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11411,28 +13469,53 @@ func (c *Client) sendSystemControllerGetStats(ctx context.Context, requestOption
 // Generate 30 X25519 keypairs.
 //
 // GET /api/system/tools/x25519/generate
-func (c *Client) SystemControllerGetX25519Keypairs(ctx context.Context, options ...RequestOption) (SystemControllerGetX25519KeypairsRes, error) {
-	res, err := c.sendSystemControllerGetX25519Keypairs(ctx, options...)
+func (c *Client) SystemControllerGetX25519Keypairs(ctx context.Context) (SystemControllerGetX25519KeypairsRes, error) {
+	res, err := c.sendSystemControllerGetX25519Keypairs(ctx)
 	return res, err
 }
 
-func (c *Client) sendSystemControllerGetX25519Keypairs(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetX25519KeypairsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendSystemControllerGetX25519Keypairs(ctx context.Context) (res SystemControllerGetX25519KeypairsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SystemController_getX25519Keypairs"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/tools/x25519/generate"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemControllerGetX25519KeypairsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/system/tools/x25519/generate"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11442,7 +13525,7 @@ func (c *Client) sendSystemControllerGetX25519Keypairs(ctx context.Context, requ
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, SystemControllerGetX25519KeypairsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11471,20 +13554,14 @@ func (c *Client) sendSystemControllerGetX25519Keypairs(ctx context.Context, requ
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeSystemControllerGetX25519KeypairsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11498,28 +13575,53 @@ func (c *Client) sendSystemControllerGetX25519Keypairs(ctx context.Context, requ
 // Get all subscription request history.
 //
 // GET /api/subscription-request-history
-func (c *Client) UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
-	res, err := c.sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, params, options...)
+func (c *Client) UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
+	res, err := c.sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams, requestOptions ...RequestOption) (res UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (res UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-request-history"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-request-history"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "size" parameter.
@@ -11557,6 +13659,7 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11566,7 +13669,7 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11595,20 +13698,14 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11622,28 +13719,53 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 // Get subscription request history stats.
 //
 // GET /api/subscription-request-history/stats
-func (c *Client) UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error) {
-	res, err := c.sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx, options...)
+func (c *Client) UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error) {
+	res, err := c.sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx)
 	return res, err
 }
 
-func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context, requestOptions ...RequestOption) (res UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context) (res UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-request-history/stats"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/subscription-request-history/stats"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11653,7 +13775,7 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11682,20 +13804,14 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11709,28 +13825,53 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 // Bulk reset all users traffic.
 //
 // POST /api/users/bulk/all/reset-traffic
-func (c *Client) UsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context, options ...RequestOption) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx, options...)
+func (c *Client) UsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkAllResetUserTrafficRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx context.Context) (res UsersBulkActionsControllerBulkAllResetUserTrafficRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkAllResetUserTraffic"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/all/reset-traffic"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkAllResetUserTrafficOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/all/reset-traffic"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11740,7 +13881,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkAllResetUserTrafficOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11769,20 +13910,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkAllResetUserTrafficResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11796,12 +13931,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx conte
 // Bulk delete users by UUIDs.
 //
 // POST /api/users/bulk/delete
-func (c *Client) UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkDeleteUsers(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkDeleteUsers(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkDeleteUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (res UsersBulkActionsControllerBulkDeleteUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -11811,22 +13946,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Conte
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkDeleteUsers"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/delete"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkDeleteUsersOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/delete"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11839,7 +13999,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkDeleteUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11868,20 +14028,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkDeleteUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11895,12 +14049,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Conte
 // Bulk delete users by status.
 //
 // POST /api/users/bulk/delete-by-status
-func (c *Client) UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkDeleteUsersByStatusRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (res UsersBulkActionsControllerBulkDeleteUsersByStatusRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -11910,22 +14064,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkDeleteUsersByStatus"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/delete-by-status"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkDeleteUsersByStatusOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/delete-by-status"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -11938,7 +14117,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkDeleteUsersByStatusOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -11967,20 +14146,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkDeleteUsersByStatusResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -11994,12 +14167,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 // Bulk reset traffic users by UUIDs.
 //
 // POST /api/users/bulk/reset-traffic
-func (c *Client) UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkResetUserTraffic(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkResetUserTraffic(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkResetUserTrafficRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (res UsersBulkActionsControllerBulkResetUserTrafficRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -12009,22 +14182,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkResetUserTraffic"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/reset-traffic"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkResetUserTrafficOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/reset-traffic"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12037,7 +14235,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkResetUserTrafficOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12066,20 +14264,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkResetUserTrafficResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12093,12 +14285,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.
 // Revoke users subscription by User UUIDs.
 //
 // POST /api/users/bulk/revoke-subscription
-func (c *Client) UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (res UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -12108,22 +14300,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx c
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkRevokeUsersSubscription"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/revoke-subscription"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkRevokeUsersSubscriptionOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/revoke-subscription"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12136,7 +14353,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx c
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkRevokeUsersSubscriptionOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12165,20 +14382,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx c
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkRevokeUsersSubscriptionResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12192,12 +14403,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx c
 // Bulk update all users.
 //
 // POST /api/users/bulk/all/update
-func (c *Client) UsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkUpdateAllUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (res UsersBulkActionsControllerBulkUpdateAllUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -12207,22 +14418,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Co
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkUpdateAllUsers"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/all/update"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkUpdateAllUsersOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/all/update"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12235,7 +14471,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Co
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkUpdateAllUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12264,20 +14500,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Co
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkUpdateAllUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12291,12 +14521,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateAllUsers(ctx context.Co
 // Bulk update users by UUIDs.
 //
 // POST /api/users/bulk/update
-func (c *Client) UsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkUpdateUsersRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkUpdateUsers(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateUsersRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkUpdateUsers(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkUpdateUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto) (res UsersBulkActionsControllerBulkUpdateUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -12306,22 +14536,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Conte
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkUpdateUsers"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/update"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkUpdateUsersOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/update"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12334,7 +14589,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Conte
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkUpdateUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12363,20 +14618,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Conte
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkUpdateUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12390,12 +14639,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsers(ctx context.Conte
 // Bulk update users internal squads by UUIDs.
 //
 // POST /api/users/bulk/update-squads
-func (c *Client) UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto, options ...RequestOption) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error) {
-	res, err := c.sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx, request, options...)
+func (c *Client) UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto, requestOptions ...RequestOption) (res UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (res UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -12405,22 +14654,47 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkUpdateUsersInternalSquads"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/update-squads"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkUpdateUsersInternalSquadsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/bulk/update-squads"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12433,7 +14707,7 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkUpdateUsersInternalSquadsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12462,20 +14736,14 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkUpdateUsersInternalSquadsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12489,12 +14757,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx
 // Create a new user.
 //
 // POST /api/users
-func (c *Client) UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, options ...RequestOption) (UsersControllerCreateUserRes, error) {
-	res, err := c.sendUsersControllerCreateUser(ctx, request, options...)
+func (c *Client) UsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto) (UsersControllerCreateUserRes, error) {
+	res, err := c.sendUsersControllerCreateUser(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto, requestOptions ...RequestOption) (res UsersControllerCreateUserRes, err error) {
+func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *CreateUserRequestDto) (res UsersControllerCreateUserRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -12504,22 +14772,47 @@ func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *Cre
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_createUser"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerCreateUserOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12532,7 +14825,7 @@ func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *Cre
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerCreateUserOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12561,20 +14854,14 @@ func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *Cre
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerCreateUserResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12588,24 +14875,48 @@ func (c *Client) sendUsersControllerCreateUser(ctx context.Context, request *Cre
 // Delete user.
 //
 // DELETE /api/users/{uuid}
-func (c *Client) UsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams, options ...RequestOption) (UsersControllerDeleteUserRes, error) {
-	res, err := c.sendUsersControllerDeleteUser(ctx, params, options...)
+func (c *Client) UsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (UsersControllerDeleteUserRes, error) {
+	res, err := c.sendUsersControllerDeleteUser(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams, requestOptions ...RequestOption) (res UsersControllerDeleteUserRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (res UsersControllerDeleteUserRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_deleteUser"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerDeleteUserOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/"
 	{
@@ -12628,6 +14939,7 @@ func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params Users
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12637,7 +14949,7 @@ func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params Users
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerDeleteUserOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12666,20 +14978,14 @@ func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params Users
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerDeleteUserResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12693,24 +14999,48 @@ func (c *Client) sendUsersControllerDeleteUser(ctx context.Context, params Users
 // Disable user.
 //
 // POST /api/users/{uuid}/actions/disable
-func (c *Client) UsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams, options ...RequestOption) (UsersControllerDisableUserRes, error) {
-	res, err := c.sendUsersControllerDisableUser(ctx, params, options...)
+func (c *Client) UsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams) (UsersControllerDisableUserRes, error) {
+	res, err := c.sendUsersControllerDisableUser(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams, requestOptions ...RequestOption) (res UsersControllerDisableUserRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params UsersControllerDisableUserParams) (res UsersControllerDisableUserRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_disableUser"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/disable"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerDisableUserOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
@@ -12734,6 +15064,7 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 	pathParts[2] = "/actions/disable"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12743,7 +15074,7 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerDisableUserOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12772,20 +15103,14 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerDisableUserResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12799,24 +15124,48 @@ func (c *Client) sendUsersControllerDisableUser(ctx context.Context, params User
 // Enable user.
 //
 // POST /api/users/{uuid}/actions/enable
-func (c *Client) UsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams, options ...RequestOption) (UsersControllerEnableUserRes, error) {
-	res, err := c.sendUsersControllerEnableUser(ctx, params, options...)
+func (c *Client) UsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams) (UsersControllerEnableUserRes, error) {
+	res, err := c.sendUsersControllerEnableUser(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams, requestOptions ...RequestOption) (res UsersControllerEnableUserRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params UsersControllerEnableUserParams) (res UsersControllerEnableUserRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_enableUser"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/enable"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerEnableUserOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
@@ -12840,6 +15189,7 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 	pathParts[2] = "/actions/enable"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12849,7 +15199,7 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerEnableUserOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12878,20 +15228,14 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerEnableUserResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12905,28 +15249,53 @@ func (c *Client) sendUsersControllerEnableUser(ctx context.Context, params Users
 // Get all existing user tags.
 //
 // GET /api/users/tags
-func (c *Client) UsersControllerGetAllTags(ctx context.Context, options ...RequestOption) (UsersControllerGetAllTagsRes, error) {
-	res, err := c.sendUsersControllerGetAllTags(ctx, options...)
+func (c *Client) UsersControllerGetAllTags(ctx context.Context) (UsersControllerGetAllTagsRes, error) {
+	res, err := c.sendUsersControllerGetAllTags(ctx)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetAllTags(ctx context.Context, requestOptions ...RequestOption) (res UsersControllerGetAllTagsRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetAllTags(ctx context.Context) (res UsersControllerGetAllTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getAllTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/tags"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetAllTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users/tags"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -12936,7 +15305,7 @@ func (c *Client) sendUsersControllerGetAllTags(ctx context.Context, requestOptio
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetAllTagsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -12965,20 +15334,14 @@ func (c *Client) sendUsersControllerGetAllTags(ctx context.Context, requestOptio
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetAllTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -12992,28 +15355,53 @@ func (c *Client) sendUsersControllerGetAllTags(ctx context.Context, requestOptio
 // Get all users.
 //
 // GET /api/users
-func (c *Client) UsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams, options ...RequestOption) (UsersControllerGetAllUsersRes, error) {
-	res, err := c.sendUsersControllerGetAllUsers(ctx, params, options...)
+func (c *Client) UsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (UsersControllerGetAllUsersRes, error) {
+	res, err := c.sendUsersControllerGetAllUsers(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams, requestOptions ...RequestOption) (res UsersControllerGetAllUsersRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (res UsersControllerGetAllUsersRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getAllUsers"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetAllUsersOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "size" parameter.
@@ -13051,6 +15439,7 @@ func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params User
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13060,7 +15449,7 @@ func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params User
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetAllUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13089,20 +15478,14 @@ func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params User
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetAllUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13116,24 +15499,48 @@ func (c *Client) sendUsersControllerGetAllUsers(ctx context.Context, params User
 // Get user accessible nodes.
 //
 // GET /api/users/{uuid}/accessible-nodes
-func (c *Client) UsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams, options ...RequestOption) (UsersControllerGetUserAccessibleNodesRes, error) {
-	res, err := c.sendUsersControllerGetUserAccessibleNodes(ctx, params, options...)
+func (c *Client) UsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error) {
+	res, err := c.sendUsersControllerGetUserAccessibleNodes(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams, requestOptions ...RequestOption) (res UsersControllerGetUserAccessibleNodesRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (res UsersControllerGetUserAccessibleNodesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserAccessibleNodes"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}/accessible-nodes"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserAccessibleNodesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
@@ -13157,6 +15564,7 @@ func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, 
 	pathParts[2] = "/accessible-nodes"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13166,7 +15574,7 @@ func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUserAccessibleNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13195,20 +15603,14 @@ func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserAccessibleNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13222,24 +15624,48 @@ func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, 
 // Get user by Short UUID.
 //
 // GET /api/users/by-short-uuid/{shortUuid}
-func (c *Client) UsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams, options ...RequestOption) (UsersControllerGetUserByShortUuidRes, error) {
-	res, err := c.sendUsersControllerGetUserByShortUuid(ctx, params, options...)
+func (c *Client) UsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (UsersControllerGetUserByShortUuidRes, error) {
+	res, err := c.sendUsersControllerGetUserByShortUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams, requestOptions ...RequestOption) (res UsersControllerGetUserByShortUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (res UsersControllerGetUserByShortUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserByShortUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/by-short-uuid/{shortUuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserByShortUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/by-short-uuid/"
 	{
@@ -13262,6 +15688,7 @@ func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, para
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13271,7 +15698,7 @@ func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, para
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUserByShortUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13300,20 +15727,14 @@ func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, para
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserByShortUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13327,24 +15748,48 @@ func (c *Client) sendUsersControllerGetUserByShortUuid(ctx context.Context, para
 // Get users by telegram ID.
 //
 // GET /api/users/by-telegram-id/{telegramId}
-func (c *Client) UsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams, options ...RequestOption) (UsersControllerGetUserByTelegramIdRes, error) {
-	res, err := c.sendUsersControllerGetUserByTelegramId(ctx, params, options...)
+func (c *Client) UsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (UsersControllerGetUserByTelegramIdRes, error) {
+	res, err := c.sendUsersControllerGetUserByTelegramId(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams, requestOptions ...RequestOption) (res UsersControllerGetUserByTelegramIdRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (res UsersControllerGetUserByTelegramIdRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserByTelegramId"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/by-telegram-id/{telegramId}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserByTelegramIdOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/by-telegram-id/"
 	{
@@ -13367,6 +15812,7 @@ func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, par
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13376,7 +15822,7 @@ func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, par
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUserByTelegramIdOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13405,20 +15851,14 @@ func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, par
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserByTelegramIdResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13432,24 +15872,48 @@ func (c *Client) sendUsersControllerGetUserByTelegramId(ctx context.Context, par
 // Get user by username.
 //
 // GET /api/users/by-username/{username}
-func (c *Client) UsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams, options ...RequestOption) (UsersControllerGetUserByUsernameRes, error) {
-	res, err := c.sendUsersControllerGetUserByUsername(ctx, params, options...)
+func (c *Client) UsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (UsersControllerGetUserByUsernameRes, error) {
+	res, err := c.sendUsersControllerGetUserByUsername(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams, requestOptions ...RequestOption) (res UsersControllerGetUserByUsernameRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (res UsersControllerGetUserByUsernameRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserByUsername"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/by-username/{username}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserByUsernameOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/by-username/"
 	{
@@ -13472,6 +15936,7 @@ func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, param
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13481,7 +15946,7 @@ func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, param
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUserByUsernameOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13510,20 +15975,14 @@ func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, param
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserByUsernameResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13537,24 +15996,48 @@ func (c *Client) sendUsersControllerGetUserByUsername(ctx context.Context, param
 // Get user by UUID.
 //
 // GET /api/users/{uuid}
-func (c *Client) UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams, options ...RequestOption) (UsersControllerGetUserByUuidRes, error) {
-	res, err := c.sendUsersControllerGetUserByUuid(ctx, params, options...)
+func (c *Client) UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (UsersControllerGetUserByUuidRes, error) {
+	res, err := c.sendUsersControllerGetUserByUuid(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams, requestOptions ...RequestOption) (res UsersControllerGetUserByUuidRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (res UsersControllerGetUserByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/"
 	{
@@ -13577,6 +16060,7 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13586,7 +16070,7 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUserByUuidOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13615,20 +16099,14 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13642,24 +16120,48 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 // Get user subscription request history, recent 24 records.
 //
 // GET /api/users/{uuid}/subscription-request-history
-func (c *Client) UsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams, options ...RequestOption) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
-	res, err := c.sendUsersControllerGetUserSubscriptionRequestHistory(ctx, params, options...)
+func (c *Client) UsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
+	res, err := c.sendUsersControllerGetUserSubscriptionRequestHistory(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams, requestOptions ...RequestOption) (res UsersControllerGetUserSubscriptionRequestHistoryRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (res UsersControllerGetUserSubscriptionRequestHistoryRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserSubscriptionRequestHistory"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}/subscription-request-history"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserSubscriptionRequestHistoryOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
@@ -13683,6 +16185,7 @@ func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx contex
 	pathParts[2] = "/subscription-request-history"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13692,7 +16195,7 @@ func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx contex
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUserSubscriptionRequestHistoryOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13721,20 +16224,14 @@ func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx contex
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserSubscriptionRequestHistoryResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13748,24 +16245,48 @@ func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx contex
 // Get users by email.
 //
 // GET /api/users/by-email/{email}
-func (c *Client) UsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams, options ...RequestOption) (UsersControllerGetUsersByEmailRes, error) {
-	res, err := c.sendUsersControllerGetUsersByEmail(ctx, params, options...)
+func (c *Client) UsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (UsersControllerGetUsersByEmailRes, error) {
+	res, err := c.sendUsersControllerGetUsersByEmail(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams, requestOptions ...RequestOption) (res UsersControllerGetUsersByEmailRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (res UsersControllerGetUsersByEmailRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUsersByEmail"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/by-email/{email}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUsersByEmailOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/by-email/"
 	{
@@ -13788,6 +16309,7 @@ func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params 
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13797,7 +16319,7 @@ func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUsersByEmailOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13826,20 +16348,14 @@ func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUsersByEmailResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13853,24 +16369,48 @@ func (c *Client) sendUsersControllerGetUsersByEmail(ctx context.Context, params 
 // Get users by tag.
 //
 // GET /api/users/by-tag/{tag}
-func (c *Client) UsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams, options ...RequestOption) (UsersControllerGetUsersByTagRes, error) {
-	res, err := c.sendUsersControllerGetUsersByTag(ctx, params, options...)
+func (c *Client) UsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (UsersControllerGetUsersByTagRes, error) {
+	res, err := c.sendUsersControllerGetUsersByTag(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams, requestOptions ...RequestOption) (res UsersControllerGetUsersByTagRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (res UsersControllerGetUsersByTagRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUsersByTag"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/by-tag/{tag}"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUsersByTagOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [2]string
 	pathParts[0] = "/api/users/by-tag/"
 	{
@@ -13893,6 +16433,7 @@ func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params Us
 	}
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -13902,7 +16443,7 @@ func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params Us
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerGetUsersByTagOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -13931,20 +16472,14 @@ func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params Us
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUsersByTagResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -13958,24 +16493,48 @@ func (c *Client) sendUsersControllerGetUsersByTag(ctx context.Context, params Us
 // Reset user traffic.
 //
 // POST /api/users/{uuid}/actions/reset-traffic
-func (c *Client) UsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams, options ...RequestOption) (UsersControllerResetUserTrafficRes, error) {
-	res, err := c.sendUsersControllerResetUserTraffic(ctx, params, options...)
+func (c *Client) UsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (UsersControllerResetUserTrafficRes, error) {
+	res, err := c.sendUsersControllerResetUserTraffic(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams, requestOptions ...RequestOption) (res UsersControllerResetUserTrafficRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (res UsersControllerResetUserTrafficRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_resetUserTraffic"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/reset-traffic"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerResetUserTrafficOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
@@ -13999,6 +16558,7 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 	pathParts[2] = "/actions/reset-traffic"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -14008,7 +16568,7 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerResetUserTrafficOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -14037,20 +16597,14 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerResetUserTrafficResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -14064,12 +16618,12 @@ func (c *Client) sendUsersControllerResetUserTraffic(ctx context.Context, params
 // Revoke user subscription.
 //
 // POST /api/users/{uuid}/actions/revoke
-func (c *Client) UsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams, options ...RequestOption) (UsersControllerRevokeUserSubscriptionRes, error) {
-	res, err := c.sendUsersControllerRevokeUserSubscription(ctx, request, params, options...)
+func (c *Client) UsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (UsersControllerRevokeUserSubscriptionRes, error) {
+	res, err := c.sendUsersControllerRevokeUserSubscription(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams, requestOptions ...RequestOption) (res UsersControllerRevokeUserSubscriptionRes, err error) {
+func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (res UsersControllerRevokeUserSubscriptionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14079,18 +16633,42 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_revokeUserSubscription"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/revoke"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerRevokeUserSubscriptionOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
@@ -14114,6 +16692,7 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 	pathParts[2] = "/actions/revoke"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -14126,7 +16705,7 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerRevokeUserSubscriptionOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -14155,20 +16734,14 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerRevokeUserSubscriptionResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -14182,12 +16755,12 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 // Update a user by UUID or username.
 //
 // PATCH /api/users
-func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (UsersControllerUpdateUserRes, error) {
-	res, err := c.sendUsersControllerUpdateUser(ctx, request, options...)
+func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto) (UsersControllerUpdateUserRes, error) {
+	res, err := c.sendUsersControllerUpdateUser(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, requestOptions ...RequestOption) (res UsersControllerUpdateUserRes, err error) {
+func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto) (res UsersControllerUpdateUserRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14197,22 +16770,47 @@ func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *Upd
 	}(); err != nil {
 		return res, errors.Wrap(err, "validate")
 	}
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_updateUser"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/users"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerUpdateUserOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
 	pathParts[0] = "/api/users"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -14225,7 +16823,7 @@ func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *Upd
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersControllerUpdateUserOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -14254,20 +16852,14 @@ func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *Upd
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersControllerUpdateUserResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
@@ -14281,24 +16873,48 @@ func (c *Client) sendUsersControllerUpdateUser(ctx context.Context, request *Upd
 // Get user usage by range.
 //
 // GET /api/users/stats/usage/{uuid}/range
-func (c *Client) UsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams, options ...RequestOption) (UsersStatsControllerGetUserUsageByRangeRes, error) {
-	res, err := c.sendUsersStatsControllerGetUserUsageByRange(ctx, params, options...)
+func (c *Client) UsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (UsersStatsControllerGetUserUsageByRangeRes, error) {
+	res, err := c.sendUsersStatsControllerGetUserUsageByRange(ctx, params)
 	return res, err
 }
 
-func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams, requestOptions ...RequestOption) (res UsersStatsControllerGetUserUsageByRangeRes, err error) {
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
+func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (res UsersStatsControllerGetUserUsageByRangeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersStatsController_getUserUsageByRange"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/stats/usage/{uuid}/range"),
 	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersStatsControllerGetUserUsageByRangeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [3]string
 	pathParts[0] = "/api/users/stats/usage/"
 	{
@@ -14322,6 +16938,7 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 	pathParts[2] = "/range"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
 		// Encode "start" parameter.
@@ -14353,6 +16970,7 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 	}
 	u.RawQuery = q.Values().Encode()
 
+	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
@@ -14362,7 +16980,7 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-
+			stage = "Security:Authorization"
 			switch err := c.securityAuthorization(ctx, UsersStatsControllerGetUserUsageByRangeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
@@ -14391,20 +17009,14 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 		}
 	}
 
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	resp, err := reqCfg.Client.Do(r)
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
 	defer resp.Body.Close()
 
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
+	stage = "DecodeResponse"
 	result, err := decodeUsersStatsControllerGetUserUsageByRangeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")

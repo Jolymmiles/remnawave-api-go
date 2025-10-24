@@ -1,7 +1,20 @@
+parser:
+  # Enable type inference from schema properties
+  infer_types: true
+  # Allow resolving remote references
+  allow_remote: true
+
 generator:
   features:
     disable_all: true
     enable:
+      # Core features
       - "paths/client"
       - "client/request/validation"
-      - "client/request/options"
+      
+      # Observability & Instrumentation (HIGH Priority)
+      - "ogen/otel"
+      
+      # Code quality improvements
+      - "ogen/unimplemented"
+      - "debug/example_tests"

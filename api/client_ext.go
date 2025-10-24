@@ -36,169 +36,169 @@ func (c *ClientExt) System() *SystemClient   { return c.system }
 // UsersClient provides organized access to user operations
 type UsersClient struct{ client *Client }
 func NewUsersClient(c *Client) *UsersClient { return &UsersClient{client: c} }
-func (uc *UsersClient) GetAll(ctx context.Context, opts ...RequestOption) (UsersControllerGetAllUsersRes, error) {
-	return uc.client.UsersControllerGetAllUsers(ctx, UsersControllerGetAllUsersParams{}, opts...)
+func (uc *UsersClient) GetAll(ctx context.Context) (UsersControllerGetAllUsersRes, error) {
+	return uc.client.UsersControllerGetAllUsers(ctx, UsersControllerGetAllUsersParams{})
 }
 func (uc *UsersClient) NewPaginationHelper(pageSize int) *PaginationHelper {
 	return NewPaginationHelper(pageSize)
 }
-func (uc *UsersClient) Create(ctx context.Context, request *CreateUserRequestDto, opts ...RequestOption) (UsersControllerCreateUserRes, error) {
-	return uc.client.UsersControllerCreateUser(ctx, request, opts...)
+func (uc *UsersClient) Create(ctx context.Context, request *CreateUserRequestDto, ) (UsersControllerCreateUserRes, error) {
+	return uc.client.UsersControllerCreateUser(ctx, request)
 }
-func (uc *UsersClient) Update(ctx context.Context, request *UpdateUserRequestDto, opts ...RequestOption) (UsersControllerUpdateUserRes, error) {
-	return uc.client.UsersControllerUpdateUser(ctx, request, opts...)
+func (uc *UsersClient) Update(ctx context.Context, request *UpdateUserRequestDto, ) (UsersControllerUpdateUserRes, error) {
+	return uc.client.UsersControllerUpdateUser(ctx, request)
 }
-func (uc *UsersClient) GetByID(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerGetUserByUuidRes, error) {
-	return uc.client.UsersControllerGetUserByUuid(ctx, UsersControllerGetUserByUuidParams{UUID: uuid}, opts...)
+func (uc *UsersClient) GetByID(ctx context.Context, uuid string, ) (UsersControllerGetUserByUuidRes, error) {
+	return uc.client.UsersControllerGetUserByUuid(ctx, UsersControllerGetUserByUuidParams{UUID: uuid})
 }
-func (uc *UsersClient) Delete(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerDeleteUserRes, error) {
-	return uc.client.UsersControllerDeleteUser(ctx, UsersControllerDeleteUserParams{UUID: uuid}, opts...)
+func (uc *UsersClient) Delete(ctx context.Context, uuid string, ) (UsersControllerDeleteUserRes, error) {
+	return uc.client.UsersControllerDeleteUser(ctx, UsersControllerDeleteUserParams{UUID: uuid})
 }
-func (uc *UsersClient) GetByUsername(ctx context.Context, username string, opts ...RequestOption) (UsersControllerGetUserByUsernameRes, error) {
-	return uc.client.UsersControllerGetUserByUsername(ctx, UsersControllerGetUserByUsernameParams{Username: username}, opts...)
+func (uc *UsersClient) GetByUsername(ctx context.Context, username string, ) (UsersControllerGetUserByUsernameRes, error) {
+	return uc.client.UsersControllerGetUserByUsername(ctx, UsersControllerGetUserByUsernameParams{Username: username})
 }
-func (uc *UsersClient) GetByEmail(ctx context.Context, email string, opts ...RequestOption) (UsersControllerGetUsersByEmailRes, error) {
-	return uc.client.UsersControllerGetUsersByEmail(ctx, UsersControllerGetUsersByEmailParams{Email: email}, opts...)
+func (uc *UsersClient) GetByEmail(ctx context.Context, email string, ) (UsersControllerGetUsersByEmailRes, error) {
+	return uc.client.UsersControllerGetUsersByEmail(ctx, UsersControllerGetUsersByEmailParams{Email: email})
 }
-func (uc *UsersClient) GetByShortUUID(ctx context.Context, shortUUID string, opts ...RequestOption) (UsersControllerGetUserByShortUuidRes, error) {
-	return uc.client.UsersControllerGetUserByShortUuid(ctx, UsersControllerGetUserByShortUuidParams{ShortUuid: shortUUID}, opts...)
+func (uc *UsersClient) GetByShortUUID(ctx context.Context, shortUUID string, ) (UsersControllerGetUserByShortUuidRes, error) {
+	return uc.client.UsersControllerGetUserByShortUuid(ctx, UsersControllerGetUserByShortUuidParams{ShortUuid: shortUUID})
 }
-func (uc *UsersClient) GetByTelegramID(ctx context.Context, telegramID string, opts ...RequestOption) (UsersControllerGetUserByTelegramIdRes, error) {
-	return uc.client.UsersControllerGetUserByTelegramId(ctx, UsersControllerGetUserByTelegramIdParams{TelegramId: telegramID}, opts...)
+func (uc *UsersClient) GetByTelegramID(ctx context.Context, telegramID string, ) (UsersControllerGetUserByTelegramIdRes, error) {
+	return uc.client.UsersControllerGetUserByTelegramId(ctx, UsersControllerGetUserByTelegramIdParams{TelegramId: telegramID})
 }
-func (uc *UsersClient) GetTags(ctx context.Context, opts ...RequestOption) (UsersControllerGetAllTagsRes, error) {
-	return uc.client.UsersControllerGetAllTags(ctx, opts...)
+func (uc *UsersClient) GetTags(ctx context.Context, ) (UsersControllerGetAllTagsRes, error) {
+	return uc.client.UsersControllerGetAllTags(ctx)
 }
-func (uc *UsersClient) GetByTag(ctx context.Context, tag string, opts ...RequestOption) (UsersControllerGetUsersByTagRes, error) {
-	return uc.client.UsersControllerGetUsersByTag(ctx, UsersControllerGetUsersByTagParams{Tag: tag}, opts...)
+func (uc *UsersClient) GetByTag(ctx context.Context, tag string, ) (UsersControllerGetUsersByTagRes, error) {
+	return uc.client.UsersControllerGetUsersByTag(ctx, UsersControllerGetUsersByTagParams{Tag: tag})
 }
-func (uc *UsersClient) GetAccessibleNodes(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerGetUserAccessibleNodesRes, error) {
-	return uc.client.UsersControllerGetUserAccessibleNodes(ctx, UsersControllerGetUserAccessibleNodesParams{UUID: uuid}, opts...)
+func (uc *UsersClient) GetAccessibleNodes(ctx context.Context, uuid string, ) (UsersControllerGetUserAccessibleNodesRes, error) {
+	return uc.client.UsersControllerGetUserAccessibleNodes(ctx, UsersControllerGetUserAccessibleNodesParams{UUID: uuid})
 }
-func (uc *UsersClient) GetSubscriptionRequestHistory(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
-	return uc.client.UsersControllerGetUserSubscriptionRequestHistory(ctx, UsersControllerGetUserSubscriptionRequestHistoryParams{UUID: uuid}, opts...)
+func (uc *UsersClient) GetSubscriptionRequestHistory(ctx context.Context, uuid string, ) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
+	return uc.client.UsersControllerGetUserSubscriptionRequestHistory(ctx, UsersControllerGetUserSubscriptionRequestHistoryParams{UUID: uuid})
 }
-func (uc *UsersClient) Enable(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerEnableUserRes, error) {
-	return uc.client.UsersControllerEnableUser(ctx, UsersControllerEnableUserParams{UUID: uuid}, opts...)
+func (uc *UsersClient) Enable(ctx context.Context, uuid string, ) (UsersControllerEnableUserRes, error) {
+	return uc.client.UsersControllerEnableUser(ctx, UsersControllerEnableUserParams{UUID: uuid})
 }
-func (uc *UsersClient) Disable(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerDisableUserRes, error) {
-	return uc.client.UsersControllerDisableUser(ctx, UsersControllerDisableUserParams{UUID: uuid}, opts...)
+func (uc *UsersClient) Disable(ctx context.Context, uuid string, ) (UsersControllerDisableUserRes, error) {
+	return uc.client.UsersControllerDisableUser(ctx, UsersControllerDisableUserParams{UUID: uuid})
 }
-func (uc *UsersClient) ResetTraffic(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerResetUserTrafficRes, error) {
-	return uc.client.UsersControllerResetUserTraffic(ctx, UsersControllerResetUserTrafficParams{UUID: uuid}, opts...)
+func (uc *UsersClient) ResetTraffic(ctx context.Context, uuid string, ) (UsersControllerResetUserTrafficRes, error) {
+	return uc.client.UsersControllerResetUserTraffic(ctx, UsersControllerResetUserTrafficParams{UUID: uuid})
 }
-func (uc *UsersClient) RevokeSubscription(ctx context.Context, uuid string, opts ...RequestOption) (UsersControllerRevokeUserSubscriptionRes, error) {
-	return uc.client.UsersControllerRevokeUserSubscription(ctx, &RevokeUserSubscriptionBodyDto{}, UsersControllerRevokeUserSubscriptionParams{UUID: uuid}, opts...)
+func (uc *UsersClient) RevokeSubscription(ctx context.Context, uuid string, ) (UsersControllerRevokeUserSubscriptionRes, error) {
+	return uc.client.UsersControllerRevokeUserSubscription(ctx, &RevokeUserSubscriptionBodyDto{}, UsersControllerRevokeUserSubscriptionParams{UUID: uuid})
 }
 
 // NodesClient provides organized access to node operations
 type NodesClient struct{ client *Client }
 func NewNodesClient(c *Client) *NodesClient { return &NodesClient{client: c} }
-func (nc *NodesClient) GetAll(ctx context.Context, opts ...RequestOption) (NodesControllerGetAllNodesRes, error) {
-	return nc.client.NodesControllerGetAllNodes(ctx, opts...)
+func (nc *NodesClient) GetAll(ctx context.Context, ) (NodesControllerGetAllNodesRes, error) {
+	return nc.client.NodesControllerGetAllNodes(ctx)
 }
 func (nc *NodesClient) NewPaginationHelper(pageSize int) *PaginationHelper {
 	return NewPaginationHelper(pageSize)
 }
-func (nc *NodesClient) Create(ctx context.Context, request *CreateNodeRequestDto, opts ...RequestOption) (NodesControllerCreateNodeRes, error) {
-	return nc.client.NodesControllerCreateNode(ctx, request, opts...)
+func (nc *NodesClient) Create(ctx context.Context, request *CreateNodeRequestDto, ) (NodesControllerCreateNodeRes, error) {
+	return nc.client.NodesControllerCreateNode(ctx, request)
 }
-func (nc *NodesClient) Update(ctx context.Context, request *UpdateNodeRequestDto, opts ...RequestOption) (NodesControllerUpdateNodeRes, error) {
-	return nc.client.NodesControllerUpdateNode(ctx, request, opts...)
+func (nc *NodesClient) Update(ctx context.Context, request *UpdateNodeRequestDto, ) (NodesControllerUpdateNodeRes, error) {
+	return nc.client.NodesControllerUpdateNode(ctx, request)
 }
-func (nc *NodesClient) GetByID(ctx context.Context, uuid string, opts ...RequestOption) (NodesControllerGetOneNodeRes, error) {
-	return nc.client.NodesControllerGetOneNode(ctx, NodesControllerGetOneNodeParams{UUID: uuid}, opts...)
+func (nc *NodesClient) GetByID(ctx context.Context, uuid string, ) (NodesControllerGetOneNodeRes, error) {
+	return nc.client.NodesControllerGetOneNode(ctx, NodesControllerGetOneNodeParams{UUID: uuid})
 }
-func (nc *NodesClient) Delete(ctx context.Context, uuid string, opts ...RequestOption) (NodesControllerDeleteNodeRes, error) {
-	return nc.client.NodesControllerDeleteNode(ctx, NodesControllerDeleteNodeParams{UUID: uuid}, opts...)
+func (nc *NodesClient) Delete(ctx context.Context, uuid string, ) (NodesControllerDeleteNodeRes, error) {
+	return nc.client.NodesControllerDeleteNode(ctx, NodesControllerDeleteNodeParams{UUID: uuid})
 }
-func (nc *NodesClient) Enable(ctx context.Context, uuid string, opts ...RequestOption) (NodesControllerEnableNodeRes, error) {
-	return nc.client.NodesControllerEnableNode(ctx, NodesControllerEnableNodeParams{UUID: uuid}, opts...)
+func (nc *NodesClient) Enable(ctx context.Context, uuid string, ) (NodesControllerEnableNodeRes, error) {
+	return nc.client.NodesControllerEnableNode(ctx, NodesControllerEnableNodeParams{UUID: uuid})
 }
-func (nc *NodesClient) Disable(ctx context.Context, uuid string, opts ...RequestOption) (NodesControllerDisableNodeRes, error) {
-	return nc.client.NodesControllerDisableNode(ctx, NodesControllerDisableNodeParams{UUID: uuid}, opts...)
+func (nc *NodesClient) Disable(ctx context.Context, uuid string, ) (NodesControllerDisableNodeRes, error) {
+	return nc.client.NodesControllerDisableNode(ctx, NodesControllerDisableNodeParams{UUID: uuid})
 }
-func (nc *NodesClient) Restart(ctx context.Context, uuid string, opts ...RequestOption) (NodesControllerRestartNodeRes, error) {
-	return nc.client.NodesControllerRestartNode(ctx, NodesControllerRestartNodeParams{UUID: uuid}, opts...)
+func (nc *NodesClient) Restart(ctx context.Context, uuid string, ) (NodesControllerRestartNodeRes, error) {
+	return nc.client.NodesControllerRestartNode(ctx, NodesControllerRestartNodeParams{UUID: uuid})
 }
-func (nc *NodesClient) RestartAll(ctx context.Context, opts ...RequestOption) (NodesControllerRestartAllNodesRes, error) {
-	return nc.client.NodesControllerRestartAllNodes(ctx, &RestartAllNodesRequestBodyDto{}, opts...)
+func (nc *NodesClient) RestartAll(ctx context.Context, ) (NodesControllerRestartAllNodesRes, error) {
+	return nc.client.NodesControllerRestartAllNodes(ctx, &RestartAllNodesRequestBodyDto{})
 }
-func (nc *NodesClient) Reorder(ctx context.Context, request *ReorderNodeRequestDto, opts ...RequestOption) (NodesControllerReorderNodesRes, error) {
-	return nc.client.NodesControllerReorderNodes(ctx, request, opts...)
+func (nc *NodesClient) Reorder(ctx context.Context, request *ReorderNodeRequestDto, ) (NodesControllerReorderNodesRes, error) {
+	return nc.client.NodesControllerReorderNodes(ctx, request)
 }
 
 // HostsClient provides organized access to host operations
 type HostsClient struct{ client *Client }
 func NewHostsClient(c *Client) *HostsClient { return &HostsClient{client: c} }
-func (hc *HostsClient) GetAll(ctx context.Context, opts ...RequestOption) (HostsControllerGetAllHostsRes, error) {
-	return hc.client.HostsControllerGetAllHosts(ctx, opts...)
+func (hc *HostsClient) GetAll(ctx context.Context, ) (HostsControllerGetAllHostsRes, error) {
+	return hc.client.HostsControllerGetAllHosts(ctx)
 }
 func (hc *HostsClient) NewPaginationHelper(pageSize int) *PaginationHelper {
 	return NewPaginationHelper(pageSize)
 }
-func (hc *HostsClient) Create(ctx context.Context, request *CreateHostRequestDto, opts ...RequestOption) (HostsControllerCreateHostRes, error) {
-	return hc.client.HostsControllerCreateHost(ctx, request, opts...)
+func (hc *HostsClient) Create(ctx context.Context, request *CreateHostRequestDto, ) (HostsControllerCreateHostRes, error) {
+	return hc.client.HostsControllerCreateHost(ctx, request)
 }
-func (hc *HostsClient) Update(ctx context.Context, request *UpdateHostRequestDto, opts ...RequestOption) (HostsControllerUpdateHostRes, error) {
-	return hc.client.HostsControllerUpdateHost(ctx, request, opts...)
+func (hc *HostsClient) Update(ctx context.Context, request *UpdateHostRequestDto, ) (HostsControllerUpdateHostRes, error) {
+	return hc.client.HostsControllerUpdateHost(ctx, request)
 }
-func (hc *HostsClient) GetByID(ctx context.Context, uuid string, opts ...RequestOption) (HostsControllerGetOneHostRes, error) {
-	return hc.client.HostsControllerGetOneHost(ctx, HostsControllerGetOneHostParams{UUID: uuid}, opts...)
+func (hc *HostsClient) GetByID(ctx context.Context, uuid string, ) (HostsControllerGetOneHostRes, error) {
+	return hc.client.HostsControllerGetOneHost(ctx, HostsControllerGetOneHostParams{UUID: uuid})
 }
-func (hc *HostsClient) Delete(ctx context.Context, uuid string, opts ...RequestOption) (HostsControllerDeleteHostRes, error) {
-	return hc.client.HostsControllerDeleteHost(ctx, HostsControllerDeleteHostParams{UUID: uuid}, opts...)
+func (hc *HostsClient) Delete(ctx context.Context, uuid string, ) (HostsControllerDeleteHostRes, error) {
+	return hc.client.HostsControllerDeleteHost(ctx, HostsControllerDeleteHostParams{UUID: uuid})
 }
-func (hc *HostsClient) GetTags(ctx context.Context, opts ...RequestOption) (HostsControllerGetAllHostTagsRes, error) {
-	return hc.client.HostsControllerGetAllHostTags(ctx, opts...)
+func (hc *HostsClient) GetTags(ctx context.Context, ) (HostsControllerGetAllHostTagsRes, error) {
+	return hc.client.HostsControllerGetAllHostTags(ctx)
 }
-func (hc *HostsClient) Reorder(ctx context.Context, request *ReorderHostRequestDto, opts ...RequestOption) (HostsControllerReorderHostsRes, error) {
-	return hc.client.HostsControllerReorderHosts(ctx, request, opts...)
+func (hc *HostsClient) Reorder(ctx context.Context, request *ReorderHostRequestDto, ) (HostsControllerReorderHostsRes, error) {
+	return hc.client.HostsControllerReorderHosts(ctx, request)
 }
 
 // AuthClient provides organized access to authentication operations
 type AuthClient struct{ client *Client }
 func NewAuthClient(c *Client) *AuthClient { return &AuthClient{client: c} }
-func (ac *AuthClient) Login(ctx context.Context, request *LoginRequestDto, opts ...RequestOption) (AuthControllerLoginRes, error) {
-	return ac.client.AuthControllerLogin(ctx, request, opts...)
+func (ac *AuthClient) Login(ctx context.Context, request *LoginRequestDto, ) (AuthControllerLoginRes, error) {
+	return ac.client.AuthControllerLogin(ctx, request)
 }
-func (ac *AuthClient) Register(ctx context.Context, request *RegisterRequestDto, opts ...RequestOption) (AuthControllerRegisterRes, error) {
-	return ac.client.AuthControllerRegister(ctx, request, opts...)
+func (ac *AuthClient) Register(ctx context.Context, request *RegisterRequestDto, ) (AuthControllerRegisterRes, error) {
+	return ac.client.AuthControllerRegister(ctx, request)
 }
-func (ac *AuthClient) GetStatus(ctx context.Context, opts ...RequestOption) (AuthControllerGetStatusRes, error) {
-	return ac.client.AuthControllerGetStatus(ctx, opts...)
+func (ac *AuthClient) GetStatus(ctx context.Context, ) (AuthControllerGetStatusRes, error) {
+	return ac.client.AuthControllerGetStatus(ctx)
 }
-func (ac *AuthClient) OAuth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto, opts ...RequestOption) (AuthControllerOauth2AuthorizeRes, error) {
-	return ac.client.AuthControllerOauth2Authorize(ctx, request, opts...)
+func (ac *AuthClient) OAuth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto, ) (AuthControllerOauth2AuthorizeRes, error) {
+	return ac.client.AuthControllerOauth2Authorize(ctx, request)
 }
-func (ac *AuthClient) OAuth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto, opts ...RequestOption) (AuthControllerOauth2CallbackRes, error) {
-	return ac.client.AuthControllerOauth2Callback(ctx, request, opts...)
+func (ac *AuthClient) OAuth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto, ) (AuthControllerOauth2CallbackRes, error) {
+	return ac.client.AuthControllerOauth2Callback(ctx, request)
 }
-func (ac *AuthClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, opts ...RequestOption) (AuthControllerTelegramCallbackRes, error) {
-	return ac.client.AuthControllerTelegramCallback(ctx, request, opts...)
+func (ac *AuthClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto, ) (AuthControllerTelegramCallbackRes, error) {
+	return ac.client.AuthControllerTelegramCallback(ctx, request)
 }
-func (ac *AuthClient) PasskeyAuthenticationOptions(ctx context.Context, opts ...RequestOption) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
-	return ac.client.AuthControllerPasskeyAuthenticationOptions(ctx, opts...)
+func (ac *AuthClient) PasskeyAuthenticationOptions(ctx context.Context, ) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
+	return ac.client.AuthControllerPasskeyAuthenticationOptions(ctx)
 }
-func (ac *AuthClient) PasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, opts ...RequestOption) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
-	return ac.client.AuthControllerPasskeyAuthenticationVerify(ctx, request, opts...)
+func (ac *AuthClient) PasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, ) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+	return ac.client.AuthControllerPasskeyAuthenticationVerify(ctx, request)
 }
 
 // SystemClient provides organized access to system operations
 type SystemClient struct{ client *Client }
 func NewSystemClient(c *Client) *SystemClient { return &SystemClient{client: c} }
-func (sc *SystemClient) GetHealth(ctx context.Context, opts ...RequestOption) (SystemControllerGetRemnawaveHealthRes, error) {
-	return sc.client.SystemControllerGetRemnawaveHealth(ctx, opts...)
+func (sc *SystemClient) GetHealth(ctx context.Context, ) (SystemControllerGetRemnawaveHealthRes, error) {
+	return sc.client.SystemControllerGetRemnawaveHealth(ctx)
 }
-func (sc *SystemClient) GetStats(ctx context.Context, opts ...RequestOption) (SystemControllerGetStatsRes, error) {
-	return sc.client.SystemControllerGetStats(ctx, opts...)
+func (sc *SystemClient) GetStats(ctx context.Context, ) (SystemControllerGetStatsRes, error) {
+	return sc.client.SystemControllerGetStats(ctx)
 }
-func (sc *SystemClient) GetBandwidthStats(ctx context.Context, opts ...RequestOption) (SystemControllerGetBandwidthStatsRes, error) {
-	return sc.client.SystemControllerGetBandwidthStats(ctx, opts...)
+func (sc *SystemClient) GetBandwidthStats(ctx context.Context, ) (SystemControllerGetBandwidthStatsRes, error) {
+	return sc.client.SystemControllerGetBandwidthStats(ctx)
 }
-func (sc *SystemClient) GetNodesStatistics(ctx context.Context, opts ...RequestOption) (SystemControllerGetNodesStatisticsRes, error) {
-	return sc.client.SystemControllerGetNodesStatistics(ctx, opts...)
+func (sc *SystemClient) GetNodesStatistics(ctx context.Context, ) (SystemControllerGetNodesStatisticsRes, error) {
+	return sc.client.SystemControllerGetNodesStatistics(ctx)
 }
-func (sc *SystemClient) GetNodesMetrics(ctx context.Context, opts ...RequestOption) (SystemControllerGetNodesMetricsRes, error) {
-	return sc.client.SystemControllerGetNodesMetrics(ctx, opts...)
+func (sc *SystemClient) GetNodesMetrics(ctx context.Context, ) (SystemControllerGetNodesMetricsRes, error) {
+	return sc.client.SystemControllerGetNodesMetrics(ctx)
 }
