@@ -20,6 +20,18 @@ func (s *BulkDeleteHostsResponseDtoResponseItem) setDefaults() {
 		val := BulkDeleteHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
 }
 
 // setDefaults set default value of fields.
@@ -40,6 +52,18 @@ func (s *BulkDisableHostsResponseDtoResponseItem) setDefaults() {
 		val := BulkDisableHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
 }
 
 // setDefaults set default value of fields.
@@ -51,6 +75,18 @@ func (s *BulkEnableHostsResponseDtoResponseItem) setDefaults() {
 	{
 		val := BulkEnableHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
 	}
 }
 
@@ -72,6 +108,26 @@ func (s *CreateHostRequestDto) setDefaults() {
 		val := CreateHostRequestDtoSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.ShuffleHost.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.MihomoX25519.SetTo(val)
+	}
 }
 
 // setDefaults set default value of fields.
@@ -83,6 +139,18 @@ func (s *CreateHostResponseDtoResponse) setDefaults() {
 	{
 		val := CreateHostResponseDtoResponseSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
 	}
 }
 
@@ -107,6 +175,26 @@ func (s *CreateUserRequestDto) setDefaults() {
 	{
 		val := CreateUserRequestDtoTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *CreateUserResponseDtoResponse) setDefaults() {
+	{
+		val := CreateUserResponseDtoResponseStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := CreateUserResponseDtoResponseTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
 	}
 }
 
@@ -160,6 +248,38 @@ func (s *GetAllHostsResponseDtoResponseItem) setDefaults() {
 		val := GetAllHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetAllUsersResponseDtoResponseUsersItem) setDefaults() {
+	{
+		val := GetAllUsersResponseDtoResponseUsersItemStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
+	}
 }
 
 // setDefaults set default value of fields.
@@ -171,6 +291,38 @@ func (s *GetOneHostResponseDtoResponse) setDefaults() {
 	{
 		val := GetOneHostResponseDtoResponseSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) setDefaults() {
+	{
+		val := GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
 	}
 }
 
@@ -186,6 +338,26 @@ func (s *GetUserByEmailResponseDtoResponseItem) setDefaults() {
 	}
 	{
 		val := GetUserByEmailResponseDtoResponseItemTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetUserByShortUuidResponseDtoResponse) setDefaults() {
+	{
+		val := GetUserByShortUuidResponseDtoResponseStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetUserByShortUuidResponseDtoResponseTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 	{
@@ -215,6 +387,26 @@ func (s *GetUserByTagResponseDtoResponseItem) setDefaults() {
 }
 
 // setDefaults set default value of fields.
+func (s *GetUserByTelegramIdResponseDtoResponseItem) setDefaults() {
+	{
+		val := GetUserByTelegramIdResponseDtoResponseItemStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetUserByTelegramIdResponseDtoResponseItemTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
 func (s *GetUserByUsernameResponseDtoResponse) setDefaults() {
 	{
 		val := GetUserByUsernameResponseDtoResponseStatus("ACTIVE")
@@ -226,6 +418,26 @@ func (s *GetUserByUsernameResponseDtoResponse) setDefaults() {
 	}
 	{
 		val := GetUserByUsernameResponseDtoResponseTrafficLimitStrategy("NO_RESET")
+		s.TrafficLimitStrategy.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.LastTriggeredThreshold.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *GetUserByUuidResponseDtoResponse) setDefaults() {
+	{
+		val := GetUserByUuidResponseDtoResponseStatus("ACTIVE")
+		s.Status.SetTo(val)
+	}
+	{
+		val := int(0)
+		s.TrafficLimitBytes.SetTo(val)
+	}
+	{
+		val := GetUserByUuidResponseDtoResponseTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 	{
@@ -284,6 +496,18 @@ func (s *SetInboundToManyHostsResponseDtoResponseItem) setDefaults() {
 		val := SetInboundToManyHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
 }
 
 // setDefaults set default value of fields.
@@ -295,6 +519,18 @@ func (s *SetPortToManyHostsResponseDtoResponseItem) setDefaults() {
 	{
 		val := SetPortToManyHostsResponseDtoResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
 	}
 }
 
@@ -308,14 +544,22 @@ func (s *UpdateHostResponseDtoResponse) setDefaults() {
 		val := UpdateHostResponseDtoResponseSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.AllowInsecure.SetTo(val)
+	}
 }
 
 // setDefaults set default value of fields.
 func (s *UpdateUserRequestDto) setDefaults() {
-	{
-		val := UpdateUserRequestDtoStatus("ACTIVE")
-		s.Status.SetTo(val)
-	}
 	{
 		val := UpdateUserRequestDtoTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
@@ -323,9 +567,9 @@ func (s *UpdateUserRequestDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *UserDto) setDefaults() {
+func (s *UpdateUserResponseDtoResponse) setDefaults() {
 	{
-		val := UserDtoStatus("ACTIVE")
+		val := UpdateUserResponseDtoResponseStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 	{
@@ -333,7 +577,7 @@ func (s *UserDto) setDefaults() {
 		s.TrafficLimitBytes.SetTo(val)
 	}
 	{
-		val := UserDtoTrafficLimitStrategy("NO_RESET")
+		val := UpdateUserResponseDtoResponseTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 	{

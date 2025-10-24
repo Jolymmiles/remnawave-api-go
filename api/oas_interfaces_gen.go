@@ -29,6 +29,14 @@ type AuthControllerOauth2CallbackRes interface {
 	authControllerOauth2CallbackRes()
 }
 
+type AuthControllerPasskeyAuthenticationOptionsRes interface {
+	authControllerPasskeyAuthenticationOptionsRes()
+}
+
+type AuthControllerPasskeyAuthenticationVerifyRes interface {
+	authControllerPasskeyAuthenticationVerifyRes()
+}
+
 type AuthControllerRegisterRes interface {
 	authControllerRegisterRes()
 }
@@ -65,6 +73,34 @@ type ConfigProfileControllerUpdateConfigProfileRes interface {
 	configProfileControllerUpdateConfigProfileRes()
 }
 
+type ExternalSquadControllerAddUsersToExternalSquadRes interface {
+	externalSquadControllerAddUsersToExternalSquadRes()
+}
+
+type ExternalSquadControllerCreateExternalSquadRes interface {
+	externalSquadControllerCreateExternalSquadRes()
+}
+
+type ExternalSquadControllerDeleteExternalSquadRes interface {
+	externalSquadControllerDeleteExternalSquadRes()
+}
+
+type ExternalSquadControllerGetExternalSquadByUuidRes interface {
+	externalSquadControllerGetExternalSquadByUuidRes()
+}
+
+type ExternalSquadControllerGetExternalSquadsRes interface {
+	externalSquadControllerGetExternalSquadsRes()
+}
+
+type ExternalSquadControllerRemoveUsersFromExternalSquadRes interface {
+	externalSquadControllerRemoveUsersFromExternalSquadRes()
+}
+
+type ExternalSquadControllerUpdateExternalSquadRes interface {
+	externalSquadControllerUpdateExternalSquadRes()
+}
+
 type HostsBulkActionsControllerDeleteHostsRes interface {
 	hostsBulkActionsControllerDeleteHostsRes()
 }
@@ -93,6 +129,10 @@ type HostsControllerDeleteHostRes interface {
 	hostsControllerDeleteHostRes()
 }
 
+type HostsControllerGetAllHostTagsRes interface {
+	hostsControllerGetAllHostTagsRes()
+}
+
 type HostsControllerGetAllHostsRes interface {
 	hostsControllerGetAllHostsRes()
 }
@@ -113,8 +153,20 @@ type HwidUserDevicesControllerCreateUserHwidDeviceRes interface {
 	hwidUserDevicesControllerCreateUserHwidDeviceRes()
 }
 
+type HwidUserDevicesControllerDeleteAllUserHwidDevicesRes interface {
+	hwidUserDevicesControllerDeleteAllUserHwidDevicesRes()
+}
+
 type HwidUserDevicesControllerDeleteUserHwidDeviceRes interface {
 	hwidUserDevicesControllerDeleteUserHwidDeviceRes()
+}
+
+type HwidUserDevicesControllerGetAllUsersRes interface {
+	hwidUserDevicesControllerGetAllUsersRes()
+}
+
+type HwidUserDevicesControllerGetHwidDevicesStatsRes interface {
+	hwidUserDevicesControllerGetHwidDevicesStatsRes()
 }
 
 type HwidUserDevicesControllerGetUserHwidDevicesRes interface {
@@ -179,6 +231,10 @@ type InternalSquadControllerCreateInternalSquadRes interface {
 
 type InternalSquadControllerDeleteInternalSquadRes interface {
 	internalSquadControllerDeleteInternalSquadRes()
+}
+
+type InternalSquadControllerGetInternalSquadAccessibleNodesRes interface {
+	internalSquadControllerGetInternalSquadAccessibleNodesRes()
 }
 
 type InternalSquadControllerGetInternalSquadByUuidRes interface {
@@ -253,8 +309,44 @@ type NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes interface {
 	nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes()
 }
 
-type SubscriptionControllerGetRawSubscriptionByShortUuidRes interface {
-	subscriptionControllerGetRawSubscriptionByShortUuidRes()
+type PasskeyControllerDeletePasskeyRes interface {
+	passkeyControllerDeletePasskeyRes()
+}
+
+type PasskeyControllerGetActivePasskeysRes interface {
+	passkeyControllerGetActivePasskeysRes()
+}
+
+type PasskeyControllerPasskeyRegistrationOptionsRes interface {
+	passkeyControllerPasskeyRegistrationOptionsRes()
+}
+
+type PasskeyControllerPasskeyRegistrationVerifyRes interface {
+	passkeyControllerPasskeyRegistrationVerifyRes()
+}
+
+type RemnawaveSettingsControllerGetSettingsRes interface {
+	remnawaveSettingsControllerGetSettingsRes()
+}
+
+type RemnawaveSettingsControllerUpdateSettingsRes interface {
+	remnawaveSettingsControllerUpdateSettingsRes()
+}
+
+type SnippetsControllerCreateSnippetRes interface {
+	snippetsControllerCreateSnippetRes()
+}
+
+type SnippetsControllerDeleteSnippetByNameRes interface {
+	snippetsControllerDeleteSnippetByNameRes()
+}
+
+type SnippetsControllerGetSnippetsRes interface {
+	snippetsControllerGetSnippetsRes()
+}
+
+type SnippetsControllerUpdateSnippetRes interface {
+	snippetsControllerUpdateSnippetRes()
 }
 
 type SubscriptionControllerGetSubscriptionInfoByShortUuidRes interface {
@@ -269,8 +361,20 @@ type SubscriptionSettingsControllerUpdateSettingsRes interface {
 	subscriptionSettingsControllerUpdateSettingsRes()
 }
 
-type SubscriptionTemplateControllerGetTemplateRes interface {
-	subscriptionTemplateControllerGetTemplateRes()
+type SubscriptionTemplateControllerCreateTemplateRes interface {
+	subscriptionTemplateControllerCreateTemplateRes()
+}
+
+type SubscriptionTemplateControllerDeleteTemplateRes interface {
+	subscriptionTemplateControllerDeleteTemplateRes()
+}
+
+type SubscriptionTemplateControllerGetAllTemplatesRes interface {
+	subscriptionTemplateControllerGetAllTemplatesRes()
+}
+
+type SubscriptionTemplateControllerGetTemplateByUuidRes interface {
+	subscriptionTemplateControllerGetTemplateByUuidRes()
 }
 
 type SubscriptionTemplateControllerUpdateTemplateRes interface {
@@ -281,8 +385,28 @@ type SubscriptionsControllerGetAllSubscriptionsRes interface {
 	subscriptionsControllerGetAllSubscriptionsRes()
 }
 
+type SubscriptionsControllerGetRawSubscriptionByShortUuidRes interface {
+	subscriptionsControllerGetRawSubscriptionByShortUuidRes()
+}
+
+type SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes interface {
+	subscriptionsControllerGetSubscriptionByShortUuidProtectedRes()
+}
+
 type SubscriptionsControllerGetSubscriptionByUsernameRes interface {
 	subscriptionsControllerGetSubscriptionByUsernameRes()
+}
+
+type SubscriptionsControllerGetSubscriptionByUuidRes interface {
+	subscriptionsControllerGetSubscriptionByUuidRes()
+}
+
+type SystemControllerDebugSrrMatcherRes interface {
+	systemControllerDebugSrrMatcherRes()
+}
+
+type SystemControllerEncryptHappCryptoLinkRes interface {
+	systemControllerEncryptHappCryptoLinkRes()
 }
 
 type SystemControllerGetBandwidthStatsRes interface {
@@ -303,6 +427,18 @@ type SystemControllerGetRemnawaveHealthRes interface {
 
 type SystemControllerGetStatsRes interface {
 	systemControllerGetStatsRes()
+}
+
+type SystemControllerGetX25519KeypairsRes interface {
+	systemControllerGetX25519KeypairsRes()
+}
+
+type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes interface {
+	userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes()
+}
+
+type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes interface {
+	userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes()
 }
 
 type UsersBulkActionsControllerBulkAllResetUserTrafficRes interface {
@@ -379,6 +515,10 @@ type UsersControllerGetUserByUsernameRes interface {
 
 type UsersControllerGetUserByUuidRes interface {
 	usersControllerGetUserByUuidRes()
+}
+
+type UsersControllerGetUserSubscriptionRequestHistoryRes interface {
+	usersControllerGetUserSubscriptionRequestHistoryRes()
 }
 
 type UsersControllerGetUsersByEmailRes interface {

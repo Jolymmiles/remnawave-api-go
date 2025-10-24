@@ -27,6 +27,26 @@ type ConfigProfileControllerGetInboundsByProfileUuidParams struct {
 	UUID string
 }
 
+// ExternalSquadControllerAddUsersToExternalSquadParams is parameters of ExternalSquadController_addUsersToExternalSquad operation.
+type ExternalSquadControllerAddUsersToExternalSquadParams struct {
+	UUID string
+}
+
+// ExternalSquadControllerDeleteExternalSquadParams is parameters of ExternalSquadController_deleteExternalSquad operation.
+type ExternalSquadControllerDeleteExternalSquadParams struct {
+	UUID string
+}
+
+// ExternalSquadControllerGetExternalSquadByUuidParams is parameters of ExternalSquadController_getExternalSquadByUuid operation.
+type ExternalSquadControllerGetExternalSquadByUuidParams struct {
+	UUID string
+}
+
+// ExternalSquadControllerRemoveUsersFromExternalSquadParams is parameters of ExternalSquadController_removeUsersFromExternalSquad operation.
+type ExternalSquadControllerRemoveUsersFromExternalSquadParams struct {
+	UUID string
+}
+
 // HostsControllerDeleteHostParams is parameters of HostsController_deleteHost operation.
 type HostsControllerDeleteHostParams struct {
 	// UUID of the host.
@@ -37,6 +57,14 @@ type HostsControllerDeleteHostParams struct {
 type HostsControllerGetOneHostParams struct {
 	// UUID of the host.
 	UUID string
+}
+
+// HwidUserDevicesControllerGetAllUsersParams is parameters of HwidUserDevicesController_getAllUsers operation.
+type HwidUserDevicesControllerGetAllUsersParams struct {
+	// Page size for pagination.
+	Size OptFloat64 `json:",omitempty,omitzero"`
+	// Offset for pagination.
+	Start OptFloat64 `json:",omitempty,omitzero"`
 }
 
 // HwidUserDevicesControllerGetUserHwidDevicesParams is parameters of HwidUserDevicesController_getUserHwidDevices operation.
@@ -72,6 +100,12 @@ type InternalSquadControllerAddUsersToInternalSquadParams struct {
 
 // InternalSquadControllerDeleteInternalSquadParams is parameters of InternalSquadController_deleteInternalSquad operation.
 type InternalSquadControllerDeleteInternalSquadParams struct {
+	UUID string
+}
+
+// InternalSquadControllerGetInternalSquadAccessibleNodesParams is parameters of InternalSquadController_getInternalSquadAccessibleNodes operation.
+type InternalSquadControllerGetInternalSquadAccessibleNodesParams struct {
+	// UUID of the internal squad.
 	UUID string
 }
 
@@ -120,7 +154,7 @@ type NodesUsageHistoryControllerGetNodesUsageByRangeParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	End time.Time
+	Limit time.Time
 }
 
 // NodesUserUsageHistoryControllerGetNodeUserUsageParams is parameters of NodesUserUsageHistoryController_getNodeUserUsage operation.
@@ -128,15 +162,9 @@ type NodesUserUsageHistoryControllerGetNodeUserUsageParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	End time.Time
+	Limit time.Time
 	// UUID of the node.
 	UUID string
-}
-
-// SubscriptionControllerGetRawSubscriptionByShortUuidParams is parameters of SubscriptionController_getRawSubscriptionByShortUuid operation.
-type SubscriptionControllerGetRawSubscriptionByShortUuidParams struct {
-	// Short UUID of the user.
-	ShortUuid string
 }
 
 // SubscriptionControllerGetSubscriptionParams is parameters of SubscriptionController_getSubscription operation.
@@ -169,24 +197,58 @@ type SubscriptionControllerGetSubscriptionWithTypeParams struct {
 	ShortUuid string
 }
 
-// SubscriptionTemplateControllerGetTemplateParams is parameters of SubscriptionTemplateController_getTemplate operation.
-type SubscriptionTemplateControllerGetTemplateParams struct {
-	// Template type.
-	TemplateType SubscriptionTemplateControllerGetTemplateTemplateType
+// SubscriptionTemplateControllerDeleteTemplateParams is parameters of SubscriptionTemplateController_deleteTemplate operation.
+type SubscriptionTemplateControllerDeleteTemplateParams struct {
+	// Template UUID.
+	UUID string
+}
+
+// SubscriptionTemplateControllerGetTemplateByUuidParams is parameters of SubscriptionTemplateController_getTemplateByUuid operation.
+type SubscriptionTemplateControllerGetTemplateByUuidParams struct {
+	// Path parameter: uuid.
+	UUID string
 }
 
 // SubscriptionsControllerGetAllSubscriptionsParams is parameters of SubscriptionsController_getAllSubscriptions operation.
 type SubscriptionsControllerGetAllSubscriptionsParams struct {
 	// Number of subscriptions to return, no more than 500.
-	Size OptFloat64
+	Size OptFloat64 `json:",omitempty,omitzero"`
 	// Start index (offset) of the users to return, default is 0.
-	Start OptFloat64
+	Start OptFloat64 `json:",omitempty,omitzero"`
+}
+
+// SubscriptionsControllerGetRawSubscriptionByShortUuidParams is parameters of SubscriptionsController_getRawSubscriptionByShortUuid operation.
+type SubscriptionsControllerGetRawSubscriptionByShortUuidParams struct {
+	// Include disabled hosts in the subscription. Default is false.
+	WithDisabledHosts OptBool `json:",omitempty,omitzero"`
+	// Short UUID of the user.
+	ShortUuid string
+}
+
+// SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams is parameters of SubscriptionsController_getSubscriptionByShortUuidProtected operation.
+type SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams struct {
+	// Short uuid of the user.
+	ShortUuid string
 }
 
 // SubscriptionsControllerGetSubscriptionByUsernameParams is parameters of SubscriptionsController_getSubscriptionByUsername operation.
 type SubscriptionsControllerGetSubscriptionByUsernameParams struct {
 	// Username of the user.
 	Username string
+}
+
+// SubscriptionsControllerGetSubscriptionByUuidParams is parameters of SubscriptionsController_getSubscriptionByUuid operation.
+type SubscriptionsControllerGetSubscriptionByUuidParams struct {
+	// Uuid of the user.
+	UUID string
+}
+
+// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams is parameters of UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory operation.
+type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams struct {
+	// Page size for pagination.
+	Size OptFloat64 `json:",omitempty,omitzero"`
+	// Offset for pagination.
+	Start OptFloat64 `json:",omitempty,omitzero"`
 }
 
 // UsersControllerDeleteUserParams is parameters of UsersController_deleteUser operation.
@@ -210,9 +272,9 @@ type UsersControllerEnableUserParams struct {
 // UsersControllerGetAllUsersParams is parameters of UsersController_getAllUsers operation.
 type UsersControllerGetAllUsersParams struct {
 	// Page size for pagination.
-	Size OptFloat64
+	Size OptFloat64 `json:",omitempty,omitzero"`
 	// Offset for pagination.
-	Start OptFloat64
+	Start OptFloat64 `json:",omitempty,omitzero"`
 }
 
 // UsersControllerGetUserAccessibleNodesParams is parameters of UsersController_getUserAccessibleNodes operation.
@@ -241,6 +303,12 @@ type UsersControllerGetUserByUsernameParams struct {
 
 // UsersControllerGetUserByUuidParams is parameters of UsersController_getUserByUuid operation.
 type UsersControllerGetUserByUuidParams struct {
+	// UUID of the user.
+	UUID string
+}
+
+// UsersControllerGetUserSubscriptionRequestHistoryParams is parameters of UsersController_getUserSubscriptionRequestHistory operation.
+type UsersControllerGetUserSubscriptionRequestHistoryParams struct {
 	// UUID of the user.
 	UUID string
 }
@@ -274,7 +342,7 @@ type UsersStatsControllerGetUserUsageByRangeParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	End time.Time
+	Limit time.Time
 	// UUID of the user.
 	UUID string
 }

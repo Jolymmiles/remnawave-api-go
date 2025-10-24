@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/go-faster/errors"
-
 	"github.com/ogen-go/ogen/conv"
 	ht "github.com/ogen-go/ogen/http"
 	"github.com/ogen-go/ogen/ogenerrors"
@@ -123,6 +122,18 @@ type Invoker interface {
 	//
 	// POST /api/auth/oauth2/callback
 	AuthControllerOauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto, options ...RequestOption) (AuthControllerOauth2CallbackRes, error)
+	// AuthControllerPasskeyAuthenticationOptions invokes AuthController_passkeyAuthenticationOptions operation.
+	//
+	// Get the authentication options for passkey.
+	//
+	// GET /api/auth/passkey/authentication/options
+	AuthControllerPasskeyAuthenticationOptions(ctx context.Context, options ...RequestOption) (AuthControllerPasskeyAuthenticationOptionsRes, error)
+	// AuthControllerPasskeyAuthenticationVerify invokes AuthController_passkeyAuthenticationVerify operation.
+	//
+	// Verify the authentication for passkey.
+	//
+	// POST /api/auth/passkey/authentication/verify
+	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, options ...RequestOption) (AuthControllerPasskeyAuthenticationVerifyRes, error)
 	// AuthControllerRegister invokes AuthController_register operation.
 	//
 	// Register as superadmin.
@@ -177,6 +188,48 @@ type Invoker interface {
 	//
 	// PATCH /api/config-profiles
 	ConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto, options ...RequestOption) (ConfigProfileControllerUpdateConfigProfileRes, error)
+	// ExternalSquadControllerAddUsersToExternalSquad invokes ExternalSquadController_addUsersToExternalSquad operation.
+	//
+	// Add all users to external squad.
+	//
+	// POST /api/external-squads/{uuid}/bulk-actions/add-users
+	ExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams, options ...RequestOption) (ExternalSquadControllerAddUsersToExternalSquadRes, error)
+	// ExternalSquadControllerCreateExternalSquad invokes ExternalSquadController_createExternalSquad operation.
+	//
+	// Create external squad.
+	//
+	// POST /api/external-squads
+	ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerCreateExternalSquadRes, error)
+	// ExternalSquadControllerDeleteExternalSquad invokes ExternalSquadController_deleteExternalSquad operation.
+	//
+	// Delete external squad.
+	//
+	// DELETE /api/external-squads/{uuid}
+	ExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams, options ...RequestOption) (ExternalSquadControllerDeleteExternalSquadRes, error)
+	// ExternalSquadControllerGetExternalSquadByUuid invokes ExternalSquadController_getExternalSquadByUuid operation.
+	//
+	// Get external squad by uuid.
+	//
+	// GET /api/external-squads/{uuid}
+	ExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams, options ...RequestOption) (ExternalSquadControllerGetExternalSquadByUuidRes, error)
+	// ExternalSquadControllerGetExternalSquads invokes ExternalSquadController_getExternalSquads operation.
+	//
+	// Get all external squads.
+	//
+	// GET /api/external-squads
+	ExternalSquadControllerGetExternalSquads(ctx context.Context, options ...RequestOption) (ExternalSquadControllerGetExternalSquadsRes, error)
+	// ExternalSquadControllerRemoveUsersFromExternalSquad invokes ExternalSquadController_removeUsersFromExternalSquad operation.
+	//
+	// Delete users from external squad.
+	//
+	// DELETE /api/external-squads/{uuid}/bulk-actions/remove-users
+	ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams, options ...RequestOption) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error)
+	// ExternalSquadControllerUpdateExternalSquad invokes ExternalSquadController_updateExternalSquad operation.
+	//
+	// Update external squad.
+	//
+	// PATCH /api/external-squads
+	ExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerUpdateExternalSquadRes, error)
 	// HostsBulkActionsControllerDeleteHosts invokes HostsBulkActionsController_deleteHosts operation.
 	//
 	// Delete hosts by UUIDs.
@@ -219,6 +272,12 @@ type Invoker interface {
 	//
 	// DELETE /api/hosts/{uuid}
 	HostsControllerDeleteHost(ctx context.Context, params HostsControllerDeleteHostParams, options ...RequestOption) (HostsControllerDeleteHostRes, error)
+	// HostsControllerGetAllHostTags invokes HostsController_getAllHostTags operation.
+	//
+	// Get all existing host tags.
+	//
+	// GET /api/hosts/tags
+	HostsControllerGetAllHostTags(ctx context.Context, options ...RequestOption) (HostsControllerGetAllHostTagsRes, error)
 	// HostsControllerGetAllHosts invokes HostsController_getAllHosts operation.
 	//
 	// Get all hosts.
@@ -249,12 +308,30 @@ type Invoker interface {
 	//
 	// POST /api/hwid/devices
 	HwidUserDevicesControllerCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto, options ...RequestOption) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error)
+	// HwidUserDevicesControllerDeleteAllUserHwidDevices invokes HwidUserDevicesController_deleteAllUserHwidDevices operation.
+	//
+	// Delete all user HWID devices.
+	//
+	// POST /api/hwid/devices/delete-all
+	HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error)
 	// HwidUserDevicesControllerDeleteUserHwidDevice invokes HwidUserDevicesController_deleteUserHwidDevice operation.
 	//
 	// Delete a user HWID device.
 	//
 	// POST /api/hwid/devices/delete
 	HwidUserDevicesControllerDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error)
+	// HwidUserDevicesControllerGetAllUsers invokes HwidUserDevicesController_getAllUsers operation.
+	//
+	// Get all HWID devices.
+	//
+	// GET /api/hwid/devices
+	HwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams, options ...RequestOption) (HwidUserDevicesControllerGetAllUsersRes, error)
+	// HwidUserDevicesControllerGetHwidDevicesStats invokes HwidUserDevicesController_getHwidDevicesStats operation.
+	//
+	// Get HWID devices stats.
+	//
+	// GET /api/hwid/devices/stats
+	HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context, options ...RequestOption) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error)
 	// HwidUserDevicesControllerGetUserHwidDevices invokes HwidUserDevicesController_getUserHwidDevices operation.
 	//
 	// Get user HWID devices.
@@ -323,7 +400,7 @@ type Invoker interface {
 	InfraBillingControllerGetInfraProviders(ctx context.Context, options ...RequestOption) (InfraBillingControllerGetInfraProvidersRes, error)
 	// InfraBillingControllerUpdateInfraBillingNode invokes InfraBillingController_updateInfraBillingNode operation.
 	//
-	// Update infra billing node.
+	// Update infra billing nodes.
 	//
 	// PATCH /api/infra-billing/nodes
 	InfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto, options ...RequestOption) (InfraBillingControllerUpdateInfraBillingNodeRes, error)
@@ -351,6 +428,12 @@ type Invoker interface {
 	//
 	// DELETE /api/internal-squads/{uuid}
 	InternalSquadControllerDeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams, options ...RequestOption) (InternalSquadControllerDeleteInternalSquadRes, error)
+	// InternalSquadControllerGetInternalSquadAccessibleNodes invokes InternalSquadController_getInternalSquadAccessibleNodes operation.
+	//
+	// Get internal squad accessible nodes.
+	//
+	// GET /api/internal-squads/{uuid}/accessible-nodes
+	InternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams, options ...RequestOption) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error)
 	// InternalSquadControllerGetInternalSquadByUuid invokes InternalSquadController_getInternalSquadByUuid operation.
 	//
 	// Get internal squad by uuid.
@@ -428,7 +511,7 @@ type Invoker interface {
 	// Restart all nodes.
 	//
 	// POST /api/nodes/actions/restart-all
-	NodesControllerRestartAllNodes(ctx context.Context, options ...RequestOption) (NodesControllerRestartAllNodesRes, error)
+	NodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto, options ...RequestOption) (NodesControllerRestartAllNodesRes, error)
 	// NodesControllerRestartNode invokes NodesController_restartNode operation.
 	//
 	// Restart node.
@@ -459,12 +542,66 @@ type Invoker interface {
 	//
 	// GET /api/nodes/usage/realtime
 	NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx context.Context, options ...RequestOption) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error)
-	// SubscriptionControllerGetRawSubscriptionByShortUuid invokes SubscriptionController_getRawSubscriptionByShortUuid operation.
+	// PasskeyControllerDeletePasskey invokes PasskeyController_deletePasskey operation.
 	//
-	// Get Raw Subscription by Short UUID.
+	// Delete a passkey by ID.
 	//
-	// GET /api/sub/{shortUuid}/raw
-	SubscriptionControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionControllerGetRawSubscriptionByShortUuidParams, options ...RequestOption) (SubscriptionControllerGetRawSubscriptionByShortUuidRes, error)
+	// DELETE /api/passkeys
+	PasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto, options ...RequestOption) (PasskeyControllerDeletePasskeyRes, error)
+	// PasskeyControllerGetActivePasskeys invokes PasskeyController_getActivePasskeys operation.
+	//
+	// Get all passkeys.
+	//
+	// GET /api/passkeys
+	PasskeyControllerGetActivePasskeys(ctx context.Context, options ...RequestOption) (PasskeyControllerGetActivePasskeysRes, error)
+	// PasskeyControllerPasskeyRegistrationOptions invokes PasskeyController_passkeyRegistrationOptions operation.
+	//
+	// Get registration options for passkey.
+	//
+	// GET /api/passkeys/registration/options
+	PasskeyControllerPasskeyRegistrationOptions(ctx context.Context, options ...RequestOption) (PasskeyControllerPasskeyRegistrationOptionsRes, error)
+	// PasskeyControllerPasskeyRegistrationVerify invokes PasskeyController_passkeyRegistrationVerify operation.
+	//
+	// Verify registration for passkey.
+	//
+	// POST /api/passkeys/registration/verify
+	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto, options ...RequestOption) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
+	// RemnawaveSettingsControllerGetSettings invokes RemnawaveSettingsController_getSettings operation.
+	//
+	// Get Remnawave settings.
+	//
+	// GET /api/remnawave-settings
+	RemnawaveSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (RemnawaveSettingsControllerGetSettingsRes, error)
+	// RemnawaveSettingsControllerUpdateSettings invokes RemnawaveSettingsController_updateSettings operation.
+	//
+	// Update Remnawave settings.
+	//
+	// PATCH /api/remnawave-settings
+	RemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto, options ...RequestOption) (RemnawaveSettingsControllerUpdateSettingsRes, error)
+	// SnippetsControllerCreateSnippet invokes SnippetsController_createSnippet operation.
+	//
+	// Create snippet.
+	//
+	// POST /api/snippets
+	SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto, options ...RequestOption) (SnippetsControllerCreateSnippetRes, error)
+	// SnippetsControllerDeleteSnippetByName invokes SnippetsController_deleteSnippetByName operation.
+	//
+	// Delete snippet.
+	//
+	// DELETE /api/snippets
+	SnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto, options ...RequestOption) (SnippetsControllerDeleteSnippetByNameRes, error)
+	// SnippetsControllerGetSnippets invokes SnippetsController_getSnippets operation.
+	//
+	// Get snippets.
+	//
+	// GET /api/snippets
+	SnippetsControllerGetSnippets(ctx context.Context, options ...RequestOption) (SnippetsControllerGetSnippetsRes, error)
+	// SnippetsControllerUpdateSnippet invokes SnippetsController_updateSnippet operation.
+	//
+	// Update snippet.
+	//
+	// PATCH /api/snippets
+	SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto, options ...RequestOption) (SnippetsControllerUpdateSnippetRes, error)
 	// SubscriptionControllerGetSubscription invokes SubscriptionController_getSubscription operation.
 	//
 	// GET /api/sub/{shortUuid}
@@ -495,17 +632,35 @@ type Invoker interface {
 	//
 	// PATCH /api/subscription-settings
 	SubscriptionSettingsControllerUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto, options ...RequestOption) (SubscriptionSettingsControllerUpdateSettingsRes, error)
-	// SubscriptionTemplateControllerGetTemplate invokes SubscriptionTemplateController_getTemplate operation.
+	// SubscriptionTemplateControllerCreateTemplate invokes SubscriptionTemplateController_createTemplate operation.
 	//
-	// Get subscription template.
+	// Create subscription template.
 	//
-	// GET /api/subscription-templates/{templateType}
-	SubscriptionTemplateControllerGetTemplate(ctx context.Context, params SubscriptionTemplateControllerGetTemplateParams, options ...RequestOption) (SubscriptionTemplateControllerGetTemplateRes, error)
+	// POST /api/subscription-templates
+	SubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerCreateTemplateRes, error)
+	// SubscriptionTemplateControllerDeleteTemplate invokes SubscriptionTemplateController_deleteTemplate operation.
+	//
+	// Delete subscription template.
+	//
+	// DELETE /api/subscription-templates/{uuid}
+	SubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams, options ...RequestOption) (SubscriptionTemplateControllerDeleteTemplateRes, error)
+	// SubscriptionTemplateControllerGetAllTemplates invokes SubscriptionTemplateController_getAllTemplates operation.
+	//
+	// Get all subscription templates (wihout content).
+	//
+	// GET /api/subscription-templates
+	SubscriptionTemplateControllerGetAllTemplates(ctx context.Context, options ...RequestOption) (SubscriptionTemplateControllerGetAllTemplatesRes, error)
+	// SubscriptionTemplateControllerGetTemplateByUuid invokes SubscriptionTemplateController_getTemplateByUuid operation.
+	//
+	// Get subscription template by uuid.
+	//
+	// GET /api/subscription-templates/{uuid}
+	SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams, options ...RequestOption) (SubscriptionTemplateControllerGetTemplateByUuidRes, error)
 	// SubscriptionTemplateControllerUpdateTemplate invokes SubscriptionTemplateController_updateTemplate operation.
 	//
 	// Update subscription template.
 	//
-	// PUT /api/subscription-templates
+	// PATCH /api/subscription-templates
 	SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerUpdateTemplateRes, error)
 	// SubscriptionsControllerGetAllSubscriptions invokes SubscriptionsController_getAllSubscriptions operation.
 	//
@@ -513,12 +668,42 @@ type Invoker interface {
 	//
 	// GET /api/subscriptions
 	SubscriptionsControllerGetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams, options ...RequestOption) (SubscriptionsControllerGetAllSubscriptionsRes, error)
+	// SubscriptionsControllerGetRawSubscriptionByShortUuid invokes SubscriptionsController_getRawSubscriptionByShortUuid operation.
+	//
+	// Get Raw Subscription by Short UUID.
+	//
+	// GET /api/subscriptions/by-short-uuid/{shortUuid}/raw
+	SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams, options ...RequestOption) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error)
+	// SubscriptionsControllerGetSubscriptionByShortUuidProtected invokes SubscriptionsController_getSubscriptionByShortUuidProtected operation.
+	//
+	// Get subscription by short uuid (protected route).
+	//
+	// GET /api/subscriptions/by-short-uuid/{shortUuid}
+	SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error)
 	// SubscriptionsControllerGetSubscriptionByUsername invokes SubscriptionsController_getSubscriptionByUsername operation.
 	//
 	// Get subscription by username.
 	//
 	// GET /api/subscriptions/by-username/{username}
 	SubscriptionsControllerGetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUsernameRes, error)
+	// SubscriptionsControllerGetSubscriptionByUuid invokes SubscriptionsController_getSubscriptionByUuid operation.
+	//
+	// Get subscription by uuid.
+	//
+	// GET /api/subscriptions/by-uuid/{uuid}
+	SubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUuidRes, error)
+	// SystemControllerDebugSrrMatcher invokes SystemController_debugSrrMatcher operation.
+	//
+	// Test SRR Matcher.
+	//
+	// POST /api/system/testers/srr-matcher
+	SystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto, options ...RequestOption) (SystemControllerDebugSrrMatcherRes, error)
+	// SystemControllerEncryptHappCryptoLink invokes SystemController_encryptHappCryptoLink operation.
+	//
+	// Encrypt Happ Crypto Link.
+	//
+	// POST /api/system/tools/happ/encrypt
+	SystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto, options ...RequestOption) (SystemControllerEncryptHappCryptoLinkRes, error)
 	// SystemControllerGetBandwidthStats invokes SystemController_getBandwidthStats operation.
 	//
 	// Get Bandwidth Stats.
@@ -549,6 +734,24 @@ type Invoker interface {
 	//
 	// GET /api/system/stats
 	SystemControllerGetStats(ctx context.Context, options ...RequestOption) (SystemControllerGetStatsRes, error)
+	// SystemControllerGetX25519Keypairs invokes SystemController_getX25519Keypairs operation.
+	//
+	// Generate 30 X25519 keypairs.
+	//
+	// GET /api/system/tools/x25519/generate
+	SystemControllerGetX25519Keypairs(ctx context.Context, options ...RequestOption) (SystemControllerGetX25519KeypairsRes, error)
+	// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory invokes UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory operation.
+	//
+	// Get all subscription request history.
+	//
+	// GET /api/subscription-request-history
+	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error)
+	// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats invokes UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats operation.
+	//
+	// Get subscription request history stats.
+	//
+	// GET /api/subscription-request-history/stats
+	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error)
 	// UsersBulkActionsControllerBulkAllResetUserTraffic invokes UsersBulkActionsController_bulkAllResetUserTraffic operation.
 	//
 	// Bulk reset all users traffic.
@@ -663,6 +866,12 @@ type Invoker interface {
 	//
 	// GET /api/users/{uuid}
 	UsersControllerGetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams, options ...RequestOption) (UsersControllerGetUserByUuidRes, error)
+	// UsersControllerGetUserSubscriptionRequestHistory invokes UsersController_getUserSubscriptionRequestHistory operation.
+	//
+	// Get user subscription request history, recent 24 records.
+	//
+	// GET /api/users/{uuid}/subscription-request-history
+	UsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams, options ...RequestOption) (UsersControllerGetUserSubscriptionRequestHistoryRes, error)
 	// UsersControllerGetUsersByEmail invokes UsersController_getUsersByEmail operation.
 	//
 	// Get users by email.
@@ -689,7 +898,7 @@ type Invoker interface {
 	UsersControllerRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams, options ...RequestOption) (UsersControllerRevokeUserSubscriptionRes, error)
 	// UsersControllerUpdateUser invokes UsersController_updateUser operation.
 	//
-	// Update a user.
+	// Update a user by UUID or username.
 	//
 	// PATCH /api/users
 	UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (UsersControllerUpdateUserRes, error)
@@ -1245,6 +1454,117 @@ func (c *Client) sendAuthControllerOauth2Callback(ctx context.Context, request *
 	}
 
 	result, err := decodeAuthControllerOauth2CallbackResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// AuthControllerPasskeyAuthenticationOptions invokes AuthController_passkeyAuthenticationOptions operation.
+//
+// Get the authentication options for passkey.
+//
+// GET /api/auth/passkey/authentication/options
+func (c *Client) AuthControllerPasskeyAuthenticationOptions(ctx context.Context, options ...RequestOption) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
+	res, err := c.sendAuthControllerPasskeyAuthenticationOptions(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendAuthControllerPasskeyAuthenticationOptions(ctx context.Context, requestOptions ...RequestOption) (res AuthControllerPasskeyAuthenticationOptionsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/auth/passkey/authentication/options"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeAuthControllerPasskeyAuthenticationOptionsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// AuthControllerPasskeyAuthenticationVerify invokes AuthController_passkeyAuthenticationVerify operation.
+//
+// Verify the authentication for passkey.
+//
+// POST /api/auth/passkey/authentication/verify
+func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, options ...RequestOption) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+	res, err := c.sendAuthControllerPasskeyAuthenticationVerify(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto, requestOptions ...RequestOption) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/auth/passkey/authentication/verify"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeAuthControllerPasskeyAuthenticationVerifyRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeAuthControllerPasskeyAuthenticationVerifyResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -1984,6 +2304,15 @@ func (c *Client) ConfigProfileControllerUpdateConfigProfile(ctx context.Context,
 }
 
 func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto, requestOptions ...RequestOption) (res ConfigProfileControllerUpdateConfigProfileRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -2056,6 +2385,713 @@ func (c *Client) sendConfigProfileControllerUpdateConfigProfile(ctx context.Cont
 	}
 
 	result, err := decodeConfigProfileControllerUpdateConfigProfileResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerAddUsersToExternalSquad invokes ExternalSquadController_addUsersToExternalSquad operation.
+//
+// Add all users to external squad.
+//
+// POST /api/external-squads/{uuid}/bulk-actions/add-users
+func (c *Client) ExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams, options ...RequestOption) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerAddUsersToExternalSquad(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams, requestOptions ...RequestOption) (res ExternalSquadControllerAddUsersToExternalSquadRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/external-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/bulk-actions/add-users"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerAddUsersToExternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerAddUsersToExternalSquadResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerCreateExternalSquad invokes ExternalSquadController_createExternalSquad operation.
+//
+// Create external squad.
+//
+// POST /api/external-squads
+func (c *Client) ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerCreateExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerCreateExternalSquad(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto, requestOptions ...RequestOption) (res ExternalSquadControllerCreateExternalSquadRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/external-squads"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeExternalSquadControllerCreateExternalSquadRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerCreateExternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerCreateExternalSquadResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerDeleteExternalSquad invokes ExternalSquadController_deleteExternalSquad operation.
+//
+// Delete external squad.
+//
+// DELETE /api/external-squads/{uuid}
+func (c *Client) ExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams, options ...RequestOption) (ExternalSquadControllerDeleteExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerDeleteExternalSquad(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerDeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams, requestOptions ...RequestOption) (res ExternalSquadControllerDeleteExternalSquadRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/external-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerDeleteExternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerDeleteExternalSquadResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerGetExternalSquadByUuid invokes ExternalSquadController_getExternalSquadByUuid operation.
+//
+// Get external squad by uuid.
+//
+// GET /api/external-squads/{uuid}
+func (c *Client) ExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams, options ...RequestOption) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
+	res, err := c.sendExternalSquadControllerGetExternalSquadByUuid(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerGetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams, requestOptions ...RequestOption) (res ExternalSquadControllerGetExternalSquadByUuidRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/external-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerGetExternalSquadByUuidOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerGetExternalSquadByUuidResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerGetExternalSquads invokes ExternalSquadController_getExternalSquads operation.
+//
+// Get all external squads.
+//
+// GET /api/external-squads
+func (c *Client) ExternalSquadControllerGetExternalSquads(ctx context.Context, options ...RequestOption) (ExternalSquadControllerGetExternalSquadsRes, error) {
+	res, err := c.sendExternalSquadControllerGetExternalSquads(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerGetExternalSquads(ctx context.Context, requestOptions ...RequestOption) (res ExternalSquadControllerGetExternalSquadsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/external-squads"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerGetExternalSquadsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerGetExternalSquadsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerRemoveUsersFromExternalSquad invokes ExternalSquadController_removeUsersFromExternalSquad operation.
+//
+// Delete users from external squad.
+//
+// DELETE /api/external-squads/{uuid}/bulk-actions/remove-users
+func (c *Client) ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams, options ...RequestOption) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams, requestOptions ...RequestOption) (res ExternalSquadControllerRemoveUsersFromExternalSquadRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/external-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/bulk-actions/remove-users"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerRemoveUsersFromExternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerRemoveUsersFromExternalSquadResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerUpdateExternalSquad invokes ExternalSquadController_updateExternalSquad operation.
+//
+// Update external squad.
+//
+// PATCH /api/external-squads
+func (c *Client) ExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto, options ...RequestOption) (ExternalSquadControllerUpdateExternalSquadRes, error) {
+	res, err := c.sendExternalSquadControllerUpdateExternalSquad(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto, requestOptions ...RequestOption) (res ExternalSquadControllerUpdateExternalSquadRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/external-squads"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeExternalSquadControllerUpdateExternalSquadRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerUpdateExternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeExternalSquadControllerUpdateExternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -2762,6 +3798,93 @@ func (c *Client) sendHostsControllerDeleteHost(ctx context.Context, params Hosts
 	return result, nil
 }
 
+// HostsControllerGetAllHostTags invokes HostsController_getAllHostTags operation.
+//
+// Get all existing host tags.
+//
+// GET /api/hosts/tags
+func (c *Client) HostsControllerGetAllHostTags(ctx context.Context, options ...RequestOption) (HostsControllerGetAllHostTagsRes, error) {
+	res, err := c.sendHostsControllerGetAllHostTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendHostsControllerGetAllHostTags(ctx context.Context, requestOptions ...RequestOption) (res HostsControllerGetAllHostTagsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/hosts/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, HostsControllerGetAllHostTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeHostsControllerGetAllHostTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // HostsControllerGetAllHosts invokes HostsController_getAllHosts operation.
 //
 // Get all hosts.
@@ -3242,6 +4365,96 @@ func (c *Client) sendHwidUserDevicesControllerCreateUserHwidDevice(ctx context.C
 	return result, nil
 }
 
+// HwidUserDevicesControllerDeleteAllUserHwidDevices invokes HwidUserDevicesController_deleteAllUserHwidDevices operation.
+//
+// Delete all user HWID devices.
+//
+// POST /api/hwid/devices/delete-all
+func (c *Client) HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto, options ...RequestOption) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error) {
+	res, err := c.sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendHwidUserDevicesControllerDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto, requestOptions ...RequestOption) (res HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/hwid/devices/delete-all"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeHwidUserDevicesControllerDeleteAllUserHwidDevicesRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerDeleteAllUserHwidDevicesOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeHwidUserDevicesControllerDeleteAllUserHwidDevicesResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // HwidUserDevicesControllerDeleteUserHwidDevice invokes HwidUserDevicesController_deleteUserHwidDevice operation.
 //
 // Delete a user HWID device.
@@ -3325,6 +4538,217 @@ func (c *Client) sendHwidUserDevicesControllerDeleteUserHwidDevice(ctx context.C
 	}
 
 	result, err := decodeHwidUserDevicesControllerDeleteUserHwidDeviceResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// HwidUserDevicesControllerGetAllUsers invokes HwidUserDevicesController_getAllUsers operation.
+//
+// Get all HWID devices.
+//
+// GET /api/hwid/devices
+func (c *Client) HwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams, options ...RequestOption) (HwidUserDevicesControllerGetAllUsersRes, error) {
+	res, err := c.sendHwidUserDevicesControllerGetAllUsers(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendHwidUserDevicesControllerGetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams, requestOptions ...RequestOption) (res HwidUserDevicesControllerGetAllUsersRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/hwid/devices"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerGetAllUsersOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeHwidUserDevicesControllerGetAllUsersResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// HwidUserDevicesControllerGetHwidDevicesStats invokes HwidUserDevicesController_getHwidDevicesStats operation.
+//
+// Get HWID devices stats.
+//
+// GET /api/hwid/devices/stats
+func (c *Client) HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context, options ...RequestOption) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
+	res, err := c.sendHwidUserDevicesControllerGetHwidDevicesStats(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context, requestOptions ...RequestOption) (res HwidUserDevicesControllerGetHwidDevicesStatsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/hwid/devices/stats"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerGetHwidDevicesStatsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeHwidUserDevicesControllerGetHwidDevicesStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -4408,7 +5832,7 @@ func (c *Client) sendInfraBillingControllerGetInfraProviders(ctx context.Context
 
 // InfraBillingControllerUpdateInfraBillingNode invokes InfraBillingController_updateInfraBillingNode operation.
 //
-// Update infra billing node.
+// Update infra billing nodes.
 //
 // PATCH /api/infra-billing/nodes
 func (c *Client) InfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto, options ...RequestOption) (InfraBillingControllerUpdateInfraBillingNodeRes, error) {
@@ -4417,6 +5841,15 @@ func (c *Client) InfraBillingControllerUpdateInfraBillingNode(ctx context.Contex
 }
 
 func (c *Client) sendInfraBillingControllerUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto, requestOptions ...RequestOption) (res InfraBillingControllerUpdateInfraBillingNodeRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -4898,6 +6331,112 @@ func (c *Client) sendInternalSquadControllerDeleteInternalSquad(ctx context.Cont
 	}
 
 	result, err := decodeInternalSquadControllerDeleteInternalSquadResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadControllerGetInternalSquadAccessibleNodes invokes InternalSquadController_getInternalSquadAccessibleNodes operation.
+//
+// Get internal squad accessible nodes.
+//
+// GET /api/internal-squads/{uuid}/accessible-nodes
+func (c *Client) InternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams, options ...RequestOption) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
+	res, err := c.sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadControllerGetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams, requestOptions ...RequestOption) (res InternalSquadControllerGetInternalSquadAccessibleNodesRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/internal-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/accessible-nodes"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, InternalSquadControllerGetInternalSquadAccessibleNodesOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeInternalSquadControllerGetInternalSquadAccessibleNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -6101,12 +7640,12 @@ func (c *Client) sendNodesControllerReorderNodes(ctx context.Context, request *R
 // Restart all nodes.
 //
 // POST /api/nodes/actions/restart-all
-func (c *Client) NodesControllerRestartAllNodes(ctx context.Context, options ...RequestOption) (NodesControllerRestartAllNodesRes, error) {
-	res, err := c.sendNodesControllerRestartAllNodes(ctx, options...)
+func (c *Client) NodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto, options ...RequestOption) (NodesControllerRestartAllNodesRes, error) {
+	res, err := c.sendNodesControllerRestartAllNodes(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, requestOptions ...RequestOption) (res NodesControllerRestartAllNodesRes, err error) {
+func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto, requestOptions ...RequestOption) (res NodesControllerRestartAllNodesRes, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -6126,6 +7665,9 @@ func (c *Client) sendNodesControllerRestartAllNodes(ctx context.Context, request
 	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodesControllerRestartAllNodesRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
 	}
 
 	{
@@ -6431,15 +7973,15 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 		}
 	}
 	{
-		// Encode "end" parameter.
+		// Encode "limit" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "end",
+			Name:    "limit",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateTimeToString(params.Limit))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -6568,15 +8110,15 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 		}
 	}
 	{
-		// Encode "end" parameter.
+		// Encode "limit" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "end",
+			Name:    "limit",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateTimeToString(params.Limit))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -6730,17 +8272,17 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx co
 	return result, nil
 }
 
-// SubscriptionControllerGetRawSubscriptionByShortUuid invokes SubscriptionController_getRawSubscriptionByShortUuid operation.
+// PasskeyControllerDeletePasskey invokes PasskeyController_deletePasskey operation.
 //
-// Get Raw Subscription by Short UUID.
+// Delete a passkey by ID.
 //
-// GET /api/sub/{shortUuid}/raw
-func (c *Client) SubscriptionControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionControllerGetRawSubscriptionByShortUuidParams, options ...RequestOption) (SubscriptionControllerGetRawSubscriptionByShortUuidRes, error) {
-	res, err := c.sendSubscriptionControllerGetRawSubscriptionByShortUuid(ctx, params, options...)
+// DELETE /api/passkeys
+func (c *Client) PasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto, options ...RequestOption) (PasskeyControllerDeletePasskeyRes, error) {
+	res, err := c.sendPasskeyControllerDeletePasskey(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionControllerGetRawSubscriptionByShortUuidParams, requestOptions ...RequestOption) (res SubscriptionControllerGetRawSubscriptionByShortUuidRes, err error) {
+func (c *Client) sendPasskeyControllerDeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto, requestOptions ...RequestOption) (res PasskeyControllerDeletePasskeyRes, err error) {
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -6753,32 +8295,16 @@ func (c *Client) sendSubscriptionControllerGetRawSubscriptionByShortUuid(ctx con
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [3]string
-	pathParts[0] = "/api/sub/"
-	{
-		// Encode "shortUuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "shortUuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.ShortUuid))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	pathParts[2] = "/raw"
+	var pathParts [1]string
+	pathParts[0] = "/api/passkeys"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "GET", u)
+	r, err := ht.NewRequest(ctx, "DELETE", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodePasskeyControllerDeletePasskeyRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
 	}
 
 	{
@@ -6786,7 +8312,7 @@ func (c *Client) sendSubscriptionControllerGetRawSubscriptionByShortUuid(ctx con
 		var satisfied bitset
 		{
 
-			switch err := c.securityAuthorization(ctx, SubscriptionControllerGetRawSubscriptionByShortUuidOperation, r); {
+			switch err := c.securityAuthorization(ctx, PasskeyControllerDeletePasskeyOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -6828,7 +8354,841 @@ func (c *Client) sendSubscriptionControllerGetRawSubscriptionByShortUuid(ctx con
 		return res, errors.Wrap(err, "edit response")
 	}
 
-	result, err := decodeSubscriptionControllerGetRawSubscriptionByShortUuidResponse(resp)
+	result, err := decodePasskeyControllerDeletePasskeyResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// PasskeyControllerGetActivePasskeys invokes PasskeyController_getActivePasskeys operation.
+//
+// Get all passkeys.
+//
+// GET /api/passkeys
+func (c *Client) PasskeyControllerGetActivePasskeys(ctx context.Context, options ...RequestOption) (PasskeyControllerGetActivePasskeysRes, error) {
+	res, err := c.sendPasskeyControllerGetActivePasskeys(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendPasskeyControllerGetActivePasskeys(ctx context.Context, requestOptions ...RequestOption) (res PasskeyControllerGetActivePasskeysRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/passkeys"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, PasskeyControllerGetActivePasskeysOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodePasskeyControllerGetActivePasskeysResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// PasskeyControllerPasskeyRegistrationOptions invokes PasskeyController_passkeyRegistrationOptions operation.
+//
+// Get registration options for passkey.
+//
+// GET /api/passkeys/registration/options
+func (c *Client) PasskeyControllerPasskeyRegistrationOptions(ctx context.Context, options ...RequestOption) (PasskeyControllerPasskeyRegistrationOptionsRes, error) {
+	res, err := c.sendPasskeyControllerPasskeyRegistrationOptions(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Context, requestOptions ...RequestOption) (res PasskeyControllerPasskeyRegistrationOptionsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/passkeys/registration/options"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, PasskeyControllerPasskeyRegistrationOptionsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodePasskeyControllerPasskeyRegistrationOptionsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// PasskeyControllerPasskeyRegistrationVerify invokes PasskeyController_passkeyRegistrationVerify operation.
+//
+// Verify registration for passkey.
+//
+// POST /api/passkeys/registration/verify
+func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto, options ...RequestOption) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+	res, err := c.sendPasskeyControllerPasskeyRegistrationVerify(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto, requestOptions ...RequestOption) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/passkeys/registration/verify"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodePasskeyControllerPasskeyRegistrationVerifyRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, PasskeyControllerPasskeyRegistrationVerifyOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodePasskeyControllerPasskeyRegistrationVerifyResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// RemnawaveSettingsControllerGetSettings invokes RemnawaveSettingsController_getSettings operation.
+//
+// Get Remnawave settings.
+//
+// GET /api/remnawave-settings
+func (c *Client) RemnawaveSettingsControllerGetSettings(ctx context.Context, options ...RequestOption) (RemnawaveSettingsControllerGetSettingsRes, error) {
+	res, err := c.sendRemnawaveSettingsControllerGetSettings(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendRemnawaveSettingsControllerGetSettings(ctx context.Context, requestOptions ...RequestOption) (res RemnawaveSettingsControllerGetSettingsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/remnawave-settings"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, RemnawaveSettingsControllerGetSettingsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeRemnawaveSettingsControllerGetSettingsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// RemnawaveSettingsControllerUpdateSettings invokes RemnawaveSettingsController_updateSettings operation.
+//
+// Update Remnawave settings.
+//
+// PATCH /api/remnawave-settings
+func (c *Client) RemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto, options ...RequestOption) (RemnawaveSettingsControllerUpdateSettingsRes, error) {
+	res, err := c.sendRemnawaveSettingsControllerUpdateSettings(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto, requestOptions ...RequestOption) (res RemnawaveSettingsControllerUpdateSettingsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/remnawave-settings"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeRemnawaveSettingsControllerUpdateSettingsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, RemnawaveSettingsControllerUpdateSettingsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeRemnawaveSettingsControllerUpdateSettingsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SnippetsControllerCreateSnippet invokes SnippetsController_createSnippet operation.
+//
+// Create snippet.
+//
+// POST /api/snippets
+func (c *Client) SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto, options ...RequestOption) (SnippetsControllerCreateSnippetRes, error) {
+	res, err := c.sendSnippetsControllerCreateSnippet(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto, requestOptions ...RequestOption) (res SnippetsControllerCreateSnippetRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/snippets"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSnippetsControllerCreateSnippetRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SnippetsControllerCreateSnippetOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSnippetsControllerCreateSnippetResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SnippetsControllerDeleteSnippetByName invokes SnippetsController_deleteSnippetByName operation.
+//
+// Delete snippet.
+//
+// DELETE /api/snippets
+func (c *Client) SnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto, options ...RequestOption) (SnippetsControllerDeleteSnippetByNameRes, error) {
+	res, err := c.sendSnippetsControllerDeleteSnippetByName(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSnippetsControllerDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto, requestOptions ...RequestOption) (res SnippetsControllerDeleteSnippetByNameRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/snippets"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSnippetsControllerDeleteSnippetByNameRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SnippetsControllerDeleteSnippetByNameOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSnippetsControllerDeleteSnippetByNameResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SnippetsControllerGetSnippets invokes SnippetsController_getSnippets operation.
+//
+// Get snippets.
+//
+// GET /api/snippets
+func (c *Client) SnippetsControllerGetSnippets(ctx context.Context, options ...RequestOption) (SnippetsControllerGetSnippetsRes, error) {
+	res, err := c.sendSnippetsControllerGetSnippets(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context, requestOptions ...RequestOption) (res SnippetsControllerGetSnippetsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/snippets"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SnippetsControllerGetSnippetsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSnippetsControllerGetSnippetsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SnippetsControllerUpdateSnippet invokes SnippetsController_updateSnippet operation.
+//
+// Update snippet.
+//
+// PATCH /api/snippets
+func (c *Client) SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto, options ...RequestOption) (SnippetsControllerUpdateSnippetRes, error) {
+	res, err := c.sendSnippetsControllerUpdateSnippet(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto, requestOptions ...RequestOption) (res SnippetsControllerUpdateSnippetRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/snippets"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSnippetsControllerUpdateSnippetRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SnippetsControllerUpdateSnippetOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSnippetsControllerUpdateSnippetResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -7362,17 +9722,26 @@ func (c *Client) sendSubscriptionSettingsControllerUpdateSettings(ctx context.Co
 	return result, nil
 }
 
-// SubscriptionTemplateControllerGetTemplate invokes SubscriptionTemplateController_getTemplate operation.
+// SubscriptionTemplateControllerCreateTemplate invokes SubscriptionTemplateController_createTemplate operation.
 //
-// Get subscription template.
+// Create subscription template.
 //
-// GET /api/subscription-templates/{templateType}
-func (c *Client) SubscriptionTemplateControllerGetTemplate(ctx context.Context, params SubscriptionTemplateControllerGetTemplateParams, options ...RequestOption) (SubscriptionTemplateControllerGetTemplateRes, error) {
-	res, err := c.sendSubscriptionTemplateControllerGetTemplate(ctx, params, options...)
+// POST /api/subscription-templates
+func (c *Client) SubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerCreateTemplateRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerCreateTemplate(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerGetTemplate(ctx context.Context, params SubscriptionTemplateControllerGetTemplateParams, requestOptions ...RequestOption) (res SubscriptionTemplateControllerGetTemplateRes, err error) {
+func (c *Client) sendSubscriptionTemplateControllerCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto, requestOptions ...RequestOption) (res SubscriptionTemplateControllerCreateTemplateRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
 
 	var reqCfg requestConfig
 	reqCfg.setDefaults(c.baseClient)
@@ -7385,31 +9754,16 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplate(ctx context.Conte
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/subscription-templates/"
-	{
-		// Encode "templateType" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "templateType",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(string(params.TemplateType)))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-templates"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "GET", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSubscriptionTemplateControllerCreateTemplateRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
 	}
 
 	{
@@ -7417,7 +9771,7 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplate(ctx context.Conte
 		var satisfied bitset
 		{
 
-			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerGetTemplateOperation, r); {
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerCreateTemplateOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -7459,7 +9813,304 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplate(ctx context.Conte
 		return res, errors.Wrap(err, "edit response")
 	}
 
-	result, err := decodeSubscriptionTemplateControllerGetTemplateResponse(resp)
+	result, err := decodeSubscriptionTemplateControllerCreateTemplateResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionTemplateControllerDeleteTemplate invokes SubscriptionTemplateController_deleteTemplate operation.
+//
+// Delete subscription template.
+//
+// DELETE /api/subscription-templates/{uuid}
+func (c *Client) SubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams, options ...RequestOption) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerDeleteTemplate(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateControllerDeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams, requestOptions ...RequestOption) (res SubscriptionTemplateControllerDeleteTemplateRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/subscription-templates/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerDeleteTemplateOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionTemplateControllerDeleteTemplateResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionTemplateControllerGetAllTemplates invokes SubscriptionTemplateController_getAllTemplates operation.
+//
+// Get all subscription templates (wihout content).
+//
+// GET /api/subscription-templates
+func (c *Client) SubscriptionTemplateControllerGetAllTemplates(ctx context.Context, options ...RequestOption) (SubscriptionTemplateControllerGetAllTemplatesRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerGetAllTemplates(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateControllerGetAllTemplates(ctx context.Context, requestOptions ...RequestOption) (res SubscriptionTemplateControllerGetAllTemplatesRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-templates"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerGetAllTemplatesOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionTemplateControllerGetAllTemplatesResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionTemplateControllerGetTemplateByUuid invokes SubscriptionTemplateController_getTemplateByUuid operation.
+//
+// Get subscription template by uuid.
+//
+// GET /api/subscription-templates/{uuid}
+func (c *Client) SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams, options ...RequestOption) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerGetTemplateByUuid(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams, requestOptions ...RequestOption) (res SubscriptionTemplateControllerGetTemplateByUuidRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/subscription-templates/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerGetTemplateByUuidOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionTemplateControllerGetTemplateByUuidResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -7471,7 +10122,7 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplate(ctx context.Conte
 //
 // Update subscription template.
 //
-// PUT /api/subscription-templates
+// PATCH /api/subscription-templates
 func (c *Client) SubscriptionTemplateControllerUpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto, options ...RequestOption) (SubscriptionTemplateControllerUpdateTemplateRes, error) {
 	res, err := c.sendSubscriptionTemplateControllerUpdateTemplate(ctx, request, options...)
 	return res, err
@@ -7503,7 +10154,7 @@ func (c *Client) sendSubscriptionTemplateControllerUpdateTemplate(ctx context.Co
 	pathParts[0] = "/api/subscription-templates"
 	uri.AddPathParts(u, pathParts[:]...)
 
-	r, err := ht.NewRequest(ctx, "PUT", u)
+	r, err := ht.NewRequest(ctx, "PATCH", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
@@ -7690,6 +10341,237 @@ func (c *Client) sendSubscriptionsControllerGetAllSubscriptions(ctx context.Cont
 	return result, nil
 }
 
+// SubscriptionsControllerGetRawSubscriptionByShortUuid invokes SubscriptionsController_getRawSubscriptionByShortUuid operation.
+//
+// Get Raw Subscription by Short UUID.
+//
+// GET /api/subscriptions/by-short-uuid/{shortUuid}/raw
+func (c *Client) SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams, options ...RequestOption) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
+	res, err := c.sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionsControllerGetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetRawSubscriptionByShortUuidRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/subscriptions/by-short-uuid/"
+	{
+		// Encode "shortUuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "shortUuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.ShortUuid))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/raw"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "withDisabledHosts" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "withDisabledHosts",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.WithDisabledHosts.Get(); ok {
+				return e.EncodeValue(conv.BoolToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetRawSubscriptionByShortUuidOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionsControllerGetRawSubscriptionByShortUuidResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionsControllerGetSubscriptionByShortUuidProtected invokes SubscriptionsController_getSubscriptionByShortUuidProtected operation.
+//
+// Get subscription by short uuid (protected route).
+//
+// GET /api/subscriptions/by-short-uuid/{shortUuid}
+func (c *Client) SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
+	res, err := c.sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/subscriptions/by-short-uuid/"
+	{
+		// Encode "shortUuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "shortUuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.ShortUuid))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetSubscriptionByShortUuidProtectedOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionsControllerGetSubscriptionByShortUuidProtectedResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SubscriptionsControllerGetSubscriptionByUsername invokes SubscriptionsController_getSubscriptionByUsername operation.
 //
 // Get subscription by username.
@@ -7788,6 +10670,300 @@ func (c *Client) sendSubscriptionsControllerGetSubscriptionByUsername(ctx contex
 	}
 
 	result, err := decodeSubscriptionsControllerGetSubscriptionByUsernameResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionsControllerGetSubscriptionByUuid invokes SubscriptionsController_getSubscriptionByUuid operation.
+//
+// Get subscription by uuid.
+//
+// GET /api/subscriptions/by-uuid/{uuid}
+func (c *Client) SubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams, options ...RequestOption) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
+	res, err := c.sendSubscriptionsControllerGetSubscriptionByUuid(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionsControllerGetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams, requestOptions ...RequestOption) (res SubscriptionsControllerGetSubscriptionByUuidRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/subscriptions/by-uuid/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SubscriptionsControllerGetSubscriptionByUuidOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSubscriptionsControllerGetSubscriptionByUuidResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SystemControllerDebugSrrMatcher invokes SystemController_debugSrrMatcher operation.
+//
+// Test SRR Matcher.
+//
+// POST /api/system/testers/srr-matcher
+func (c *Client) SystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto, options ...RequestOption) (SystemControllerDebugSrrMatcherRes, error) {
+	res, err := c.sendSystemControllerDebugSrrMatcher(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSystemControllerDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto, requestOptions ...RequestOption) (res SystemControllerDebugSrrMatcherRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/system/testers/srr-matcher"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSystemControllerDebugSrrMatcherRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SystemControllerDebugSrrMatcherOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSystemControllerDebugSrrMatcherResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SystemControllerEncryptHappCryptoLink invokes SystemController_encryptHappCryptoLink operation.
+//
+// Encrypt Happ Crypto Link.
+//
+// POST /api/system/tools/happ/encrypt
+func (c *Client) SystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto, options ...RequestOption) (SystemControllerEncryptHappCryptoLinkRes, error) {
+	res, err := c.sendSystemControllerEncryptHappCryptoLink(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSystemControllerEncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto, requestOptions ...RequestOption) (res SystemControllerEncryptHappCryptoLinkRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/system/tools/happ/encrypt"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSystemControllerEncryptHappCryptoLinkRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SystemControllerEncryptHappCryptoLinkOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSystemControllerEncryptHappCryptoLinkResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -8223,6 +11399,304 @@ func (c *Client) sendSystemControllerGetStats(ctx context.Context, requestOption
 	}
 
 	result, err := decodeSystemControllerGetStatsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SystemControllerGetX25519Keypairs invokes SystemController_getX25519Keypairs operation.
+//
+// Generate 30 X25519 keypairs.
+//
+// GET /api/system/tools/x25519/generate
+func (c *Client) SystemControllerGetX25519Keypairs(ctx context.Context, options ...RequestOption) (SystemControllerGetX25519KeypairsRes, error) {
+	res, err := c.sendSystemControllerGetX25519Keypairs(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSystemControllerGetX25519Keypairs(ctx context.Context, requestOptions ...RequestOption) (res SystemControllerGetX25519KeypairsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/system/tools/x25519/generate"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, SystemControllerGetX25519KeypairsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeSystemControllerGetX25519KeypairsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory invokes UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory operation.
+//
+// Get all subscription request history.
+//
+// GET /api/subscription-request-history
+func (c *Client) UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
+	res, err := c.sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams, requestOptions ...RequestOption) (res UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-request-history"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats invokes UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats operation.
+//
+// Get subscription request history stats.
+//
+// GET /api/subscription-request-history/stats
+func (c *Client) UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context, options ...RequestOption) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error) {
+	res, err := c.sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context, requestOptions ...RequestOption) (res UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-request-history/stats"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -10163,6 +13637,112 @@ func (c *Client) sendUsersControllerGetUserByUuid(ctx context.Context, params Us
 	return result, nil
 }
 
+// UsersControllerGetUserSubscriptionRequestHistory invokes UsersController_getUserSubscriptionRequestHistory operation.
+//
+// Get user subscription request history, recent 24 records.
+//
+// GET /api/users/{uuid}/subscription-request-history
+func (c *Client) UsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams, options ...RequestOption) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
+	res, err := c.sendUsersControllerGetUserSubscriptionRequestHistory(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendUsersControllerGetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams, requestOptions ...RequestOption) (res UsersControllerGetUserSubscriptionRequestHistoryRes, err error) {
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/subscription-request-history"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+
+			switch err := c.securityAuthorization(ctx, UsersControllerGetUserSubscriptionRequestHistoryOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	result, err := decodeUsersControllerGetUserSubscriptionRequestHistoryResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // UsersControllerGetUsersByEmail invokes UsersController_getUsersByEmail operation.
 //
 // Get users by email.
@@ -10599,7 +14179,7 @@ func (c *Client) sendUsersControllerRevokeUserSubscription(ctx context.Context, 
 
 // UsersControllerUpdateUser invokes UsersController_updateUser operation.
 //
-// Update a user.
+// Update a user by UUID or username.
 //
 // PATCH /api/users
 func (c *Client) UsersControllerUpdateUser(ctx context.Context, request *UpdateUserRequestDto, options ...RequestOption) (UsersControllerUpdateUserRes, error) {
@@ -10758,15 +14338,15 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 		}
 	}
 	{
-		// Encode "end" parameter.
+		// Encode "limit" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "end",
+			Name:    "limit",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateTimeToString(params.Limit))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
