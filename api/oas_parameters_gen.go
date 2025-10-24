@@ -27,26 +27,6 @@ type ConfigProfileControllerGetInboundsByProfileUuidParams struct {
 	UUID string
 }
 
-// ExternalSquadControllerAddUsersToExternalSquadParams is parameters of ExternalSquadController_addUsersToExternalSquad operation.
-type ExternalSquadControllerAddUsersToExternalSquadParams struct {
-	UUID string
-}
-
-// ExternalSquadControllerDeleteExternalSquadParams is parameters of ExternalSquadController_deleteExternalSquad operation.
-type ExternalSquadControllerDeleteExternalSquadParams struct {
-	UUID string
-}
-
-// ExternalSquadControllerGetExternalSquadByUuidParams is parameters of ExternalSquadController_getExternalSquadByUuid operation.
-type ExternalSquadControllerGetExternalSquadByUuidParams struct {
-	UUID string
-}
-
-// ExternalSquadControllerRemoveUsersFromExternalSquadParams is parameters of ExternalSquadController_removeUsersFromExternalSquad operation.
-type ExternalSquadControllerRemoveUsersFromExternalSquadParams struct {
-	UUID string
-}
-
 // HostsControllerDeleteHostParams is parameters of HostsController_deleteHost operation.
 type HostsControllerDeleteHostParams struct {
 	// UUID of the host.
@@ -154,7 +134,7 @@ type NodesUsageHistoryControllerGetNodesUsageByRangeParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	Limit time.Time
+	End time.Time
 }
 
 // NodesUserUsageHistoryControllerGetNodeUserUsageParams is parameters of NodesUserUsageHistoryController_getNodeUserUsage operation.
@@ -162,7 +142,7 @@ type NodesUserUsageHistoryControllerGetNodeUserUsageParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	Limit time.Time
+	End time.Time
 	// UUID of the node.
 	UUID string
 }
@@ -197,16 +177,10 @@ type SubscriptionControllerGetSubscriptionWithTypeParams struct {
 	ShortUuid string
 }
 
-// SubscriptionTemplateControllerDeleteTemplateParams is parameters of SubscriptionTemplateController_deleteTemplate operation.
-type SubscriptionTemplateControllerDeleteTemplateParams struct {
-	// Template UUID.
-	UUID string
-}
-
-// SubscriptionTemplateControllerGetTemplateByUuidParams is parameters of SubscriptionTemplateController_getTemplateByUuid operation.
-type SubscriptionTemplateControllerGetTemplateByUuidParams struct {
-	// Path parameter: uuid.
-	UUID string
+// SubscriptionTemplateControllerGetTemplateParams is parameters of SubscriptionTemplateController_getTemplate operation.
+type SubscriptionTemplateControllerGetTemplateParams struct {
+	// Template type.
+	TemplateType SubscriptionTemplateControllerGetTemplateTemplateType
 }
 
 // SubscriptionsControllerGetAllSubscriptionsParams is parameters of SubscriptionsController_getAllSubscriptions operation.
@@ -342,7 +316,7 @@ type UsersStatsControllerGetUserUsageByRangeParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	Limit time.Time
+	End time.Time
 	// UUID of the user.
 	UUID string
 }

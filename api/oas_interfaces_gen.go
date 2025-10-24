@@ -13,36 +13,12 @@ type ApiTokensControllerFindAllRes interface {
 	apiTokensControllerFindAllRes()
 }
 
-type AuthControllerGetStatusRes interface {
-	authControllerGetStatusRes()
-}
-
 type AuthControllerLoginRes interface {
 	authControllerLoginRes()
 }
 
-type AuthControllerOauth2AuthorizeRes interface {
-	authControllerOauth2AuthorizeRes()
-}
-
-type AuthControllerOauth2CallbackRes interface {
-	authControllerOauth2CallbackRes()
-}
-
-type AuthControllerPasskeyAuthenticationOptionsRes interface {
-	authControllerPasskeyAuthenticationOptionsRes()
-}
-
-type AuthControllerPasskeyAuthenticationVerifyRes interface {
-	authControllerPasskeyAuthenticationVerifyRes()
-}
-
 type AuthControllerRegisterRes interface {
 	authControllerRegisterRes()
-}
-
-type AuthControllerTelegramCallbackRes interface {
-	authControllerTelegramCallbackRes()
 }
 
 type ConfigProfileControllerCreateConfigProfileRes interface {
@@ -71,34 +47,6 @@ type ConfigProfileControllerGetInboundsByProfileUuidRes interface {
 
 type ConfigProfileControllerUpdateConfigProfileRes interface {
 	configProfileControllerUpdateConfigProfileRes()
-}
-
-type ExternalSquadControllerAddUsersToExternalSquadRes interface {
-	externalSquadControllerAddUsersToExternalSquadRes()
-}
-
-type ExternalSquadControllerCreateExternalSquadRes interface {
-	externalSquadControllerCreateExternalSquadRes()
-}
-
-type ExternalSquadControllerDeleteExternalSquadRes interface {
-	externalSquadControllerDeleteExternalSquadRes()
-}
-
-type ExternalSquadControllerGetExternalSquadByUuidRes interface {
-	externalSquadControllerGetExternalSquadByUuidRes()
-}
-
-type ExternalSquadControllerGetExternalSquadsRes interface {
-	externalSquadControllerGetExternalSquadsRes()
-}
-
-type ExternalSquadControllerRemoveUsersFromExternalSquadRes interface {
-	externalSquadControllerRemoveUsersFromExternalSquadRes()
-}
-
-type ExternalSquadControllerUpdateExternalSquadRes interface {
-	externalSquadControllerUpdateExternalSquadRes()
 }
 
 type HostsBulkActionsControllerDeleteHostsRes interface {
@@ -309,46 +257,6 @@ type NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes interface {
 	nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes()
 }
 
-type PasskeyControllerDeletePasskeyRes interface {
-	passkeyControllerDeletePasskeyRes()
-}
-
-type PasskeyControllerGetActivePasskeysRes interface {
-	passkeyControllerGetActivePasskeysRes()
-}
-
-type PasskeyControllerPasskeyRegistrationOptionsRes interface {
-	passkeyControllerPasskeyRegistrationOptionsRes()
-}
-
-type PasskeyControllerPasskeyRegistrationVerifyRes interface {
-	passkeyControllerPasskeyRegistrationVerifyRes()
-}
-
-type RemnawaveSettingsControllerGetSettingsRes interface {
-	remnawaveSettingsControllerGetSettingsRes()
-}
-
-type RemnawaveSettingsControllerUpdateSettingsRes interface {
-	remnawaveSettingsControllerUpdateSettingsRes()
-}
-
-type SnippetsControllerCreateSnippetRes interface {
-	snippetsControllerCreateSnippetRes()
-}
-
-type SnippetsControllerDeleteSnippetByNameRes interface {
-	snippetsControllerDeleteSnippetByNameRes()
-}
-
-type SnippetsControllerGetSnippetsRes interface {
-	snippetsControllerGetSnippetsRes()
-}
-
-type SnippetsControllerUpdateSnippetRes interface {
-	snippetsControllerUpdateSnippetRes()
-}
-
 type SubscriptionControllerGetSubscriptionInfoByShortUuidRes interface {
 	subscriptionControllerGetSubscriptionInfoByShortUuidRes()
 }
@@ -361,20 +269,8 @@ type SubscriptionSettingsControllerUpdateSettingsRes interface {
 	subscriptionSettingsControllerUpdateSettingsRes()
 }
 
-type SubscriptionTemplateControllerCreateTemplateRes interface {
-	subscriptionTemplateControllerCreateTemplateRes()
-}
-
-type SubscriptionTemplateControllerDeleteTemplateRes interface {
-	subscriptionTemplateControllerDeleteTemplateRes()
-}
-
-type SubscriptionTemplateControllerGetAllTemplatesRes interface {
-	subscriptionTemplateControllerGetAllTemplatesRes()
-}
-
-type SubscriptionTemplateControllerGetTemplateByUuidRes interface {
-	subscriptionTemplateControllerGetTemplateByUuidRes()
+type SubscriptionTemplateControllerGetTemplateRes interface {
+	subscriptionTemplateControllerGetTemplateRes()
 }
 
 type SubscriptionTemplateControllerUpdateTemplateRes interface {
@@ -399,10 +295,6 @@ type SubscriptionsControllerGetSubscriptionByUsernameRes interface {
 
 type SubscriptionsControllerGetSubscriptionByUuidRes interface {
 	subscriptionsControllerGetSubscriptionByUuidRes()
-}
-
-type SystemControllerDebugSrrMatcherRes interface {
-	systemControllerDebugSrrMatcherRes()
 }
 
 type SystemControllerEncryptHappCryptoLinkRes interface {
