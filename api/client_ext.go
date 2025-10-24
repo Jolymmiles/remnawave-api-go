@@ -57,10 +57,6 @@ func (uc *UsersClient) Disable(ctx context.Context, params UsersControllerDisabl
 	return uc.client.UsersControllerDisableUser(ctx, params)
 }
 
-func (uc *UsersClient) GetByTag(ctx context.Context, tag string) (UsersControllerGetUsersByTagRes, error) {
-	return uc.client.UsersControllerGetUsersByTag(ctx, UsersControllerGetUsersByTagParams{Tag: tag})
-}
-
 // NodesClient provides organized access to node operations
 type NodesClient struct{ client *Client }
 func NewNodesClient(c *Client) *NodesClient { return &NodesClient{client: c} }
@@ -119,6 +115,14 @@ func (ac *AuthClient) Login(ctx context.Context, request *LoginRequestDto) (Auth
 
 func (ac *AuthClient) Register(ctx context.Context, request *RegisterRequestDto) (AuthControllerRegisterRes, error) {
 	return ac.client.AuthControllerRegister(ctx, request)
+}
+
+func (ac *AuthClient) OAuth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (*AuthControllerOauth2AuthorizeInternalServerError, error) {
+	return ac.client.AuthControllerOauth2Authorize(ctx, request)
+}
+
+func (ac *AuthClient) OAuth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (*AuthControllerOauth2CallbackInternalServerError, error) {
+	return ac.client.AuthControllerOauth2Callback(ctx, request)
 }
 
 // SystemClient provides organized access to system operations

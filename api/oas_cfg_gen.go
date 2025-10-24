@@ -16,10 +16,11 @@ import (
 
 var regexMap = map[string]ogenregex.Regexp{
 	"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{24,}$": ogenregex.MustCompile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{24,}$"),
-	"^[A-Z0-9_:]+$":       ogenregex.MustCompile("^[A-Z0-9_:]+$"),
-	"^[A-Z0-9_]+$":        ogenregex.MustCompile("^[A-Z0-9_]+$"),
-	"^[A-Za-z0-9_\\s-]+$": ogenregex.MustCompile("^[A-Za-z0-9_\\s-]+$"),
-	"^[a-zA-Z0-9_-]+$":    ogenregex.MustCompile("^[a-zA-Z0-9_-]+$"),
+	"^[!#$%&'*+\\-.0-9A-Z^_`a-z|~]+$":              ogenregex.MustCompile("^[!#$%&'*+\\-.0-9A-Z^_`a-z|~]+$"),
+	"^[A-Z0-9_:]+$":                                ogenregex.MustCompile("^[A-Z0-9_:]+$"),
+	"^[A-Z0-9_]+$":                                 ogenregex.MustCompile("^[A-Z0-9_]+$"),
+	"^[A-Za-z0-9_\\s-]+$":                          ogenregex.MustCompile("^[A-Za-z0-9_\\s-]+$"),
+	"^[a-zA-Z0-9_-]+$":                             ogenregex.MustCompile("^[a-zA-Z0-9_-]+$"),
 }
 var (
 	// Allocate option closure once.

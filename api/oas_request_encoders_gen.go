@@ -66,6 +66,20 @@ func encodeAuthControllerOauth2CallbackRequest(
 	return nil
 }
 
+func encodeAuthControllerPasskeyAuthenticationVerifyRequest(
+	req *VerifyPasskeyAuthenticationRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeAuthControllerRegisterRequest(
 	req *RegisterRequestDto,
 	r *http.Request,
@@ -110,6 +124,34 @@ func encodeConfigProfileControllerCreateConfigProfileRequest(
 
 func encodeConfigProfileControllerUpdateConfigProfileRequest(
 	req *UpdateConfigProfileRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeExternalSquadControllerCreateExternalSquadRequest(
+	req *CreateExternalSquadRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeExternalSquadControllerUpdateExternalSquadRequest(
+	req *UpdateExternalSquadRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -430,6 +472,90 @@ func encodeNodesControllerUpdateNodeRequest(
 	return nil
 }
 
+func encodePasskeyControllerDeletePasskeyRequest(
+	req *DeletePasskeyRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodePasskeyControllerPasskeyRegistrationVerifyRequest(
+	req *VerifyPasskeyRegistrationRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeRemnawaveSettingsControllerUpdateSettingsRequest(
+	req *UpdateRemnawaveSettingsRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSnippetsControllerCreateSnippetRequest(
+	req *CreateSnippetRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSnippetsControllerDeleteSnippetByNameRequest(
+	req *DeleteSnippetRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSnippetsControllerUpdateSnippetRequest(
+	req *UpdateSnippetRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeSubscriptionSettingsControllerUpdateSettingsRequest(
 	req *UpdateSubscriptionSettingsRequestDto,
 	r *http.Request,
@@ -444,8 +570,36 @@ func encodeSubscriptionSettingsControllerUpdateSettingsRequest(
 	return nil
 }
 
+func encodeSubscriptionTemplateControllerCreateTemplateRequest(
+	req *CreateSubscriptionTemplateRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeSubscriptionTemplateControllerUpdateTemplateRequest(
 	req *UpdateTemplateRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSystemControllerDebugSrrMatcherRequest(
+	req *DebugSrrMatcherRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
