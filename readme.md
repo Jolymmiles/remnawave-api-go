@@ -91,15 +91,217 @@ resp, err := rclient.NodesControllerGetAllNodes(ctx, remapi.NodesControllerGetAl
 - **`client.System()`** - System operations (5 operations)
   - `GetHealth()`, `GetStats()`, `GetBandwidthStats()`, `GetNodesStatistics()`, `GetNodesMetrics()`
 
-**📖 [See detailed examples →](SUBCLIENT_EXAMPLES.md)**
+---
+
+## Detailed Usage Examples
+
+### Pagination Helpers
+
+The SDK provides automatic pagination management for endpoints that support it:
+
+```go
+import (
+	"fmt"
+	remapi "github.com/Jolymmiles/remnawave-api-go/api"
+)
+
+// Create pagination helper
+pager := client.Users().NewPaginationHelper(20)
+
+// Iterate through pages
+for {
+    users, err := client.Users().GetAll(ctx)
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("Page %d of %d\n", pager.CurrentPage(), pager.TotalPages())
+    
+    // Process users...
+
+    if !pager.CanGoNext() {
+        break
+    }
+    pager.NextPage()
+}
+
+// Navigation methods
+pager.FirstPage()      // Go to first page
+pager.NextPage()       // Go to next page
+pager.PreviousPage()   // Go to previous page
+pager.CurrentPage()    // Get current page number
+pager.TotalPages()     // Get total pages
+pager.CanGoNext()      // Check if there's a next page
+pager.CanGoPrevious()  // Check if there's a previous page
+```
+
+### User Operations
+
+```go
+// Get all users
+users, err := client.Users().GetAll(ctx)
+
+// Create user
+user, err := client.Users().Create(ctx, &remapi.CreateUserRequestDto{
+    Username: "john",
+    Email:    "john@example.com",
+})
+
+// Get user by ID
+user, err := client.Users().GetByID(ctx, "user-uuid")
+
+// Get user by username
+user, err := client.Users().GetByUsername(ctx, "john")
+
+// Get user by email
+user, err := client.Users().GetByEmail(ctx, "john@example.com")
+
+// Update user
+user, err := client.Users().Update(ctx, &remapi.UpdateUserRequestDto{
+    UUID:  "user-uuid",
+    Email: "newemail@example.com",
+})
+
+// Enable/Disable user
+client.Users().Enable(ctx, "user-uuid")
+client.Users().Disable(ctx, "user-uuid")
+
+// Reset user traffic
+client.Users().ResetTraffic(ctx, "user-uuid")
+
+// Delete user
+client.Users().Delete(ctx, "user-uuid")
+
+// Get user tags
+tags, err := client.Users().GetTags(ctx)
+
+// Get users by tag
+users, err := client.Users().GetByTag(ctx, "tag-name")
+```
+
+### Node Operations
+
+```go
+// Get all nodes
+nodes, err := client.Nodes().GetAll(ctx)
+
+// Create node
+node, err := client.Nodes().Create(ctx, &remapi.CreateNodeRequestDto{
+    Name: "Node-1",
+})
+
+// Get node by ID
+node, err := client.Nodes().GetByID(ctx, "node-uuid")
+
+// Update node
+node, err := client.Nodes().Update(ctx, &remapi.UpdateNodeRequestDto{
+    UUID: "node-uuid",
+    Name: "Updated-Node",
+})
+
+// Enable/Disable node
+client.Nodes().Enable(ctx, "node-uuid")
+client.Nodes().Disable(ctx, "node-uuid")
+
+// Restart node
+client.Nodes().Restart(ctx, "node-uuid")
+
+// Restart all nodes
+client.Nodes().RestartAll(ctx)
+
+// Delete node
+client.Nodes().Delete(ctx, "node-uuid")
+
+// Reorder nodes
+client.Nodes().Reorder(ctx, &remapi.ReorderNodeRequestDto{
+    UUIDs: []string{"node-1", "node-2", "node-3"},
+})
+```
+
+### Host Operations
+
+```go
+// Get all hosts
+hosts, err := client.Hosts().GetAll(ctx)
+
+// Create host
+host, err := client.Hosts().Create(ctx, &remapi.CreateHostRequestDto{
+    Name: "Host-1",
+})
+
+// Get host by ID
+host, err := client.Hosts().GetByID(ctx, "host-uuid")
+
+// Update host
+host, err := client.Hosts().Update(ctx, &remapi.UpdateHostRequestDto{
+    UUID: "host-uuid",
+    Name: "Updated-Host",
+})
+
+// Delete host
+client.Hosts().Delete(ctx, "host-uuid")
+
+// Get host tags
+tags, err := client.Hosts().GetTags(ctx)
+
+// Reorder hosts
+client.Hosts().Reorder(ctx, &remapi.ReorderHostRequestDto{
+    UUIDs: []string{"host-1", "host-2"},
+})
+```
+
+### Authentication Operations
+
+```go
+// Login
+loginResp, err := client.Auth().Login(ctx, &remapi.LoginRequestDto{
+    Username: "admin",
+    Password: "password",
+})
+
+// Register
+registerResp, err := client.Auth().Register(ctx, &remapi.RegisterRequestDto{
+    Username: "newuser",
+    Email:    "newuser@example.com",
+    Password: "password",
+})
+
+// Get auth status
+status, err := client.Auth().GetStatus(ctx)
+
+// OAuth2 authorize
+oauthResp, err := client.Auth().OAuth2Authorize(ctx, &remapi.OAuth2AuthorizeRequestDto{
+    Provider: "github",
+})
+```
+
+### System Operations
+
+```go
+// Get system health
+health, err := client.System().GetHealth(ctx)
+
+// Get stats
+stats, err := client.System().GetStats(ctx)
+
+// Get bandwidth stats
+bwStats, err := client.System().GetBandwidthStats(ctx)
+
+// Get nodes statistics
+nodesStats, err := client.System().GetNodesStatistics(ctx)
+
+// Get nodes metrics
+metrics, err := client.System().GetNodesMetrics(ctx)
+```
 
 ---
 
 ## Requirements
 
-|                         | Minimum                 |
+|                         | Version                 |
 |-------------------------|-------------------------|
-| **Go**                  | 1.24                    |
+| **Go**                  | 1.25+                   |
+| **Remnawave API**       | 2.2.0+                  |
 | **Remnawave JWT token** | Obtainable in the panel |
 
 
