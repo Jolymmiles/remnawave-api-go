@@ -6,6 +6,7 @@
 [![Issues](https://img.shields.io/github/issues/Jolymmiles/remnawave-api-go.svg)](https://github.com/Jolymmiles/remnawave-api-go/issues)
 
 A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
+Latest version: **v2.2.0.1** (with pagination parameter support)
 Library checked with Remnawave **[v2.2.0](https://github.com/remnawave/panel/releases/tag/2.0.0)**
 
 The client is generated with [**ogen**](https://github.com/ogen-go/ogen):
@@ -19,8 +20,8 @@ The client is generated with [**ogen**](https://github.com/ogen-go/ogen):
 **TL;DR**
 
 ```bash
-go get github.com/Jolymmiles/remnawave-api-go@latest
-````
+go get github.com/Jolymmiles/remnawave-api-go/v2@v2.2.0.1
+```
 
 ### Quick Start (New Organized API)
 
@@ -101,45 +102,79 @@ The SDK provides automatic pagination management for endpoints that support it:
 
 ```go
 import (
+	"context"
 	"fmt"
-	remapi "github.com/Jolymmiles/remnawave-api-go/api"
+	remapi "github.com/Jolymmiles/remnawave-api-go/v2/api"
 )
 
-// Create pagination helper
-pager := client.Users().NewPaginationHelper(20)
+ctx := context.Background()
+client := remapi.NewClientExt(baseClient)
+
+// Create pagination helper with page size
+pager := remapi.NewPaginationHelper(50) // 50 items per page
 
 // Iterate through pages
 for {
-    users, err := client.Users().GetAll(ctx)
-    if err != nil {
-        panic(err)
-    }
+	// Create params with pagination
+	params := remapi.UsersControllerGetAllUsersParams{
+		Start: remapi.NewOptFloat64(float64(pager.Offset)),
+		Size:  remapi.NewOptFloat64(float64(pager.Limit)),
+	}
 
-    fmt.Printf("Page %d of %d\n", pager.CurrentPage(), pager.TotalPages())
-    
-    // Process users...
+	// Get users with pagination
+	users, err := client.Users().GetAll(ctx, params)
+	if err != nil {
+		panic(err)
+	}
 
-    if !pager.CanGoNext() {
-        break
-    }
-    pager.NextPage()
+	fmt.Printf("Page %d - Fetched %d users\n", pager.CurrentPage(), len(users.Response))
+	
+	// Process users...
+	for _, user := range users.Response {
+		fmt.Println(user.Username)
+	}
+
+	// If we got less than requested, it's the last page
+	if len(users.Response) < pager.Limit {
+		break
+	}
+
+	// Move to next page
+	if !pager.NextPage() {
+		break
+	}
 }
 
 // Navigation methods
 pager.FirstPage()      // Go to first page
-pager.NextPage()       // Go to next page
-pager.PreviousPage()   // Go to previous page
-pager.CurrentPage()    // Get current page number
-pager.TotalPages()     // Get total pages
+pager.NextPage()       // Go to next page (returns true if moved, false if already last)
+pager.PreviousPage()   // Go to previous page (returns true if moved, false if at first)
+pager.CurrentPage()    // Get current page number (1-indexed)
+pager.TotalPages()     // Get total pages (needs SetTotal() to be called first)
 pager.CanGoNext()      // Check if there's a next page
 pager.CanGoPrevious()  // Check if there's a previous page
+pager.SetTotal(100)    // Set total items count to calculate total pages
+```
+
+**Alternative: Get all users without pagination**
+
+```go
+// Get all users at once (no pagination needed)
+users, err := client.Users().GetAll(ctx, remapi.UsersControllerGetAllUsersParams{})
 ```
 
 ### User Operations
 
 ```go
-// Get all users
-users, err := client.Users().GetAll(ctx)
+// Get all users (with pagination support)
+users, err := client.Users().GetAll(ctx, remapi.UsersControllerGetAllUsersParams{})
+
+// Get all users (with custom pagination)
+params := remapi.UsersControllerGetAllUsersParams{
+	Start: remapi.NewOptFloat64(0),
+	Size:  remapi.NewOptFloat64(50),
+}
+users, err := client.Users().GetAll(ctx, params)
 
 // Create user
 user, err := client.Users().Create(ctx, &remapi.CreateUserRequestDto{
