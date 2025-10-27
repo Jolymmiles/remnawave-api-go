@@ -81,7 +81,7 @@ type Invoker interface {
 	// Verify the authentication for passkey.
 	//
 	// POST /api/auth/passkey/authentication/verify
-	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error)
+	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error)
 	// AuthControllerRegister invokes AuthController_register operation.
 	//
 	// Register as superadmin.
@@ -183,19 +183,19 @@ type Invoker interface {
 	// Delete hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/delete
-	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error)
+	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error)
 	// HostsBulkActionsControllerDisableHosts invokes HostsBulkActionsController_disableHosts operation.
 	//
 	// Disable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/disable
-	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error)
+	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error)
 	// HostsBulkActionsControllerEnableHosts invokes HostsBulkActionsController_enableHosts operation.
 	//
 	// Enable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/enable
-	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error)
+	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error)
 	// HostsBulkActionsControllerSetInboundToHosts invokes HostsBulkActionsController_setInboundToHosts operation.
 	//
 	// Set inbound to hosts by UUIDs.
@@ -513,7 +513,7 @@ type Invoker interface {
 	// Verify registration for passkey.
 	//
 	// POST /api/passkeys/registration/verify
-	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
+	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
 	// RemnawaveSettingsControllerGetSettings invokes RemnawaveSettingsController_getSettings operation.
 	//
 	// Get Remnawave settings.
@@ -531,7 +531,7 @@ type Invoker interface {
 	// Create snippet.
 	//
 	// POST /api/snippets
-	SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error)
+	SnippetsControllerCreateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerCreateSnippetRes, error)
 	// SnippetsControllerDeleteSnippetByName invokes SnippetsController_deleteSnippetByName operation.
 	//
 	// Delete snippet.
@@ -549,7 +549,7 @@ type Invoker interface {
 	// Update snippet.
 	//
 	// PATCH /api/snippets
-	SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error)
+	SnippetsControllerUpdateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerUpdateSnippetRes, error)
 	// SubscriptionControllerGetSubscription invokes SubscriptionController_getSubscription operation.
 	//
 	// GET /api/sub/{shortUuid}
@@ -711,7 +711,7 @@ type Invoker interface {
 	// Bulk delete users by UUIDs.
 	//
 	// POST /api/users/bulk/delete
-	UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error)
+	UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkDeleteUsersRes, error)
 	// UsersBulkActionsControllerBulkDeleteUsersByStatus invokes UsersBulkActionsController_bulkDeleteUsersByStatus operation.
 	//
 	// Bulk delete users by status.
@@ -723,13 +723,13 @@ type Invoker interface {
 	// Bulk reset traffic users by UUIDs.
 	//
 	// POST /api/users/bulk/reset-traffic
-	UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error)
+	UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkResetUserTrafficRes, error)
 	// UsersBulkActionsControllerBulkRevokeUsersSubscription invokes UsersBulkActionsController_bulkRevokeUsersSubscription operation.
 	//
 	// Revoke users subscription by User UUIDs.
 	//
 	// POST /api/users/bulk/revoke-subscription
-	UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error)
+	UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error)
 	// UsersBulkActionsControllerBulkUpdateAllUsers invokes UsersBulkActionsController_bulkUpdateAllUsers operation.
 	//
 	// Bulk update all users.
@@ -1635,12 +1635,12 @@ func (c *Client) sendAuthControllerPasskeyAuthenticationOptions(ctx context.Cont
 // Verify the authentication for passkey.
 //
 // POST /api/auth/passkey/authentication/verify
-func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
 	res, err := c.sendAuthControllerPasskeyAuthenticationVerify(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
+func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("AuthController_passkeyAuthenticationVerify"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -3542,12 +3542,12 @@ func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Cont
 // Delete hosts by UUIDs.
 //
 // POST /api/hosts/bulk/delete
-func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error) {
+func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error) {
 	res, err := c.sendHostsBulkActionsControllerDeleteHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (res HostsBulkActionsControllerDeleteHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest) (res HostsBulkActionsControllerDeleteHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3660,12 +3660,12 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 // Disable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/disable
-func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error) {
+func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error) {
 	res, err := c.sendHostsBulkActionsControllerDisableHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (res HostsBulkActionsControllerDisableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest) (res HostsBulkActionsControllerDisableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3778,12 +3778,12 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 // Enable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/enable
-func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error) {
+func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error) {
 	res, err := c.sendHostsBulkActionsControllerEnableHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (res HostsBulkActionsControllerEnableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest) (res HostsBulkActionsControllerEnableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -9368,15 +9368,15 @@ func (c *Client) sendNodesUsageHistoryControllerGetNodesUsageByRange(ctx context
 		}
 	}
 	{
-		// Encode "limit" parameter.
+		// Encode "end" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "limit",
+			Name:    "end",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Limit))
+			return e.EncodeValue(conv.DateTimeToString(params.End))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -9525,15 +9525,15 @@ func (c *Client) sendNodesUserUsageHistoryControllerGetNodeUserUsage(ctx context
 		}
 	}
 	{
-		// Encode "limit" parameter.
+		// Encode "end" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "limit",
+			Name:    "end",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Limit))
+			return e.EncodeValue(conv.DateTimeToString(params.End))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -10027,12 +10027,12 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Con
 // Verify registration for passkey.
 //
 // POST /api/passkeys/registration/verify
-func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
 	res, err := c.sendPasskeyControllerPasskeyRegistrationVerify(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
+func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("PasskeyController_passkeyRegistrationVerify"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -10360,12 +10360,12 @@ func (c *Client) sendRemnawaveSettingsControllerUpdateSettings(ctx context.Conte
 // Create snippet.
 //
 // POST /api/snippets
-func (c *Client) SnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error) {
+func (c *Client) SnippetsControllerCreateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerCreateSnippetRes, error) {
 	res, err := c.sendSnippetsControllerCreateSnippet(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (res SnippetsControllerCreateSnippetRes, err error) {
+func (c *Client) sendSnippetsControllerCreateSnippet(ctx context.Context, request *SnippetRequest) (res SnippetsControllerCreateSnippetRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10702,12 +10702,12 @@ func (c *Client) sendSnippetsControllerGetSnippets(ctx context.Context) (res Sni
 // Update snippet.
 //
 // PATCH /api/snippets
-func (c *Client) SnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error) {
+func (c *Client) SnippetsControllerUpdateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerUpdateSnippetRes, error) {
 	res, err := c.sendSnippetsControllerUpdateSnippet(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (res SnippetsControllerUpdateSnippetRes, err error) {
+func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, request *SnippetRequest) (res SnippetsControllerUpdateSnippetRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -11860,7 +11860,7 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -13931,12 +13931,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkAllResetUserTraffic(ctx conte
 // Bulk delete users by UUIDs.
 //
 // POST /api/users/bulk/delete
-func (c *Client) UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
+func (c *Client) UsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
 	res, err := c.sendUsersBulkActionsControllerBulkDeleteUsers(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (res UsersBulkActionsControllerBulkDeleteUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsers(ctx context.Context, request *BulkUuidsRequest) (res UsersBulkActionsControllerBulkDeleteUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14167,12 +14167,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 // Bulk reset traffic users by UUIDs.
 //
 // POST /api/users/bulk/reset-traffic
-func (c *Client) UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
+func (c *Client) UsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
 	res, err := c.sendUsersBulkActionsControllerBulkResetUserTraffic(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (res UsersBulkActionsControllerBulkResetUserTrafficRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest) (res UsersBulkActionsControllerBulkResetUserTrafficRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14285,12 +14285,12 @@ func (c *Client) sendUsersBulkActionsControllerBulkResetUserTraffic(ctx context.
 // Revoke users subscription by User UUIDs.
 //
 // POST /api/users/bulk/revoke-subscription
-func (c *Client) UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
+func (c *Client) UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
 	res, err := c.sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (res UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, err error) {
+func (c *Client) sendUsersBulkActionsControllerBulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest) (res UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -16955,15 +16955,15 @@ func (c *Client) sendUsersStatsControllerGetUserUsageByRange(ctx context.Context
 		}
 	}
 	{
-		// Encode "limit" parameter.
+		// Encode "end" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "limit",
+			Name:    "end",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Limit))
+			return e.EncodeValue(conv.DateTimeToString(params.End))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}

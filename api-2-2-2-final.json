@@ -4414,7 +4414,18 @@
     "/api/subscription-templates/{uuid}": {
       "get": {
         "operationId": "SubscriptionTemplateController_getTemplateByUuid",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "uuid",
+            "required": true,
+            "in": "path",
+            "description": "UUID of the subscription template",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Template retrieved successfully",
