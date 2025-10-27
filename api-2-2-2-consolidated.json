@@ -11,7 +11,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SettingsResponse"
+                  "$ref": "#/components/schemas/GetRemnawaveSettingsResponseDto"
                 }
               }
             }
@@ -95,7 +95,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SettingsResponse"
+                  "$ref": "#/components/schemas/GetRemnawaveSettingsResponseDto"
                 }
               }
             }
@@ -220,7 +220,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                  "$ref": "#/components/schemas/GetPasskeyRegistrationOptionsResponseDto"
                 }
               }
             }
@@ -246,7 +246,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                "$ref": "#/components/schemas/GetPasskeyRegistrationOptionsResponseDto"
               }
             }
           }
@@ -382,7 +382,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasskeysResponse"
+                  "$ref": "#/components/schemas/GetAllPasskeysResponseDto"
                 }
               }
             }
@@ -466,7 +466,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasskeysResponse"
+                  "$ref": "#/components/schemas/GetAllPasskeysResponseDto"
                 }
               }
             }
@@ -576,7 +576,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
+                  "$ref": "#/components/schemas/LoginResponseDto"
                 }
               }
             }
@@ -681,7 +681,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
+                  "$ref": "#/components/schemas/LoginResponseDto"
                 }
               }
             }
@@ -833,7 +833,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
+                  "$ref": "#/components/schemas/LoginResponseDto"
                 }
               }
             }
@@ -995,7 +995,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
+                  "$ref": "#/components/schemas/LoginResponseDto"
                 }
               }
             }
@@ -1066,7 +1066,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                  "$ref": "#/components/schemas/GetPasskeyRegistrationOptionsResponseDto"
                 }
               }
             }
@@ -1087,7 +1087,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                "$ref": "#/components/schemas/GetPasskeyRegistrationOptionsResponseDto"
               }
             }
           }
@@ -1147,7 +1147,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
+                  "$ref": "#/components/schemas/LoginResponseDto"
                 }
               }
             }
@@ -1179,7 +1179,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -1263,7 +1263,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -1529,7 +1529,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -1608,7 +1608,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TagsResponse"
+                  "$ref": "#/components/schemas/GetAllTagsResponseDto"
                 }
               }
             }
@@ -1872,7 +1872,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -1961,7 +1961,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -2050,7 +2050,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersResponse"
+                  "$ref": "#/components/schemas/GetUserByTelegramIdResponseDto"
                 }
               }
             }
@@ -2139,7 +2139,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersResponse"
+                  "$ref": "#/components/schemas/GetUserByTelegramIdResponseDto"
                 }
               }
             }
@@ -2229,7 +2229,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersResponse"
+                  "$ref": "#/components/schemas/GetUserByTelegramIdResponseDto"
                 }
               }
             }
@@ -2328,7 +2328,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -2417,7 +2417,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -2506,7 +2506,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -2595,7 +2595,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/CreateUserResponseDto"
                 }
               }
             }
@@ -2845,7 +2845,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUuidsRequest"
+                "$ref": "#/components/schemas/BulkUuidsRequestDto"
               }
             }
           }
@@ -2931,7 +2931,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUuidsRequest"
+                "$ref": "#/components/schemas/BulkUuidsRequestDto"
               }
             }
           }
@@ -3472,7 +3472,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionResponse"
+                  "$ref": "#/components/schemas/GetSubscriptionInfoResponseDto"
                 }
               }
             }
@@ -3759,7 +3759,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionResponse"
+                  "$ref": "#/components/schemas/GetSubscriptionInfoResponseDto"
                 }
               }
             }
@@ -3870,7 +3870,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionResponse"
+                  "$ref": "#/components/schemas/GetSubscriptionInfoResponseDto"
                 }
               }
             }
@@ -3981,7 +3981,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionResponse"
+                  "$ref": "#/components/schemas/GetSubscriptionInfoResponseDto"
                 }
               }
             }
@@ -4261,7 +4261,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TemplateResponse"
+                  "$ref": "#/components/schemas/GetTemplateResponseDto"
                 }
               }
             }
@@ -4345,7 +4345,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TemplateResponse"
+                  "$ref": "#/components/schemas/GetTemplateResponseDto"
                 }
               }
             }
@@ -4414,23 +4414,14 @@
     "/api/subscription-templates/{uuid}": {
       "get": {
         "operationId": "SubscriptionTemplateController_getTemplateByUuid",
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Template retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TemplateResponse"
+                  "$ref": "#/components/schemas/GetTemplateResponseDto"
                 }
               }
             }
@@ -4923,7 +4914,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfigProfileResponse"
+                  "$ref": "#/components/schemas/GetConfigProfileByUuidResponseDto"
                 }
               }
             }
@@ -5010,7 +5001,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfigProfileResponse"
+                  "$ref": "#/components/schemas/GetConfigProfileByUuidResponseDto"
                 }
               }
             }
@@ -5092,7 +5083,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InboundsResponse"
+                  "$ref": "#/components/schemas/GetAllInboundsResponseDto"
                 }
               }
             }
@@ -5177,7 +5168,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InboundsResponse"
+                  "$ref": "#/components/schemas/GetAllInboundsResponseDto"
                 }
               }
             }
@@ -5265,7 +5256,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConfigProfileResponse"
+                  "$ref": "#/components/schemas/GetConfigProfileByUuidResponseDto"
                 }
               }
             }
@@ -5430,7 +5421,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SnippetsResponse"
+                  "$ref": "#/components/schemas/GetSnippetsResponseDto"
                 }
               }
             }
@@ -5514,7 +5505,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SnippetsResponse"
+                  "$ref": "#/components/schemas/GetSnippetsResponseDto"
                 }
               }
             }
@@ -5590,7 +5581,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SnippetRequest"
+                "$ref": "#/components/schemas/CreateSnippetRequestDto"
               }
             }
           }
@@ -5601,7 +5592,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SnippetsResponse"
+                  "$ref": "#/components/schemas/GetSnippetsResponseDto"
                 }
               }
             }
@@ -5677,7 +5668,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SnippetRequest"
+                "$ref": "#/components/schemas/CreateSnippetRequestDto"
               }
             }
           }
@@ -5688,7 +5679,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SnippetsResponse"
+                  "$ref": "#/components/schemas/GetSnippetsResponseDto"
                 }
               }
             }
@@ -5854,7 +5845,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InternalSquadResponse"
+                  "$ref": "#/components/schemas/GetInternalSquadByUuidResponseDto"
                 }
               }
             }
@@ -5941,7 +5932,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InternalSquadResponse"
+                  "$ref": "#/components/schemas/GetInternalSquadByUuidResponseDto"
                 }
               }
             }
@@ -6032,7 +6023,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InternalSquadResponse"
+                  "$ref": "#/components/schemas/GetInternalSquadByUuidResponseDto"
                 }
               }
             }
@@ -6543,7 +6534,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExternalSquadResponse"
+                  "$ref": "#/components/schemas/GetExternalSquadByUuidResponseDto"
                 }
               }
             }
@@ -6630,7 +6621,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExternalSquadResponse"
+                  "$ref": "#/components/schemas/GetExternalSquadByUuidResponseDto"
                 }
               }
             }
@@ -6721,7 +6712,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExternalSquadResponse"
+                  "$ref": "#/components/schemas/GetExternalSquadByUuidResponseDto"
                 }
               }
             }
@@ -7145,7 +7136,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodeResponse"
+                  "$ref": "#/components/schemas/CreateNodeResponseDto"
                 }
               }
             }
@@ -7219,7 +7210,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodesResponse"
+                  "$ref": "#/components/schemas/GetAllNodesResponseDto"
                 }
               }
             }
@@ -7303,7 +7294,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodeResponse"
+                  "$ref": "#/components/schemas/CreateNodeResponseDto"
                 }
               }
             }
@@ -7389,7 +7380,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodeResponse"
+                  "$ref": "#/components/schemas/CreateNodeResponseDto"
                 }
               }
             }
@@ -7559,7 +7550,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodeResponse"
+                  "$ref": "#/components/schemas/CreateNodeResponseDto"
                 }
               }
             }
@@ -7645,7 +7636,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodeResponse"
+                  "$ref": "#/components/schemas/CreateNodeResponseDto"
                 }
               }
             }
@@ -7903,7 +7894,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodesResponse"
+                  "$ref": "#/components/schemas/GetAllNodesResponseDto"
                 }
               }
             }
@@ -7979,7 +7970,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TagsResponse"
+                  "$ref": "#/components/schemas/GetAllTagsResponseDto"
                 }
               }
             }
@@ -8065,7 +8056,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostResponse"
+                  "$ref": "#/components/schemas/GetOneHostResponseDto"
                 }
               }
             }
@@ -8149,7 +8140,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostResponse"
+                  "$ref": "#/components/schemas/GetOneHostResponseDto"
                 }
               }
             }
@@ -8223,7 +8214,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostListResponse"
+                  "$ref": "#/components/schemas/GetAllHostsResponseDto"
                 }
               }
             }
@@ -8309,7 +8300,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostResponse"
+                  "$ref": "#/components/schemas/GetOneHostResponseDto"
                 }
               }
             }
@@ -8557,7 +8548,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUuidsRequest"
+                "$ref": "#/components/schemas/BulkUuidsRequestDto"
               }
             }
           }
@@ -8568,7 +8559,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostListResponse"
+                  "$ref": "#/components/schemas/GetAllHostsResponseDto"
                 }
               }
             }
@@ -8643,7 +8634,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUuidsRequest"
+                "$ref": "#/components/schemas/BulkUuidsRequestDto"
               }
             }
           }
@@ -8654,7 +8645,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostListResponse"
+                  "$ref": "#/components/schemas/GetAllHostsResponseDto"
                 }
               }
             }
@@ -8729,7 +8720,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUuidsRequest"
+                "$ref": "#/components/schemas/BulkUuidsRequestDto"
               }
             }
           }
@@ -8740,7 +8731,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostListResponse"
+                  "$ref": "#/components/schemas/GetAllHostsResponseDto"
                 }
               }
             }
@@ -8826,7 +8817,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostListResponse"
+                  "$ref": "#/components/schemas/GetAllHostsResponseDto"
                 }
               }
             }
@@ -8912,7 +8903,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HostListResponse"
+                  "$ref": "#/components/schemas/GetAllHostsResponseDto"
                 }
               }
             }
@@ -9273,7 +9264,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HwidDevicesResponse"
+                  "$ref": "#/components/schemas/GetUserHwidDevicesResponseDto"
                 }
               }
             }
@@ -9359,7 +9350,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HwidDevicesResponse"
+                  "$ref": "#/components/schemas/GetUserHwidDevicesResponseDto"
                 }
               }
             }
@@ -9445,7 +9436,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HwidDevicesResponse"
+                  "$ref": "#/components/schemas/GetUserHwidDevicesResponseDto"
                 }
               }
             }
@@ -9607,7 +9598,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HwidDevicesResponse"
+                  "$ref": "#/components/schemas/GetUserHwidDevicesResponseDto"
                 }
               }
             }
@@ -9864,7 +9855,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InfraProviderResponse"
+                  "$ref": "#/components/schemas/GetInfraProviderByUuidResponseDto"
                 }
               }
             }
@@ -9948,7 +9939,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InfraProviderResponse"
+                  "$ref": "#/components/schemas/GetInfraProviderByUuidResponseDto"
                 }
               }
             }
@@ -10033,7 +10024,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InfraProviderResponse"
+                  "$ref": "#/components/schemas/GetInfraProviderByUuidResponseDto"
                 }
               }
             }
@@ -10205,7 +10196,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingHistoryResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingHistoryRecordsResponseDto"
                 }
               }
             }
@@ -10279,7 +10270,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingHistoryResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingHistoryRecordsResponseDto"
                 }
               }
             }
@@ -10364,7 +10355,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingHistoryResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingHistoryRecordsResponseDto"
                 }
               }
             }
@@ -10440,7 +10431,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingNodesResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingNodesResponseDto"
                 }
               }
             }
@@ -10524,7 +10515,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingNodesResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingNodesResponseDto"
                 }
               }
             }
@@ -10608,7 +10599,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingNodesResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingNodesResponseDto"
                 }
               }
             }
@@ -10693,7 +10684,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingNodesResponse"
+                  "$ref": "#/components/schemas/GetInfraBillingNodesResponseDto"
                 }
               }
             }
@@ -11568,7 +11559,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionSettingsResponse"
+                  "$ref": "#/components/schemas/GetSubscriptionSettingsResponseDto"
                 }
               }
             }
@@ -11652,7 +11643,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionSettingsResponse"
+                  "$ref": "#/components/schemas/GetSubscriptionSettingsResponseDto"
                 }
               }
             }
@@ -11845,7 +11836,7 @@
       }
     },
     "schemas": {
-      "SettingsResponse": {
+      "GetRemnawaveSettingsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -12219,7 +12210,7 @@
           }
         }
       },
-      "PasskeyOptionsResponse": {
+      "GetPasskeyRegistrationOptionsResponseDto": {
         "type": "object",
         "properties": {
           "response": {}
@@ -12247,7 +12238,7 @@
           "response"
         ]
       },
-      "PasskeysResponse": {
+      "GetAllPasskeysResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -12319,7 +12310,7 @@
           "password"
         ]
       },
-      "TokenResponse": {
+      "LoginResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -12703,7 +12694,7 @@
           "expireAt"
         ]
       },
-      "UserResponse": {
+      "CreateUserResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -13265,7 +13256,7 @@
           "response"
         ]
       },
-      "TagsResponse": {
+      "GetAllTagsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -13416,7 +13407,7 @@
           "response"
         ]
       },
-      "UsersResponse": {
+      "GetUserByTelegramIdResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -13931,7 +13922,7 @@
           "response"
         ]
       },
-      "SubscriptionResponse": {
+      "GetSubscriptionInfoResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -14748,7 +14739,7 @@
           "response"
         ]
       },
-      "TemplateResponse": {
+      "GetTemplateResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -15099,7 +15090,7 @@
           "response"
         ]
       },
-      "InboundsResponse": {
+      "GetAllInboundsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -15174,7 +15165,7 @@
           "response"
         ]
       },
-      "ConfigProfileResponse": {
+      "GetConfigProfileByUuidResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -15323,7 +15314,7 @@
           "uuid"
         ]
       },
-      "SnippetsResponse": {
+      "GetSnippetsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -15373,7 +15364,7 @@
           "name"
         ]
       },
-      "SnippetRequest": {
+      "CreateSnippetRequestDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -15508,7 +15499,7 @@
           "response"
         ]
       },
-      "InternalSquadResponse": {
+      "GetInternalSquadByUuidResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -15851,7 +15842,7 @@
           "response"
         ]
       },
-      "ExternalSquadResponse": {
+      "GetExternalSquadByUuidResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -16183,7 +16174,7 @@
           "configProfile"
         ]
       },
-      "NodeResponse": {
+      "CreateNodeResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -16433,7 +16424,7 @@
           "response"
         ]
       },
-      "NodesResponse": {
+      "GetAllNodesResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -17134,7 +17125,7 @@
           "uuid"
         ]
       },
-      "HostListResponse": {
+      "GetAllHostsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -17291,7 +17282,7 @@
           "response"
         ]
       },
-      "HostResponse": {
+      "GetOneHostResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -17832,7 +17823,7 @@
           "response"
         ]
       },
-      "HwidDevicesResponse": {
+      "GetUserHwidDevicesResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -18059,7 +18050,7 @@
           "response"
         ]
       },
-      "InfraProviderResponse": {
+      "GetInfraProviderByUuidResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -18215,7 +18206,7 @@
           "billedAt"
         ]
       },
-      "BillingHistoryResponse": {
+      "GetInfraBillingHistoryRecordsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -18286,7 +18277,7 @@
           "response"
         ]
       },
-      "BillingNodesResponse": {
+      "GetInfraBillingNodesResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -19492,7 +19483,7 @@
           "response"
         ]
       },
-      "SubscriptionSettingsResponse": {
+      "GetSubscriptionSettingsResponseDto": {
         "type": "object",
         "properties": {
           "response": {
@@ -20099,7 +20090,7 @@
         ],
         "type": "object"
       },
-      "BulkUuidsRequest": {
+      "BulkUuidsRequestDto": {
         "properties": {
           "uuids": {
             "items": {
