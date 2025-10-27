@@ -8,761 +8,761 @@ import "context"
 // ClientExt wraps the base Client and adds organized sub-client methods for all 139 API operations.
 type ClientExt struct {
 	*Client
-	apiTokensController *ApiTokensControllerClient
-	authController *AuthControllerClient
-	bandwidthStatsController *BandwidthStatsControllerClient
-	configProfilesController *ConfigProfilesControllerClient
-	externalSquadsController *ExternalSquadsControllerClient
-	hwidUserDevicesController *HwidUserDevicesControllerClient
-	hostsBulkActionsController *HostsBulkActionsControllerClient
-	hostsController *HostsControllerClient
-	infraBillingController *InfraBillingControllerClient
-	internalSquadsController *InternalSquadsControllerClient
-	keygenController *KeygenControllerClient
-	nodesController *NodesControllerClient
-	passkeysController *PasskeysControllerClient
-	remnawaveSettingsController *RemnawaveSettingsControllerClient
-	snippetsController *SnippetsControllerClient
-	subscriptionRequestHistoryController *SubscriptionRequestHistoryControllerClient
-	subscriptionSettingsController *SubscriptionSettingsControllerClient
-	subscriptionTemplateController *SubscriptionTemplateControllerClient
-	systemController *SystemControllerClient
-	usersBulkActionsController *UsersBulkActionsControllerClient
-	usersController *UsersControllerClient
-	usersStatsController *UsersStatsControllerClient
-	protectedSubscriptionsController *ProtectedSubscriptionsControllerClient
-	publicSubscriptionController *PublicSubscriptionControllerClient
+	apiTokens *ApiTokensClient
+	auth *AuthClient
+	bandwidthStats *BandwidthStatsClient
+	configProfiles *ConfigProfilesClient
+	externalSquads *ExternalSquadsClient
+	hwidUserDevices *HwidUserDevicesClient
+	hostsBulkActions *HostsBulkActionsClient
+	hosts *HostsClient
+	infraBilling *InfraBillingClient
+	internalSquads *InternalSquadsClient
+	keygen *KeygenClient
+	nodes *NodesClient
+	passkeys *PasskeysClient
+	remnawaveSettings *RemnawaveSettingsClient
+	snippets *SnippetsClient
+	subscriptionRequestHistory *SubscriptionRequestHistoryClient
+	subscriptionSettings *SubscriptionSettingsClient
+	subscriptionTemplate *SubscriptionTemplateClient
+	system *SystemClient
+	usersBulkActions *UsersBulkActionsClient
+	users *UsersClient
+	usersStats *UsersStatsClient
+	protectedSubscriptions *ProtectedSubscriptionsClient
+	publicSubscription *PublicSubscriptionClient
 }
 
 // NewClientExt wraps an existing Client with sub-client access.
 func NewClientExt(client *Client) *ClientExt {
 	return &ClientExt{
 		Client: client,
-		apiTokensController: NewApiTokensControllerClient(client),
-		authController: NewAuthControllerClient(client),
-		bandwidthStatsController: NewBandwidthStatsControllerClient(client),
-		configProfilesController: NewConfigProfilesControllerClient(client),
-		externalSquadsController: NewExternalSquadsControllerClient(client),
-		hwidUserDevicesController: NewHwidUserDevicesControllerClient(client),
-		hostsBulkActionsController: NewHostsBulkActionsControllerClient(client),
-		hostsController: NewHostsControllerClient(client),
-		infraBillingController: NewInfraBillingControllerClient(client),
-		internalSquadsController: NewInternalSquadsControllerClient(client),
-		keygenController: NewKeygenControllerClient(client),
-		nodesController: NewNodesControllerClient(client),
-		passkeysController: NewPasskeysControllerClient(client),
-		remnawaveSettingsController: NewRemnawaveSettingsControllerClient(client),
-		snippetsController: NewSnippetsControllerClient(client),
-		subscriptionRequestHistoryController: NewSubscriptionRequestHistoryControllerClient(client),
-		subscriptionSettingsController: NewSubscriptionSettingsControllerClient(client),
-		subscriptionTemplateController: NewSubscriptionTemplateControllerClient(client),
-		systemController: NewSystemControllerClient(client),
-		usersBulkActionsController: NewUsersBulkActionsControllerClient(client),
-		usersController: NewUsersControllerClient(client),
-		usersStatsController: NewUsersStatsControllerClient(client),
-		protectedSubscriptionsController: NewProtectedSubscriptionsControllerClient(client),
-		publicSubscriptionController: NewPublicSubscriptionControllerClient(client),
+		apiTokens: NewApiTokensClient(client),
+		auth: NewAuthClient(client),
+		bandwidthStats: NewBandwidthStatsClient(client),
+		configProfiles: NewConfigProfilesClient(client),
+		externalSquads: NewExternalSquadsClient(client),
+		hwidUserDevices: NewHwidUserDevicesClient(client),
+		hostsBulkActions: NewHostsBulkActionsClient(client),
+		hosts: NewHostsClient(client),
+		infraBilling: NewInfraBillingClient(client),
+		internalSquads: NewInternalSquadsClient(client),
+		keygen: NewKeygenClient(client),
+		nodes: NewNodesClient(client),
+		passkeys: NewPasskeysClient(client),
+		remnawaveSettings: NewRemnawaveSettingsClient(client),
+		snippets: NewSnippetsClient(client),
+		subscriptionRequestHistory: NewSubscriptionRequestHistoryClient(client),
+		subscriptionSettings: NewSubscriptionSettingsClient(client),
+		subscriptionTemplate: NewSubscriptionTemplateClient(client),
+		system: NewSystemClient(client),
+		usersBulkActions: NewUsersBulkActionsClient(client),
+		users: NewUsersClient(client),
+		usersStats: NewUsersStatsClient(client),
+		protectedSubscriptions: NewProtectedSubscriptionsClient(client),
+		publicSubscription: NewPublicSubscriptionClient(client),
 	}
 }
 
 // Accessor methods
-func (c *ClientExt) Apitokenscontroller() *ApiTokensControllerClient { return c.apiTokensController }
-func (c *ClientExt) Authcontroller() *AuthControllerClient { return c.authController }
-func (c *ClientExt) Bandwidthstatscontroller() *BandwidthStatsControllerClient { return c.bandwidthStatsController }
-func (c *ClientExt) Configprofilescontroller() *ConfigProfilesControllerClient { return c.configProfilesController }
-func (c *ClientExt) Externalsquadscontroller() *ExternalSquadsControllerClient { return c.externalSquadsController }
-func (c *ClientExt) Hwiduserdevicescontroller() *HwidUserDevicesControllerClient { return c.hwidUserDevicesController }
-func (c *ClientExt) Hostsbulkactionscontroller() *HostsBulkActionsControllerClient { return c.hostsBulkActionsController }
-func (c *ClientExt) Hostscontroller() *HostsControllerClient { return c.hostsController }
-func (c *ClientExt) Infrabillingcontroller() *InfraBillingControllerClient { return c.infraBillingController }
-func (c *ClientExt) Internalsquadscontroller() *InternalSquadsControllerClient { return c.internalSquadsController }
-func (c *ClientExt) Keygencontroller() *KeygenControllerClient { return c.keygenController }
-func (c *ClientExt) Nodescontroller() *NodesControllerClient { return c.nodesController }
-func (c *ClientExt) Passkeyscontroller() *PasskeysControllerClient { return c.passkeysController }
-func (c *ClientExt) Remnawavesettingscontroller() *RemnawaveSettingsControllerClient { return c.remnawaveSettingsController }
-func (c *ClientExt) Snippetscontroller() *SnippetsControllerClient { return c.snippetsController }
-func (c *ClientExt) Subscriptionrequesthistorycontroller() *SubscriptionRequestHistoryControllerClient { return c.subscriptionRequestHistoryController }
-func (c *ClientExt) Subscriptionsettingscontroller() *SubscriptionSettingsControllerClient { return c.subscriptionSettingsController }
-func (c *ClientExt) Subscriptiontemplatecontroller() *SubscriptionTemplateControllerClient { return c.subscriptionTemplateController }
-func (c *ClientExt) Systemcontroller() *SystemControllerClient { return c.systemController }
-func (c *ClientExt) Usersbulkactionscontroller() *UsersBulkActionsControllerClient { return c.usersBulkActionsController }
-func (c *ClientExt) Userscontroller() *UsersControllerClient { return c.usersController }
-func (c *ClientExt) Usersstatscontroller() *UsersStatsControllerClient { return c.usersStatsController }
-func (c *ClientExt) Protectedsubscriptionscontroller() *ProtectedSubscriptionsControllerClient { return c.protectedSubscriptionsController }
-func (c *ClientExt) Publicsubscriptioncontroller() *PublicSubscriptionControllerClient { return c.publicSubscriptionController }
+func (c *ClientExt) ApiTokens() *ApiTokensClient { return c.apiTokens }
+func (c *ClientExt) Auth() *AuthClient { return c.auth }
+func (c *ClientExt) BandwidthStats() *BandwidthStatsClient { return c.bandwidthStats }
+func (c *ClientExt) ConfigProfiles() *ConfigProfilesClient { return c.configProfiles }
+func (c *ClientExt) ExternalSquads() *ExternalSquadsClient { return c.externalSquads }
+func (c *ClientExt) HwidUserDevices() *HwidUserDevicesClient { return c.hwidUserDevices }
+func (c *ClientExt) HostsBulkActions() *HostsBulkActionsClient { return c.hostsBulkActions }
+func (c *ClientExt) Hosts() *HostsClient { return c.hosts }
+func (c *ClientExt) InfraBilling() *InfraBillingClient { return c.infraBilling }
+func (c *ClientExt) InternalSquads() *InternalSquadsClient { return c.internalSquads }
+func (c *ClientExt) Keygen() *KeygenClient { return c.keygen }
+func (c *ClientExt) Nodes() *NodesClient { return c.nodes }
+func (c *ClientExt) Passkeys() *PasskeysClient { return c.passkeys }
+func (c *ClientExt) RemnawaveSettings() *RemnawaveSettingsClient { return c.remnawaveSettings }
+func (c *ClientExt) Snippets() *SnippetsClient { return c.snippets }
+func (c *ClientExt) SubscriptionRequestHistory() *SubscriptionRequestHistoryClient { return c.subscriptionRequestHistory }
+func (c *ClientExt) SubscriptionSettings() *SubscriptionSettingsClient { return c.subscriptionSettings }
+func (c *ClientExt) SubscriptionTemplate() *SubscriptionTemplateClient { return c.subscriptionTemplate }
+func (c *ClientExt) System() *SystemClient { return c.system }
+func (c *ClientExt) UsersBulkActions() *UsersBulkActionsClient { return c.usersBulkActions }
+func (c *ClientExt) Users() *UsersClient { return c.users }
+func (c *ClientExt) UsersStats() *UsersStatsClient { return c.usersStats }
+func (c *ClientExt) ProtectedSubscriptions() *ProtectedSubscriptionsClient { return c.protectedSubscriptions }
+func (c *ClientExt) PublicSubscription() *PublicSubscriptionClient { return c.publicSubscription }
 
 
-// ApiTokensControllerClient provides access to api tokens controller operations
-type ApiTokensControllerClient struct { client *Client }
-func NewApiTokensControllerClient(c *Client) *ApiTokensControllerClient { return &ApiTokensControllerClient{client: c} }
+// ApiTokensClient provides access to api tokens controller operations
+type ApiTokensClient struct { client *Client }
+func NewApiTokensClient(c *Client) *ApiTokensClient { return &ApiTokensClient{client: c} }
 
-func (ac *ApiTokensControllerClient) Create(ctx context.Context, request *CreateApiTokenRequestDto) (ApiTokensControllerCreateRes, error) {
+func (ac *ApiTokensClient) Create(ctx context.Context, request *CreateApiTokenRequestDto) (ApiTokensControllerCreateRes, error) {
 	return ac.client.ApiTokensControllerCreate(ctx, request)
 }
 
-func (ac *ApiTokensControllerClient) Delete(ctx context.Context, params ApiTokensControllerDeleteParams) (ApiTokensControllerDeleteRes, error) {
+func (ac *ApiTokensClient) Delete(ctx context.Context, params ApiTokensControllerDeleteParams) (ApiTokensControllerDeleteRes, error) {
 	return ac.client.ApiTokensControllerDelete(ctx, params)
 }
 
-func (ac *ApiTokensControllerClient) FindAll(ctx context.Context) (ApiTokensControllerFindAllRes, error) {
+func (ac *ApiTokensClient) FindAll(ctx context.Context) (ApiTokensControllerFindAllRes, error) {
 	return ac.client.ApiTokensControllerFindAll(ctx)
 }
 
 
-// AuthControllerClient provides access to auth controller operations
-type AuthControllerClient struct { client *Client }
-func NewAuthControllerClient(c *Client) *AuthControllerClient { return &AuthControllerClient{client: c} }
+// AuthClient provides access to auth controller operations
+type AuthClient struct { client *Client }
+func NewAuthClient(c *Client) *AuthClient { return &AuthClient{client: c} }
 
-func (ac *AuthControllerClient) GetStatus(ctx context.Context) (AuthControllerGetStatusRes, error) {
+func (ac *AuthClient) GetStatus(ctx context.Context) (AuthControllerGetStatusRes, error) {
 	return ac.client.AuthControllerGetStatus(ctx)
 }
 
-func (ac *AuthControllerClient) Login(ctx context.Context, request *LoginRequestDto) (AuthControllerLoginRes, error) {
+func (ac *AuthClient) Login(ctx context.Context, request *LoginRequestDto) (AuthControllerLoginRes, error) {
 	return ac.client.AuthControllerLogin(ctx, request)
 }
 
-func (ac *AuthControllerClient) Oauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (AuthControllerOauth2AuthorizeRes, error) {
+func (ac *AuthClient) Oauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (AuthControllerOauth2AuthorizeRes, error) {
 	return ac.client.AuthControllerOauth2Authorize(ctx, request)
 }
 
-func (ac *AuthControllerClient) Oauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (AuthControllerOauth2CallbackRes, error) {
+func (ac *AuthClient) Oauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (AuthControllerOauth2CallbackRes, error) {
 	return ac.client.AuthControllerOauth2Callback(ctx, request)
 }
 
-func (ac *AuthControllerClient) PasskeyAuthenticationOptions(ctx context.Context) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
+func (ac *AuthClient) PasskeyAuthenticationOptions(ctx context.Context) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
 	return ac.client.AuthControllerPasskeyAuthenticationOptions(ctx)
 }
 
-func (ac *AuthControllerClient) PasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+func (ac *AuthClient) PasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
 	return ac.client.AuthControllerPasskeyAuthenticationVerify(ctx, request)
 }
 
-func (ac *AuthControllerClient) Register(ctx context.Context, request *RegisterRequestDto) (AuthControllerRegisterRes, error) {
+func (ac *AuthClient) Register(ctx context.Context, request *RegisterRequestDto) (AuthControllerRegisterRes, error) {
 	return ac.client.AuthControllerRegister(ctx, request)
 }
 
-func (ac *AuthControllerClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (AuthControllerTelegramCallbackRes, error) {
+func (ac *AuthClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (AuthControllerTelegramCallbackRes, error) {
 	return ac.client.AuthControllerTelegramCallback(ctx, request)
 }
 
 
-// BandwidthStatsControllerClient provides access to bandwidth stats controller operations
-type BandwidthStatsControllerClient struct { client *Client }
-func NewBandwidthStatsControllerClient(c *Client) *BandwidthStatsControllerClient { return &BandwidthStatsControllerClient{client: c} }
+// BandwidthStatsClient provides access to bandwidth stats controller operations
+type BandwidthStatsClient struct { client *Client }
+func NewBandwidthStatsClient(c *Client) *BandwidthStatsClient { return &BandwidthStatsClient{client: c} }
 
-func (bc *BandwidthStatsControllerClient) GetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error) {
+func (bc *BandwidthStatsClient) GetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error) {
 	return bc.client.NodesUsageHistoryControllerGetNodesUsageByRange(ctx, params)
 }
 
-func (bc *BandwidthStatsControllerClient) GetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error) {
+func (bc *BandwidthStatsClient) GetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error) {
 	return bc.client.NodesUserUsageHistoryControllerGetNodeUserUsage(ctx, params)
 }
 
-func (bc *BandwidthStatsControllerClient) GetNodesRealtimeUsage(ctx context.Context) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error) {
+func (bc *BandwidthStatsClient) GetNodesRealtimeUsage(ctx context.Context) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error) {
 	return bc.client.NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx)
 }
 
 
-// ConfigProfilesControllerClient provides access to config profiles controller operations
-type ConfigProfilesControllerClient struct { client *Client }
-func NewConfigProfilesControllerClient(c *Client) *ConfigProfilesControllerClient { return &ConfigProfilesControllerClient{client: c} }
+// ConfigProfilesClient provides access to config profiles controller operations
+type ConfigProfilesClient struct { client *Client }
+func NewConfigProfilesClient(c *Client) *ConfigProfilesClient { return &ConfigProfilesClient{client: c} }
 
-func (cc *ConfigProfilesControllerClient) CreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto) (ConfigProfileControllerCreateConfigProfileRes, error) {
+func (cc *ConfigProfilesClient) CreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto) (ConfigProfileControllerCreateConfigProfileRes, error) {
 	return cc.client.ConfigProfileControllerCreateConfigProfile(ctx, request)
 }
 
-func (cc *ConfigProfilesControllerClient) DeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
+func (cc *ConfigProfilesClient) DeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
 	return cc.client.ConfigProfileControllerDeleteConfigProfileByUuid(ctx, params)
 }
 
-func (cc *ConfigProfilesControllerClient) GetAllInbounds(ctx context.Context) (ConfigProfileControllerGetAllInboundsRes, error) {
+func (cc *ConfigProfilesClient) GetAllInbounds(ctx context.Context) (ConfigProfileControllerGetAllInboundsRes, error) {
 	return cc.client.ConfigProfileControllerGetAllInbounds(ctx)
 }
 
-func (cc *ConfigProfilesControllerClient) GetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
+func (cc *ConfigProfilesClient) GetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
 	return cc.client.ConfigProfileControllerGetConfigProfileByUuid(ctx, params)
 }
 
-func (cc *ConfigProfilesControllerClient) GetConfigProfiles(ctx context.Context) (ConfigProfileControllerGetConfigProfilesRes, error) {
+func (cc *ConfigProfilesClient) GetConfigProfiles(ctx context.Context) (ConfigProfileControllerGetConfigProfilesRes, error) {
 	return cc.client.ConfigProfileControllerGetConfigProfiles(ctx)
 }
 
-func (cc *ConfigProfilesControllerClient) GetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
+func (cc *ConfigProfilesClient) GetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
 	return cc.client.ConfigProfileControllerGetInboundsByProfileUuid(ctx, params)
 }
 
-func (cc *ConfigProfilesControllerClient) UpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileControllerUpdateConfigProfileRes, error) {
+func (cc *ConfigProfilesClient) UpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileControllerUpdateConfigProfileRes, error) {
 	return cc.client.ConfigProfileControllerUpdateConfigProfile(ctx, request)
 }
 
 
-// ExternalSquadsControllerClient provides access to external squads controller operations
-type ExternalSquadsControllerClient struct { client *Client }
-func NewExternalSquadsControllerClient(c *Client) *ExternalSquadsControllerClient { return &ExternalSquadsControllerClient{client: c} }
+// ExternalSquadsClient provides access to external squads controller operations
+type ExternalSquadsClient struct { client *Client }
+func NewExternalSquadsClient(c *Client) *ExternalSquadsClient { return &ExternalSquadsClient{client: c} }
 
-func (ec *ExternalSquadsControllerClient) AddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
+func (ec *ExternalSquadsClient) AddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
 	return ec.client.ExternalSquadControllerAddUsersToExternalSquad(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) CreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
+func (ec *ExternalSquadsClient) CreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
 	return ec.client.ExternalSquadControllerCreateExternalSquad(ctx, request)
 }
 
-func (ec *ExternalSquadsControllerClient) DeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (ExternalSquadControllerDeleteExternalSquadRes, error) {
+func (ec *ExternalSquadsClient) DeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (ExternalSquadControllerDeleteExternalSquadRes, error) {
 	return ec.client.ExternalSquadControllerDeleteExternalSquad(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) GetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
+func (ec *ExternalSquadsClient) GetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
 	return ec.client.ExternalSquadControllerGetExternalSquadByUuid(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) GetExternalSquads(ctx context.Context) (ExternalSquadControllerGetExternalSquadsRes, error) {
+func (ec *ExternalSquadsClient) GetExternalSquads(ctx context.Context) (ExternalSquadControllerGetExternalSquadsRes, error) {
 	return ec.client.ExternalSquadControllerGetExternalSquads(ctx)
 }
 
-func (ec *ExternalSquadsControllerClient) RemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
+func (ec *ExternalSquadsClient) RemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
 	return ec.client.ExternalSquadControllerRemoveUsersFromExternalSquad(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) UpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (ExternalSquadControllerUpdateExternalSquadRes, error) {
+func (ec *ExternalSquadsClient) UpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (ExternalSquadControllerUpdateExternalSquadRes, error) {
 	return ec.client.ExternalSquadControllerUpdateExternalSquad(ctx, request)
 }
 
 
-// HwidUserDevicesControllerClient provides access to hwid user devices controller operations
-type HwidUserDevicesControllerClient struct { client *Client }
-func NewHwidUserDevicesControllerClient(c *Client) *HwidUserDevicesControllerClient { return &HwidUserDevicesControllerClient{client: c} }
+// HwidUserDevicesClient provides access to hwid user devices controller operations
+type HwidUserDevicesClient struct { client *Client }
+func NewHwidUserDevicesClient(c *Client) *HwidUserDevicesClient { return &HwidUserDevicesClient{client: c} }
 
-func (hc *HwidUserDevicesControllerClient) CreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error) {
+func (hc *HwidUserDevicesClient) CreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error) {
 	return hc.client.HwidUserDevicesControllerCreateUserHwidDevice(ctx, request)
 }
 
-func (hc *HwidUserDevicesControllerClient) DeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error) {
+func (hc *HwidUserDevicesClient) DeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error) {
 	return hc.client.HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx, request)
 }
 
-func (hc *HwidUserDevicesControllerClient) DeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error) {
+func (hc *HwidUserDevicesClient) DeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error) {
 	return hc.client.HwidUserDevicesControllerDeleteUserHwidDevice(ctx, request)
 }
 
-func (hc *HwidUserDevicesControllerClient) GetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (HwidUserDevicesControllerGetAllUsersRes, error) {
+func (hc *HwidUserDevicesClient) GetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (HwidUserDevicesControllerGetAllUsersRes, error) {
 	return hc.client.HwidUserDevicesControllerGetAllUsers(ctx, params)
 }
 
-func (hc *HwidUserDevicesControllerClient) GetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
+func (hc *HwidUserDevicesClient) GetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
 	return hc.client.HwidUserDevicesControllerGetHwidDevicesStats(ctx)
 }
 
-func (hc *HwidUserDevicesControllerClient) GetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
+func (hc *HwidUserDevicesClient) GetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
 	return hc.client.HwidUserDevicesControllerGetUserHwidDevices(ctx, params)
 }
 
 
-// HostsBulkActionsControllerClient provides access to hosts bulk actions controller operations
-type HostsBulkActionsControllerClient struct { client *Client }
-func NewHostsBulkActionsControllerClient(c *Client) *HostsBulkActionsControllerClient { return &HostsBulkActionsControllerClient{client: c} }
+// HostsBulkActionsClient provides access to hosts bulk actions controller operations
+type HostsBulkActionsClient struct { client *Client }
+func NewHostsBulkActionsClient(c *Client) *HostsBulkActionsClient { return &HostsBulkActionsClient{client: c} }
 
-func (hc *HostsBulkActionsControllerClient) DeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error) {
+func (hc *HostsBulkActionsClient) DeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerDeleteHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) DisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error) {
+func (hc *HostsBulkActionsClient) DisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerDisableHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) EnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error) {
+func (hc *HostsBulkActionsClient) EnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerEnableHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) SetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (HostsBulkActionsControllerSetInboundToHostsRes, error) {
+func (hc *HostsBulkActionsClient) SetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (HostsBulkActionsControllerSetInboundToHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerSetInboundToHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) SetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (HostsBulkActionsControllerSetPortToHostsRes, error) {
+func (hc *HostsBulkActionsClient) SetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (HostsBulkActionsControllerSetPortToHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerSetPortToHosts(ctx, request)
 }
 
 
-// HostsControllerClient provides access to hosts controller operations
-type HostsControllerClient struct { client *Client }
-func NewHostsControllerClient(c *Client) *HostsControllerClient { return &HostsControllerClient{client: c} }
+// HostsClient provides access to hosts controller operations
+type HostsClient struct { client *Client }
+func NewHostsClient(c *Client) *HostsClient { return &HostsClient{client: c} }
 
-func (hc *HostsControllerClient) CreateHost(ctx context.Context, request *CreateHostRequestDto) (HostsControllerCreateHostRes, error) {
+func (hc *HostsClient) CreateHost(ctx context.Context, request *CreateHostRequestDto) (HostsControllerCreateHostRes, error) {
 	return hc.client.HostsControllerCreateHost(ctx, request)
 }
 
-func (hc *HostsControllerClient) DeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (HostsControllerDeleteHostRes, error) {
+func (hc *HostsClient) DeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (HostsControllerDeleteHostRes, error) {
 	return hc.client.HostsControllerDeleteHost(ctx, params)
 }
 
-func (hc *HostsControllerClient) GetAllHostTags(ctx context.Context) (HostsControllerGetAllHostTagsRes, error) {
+func (hc *HostsClient) GetAllHostTags(ctx context.Context) (HostsControllerGetAllHostTagsRes, error) {
 	return hc.client.HostsControllerGetAllHostTags(ctx)
 }
 
-func (hc *HostsControllerClient) GetAllHosts(ctx context.Context) (HostsControllerGetAllHostsRes, error) {
+func (hc *HostsClient) GetAllHosts(ctx context.Context) (HostsControllerGetAllHostsRes, error) {
 	return hc.client.HostsControllerGetAllHosts(ctx)
 }
 
-func (hc *HostsControllerClient) GetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (HostsControllerGetOneHostRes, error) {
+func (hc *HostsClient) GetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (HostsControllerGetOneHostRes, error) {
 	return hc.client.HostsControllerGetOneHost(ctx, params)
 }
 
-func (hc *HostsControllerClient) ReorderHosts(ctx context.Context, request *ReorderHostRequestDto) (HostsControllerReorderHostsRes, error) {
+func (hc *HostsClient) ReorderHosts(ctx context.Context, request *ReorderHostRequestDto) (HostsControllerReorderHostsRes, error) {
 	return hc.client.HostsControllerReorderHosts(ctx, request)
 }
 
-func (hc *HostsControllerClient) UpdateHost(ctx context.Context, request *UpdateHostRequestDto) (HostsControllerUpdateHostRes, error) {
+func (hc *HostsClient) UpdateHost(ctx context.Context, request *UpdateHostRequestDto) (HostsControllerUpdateHostRes, error) {
 	return hc.client.HostsControllerUpdateHost(ctx, request)
 }
 
 
-// InfraBillingControllerClient provides access to infra billing controller operations
-type InfraBillingControllerClient struct { client *Client }
-func NewInfraBillingControllerClient(c *Client) *InfraBillingControllerClient { return &InfraBillingControllerClient{client: c} }
+// InfraBillingClient provides access to infra billing controller operations
+type InfraBillingClient struct { client *Client }
+func NewInfraBillingClient(c *Client) *InfraBillingClient { return &InfraBillingClient{client: c} }
 
-func (ic *InfraBillingControllerClient) CreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error) {
+func (ic *InfraBillingClient) CreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error) {
 	return ic.client.InfraBillingControllerCreateInfraBillingHistoryRecord(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) CreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (InfraBillingControllerCreateInfraBillingNodeRes, error) {
+func (ic *InfraBillingClient) CreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (InfraBillingControllerCreateInfraBillingNodeRes, error) {
 	return ic.client.InfraBillingControllerCreateInfraBillingNode(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) CreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto) (InfraBillingControllerCreateInfraProviderRes, error) {
+func (ic *InfraBillingClient) CreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto) (InfraBillingControllerCreateInfraProviderRes, error) {
 	return ic.client.InfraBillingControllerCreateInfraProvider(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) DeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
+func (ic *InfraBillingClient) DeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
 	return ic.client.InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) DeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
+func (ic *InfraBillingClient) DeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
 	return ic.client.InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) DeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
+func (ic *InfraBillingClient) DeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
 	return ic.client.InfraBillingControllerDeleteInfraProviderByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) GetBillingNodes(ctx context.Context) (InfraBillingControllerGetBillingNodesRes, error) {
+func (ic *InfraBillingClient) GetBillingNodes(ctx context.Context) (InfraBillingControllerGetBillingNodesRes, error) {
 	return ic.client.InfraBillingControllerGetBillingNodes(ctx)
 }
 
-func (ic *InfraBillingControllerClient) GetInfraBillingHistoryRecords(ctx context.Context) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error) {
+func (ic *InfraBillingClient) GetInfraBillingHistoryRecords(ctx context.Context) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error) {
 	return ic.client.InfraBillingControllerGetInfraBillingHistoryRecords(ctx)
 }
 
-func (ic *InfraBillingControllerClient) GetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
+func (ic *InfraBillingClient) GetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
 	return ic.client.InfraBillingControllerGetInfraProviderByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) GetInfraProviders(ctx context.Context) (InfraBillingControllerGetInfraProvidersRes, error) {
+func (ic *InfraBillingClient) GetInfraProviders(ctx context.Context) (InfraBillingControllerGetInfraProvidersRes, error) {
 	return ic.client.InfraBillingControllerGetInfraProviders(ctx)
 }
 
-func (ic *InfraBillingControllerClient) UpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (InfraBillingControllerUpdateInfraBillingNodeRes, error) {
+func (ic *InfraBillingClient) UpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (InfraBillingControllerUpdateInfraBillingNodeRes, error) {
 	return ic.client.InfraBillingControllerUpdateInfraBillingNode(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) UpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto) (InfraBillingControllerUpdateInfraProviderRes, error) {
+func (ic *InfraBillingClient) UpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto) (InfraBillingControllerUpdateInfraProviderRes, error) {
 	return ic.client.InfraBillingControllerUpdateInfraProvider(ctx, request)
 }
 
 
-// InternalSquadsControllerClient provides access to internal squads controller operations
-type InternalSquadsControllerClient struct { client *Client }
-func NewInternalSquadsControllerClient(c *Client) *InternalSquadsControllerClient { return &InternalSquadsControllerClient{client: c} }
+// InternalSquadsClient provides access to internal squads controller operations
+type InternalSquadsClient struct { client *Client }
+func NewInternalSquadsClient(c *Client) *InternalSquadsClient { return &InternalSquadsClient{client: c} }
 
-func (ic *InternalSquadsControllerClient) AddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
+func (ic *InternalSquadsClient) AddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
 	return ic.client.InternalSquadControllerAddUsersToInternalSquad(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) CreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto) (InternalSquadControllerCreateInternalSquadRes, error) {
+func (ic *InternalSquadsClient) CreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto) (InternalSquadControllerCreateInternalSquadRes, error) {
 	return ic.client.InternalSquadControllerCreateInternalSquad(ctx, request)
 }
 
-func (ic *InternalSquadsControllerClient) DeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (InternalSquadControllerDeleteInternalSquadRes, error) {
+func (ic *InternalSquadsClient) DeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (InternalSquadControllerDeleteInternalSquadRes, error) {
 	return ic.client.InternalSquadControllerDeleteInternalSquad(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) GetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
+func (ic *InternalSquadsClient) GetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
 	return ic.client.InternalSquadControllerGetInternalSquadAccessibleNodes(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) GetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
+func (ic *InternalSquadsClient) GetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
 	return ic.client.InternalSquadControllerGetInternalSquadByUuid(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) GetInternalSquads(ctx context.Context) (InternalSquadControllerGetInternalSquadsRes, error) {
+func (ic *InternalSquadsClient) GetInternalSquads(ctx context.Context) (InternalSquadControllerGetInternalSquadsRes, error) {
 	return ic.client.InternalSquadControllerGetInternalSquads(ctx)
 }
 
-func (ic *InternalSquadsControllerClient) RemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
+func (ic *InternalSquadsClient) RemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
 	return ic.client.InternalSquadControllerRemoveUsersFromInternalSquad(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) UpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadControllerUpdateInternalSquadRes, error) {
+func (ic *InternalSquadsClient) UpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadControllerUpdateInternalSquadRes, error) {
 	return ic.client.InternalSquadControllerUpdateInternalSquad(ctx, request)
 }
 
 
-// KeygenControllerClient provides access to keygen controller operations
-type KeygenControllerClient struct { client *Client }
-func NewKeygenControllerClient(c *Client) *KeygenControllerClient { return &KeygenControllerClient{client: c} }
+// KeygenClient provides access to keygen controller operations
+type KeygenClient struct { client *Client }
+func NewKeygenClient(c *Client) *KeygenClient { return &KeygenClient{client: c} }
 
-func (kc *KeygenControllerClient) GenerateKey(ctx context.Context) (KeygenControllerGenerateKeyRes, error) {
+func (kc *KeygenClient) GenerateKey(ctx context.Context) (KeygenControllerGenerateKeyRes, error) {
 	return kc.client.KeygenControllerGenerateKey(ctx)
 }
 
 
-// NodesControllerClient provides access to nodes controller operations
-type NodesControllerClient struct { client *Client }
-func NewNodesControllerClient(c *Client) *NodesControllerClient { return &NodesControllerClient{client: c} }
+// NodesClient provides access to nodes controller operations
+type NodesClient struct { client *Client }
+func NewNodesClient(c *Client) *NodesClient { return &NodesClient{client: c} }
 
-func (nc *NodesControllerClient) CreateNode(ctx context.Context, request *CreateNodeRequestDto) (NodesControllerCreateNodeRes, error) {
+func (nc *NodesClient) CreateNode(ctx context.Context, request *CreateNodeRequestDto) (NodesControllerCreateNodeRes, error) {
 	return nc.client.NodesControllerCreateNode(ctx, request)
 }
 
-func (nc *NodesControllerClient) DeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (NodesControllerDeleteNodeRes, error) {
+func (nc *NodesClient) DeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (NodesControllerDeleteNodeRes, error) {
 	return nc.client.NodesControllerDeleteNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) DisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (NodesControllerDisableNodeRes, error) {
+func (nc *NodesClient) DisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (NodesControllerDisableNodeRes, error) {
 	return nc.client.NodesControllerDisableNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) EnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (NodesControllerEnableNodeRes, error) {
+func (nc *NodesClient) EnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (NodesControllerEnableNodeRes, error) {
 	return nc.client.NodesControllerEnableNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) GetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error) {
+func (nc *NodesClient) GetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error) {
 	return nc.client.NodesControllerGetAllNodes(ctx)
 }
 
-func (nc *NodesControllerClient) GetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error) {
+func (nc *NodesClient) GetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error) {
 	return nc.client.NodesControllerGetOneNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) ReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesControllerReorderNodesRes, error) {
+func (nc *NodesClient) ReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesControllerReorderNodesRes, error) {
 	return nc.client.NodesControllerReorderNodes(ctx, request)
 }
 
-func (nc *NodesControllerClient) RestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (NodesControllerRestartAllNodesRes, error) {
+func (nc *NodesClient) RestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (NodesControllerRestartAllNodesRes, error) {
 	return nc.client.NodesControllerRestartAllNodes(ctx, request)
 }
 
-func (nc *NodesControllerClient) RestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (NodesControllerRestartNodeRes, error) {
+func (nc *NodesClient) RestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (NodesControllerRestartNodeRes, error) {
 	return nc.client.NodesControllerRestartNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) UpdateNode(ctx context.Context, request *UpdateNodeRequestDto) (NodesControllerUpdateNodeRes, error) {
+func (nc *NodesClient) UpdateNode(ctx context.Context, request *UpdateNodeRequestDto) (NodesControllerUpdateNodeRes, error) {
 	return nc.client.NodesControllerUpdateNode(ctx, request)
 }
 
 
-// PasskeysControllerClient provides access to passkeys controller operations
-type PasskeysControllerClient struct { client *Client }
-func NewPasskeysControllerClient(c *Client) *PasskeysControllerClient { return &PasskeysControllerClient{client: c} }
+// PasskeysClient provides access to passkeys controller operations
+type PasskeysClient struct { client *Client }
+func NewPasskeysClient(c *Client) *PasskeysClient { return &PasskeysClient{client: c} }
 
-func (pc *PasskeysControllerClient) DeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto) (PasskeyControllerDeletePasskeyRes, error) {
+func (pc *PasskeysClient) DeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto) (PasskeyControllerDeletePasskeyRes, error) {
 	return pc.client.PasskeyControllerDeletePasskey(ctx, request)
 }
 
-func (pc *PasskeysControllerClient) GetActivePasskeys(ctx context.Context) (PasskeyControllerGetActivePasskeysRes, error) {
+func (pc *PasskeysClient) GetActivePasskeys(ctx context.Context) (PasskeyControllerGetActivePasskeysRes, error) {
 	return pc.client.PasskeyControllerGetActivePasskeys(ctx)
 }
 
-func (pc *PasskeysControllerClient) PasskeyRegistrationOptions(ctx context.Context) (PasskeyControllerPasskeyRegistrationOptionsRes, error) {
+func (pc *PasskeysClient) PasskeyRegistrationOptions(ctx context.Context) (PasskeyControllerPasskeyRegistrationOptionsRes, error) {
 	return pc.client.PasskeyControllerPasskeyRegistrationOptions(ctx)
 }
 
-func (pc *PasskeysControllerClient) PasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+func (pc *PasskeysClient) PasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
 	return pc.client.PasskeyControllerPasskeyRegistrationVerify(ctx, request)
 }
 
 
-// RemnawaveSettingsControllerClient provides access to remnawave settings controller operations
-type RemnawaveSettingsControllerClient struct { client *Client }
-func NewRemnawaveSettingsControllerClient(c *Client) *RemnawaveSettingsControllerClient { return &RemnawaveSettingsControllerClient{client: c} }
+// RemnawaveSettingsClient provides access to remnawave settings controller operations
+type RemnawaveSettingsClient struct { client *Client }
+func NewRemnawaveSettingsClient(c *Client) *RemnawaveSettingsClient { return &RemnawaveSettingsClient{client: c} }
 
-func (rc *RemnawaveSettingsControllerClient) GetSettings(ctx context.Context) (RemnawaveSettingsControllerGetSettingsRes, error) {
+func (rc *RemnawaveSettingsClient) GetSettings(ctx context.Context) (RemnawaveSettingsControllerGetSettingsRes, error) {
 	return rc.client.RemnawaveSettingsControllerGetSettings(ctx)
 }
 
-func (rc *RemnawaveSettingsControllerClient) UpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (RemnawaveSettingsControllerUpdateSettingsRes, error) {
+func (rc *RemnawaveSettingsClient) UpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (RemnawaveSettingsControllerUpdateSettingsRes, error) {
 	return rc.client.RemnawaveSettingsControllerUpdateSettings(ctx, request)
 }
 
 
-// SnippetsControllerClient provides access to snippets controller operations
-type SnippetsControllerClient struct { client *Client }
-func NewSnippetsControllerClient(c *Client) *SnippetsControllerClient { return &SnippetsControllerClient{client: c} }
+// SnippetsClient provides access to snippets controller operations
+type SnippetsClient struct { client *Client }
+func NewSnippetsClient(c *Client) *SnippetsClient { return &SnippetsClient{client: c} }
 
-func (sc *SnippetsControllerClient) CreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error) {
+func (sc *SnippetsClient) CreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error) {
 	return sc.client.SnippetsControllerCreateSnippet(ctx, request)
 }
 
-func (sc *SnippetsControllerClient) DeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto) (SnippetsControllerDeleteSnippetByNameRes, error) {
+func (sc *SnippetsClient) DeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto) (SnippetsControllerDeleteSnippetByNameRes, error) {
 	return sc.client.SnippetsControllerDeleteSnippetByName(ctx, request)
 }
 
-func (sc *SnippetsControllerClient) GetSnippets(ctx context.Context) (SnippetsControllerGetSnippetsRes, error) {
+func (sc *SnippetsClient) GetSnippets(ctx context.Context) (SnippetsControllerGetSnippetsRes, error) {
 	return sc.client.SnippetsControllerGetSnippets(ctx)
 }
 
-func (sc *SnippetsControllerClient) UpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error) {
+func (sc *SnippetsClient) UpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error) {
 	return sc.client.SnippetsControllerUpdateSnippet(ctx, request)
 }
 
 
-// SubscriptionRequestHistoryControllerClient provides access to subscription request history controller operations
-type SubscriptionRequestHistoryControllerClient struct { client *Client }
-func NewSubscriptionRequestHistoryControllerClient(c *Client) *SubscriptionRequestHistoryControllerClient { return &SubscriptionRequestHistoryControllerClient{client: c} }
+// SubscriptionRequestHistoryClient provides access to subscription request history controller operations
+type SubscriptionRequestHistoryClient struct { client *Client }
+func NewSubscriptionRequestHistoryClient(c *Client) *SubscriptionRequestHistoryClient { return &SubscriptionRequestHistoryClient{client: c} }
 
-func (sc *SubscriptionRequestHistoryControllerClient) GetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
+func (sc *SubscriptionRequestHistoryClient) GetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
 	return sc.client.UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, params)
 }
 
-func (sc *SubscriptionRequestHistoryControllerClient) GetSubscriptionRequestHistoryStats(ctx context.Context) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error) {
+func (sc *SubscriptionRequestHistoryClient) GetSubscriptionRequestHistoryStats(ctx context.Context) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error) {
 	return sc.client.UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx)
 }
 
 
-// SubscriptionSettingsControllerClient provides access to subscription settings controller operations
-type SubscriptionSettingsControllerClient struct { client *Client }
-func NewSubscriptionSettingsControllerClient(c *Client) *SubscriptionSettingsControllerClient { return &SubscriptionSettingsControllerClient{client: c} }
+// SubscriptionSettingsClient provides access to subscription settings controller operations
+type SubscriptionSettingsClient struct { client *Client }
+func NewSubscriptionSettingsClient(c *Client) *SubscriptionSettingsClient { return &SubscriptionSettingsClient{client: c} }
 
-func (sc *SubscriptionSettingsControllerClient) GetSettings(ctx context.Context) (SubscriptionSettingsControllerGetSettingsRes, error) {
+func (sc *SubscriptionSettingsClient) GetSettings(ctx context.Context) (SubscriptionSettingsControllerGetSettingsRes, error) {
 	return sc.client.SubscriptionSettingsControllerGetSettings(ctx)
 }
 
-func (sc *SubscriptionSettingsControllerClient) UpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (SubscriptionSettingsControllerUpdateSettingsRes, error) {
+func (sc *SubscriptionSettingsClient) UpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (SubscriptionSettingsControllerUpdateSettingsRes, error) {
 	return sc.client.SubscriptionSettingsControllerUpdateSettings(ctx, request)
 }
 
 
-// SubscriptionTemplateControllerClient provides access to subscription template controller operations
-type SubscriptionTemplateControllerClient struct { client *Client }
-func NewSubscriptionTemplateControllerClient(c *Client) *SubscriptionTemplateControllerClient { return &SubscriptionTemplateControllerClient{client: c} }
+// SubscriptionTemplateClient provides access to subscription template controller operations
+type SubscriptionTemplateClient struct { client *Client }
+func NewSubscriptionTemplateClient(c *Client) *SubscriptionTemplateClient { return &SubscriptionTemplateClient{client: c} }
 
-func (sc *SubscriptionTemplateControllerClient) CreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (SubscriptionTemplateControllerCreateTemplateRes, error) {
+func (sc *SubscriptionTemplateClient) CreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (SubscriptionTemplateControllerCreateTemplateRes, error) {
 	return sc.client.SubscriptionTemplateControllerCreateTemplate(ctx, request)
 }
 
-func (sc *SubscriptionTemplateControllerClient) DeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
+func (sc *SubscriptionTemplateClient) DeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
 	return sc.client.SubscriptionTemplateControllerDeleteTemplate(ctx, params)
 }
 
-func (sc *SubscriptionTemplateControllerClient) GetAllTemplates(ctx context.Context) (SubscriptionTemplateControllerGetAllTemplatesRes, error) {
+func (sc *SubscriptionTemplateClient) GetAllTemplates(ctx context.Context) (SubscriptionTemplateControllerGetAllTemplatesRes, error) {
 	return sc.client.SubscriptionTemplateControllerGetAllTemplates(ctx)
 }
 
-func (sc *SubscriptionTemplateControllerClient) GetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
+func (sc *SubscriptionTemplateClient) GetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
 	return sc.client.SubscriptionTemplateControllerGetTemplateByUuid(ctx, params)
 }
 
-func (sc *SubscriptionTemplateControllerClient) UpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto) (SubscriptionTemplateControllerUpdateTemplateRes, error) {
+func (sc *SubscriptionTemplateClient) UpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto) (SubscriptionTemplateControllerUpdateTemplateRes, error) {
 	return sc.client.SubscriptionTemplateControllerUpdateTemplate(ctx, request)
 }
 
 
-// SystemControllerClient provides access to system controller operations
-type SystemControllerClient struct { client *Client }
-func NewSystemControllerClient(c *Client) *SystemControllerClient { return &SystemControllerClient{client: c} }
+// SystemClient provides access to system controller operations
+type SystemClient struct { client *Client }
+func NewSystemClient(c *Client) *SystemClient { return &SystemClient{client: c} }
 
-func (sc *SystemControllerClient) DebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (SystemControllerDebugSrrMatcherRes, error) {
+func (sc *SystemClient) DebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (SystemControllerDebugSrrMatcherRes, error) {
 	return sc.client.SystemControllerDebugSrrMatcher(ctx, request)
 }
 
-func (sc *SystemControllerClient) EncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (SystemControllerEncryptHappCryptoLinkRes, error) {
+func (sc *SystemClient) EncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (SystemControllerEncryptHappCryptoLinkRes, error) {
 	return sc.client.SystemControllerEncryptHappCryptoLink(ctx, request)
 }
 
-func (sc *SystemControllerClient) GetBandwidthStats(ctx context.Context) (SystemControllerGetBandwidthStatsRes, error) {
+func (sc *SystemClient) GetBandwidthStats(ctx context.Context) (SystemControllerGetBandwidthStatsRes, error) {
 	return sc.client.SystemControllerGetBandwidthStats(ctx)
 }
 
-func (sc *SystemControllerClient) GetNodesMetrics(ctx context.Context) (SystemControllerGetNodesMetricsRes, error) {
+func (sc *SystemClient) GetNodesMetrics(ctx context.Context) (SystemControllerGetNodesMetricsRes, error) {
 	return sc.client.SystemControllerGetNodesMetrics(ctx)
 }
 
-func (sc *SystemControllerClient) GetNodesStatistics(ctx context.Context) (SystemControllerGetNodesStatisticsRes, error) {
+func (sc *SystemClient) GetNodesStatistics(ctx context.Context) (SystemControllerGetNodesStatisticsRes, error) {
 	return sc.client.SystemControllerGetNodesStatistics(ctx)
 }
 
-func (sc *SystemControllerClient) GetRemnawaveHealth(ctx context.Context) (SystemControllerGetRemnawaveHealthRes, error) {
+func (sc *SystemClient) GetRemnawaveHealth(ctx context.Context) (SystemControllerGetRemnawaveHealthRes, error) {
 	return sc.client.SystemControllerGetRemnawaveHealth(ctx)
 }
 
-func (sc *SystemControllerClient) GetStats(ctx context.Context) (SystemControllerGetStatsRes, error) {
+func (sc *SystemClient) GetStats(ctx context.Context) (SystemControllerGetStatsRes, error) {
 	return sc.client.SystemControllerGetStats(ctx)
 }
 
-func (sc *SystemControllerClient) GetX25519Keypairs(ctx context.Context) (SystemControllerGetX25519KeypairsRes, error) {
+func (sc *SystemClient) GetX25519Keypairs(ctx context.Context) (SystemControllerGetX25519KeypairsRes, error) {
 	return sc.client.SystemControllerGetX25519Keypairs(ctx)
 }
 
 
-// UsersBulkActionsControllerClient provides access to users bulk actions controller operations
-type UsersBulkActionsControllerClient struct { client *Client }
-func NewUsersBulkActionsControllerClient(c *Client) *UsersBulkActionsControllerClient { return &UsersBulkActionsControllerClient{client: c} }
+// UsersBulkActionsClient provides access to users bulk actions controller operations
+type UsersBulkActionsClient struct { client *Client }
+func NewUsersBulkActionsClient(c *Client) *UsersBulkActionsClient { return &UsersBulkActionsClient{client: c} }
 
-func (uc *UsersBulkActionsControllerClient) BulkAllResetUserTraffic(ctx context.Context) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error) {
+func (uc *UsersBulkActionsClient) BulkAllResetUserTraffic(ctx context.Context) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkAllResetUserTraffic(ctx)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
+func (uc *UsersBulkActionsClient) BulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkDeleteUsers(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error) {
+func (uc *UsersBulkActionsClient) BulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
+func (uc *UsersBulkActionsClient) BulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkResetUserTraffic(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
+func (uc *UsersBulkActionsClient) BulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error) {
+func (uc *UsersBulkActionsClient) BulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkUpdateAllUsers(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateUsersRes, error) {
+func (uc *UsersBulkActionsClient) BulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateUsersRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkUpdateUsers(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error) {
+func (uc *UsersBulkActionsClient) BulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx, request)
 }
 
 
-// UsersControllerClient provides access to users controller operations
-type UsersControllerClient struct { client *Client }
-func NewUsersControllerClient(c *Client) *UsersControllerClient { return &UsersControllerClient{client: c} }
+// UsersClient provides access to users controller operations
+type UsersClient struct { client *Client }
+func NewUsersClient(c *Client) *UsersClient { return &UsersClient{client: c} }
 
-func (uc *UsersControllerClient) CreateUser(ctx context.Context, request *CreateUserRequestDto) (UsersControllerCreateUserRes, error) {
+func (uc *UsersClient) CreateUser(ctx context.Context, request *CreateUserRequestDto) (UsersControllerCreateUserRes, error) {
 	return uc.client.UsersControllerCreateUser(ctx, request)
 }
 
-func (uc *UsersControllerClient) DeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (UsersControllerDeleteUserRes, error) {
+func (uc *UsersClient) DeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (UsersControllerDeleteUserRes, error) {
 	return uc.client.UsersControllerDeleteUser(ctx, params)
 }
 
-func (uc *UsersControllerClient) DisableUser(ctx context.Context, params UsersControllerDisableUserParams) (UsersControllerDisableUserRes, error) {
+func (uc *UsersClient) DisableUser(ctx context.Context, params UsersControllerDisableUserParams) (UsersControllerDisableUserRes, error) {
 	return uc.client.UsersControllerDisableUser(ctx, params)
 }
 
-func (uc *UsersControllerClient) EnableUser(ctx context.Context, params UsersControllerEnableUserParams) (UsersControllerEnableUserRes, error) {
+func (uc *UsersClient) EnableUser(ctx context.Context, params UsersControllerEnableUserParams) (UsersControllerEnableUserRes, error) {
 	return uc.client.UsersControllerEnableUser(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetAllTags(ctx context.Context) (UsersControllerGetAllTagsRes, error) {
+func (uc *UsersClient) GetAllTags(ctx context.Context) (UsersControllerGetAllTagsRes, error) {
 	return uc.client.UsersControllerGetAllTags(ctx)
 }
 
-func (uc *UsersControllerClient) GetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (UsersControllerGetAllUsersRes, error) {
+func (uc *UsersClient) GetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (UsersControllerGetAllUsersRes, error) {
 	return uc.client.UsersControllerGetAllUsers(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error) {
+func (uc *UsersClient) GetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error) {
 	return uc.client.UsersControllerGetUserAccessibleNodes(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (UsersControllerGetUserByShortUuidRes, error) {
+func (uc *UsersClient) GetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (UsersControllerGetUserByShortUuidRes, error) {
 	return uc.client.UsersControllerGetUserByShortUuid(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (UsersControllerGetUserByTelegramIdRes, error) {
+func (uc *UsersClient) GetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (UsersControllerGetUserByTelegramIdRes, error) {
 	return uc.client.UsersControllerGetUserByTelegramId(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (UsersControllerGetUserByUsernameRes, error) {
+func (uc *UsersClient) GetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (UsersControllerGetUserByUsernameRes, error) {
 	return uc.client.UsersControllerGetUserByUsername(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (UsersControllerGetUserByUuidRes, error) {
+func (uc *UsersClient) GetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (UsersControllerGetUserByUuidRes, error) {
 	return uc.client.UsersControllerGetUserByUuid(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
+func (uc *UsersClient) GetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
 	return uc.client.UsersControllerGetUserSubscriptionRequestHistory(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (UsersControllerGetUsersByEmailRes, error) {
+func (uc *UsersClient) GetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (UsersControllerGetUsersByEmailRes, error) {
 	return uc.client.UsersControllerGetUsersByEmail(ctx, params)
 }
 
-func (uc *UsersControllerClient) GetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (UsersControllerGetUsersByTagRes, error) {
+func (uc *UsersClient) GetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (UsersControllerGetUsersByTagRes, error) {
 	return uc.client.UsersControllerGetUsersByTag(ctx, params)
 }
 
-func (uc *UsersControllerClient) ResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (UsersControllerResetUserTrafficRes, error) {
+func (uc *UsersClient) ResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (UsersControllerResetUserTrafficRes, error) {
 	return uc.client.UsersControllerResetUserTraffic(ctx, params)
 }
 
-func (uc *UsersControllerClient) RevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (UsersControllerRevokeUserSubscriptionRes, error) {
-	return uc.client.UsersControllerRevokeUserSubscription(ctx, params, request)
+func (uc *UsersClient) RevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (UsersControllerRevokeUserSubscriptionRes, error) {
+	return uc.client.UsersControllerRevokeUserSubscription(ctx, request, params)
 }
 
-func (uc *UsersControllerClient) UpdateUser(ctx context.Context, request *UpdateUserRequestDto) (UsersControllerUpdateUserRes, error) {
+func (uc *UsersClient) UpdateUser(ctx context.Context, request *UpdateUserRequestDto) (UsersControllerUpdateUserRes, error) {
 	return uc.client.UsersControllerUpdateUser(ctx, request)
 }
 
 
-// UsersStatsControllerClient provides access to users stats controller operations
-type UsersStatsControllerClient struct { client *Client }
-func NewUsersStatsControllerClient(c *Client) *UsersStatsControllerClient { return &UsersStatsControllerClient{client: c} }
+// UsersStatsClient provides access to users stats controller operations
+type UsersStatsClient struct { client *Client }
+func NewUsersStatsClient(c *Client) *UsersStatsClient { return &UsersStatsClient{client: c} }
 
-func (uc *UsersStatsControllerClient) GetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (UsersStatsControllerGetUserUsageByRangeRes, error) {
+func (uc *UsersStatsClient) GetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (UsersStatsControllerGetUserUsageByRangeRes, error) {
 	return uc.client.UsersStatsControllerGetUserUsageByRange(ctx, params)
 }
 
 
-// ProtectedSubscriptionsControllerClient provides access to [protected] subscriptions controller operations
-type ProtectedSubscriptionsControllerClient struct { client *Client }
-func NewProtectedSubscriptionsControllerClient(c *Client) *ProtectedSubscriptionsControllerClient { return &ProtectedSubscriptionsControllerClient{client: c} }
+// ProtectedSubscriptionsClient provides access to [protected] subscriptions controller operations
+type ProtectedSubscriptionsClient struct { client *Client }
+func NewProtectedSubscriptionsClient(c *Client) *ProtectedSubscriptionsClient { return &ProtectedSubscriptionsClient{client: c} }
 
-func (pc *ProtectedSubscriptionsControllerClient) GetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
+func (pc *ProtectedSubscriptionsClient) GetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
 	return pc.client.SubscriptionsControllerGetAllSubscriptions(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) GetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
+func (pc *ProtectedSubscriptionsClient) GetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
 	return pc.client.SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
+func (pc *ProtectedSubscriptionsClient) GetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
 	return pc.client.SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
+func (pc *ProtectedSubscriptionsClient) GetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
 	return pc.client.SubscriptionsControllerGetSubscriptionByUsername(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
+func (pc *ProtectedSubscriptionsClient) GetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
 	return pc.client.SubscriptionsControllerGetSubscriptionByUuid(ctx, params)
 }
 
 
-// PublicSubscriptionControllerClient provides access to [public] subscription controller operations
-type PublicSubscriptionControllerClient struct { client *Client }
-func NewPublicSubscriptionControllerClient(c *Client) *PublicSubscriptionControllerClient { return &PublicSubscriptionControllerClient{client: c} }
+// PublicSubscriptionClient provides access to [public] subscription controller operations
+type PublicSubscriptionClient struct { client *Client }
+func NewPublicSubscriptionClient(c *Client) *PublicSubscriptionClient { return &PublicSubscriptionClient{client: c} }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error {
+func (pc *PublicSubscriptionClient) GetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error {
 	return pc.client.SubscriptionControllerGetSubscription(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error {
+func (pc *PublicSubscriptionClient) GetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error {
 	return pc.client.SubscriptionControllerGetSubscriptionByClientType(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
+func (pc *PublicSubscriptionClient) GetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
 	return pc.client.SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error {
+func (pc *PublicSubscriptionClient) GetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error {
 	return pc.client.SubscriptionControllerGetSubscriptionWithType(ctx, params)
 }
