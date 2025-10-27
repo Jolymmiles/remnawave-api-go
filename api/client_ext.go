@@ -5,33 +5,88 @@ package api
 
 import "context"
 
-// ClientExt wraps the base Client and adds organized sub-client methods.
+// ClientExt wraps the base Client and adds organized sub-client methods for all 139 API operations.
 type ClientExt struct {
 	*Client
-	users   *UsersClient
-	nodes   *NodesClient
-	hosts   *HostsClient
-	auth    *AuthClient
-	system  *SystemClient
+	users                       *UsersClient
+	nodes                       *NodesClient
+	hosts                       *HostsClient
+	auth                        *AuthClient
+	system                      *SystemClient
+	apiTokens                   *ApiTokensClient
+	configProfiles              *ConfigProfilesClient
+	externalSquads              *ExternalSquadsClient
+	hwidUserDevices             *HwidUserDevicesClient
+	hostsBulkActions            *HostsBulkActionsClient
+	infraBilling                *InfraBillingClient
+	internalSquads              *InternalSquadsClient
+	keygen                      *KeygenClient
+	passkeys                    *PasskeysClient
+	remnawaveSettings           *RemnawaveSettingsClient
+	snippets                    *SnippetsClient
+	subscriptionRequestHistory  *SubscriptionRequestHistoryClient
+	subscriptionSettings        *SubscriptionSettingsClient
+	subscriptionTemplate        *SubscriptionTemplateClient
+	usersBulkActions            *UsersBulkActionsClient
+	usersStats                  *UsersStatsClient
+	protectedSubscriptions      *ProtectedSubscriptionsClient
+	publicSubscription          *PublicSubscriptionClient
 }
 
 // NewClientExt wraps an existing Client with sub-client access.
 func NewClientExt(client *Client) *ClientExt {
 	return &ClientExt{
-		Client: client,
-		users:  NewUsersClient(client),
-		nodes:  NewNodesClient(client),
-		hosts:  NewHostsClient(client),
-		auth:   NewAuthClient(client),
-		system: NewSystemClient(client),
+		Client:                     client,
+		users:                      NewUsersClient(client),
+		nodes:                      NewNodesClient(client),
+		hosts:                      NewHostsClient(client),
+		auth:                       NewAuthClient(client),
+		system:                     NewSystemClient(client),
+		apiTokens:                  NewApiTokensClient(client),
+		configProfiles:             NewConfigProfilesClient(client),
+		externalSquads:             NewExternalSquadsClient(client),
+		hwidUserDevices:            NewHwidUserDevicesClient(client),
+		hostsBulkActions:           NewHostsBulkActionsClient(client),
+		infraBilling:               NewInfraBillingClient(client),
+		internalSquads:             NewInternalSquadsClient(client),
+		keygen:                     NewKeygenClient(client),
+		passkeys:                   NewPasskeysClient(client),
+		remnawaveSettings:          NewRemnawaveSettingsClient(client),
+		snippets:                   NewSnippetsClient(client),
+		subscriptionRequestHistory: NewSubscriptionRequestHistoryClient(client),
+		subscriptionSettings:       NewSubscriptionSettingsClient(client),
+		subscriptionTemplate:       NewSubscriptionTemplateClient(client),
+		usersBulkActions:           NewUsersBulkActionsClient(client),
+		usersStats:                 NewUsersStatsClient(client),
+		protectedSubscriptions:     NewProtectedSubscriptionsClient(client),
+		publicSubscription:         NewPublicSubscriptionClient(client),
 	}
 }
 
-func (c *ClientExt) Users() *UsersClient     { return c.users }
-func (c *ClientExt) Nodes() *NodesClient     { return c.nodes }
-func (c *ClientExt) Hosts() *HostsClient     { return c.hosts }
-func (c *ClientExt) Auth() *AuthClient       { return c.auth }
-func (c *ClientExt) System() *SystemClient   { return c.system }
+// Accessor methods for all sub-clients
+func (c *ClientExt) Users() *UsersClient                       { return c.users }
+func (c *ClientExt) Nodes() *NodesClient                       { return c.nodes }
+func (c *ClientExt) Hosts() *HostsClient                       { return c.hosts }
+func (c *ClientExt) Auth() *AuthClient                         { return c.auth }
+func (c *ClientExt) System() *SystemClient                     { return c.system }
+func (c *ClientExt) ApiTokens() *ApiTokensClient               { return c.apiTokens }
+func (c *ClientExt) ConfigProfiles() *ConfigProfilesClient     { return c.configProfiles }
+func (c *ClientExt) ExternalSquads() *ExternalSquadsClient     { return c.externalSquads }
+func (c *ClientExt) HwidUserDevices() *HwidUserDevicesClient   { return c.hwidUserDevices }
+func (c *ClientExt) HostsBulkActions() *HostsBulkActionsClient { return c.hostsBulkActions }
+func (c *ClientExt) InfraBilling() *InfraBillingClient         { return c.infraBilling }
+func (c *ClientExt) InternalSquads() *InternalSquadsClient     { return c.internalSquads }
+func (c *ClientExt) Keygen() *KeygenClient                     { return c.keygen }
+func (c *ClientExt) Passkeys() *PasskeysClient                 { return c.passkeys }
+func (c *ClientExt) RemnawaveSettings() *RemnawaveSettingsClient { return c.remnawaveSettings }
+func (c *ClientExt) Snippets() *SnippetsClient                 { return c.snippets }
+func (c *ClientExt) SubscriptionRequestHistory() *SubscriptionRequestHistoryClient { return c.subscriptionRequestHistory }
+func (c *ClientExt) SubscriptionSettings() *SubscriptionSettingsClient { return c.subscriptionSettings }
+func (c *ClientExt) SubscriptionTemplate() *SubscriptionTemplateClient { return c.subscriptionTemplate }
+func (c *ClientExt) UsersBulkActions() *UsersBulkActionsClient { return c.usersBulkActions }
+func (c *ClientExt) UsersStats() *UsersStatsClient             { return c.usersStats }
+func (c *ClientExt) ProtectedSubscriptions() *ProtectedSubscriptionsClient { return c.protectedSubscriptions }
+func (c *ClientExt) PublicSubscription() *PublicSubscriptionClient { return c.publicSubscription }
 
 // UsersClient provides organized access to user operations
 type UsersClient struct{ client *Client }
@@ -144,3 +199,75 @@ func (sc *SystemClient) GetNodesStatistics(ctx context.Context) (SystemControlle
 func (sc *SystemClient) GetNodesMetrics(ctx context.Context) (SystemControllerGetNodesMetricsRes, error) {
 	return sc.client.SystemControllerGetNodesMetrics(ctx)
 }
+
+// ApiTokensClient provides organized access to API token operations
+type ApiTokensClient struct{ client *Client }
+func NewApiTokensClient(c *Client) *ApiTokensClient { return &ApiTokensClient{client: c} }
+
+// ConfigProfilesClient provides organized access to config profile operations
+type ConfigProfilesClient struct{ client *Client }
+func NewConfigProfilesClient(c *Client) *ConfigProfilesClient { return &ConfigProfilesClient{client: c} }
+
+// ExternalSquadsClient provides organized access to external squad operations
+type ExternalSquadsClient struct{ client *Client }
+func NewExternalSquadsClient(c *Client) *ExternalSquadsClient { return &ExternalSquadsClient{client: c} }
+
+// HwidUserDevicesClient provides organized access to HWID user device operations
+type HwidUserDevicesClient struct{ client *Client }
+func NewHwidUserDevicesClient(c *Client) *HwidUserDevicesClient { return &HwidUserDevicesClient{client: c} }
+
+// HostsBulkActionsClient provides organized access to hosts bulk action operations
+type HostsBulkActionsClient struct{ client *Client }
+func NewHostsBulkActionsClient(c *Client) *HostsBulkActionsClient { return &HostsBulkActionsClient{client: c} }
+
+// InfraBillingClient provides organized access to infra billing operations
+type InfraBillingClient struct{ client *Client }
+func NewInfraBillingClient(c *Client) *InfraBillingClient { return &InfraBillingClient{client: c} }
+
+// InternalSquadsClient provides organized access to internal squad operations
+type InternalSquadsClient struct{ client *Client }
+func NewInternalSquadsClient(c *Client) *InternalSquadsClient { return &InternalSquadsClient{client: c} }
+
+// KeygenClient provides organized access to key generation operations
+type KeygenClient struct{ client *Client }
+func NewKeygenClient(c *Client) *KeygenClient { return &KeygenClient{client: c} }
+
+// PasskeysClient provides organized access to passkey operations
+type PasskeysClient struct{ client *Client }
+func NewPasskeysClient(c *Client) *PasskeysClient { return &PasskeysClient{client: c} }
+
+// RemnawaveSettingsClient provides organized access to remnawave settings operations
+type RemnawaveSettingsClient struct{ client *Client }
+func NewRemnawaveSettingsClient(c *Client) *RemnawaveSettingsClient { return &RemnawaveSettingsClient{client: c} }
+
+// SnippetsClient provides organized access to snippet operations
+type SnippetsClient struct{ client *Client }
+func NewSnippetsClient(c *Client) *SnippetsClient { return &SnippetsClient{client: c} }
+
+// SubscriptionRequestHistoryClient provides organized access to subscription request history operations
+type SubscriptionRequestHistoryClient struct{ client *Client }
+func NewSubscriptionRequestHistoryClient(c *Client) *SubscriptionRequestHistoryClient { return &SubscriptionRequestHistoryClient{client: c} }
+
+// SubscriptionSettingsClient provides organized access to subscription settings operations
+type SubscriptionSettingsClient struct{ client *Client }
+func NewSubscriptionSettingsClient(c *Client) *SubscriptionSettingsClient { return &SubscriptionSettingsClient{client: c} }
+
+// SubscriptionTemplateClient provides organized access to subscription template operations
+type SubscriptionTemplateClient struct{ client *Client }
+func NewSubscriptionTemplateClient(c *Client) *SubscriptionTemplateClient { return &SubscriptionTemplateClient{client: c} }
+
+// UsersBulkActionsClient provides organized access to users bulk action operations
+type UsersBulkActionsClient struct{ client *Client }
+func NewUsersBulkActionsClient(c *Client) *UsersBulkActionsClient { return &UsersBulkActionsClient{client: c} }
+
+// UsersStatsClient provides organized access to users statistics operations
+type UsersStatsClient struct{ client *Client }
+func NewUsersStatsClient(c *Client) *UsersStatsClient { return &UsersStatsClient{client: c} }
+
+// ProtectedSubscriptionsClient provides organized access to protected subscription operations
+type ProtectedSubscriptionsClient struct{ client *Client }
+func NewProtectedSubscriptionsClient(c *Client) *ProtectedSubscriptionsClient { return &ProtectedSubscriptionsClient{client: c} }
+
+// PublicSubscriptionClient provides organized access to public subscription operations
+type PublicSubscriptionClient struct{ client *Client }
+func NewPublicSubscriptionClient(c *Client) *PublicSubscriptionClient { return &PublicSubscriptionClient{client: c} }
