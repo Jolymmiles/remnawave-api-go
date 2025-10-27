@@ -331,6 +331,57 @@ metrics, err := client.System().GetNodesMetrics(ctx)
 
 ---
 
+## Tools & Utilities
+
+### 1. Schema Analysis Tool
+
+**Find duplicate and identical schemas in OpenAPI specifications:**
+
+```bash
+# Analyze api-2-2-0.json for duplicate schemas
+python3 find_duplicate_schemas.py api-2-2-0.json
+
+# Show only first 10 duplicate groups
+python3 find_duplicate_schemas.py api-2-2-0.json 10
+```
+
+**Features:**
+- Finds identical request/response DTOs
+- Groups schemas by type and pattern
+- Provides consolidation recommendations
+- Handles malformed JSON files
+- Generates detailed analysis reports
+
+For detailed usage and examples, see [SCHEMA_ANALYZER_README.md](SCHEMA_ANALYZER_README.md)
+
+### 2. Schema Consolidation Tools
+
+**Consolidate duplicate schemas for cleaner API specifications:**
+
+```bash
+# Create consolidated schema (removes 42.1% duplicate definitions)
+python3 create_consolidated_schema.py api-2-2-0.json api-2-2-0-consolidated.json
+
+# Analyze the consolidated result
+python3 find_duplicate_schemas.py api-2-2-0-consolidated.json
+```
+
+**Consolidation Results:**
+- **Original:** 195 schemas (691 KB)
+- **Consolidated:** 113 schemas (420 KB)
+- **Reduction:** 82 schemas (-42.1%), 271 KB saved (-39.2%)
+- **Generic Schemas:** 4 new reusable patterns
+
+**New Generic Schemas Created:**
+- `DeleteResponseDto` - for all DELETE operations (8 schemas consolidated)
+- `EventResponseDto` - for event-based operations (8 schemas consolidated)
+- `BulkActionResponseDto` - for bulk operations (6 schemas consolidated)
+- `BulkUuidsRequestDto` - for bulk request handling (5 schemas consolidated)
+
+For detailed consolidation report, see [CONSOLIDATION_REPORT.md](CONSOLIDATION_REPORT.md)
+
+---
+
 ## Requirements
 
 |                         | Version                 |
@@ -338,6 +389,7 @@ metrics, err := client.System().GetNodesMetrics(ctx)
 | **Go**                  | 1.25+                   |
 | **Remnawave API**       | 2.2.0+                  |
 | **Remnawave JWT token** | Obtainable in the panel |
+| **Python** (optional)   | 3.6+ (for schema analysis)|
 
 
 ---
