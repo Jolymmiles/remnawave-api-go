@@ -96,16 +96,16 @@ func (c *ClientExt) Publicsubscriptioncontroller() *PublicSubscriptionController
 type ApiTokensControllerClient struct { client *Client }
 func NewApiTokensControllerClient(c *Client) *ApiTokensControllerClient { return &ApiTokensControllerClient{client: c} }
 
-func (ac *ApiTokensControllerClient) Create(ctx context.Context, request *CreateApiTokenRequestDto) (CreateApiTokenResponseDto, error) {
-	return ac.client.ApiTokensController_create(ctx, request)
+func (ac *ApiTokensControllerClient) Create(ctx context.Context, request *CreateApiTokenRequestDto) (ApiTokensControllerCreateRes, error) {
+	return ac.client.ApiTokensControllerCreate(ctx, request)
 }
 
-func (ac *ApiTokensControllerClient) Delete(ctx context.Context, params ApiTokensController_deleteParams) (DeleteApiTokenResponseDto, error) {
-	return ac.client.ApiTokensController_delete(ctx, params)
+func (ac *ApiTokensControllerClient) Delete(ctx context.Context, params ApiTokensControllerDeleteParams) (ApiTokensControllerDeleteRes, error) {
+	return ac.client.ApiTokensControllerDelete(ctx, params)
 }
 
-func (ac *ApiTokensControllerClient) Findall(ctx context.Context) (FindAllApiTokensResponseDto, error) {
-	return ac.client.ApiTokensController_findAll(ctx)
+func (ac *ApiTokensControllerClient) FindAll(ctx context.Context) (ApiTokensControllerFindAllRes, error) {
+	return ac.client.ApiTokensControllerFindAll(ctx)
 }
 
 
@@ -113,36 +113,36 @@ func (ac *ApiTokensControllerClient) Findall(ctx context.Context) (FindAllApiTok
 type AuthControllerClient struct { client *Client }
 func NewAuthControllerClient(c *Client) *AuthControllerClient { return &AuthControllerClient{client: c} }
 
-func (ac *AuthControllerClient) Getstatus(ctx context.Context) error {
-	return ac.client.AuthController_getStatus(ctx)
+func (ac *AuthControllerClient) GetStatus(ctx context.Context) (AuthControllerGetStatusRes, error) {
+	return ac.client.AuthControllerGetStatus(ctx)
 }
 
-func (ac *AuthControllerClient) Login(ctx context.Context, request *LoginRequestDto) error {
-	return ac.client.AuthController_login(ctx, request)
+func (ac *AuthControllerClient) Login(ctx context.Context, request *LoginRequestDto) (AuthControllerLoginRes, error) {
+	return ac.client.AuthControllerLogin(ctx, request)
 }
 
-func (ac *AuthControllerClient) Oauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) error {
-	return ac.client.AuthController_oauth2Authorize(ctx, request)
+func (ac *AuthControllerClient) Oauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequestDto) (AuthControllerOauth2AuthorizeRes, error) {
+	return ac.client.AuthControllerOauth2Authorize(ctx, request)
 }
 
-func (ac *AuthControllerClient) Oauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) error {
-	return ac.client.AuthController_oauth2Callback(ctx, request)
+func (ac *AuthControllerClient) Oauth2Callback(ctx context.Context, request *OAuth2CallbackRequestDto) (AuthControllerOauth2CallbackRes, error) {
+	return ac.client.AuthControllerOauth2Callback(ctx, request)
 }
 
-func (ac *AuthControllerClient) Passkeyauthenticationoptions(ctx context.Context) error {
-	return ac.client.AuthController_passkeyAuthenticationOptions(ctx)
+func (ac *AuthControllerClient) PasskeyAuthenticationOptions(ctx context.Context) (AuthControllerPasskeyAuthenticationOptionsRes, error) {
+	return ac.client.AuthControllerPasskeyAuthenticationOptions(ctx)
 }
 
-func (ac *AuthControllerClient) Passkeyauthenticationverify(ctx context.Context, request *PasskeyOptionsResponse) error {
-	return ac.client.AuthController_passkeyAuthenticationVerify(ctx, request)
+func (ac *AuthControllerClient) PasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+	return ac.client.AuthControllerPasskeyAuthenticationVerify(ctx, request)
 }
 
-func (ac *AuthControllerClient) Register(ctx context.Context, request *RegisterRequestDto) error {
-	return ac.client.AuthController_register(ctx, request)
+func (ac *AuthControllerClient) Register(ctx context.Context, request *RegisterRequestDto) (AuthControllerRegisterRes, error) {
+	return ac.client.AuthControllerRegister(ctx, request)
 }
 
-func (ac *AuthControllerClient) Telegramcallback(ctx context.Context, request *TelegramCallbackRequestDto) error {
-	return ac.client.AuthController_telegramCallback(ctx, request)
+func (ac *AuthControllerClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (AuthControllerTelegramCallbackRes, error) {
+	return ac.client.AuthControllerTelegramCallback(ctx, request)
 }
 
 
@@ -150,16 +150,16 @@ func (ac *AuthControllerClient) Telegramcallback(ctx context.Context, request *T
 type BandwidthStatsControllerClient struct { client *Client }
 func NewBandwidthStatsControllerClient(c *Client) *BandwidthStatsControllerClient { return &BandwidthStatsControllerClient{client: c} }
 
-func (bc *BandwidthStatsControllerClient) Getnodesusagebyrange(ctx context.Context, params NodesUsageHistoryController_getNodesUsageByRangeParams) (GetNodesUsageByRangeResponseDto, error) {
-	return bc.client.NodesUsageHistoryController_getNodesUsageByRange(ctx, params)
+func (bc *BandwidthStatsControllerClient) GetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error) {
+	return bc.client.NodesUsageHistoryControllerGetNodesUsageByRange(ctx, params)
 }
 
-func (bc *BandwidthStatsControllerClient) Getnodeuserusage(ctx context.Context, params NodesUserUsageHistoryController_getNodeUserUsageParams) (GetNodeUserUsageByRangeResponseDto, error) {
-	return bc.client.NodesUserUsageHistoryController_getNodeUserUsage(ctx, params)
+func (bc *BandwidthStatsControllerClient) GetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error) {
+	return bc.client.NodesUserUsageHistoryControllerGetNodeUserUsage(ctx, params)
 }
 
-func (bc *BandwidthStatsControllerClient) Getnodesrealtimeusage(ctx context.Context) (GetNodesRealtimeUsageResponseDto, error) {
-	return bc.client.NodesUserUsageHistoryController_getNodesRealtimeUsage(ctx)
+func (bc *BandwidthStatsControllerClient) GetNodesRealtimeUsage(ctx context.Context) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error) {
+	return bc.client.NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx)
 }
 
 
@@ -167,32 +167,32 @@ func (bc *BandwidthStatsControllerClient) Getnodesrealtimeusage(ctx context.Cont
 type ConfigProfilesControllerClient struct { client *Client }
 func NewConfigProfilesControllerClient(c *Client) *ConfigProfilesControllerClient { return &ConfigProfilesControllerClient{client: c} }
 
-func (cc *ConfigProfilesControllerClient) Createconfigprofile(ctx context.Context, request *CreateConfigProfileRequestDto) (ConfigProfileResponse, error) {
-	return cc.client.ConfigProfileController_createConfigProfile(ctx, request)
+func (cc *ConfigProfilesControllerClient) CreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequestDto) (ConfigProfileControllerCreateConfigProfileRes, error) {
+	return cc.client.ConfigProfileControllerCreateConfigProfile(ctx, request)
 }
 
-func (cc *ConfigProfilesControllerClient) Deleteconfigprofilebyuuid(ctx context.Context, params ConfigProfileController_deleteConfigProfileByUuidParams) (DeleteResponseDto, error) {
-	return cc.client.ConfigProfileController_deleteConfigProfileByUuid(ctx, params)
+func (cc *ConfigProfilesControllerClient) DeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
+	return cc.client.ConfigProfileControllerDeleteConfigProfileByUuid(ctx, params)
 }
 
-func (cc *ConfigProfilesControllerClient) Getallinbounds(ctx context.Context) (InboundsResponse, error) {
-	return cc.client.ConfigProfileController_getAllInbounds(ctx)
+func (cc *ConfigProfilesControllerClient) GetAllInbounds(ctx context.Context) (ConfigProfileControllerGetAllInboundsRes, error) {
+	return cc.client.ConfigProfileControllerGetAllInbounds(ctx)
 }
 
-func (cc *ConfigProfilesControllerClient) Getconfigprofilebyuuid(ctx context.Context, params ConfigProfileController_getConfigProfileByUuidParams) (ConfigProfileResponse, error) {
-	return cc.client.ConfigProfileController_getConfigProfileByUuid(ctx, params)
+func (cc *ConfigProfilesControllerClient) GetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
+	return cc.client.ConfigProfileControllerGetConfigProfileByUuid(ctx, params)
 }
 
-func (cc *ConfigProfilesControllerClient) Getconfigprofiles(ctx context.Context) (GetConfigProfilesResponseDto, error) {
-	return cc.client.ConfigProfileController_getConfigProfiles(ctx)
+func (cc *ConfigProfilesControllerClient) GetConfigProfiles(ctx context.Context) (ConfigProfileControllerGetConfigProfilesRes, error) {
+	return cc.client.ConfigProfileControllerGetConfigProfiles(ctx)
 }
 
-func (cc *ConfigProfilesControllerClient) Getinboundsbyprofileuuid(ctx context.Context, params ConfigProfileController_getInboundsByProfileUuidParams) (InboundsResponse, error) {
-	return cc.client.ConfigProfileController_getInboundsByProfileUuid(ctx, params)
+func (cc *ConfigProfilesControllerClient) GetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
+	return cc.client.ConfigProfileControllerGetInboundsByProfileUuid(ctx, params)
 }
 
-func (cc *ConfigProfilesControllerClient) Updateconfigprofile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileResponse, error) {
-	return cc.client.ConfigProfileController_updateConfigProfile(ctx, request)
+func (cc *ConfigProfilesControllerClient) UpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileControllerUpdateConfigProfileRes, error) {
+	return cc.client.ConfigProfileControllerUpdateConfigProfile(ctx, request)
 }
 
 
@@ -200,32 +200,32 @@ func (cc *ConfigProfilesControllerClient) Updateconfigprofile(ctx context.Contex
 type ExternalSquadsControllerClient struct { client *Client }
 func NewExternalSquadsControllerClient(c *Client) *ExternalSquadsControllerClient { return &ExternalSquadsControllerClient{client: c} }
 
-func (ec *ExternalSquadsControllerClient) Adduserstoexternalsquad(ctx context.Context, params ExternalSquadController_addUsersToExternalSquadParams) (EventResponseDto, error) {
-	return ec.client.ExternalSquadController_addUsersToExternalSquad(ctx, params)
+func (ec *ExternalSquadsControllerClient) AddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
+	return ec.client.ExternalSquadControllerAddUsersToExternalSquad(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) Createexternalsquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadResponse, error) {
-	return ec.client.ExternalSquadController_createExternalSquad(ctx, request)
+func (ec *ExternalSquadsControllerClient) CreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
+	return ec.client.ExternalSquadControllerCreateExternalSquad(ctx, request)
 }
 
-func (ec *ExternalSquadsControllerClient) Deleteexternalsquad(ctx context.Context, params ExternalSquadController_deleteExternalSquadParams) (DeleteResponseDto, error) {
-	return ec.client.ExternalSquadController_deleteExternalSquad(ctx, params)
+func (ec *ExternalSquadsControllerClient) DeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (ExternalSquadControllerDeleteExternalSquadRes, error) {
+	return ec.client.ExternalSquadControllerDeleteExternalSquad(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) Getexternalsquadbyuuid(ctx context.Context, params ExternalSquadController_getExternalSquadByUuidParams) (ExternalSquadResponse, error) {
-	return ec.client.ExternalSquadController_getExternalSquadByUuid(ctx, params)
+func (ec *ExternalSquadsControllerClient) GetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
+	return ec.client.ExternalSquadControllerGetExternalSquadByUuid(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) Getexternalsquads(ctx context.Context) (GetExternalSquadsResponseDto, error) {
-	return ec.client.ExternalSquadController_getExternalSquads(ctx)
+func (ec *ExternalSquadsControllerClient) GetExternalSquads(ctx context.Context) (ExternalSquadControllerGetExternalSquadsRes, error) {
+	return ec.client.ExternalSquadControllerGetExternalSquads(ctx)
 }
 
-func (ec *ExternalSquadsControllerClient) Removeusersfromexternalsquad(ctx context.Context, params ExternalSquadController_removeUsersFromExternalSquadParams) (EventResponseDto, error) {
-	return ec.client.ExternalSquadController_removeUsersFromExternalSquad(ctx, params)
+func (ec *ExternalSquadsControllerClient) RemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
+	return ec.client.ExternalSquadControllerRemoveUsersFromExternalSquad(ctx, params)
 }
 
-func (ec *ExternalSquadsControllerClient) Updateexternalsquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (ExternalSquadResponse, error) {
-	return ec.client.ExternalSquadController_updateExternalSquad(ctx, request)
+func (ec *ExternalSquadsControllerClient) UpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequestDto) (ExternalSquadControllerUpdateExternalSquadRes, error) {
+	return ec.client.ExternalSquadControllerUpdateExternalSquad(ctx, request)
 }
 
 
@@ -233,28 +233,28 @@ func (ec *ExternalSquadsControllerClient) Updateexternalsquad(ctx context.Contex
 type HwidUserDevicesControllerClient struct { client *Client }
 func NewHwidUserDevicesControllerClient(c *Client) *HwidUserDevicesControllerClient { return &HwidUserDevicesControllerClient{client: c} }
 
-func (hc *HwidUserDevicesControllerClient) Createuserhwiddevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (HwidDevicesResponse, error) {
-	return hc.client.HwidUserDevicesController_createUserHwidDevice(ctx, request)
+func (hc *HwidUserDevicesControllerClient) CreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequestDto) (HwidUserDevicesControllerCreateUserHwidDeviceRes, error) {
+	return hc.client.HwidUserDevicesControllerCreateUserHwidDevice(ctx, request)
 }
 
-func (hc *HwidUserDevicesControllerClient) Deletealluserhwiddevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (HwidDevicesResponse, error) {
-	return hc.client.HwidUserDevicesController_deleteAllUserHwidDevices(ctx, request)
+func (hc *HwidUserDevicesControllerClient) DeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequestDto) (HwidUserDevicesControllerDeleteAllUserHwidDevicesRes, error) {
+	return hc.client.HwidUserDevicesControllerDeleteAllUserHwidDevices(ctx, request)
 }
 
-func (hc *HwidUserDevicesControllerClient) Deleteuserhwiddevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (HwidDevicesResponse, error) {
-	return hc.client.HwidUserDevicesController_deleteUserHwidDevice(ctx, request)
+func (hc *HwidUserDevicesControllerClient) DeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequestDto) (HwidUserDevicesControllerDeleteUserHwidDeviceRes, error) {
+	return hc.client.HwidUserDevicesControllerDeleteUserHwidDevice(ctx, request)
 }
 
-func (hc *HwidUserDevicesControllerClient) Getallusers(ctx context.Context, params HwidUserDevicesController_getAllUsersParams) (GetAllHwidDevicesResponseDto, error) {
-	return hc.client.HwidUserDevicesController_getAllUsers(ctx, params)
+func (hc *HwidUserDevicesControllerClient) GetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (HwidUserDevicesControllerGetAllUsersRes, error) {
+	return hc.client.HwidUserDevicesControllerGetAllUsers(ctx, params)
 }
 
-func (hc *HwidUserDevicesControllerClient) Gethwiddevicesstats(ctx context.Context) (GetHwidDevicesStatsResponseDto, error) {
-	return hc.client.HwidUserDevicesController_getHwidDevicesStats(ctx)
+func (hc *HwidUserDevicesControllerClient) GetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
+	return hc.client.HwidUserDevicesControllerGetHwidDevicesStats(ctx)
 }
 
-func (hc *HwidUserDevicesControllerClient) Getuserhwiddevices(ctx context.Context, params HwidUserDevicesController_getUserHwidDevicesParams) (HwidDevicesResponse, error) {
-	return hc.client.HwidUserDevicesController_getUserHwidDevices(ctx, params)
+func (hc *HwidUserDevicesControllerClient) GetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
+	return hc.client.HwidUserDevicesControllerGetUserHwidDevices(ctx, params)
 }
 
 
@@ -262,24 +262,24 @@ func (hc *HwidUserDevicesControllerClient) Getuserhwiddevices(ctx context.Contex
 type HostsBulkActionsControllerClient struct { client *Client }
 func NewHostsBulkActionsControllerClient(c *Client) *HostsBulkActionsControllerClient { return &HostsBulkActionsControllerClient{client: c} }
 
-func (hc *HostsBulkActionsControllerClient) Deletehosts(ctx context.Context, request *BulkUuidsRequest) (HostListResponse, error) {
-	return hc.client.HostsBulkActionsController_deleteHosts(ctx, request)
+func (hc *HostsBulkActionsControllerClient) DeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error) {
+	return hc.client.HostsBulkActionsControllerDeleteHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) Disablehosts(ctx context.Context, request *BulkUuidsRequest) (HostListResponse, error) {
-	return hc.client.HostsBulkActionsController_disableHosts(ctx, request)
+func (hc *HostsBulkActionsControllerClient) DisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error) {
+	return hc.client.HostsBulkActionsControllerDisableHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) Enablehosts(ctx context.Context, request *BulkUuidsRequest) (HostListResponse, error) {
-	return hc.client.HostsBulkActionsController_enableHosts(ctx, request)
+func (hc *HostsBulkActionsControllerClient) EnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error) {
+	return hc.client.HostsBulkActionsControllerEnableHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) Setinboundtohosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (HostListResponse, error) {
-	return hc.client.HostsBulkActionsController_setInboundToHosts(ctx, request)
+func (hc *HostsBulkActionsControllerClient) SetInboundToHosts(ctx context.Context, request *SetInboundToManyHostsRequestDto) (HostsBulkActionsControllerSetInboundToHostsRes, error) {
+	return hc.client.HostsBulkActionsControllerSetInboundToHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) Setporttohosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (HostListResponse, error) {
-	return hc.client.HostsBulkActionsController_setPortToHosts(ctx, request)
+func (hc *HostsBulkActionsControllerClient) SetPortToHosts(ctx context.Context, request *SetPortToManyHostsRequestDto) (HostsBulkActionsControllerSetPortToHostsRes, error) {
+	return hc.client.HostsBulkActionsControllerSetPortToHosts(ctx, request)
 }
 
 
@@ -287,32 +287,32 @@ func (hc *HostsBulkActionsControllerClient) Setporttohosts(ctx context.Context, 
 type HostsControllerClient struct { client *Client }
 func NewHostsControllerClient(c *Client) *HostsControllerClient { return &HostsControllerClient{client: c} }
 
-func (hc *HostsControllerClient) Createhost(ctx context.Context, request *CreateHostRequestDto) (HostResponse, error) {
-	return hc.client.HostsController_createHost(ctx, request)
+func (hc *HostsControllerClient) CreateHost(ctx context.Context, request *CreateHostRequestDto) (HostsControllerCreateHostRes, error) {
+	return hc.client.HostsControllerCreateHost(ctx, request)
 }
 
-func (hc *HostsControllerClient) Deletehost(ctx context.Context, params HostsController_deleteHostParams) (DeleteResponseDto, error) {
-	return hc.client.HostsController_deleteHost(ctx, params)
+func (hc *HostsControllerClient) DeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (HostsControllerDeleteHostRes, error) {
+	return hc.client.HostsControllerDeleteHost(ctx, params)
 }
 
-func (hc *HostsControllerClient) Getallhosttags(ctx context.Context) (TagsResponse, error) {
-	return hc.client.HostsController_getAllHostTags(ctx)
+func (hc *HostsControllerClient) GetAllHostTags(ctx context.Context) (HostsControllerGetAllHostTagsRes, error) {
+	return hc.client.HostsControllerGetAllHostTags(ctx)
 }
 
-func (hc *HostsControllerClient) Getallhosts(ctx context.Context) (HostListResponse, error) {
-	return hc.client.HostsController_getAllHosts(ctx)
+func (hc *HostsControllerClient) GetAllHosts(ctx context.Context) (HostsControllerGetAllHostsRes, error) {
+	return hc.client.HostsControllerGetAllHosts(ctx)
 }
 
-func (hc *HostsControllerClient) Getonehost(ctx context.Context, params HostsController_getOneHostParams) (HostResponse, error) {
-	return hc.client.HostsController_getOneHost(ctx, params)
+func (hc *HostsControllerClient) GetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (HostsControllerGetOneHostRes, error) {
+	return hc.client.HostsControllerGetOneHost(ctx, params)
 }
 
-func (hc *HostsControllerClient) Reorderhosts(ctx context.Context, request *ReorderHostRequestDto) (ReorderHostResponseDto, error) {
-	return hc.client.HostsController_reorderHosts(ctx, request)
+func (hc *HostsControllerClient) ReorderHosts(ctx context.Context, request *ReorderHostRequestDto) (HostsControllerReorderHostsRes, error) {
+	return hc.client.HostsControllerReorderHosts(ctx, request)
 }
 
-func (hc *HostsControllerClient) Updatehost(ctx context.Context, request *UpdateHostRequestDto) (HostResponse, error) {
-	return hc.client.HostsController_updateHost(ctx, request)
+func (hc *HostsControllerClient) UpdateHost(ctx context.Context, request *UpdateHostRequestDto) (HostsControllerUpdateHostRes, error) {
+	return hc.client.HostsControllerUpdateHost(ctx, request)
 }
 
 
@@ -320,52 +320,52 @@ func (hc *HostsControllerClient) Updatehost(ctx context.Context, request *Update
 type InfraBillingControllerClient struct { client *Client }
 func NewInfraBillingControllerClient(c *Client) *InfraBillingControllerClient { return &InfraBillingControllerClient{client: c} }
 
-func (ic *InfraBillingControllerClient) Createinfrabillinghistoryrecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (BillingHistoryResponse, error) {
-	return ic.client.InfraBillingController_createInfraBillingHistoryRecord(ctx, request)
+func (ic *InfraBillingControllerClient) CreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequestDto) (InfraBillingControllerCreateInfraBillingHistoryRecordRes, error) {
+	return ic.client.InfraBillingControllerCreateInfraBillingHistoryRecord(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) Createinfrabillingnode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (BillingNodesResponse, error) {
-	return ic.client.InfraBillingController_createInfraBillingNode(ctx, request)
+func (ic *InfraBillingControllerClient) CreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequestDto) (InfraBillingControllerCreateInfraBillingNodeRes, error) {
+	return ic.client.InfraBillingControllerCreateInfraBillingNode(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) Createinfraprovider(ctx context.Context, request *CreateInfraProviderRequestDto) (InfraProviderResponse, error) {
-	return ic.client.InfraBillingController_createInfraProvider(ctx, request)
+func (ic *InfraBillingControllerClient) CreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequestDto) (InfraBillingControllerCreateInfraProviderRes, error) {
+	return ic.client.InfraBillingControllerCreateInfraProvider(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) Deleteinfrabillinghistoryrecordbyuuid(ctx context.Context, params InfraBillingController_deleteInfraBillingHistoryRecordByUuidParams) (BillingHistoryResponse, error) {
-	return ic.client.InfraBillingController_deleteInfraBillingHistoryRecordByUuid(ctx, params)
+func (ic *InfraBillingControllerClient) DeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
+	return ic.client.InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) Deleteinfrabillingnodebyuuid(ctx context.Context, params InfraBillingController_deleteInfraBillingNodeByUuidParams) (BillingNodesResponse, error) {
-	return ic.client.InfraBillingController_deleteInfraBillingNodeByUuid(ctx, params)
+func (ic *InfraBillingControllerClient) DeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
+	return ic.client.InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) Deleteinfraproviderbyuuid(ctx context.Context, params InfraBillingController_deleteInfraProviderByUuidParams) (DeleteResponseDto, error) {
-	return ic.client.InfraBillingController_deleteInfraProviderByUuid(ctx, params)
+func (ic *InfraBillingControllerClient) DeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
+	return ic.client.InfraBillingControllerDeleteInfraProviderByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) Getbillingnodes(ctx context.Context) (BillingNodesResponse, error) {
-	return ic.client.InfraBillingController_getBillingNodes(ctx)
+func (ic *InfraBillingControllerClient) GetBillingNodes(ctx context.Context) (InfraBillingControllerGetBillingNodesRes, error) {
+	return ic.client.InfraBillingControllerGetBillingNodes(ctx)
 }
 
-func (ic *InfraBillingControllerClient) Getinfrabillinghistoryrecords(ctx context.Context) (BillingHistoryResponse, error) {
-	return ic.client.InfraBillingController_getInfraBillingHistoryRecords(ctx)
+func (ic *InfraBillingControllerClient) GetInfraBillingHistoryRecords(ctx context.Context) (InfraBillingControllerGetInfraBillingHistoryRecordsRes, error) {
+	return ic.client.InfraBillingControllerGetInfraBillingHistoryRecords(ctx)
 }
 
-func (ic *InfraBillingControllerClient) Getinfraproviderbyuuid(ctx context.Context, params InfraBillingController_getInfraProviderByUuidParams) (InfraProviderResponse, error) {
-	return ic.client.InfraBillingController_getInfraProviderByUuid(ctx, params)
+func (ic *InfraBillingControllerClient) GetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
+	return ic.client.InfraBillingControllerGetInfraProviderByUuid(ctx, params)
 }
 
-func (ic *InfraBillingControllerClient) Getinfraproviders(ctx context.Context) (GetInfraProvidersResponseDto, error) {
-	return ic.client.InfraBillingController_getInfraProviders(ctx)
+func (ic *InfraBillingControllerClient) GetInfraProviders(ctx context.Context) (InfraBillingControllerGetInfraProvidersRes, error) {
+	return ic.client.InfraBillingControllerGetInfraProviders(ctx)
 }
 
-func (ic *InfraBillingControllerClient) Updateinfrabillingnode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (BillingNodesResponse, error) {
-	return ic.client.InfraBillingController_updateInfraBillingNode(ctx, request)
+func (ic *InfraBillingControllerClient) UpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequestDto) (InfraBillingControllerUpdateInfraBillingNodeRes, error) {
+	return ic.client.InfraBillingControllerUpdateInfraBillingNode(ctx, request)
 }
 
-func (ic *InfraBillingControllerClient) Updateinfraprovider(ctx context.Context, request *UpdateInfraProviderRequestDto) (InfraProviderResponse, error) {
-	return ic.client.InfraBillingController_updateInfraProvider(ctx, request)
+func (ic *InfraBillingControllerClient) UpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequestDto) (InfraBillingControllerUpdateInfraProviderRes, error) {
+	return ic.client.InfraBillingControllerUpdateInfraProvider(ctx, request)
 }
 
 
@@ -373,36 +373,36 @@ func (ic *InfraBillingControllerClient) Updateinfraprovider(ctx context.Context,
 type InternalSquadsControllerClient struct { client *Client }
 func NewInternalSquadsControllerClient(c *Client) *InternalSquadsControllerClient { return &InternalSquadsControllerClient{client: c} }
 
-func (ic *InternalSquadsControllerClient) Adduserstointernalsquad(ctx context.Context, params InternalSquadController_addUsersToInternalSquadParams) (EventResponseDto, error) {
-	return ic.client.InternalSquadController_addUsersToInternalSquad(ctx, params)
+func (ic *InternalSquadsControllerClient) AddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
+	return ic.client.InternalSquadControllerAddUsersToInternalSquad(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) Createinternalsquad(ctx context.Context, request *CreateInternalSquadRequestDto) (InternalSquadResponse, error) {
-	return ic.client.InternalSquadController_createInternalSquad(ctx, request)
+func (ic *InternalSquadsControllerClient) CreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequestDto) (InternalSquadControllerCreateInternalSquadRes, error) {
+	return ic.client.InternalSquadControllerCreateInternalSquad(ctx, request)
 }
 
-func (ic *InternalSquadsControllerClient) Deleteinternalsquad(ctx context.Context, params InternalSquadController_deleteInternalSquadParams) (DeleteResponseDto, error) {
-	return ic.client.InternalSquadController_deleteInternalSquad(ctx, params)
+func (ic *InternalSquadsControllerClient) DeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (InternalSquadControllerDeleteInternalSquadRes, error) {
+	return ic.client.InternalSquadControllerDeleteInternalSquad(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) Getinternalsquadaccessiblenodes(ctx context.Context, params InternalSquadController_getInternalSquadAccessibleNodesParams) (GetInternalSquadAccessibleNodesResponseDto, error) {
-	return ic.client.InternalSquadController_getInternalSquadAccessibleNodes(ctx, params)
+func (ic *InternalSquadsControllerClient) GetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
+	return ic.client.InternalSquadControllerGetInternalSquadAccessibleNodes(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) Getinternalsquadbyuuid(ctx context.Context, params InternalSquadController_getInternalSquadByUuidParams) (InternalSquadResponse, error) {
-	return ic.client.InternalSquadController_getInternalSquadByUuid(ctx, params)
+func (ic *InternalSquadsControllerClient) GetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
+	return ic.client.InternalSquadControllerGetInternalSquadByUuid(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) Getinternalsquads(ctx context.Context) (GetInternalSquadsResponseDto, error) {
-	return ic.client.InternalSquadController_getInternalSquads(ctx)
+func (ic *InternalSquadsControllerClient) GetInternalSquads(ctx context.Context) (InternalSquadControllerGetInternalSquadsRes, error) {
+	return ic.client.InternalSquadControllerGetInternalSquads(ctx)
 }
 
-func (ic *InternalSquadsControllerClient) Removeusersfrominternalsquad(ctx context.Context, params InternalSquadController_removeUsersFromInternalSquadParams) (EventResponseDto, error) {
-	return ic.client.InternalSquadController_removeUsersFromInternalSquad(ctx, params)
+func (ic *InternalSquadsControllerClient) RemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
+	return ic.client.InternalSquadControllerRemoveUsersFromInternalSquad(ctx, params)
 }
 
-func (ic *InternalSquadsControllerClient) Updateinternalsquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadResponse, error) {
-	return ic.client.InternalSquadController_updateInternalSquad(ctx, request)
+func (ic *InternalSquadsControllerClient) UpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadControllerUpdateInternalSquadRes, error) {
+	return ic.client.InternalSquadControllerUpdateInternalSquad(ctx, request)
 }
 
 
@@ -410,8 +410,8 @@ func (ic *InternalSquadsControllerClient) Updateinternalsquad(ctx context.Contex
 type KeygenControllerClient struct { client *Client }
 func NewKeygenControllerClient(c *Client) *KeygenControllerClient { return &KeygenControllerClient{client: c} }
 
-func (kc *KeygenControllerClient) Generatekey(ctx context.Context) (GetPubKeyResponseDto, error) {
-	return kc.client.KeygenController_generateKey(ctx)
+func (kc *KeygenControllerClient) GenerateKey(ctx context.Context) (KeygenControllerGenerateKeyRes, error) {
+	return kc.client.KeygenControllerGenerateKey(ctx)
 }
 
 
@@ -419,44 +419,44 @@ func (kc *KeygenControllerClient) Generatekey(ctx context.Context) (GetPubKeyRes
 type NodesControllerClient struct { client *Client }
 func NewNodesControllerClient(c *Client) *NodesControllerClient { return &NodesControllerClient{client: c} }
 
-func (nc *NodesControllerClient) Createnode(ctx context.Context, request *CreateNodeRequestDto) (NodeResponse, error) {
-	return nc.client.NodesController_createNode(ctx, request)
+func (nc *NodesControllerClient) CreateNode(ctx context.Context, request *CreateNodeRequestDto) (NodesControllerCreateNodeRes, error) {
+	return nc.client.NodesControllerCreateNode(ctx, request)
 }
 
-func (nc *NodesControllerClient) Deletenode(ctx context.Context, params NodesController_deleteNodeParams) (DeleteResponseDto, error) {
-	return nc.client.NodesController_deleteNode(ctx, params)
+func (nc *NodesControllerClient) DeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (NodesControllerDeleteNodeRes, error) {
+	return nc.client.NodesControllerDeleteNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) Disablenode(ctx context.Context, params NodesController_disableNodeParams) (NodeResponse, error) {
-	return nc.client.NodesController_disableNode(ctx, params)
+func (nc *NodesControllerClient) DisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (NodesControllerDisableNodeRes, error) {
+	return nc.client.NodesControllerDisableNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) Enablenode(ctx context.Context, params NodesController_enableNodeParams) (NodeResponse, error) {
-	return nc.client.NodesController_enableNode(ctx, params)
+func (nc *NodesControllerClient) EnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (NodesControllerEnableNodeRes, error) {
+	return nc.client.NodesControllerEnableNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) Getallnodes(ctx context.Context) (NodesResponse, error) {
-	return nc.client.NodesController_getAllNodes(ctx)
+func (nc *NodesControllerClient) GetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error) {
+	return nc.client.NodesControllerGetAllNodes(ctx)
 }
 
-func (nc *NodesControllerClient) Getonenode(ctx context.Context, params NodesController_getOneNodeParams) (NodeResponse, error) {
-	return nc.client.NodesController_getOneNode(ctx, params)
+func (nc *NodesControllerClient) GetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error) {
+	return nc.client.NodesControllerGetOneNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) Reordernodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesResponse, error) {
-	return nc.client.NodesController_reorderNodes(ctx, request)
+func (nc *NodesControllerClient) ReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesControllerReorderNodesRes, error) {
+	return nc.client.NodesControllerReorderNodes(ctx, request)
 }
 
-func (nc *NodesControllerClient) Restartallnodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (EventResponseDto, error) {
-	return nc.client.NodesController_restartAllNodes(ctx, request)
+func (nc *NodesControllerClient) RestartAllNodes(ctx context.Context, request *RestartAllNodesRequestBodyDto) (NodesControllerRestartAllNodesRes, error) {
+	return nc.client.NodesControllerRestartAllNodes(ctx, request)
 }
 
-func (nc *NodesControllerClient) Restartnode(ctx context.Context, params NodesController_restartNodeParams) (EventResponseDto, error) {
-	return nc.client.NodesController_restartNode(ctx, params)
+func (nc *NodesControllerClient) RestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (NodesControllerRestartNodeRes, error) {
+	return nc.client.NodesControllerRestartNode(ctx, params)
 }
 
-func (nc *NodesControllerClient) Updatenode(ctx context.Context, request *UpdateNodeRequestDto) (NodeResponse, error) {
-	return nc.client.NodesController_updateNode(ctx, request)
+func (nc *NodesControllerClient) UpdateNode(ctx context.Context, request *UpdateNodeRequestDto) (NodesControllerUpdateNodeRes, error) {
+	return nc.client.NodesControllerUpdateNode(ctx, request)
 }
 
 
@@ -464,20 +464,20 @@ func (nc *NodesControllerClient) Updatenode(ctx context.Context, request *Update
 type PasskeysControllerClient struct { client *Client }
 func NewPasskeysControllerClient(c *Client) *PasskeysControllerClient { return &PasskeysControllerClient{client: c} }
 
-func (pc *PasskeysControllerClient) Deletepasskey(ctx context.Context, request *DeletePasskeyRequestDto) error {
-	return pc.client.PasskeyController_deletePasskey(ctx, request)
+func (pc *PasskeysControllerClient) DeletePasskey(ctx context.Context, request *DeletePasskeyRequestDto) (PasskeyControllerDeletePasskeyRes, error) {
+	return pc.client.PasskeyControllerDeletePasskey(ctx, request)
 }
 
-func (pc *PasskeysControllerClient) Getactivepasskeys(ctx context.Context) error {
-	return pc.client.PasskeyController_getActivePasskeys(ctx)
+func (pc *PasskeysControllerClient) GetActivePasskeys(ctx context.Context) (PasskeyControllerGetActivePasskeysRes, error) {
+	return pc.client.PasskeyControllerGetActivePasskeys(ctx)
 }
 
-func (pc *PasskeysControllerClient) Passkeyregistrationoptions(ctx context.Context) error {
-	return pc.client.PasskeyController_passkeyRegistrationOptions(ctx)
+func (pc *PasskeysControllerClient) PasskeyRegistrationOptions(ctx context.Context) (PasskeyControllerPasskeyRegistrationOptionsRes, error) {
+	return pc.client.PasskeyControllerPasskeyRegistrationOptions(ctx)
 }
 
-func (pc *PasskeysControllerClient) Passkeyregistrationverify(ctx context.Context, request *PasskeyOptionsResponse) error {
-	return pc.client.PasskeyController_passkeyRegistrationVerify(ctx, request)
+func (pc *PasskeysControllerClient) PasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+	return pc.client.PasskeyControllerPasskeyRegistrationVerify(ctx, request)
 }
 
 
@@ -485,12 +485,12 @@ func (pc *PasskeysControllerClient) Passkeyregistrationverify(ctx context.Contex
 type RemnawaveSettingsControllerClient struct { client *Client }
 func NewRemnawaveSettingsControllerClient(c *Client) *RemnawaveSettingsControllerClient { return &RemnawaveSettingsControllerClient{client: c} }
 
-func (rc *RemnawaveSettingsControllerClient) Getsettings(ctx context.Context) (SettingsResponse, error) {
-	return rc.client.RemnawaveSettingsController_getSettings(ctx)
+func (rc *RemnawaveSettingsControllerClient) GetSettings(ctx context.Context) (RemnawaveSettingsControllerGetSettingsRes, error) {
+	return rc.client.RemnawaveSettingsControllerGetSettings(ctx)
 }
 
-func (rc *RemnawaveSettingsControllerClient) Updatesettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (SettingsResponse, error) {
-	return rc.client.RemnawaveSettingsController_updateSettings(ctx, request)
+func (rc *RemnawaveSettingsControllerClient) UpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequestDto) (RemnawaveSettingsControllerUpdateSettingsRes, error) {
+	return rc.client.RemnawaveSettingsControllerUpdateSettings(ctx, request)
 }
 
 
@@ -498,20 +498,20 @@ func (rc *RemnawaveSettingsControllerClient) Updatesettings(ctx context.Context,
 type SnippetsControllerClient struct { client *Client }
 func NewSnippetsControllerClient(c *Client) *SnippetsControllerClient { return &SnippetsControllerClient{client: c} }
 
-func (sc *SnippetsControllerClient) Createsnippet(ctx context.Context, request *SnippetRequest) (SnippetsResponse, error) {
-	return sc.client.SnippetsController_createSnippet(ctx, request)
+func (sc *SnippetsControllerClient) CreateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerCreateSnippetRes, error) {
+	return sc.client.SnippetsControllerCreateSnippet(ctx, request)
 }
 
-func (sc *SnippetsControllerClient) Deletesnippetbyname(ctx context.Context, request *DeleteSnippetRequestDto) (SnippetsResponse, error) {
-	return sc.client.SnippetsController_deleteSnippetByName(ctx, request)
+func (sc *SnippetsControllerClient) DeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequestDto) (SnippetsControllerDeleteSnippetByNameRes, error) {
+	return sc.client.SnippetsControllerDeleteSnippetByName(ctx, request)
 }
 
-func (sc *SnippetsControllerClient) Getsnippets(ctx context.Context) (SnippetsResponse, error) {
-	return sc.client.SnippetsController_getSnippets(ctx)
+func (sc *SnippetsControllerClient) GetSnippets(ctx context.Context) (SnippetsControllerGetSnippetsRes, error) {
+	return sc.client.SnippetsControllerGetSnippets(ctx)
 }
 
-func (sc *SnippetsControllerClient) Updatesnippet(ctx context.Context, request *SnippetRequest) (SnippetsResponse, error) {
-	return sc.client.SnippetsController_updateSnippet(ctx, request)
+func (sc *SnippetsControllerClient) UpdateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerUpdateSnippetRes, error) {
+	return sc.client.SnippetsControllerUpdateSnippet(ctx, request)
 }
 
 
@@ -519,12 +519,12 @@ func (sc *SnippetsControllerClient) Updatesnippet(ctx context.Context, request *
 type SubscriptionRequestHistoryControllerClient struct { client *Client }
 func NewSubscriptionRequestHistoryControllerClient(c *Client) *SubscriptionRequestHistoryControllerClient { return &SubscriptionRequestHistoryControllerClient{client: c} }
 
-func (sc *SubscriptionRequestHistoryControllerClient) Getsubscriptionrequesthistory(ctx context.Context, params UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryParams) (GetSubscriptionRequestHistoryResponseDto, error) {
-	return sc.client.UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory(ctx, params)
+func (sc *SubscriptionRequestHistoryControllerClient) GetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
+	return sc.client.UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, params)
 }
 
-func (sc *SubscriptionRequestHistoryControllerClient) Getsubscriptionrequesthistorystats(ctx context.Context) (GetSubscriptionRequestHistoryStatsResponseDto, error) {
-	return sc.client.UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats(ctx)
+func (sc *SubscriptionRequestHistoryControllerClient) GetSubscriptionRequestHistoryStats(ctx context.Context) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error) {
+	return sc.client.UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx)
 }
 
 
@@ -532,12 +532,12 @@ func (sc *SubscriptionRequestHistoryControllerClient) Getsubscriptionrequesthist
 type SubscriptionSettingsControllerClient struct { client *Client }
 func NewSubscriptionSettingsControllerClient(c *Client) *SubscriptionSettingsControllerClient { return &SubscriptionSettingsControllerClient{client: c} }
 
-func (sc *SubscriptionSettingsControllerClient) Getsettings(ctx context.Context) (SubscriptionSettingsResponse, error) {
-	return sc.client.SubscriptionSettingsController_getSettings(ctx)
+func (sc *SubscriptionSettingsControllerClient) GetSettings(ctx context.Context) (SubscriptionSettingsControllerGetSettingsRes, error) {
+	return sc.client.SubscriptionSettingsControllerGetSettings(ctx)
 }
 
-func (sc *SubscriptionSettingsControllerClient) Updatesettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (SubscriptionSettingsResponse, error) {
-	return sc.client.SubscriptionSettingsController_updateSettings(ctx, request)
+func (sc *SubscriptionSettingsControllerClient) UpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequestDto) (SubscriptionSettingsControllerUpdateSettingsRes, error) {
+	return sc.client.SubscriptionSettingsControllerUpdateSettings(ctx, request)
 }
 
 
@@ -545,24 +545,24 @@ func (sc *SubscriptionSettingsControllerClient) Updatesettings(ctx context.Conte
 type SubscriptionTemplateControllerClient struct { client *Client }
 func NewSubscriptionTemplateControllerClient(c *Client) *SubscriptionTemplateControllerClient { return &SubscriptionTemplateControllerClient{client: c} }
 
-func (sc *SubscriptionTemplateControllerClient) Createtemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (TemplateResponse, error) {
-	return sc.client.SubscriptionTemplateController_createTemplate(ctx, request)
+func (sc *SubscriptionTemplateControllerClient) CreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequestDto) (SubscriptionTemplateControllerCreateTemplateRes, error) {
+	return sc.client.SubscriptionTemplateControllerCreateTemplate(ctx, request)
 }
 
-func (sc *SubscriptionTemplateControllerClient) Deletetemplate(ctx context.Context, params SubscriptionTemplateController_deleteTemplateParams) (DeleteResponseDto, error) {
-	return sc.client.SubscriptionTemplateController_deleteTemplate(ctx, params)
+func (sc *SubscriptionTemplateControllerClient) DeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
+	return sc.client.SubscriptionTemplateControllerDeleteTemplate(ctx, params)
 }
 
-func (sc *SubscriptionTemplateControllerClient) Getalltemplates(ctx context.Context) (GetTemplatesResponseDto, error) {
-	return sc.client.SubscriptionTemplateController_getAllTemplates(ctx)
+func (sc *SubscriptionTemplateControllerClient) GetAllTemplates(ctx context.Context) (SubscriptionTemplateControllerGetAllTemplatesRes, error) {
+	return sc.client.SubscriptionTemplateControllerGetAllTemplates(ctx)
 }
 
-func (sc *SubscriptionTemplateControllerClient) Gettemplatebyuuid(ctx context.Context, params SubscriptionTemplateController_getTemplateByUuidParams) (TemplateResponse, error) {
-	return sc.client.SubscriptionTemplateController_getTemplateByUuid(ctx, params)
+func (sc *SubscriptionTemplateControllerClient) GetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
+	return sc.client.SubscriptionTemplateControllerGetTemplateByUuid(ctx, params)
 }
 
-func (sc *SubscriptionTemplateControllerClient) Updatetemplate(ctx context.Context, request *UpdateTemplateRequestDto) (TemplateResponse, error) {
-	return sc.client.SubscriptionTemplateController_updateTemplate(ctx, request)
+func (sc *SubscriptionTemplateControllerClient) UpdateTemplate(ctx context.Context, request *UpdateTemplateRequestDto) (SubscriptionTemplateControllerUpdateTemplateRes, error) {
+	return sc.client.SubscriptionTemplateControllerUpdateTemplate(ctx, request)
 }
 
 
@@ -570,36 +570,36 @@ func (sc *SubscriptionTemplateControllerClient) Updatetemplate(ctx context.Conte
 type SystemControllerClient struct { client *Client }
 func NewSystemControllerClient(c *Client) *SystemControllerClient { return &SystemControllerClient{client: c} }
 
-func (sc *SystemControllerClient) Debugsrrmatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (DebugSrrMatcherResponseDto, error) {
-	return sc.client.SystemController_debugSrrMatcher(ctx, request)
+func (sc *SystemControllerClient) DebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequestDto) (SystemControllerDebugSrrMatcherRes, error) {
+	return sc.client.SystemControllerDebugSrrMatcher(ctx, request)
 }
 
-func (sc *SystemControllerClient) Encrypthappcryptolink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (EncryptHappCryptoLinkResponseDto, error) {
-	return sc.client.SystemController_encryptHappCryptoLink(ctx, request)
+func (sc *SystemControllerClient) EncryptHappCryptoLink(ctx context.Context, request *EncryptHappCryptoLinkRequestDto) (SystemControllerEncryptHappCryptoLinkRes, error) {
+	return sc.client.SystemControllerEncryptHappCryptoLink(ctx, request)
 }
 
-func (sc *SystemControllerClient) Getbandwidthstats(ctx context.Context) (GetBandwidthStatsResponseDto, error) {
-	return sc.client.SystemController_getBandwidthStats(ctx)
+func (sc *SystemControllerClient) GetBandwidthStats(ctx context.Context) (SystemControllerGetBandwidthStatsRes, error) {
+	return sc.client.SystemControllerGetBandwidthStats(ctx)
 }
 
-func (sc *SystemControllerClient) Getnodesmetrics(ctx context.Context) (GetNodesMetricsResponseDto, error) {
-	return sc.client.SystemController_getNodesMetrics(ctx)
+func (sc *SystemControllerClient) GetNodesMetrics(ctx context.Context) (SystemControllerGetNodesMetricsRes, error) {
+	return sc.client.SystemControllerGetNodesMetrics(ctx)
 }
 
-func (sc *SystemControllerClient) Getnodesstatistics(ctx context.Context) (GetNodesStatisticsResponseDto, error) {
-	return sc.client.SystemController_getNodesStatistics(ctx)
+func (sc *SystemControllerClient) GetNodesStatistics(ctx context.Context) (SystemControllerGetNodesStatisticsRes, error) {
+	return sc.client.SystemControllerGetNodesStatistics(ctx)
 }
 
-func (sc *SystemControllerClient) Getremnawavehealth(ctx context.Context) (GetRemnawaveHealthResponseDto, error) {
-	return sc.client.SystemController_getRemnawaveHealth(ctx)
+func (sc *SystemControllerClient) GetRemnawaveHealth(ctx context.Context) (SystemControllerGetRemnawaveHealthRes, error) {
+	return sc.client.SystemControllerGetRemnawaveHealth(ctx)
 }
 
-func (sc *SystemControllerClient) Getstats(ctx context.Context) (GetStatsResponseDto, error) {
-	return sc.client.SystemController_getStats(ctx)
+func (sc *SystemControllerClient) GetStats(ctx context.Context) (SystemControllerGetStatsRes, error) {
+	return sc.client.SystemControllerGetStats(ctx)
 }
 
-func (sc *SystemControllerClient) Getx25519Keypairs(ctx context.Context) (GenerateX25519ResponseDto, error) {
-	return sc.client.SystemController_getX25519Keypairs(ctx)
+func (sc *SystemControllerClient) GetX25519Keypairs(ctx context.Context) (SystemControllerGetX25519KeypairsRes, error) {
+	return sc.client.SystemControllerGetX25519Keypairs(ctx)
 }
 
 
@@ -607,36 +607,36 @@ func (sc *SystemControllerClient) Getx25519Keypairs(ctx context.Context) (Genera
 type UsersBulkActionsControllerClient struct { client *Client }
 func NewUsersBulkActionsControllerClient(c *Client) *UsersBulkActionsControllerClient { return &UsersBulkActionsControllerClient{client: c} }
 
-func (uc *UsersBulkActionsControllerClient) Bulkallresetusertraffic(ctx context.Context) (EventResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkAllResetUserTraffic(ctx)
+func (uc *UsersBulkActionsControllerClient) BulkAllResetUserTraffic(ctx context.Context) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkAllResetUserTraffic(ctx)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkdeleteusers(ctx context.Context, request *BulkDeleteUsersRequestDto) (BulkActionResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkDeleteUsers(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkDeleteUsers(ctx context.Context, request *BulkDeleteUsersRequestDto) (UsersBulkActionsControllerBulkDeleteUsersRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkDeleteUsers(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkdeleteusersbystatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (BulkActionResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkDeleteUsersByStatus(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkresetusertraffic(ctx context.Context, request *BulkUuidsRequest) (BulkActionResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkResetUserTraffic(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkResetUserTraffic(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkrevokeuserssubscription(ctx context.Context, request *BulkUuidsRequest) (BulkActionResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkRevokeUsersSubscription(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkupdateallusers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (EventResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkUpdateAllUsers(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateAllUsersRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkUpdateAllUsers(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkupdateusers(ctx context.Context, request *BulkUpdateUsersRequestDto) (BulkActionResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkUpdateUsers(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequestDto) (UsersBulkActionsControllerBulkUpdateUsersRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkUpdateUsers(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) Bulkupdateusersinternalsquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (BulkActionResponseDto, error) {
-	return uc.client.UsersBulkActionsController_bulkUpdateUsersInternalSquads(ctx, request)
+func (uc *UsersBulkActionsControllerClient) BulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error) {
+	return uc.client.UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx, request)
 }
 
 
@@ -644,72 +644,72 @@ func (uc *UsersBulkActionsControllerClient) Bulkupdateusersinternalsquads(ctx co
 type UsersControllerClient struct { client *Client }
 func NewUsersControllerClient(c *Client) *UsersControllerClient { return &UsersControllerClient{client: c} }
 
-func (uc *UsersControllerClient) Createuser(ctx context.Context, request *CreateUserRequestDto) (UserResponse, error) {
-	return uc.client.UsersController_createUser(ctx, request)
+func (uc *UsersControllerClient) CreateUser(ctx context.Context, request *CreateUserRequestDto) (UsersControllerCreateUserRes, error) {
+	return uc.client.UsersControllerCreateUser(ctx, request)
 }
 
-func (uc *UsersControllerClient) Deleteuser(ctx context.Context, params UsersController_deleteUserParams) (DeleteResponseDto, error) {
-	return uc.client.UsersController_deleteUser(ctx, params)
+func (uc *UsersControllerClient) DeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (UsersControllerDeleteUserRes, error) {
+	return uc.client.UsersControllerDeleteUser(ctx, params)
 }
 
-func (uc *UsersControllerClient) Disableuser(ctx context.Context, params UsersController_disableUserParams) (UserResponse, error) {
-	return uc.client.UsersController_disableUser(ctx, params)
+func (uc *UsersControllerClient) DisableUser(ctx context.Context, params UsersControllerDisableUserParams) (UsersControllerDisableUserRes, error) {
+	return uc.client.UsersControllerDisableUser(ctx, params)
 }
 
-func (uc *UsersControllerClient) Enableuser(ctx context.Context, params UsersController_enableUserParams) (UserResponse, error) {
-	return uc.client.UsersController_enableUser(ctx, params)
+func (uc *UsersControllerClient) EnableUser(ctx context.Context, params UsersControllerEnableUserParams) (UsersControllerEnableUserRes, error) {
+	return uc.client.UsersControllerEnableUser(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getalltags(ctx context.Context) (TagsResponse, error) {
-	return uc.client.UsersController_getAllTags(ctx)
+func (uc *UsersControllerClient) GetAllTags(ctx context.Context) (UsersControllerGetAllTagsRes, error) {
+	return uc.client.UsersControllerGetAllTags(ctx)
 }
 
-func (uc *UsersControllerClient) Getallusers(ctx context.Context, params UsersController_getAllUsersParams) (GetAllUsersResponseDto, error) {
-	return uc.client.UsersController_getAllUsers(ctx, params)
+func (uc *UsersControllerClient) GetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (UsersControllerGetAllUsersRes, error) {
+	return uc.client.UsersControllerGetAllUsers(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getuseraccessiblenodes(ctx context.Context, params UsersController_getUserAccessibleNodesParams) (GetUserAccessibleNodesResponseDto, error) {
-	return uc.client.UsersController_getUserAccessibleNodes(ctx, params)
+func (uc *UsersControllerClient) GetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error) {
+	return uc.client.UsersControllerGetUserAccessibleNodes(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getuserbyshortuuid(ctx context.Context, params UsersController_getUserByShortUuidParams) (UserResponse, error) {
-	return uc.client.UsersController_getUserByShortUuid(ctx, params)
+func (uc *UsersControllerClient) GetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (UsersControllerGetUserByShortUuidRes, error) {
+	return uc.client.UsersControllerGetUserByShortUuid(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getuserbytelegramid(ctx context.Context, params UsersController_getUserByTelegramIdParams) (UsersResponse, error) {
-	return uc.client.UsersController_getUserByTelegramId(ctx, params)
+func (uc *UsersControllerClient) GetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (UsersControllerGetUserByTelegramIdRes, error) {
+	return uc.client.UsersControllerGetUserByTelegramId(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getuserbyusername(ctx context.Context, params UsersController_getUserByUsernameParams) (UserResponse, error) {
-	return uc.client.UsersController_getUserByUsername(ctx, params)
+func (uc *UsersControllerClient) GetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (UsersControllerGetUserByUsernameRes, error) {
+	return uc.client.UsersControllerGetUserByUsername(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getuserbyuuid(ctx context.Context, params UsersController_getUserByUuidParams) (UserResponse, error) {
-	return uc.client.UsersController_getUserByUuid(ctx, params)
+func (uc *UsersControllerClient) GetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (UsersControllerGetUserByUuidRes, error) {
+	return uc.client.UsersControllerGetUserByUuid(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getusersubscriptionrequesthistory(ctx context.Context, params UsersController_getUserSubscriptionRequestHistoryParams) (GetUserSubscriptionRequestHistoryResponseDto, error) {
-	return uc.client.UsersController_getUserSubscriptionRequestHistory(ctx, params)
+func (uc *UsersControllerClient) GetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
+	return uc.client.UsersControllerGetUserSubscriptionRequestHistory(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getusersbyemail(ctx context.Context, params UsersController_getUsersByEmailParams) (UsersResponse, error) {
-	return uc.client.UsersController_getUsersByEmail(ctx, params)
+func (uc *UsersControllerClient) GetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (UsersControllerGetUsersByEmailRes, error) {
+	return uc.client.UsersControllerGetUsersByEmail(ctx, params)
 }
 
-func (uc *UsersControllerClient) Getusersbytag(ctx context.Context, params UsersController_getUsersByTagParams) (UsersResponse, error) {
-	return uc.client.UsersController_getUsersByTag(ctx, params)
+func (uc *UsersControllerClient) GetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (UsersControllerGetUsersByTagRes, error) {
+	return uc.client.UsersControllerGetUsersByTag(ctx, params)
 }
 
-func (uc *UsersControllerClient) Resetusertraffic(ctx context.Context, params UsersController_resetUserTrafficParams) (UserResponse, error) {
-	return uc.client.UsersController_resetUserTraffic(ctx, params)
+func (uc *UsersControllerClient) ResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (UsersControllerResetUserTrafficRes, error) {
+	return uc.client.UsersControllerResetUserTraffic(ctx, params)
 }
 
-func (uc *UsersControllerClient) Revokeusersubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersController_revokeUserSubscriptionParams) (UserResponse, error) {
-	return uc.client.UsersController_revokeUserSubscription(ctx, params, request)
+func (uc *UsersControllerClient) RevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (UsersControllerRevokeUserSubscriptionRes, error) {
+	return uc.client.UsersControllerRevokeUserSubscription(ctx, params, request)
 }
 
-func (uc *UsersControllerClient) Updateuser(ctx context.Context, request *UpdateUserRequestDto) (UserResponse, error) {
-	return uc.client.UsersController_updateUser(ctx, request)
+func (uc *UsersControllerClient) UpdateUser(ctx context.Context, request *UpdateUserRequestDto) (UsersControllerUpdateUserRes, error) {
+	return uc.client.UsersControllerUpdateUser(ctx, request)
 }
 
 
@@ -717,8 +717,8 @@ func (uc *UsersControllerClient) Updateuser(ctx context.Context, request *Update
 type UsersStatsControllerClient struct { client *Client }
 func NewUsersStatsControllerClient(c *Client) *UsersStatsControllerClient { return &UsersStatsControllerClient{client: c} }
 
-func (uc *UsersStatsControllerClient) Getuserusagebyrange(ctx context.Context, params UsersStatsController_getUserUsageByRangeParams) (GetUserUsageByRangeResponseDto, error) {
-	return uc.client.UsersStatsController_getUserUsageByRange(ctx, params)
+func (uc *UsersStatsControllerClient) GetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (UsersStatsControllerGetUserUsageByRangeRes, error) {
+	return uc.client.UsersStatsControllerGetUserUsageByRange(ctx, params)
 }
 
 
@@ -726,24 +726,24 @@ func (uc *UsersStatsControllerClient) Getuserusagebyrange(ctx context.Context, p
 type ProtectedSubscriptionsControllerClient struct { client *Client }
 func NewProtectedSubscriptionsControllerClient(c *Client) *ProtectedSubscriptionsControllerClient { return &ProtectedSubscriptionsControllerClient{client: c} }
 
-func (pc *ProtectedSubscriptionsControllerClient) Getallsubscriptions(ctx context.Context, params SubscriptionsController_getAllSubscriptionsParams) (GetAllSubscriptionsResponseDto, error) {
-	return pc.client.SubscriptionsController_getAllSubscriptions(ctx, params)
+func (pc *ProtectedSubscriptionsControllerClient) GetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
+	return pc.client.SubscriptionsControllerGetAllSubscriptions(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) Getrawsubscriptionbyshortuuid(ctx context.Context, params SubscriptionsController_getRawSubscriptionByShortUuidParams) (GetRawSubscriptionByShortUuidResponseDto, error) {
-	return pc.client.SubscriptionsController_getRawSubscriptionByShortUuid(ctx, params)
+func (pc *ProtectedSubscriptionsControllerClient) GetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
+	return pc.client.SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) Getsubscriptionbyshortuuidprotected(ctx context.Context, params SubscriptionsController_getSubscriptionByShortUuidProtectedParams) (SubscriptionResponse, error) {
-	return pc.client.SubscriptionsController_getSubscriptionByShortUuidProtected(ctx, params)
+func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
+	return pc.client.SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) Getsubscriptionbyusername(ctx context.Context, params SubscriptionsController_getSubscriptionByUsernameParams) (SubscriptionResponse, error) {
-	return pc.client.SubscriptionsController_getSubscriptionByUsername(ctx, params)
+func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
+	return pc.client.SubscriptionsControllerGetSubscriptionByUsername(ctx, params)
 }
 
-func (pc *ProtectedSubscriptionsControllerClient) Getsubscriptionbyuuid(ctx context.Context, params SubscriptionsController_getSubscriptionByUuidParams) (SubscriptionResponse, error) {
-	return pc.client.SubscriptionsController_getSubscriptionByUuid(ctx, params)
+func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
+	return pc.client.SubscriptionsControllerGetSubscriptionByUuid(ctx, params)
 }
 
 
@@ -751,18 +751,18 @@ func (pc *ProtectedSubscriptionsControllerClient) Getsubscriptionbyuuid(ctx cont
 type PublicSubscriptionControllerClient struct { client *Client }
 func NewPublicSubscriptionControllerClient(c *Client) *PublicSubscriptionControllerClient { return &PublicSubscriptionControllerClient{client: c} }
 
-func (pc *PublicSubscriptionControllerClient) Getsubscription(ctx context.Context, params SubscriptionController_getSubscriptionParams) error {
-	return pc.client.SubscriptionController_getSubscription(ctx, params)
+func (pc *PublicSubscriptionControllerClient) GetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (SubscriptionControllerGetSubscriptionRes, error) {
+	return pc.client.SubscriptionControllerGetSubscription(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) Getsubscriptionbyclienttype(ctx context.Context, params SubscriptionController_getSubscriptionByClientTypeParams) error {
-	return pc.client.SubscriptionController_getSubscriptionByClientType(ctx, params)
+func (pc *PublicSubscriptionControllerClient) GetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (SubscriptionControllerGetSubscriptionByClientTypeRes, error) {
+	return pc.client.SubscriptionControllerGetSubscriptionByClientType(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) Getsubscriptioninfobyshortuuid(ctx context.Context, params SubscriptionController_getSubscriptionInfoByShortUuidParams) (SubscriptionResponse, error) {
-	return pc.client.SubscriptionController_getSubscriptionInfoByShortUuid(ctx, params)
+func (pc *PublicSubscriptionControllerClient) GetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
+	return pc.client.SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) Getsubscriptionwithtype(ctx context.Context, params SubscriptionController_getSubscriptionWithTypeParams) error {
-	return pc.client.SubscriptionController_getSubscriptionWithType(ctx, params)
+func (pc *PublicSubscriptionControllerClient) GetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (SubscriptionControllerGetSubscriptionWithTypeRes, error) {
+	return pc.client.SubscriptionControllerGetSubscriptionWithType(ctx, params)
 }
