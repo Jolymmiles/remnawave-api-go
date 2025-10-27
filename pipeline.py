@@ -365,18 +365,25 @@ def rename_schemas(input_file: str, output_file: str) -> int:
 
 def generate_ogen_client(spec_file: str) -> bool:
     """Generate Go client using ogen"""
-    print_info("Running go generate...")
+    print_info(f"Running ogen with {spec_file}...")
     
     try:
         result = subprocess.run(
-            ['go', 'generate', './...'],
+            [
+                'go', 'run', 'github.com/ogen-go/ogen/cmd/ogen@latest',
+                '--config', '.ogen.yml',
+                '--target', 'api',
+                '--package', 'api',
+                '--clean',
+                spec_file
+            ],
             capture_output=True,
             text=True,
             timeout=120
         )
         
         if result.returncode == 0:
-            print_success("Go client generated successfully")
+            print_success(f"Go client generated from {spec_file}")
             return True
         else:
             print_error(f"ogen generation failed: {result.stderr}")
@@ -385,7 +392,7 @@ def generate_ogen_client(spec_file: str) -> bool:
         print_error("ogen generation timed out")
         return False
     except Exception as e:
-        print_error(f"Error running go generate: {e}")
+        print_error(f"Error running ogen: {e}")
         return False
 
 
