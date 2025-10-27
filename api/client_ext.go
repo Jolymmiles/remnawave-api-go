@@ -751,11 +751,11 @@ func (pc *ProtectedSubscriptionsControllerClient) GetSubscriptionByUuid(ctx cont
 type PublicSubscriptionControllerClient struct { client *Client }
 func NewPublicSubscriptionControllerClient(c *Client) *PublicSubscriptionControllerClient { return &PublicSubscriptionControllerClient{client: c} }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (SubscriptionControllerGetSubscriptionRes, error) {
+func (pc *PublicSubscriptionControllerClient) GetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error {
 	return pc.client.SubscriptionControllerGetSubscription(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (SubscriptionControllerGetSubscriptionByClientTypeRes, error) {
+func (pc *PublicSubscriptionControllerClient) GetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error {
 	return pc.client.SubscriptionControllerGetSubscriptionByClientType(ctx, params)
 }
 
@@ -763,6 +763,6 @@ func (pc *PublicSubscriptionControllerClient) GetSubscriptionInfoByShortUuid(ctx
 	return pc.client.SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params)
 }
 
-func (pc *PublicSubscriptionControllerClient) GetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (SubscriptionControllerGetSubscriptionWithTypeRes, error) {
+func (pc *PublicSubscriptionControllerClient) GetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error {
 	return pc.client.SubscriptionControllerGetSubscriptionWithType(ctx, params)
 }
