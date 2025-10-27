@@ -133,7 +133,7 @@ func (ac *AuthControllerClient) PasskeyAuthenticationOptions(ctx context.Context
 	return ac.client.AuthControllerPasskeyAuthenticationOptions(ctx)
 }
 
-func (ac *AuthControllerClient) PasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+func (ac *AuthControllerClient) PasskeyAuthenticationVerify(ctx context.Context, request *VerifyPasskeyAuthenticationRequestDto) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
 	return ac.client.AuthControllerPasskeyAuthenticationVerify(ctx, request)
 }
 
@@ -262,15 +262,15 @@ func (hc *HwidUserDevicesControllerClient) GetUserHwidDevices(ctx context.Contex
 type HostsBulkActionsControllerClient struct { client *Client }
 func NewHostsBulkActionsControllerClient(c *Client) *HostsBulkActionsControllerClient { return &HostsBulkActionsControllerClient{client: c} }
 
-func (hc *HostsBulkActionsControllerClient) DeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error) {
+func (hc *HostsBulkActionsControllerClient) DeleteHosts(ctx context.Context, request *BulkDeleteHostsRequestDto) (HostsBulkActionsControllerDeleteHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerDeleteHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) DisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error) {
+func (hc *HostsBulkActionsControllerClient) DisableHosts(ctx context.Context, request *BulkDisableHostsRequestDto) (HostsBulkActionsControllerDisableHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerDisableHosts(ctx, request)
 }
 
-func (hc *HostsBulkActionsControllerClient) EnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error) {
+func (hc *HostsBulkActionsControllerClient) EnableHosts(ctx context.Context, request *BulkEnableHostsRequestDto) (HostsBulkActionsControllerEnableHostsRes, error) {
 	return hc.client.HostsBulkActionsControllerEnableHosts(ctx, request)
 }
 
@@ -476,7 +476,7 @@ func (pc *PasskeysControllerClient) PasskeyRegistrationOptions(ctx context.Conte
 	return pc.client.PasskeyControllerPasskeyRegistrationOptions(ctx)
 }
 
-func (pc *PasskeysControllerClient) PasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+func (pc *PasskeysControllerClient) PasskeyRegistrationVerify(ctx context.Context, request *VerifyPasskeyRegistrationRequestDto) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
 	return pc.client.PasskeyControllerPasskeyRegistrationVerify(ctx, request)
 }
 
@@ -498,7 +498,7 @@ func (rc *RemnawaveSettingsControllerClient) UpdateSettings(ctx context.Context,
 type SnippetsControllerClient struct { client *Client }
 func NewSnippetsControllerClient(c *Client) *SnippetsControllerClient { return &SnippetsControllerClient{client: c} }
 
-func (sc *SnippetsControllerClient) CreateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerCreateSnippetRes, error) {
+func (sc *SnippetsControllerClient) CreateSnippet(ctx context.Context, request *CreateSnippetRequestDto) (SnippetsControllerCreateSnippetRes, error) {
 	return sc.client.SnippetsControllerCreateSnippet(ctx, request)
 }
 
@@ -510,7 +510,7 @@ func (sc *SnippetsControllerClient) GetSnippets(ctx context.Context) (SnippetsCo
 	return sc.client.SnippetsControllerGetSnippets(ctx)
 }
 
-func (sc *SnippetsControllerClient) UpdateSnippet(ctx context.Context, request *SnippetRequest) (SnippetsControllerUpdateSnippetRes, error) {
+func (sc *SnippetsControllerClient) UpdateSnippet(ctx context.Context, request *UpdateSnippetRequestDto) (SnippetsControllerUpdateSnippetRes, error) {
 	return sc.client.SnippetsControllerUpdateSnippet(ctx, request)
 }
 
@@ -619,11 +619,11 @@ func (uc *UsersBulkActionsControllerClient) BulkDeleteUsersByStatus(ctx context.
 	return uc.client.UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
+func (uc *UsersBulkActionsControllerClient) BulkResetUserTraffic(ctx context.Context, request *BulkResetTrafficUsersRequestDto) (UsersBulkActionsControllerBulkResetUserTrafficRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkResetUserTraffic(ctx, request)
 }
 
-func (uc *UsersBulkActionsControllerClient) BulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
+func (uc *UsersBulkActionsControllerClient) BulkRevokeUsersSubscription(ctx context.Context, request *BulkRevokeUsersSubscriptionRequestDto) (UsersBulkActionsControllerBulkRevokeUsersSubscriptionRes, error) {
 	return uc.client.UsersBulkActionsControllerBulkRevokeUsersSubscription(ctx, request)
 }
 
