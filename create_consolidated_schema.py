@@ -331,7 +331,34 @@ def main():
         
         print("\n📖 Loading full OpenAPI spec...")
         with open(input_file, 'r', encoding='utf-8') as f:
-            full_spec = json.load(f)
+            content = f.read()
+        
+        # Find last valid JSON brace
+        brace_count = 0
+        in_string = False
+        escape = False
+        last_valid = 0
+        
+        for i, char in enumerate(content):
+            if escape:
+                escape = False
+                continue
+            if char == '\\':
+                escape = True
+                continue
+            if char == '"':
+                in_string = not in_string
+                continue
+            if not in_string:
+                if char == '{':
+                    brace_count += 1
+                elif char == '}':
+                    brace_count -= 1
+                    if brace_count == 0:
+                        last_valid = i + 1
+        
+        # Load truncated JSON
+        full_spec = json.loads(content[:last_valid])
         
         print("🔄 Replacing all schema references...")
         full_spec = replace_refs_in_spec(full_spec, consolidation_map)
