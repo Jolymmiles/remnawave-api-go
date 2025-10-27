@@ -4,6 +4,8 @@ package api
 
 import (
 	"time"
+
+	"github.com/google/uuid"
 )
 
 // ApiTokensControllerDeleteParams is parameters of ApiTokensController_delete operation.
@@ -154,7 +156,7 @@ type NodesUsageHistoryControllerGetNodesUsageByRangeParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	Limit time.Time
+	End time.Time
 }
 
 // NodesUserUsageHistoryControllerGetNodeUserUsageParams is parameters of NodesUserUsageHistoryController_getNodeUserUsage operation.
@@ -162,7 +164,7 @@ type NodesUserUsageHistoryControllerGetNodeUserUsageParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	Limit time.Time
+	End time.Time
 	// UUID of the node.
 	UUID string
 }
@@ -205,8 +207,8 @@ type SubscriptionTemplateControllerDeleteTemplateParams struct {
 
 // SubscriptionTemplateControllerGetTemplateByUuidParams is parameters of SubscriptionTemplateController_getTemplateByUuid operation.
 type SubscriptionTemplateControllerGetTemplateByUuidParams struct {
-	// Path parameter: uuid.
-	UUID string
+	// UUID of the subscription template.
+	UUID uuid.UUID
 }
 
 // SubscriptionsControllerGetAllSubscriptionsParams is parameters of SubscriptionsController_getAllSubscriptions operation.
@@ -342,7 +344,7 @@ type UsersStatsControllerGetUserUsageByRangeParams struct {
 	// Start date.
 	Start time.Time
 	// End date.
-	Limit time.Time
+	End time.Time
 	// UUID of the user.
 	UUID string
 }

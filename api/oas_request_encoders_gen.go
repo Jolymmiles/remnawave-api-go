@@ -67,7 +67,7 @@ func encodeAuthControllerOauth2CallbackRequest(
 }
 
 func encodeAuthControllerPasskeyAuthenticationVerifyRequest(
-	req *VerifyPasskeyAuthenticationRequestDto,
+	req *PasskeyOptionsResponse,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -165,7 +165,7 @@ func encodeExternalSquadControllerUpdateExternalSquadRequest(
 }
 
 func encodeHostsBulkActionsControllerDeleteHostsRequest(
-	req *BulkDeleteHostsRequestDto,
+	req *BulkUuidsRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -179,7 +179,7 @@ func encodeHostsBulkActionsControllerDeleteHostsRequest(
 }
 
 func encodeHostsBulkActionsControllerDisableHostsRequest(
-	req *BulkDisableHostsRequestDto,
+	req *BulkUuidsRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -193,7 +193,7 @@ func encodeHostsBulkActionsControllerDisableHostsRequest(
 }
 
 func encodeHostsBulkActionsControllerEnableHostsRequest(
-	req *BulkEnableHostsRequestDto,
+	req *BulkUuidsRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -487,7 +487,7 @@ func encodePasskeyControllerDeletePasskeyRequest(
 }
 
 func encodePasskeyControllerPasskeyRegistrationVerifyRequest(
-	req *VerifyPasskeyRegistrationRequestDto,
+	req *PasskeyOptionsResponse,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -515,7 +515,7 @@ func encodeRemnawaveSettingsControllerUpdateSettingsRequest(
 }
 
 func encodeSnippetsControllerCreateSnippetRequest(
-	req *CreateSnippetRequestDto,
+	req *SnippetRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -543,7 +543,7 @@ func encodeSnippetsControllerDeleteSnippetByNameRequest(
 }
 
 func encodeSnippetsControllerUpdateSnippetRequest(
-	req *UpdateSnippetRequestDto,
+	req *SnippetRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -627,7 +627,7 @@ func encodeSystemControllerEncryptHappCryptoLinkRequest(
 }
 
 func encodeUsersBulkActionsControllerBulkDeleteUsersRequest(
-	req *BulkDeleteUsersRequestDto,
+	req *BulkUuidsRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -655,7 +655,7 @@ func encodeUsersBulkActionsControllerBulkDeleteUsersByStatusRequest(
 }
 
 func encodeUsersBulkActionsControllerBulkResetUserTrafficRequest(
-	req *BulkResetTrafficUsersRequestDto,
+	req *BulkUuidsRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -669,7 +669,7 @@ func encodeUsersBulkActionsControllerBulkResetUserTrafficRequest(
 }
 
 func encodeUsersBulkActionsControllerBulkRevokeUsersSubscriptionRequest(
-	req *BulkRevokeUsersSubscriptionRequestDto,
+	req *BulkUuidsRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
