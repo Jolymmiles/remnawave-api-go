@@ -6,7 +6,7 @@
 
 A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 
-**Latest version:** `v2.3.0-5`  
+**Latest version:** `v2.3.0-6`  
 **API version:** `v2.3.0`
 
 Generated with [**ogen**](https://github.com/ogen-go/ogen):
@@ -14,11 +14,12 @@ Generated with [**ogen**](https://github.com/ogen-go/ogen):
 * Compile-time validation against OpenAPI 3.0 spec
 * First-class `context.Context` support
 * Organized sub-clients for clean API access
+* Simplified method signatures (no verbose Params structs)
 
 ## Installation
 
 ```bash
-go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-5
+go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-6
 ```
 
 ## Quick Start
@@ -44,19 +45,19 @@ func main() {
     // Wrap with organized sub-clients
     client := remapi.NewClientExt(baseClient)
 
-    // Use controller methods
-    users, _ := client.Users().GetAll(ctx, remapi.UsersControllerGetAllUsersParams{})
-    fmt.Printf("Found %d users\n", len(users.Response.Users))
+    // Get user by UUID - simple string argument
+    user, _ := client.Users().GetUserByUuid(ctx, "user-uuid-here")
+    fmt.Printf("User: %s\n", user.(*remapi.UserResponse).Response.Username)
+
+    // Get node by UUID
+    node, _ := client.Nodes().GetOneNode(ctx, "node-uuid-here")
+    fmt.Printf("Node: %s\n", node.(*remapi.NodeResponse).Response.Name)
 
     // Create user
-    user, _ := client.Users().Create(ctx, &remapi.CreateUserRequestDto{
+    newUser, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequestDto{
         Username: "john_doe",
     })
-    fmt.Printf("Created user: %s\n", user.Response.Username)
-
-    // Get nodes
-    nodes, _ := client.Nodes().GetAll(ctx)
-    fmt.Printf("Found %d nodes\n", len(nodes.Response))
+    fmt.Printf("Created: %s\n", newUser.(*remapi.UserResponse).Response.Username)
 }
 ```
 
@@ -95,13 +96,13 @@ func main() {
 Unified error types for consistent error handling:
 
 ```go
-resp, err := client.Users().GetByUuid(ctx, remapi.UsersControllerGetUserByUuidParams{
-    Uuid: "invalid-uuid",
-})
+resp, err := client.Users().GetUserByUuid(ctx, "invalid-uuid")
+if err != nil {
+    panic(err)
+}
 
 switch e := resp.(type) {
 case *remapi.BadRequestError:
-    // Validation errors
     for _, validationErr := range e.Errors {
         fmt.Printf("Field: %v, Error: %s\n", validationErr.Path, validationErr.Message)
     }
@@ -142,46 +143,78 @@ type ValidationError struct {
 ### Users
 
 ```go
-// List all users
-users, _ := client.Users().GetAll(ctx, remapi.UsersControllerGetAllUsersParams{})
-
-// Get by UUID
-user, _ := client.Users().GetByUuid(ctx, remapi.UsersControllerGetUserByUuidParams{Uuid: "..."})
+// Get by UUID (simplified - just pass the string)
+user, _ := client.Users().GetUserByUuid(ctx, "uuid-here")
 
 // Get by username
-user, _ := client.Users().GetByUsername(ctx, remapi.UsersControllerGetUserByUsernameParams{Username: "john"})
+user, _ := client.Users().GetUserByUsername(ctx, "john")
+
+// Get by short UUID
+user, _ := client.Users().GetUserByShortUuid(ctx, "short-uuid")
 
 // Create
-user, _ := client.Users().Create(ctx, &remapi.CreateUserRequestDto{Username: "new_user"})
+user, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequestDto{
+    Username: "new_user",
+})
 
 // Update
-user, _ := client.Users().Update(ctx, &remapi.UpdateUserRequestDto{Uuid: "...", Username: remapi.NewOptString("updated")})
+user, _ := client.Users().UpdateUser(ctx, &remapi.UpdateUserRequestDto{
+    Uuid: "uuid-here",
+})
 
 // Delete
-client.Users().Delete(ctx, remapi.UsersControllerDeleteUserParams{Uuid: "..."})
+client.Users().DeleteUser(ctx, "uuid-here")
 
 // Enable/Disable
-client.Users().Enable(ctx, remapi.UsersControllerEnableUserParams{Uuid: "..."})
-client.Users().Disable(ctx, remapi.UsersControllerDisableUserParams{Uuid: "..."})
+client.Users().EnableUser(ctx, "uuid-here")
+client.Users().DisableUser(ctx, "uuid-here")
+
+// Reset traffic
+client.Users().ResetUserTraffic(ctx, "uuid-here")
 ```
 
 ### Nodes
 
 ```go
 // List all
-nodes, _ := client.Nodes().GetAll(ctx)
+nodes, _ := client.Nodes().GetAllNodes(ctx)
 
-// Get one
-node, _ := client.Nodes().GetOne(ctx, remapi.NodesControllerGetOneNodeParams{Uuid: "..."})
+// Get one (simplified)
+node, _ := client.Nodes().GetOneNode(ctx, "uuid-here")
 
 // Create
-node, _ := client.Nodes().Create(ctx, &remapi.CreateNodeRequestDto{Name: "Node-1"})
+node, _ := client.Nodes().CreateNode(ctx, &remapi.CreateNodeRequestDto{
+    Name: "Node-1",
+})
+
+// Delete
+client.Nodes().DeleteNode(ctx, "uuid-here")
+
+// Enable/Disable
+client.Nodes().EnableNode(ctx, "uuid-here")
+client.Nodes().DisableNode(ctx, "uuid-here")
 
 // Restart
-client.Nodes().Restart(ctx, remapi.NodesControllerRestartNodeParams{Uuid: "..."})
+client.Nodes().RestartNode(ctx, "uuid-here")
 
-// Restart all
-client.Nodes().RestartAll(ctx)
+// Reset traffic
+client.Nodes().ResetNodeTraffic(ctx, "uuid-here")
+```
+
+### Hosts
+
+```go
+// List all
+hosts, _ := client.Hosts().GetAllHosts(ctx)
+
+// Get one
+host, _ := client.Hosts().GetOneHost(ctx, "uuid-here")
+
+// Create
+host, _ := client.Hosts().CreateHost(ctx, &remapi.CreateHostRequestDto{...})
+
+// Delete
+client.Hosts().DeleteHost(ctx, "uuid-here")
 ```
 
 ### Authentication
@@ -192,7 +225,7 @@ resp, _ := client.Auth().Login(ctx, &remapi.LoginRequestDto{
     Username: "admin",
     Password: "password",
 })
-token := resp.Response.AccessToken
+token := resp.(*remapi.TokenResponse).Response.AccessToken
 
 // Get status
 status, _ := client.Auth().GetStatus(ctx)
@@ -204,7 +237,6 @@ If you need direct access to the underlying ogen client:
 
 ```go
 baseClient := client.Client()
-// Use baseClient for advanced operations
 ```
 
 ## Requirements
