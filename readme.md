@@ -6,8 +6,12 @@
 
 A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 
-**Latest version:** `v2.3.0-6`  
-**API version:** `v2.3.0`
+## Version Compatibility
+
+| API Version | SDK Version | Install |
+|-------------|-------------|---------|
+| 2.3.0 | v2.3.0-6 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-6` |
+| 2.2.6 | v2.2.6-1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.2.6-1` |
 
 Generated with [**ogen**](https://github.com/ogen-go/ogen):
 * Zero-reflection JSON decoder for high throughput
