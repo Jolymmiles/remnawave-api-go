@@ -213,8 +213,10 @@ func (sc *ApiTokensClient) Create(ctx context.Context, request *CreateApiTokenRe
 }
 
 // Delete calls ApiTokensController_delete.
-func (sc *ApiTokensClient) Delete(ctx context.Context, params ApiTokensControllerDeleteParams) (ApiTokensControllerDeleteRes, error) {
-	return sc.client.ApiTokensControllerDelete(ctx, params)
+func (sc *ApiTokensClient) Delete(ctx context.Context, uuid string) (ApiTokensControllerDeleteRes, error) {
+	return sc.client.ApiTokensControllerDelete(ctx, ApiTokensControllerDeleteParams{
+		UUID: uuid,
+	})
 }
 
 // FindAll calls ApiTokensController_findAll.
@@ -288,8 +290,10 @@ func (sc *ConfigProfileClient) CreateConfigProfile(ctx context.Context, request 
 }
 
 // DeleteConfigProfileByUuid calls ConfigProfileController_deleteConfigProfileByUuid.
-func (sc *ConfigProfileClient) DeleteConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerDeleteConfigProfileByUuidParams) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
-	return sc.client.ConfigProfileControllerDeleteConfigProfileByUuid(ctx, params)
+func (sc *ConfigProfileClient) DeleteConfigProfileByUuid(ctx context.Context, uuid string) (ConfigProfileControllerDeleteConfigProfileByUuidRes, error) {
+	return sc.client.ConfigProfileControllerDeleteConfigProfileByUuid(ctx, ConfigProfileControllerDeleteConfigProfileByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetAllInbounds calls ConfigProfileController_getAllInbounds.
@@ -298,13 +302,17 @@ func (sc *ConfigProfileClient) GetAllInbounds(ctx context.Context) (ConfigProfil
 }
 
 // GetComputedConfigProfileByUuid calls ConfigProfileController_getComputedConfigProfileByUuid.
-func (sc *ConfigProfileClient) GetComputedConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetComputedConfigProfileByUuidParams) (ConfigProfileControllerGetComputedConfigProfileByUuidRes, error) {
-	return sc.client.ConfigProfileControllerGetComputedConfigProfileByUuid(ctx, params)
+func (sc *ConfigProfileClient) GetComputedConfigProfileByUuid(ctx context.Context, uuid string) (ConfigProfileControllerGetComputedConfigProfileByUuidRes, error) {
+	return sc.client.ConfigProfileControllerGetComputedConfigProfileByUuid(ctx, ConfigProfileControllerGetComputedConfigProfileByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetConfigProfileByUuid calls ConfigProfileController_getConfigProfileByUuid.
-func (sc *ConfigProfileClient) GetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
-	return sc.client.ConfigProfileControllerGetConfigProfileByUuid(ctx, params)
+func (sc *ConfigProfileClient) GetConfigProfileByUuid(ctx context.Context, uuid string) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
+	return sc.client.ConfigProfileControllerGetConfigProfileByUuid(ctx, ConfigProfileControllerGetConfigProfileByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetConfigProfiles calls ConfigProfileController_getConfigProfiles.
@@ -313,8 +321,10 @@ func (sc *ConfigProfileClient) GetConfigProfiles(ctx context.Context) (ConfigPro
 }
 
 // GetInboundsByProfileUuid calls ConfigProfileController_getInboundsByProfileUuid.
-func (sc *ConfigProfileClient) GetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
-	return sc.client.ConfigProfileControllerGetInboundsByProfileUuid(ctx, params)
+func (sc *ConfigProfileClient) GetInboundsByProfileUuid(ctx context.Context, uuid string) (ConfigProfileControllerGetInboundsByProfileUuidRes, error) {
+	return sc.client.ConfigProfileControllerGetInboundsByProfileUuid(ctx, ConfigProfileControllerGetInboundsByProfileUuidParams{
+		UUID: uuid,
+	})
 }
 
 // ReorderConfigProfiles calls ConfigProfileController_reorderConfigProfiles.
@@ -338,8 +348,10 @@ func NewExternalSquadClient(client *Client) *ExternalSquadClient {
 }
 
 // AddUsersToExternalSquad calls ExternalSquadController_addUsersToExternalSquad.
-func (sc *ExternalSquadClient) AddUsersToExternalSquad(ctx context.Context, params ExternalSquadControllerAddUsersToExternalSquadParams) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
-	return sc.client.ExternalSquadControllerAddUsersToExternalSquad(ctx, params)
+func (sc *ExternalSquadClient) AddUsersToExternalSquad(ctx context.Context, uuid string) (ExternalSquadControllerAddUsersToExternalSquadRes, error) {
+	return sc.client.ExternalSquadControllerAddUsersToExternalSquad(ctx, ExternalSquadControllerAddUsersToExternalSquadParams{
+		UUID: uuid,
+	})
 }
 
 // CreateExternalSquad calls ExternalSquadController_createExternalSquad.
@@ -348,13 +360,17 @@ func (sc *ExternalSquadClient) CreateExternalSquad(ctx context.Context, request 
 }
 
 // DeleteExternalSquad calls ExternalSquadController_deleteExternalSquad.
-func (sc *ExternalSquadClient) DeleteExternalSquad(ctx context.Context, params ExternalSquadControllerDeleteExternalSquadParams) (ExternalSquadControllerDeleteExternalSquadRes, error) {
-	return sc.client.ExternalSquadControllerDeleteExternalSquad(ctx, params)
+func (sc *ExternalSquadClient) DeleteExternalSquad(ctx context.Context, uuid string) (ExternalSquadControllerDeleteExternalSquadRes, error) {
+	return sc.client.ExternalSquadControllerDeleteExternalSquad(ctx, ExternalSquadControllerDeleteExternalSquadParams{
+		UUID: uuid,
+	})
 }
 
 // GetExternalSquadByUuid calls ExternalSquadController_getExternalSquadByUuid.
-func (sc *ExternalSquadClient) GetExternalSquadByUuid(ctx context.Context, params ExternalSquadControllerGetExternalSquadByUuidParams) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
-	return sc.client.ExternalSquadControllerGetExternalSquadByUuid(ctx, params)
+func (sc *ExternalSquadClient) GetExternalSquadByUuid(ctx context.Context, uuid string) (ExternalSquadControllerGetExternalSquadByUuidRes, error) {
+	return sc.client.ExternalSquadControllerGetExternalSquadByUuid(ctx, ExternalSquadControllerGetExternalSquadByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetExternalSquads calls ExternalSquadController_getExternalSquads.
@@ -363,8 +379,10 @@ func (sc *ExternalSquadClient) GetExternalSquads(ctx context.Context) (ExternalS
 }
 
 // RemoveUsersFromExternalSquad calls ExternalSquadController_removeUsersFromExternalSquad.
-func (sc *ExternalSquadClient) RemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
-	return sc.client.ExternalSquadControllerRemoveUsersFromExternalSquad(ctx, params)
+func (sc *ExternalSquadClient) RemoveUsersFromExternalSquad(ctx context.Context, uuid string) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error) {
+	return sc.client.ExternalSquadControllerRemoveUsersFromExternalSquad(ctx, ExternalSquadControllerRemoveUsersFromExternalSquadParams{
+		UUID: uuid,
+	})
 }
 
 // ReorderExternalSquads calls ExternalSquadController_reorderExternalSquads.
@@ -393,8 +411,10 @@ func (sc *HostsClient) CreateHost(ctx context.Context, request *CreateHostReques
 }
 
 // DeleteHost calls HostsController_deleteHost.
-func (sc *HostsClient) DeleteHost(ctx context.Context, params HostsControllerDeleteHostParams) (HostsControllerDeleteHostRes, error) {
-	return sc.client.HostsControllerDeleteHost(ctx, params)
+func (sc *HostsClient) DeleteHost(ctx context.Context, uuid string) (HostsControllerDeleteHostRes, error) {
+	return sc.client.HostsControllerDeleteHost(ctx, HostsControllerDeleteHostParams{
+		UUID: uuid,
+	})
 }
 
 // GetAllHostTags calls HostsController_getAllHostTags.
@@ -408,8 +428,10 @@ func (sc *HostsClient) GetAllHosts(ctx context.Context) (HostsControllerGetAllHo
 }
 
 // GetOneHost calls HostsController_getOneHost.
-func (sc *HostsClient) GetOneHost(ctx context.Context, params HostsControllerGetOneHostParams) (HostsControllerGetOneHostRes, error) {
-	return sc.client.HostsControllerGetOneHost(ctx, params)
+func (sc *HostsClient) GetOneHost(ctx context.Context, uuid string) (HostsControllerGetOneHostRes, error) {
+	return sc.client.HostsControllerGetOneHost(ctx, HostsControllerGetOneHostParams{
+		UUID: uuid,
+	})
 }
 
 // ReorderHosts calls HostsController_reorderHosts.
@@ -483,8 +505,11 @@ func (sc *HwidUserDevicesClient) DeleteUserHwidDevice(ctx context.Context, reque
 }
 
 // GetAllUsers calls HwidUserDevicesController_getAllUsers.
-func (sc *HwidUserDevicesClient) GetAllUsers(ctx context.Context, params HwidUserDevicesControllerGetAllUsersParams) (HwidUserDevicesControllerGetAllUsersRes, error) {
-	return sc.client.HwidUserDevicesControllerGetAllUsers(ctx, params)
+func (sc *HwidUserDevicesClient) GetAllUsers(ctx context.Context, size float64, start float64) (HwidUserDevicesControllerGetAllUsersRes, error) {
+	return sc.client.HwidUserDevicesControllerGetAllUsers(ctx, HwidUserDevicesControllerGetAllUsersParams{
+		Size: NewOptFloat64(size),
+		Start: NewOptFloat64(start),
+	})
 }
 
 // GetHwidDevicesStats calls HwidUserDevicesController_getHwidDevicesStats.
@@ -493,8 +518,10 @@ func (sc *HwidUserDevicesClient) GetHwidDevicesStats(ctx context.Context) (HwidU
 }
 
 // GetUserHwidDevices calls HwidUserDevicesController_getUserHwidDevices.
-func (sc *HwidUserDevicesClient) GetUserHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetUserHwidDevicesParams) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
-	return sc.client.HwidUserDevicesControllerGetUserHwidDevices(ctx, params)
+func (sc *HwidUserDevicesClient) GetUserHwidDevices(ctx context.Context, useruuid string) (HwidUserDevicesControllerGetUserHwidDevicesRes, error) {
+	return sc.client.HwidUserDevicesControllerGetUserHwidDevices(ctx, HwidUserDevicesControllerGetUserHwidDevicesParams{
+		UserUuid: useruuid,
+	})
 }
 
 // InfraBillingClient provides InfraBilling operations.
@@ -523,18 +550,24 @@ func (sc *InfraBillingClient) CreateInfraProvider(ctx context.Context, request *
 }
 
 // DeleteInfraBillingHistoryRecordByUuid calls InfraBillingController_deleteInfraBillingHistoryRecordByUuid.
-func (sc *InfraBillingClient) DeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
-	return sc.client.InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx, params)
+func (sc *InfraBillingClient) DeleteInfraBillingHistoryRecordByUuid(ctx context.Context, uuid string) (InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes, error) {
+	return sc.client.InfraBillingControllerDeleteInfraBillingHistoryRecordByUuid(ctx, InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // DeleteInfraBillingNodeByUuid calls InfraBillingController_deleteInfraBillingNodeByUuid.
-func (sc *InfraBillingClient) DeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraBillingNodeByUuidParams) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
-	return sc.client.InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx, params)
+func (sc *InfraBillingClient) DeleteInfraBillingNodeByUuid(ctx context.Context, uuid string) (InfraBillingControllerDeleteInfraBillingNodeByUuidRes, error) {
+	return sc.client.InfraBillingControllerDeleteInfraBillingNodeByUuid(ctx, InfraBillingControllerDeleteInfraBillingNodeByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // DeleteInfraProviderByUuid calls InfraBillingController_deleteInfraProviderByUuid.
-func (sc *InfraBillingClient) DeleteInfraProviderByUuid(ctx context.Context, params InfraBillingControllerDeleteInfraProviderByUuidParams) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
-	return sc.client.InfraBillingControllerDeleteInfraProviderByUuid(ctx, params)
+func (sc *InfraBillingClient) DeleteInfraProviderByUuid(ctx context.Context, uuid string) (InfraBillingControllerDeleteInfraProviderByUuidRes, error) {
+	return sc.client.InfraBillingControllerDeleteInfraProviderByUuid(ctx, InfraBillingControllerDeleteInfraProviderByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetBillingNodes calls InfraBillingController_getBillingNodes.
@@ -548,8 +581,10 @@ func (sc *InfraBillingClient) GetInfraBillingHistoryRecords(ctx context.Context)
 }
 
 // GetInfraProviderByUuid calls InfraBillingController_getInfraProviderByUuid.
-func (sc *InfraBillingClient) GetInfraProviderByUuid(ctx context.Context, params InfraBillingControllerGetInfraProviderByUuidParams) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
-	return sc.client.InfraBillingControllerGetInfraProviderByUuid(ctx, params)
+func (sc *InfraBillingClient) GetInfraProviderByUuid(ctx context.Context, uuid string) (InfraBillingControllerGetInfraProviderByUuidRes, error) {
+	return sc.client.InfraBillingControllerGetInfraProviderByUuid(ctx, InfraBillingControllerGetInfraProviderByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetInfraProviders calls InfraBillingController_getInfraProviders.
@@ -578,8 +613,10 @@ func NewInternalSquadClient(client *Client) *InternalSquadClient {
 }
 
 // AddUsersToInternalSquad calls InternalSquadController_addUsersToInternalSquad.
-func (sc *InternalSquadClient) AddUsersToInternalSquad(ctx context.Context, params InternalSquadControllerAddUsersToInternalSquadParams) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
-	return sc.client.InternalSquadControllerAddUsersToInternalSquad(ctx, params)
+func (sc *InternalSquadClient) AddUsersToInternalSquad(ctx context.Context, uuid string) (InternalSquadControllerAddUsersToInternalSquadRes, error) {
+	return sc.client.InternalSquadControllerAddUsersToInternalSquad(ctx, InternalSquadControllerAddUsersToInternalSquadParams{
+		UUID: uuid,
+	})
 }
 
 // CreateInternalSquad calls InternalSquadController_createInternalSquad.
@@ -588,18 +625,24 @@ func (sc *InternalSquadClient) CreateInternalSquad(ctx context.Context, request 
 }
 
 // DeleteInternalSquad calls InternalSquadController_deleteInternalSquad.
-func (sc *InternalSquadClient) DeleteInternalSquad(ctx context.Context, params InternalSquadControllerDeleteInternalSquadParams) (InternalSquadControllerDeleteInternalSquadRes, error) {
-	return sc.client.InternalSquadControllerDeleteInternalSquad(ctx, params)
+func (sc *InternalSquadClient) DeleteInternalSquad(ctx context.Context, uuid string) (InternalSquadControllerDeleteInternalSquadRes, error) {
+	return sc.client.InternalSquadControllerDeleteInternalSquad(ctx, InternalSquadControllerDeleteInternalSquadParams{
+		UUID: uuid,
+	})
 }
 
 // GetInternalSquadAccessibleNodes calls InternalSquadController_getInternalSquadAccessibleNodes.
-func (sc *InternalSquadClient) GetInternalSquadAccessibleNodes(ctx context.Context, params InternalSquadControllerGetInternalSquadAccessibleNodesParams) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
-	return sc.client.InternalSquadControllerGetInternalSquadAccessibleNodes(ctx, params)
+func (sc *InternalSquadClient) GetInternalSquadAccessibleNodes(ctx context.Context, uuid string) (InternalSquadControllerGetInternalSquadAccessibleNodesRes, error) {
+	return sc.client.InternalSquadControllerGetInternalSquadAccessibleNodes(ctx, InternalSquadControllerGetInternalSquadAccessibleNodesParams{
+		UUID: uuid,
+	})
 }
 
 // GetInternalSquadByUuid calls InternalSquadController_getInternalSquadByUuid.
-func (sc *InternalSquadClient) GetInternalSquadByUuid(ctx context.Context, params InternalSquadControllerGetInternalSquadByUuidParams) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
-	return sc.client.InternalSquadControllerGetInternalSquadByUuid(ctx, params)
+func (sc *InternalSquadClient) GetInternalSquadByUuid(ctx context.Context, uuid string) (InternalSquadControllerGetInternalSquadByUuidRes, error) {
+	return sc.client.InternalSquadControllerGetInternalSquadByUuid(ctx, InternalSquadControllerGetInternalSquadByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetInternalSquads calls InternalSquadController_getInternalSquads.
@@ -608,8 +651,10 @@ func (sc *InternalSquadClient) GetInternalSquads(ctx context.Context) (InternalS
 }
 
 // RemoveUsersFromInternalSquad calls InternalSquadController_removeUsersFromInternalSquad.
-func (sc *InternalSquadClient) RemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
-	return sc.client.InternalSquadControllerRemoveUsersFromInternalSquad(ctx, params)
+func (sc *InternalSquadClient) RemoveUsersFromInternalSquad(ctx context.Context, uuid string) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error) {
+	return sc.client.InternalSquadControllerRemoveUsersFromInternalSquad(ctx, InternalSquadControllerRemoveUsersFromInternalSquadParams{
+		UUID: uuid,
+	})
 }
 
 // ReorderInternalSquads calls InternalSquadController_reorderInternalSquads.
@@ -653,18 +698,24 @@ func (sc *NodesClient) CreateNode(ctx context.Context, request *CreateNodeReques
 }
 
 // DeleteNode calls NodesController_deleteNode.
-func (sc *NodesClient) DeleteNode(ctx context.Context, params NodesControllerDeleteNodeParams) (NodesControllerDeleteNodeRes, error) {
-	return sc.client.NodesControllerDeleteNode(ctx, params)
+func (sc *NodesClient) DeleteNode(ctx context.Context, uuid string) (NodesControllerDeleteNodeRes, error) {
+	return sc.client.NodesControllerDeleteNode(ctx, NodesControllerDeleteNodeParams{
+		UUID: uuid,
+	})
 }
 
 // DisableNode calls NodesController_disableNode.
-func (sc *NodesClient) DisableNode(ctx context.Context, params NodesControllerDisableNodeParams) (NodesControllerDisableNodeRes, error) {
-	return sc.client.NodesControllerDisableNode(ctx, params)
+func (sc *NodesClient) DisableNode(ctx context.Context, uuid string) (NodesControllerDisableNodeRes, error) {
+	return sc.client.NodesControllerDisableNode(ctx, NodesControllerDisableNodeParams{
+		UUID: uuid,
+	})
 }
 
 // EnableNode calls NodesController_enableNode.
-func (sc *NodesClient) EnableNode(ctx context.Context, params NodesControllerEnableNodeParams) (NodesControllerEnableNodeRes, error) {
-	return sc.client.NodesControllerEnableNode(ctx, params)
+func (sc *NodesClient) EnableNode(ctx context.Context, uuid string) (NodesControllerEnableNodeRes, error) {
+	return sc.client.NodesControllerEnableNode(ctx, NodesControllerEnableNodeParams{
+		UUID: uuid,
+	})
 }
 
 // GetAllNodes calls NodesController_getAllNodes.
@@ -678,8 +729,10 @@ func (sc *NodesClient) GetAllNodesTags(ctx context.Context) (NodesControllerGetA
 }
 
 // GetOneNode calls NodesController_getOneNode.
-func (sc *NodesClient) GetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error) {
-	return sc.client.NodesControllerGetOneNode(ctx, params)
+func (sc *NodesClient) GetOneNode(ctx context.Context, uuid string) (NodesControllerGetOneNodeRes, error) {
+	return sc.client.NodesControllerGetOneNode(ctx, NodesControllerGetOneNodeParams{
+		UUID: uuid,
+	})
 }
 
 // ReorderNodes calls NodesController_reorderNodes.
@@ -688,8 +741,10 @@ func (sc *NodesClient) ReorderNodes(ctx context.Context, request *ReorderNodeReq
 }
 
 // ResetNodeTraffic calls NodesController_resetNodeTraffic.
-func (sc *NodesClient) ResetNodeTraffic(ctx context.Context, params NodesControllerResetNodeTrafficParams) (NodesControllerResetNodeTrafficRes, error) {
-	return sc.client.NodesControllerResetNodeTraffic(ctx, params)
+func (sc *NodesClient) ResetNodeTraffic(ctx context.Context, uuid string) (NodesControllerResetNodeTrafficRes, error) {
+	return sc.client.NodesControllerResetNodeTraffic(ctx, NodesControllerResetNodeTrafficParams{
+		UUID: uuid,
+	})
 }
 
 // RestartAllNodes calls NodesController_restartAllNodes.
@@ -698,8 +753,10 @@ func (sc *NodesClient) RestartAllNodes(ctx context.Context, request *RestartAllN
 }
 
 // RestartNode calls NodesController_restartNode.
-func (sc *NodesClient) RestartNode(ctx context.Context, params NodesControllerRestartNodeParams) (NodesControllerRestartNodeRes, error) {
-	return sc.client.NodesControllerRestartNode(ctx, params)
+func (sc *NodesClient) RestartNode(ctx context.Context, uuid string) (NodesControllerRestartNodeRes, error) {
+	return sc.client.NodesControllerRestartNode(ctx, NodesControllerRestartNodeParams{
+		UUID: uuid,
+	})
 }
 
 // UpdateNode calls NodesController_updateNode.
@@ -838,8 +895,10 @@ func NewSubscriptionClient(client *Client) *SubscriptionClient {
 }
 
 // GetSubscriptionInfoByShortUuid calls SubscriptionController_getSubscriptionInfoByShortUuid.
-func (sc *SubscriptionClient) GetSubscriptionInfoByShortUuid(ctx context.Context, params SubscriptionControllerGetSubscriptionInfoByShortUuidParams) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
-	return sc.client.SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, params)
+func (sc *SubscriptionClient) GetSubscriptionInfoByShortUuid(ctx context.Context, shortuuid string) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
+	return sc.client.SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, SubscriptionControllerGetSubscriptionInfoByShortUuidParams{
+		ShortUuid: shortuuid,
+	})
 }
 
 // SubscriptionSettingsClient provides SubscriptionSettings operations.
@@ -878,8 +937,10 @@ func (sc *SubscriptionTemplateClient) CreateTemplate(ctx context.Context, reques
 }
 
 // DeleteTemplate calls SubscriptionTemplateController_deleteTemplate.
-func (sc *SubscriptionTemplateClient) DeleteTemplate(ctx context.Context, params SubscriptionTemplateControllerDeleteTemplateParams) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
-	return sc.client.SubscriptionTemplateControllerDeleteTemplate(ctx, params)
+func (sc *SubscriptionTemplateClient) DeleteTemplate(ctx context.Context, uuid string) (SubscriptionTemplateControllerDeleteTemplateRes, error) {
+	return sc.client.SubscriptionTemplateControllerDeleteTemplate(ctx, SubscriptionTemplateControllerDeleteTemplateParams{
+		UUID: uuid,
+	})
 }
 
 // GetAllTemplates calls SubscriptionTemplateController_getAllTemplates.
@@ -888,8 +949,10 @@ func (sc *SubscriptionTemplateClient) GetAllTemplates(ctx context.Context) (Subs
 }
 
 // GetTemplateByUuid calls SubscriptionTemplateController_getTemplateByUuid.
-func (sc *SubscriptionTemplateClient) GetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
-	return sc.client.SubscriptionTemplateControllerGetTemplateByUuid(ctx, params)
+func (sc *SubscriptionTemplateClient) GetTemplateByUuid(ctx context.Context, uuid string) (SubscriptionTemplateControllerGetTemplateByUuidRes, error) {
+	return sc.client.SubscriptionTemplateControllerGetTemplateByUuid(ctx, SubscriptionTemplateControllerGetTemplateByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // ReorderSubscriptionTemplates calls SubscriptionTemplateController_reorderSubscriptionTemplates.
@@ -913,28 +976,40 @@ func NewSubscriptionsClient(client *Client) *SubscriptionsClient {
 }
 
 // GetAllSubscriptions calls SubscriptionsController_getAllSubscriptions.
-func (sc *SubscriptionsClient) GetAllSubscriptions(ctx context.Context, params SubscriptionsControllerGetAllSubscriptionsParams) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
-	return sc.client.SubscriptionsControllerGetAllSubscriptions(ctx, params)
+func (sc *SubscriptionsClient) GetAllSubscriptions(ctx context.Context, size float64, start float64) (SubscriptionsControllerGetAllSubscriptionsRes, error) {
+	return sc.client.SubscriptionsControllerGetAllSubscriptions(ctx, SubscriptionsControllerGetAllSubscriptionsParams{
+		Size: NewOptFloat64(size),
+		Start: NewOptFloat64(start),
+	})
 }
 
 // GetRawSubscriptionByShortUuid calls SubscriptionsController_getRawSubscriptionByShortUuid.
-func (sc *SubscriptionsClient) GetRawSubscriptionByShortUuid(ctx context.Context, params SubscriptionsControllerGetRawSubscriptionByShortUuidParams) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
-	return sc.client.SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, params)
+func (sc *SubscriptionsClient) GetRawSubscriptionByShortUuid(ctx context.Context, withdisabledhosts bool, shortuuid string) (SubscriptionsControllerGetRawSubscriptionByShortUuidRes, error) {
+	return sc.client.SubscriptionsControllerGetRawSubscriptionByShortUuid(ctx, SubscriptionsControllerGetRawSubscriptionByShortUuidParams{
+		WithDisabledHosts: NewOptBool(withdisabledhosts),
+		ShortUuid: shortuuid,
+	})
 }
 
 // GetSubscriptionByShortUuidProtected calls SubscriptionsController_getSubscriptionByShortUuidProtected.
-func (sc *SubscriptionsClient) GetSubscriptionByShortUuidProtected(ctx context.Context, params SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
-	return sc.client.SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, params)
+func (sc *SubscriptionsClient) GetSubscriptionByShortUuidProtected(ctx context.Context, shortuuid string) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
+	return sc.client.SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams{
+		ShortUuid: shortuuid,
+	})
 }
 
 // GetSubscriptionByUsername calls SubscriptionsController_getSubscriptionByUsername.
-func (sc *SubscriptionsClient) GetSubscriptionByUsername(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUsernameParams) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
-	return sc.client.SubscriptionsControllerGetSubscriptionByUsername(ctx, params)
+func (sc *SubscriptionsClient) GetSubscriptionByUsername(ctx context.Context, username string) (SubscriptionsControllerGetSubscriptionByUsernameRes, error) {
+	return sc.client.SubscriptionsControllerGetSubscriptionByUsername(ctx, SubscriptionsControllerGetSubscriptionByUsernameParams{
+		Username: username,
+	})
 }
 
 // GetSubscriptionByUuid calls SubscriptionsController_getSubscriptionByUuid.
-func (sc *SubscriptionsClient) GetSubscriptionByUuid(ctx context.Context, params SubscriptionsControllerGetSubscriptionByUuidParams) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
-	return sc.client.SubscriptionsControllerGetSubscriptionByUuid(ctx, params)
+func (sc *SubscriptionsClient) GetSubscriptionByUuid(ctx context.Context, uuid string) (SubscriptionsControllerGetSubscriptionByUuidRes, error) {
+	return sc.client.SubscriptionsControllerGetSubscriptionByUuid(ctx, SubscriptionsControllerGetSubscriptionByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // SystemClient provides System operations.
@@ -998,8 +1073,11 @@ func NewUserSubscriptionRequestHistoryClient(client *Client) *UserSubscriptionRe
 }
 
 // GetSubscriptionRequestHistory calls UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory.
-func (sc *UserSubscriptionRequestHistoryClient) GetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
-	return sc.client.UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, params)
+func (sc *UserSubscriptionRequestHistoryClient) GetSubscriptionRequestHistory(ctx context.Context, size float64, start float64) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes, error) {
+	return sc.client.UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory(ctx, UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryParams{
+		Size: NewOptFloat64(size),
+		Start: NewOptFloat64(start),
+	})
 }
 
 // GetSubscriptionRequestHistoryStats calls UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats.
@@ -1023,18 +1101,24 @@ func (sc *UsersClient) CreateUser(ctx context.Context, request *CreateUserReques
 }
 
 // DeleteUser calls UsersController_deleteUser.
-func (sc *UsersClient) DeleteUser(ctx context.Context, params UsersControllerDeleteUserParams) (UsersControllerDeleteUserRes, error) {
-	return sc.client.UsersControllerDeleteUser(ctx, params)
+func (sc *UsersClient) DeleteUser(ctx context.Context, uuid string) (UsersControllerDeleteUserRes, error) {
+	return sc.client.UsersControllerDeleteUser(ctx, UsersControllerDeleteUserParams{
+		UUID: uuid,
+	})
 }
 
 // DisableUser calls UsersController_disableUser.
-func (sc *UsersClient) DisableUser(ctx context.Context, params UsersControllerDisableUserParams) (UsersControllerDisableUserRes, error) {
-	return sc.client.UsersControllerDisableUser(ctx, params)
+func (sc *UsersClient) DisableUser(ctx context.Context, uuid string) (UsersControllerDisableUserRes, error) {
+	return sc.client.UsersControllerDisableUser(ctx, UsersControllerDisableUserParams{
+		UUID: uuid,
+	})
 }
 
 // EnableUser calls UsersController_enableUser.
-func (sc *UsersClient) EnableUser(ctx context.Context, params UsersControllerEnableUserParams) (UsersControllerEnableUserRes, error) {
-	return sc.client.UsersControllerEnableUser(ctx, params)
+func (sc *UsersClient) EnableUser(ctx context.Context, uuid string) (UsersControllerEnableUserRes, error) {
+	return sc.client.UsersControllerEnableUser(ctx, UsersControllerEnableUserParams{
+		UUID: uuid,
+	})
 }
 
 // GetAllTags calls UsersController_getAllTags.
@@ -1043,53 +1127,74 @@ func (sc *UsersClient) GetAllTags(ctx context.Context) (UsersControllerGetAllTag
 }
 
 // GetAllUsers calls UsersController_getAllUsers.
-func (sc *UsersClient) GetAllUsers(ctx context.Context, params UsersControllerGetAllUsersParams) (UsersControllerGetAllUsersRes, error) {
-	return sc.client.UsersControllerGetAllUsers(ctx, params)
+func (sc *UsersClient) GetAllUsers(ctx context.Context, size float64, start float64) (UsersControllerGetAllUsersRes, error) {
+	return sc.client.UsersControllerGetAllUsers(ctx, UsersControllerGetAllUsersParams{
+		Size: NewOptFloat64(size),
+		Start: NewOptFloat64(start),
+	})
 }
 
 // GetUserAccessibleNodes calls UsersController_getUserAccessibleNodes.
-func (sc *UsersClient) GetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error) {
-	return sc.client.UsersControllerGetUserAccessibleNodes(ctx, params)
+func (sc *UsersClient) GetUserAccessibleNodes(ctx context.Context, uuid string) (UsersControllerGetUserAccessibleNodesRes, error) {
+	return sc.client.UsersControllerGetUserAccessibleNodes(ctx, UsersControllerGetUserAccessibleNodesParams{
+		UUID: uuid,
+	})
 }
 
 // GetUserByShortUuid calls UsersController_getUserByShortUuid.
-func (sc *UsersClient) GetUserByShortUuid(ctx context.Context, params UsersControllerGetUserByShortUuidParams) (UsersControllerGetUserByShortUuidRes, error) {
-	return sc.client.UsersControllerGetUserByShortUuid(ctx, params)
+func (sc *UsersClient) GetUserByShortUuid(ctx context.Context, shortuuid string) (UsersControllerGetUserByShortUuidRes, error) {
+	return sc.client.UsersControllerGetUserByShortUuid(ctx, UsersControllerGetUserByShortUuidParams{
+		ShortUuid: shortuuid,
+	})
 }
 
 // GetUserByTelegramId calls UsersController_getUserByTelegramId.
-func (sc *UsersClient) GetUserByTelegramId(ctx context.Context, params UsersControllerGetUserByTelegramIdParams) (UsersControllerGetUserByTelegramIdRes, error) {
-	return sc.client.UsersControllerGetUserByTelegramId(ctx, params)
+func (sc *UsersClient) GetUserByTelegramId(ctx context.Context, telegramid string) (UsersControllerGetUserByTelegramIdRes, error) {
+	return sc.client.UsersControllerGetUserByTelegramId(ctx, UsersControllerGetUserByTelegramIdParams{
+		TelegramId: telegramid,
+	})
 }
 
 // GetUserByUsername calls UsersController_getUserByUsername.
-func (sc *UsersClient) GetUserByUsername(ctx context.Context, params UsersControllerGetUserByUsernameParams) (UsersControllerGetUserByUsernameRes, error) {
-	return sc.client.UsersControllerGetUserByUsername(ctx, params)
+func (sc *UsersClient) GetUserByUsername(ctx context.Context, username string) (UsersControllerGetUserByUsernameRes, error) {
+	return sc.client.UsersControllerGetUserByUsername(ctx, UsersControllerGetUserByUsernameParams{
+		Username: username,
+	})
 }
 
 // GetUserByUuid calls UsersController_getUserByUuid.
-func (sc *UsersClient) GetUserByUuid(ctx context.Context, params UsersControllerGetUserByUuidParams) (UsersControllerGetUserByUuidRes, error) {
-	return sc.client.UsersControllerGetUserByUuid(ctx, params)
+func (sc *UsersClient) GetUserByUuid(ctx context.Context, uuid string) (UsersControllerGetUserByUuidRes, error) {
+	return sc.client.UsersControllerGetUserByUuid(ctx, UsersControllerGetUserByUuidParams{
+		UUID: uuid,
+	})
 }
 
 // GetUserSubscriptionRequestHistory calls UsersController_getUserSubscriptionRequestHistory.
-func (sc *UsersClient) GetUserSubscriptionRequestHistory(ctx context.Context, params UsersControllerGetUserSubscriptionRequestHistoryParams) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
-	return sc.client.UsersControllerGetUserSubscriptionRequestHistory(ctx, params)
+func (sc *UsersClient) GetUserSubscriptionRequestHistory(ctx context.Context, uuid string) (UsersControllerGetUserSubscriptionRequestHistoryRes, error) {
+	return sc.client.UsersControllerGetUserSubscriptionRequestHistory(ctx, UsersControllerGetUserSubscriptionRequestHistoryParams{
+		UUID: uuid,
+	})
 }
 
 // GetUsersByEmail calls UsersController_getUsersByEmail.
-func (sc *UsersClient) GetUsersByEmail(ctx context.Context, params UsersControllerGetUsersByEmailParams) (UsersControllerGetUsersByEmailRes, error) {
-	return sc.client.UsersControllerGetUsersByEmail(ctx, params)
+func (sc *UsersClient) GetUsersByEmail(ctx context.Context, email string) (UsersControllerGetUsersByEmailRes, error) {
+	return sc.client.UsersControllerGetUsersByEmail(ctx, UsersControllerGetUsersByEmailParams{
+		Email: email,
+	})
 }
 
 // GetUsersByTag calls UsersController_getUsersByTag.
-func (sc *UsersClient) GetUsersByTag(ctx context.Context, params UsersControllerGetUsersByTagParams) (UsersControllerGetUsersByTagRes, error) {
-	return sc.client.UsersControllerGetUsersByTag(ctx, params)
+func (sc *UsersClient) GetUsersByTag(ctx context.Context, tag string) (UsersControllerGetUsersByTagRes, error) {
+	return sc.client.UsersControllerGetUsersByTag(ctx, UsersControllerGetUsersByTagParams{
+		Tag: tag,
+	})
 }
 
 // ResetUserTraffic calls UsersController_resetUserTraffic.
-func (sc *UsersClient) ResetUserTraffic(ctx context.Context, params UsersControllerResetUserTrafficParams) (UsersControllerResetUserTrafficRes, error) {
-	return sc.client.UsersControllerResetUserTraffic(ctx, params)
+func (sc *UsersClient) ResetUserTraffic(ctx context.Context, uuid string) (UsersControllerResetUserTrafficRes, error) {
+	return sc.client.UsersControllerResetUserTraffic(ctx, UsersControllerResetUserTrafficParams{
+		UUID: uuid,
+	})
 }
 
 // RevokeUserSubscription calls UsersController_revokeUserSubscription.
