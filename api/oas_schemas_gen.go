@@ -11,6 +11,58 @@ import (
 	"github.com/google/uuid"
 )
 
+// Ref: #/components/schemas/ActiveInternalSquad
+type ActiveInternalSquad struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *ActiveInternalSquad) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *ActiveInternalSquad) GetName() string {
+	return s.Name
+}
+
+// SetUUID sets the value of UUID.
+func (s *ActiveInternalSquad) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *ActiveInternalSquad) SetName(val string) {
+	s.Name = val
+}
+
+// Ref: #/components/schemas/AllHwidDevices
+type AllHwidDevices struct {
+	Devices []Device `json:"devices"`
+	Total   float64  `json:"total"`
+}
+
+// GetDevices returns the value of Devices.
+func (s *AllHwidDevices) GetDevices() []Device {
+	return s.Devices
+}
+
+// GetTotal returns the value of Total.
+func (s *AllHwidDevices) GetTotal() float64 {
+	return s.Total
+}
+
+// SetDevices sets the value of Devices.
+func (s *AllHwidDevices) SetDevices(val []Device) {
+	s.Devices = val
+}
+
+// SetTotal sets the value of Total.
+func (s *AllHwidDevices) SetTotal(val float64) {
+	s.Total = val
+}
+
 type Authorization struct {
 	Token string
 	Roles []string
@@ -213,6 +265,69 @@ func (*BadRequestError) usersControllerRevokeUserSubscriptionRes()              
 func (*BadRequestError) usersControllerUpdateUserRes()                               {}
 func (*BadRequestError) usersStatsControllerGetUserUsageByRangeRes()                 {}
 
+// Ref: #/components/schemas/BandwidthLastTwoDays
+type BandwidthLastTwoDays struct {
+	Current    string `json:"current"`
+	Previous   string `json:"previous"`
+	Difference string `json:"difference"`
+}
+
+// GetCurrent returns the value of Current.
+func (s *BandwidthLastTwoDays) GetCurrent() string {
+	return s.Current
+}
+
+// GetPrevious returns the value of Previous.
+func (s *BandwidthLastTwoDays) GetPrevious() string {
+	return s.Previous
+}
+
+// GetDifference returns the value of Difference.
+func (s *BandwidthLastTwoDays) GetDifference() string {
+	return s.Difference
+}
+
+// SetCurrent sets the value of Current.
+func (s *BandwidthLastTwoDays) SetCurrent(val string) {
+	s.Current = val
+}
+
+// SetPrevious sets the value of Previous.
+func (s *BandwidthLastTwoDays) SetPrevious(val string) {
+	s.Previous = val
+}
+
+// SetDifference sets the value of Difference.
+func (s *BandwidthLastTwoDays) SetDifference(val string) {
+	s.Difference = val
+}
+
+// Ref: #/components/schemas/BillingHistoryItem
+type BillingHistoryItem struct {
+	TotalAmount float64 `json:"totalAmount"`
+	TotalBills  float64 `json:"totalBills"`
+}
+
+// GetTotalAmount returns the value of TotalAmount.
+func (s *BillingHistoryItem) GetTotalAmount() float64 {
+	return s.TotalAmount
+}
+
+// GetTotalBills returns the value of TotalBills.
+func (s *BillingHistoryItem) GetTotalBills() float64 {
+	return s.TotalBills
+}
+
+// SetTotalAmount sets the value of TotalAmount.
+func (s *BillingHistoryItem) SetTotalAmount(val float64) {
+	s.TotalAmount = val
+}
+
+// SetTotalBills sets the value of TotalBills.
+func (s *BillingHistoryItem) SetTotalBills(val float64) {
+	s.TotalBills = val
+}
+
 // Ref: #/components/schemas/BillingHistoryResponse
 type BillingHistoryResponse struct {
 	Response BillingHistoryResponseResponse `json:"response"`
@@ -351,6 +466,43 @@ func (s *BillingHistoryResponseResponseRecordsItemProvider) SetFaviconLink(val N
 	s.FaviconLink = val
 }
 
+// Ref: #/components/schemas/BillingNode
+type BillingNode struct {
+	NodeUuid    uuid.UUID `json:"nodeUuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *BillingNode) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetName returns the value of Name.
+func (s *BillingNode) GetName() string {
+	return s.Name
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *BillingNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *BillingNode) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetName sets the value of Name.
+func (s *BillingNode) SetName(val string) {
+	s.Name = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *BillingNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
 // Ref: #/components/schemas/BillingNodesResponse
 type BillingNodesResponse struct {
 	Response BillingNodesResponseResponse `json:"response"`
@@ -372,11 +524,11 @@ func (*BillingNodesResponse) infraBillingControllerGetBillingNodesRes()         
 func (*BillingNodesResponse) infraBillingControllerUpdateInfraBillingNodeRes()       {}
 
 type BillingNodesResponseResponse struct {
-	TotalBillingNodes          float64                                                 `json:"totalBillingNodes"`
-	BillingNodes               []BillingNodesResponseResponseBillingNodesItem          `json:"billingNodes"`
-	AvailableBillingNodes      []BillingNodesResponseResponseAvailableBillingNodesItem `json:"availableBillingNodes"`
-	TotalAvailableBillingNodes float64                                                 `json:"totalAvailableBillingNodes"`
-	Stats                      BillingNodesResponseResponseStats                       `json:"stats"`
+	TotalBillingNodes          float64                                        `json:"totalBillingNodes"`
+	BillingNodes               []BillingNodesResponseResponseBillingNodesItem `json:"billingNodes"`
+	AvailableBillingNodes      []Node                                         `json:"availableBillingNodes"`
+	TotalAvailableBillingNodes float64                                        `json:"totalAvailableBillingNodes"`
+	Stats                      BillingNodesResponseResponseStats              `json:"stats"`
 }
 
 // GetTotalBillingNodes returns the value of TotalBillingNodes.
@@ -390,7 +542,7 @@ func (s *BillingNodesResponseResponse) GetBillingNodes() []BillingNodesResponseR
 }
 
 // GetAvailableBillingNodes returns the value of AvailableBillingNodes.
-func (s *BillingNodesResponseResponse) GetAvailableBillingNodes() []BillingNodesResponseResponseAvailableBillingNodesItem {
+func (s *BillingNodesResponseResponse) GetAvailableBillingNodes() []Node {
 	return s.AvailableBillingNodes
 }
 
@@ -415,7 +567,7 @@ func (s *BillingNodesResponseResponse) SetBillingNodes(val []BillingNodesRespons
 }
 
 // SetAvailableBillingNodes sets the value of AvailableBillingNodes.
-func (s *BillingNodesResponseResponse) SetAvailableBillingNodes(val []BillingNodesResponseResponseAvailableBillingNodesItem) {
+func (s *BillingNodesResponseResponse) SetAvailableBillingNodes(val []Node) {
 	s.AvailableBillingNodes = val
 }
 
@@ -429,48 +581,12 @@ func (s *BillingNodesResponseResponse) SetStats(val BillingNodesResponseResponse
 	s.Stats = val
 }
 
-type BillingNodesResponseResponseAvailableBillingNodesItem struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *BillingNodesResponseResponseAvailableBillingNodesItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *BillingNodesResponseResponseAvailableBillingNodesItem) GetName() string {
-	return s.Name
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *BillingNodesResponseResponseAvailableBillingNodesItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetUUID sets the value of UUID.
-func (s *BillingNodesResponseResponseAvailableBillingNodesItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *BillingNodesResponseResponseAvailableBillingNodesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *BillingNodesResponseResponseAvailableBillingNodesItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
 type BillingNodesResponseResponseBillingNodesItem struct {
 	UUID          uuid.UUID                                            `json:"uuid"`
 	NodeUuid      uuid.UUID                                            `json:"nodeUuid"`
 	ProviderUuid  uuid.UUID                                            `json:"providerUuid"`
 	Provider      BillingNodesResponseResponseBillingNodesItemProvider `json:"provider"`
-	Node          BillingNodesResponseResponseBillingNodesItemNode     `json:"node"`
+	Node          Node                                                 `json:"node"`
 	NextBillingAt time.Time                                            `json:"nextBillingAt"`
 	CreatedAt     time.Time                                            `json:"createdAt"`
 	UpdatedAt     time.Time                                            `json:"updatedAt"`
@@ -497,7 +613,7 @@ func (s *BillingNodesResponseResponseBillingNodesItem) GetProvider() BillingNode
 }
 
 // GetNode returns the value of Node.
-func (s *BillingNodesResponseResponseBillingNodesItem) GetNode() BillingNodesResponseResponseBillingNodesItemNode {
+func (s *BillingNodesResponseResponseBillingNodesItem) GetNode() Node {
 	return s.Node
 }
 
@@ -537,7 +653,7 @@ func (s *BillingNodesResponseResponseBillingNodesItem) SetProvider(val BillingNo
 }
 
 // SetNode sets the value of Node.
-func (s *BillingNodesResponseResponseBillingNodesItem) SetNode(val BillingNodesResponseResponseBillingNodesItemNode) {
+func (s *BillingNodesResponseResponseBillingNodesItem) SetNode(val Node) {
 	s.Node = val
 }
 
@@ -554,42 +670,6 @@ func (s *BillingNodesResponseResponseBillingNodesItem) SetCreatedAt(val time.Tim
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *BillingNodesResponseResponseBillingNodesItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
-}
-
-type BillingNodesResponseResponseBillingNodesItemNode struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *BillingNodesResponseResponseBillingNodesItemNode) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *BillingNodesResponseResponseBillingNodesItemNode) GetName() string {
-	return s.Name
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *BillingNodesResponseResponseBillingNodesItemNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetUUID sets the value of UUID.
-func (s *BillingNodesResponseResponseBillingNodesItemNode) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *BillingNodesResponseResponseBillingNodesItemNode) SetName(val string) {
-	s.Name = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *BillingNodesResponseResponseBillingNodesItemNode) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 type BillingNodesResponseResponseBillingNodesItemProvider struct {
@@ -673,6 +753,32 @@ func (s *BillingNodesResponseResponseStats) SetCurrentMonthPayments(val float64)
 // SetTotalSpent sets the value of TotalSpent.
 func (s *BillingNodesResponseResponseStats) SetTotalSpent(val float64) {
 	s.TotalSpent = val
+}
+
+// Ref: #/components/schemas/BrandingSettings
+type BrandingSettings struct {
+	Title   NilString `json:"title"`
+	LogoUrl NilURI    `json:"logoUrl"`
+}
+
+// GetTitle returns the value of Title.
+func (s *BrandingSettings) GetTitle() NilString {
+	return s.Title
+}
+
+// GetLogoUrl returns the value of LogoUrl.
+func (s *BrandingSettings) GetLogoUrl() NilURI {
+	return s.LogoUrl
+}
+
+// SetTitle sets the value of Title.
+func (s *BrandingSettings) SetTitle(val NilString) {
+	s.Title = val
+}
+
+// SetLogoUrl sets the value of LogoUrl.
+func (s *BrandingSettings) SetLogoUrl(val NilURI) {
+	s.LogoUrl = val
 }
 
 // Ref: #/components/schemas/BulkActionResponse
@@ -1293,6 +1399,294 @@ func (s *BulkUuidsRequest) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
+// Ref: #/components/schemas/ByAppItem
+type ByAppItem struct {
+	App   string  `json:"app"`
+	Count float64 `json:"count"`
+}
+
+// GetApp returns the value of App.
+func (s *ByAppItem) GetApp() string {
+	return s.App
+}
+
+// GetCount returns the value of Count.
+func (s *ByAppItem) GetCount() float64 {
+	return s.Count
+}
+
+// SetApp sets the value of App.
+func (s *ByAppItem) SetApp(val string) {
+	s.App = val
+}
+
+// SetCount sets the value of Count.
+func (s *ByAppItem) SetCount(val float64) {
+	s.Count = val
+}
+
+// {"markdownDescription":"Condition to check against the **headerName**.",
+// "defaultSnippets":[{"label":"Examples: Check if header contains \"text/html\"",
+// "markdownDescription":"Condition to check if **headerName** contains \"text/html\"",
+// "body":{"headerName":"accept","operator":"CONTAINS","value":"text/html","caseSensitive":true}}]}.
+// Ref: #/components/schemas/Condition
+type Condition struct {
+	// {"markdownDescription":"**Name** of the HTTP header to check. Must comply with RFC 7230."}.
+	HeaderName string `json:"headerName"`
+	// {"errorMessage":"Invalid operator. Please select a valid operator.",
+	// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
+	// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
+	// string. `string === value`","Ensures the header value does not exactly match the specified string.
+	// `string !== value`","Checks if the header value contains the specified string as a substring.
+	// `string.includes()`","Verifies the header value does not contain the specified string as a
+	// substring. `!string.includes()`","Validates that the header value begins with the specified string.
+	//  `string.startsWith()`","Validates that the header value does not begin with the specified string.
+	// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
+	// endsWith()`","Confirms the header value does not end with the specified string. `!string.
+	// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
+	// `regex.test()`","Evaluates if the header value does not match the specified regular expression
+	// pattern. `!regex.test()`"]}.
+	Operator ConditionOperator `json:"operator"`
+	// {"markdownDescription":"**Value** to check against the **headerName**."}.
+	Value string `json:"value"`
+	// {"markdownDescription":"Whether the value is **case sensitive**. \n\n - `true`: the value will be
+	// compared as is. \n\n - `false`: the value will be lowercased **before** comparison."}.
+	CaseSensitive bool `json:"caseSensitive"`
+}
+
+// GetHeaderName returns the value of HeaderName.
+func (s *Condition) GetHeaderName() string {
+	return s.HeaderName
+}
+
+// GetOperator returns the value of Operator.
+func (s *Condition) GetOperator() ConditionOperator {
+	return s.Operator
+}
+
+// GetValue returns the value of Value.
+func (s *Condition) GetValue() string {
+	return s.Value
+}
+
+// GetCaseSensitive returns the value of CaseSensitive.
+func (s *Condition) GetCaseSensitive() bool {
+	return s.CaseSensitive
+}
+
+// SetHeaderName sets the value of HeaderName.
+func (s *Condition) SetHeaderName(val string) {
+	s.HeaderName = val
+}
+
+// SetOperator sets the value of Operator.
+func (s *Condition) SetOperator(val ConditionOperator) {
+	s.Operator = val
+}
+
+// SetValue sets the value of Value.
+func (s *Condition) SetValue(val string) {
+	s.Value = val
+}
+
+// SetCaseSensitive sets the value of CaseSensitive.
+func (s *Condition) SetCaseSensitive(val bool) {
+	s.CaseSensitive = val
+}
+
+// {"errorMessage":"Invalid operator. Please select a valid operator.",
+// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
+// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
+// string. `string === value`","Ensures the header value does not exactly match the specified string.
+// `string !== value`","Checks if the header value contains the specified string as a substring.
+// `string.includes()`","Verifies the header value does not contain the specified string as a
+// substring. `!string.includes()`","Validates that the header value begins with the specified string.
+//
+//	`string.startsWith()`","Validates that the header value does not begin with the specified string.
+//
+// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
+// endsWith()`","Confirms the header value does not end with the specified string. `!string.
+// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
+// `regex.test()`","Evaluates if the header value does not match the specified regular expression
+// pattern. `!regex.test()`"]}.
+type ConditionOperator string
+
+const (
+	ConditionOperatorEQUALS        ConditionOperator = "EQUALS"
+	ConditionOperatorNOTEQUALS     ConditionOperator = "NOT_EQUALS"
+	ConditionOperatorCONTAINS      ConditionOperator = "CONTAINS"
+	ConditionOperatorNOTCONTAINS   ConditionOperator = "NOT_CONTAINS"
+	ConditionOperatorSTARTSWITH    ConditionOperator = "STARTS_WITH"
+	ConditionOperatorNOTSTARTSWITH ConditionOperator = "NOT_STARTS_WITH"
+	ConditionOperatorENDSWITH      ConditionOperator = "ENDS_WITH"
+	ConditionOperatorNOTENDSWITH   ConditionOperator = "NOT_ENDS_WITH"
+	ConditionOperatorREGEX         ConditionOperator = "REGEX"
+	ConditionOperatorNOTREGEX      ConditionOperator = "NOT_REGEX"
+)
+
+// AllValues returns all ConditionOperator values.
+func (ConditionOperator) AllValues() []ConditionOperator {
+	return []ConditionOperator{
+		ConditionOperatorEQUALS,
+		ConditionOperatorNOTEQUALS,
+		ConditionOperatorCONTAINS,
+		ConditionOperatorNOTCONTAINS,
+		ConditionOperatorSTARTSWITH,
+		ConditionOperatorNOTSTARTSWITH,
+		ConditionOperatorENDSWITH,
+		ConditionOperatorNOTENDSWITH,
+		ConditionOperatorREGEX,
+		ConditionOperatorNOTREGEX,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s ConditionOperator) MarshalText() ([]byte, error) {
+	switch s {
+	case ConditionOperatorEQUALS:
+		return []byte(s), nil
+	case ConditionOperatorNOTEQUALS:
+		return []byte(s), nil
+	case ConditionOperatorCONTAINS:
+		return []byte(s), nil
+	case ConditionOperatorNOTCONTAINS:
+		return []byte(s), nil
+	case ConditionOperatorSTARTSWITH:
+		return []byte(s), nil
+	case ConditionOperatorNOTSTARTSWITH:
+		return []byte(s), nil
+	case ConditionOperatorENDSWITH:
+		return []byte(s), nil
+	case ConditionOperatorNOTENDSWITH:
+		return []byte(s), nil
+	case ConditionOperatorREGEX:
+		return []byte(s), nil
+	case ConditionOperatorNOTREGEX:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *ConditionOperator) UnmarshalText(data []byte) error {
+	switch ConditionOperator(data) {
+	case ConditionOperatorEQUALS:
+		*s = ConditionOperatorEQUALS
+		return nil
+	case ConditionOperatorNOTEQUALS:
+		*s = ConditionOperatorNOTEQUALS
+		return nil
+	case ConditionOperatorCONTAINS:
+		*s = ConditionOperatorCONTAINS
+		return nil
+	case ConditionOperatorNOTCONTAINS:
+		*s = ConditionOperatorNOTCONTAINS
+		return nil
+	case ConditionOperatorSTARTSWITH:
+		*s = ConditionOperatorSTARTSWITH
+		return nil
+	case ConditionOperatorNOTSTARTSWITH:
+		*s = ConditionOperatorNOTSTARTSWITH
+		return nil
+	case ConditionOperatorENDSWITH:
+		*s = ConditionOperatorENDSWITH
+		return nil
+	case ConditionOperatorNOTENDSWITH:
+		*s = ConditionOperatorNOTENDSWITH
+		return nil
+	case ConditionOperatorREGEX:
+		*s = ConditionOperatorREGEX
+		return nil
+	case ConditionOperatorNOTREGEX:
+		*s = ConditionOperatorNOTREGEX
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/ConfigProfile
+type ConfigProfile struct {
+	UUID      uuid.UUID `json:"uuid"`
+	Name      string    `json:"name"`
+	Config    jx.Raw    `json:"config"`
+	Inbounds  []Inbound `json:"inbounds"`
+	Nodes     []Node    `json:"nodes"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *ConfigProfile) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *ConfigProfile) GetName() string {
+	return s.Name
+}
+
+// GetConfig returns the value of Config.
+func (s *ConfigProfile) GetConfig() jx.Raw {
+	return s.Config
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *ConfigProfile) GetInbounds() []Inbound {
+	return s.Inbounds
+}
+
+// GetNodes returns the value of Nodes.
+func (s *ConfigProfile) GetNodes() []Node {
+	return s.Nodes
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *ConfigProfile) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *ConfigProfile) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *ConfigProfile) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *ConfigProfile) SetName(val string) {
+	s.Name = val
+}
+
+// SetConfig sets the value of Config.
+func (s *ConfigProfile) SetConfig(val jx.Raw) {
+	s.Config = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *ConfigProfile) SetInbounds(val []Inbound) {
+	s.Inbounds = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *ConfigProfile) SetNodes(val []Node) {
+	s.Nodes = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *ConfigProfile) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *ConfigProfile) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
 // ConfigProfileControllerCreateConfigProfileConflict is response for ConfigProfileControllerCreateConfigProfile operation.
 type ConfigProfileControllerCreateConfigProfileConflict struct{}
 
@@ -1335,18 +1729,70 @@ type ConfigProfileControllerUpdateConfigProfileNotFound struct{}
 func (*ConfigProfileControllerUpdateConfigProfileNotFound) configProfileControllerUpdateConfigProfileRes() {
 }
 
+// Ref: #/components/schemas/ConfigProfileItem
+type ConfigProfileItem struct {
+	ActiveConfigProfileUuid NilUUID   `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []Inbound `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *ConfigProfileItem) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *ConfigProfileItem) GetActiveInbounds() []Inbound {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *ConfigProfileItem) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *ConfigProfileItem) SetActiveInbounds(val []Inbound) {
+	s.ActiveInbounds = val
+}
+
+// Ref: #/components/schemas/ConfigProfileRef
+type ConfigProfileRef struct {
+	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *ConfigProfileRef) GetActiveConfigProfileUuid() uuid.UUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *ConfigProfileRef) GetActiveInbounds() []uuid.UUID {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *ConfigProfileRef) SetActiveConfigProfileUuid(val uuid.UUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *ConfigProfileRef) SetActiveInbounds(val []uuid.UUID) {
+	s.ActiveInbounds = val
+}
+
 // Ref: #/components/schemas/ConfigProfileResponse
 type ConfigProfileResponse struct {
-	Response ConfigProfileResponseResponse `json:"response"`
+	Response ConfigProfile `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *ConfigProfileResponse) GetResponse() ConfigProfileResponseResponse {
+func (s *ConfigProfileResponse) GetResponse() ConfigProfile {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *ConfigProfileResponse) SetResponse(val ConfigProfileResponseResponse) {
+func (s *ConfigProfileResponse) SetResponse(val ConfigProfile) {
 	s.Response = val
 }
 
@@ -1354,213 +1800,6 @@ func (*ConfigProfileResponse) configProfileControllerCreateConfigProfileRes()   
 func (*ConfigProfileResponse) configProfileControllerGetComputedConfigProfileByUuidRes() {}
 func (*ConfigProfileResponse) configProfileControllerGetConfigProfileByUuidRes()         {}
 func (*ConfigProfileResponse) configProfileControllerUpdateConfigProfileRes()            {}
-
-type ConfigProfileResponseResponse struct {
-	UUID      uuid.UUID                                   `json:"uuid"`
-	Name      string                                      `json:"name"`
-	Config    jx.Raw                                      `json:"config"`
-	Inbounds  []ConfigProfileResponseResponseInboundsItem `json:"inbounds"`
-	Nodes     []ConfigProfileResponseResponseNodesItem    `json:"nodes"`
-	CreatedAt time.Time                                   `json:"createdAt"`
-	UpdatedAt time.Time                                   `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *ConfigProfileResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *ConfigProfileResponseResponse) GetName() string {
-	return s.Name
-}
-
-// GetConfig returns the value of Config.
-func (s *ConfigProfileResponseResponse) GetConfig() jx.Raw {
-	return s.Config
-}
-
-// GetInbounds returns the value of Inbounds.
-func (s *ConfigProfileResponseResponse) GetInbounds() []ConfigProfileResponseResponseInboundsItem {
-	return s.Inbounds
-}
-
-// GetNodes returns the value of Nodes.
-func (s *ConfigProfileResponseResponse) GetNodes() []ConfigProfileResponseResponseNodesItem {
-	return s.Nodes
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *ConfigProfileResponseResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *ConfigProfileResponseResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *ConfigProfileResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *ConfigProfileResponseResponse) SetName(val string) {
-	s.Name = val
-}
-
-// SetConfig sets the value of Config.
-func (s *ConfigProfileResponseResponse) SetConfig(val jx.Raw) {
-	s.Config = val
-}
-
-// SetInbounds sets the value of Inbounds.
-func (s *ConfigProfileResponseResponse) SetInbounds(val []ConfigProfileResponseResponseInboundsItem) {
-	s.Inbounds = val
-}
-
-// SetNodes sets the value of Nodes.
-func (s *ConfigProfileResponseResponse) SetNodes(val []ConfigProfileResponseResponseNodesItem) {
-	s.Nodes = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *ConfigProfileResponseResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *ConfigProfileResponseResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-type ConfigProfileResponseResponseInboundsItem struct {
-	UUID        uuid.UUID  `json:"uuid"`
-	ProfileUuid uuid.UUID  `json:"profileUuid"`
-	Tag         string     `json:"tag"`
-	Type        string     `json:"type"`
-	Network     NilString  `json:"network"`
-	Security    NilString  `json:"security"`
-	Port        NilFloat64 `json:"port"`
-	RawInbound  jx.Raw     `json:"rawInbound"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *ConfigProfileResponseResponseInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProfileUuid returns the value of ProfileUuid.
-func (s *ConfigProfileResponseResponseInboundsItem) GetProfileUuid() uuid.UUID {
-	return s.ProfileUuid
-}
-
-// GetTag returns the value of Tag.
-func (s *ConfigProfileResponseResponseInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *ConfigProfileResponseResponseInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *ConfigProfileResponseResponseInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *ConfigProfileResponseResponseInboundsItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetPort returns the value of Port.
-func (s *ConfigProfileResponseResponseInboundsItem) GetPort() NilFloat64 {
-	return s.Port
-}
-
-// GetRawInbound returns the value of RawInbound.
-func (s *ConfigProfileResponseResponseInboundsItem) GetRawInbound() jx.Raw {
-	return s.RawInbound
-}
-
-// SetUUID sets the value of UUID.
-func (s *ConfigProfileResponseResponseInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProfileUuid sets the value of ProfileUuid.
-func (s *ConfigProfileResponseResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
-	s.ProfileUuid = val
-}
-
-// SetTag sets the value of Tag.
-func (s *ConfigProfileResponseResponseInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *ConfigProfileResponseResponseInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *ConfigProfileResponseResponseInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *ConfigProfileResponseResponseInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetPort sets the value of Port.
-func (s *ConfigProfileResponseResponseInboundsItem) SetPort(val NilFloat64) {
-	s.Port = val
-}
-
-// SetRawInbound sets the value of RawInbound.
-func (s *ConfigProfileResponseResponseInboundsItem) SetRawInbound(val jx.Raw) {
-	s.RawInbound = val
-}
-
-type ConfigProfileResponseResponseNodesItem struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *ConfigProfileResponseResponseNodesItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *ConfigProfileResponseResponseNodesItem) GetName() string {
-	return s.Name
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *ConfigProfileResponseResponseNodesItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetUUID sets the value of UUID.
-func (s *ConfigProfileResponseResponseNodesItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *ConfigProfileResponseResponseNodesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *ConfigProfileResponseResponseNodesItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
 
 // Ref: #/components/schemas/CreateApiTokenRequestDto
 type CreateApiTokenRequestDto struct {
@@ -1664,7 +1903,7 @@ func (s *CreateExternalSquadRequestDto) SetName(val string) {
 
 // Ref: #/components/schemas/CreateHostRequestDto
 type CreateHostRequestDto struct {
-	Inbound           CreateHostRequestDtoInbound           `json:"inbound"`
+	Inbound           InboundRef                            `json:"inbound"`
 	Remark            string                                `json:"remark"`
 	Address           string                                `json:"address"`
 	Port              int                                   `json:"port"`
@@ -1692,7 +1931,7 @@ type CreateHostRequestDto struct {
 }
 
 // GetInbound returns the value of Inbound.
-func (s *CreateHostRequestDto) GetInbound() CreateHostRequestDtoInbound {
+func (s *CreateHostRequestDto) GetInbound() InboundRef {
 	return s.Inbound
 }
 
@@ -1807,7 +2046,7 @@ func (s *CreateHostRequestDto) GetNodes() []uuid.UUID {
 }
 
 // SetInbound sets the value of Inbound.
-func (s *CreateHostRequestDto) SetInbound(val CreateHostRequestDtoInbound) {
+func (s *CreateHostRequestDto) SetInbound(val InboundRef) {
 	s.Inbound = val
 }
 
@@ -2080,31 +2319,6 @@ func (s *CreateHostRequestDtoFingerprint) UnmarshalText(data []byte) error {
 	}
 }
 
-type CreateHostRequestDtoInbound struct {
-	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
-	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
-}
-
-// GetConfigProfileUuid returns the value of ConfigProfileUuid.
-func (s *CreateHostRequestDtoInbound) GetConfigProfileUuid() uuid.UUID {
-	return s.ConfigProfileUuid
-}
-
-// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
-func (s *CreateHostRequestDtoInbound) GetConfigProfileInboundUuid() uuid.UUID {
-	return s.ConfigProfileInboundUuid
-}
-
-// SetConfigProfileUuid sets the value of ConfigProfileUuid.
-func (s *CreateHostRequestDtoInbound) SetConfigProfileUuid(val uuid.UUID) {
-	s.ConfigProfileUuid = val
-}
-
-// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
-func (s *CreateHostRequestDtoInbound) SetConfigProfileInboundUuid(val uuid.UUID) {
-	s.ConfigProfileInboundUuid = val
-}
-
 type CreateHostRequestDtoSecurityLayer string
 
 const (
@@ -2294,17 +2508,17 @@ func (s *CreateInternalSquadRequestDto) SetInbounds(val []uuid.UUID) {
 
 // Ref: #/components/schemas/CreateNodeRequestDto
 type CreateNodeRequestDto struct {
-	Name                    string                            `json:"name"`
-	Address                 string                            `json:"address"`
-	Port                    OptInt                            `json:"port"`
-	IsTrafficTrackingActive OptBool                           `json:"isTrafficTrackingActive"`
-	TrafficLimitBytes       OptInt                            `json:"trafficLimitBytes"`
-	NotifyPercent           OptInt                            `json:"notifyPercent"`
-	TrafficResetDay         OptInt                            `json:"trafficResetDay"`
-	CountryCode             OptString                         `json:"countryCode"`
-	ConsumptionMultiplier   OptFloat64                        `json:"consumptionMultiplier"`
-	ConfigProfile           CreateNodeRequestDtoConfigProfile `json:"configProfile"`
-	ProviderUuid            OptNilUUID                        `json:"providerUuid"`
+	Name                    string           `json:"name"`
+	Address                 string           `json:"address"`
+	Port                    OptInt           `json:"port"`
+	IsTrafficTrackingActive OptBool          `json:"isTrafficTrackingActive"`
+	TrafficLimitBytes       OptInt           `json:"trafficLimitBytes"`
+	NotifyPercent           OptInt           `json:"notifyPercent"`
+	TrafficResetDay         OptInt           `json:"trafficResetDay"`
+	CountryCode             OptString        `json:"countryCode"`
+	ConsumptionMultiplier   OptFloat64       `json:"consumptionMultiplier"`
+	ConfigProfile           ConfigProfileRef `json:"configProfile"`
+	ProviderUuid            OptNilUUID       `json:"providerUuid"`
 }
 
 // GetName returns the value of Name.
@@ -2353,7 +2567,7 @@ func (s *CreateNodeRequestDto) GetConsumptionMultiplier() OptFloat64 {
 }
 
 // GetConfigProfile returns the value of ConfigProfile.
-func (s *CreateNodeRequestDto) GetConfigProfile() CreateNodeRequestDtoConfigProfile {
+func (s *CreateNodeRequestDto) GetConfigProfile() ConfigProfileRef {
 	return s.ConfigProfile
 }
 
@@ -2408,38 +2622,13 @@ func (s *CreateNodeRequestDto) SetConsumptionMultiplier(val OptFloat64) {
 }
 
 // SetConfigProfile sets the value of ConfigProfile.
-func (s *CreateNodeRequestDto) SetConfigProfile(val CreateNodeRequestDtoConfigProfile) {
+func (s *CreateNodeRequestDto) SetConfigProfile(val ConfigProfileRef) {
 	s.ConfigProfile = val
 }
 
 // SetProviderUuid sets the value of ProviderUuid.
 func (s *CreateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
 	s.ProviderUuid = val
-}
-
-type CreateNodeRequestDtoConfigProfile struct {
-	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
-	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
-}
-
-// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *CreateNodeRequestDtoConfigProfile) GetActiveConfigProfileUuid() uuid.UUID {
-	return s.ActiveConfigProfileUuid
-}
-
-// GetActiveInbounds returns the value of ActiveInbounds.
-func (s *CreateNodeRequestDtoConfigProfile) GetActiveInbounds() []uuid.UUID {
-	return s.ActiveInbounds
-}
-
-// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *CreateNodeRequestDtoConfigProfile) SetActiveConfigProfileUuid(val uuid.UUID) {
-	s.ActiveConfigProfileUuid = val
-}
-
-// SetActiveInbounds sets the value of ActiveInbounds.
-func (s *CreateNodeRequestDtoConfigProfile) SetActiveInbounds(val []uuid.UUID) {
-	s.ActiveInbounds = val
 }
 
 // Ref: #/components/schemas/CreateSubscriptionTemplateRequestDto
@@ -2956,626 +3145,17 @@ func (s *CreateUserRequestDtoTrafficLimitStrategy) UnmarshalText(data []byte) er
 
 // Ref: #/components/schemas/DebugSrrMatcherRequestDto
 type DebugSrrMatcherRequestDto struct {
-	ResponseRules DebugSrrMatcherRequestDtoResponseRules `json:"responseRules"`
+	ResponseRules ResponseRules `json:"responseRules"`
 }
 
 // GetResponseRules returns the value of ResponseRules.
-func (s *DebugSrrMatcherRequestDto) GetResponseRules() DebugSrrMatcherRequestDtoResponseRules {
+func (s *DebugSrrMatcherRequestDto) GetResponseRules() ResponseRules {
 	return s.ResponseRules
 }
 
 // SetResponseRules sets the value of ResponseRules.
-func (s *DebugSrrMatcherRequestDto) SetResponseRules(val DebugSrrMatcherRequestDtoResponseRules) {
+func (s *DebugSrrMatcherRequestDto) SetResponseRules(val ResponseRules) {
 	s.ResponseRules = val
-}
-
-type DebugSrrMatcherRequestDtoResponseRules struct {
-	// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-	// config. Currently supported version is **1**."}.
-	Version DebugSrrMatcherRequestDtoResponseRulesVersion `json:"version"`
-	// {"title":"Response Rules","markdownDescription":"Array of **response rules**. Rules are evaluated
-	// in order and the first rule that matches is applied. If no rule matches, request will be blocked
-	// by default.\n\n**Example:**\n```json\n[\n  {\n    \"name\": \"Blank rule\",\n    \"description\":
-	// \"Blank rule\",\n    \"operator\": \"AND\",\n    \"enabled\": true,\n    \"conditions\": [],\n
-	// \"responseType\": \"BLOCK\",\n    \"responseModifications\": {\n      \"headers\": []\n    }\n
-	// }\n]\n```","defaultSnippets":[]}.
-	Rules []DebugSrrMatcherRequestDtoResponseRulesRulesItem `json:"rules"`
-}
-
-// GetVersion returns the value of Version.
-func (s *DebugSrrMatcherRequestDtoResponseRules) GetVersion() DebugSrrMatcherRequestDtoResponseRulesVersion {
-	return s.Version
-}
-
-// GetRules returns the value of Rules.
-func (s *DebugSrrMatcherRequestDtoResponseRules) GetRules() []DebugSrrMatcherRequestDtoResponseRulesRulesItem {
-	return s.Rules
-}
-
-// SetVersion sets the value of Version.
-func (s *DebugSrrMatcherRequestDtoResponseRules) SetVersion(val DebugSrrMatcherRequestDtoResponseRulesVersion) {
-	s.Version = val
-}
-
-// SetRules sets the value of Rules.
-func (s *DebugSrrMatcherRequestDtoResponseRules) SetRules(val []DebugSrrMatcherRequestDtoResponseRulesRulesItem) {
-	s.Rules = val
-}
-
-// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
-// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
-// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
-// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
-// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
-// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
-// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
-// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
-// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
-// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
-// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
-// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
-//
-//	}\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
-//
-// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
-// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
-// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
-// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
-// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
-// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
-// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
-// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
-// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
-// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
-// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
-// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
-// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
-// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
-// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
-//
-//	\"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
-//
-// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
-// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
-// \"BLOCK\"\n}\n```"}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItem struct {
-	// {"markdownDescription":"Name of the response rule."}.
-	Name string `json:"name"`
-	// {"markdownDescription":"Description of the response rule. Optional."}.
-	Description OptString `json:"description"`
-	// {"markdownDescription":"Control whether the response rule is enabled or disabled. \n\n - `true`
-	// the rule will be applied. \n\n - `false` the rule will be always ignored."}.
-	Enabled bool `json:"enabled"`
-	// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-	Operator DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator `json:"operator"`
-	// {"markdownDescription":"Array of conditions to check against the request headers. Conditions are
-	// applied with **operator**. If conditions are empty, the rule will be matched."}.
-	Conditions []DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem `json:"conditions"`
-	// {"errorMessage":"Invalid response type. Please select a valid response type.",
-	// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-	// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-	// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-	// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-	//  (Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-	// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-	// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-	// template) Format which is used by Singbox client application.","Return **subscription** as browser
-	// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-	// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-	// the socket connection."]}.
-	ResponseType DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType `json:"responseType"`
-	// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-	ResponseModifications OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications `json:"responseModifications"`
-}
-
-// GetName returns the value of Name.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetName() string {
-	return s.Name
-}
-
-// GetDescription returns the value of Description.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetDescription() OptString {
-	return s.Description
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetOperator returns the value of Operator.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetOperator() DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator {
-	return s.Operator
-}
-
-// GetConditions returns the value of Conditions.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetConditions() []DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem {
-	return s.Conditions
-}
-
-// GetResponseType returns the value of ResponseType.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetResponseType() DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType {
-	return s.ResponseType
-}
-
-// GetResponseModifications returns the value of ResponseModifications.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) GetResponseModifications() OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications {
-	return s.ResponseModifications
-}
-
-// SetName sets the value of Name.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetDescription sets the value of Description.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetDescription(val OptString) {
-	s.Description = val
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetOperator(val DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator) {
-	s.Operator = val
-}
-
-// SetConditions sets the value of Conditions.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetConditions(val []DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) {
-	s.Conditions = val
-}
-
-// SetResponseType sets the value of ResponseType.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetResponseType(val DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType) {
-	s.ResponseType = val
-}
-
-// SetResponseModifications sets the value of ResponseModifications.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItem) SetResponseModifications(val OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) {
-	s.ResponseModifications = val
-}
-
-// {"markdownDescription":"Condition to check against the **headerName**.",
-// "defaultSnippets":[{"label":"Examples: Check if header contains \"text/html\"",
-// "markdownDescription":"Condition to check if **headerName** contains \"text/html\"",
-// "body":{"headerName":"accept","operator":"CONTAINS","value":"text/html","caseSensitive":true}}]}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem struct {
-	// {"markdownDescription":"**Name** of the HTTP header to check. Must comply with RFC 7230."}.
-	HeaderName string `json:"headerName"`
-	// {"errorMessage":"Invalid operator. Please select a valid operator.",
-	// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-	// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-	// string. `string === value`","Ensures the header value does not exactly match the specified string.
-	// `string !== value`","Checks if the header value contains the specified string as a substring.
-	// `string.includes()`","Verifies the header value does not contain the specified string as a
-	// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-	//  `string.startsWith()`","Validates that the header value does not begin with the specified string.
-	// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-	// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-	// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-	// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-	// pattern. `!regex.test()`"]}.
-	Operator DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator `json:"operator"`
-	// {"markdownDescription":"**Value** to check against the **headerName**."}.
-	Value string `json:"value"`
-	// {"markdownDescription":"Whether the value is **case sensitive**. \n\n - `true`: the value will be
-	// compared as is. \n\n - `false`: the value will be lowercased **before** comparison."}.
-	CaseSensitive bool `json:"caseSensitive"`
-}
-
-// GetHeaderName returns the value of HeaderName.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) GetHeaderName() string {
-	return s.HeaderName
-}
-
-// GetOperator returns the value of Operator.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) GetOperator() DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator {
-	return s.Operator
-}
-
-// GetValue returns the value of Value.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) GetValue() string {
-	return s.Value
-}
-
-// GetCaseSensitive returns the value of CaseSensitive.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) GetCaseSensitive() bool {
-	return s.CaseSensitive
-}
-
-// SetHeaderName sets the value of HeaderName.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) SetHeaderName(val string) {
-	s.HeaderName = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) SetOperator(val DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator) {
-	s.Operator = val
-}
-
-// SetValue sets the value of Value.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) SetValue(val string) {
-	s.Value = val
-}
-
-// SetCaseSensitive sets the value of CaseSensitive.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItem) SetCaseSensitive(val bool) {
-	s.CaseSensitive = val
-}
-
-// {"errorMessage":"Invalid operator. Please select a valid operator.",
-// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-// string. `string === value`","Ensures the header value does not exactly match the specified string.
-// `string !== value`","Checks if the header value contains the specified string as a substring.
-// `string.includes()`","Verifies the header value does not contain the specified string as a
-// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-//
-//	`string.startsWith()`","Validates that the header value does not begin with the specified string.
-//
-// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-// pattern. `!regex.test()`"]}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator string
-
-const (
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS        DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "EQUALS"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS     DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_EQUALS"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS      DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "CONTAINS"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS   DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_CONTAINS"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH    DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "STARTS_WITH"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_STARTS_WITH"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH      DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "ENDS_WITH"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH   DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_ENDS_WITH"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX         DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "REGEX"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX      DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_REGEX"
-)
-
-// AllValues returns all DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator values.
-func (DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator) AllValues() []DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator {
-	return []DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator{
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperator(data) {
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator string
-
-const (
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorAND DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator = "AND"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorOR  DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator = "OR"
-)
-
-// AllValues returns all DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator values.
-func (DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator) AllValues() []DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator {
-	return []DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator{
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorAND,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorOR,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorAND:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorOR:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherRequestDtoResponseRulesRulesItemOperator(data) {
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorAND:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorAND
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorOR:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemOperatorOR
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications struct {
-	// {"defaultSnippets":[{"label":"Examples: Add custom header","markdownDescription":"Add a custom
-	// header to the response","body":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Array of headers to be added when the rule is matched."}.
-	Headers []DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem `json:"headers"`
-	// {"markdownDescription":"Override the subscription template with the given name. If not provided,
-	// the default subscription template will be used. If the template name is not found, the default
-	// subscription template for this type will be used. **This modification have higher priority than
-	// settings from External Squads.**"}.
-	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
-}
-
-// GetHeaders returns the value of Headers.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) GetHeaders() []DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem {
-	return s.Headers
-}
-
-// GetSubscriptionTemplate returns the value of SubscriptionTemplate.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) GetSubscriptionTemplate() OptString {
-	return s.SubscriptionTemplate
-}
-
-// SetHeaders sets the value of Headers.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) SetHeaders(val []DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) {
-	s.Headers = val
-}
-
-// SetSubscriptionTemplate sets the value of SubscriptionTemplate.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) SetSubscriptionTemplate(val OptString) {
-	s.SubscriptionTemplate = val
-}
-
-// {"markdownDescription":"**Key** and **value** of the response header will be added to the response.
-// "}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem struct {
-	// {"markdownDescription":"Key of the response header. Must comply with RFC 7230."}.
-	Key string `json:"key"`
-	// {"markdownDescription":"Value of the response header. "}.
-	Value string `json:"value"`
-}
-
-// GetKey returns the value of Key.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) GetKey() string {
-	return s.Key
-}
-
-// GetValue returns the value of Value.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) GetValue() string {
-	return s.Value
-}
-
-// SetKey sets the value of Key.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) SetKey(val string) {
-	s.Key = val
-}
-
-// SetValue sets the value of Value.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) SetValue(val string) {
-	s.Value = val
-}
-
-// {"errorMessage":"Invalid response type. Please select a valid response type.",
-// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-//
-//	(Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-//
-// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-// template) Format which is used by Singbox client application.","Return **subscription** as browser
-// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-// the socket connection."]}.
-type DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType string
-
-const (
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON      DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "XRAY_JSON"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64    DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "XRAY_BASE64"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeMIHOMO        DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "MIHOMO"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTASH         DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "STASH"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeCLASH         DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "CLASH"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSINGBOX       DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "SINGBOX"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBROWSER       DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "BROWSER"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBLOCK         DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "BLOCK"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404 DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "STATUS_CODE_404"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451 DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "STATUS_CODE_451"
-	DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP    DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType = "SOCKET_DROP"
-)
-
-// AllValues returns all DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType values.
-func (DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType) AllValues() []DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType {
-	return []DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType{
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeMIHOMO,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTASH,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeCLASH,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSINGBOX,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBROWSER,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBLOCK,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451,
-		DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeMIHOMO:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTASH:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeCLASH:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSINGBOX:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBROWSER:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBLOCK:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451:
-		return []byte(s), nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseType(data) {
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeMIHOMO:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeMIHOMO
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTASH:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTASH
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeCLASH:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeCLASH
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSINGBOX:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSINGBOX
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBROWSER:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBROWSER
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBLOCK:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeBLOCK
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451
-		return nil
-	case DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP:
-		*s = DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-// config. Currently supported version is **1**."}.
-type DebugSrrMatcherRequestDtoResponseRulesVersion string
-
-const (
-	DebugSrrMatcherRequestDtoResponseRulesVersion1 DebugSrrMatcherRequestDtoResponseRulesVersion = "1"
-)
-
-// AllValues returns all DebugSrrMatcherRequestDtoResponseRulesVersion values.
-func (DebugSrrMatcherRequestDtoResponseRulesVersion) AllValues() []DebugSrrMatcherRequestDtoResponseRulesVersion {
-	return []DebugSrrMatcherRequestDtoResponseRulesVersion{
-		DebugSrrMatcherRequestDtoResponseRulesVersion1,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherRequestDtoResponseRulesVersion) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherRequestDtoResponseRulesVersion1:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherRequestDtoResponseRulesVersion) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherRequestDtoResponseRulesVersion(data) {
-	case DebugSrrMatcherRequestDtoResponseRulesVersion1:
-		*s = DebugSrrMatcherRequestDtoResponseRulesVersion1
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/DebugSrrMatcherResponseDto
@@ -3596,43 +3176,11 @@ func (s *DebugSrrMatcherResponseDto) SetResponse(val DebugSrrMatcherResponseDtoR
 func (*DebugSrrMatcherResponseDto) systemControllerDebugSrrMatcherRes() {}
 
 type DebugSrrMatcherResponseDtoResponse struct {
-	Matched      bool                                           `json:"matched"`
-	ResponseType DebugSrrMatcherResponseDtoResponseResponseType `json:"responseType"`
-	// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
-	// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
-	// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
-	// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
-	// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
-	// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
-	// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
-	// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
-	// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
-	// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
-	// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
-	// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
-	//    }\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
-	// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
-	// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
-	// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
-	// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
-	// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
-	// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
-	// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
-	// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
-	// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
-	// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
-	// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
-	// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
-	// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
-	// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
-	// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
-	//  \"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
-	// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
-	// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
-	// \"BLOCK\"\n}\n```"}.
-	MatchedRule   NilDebugSrrMatcherResponseDtoResponseMatchedRule `json:"matchedRule"`
-	InputHeaders  DebugSrrMatcherResponseDtoResponseInputHeaders   `json:"inputHeaders"`
-	OutputHeaders DebugSrrMatcherResponseDtoResponseOutputHeaders  `json:"outputHeaders"`
+	Matched       bool                                            `json:"matched"`
+	ResponseType  DebugSrrMatcherResponseDtoResponseResponseType  `json:"responseType"`
+	MatchedRule   Rule                                            `json:"matchedRule"`
+	InputHeaders  DebugSrrMatcherResponseDtoResponseInputHeaders  `json:"inputHeaders"`
+	OutputHeaders DebugSrrMatcherResponseDtoResponseOutputHeaders `json:"outputHeaders"`
 }
 
 // GetMatched returns the value of Matched.
@@ -3646,7 +3194,7 @@ func (s *DebugSrrMatcherResponseDtoResponse) GetResponseType() DebugSrrMatcherRe
 }
 
 // GetMatchedRule returns the value of MatchedRule.
-func (s *DebugSrrMatcherResponseDtoResponse) GetMatchedRule() NilDebugSrrMatcherResponseDtoResponseMatchedRule {
+func (s *DebugSrrMatcherResponseDtoResponse) GetMatchedRule() Rule {
 	return s.MatchedRule
 }
 
@@ -3671,7 +3219,7 @@ func (s *DebugSrrMatcherResponseDtoResponse) SetResponseType(val DebugSrrMatcher
 }
 
 // SetMatchedRule sets the value of MatchedRule.
-func (s *DebugSrrMatcherResponseDtoResponse) SetMatchedRule(val NilDebugSrrMatcherResponseDtoResponseMatchedRule) {
+func (s *DebugSrrMatcherResponseDtoResponse) SetMatchedRule(val Rule) {
 	s.MatchedRule = val
 }
 
@@ -3694,546 +3242,6 @@ func (s *DebugSrrMatcherResponseDtoResponseInputHeaders) init() DebugSrrMatcherR
 		*s = m
 	}
 	return m
-}
-
-// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
-// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
-// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
-// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
-// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
-// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
-// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
-// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
-// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
-// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
-// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
-// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
-//
-//	}\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
-//
-// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
-// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
-// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
-// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
-// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
-// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
-// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
-// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
-// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
-// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
-// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
-// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
-// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
-// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
-// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
-//
-//	\"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
-//
-// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
-// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
-// \"BLOCK\"\n}\n```"}.
-type DebugSrrMatcherResponseDtoResponseMatchedRule struct {
-	// {"markdownDescription":"Name of the response rule."}.
-	Name string `json:"name"`
-	// {"markdownDescription":"Description of the response rule. Optional."}.
-	Description OptString `json:"description"`
-	// {"markdownDescription":"Control whether the response rule is enabled or disabled. \n\n - `true`
-	// the rule will be applied. \n\n - `false` the rule will be always ignored."}.
-	Enabled bool `json:"enabled"`
-	// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-	Operator DebugSrrMatcherResponseDtoResponseMatchedRuleOperator `json:"operator"`
-	// {"markdownDescription":"Array of conditions to check against the request headers. Conditions are
-	// applied with **operator**. If conditions are empty, the rule will be matched."}.
-	Conditions []DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem `json:"conditions"`
-	// {"errorMessage":"Invalid response type. Please select a valid response type.",
-	// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-	// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-	// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-	// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-	//  (Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-	// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-	// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-	// template) Format which is used by Singbox client application.","Return **subscription** as browser
-	// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-	// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-	// the socket connection."]}.
-	ResponseType DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType `json:"responseType"`
-	// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-	ResponseModifications OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications `json:"responseModifications"`
-}
-
-// GetName returns the value of Name.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetName() string {
-	return s.Name
-}
-
-// GetDescription returns the value of Description.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetDescription() OptString {
-	return s.Description
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetOperator returns the value of Operator.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetOperator() DebugSrrMatcherResponseDtoResponseMatchedRuleOperator {
-	return s.Operator
-}
-
-// GetConditions returns the value of Conditions.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetConditions() []DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem {
-	return s.Conditions
-}
-
-// GetResponseType returns the value of ResponseType.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetResponseType() DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType {
-	return s.ResponseType
-}
-
-// GetResponseModifications returns the value of ResponseModifications.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) GetResponseModifications() OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications {
-	return s.ResponseModifications
-}
-
-// SetName sets the value of Name.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetName(val string) {
-	s.Name = val
-}
-
-// SetDescription sets the value of Description.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetDescription(val OptString) {
-	s.Description = val
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetOperator(val DebugSrrMatcherResponseDtoResponseMatchedRuleOperator) {
-	s.Operator = val
-}
-
-// SetConditions sets the value of Conditions.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetConditions(val []DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) {
-	s.Conditions = val
-}
-
-// SetResponseType sets the value of ResponseType.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetResponseType(val DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType) {
-	s.ResponseType = val
-}
-
-// SetResponseModifications sets the value of ResponseModifications.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRule) SetResponseModifications(val OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) {
-	s.ResponseModifications = val
-}
-
-// {"markdownDescription":"Condition to check against the **headerName**.",
-// "defaultSnippets":[{"label":"Examples: Check if header contains \"text/html\"",
-// "markdownDescription":"Condition to check if **headerName** contains \"text/html\"",
-// "body":{"headerName":"accept","operator":"CONTAINS","value":"text/html","caseSensitive":true}}]}.
-type DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem struct {
-	// {"markdownDescription":"**Name** of the HTTP header to check. Must comply with RFC 7230."}.
-	HeaderName string `json:"headerName"`
-	// {"errorMessage":"Invalid operator. Please select a valid operator.",
-	// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-	// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-	// string. `string === value`","Ensures the header value does not exactly match the specified string.
-	// `string !== value`","Checks if the header value contains the specified string as a substring.
-	// `string.includes()`","Verifies the header value does not contain the specified string as a
-	// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-	//  `string.startsWith()`","Validates that the header value does not begin with the specified string.
-	// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-	// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-	// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-	// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-	// pattern. `!regex.test()`"]}.
-	Operator DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator `json:"operator"`
-	// {"markdownDescription":"**Value** to check against the **headerName**."}.
-	Value string `json:"value"`
-	// {"markdownDescription":"Whether the value is **case sensitive**. \n\n - `true`: the value will be
-	// compared as is. \n\n - `false`: the value will be lowercased **before** comparison."}.
-	CaseSensitive bool `json:"caseSensitive"`
-}
-
-// GetHeaderName returns the value of HeaderName.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) GetHeaderName() string {
-	return s.HeaderName
-}
-
-// GetOperator returns the value of Operator.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) GetOperator() DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator {
-	return s.Operator
-}
-
-// GetValue returns the value of Value.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) GetValue() string {
-	return s.Value
-}
-
-// GetCaseSensitive returns the value of CaseSensitive.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) GetCaseSensitive() bool {
-	return s.CaseSensitive
-}
-
-// SetHeaderName sets the value of HeaderName.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) SetHeaderName(val string) {
-	s.HeaderName = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) SetOperator(val DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator) {
-	s.Operator = val
-}
-
-// SetValue sets the value of Value.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) SetValue(val string) {
-	s.Value = val
-}
-
-// SetCaseSensitive sets the value of CaseSensitive.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItem) SetCaseSensitive(val bool) {
-	s.CaseSensitive = val
-}
-
-// {"errorMessage":"Invalid operator. Please select a valid operator.",
-// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-// string. `string === value`","Ensures the header value does not exactly match the specified string.
-// `string !== value`","Checks if the header value contains the specified string as a substring.
-// `string.includes()`","Verifies the header value does not contain the specified string as a
-// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-//
-//	`string.startsWith()`","Validates that the header value does not begin with the specified string.
-//
-// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-// pattern. `!regex.test()`"]}.
-type DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator string
-
-const (
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorEQUALS        DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "EQUALS"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTEQUALS     DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "NOT_EQUALS"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorCONTAINS      DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "CONTAINS"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTCONTAINS   DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "NOT_CONTAINS"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorSTARTSWITH    DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "STARTS_WITH"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTSTARTSWITH DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "NOT_STARTS_WITH"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorENDSWITH      DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "ENDS_WITH"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTENDSWITH   DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "NOT_ENDS_WITH"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorREGEX         DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "REGEX"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTREGEX      DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator = "NOT_REGEX"
-)
-
-// AllValues returns all DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator values.
-func (DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator) AllValues() []DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator {
-	return []DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator{
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorEQUALS,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTEQUALS,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorCONTAINS,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTCONTAINS,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorSTARTSWITH,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTSTARTSWITH,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorENDSWITH,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTENDSWITH,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorREGEX,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTREGEX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorEQUALS:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTEQUALS:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorCONTAINS:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTCONTAINS:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorSTARTSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTSTARTSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorENDSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTENDSWITH:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorREGEX:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTREGEX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperator(data) {
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorEQUALS:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorEQUALS
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTEQUALS:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTEQUALS
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorCONTAINS:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorCONTAINS
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTCONTAINS:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTCONTAINS
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorSTARTSWITH:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorSTARTSWITH
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTSTARTSWITH:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTSTARTSWITH
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorENDSWITH:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorENDSWITH
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTENDSWITH:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTENDSWITH
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorREGEX:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorREGEX
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTREGEX:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleConditionsItemOperatorNOTREGEX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-type DebugSrrMatcherResponseDtoResponseMatchedRuleOperator string
-
-const (
-	DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorAND DebugSrrMatcherResponseDtoResponseMatchedRuleOperator = "AND"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorOR  DebugSrrMatcherResponseDtoResponseMatchedRuleOperator = "OR"
-)
-
-// AllValues returns all DebugSrrMatcherResponseDtoResponseMatchedRuleOperator values.
-func (DebugSrrMatcherResponseDtoResponseMatchedRuleOperator) AllValues() []DebugSrrMatcherResponseDtoResponseMatchedRuleOperator {
-	return []DebugSrrMatcherResponseDtoResponseMatchedRuleOperator{
-		DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorAND,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorOR,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherResponseDtoResponseMatchedRuleOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorAND:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorOR:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleOperator) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherResponseDtoResponseMatchedRuleOperator(data) {
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorAND:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorAND
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorOR:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleOperatorOR
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-type DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications struct {
-	// {"defaultSnippets":[{"label":"Examples: Add custom header","markdownDescription":"Add a custom
-	// header to the response","body":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Array of headers to be added when the rule is matched."}.
-	Headers []DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem `json:"headers"`
-	// {"markdownDescription":"Override the subscription template with the given name. If not provided,
-	// the default subscription template will be used. If the template name is not found, the default
-	// subscription template for this type will be used. **This modification have higher priority than
-	// settings from External Squads.**"}.
-	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
-}
-
-// GetHeaders returns the value of Headers.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) GetHeaders() []DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem {
-	return s.Headers
-}
-
-// GetSubscriptionTemplate returns the value of SubscriptionTemplate.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) GetSubscriptionTemplate() OptString {
-	return s.SubscriptionTemplate
-}
-
-// SetHeaders sets the value of Headers.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) SetHeaders(val []DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem) {
-	s.Headers = val
-}
-
-// SetSubscriptionTemplate sets the value of SubscriptionTemplate.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) SetSubscriptionTemplate(val OptString) {
-	s.SubscriptionTemplate = val
-}
-
-// {"markdownDescription":"**Key** and **value** of the response header will be added to the response.
-// "}.
-type DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem struct {
-	// {"markdownDescription":"Key of the response header. Must comply with RFC 7230."}.
-	Key string `json:"key"`
-	// {"markdownDescription":"Value of the response header. "}.
-	Value string `json:"value"`
-}
-
-// GetKey returns the value of Key.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem) GetKey() string {
-	return s.Key
-}
-
-// GetValue returns the value of Value.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem) GetValue() string {
-	return s.Value
-}
-
-// SetKey sets the value of Key.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem) SetKey(val string) {
-	s.Key = val
-}
-
-// SetValue sets the value of Value.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModificationsHeadersItem) SetValue(val string) {
-	s.Value = val
-}
-
-// {"errorMessage":"Invalid response type. Please select a valid response type.",
-// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-//
-//	(Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-//
-// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-// template) Format which is used by Singbox client application.","Return **subscription** as browser
-// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-// the socket connection."]}.
-type DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType string
-
-const (
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYJSON      DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "XRAY_JSON"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYBASE64    DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "XRAY_BASE64"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeMIHOMO        DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "MIHOMO"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTASH         DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "STASH"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeCLASH         DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "CLASH"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSINGBOX       DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "SINGBOX"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBROWSER       DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "BROWSER"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBLOCK         DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "BLOCK"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE404 DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "STATUS_CODE_404"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE451 DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "STATUS_CODE_451"
-	DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSOCKETDROP    DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType = "SOCKET_DROP"
-)
-
-// AllValues returns all DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType values.
-func (DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType) AllValues() []DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType {
-	return []DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType{
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYJSON,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYBASE64,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeMIHOMO,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTASH,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeCLASH,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSINGBOX,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBROWSER,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBLOCK,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE404,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE451,
-		DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSOCKETDROP,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType) MarshalText() ([]byte, error) {
-	switch s {
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYJSON:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYBASE64:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeMIHOMO:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTASH:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeCLASH:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSINGBOX:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBROWSER:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBLOCK:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE404:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE451:
-		return []byte(s), nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSOCKETDROP:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType) UnmarshalText(data []byte) error {
-	switch DebugSrrMatcherResponseDtoResponseMatchedRuleResponseType(data) {
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYJSON:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYJSON
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYBASE64:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeXRAYBASE64
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeMIHOMO:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeMIHOMO
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTASH:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTASH
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeCLASH:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeCLASH
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSINGBOX:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSINGBOX
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBROWSER:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBROWSER
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBLOCK:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeBLOCK
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE404:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE404
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE451:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSTATUSCODE451
-		return nil
-	case DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSOCKETDROP:
-		*s = DebugSrrMatcherResponseDtoResponseMatchedRuleResponseTypeSOCKETDROP
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 type DebugSrrMatcherResponseDtoResponseOutputHeaders map[string]string
@@ -4477,6 +3485,98 @@ func (s *DeleteUserHwidDeviceRequestDto) SetHwid(val string) {
 	s.Hwid = val
 }
 
+// Ref: #/components/schemas/Device
+type Device struct {
+	Hwid        string    `json:"hwid"`
+	UserUuid    uuid.UUID `json:"userUuid"`
+	Platform    NilString `json:"platform"`
+	OsVersion   NilString `json:"osVersion"`
+	DeviceModel NilString `json:"deviceModel"`
+	UserAgent   NilString `json:"userAgent"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetHwid returns the value of Hwid.
+func (s *Device) GetHwid() string {
+	return s.Hwid
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *Device) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetPlatform returns the value of Platform.
+func (s *Device) GetPlatform() NilString {
+	return s.Platform
+}
+
+// GetOsVersion returns the value of OsVersion.
+func (s *Device) GetOsVersion() NilString {
+	return s.OsVersion
+}
+
+// GetDeviceModel returns the value of DeviceModel.
+func (s *Device) GetDeviceModel() NilString {
+	return s.DeviceModel
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *Device) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *Device) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *Device) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetHwid sets the value of Hwid.
+func (s *Device) SetHwid(val string) {
+	s.Hwid = val
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *Device) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetPlatform sets the value of Platform.
+func (s *Device) SetPlatform(val NilString) {
+	s.Platform = val
+}
+
+// SetOsVersion sets the value of OsVersion.
+func (s *Device) SetOsVersion(val NilString) {
+	s.OsVersion = val
+}
+
+// SetDeviceModel sets the value of DeviceModel.
+func (s *Device) SetDeviceModel(val NilString) {
+	s.DeviceModel = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *Device) SetUserAgent(val NilString) {
+	s.UserAgent = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *Device) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *Device) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
 // Ref: #/components/schemas/EncryptHappCryptoLinkRequestDto
 type EncryptHappCryptoLinkRequestDto struct {
 	LinkToEncrypt url.URL `json:"linkToEncrypt"`
@@ -4562,6 +3662,109 @@ func (s *EventResponseResponse) SetEventSent(val bool) {
 	s.EventSent = val
 }
 
+// Ref: #/components/schemas/ExternalSquad
+type ExternalSquad struct {
+	UUID                 uuid.UUID                       `json:"uuid"`
+	Name                 string                          `json:"name"`
+	Info                 ExternalSquadsInfoItem          `json:"info"`
+	Templates            []TemplateRef                   `json:"templates"`
+	SubscriptionSettings NilSubscriptionSettings         `json:"subscriptionSettings"`
+	HostOverrides        NilHostOverride                 `json:"hostOverrides"`
+	ResponseHeaders      NilExternalSquadResponseHeaders `json:"responseHeaders"`
+	CreatedAt            time.Time                       `json:"createdAt"`
+	UpdatedAt            time.Time                       `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *ExternalSquad) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *ExternalSquad) GetName() string {
+	return s.Name
+}
+
+// GetInfo returns the value of Info.
+func (s *ExternalSquad) GetInfo() ExternalSquadsInfoItem {
+	return s.Info
+}
+
+// GetTemplates returns the value of Templates.
+func (s *ExternalSquad) GetTemplates() []TemplateRef {
+	return s.Templates
+}
+
+// GetSubscriptionSettings returns the value of SubscriptionSettings.
+func (s *ExternalSquad) GetSubscriptionSettings() NilSubscriptionSettings {
+	return s.SubscriptionSettings
+}
+
+// GetHostOverrides returns the value of HostOverrides.
+func (s *ExternalSquad) GetHostOverrides() NilHostOverride {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *ExternalSquad) GetResponseHeaders() NilExternalSquadResponseHeaders {
+	return s.ResponseHeaders
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *ExternalSquad) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *ExternalSquad) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *ExternalSquad) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *ExternalSquad) SetName(val string) {
+	s.Name = val
+}
+
+// SetInfo sets the value of Info.
+func (s *ExternalSquad) SetInfo(val ExternalSquadsInfoItem) {
+	s.Info = val
+}
+
+// SetTemplates sets the value of Templates.
+func (s *ExternalSquad) SetTemplates(val []TemplateRef) {
+	s.Templates = val
+}
+
+// SetSubscriptionSettings sets the value of SubscriptionSettings.
+func (s *ExternalSquad) SetSubscriptionSettings(val NilSubscriptionSettings) {
+	s.SubscriptionSettings = val
+}
+
+// SetHostOverrides sets the value of HostOverrides.
+func (s *ExternalSquad) SetHostOverrides(val NilHostOverride) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *ExternalSquad) SetResponseHeaders(val NilExternalSquadResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *ExternalSquad) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *ExternalSquad) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
 // ExternalSquadControllerAddUsersToExternalSquadNotFound is response for ExternalSquadControllerAddUsersToExternalSquad operation.
 type ExternalSquadControllerAddUsersToExternalSquadNotFound struct{}
 
@@ -4598,169 +3801,9 @@ type ExternalSquadControllerUpdateExternalSquadNotFound struct{}
 func (*ExternalSquadControllerUpdateExternalSquadNotFound) externalSquadControllerUpdateExternalSquadRes() {
 }
 
-// Ref: #/components/schemas/ExternalSquadResponseResponse
-type ExternalSquadResponseResponse struct {
-	Response ExternalSquadResponseResponseResponse `json:"response"`
-}
+type ExternalSquadResponseHeaders map[string]string
 
-// GetResponse returns the value of Response.
-func (s *ExternalSquadResponseResponse) GetResponse() ExternalSquadResponseResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *ExternalSquadResponseResponse) SetResponse(val ExternalSquadResponseResponseResponse) {
-	s.Response = val
-}
-
-func (*ExternalSquadResponseResponse) externalSquadControllerCreateExternalSquadRes()    {}
-func (*ExternalSquadResponseResponse) externalSquadControllerGetExternalSquadByUuidRes() {}
-func (*ExternalSquadResponseResponse) externalSquadControllerUpdateExternalSquadRes()    {}
-
-type ExternalSquadResponseResponseResponse struct {
-	UUID                 uuid.UUID                                                    `json:"uuid"`
-	Name                 string                                                       `json:"name"`
-	Info                 ExternalSquadResponseResponseResponseInfo                    `json:"info"`
-	Templates            []ExternalSquadResponseResponseResponseTemplatesItem         `json:"templates"`
-	SubscriptionSettings NilExternalSquadResponseResponseResponseSubscriptionSettings `json:"subscriptionSettings"`
-	HostOverrides        NilExternalSquadResponseResponseResponseHostOverrides        `json:"hostOverrides"`
-	ResponseHeaders      NilExternalSquadResponseResponseResponseResponseHeaders      `json:"responseHeaders"`
-	CreatedAt            time.Time                                                    `json:"createdAt"`
-	UpdatedAt            time.Time                                                    `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *ExternalSquadResponseResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *ExternalSquadResponseResponseResponse) GetName() string {
-	return s.Name
-}
-
-// GetInfo returns the value of Info.
-func (s *ExternalSquadResponseResponseResponse) GetInfo() ExternalSquadResponseResponseResponseInfo {
-	return s.Info
-}
-
-// GetTemplates returns the value of Templates.
-func (s *ExternalSquadResponseResponseResponse) GetTemplates() []ExternalSquadResponseResponseResponseTemplatesItem {
-	return s.Templates
-}
-
-// GetSubscriptionSettings returns the value of SubscriptionSettings.
-func (s *ExternalSquadResponseResponseResponse) GetSubscriptionSettings() NilExternalSquadResponseResponseResponseSubscriptionSettings {
-	return s.SubscriptionSettings
-}
-
-// GetHostOverrides returns the value of HostOverrides.
-func (s *ExternalSquadResponseResponseResponse) GetHostOverrides() NilExternalSquadResponseResponseResponseHostOverrides {
-	return s.HostOverrides
-}
-
-// GetResponseHeaders returns the value of ResponseHeaders.
-func (s *ExternalSquadResponseResponseResponse) GetResponseHeaders() NilExternalSquadResponseResponseResponseResponseHeaders {
-	return s.ResponseHeaders
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *ExternalSquadResponseResponseResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *ExternalSquadResponseResponseResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *ExternalSquadResponseResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *ExternalSquadResponseResponseResponse) SetName(val string) {
-	s.Name = val
-}
-
-// SetInfo sets the value of Info.
-func (s *ExternalSquadResponseResponseResponse) SetInfo(val ExternalSquadResponseResponseResponseInfo) {
-	s.Info = val
-}
-
-// SetTemplates sets the value of Templates.
-func (s *ExternalSquadResponseResponseResponse) SetTemplates(val []ExternalSquadResponseResponseResponseTemplatesItem) {
-	s.Templates = val
-}
-
-// SetSubscriptionSettings sets the value of SubscriptionSettings.
-func (s *ExternalSquadResponseResponseResponse) SetSubscriptionSettings(val NilExternalSquadResponseResponseResponseSubscriptionSettings) {
-	s.SubscriptionSettings = val
-}
-
-// SetHostOverrides sets the value of HostOverrides.
-func (s *ExternalSquadResponseResponseResponse) SetHostOverrides(val NilExternalSquadResponseResponseResponseHostOverrides) {
-	s.HostOverrides = val
-}
-
-// SetResponseHeaders sets the value of ResponseHeaders.
-func (s *ExternalSquadResponseResponseResponse) SetResponseHeaders(val NilExternalSquadResponseResponseResponseResponseHeaders) {
-	s.ResponseHeaders = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *ExternalSquadResponseResponseResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *ExternalSquadResponseResponseResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-type ExternalSquadResponseResponseResponseHostOverrides struct {
-	ServerDescription OptNilString `json:"serverDescription"`
-	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
-}
-
-// GetServerDescription returns the value of ServerDescription.
-func (s *ExternalSquadResponseResponseResponseHostOverrides) GetServerDescription() OptNilString {
-	return s.ServerDescription
-}
-
-// GetVlessRouteId returns the value of VlessRouteId.
-func (s *ExternalSquadResponseResponseResponseHostOverrides) GetVlessRouteId() OptNilInt {
-	return s.VlessRouteId
-}
-
-// SetServerDescription sets the value of ServerDescription.
-func (s *ExternalSquadResponseResponseResponseHostOverrides) SetServerDescription(val OptNilString) {
-	s.ServerDescription = val
-}
-
-// SetVlessRouteId sets the value of VlessRouteId.
-func (s *ExternalSquadResponseResponseResponseHostOverrides) SetVlessRouteId(val OptNilInt) {
-	s.VlessRouteId = val
-}
-
-type ExternalSquadResponseResponseResponseInfo struct {
-	MembersCount float64 `json:"membersCount"`
-}
-
-// GetMembersCount returns the value of MembersCount.
-func (s *ExternalSquadResponseResponseResponseInfo) GetMembersCount() float64 {
-	return s.MembersCount
-}
-
-// SetMembersCount sets the value of MembersCount.
-func (s *ExternalSquadResponseResponseResponseInfo) SetMembersCount(val float64) {
-	s.MembersCount = val
-}
-
-type ExternalSquadResponseResponseResponseResponseHeaders map[string]string
-
-func (s *ExternalSquadResponseResponseResponseResponseHeaders) init() ExternalSquadResponseResponseResponseResponseHeaders {
+func (s *ExternalSquadResponseHeaders) init() ExternalSquadResponseHeaders {
 	m := *s
 	if m == nil {
 		m = map[string]string{}
@@ -4769,211 +3812,38 @@ func (s *ExternalSquadResponseResponseResponseResponseHeaders) init() ExternalSq
 	return m
 }
 
-type ExternalSquadResponseResponseResponseSubscriptionSettings struct {
-	ProfileTitle                  OptString    `json:"profileTitle"`
-	SupportLink                   OptString    `json:"supportLink"`
-	ProfileUpdateInterval         OptInt       `json:"profileUpdateInterval"`
-	IsProfileWebpageUrlEnabled    OptBool      `json:"isProfileWebpageUrlEnabled"`
-	ServeJsonAtBaseSubscription   OptBool      `json:"serveJsonAtBaseSubscription"`
-	AddUsernameToBaseSubscription OptBool      `json:"addUsernameToBaseSubscription"`
-	IsShowCustomRemarks           OptBool      `json:"isShowCustomRemarks"`
-	HappAnnounce                  OptNilString `json:"happAnnounce"`
-	HappRouting                   OptNilString `json:"happRouting"`
-	RandomizeHosts                OptBool      `json:"randomizeHosts"`
+// Ref: #/components/schemas/ExternalSquadResponseResponse
+type ExternalSquadResponseResponse struct {
+	Response ExternalSquad `json:"response"`
 }
 
-// GetProfileTitle returns the value of ProfileTitle.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetProfileTitle() OptString {
-	return s.ProfileTitle
+// GetResponse returns the value of Response.
+func (s *ExternalSquadResponseResponse) GetResponse() ExternalSquad {
+	return s.Response
 }
 
-// GetSupportLink returns the value of SupportLink.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetSupportLink() OptString {
-	return s.SupportLink
+// SetResponse sets the value of Response.
+func (s *ExternalSquadResponseResponse) SetResponse(val ExternalSquad) {
+	s.Response = val
 }
 
-// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetProfileUpdateInterval() OptInt {
-	return s.ProfileUpdateInterval
+func (*ExternalSquadResponseResponse) externalSquadControllerCreateExternalSquadRes()    {}
+func (*ExternalSquadResponseResponse) externalSquadControllerGetExternalSquadByUuidRes() {}
+func (*ExternalSquadResponseResponse) externalSquadControllerUpdateExternalSquadRes()    {}
+
+// Ref: #/components/schemas/ExternalSquadsInfoItem
+type ExternalSquadsInfoItem struct {
+	MembersCount float64 `json:"membersCount"`
 }
 
-// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetIsProfileWebpageUrlEnabled() OptBool {
-	return s.IsProfileWebpageUrlEnabled
+// GetMembersCount returns the value of MembersCount.
+func (s *ExternalSquadsInfoItem) GetMembersCount() float64 {
+	return s.MembersCount
 }
 
-// GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetServeJsonAtBaseSubscription() OptBool {
-	return s.ServeJsonAtBaseSubscription
-}
-
-// GetAddUsernameToBaseSubscription returns the value of AddUsernameToBaseSubscription.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetAddUsernameToBaseSubscription() OptBool {
-	return s.AddUsernameToBaseSubscription
-}
-
-// GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetIsShowCustomRemarks() OptBool {
-	return s.IsShowCustomRemarks
-}
-
-// GetHappAnnounce returns the value of HappAnnounce.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetHappAnnounce() OptNilString {
-	return s.HappAnnounce
-}
-
-// GetHappRouting returns the value of HappRouting.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetHappRouting() OptNilString {
-	return s.HappRouting
-}
-
-// GetRandomizeHosts returns the value of RandomizeHosts.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) GetRandomizeHosts() OptBool {
-	return s.RandomizeHosts
-}
-
-// SetProfileTitle sets the value of ProfileTitle.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetProfileTitle(val OptString) {
-	s.ProfileTitle = val
-}
-
-// SetSupportLink sets the value of SupportLink.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetSupportLink(val OptString) {
-	s.SupportLink = val
-}
-
-// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetProfileUpdateInterval(val OptInt) {
-	s.ProfileUpdateInterval = val
-}
-
-// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetIsProfileWebpageUrlEnabled(val OptBool) {
-	s.IsProfileWebpageUrlEnabled = val
-}
-
-// SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetServeJsonAtBaseSubscription(val OptBool) {
-	s.ServeJsonAtBaseSubscription = val
-}
-
-// SetAddUsernameToBaseSubscription sets the value of AddUsernameToBaseSubscription.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetAddUsernameToBaseSubscription(val OptBool) {
-	s.AddUsernameToBaseSubscription = val
-}
-
-// SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetIsShowCustomRemarks(val OptBool) {
-	s.IsShowCustomRemarks = val
-}
-
-// SetHappAnnounce sets the value of HappAnnounce.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetHappAnnounce(val OptNilString) {
-	s.HappAnnounce = val
-}
-
-// SetHappRouting sets the value of HappRouting.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetHappRouting(val OptNilString) {
-	s.HappRouting = val
-}
-
-// SetRandomizeHosts sets the value of RandomizeHosts.
-func (s *ExternalSquadResponseResponseResponseSubscriptionSettings) SetRandomizeHosts(val OptBool) {
-	s.RandomizeHosts = val
-}
-
-type ExternalSquadResponseResponseResponseTemplatesItem struct {
-	TemplateUuid uuid.UUID                                                      `json:"templateUuid"`
-	TemplateType ExternalSquadResponseResponseResponseTemplatesItemTemplateType `json:"templateType"`
-}
-
-// GetTemplateUuid returns the value of TemplateUuid.
-func (s *ExternalSquadResponseResponseResponseTemplatesItem) GetTemplateUuid() uuid.UUID {
-	return s.TemplateUuid
-}
-
-// GetTemplateType returns the value of TemplateType.
-func (s *ExternalSquadResponseResponseResponseTemplatesItem) GetTemplateType() ExternalSquadResponseResponseResponseTemplatesItemTemplateType {
-	return s.TemplateType
-}
-
-// SetTemplateUuid sets the value of TemplateUuid.
-func (s *ExternalSquadResponseResponseResponseTemplatesItem) SetTemplateUuid(val uuid.UUID) {
-	s.TemplateUuid = val
-}
-
-// SetTemplateType sets the value of TemplateType.
-func (s *ExternalSquadResponseResponseResponseTemplatesItem) SetTemplateType(val ExternalSquadResponseResponseResponseTemplatesItemTemplateType) {
-	s.TemplateType = val
-}
-
-type ExternalSquadResponseResponseResponseTemplatesItemTemplateType string
-
-const (
-	ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYJSON   ExternalSquadResponseResponseResponseTemplatesItemTemplateType = "XRAY_JSON"
-	ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYBASE64 ExternalSquadResponseResponseResponseTemplatesItemTemplateType = "XRAY_BASE64"
-	ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeMIHOMO     ExternalSquadResponseResponseResponseTemplatesItemTemplateType = "MIHOMO"
-	ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSTASH      ExternalSquadResponseResponseResponseTemplatesItemTemplateType = "STASH"
-	ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeCLASH      ExternalSquadResponseResponseResponseTemplatesItemTemplateType = "CLASH"
-	ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSINGBOX    ExternalSquadResponseResponseResponseTemplatesItemTemplateType = "SINGBOX"
-)
-
-// AllValues returns all ExternalSquadResponseResponseResponseTemplatesItemTemplateType values.
-func (ExternalSquadResponseResponseResponseTemplatesItemTemplateType) AllValues() []ExternalSquadResponseResponseResponseTemplatesItemTemplateType {
-	return []ExternalSquadResponseResponseResponseTemplatesItemTemplateType{
-		ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYJSON,
-		ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYBASE64,
-		ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeMIHOMO,
-		ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSTASH,
-		ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeCLASH,
-		ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSINGBOX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s ExternalSquadResponseResponseResponseTemplatesItemTemplateType) MarshalText() ([]byte, error) {
-	switch s {
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYJSON:
-		return []byte(s), nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYBASE64:
-		return []byte(s), nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeMIHOMO:
-		return []byte(s), nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSTASH:
-		return []byte(s), nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeCLASH:
-		return []byte(s), nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSINGBOX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *ExternalSquadResponseResponseResponseTemplatesItemTemplateType) UnmarshalText(data []byte) error {
-	switch ExternalSquadResponseResponseResponseTemplatesItemTemplateType(data) {
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYJSON:
-		*s = ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYJSON
-		return nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYBASE64:
-		*s = ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeXRAYBASE64
-		return nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeMIHOMO:
-		*s = ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeMIHOMO
-		return nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSTASH:
-		*s = ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSTASH
-		return nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeCLASH:
-		*s = ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeCLASH
-		return nil
-	case ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSINGBOX:
-		*s = ExternalSquadResponseResponseResponseTemplatesItemTemplateTypeSINGBOX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
+// SetMembersCount sets the value of MembersCount.
+func (s *ExternalSquadsInfoItem) SetMembersCount(val float64) {
+	s.MembersCount = val
 }
 
 // Ref: #/components/schemas/FindAllApiTokensResponseDto
@@ -5198,136 +4068,20 @@ func (s *GenerateX25519ResponseDtoResponseKeypairsItem) SetPrivateKey(val string
 
 // Ref: #/components/schemas/GetAllHwidDevicesResponseDto
 type GetAllHwidDevicesResponseDto struct {
-	Response GetAllHwidDevicesResponseDtoResponse `json:"response"`
+	Response AllHwidDevices `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetAllHwidDevicesResponseDto) GetResponse() GetAllHwidDevicesResponseDtoResponse {
+func (s *GetAllHwidDevicesResponseDto) GetResponse() AllHwidDevices {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetAllHwidDevicesResponseDto) SetResponse(val GetAllHwidDevicesResponseDtoResponse) {
+func (s *GetAllHwidDevicesResponseDto) SetResponse(val AllHwidDevices) {
 	s.Response = val
 }
 
 func (*GetAllHwidDevicesResponseDto) hwidUserDevicesControllerGetAllUsersRes() {}
-
-type GetAllHwidDevicesResponseDtoResponse struct {
-	Devices []GetAllHwidDevicesResponseDtoResponseDevicesItem `json:"devices"`
-	Total   float64                                           `json:"total"`
-}
-
-// GetDevices returns the value of Devices.
-func (s *GetAllHwidDevicesResponseDtoResponse) GetDevices() []GetAllHwidDevicesResponseDtoResponseDevicesItem {
-	return s.Devices
-}
-
-// GetTotal returns the value of Total.
-func (s *GetAllHwidDevicesResponseDtoResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// SetDevices sets the value of Devices.
-func (s *GetAllHwidDevicesResponseDtoResponse) SetDevices(val []GetAllHwidDevicesResponseDtoResponseDevicesItem) {
-	s.Devices = val
-}
-
-// SetTotal sets the value of Total.
-func (s *GetAllHwidDevicesResponseDtoResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-type GetAllHwidDevicesResponseDtoResponseDevicesItem struct {
-	Hwid        string    `json:"hwid"`
-	UserUuid    uuid.UUID `json:"userUuid"`
-	Platform    NilString `json:"platform"`
-	OsVersion   NilString `json:"osVersion"`
-	DeviceModel NilString `json:"deviceModel"`
-	UserAgent   NilString `json:"userAgent"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
-}
-
-// GetHwid returns the value of Hwid.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetHwid() string {
-	return s.Hwid
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// GetPlatform returns the value of Platform.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetPlatform() NilString {
-	return s.Platform
-}
-
-// GetOsVersion returns the value of OsVersion.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetOsVersion() NilString {
-	return s.OsVersion
-}
-
-// GetDeviceModel returns the value of DeviceModel.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetDeviceModel() NilString {
-	return s.DeviceModel
-}
-
-// GetUserAgent returns the value of UserAgent.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetUserAgent() NilString {
-	return s.UserAgent
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetHwid sets the value of Hwid.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetHwid(val string) {
-	s.Hwid = val
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetPlatform sets the value of Platform.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetPlatform(val NilString) {
-	s.Platform = val
-}
-
-// SetOsVersion sets the value of OsVersion.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetOsVersion(val NilString) {
-	s.OsVersion = val
-}
-
-// SetDeviceModel sets the value of DeviceModel.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetDeviceModel(val NilString) {
-	s.DeviceModel = val
-}
-
-// SetUserAgent sets the value of UserAgent.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetUserAgent(val NilString) {
-	s.UserAgent = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
 
 // Ref: #/components/schemas/GetAllSubscriptionsResponseDto
 type GetAllSubscriptionsResponseDto struct {
@@ -5670,12 +4424,12 @@ func (s *GetAllUsersResponseDto) SetResponse(val GetAllUsersResponseDtoResponse)
 func (*GetAllUsersResponseDto) usersControllerGetAllUsersRes() {}
 
 type GetAllUsersResponseDtoResponse struct {
-	Users []GetAllUsersResponseDtoResponseUsersItem `json:"users"`
-	Total float64                                   `json:"total"`
+	Users []User  `json:"users"`
+	Total float64 `json:"total"`
 }
 
 // GetUsers returns the value of Users.
-func (s *GetAllUsersResponseDtoResponse) GetUsers() []GetAllUsersResponseDtoResponseUsersItem {
+func (s *GetAllUsersResponseDtoResponse) GetUsers() []User {
 	return s.Users
 }
 
@@ -5685,544 +4439,13 @@ func (s *GetAllUsersResponseDtoResponse) GetTotal() float64 {
 }
 
 // SetUsers sets the value of Users.
-func (s *GetAllUsersResponseDtoResponse) SetUsers(val []GetAllUsersResponseDtoResponseUsersItem) {
+func (s *GetAllUsersResponseDtoResponse) SetUsers(val []User) {
 	s.Users = val
 }
 
 // SetTotal sets the value of Total.
 func (s *GetAllUsersResponseDtoResponse) SetTotal(val float64) {
 	s.Total = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItem struct {
-	UUID                     uuid.UUID                                        `json:"uuid"`
-	ShortUuid                string                                           `json:"shortUuid"`
-	Username                 string                                           `json:"username"`
-	Status                   OptGetAllUsersResponseDtoResponseUsersItemStatus `json:"status"`
-	UsedTrafficBytes         float64                                          `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                                          `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                                           `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy   OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                                         `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                                       `json:"subLastOpenedAt"`
-	ExpireAt               time.Time                                                         `json:"expireAt"`
-	OnlineAt               NilDateTime                                                       `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                                       `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                                       `json:"lastTrafficResetAt"`
-	TrojanPassword         string                                                            `json:"trojanPassword"`
-	VlessUuid              uuid.UUID                                                         `json:"vlessUuid"`
-	SsPassword             string                                                            `json:"ssPassword"`
-	Description            NilString                                                         `json:"description"`
-	Tag                    NilString                                                         `json:"tag"`
-	TelegramId             NilInt                                                            `json:"telegramId"`
-	Email                  NilString                                                         `json:"email"`
-	HwidDeviceLimit        NilInt                                                            `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                                       `json:"firstConnectedAt"`
-	LastTriggeredThreshold OptInt                                                            `json:"lastTriggeredThreshold"`
-	CreatedAt              time.Time                                                         `json:"createdAt"`
-	UpdatedAt              time.Time                                                         `json:"updatedAt"`
-	ActiveInternalSquads   []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                                           `json:"externalSquadUuid"`
-	SubscriptionUrl        string                                                            `json:"subscriptionUrl"`
-	LastConnectedNode      NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   GetAllUsersResponseDtoResponseUsersItemHapp                       `json:"happ"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetShortUuid returns the value of ShortUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetShortUuid() string {
-	return s.ShortUuid
-}
-
-// GetUsername returns the value of Username.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetUsername() string {
-	return s.Username
-}
-
-// GetStatus returns the value of Status.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetStatus() OptGetAllUsersResponseDtoResponseUsersItemStatus {
-	return s.Status
-}
-
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrafficLimitBytes() OptInt {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrafficLimitStrategy() OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
-	return s.TrafficLimitStrategy
-}
-
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
-// GetExpireAt returns the value of ExpireAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetOnlineAt returns the value of OnlineAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
-}
-
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
-}
-
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
-}
-
-// GetTrojanPassword returns the value of TrojanPassword.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrojanPassword() string {
-	return s.TrojanPassword
-}
-
-// GetVlessUuid returns the value of VlessUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetVlessUuid() uuid.UUID {
-	return s.VlessUuid
-}
-
-// GetSsPassword returns the value of SsPassword.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSsPassword() string {
-	return s.SsPassword
-}
-
-// GetDescription returns the value of Description.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
-// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastTriggeredThreshold() OptInt {
-	return s.LastTriggeredThreshold
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetActiveInternalSquads() []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
-// GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubscriptionUrl() string {
-	return s.SubscriptionUrl
-}
-
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastConnectedNode() NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
-	return s.LastConnectedNode
-}
-
-// GetHapp returns the value of Happ.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetHapp() GetAllUsersResponseDtoResponseUsersItemHapp {
-	return s.Happ
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetShortUuid sets the value of ShortUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetShortUuid(val string) {
-	s.ShortUuid = val
-}
-
-// SetUsername sets the value of Username.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetStatus sets the value of Status.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetStatus(val OptGetAllUsersResponseDtoResponseUsersItemStatus) {
-	s.Status = val
-}
-
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrafficLimitBytes(val OptInt) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrafficLimitStrategy(val OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) {
-	s.TrafficLimitStrategy = val
-}
-
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
-// SetExpireAt sets the value of ExpireAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
-}
-
-// SetOnlineAt sets the value of OnlineAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
-}
-
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
-}
-
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
-}
-
-// SetTrojanPassword sets the value of TrojanPassword.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrojanPassword(val string) {
-	s.TrojanPassword = val
-}
-
-// SetVlessUuid sets the value of VlessUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetVlessUuid(val uuid.UUID) {
-	s.VlessUuid = val
-}
-
-// SetSsPassword sets the value of SsPassword.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSsPassword(val string) {
-	s.SsPassword = val
-}
-
-// SetDescription sets the value of Description.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
-// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastTriggeredThreshold(val OptInt) {
-	s.LastTriggeredThreshold = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetActiveInternalSquads(val []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
-// SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubscriptionUrl(val string) {
-	s.SubscriptionUrl = val
-}
-
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastConnectedNode(val NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) {
-	s.LastConnectedNode = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetHapp(val GetAllUsersResponseDtoResponseUsersItemHapp) {
-	s.Happ = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem struct {
-	UUID uuid.UUID `json:"uuid"`
-	Name string    `json:"name"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItemHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *GetAllUsersResponseDtoResponseUsersItemHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *GetAllUsersResponseDtoResponseUsersItemHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItemLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItemStatus string
-
-const (
-	GetAllUsersResponseDtoResponseUsersItemStatusACTIVE   GetAllUsersResponseDtoResponseUsersItemStatus = "ACTIVE"
-	GetAllUsersResponseDtoResponseUsersItemStatusDISABLED GetAllUsersResponseDtoResponseUsersItemStatus = "DISABLED"
-	GetAllUsersResponseDtoResponseUsersItemStatusLIMITED  GetAllUsersResponseDtoResponseUsersItemStatus = "LIMITED"
-	GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED  GetAllUsersResponseDtoResponseUsersItemStatus = "EXPIRED"
-)
-
-// AllValues returns all GetAllUsersResponseDtoResponseUsersItemStatus values.
-func (GetAllUsersResponseDtoResponseUsersItemStatus) AllValues() []GetAllUsersResponseDtoResponseUsersItemStatus {
-	return []GetAllUsersResponseDtoResponseUsersItemStatus{
-		GetAllUsersResponseDtoResponseUsersItemStatusACTIVE,
-		GetAllUsersResponseDtoResponseUsersItemStatusDISABLED,
-		GetAllUsersResponseDtoResponseUsersItemStatusLIMITED,
-		GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetAllUsersResponseDtoResponseUsersItemStatus) MarshalText() ([]byte, error) {
-	switch s {
-	case GetAllUsersResponseDtoResponseUsersItemStatusACTIVE:
-		return []byte(s), nil
-	case GetAllUsersResponseDtoResponseUsersItemStatusDISABLED:
-		return []byte(s), nil
-	case GetAllUsersResponseDtoResponseUsersItemStatusLIMITED:
-		return []byte(s), nil
-	case GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetAllUsersResponseDtoResponseUsersItemStatus) UnmarshalText(data []byte) error {
-	switch GetAllUsersResponseDtoResponseUsersItemStatus(data) {
-	case GetAllUsersResponseDtoResponseUsersItemStatusACTIVE:
-		*s = GetAllUsersResponseDtoResponseUsersItemStatusACTIVE
-		return nil
-	case GetAllUsersResponseDtoResponseUsersItemStatusDISABLED:
-		*s = GetAllUsersResponseDtoResponseUsersItemStatusDISABLED
-		return nil
-	case GetAllUsersResponseDtoResponseUsersItemStatusLIMITED:
-		*s = GetAllUsersResponseDtoResponseUsersItemStatusLIMITED
-		return nil
-	case GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED:
-		*s = GetAllUsersResponseDtoResponseUsersItemStatusEXPIRED
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// Available reset periods.
-type GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy string
-
-const (
-	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "NO_RESET"
-	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY     GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "DAY"
-	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK    GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "WEEK"
-	GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH   GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy = "MONTH"
-)
-
-// AllValues returns all GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy values.
-func (GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) AllValues() []GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
-	return []GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy{
-		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET,
-		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY,
-		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK,
-		GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
-	switch s {
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET:
-		return []byte(s), nil
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY:
-		return []byte(s), nil
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK:
-		return []byte(s), nil
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy(data) {
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET:
-		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET
-		return nil
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY:
-		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyDAY
-		return nil
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK:
-		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyWEEK
-		return nil
-	case GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH:
-		*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyMONTH
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/GetBandwidthStatsResponseDto
@@ -6243,241 +4466,61 @@ func (s *GetBandwidthStatsResponseDto) SetResponse(val GetBandwidthStatsResponse
 func (*GetBandwidthStatsResponseDto) systemControllerGetBandwidthStatsRes() {}
 
 type GetBandwidthStatsResponseDtoResponse struct {
-	BandwidthLastTwoDays   GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays   `json:"bandwidthLastTwoDays"`
-	BandwidthLastSevenDays GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays `json:"bandwidthLastSevenDays"`
-	BandwidthLast30Days    GetBandwidthStatsResponseDtoResponseBandwidthLast30Days    `json:"bandwidthLast30Days"`
-	BandwidthCalendarMonth GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth `json:"bandwidthCalendarMonth"`
-	BandwidthCurrentYear   GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear   `json:"bandwidthCurrentYear"`
+	BandwidthLastTwoDays   BandwidthLastTwoDays `json:"bandwidthLastTwoDays"`
+	BandwidthLastSevenDays BandwidthLastTwoDays `json:"bandwidthLastSevenDays"`
+	BandwidthLast30Days    BandwidthLastTwoDays `json:"bandwidthLast30Days"`
+	BandwidthCalendarMonth BandwidthLastTwoDays `json:"bandwidthCalendarMonth"`
+	BandwidthCurrentYear   BandwidthLastTwoDays `json:"bandwidthCurrentYear"`
 }
 
 // GetBandwidthLastTwoDays returns the value of BandwidthLastTwoDays.
-func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthLastTwoDays() GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays {
+func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthLastTwoDays() BandwidthLastTwoDays {
 	return s.BandwidthLastTwoDays
 }
 
 // GetBandwidthLastSevenDays returns the value of BandwidthLastSevenDays.
-func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthLastSevenDays() GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays {
+func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthLastSevenDays() BandwidthLastTwoDays {
 	return s.BandwidthLastSevenDays
 }
 
 // GetBandwidthLast30Days returns the value of BandwidthLast30Days.
-func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthLast30Days() GetBandwidthStatsResponseDtoResponseBandwidthLast30Days {
+func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthLast30Days() BandwidthLastTwoDays {
 	return s.BandwidthLast30Days
 }
 
 // GetBandwidthCalendarMonth returns the value of BandwidthCalendarMonth.
-func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthCalendarMonth() GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth {
+func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthCalendarMonth() BandwidthLastTwoDays {
 	return s.BandwidthCalendarMonth
 }
 
 // GetBandwidthCurrentYear returns the value of BandwidthCurrentYear.
-func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthCurrentYear() GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear {
+func (s *GetBandwidthStatsResponseDtoResponse) GetBandwidthCurrentYear() BandwidthLastTwoDays {
 	return s.BandwidthCurrentYear
 }
 
 // SetBandwidthLastTwoDays sets the value of BandwidthLastTwoDays.
-func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthLastTwoDays(val GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) {
+func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthLastTwoDays(val BandwidthLastTwoDays) {
 	s.BandwidthLastTwoDays = val
 }
 
 // SetBandwidthLastSevenDays sets the value of BandwidthLastSevenDays.
-func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthLastSevenDays(val GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) {
+func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthLastSevenDays(val BandwidthLastTwoDays) {
 	s.BandwidthLastSevenDays = val
 }
 
 // SetBandwidthLast30Days sets the value of BandwidthLast30Days.
-func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthLast30Days(val GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) {
+func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthLast30Days(val BandwidthLastTwoDays) {
 	s.BandwidthLast30Days = val
 }
 
 // SetBandwidthCalendarMonth sets the value of BandwidthCalendarMonth.
-func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthCalendarMonth(val GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) {
+func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthCalendarMonth(val BandwidthLastTwoDays) {
 	s.BandwidthCalendarMonth = val
 }
 
 // SetBandwidthCurrentYear sets the value of BandwidthCurrentYear.
-func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthCurrentYear(val GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) {
+func (s *GetBandwidthStatsResponseDtoResponse) SetBandwidthCurrentYear(val BandwidthLastTwoDays) {
 	s.BandwidthCurrentYear = val
-}
-
-type GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth struct {
-	Current    string `json:"current"`
-	Previous   string `json:"previous"`
-	Difference string `json:"difference"`
-}
-
-// GetCurrent returns the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) GetCurrent() string {
-	return s.Current
-}
-
-// GetPrevious returns the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) GetPrevious() string {
-	return s.Previous
-}
-
-// GetDifference returns the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) GetDifference() string {
-	return s.Difference
-}
-
-// SetCurrent sets the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) SetCurrent(val string) {
-	s.Current = val
-}
-
-// SetPrevious sets the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) SetPrevious(val string) {
-	s.Previous = val
-}
-
-// SetDifference sets the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCalendarMonth) SetDifference(val string) {
-	s.Difference = val
-}
-
-type GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear struct {
-	Current    string `json:"current"`
-	Previous   string `json:"previous"`
-	Difference string `json:"difference"`
-}
-
-// GetCurrent returns the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) GetCurrent() string {
-	return s.Current
-}
-
-// GetPrevious returns the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) GetPrevious() string {
-	return s.Previous
-}
-
-// GetDifference returns the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) GetDifference() string {
-	return s.Difference
-}
-
-// SetCurrent sets the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) SetCurrent(val string) {
-	s.Current = val
-}
-
-// SetPrevious sets the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) SetPrevious(val string) {
-	s.Previous = val
-}
-
-// SetDifference sets the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthCurrentYear) SetDifference(val string) {
-	s.Difference = val
-}
-
-type GetBandwidthStatsResponseDtoResponseBandwidthLast30Days struct {
-	Current    string `json:"current"`
-	Previous   string `json:"previous"`
-	Difference string `json:"difference"`
-}
-
-// GetCurrent returns the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) GetCurrent() string {
-	return s.Current
-}
-
-// GetPrevious returns the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) GetPrevious() string {
-	return s.Previous
-}
-
-// GetDifference returns the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) GetDifference() string {
-	return s.Difference
-}
-
-// SetCurrent sets the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) SetCurrent(val string) {
-	s.Current = val
-}
-
-// SetPrevious sets the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) SetPrevious(val string) {
-	s.Previous = val
-}
-
-// SetDifference sets the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLast30Days) SetDifference(val string) {
-	s.Difference = val
-}
-
-type GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays struct {
-	Current    string `json:"current"`
-	Previous   string `json:"previous"`
-	Difference string `json:"difference"`
-}
-
-// GetCurrent returns the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) GetCurrent() string {
-	return s.Current
-}
-
-// GetPrevious returns the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) GetPrevious() string {
-	return s.Previous
-}
-
-// GetDifference returns the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) GetDifference() string {
-	return s.Difference
-}
-
-// SetCurrent sets the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) SetCurrent(val string) {
-	s.Current = val
-}
-
-// SetPrevious sets the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) SetPrevious(val string) {
-	s.Previous = val
-}
-
-// SetDifference sets the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastSevenDays) SetDifference(val string) {
-	s.Difference = val
-}
-
-type GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays struct {
-	Current    string `json:"current"`
-	Previous   string `json:"previous"`
-	Difference string `json:"difference"`
-}
-
-// GetCurrent returns the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) GetCurrent() string {
-	return s.Current
-}
-
-// GetPrevious returns the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) GetPrevious() string {
-	return s.Previous
-}
-
-// GetDifference returns the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) GetDifference() string {
-	return s.Difference
-}
-
-// SetCurrent sets the value of Current.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) SetCurrent(val string) {
-	s.Current = val
-}
-
-// SetPrevious sets the value of Previous.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) SetPrevious(val string) {
-	s.Previous = val
-}
-
-// SetDifference sets the value of Difference.
-func (s *GetBandwidthStatsResponseDtoResponseBandwidthLastTwoDays) SetDifference(val string) {
-	s.Difference = val
 }
 
 // Ref: #/components/schemas/GetConfigProfilesResponseDto
@@ -6498,8 +4541,8 @@ func (s *GetConfigProfilesResponseDto) SetResponse(val GetConfigProfilesResponse
 func (*GetConfigProfilesResponseDto) configProfileControllerGetConfigProfilesRes() {}
 
 type GetConfigProfilesResponseDtoResponse struct {
-	Total          float64                                                  `json:"total"`
-	ConfigProfiles []GetConfigProfilesResponseDtoResponseConfigProfilesItem `json:"configProfiles"`
+	Total          float64         `json:"total"`
+	ConfigProfiles []ConfigProfile `json:"configProfiles"`
 }
 
 // GetTotal returns the value of Total.
@@ -6508,7 +4551,7 @@ func (s *GetConfigProfilesResponseDtoResponse) GetTotal() float64 {
 }
 
 // GetConfigProfiles returns the value of ConfigProfiles.
-func (s *GetConfigProfilesResponseDtoResponse) GetConfigProfiles() []GetConfigProfilesResponseDtoResponseConfigProfilesItem {
+func (s *GetConfigProfilesResponseDtoResponse) GetConfigProfiles() []ConfigProfile {
 	return s.ConfigProfiles
 }
 
@@ -6518,215 +4561,8 @@ func (s *GetConfigProfilesResponseDtoResponse) SetTotal(val float64) {
 }
 
 // SetConfigProfiles sets the value of ConfigProfiles.
-func (s *GetConfigProfilesResponseDtoResponse) SetConfigProfiles(val []GetConfigProfilesResponseDtoResponseConfigProfilesItem) {
+func (s *GetConfigProfilesResponseDtoResponse) SetConfigProfiles(val []ConfigProfile) {
 	s.ConfigProfiles = val
-}
-
-type GetConfigProfilesResponseDtoResponseConfigProfilesItem struct {
-	UUID      uuid.UUID                                                            `json:"uuid"`
-	Name      string                                                               `json:"name"`
-	Config    jx.Raw                                                               `json:"config"`
-	Inbounds  []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem `json:"inbounds"`
-	Nodes     []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem    `json:"nodes"`
-	CreatedAt time.Time                                                            `json:"createdAt"`
-	UpdatedAt time.Time                                                            `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetName() string {
-	return s.Name
-}
-
-// GetConfig returns the value of Config.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetConfig() jx.Raw {
-	return s.Config
-}
-
-// GetInbounds returns the value of Inbounds.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetInbounds() []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem {
-	return s.Inbounds
-}
-
-// GetNodes returns the value of Nodes.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetNodes() []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem {
-	return s.Nodes
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetConfig sets the value of Config.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetConfig(val jx.Raw) {
-	s.Config = val
-}
-
-// SetInbounds sets the value of Inbounds.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetInbounds(val []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) {
-	s.Inbounds = val
-}
-
-// SetNodes sets the value of Nodes.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetNodes(val []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) {
-	s.Nodes = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-type GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem struct {
-	UUID        uuid.UUID  `json:"uuid"`
-	ProfileUuid uuid.UUID  `json:"profileUuid"`
-	Tag         string     `json:"tag"`
-	Type        string     `json:"type"`
-	Network     NilString  `json:"network"`
-	Security    NilString  `json:"security"`
-	Port        NilFloat64 `json:"port"`
-	RawInbound  jx.Raw     `json:"rawInbound"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProfileUuid returns the value of ProfileUuid.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetProfileUuid() uuid.UUID {
-	return s.ProfileUuid
-}
-
-// GetTag returns the value of Tag.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetPort returns the value of Port.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetPort() NilFloat64 {
-	return s.Port
-}
-
-// GetRawInbound returns the value of RawInbound.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) GetRawInbound() jx.Raw {
-	return s.RawInbound
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProfileUuid sets the value of ProfileUuid.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetProfileUuid(val uuid.UUID) {
-	s.ProfileUuid = val
-}
-
-// SetTag sets the value of Tag.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetPort sets the value of Port.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetPort(val NilFloat64) {
-	s.Port = val
-}
-
-// SetRawInbound sets the value of RawInbound.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) SetRawInbound(val jx.Raw) {
-	s.RawInbound = val
-}
-
-type GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) GetName() string {
-	return s.Name
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 // Ref: #/components/schemas/GetExternalSquadsResponseDto
@@ -6747,8 +4583,8 @@ func (s *GetExternalSquadsResponseDto) SetResponse(val GetExternalSquadsResponse
 func (*GetExternalSquadsResponseDto) externalSquadControllerGetExternalSquadsRes() {}
 
 type GetExternalSquadsResponseDtoResponse struct {
-	Total          float64                                                  `json:"total"`
-	ExternalSquads []GetExternalSquadsResponseDtoResponseExternalSquadsItem `json:"externalSquads"`
+	Total          float64         `json:"total"`
+	ExternalSquads []ExternalSquad `json:"externalSquads"`
 }
 
 // GetTotal returns the value of Total.
@@ -6757,7 +4593,7 @@ func (s *GetExternalSquadsResponseDtoResponse) GetTotal() float64 {
 }
 
 // GetExternalSquads returns the value of ExternalSquads.
-func (s *GetExternalSquadsResponseDtoResponse) GetExternalSquads() []GetExternalSquadsResponseDtoResponseExternalSquadsItem {
+func (s *GetExternalSquadsResponseDtoResponse) GetExternalSquads() []ExternalSquad {
 	return s.ExternalSquads
 }
 
@@ -6767,367 +4603,8 @@ func (s *GetExternalSquadsResponseDtoResponse) SetTotal(val float64) {
 }
 
 // SetExternalSquads sets the value of ExternalSquads.
-func (s *GetExternalSquadsResponseDtoResponse) SetExternalSquads(val []GetExternalSquadsResponseDtoResponseExternalSquadsItem) {
+func (s *GetExternalSquadsResponseDtoResponse) SetExternalSquads(val []ExternalSquad) {
 	s.ExternalSquads = val
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItem struct {
-	UUID                 uuid.UUID                                                                     `json:"uuid"`
-	Name                 string                                                                        `json:"name"`
-	Info                 GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo                    `json:"info"`
-	Templates            []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem         `json:"templates"`
-	SubscriptionSettings NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings `json:"subscriptionSettings"`
-	HostOverrides        NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides        `json:"hostOverrides"`
-	ResponseHeaders      NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders      `json:"responseHeaders"`
-	CreatedAt            time.Time                                                                     `json:"createdAt"`
-	UpdatedAt            time.Time                                                                     `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// GetInfo returns the value of Info.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetInfo() GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo {
-	return s.Info
-}
-
-// GetTemplates returns the value of Templates.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetTemplates() []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem {
-	return s.Templates
-}
-
-// GetSubscriptionSettings returns the value of SubscriptionSettings.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetSubscriptionSettings() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings {
-	return s.SubscriptionSettings
-}
-
-// GetHostOverrides returns the value of HostOverrides.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetHostOverrides() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
-	return s.HostOverrides
-}
-
-// GetResponseHeaders returns the value of ResponseHeaders.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetResponseHeaders() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
-	return s.ResponseHeaders
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetInfo sets the value of Info.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetInfo(val GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) {
-	s.Info = val
-}
-
-// SetTemplates sets the value of Templates.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetTemplates(val []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem) {
-	s.Templates = val
-}
-
-// SetSubscriptionSettings sets the value of SubscriptionSettings.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetSubscriptionSettings(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) {
-	s.SubscriptionSettings = val
-}
-
-// SetHostOverrides sets the value of HostOverrides.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetHostOverrides(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) {
-	s.HostOverrides = val
-}
-
-// SetResponseHeaders sets the value of ResponseHeaders.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetResponseHeaders(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) {
-	s.ResponseHeaders = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides struct {
-	ServerDescription OptNilString `json:"serverDescription"`
-	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
-}
-
-// GetServerDescription returns the value of ServerDescription.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetServerDescription() OptNilString {
-	return s.ServerDescription
-}
-
-// GetVlessRouteId returns the value of VlessRouteId.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetVlessRouteId() OptNilInt {
-	return s.VlessRouteId
-}
-
-// SetServerDescription sets the value of ServerDescription.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetServerDescription(val OptNilString) {
-	s.ServerDescription = val
-}
-
-// SetVlessRouteId sets the value of VlessRouteId.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetVlessRouteId(val OptNilInt) {
-	s.VlessRouteId = val
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo struct {
-	MembersCount float64 `json:"membersCount"`
-}
-
-// GetMembersCount returns the value of MembersCount.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) GetMembersCount() float64 {
-	return s.MembersCount
-}
-
-// SetMembersCount sets the value of MembersCount.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) SetMembersCount(val float64) {
-	s.MembersCount = val
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders map[string]string
-
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) init() GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
-	m := *s
-	if m == nil {
-		m = map[string]string{}
-		*s = m
-	}
-	return m
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings struct {
-	ProfileTitle                  OptString    `json:"profileTitle"`
-	SupportLink                   OptString    `json:"supportLink"`
-	ProfileUpdateInterval         OptInt       `json:"profileUpdateInterval"`
-	IsProfileWebpageUrlEnabled    OptBool      `json:"isProfileWebpageUrlEnabled"`
-	ServeJsonAtBaseSubscription   OptBool      `json:"serveJsonAtBaseSubscription"`
-	AddUsernameToBaseSubscription OptBool      `json:"addUsernameToBaseSubscription"`
-	IsShowCustomRemarks           OptBool      `json:"isShowCustomRemarks"`
-	HappAnnounce                  OptNilString `json:"happAnnounce"`
-	HappRouting                   OptNilString `json:"happRouting"`
-	RandomizeHosts                OptBool      `json:"randomizeHosts"`
-}
-
-// GetProfileTitle returns the value of ProfileTitle.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetProfileTitle() OptString {
-	return s.ProfileTitle
-}
-
-// GetSupportLink returns the value of SupportLink.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetSupportLink() OptString {
-	return s.SupportLink
-}
-
-// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetProfileUpdateInterval() OptInt {
-	return s.ProfileUpdateInterval
-}
-
-// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetIsProfileWebpageUrlEnabled() OptBool {
-	return s.IsProfileWebpageUrlEnabled
-}
-
-// GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetServeJsonAtBaseSubscription() OptBool {
-	return s.ServeJsonAtBaseSubscription
-}
-
-// GetAddUsernameToBaseSubscription returns the value of AddUsernameToBaseSubscription.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetAddUsernameToBaseSubscription() OptBool {
-	return s.AddUsernameToBaseSubscription
-}
-
-// GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetIsShowCustomRemarks() OptBool {
-	return s.IsShowCustomRemarks
-}
-
-// GetHappAnnounce returns the value of HappAnnounce.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetHappAnnounce() OptNilString {
-	return s.HappAnnounce
-}
-
-// GetHappRouting returns the value of HappRouting.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetHappRouting() OptNilString {
-	return s.HappRouting
-}
-
-// GetRandomizeHosts returns the value of RandomizeHosts.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetRandomizeHosts() OptBool {
-	return s.RandomizeHosts
-}
-
-// SetProfileTitle sets the value of ProfileTitle.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetProfileTitle(val OptString) {
-	s.ProfileTitle = val
-}
-
-// SetSupportLink sets the value of SupportLink.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetSupportLink(val OptString) {
-	s.SupportLink = val
-}
-
-// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetProfileUpdateInterval(val OptInt) {
-	s.ProfileUpdateInterval = val
-}
-
-// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetIsProfileWebpageUrlEnabled(val OptBool) {
-	s.IsProfileWebpageUrlEnabled = val
-}
-
-// SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetServeJsonAtBaseSubscription(val OptBool) {
-	s.ServeJsonAtBaseSubscription = val
-}
-
-// SetAddUsernameToBaseSubscription sets the value of AddUsernameToBaseSubscription.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetAddUsernameToBaseSubscription(val OptBool) {
-	s.AddUsernameToBaseSubscription = val
-}
-
-// SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetIsShowCustomRemarks(val OptBool) {
-	s.IsShowCustomRemarks = val
-}
-
-// SetHappAnnounce sets the value of HappAnnounce.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetHappAnnounce(val OptNilString) {
-	s.HappAnnounce = val
-}
-
-// SetHappRouting sets the value of HappRouting.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetHappRouting(val OptNilString) {
-	s.HappRouting = val
-}
-
-// SetRandomizeHosts sets the value of RandomizeHosts.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetRandomizeHosts(val OptBool) {
-	s.RandomizeHosts = val
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem struct {
-	TemplateUuid uuid.UUID                                                                       `json:"templateUuid"`
-	TemplateType GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType `json:"templateType"`
-}
-
-// GetTemplateUuid returns the value of TemplateUuid.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem) GetTemplateUuid() uuid.UUID {
-	return s.TemplateUuid
-}
-
-// GetTemplateType returns the value of TemplateType.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem) GetTemplateType() GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType {
-	return s.TemplateType
-}
-
-// SetTemplateUuid sets the value of TemplateUuid.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem) SetTemplateUuid(val uuid.UUID) {
-	s.TemplateUuid = val
-}
-
-// SetTemplateType sets the value of TemplateType.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem) SetTemplateType(val GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType) {
-	s.TemplateType = val
-}
-
-type GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType string
-
-const (
-	GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYJSON   GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType = "XRAY_JSON"
-	GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYBASE64 GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType = "XRAY_BASE64"
-	GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeMIHOMO     GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType = "MIHOMO"
-	GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSTASH      GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType = "STASH"
-	GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeCLASH      GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType = "CLASH"
-	GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSINGBOX    GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType = "SINGBOX"
-)
-
-// AllValues returns all GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType values.
-func (GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType) AllValues() []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType {
-	return []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType{
-		GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYJSON,
-		GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYBASE64,
-		GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeMIHOMO,
-		GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSTASH,
-		GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeCLASH,
-		GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSINGBOX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType) MarshalText() ([]byte, error) {
-	switch s {
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYJSON:
-		return []byte(s), nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYBASE64:
-		return []byte(s), nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeMIHOMO:
-		return []byte(s), nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSTASH:
-		return []byte(s), nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeCLASH:
-		return []byte(s), nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSINGBOX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType) UnmarshalText(data []byte) error {
-	switch GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType(data) {
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYJSON:
-		*s = GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYJSON
-		return nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYBASE64:
-		*s = GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeXRAYBASE64
-		return nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeMIHOMO:
-		*s = GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeMIHOMO
-		return nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSTASH:
-		*s = GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSTASH
-		return nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeCLASH:
-		*s = GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeCLASH
-		return nil
-	case GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSINGBOX:
-		*s = GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateTypeSINGBOX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/GetHwidDevicesStatsResponseDto
@@ -7149,7 +4626,7 @@ func (*GetHwidDevicesStatsResponseDto) hwidUserDevicesControllerGetHwidDevicesSt
 
 type GetHwidDevicesStatsResponseDtoResponse struct {
 	ByPlatform []GetHwidDevicesStatsResponseDtoResponseByPlatformItem `json:"byPlatform"`
-	ByApp      []GetHwidDevicesStatsResponseDtoResponseByAppItem      `json:"byApp"`
+	ByApp      []ByAppItem                                            `json:"byApp"`
 	Stats      GetHwidDevicesStatsResponseDtoResponseStats            `json:"stats"`
 }
 
@@ -7159,7 +4636,7 @@ func (s *GetHwidDevicesStatsResponseDtoResponse) GetByPlatform() []GetHwidDevice
 }
 
 // GetByApp returns the value of ByApp.
-func (s *GetHwidDevicesStatsResponseDtoResponse) GetByApp() []GetHwidDevicesStatsResponseDtoResponseByAppItem {
+func (s *GetHwidDevicesStatsResponseDtoResponse) GetByApp() []ByAppItem {
 	return s.ByApp
 }
 
@@ -7174,38 +4651,13 @@ func (s *GetHwidDevicesStatsResponseDtoResponse) SetByPlatform(val []GetHwidDevi
 }
 
 // SetByApp sets the value of ByApp.
-func (s *GetHwidDevicesStatsResponseDtoResponse) SetByApp(val []GetHwidDevicesStatsResponseDtoResponseByAppItem) {
+func (s *GetHwidDevicesStatsResponseDtoResponse) SetByApp(val []ByAppItem) {
 	s.ByApp = val
 }
 
 // SetStats sets the value of Stats.
 func (s *GetHwidDevicesStatsResponseDtoResponse) SetStats(val GetHwidDevicesStatsResponseDtoResponseStats) {
 	s.Stats = val
-}
-
-type GetHwidDevicesStatsResponseDtoResponseByAppItem struct {
-	App   string  `json:"app"`
-	Count float64 `json:"count"`
-}
-
-// GetApp returns the value of App.
-func (s *GetHwidDevicesStatsResponseDtoResponseByAppItem) GetApp() string {
-	return s.App
-}
-
-// GetCount returns the value of Count.
-func (s *GetHwidDevicesStatsResponseDtoResponseByAppItem) GetCount() float64 {
-	return s.Count
-}
-
-// SetApp sets the value of App.
-func (s *GetHwidDevicesStatsResponseDtoResponseByAppItem) SetApp(val string) {
-	s.App = val
-}
-
-// SetCount sets the value of Count.
-func (s *GetHwidDevicesStatsResponseDtoResponseByAppItem) SetCount(val float64) {
-	s.Count = val
 }
 
 type GetHwidDevicesStatsResponseDtoResponseByPlatformItem struct {
@@ -7287,8 +4739,8 @@ func (s *GetInfraProvidersResponseDto) SetResponse(val GetInfraProvidersResponse
 func (*GetInfraProvidersResponseDto) infraBillingControllerGetInfraProvidersRes() {}
 
 type GetInfraProvidersResponseDtoResponse struct {
-	Total     float64                                             `json:"total"`
-	Providers []GetInfraProvidersResponseDtoResponseProvidersItem `json:"providers"`
+	Total     float64    `json:"total"`
+	Providers []Provider `json:"providers"`
 }
 
 // GetTotal returns the value of Total.
@@ -7297,7 +4749,7 @@ func (s *GetInfraProvidersResponseDtoResponse) GetTotal() float64 {
 }
 
 // GetProviders returns the value of Providers.
-func (s *GetInfraProvidersResponseDtoResponse) GetProviders() []GetInfraProvidersResponseDtoResponseProvidersItem {
+func (s *GetInfraProvidersResponseDtoResponse) GetProviders() []Provider {
 	return s.Providers
 }
 
@@ -7307,160 +4759,8 @@ func (s *GetInfraProvidersResponseDtoResponse) SetTotal(val float64) {
 }
 
 // SetProviders sets the value of Providers.
-func (s *GetInfraProvidersResponseDtoResponse) SetProviders(val []GetInfraProvidersResponseDtoResponseProvidersItem) {
+func (s *GetInfraProvidersResponseDtoResponse) SetProviders(val []Provider) {
 	s.Providers = val
-}
-
-type GetInfraProvidersResponseDtoResponseProvidersItem struct {
-	UUID           uuid.UUID                                                           `json:"uuid"`
-	Name           string                                                              `json:"name"`
-	FaviconLink    NilString                                                           `json:"faviconLink"`
-	LoginUrl       NilString                                                           `json:"loginUrl"`
-	CreatedAt      time.Time                                                           `json:"createdAt"`
-	UpdatedAt      time.Time                                                           `json:"updatedAt"`
-	BillingHistory GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory     `json:"billingHistory"`
-	BillingNodes   []GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem `json:"billingNodes"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetName() string {
-	return s.Name
-}
-
-// GetFaviconLink returns the value of FaviconLink.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetFaviconLink() NilString {
-	return s.FaviconLink
-}
-
-// GetLoginUrl returns the value of LoginUrl.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetLoginUrl() NilString {
-	return s.LoginUrl
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetBillingHistory returns the value of BillingHistory.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetBillingHistory() GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory {
-	return s.BillingHistory
-}
-
-// GetBillingNodes returns the value of BillingNodes.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) GetBillingNodes() []GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem {
-	return s.BillingNodes
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetFaviconLink sets the value of FaviconLink.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetFaviconLink(val NilString) {
-	s.FaviconLink = val
-}
-
-// SetLoginUrl sets the value of LoginUrl.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetLoginUrl(val NilString) {
-	s.LoginUrl = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetBillingHistory sets the value of BillingHistory.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetBillingHistory(val GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) {
-	s.BillingHistory = val
-}
-
-// SetBillingNodes sets the value of BillingNodes.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItem) SetBillingNodes(val []GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) {
-	s.BillingNodes = val
-}
-
-type GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory struct {
-	TotalAmount float64 `json:"totalAmount"`
-	TotalBills  float64 `json:"totalBills"`
-}
-
-// GetTotalAmount returns the value of TotalAmount.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) GetTotalAmount() float64 {
-	return s.TotalAmount
-}
-
-// GetTotalBills returns the value of TotalBills.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) GetTotalBills() float64 {
-	return s.TotalBills
-}
-
-// SetTotalAmount sets the value of TotalAmount.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) SetTotalAmount(val float64) {
-	s.TotalAmount = val
-}
-
-// SetTotalBills sets the value of TotalBills.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingHistory) SetTotalBills(val float64) {
-	s.TotalBills = val
-}
-
-type GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem struct {
-	NodeUuid    uuid.UUID `json:"nodeUuid"`
-	Name        string    `json:"name"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetNodeUuid returns the value of NodeUuid.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) GetNodeUuid() uuid.UUID {
-	return s.NodeUuid
-}
-
-// GetName returns the value of Name.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) GetName() string {
-	return s.Name
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetNodeUuid sets the value of NodeUuid.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) SetNodeUuid(val uuid.UUID) {
-	s.NodeUuid = val
-}
-
-// SetName sets the value of Name.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetInfraProvidersResponseDtoResponseProvidersItemBillingNodesItem) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 // Ref: #/components/schemas/GetInternalSquadAccessibleNodesResponseDto
@@ -7593,8 +4893,8 @@ func (s *GetInternalSquadsResponseDto) SetResponse(val GetInternalSquadsResponse
 func (*GetInternalSquadsResponseDto) internalSquadControllerGetInternalSquadsRes() {}
 
 type GetInternalSquadsResponseDtoResponse struct {
-	Total          float64                                                  `json:"total"`
-	InternalSquads []GetInternalSquadsResponseDtoResponseInternalSquadsItem `json:"internalSquads"`
+	Total          float64         `json:"total"`
+	InternalSquads []InternalSquad `json:"internalSquads"`
 }
 
 // GetTotal returns the value of Total.
@@ -7603,7 +4903,7 @@ func (s *GetInternalSquadsResponseDtoResponse) GetTotal() float64 {
 }
 
 // GetInternalSquads returns the value of InternalSquads.
-func (s *GetInternalSquadsResponseDtoResponse) GetInternalSquads() []GetInternalSquadsResponseDtoResponseInternalSquadsItem {
+func (s *GetInternalSquadsResponseDtoResponse) GetInternalSquads() []InternalSquad {
 	return s.InternalSquads
 }
 
@@ -7613,193 +4913,8 @@ func (s *GetInternalSquadsResponseDtoResponse) SetTotal(val float64) {
 }
 
 // SetInternalSquads sets the value of InternalSquads.
-func (s *GetInternalSquadsResponseDtoResponse) SetInternalSquads(val []GetInternalSquadsResponseDtoResponseInternalSquadsItem) {
+func (s *GetInternalSquadsResponseDtoResponse) SetInternalSquads(val []InternalSquad) {
 	s.InternalSquads = val
-}
-
-type GetInternalSquadsResponseDtoResponseInternalSquadsItem struct {
-	UUID      uuid.UUID                                                            `json:"uuid"`
-	Name      string                                                               `json:"name"`
-	Info      GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo           `json:"info"`
-	Inbounds  []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem `json:"inbounds"`
-	CreatedAt time.Time                                                            `json:"createdAt"`
-	UpdatedAt time.Time                                                            `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// GetInfo returns the value of Info.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetInfo() GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo {
-	return s.Info
-}
-
-// GetInbounds returns the value of Inbounds.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetInbounds() []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem {
-	return s.Inbounds
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetInfo sets the value of Info.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetInfo(val GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) {
-	s.Info = val
-}
-
-// SetInbounds sets the value of Inbounds.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetInbounds(val []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) {
-	s.Inbounds = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-type GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem struct {
-	UUID        uuid.UUID  `json:"uuid"`
-	ProfileUuid uuid.UUID  `json:"profileUuid"`
-	Tag         string     `json:"tag"`
-	Type        string     `json:"type"`
-	Network     NilString  `json:"network"`
-	Security    NilString  `json:"security"`
-	Port        NilFloat64 `json:"port"`
-	RawInbound  jx.Raw     `json:"rawInbound"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProfileUuid returns the value of ProfileUuid.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetProfileUuid() uuid.UUID {
-	return s.ProfileUuid
-}
-
-// GetTag returns the value of Tag.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetPort returns the value of Port.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetPort() NilFloat64 {
-	return s.Port
-}
-
-// GetRawInbound returns the value of RawInbound.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) GetRawInbound() jx.Raw {
-	return s.RawInbound
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProfileUuid sets the value of ProfileUuid.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetProfileUuid(val uuid.UUID) {
-	s.ProfileUuid = val
-}
-
-// SetTag sets the value of Tag.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetPort sets the value of Port.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetPort(val NilFloat64) {
-	s.Port = val
-}
-
-// SetRawInbound sets the value of RawInbound.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) SetRawInbound(val jx.Raw) {
-	s.RawInbound = val
-}
-
-type GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo struct {
-	MembersCount  float64 `json:"membersCount"`
-	InboundsCount float64 `json:"inboundsCount"`
-}
-
-// GetMembersCount returns the value of MembersCount.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) GetMembersCount() float64 {
-	return s.MembersCount
-}
-
-// GetInboundsCount returns the value of InboundsCount.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) GetInboundsCount() float64 {
-	return s.InboundsCount
-}
-
-// SetMembersCount sets the value of MembersCount.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) SetMembersCount(val float64) {
-	s.MembersCount = val
-}
-
-// SetInboundsCount sets the value of InboundsCount.
-func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) SetInboundsCount(val float64) {
-	s.InboundsCount = val
 }
 
 // Ref: #/components/schemas/GetNodeUserUsageByRangeResponseDto
@@ -7909,13 +5024,13 @@ func (s *GetNodesMetricsResponseDtoResponse) SetNodes(val []GetNodesMetricsRespo
 }
 
 type GetNodesMetricsResponseDtoResponseNodesItem struct {
-	NodeUuid       string                                                          `json:"nodeUuid"`
-	NodeName       string                                                          `json:"nodeName"`
-	CountryEmoji   string                                                          `json:"countryEmoji"`
-	ProviderName   string                                                          `json:"providerName"`
-	UsersOnline    float64                                                         `json:"usersOnline"`
-	InboundsStats  []GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem  `json:"inboundsStats"`
-	OutboundsStats []GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem `json:"outboundsStats"`
+	NodeUuid       string         `json:"nodeUuid"`
+	NodeName       string         `json:"nodeName"`
+	CountryEmoji   string         `json:"countryEmoji"`
+	ProviderName   string         `json:"providerName"`
+	UsersOnline    float64        `json:"usersOnline"`
+	InboundsStats  []InboundsStat `json:"inboundsStats"`
+	OutboundsStats []InboundsStat `json:"outboundsStats"`
 }
 
 // GetNodeUuid returns the value of NodeUuid.
@@ -7944,12 +5059,12 @@ func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetUsersOnline() float64 {
 }
 
 // GetInboundsStats returns the value of InboundsStats.
-func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetInboundsStats() []GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem {
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetInboundsStats() []InboundsStat {
 	return s.InboundsStats
 }
 
 // GetOutboundsStats returns the value of OutboundsStats.
-func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetOutboundsStats() []GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem {
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) GetOutboundsStats() []InboundsStat {
 	return s.OutboundsStats
 }
 
@@ -7979,85 +5094,13 @@ func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetUsersOnline(val float64
 }
 
 // SetInboundsStats sets the value of InboundsStats.
-func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetInboundsStats(val []GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) {
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetInboundsStats(val []InboundsStat) {
 	s.InboundsStats = val
 }
 
 // SetOutboundsStats sets the value of OutboundsStats.
-func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetOutboundsStats(val []GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) {
+func (s *GetNodesMetricsResponseDtoResponseNodesItem) SetOutboundsStats(val []InboundsStat) {
 	s.OutboundsStats = val
-}
-
-type GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem struct {
-	Tag      string `json:"tag"`
-	Upload   string `json:"upload"`
-	Download string `json:"download"`
-}
-
-// GetTag returns the value of Tag.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetUpload returns the value of Upload.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) GetUpload() string {
-	return s.Upload
-}
-
-// GetDownload returns the value of Download.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) GetDownload() string {
-	return s.Download
-}
-
-// SetTag sets the value of Tag.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetUpload sets the value of Upload.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) SetUpload(val string) {
-	s.Upload = val
-}
-
-// SetDownload sets the value of Download.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemInboundsStatsItem) SetDownload(val string) {
-	s.Download = val
-}
-
-type GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem struct {
-	Tag      string `json:"tag"`
-	Upload   string `json:"upload"`
-	Download string `json:"download"`
-}
-
-// GetTag returns the value of Tag.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetUpload returns the value of Upload.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) GetUpload() string {
-	return s.Upload
-}
-
-// GetDownload returns the value of Download.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) GetDownload() string {
-	return s.Download
-}
-
-// SetTag sets the value of Tag.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetUpload sets the value of Upload.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) SetUpload(val string) {
-	s.Upload = val
-}
-
-// SetDownload sets the value of Download.
-func (s *GetNodesMetricsResponseDtoResponseNodesItemOutboundsStatsItem) SetDownload(val string) {
-	s.Download = val
 }
 
 // Ref: #/components/schemas/GetNodesRealtimeUsageResponseDto
@@ -8426,14 +5469,14 @@ func (*GetRawSubscriptionByShortUuidResponseDto) subscriptionsControllerGetRawSu
 }
 
 type GetRawSubscriptionByShortUuidResponseDtoResponse struct {
-	User              GetRawSubscriptionByShortUuidResponseDtoResponseUser              `json:"user"`
+	User              User                                                              `json:"user"`
 	ConvertedUserInfo GetRawSubscriptionByShortUuidResponseDtoResponseConvertedUserInfo `json:"convertedUserInfo"`
 	Headers           GetRawSubscriptionByShortUuidResponseDtoResponseHeaders           `json:"headers"`
 	RawHosts          []GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem    `json:"rawHosts"`
 }
 
 // GetUser returns the value of User.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetUser() GetRawSubscriptionByShortUuidResponseDtoResponseUser {
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetUser() User {
 	return s.User
 }
 
@@ -8453,7 +5496,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) GetRawHosts() []GetRa
 }
 
 // SetUser sets the value of User.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetUser(val GetRawSubscriptionByShortUuidResponseDtoResponseUser) {
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) SetUser(val User) {
 	s.User = val
 }
 
@@ -9084,537 +6127,6 @@ type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams s
 
 type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams struct{}
 
-type GetRawSubscriptionByShortUuidResponseDtoResponseUser struct {
-	UUID                     uuid.UUID                                                     `json:"uuid"`
-	ShortUuid                string                                                        `json:"shortUuid"`
-	Username                 string                                                        `json:"username"`
-	Status                   OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus `json:"status"`
-	UsedTrafficBytes         float64                                                       `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                                                       `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                                                        `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy   OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                                                      `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                                                    `json:"subLastOpenedAt"`
-	ExpireAt               time.Time                                                                      `json:"expireAt"`
-	OnlineAt               NilDateTime                                                                    `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                                                    `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                                                    `json:"lastTrafficResetAt"`
-	TrojanPassword         string                                                                         `json:"trojanPassword"`
-	VlessUuid              uuid.UUID                                                                      `json:"vlessUuid"`
-	SsPassword             string                                                                         `json:"ssPassword"`
-	Description            NilString                                                                      `json:"description"`
-	Tag                    NilString                                                                      `json:"tag"`
-	TelegramId             NilInt                                                                         `json:"telegramId"`
-	Email                  NilString                                                                      `json:"email"`
-	HwidDeviceLimit        NilInt                                                                         `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                                                    `json:"firstConnectedAt"`
-	LastTriggeredThreshold OptInt                                                                         `json:"lastTriggeredThreshold"`
-	CreatedAt              time.Time                                                                      `json:"createdAt"`
-	UpdatedAt              time.Time                                                                      `json:"updatedAt"`
-	ActiveInternalSquads   []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                                                        `json:"externalSquadUuid"`
-	SubscriptionUrl        string                                                                         `json:"subscriptionUrl"`
-	LastConnectedNode      NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp                       `json:"happ"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetShortUuid returns the value of ShortUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetShortUuid() string {
-	return s.ShortUuid
-}
-
-// GetUsername returns the value of Username.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUsername() string {
-	return s.Username
-}
-
-// GetStatus returns the value of Status.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetStatus() OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus {
-	return s.Status
-}
-
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficLimitBytes() OptInt {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficLimitStrategy() OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy {
-	return s.TrafficLimitStrategy
-}
-
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
-// GetExpireAt returns the value of ExpireAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetOnlineAt returns the value of OnlineAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
-}
-
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
-}
-
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
-}
-
-// GetTrojanPassword returns the value of TrojanPassword.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrojanPassword() string {
-	return s.TrojanPassword
-}
-
-// GetVlessUuid returns the value of VlessUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetVlessUuid() uuid.UUID {
-	return s.VlessUuid
-}
-
-// GetSsPassword returns the value of SsPassword.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSsPassword() string {
-	return s.SsPassword
-}
-
-// GetDescription returns the value of Description.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
-// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastTriggeredThreshold() OptInt {
-	return s.LastTriggeredThreshold
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetActiveInternalSquads() []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
-// GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubscriptionUrl() string {
-	return s.SubscriptionUrl
-}
-
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastConnectedNode() NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode {
-	return s.LastConnectedNode
-}
-
-// GetHapp returns the value of Happ.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetHapp() GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp {
-	return s.Happ
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetShortUuid sets the value of ShortUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetShortUuid(val string) {
-	s.ShortUuid = val
-}
-
-// SetUsername sets the value of Username.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetStatus sets the value of Status.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetStatus(val OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) {
-	s.Status = val
-}
-
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficLimitBytes(val OptInt) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficLimitStrategy(val OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) {
-	s.TrafficLimitStrategy = val
-}
-
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
-// SetExpireAt sets the value of ExpireAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
-}
-
-// SetOnlineAt sets the value of OnlineAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
-}
-
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
-}
-
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
-}
-
-// SetTrojanPassword sets the value of TrojanPassword.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrojanPassword(val string) {
-	s.TrojanPassword = val
-}
-
-// SetVlessUuid sets the value of VlessUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetVlessUuid(val uuid.UUID) {
-	s.VlessUuid = val
-}
-
-// SetSsPassword sets the value of SsPassword.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSsPassword(val string) {
-	s.SsPassword = val
-}
-
-// SetDescription sets the value of Description.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
-// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastTriggeredThreshold(val OptInt) {
-	s.LastTriggeredThreshold = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetActiveInternalSquads(val []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
-// SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubscriptionUrl(val string) {
-	s.SubscriptionUrl = val
-}
-
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastConnectedNode(val NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) {
-	s.LastConnectedNode = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetHapp(val GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) {
-	s.Happ = val
-}
-
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem struct {
-	UUID uuid.UUID `json:"uuid"`
-	Name string    `json:"name"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus string
-
-const (
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusACTIVE   GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus = "ACTIVE"
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusDISABLED GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus = "DISABLED"
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusLIMITED  GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus = "LIMITED"
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusEXPIRED  GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus = "EXPIRED"
-)
-
-// AllValues returns all GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus values.
-func (GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) AllValues() []GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus {
-	return []GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus{
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusACTIVE,
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusDISABLED,
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusLIMITED,
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusEXPIRED,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) MarshalText() ([]byte, error) {
-	switch s {
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusACTIVE:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusDISABLED:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusLIMITED:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusEXPIRED:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) UnmarshalText(data []byte) error {
-	switch GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus(data) {
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusACTIVE:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusACTIVE
-		return nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusDISABLED:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusDISABLED
-		return nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusLIMITED:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusLIMITED
-		return nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusEXPIRED:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusEXPIRED
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// Available reset periods.
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy string
-
-const (
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "NO_RESET"
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY     GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "DAY"
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK    GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "WEEK"
-	GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH   GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy = "MONTH"
-)
-
-// AllValues returns all GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy values.
-func (GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) AllValues() []GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy {
-	return []GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy{
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET,
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY,
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK,
-		GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) MarshalText() ([]byte, error) {
-	switch s {
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy(data) {
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET
-		return nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyDAY
-		return nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyWEEK
-		return nil
-	case GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH:
-		*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyMONTH
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
 // Ref: #/components/schemas/GetRemnawaveHealthResponseDto
 type GetRemnawaveHealthResponseDto struct {
 	Response GetRemnawaveHealthResponseDtoResponse `json:"response"`
@@ -10033,14 +6545,14 @@ func (s *GetStatusResponseDtoResponse) SetBranding(val GetStatusResponseDtoRespo
 }
 
 type GetStatusResponseDtoResponseAuthentication struct {
-	Passkey  GetStatusResponseDtoResponseAuthenticationPasskey  `json:"passkey"`
-	TgAuth   GetStatusResponseDtoResponseAuthenticationTgAuth   `json:"tgAuth"`
-	OAuth2   GetStatusResponseDtoResponseAuthenticationOAuth2   `json:"oauth2"`
-	Password GetStatusResponseDtoResponseAuthenticationPassword `json:"password"`
+	Passkey  NilPasswordSettings                              `json:"passkey"`
+	TgAuth   GetStatusResponseDtoResponseAuthenticationTgAuth `json:"tgAuth"`
+	OAuth2   GetStatusResponseDtoResponseAuthenticationOAuth2 `json:"oauth2"`
+	Password NilPasswordSettings                              `json:"password"`
 }
 
 // GetPasskey returns the value of Passkey.
-func (s *GetStatusResponseDtoResponseAuthentication) GetPasskey() GetStatusResponseDtoResponseAuthenticationPasskey {
+func (s *GetStatusResponseDtoResponseAuthentication) GetPasskey() NilPasswordSettings {
 	return s.Passkey
 }
 
@@ -10055,12 +6567,12 @@ func (s *GetStatusResponseDtoResponseAuthentication) GetOAuth2() GetStatusRespon
 }
 
 // GetPassword returns the value of Password.
-func (s *GetStatusResponseDtoResponseAuthentication) GetPassword() GetStatusResponseDtoResponseAuthenticationPassword {
+func (s *GetStatusResponseDtoResponseAuthentication) GetPassword() NilPasswordSettings {
 	return s.Password
 }
 
 // SetPasskey sets the value of Passkey.
-func (s *GetStatusResponseDtoResponseAuthentication) SetPasskey(val GetStatusResponseDtoResponseAuthenticationPasskey) {
+func (s *GetStatusResponseDtoResponseAuthentication) SetPasskey(val NilPasswordSettings) {
 	s.Passkey = val
 }
 
@@ -10075,7 +6587,7 @@ func (s *GetStatusResponseDtoResponseAuthentication) SetOAuth2(val GetStatusResp
 }
 
 // SetPassword sets the value of Password.
-func (s *GetStatusResponseDtoResponseAuthentication) SetPassword(val GetStatusResponseDtoResponseAuthenticationPassword) {
+func (s *GetStatusResponseDtoResponseAuthentication) SetPassword(val NilPasswordSettings) {
 	s.Password = val
 }
 
@@ -10102,34 +6614,6 @@ func (s *GetStatusResponseDtoResponseAuthenticationOAuth2Providers) init() GetSt
 		*s = m
 	}
 	return m
-}
-
-type GetStatusResponseDtoResponseAuthenticationPasskey struct {
-	Enabled bool `json:"enabled"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *GetStatusResponseDtoResponseAuthenticationPasskey) GetEnabled() bool {
-	return s.Enabled
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *GetStatusResponseDtoResponseAuthenticationPasskey) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-type GetStatusResponseDtoResponseAuthenticationPassword struct {
-	Enabled bool `json:"enabled"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *GetStatusResponseDtoResponseAuthenticationPassword) GetEnabled() bool {
-	return s.Enabled
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *GetStatusResponseDtoResponseAuthenticationPassword) SetEnabled(val bool) {
-	s.Enabled = val
 }
 
 type GetStatusResponseDtoResponseAuthenticationTgAuth struct {
@@ -10212,103 +6696,20 @@ func (*GetStatusResponseDtoStatusCode) authControllerGetStatusRes() {}
 
 // Ref: #/components/schemas/GetSubscriptionRequestHistoryResponseDto
 type GetSubscriptionRequestHistoryResponseDto struct {
-	Response GetSubscriptionRequestHistoryResponseDtoResponse `json:"response"`
+	Response UserSubscriptionHistory `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetSubscriptionRequestHistoryResponseDto) GetResponse() GetSubscriptionRequestHistoryResponseDtoResponse {
+func (s *GetSubscriptionRequestHistoryResponseDto) GetResponse() UserSubscriptionHistory {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetSubscriptionRequestHistoryResponseDto) SetResponse(val GetSubscriptionRequestHistoryResponseDtoResponse) {
+func (s *GetSubscriptionRequestHistoryResponseDto) SetResponse(val UserSubscriptionHistory) {
 	s.Response = val
 }
 
 func (*GetSubscriptionRequestHistoryResponseDto) userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes() {
-}
-
-type GetSubscriptionRequestHistoryResponseDtoResponse struct {
-	Records []GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem `json:"records"`
-	Total   float64                                                       `json:"total"`
-}
-
-// GetRecords returns the value of Records.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponse) GetRecords() []GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem {
-	return s.Records
-}
-
-// GetTotal returns the value of Total.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// SetRecords sets the value of Records.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponse) SetRecords(val []GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) {
-	s.Records = val
-}
-
-// SetTotal sets the value of Total.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-type GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem struct {
-	ID        float64   `json:"id"`
-	UserUuid  uuid.UUID `json:"userUuid"`
-	RequestIp NilString `json:"requestIp"`
-	UserAgent NilString `json:"userAgent"`
-	RequestAt time.Time `json:"requestAt"`
-}
-
-// GetID returns the value of ID.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetID() float64 {
-	return s.ID
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// GetRequestIp returns the value of RequestIp.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestIp() NilString {
-	return s.RequestIp
-}
-
-// GetUserAgent returns the value of UserAgent.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserAgent() NilString {
-	return s.UserAgent
-}
-
-// GetRequestAt returns the value of RequestAt.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestAt() time.Time {
-	return s.RequestAt
-}
-
-// SetID sets the value of ID.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetID(val float64) {
-	s.ID = val
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetRequestIp sets the value of RequestIp.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestIp(val NilString) {
-	s.RequestIp = val
-}
-
-// SetUserAgent sets the value of UserAgent.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserAgent(val NilString) {
-	s.UserAgent = val
-}
-
-// SetRequestAt sets the value of RequestAt.
-func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestAt(val time.Time) {
-	s.RequestAt = val
 }
 
 // Ref: #/components/schemas/GetSubscriptionRequestHistoryStatsResponseDto
@@ -10330,12 +6731,12 @@ func (*GetSubscriptionRequestHistoryStatsResponseDto) userSubscriptionRequestHis
 }
 
 type GetSubscriptionRequestHistoryStatsResponseDtoResponse struct {
-	ByParsedApp        []GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem        `json:"byParsedApp"`
+	ByParsedApp        []ByAppItem                                                                   `json:"byParsedApp"`
 	HourlyRequestStats []GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStatsItem `json:"hourlyRequestStats"`
 }
 
 // GetByParsedApp returns the value of ByParsedApp.
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) GetByParsedApp() []GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem {
+func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) GetByParsedApp() []ByAppItem {
 	return s.ByParsedApp
 }
 
@@ -10345,38 +6746,13 @@ func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) GetHourlyRequest
 }
 
 // SetByParsedApp sets the value of ByParsedApp.
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) SetByParsedApp(val []GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem) {
+func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) SetByParsedApp(val []ByAppItem) {
 	s.ByParsedApp = val
 }
 
 // SetHourlyRequestStats sets the value of HourlyRequestStats.
 func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) SetHourlyRequestStats(val []GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStatsItem) {
 	s.HourlyRequestStats = val
-}
-
-type GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem struct {
-	App   string  `json:"app"`
-	Count float64 `json:"count"`
-}
-
-// GetApp returns the value of App.
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem) GetApp() string {
-	return s.App
-}
-
-// GetCount returns the value of Count.
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem) GetCount() float64 {
-	return s.Count
-}
-
-// SetApp sets the value of App.
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem) SetApp(val string) {
-	s.App = val
-}
-
-// SetCount sets the value of Count.
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseByParsedAppItem) SetCount(val float64) {
-	s.Count = val
 }
 
 type GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStatsItem struct {
@@ -10422,8 +6798,8 @@ func (s *GetTemplatesResponseDto) SetResponse(val GetTemplatesResponseDtoRespons
 func (*GetTemplatesResponseDto) subscriptionTemplateControllerGetAllTemplatesRes() {}
 
 type GetTemplatesResponseDtoResponse struct {
-	Total     float64                                        `json:"total"`
-	Templates []GetTemplatesResponseDtoResponseTemplatesItem `json:"templates"`
+	Total     float64    `json:"total"`
+	Templates []Template `json:"templates"`
 }
 
 // GetTotal returns the value of Total.
@@ -10432,7 +6808,7 @@ func (s *GetTemplatesResponseDtoResponse) GetTotal() float64 {
 }
 
 // GetTemplates returns the value of Templates.
-func (s *GetTemplatesResponseDtoResponse) GetTemplates() []GetTemplatesResponseDtoResponseTemplatesItem {
+func (s *GetTemplatesResponseDtoResponse) GetTemplates() []Template {
 	return s.Templates
 }
 
@@ -10442,135 +6818,8 @@ func (s *GetTemplatesResponseDtoResponse) SetTotal(val float64) {
 }
 
 // SetTemplates sets the value of Templates.
-func (s *GetTemplatesResponseDtoResponse) SetTemplates(val []GetTemplatesResponseDtoResponseTemplatesItem) {
+func (s *GetTemplatesResponseDtoResponse) SetTemplates(val []Template) {
 	s.Templates = val
-}
-
-type GetTemplatesResponseDtoResponseTemplatesItem struct {
-	UUID                uuid.UUID                                                `json:"uuid"`
-	Name                string                                                   `json:"name"`
-	TemplateType        GetTemplatesResponseDtoResponseTemplatesItemTemplateType `json:"templateType"`
-	TemplateJson        jx.Raw                                                   `json:"templateJson"`
-	EncodedTemplateYaml NilString                                                `json:"encodedTemplateYaml"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetName() string {
-	return s.Name
-}
-
-// GetTemplateType returns the value of TemplateType.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetTemplateType() GetTemplatesResponseDtoResponseTemplatesItemTemplateType {
-	return s.TemplateType
-}
-
-// GetTemplateJson returns the value of TemplateJson.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetTemplateJson() jx.Raw {
-	return s.TemplateJson
-}
-
-// GetEncodedTemplateYaml returns the value of EncodedTemplateYaml.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetEncodedTemplateYaml() NilString {
-	return s.EncodedTemplateYaml
-}
-
-// SetUUID sets the value of UUID.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetTemplateType sets the value of TemplateType.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetTemplateType(val GetTemplatesResponseDtoResponseTemplatesItemTemplateType) {
-	s.TemplateType = val
-}
-
-// SetTemplateJson sets the value of TemplateJson.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetTemplateJson(val jx.Raw) {
-	s.TemplateJson = val
-}
-
-// SetEncodedTemplateYaml sets the value of EncodedTemplateYaml.
-func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetEncodedTemplateYaml(val NilString) {
-	s.EncodedTemplateYaml = val
-}
-
-type GetTemplatesResponseDtoResponseTemplatesItemTemplateType string
-
-const (
-	GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYJSON   GetTemplatesResponseDtoResponseTemplatesItemTemplateType = "XRAY_JSON"
-	GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYBASE64 GetTemplatesResponseDtoResponseTemplatesItemTemplateType = "XRAY_BASE64"
-	GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeMIHOMO     GetTemplatesResponseDtoResponseTemplatesItemTemplateType = "MIHOMO"
-	GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSTASH      GetTemplatesResponseDtoResponseTemplatesItemTemplateType = "STASH"
-	GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeCLASH      GetTemplatesResponseDtoResponseTemplatesItemTemplateType = "CLASH"
-	GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSINGBOX    GetTemplatesResponseDtoResponseTemplatesItemTemplateType = "SINGBOX"
-)
-
-// AllValues returns all GetTemplatesResponseDtoResponseTemplatesItemTemplateType values.
-func (GetTemplatesResponseDtoResponseTemplatesItemTemplateType) AllValues() []GetTemplatesResponseDtoResponseTemplatesItemTemplateType {
-	return []GetTemplatesResponseDtoResponseTemplatesItemTemplateType{
-		GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYJSON,
-		GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYBASE64,
-		GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeMIHOMO,
-		GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSTASH,
-		GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeCLASH,
-		GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSINGBOX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetTemplatesResponseDtoResponseTemplatesItemTemplateType) MarshalText() ([]byte, error) {
-	switch s {
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYJSON:
-		return []byte(s), nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYBASE64:
-		return []byte(s), nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeMIHOMO:
-		return []byte(s), nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSTASH:
-		return []byte(s), nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeCLASH:
-		return []byte(s), nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSINGBOX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetTemplatesResponseDtoResponseTemplatesItemTemplateType) UnmarshalText(data []byte) error {
-	switch GetTemplatesResponseDtoResponseTemplatesItemTemplateType(data) {
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYJSON:
-		*s = GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYJSON
-		return nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYBASE64:
-		*s = GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeXRAYBASE64
-		return nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeMIHOMO:
-		*s = GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeMIHOMO
-		return nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSTASH:
-		*s = GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSTASH
-		return nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeCLASH:
-		*s = GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeCLASH
-		return nil
-	case GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSINGBOX:
-		*s = GetTemplatesResponseDtoResponseTemplatesItemTemplateTypeSINGBOX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/GetUserAccessibleNodesResponseDto
@@ -10711,103 +6960,20 @@ func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsIte
 
 // Ref: #/components/schemas/GetUserSubscriptionRequestHistoryResponseDto
 type GetUserSubscriptionRequestHistoryResponseDto struct {
-	Response GetUserSubscriptionRequestHistoryResponseDtoResponse `json:"response"`
+	Response UserSubscriptionHistory `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetUserSubscriptionRequestHistoryResponseDto) GetResponse() GetUserSubscriptionRequestHistoryResponseDtoResponse {
+func (s *GetUserSubscriptionRequestHistoryResponseDto) GetResponse() UserSubscriptionHistory {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetUserSubscriptionRequestHistoryResponseDto) SetResponse(val GetUserSubscriptionRequestHistoryResponseDtoResponse) {
+func (s *GetUserSubscriptionRequestHistoryResponseDto) SetResponse(val UserSubscriptionHistory) {
 	s.Response = val
 }
 
 func (*GetUserSubscriptionRequestHistoryResponseDto) usersControllerGetUserSubscriptionRequestHistoryRes() {
-}
-
-type GetUserSubscriptionRequestHistoryResponseDtoResponse struct {
-	Total   float64                                                           `json:"total"`
-	Records []GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem `json:"records"`
-}
-
-// GetTotal returns the value of Total.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// GetRecords returns the value of Records.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) GetRecords() []GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem {
-	return s.Records
-}
-
-// SetTotal sets the value of Total.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-// SetRecords sets the value of Records.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) SetRecords(val []GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) {
-	s.Records = val
-}
-
-type GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem struct {
-	ID        float64   `json:"id"`
-	UserUuid  uuid.UUID `json:"userUuid"`
-	RequestAt time.Time `json:"requestAt"`
-	RequestIp NilString `json:"requestIp"`
-	UserAgent NilString `json:"userAgent"`
-}
-
-// GetID returns the value of ID.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetID() float64 {
-	return s.ID
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// GetRequestAt returns the value of RequestAt.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestAt() time.Time {
-	return s.RequestAt
-}
-
-// GetRequestIp returns the value of RequestIp.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestIp() NilString {
-	return s.RequestIp
-}
-
-// GetUserAgent returns the value of UserAgent.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserAgent() NilString {
-	return s.UserAgent
-}
-
-// SetID sets the value of ID.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetID(val float64) {
-	s.ID = val
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetRequestAt sets the value of RequestAt.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestAt(val time.Time) {
-	s.RequestAt = val
-}
-
-// SetRequestIp sets the value of RequestIp.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestIp(val NilString) {
-	s.RequestIp = val
-}
-
-// SetUserAgent sets the value of UserAgent.
-func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserAgent(val NilString) {
-	s.UserAgent = val
 }
 
 // Ref: #/components/schemas/GetUserUsageByRangeResponseDto
@@ -10896,18 +7062,438 @@ func (s *GetUserUsageByRangeResponseDtoResponseItem) SetDate(val string) {
 	s.Date = val
 }
 
+// Ref: #/components/schemas/Github
+type Github struct {
+	Enabled       bool      `json:"enabled"`
+	ClientId      NilString `json:"clientId"`
+	ClientSecret  NilString `json:"clientSecret"`
+	AllowedEmails []string  `json:"allowedEmails"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *Github) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetClientId returns the value of ClientId.
+func (s *Github) GetClientId() NilString {
+	return s.ClientId
+}
+
+// GetClientSecret returns the value of ClientSecret.
+func (s *Github) GetClientSecret() NilString {
+	return s.ClientSecret
+}
+
+// GetAllowedEmails returns the value of AllowedEmails.
+func (s *Github) GetAllowedEmails() []string {
+	return s.AllowedEmails
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *Github) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetClientId sets the value of ClientId.
+func (s *Github) SetClientId(val NilString) {
+	s.ClientId = val
+}
+
+// SetClientSecret sets the value of ClientSecret.
+func (s *Github) SetClientSecret(val NilString) {
+	s.ClientSecret = val
+}
+
+// SetAllowedEmails sets the value of AllowedEmails.
+func (s *Github) SetAllowedEmails(val []string) {
+	s.AllowedEmails = val
+}
+
+// Ref: #/components/schemas/HappItem
+type HappItem struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *HappItem) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *HappItem) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+// {"markdownDescription":"**Key** and **value** of the response header will be added to the response.
+// "}.
+// Ref: #/components/schemas/Header
+type Header struct {
+	// {"markdownDescription":"Key of the response header. Must comply with RFC 7230."}.
+	Key string `json:"key"`
+	// {"markdownDescription":"Value of the response header. "}.
+	Value string `json:"value"`
+}
+
+// GetKey returns the value of Key.
+func (s *Header) GetKey() string {
+	return s.Key
+}
+
+// GetValue returns the value of Value.
+func (s *Header) GetValue() string {
+	return s.Value
+}
+
+// SetKey sets the value of Key.
+func (s *Header) SetKey(val string) {
+	s.Key = val
+}
+
+// SetValue sets the value of Value.
+func (s *Header) SetValue(val string) {
+	s.Value = val
+}
+
+// Ref: #/components/schemas/HostItem
+type HostItem struct {
+	UUID                   uuid.UUID                `json:"uuid"`
+	ViewPosition           int                      `json:"viewPosition"`
+	Remark                 string                   `json:"remark"`
+	Address                string                   `json:"address"`
+	Port                   int                      `json:"port"`
+	Path                   NilString                `json:"path"`
+	Sni                    NilString                `json:"sni"`
+	Host                   NilString                `json:"host"`
+	Alpn                   NilString                `json:"alpn"`
+	Fingerprint            NilString                `json:"fingerprint"`
+	IsDisabled             OptBool                  `json:"isDisabled"`
+	SecurityLayer          OptHostItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams       jx.Raw                   `json:"xHttpExtraParams"`
+	MuxParams              jx.Raw                   `json:"muxParams"`
+	SockoptParams          jx.Raw                   `json:"sockoptParams"`
+	Inbound                InboundItem              `json:"inbound"`
+	ServerDescription      NilString                `json:"serverDescription"`
+	Tag                    NilString                `json:"tag"`
+	IsHidden               OptBool                  `json:"isHidden"`
+	OverrideSniFromAddress OptBool                  `json:"overrideSniFromAddress"`
+	VlessRouteId           NilInt                   `json:"vlessRouteId"`
+	AllowInsecure          OptBool                  `json:"allowInsecure"`
+	ShuffleHost            bool                     `json:"shuffleHost"`
+	MihomoX25519           bool                     `json:"mihomoX25519"`
+	Nodes                  []uuid.UUID              `json:"nodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *HostItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *HostItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetRemark returns the value of Remark.
+func (s *HostItem) GetRemark() string {
+	return s.Remark
+}
+
+// GetAddress returns the value of Address.
+func (s *HostItem) GetAddress() string {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *HostItem) GetPort() int {
+	return s.Port
+}
+
+// GetPath returns the value of Path.
+func (s *HostItem) GetPath() NilString {
+	return s.Path
+}
+
+// GetSni returns the value of Sni.
+func (s *HostItem) GetSni() NilString {
+	return s.Sni
+}
+
+// GetHost returns the value of Host.
+func (s *HostItem) GetHost() NilString {
+	return s.Host
+}
+
+// GetAlpn returns the value of Alpn.
+func (s *HostItem) GetAlpn() NilString {
+	return s.Alpn
+}
+
+// GetFingerprint returns the value of Fingerprint.
+func (s *HostItem) GetFingerprint() NilString {
+	return s.Fingerprint
+}
+
+// GetIsDisabled returns the value of IsDisabled.
+func (s *HostItem) GetIsDisabled() OptBool {
+	return s.IsDisabled
+}
+
+// GetSecurityLayer returns the value of SecurityLayer.
+func (s *HostItem) GetSecurityLayer() OptHostItemSecurityLayer {
+	return s.SecurityLayer
+}
+
+// GetXHttpExtraParams returns the value of XHttpExtraParams.
+func (s *HostItem) GetXHttpExtraParams() jx.Raw {
+	return s.XHttpExtraParams
+}
+
+// GetMuxParams returns the value of MuxParams.
+func (s *HostItem) GetMuxParams() jx.Raw {
+	return s.MuxParams
+}
+
+// GetSockoptParams returns the value of SockoptParams.
+func (s *HostItem) GetSockoptParams() jx.Raw {
+	return s.SockoptParams
+}
+
+// GetInbound returns the value of Inbound.
+func (s *HostItem) GetInbound() InboundItem {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *HostItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
+// GetTag returns the value of Tag.
+func (s *HostItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetIsHidden returns the value of IsHidden.
+func (s *HostItem) GetIsHidden() OptBool {
+	return s.IsHidden
+}
+
+// GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
+func (s *HostItem) GetOverrideSniFromAddress() OptBool {
+	return s.OverrideSniFromAddress
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *HostItem) GetVlessRouteId() NilInt {
+	return s.VlessRouteId
+}
+
+// GetAllowInsecure returns the value of AllowInsecure.
+func (s *HostItem) GetAllowInsecure() OptBool {
+	return s.AllowInsecure
+}
+
+// GetShuffleHost returns the value of ShuffleHost.
+func (s *HostItem) GetShuffleHost() bool {
+	return s.ShuffleHost
+}
+
+// GetMihomoX25519 returns the value of MihomoX25519.
+func (s *HostItem) GetMihomoX25519() bool {
+	return s.MihomoX25519
+}
+
+// GetNodes returns the value of Nodes.
+func (s *HostItem) GetNodes() []uuid.UUID {
+	return s.Nodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *HostItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *HostItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetRemark sets the value of Remark.
+func (s *HostItem) SetRemark(val string) {
+	s.Remark = val
+}
+
+// SetAddress sets the value of Address.
+func (s *HostItem) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *HostItem) SetPort(val int) {
+	s.Port = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostItem) SetPath(val NilString) {
+	s.Path = val
+}
+
+// SetSni sets the value of Sni.
+func (s *HostItem) SetSni(val NilString) {
+	s.Sni = val
+}
+
+// SetHost sets the value of Host.
+func (s *HostItem) SetHost(val NilString) {
+	s.Host = val
+}
+
+// SetAlpn sets the value of Alpn.
+func (s *HostItem) SetAlpn(val NilString) {
+	s.Alpn = val
+}
+
+// SetFingerprint sets the value of Fingerprint.
+func (s *HostItem) SetFingerprint(val NilString) {
+	s.Fingerprint = val
+}
+
+// SetIsDisabled sets the value of IsDisabled.
+func (s *HostItem) SetIsDisabled(val OptBool) {
+	s.IsDisabled = val
+}
+
+// SetSecurityLayer sets the value of SecurityLayer.
+func (s *HostItem) SetSecurityLayer(val OptHostItemSecurityLayer) {
+	s.SecurityLayer = val
+}
+
+// SetXHttpExtraParams sets the value of XHttpExtraParams.
+func (s *HostItem) SetXHttpExtraParams(val jx.Raw) {
+	s.XHttpExtraParams = val
+}
+
+// SetMuxParams sets the value of MuxParams.
+func (s *HostItem) SetMuxParams(val jx.Raw) {
+	s.MuxParams = val
+}
+
+// SetSockoptParams sets the value of SockoptParams.
+func (s *HostItem) SetSockoptParams(val jx.Raw) {
+	s.SockoptParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *HostItem) SetInbound(val InboundItem) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *HostItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+// SetTag sets the value of Tag.
+func (s *HostItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetIsHidden sets the value of IsHidden.
+func (s *HostItem) SetIsHidden(val OptBool) {
+	s.IsHidden = val
+}
+
+// SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
+func (s *HostItem) SetOverrideSniFromAddress(val OptBool) {
+	s.OverrideSniFromAddress = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *HostItem) SetVlessRouteId(val NilInt) {
+	s.VlessRouteId = val
+}
+
+// SetAllowInsecure sets the value of AllowInsecure.
+func (s *HostItem) SetAllowInsecure(val OptBool) {
+	s.AllowInsecure = val
+}
+
+// SetShuffleHost sets the value of ShuffleHost.
+func (s *HostItem) SetShuffleHost(val bool) {
+	s.ShuffleHost = val
+}
+
+// SetMihomoX25519 sets the value of MihomoX25519.
+func (s *HostItem) SetMihomoX25519(val bool) {
+	s.MihomoX25519 = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *HostItem) SetNodes(val []uuid.UUID) {
+	s.Nodes = val
+}
+
+type HostItemSecurityLayer string
+
+const (
+	HostItemSecurityLayerDEFAULT HostItemSecurityLayer = "DEFAULT"
+	HostItemSecurityLayerTLS     HostItemSecurityLayer = "TLS"
+	HostItemSecurityLayerNONE    HostItemSecurityLayer = "NONE"
+)
+
+// AllValues returns all HostItemSecurityLayer values.
+func (HostItemSecurityLayer) AllValues() []HostItemSecurityLayer {
+	return []HostItemSecurityLayer{
+		HostItemSecurityLayerDEFAULT,
+		HostItemSecurityLayerTLS,
+		HostItemSecurityLayerNONE,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s HostItemSecurityLayer) MarshalText() ([]byte, error) {
+	switch s {
+	case HostItemSecurityLayerDEFAULT:
+		return []byte(s), nil
+	case HostItemSecurityLayerTLS:
+		return []byte(s), nil
+	case HostItemSecurityLayerNONE:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *HostItemSecurityLayer) UnmarshalText(data []byte) error {
+	switch HostItemSecurityLayer(data) {
+	case HostItemSecurityLayerDEFAULT:
+		*s = HostItemSecurityLayerDEFAULT
+		return nil
+	case HostItemSecurityLayerTLS:
+		*s = HostItemSecurityLayerTLS
+		return nil
+	case HostItemSecurityLayerNONE:
+		*s = HostItemSecurityLayerNONE
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 // Ref: #/components/schemas/HostListResponse
 type HostListResponse struct {
-	Response []HostListResponseResponseItem `json:"response"`
+	Response []HostItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HostListResponse) GetResponse() []HostListResponseResponseItem {
+func (s *HostListResponse) GetResponse() []HostItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HostListResponse) SetResponse(val []HostListResponseResponseItem) {
+func (s *HostListResponse) SetResponse(val []HostItem) {
 	s.Response = val
 }
 
@@ -10918,726 +7504,50 @@ func (*HostListResponse) hostsBulkActionsControllerSetInboundToHostsRes() {}
 func (*HostListResponse) hostsBulkActionsControllerSetPortToHostsRes()    {}
 func (*HostListResponse) hostsControllerGetAllHostsRes()                  {}
 
-type HostListResponseResponseItem struct {
-	UUID                   uuid.UUID                                    `json:"uuid"`
-	ViewPosition           int                                          `json:"viewPosition"`
-	Remark                 string                                       `json:"remark"`
-	Address                string                                       `json:"address"`
-	Port                   int                                          `json:"port"`
-	Path                   NilString                                    `json:"path"`
-	Sni                    NilString                                    `json:"sni"`
-	Host                   NilString                                    `json:"host"`
-	Alpn                   NilString                                    `json:"alpn"`
-	Fingerprint            NilString                                    `json:"fingerprint"`
-	IsDisabled             OptBool                                      `json:"isDisabled"`
-	SecurityLayer          OptHostListResponseResponseItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams       jx.Raw                                       `json:"xHttpExtraParams"`
-	MuxParams              jx.Raw                                       `json:"muxParams"`
-	SockoptParams          jx.Raw                                       `json:"sockoptParams"`
-	Inbound                HostListResponseResponseItemInbound          `json:"inbound"`
-	ServerDescription      NilString                                    `json:"serverDescription"`
-	Tag                    NilString                                    `json:"tag"`
-	IsHidden               OptBool                                      `json:"isHidden"`
-	OverrideSniFromAddress OptBool                                      `json:"overrideSniFromAddress"`
-	VlessRouteId           NilInt                                       `json:"vlessRouteId"`
-	AllowInsecure          OptBool                                      `json:"allowInsecure"`
-	ShuffleHost            bool                                         `json:"shuffleHost"`
-	MihomoX25519           bool                                         `json:"mihomoX25519"`
-	Nodes                  []uuid.UUID                                  `json:"nodes"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *HostListResponseResponseItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *HostListResponseResponseItem) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetRemark returns the value of Remark.
-func (s *HostListResponseResponseItem) GetRemark() string {
-	return s.Remark
-}
-
-// GetAddress returns the value of Address.
-func (s *HostListResponseResponseItem) GetAddress() string {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *HostListResponseResponseItem) GetPort() int {
-	return s.Port
-}
-
-// GetPath returns the value of Path.
-func (s *HostListResponseResponseItem) GetPath() NilString {
-	return s.Path
-}
-
-// GetSni returns the value of Sni.
-func (s *HostListResponseResponseItem) GetSni() NilString {
-	return s.Sni
-}
-
-// GetHost returns the value of Host.
-func (s *HostListResponseResponseItem) GetHost() NilString {
-	return s.Host
-}
-
-// GetAlpn returns the value of Alpn.
-func (s *HostListResponseResponseItem) GetAlpn() NilString {
-	return s.Alpn
-}
-
-// GetFingerprint returns the value of Fingerprint.
-func (s *HostListResponseResponseItem) GetFingerprint() NilString {
-	return s.Fingerprint
-}
-
-// GetIsDisabled returns the value of IsDisabled.
-func (s *HostListResponseResponseItem) GetIsDisabled() OptBool {
-	return s.IsDisabled
-}
-
-// GetSecurityLayer returns the value of SecurityLayer.
-func (s *HostListResponseResponseItem) GetSecurityLayer() OptHostListResponseResponseItemSecurityLayer {
-	return s.SecurityLayer
-}
-
-// GetXHttpExtraParams returns the value of XHttpExtraParams.
-func (s *HostListResponseResponseItem) GetXHttpExtraParams() jx.Raw {
-	return s.XHttpExtraParams
-}
-
-// GetMuxParams returns the value of MuxParams.
-func (s *HostListResponseResponseItem) GetMuxParams() jx.Raw {
-	return s.MuxParams
-}
-
-// GetSockoptParams returns the value of SockoptParams.
-func (s *HostListResponseResponseItem) GetSockoptParams() jx.Raw {
-	return s.SockoptParams
-}
-
-// GetInbound returns the value of Inbound.
-func (s *HostListResponseResponseItem) GetInbound() HostListResponseResponseItemInbound {
-	return s.Inbound
+// Ref: #/components/schemas/HostOverride
+type HostOverride struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
 }
 
 // GetServerDescription returns the value of ServerDescription.
-func (s *HostListResponseResponseItem) GetServerDescription() NilString {
+func (s *HostOverride) GetServerDescription() OptNilString {
 	return s.ServerDescription
 }
 
-// GetTag returns the value of Tag.
-func (s *HostListResponseResponseItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetIsHidden returns the value of IsHidden.
-func (s *HostListResponseResponseItem) GetIsHidden() OptBool {
-	return s.IsHidden
-}
-
-// GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
-func (s *HostListResponseResponseItem) GetOverrideSniFromAddress() OptBool {
-	return s.OverrideSniFromAddress
-}
-
 // GetVlessRouteId returns the value of VlessRouteId.
-func (s *HostListResponseResponseItem) GetVlessRouteId() NilInt {
+func (s *HostOverride) GetVlessRouteId() OptNilInt {
 	return s.VlessRouteId
 }
 
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *HostListResponseResponseItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
-// GetShuffleHost returns the value of ShuffleHost.
-func (s *HostListResponseResponseItem) GetShuffleHost() bool {
-	return s.ShuffleHost
-}
-
-// GetMihomoX25519 returns the value of MihomoX25519.
-func (s *HostListResponseResponseItem) GetMihomoX25519() bool {
-	return s.MihomoX25519
-}
-
-// GetNodes returns the value of Nodes.
-func (s *HostListResponseResponseItem) GetNodes() []uuid.UUID {
-	return s.Nodes
-}
-
-// SetUUID sets the value of UUID.
-func (s *HostListResponseResponseItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *HostListResponseResponseItem) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetRemark sets the value of Remark.
-func (s *HostListResponseResponseItem) SetRemark(val string) {
-	s.Remark = val
-}
-
-// SetAddress sets the value of Address.
-func (s *HostListResponseResponseItem) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *HostListResponseResponseItem) SetPort(val int) {
-	s.Port = val
-}
-
-// SetPath sets the value of Path.
-func (s *HostListResponseResponseItem) SetPath(val NilString) {
-	s.Path = val
-}
-
-// SetSni sets the value of Sni.
-func (s *HostListResponseResponseItem) SetSni(val NilString) {
-	s.Sni = val
-}
-
-// SetHost sets the value of Host.
-func (s *HostListResponseResponseItem) SetHost(val NilString) {
-	s.Host = val
-}
-
-// SetAlpn sets the value of Alpn.
-func (s *HostListResponseResponseItem) SetAlpn(val NilString) {
-	s.Alpn = val
-}
-
-// SetFingerprint sets the value of Fingerprint.
-func (s *HostListResponseResponseItem) SetFingerprint(val NilString) {
-	s.Fingerprint = val
-}
-
-// SetIsDisabled sets the value of IsDisabled.
-func (s *HostListResponseResponseItem) SetIsDisabled(val OptBool) {
-	s.IsDisabled = val
-}
-
-// SetSecurityLayer sets the value of SecurityLayer.
-func (s *HostListResponseResponseItem) SetSecurityLayer(val OptHostListResponseResponseItemSecurityLayer) {
-	s.SecurityLayer = val
-}
-
-// SetXHttpExtraParams sets the value of XHttpExtraParams.
-func (s *HostListResponseResponseItem) SetXHttpExtraParams(val jx.Raw) {
-	s.XHttpExtraParams = val
-}
-
-// SetMuxParams sets the value of MuxParams.
-func (s *HostListResponseResponseItem) SetMuxParams(val jx.Raw) {
-	s.MuxParams = val
-}
-
-// SetSockoptParams sets the value of SockoptParams.
-func (s *HostListResponseResponseItem) SetSockoptParams(val jx.Raw) {
-	s.SockoptParams = val
-}
-
-// SetInbound sets the value of Inbound.
-func (s *HostListResponseResponseItem) SetInbound(val HostListResponseResponseItemInbound) {
-	s.Inbound = val
-}
-
 // SetServerDescription sets the value of ServerDescription.
-func (s *HostListResponseResponseItem) SetServerDescription(val NilString) {
+func (s *HostOverride) SetServerDescription(val OptNilString) {
 	s.ServerDescription = val
 }
 
-// SetTag sets the value of Tag.
-func (s *HostListResponseResponseItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetIsHidden sets the value of IsHidden.
-func (s *HostListResponseResponseItem) SetIsHidden(val OptBool) {
-	s.IsHidden = val
-}
-
-// SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
-func (s *HostListResponseResponseItem) SetOverrideSniFromAddress(val OptBool) {
-	s.OverrideSniFromAddress = val
-}
-
 // SetVlessRouteId sets the value of VlessRouteId.
-func (s *HostListResponseResponseItem) SetVlessRouteId(val NilInt) {
+func (s *HostOverride) SetVlessRouteId(val OptNilInt) {
 	s.VlessRouteId = val
-}
-
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *HostListResponseResponseItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
-// SetShuffleHost sets the value of ShuffleHost.
-func (s *HostListResponseResponseItem) SetShuffleHost(val bool) {
-	s.ShuffleHost = val
-}
-
-// SetMihomoX25519 sets the value of MihomoX25519.
-func (s *HostListResponseResponseItem) SetMihomoX25519(val bool) {
-	s.MihomoX25519 = val
-}
-
-// SetNodes sets the value of Nodes.
-func (s *HostListResponseResponseItem) SetNodes(val []uuid.UUID) {
-	s.Nodes = val
-}
-
-type HostListResponseResponseItemInbound struct {
-	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
-	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
-}
-
-// GetConfigProfileUuid returns the value of ConfigProfileUuid.
-func (s *HostListResponseResponseItemInbound) GetConfigProfileUuid() NilUUID {
-	return s.ConfigProfileUuid
-}
-
-// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
-func (s *HostListResponseResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
-	return s.ConfigProfileInboundUuid
-}
-
-// SetConfigProfileUuid sets the value of ConfigProfileUuid.
-func (s *HostListResponseResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
-	s.ConfigProfileUuid = val
-}
-
-// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
-func (s *HostListResponseResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
-	s.ConfigProfileInboundUuid = val
-}
-
-type HostListResponseResponseItemSecurityLayer string
-
-const (
-	HostListResponseResponseItemSecurityLayerDEFAULT HostListResponseResponseItemSecurityLayer = "DEFAULT"
-	HostListResponseResponseItemSecurityLayerTLS     HostListResponseResponseItemSecurityLayer = "TLS"
-	HostListResponseResponseItemSecurityLayerNONE    HostListResponseResponseItemSecurityLayer = "NONE"
-)
-
-// AllValues returns all HostListResponseResponseItemSecurityLayer values.
-func (HostListResponseResponseItemSecurityLayer) AllValues() []HostListResponseResponseItemSecurityLayer {
-	return []HostListResponseResponseItemSecurityLayer{
-		HostListResponseResponseItemSecurityLayerDEFAULT,
-		HostListResponseResponseItemSecurityLayerTLS,
-		HostListResponseResponseItemSecurityLayerNONE,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s HostListResponseResponseItemSecurityLayer) MarshalText() ([]byte, error) {
-	switch s {
-	case HostListResponseResponseItemSecurityLayerDEFAULT:
-		return []byte(s), nil
-	case HostListResponseResponseItemSecurityLayerTLS:
-		return []byte(s), nil
-	case HostListResponseResponseItemSecurityLayerNONE:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *HostListResponseResponseItemSecurityLayer) UnmarshalText(data []byte) error {
-	switch HostListResponseResponseItemSecurityLayer(data) {
-	case HostListResponseResponseItemSecurityLayerDEFAULT:
-		*s = HostListResponseResponseItemSecurityLayerDEFAULT
-		return nil
-	case HostListResponseResponseItemSecurityLayerTLS:
-		*s = HostListResponseResponseItemSecurityLayerTLS
-		return nil
-	case HostListResponseResponseItemSecurityLayerNONE:
-		*s = HostListResponseResponseItemSecurityLayerNONE
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/HostResponse
 type HostResponse struct {
-	Response HostResponseResponse `json:"response"`
+	Response HostItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HostResponse) GetResponse() HostResponseResponse {
+func (s *HostResponse) GetResponse() HostItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HostResponse) SetResponse(val HostResponseResponse) {
+func (s *HostResponse) SetResponse(val HostItem) {
 	s.Response = val
 }
 
 func (*HostResponse) hostsControllerCreateHostRes() {}
 func (*HostResponse) hostsControllerGetOneHostRes() {}
 func (*HostResponse) hostsControllerUpdateHostRes() {}
-
-type HostResponseResponse struct {
-	UUID                   uuid.UUID                            `json:"uuid"`
-	ViewPosition           int                                  `json:"viewPosition"`
-	Remark                 string                               `json:"remark"`
-	Address                string                               `json:"address"`
-	Port                   int                                  `json:"port"`
-	Path                   NilString                            `json:"path"`
-	Sni                    NilString                            `json:"sni"`
-	Host                   NilString                            `json:"host"`
-	Alpn                   NilString                            `json:"alpn"`
-	Fingerprint            NilString                            `json:"fingerprint"`
-	IsDisabled             OptBool                              `json:"isDisabled"`
-	SecurityLayer          OptHostResponseResponseSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams       jx.Raw                               `json:"xHttpExtraParams"`
-	MuxParams              jx.Raw                               `json:"muxParams"`
-	SockoptParams          jx.Raw                               `json:"sockoptParams"`
-	Inbound                HostResponseResponseInbound          `json:"inbound"`
-	ServerDescription      NilString                            `json:"serverDescription"`
-	Tag                    NilString                            `json:"tag"`
-	IsHidden               OptBool                              `json:"isHidden"`
-	OverrideSniFromAddress OptBool                              `json:"overrideSniFromAddress"`
-	VlessRouteId           NilInt                               `json:"vlessRouteId"`
-	AllowInsecure          OptBool                              `json:"allowInsecure"`
-	ShuffleHost            bool                                 `json:"shuffleHost"`
-	MihomoX25519           bool                                 `json:"mihomoX25519"`
-	Nodes                  []uuid.UUID                          `json:"nodes"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *HostResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *HostResponseResponse) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetRemark returns the value of Remark.
-func (s *HostResponseResponse) GetRemark() string {
-	return s.Remark
-}
-
-// GetAddress returns the value of Address.
-func (s *HostResponseResponse) GetAddress() string {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *HostResponseResponse) GetPort() int {
-	return s.Port
-}
-
-// GetPath returns the value of Path.
-func (s *HostResponseResponse) GetPath() NilString {
-	return s.Path
-}
-
-// GetSni returns the value of Sni.
-func (s *HostResponseResponse) GetSni() NilString {
-	return s.Sni
-}
-
-// GetHost returns the value of Host.
-func (s *HostResponseResponse) GetHost() NilString {
-	return s.Host
-}
-
-// GetAlpn returns the value of Alpn.
-func (s *HostResponseResponse) GetAlpn() NilString {
-	return s.Alpn
-}
-
-// GetFingerprint returns the value of Fingerprint.
-func (s *HostResponseResponse) GetFingerprint() NilString {
-	return s.Fingerprint
-}
-
-// GetIsDisabled returns the value of IsDisabled.
-func (s *HostResponseResponse) GetIsDisabled() OptBool {
-	return s.IsDisabled
-}
-
-// GetSecurityLayer returns the value of SecurityLayer.
-func (s *HostResponseResponse) GetSecurityLayer() OptHostResponseResponseSecurityLayer {
-	return s.SecurityLayer
-}
-
-// GetXHttpExtraParams returns the value of XHttpExtraParams.
-func (s *HostResponseResponse) GetXHttpExtraParams() jx.Raw {
-	return s.XHttpExtraParams
-}
-
-// GetMuxParams returns the value of MuxParams.
-func (s *HostResponseResponse) GetMuxParams() jx.Raw {
-	return s.MuxParams
-}
-
-// GetSockoptParams returns the value of SockoptParams.
-func (s *HostResponseResponse) GetSockoptParams() jx.Raw {
-	return s.SockoptParams
-}
-
-// GetInbound returns the value of Inbound.
-func (s *HostResponseResponse) GetInbound() HostResponseResponseInbound {
-	return s.Inbound
-}
-
-// GetServerDescription returns the value of ServerDescription.
-func (s *HostResponseResponse) GetServerDescription() NilString {
-	return s.ServerDescription
-}
-
-// GetTag returns the value of Tag.
-func (s *HostResponseResponse) GetTag() NilString {
-	return s.Tag
-}
-
-// GetIsHidden returns the value of IsHidden.
-func (s *HostResponseResponse) GetIsHidden() OptBool {
-	return s.IsHidden
-}
-
-// GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
-func (s *HostResponseResponse) GetOverrideSniFromAddress() OptBool {
-	return s.OverrideSniFromAddress
-}
-
-// GetVlessRouteId returns the value of VlessRouteId.
-func (s *HostResponseResponse) GetVlessRouteId() NilInt {
-	return s.VlessRouteId
-}
-
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *HostResponseResponse) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
-// GetShuffleHost returns the value of ShuffleHost.
-func (s *HostResponseResponse) GetShuffleHost() bool {
-	return s.ShuffleHost
-}
-
-// GetMihomoX25519 returns the value of MihomoX25519.
-func (s *HostResponseResponse) GetMihomoX25519() bool {
-	return s.MihomoX25519
-}
-
-// GetNodes returns the value of Nodes.
-func (s *HostResponseResponse) GetNodes() []uuid.UUID {
-	return s.Nodes
-}
-
-// SetUUID sets the value of UUID.
-func (s *HostResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *HostResponseResponse) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetRemark sets the value of Remark.
-func (s *HostResponseResponse) SetRemark(val string) {
-	s.Remark = val
-}
-
-// SetAddress sets the value of Address.
-func (s *HostResponseResponse) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *HostResponseResponse) SetPort(val int) {
-	s.Port = val
-}
-
-// SetPath sets the value of Path.
-func (s *HostResponseResponse) SetPath(val NilString) {
-	s.Path = val
-}
-
-// SetSni sets the value of Sni.
-func (s *HostResponseResponse) SetSni(val NilString) {
-	s.Sni = val
-}
-
-// SetHost sets the value of Host.
-func (s *HostResponseResponse) SetHost(val NilString) {
-	s.Host = val
-}
-
-// SetAlpn sets the value of Alpn.
-func (s *HostResponseResponse) SetAlpn(val NilString) {
-	s.Alpn = val
-}
-
-// SetFingerprint sets the value of Fingerprint.
-func (s *HostResponseResponse) SetFingerprint(val NilString) {
-	s.Fingerprint = val
-}
-
-// SetIsDisabled sets the value of IsDisabled.
-func (s *HostResponseResponse) SetIsDisabled(val OptBool) {
-	s.IsDisabled = val
-}
-
-// SetSecurityLayer sets the value of SecurityLayer.
-func (s *HostResponseResponse) SetSecurityLayer(val OptHostResponseResponseSecurityLayer) {
-	s.SecurityLayer = val
-}
-
-// SetXHttpExtraParams sets the value of XHttpExtraParams.
-func (s *HostResponseResponse) SetXHttpExtraParams(val jx.Raw) {
-	s.XHttpExtraParams = val
-}
-
-// SetMuxParams sets the value of MuxParams.
-func (s *HostResponseResponse) SetMuxParams(val jx.Raw) {
-	s.MuxParams = val
-}
-
-// SetSockoptParams sets the value of SockoptParams.
-func (s *HostResponseResponse) SetSockoptParams(val jx.Raw) {
-	s.SockoptParams = val
-}
-
-// SetInbound sets the value of Inbound.
-func (s *HostResponseResponse) SetInbound(val HostResponseResponseInbound) {
-	s.Inbound = val
-}
-
-// SetServerDescription sets the value of ServerDescription.
-func (s *HostResponseResponse) SetServerDescription(val NilString) {
-	s.ServerDescription = val
-}
-
-// SetTag sets the value of Tag.
-func (s *HostResponseResponse) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetIsHidden sets the value of IsHidden.
-func (s *HostResponseResponse) SetIsHidden(val OptBool) {
-	s.IsHidden = val
-}
-
-// SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
-func (s *HostResponseResponse) SetOverrideSniFromAddress(val OptBool) {
-	s.OverrideSniFromAddress = val
-}
-
-// SetVlessRouteId sets the value of VlessRouteId.
-func (s *HostResponseResponse) SetVlessRouteId(val NilInt) {
-	s.VlessRouteId = val
-}
-
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *HostResponseResponse) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
-// SetShuffleHost sets the value of ShuffleHost.
-func (s *HostResponseResponse) SetShuffleHost(val bool) {
-	s.ShuffleHost = val
-}
-
-// SetMihomoX25519 sets the value of MihomoX25519.
-func (s *HostResponseResponse) SetMihomoX25519(val bool) {
-	s.MihomoX25519 = val
-}
-
-// SetNodes sets the value of Nodes.
-func (s *HostResponseResponse) SetNodes(val []uuid.UUID) {
-	s.Nodes = val
-}
-
-type HostResponseResponseInbound struct {
-	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
-	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
-}
-
-// GetConfigProfileUuid returns the value of ConfigProfileUuid.
-func (s *HostResponseResponseInbound) GetConfigProfileUuid() NilUUID {
-	return s.ConfigProfileUuid
-}
-
-// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
-func (s *HostResponseResponseInbound) GetConfigProfileInboundUuid() NilUUID {
-	return s.ConfigProfileInboundUuid
-}
-
-// SetConfigProfileUuid sets the value of ConfigProfileUuid.
-func (s *HostResponseResponseInbound) SetConfigProfileUuid(val NilUUID) {
-	s.ConfigProfileUuid = val
-}
-
-// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
-func (s *HostResponseResponseInbound) SetConfigProfileInboundUuid(val NilUUID) {
-	s.ConfigProfileInboundUuid = val
-}
-
-type HostResponseResponseSecurityLayer string
-
-const (
-	HostResponseResponseSecurityLayerDEFAULT HostResponseResponseSecurityLayer = "DEFAULT"
-	HostResponseResponseSecurityLayerTLS     HostResponseResponseSecurityLayer = "TLS"
-	HostResponseResponseSecurityLayerNONE    HostResponseResponseSecurityLayer = "NONE"
-)
-
-// AllValues returns all HostResponseResponseSecurityLayer values.
-func (HostResponseResponseSecurityLayer) AllValues() []HostResponseResponseSecurityLayer {
-	return []HostResponseResponseSecurityLayer{
-		HostResponseResponseSecurityLayerDEFAULT,
-		HostResponseResponseSecurityLayerTLS,
-		HostResponseResponseSecurityLayerNONE,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s HostResponseResponseSecurityLayer) MarshalText() ([]byte, error) {
-	switch s {
-	case HostResponseResponseSecurityLayerDEFAULT:
-		return []byte(s), nil
-	case HostResponseResponseSecurityLayerTLS:
-		return []byte(s), nil
-	case HostResponseResponseSecurityLayerNONE:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *HostResponseResponseSecurityLayer) UnmarshalText(data []byte) error {
-	switch HostResponseResponseSecurityLayer(data) {
-	case HostResponseResponseSecurityLayerDEFAULT:
-		*s = HostResponseResponseSecurityLayerDEFAULT
-		return nil
-	case HostResponseResponseSecurityLayerTLS:
-		*s = HostResponseResponseSecurityLayerTLS
-		return nil
-	case HostResponseResponseSecurityLayerNONE:
-		*s = HostResponseResponseSecurityLayerNONE
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
 
 // HostsControllerDeleteHostNotFound is response for HostsControllerDeleteHost operation.
 type HostsControllerDeleteHostNotFound struct{}
@@ -11646,16 +7556,16 @@ func (*HostsControllerDeleteHostNotFound) hostsControllerDeleteHostRes() {}
 
 // Ref: #/components/schemas/HwidDevicesResponse
 type HwidDevicesResponse struct {
-	Response HwidDevicesResponseResponse `json:"response"`
+	Response AllHwidDevices `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HwidDevicesResponse) GetResponse() HwidDevicesResponseResponse {
+func (s *HwidDevicesResponse) GetResponse() AllHwidDevices {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HwidDevicesResponse) SetResponse(val HwidDevicesResponseResponse) {
+func (s *HwidDevicesResponse) SetResponse(val AllHwidDevices) {
 	s.Response = val
 }
 
@@ -11664,120 +7574,148 @@ func (*HwidDevicesResponse) hwidUserDevicesControllerDeleteAllUserHwidDevicesRes
 func (*HwidDevicesResponse) hwidUserDevicesControllerDeleteUserHwidDeviceRes()     {}
 func (*HwidDevicesResponse) hwidUserDevicesControllerGetUserHwidDevicesRes()       {}
 
-type HwidDevicesResponseResponse struct {
-	Total   float64                                  `json:"total"`
-	Devices []HwidDevicesResponseResponseDevicesItem `json:"devices"`
+// Ref: #/components/schemas/Inbound
+type Inbound struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
 }
 
-// GetTotal returns the value of Total.
-func (s *HwidDevicesResponseResponse) GetTotal() float64 {
-	return s.Total
+// GetUUID returns the value of UUID.
+func (s *Inbound) GetUUID() uuid.UUID {
+	return s.UUID
 }
 
-// GetDevices returns the value of Devices.
-func (s *HwidDevicesResponseResponse) GetDevices() []HwidDevicesResponseResponseDevicesItem {
-	return s.Devices
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *Inbound) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
 }
 
-// SetTotal sets the value of Total.
-func (s *HwidDevicesResponseResponse) SetTotal(val float64) {
-	s.Total = val
+// GetTag returns the value of Tag.
+func (s *Inbound) GetTag() string {
+	return s.Tag
 }
 
-// SetDevices sets the value of Devices.
-func (s *HwidDevicesResponseResponse) SetDevices(val []HwidDevicesResponseResponseDevicesItem) {
-	s.Devices = val
+// GetType returns the value of Type.
+func (s *Inbound) GetType() string {
+	return s.Type
 }
 
-type HwidDevicesResponseResponseDevicesItem struct {
-	Hwid        string    `json:"hwid"`
-	UserUuid    uuid.UUID `json:"userUuid"`
-	Platform    NilString `json:"platform"`
-	OsVersion   NilString `json:"osVersion"`
-	DeviceModel NilString `json:"deviceModel"`
-	UserAgent   NilString `json:"userAgent"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
+// GetNetwork returns the value of Network.
+func (s *Inbound) GetNetwork() NilString {
+	return s.Network
 }
 
-// GetHwid returns the value of Hwid.
-func (s *HwidDevicesResponseResponseDevicesItem) GetHwid() string {
-	return s.Hwid
+// GetSecurity returns the value of Security.
+func (s *Inbound) GetSecurity() NilString {
+	return s.Security
 }
 
-// GetUserUuid returns the value of UserUuid.
-func (s *HwidDevicesResponseResponseDevicesItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+// GetPort returns the value of Port.
+func (s *Inbound) GetPort() NilFloat64 {
+	return s.Port
 }
 
-// GetPlatform returns the value of Platform.
-func (s *HwidDevicesResponseResponseDevicesItem) GetPlatform() NilString {
-	return s.Platform
+// GetRawInbound returns the value of RawInbound.
+func (s *Inbound) GetRawInbound() jx.Raw {
+	return s.RawInbound
 }
 
-// GetOsVersion returns the value of OsVersion.
-func (s *HwidDevicesResponseResponseDevicesItem) GetOsVersion() NilString {
-	return s.OsVersion
+// SetUUID sets the value of UUID.
+func (s *Inbound) SetUUID(val uuid.UUID) {
+	s.UUID = val
 }
 
-// GetDeviceModel returns the value of DeviceModel.
-func (s *HwidDevicesResponseResponseDevicesItem) GetDeviceModel() NilString {
-	return s.DeviceModel
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *Inbound) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
 }
 
-// GetUserAgent returns the value of UserAgent.
-func (s *HwidDevicesResponseResponseDevicesItem) GetUserAgent() NilString {
-	return s.UserAgent
+// SetTag sets the value of Tag.
+func (s *Inbound) SetTag(val string) {
+	s.Tag = val
 }
 
-// GetCreatedAt returns the value of CreatedAt.
-func (s *HwidDevicesResponseResponseDevicesItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
+// SetType sets the value of Type.
+func (s *Inbound) SetType(val string) {
+	s.Type = val
 }
 
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *HwidDevicesResponseResponseDevicesItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
+// SetNetwork sets the value of Network.
+func (s *Inbound) SetNetwork(val NilString) {
+	s.Network = val
 }
 
-// SetHwid sets the value of Hwid.
-func (s *HwidDevicesResponseResponseDevicesItem) SetHwid(val string) {
-	s.Hwid = val
+// SetSecurity sets the value of Security.
+func (s *Inbound) SetSecurity(val NilString) {
+	s.Security = val
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *HwidDevicesResponseResponseDevicesItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
+// SetPort sets the value of Port.
+func (s *Inbound) SetPort(val NilFloat64) {
+	s.Port = val
 }
 
-// SetPlatform sets the value of Platform.
-func (s *HwidDevicesResponseResponseDevicesItem) SetPlatform(val NilString) {
-	s.Platform = val
+// SetRawInbound sets the value of RawInbound.
+func (s *Inbound) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
 }
 
-// SetOsVersion sets the value of OsVersion.
-func (s *HwidDevicesResponseResponseDevicesItem) SetOsVersion(val NilString) {
-	s.OsVersion = val
+// Ref: #/components/schemas/InboundItem
+type InboundItem struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
 }
 
-// SetDeviceModel sets the value of DeviceModel.
-func (s *HwidDevicesResponseResponseDevicesItem) SetDeviceModel(val NilString) {
-	s.DeviceModel = val
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *InboundItem) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
 }
 
-// SetUserAgent sets the value of UserAgent.
-func (s *HwidDevicesResponseResponseDevicesItem) SetUserAgent(val NilString) {
-	s.UserAgent = val
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *InboundItem) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
 }
 
-// SetCreatedAt sets the value of CreatedAt.
-func (s *HwidDevicesResponseResponseDevicesItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *InboundItem) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
 }
 
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *HwidDevicesResponseResponseDevicesItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *InboundItem) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
+}
+
+// Ref: #/components/schemas/InboundRef
+type InboundRef struct {
+	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *InboundRef) GetConfigProfileUuid() uuid.UUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *InboundRef) GetConfigProfileInboundUuid() uuid.UUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *InboundRef) SetConfigProfileUuid(val uuid.UUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *InboundRef) SetConfigProfileInboundUuid(val uuid.UUID) {
+	s.ConfigProfileInboundUuid = val
 }
 
 // Ref: #/components/schemas/InboundsResponse
@@ -11925,6 +7863,43 @@ func (s *InboundsResponseResponseInboundsItem) SetActiveSquads(val []uuid.UUID) 
 	s.ActiveSquads = val
 }
 
+// Ref: #/components/schemas/InboundsStat
+type InboundsStat struct {
+	Tag      string `json:"tag"`
+	Upload   string `json:"upload"`
+	Download string `json:"download"`
+}
+
+// GetTag returns the value of Tag.
+func (s *InboundsStat) GetTag() string {
+	return s.Tag
+}
+
+// GetUpload returns the value of Upload.
+func (s *InboundsStat) GetUpload() string {
+	return s.Upload
+}
+
+// GetDownload returns the value of Download.
+func (s *InboundsStat) GetDownload() string {
+	return s.Download
+}
+
+// SetTag sets the value of Tag.
+func (s *InboundsStat) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetUpload sets the value of Upload.
+func (s *InboundsStat) SetUpload(val string) {
+	s.Upload = val
+}
+
+// SetDownload sets the value of Download.
+func (s *InboundsStat) SetDownload(val string) {
+	s.Download = val
+}
+
 // InfraBillingControllerGetInfraProviderByUuidNotFound is response for InfraBillingControllerGetInfraProviderByUuid operation.
 type InfraBillingControllerGetInfraProviderByUuidNotFound struct{}
 
@@ -11933,174 +7908,22 @@ func (*InfraBillingControllerGetInfraProviderByUuidNotFound) infraBillingControl
 
 // Ref: #/components/schemas/InfraProviderResponseResponse
 type InfraProviderResponseResponse struct {
-	Response InfraProviderResponseResponseResponse `json:"response"`
+	Response Provider `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *InfraProviderResponseResponse) GetResponse() InfraProviderResponseResponseResponse {
+func (s *InfraProviderResponseResponse) GetResponse() Provider {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *InfraProviderResponseResponse) SetResponse(val InfraProviderResponseResponseResponse) {
+func (s *InfraProviderResponseResponse) SetResponse(val Provider) {
 	s.Response = val
 }
 
 func (*InfraProviderResponseResponse) infraBillingControllerCreateInfraProviderRes()    {}
 func (*InfraProviderResponseResponse) infraBillingControllerGetInfraProviderByUuidRes() {}
 func (*InfraProviderResponseResponse) infraBillingControllerUpdateInfraProviderRes()    {}
-
-type InfraProviderResponseResponseResponse struct {
-	UUID           uuid.UUID                                               `json:"uuid"`
-	Name           string                                                  `json:"name"`
-	FaviconLink    NilString                                               `json:"faviconLink"`
-	LoginUrl       NilString                                               `json:"loginUrl"`
-	CreatedAt      time.Time                                               `json:"createdAt"`
-	UpdatedAt      time.Time                                               `json:"updatedAt"`
-	BillingHistory InfraProviderResponseResponseResponseBillingHistory     `json:"billingHistory"`
-	BillingNodes   []InfraProviderResponseResponseResponseBillingNodesItem `json:"billingNodes"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *InfraProviderResponseResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *InfraProviderResponseResponseResponse) GetName() string {
-	return s.Name
-}
-
-// GetFaviconLink returns the value of FaviconLink.
-func (s *InfraProviderResponseResponseResponse) GetFaviconLink() NilString {
-	return s.FaviconLink
-}
-
-// GetLoginUrl returns the value of LoginUrl.
-func (s *InfraProviderResponseResponseResponse) GetLoginUrl() NilString {
-	return s.LoginUrl
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *InfraProviderResponseResponseResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *InfraProviderResponseResponseResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetBillingHistory returns the value of BillingHistory.
-func (s *InfraProviderResponseResponseResponse) GetBillingHistory() InfraProviderResponseResponseResponseBillingHistory {
-	return s.BillingHistory
-}
-
-// GetBillingNodes returns the value of BillingNodes.
-func (s *InfraProviderResponseResponseResponse) GetBillingNodes() []InfraProviderResponseResponseResponseBillingNodesItem {
-	return s.BillingNodes
-}
-
-// SetUUID sets the value of UUID.
-func (s *InfraProviderResponseResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *InfraProviderResponseResponseResponse) SetName(val string) {
-	s.Name = val
-}
-
-// SetFaviconLink sets the value of FaviconLink.
-func (s *InfraProviderResponseResponseResponse) SetFaviconLink(val NilString) {
-	s.FaviconLink = val
-}
-
-// SetLoginUrl sets the value of LoginUrl.
-func (s *InfraProviderResponseResponseResponse) SetLoginUrl(val NilString) {
-	s.LoginUrl = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *InfraProviderResponseResponseResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *InfraProviderResponseResponseResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetBillingHistory sets the value of BillingHistory.
-func (s *InfraProviderResponseResponseResponse) SetBillingHistory(val InfraProviderResponseResponseResponseBillingHistory) {
-	s.BillingHistory = val
-}
-
-// SetBillingNodes sets the value of BillingNodes.
-func (s *InfraProviderResponseResponseResponse) SetBillingNodes(val []InfraProviderResponseResponseResponseBillingNodesItem) {
-	s.BillingNodes = val
-}
-
-type InfraProviderResponseResponseResponseBillingHistory struct {
-	TotalAmount float64 `json:"totalAmount"`
-	TotalBills  float64 `json:"totalBills"`
-}
-
-// GetTotalAmount returns the value of TotalAmount.
-func (s *InfraProviderResponseResponseResponseBillingHistory) GetTotalAmount() float64 {
-	return s.TotalAmount
-}
-
-// GetTotalBills returns the value of TotalBills.
-func (s *InfraProviderResponseResponseResponseBillingHistory) GetTotalBills() float64 {
-	return s.TotalBills
-}
-
-// SetTotalAmount sets the value of TotalAmount.
-func (s *InfraProviderResponseResponseResponseBillingHistory) SetTotalAmount(val float64) {
-	s.TotalAmount = val
-}
-
-// SetTotalBills sets the value of TotalBills.
-func (s *InfraProviderResponseResponseResponseBillingHistory) SetTotalBills(val float64) {
-	s.TotalBills = val
-}
-
-type InfraProviderResponseResponseResponseBillingNodesItem struct {
-	NodeUuid    uuid.UUID `json:"nodeUuid"`
-	Name        string    `json:"name"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetNodeUuid returns the value of NodeUuid.
-func (s *InfraProviderResponseResponseResponseBillingNodesItem) GetNodeUuid() uuid.UUID {
-	return s.NodeUuid
-}
-
-// GetName returns the value of Name.
-func (s *InfraProviderResponseResponseResponseBillingNodesItem) GetName() string {
-	return s.Name
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *InfraProviderResponseResponseResponseBillingNodesItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetNodeUuid sets the value of NodeUuid.
-func (s *InfraProviderResponseResponseResponseBillingNodesItem) SetNodeUuid(val uuid.UUID) {
-	s.NodeUuid = val
-}
-
-// SetName sets the value of Name.
-func (s *InfraProviderResponseResponseResponseBillingNodesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *InfraProviderResponseResponseResponseBillingNodesItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
 
 // Ref: #/components/schemas/InternalServerError
 type InternalServerError struct {
@@ -12291,6 +8114,76 @@ func (*InternalServerError) usersControllerRevokeUserSubscriptionRes()          
 func (*InternalServerError) usersControllerUpdateUserRes()                               {}
 func (*InternalServerError) usersStatsControllerGetUserUsageByRangeRes()                 {}
 
+// Ref: #/components/schemas/InternalSquad
+type InternalSquad struct {
+	UUID      uuid.UUID              `json:"uuid"`
+	Name      string                 `json:"name"`
+	Info      InternalSquadsInfoItem `json:"info"`
+	Inbounds  []Inbound              `json:"inbounds"`
+	CreatedAt time.Time              `json:"createdAt"`
+	UpdatedAt time.Time              `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *InternalSquad) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *InternalSquad) GetName() string {
+	return s.Name
+}
+
+// GetInfo returns the value of Info.
+func (s *InternalSquad) GetInfo() InternalSquadsInfoItem {
+	return s.Info
+}
+
+// GetInbounds returns the value of Inbounds.
+func (s *InternalSquad) GetInbounds() []Inbound {
+	return s.Inbounds
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *InternalSquad) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *InternalSquad) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *InternalSquad) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *InternalSquad) SetName(val string) {
+	s.Name = val
+}
+
+// SetInfo sets the value of Info.
+func (s *InternalSquad) SetInfo(val InternalSquadsInfoItem) {
+	s.Info = val
+}
+
+// SetInbounds sets the value of Inbounds.
+func (s *InternalSquad) SetInbounds(val []Inbound) {
+	s.Inbounds = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *InternalSquad) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *InternalSquad) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
 // InternalSquadControllerAddUsersToInternalSquadNotFound is response for InternalSquadControllerAddUsersToInternalSquad operation.
 type InternalSquadControllerAddUsersToInternalSquadNotFound struct{}
 
@@ -12335,16 +8228,16 @@ func (*InternalSquadControllerUpdateInternalSquadNotFound) internalSquadControll
 
 // Ref: #/components/schemas/InternalSquadResponseResponse
 type InternalSquadResponseResponse struct {
-	Response InternalSquadResponseResponseResponse `json:"response"`
+	Response InternalSquad `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *InternalSquadResponseResponse) GetResponse() InternalSquadResponseResponseResponse {
+func (s *InternalSquadResponseResponse) GetResponse() InternalSquad {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *InternalSquadResponseResponse) SetResponse(val InternalSquadResponseResponseResponse) {
+func (s *InternalSquadResponseResponse) SetResponse(val InternalSquad) {
 	s.Response = val
 }
 
@@ -12352,189 +8245,67 @@ func (*InternalSquadResponseResponse) internalSquadControllerCreateInternalSquad
 func (*InternalSquadResponseResponse) internalSquadControllerGetInternalSquadByUuidRes() {}
 func (*InternalSquadResponseResponse) internalSquadControllerUpdateInternalSquadRes()    {}
 
-type InternalSquadResponseResponseResponse struct {
-	UUID      uuid.UUID                                           `json:"uuid"`
-	Name      string                                              `json:"name"`
-	Info      InternalSquadResponseResponseResponseInfo           `json:"info"`
-	Inbounds  []InternalSquadResponseResponseResponseInboundsItem `json:"inbounds"`
-	CreatedAt time.Time                                           `json:"createdAt"`
-	UpdatedAt time.Time                                           `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *InternalSquadResponseResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *InternalSquadResponseResponseResponse) GetName() string {
-	return s.Name
-}
-
-// GetInfo returns the value of Info.
-func (s *InternalSquadResponseResponseResponse) GetInfo() InternalSquadResponseResponseResponseInfo {
-	return s.Info
-}
-
-// GetInbounds returns the value of Inbounds.
-func (s *InternalSquadResponseResponseResponse) GetInbounds() []InternalSquadResponseResponseResponseInboundsItem {
-	return s.Inbounds
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *InternalSquadResponseResponseResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *InternalSquadResponseResponseResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *InternalSquadResponseResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *InternalSquadResponseResponseResponse) SetName(val string) {
-	s.Name = val
-}
-
-// SetInfo sets the value of Info.
-func (s *InternalSquadResponseResponseResponse) SetInfo(val InternalSquadResponseResponseResponseInfo) {
-	s.Info = val
-}
-
-// SetInbounds sets the value of Inbounds.
-func (s *InternalSquadResponseResponseResponse) SetInbounds(val []InternalSquadResponseResponseResponseInboundsItem) {
-	s.Inbounds = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *InternalSquadResponseResponseResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *InternalSquadResponseResponseResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-type InternalSquadResponseResponseResponseInboundsItem struct {
-	UUID        uuid.UUID  `json:"uuid"`
-	ProfileUuid uuid.UUID  `json:"profileUuid"`
-	Tag         string     `json:"tag"`
-	Type        string     `json:"type"`
-	Network     NilString  `json:"network"`
-	Security    NilString  `json:"security"`
-	Port        NilFloat64 `json:"port"`
-	RawInbound  jx.Raw     `json:"rawInbound"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProfileUuid returns the value of ProfileUuid.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetProfileUuid() uuid.UUID {
-	return s.ProfileUuid
-}
-
-// GetTag returns the value of Tag.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetPort returns the value of Port.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetPort() NilFloat64 {
-	return s.Port
-}
-
-// GetRawInbound returns the value of RawInbound.
-func (s *InternalSquadResponseResponseResponseInboundsItem) GetRawInbound() jx.Raw {
-	return s.RawInbound
-}
-
-// SetUUID sets the value of UUID.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProfileUuid sets the value of ProfileUuid.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetProfileUuid(val uuid.UUID) {
-	s.ProfileUuid = val
-}
-
-// SetTag sets the value of Tag.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetPort sets the value of Port.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetPort(val NilFloat64) {
-	s.Port = val
-}
-
-// SetRawInbound sets the value of RawInbound.
-func (s *InternalSquadResponseResponseResponseInboundsItem) SetRawInbound(val jx.Raw) {
-	s.RawInbound = val
-}
-
-type InternalSquadResponseResponseResponseInfo struct {
+// Ref: #/components/schemas/InternalSquadsInfoItem
+type InternalSquadsInfoItem struct {
 	MembersCount  float64 `json:"membersCount"`
 	InboundsCount float64 `json:"inboundsCount"`
 }
 
 // GetMembersCount returns the value of MembersCount.
-func (s *InternalSquadResponseResponseResponseInfo) GetMembersCount() float64 {
+func (s *InternalSquadsInfoItem) GetMembersCount() float64 {
 	return s.MembersCount
 }
 
 // GetInboundsCount returns the value of InboundsCount.
-func (s *InternalSquadResponseResponseResponseInfo) GetInboundsCount() float64 {
+func (s *InternalSquadsInfoItem) GetInboundsCount() float64 {
 	return s.InboundsCount
 }
 
 // SetMembersCount sets the value of MembersCount.
-func (s *InternalSquadResponseResponseResponseInfo) SetMembersCount(val float64) {
+func (s *InternalSquadsInfoItem) SetMembersCount(val float64) {
 	s.MembersCount = val
 }
 
 // SetInboundsCount sets the value of InboundsCount.
-func (s *InternalSquadResponseResponseResponseInfo) SetInboundsCount(val float64) {
+func (s *InternalSquadsInfoItem) SetInboundsCount(val float64) {
 	s.InboundsCount = val
+}
+
+// Ref: #/components/schemas/LastConnectedNodeItem
+type LastConnectedNodeItem struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *LastConnectedNodeItem) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *LastConnectedNodeItem) GetNodeName() string {
+	return s.NodeName
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *LastConnectedNodeItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *LastConnectedNodeItem) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *LastConnectedNodeItem) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *LastConnectedNodeItem) SetCountryCode(val string) {
+	s.CountryCode = val
 }
 
 // Ref: #/components/schemas/LoginRequestDto
@@ -12561,6 +8332,51 @@ func (s *LoginRequestDto) SetUsername(val string) {
 // SetPassword sets the value of Password.
 func (s *LoginRequestDto) SetPassword(val string) {
 	s.Password = val
+}
+
+// NewNilBrandingSettings returns new NilBrandingSettings with value set to v.
+func NewNilBrandingSettings(v BrandingSettings) NilBrandingSettings {
+	return NilBrandingSettings{
+		Value: v,
+	}
+}
+
+// NilBrandingSettings is nullable BrandingSettings.
+type NilBrandingSettings struct {
+	Value BrandingSettings
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilBrandingSettings) SetTo(v BrandingSettings) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilBrandingSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilBrandingSettings) SetToNull() {
+	o.Null = true
+	var v BrandingSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilBrandingSettings) Get() (v BrandingSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilBrandingSettings) Or(d BrandingSettings) BrandingSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
 }
 
 // NewNilDateTime returns new NilDateTime with value set to v.
@@ -12608,37 +8424,37 @@ func (o NilDateTime) Or(d time.Time) time.Time {
 	return d
 }
 
-// NewNilDebugSrrMatcherResponseDtoResponseMatchedRule returns new NilDebugSrrMatcherResponseDtoResponseMatchedRule with value set to v.
-func NewNilDebugSrrMatcherResponseDtoResponseMatchedRule(v DebugSrrMatcherResponseDtoResponseMatchedRule) NilDebugSrrMatcherResponseDtoResponseMatchedRule {
-	return NilDebugSrrMatcherResponseDtoResponseMatchedRule{
+// NewNilExternalSquadResponseHeaders returns new NilExternalSquadResponseHeaders with value set to v.
+func NewNilExternalSquadResponseHeaders(v ExternalSquadResponseHeaders) NilExternalSquadResponseHeaders {
+	return NilExternalSquadResponseHeaders{
 		Value: v,
 	}
 }
 
-// NilDebugSrrMatcherResponseDtoResponseMatchedRule is nullable DebugSrrMatcherResponseDtoResponseMatchedRule.
-type NilDebugSrrMatcherResponseDtoResponseMatchedRule struct {
-	Value DebugSrrMatcherResponseDtoResponseMatchedRule
+// NilExternalSquadResponseHeaders is nullable ExternalSquadResponseHeaders.
+type NilExternalSquadResponseHeaders struct {
+	Value ExternalSquadResponseHeaders
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilDebugSrrMatcherResponseDtoResponseMatchedRule) SetTo(v DebugSrrMatcherResponseDtoResponseMatchedRule) {
+func (o *NilExternalSquadResponseHeaders) SetTo(v ExternalSquadResponseHeaders) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilDebugSrrMatcherResponseDtoResponseMatchedRule) IsNull() bool { return o.Null }
+func (o NilExternalSquadResponseHeaders) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilDebugSrrMatcherResponseDtoResponseMatchedRule) SetToNull() {
+func (o *NilExternalSquadResponseHeaders) SetToNull() {
 	o.Null = true
-	var v DebugSrrMatcherResponseDtoResponseMatchedRule
+	var v ExternalSquadResponseHeaders
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilDebugSrrMatcherResponseDtoResponseMatchedRule) Get() (v DebugSrrMatcherResponseDtoResponseMatchedRule, ok bool) {
+func (o NilExternalSquadResponseHeaders) Get() (v ExternalSquadResponseHeaders, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -12646,142 +8462,7 @@ func (o NilDebugSrrMatcherResponseDtoResponseMatchedRule) Get() (v DebugSrrMatch
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilDebugSrrMatcherResponseDtoResponseMatchedRule) Or(d DebugSrrMatcherResponseDtoResponseMatchedRule) DebugSrrMatcherResponseDtoResponseMatchedRule {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilExternalSquadResponseResponseResponseHostOverrides returns new NilExternalSquadResponseResponseResponseHostOverrides with value set to v.
-func NewNilExternalSquadResponseResponseResponseHostOverrides(v ExternalSquadResponseResponseResponseHostOverrides) NilExternalSquadResponseResponseResponseHostOverrides {
-	return NilExternalSquadResponseResponseResponseHostOverrides{
-		Value: v,
-	}
-}
-
-// NilExternalSquadResponseResponseResponseHostOverrides is nullable ExternalSquadResponseResponseResponseHostOverrides.
-type NilExternalSquadResponseResponseResponseHostOverrides struct {
-	Value ExternalSquadResponseResponseResponseHostOverrides
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilExternalSquadResponseResponseResponseHostOverrides) SetTo(v ExternalSquadResponseResponseResponseHostOverrides) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilExternalSquadResponseResponseResponseHostOverrides) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilExternalSquadResponseResponseResponseHostOverrides) SetToNull() {
-	o.Null = true
-	var v ExternalSquadResponseResponseResponseHostOverrides
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilExternalSquadResponseResponseResponseHostOverrides) Get() (v ExternalSquadResponseResponseResponseHostOverrides, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilExternalSquadResponseResponseResponseHostOverrides) Or(d ExternalSquadResponseResponseResponseHostOverrides) ExternalSquadResponseResponseResponseHostOverrides {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilExternalSquadResponseResponseResponseResponseHeaders returns new NilExternalSquadResponseResponseResponseResponseHeaders with value set to v.
-func NewNilExternalSquadResponseResponseResponseResponseHeaders(v ExternalSquadResponseResponseResponseResponseHeaders) NilExternalSquadResponseResponseResponseResponseHeaders {
-	return NilExternalSquadResponseResponseResponseResponseHeaders{
-		Value: v,
-	}
-}
-
-// NilExternalSquadResponseResponseResponseResponseHeaders is nullable ExternalSquadResponseResponseResponseResponseHeaders.
-type NilExternalSquadResponseResponseResponseResponseHeaders struct {
-	Value ExternalSquadResponseResponseResponseResponseHeaders
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilExternalSquadResponseResponseResponseResponseHeaders) SetTo(v ExternalSquadResponseResponseResponseResponseHeaders) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilExternalSquadResponseResponseResponseResponseHeaders) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilExternalSquadResponseResponseResponseResponseHeaders) SetToNull() {
-	o.Null = true
-	var v ExternalSquadResponseResponseResponseResponseHeaders
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilExternalSquadResponseResponseResponseResponseHeaders) Get() (v ExternalSquadResponseResponseResponseResponseHeaders, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilExternalSquadResponseResponseResponseResponseHeaders) Or(d ExternalSquadResponseResponseResponseResponseHeaders) ExternalSquadResponseResponseResponseResponseHeaders {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilExternalSquadResponseResponseResponseSubscriptionSettings returns new NilExternalSquadResponseResponseResponseSubscriptionSettings with value set to v.
-func NewNilExternalSquadResponseResponseResponseSubscriptionSettings(v ExternalSquadResponseResponseResponseSubscriptionSettings) NilExternalSquadResponseResponseResponseSubscriptionSettings {
-	return NilExternalSquadResponseResponseResponseSubscriptionSettings{
-		Value: v,
-	}
-}
-
-// NilExternalSquadResponseResponseResponseSubscriptionSettings is nullable ExternalSquadResponseResponseResponseSubscriptionSettings.
-type NilExternalSquadResponseResponseResponseSubscriptionSettings struct {
-	Value ExternalSquadResponseResponseResponseSubscriptionSettings
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilExternalSquadResponseResponseResponseSubscriptionSettings) SetTo(v ExternalSquadResponseResponseResponseSubscriptionSettings) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilExternalSquadResponseResponseResponseSubscriptionSettings) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilExternalSquadResponseResponseResponseSubscriptionSettings) SetToNull() {
-	o.Null = true
-	var v ExternalSquadResponseResponseResponseSubscriptionSettings
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilExternalSquadResponseResponseResponseSubscriptionSettings) Get() (v ExternalSquadResponseResponseResponseSubscriptionSettings, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilExternalSquadResponseResponseResponseSubscriptionSettings) Or(d ExternalSquadResponseResponseResponseSubscriptionSettings) ExternalSquadResponseResponseResponseSubscriptionSettings {
+func (o NilExternalSquadResponseHeaders) Or(d ExternalSquadResponseHeaders) ExternalSquadResponseHeaders {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -12833,239 +8514,6 @@ func (o NilFloat64) Or(d float64) float64 {
 	return d
 }
 
-// NewNilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode returns new NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode with value set to v.
-func NewNilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode(v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
-	return NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode{
-		Value: v,
-	}
-}
-
-// NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode is nullable GetAllUsersResponseDtoResponseUsersItemLastConnectedNode.
-type NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode struct {
-	Value GetAllUsersResponseDtoResponseUsersItemLastConnectedNode
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetTo(v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Get() (v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Or(d GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides with value set to v.
-func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
-	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides{
-		Value: v,
-	}
-}
-
-// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides.
-type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides struct {
-	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetToNull() {
-	o.Null = true
-	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders with value set to v.
-func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders(v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
-	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders{
-		Value: v,
-	}
-}
-
-// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders.
-type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders struct {
-	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetToNull() {
-	o.Null = true
-	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings with value set to v.
-func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings(v GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings {
-	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings{
-		Value: v,
-	}
-}
-
-// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings.
-type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings struct {
-	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetToNull() {
-	o.Null = true
-	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode returns new NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode with value set to v.
-func NewNilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode(v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode {
-	return NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode{
-		Value: v,
-	}
-}
-
-// NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode is nullable GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode.
-type NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode struct {
-	Value GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewNilGetStatusResponseDtoResponseAuthentication returns new NilGetStatusResponseDtoResponseAuthentication with value set to v.
 func NewNilGetStatusResponseDtoResponseAuthentication(v GetStatusResponseDtoResponseAuthentication) NilGetStatusResponseDtoResponseAuthentication {
 	return NilGetStatusResponseDtoResponseAuthentication{
@@ -13105,6 +8553,51 @@ func (o NilGetStatusResponseDtoResponseAuthentication) Get() (v GetStatusRespons
 
 // Or returns value if set, or given parameter if does not.
 func (o NilGetStatusResponseDtoResponseAuthentication) Or(d GetStatusResponseDtoResponseAuthentication) GetStatusResponseDtoResponseAuthentication {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilHostOverride returns new NilHostOverride with value set to v.
+func NewNilHostOverride(v HostOverride) NilHostOverride {
+	return NilHostOverride{
+		Value: v,
+	}
+}
+
+// NilHostOverride is nullable HostOverride.
+type NilHostOverride struct {
+	Value HostOverride
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilHostOverride) SetTo(v HostOverride) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilHostOverride) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilHostOverride) SetToNull() {
+	o.Null = true
+	var v HostOverride
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilHostOverride) Get() (v HostOverride, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilHostOverride) Or(d HostOverride) HostOverride {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13156,37 +8649,37 @@ func (o NilInt) Or(d int) int {
 	return d
 }
 
-// NewNilNodeResponseResponseProvider returns new NilNodeResponseResponseProvider with value set to v.
-func NewNilNodeResponseResponseProvider(v NodeResponseResponseProvider) NilNodeResponseResponseProvider {
-	return NilNodeResponseResponseProvider{
+// NewNilLastConnectedNodeItem returns new NilLastConnectedNodeItem with value set to v.
+func NewNilLastConnectedNodeItem(v LastConnectedNodeItem) NilLastConnectedNodeItem {
+	return NilLastConnectedNodeItem{
 		Value: v,
 	}
 }
 
-// NilNodeResponseResponseProvider is nullable NodeResponseResponseProvider.
-type NilNodeResponseResponseProvider struct {
-	Value NodeResponseResponseProvider
+// NilLastConnectedNodeItem is nullable LastConnectedNodeItem.
+type NilLastConnectedNodeItem struct {
+	Value LastConnectedNodeItem
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilNodeResponseResponseProvider) SetTo(v NodeResponseResponseProvider) {
+func (o *NilLastConnectedNodeItem) SetTo(v LastConnectedNodeItem) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilNodeResponseResponseProvider) IsNull() bool { return o.Null }
+func (o NilLastConnectedNodeItem) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilNodeResponseResponseProvider) SetToNull() {
+func (o *NilLastConnectedNodeItem) SetToNull() {
 	o.Null = true
-	var v NodeResponseResponseProvider
+	var v LastConnectedNodeItem
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilNodeResponseResponseProvider) Get() (v NodeResponseResponseProvider, ok bool) {
+func (o NilLastConnectedNodeItem) Get() (v LastConnectedNodeItem, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13194,44 +8687,44 @@ func (o NilNodeResponseResponseProvider) Get() (v NodeResponseResponseProvider, 
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilNodeResponseResponseProvider) Or(d NodeResponseResponseProvider) NodeResponseResponseProvider {
+func (o NilLastConnectedNodeItem) Or(d LastConnectedNodeItem) LastConnectedNodeItem {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewNilNodesResponseResponseItemProvider returns new NilNodesResponseResponseItemProvider with value set to v.
-func NewNilNodesResponseResponseItemProvider(v NodesResponseResponseItemProvider) NilNodesResponseResponseItemProvider {
-	return NilNodesResponseResponseItemProvider{
+// NewNilOauth2Settings returns new NilOauth2Settings with value set to v.
+func NewNilOauth2Settings(v Oauth2Settings) NilOauth2Settings {
+	return NilOauth2Settings{
 		Value: v,
 	}
 }
 
-// NilNodesResponseResponseItemProvider is nullable NodesResponseResponseItemProvider.
-type NilNodesResponseResponseItemProvider struct {
-	Value NodesResponseResponseItemProvider
+// NilOauth2Settings is nullable Oauth2Settings.
+type NilOauth2Settings struct {
+	Value Oauth2Settings
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilNodesResponseResponseItemProvider) SetTo(v NodesResponseResponseItemProvider) {
+func (o *NilOauth2Settings) SetTo(v Oauth2Settings) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilNodesResponseResponseItemProvider) IsNull() bool { return o.Null }
+func (o NilOauth2Settings) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilNodesResponseResponseItemProvider) SetToNull() {
+func (o *NilOauth2Settings) SetToNull() {
 	o.Null = true
-	var v NodesResponseResponseItemProvider
+	var v Oauth2Settings
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilNodesResponseResponseItemProvider) Get() (v NodesResponseResponseItemProvider, ok bool) {
+func (o NilOauth2Settings) Get() (v Oauth2Settings, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13239,44 +8732,44 @@ func (o NilNodesResponseResponseItemProvider) Get() (v NodesResponseResponseItem
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilNodesResponseResponseItemProvider) Or(d NodesResponseResponseItemProvider) NodesResponseResponseItemProvider {
+func (o NilOauth2Settings) Or(d Oauth2Settings) Oauth2Settings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewNilSettingsResponseResponseBrandingSettings returns new NilSettingsResponseResponseBrandingSettings with value set to v.
-func NewNilSettingsResponseResponseBrandingSettings(v SettingsResponseResponseBrandingSettings) NilSettingsResponseResponseBrandingSettings {
-	return NilSettingsResponseResponseBrandingSettings{
+// NewNilPasskeySettings returns new NilPasskeySettings with value set to v.
+func NewNilPasskeySettings(v PasskeySettings) NilPasskeySettings {
+	return NilPasskeySettings{
 		Value: v,
 	}
 }
 
-// NilSettingsResponseResponseBrandingSettings is nullable SettingsResponseResponseBrandingSettings.
-type NilSettingsResponseResponseBrandingSettings struct {
-	Value SettingsResponseResponseBrandingSettings
+// NilPasskeySettings is nullable PasskeySettings.
+type NilPasskeySettings struct {
+	Value PasskeySettings
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilSettingsResponseResponseBrandingSettings) SetTo(v SettingsResponseResponseBrandingSettings) {
+func (o *NilPasskeySettings) SetTo(v PasskeySettings) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilSettingsResponseResponseBrandingSettings) IsNull() bool { return o.Null }
+func (o NilPasskeySettings) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilSettingsResponseResponseBrandingSettings) SetToNull() {
+func (o *NilPasskeySettings) SetToNull() {
 	o.Null = true
-	var v SettingsResponseResponseBrandingSettings
+	var v PasskeySettings
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilSettingsResponseResponseBrandingSettings) Get() (v SettingsResponseResponseBrandingSettings, ok bool) {
+func (o NilPasskeySettings) Get() (v PasskeySettings, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13284,44 +8777,44 @@ func (o NilSettingsResponseResponseBrandingSettings) Get() (v SettingsResponseRe
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilSettingsResponseResponseBrandingSettings) Or(d SettingsResponseResponseBrandingSettings) SettingsResponseResponseBrandingSettings {
+func (o NilPasskeySettings) Or(d PasskeySettings) PasskeySettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewNilSettingsResponseResponseOauth2Settings returns new NilSettingsResponseResponseOauth2Settings with value set to v.
-func NewNilSettingsResponseResponseOauth2Settings(v SettingsResponseResponseOauth2Settings) NilSettingsResponseResponseOauth2Settings {
-	return NilSettingsResponseResponseOauth2Settings{
+// NewNilPasswordSettings returns new NilPasswordSettings with value set to v.
+func NewNilPasswordSettings(v PasswordSettings) NilPasswordSettings {
+	return NilPasswordSettings{
 		Value: v,
 	}
 }
 
-// NilSettingsResponseResponseOauth2Settings is nullable SettingsResponseResponseOauth2Settings.
-type NilSettingsResponseResponseOauth2Settings struct {
-	Value SettingsResponseResponseOauth2Settings
+// NilPasswordSettings is nullable PasswordSettings.
+type NilPasswordSettings struct {
+	Value PasswordSettings
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilSettingsResponseResponseOauth2Settings) SetTo(v SettingsResponseResponseOauth2Settings) {
+func (o *NilPasswordSettings) SetTo(v PasswordSettings) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilSettingsResponseResponseOauth2Settings) IsNull() bool { return o.Null }
+func (o NilPasswordSettings) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilSettingsResponseResponseOauth2Settings) SetToNull() {
+func (o *NilPasswordSettings) SetToNull() {
 	o.Null = true
-	var v SettingsResponseResponseOauth2Settings
+	var v PasswordSettings
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilSettingsResponseResponseOauth2Settings) Get() (v SettingsResponseResponseOauth2Settings, ok bool) {
+func (o NilPasswordSettings) Get() (v PasswordSettings, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13329,44 +8822,44 @@ func (o NilSettingsResponseResponseOauth2Settings) Get() (v SettingsResponseResp
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilSettingsResponseResponseOauth2Settings) Or(d SettingsResponseResponseOauth2Settings) SettingsResponseResponseOauth2Settings {
+func (o NilPasswordSettings) Or(d PasswordSettings) PasswordSettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewNilSettingsResponseResponsePasskeySettings returns new NilSettingsResponseResponsePasskeySettings with value set to v.
-func NewNilSettingsResponseResponsePasskeySettings(v SettingsResponseResponsePasskeySettings) NilSettingsResponseResponsePasskeySettings {
-	return NilSettingsResponseResponsePasskeySettings{
+// NewNilProviderItem returns new NilProviderItem with value set to v.
+func NewNilProviderItem(v ProviderItem) NilProviderItem {
+	return NilProviderItem{
 		Value: v,
 	}
 }
 
-// NilSettingsResponseResponsePasskeySettings is nullable SettingsResponseResponsePasskeySettings.
-type NilSettingsResponseResponsePasskeySettings struct {
-	Value SettingsResponseResponsePasskeySettings
+// NilProviderItem is nullable ProviderItem.
+type NilProviderItem struct {
+	Value ProviderItem
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilSettingsResponseResponsePasskeySettings) SetTo(v SettingsResponseResponsePasskeySettings) {
+func (o *NilProviderItem) SetTo(v ProviderItem) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilSettingsResponseResponsePasskeySettings) IsNull() bool { return o.Null }
+func (o NilProviderItem) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilSettingsResponseResponsePasskeySettings) SetToNull() {
+func (o *NilProviderItem) SetToNull() {
 	o.Null = true
-	var v SettingsResponseResponsePasskeySettings
+	var v ProviderItem
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilSettingsResponseResponsePasskeySettings) Get() (v SettingsResponseResponsePasskeySettings, ok bool) {
+func (o NilProviderItem) Get() (v ProviderItem, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13374,97 +8867,7 @@ func (o NilSettingsResponseResponsePasskeySettings) Get() (v SettingsResponseRes
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilSettingsResponseResponsePasskeySettings) Or(d SettingsResponseResponsePasskeySettings) SettingsResponseResponsePasskeySettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilSettingsResponseResponsePasswordSettings returns new NilSettingsResponseResponsePasswordSettings with value set to v.
-func NewNilSettingsResponseResponsePasswordSettings(v SettingsResponseResponsePasswordSettings) NilSettingsResponseResponsePasswordSettings {
-	return NilSettingsResponseResponsePasswordSettings{
-		Value: v,
-	}
-}
-
-// NilSettingsResponseResponsePasswordSettings is nullable SettingsResponseResponsePasswordSettings.
-type NilSettingsResponseResponsePasswordSettings struct {
-	Value SettingsResponseResponsePasswordSettings
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilSettingsResponseResponsePasswordSettings) SetTo(v SettingsResponseResponsePasswordSettings) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilSettingsResponseResponsePasswordSettings) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilSettingsResponseResponsePasswordSettings) SetToNull() {
-	o.Null = true
-	var v SettingsResponseResponsePasswordSettings
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilSettingsResponseResponsePasswordSettings) Get() (v SettingsResponseResponsePasswordSettings, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilSettingsResponseResponsePasswordSettings) Or(d SettingsResponseResponsePasswordSettings) SettingsResponseResponsePasswordSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilSettingsResponseResponseTgAuthSettings returns new NilSettingsResponseResponseTgAuthSettings with value set to v.
-func NewNilSettingsResponseResponseTgAuthSettings(v SettingsResponseResponseTgAuthSettings) NilSettingsResponseResponseTgAuthSettings {
-	return NilSettingsResponseResponseTgAuthSettings{
-		Value: v,
-	}
-}
-
-// NilSettingsResponseResponseTgAuthSettings is nullable SettingsResponseResponseTgAuthSettings.
-type NilSettingsResponseResponseTgAuthSettings struct {
-	Value SettingsResponseResponseTgAuthSettings
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilSettingsResponseResponseTgAuthSettings) SetTo(v SettingsResponseResponseTgAuthSettings) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilSettingsResponseResponseTgAuthSettings) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilSettingsResponseResponseTgAuthSettings) SetToNull() {
-	o.Null = true
-	var v SettingsResponseResponseTgAuthSettings
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilSettingsResponseResponseTgAuthSettings) Get() (v SettingsResponseResponseTgAuthSettings, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilSettingsResponseResponseTgAuthSettings) Or(d SettingsResponseResponseTgAuthSettings) SettingsResponseResponseTgAuthSettings {
+func (o NilProviderItem) Or(d ProviderItem) ProviderItem {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13516,6 +8919,51 @@ func (o NilString) Or(d string) string {
 	return d
 }
 
+// NewNilSubscriptionSettings returns new NilSubscriptionSettings with value set to v.
+func NewNilSubscriptionSettings(v SubscriptionSettings) NilSubscriptionSettings {
+	return NilSubscriptionSettings{
+		Value: v,
+	}
+}
+
+// NilSubscriptionSettings is nullable SubscriptionSettings.
+type NilSubscriptionSettings struct {
+	Value SubscriptionSettings
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilSubscriptionSettings) SetTo(v SubscriptionSettings) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilSubscriptionSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilSubscriptionSettings) SetToNull() {
+	o.Null = true
+	var v SubscriptionSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilSubscriptionSettings) Get() (v SubscriptionSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilSubscriptionSettings) Or(d SubscriptionSettings) SubscriptionSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilSubscriptionSettingsResponseResponseCustomResponseHeaders returns new NilSubscriptionSettingsResponseResponseCustomResponseHeaders with value set to v.
 func NewNilSubscriptionSettingsResponseResponseCustomResponseHeaders(v SubscriptionSettingsResponseResponseCustomResponseHeaders) NilSubscriptionSettingsResponseResponseCustomResponseHeaders {
 	return NilSubscriptionSettingsResponseResponseCustomResponseHeaders{
@@ -13561,37 +9009,37 @@ func (o NilSubscriptionSettingsResponseResponseCustomResponseHeaders) Or(d Subsc
 	return d
 }
 
-// NewNilSubscriptionSettingsResponseResponseResponseRules returns new NilSubscriptionSettingsResponseResponseResponseRules with value set to v.
-func NewNilSubscriptionSettingsResponseResponseResponseRules(v SubscriptionSettingsResponseResponseResponseRules) NilSubscriptionSettingsResponseResponseResponseRules {
-	return NilSubscriptionSettingsResponseResponseResponseRules{
+// NewNilTgAuthSettings returns new NilTgAuthSettings with value set to v.
+func NewNilTgAuthSettings(v TgAuthSettings) NilTgAuthSettings {
+	return NilTgAuthSettings{
 		Value: v,
 	}
 }
 
-// NilSubscriptionSettingsResponseResponseResponseRules is nullable SubscriptionSettingsResponseResponseResponseRules.
-type NilSubscriptionSettingsResponseResponseResponseRules struct {
-	Value SubscriptionSettingsResponseResponseResponseRules
+// NilTgAuthSettings is nullable TgAuthSettings.
+type NilTgAuthSettings struct {
+	Value TgAuthSettings
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilSubscriptionSettingsResponseResponseResponseRules) SetTo(v SubscriptionSettingsResponseResponseResponseRules) {
+func (o *NilTgAuthSettings) SetTo(v TgAuthSettings) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilSubscriptionSettingsResponseResponseResponseRules) IsNull() bool { return o.Null }
+func (o NilTgAuthSettings) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilSubscriptionSettingsResponseResponseResponseRules) SetToNull() {
+func (o *NilTgAuthSettings) SetToNull() {
 	o.Null = true
-	var v SubscriptionSettingsResponseResponseResponseRules
+	var v TgAuthSettings
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilSubscriptionSettingsResponseResponseResponseRules) Get() (v SubscriptionSettingsResponseResponseResponseRules, ok bool) {
+func (o NilTgAuthSettings) Get() (v TgAuthSettings, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13599,7 +9047,7 @@ func (o NilSubscriptionSettingsResponseResponseResponseRules) Get() (v Subscript
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilSubscriptionSettingsResponseResponseResponseRules) Or(d SubscriptionSettingsResponseResponseResponseRules) SubscriptionSettingsResponseResponseResponseRules {
+func (o NilTgAuthSettings) Or(d TgAuthSettings) TgAuthSettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13696,108 +9144,426 @@ func (o NilUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
-// NewNilUserResponseResponseLastConnectedNode returns new NilUserResponseResponseLastConnectedNode with value set to v.
-func NewNilUserResponseResponseLastConnectedNode(v UserResponseResponseLastConnectedNode) NilUserResponseResponseLastConnectedNode {
-	return NilUserResponseResponseLastConnectedNode{
-		Value: v,
-	}
+// Ref: #/components/schemas/Node
+type Node struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	CountryCode string    `json:"countryCode"`
 }
 
-// NilUserResponseResponseLastConnectedNode is nullable UserResponseResponseLastConnectedNode.
-type NilUserResponseResponseLastConnectedNode struct {
-	Value UserResponseResponseLastConnectedNode
-	Null  bool
+// GetUUID returns the value of UUID.
+func (s *Node) GetUUID() uuid.UUID {
+	return s.UUID
 }
 
-// SetTo sets value to v.
-func (o *NilUserResponseResponseLastConnectedNode) SetTo(v UserResponseResponseLastConnectedNode) {
-	o.Null = false
-	o.Value = v
+// GetName returns the value of Name.
+func (s *Node) GetName() string {
+	return s.Name
 }
 
-// IsNull returns true if value is Null.
-func (o NilUserResponseResponseLastConnectedNode) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilUserResponseResponseLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v UserResponseResponseLastConnectedNode
-	o.Value = v
+// GetCountryCode returns the value of CountryCode.
+func (s *Node) GetCountryCode() string {
+	return s.CountryCode
 }
 
-// Get returns value and boolean that denotes whether value was set.
-func (o NilUserResponseResponseLastConnectedNode) Get() (v UserResponseResponseLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
+// SetUUID sets the value of UUID.
+func (s *Node) SetUUID(val uuid.UUID) {
+	s.UUID = val
 }
 
-// Or returns value if set, or given parameter if does not.
-func (o NilUserResponseResponseLastConnectedNode) Or(d UserResponseResponseLastConnectedNode) UserResponseResponseLastConnectedNode {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
+// SetName sets the value of Name.
+func (s *Node) SetName(val string) {
+	s.Name = val
 }
 
-// NewNilUsersResponseResponseItemLastConnectedNode returns new NilUsersResponseResponseItemLastConnectedNode with value set to v.
-func NewNilUsersResponseResponseItemLastConnectedNode(v UsersResponseResponseItemLastConnectedNode) NilUsersResponseResponseItemLastConnectedNode {
-	return NilUsersResponseResponseItemLastConnectedNode{
-		Value: v,
-	}
+// SetCountryCode sets the value of CountryCode.
+func (s *Node) SetCountryCode(val string) {
+	s.CountryCode = val
 }
 
-// NilUsersResponseResponseItemLastConnectedNode is nullable UsersResponseResponseItemLastConnectedNode.
-type NilUsersResponseResponseItemLastConnectedNode struct {
-	Value UsersResponseResponseItemLastConnectedNode
-	Null  bool
+// Ref: #/components/schemas/NodeItem
+type NodeItem struct {
+	UUID                    uuid.UUID         `json:"uuid"`
+	Name                    string            `json:"name"`
+	Address                 string            `json:"address"`
+	Port                    NilInt            `json:"port"`
+	IsConnected             bool              `json:"isConnected"`
+	IsDisabled              bool              `json:"isDisabled"`
+	IsConnecting            bool              `json:"isConnecting"`
+	IsNodeOnline            bool              `json:"isNodeOnline"`
+	IsXrayRunning           bool              `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime       `json:"lastStatusChange"`
+	LastStatusMessage       NilString         `json:"lastStatusMessage"`
+	XrayVersion             NilString         `json:"xrayVersion"`
+	NodeVersion             NilString         `json:"nodeVersion"`
+	XrayUptime              string            `json:"xrayUptime"`
+	IsTrafficTrackingActive bool              `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt            `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64        `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64        `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt            `json:"notifyPercent"`
+	UsersOnline             NilInt            `json:"usersOnline"`
+	ViewPosition            int               `json:"viewPosition"`
+	CountryCode             string            `json:"countryCode"`
+	ConsumptionMultiplier   float64           `json:"consumptionMultiplier"`
+	CpuCount                NilInt            `json:"cpuCount"`
+	CpuModel                NilString         `json:"cpuModel"`
+	TotalRam                NilString         `json:"totalRam"`
+	CreatedAt               time.Time         `json:"createdAt"`
+	UpdatedAt               time.Time         `json:"updatedAt"`
+	ConfigProfile           ConfigProfileItem `json:"configProfile"`
+	ProviderUuid            NilUUID           `json:"providerUuid"`
+	Provider                NilProviderItem   `json:"provider"`
 }
 
-// SetTo sets value to v.
-func (o *NilUsersResponseResponseItemLastConnectedNode) SetTo(v UsersResponseResponseItemLastConnectedNode) {
-	o.Null = false
-	o.Value = v
+// GetUUID returns the value of UUID.
+func (s *NodeItem) GetUUID() uuid.UUID {
+	return s.UUID
 }
 
-// IsNull returns true if value is Null.
-func (o NilUsersResponseResponseItemLastConnectedNode) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilUsersResponseResponseItemLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v UsersResponseResponseItemLastConnectedNode
-	o.Value = v
+// GetName returns the value of Name.
+func (s *NodeItem) GetName() string {
+	return s.Name
 }
 
-// Get returns value and boolean that denotes whether value was set.
-func (o NilUsersResponseResponseItemLastConnectedNode) Get() (v UsersResponseResponseItemLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
+// GetAddress returns the value of Address.
+func (s *NodeItem) GetAddress() string {
+	return s.Address
 }
 
-// Or returns value if set, or given parameter if does not.
-func (o NilUsersResponseResponseItemLastConnectedNode) Or(d UsersResponseResponseItemLastConnectedNode) UsersResponseResponseItemLastConnectedNode {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
+// GetPort returns the value of Port.
+func (s *NodeItem) GetPort() NilInt {
+	return s.Port
+}
+
+// GetIsConnected returns the value of IsConnected.
+func (s *NodeItem) GetIsConnected() bool {
+	return s.IsConnected
+}
+
+// GetIsDisabled returns the value of IsDisabled.
+func (s *NodeItem) GetIsDisabled() bool {
+	return s.IsDisabled
+}
+
+// GetIsConnecting returns the value of IsConnecting.
+func (s *NodeItem) GetIsConnecting() bool {
+	return s.IsConnecting
+}
+
+// GetIsNodeOnline returns the value of IsNodeOnline.
+func (s *NodeItem) GetIsNodeOnline() bool {
+	return s.IsNodeOnline
+}
+
+// GetIsXrayRunning returns the value of IsXrayRunning.
+func (s *NodeItem) GetIsXrayRunning() bool {
+	return s.IsXrayRunning
+}
+
+// GetLastStatusChange returns the value of LastStatusChange.
+func (s *NodeItem) GetLastStatusChange() NilDateTime {
+	return s.LastStatusChange
+}
+
+// GetLastStatusMessage returns the value of LastStatusMessage.
+func (s *NodeItem) GetLastStatusMessage() NilString {
+	return s.LastStatusMessage
+}
+
+// GetXrayVersion returns the value of XrayVersion.
+func (s *NodeItem) GetXrayVersion() NilString {
+	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *NodeItem) GetNodeVersion() NilString {
+	return s.NodeVersion
+}
+
+// GetXrayUptime returns the value of XrayUptime.
+func (s *NodeItem) GetXrayUptime() string {
+	return s.XrayUptime
+}
+
+// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
+func (s *NodeItem) GetIsTrafficTrackingActive() bool {
+	return s.IsTrafficTrackingActive
+}
+
+// GetTrafficResetDay returns the value of TrafficResetDay.
+func (s *NodeItem) GetTrafficResetDay() NilInt {
+	return s.TrafficResetDay
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *NodeItem) GetTrafficLimitBytes() NilFloat64 {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
+func (s *NodeItem) GetTrafficUsedBytes() NilFloat64 {
+	return s.TrafficUsedBytes
+}
+
+// GetNotifyPercent returns the value of NotifyPercent.
+func (s *NodeItem) GetNotifyPercent() NilInt {
+	return s.NotifyPercent
+}
+
+// GetUsersOnline returns the value of UsersOnline.
+func (s *NodeItem) GetUsersOnline() NilInt {
+	return s.UsersOnline
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *NodeItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *NodeItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
+func (s *NodeItem) GetConsumptionMultiplier() float64 {
+	return s.ConsumptionMultiplier
+}
+
+// GetCpuCount returns the value of CpuCount.
+func (s *NodeItem) GetCpuCount() NilInt {
+	return s.CpuCount
+}
+
+// GetCpuModel returns the value of CpuModel.
+func (s *NodeItem) GetCpuModel() NilString {
+	return s.CpuModel
+}
+
+// GetTotalRam returns the value of TotalRam.
+func (s *NodeItem) GetTotalRam() NilString {
+	return s.TotalRam
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *NodeItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *NodeItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *NodeItem) GetConfigProfile() ConfigProfileItem {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *NodeItem) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *NodeItem) GetProvider() NilProviderItem {
+	return s.Provider
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodeItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *NodeItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetAddress sets the value of Address.
+func (s *NodeItem) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *NodeItem) SetPort(val NilInt) {
+	s.Port = val
+}
+
+// SetIsConnected sets the value of IsConnected.
+func (s *NodeItem) SetIsConnected(val bool) {
+	s.IsConnected = val
+}
+
+// SetIsDisabled sets the value of IsDisabled.
+func (s *NodeItem) SetIsDisabled(val bool) {
+	s.IsDisabled = val
+}
+
+// SetIsConnecting sets the value of IsConnecting.
+func (s *NodeItem) SetIsConnecting(val bool) {
+	s.IsConnecting = val
+}
+
+// SetIsNodeOnline sets the value of IsNodeOnline.
+func (s *NodeItem) SetIsNodeOnline(val bool) {
+	s.IsNodeOnline = val
+}
+
+// SetIsXrayRunning sets the value of IsXrayRunning.
+func (s *NodeItem) SetIsXrayRunning(val bool) {
+	s.IsXrayRunning = val
+}
+
+// SetLastStatusChange sets the value of LastStatusChange.
+func (s *NodeItem) SetLastStatusChange(val NilDateTime) {
+	s.LastStatusChange = val
+}
+
+// SetLastStatusMessage sets the value of LastStatusMessage.
+func (s *NodeItem) SetLastStatusMessage(val NilString) {
+	s.LastStatusMessage = val
+}
+
+// SetXrayVersion sets the value of XrayVersion.
+func (s *NodeItem) SetXrayVersion(val NilString) {
+	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *NodeItem) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
+}
+
+// SetXrayUptime sets the value of XrayUptime.
+func (s *NodeItem) SetXrayUptime(val string) {
+	s.XrayUptime = val
+}
+
+// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
+func (s *NodeItem) SetIsTrafficTrackingActive(val bool) {
+	s.IsTrafficTrackingActive = val
+}
+
+// SetTrafficResetDay sets the value of TrafficResetDay.
+func (s *NodeItem) SetTrafficResetDay(val NilInt) {
+	s.TrafficResetDay = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *NodeItem) SetTrafficLimitBytes(val NilFloat64) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
+func (s *NodeItem) SetTrafficUsedBytes(val NilFloat64) {
+	s.TrafficUsedBytes = val
+}
+
+// SetNotifyPercent sets the value of NotifyPercent.
+func (s *NodeItem) SetNotifyPercent(val NilInt) {
+	s.NotifyPercent = val
+}
+
+// SetUsersOnline sets the value of UsersOnline.
+func (s *NodeItem) SetUsersOnline(val NilInt) {
+	s.UsersOnline = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *NodeItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *NodeItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
+func (s *NodeItem) SetConsumptionMultiplier(val float64) {
+	s.ConsumptionMultiplier = val
+}
+
+// SetCpuCount sets the value of CpuCount.
+func (s *NodeItem) SetCpuCount(val NilInt) {
+	s.CpuCount = val
+}
+
+// SetCpuModel sets the value of CpuModel.
+func (s *NodeItem) SetCpuModel(val NilString) {
+	s.CpuModel = val
+}
+
+// SetTotalRam sets the value of TotalRam.
+func (s *NodeItem) SetTotalRam(val NilString) {
+	s.TotalRam = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *NodeItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *NodeItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *NodeItem) SetConfigProfile(val ConfigProfileItem) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *NodeItem) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *NodeItem) SetProvider(val NilProviderItem) {
+	s.Provider = val
+}
+
+// Ref: #/components/schemas/NodeRef
+type NodeRef struct {
+	ViewPosition int       `json:"viewPosition"`
+	UUID         uuid.UUID `json:"uuid"`
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *NodeRef) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetUUID returns the value of UUID.
+func (s *NodeRef) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *NodeRef) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodeRef) SetUUID(val uuid.UUID) {
+	s.UUID = val
 }
 
 // Ref: #/components/schemas/NodeResponse
 type NodeResponse struct {
-	Response NodeResponseResponse `json:"response"`
+	Response NodeItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *NodeResponse) GetResponse() NodeResponseResponse {
+func (s *NodeResponse) GetResponse() NodeItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *NodeResponse) SetResponse(val NodeResponseResponse) {
+func (s *NodeResponse) SetResponse(val NodeItem) {
 	s.Response = val
 }
 
@@ -13807,1081 +9573,23 @@ func (*NodeResponse) nodesControllerEnableNodeRes()  {}
 func (*NodeResponse) nodesControllerGetOneNodeRes()  {}
 func (*NodeResponse) nodesControllerUpdateNodeRes()  {}
 
-type NodeResponseResponse struct {
-	UUID                    uuid.UUID                         `json:"uuid"`
-	Name                    string                            `json:"name"`
-	Address                 string                            `json:"address"`
-	Port                    NilInt                            `json:"port"`
-	IsConnected             bool                              `json:"isConnected"`
-	IsDisabled              bool                              `json:"isDisabled"`
-	IsConnecting            bool                              `json:"isConnecting"`
-	IsNodeOnline            bool                              `json:"isNodeOnline"`
-	IsXrayRunning           bool                              `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                       `json:"lastStatusChange"`
-	LastStatusMessage       NilString                         `json:"lastStatusMessage"`
-	XrayVersion             NilString                         `json:"xrayVersion"`
-	NodeVersion             NilString                         `json:"nodeVersion"`
-	XrayUptime              string                            `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                              `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                            `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                        `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                        `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                            `json:"notifyPercent"`
-	UsersOnline             NilInt                            `json:"usersOnline"`
-	ViewPosition            int                               `json:"viewPosition"`
-	CountryCode             string                            `json:"countryCode"`
-	ConsumptionMultiplier   float64                           `json:"consumptionMultiplier"`
-	CpuCount                NilInt                            `json:"cpuCount"`
-	CpuModel                NilString                         `json:"cpuModel"`
-	TotalRam                NilString                         `json:"totalRam"`
-	CreatedAt               time.Time                         `json:"createdAt"`
-	UpdatedAt               time.Time                         `json:"updatedAt"`
-	ConfigProfile           NodeResponseResponseConfigProfile `json:"configProfile"`
-	ProviderUuid            NilUUID                           `json:"providerUuid"`
-	Provider                NilNodeResponseResponseProvider   `json:"provider"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *NodeResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *NodeResponseResponse) GetName() string {
-	return s.Name
-}
-
-// GetAddress returns the value of Address.
-func (s *NodeResponseResponse) GetAddress() string {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *NodeResponseResponse) GetPort() NilInt {
-	return s.Port
-}
-
-// GetIsConnected returns the value of IsConnected.
-func (s *NodeResponseResponse) GetIsConnected() bool {
-	return s.IsConnected
-}
-
-// GetIsDisabled returns the value of IsDisabled.
-func (s *NodeResponseResponse) GetIsDisabled() bool {
-	return s.IsDisabled
-}
-
-// GetIsConnecting returns the value of IsConnecting.
-func (s *NodeResponseResponse) GetIsConnecting() bool {
-	return s.IsConnecting
-}
-
-// GetIsNodeOnline returns the value of IsNodeOnline.
-func (s *NodeResponseResponse) GetIsNodeOnline() bool {
-	return s.IsNodeOnline
-}
-
-// GetIsXrayRunning returns the value of IsXrayRunning.
-func (s *NodeResponseResponse) GetIsXrayRunning() bool {
-	return s.IsXrayRunning
-}
-
-// GetLastStatusChange returns the value of LastStatusChange.
-func (s *NodeResponseResponse) GetLastStatusChange() NilDateTime {
-	return s.LastStatusChange
-}
-
-// GetLastStatusMessage returns the value of LastStatusMessage.
-func (s *NodeResponseResponse) GetLastStatusMessage() NilString {
-	return s.LastStatusMessage
-}
-
-// GetXrayVersion returns the value of XrayVersion.
-func (s *NodeResponseResponse) GetXrayVersion() NilString {
-	return s.XrayVersion
-}
-
-// GetNodeVersion returns the value of NodeVersion.
-func (s *NodeResponseResponse) GetNodeVersion() NilString {
-	return s.NodeVersion
-}
-
-// GetXrayUptime returns the value of XrayUptime.
-func (s *NodeResponseResponse) GetXrayUptime() string {
-	return s.XrayUptime
-}
-
-// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
-func (s *NodeResponseResponse) GetIsTrafficTrackingActive() bool {
-	return s.IsTrafficTrackingActive
-}
-
-// GetTrafficResetDay returns the value of TrafficResetDay.
-func (s *NodeResponseResponse) GetTrafficResetDay() NilInt {
-	return s.TrafficResetDay
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *NodeResponseResponse) GetTrafficLimitBytes() NilFloat64 {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
-func (s *NodeResponseResponse) GetTrafficUsedBytes() NilFloat64 {
-	return s.TrafficUsedBytes
-}
-
-// GetNotifyPercent returns the value of NotifyPercent.
-func (s *NodeResponseResponse) GetNotifyPercent() NilInt {
-	return s.NotifyPercent
-}
-
-// GetUsersOnline returns the value of UsersOnline.
-func (s *NodeResponseResponse) GetUsersOnline() NilInt {
-	return s.UsersOnline
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *NodeResponseResponse) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *NodeResponseResponse) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *NodeResponseResponse) GetConsumptionMultiplier() float64 {
-	return s.ConsumptionMultiplier
-}
-
-// GetCpuCount returns the value of CpuCount.
-func (s *NodeResponseResponse) GetCpuCount() NilInt {
-	return s.CpuCount
-}
-
-// GetCpuModel returns the value of CpuModel.
-func (s *NodeResponseResponse) GetCpuModel() NilString {
-	return s.CpuModel
-}
-
-// GetTotalRam returns the value of TotalRam.
-func (s *NodeResponseResponse) GetTotalRam() NilString {
-	return s.TotalRam
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *NodeResponseResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodeResponseResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetConfigProfile returns the value of ConfigProfile.
-func (s *NodeResponseResponse) GetConfigProfile() NodeResponseResponseConfigProfile {
-	return s.ConfigProfile
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *NodeResponseResponse) GetProviderUuid() NilUUID {
-	return s.ProviderUuid
-}
-
-// GetProvider returns the value of Provider.
-func (s *NodeResponseResponse) GetProvider() NilNodeResponseResponseProvider {
-	return s.Provider
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodeResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *NodeResponseResponse) SetName(val string) {
-	s.Name = val
-}
-
-// SetAddress sets the value of Address.
-func (s *NodeResponseResponse) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *NodeResponseResponse) SetPort(val NilInt) {
-	s.Port = val
-}
-
-// SetIsConnected sets the value of IsConnected.
-func (s *NodeResponseResponse) SetIsConnected(val bool) {
-	s.IsConnected = val
-}
-
-// SetIsDisabled sets the value of IsDisabled.
-func (s *NodeResponseResponse) SetIsDisabled(val bool) {
-	s.IsDisabled = val
-}
-
-// SetIsConnecting sets the value of IsConnecting.
-func (s *NodeResponseResponse) SetIsConnecting(val bool) {
-	s.IsConnecting = val
-}
-
-// SetIsNodeOnline sets the value of IsNodeOnline.
-func (s *NodeResponseResponse) SetIsNodeOnline(val bool) {
-	s.IsNodeOnline = val
-}
-
-// SetIsXrayRunning sets the value of IsXrayRunning.
-func (s *NodeResponseResponse) SetIsXrayRunning(val bool) {
-	s.IsXrayRunning = val
-}
-
-// SetLastStatusChange sets the value of LastStatusChange.
-func (s *NodeResponseResponse) SetLastStatusChange(val NilDateTime) {
-	s.LastStatusChange = val
-}
-
-// SetLastStatusMessage sets the value of LastStatusMessage.
-func (s *NodeResponseResponse) SetLastStatusMessage(val NilString) {
-	s.LastStatusMessage = val
-}
-
-// SetXrayVersion sets the value of XrayVersion.
-func (s *NodeResponseResponse) SetXrayVersion(val NilString) {
-	s.XrayVersion = val
-}
-
-// SetNodeVersion sets the value of NodeVersion.
-func (s *NodeResponseResponse) SetNodeVersion(val NilString) {
-	s.NodeVersion = val
-}
-
-// SetXrayUptime sets the value of XrayUptime.
-func (s *NodeResponseResponse) SetXrayUptime(val string) {
-	s.XrayUptime = val
-}
-
-// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
-func (s *NodeResponseResponse) SetIsTrafficTrackingActive(val bool) {
-	s.IsTrafficTrackingActive = val
-}
-
-// SetTrafficResetDay sets the value of TrafficResetDay.
-func (s *NodeResponseResponse) SetTrafficResetDay(val NilInt) {
-	s.TrafficResetDay = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *NodeResponseResponse) SetTrafficLimitBytes(val NilFloat64) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
-func (s *NodeResponseResponse) SetTrafficUsedBytes(val NilFloat64) {
-	s.TrafficUsedBytes = val
-}
-
-// SetNotifyPercent sets the value of NotifyPercent.
-func (s *NodeResponseResponse) SetNotifyPercent(val NilInt) {
-	s.NotifyPercent = val
-}
-
-// SetUsersOnline sets the value of UsersOnline.
-func (s *NodeResponseResponse) SetUsersOnline(val NilInt) {
-	s.UsersOnline = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *NodeResponseResponse) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *NodeResponseResponse) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *NodeResponseResponse) SetConsumptionMultiplier(val float64) {
-	s.ConsumptionMultiplier = val
-}
-
-// SetCpuCount sets the value of CpuCount.
-func (s *NodeResponseResponse) SetCpuCount(val NilInt) {
-	s.CpuCount = val
-}
-
-// SetCpuModel sets the value of CpuModel.
-func (s *NodeResponseResponse) SetCpuModel(val NilString) {
-	s.CpuModel = val
-}
-
-// SetTotalRam sets the value of TotalRam.
-func (s *NodeResponseResponse) SetTotalRam(val NilString) {
-	s.TotalRam = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *NodeResponseResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodeResponseResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetConfigProfile sets the value of ConfigProfile.
-func (s *NodeResponseResponse) SetConfigProfile(val NodeResponseResponseConfigProfile) {
-	s.ConfigProfile = val
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *NodeResponseResponse) SetProviderUuid(val NilUUID) {
-	s.ProviderUuid = val
-}
-
-// SetProvider sets the value of Provider.
-func (s *NodeResponseResponse) SetProvider(val NilNodeResponseResponseProvider) {
-	s.Provider = val
-}
-
-type NodeResponseResponseConfigProfile struct {
-	ActiveConfigProfileUuid NilUUID                                               `json:"activeConfigProfileUuid"`
-	ActiveInbounds          []NodeResponseResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
-}
-
-// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *NodeResponseResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
-	return s.ActiveConfigProfileUuid
-}
-
-// GetActiveInbounds returns the value of ActiveInbounds.
-func (s *NodeResponseResponseConfigProfile) GetActiveInbounds() []NodeResponseResponseConfigProfileActiveInboundsItem {
-	return s.ActiveInbounds
-}
-
-// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *NodeResponseResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
-	s.ActiveConfigProfileUuid = val
-}
-
-// SetActiveInbounds sets the value of ActiveInbounds.
-func (s *NodeResponseResponseConfigProfile) SetActiveInbounds(val []NodeResponseResponseConfigProfileActiveInboundsItem) {
-	s.ActiveInbounds = val
-}
-
-type NodeResponseResponseConfigProfileActiveInboundsItem struct {
-	UUID        uuid.UUID  `json:"uuid"`
-	ProfileUuid uuid.UUID  `json:"profileUuid"`
-	Tag         string     `json:"tag"`
-	Type        string     `json:"type"`
-	Network     NilString  `json:"network"`
-	Security    NilString  `json:"security"`
-	Port        NilFloat64 `json:"port"`
-	RawInbound  jx.Raw     `json:"rawInbound"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProfileUuid returns the value of ProfileUuid.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
-	return s.ProfileUuid
-}
-
-// GetTag returns the value of Tag.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetPort returns the value of Port.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
-	return s.Port
-}
-
-// GetRawInbound returns the value of RawInbound.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
-	return s.RawInbound
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProfileUuid sets the value of ProfileUuid.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
-	s.ProfileUuid = val
-}
-
-// SetTag sets the value of Tag.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetPort sets the value of Port.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
-	s.Port = val
-}
-
-// SetRawInbound sets the value of RawInbound.
-func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
-	s.RawInbound = val
-}
-
-type NodeResponseResponseProvider struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	FaviconLink NilString `json:"faviconLink"`
-	LoginUrl    NilString `json:"loginUrl"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *NodeResponseResponseProvider) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *NodeResponseResponseProvider) GetName() string {
-	return s.Name
-}
-
-// GetFaviconLink returns the value of FaviconLink.
-func (s *NodeResponseResponseProvider) GetFaviconLink() NilString {
-	return s.FaviconLink
-}
-
-// GetLoginUrl returns the value of LoginUrl.
-func (s *NodeResponseResponseProvider) GetLoginUrl() NilString {
-	return s.LoginUrl
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *NodeResponseResponseProvider) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodeResponseResponseProvider) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodeResponseResponseProvider) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *NodeResponseResponseProvider) SetName(val string) {
-	s.Name = val
-}
-
-// SetFaviconLink sets the value of FaviconLink.
-func (s *NodeResponseResponseProvider) SetFaviconLink(val NilString) {
-	s.FaviconLink = val
-}
-
-// SetLoginUrl sets the value of LoginUrl.
-func (s *NodeResponseResponseProvider) SetLoginUrl(val NilString) {
-	s.LoginUrl = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *NodeResponseResponseProvider) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodeResponseResponseProvider) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
 // Ref: #/components/schemas/NodesResponse
 type NodesResponse struct {
-	Response []NodesResponseResponseItem `json:"response"`
+	Response []NodeItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *NodesResponse) GetResponse() []NodesResponseResponseItem {
+func (s *NodesResponse) GetResponse() []NodeItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *NodesResponse) SetResponse(val []NodesResponseResponseItem) {
+func (s *NodesResponse) SetResponse(val []NodeItem) {
 	s.Response = val
 }
 
 func (*NodesResponse) nodesControllerGetAllNodesRes()  {}
 func (*NodesResponse) nodesControllerReorderNodesRes() {}
-
-type NodesResponseResponseItem struct {
-	UUID                    uuid.UUID                              `json:"uuid"`
-	Name                    string                                 `json:"name"`
-	Address                 string                                 `json:"address"`
-	Port                    NilInt                                 `json:"port"`
-	IsConnected             bool                                   `json:"isConnected"`
-	IsDisabled              bool                                   `json:"isDisabled"`
-	IsConnecting            bool                                   `json:"isConnecting"`
-	IsNodeOnline            bool                                   `json:"isNodeOnline"`
-	IsXrayRunning           bool                                   `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime                            `json:"lastStatusChange"`
-	LastStatusMessage       NilString                              `json:"lastStatusMessage"`
-	XrayVersion             NilString                              `json:"xrayVersion"`
-	NodeVersion             NilString                              `json:"nodeVersion"`
-	XrayUptime              string                                 `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                                   `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                                 `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64                             `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64                             `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                                 `json:"notifyPercent"`
-	UsersOnline             NilInt                                 `json:"usersOnline"`
-	ViewPosition            int                                    `json:"viewPosition"`
-	CountryCode             string                                 `json:"countryCode"`
-	ConsumptionMultiplier   float64                                `json:"consumptionMultiplier"`
-	CpuCount                NilInt                                 `json:"cpuCount"`
-	CpuModel                NilString                              `json:"cpuModel"`
-	TotalRam                NilString                              `json:"totalRam"`
-	CreatedAt               time.Time                              `json:"createdAt"`
-	UpdatedAt               time.Time                              `json:"updatedAt"`
-	ConfigProfile           NodesResponseResponseItemConfigProfile `json:"configProfile"`
-	ProviderUuid            NilUUID                                `json:"providerUuid"`
-	Provider                NilNodesResponseResponseItemProvider   `json:"provider"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *NodesResponseResponseItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *NodesResponseResponseItem) GetName() string {
-	return s.Name
-}
-
-// GetAddress returns the value of Address.
-func (s *NodesResponseResponseItem) GetAddress() string {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *NodesResponseResponseItem) GetPort() NilInt {
-	return s.Port
-}
-
-// GetIsConnected returns the value of IsConnected.
-func (s *NodesResponseResponseItem) GetIsConnected() bool {
-	return s.IsConnected
-}
-
-// GetIsDisabled returns the value of IsDisabled.
-func (s *NodesResponseResponseItem) GetIsDisabled() bool {
-	return s.IsDisabled
-}
-
-// GetIsConnecting returns the value of IsConnecting.
-func (s *NodesResponseResponseItem) GetIsConnecting() bool {
-	return s.IsConnecting
-}
-
-// GetIsNodeOnline returns the value of IsNodeOnline.
-func (s *NodesResponseResponseItem) GetIsNodeOnline() bool {
-	return s.IsNodeOnline
-}
-
-// GetIsXrayRunning returns the value of IsXrayRunning.
-func (s *NodesResponseResponseItem) GetIsXrayRunning() bool {
-	return s.IsXrayRunning
-}
-
-// GetLastStatusChange returns the value of LastStatusChange.
-func (s *NodesResponseResponseItem) GetLastStatusChange() NilDateTime {
-	return s.LastStatusChange
-}
-
-// GetLastStatusMessage returns the value of LastStatusMessage.
-func (s *NodesResponseResponseItem) GetLastStatusMessage() NilString {
-	return s.LastStatusMessage
-}
-
-// GetXrayVersion returns the value of XrayVersion.
-func (s *NodesResponseResponseItem) GetXrayVersion() NilString {
-	return s.XrayVersion
-}
-
-// GetNodeVersion returns the value of NodeVersion.
-func (s *NodesResponseResponseItem) GetNodeVersion() NilString {
-	return s.NodeVersion
-}
-
-// GetXrayUptime returns the value of XrayUptime.
-func (s *NodesResponseResponseItem) GetXrayUptime() string {
-	return s.XrayUptime
-}
-
-// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
-func (s *NodesResponseResponseItem) GetIsTrafficTrackingActive() bool {
-	return s.IsTrafficTrackingActive
-}
-
-// GetTrafficResetDay returns the value of TrafficResetDay.
-func (s *NodesResponseResponseItem) GetTrafficResetDay() NilInt {
-	return s.TrafficResetDay
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *NodesResponseResponseItem) GetTrafficLimitBytes() NilFloat64 {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
-func (s *NodesResponseResponseItem) GetTrafficUsedBytes() NilFloat64 {
-	return s.TrafficUsedBytes
-}
-
-// GetNotifyPercent returns the value of NotifyPercent.
-func (s *NodesResponseResponseItem) GetNotifyPercent() NilInt {
-	return s.NotifyPercent
-}
-
-// GetUsersOnline returns the value of UsersOnline.
-func (s *NodesResponseResponseItem) GetUsersOnline() NilInt {
-	return s.UsersOnline
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *NodesResponseResponseItem) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *NodesResponseResponseItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *NodesResponseResponseItem) GetConsumptionMultiplier() float64 {
-	return s.ConsumptionMultiplier
-}
-
-// GetCpuCount returns the value of CpuCount.
-func (s *NodesResponseResponseItem) GetCpuCount() NilInt {
-	return s.CpuCount
-}
-
-// GetCpuModel returns the value of CpuModel.
-func (s *NodesResponseResponseItem) GetCpuModel() NilString {
-	return s.CpuModel
-}
-
-// GetTotalRam returns the value of TotalRam.
-func (s *NodesResponseResponseItem) GetTotalRam() NilString {
-	return s.TotalRam
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *NodesResponseResponseItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodesResponseResponseItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetConfigProfile returns the value of ConfigProfile.
-func (s *NodesResponseResponseItem) GetConfigProfile() NodesResponseResponseItemConfigProfile {
-	return s.ConfigProfile
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *NodesResponseResponseItem) GetProviderUuid() NilUUID {
-	return s.ProviderUuid
-}
-
-// GetProvider returns the value of Provider.
-func (s *NodesResponseResponseItem) GetProvider() NilNodesResponseResponseItemProvider {
-	return s.Provider
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodesResponseResponseItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *NodesResponseResponseItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetAddress sets the value of Address.
-func (s *NodesResponseResponseItem) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *NodesResponseResponseItem) SetPort(val NilInt) {
-	s.Port = val
-}
-
-// SetIsConnected sets the value of IsConnected.
-func (s *NodesResponseResponseItem) SetIsConnected(val bool) {
-	s.IsConnected = val
-}
-
-// SetIsDisabled sets the value of IsDisabled.
-func (s *NodesResponseResponseItem) SetIsDisabled(val bool) {
-	s.IsDisabled = val
-}
-
-// SetIsConnecting sets the value of IsConnecting.
-func (s *NodesResponseResponseItem) SetIsConnecting(val bool) {
-	s.IsConnecting = val
-}
-
-// SetIsNodeOnline sets the value of IsNodeOnline.
-func (s *NodesResponseResponseItem) SetIsNodeOnline(val bool) {
-	s.IsNodeOnline = val
-}
-
-// SetIsXrayRunning sets the value of IsXrayRunning.
-func (s *NodesResponseResponseItem) SetIsXrayRunning(val bool) {
-	s.IsXrayRunning = val
-}
-
-// SetLastStatusChange sets the value of LastStatusChange.
-func (s *NodesResponseResponseItem) SetLastStatusChange(val NilDateTime) {
-	s.LastStatusChange = val
-}
-
-// SetLastStatusMessage sets the value of LastStatusMessage.
-func (s *NodesResponseResponseItem) SetLastStatusMessage(val NilString) {
-	s.LastStatusMessage = val
-}
-
-// SetXrayVersion sets the value of XrayVersion.
-func (s *NodesResponseResponseItem) SetXrayVersion(val NilString) {
-	s.XrayVersion = val
-}
-
-// SetNodeVersion sets the value of NodeVersion.
-func (s *NodesResponseResponseItem) SetNodeVersion(val NilString) {
-	s.NodeVersion = val
-}
-
-// SetXrayUptime sets the value of XrayUptime.
-func (s *NodesResponseResponseItem) SetXrayUptime(val string) {
-	s.XrayUptime = val
-}
-
-// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
-func (s *NodesResponseResponseItem) SetIsTrafficTrackingActive(val bool) {
-	s.IsTrafficTrackingActive = val
-}
-
-// SetTrafficResetDay sets the value of TrafficResetDay.
-func (s *NodesResponseResponseItem) SetTrafficResetDay(val NilInt) {
-	s.TrafficResetDay = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *NodesResponseResponseItem) SetTrafficLimitBytes(val NilFloat64) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
-func (s *NodesResponseResponseItem) SetTrafficUsedBytes(val NilFloat64) {
-	s.TrafficUsedBytes = val
-}
-
-// SetNotifyPercent sets the value of NotifyPercent.
-func (s *NodesResponseResponseItem) SetNotifyPercent(val NilInt) {
-	s.NotifyPercent = val
-}
-
-// SetUsersOnline sets the value of UsersOnline.
-func (s *NodesResponseResponseItem) SetUsersOnline(val NilInt) {
-	s.UsersOnline = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *NodesResponseResponseItem) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *NodesResponseResponseItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *NodesResponseResponseItem) SetConsumptionMultiplier(val float64) {
-	s.ConsumptionMultiplier = val
-}
-
-// SetCpuCount sets the value of CpuCount.
-func (s *NodesResponseResponseItem) SetCpuCount(val NilInt) {
-	s.CpuCount = val
-}
-
-// SetCpuModel sets the value of CpuModel.
-func (s *NodesResponseResponseItem) SetCpuModel(val NilString) {
-	s.CpuModel = val
-}
-
-// SetTotalRam sets the value of TotalRam.
-func (s *NodesResponseResponseItem) SetTotalRam(val NilString) {
-	s.TotalRam = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *NodesResponseResponseItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodesResponseResponseItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetConfigProfile sets the value of ConfigProfile.
-func (s *NodesResponseResponseItem) SetConfigProfile(val NodesResponseResponseItemConfigProfile) {
-	s.ConfigProfile = val
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *NodesResponseResponseItem) SetProviderUuid(val NilUUID) {
-	s.ProviderUuid = val
-}
-
-// SetProvider sets the value of Provider.
-func (s *NodesResponseResponseItem) SetProvider(val NilNodesResponseResponseItemProvider) {
-	s.Provider = val
-}
-
-type NodesResponseResponseItemConfigProfile struct {
-	ActiveConfigProfileUuid NilUUID                                                    `json:"activeConfigProfileUuid"`
-	ActiveInbounds          []NodesResponseResponseItemConfigProfileActiveInboundsItem `json:"activeInbounds"`
-}
-
-// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *NodesResponseResponseItemConfigProfile) GetActiveConfigProfileUuid() NilUUID {
-	return s.ActiveConfigProfileUuid
-}
-
-// GetActiveInbounds returns the value of ActiveInbounds.
-func (s *NodesResponseResponseItemConfigProfile) GetActiveInbounds() []NodesResponseResponseItemConfigProfileActiveInboundsItem {
-	return s.ActiveInbounds
-}
-
-// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *NodesResponseResponseItemConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
-	s.ActiveConfigProfileUuid = val
-}
-
-// SetActiveInbounds sets the value of ActiveInbounds.
-func (s *NodesResponseResponseItemConfigProfile) SetActiveInbounds(val []NodesResponseResponseItemConfigProfileActiveInboundsItem) {
-	s.ActiveInbounds = val
-}
-
-type NodesResponseResponseItemConfigProfileActiveInboundsItem struct {
-	UUID        uuid.UUID  `json:"uuid"`
-	ProfileUuid uuid.UUID  `json:"profileUuid"`
-	Tag         string     `json:"tag"`
-	Type        string     `json:"type"`
-	Network     NilString  `json:"network"`
-	Security    NilString  `json:"security"`
-	Port        NilFloat64 `json:"port"`
-	RawInbound  jx.Raw     `json:"rawInbound"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProfileUuid returns the value of ProfileUuid.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
-	return s.ProfileUuid
-}
-
-// GetTag returns the value of Tag.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetTag() string {
-	return s.Tag
-}
-
-// GetType returns the value of Type.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetType() string {
-	return s.Type
-}
-
-// GetNetwork returns the value of Network.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetNetwork() NilString {
-	return s.Network
-}
-
-// GetSecurity returns the value of Security.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetSecurity() NilString {
-	return s.Security
-}
-
-// GetPort returns the value of Port.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
-	return s.Port
-}
-
-// GetRawInbound returns the value of RawInbound.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
-	return s.RawInbound
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProfileUuid sets the value of ProfileUuid.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
-	s.ProfileUuid = val
-}
-
-// SetTag sets the value of Tag.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetTag(val string) {
-	s.Tag = val
-}
-
-// SetType sets the value of Type.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetNetwork sets the value of Network.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
-	s.Network = val
-}
-
-// SetSecurity sets the value of Security.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
-	s.Security = val
-}
-
-// SetPort sets the value of Port.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
-	s.Port = val
-}
-
-// SetRawInbound sets the value of RawInbound.
-func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
-	s.RawInbound = val
-}
-
-type NodesResponseResponseItemProvider struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	FaviconLink NilString `json:"faviconLink"`
-	LoginUrl    NilString `json:"loginUrl"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *NodesResponseResponseItemProvider) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *NodesResponseResponseItemProvider) GetName() string {
-	return s.Name
-}
-
-// GetFaviconLink returns the value of FaviconLink.
-func (s *NodesResponseResponseItemProvider) GetFaviconLink() NilString {
-	return s.FaviconLink
-}
-
-// GetLoginUrl returns the value of LoginUrl.
-func (s *NodesResponseResponseItemProvider) GetLoginUrl() NilString {
-	return s.LoginUrl
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *NodesResponseResponseItemProvider) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodesResponseResponseItemProvider) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodesResponseResponseItemProvider) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *NodesResponseResponseItemProvider) SetName(val string) {
-	s.Name = val
-}
-
-// SetFaviconLink sets the value of FaviconLink.
-func (s *NodesResponseResponseItemProvider) SetFaviconLink(val NilString) {
-	s.FaviconLink = val
-}
-
-// SetLoginUrl sets the value of LoginUrl.
-func (s *NodesResponseResponseItemProvider) SetLoginUrl(val NilString) {
-	s.LoginUrl = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *NodesResponseResponseItemProvider) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodesResponseResponseItemProvider) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
 
 // Ref: #/components/schemas/NotFoundError
 type NotFoundError struct {
@@ -15116,6 +9824,43 @@ func (s *OAuth2CallbackRequestDtoProvider) UnmarshalText(data []byte) error {
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
+}
+
+// Ref: #/components/schemas/Oauth2Settings
+type Oauth2Settings struct {
+	Github   Github   `json:"github"`
+	Pocketid Pocketid `json:"pocketid"`
+	Yandex   Github   `json:"yandex"`
+}
+
+// GetGithub returns the value of Github.
+func (s *Oauth2Settings) GetGithub() Github {
+	return s.Github
+}
+
+// GetPocketid returns the value of Pocketid.
+func (s *Oauth2Settings) GetPocketid() Pocketid {
+	return s.Pocketid
+}
+
+// GetYandex returns the value of Yandex.
+func (s *Oauth2Settings) GetYandex() Github {
+	return s.Yandex
+}
+
+// SetGithub sets the value of Github.
+func (s *Oauth2Settings) SetGithub(val Github) {
+	s.Github = val
+}
+
+// SetPocketid sets the value of Pocketid.
+func (s *Oauth2Settings) SetPocketid(val Pocketid) {
+	s.Pocketid = val
+}
+
+// SetYandex sets the value of Yandex.
+func (s *Oauth2Settings) SetYandex(val Github) {
+	s.Yandex = val
 }
 
 // NewOptBool returns new OptBool with value set to v.
@@ -15394,6 +10139,52 @@ func (o OptBulkUpdateUsersRequestDtoFieldsTrafficLimitStrategy) Or(d BulkUpdateU
 	return d
 }
 
+// NewOptConfigProfileRef returns new OptConfigProfileRef with value set to v.
+func NewOptConfigProfileRef(v ConfigProfileRef) OptConfigProfileRef {
+	return OptConfigProfileRef{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptConfigProfileRef is optional ConfigProfileRef.
+type OptConfigProfileRef struct {
+	Value ConfigProfileRef
+	Set   bool
+}
+
+// IsSet returns true if OptConfigProfileRef was set.
+func (o OptConfigProfileRef) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptConfigProfileRef) Reset() {
+	var v ConfigProfileRef
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptConfigProfileRef) SetTo(v ConfigProfileRef) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptConfigProfileRef) Get() (v ConfigProfileRef, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptConfigProfileRef) Or(d ConfigProfileRef) ConfigProfileRef {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptCreateHostRequestDtoSecurityLayer returns new OptCreateHostRequestDtoSecurityLayer with value set to v.
 func NewOptCreateHostRequestDtoSecurityLayer(v CreateHostRequestDtoSecurityLayer) OptCreateHostRequestDtoSecurityLayer {
 	return OptCreateHostRequestDtoSecurityLayer{
@@ -15578,102 +10369,6 @@ func (o OptDateTime) Or(d time.Time) time.Time {
 	return d
 }
 
-// NewOptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications returns new OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications with value set to v.
-func NewOptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications(v DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications {
-	return OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications is optional DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications.
-type OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications struct {
-	Value DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications
-	Set   bool
-}
-
-// IsSet returns true if OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications was set.
-func (o OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) Reset() {
-	var v DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) SetTo(v DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) Get() (v DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptDebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) Or(d DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications) DebugSrrMatcherRequestDtoResponseRulesRulesItemResponseModifications {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications returns new OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications with value set to v.
-func NewOptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications(v DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications {
-	return OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications is optional DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications.
-type OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications struct {
-	Value DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications
-	Set   bool
-}
-
-// IsSet returns true if OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications was set.
-func (o OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) Reset() {
-	var v DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) SetTo(v DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) Get() (v DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptDebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) Or(d DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications) DebugSrrMatcherResponseDtoResponseMatchedRuleResponseModifications {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptFloat64 returns new OptFloat64 with value set to v.
 func NewOptFloat64(v float64) OptFloat64 {
 	return OptFloat64{
@@ -15714,98 +10409,6 @@ func (o OptFloat64) Get() (v float64, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptFloat64) Or(d float64) float64 {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptGetAllUsersResponseDtoResponseUsersItemStatus returns new OptGetAllUsersResponseDtoResponseUsersItemStatus with value set to v.
-func NewOptGetAllUsersResponseDtoResponseUsersItemStatus(v GetAllUsersResponseDtoResponseUsersItemStatus) OptGetAllUsersResponseDtoResponseUsersItemStatus {
-	return OptGetAllUsersResponseDtoResponseUsersItemStatus{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetAllUsersResponseDtoResponseUsersItemStatus is optional GetAllUsersResponseDtoResponseUsersItemStatus.
-type OptGetAllUsersResponseDtoResponseUsersItemStatus struct {
-	Value GetAllUsersResponseDtoResponseUsersItemStatus
-	Set   bool
-}
-
-// IsSet returns true if OptGetAllUsersResponseDtoResponseUsersItemStatus was set.
-func (o OptGetAllUsersResponseDtoResponseUsersItemStatus) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptGetAllUsersResponseDtoResponseUsersItemStatus) Reset() {
-	var v GetAllUsersResponseDtoResponseUsersItemStatus
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetAllUsersResponseDtoResponseUsersItemStatus) SetTo(v GetAllUsersResponseDtoResponseUsersItemStatus) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetAllUsersResponseDtoResponseUsersItemStatus) Get() (v GetAllUsersResponseDtoResponseUsersItemStatus, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetAllUsersResponseDtoResponseUsersItemStatus) Or(d GetAllUsersResponseDtoResponseUsersItemStatus) GetAllUsersResponseDtoResponseUsersItemStatus {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy returns new OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy with value set to v.
-func NewOptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy(v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
-	return OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy is optional GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy.
-type OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy struct {
-	Value GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy
-	Set   bool
-}
-
-// IsSet returns true if OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy was set.
-func (o OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Reset() {
-	var v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) SetTo(v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Get() (v GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Or(d GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16004,38 +10607,38 @@ func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtr
 	return d
 }
 
-// NewOptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus returns new OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus(v GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus {
-	return OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus{
+// NewOptHostItemSecurityLayer returns new OptHostItemSecurityLayer with value set to v.
+func NewOptHostItemSecurityLayer(v HostItemSecurityLayer) OptHostItemSecurityLayer {
+	return OptHostItemSecurityLayer{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus is optional GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus.
-type OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus struct {
-	Value GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus
+// OptHostItemSecurityLayer is optional HostItemSecurityLayer.
+type OptHostItemSecurityLayer struct {
+	Value HostItemSecurityLayer
 	Set   bool
 }
 
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus was set.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptHostItemSecurityLayer was set.
+func (o OptHostItemSecurityLayer) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus
+func (o *OptHostItemSecurityLayer) Reset() {
+	var v HostItemSecurityLayer
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) {
+func (o *OptHostItemSecurityLayer) SetTo(v HostItemSecurityLayer) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus, ok bool) {
+func (o OptHostItemSecurityLayer) Get() (v HostItemSecurityLayer, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -16043,47 +10646,45 @@ func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) Get() (v 
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus {
+func (o OptHostItemSecurityLayer) Or(d HostItemSecurityLayer) HostItemSecurityLayer {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy returns new OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy(v GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy {
-	return OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy{
+// NewOptInboundRef returns new OptInboundRef with value set to v.
+func NewOptInboundRef(v InboundRef) OptInboundRef {
+	return OptInboundRef{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy is optional GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy.
-type OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy struct {
-	Value GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy
+// OptInboundRef is optional InboundRef.
+type OptInboundRef struct {
+	Value InboundRef
 	Set   bool
 }
 
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy was set.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) IsSet() bool {
-	return o.Set
-}
+// IsSet returns true if OptInboundRef was set.
+func (o OptInboundRef) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy
+func (o *OptInboundRef) Reset() {
+	var v InboundRef
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) {
+func (o *OptInboundRef) SetTo(v InboundRef) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy, ok bool) {
+func (o OptInboundRef) Get() (v InboundRef, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -16091,99 +10692,7 @@ func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrat
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptHostListResponseResponseItemSecurityLayer returns new OptHostListResponseResponseItemSecurityLayer with value set to v.
-func NewOptHostListResponseResponseItemSecurityLayer(v HostListResponseResponseItemSecurityLayer) OptHostListResponseResponseItemSecurityLayer {
-	return OptHostListResponseResponseItemSecurityLayer{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptHostListResponseResponseItemSecurityLayer is optional HostListResponseResponseItemSecurityLayer.
-type OptHostListResponseResponseItemSecurityLayer struct {
-	Value HostListResponseResponseItemSecurityLayer
-	Set   bool
-}
-
-// IsSet returns true if OptHostListResponseResponseItemSecurityLayer was set.
-func (o OptHostListResponseResponseItemSecurityLayer) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptHostListResponseResponseItemSecurityLayer) Reset() {
-	var v HostListResponseResponseItemSecurityLayer
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptHostListResponseResponseItemSecurityLayer) SetTo(v HostListResponseResponseItemSecurityLayer) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptHostListResponseResponseItemSecurityLayer) Get() (v HostListResponseResponseItemSecurityLayer, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptHostListResponseResponseItemSecurityLayer) Or(d HostListResponseResponseItemSecurityLayer) HostListResponseResponseItemSecurityLayer {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptHostResponseResponseSecurityLayer returns new OptHostResponseResponseSecurityLayer with value set to v.
-func NewOptHostResponseResponseSecurityLayer(v HostResponseResponseSecurityLayer) OptHostResponseResponseSecurityLayer {
-	return OptHostResponseResponseSecurityLayer{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptHostResponseResponseSecurityLayer is optional HostResponseResponseSecurityLayer.
-type OptHostResponseResponseSecurityLayer struct {
-	Value HostResponseResponseSecurityLayer
-	Set   bool
-}
-
-// IsSet returns true if OptHostResponseResponseSecurityLayer was set.
-func (o OptHostResponseResponseSecurityLayer) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptHostResponseResponseSecurityLayer) Reset() {
-	var v HostResponseResponseSecurityLayer
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptHostResponseResponseSecurityLayer) SetTo(v HostResponseResponseSecurityLayer) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptHostResponseResponseSecurityLayer) Get() (v HostResponseResponseSecurityLayer, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptHostResponseResponseSecurityLayer) Or(d HostResponseResponseSecurityLayer) HostResponseResponseSecurityLayer {
+func (o OptInboundRef) Or(d InboundRef) InboundRef {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16293,6 +10802,69 @@ func (o OptNilBool) Get() (v bool, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptNilBool) Or(d bool) bool {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilBrandingSettings returns new OptNilBrandingSettings with value set to v.
+func NewOptNilBrandingSettings(v BrandingSettings) OptNilBrandingSettings {
+	return OptNilBrandingSettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilBrandingSettings is optional nullable BrandingSettings.
+type OptNilBrandingSettings struct {
+	Value BrandingSettings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilBrandingSettings was set.
+func (o OptNilBrandingSettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilBrandingSettings) Reset() {
+	var v BrandingSettings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilBrandingSettings) SetTo(v BrandingSettings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilBrandingSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilBrandingSettings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v BrandingSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilBrandingSettings) Get() (v BrandingSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilBrandingSettings) Or(d BrandingSettings) BrandingSettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16689,6 +11261,69 @@ func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtoc
 	return d
 }
 
+// NewOptNilHostOverride returns new OptNilHostOverride with value set to v.
+func NewOptNilHostOverride(v HostOverride) OptNilHostOverride {
+	return OptNilHostOverride{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilHostOverride is optional nullable HostOverride.
+type OptNilHostOverride struct {
+	Value HostOverride
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilHostOverride was set.
+func (o OptNilHostOverride) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilHostOverride) Reset() {
+	var v HostOverride
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilHostOverride) SetTo(v HostOverride) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilHostOverride) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilHostOverride) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v HostOverride
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilHostOverride) Get() (v HostOverride, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilHostOverride) Or(d HostOverride) HostOverride {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptNilInt returns new OptNilInt with value set to v.
 func NewOptNilInt(v int) OptNilInt {
 	return OptNilInt{
@@ -16752,6 +11387,195 @@ func (o OptNilInt) Or(d int) int {
 	return d
 }
 
+// NewOptNilOauth2Settings returns new OptNilOauth2Settings with value set to v.
+func NewOptNilOauth2Settings(v Oauth2Settings) OptNilOauth2Settings {
+	return OptNilOauth2Settings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilOauth2Settings is optional nullable Oauth2Settings.
+type OptNilOauth2Settings struct {
+	Value Oauth2Settings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilOauth2Settings was set.
+func (o OptNilOauth2Settings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilOauth2Settings) Reset() {
+	var v Oauth2Settings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilOauth2Settings) SetTo(v Oauth2Settings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilOauth2Settings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilOauth2Settings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v Oauth2Settings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilOauth2Settings) Get() (v Oauth2Settings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilOauth2Settings) Or(d Oauth2Settings) Oauth2Settings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilPasskeySettings returns new OptNilPasskeySettings with value set to v.
+func NewOptNilPasskeySettings(v PasskeySettings) OptNilPasskeySettings {
+	return OptNilPasskeySettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilPasskeySettings is optional nullable PasskeySettings.
+type OptNilPasskeySettings struct {
+	Value PasskeySettings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilPasskeySettings was set.
+func (o OptNilPasskeySettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilPasskeySettings) Reset() {
+	var v PasskeySettings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilPasskeySettings) SetTo(v PasskeySettings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilPasskeySettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilPasskeySettings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v PasskeySettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilPasskeySettings) Get() (v PasskeySettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilPasskeySettings) Or(d PasskeySettings) PasskeySettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilPasswordSettings returns new OptNilPasswordSettings with value set to v.
+func NewOptNilPasswordSettings(v PasswordSettings) OptNilPasswordSettings {
+	return OptNilPasswordSettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilPasswordSettings is optional nullable PasswordSettings.
+type OptNilPasswordSettings struct {
+	Value PasswordSettings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilPasswordSettings was set.
+func (o OptNilPasswordSettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilPasswordSettings) Reset() {
+	var v PasswordSettings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilPasswordSettings) SetTo(v PasswordSettings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilPasswordSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilPasswordSettings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v PasswordSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilPasswordSettings) Get() (v PasswordSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilPasswordSettings) Or(d PasswordSettings) PasswordSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptNilString returns new OptNilString with value set to v.
 func NewOptNilString(v string) OptNilString {
 	return OptNilString{
@@ -16809,6 +11633,132 @@ func (o OptNilString) Get() (v string, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptNilString) Or(d string) string {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilSubscriptionSettings returns new OptNilSubscriptionSettings with value set to v.
+func NewOptNilSubscriptionSettings(v SubscriptionSettings) OptNilSubscriptionSettings {
+	return OptNilSubscriptionSettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilSubscriptionSettings is optional nullable SubscriptionSettings.
+type OptNilSubscriptionSettings struct {
+	Value SubscriptionSettings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilSubscriptionSettings was set.
+func (o OptNilSubscriptionSettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilSubscriptionSettings) Reset() {
+	var v SubscriptionSettings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilSubscriptionSettings) SetTo(v SubscriptionSettings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilSubscriptionSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilSubscriptionSettings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v SubscriptionSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilSubscriptionSettings) Get() (v SubscriptionSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilSubscriptionSettings) Or(d SubscriptionSettings) SubscriptionSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilTgAuthSettings returns new OptNilTgAuthSettings with value set to v.
+func NewOptNilTgAuthSettings(v TgAuthSettings) OptNilTgAuthSettings {
+	return OptNilTgAuthSettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilTgAuthSettings is optional nullable TgAuthSettings.
+type OptNilTgAuthSettings struct {
+	Value TgAuthSettings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilTgAuthSettings was set.
+func (o OptNilTgAuthSettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilTgAuthSettings) Reset() {
+	var v TgAuthSettings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilTgAuthSettings) SetTo(v TgAuthSettings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilTgAuthSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilTgAuthSettings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v TgAuthSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilTgAuthSettings) Get() (v TgAuthSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilTgAuthSettings) Or(d TgAuthSettings) TgAuthSettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -17130,6 +12080,98 @@ func (o OptNilUpdateHostRequestDtoFingerprint) Or(d UpdateHostRequestDtoFingerpr
 	return d
 }
 
+// NewOptResponseModification returns new OptResponseModification with value set to v.
+func NewOptResponseModification(v ResponseModification) OptResponseModification {
+	return OptResponseModification{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptResponseModification is optional ResponseModification.
+type OptResponseModification struct {
+	Value ResponseModification
+	Set   bool
+}
+
+// IsSet returns true if OptResponseModification was set.
+func (o OptResponseModification) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptResponseModification) Reset() {
+	var v ResponseModification
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptResponseModification) SetTo(v ResponseModification) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptResponseModification) Get() (v ResponseModification, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptResponseModification) Or(d ResponseModification) ResponseModification {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptResponseRules returns new OptResponseRules with value set to v.
+func NewOptResponseRules(v ResponseRules) OptResponseRules {
+	return OptResponseRules{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptResponseRules is optional ResponseRules.
+type OptResponseRules struct {
+	Value ResponseRules
+	Set   bool
+}
+
+// IsSet returns true if OptResponseRules was set.
+func (o OptResponseRules) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptResponseRules) Reset() {
+	var v ResponseRules
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptResponseRules) SetTo(v ResponseRules) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptResponseRules) Get() (v ResponseRules, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptResponseRules) Or(d ResponseRules) ResponseRules {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptString returns new OptString with value set to v.
 func NewOptString(v string) OptString {
 	return OptString{
@@ -17170,54 +12212,6 @@ func (o OptString) Get() (v string, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptString) Or(d string) string {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications returns new OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications with value set to v.
-func NewOptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications(v SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications {
-	return OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications is optional SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications.
-type OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications struct {
-	Value SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications
-	Set   bool
-}
-
-// IsSet returns true if OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications was set.
-func (o OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) Reset() {
-	var v SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) SetTo(v SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) Get() (v SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) Or(d SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -17316,144 +12310,6 @@ func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
-// NewOptUpdateExternalSquadRequestDtoHostOverrides returns new OptUpdateExternalSquadRequestDtoHostOverrides with value set to v.
-func NewOptUpdateExternalSquadRequestDtoHostOverrides(v UpdateExternalSquadRequestDtoHostOverrides) OptUpdateExternalSquadRequestDtoHostOverrides {
-	return OptUpdateExternalSquadRequestDtoHostOverrides{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateExternalSquadRequestDtoHostOverrides is optional UpdateExternalSquadRequestDtoHostOverrides.
-type OptUpdateExternalSquadRequestDtoHostOverrides struct {
-	Value UpdateExternalSquadRequestDtoHostOverrides
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateExternalSquadRequestDtoHostOverrides was set.
-func (o OptUpdateExternalSquadRequestDtoHostOverrides) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateExternalSquadRequestDtoHostOverrides) Reset() {
-	var v UpdateExternalSquadRequestDtoHostOverrides
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateExternalSquadRequestDtoHostOverrides) SetTo(v UpdateExternalSquadRequestDtoHostOverrides) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateExternalSquadRequestDtoHostOverrides) Get() (v UpdateExternalSquadRequestDtoHostOverrides, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateExternalSquadRequestDtoHostOverrides) Or(d UpdateExternalSquadRequestDtoHostOverrides) UpdateExternalSquadRequestDtoHostOverrides {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateExternalSquadRequestDtoSubscriptionSettings returns new OptUpdateExternalSquadRequestDtoSubscriptionSettings with value set to v.
-func NewOptUpdateExternalSquadRequestDtoSubscriptionSettings(v UpdateExternalSquadRequestDtoSubscriptionSettings) OptUpdateExternalSquadRequestDtoSubscriptionSettings {
-	return OptUpdateExternalSquadRequestDtoSubscriptionSettings{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateExternalSquadRequestDtoSubscriptionSettings is optional UpdateExternalSquadRequestDtoSubscriptionSettings.
-type OptUpdateExternalSquadRequestDtoSubscriptionSettings struct {
-	Value UpdateExternalSquadRequestDtoSubscriptionSettings
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateExternalSquadRequestDtoSubscriptionSettings was set.
-func (o OptUpdateExternalSquadRequestDtoSubscriptionSettings) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateExternalSquadRequestDtoSubscriptionSettings) Reset() {
-	var v UpdateExternalSquadRequestDtoSubscriptionSettings
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateExternalSquadRequestDtoSubscriptionSettings) SetTo(v UpdateExternalSquadRequestDtoSubscriptionSettings) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateExternalSquadRequestDtoSubscriptionSettings) Get() (v UpdateExternalSquadRequestDtoSubscriptionSettings, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateExternalSquadRequestDtoSubscriptionSettings) Or(d UpdateExternalSquadRequestDtoSubscriptionSettings) UpdateExternalSquadRequestDtoSubscriptionSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateHostRequestDtoInbound returns new OptUpdateHostRequestDtoInbound with value set to v.
-func NewOptUpdateHostRequestDtoInbound(v UpdateHostRequestDtoInbound) OptUpdateHostRequestDtoInbound {
-	return OptUpdateHostRequestDtoInbound{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateHostRequestDtoInbound is optional UpdateHostRequestDtoInbound.
-type OptUpdateHostRequestDtoInbound struct {
-	Value UpdateHostRequestDtoInbound
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateHostRequestDtoInbound was set.
-func (o OptUpdateHostRequestDtoInbound) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateHostRequestDtoInbound) Reset() {
-	var v UpdateHostRequestDtoInbound
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateHostRequestDtoInbound) SetTo(v UpdateHostRequestDtoInbound) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateHostRequestDtoInbound) Get() (v UpdateHostRequestDtoInbound, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateHostRequestDtoInbound) Or(d UpdateHostRequestDtoInbound) UpdateHostRequestDtoInbound {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptUpdateHostRequestDtoSecurityLayer returns new OptUpdateHostRequestDtoSecurityLayer with value set to v.
 func NewOptUpdateHostRequestDtoSecurityLayer(v UpdateHostRequestDtoSecurityLayer) OptUpdateHostRequestDtoSecurityLayer {
 	return OptUpdateHostRequestDtoSecurityLayer{
@@ -17500,282 +12356,6 @@ func (o OptUpdateHostRequestDtoSecurityLayer) Or(d UpdateHostRequestDtoSecurityL
 	return d
 }
 
-// NewOptUpdateNodeRequestDtoConfigProfile returns new OptUpdateNodeRequestDtoConfigProfile with value set to v.
-func NewOptUpdateNodeRequestDtoConfigProfile(v UpdateNodeRequestDtoConfigProfile) OptUpdateNodeRequestDtoConfigProfile {
-	return OptUpdateNodeRequestDtoConfigProfile{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateNodeRequestDtoConfigProfile is optional UpdateNodeRequestDtoConfigProfile.
-type OptUpdateNodeRequestDtoConfigProfile struct {
-	Value UpdateNodeRequestDtoConfigProfile
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateNodeRequestDtoConfigProfile was set.
-func (o OptUpdateNodeRequestDtoConfigProfile) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateNodeRequestDtoConfigProfile) Reset() {
-	var v UpdateNodeRequestDtoConfigProfile
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateNodeRequestDtoConfigProfile) SetTo(v UpdateNodeRequestDtoConfigProfile) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateNodeRequestDtoConfigProfile) Get() (v UpdateNodeRequestDtoConfigProfile, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateNodeRequestDtoConfigProfile) Or(d UpdateNodeRequestDtoConfigProfile) UpdateNodeRequestDtoConfigProfile {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateRemnawaveSettingsRequestDtoBrandingSettings returns new OptUpdateRemnawaveSettingsRequestDtoBrandingSettings with value set to v.
-func NewOptUpdateRemnawaveSettingsRequestDtoBrandingSettings(v UpdateRemnawaveSettingsRequestDtoBrandingSettings) OptUpdateRemnawaveSettingsRequestDtoBrandingSettings {
-	return OptUpdateRemnawaveSettingsRequestDtoBrandingSettings{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateRemnawaveSettingsRequestDtoBrandingSettings is optional UpdateRemnawaveSettingsRequestDtoBrandingSettings.
-type OptUpdateRemnawaveSettingsRequestDtoBrandingSettings struct {
-	Value UpdateRemnawaveSettingsRequestDtoBrandingSettings
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateRemnawaveSettingsRequestDtoBrandingSettings was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoBrandingSettings) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateRemnawaveSettingsRequestDtoBrandingSettings) Reset() {
-	var v UpdateRemnawaveSettingsRequestDtoBrandingSettings
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateRemnawaveSettingsRequestDtoBrandingSettings) SetTo(v UpdateRemnawaveSettingsRequestDtoBrandingSettings) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoBrandingSettings) Get() (v UpdateRemnawaveSettingsRequestDtoBrandingSettings, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateRemnawaveSettingsRequestDtoBrandingSettings) Or(d UpdateRemnawaveSettingsRequestDtoBrandingSettings) UpdateRemnawaveSettingsRequestDtoBrandingSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateRemnawaveSettingsRequestDtoOauth2Settings returns new OptUpdateRemnawaveSettingsRequestDtoOauth2Settings with value set to v.
-func NewOptUpdateRemnawaveSettingsRequestDtoOauth2Settings(v UpdateRemnawaveSettingsRequestDtoOauth2Settings) OptUpdateRemnawaveSettingsRequestDtoOauth2Settings {
-	return OptUpdateRemnawaveSettingsRequestDtoOauth2Settings{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateRemnawaveSettingsRequestDtoOauth2Settings is optional UpdateRemnawaveSettingsRequestDtoOauth2Settings.
-type OptUpdateRemnawaveSettingsRequestDtoOauth2Settings struct {
-	Value UpdateRemnawaveSettingsRequestDtoOauth2Settings
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateRemnawaveSettingsRequestDtoOauth2Settings was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoOauth2Settings) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateRemnawaveSettingsRequestDtoOauth2Settings) Reset() {
-	var v UpdateRemnawaveSettingsRequestDtoOauth2Settings
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateRemnawaveSettingsRequestDtoOauth2Settings) SetTo(v UpdateRemnawaveSettingsRequestDtoOauth2Settings) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoOauth2Settings) Get() (v UpdateRemnawaveSettingsRequestDtoOauth2Settings, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateRemnawaveSettingsRequestDtoOauth2Settings) Or(d UpdateRemnawaveSettingsRequestDtoOauth2Settings) UpdateRemnawaveSettingsRequestDtoOauth2Settings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateRemnawaveSettingsRequestDtoPasskeySettings returns new OptUpdateRemnawaveSettingsRequestDtoPasskeySettings with value set to v.
-func NewOptUpdateRemnawaveSettingsRequestDtoPasskeySettings(v UpdateRemnawaveSettingsRequestDtoPasskeySettings) OptUpdateRemnawaveSettingsRequestDtoPasskeySettings {
-	return OptUpdateRemnawaveSettingsRequestDtoPasskeySettings{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateRemnawaveSettingsRequestDtoPasskeySettings is optional UpdateRemnawaveSettingsRequestDtoPasskeySettings.
-type OptUpdateRemnawaveSettingsRequestDtoPasskeySettings struct {
-	Value UpdateRemnawaveSettingsRequestDtoPasskeySettings
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateRemnawaveSettingsRequestDtoPasskeySettings was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoPasskeySettings) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateRemnawaveSettingsRequestDtoPasskeySettings) Reset() {
-	var v UpdateRemnawaveSettingsRequestDtoPasskeySettings
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateRemnawaveSettingsRequestDtoPasskeySettings) SetTo(v UpdateRemnawaveSettingsRequestDtoPasskeySettings) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoPasskeySettings) Get() (v UpdateRemnawaveSettingsRequestDtoPasskeySettings, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateRemnawaveSettingsRequestDtoPasskeySettings) Or(d UpdateRemnawaveSettingsRequestDtoPasskeySettings) UpdateRemnawaveSettingsRequestDtoPasskeySettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateRemnawaveSettingsRequestDtoPasswordSettings returns new OptUpdateRemnawaveSettingsRequestDtoPasswordSettings with value set to v.
-func NewOptUpdateRemnawaveSettingsRequestDtoPasswordSettings(v UpdateRemnawaveSettingsRequestDtoPasswordSettings) OptUpdateRemnawaveSettingsRequestDtoPasswordSettings {
-	return OptUpdateRemnawaveSettingsRequestDtoPasswordSettings{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateRemnawaveSettingsRequestDtoPasswordSettings is optional UpdateRemnawaveSettingsRequestDtoPasswordSettings.
-type OptUpdateRemnawaveSettingsRequestDtoPasswordSettings struct {
-	Value UpdateRemnawaveSettingsRequestDtoPasswordSettings
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateRemnawaveSettingsRequestDtoPasswordSettings was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoPasswordSettings) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateRemnawaveSettingsRequestDtoPasswordSettings) Reset() {
-	var v UpdateRemnawaveSettingsRequestDtoPasswordSettings
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateRemnawaveSettingsRequestDtoPasswordSettings) SetTo(v UpdateRemnawaveSettingsRequestDtoPasswordSettings) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoPasswordSettings) Get() (v UpdateRemnawaveSettingsRequestDtoPasswordSettings, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateRemnawaveSettingsRequestDtoPasswordSettings) Or(d UpdateRemnawaveSettingsRequestDtoPasswordSettings) UpdateRemnawaveSettingsRequestDtoPasswordSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateRemnawaveSettingsRequestDtoTgAuthSettings returns new OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings with value set to v.
-func NewOptUpdateRemnawaveSettingsRequestDtoTgAuthSettings(v UpdateRemnawaveSettingsRequestDtoTgAuthSettings) OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings {
-	return OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings is optional UpdateRemnawaveSettingsRequestDtoTgAuthSettings.
-type OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings struct {
-	Value UpdateRemnawaveSettingsRequestDtoTgAuthSettings
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) Reset() {
-	var v UpdateRemnawaveSettingsRequestDtoTgAuthSettings
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) SetTo(v UpdateRemnawaveSettingsRequestDtoTgAuthSettings) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) Get() (v UpdateRemnawaveSettingsRequestDtoTgAuthSettings, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) Or(d UpdateRemnawaveSettingsRequestDtoTgAuthSettings) UpdateRemnawaveSettingsRequestDtoTgAuthSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders returns new OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders with value set to v.
 func NewOptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders(v UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders {
 	return OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders{
@@ -17816,100 +12396,6 @@ func (o OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) Get() (v U
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) Or(d UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateSubscriptionSettingsRequestDtoResponseRules returns new OptUpdateSubscriptionSettingsRequestDtoResponseRules with value set to v.
-func NewOptUpdateSubscriptionSettingsRequestDtoResponseRules(v UpdateSubscriptionSettingsRequestDtoResponseRules) OptUpdateSubscriptionSettingsRequestDtoResponseRules {
-	return OptUpdateSubscriptionSettingsRequestDtoResponseRules{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateSubscriptionSettingsRequestDtoResponseRules is optional UpdateSubscriptionSettingsRequestDtoResponseRules.
-type OptUpdateSubscriptionSettingsRequestDtoResponseRules struct {
-	Value UpdateSubscriptionSettingsRequestDtoResponseRules
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateSubscriptionSettingsRequestDtoResponseRules was set.
-func (o OptUpdateSubscriptionSettingsRequestDtoResponseRules) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateSubscriptionSettingsRequestDtoResponseRules) Reset() {
-	var v UpdateSubscriptionSettingsRequestDtoResponseRules
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateSubscriptionSettingsRequestDtoResponseRules) SetTo(v UpdateSubscriptionSettingsRequestDtoResponseRules) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateSubscriptionSettingsRequestDtoResponseRules) Get() (v UpdateSubscriptionSettingsRequestDtoResponseRules, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateSubscriptionSettingsRequestDtoResponseRules) Or(d UpdateSubscriptionSettingsRequestDtoResponseRules) UpdateSubscriptionSettingsRequestDtoResponseRules {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications returns new OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications with value set to v.
-func NewOptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications(v UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications {
-	return OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications is optional UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications.
-type OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications struct {
-	Value UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications was set.
-func (o OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) Reset() {
-	var v UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) SetTo(v UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) Get() (v UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) Or(d UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -18008,38 +12494,38 @@ func (o OptUpdateUserRequestDtoTrafficLimitStrategy) Or(d UpdateUserRequestDtoTr
 	return d
 }
 
-// NewOptUserResponseResponseStatus returns new OptUserResponseResponseStatus with value set to v.
-func NewOptUserResponseResponseStatus(v UserResponseResponseStatus) OptUserResponseResponseStatus {
-	return OptUserResponseResponseStatus{
+// NewOptUserStatus returns new OptUserStatus with value set to v.
+func NewOptUserStatus(v UserStatus) OptUserStatus {
+	return OptUserStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserResponseResponseStatus is optional UserResponseResponseStatus.
-type OptUserResponseResponseStatus struct {
-	Value UserResponseResponseStatus
+// OptUserStatus is optional UserStatus.
+type OptUserStatus struct {
+	Value UserStatus
 	Set   bool
 }
 
-// IsSet returns true if OptUserResponseResponseStatus was set.
-func (o OptUserResponseResponseStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptUserStatus was set.
+func (o OptUserStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserResponseResponseStatus) Reset() {
-	var v UserResponseResponseStatus
+func (o *OptUserStatus) Reset() {
+	var v UserStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserResponseResponseStatus) SetTo(v UserResponseResponseStatus) {
+func (o *OptUserStatus) SetTo(v UserStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserResponseResponseStatus) Get() (v UserResponseResponseStatus, ok bool) {
+func (o OptUserStatus) Get() (v UserStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -18047,45 +12533,45 @@ func (o OptUserResponseResponseStatus) Get() (v UserResponseResponseStatus, ok b
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserResponseResponseStatus) Or(d UserResponseResponseStatus) UserResponseResponseStatus {
+func (o OptUserStatus) Or(d UserStatus) UserStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUserResponseResponseTrafficLimitStrategy returns new OptUserResponseResponseTrafficLimitStrategy with value set to v.
-func NewOptUserResponseResponseTrafficLimitStrategy(v UserResponseResponseTrafficLimitStrategy) OptUserResponseResponseTrafficLimitStrategy {
-	return OptUserResponseResponseTrafficLimitStrategy{
+// NewOptUserTrafficLimitStrategy returns new OptUserTrafficLimitStrategy with value set to v.
+func NewOptUserTrafficLimitStrategy(v UserTrafficLimitStrategy) OptUserTrafficLimitStrategy {
+	return OptUserTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserResponseResponseTrafficLimitStrategy is optional UserResponseResponseTrafficLimitStrategy.
-type OptUserResponseResponseTrafficLimitStrategy struct {
-	Value UserResponseResponseTrafficLimitStrategy
+// OptUserTrafficLimitStrategy is optional UserTrafficLimitStrategy.
+type OptUserTrafficLimitStrategy struct {
+	Value UserTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptUserResponseResponseTrafficLimitStrategy was set.
-func (o OptUserResponseResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptUserTrafficLimitStrategy was set.
+func (o OptUserTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserResponseResponseTrafficLimitStrategy) Reset() {
-	var v UserResponseResponseTrafficLimitStrategy
+func (o *OptUserTrafficLimitStrategy) Reset() {
+	var v UserTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserResponseResponseTrafficLimitStrategy) SetTo(v UserResponseResponseTrafficLimitStrategy) {
+func (o *OptUserTrafficLimitStrategy) SetTo(v UserTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserResponseResponseTrafficLimitStrategy) Get() (v UserResponseResponseTrafficLimitStrategy, ok bool) {
+func (o OptUserTrafficLimitStrategy) Get() (v UserTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -18093,99 +12579,7 @@ func (o OptUserResponseResponseTrafficLimitStrategy) Get() (v UserResponseRespon
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserResponseResponseTrafficLimitStrategy) Or(d UserResponseResponseTrafficLimitStrategy) UserResponseResponseTrafficLimitStrategy {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUsersResponseResponseItemStatus returns new OptUsersResponseResponseItemStatus with value set to v.
-func NewOptUsersResponseResponseItemStatus(v UsersResponseResponseItemStatus) OptUsersResponseResponseItemStatus {
-	return OptUsersResponseResponseItemStatus{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUsersResponseResponseItemStatus is optional UsersResponseResponseItemStatus.
-type OptUsersResponseResponseItemStatus struct {
-	Value UsersResponseResponseItemStatus
-	Set   bool
-}
-
-// IsSet returns true if OptUsersResponseResponseItemStatus was set.
-func (o OptUsersResponseResponseItemStatus) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUsersResponseResponseItemStatus) Reset() {
-	var v UsersResponseResponseItemStatus
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUsersResponseResponseItemStatus) SetTo(v UsersResponseResponseItemStatus) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUsersResponseResponseItemStatus) Get() (v UsersResponseResponseItemStatus, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUsersResponseResponseItemStatus) Or(d UsersResponseResponseItemStatus) UsersResponseResponseItemStatus {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUsersResponseResponseItemTrafficLimitStrategy returns new OptUsersResponseResponseItemTrafficLimitStrategy with value set to v.
-func NewOptUsersResponseResponseItemTrafficLimitStrategy(v UsersResponseResponseItemTrafficLimitStrategy) OptUsersResponseResponseItemTrafficLimitStrategy {
-	return OptUsersResponseResponseItemTrafficLimitStrategy{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUsersResponseResponseItemTrafficLimitStrategy is optional UsersResponseResponseItemTrafficLimitStrategy.
-type OptUsersResponseResponseItemTrafficLimitStrategy struct {
-	Value UsersResponseResponseItemTrafficLimitStrategy
-	Set   bool
-}
-
-// IsSet returns true if OptUsersResponseResponseItemTrafficLimitStrategy was set.
-func (o OptUsersResponseResponseItemTrafficLimitStrategy) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUsersResponseResponseItemTrafficLimitStrategy) Reset() {
-	var v UsersResponseResponseItemTrafficLimitStrategy
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUsersResponseResponseItemTrafficLimitStrategy) SetTo(v UsersResponseResponseItemTrafficLimitStrategy) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUsersResponseResponseItemTrafficLimitStrategy) Get() (v UsersResponseResponseItemTrafficLimitStrategy, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUsersResponseResponseItemTrafficLimitStrategy) Or(d UsersResponseResponseItemTrafficLimitStrategy) UsersResponseResponseItemTrafficLimitStrategy {
+func (o OptUserTrafficLimitStrategy) Or(d UserTrafficLimitStrategy) UserTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -18235,6 +12629,43 @@ func (s *PasskeyOptionsStatusCode) SetResponse(val PasskeyOptions) {
 
 func (*PasskeyOptionsStatusCode) authControllerPasskeyAuthenticationOptionsRes()  {}
 func (*PasskeyOptionsStatusCode) passkeyControllerPasskeyRegistrationOptionsRes() {}
+
+// Ref: #/components/schemas/PasskeySettings
+type PasskeySettings struct {
+	Enabled bool      `json:"enabled"`
+	RpId    NilString `json:"rpId"`
+	Origin  NilString `json:"origin"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *PasskeySettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetRpId returns the value of RpId.
+func (s *PasskeySettings) GetRpId() NilString {
+	return s.RpId
+}
+
+// GetOrigin returns the value of Origin.
+func (s *PasskeySettings) GetOrigin() NilString {
+	return s.Origin
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *PasskeySettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetRpId sets the value of RpId.
+func (s *PasskeySettings) SetRpId(val NilString) {
+	s.RpId = val
+}
+
+// SetOrigin sets the value of Origin.
+func (s *PasskeySettings) SetOrigin(val NilString) {
+	s.Origin = val
+}
 
 // Ref: #/components/schemas/PasskeysResponse
 type PasskeysResponse struct {
@@ -18343,6 +12774,301 @@ func (s *PasskeysResponseStatusCode) SetResponse(val PasskeysResponse) {
 func (*PasskeysResponseStatusCode) passkeyControllerDeletePasskeyRes()     {}
 func (*PasskeysResponseStatusCode) passkeyControllerGetActivePasskeysRes() {}
 
+// Ref: #/components/schemas/PasswordSettings
+type PasswordSettings struct {
+	Enabled bool `json:"enabled"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *PasswordSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *PasswordSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// Ref: #/components/schemas/Pocketid
+type Pocketid struct {
+	Enabled       bool      `json:"enabled"`
+	ClientId      NilString `json:"clientId"`
+	ClientSecret  NilString `json:"clientSecret"`
+	PlainDomain   NilString `json:"plainDomain"`
+	AllowedEmails []string  `json:"allowedEmails"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *Pocketid) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetClientId returns the value of ClientId.
+func (s *Pocketid) GetClientId() NilString {
+	return s.ClientId
+}
+
+// GetClientSecret returns the value of ClientSecret.
+func (s *Pocketid) GetClientSecret() NilString {
+	return s.ClientSecret
+}
+
+// GetPlainDomain returns the value of PlainDomain.
+func (s *Pocketid) GetPlainDomain() NilString {
+	return s.PlainDomain
+}
+
+// GetAllowedEmails returns the value of AllowedEmails.
+func (s *Pocketid) GetAllowedEmails() []string {
+	return s.AllowedEmails
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *Pocketid) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetClientId sets the value of ClientId.
+func (s *Pocketid) SetClientId(val NilString) {
+	s.ClientId = val
+}
+
+// SetClientSecret sets the value of ClientSecret.
+func (s *Pocketid) SetClientSecret(val NilString) {
+	s.ClientSecret = val
+}
+
+// SetPlainDomain sets the value of PlainDomain.
+func (s *Pocketid) SetPlainDomain(val NilString) {
+	s.PlainDomain = val
+}
+
+// SetAllowedEmails sets the value of AllowedEmails.
+func (s *Pocketid) SetAllowedEmails(val []string) {
+	s.AllowedEmails = val
+}
+
+// Ref: #/components/schemas/Provider
+type Provider struct {
+	UUID           uuid.UUID          `json:"uuid"`
+	Name           string             `json:"name"`
+	FaviconLink    NilString          `json:"faviconLink"`
+	LoginUrl       NilString          `json:"loginUrl"`
+	CreatedAt      time.Time          `json:"createdAt"`
+	UpdatedAt      time.Time          `json:"updatedAt"`
+	BillingHistory BillingHistoryItem `json:"billingHistory"`
+	BillingNodes   []BillingNode      `json:"billingNodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *Provider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *Provider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *Provider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *Provider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *Provider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *Provider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetBillingHistory returns the value of BillingHistory.
+func (s *Provider) GetBillingHistory() BillingHistoryItem {
+	return s.BillingHistory
+}
+
+// GetBillingNodes returns the value of BillingNodes.
+func (s *Provider) GetBillingNodes() []BillingNode {
+	return s.BillingNodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *Provider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *Provider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *Provider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *Provider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *Provider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *Provider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetBillingHistory sets the value of BillingHistory.
+func (s *Provider) SetBillingHistory(val BillingHistoryItem) {
+	s.BillingHistory = val
+}
+
+// SetBillingNodes sets the value of BillingNodes.
+func (s *Provider) SetBillingNodes(val []BillingNode) {
+	s.BillingNodes = val
+}
+
+// Ref: #/components/schemas/ProviderItem
+type ProviderItem struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *ProviderItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *ProviderItem) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *ProviderItem) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *ProviderItem) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *ProviderItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *ProviderItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *ProviderItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *ProviderItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *ProviderItem) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *ProviderItem) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *ProviderItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *ProviderItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// Ref: #/components/schemas/Record
+type Record struct {
+	ID        float64   `json:"id"`
+	UserUuid  uuid.UUID `json:"userUuid"`
+	RequestAt time.Time `json:"requestAt"`
+	RequestIp NilString `json:"requestIp"`
+	UserAgent NilString `json:"userAgent"`
+}
+
+// GetID returns the value of ID.
+func (s *Record) GetID() float64 {
+	return s.ID
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *Record) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetRequestAt returns the value of RequestAt.
+func (s *Record) GetRequestAt() time.Time {
+	return s.RequestAt
+}
+
+// GetRequestIp returns the value of RequestIp.
+func (s *Record) GetRequestIp() NilString {
+	return s.RequestIp
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *Record) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// SetID sets the value of ID.
+func (s *Record) SetID(val float64) {
+	s.ID = val
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *Record) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetRequestAt sets the value of RequestAt.
+func (s *Record) SetRequestAt(val time.Time) {
+	s.RequestAt = val
+}
+
+// SetRequestIp sets the value of RequestIp.
+func (s *Record) SetRequestIp(val NilString) {
+	s.RequestIp = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *Record) SetUserAgent(val NilString) {
+	s.UserAgent = val
+}
+
 // Ref: #/components/schemas/RegisterRequestDto
 type RegisterRequestDto struct {
 	Username string `json:"username"`
@@ -18371,42 +13097,17 @@ func (s *RegisterRequestDto) SetPassword(val string) {
 
 // Ref: #/components/schemas/ReorderHostRequestDto
 type ReorderHostRequestDto struct {
-	Hosts []ReorderHostRequestDtoHostsItem `json:"hosts"`
+	Hosts []NodeRef `json:"hosts"`
 }
 
 // GetHosts returns the value of Hosts.
-func (s *ReorderHostRequestDto) GetHosts() []ReorderHostRequestDtoHostsItem {
+func (s *ReorderHostRequestDto) GetHosts() []NodeRef {
 	return s.Hosts
 }
 
 // SetHosts sets the value of Hosts.
-func (s *ReorderHostRequestDto) SetHosts(val []ReorderHostRequestDtoHostsItem) {
+func (s *ReorderHostRequestDto) SetHosts(val []NodeRef) {
 	s.Hosts = val
-}
-
-type ReorderHostRequestDtoHostsItem struct {
-	ViewPosition int       `json:"viewPosition"`
-	UUID         uuid.UUID `json:"uuid"`
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *ReorderHostRequestDtoHostsItem) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetUUID returns the value of UUID.
-func (s *ReorderHostRequestDtoHostsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *ReorderHostRequestDtoHostsItem) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetUUID sets the value of UUID.
-func (s *ReorderHostRequestDtoHostsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
 }
 
 // Ref: #/components/schemas/ReorderHostResponseDto
@@ -18442,42 +13143,122 @@ func (s *ReorderHostResponseDtoResponse) SetIsUpdated(val bool) {
 
 // Ref: #/components/schemas/ReorderNodeRequestDto
 type ReorderNodeRequestDto struct {
-	Nodes []ReorderNodeRequestDtoNodesItem `json:"nodes"`
+	Nodes []NodeRef `json:"nodes"`
 }
 
 // GetNodes returns the value of Nodes.
-func (s *ReorderNodeRequestDto) GetNodes() []ReorderNodeRequestDtoNodesItem {
+func (s *ReorderNodeRequestDto) GetNodes() []NodeRef {
 	return s.Nodes
 }
 
 // SetNodes sets the value of Nodes.
-func (s *ReorderNodeRequestDto) SetNodes(val []ReorderNodeRequestDtoNodesItem) {
+func (s *ReorderNodeRequestDto) SetNodes(val []NodeRef) {
 	s.Nodes = val
 }
 
-type ReorderNodeRequestDtoNodesItem struct {
-	ViewPosition int       `json:"viewPosition"`
-	UUID         uuid.UUID `json:"uuid"`
+// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
+// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
+// Ref: #/components/schemas/ResponseModification
+type ResponseModification struct {
+	// {"defaultSnippets":[{"label":"Examples: Add custom header","markdownDescription":"Add a custom
+	// header to the response","body":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
+	// "markdownDescription":"Array of headers to be added when the rule is matched."}.
+	Headers []Header `json:"headers"`
+	// {"markdownDescription":"Override the subscription template with the given name. If not provided,
+	// the default subscription template will be used. If the template name is not found, the default
+	// subscription template for this type will be used. **This modification have higher priority than
+	// settings from External Squads.**"}.
+	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
 }
 
-// GetViewPosition returns the value of ViewPosition.
-func (s *ReorderNodeRequestDtoNodesItem) GetViewPosition() int {
-	return s.ViewPosition
+// GetHeaders returns the value of Headers.
+func (s *ResponseModification) GetHeaders() []Header {
+	return s.Headers
 }
 
-// GetUUID returns the value of UUID.
-func (s *ReorderNodeRequestDtoNodesItem) GetUUID() uuid.UUID {
-	return s.UUID
+// GetSubscriptionTemplate returns the value of SubscriptionTemplate.
+func (s *ResponseModification) GetSubscriptionTemplate() OptString {
+	return s.SubscriptionTemplate
 }
 
-// SetViewPosition sets the value of ViewPosition.
-func (s *ReorderNodeRequestDtoNodesItem) SetViewPosition(val int) {
-	s.ViewPosition = val
+// SetHeaders sets the value of Headers.
+func (s *ResponseModification) SetHeaders(val []Header) {
+	s.Headers = val
 }
 
-// SetUUID sets the value of UUID.
-func (s *ReorderNodeRequestDtoNodesItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
+// SetSubscriptionTemplate sets the value of SubscriptionTemplate.
+func (s *ResponseModification) SetSubscriptionTemplate(val OptString) {
+	s.SubscriptionTemplate = val
+}
+
+// Ref: #/components/schemas/ResponseRules
+type ResponseRules struct {
+	// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
+	// config. Currently supported version is **1**."}.
+	Version ResponseRulesVersion `json:"version"`
+	// {"title":"Response Rules","markdownDescription":"Array of **response rules**. Rules are evaluated
+	// in order and the first rule that matches is applied. If no rule matches, request will be blocked
+	// by default.\n\n**Example:**\n```json\n[\n  {\n    \"name\": \"Blank rule\",\n    \"description\":
+	// \"Blank rule\",\n    \"operator\": \"AND\",\n    \"enabled\": true,\n    \"conditions\": [],\n
+	// \"responseType\": \"BLOCK\",\n    \"responseModifications\": {\n      \"headers\": []\n    }\n
+	// }\n]\n```","defaultSnippets":[]}.
+	Rules []Rule `json:"rules"`
+}
+
+// GetVersion returns the value of Version.
+func (s *ResponseRules) GetVersion() ResponseRulesVersion {
+	return s.Version
+}
+
+// GetRules returns the value of Rules.
+func (s *ResponseRules) GetRules() []Rule {
+	return s.Rules
+}
+
+// SetVersion sets the value of Version.
+func (s *ResponseRules) SetVersion(val ResponseRulesVersion) {
+	s.Version = val
+}
+
+// SetRules sets the value of Rules.
+func (s *ResponseRules) SetRules(val []Rule) {
+	s.Rules = val
+}
+
+// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
+// config. Currently supported version is **1**."}.
+type ResponseRulesVersion string
+
+const (
+	ResponseRulesVersion1 ResponseRulesVersion = "1"
+)
+
+// AllValues returns all ResponseRulesVersion values.
+func (ResponseRulesVersion) AllValues() []ResponseRulesVersion {
+	return []ResponseRulesVersion{
+		ResponseRulesVersion1,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s ResponseRulesVersion) MarshalText() ([]byte, error) {
+	switch s {
+	case ResponseRulesVersion1:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *ResponseRulesVersion) UnmarshalText(data []byte) error {
+	switch ResponseRulesVersion(data) {
+	case ResponseRulesVersion1:
+		*s = ResponseRulesVersion1
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // Ref: #/components/schemas/RestartAllNodesRequestBodyDto
@@ -18510,6 +13291,302 @@ func (s *RevokeUserSubscriptionBodyDto) GetShortUuid() OptString {
 // SetShortUuid sets the value of ShortUuid.
 func (s *RevokeUserSubscriptionBodyDto) SetShortUuid(val OptString) {
 	s.ShortUuid = val
+}
+
+// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
+// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
+// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
+// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
+// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
+// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
+// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
+// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
+// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
+// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
+// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
+// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
+//
+//	}\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
+//
+// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
+// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
+// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
+// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
+// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
+// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
+// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
+// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
+// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
+// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
+// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
+// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
+// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
+// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
+// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
+//
+//	\"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
+//
+// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
+// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
+// \"BLOCK\"\n}\n```"}.
+// Ref: #/components/schemas/Rule
+type Rule struct {
+	// {"markdownDescription":"Name of the response rule."}.
+	Name string `json:"name"`
+	// {"markdownDescription":"Description of the response rule. Optional."}.
+	Description OptString `json:"description"`
+	// {"markdownDescription":"Control whether the response rule is enabled or disabled. \n\n - `true`
+	// the rule will be applied. \n\n - `false` the rule will be always ignored."}.
+	Enabled bool `json:"enabled"`
+	// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
+	Operator RuleOperator `json:"operator"`
+	// {"markdownDescription":"Array of conditions to check against the request headers. Conditions are
+	// applied with **operator**. If conditions are empty, the rule will be matched."}.
+	Conditions []Condition `json:"conditions"`
+	// {"errorMessage":"Invalid response type. Please select a valid response type.",
+	// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
+	// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
+	// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
+	// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
+	//  (Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
+	// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
+	// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
+	// template) Format which is used by Singbox client application.","Return **subscription** as browser
+	// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
+	// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
+	// the socket connection."]}.
+	ResponseType          RuleResponseType        `json:"responseType"`
+	ResponseModifications OptResponseModification `json:"responseModifications"`
+}
+
+// GetName returns the value of Name.
+func (s *Rule) GetName() string {
+	return s.Name
+}
+
+// GetDescription returns the value of Description.
+func (s *Rule) GetDescription() OptString {
+	return s.Description
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *Rule) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetOperator returns the value of Operator.
+func (s *Rule) GetOperator() RuleOperator {
+	return s.Operator
+}
+
+// GetConditions returns the value of Conditions.
+func (s *Rule) GetConditions() []Condition {
+	return s.Conditions
+}
+
+// GetResponseType returns the value of ResponseType.
+func (s *Rule) GetResponseType() RuleResponseType {
+	return s.ResponseType
+}
+
+// GetResponseModifications returns the value of ResponseModifications.
+func (s *Rule) GetResponseModifications() OptResponseModification {
+	return s.ResponseModifications
+}
+
+// SetName sets the value of Name.
+func (s *Rule) SetName(val string) {
+	s.Name = val
+}
+
+// SetDescription sets the value of Description.
+func (s *Rule) SetDescription(val OptString) {
+	s.Description = val
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *Rule) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetOperator sets the value of Operator.
+func (s *Rule) SetOperator(val RuleOperator) {
+	s.Operator = val
+}
+
+// SetConditions sets the value of Conditions.
+func (s *Rule) SetConditions(val []Condition) {
+	s.Conditions = val
+}
+
+// SetResponseType sets the value of ResponseType.
+func (s *Rule) SetResponseType(val RuleResponseType) {
+	s.ResponseType = val
+}
+
+// SetResponseModifications sets the value of ResponseModifications.
+func (s *Rule) SetResponseModifications(val OptResponseModification) {
+	s.ResponseModifications = val
+}
+
+// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
+type RuleOperator string
+
+const (
+	RuleOperatorAND RuleOperator = "AND"
+	RuleOperatorOR  RuleOperator = "OR"
+)
+
+// AllValues returns all RuleOperator values.
+func (RuleOperator) AllValues() []RuleOperator {
+	return []RuleOperator{
+		RuleOperatorAND,
+		RuleOperatorOR,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s RuleOperator) MarshalText() ([]byte, error) {
+	switch s {
+	case RuleOperatorAND:
+		return []byte(s), nil
+	case RuleOperatorOR:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *RuleOperator) UnmarshalText(data []byte) error {
+	switch RuleOperator(data) {
+	case RuleOperatorAND:
+		*s = RuleOperatorAND
+		return nil
+	case RuleOperatorOR:
+		*s = RuleOperatorOR
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// {"errorMessage":"Invalid response type. Please select a valid response type.",
+// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
+// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
+// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
+// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
+//
+//	(Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
+//
+// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
+// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
+// template) Format which is used by Singbox client application.","Return **subscription** as browser
+// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
+// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
+// the socket connection."]}.
+type RuleResponseType string
+
+const (
+	RuleResponseTypeXRAYJSON      RuleResponseType = "XRAY_JSON"
+	RuleResponseTypeXRAYBASE64    RuleResponseType = "XRAY_BASE64"
+	RuleResponseTypeMIHOMO        RuleResponseType = "MIHOMO"
+	RuleResponseTypeSTASH         RuleResponseType = "STASH"
+	RuleResponseTypeCLASH         RuleResponseType = "CLASH"
+	RuleResponseTypeSINGBOX       RuleResponseType = "SINGBOX"
+	RuleResponseTypeBROWSER       RuleResponseType = "BROWSER"
+	RuleResponseTypeBLOCK         RuleResponseType = "BLOCK"
+	RuleResponseTypeSTATUSCODE404 RuleResponseType = "STATUS_CODE_404"
+	RuleResponseTypeSTATUSCODE451 RuleResponseType = "STATUS_CODE_451"
+	RuleResponseTypeSOCKETDROP    RuleResponseType = "SOCKET_DROP"
+)
+
+// AllValues returns all RuleResponseType values.
+func (RuleResponseType) AllValues() []RuleResponseType {
+	return []RuleResponseType{
+		RuleResponseTypeXRAYJSON,
+		RuleResponseTypeXRAYBASE64,
+		RuleResponseTypeMIHOMO,
+		RuleResponseTypeSTASH,
+		RuleResponseTypeCLASH,
+		RuleResponseTypeSINGBOX,
+		RuleResponseTypeBROWSER,
+		RuleResponseTypeBLOCK,
+		RuleResponseTypeSTATUSCODE404,
+		RuleResponseTypeSTATUSCODE451,
+		RuleResponseTypeSOCKETDROP,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s RuleResponseType) MarshalText() ([]byte, error) {
+	switch s {
+	case RuleResponseTypeXRAYJSON:
+		return []byte(s), nil
+	case RuleResponseTypeXRAYBASE64:
+		return []byte(s), nil
+	case RuleResponseTypeMIHOMO:
+		return []byte(s), nil
+	case RuleResponseTypeSTASH:
+		return []byte(s), nil
+	case RuleResponseTypeCLASH:
+		return []byte(s), nil
+	case RuleResponseTypeSINGBOX:
+		return []byte(s), nil
+	case RuleResponseTypeBROWSER:
+		return []byte(s), nil
+	case RuleResponseTypeBLOCK:
+		return []byte(s), nil
+	case RuleResponseTypeSTATUSCODE404:
+		return []byte(s), nil
+	case RuleResponseTypeSTATUSCODE451:
+		return []byte(s), nil
+	case RuleResponseTypeSOCKETDROP:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *RuleResponseType) UnmarshalText(data []byte) error {
+	switch RuleResponseType(data) {
+	case RuleResponseTypeXRAYJSON:
+		*s = RuleResponseTypeXRAYJSON
+		return nil
+	case RuleResponseTypeXRAYBASE64:
+		*s = RuleResponseTypeXRAYBASE64
+		return nil
+	case RuleResponseTypeMIHOMO:
+		*s = RuleResponseTypeMIHOMO
+		return nil
+	case RuleResponseTypeSTASH:
+		*s = RuleResponseTypeSTASH
+		return nil
+	case RuleResponseTypeCLASH:
+		*s = RuleResponseTypeCLASH
+		return nil
+	case RuleResponseTypeSINGBOX:
+		*s = RuleResponseTypeSINGBOX
+		return nil
+	case RuleResponseTypeBROWSER:
+		*s = RuleResponseTypeBROWSER
+		return nil
+	case RuleResponseTypeBLOCK:
+		*s = RuleResponseTypeBLOCK
+		return nil
+	case RuleResponseTypeSTATUSCODE404:
+		*s = RuleResponseTypeSTATUSCODE404
+		return nil
+	case RuleResponseTypeSTATUSCODE451:
+		*s = RuleResponseTypeSTATUSCODE451
+		return nil
+	case RuleResponseTypeSOCKETDROP:
+		*s = RuleResponseTypeSOCKETDROP
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // Ref: #/components/schemas/SetInboundToManyHostsRequestDto
@@ -18594,360 +13671,61 @@ func (*SettingsResponse) remnawaveSettingsControllerGetSettingsRes()    {}
 func (*SettingsResponse) remnawaveSettingsControllerUpdateSettingsRes() {}
 
 type SettingsResponseResponse struct {
-	PasskeySettings  NilSettingsResponseResponsePasskeySettings  `json:"passkeySettings"`
-	Oauth2Settings   NilSettingsResponseResponseOauth2Settings   `json:"oauth2Settings"`
-	TgAuthSettings   NilSettingsResponseResponseTgAuthSettings   `json:"tgAuthSettings"`
-	PasswordSettings NilSettingsResponseResponsePasswordSettings `json:"passwordSettings"`
-	BrandingSettings NilSettingsResponseResponseBrandingSettings `json:"brandingSettings"`
+	PasskeySettings  NilPasskeySettings  `json:"passkeySettings"`
+	Oauth2Settings   NilOauth2Settings   `json:"oauth2Settings"`
+	TgAuthSettings   NilTgAuthSettings   `json:"tgAuthSettings"`
+	PasswordSettings NilPasswordSettings `json:"passwordSettings"`
+	BrandingSettings NilBrandingSettings `json:"brandingSettings"`
 }
 
 // GetPasskeySettings returns the value of PasskeySettings.
-func (s *SettingsResponseResponse) GetPasskeySettings() NilSettingsResponseResponsePasskeySettings {
+func (s *SettingsResponseResponse) GetPasskeySettings() NilPasskeySettings {
 	return s.PasskeySettings
 }
 
 // GetOauth2Settings returns the value of Oauth2Settings.
-func (s *SettingsResponseResponse) GetOauth2Settings() NilSettingsResponseResponseOauth2Settings {
+func (s *SettingsResponseResponse) GetOauth2Settings() NilOauth2Settings {
 	return s.Oauth2Settings
 }
 
 // GetTgAuthSettings returns the value of TgAuthSettings.
-func (s *SettingsResponseResponse) GetTgAuthSettings() NilSettingsResponseResponseTgAuthSettings {
+func (s *SettingsResponseResponse) GetTgAuthSettings() NilTgAuthSettings {
 	return s.TgAuthSettings
 }
 
 // GetPasswordSettings returns the value of PasswordSettings.
-func (s *SettingsResponseResponse) GetPasswordSettings() NilSettingsResponseResponsePasswordSettings {
+func (s *SettingsResponseResponse) GetPasswordSettings() NilPasswordSettings {
 	return s.PasswordSettings
 }
 
 // GetBrandingSettings returns the value of BrandingSettings.
-func (s *SettingsResponseResponse) GetBrandingSettings() NilSettingsResponseResponseBrandingSettings {
+func (s *SettingsResponseResponse) GetBrandingSettings() NilBrandingSettings {
 	return s.BrandingSettings
 }
 
 // SetPasskeySettings sets the value of PasskeySettings.
-func (s *SettingsResponseResponse) SetPasskeySettings(val NilSettingsResponseResponsePasskeySettings) {
+func (s *SettingsResponseResponse) SetPasskeySettings(val NilPasskeySettings) {
 	s.PasskeySettings = val
 }
 
 // SetOauth2Settings sets the value of Oauth2Settings.
-func (s *SettingsResponseResponse) SetOauth2Settings(val NilSettingsResponseResponseOauth2Settings) {
+func (s *SettingsResponseResponse) SetOauth2Settings(val NilOauth2Settings) {
 	s.Oauth2Settings = val
 }
 
 // SetTgAuthSettings sets the value of TgAuthSettings.
-func (s *SettingsResponseResponse) SetTgAuthSettings(val NilSettingsResponseResponseTgAuthSettings) {
+func (s *SettingsResponseResponse) SetTgAuthSettings(val NilTgAuthSettings) {
 	s.TgAuthSettings = val
 }
 
 // SetPasswordSettings sets the value of PasswordSettings.
-func (s *SettingsResponseResponse) SetPasswordSettings(val NilSettingsResponseResponsePasswordSettings) {
+func (s *SettingsResponseResponse) SetPasswordSettings(val NilPasswordSettings) {
 	s.PasswordSettings = val
 }
 
 // SetBrandingSettings sets the value of BrandingSettings.
-func (s *SettingsResponseResponse) SetBrandingSettings(val NilSettingsResponseResponseBrandingSettings) {
+func (s *SettingsResponseResponse) SetBrandingSettings(val NilBrandingSettings) {
 	s.BrandingSettings = val
-}
-
-type SettingsResponseResponseBrandingSettings struct {
-	Title   NilString `json:"title"`
-	LogoUrl NilURI    `json:"logoUrl"`
-}
-
-// GetTitle returns the value of Title.
-func (s *SettingsResponseResponseBrandingSettings) GetTitle() NilString {
-	return s.Title
-}
-
-// GetLogoUrl returns the value of LogoUrl.
-func (s *SettingsResponseResponseBrandingSettings) GetLogoUrl() NilURI {
-	return s.LogoUrl
-}
-
-// SetTitle sets the value of Title.
-func (s *SettingsResponseResponseBrandingSettings) SetTitle(val NilString) {
-	s.Title = val
-}
-
-// SetLogoUrl sets the value of LogoUrl.
-func (s *SettingsResponseResponseBrandingSettings) SetLogoUrl(val NilURI) {
-	s.LogoUrl = val
-}
-
-type SettingsResponseResponseOauth2Settings struct {
-	Github   SettingsResponseResponseOauth2SettingsGithub   `json:"github"`
-	Pocketid SettingsResponseResponseOauth2SettingsPocketid `json:"pocketid"`
-	Yandex   SettingsResponseResponseOauth2SettingsYandex   `json:"yandex"`
-}
-
-// GetGithub returns the value of Github.
-func (s *SettingsResponseResponseOauth2Settings) GetGithub() SettingsResponseResponseOauth2SettingsGithub {
-	return s.Github
-}
-
-// GetPocketid returns the value of Pocketid.
-func (s *SettingsResponseResponseOauth2Settings) GetPocketid() SettingsResponseResponseOauth2SettingsPocketid {
-	return s.Pocketid
-}
-
-// GetYandex returns the value of Yandex.
-func (s *SettingsResponseResponseOauth2Settings) GetYandex() SettingsResponseResponseOauth2SettingsYandex {
-	return s.Yandex
-}
-
-// SetGithub sets the value of Github.
-func (s *SettingsResponseResponseOauth2Settings) SetGithub(val SettingsResponseResponseOauth2SettingsGithub) {
-	s.Github = val
-}
-
-// SetPocketid sets the value of Pocketid.
-func (s *SettingsResponseResponseOauth2Settings) SetPocketid(val SettingsResponseResponseOauth2SettingsPocketid) {
-	s.Pocketid = val
-}
-
-// SetYandex sets the value of Yandex.
-func (s *SettingsResponseResponseOauth2Settings) SetYandex(val SettingsResponseResponseOauth2SettingsYandex) {
-	s.Yandex = val
-}
-
-type SettingsResponseResponseOauth2SettingsGithub struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	AllowedEmails []string  `json:"allowedEmails"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SettingsResponseResponseOauth2SettingsGithub) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetClientId returns the value of ClientId.
-func (s *SettingsResponseResponseOauth2SettingsGithub) GetClientId() NilString {
-	return s.ClientId
-}
-
-// GetClientSecret returns the value of ClientSecret.
-func (s *SettingsResponseResponseOauth2SettingsGithub) GetClientSecret() NilString {
-	return s.ClientSecret
-}
-
-// GetAllowedEmails returns the value of AllowedEmails.
-func (s *SettingsResponseResponseOauth2SettingsGithub) GetAllowedEmails() []string {
-	return s.AllowedEmails
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SettingsResponseResponseOauth2SettingsGithub) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetClientId sets the value of ClientId.
-func (s *SettingsResponseResponseOauth2SettingsGithub) SetClientId(val NilString) {
-	s.ClientId = val
-}
-
-// SetClientSecret sets the value of ClientSecret.
-func (s *SettingsResponseResponseOauth2SettingsGithub) SetClientSecret(val NilString) {
-	s.ClientSecret = val
-}
-
-// SetAllowedEmails sets the value of AllowedEmails.
-func (s *SettingsResponseResponseOauth2SettingsGithub) SetAllowedEmails(val []string) {
-	s.AllowedEmails = val
-}
-
-type SettingsResponseResponseOauth2SettingsPocketid struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	PlainDomain   NilString `json:"plainDomain"`
-	AllowedEmails []string  `json:"allowedEmails"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetClientId returns the value of ClientId.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) GetClientId() NilString {
-	return s.ClientId
-}
-
-// GetClientSecret returns the value of ClientSecret.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) GetClientSecret() NilString {
-	return s.ClientSecret
-}
-
-// GetPlainDomain returns the value of PlainDomain.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) GetPlainDomain() NilString {
-	return s.PlainDomain
-}
-
-// GetAllowedEmails returns the value of AllowedEmails.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) GetAllowedEmails() []string {
-	return s.AllowedEmails
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetClientId sets the value of ClientId.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) SetClientId(val NilString) {
-	s.ClientId = val
-}
-
-// SetClientSecret sets the value of ClientSecret.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) SetClientSecret(val NilString) {
-	s.ClientSecret = val
-}
-
-// SetPlainDomain sets the value of PlainDomain.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) SetPlainDomain(val NilString) {
-	s.PlainDomain = val
-}
-
-// SetAllowedEmails sets the value of AllowedEmails.
-func (s *SettingsResponseResponseOauth2SettingsPocketid) SetAllowedEmails(val []string) {
-	s.AllowedEmails = val
-}
-
-type SettingsResponseResponseOauth2SettingsYandex struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	AllowedEmails []string  `json:"allowedEmails"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SettingsResponseResponseOauth2SettingsYandex) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetClientId returns the value of ClientId.
-func (s *SettingsResponseResponseOauth2SettingsYandex) GetClientId() NilString {
-	return s.ClientId
-}
-
-// GetClientSecret returns the value of ClientSecret.
-func (s *SettingsResponseResponseOauth2SettingsYandex) GetClientSecret() NilString {
-	return s.ClientSecret
-}
-
-// GetAllowedEmails returns the value of AllowedEmails.
-func (s *SettingsResponseResponseOauth2SettingsYandex) GetAllowedEmails() []string {
-	return s.AllowedEmails
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SettingsResponseResponseOauth2SettingsYandex) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetClientId sets the value of ClientId.
-func (s *SettingsResponseResponseOauth2SettingsYandex) SetClientId(val NilString) {
-	s.ClientId = val
-}
-
-// SetClientSecret sets the value of ClientSecret.
-func (s *SettingsResponseResponseOauth2SettingsYandex) SetClientSecret(val NilString) {
-	s.ClientSecret = val
-}
-
-// SetAllowedEmails sets the value of AllowedEmails.
-func (s *SettingsResponseResponseOauth2SettingsYandex) SetAllowedEmails(val []string) {
-	s.AllowedEmails = val
-}
-
-type SettingsResponseResponsePasskeySettings struct {
-	Enabled bool      `json:"enabled"`
-	RpId    NilString `json:"rpId"`
-	Origin  NilString `json:"origin"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SettingsResponseResponsePasskeySettings) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetRpId returns the value of RpId.
-func (s *SettingsResponseResponsePasskeySettings) GetRpId() NilString {
-	return s.RpId
-}
-
-// GetOrigin returns the value of Origin.
-func (s *SettingsResponseResponsePasskeySettings) GetOrigin() NilString {
-	return s.Origin
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SettingsResponseResponsePasskeySettings) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetRpId sets the value of RpId.
-func (s *SettingsResponseResponsePasskeySettings) SetRpId(val NilString) {
-	s.RpId = val
-}
-
-// SetOrigin sets the value of Origin.
-func (s *SettingsResponseResponsePasskeySettings) SetOrigin(val NilString) {
-	s.Origin = val
-}
-
-type SettingsResponseResponsePasswordSettings struct {
-	Enabled bool `json:"enabled"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SettingsResponseResponsePasswordSettings) GetEnabled() bool {
-	return s.Enabled
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SettingsResponseResponsePasswordSettings) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-type SettingsResponseResponseTgAuthSettings struct {
-	Enabled  bool      `json:"enabled"`
-	BotToken NilString `json:"botToken"`
-	AdminIds []string  `json:"adminIds"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SettingsResponseResponseTgAuthSettings) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetBotToken returns the value of BotToken.
-func (s *SettingsResponseResponseTgAuthSettings) GetBotToken() NilString {
-	return s.BotToken
-}
-
-// GetAdminIds returns the value of AdminIds.
-func (s *SettingsResponseResponseTgAuthSettings) GetAdminIds() []string {
-	return s.AdminIds
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SettingsResponseResponseTgAuthSettings) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetBotToken sets the value of BotToken.
-func (s *SettingsResponseResponseTgAuthSettings) SetBotToken(val NilString) {
-	s.BotToken = val
-}
-
-// SetAdminIds sets the value of AdminIds.
-func (s *SettingsResponseResponseTgAuthSettings) SetAdminIds(val []string) {
-	s.AdminIds = val
 }
 
 // Ref: #/components/schemas/SnippetRequest
@@ -19172,7 +13950,7 @@ type SubscriptionResponseResponse struct {
 	Links           []string                                `json:"links"`
 	SsConfLinks     SubscriptionResponseResponseSsConfLinks `json:"ssConfLinks"`
 	SubscriptionUrl string                                  `json:"subscriptionUrl"`
-	Happ            SubscriptionResponseResponseHapp        `json:"happ"`
+	Happ            HappItem                                `json:"happ"`
 }
 
 // GetIsFound returns the value of IsFound.
@@ -19201,7 +13979,7 @@ func (s *SubscriptionResponseResponse) GetSubscriptionUrl() string {
 }
 
 // GetHapp returns the value of Happ.
-func (s *SubscriptionResponseResponse) GetHapp() SubscriptionResponseResponseHapp {
+func (s *SubscriptionResponseResponse) GetHapp() HappItem {
 	return s.Happ
 }
 
@@ -19231,22 +14009,8 @@ func (s *SubscriptionResponseResponse) SetSubscriptionUrl(val string) {
 }
 
 // SetHapp sets the value of Happ.
-func (s *SubscriptionResponseResponse) SetHapp(val SubscriptionResponseResponseHapp) {
+func (s *SubscriptionResponseResponse) SetHapp(val HappItem) {
 	s.Happ = val
-}
-
-type SubscriptionResponseResponseHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *SubscriptionResponseResponseHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *SubscriptionResponseResponseHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
 }
 
 type SubscriptionResponseResponseSsConfLinks map[string]string
@@ -19516,6 +14280,120 @@ func (s *SubscriptionResponseResponseUserUserStatus) UnmarshalText(data []byte) 
 	}
 }
 
+// Ref: #/components/schemas/SubscriptionSettings
+type SubscriptionSettings struct {
+	ProfileTitle                  OptString    `json:"profileTitle"`
+	SupportLink                   OptString    `json:"supportLink"`
+	ProfileUpdateInterval         OptInt       `json:"profileUpdateInterval"`
+	IsProfileWebpageUrlEnabled    OptBool      `json:"isProfileWebpageUrlEnabled"`
+	ServeJsonAtBaseSubscription   OptBool      `json:"serveJsonAtBaseSubscription"`
+	AddUsernameToBaseSubscription OptBool      `json:"addUsernameToBaseSubscription"`
+	IsShowCustomRemarks           OptBool      `json:"isShowCustomRemarks"`
+	HappAnnounce                  OptNilString `json:"happAnnounce"`
+	HappRouting                   OptNilString `json:"happRouting"`
+	RandomizeHosts                OptBool      `json:"randomizeHosts"`
+}
+
+// GetProfileTitle returns the value of ProfileTitle.
+func (s *SubscriptionSettings) GetProfileTitle() OptString {
+	return s.ProfileTitle
+}
+
+// GetSupportLink returns the value of SupportLink.
+func (s *SubscriptionSettings) GetSupportLink() OptString {
+	return s.SupportLink
+}
+
+// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
+func (s *SubscriptionSettings) GetProfileUpdateInterval() OptInt {
+	return s.ProfileUpdateInterval
+}
+
+// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
+func (s *SubscriptionSettings) GetIsProfileWebpageUrlEnabled() OptBool {
+	return s.IsProfileWebpageUrlEnabled
+}
+
+// GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
+func (s *SubscriptionSettings) GetServeJsonAtBaseSubscription() OptBool {
+	return s.ServeJsonAtBaseSubscription
+}
+
+// GetAddUsernameToBaseSubscription returns the value of AddUsernameToBaseSubscription.
+func (s *SubscriptionSettings) GetAddUsernameToBaseSubscription() OptBool {
+	return s.AddUsernameToBaseSubscription
+}
+
+// GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
+func (s *SubscriptionSettings) GetIsShowCustomRemarks() OptBool {
+	return s.IsShowCustomRemarks
+}
+
+// GetHappAnnounce returns the value of HappAnnounce.
+func (s *SubscriptionSettings) GetHappAnnounce() OptNilString {
+	return s.HappAnnounce
+}
+
+// GetHappRouting returns the value of HappRouting.
+func (s *SubscriptionSettings) GetHappRouting() OptNilString {
+	return s.HappRouting
+}
+
+// GetRandomizeHosts returns the value of RandomizeHosts.
+func (s *SubscriptionSettings) GetRandomizeHosts() OptBool {
+	return s.RandomizeHosts
+}
+
+// SetProfileTitle sets the value of ProfileTitle.
+func (s *SubscriptionSettings) SetProfileTitle(val OptString) {
+	s.ProfileTitle = val
+}
+
+// SetSupportLink sets the value of SupportLink.
+func (s *SubscriptionSettings) SetSupportLink(val OptString) {
+	s.SupportLink = val
+}
+
+// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
+func (s *SubscriptionSettings) SetProfileUpdateInterval(val OptInt) {
+	s.ProfileUpdateInterval = val
+}
+
+// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
+func (s *SubscriptionSettings) SetIsProfileWebpageUrlEnabled(val OptBool) {
+	s.IsProfileWebpageUrlEnabled = val
+}
+
+// SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
+func (s *SubscriptionSettings) SetServeJsonAtBaseSubscription(val OptBool) {
+	s.ServeJsonAtBaseSubscription = val
+}
+
+// SetAddUsernameToBaseSubscription sets the value of AddUsernameToBaseSubscription.
+func (s *SubscriptionSettings) SetAddUsernameToBaseSubscription(val OptBool) {
+	s.AddUsernameToBaseSubscription = val
+}
+
+// SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
+func (s *SubscriptionSettings) SetIsShowCustomRemarks(val OptBool) {
+	s.IsShowCustomRemarks = val
+}
+
+// SetHappAnnounce sets the value of HappAnnounce.
+func (s *SubscriptionSettings) SetHappAnnounce(val OptNilString) {
+	s.HappAnnounce = val
+}
+
+// SetHappRouting sets the value of HappRouting.
+func (s *SubscriptionSettings) SetHappRouting(val OptNilString) {
+	s.HappRouting = val
+}
+
+// SetRandomizeHosts sets the value of RandomizeHosts.
+func (s *SubscriptionSettings) SetRandomizeHosts(val OptBool) {
+	s.RandomizeHosts = val
+}
+
 // Ref: #/components/schemas/SubscriptionSettingsResponse
 type SubscriptionSettingsResponse struct {
 	Response SubscriptionSettingsResponseResponse `json:"response"`
@@ -19550,7 +14428,7 @@ type SubscriptionSettingsResponseResponse struct {
 	DisabledUsersRemarks          []string                                                     `json:"disabledUsersRemarks"`
 	CustomResponseHeaders         NilSubscriptionSettingsResponseResponseCustomResponseHeaders `json:"customResponseHeaders"`
 	RandomizeHosts                bool                                                         `json:"randomizeHosts"`
-	ResponseRules                 NilSubscriptionSettingsResponseResponseResponseRules         `json:"responseRules"`
+	ResponseRules                 ResponseRules                                                `json:"responseRules"`
 	CreatedAt                     time.Time                                                    `json:"createdAt"`
 	UpdatedAt                     time.Time                                                    `json:"updatedAt"`
 }
@@ -19631,7 +14509,7 @@ func (s *SubscriptionSettingsResponseResponse) GetRandomizeHosts() bool {
 }
 
 // GetResponseRules returns the value of ResponseRules.
-func (s *SubscriptionSettingsResponseResponse) GetResponseRules() NilSubscriptionSettingsResponseResponseResponseRules {
+func (s *SubscriptionSettingsResponseResponse) GetResponseRules() ResponseRules {
 	return s.ResponseRules
 }
 
@@ -19721,7 +14599,7 @@ func (s *SubscriptionSettingsResponseResponse) SetRandomizeHosts(val bool) {
 }
 
 // SetResponseRules sets the value of ResponseRules.
-func (s *SubscriptionSettingsResponseResponse) SetResponseRules(val NilSubscriptionSettingsResponseResponseResponseRules) {
+func (s *SubscriptionSettingsResponseResponse) SetResponseRules(val ResponseRules) {
 	s.ResponseRules = val
 }
 
@@ -19744,615 +14622,6 @@ func (s *SubscriptionSettingsResponseResponseCustomResponseHeaders) init() Subsc
 		*s = m
 	}
 	return m
-}
-
-type SubscriptionSettingsResponseResponseResponseRules struct {
-	// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-	// config. Currently supported version is **1**."}.
-	Version SubscriptionSettingsResponseResponseResponseRulesVersion `json:"version"`
-	// {"title":"Response Rules","markdownDescription":"Array of **response rules**. Rules are evaluated
-	// in order and the first rule that matches is applied. If no rule matches, request will be blocked
-	// by default.\n\n**Example:**\n```json\n[\n  {\n    \"name\": \"Blank rule\",\n    \"description\":
-	// \"Blank rule\",\n    \"operator\": \"AND\",\n    \"enabled\": true,\n    \"conditions\": [],\n
-	// \"responseType\": \"BLOCK\",\n    \"responseModifications\": {\n      \"headers\": []\n    }\n
-	// }\n]\n```","defaultSnippets":[]}.
-	Rules []SubscriptionSettingsResponseResponseResponseRulesRulesItem `json:"rules"`
-}
-
-// GetVersion returns the value of Version.
-func (s *SubscriptionSettingsResponseResponseResponseRules) GetVersion() SubscriptionSettingsResponseResponseResponseRulesVersion {
-	return s.Version
-}
-
-// GetRules returns the value of Rules.
-func (s *SubscriptionSettingsResponseResponseResponseRules) GetRules() []SubscriptionSettingsResponseResponseResponseRulesRulesItem {
-	return s.Rules
-}
-
-// SetVersion sets the value of Version.
-func (s *SubscriptionSettingsResponseResponseResponseRules) SetVersion(val SubscriptionSettingsResponseResponseResponseRulesVersion) {
-	s.Version = val
-}
-
-// SetRules sets the value of Rules.
-func (s *SubscriptionSettingsResponseResponseResponseRules) SetRules(val []SubscriptionSettingsResponseResponseResponseRulesRulesItem) {
-	s.Rules = val
-}
-
-// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
-// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
-// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
-// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
-// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
-// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
-// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
-// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
-// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
-// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
-// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
-// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
-//
-//	}\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
-//
-// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
-// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
-// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
-// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
-// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
-// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
-// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
-// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
-// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
-// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
-// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
-// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
-// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
-// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
-// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
-//
-//	\"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
-//
-// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
-// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
-// \"BLOCK\"\n}\n```"}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItem struct {
-	// {"markdownDescription":"Name of the response rule."}.
-	Name string `json:"name"`
-	// {"markdownDescription":"Description of the response rule. Optional."}.
-	Description OptString `json:"description"`
-	// {"markdownDescription":"Control whether the response rule is enabled or disabled. \n\n - `true`
-	// the rule will be applied. \n\n - `false` the rule will be always ignored."}.
-	Enabled bool `json:"enabled"`
-	// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-	Operator SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator `json:"operator"`
-	// {"markdownDescription":"Array of conditions to check against the request headers. Conditions are
-	// applied with **operator**. If conditions are empty, the rule will be matched."}.
-	Conditions []SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem `json:"conditions"`
-	// {"errorMessage":"Invalid response type. Please select a valid response type.",
-	// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-	// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-	// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-	// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-	//  (Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-	// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-	// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-	// template) Format which is used by Singbox client application.","Return **subscription** as browser
-	// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-	// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-	// the socket connection."]}.
-	ResponseType SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType `json:"responseType"`
-	// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-	ResponseModifications OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications `json:"responseModifications"`
-}
-
-// GetName returns the value of Name.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetName() string {
-	return s.Name
-}
-
-// GetDescription returns the value of Description.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetDescription() OptString {
-	return s.Description
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetOperator returns the value of Operator.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetOperator() SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator {
-	return s.Operator
-}
-
-// GetConditions returns the value of Conditions.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetConditions() []SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem {
-	return s.Conditions
-}
-
-// GetResponseType returns the value of ResponseType.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetResponseType() SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType {
-	return s.ResponseType
-}
-
-// GetResponseModifications returns the value of ResponseModifications.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) GetResponseModifications() OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications {
-	return s.ResponseModifications
-}
-
-// SetName sets the value of Name.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetDescription sets the value of Description.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetDescription(val OptString) {
-	s.Description = val
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetOperator(val SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator) {
-	s.Operator = val
-}
-
-// SetConditions sets the value of Conditions.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetConditions(val []SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) {
-	s.Conditions = val
-}
-
-// SetResponseType sets the value of ResponseType.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetResponseType(val SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType) {
-	s.ResponseType = val
-}
-
-// SetResponseModifications sets the value of ResponseModifications.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItem) SetResponseModifications(val OptSubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) {
-	s.ResponseModifications = val
-}
-
-// {"markdownDescription":"Condition to check against the **headerName**.",
-// "defaultSnippets":[{"label":"Examples: Check if header contains \"text/html\"",
-// "markdownDescription":"Condition to check if **headerName** contains \"text/html\"",
-// "body":{"headerName":"accept","operator":"CONTAINS","value":"text/html","caseSensitive":true}}]}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem struct {
-	// {"markdownDescription":"**Name** of the HTTP header to check. Must comply with RFC 7230."}.
-	HeaderName string `json:"headerName"`
-	// {"errorMessage":"Invalid operator. Please select a valid operator.",
-	// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-	// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-	// string. `string === value`","Ensures the header value does not exactly match the specified string.
-	// `string !== value`","Checks if the header value contains the specified string as a substring.
-	// `string.includes()`","Verifies the header value does not contain the specified string as a
-	// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-	//  `string.startsWith()`","Validates that the header value does not begin with the specified string.
-	// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-	// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-	// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-	// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-	// pattern. `!regex.test()`"]}.
-	Operator SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator `json:"operator"`
-	// {"markdownDescription":"**Value** to check against the **headerName**."}.
-	Value string `json:"value"`
-	// {"markdownDescription":"Whether the value is **case sensitive**. \n\n - `true`: the value will be
-	// compared as is. \n\n - `false`: the value will be lowercased **before** comparison."}.
-	CaseSensitive bool `json:"caseSensitive"`
-}
-
-// GetHeaderName returns the value of HeaderName.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) GetHeaderName() string {
-	return s.HeaderName
-}
-
-// GetOperator returns the value of Operator.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) GetOperator() SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator {
-	return s.Operator
-}
-
-// GetValue returns the value of Value.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) GetValue() string {
-	return s.Value
-}
-
-// GetCaseSensitive returns the value of CaseSensitive.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) GetCaseSensitive() bool {
-	return s.CaseSensitive
-}
-
-// SetHeaderName sets the value of HeaderName.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) SetHeaderName(val string) {
-	s.HeaderName = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) SetOperator(val SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator) {
-	s.Operator = val
-}
-
-// SetValue sets the value of Value.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) SetValue(val string) {
-	s.Value = val
-}
-
-// SetCaseSensitive sets the value of CaseSensitive.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItem) SetCaseSensitive(val bool) {
-	s.CaseSensitive = val
-}
-
-// {"errorMessage":"Invalid operator. Please select a valid operator.",
-// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-// string. `string === value`","Ensures the header value does not exactly match the specified string.
-// `string !== value`","Checks if the header value contains the specified string as a substring.
-// `string.includes()`","Verifies the header value does not contain the specified string as a
-// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-//
-//	`string.startsWith()`","Validates that the header value does not begin with the specified string.
-//
-// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-// pattern. `!regex.test()`"]}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator string
-
-const (
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorEQUALS        SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "EQUALS"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTEQUALS     SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "NOT_EQUALS"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorCONTAINS      SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "CONTAINS"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS   SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "NOT_CONTAINS"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorSTARTSWITH    SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "STARTS_WITH"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "NOT_STARTS_WITH"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorENDSWITH      SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "ENDS_WITH"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH   SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "NOT_ENDS_WITH"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorREGEX         SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "REGEX"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTREGEX      SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator = "NOT_REGEX"
-)
-
-// AllValues returns all SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator values.
-func (SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator) AllValues() []SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator {
-	return []SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator{
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorEQUALS,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTEQUALS,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorCONTAINS,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorSTARTSWITH,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorENDSWITH,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorREGEX,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTREGEX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorEQUALS:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTEQUALS:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorCONTAINS:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorSTARTSWITH:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorENDSWITH:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorREGEX:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTREGEX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator) UnmarshalText(data []byte) error {
-	switch SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperator(data) {
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorEQUALS:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorEQUALS
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTEQUALS:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTEQUALS
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorCONTAINS:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorCONTAINS
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorSTARTSWITH:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorSTARTSWITH
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorENDSWITH:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorENDSWITH
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorREGEX:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorREGEX
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTREGEX:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemConditionsItemOperatorNOTREGEX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator string
-
-const (
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorAND SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator = "AND"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorOR  SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator = "OR"
-)
-
-// AllValues returns all SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator values.
-func (SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator) AllValues() []SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator {
-	return []SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator{
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorAND,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorOR,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorAND:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorOR:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator) UnmarshalText(data []byte) error {
-	switch SubscriptionSettingsResponseResponseResponseRulesRulesItemOperator(data) {
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorAND:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorAND
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorOR:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemOperatorOR
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications struct {
-	// {"defaultSnippets":[{"label":"Examples: Add custom header","markdownDescription":"Add a custom
-	// header to the response","body":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Array of headers to be added when the rule is matched."}.
-	Headers []SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem `json:"headers"`
-	// {"markdownDescription":"Override the subscription template with the given name. If not provided,
-	// the default subscription template will be used. If the template name is not found, the default
-	// subscription template for this type will be used. **This modification have higher priority than
-	// settings from External Squads.**"}.
-	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
-}
-
-// GetHeaders returns the value of Headers.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) GetHeaders() []SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem {
-	return s.Headers
-}
-
-// GetSubscriptionTemplate returns the value of SubscriptionTemplate.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) GetSubscriptionTemplate() OptString {
-	return s.SubscriptionTemplate
-}
-
-// SetHeaders sets the value of Headers.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) SetHeaders(val []SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem) {
-	s.Headers = val
-}
-
-// SetSubscriptionTemplate sets the value of SubscriptionTemplate.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModifications) SetSubscriptionTemplate(val OptString) {
-	s.SubscriptionTemplate = val
-}
-
-// {"markdownDescription":"**Key** and **value** of the response header will be added to the response.
-// "}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem struct {
-	// {"markdownDescription":"Key of the response header. Must comply with RFC 7230."}.
-	Key string `json:"key"`
-	// {"markdownDescription":"Value of the response header. "}.
-	Value string `json:"value"`
-}
-
-// GetKey returns the value of Key.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem) GetKey() string {
-	return s.Key
-}
-
-// GetValue returns the value of Value.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem) GetValue() string {
-	return s.Value
-}
-
-// SetKey sets the value of Key.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem) SetKey(val string) {
-	s.Key = val
-}
-
-// SetValue sets the value of Value.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseModificationsHeadersItem) SetValue(val string) {
-	s.Value = val
-}
-
-// {"errorMessage":"Invalid response type. Please select a valid response type.",
-// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-//
-//	(Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-//
-// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-// template) Format which is used by Singbox client application.","Return **subscription** as browser
-// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-// the socket connection."]}.
-type SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType string
-
-const (
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYJSON      SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "XRAY_JSON"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYBASE64    SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "XRAY_BASE64"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeMIHOMO        SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "MIHOMO"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTASH         SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "STASH"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeCLASH         SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "CLASH"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSINGBOX       SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "SINGBOX"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBROWSER       SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "BROWSER"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBLOCK         SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "BLOCK"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE404 SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "STATUS_CODE_404"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE451 SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "STATUS_CODE_451"
-	SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSOCKETDROP    SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType = "SOCKET_DROP"
-)
-
-// AllValues returns all SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType values.
-func (SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType) AllValues() []SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType {
-	return []SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType{
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYJSON,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYBASE64,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeMIHOMO,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTASH,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeCLASH,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSINGBOX,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBROWSER,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBLOCK,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE404,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE451,
-		SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSOCKETDROP,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType) MarshalText() ([]byte, error) {
-	switch s {
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYJSON:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYBASE64:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeMIHOMO:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTASH:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeCLASH:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSINGBOX:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBROWSER:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBLOCK:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE404:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE451:
-		return []byte(s), nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSOCKETDROP:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType) UnmarshalText(data []byte) error {
-	switch SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseType(data) {
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYJSON:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYJSON
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYBASE64:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeXRAYBASE64
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeMIHOMO:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeMIHOMO
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTASH:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTASH
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeCLASH:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeCLASH
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSINGBOX:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSINGBOX
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBROWSER:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBROWSER
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBLOCK:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeBLOCK
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE404:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE404
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE451:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSTATUSCODE451
-		return nil
-	case SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSOCKETDROP:
-		*s = SubscriptionSettingsResponseResponseResponseRulesRulesItemResponseTypeSOCKETDROP
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-// config. Currently supported version is **1**."}.
-type SubscriptionSettingsResponseResponseResponseRulesVersion string
-
-const (
-	SubscriptionSettingsResponseResponseResponseRulesVersion1 SubscriptionSettingsResponseResponseResponseRulesVersion = "1"
-)
-
-// AllValues returns all SubscriptionSettingsResponseResponseResponseRulesVersion values.
-func (SubscriptionSettingsResponseResponseResponseRulesVersion) AllValues() []SubscriptionSettingsResponseResponseResponseRulesVersion {
-	return []SubscriptionSettingsResponseResponseResponseRulesVersion{
-		SubscriptionSettingsResponseResponseResponseRulesVersion1,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s SubscriptionSettingsResponseResponseResponseRulesVersion) MarshalText() ([]byte, error) {
-	switch s {
-	case SubscriptionSettingsResponseResponseResponseRulesVersion1:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *SubscriptionSettingsResponseResponseResponseRulesVersion) UnmarshalText(data []byte) error {
-	switch SubscriptionSettingsResponseResponseResponseRulesVersion(data) {
-	case SubscriptionSettingsResponseResponseResponseRulesVersion1:
-		*s = SubscriptionSettingsResponseResponseResponseRulesVersion1
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/TagsResponse
@@ -20468,120 +14737,128 @@ func (s *TelegramCallbackRequestDto) SetHash(val string) {
 	s.Hash = val
 }
 
-// Ref: #/components/schemas/TemplateResponse
-type TemplateResponse struct {
-	Response TemplateResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *TemplateResponse) GetResponse() TemplateResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *TemplateResponse) SetResponse(val TemplateResponseResponse) {
-	s.Response = val
-}
-
-func (*TemplateResponse) subscriptionTemplateControllerCreateTemplateRes()    {}
-func (*TemplateResponse) subscriptionTemplateControllerGetTemplateByUuidRes() {}
-func (*TemplateResponse) subscriptionTemplateControllerUpdateTemplateRes()    {}
-
-type TemplateResponseResponse struct {
-	UUID                uuid.UUID                            `json:"uuid"`
-	Name                string                               `json:"name"`
-	TemplateType        TemplateResponseResponseTemplateType `json:"templateType"`
-	TemplateJson        jx.Raw                               `json:"templateJson"`
-	EncodedTemplateYaml NilString                            `json:"encodedTemplateYaml"`
+// Ref: #/components/schemas/Template
+type Template struct {
+	UUID                uuid.UUID            `json:"uuid"`
+	Name                string               `json:"name"`
+	TemplateType        TemplateTemplateType `json:"templateType"`
+	TemplateJson        jx.Raw               `json:"templateJson"`
+	EncodedTemplateYaml NilString            `json:"encodedTemplateYaml"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *TemplateResponseResponse) GetUUID() uuid.UUID {
+func (s *Template) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *TemplateResponseResponse) GetName() string {
+func (s *Template) GetName() string {
 	return s.Name
 }
 
 // GetTemplateType returns the value of TemplateType.
-func (s *TemplateResponseResponse) GetTemplateType() TemplateResponseResponseTemplateType {
+func (s *Template) GetTemplateType() TemplateTemplateType {
 	return s.TemplateType
 }
 
 // GetTemplateJson returns the value of TemplateJson.
-func (s *TemplateResponseResponse) GetTemplateJson() jx.Raw {
+func (s *Template) GetTemplateJson() jx.Raw {
 	return s.TemplateJson
 }
 
 // GetEncodedTemplateYaml returns the value of EncodedTemplateYaml.
-func (s *TemplateResponseResponse) GetEncodedTemplateYaml() NilString {
+func (s *Template) GetEncodedTemplateYaml() NilString {
 	return s.EncodedTemplateYaml
 }
 
 // SetUUID sets the value of UUID.
-func (s *TemplateResponseResponse) SetUUID(val uuid.UUID) {
+func (s *Template) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *TemplateResponseResponse) SetName(val string) {
+func (s *Template) SetName(val string) {
 	s.Name = val
 }
 
 // SetTemplateType sets the value of TemplateType.
-func (s *TemplateResponseResponse) SetTemplateType(val TemplateResponseResponseTemplateType) {
+func (s *Template) SetTemplateType(val TemplateTemplateType) {
 	s.TemplateType = val
 }
 
 // SetTemplateJson sets the value of TemplateJson.
-func (s *TemplateResponseResponse) SetTemplateJson(val jx.Raw) {
+func (s *Template) SetTemplateJson(val jx.Raw) {
 	s.TemplateJson = val
 }
 
 // SetEncodedTemplateYaml sets the value of EncodedTemplateYaml.
-func (s *TemplateResponseResponse) SetEncodedTemplateYaml(val NilString) {
+func (s *Template) SetEncodedTemplateYaml(val NilString) {
 	s.EncodedTemplateYaml = val
 }
 
-type TemplateResponseResponseTemplateType string
+// Ref: #/components/schemas/TemplateRef
+type TemplateRef struct {
+	TemplateUuid uuid.UUID               `json:"templateUuid"`
+	TemplateType TemplateRefTemplateType `json:"templateType"`
+}
+
+// GetTemplateUuid returns the value of TemplateUuid.
+func (s *TemplateRef) GetTemplateUuid() uuid.UUID {
+	return s.TemplateUuid
+}
+
+// GetTemplateType returns the value of TemplateType.
+func (s *TemplateRef) GetTemplateType() TemplateRefTemplateType {
+	return s.TemplateType
+}
+
+// SetTemplateUuid sets the value of TemplateUuid.
+func (s *TemplateRef) SetTemplateUuid(val uuid.UUID) {
+	s.TemplateUuid = val
+}
+
+// SetTemplateType sets the value of TemplateType.
+func (s *TemplateRef) SetTemplateType(val TemplateRefTemplateType) {
+	s.TemplateType = val
+}
+
+type TemplateRefTemplateType string
 
 const (
-	TemplateResponseResponseTemplateTypeXRAYJSON   TemplateResponseResponseTemplateType = "XRAY_JSON"
-	TemplateResponseResponseTemplateTypeXRAYBASE64 TemplateResponseResponseTemplateType = "XRAY_BASE64"
-	TemplateResponseResponseTemplateTypeMIHOMO     TemplateResponseResponseTemplateType = "MIHOMO"
-	TemplateResponseResponseTemplateTypeSTASH      TemplateResponseResponseTemplateType = "STASH"
-	TemplateResponseResponseTemplateTypeCLASH      TemplateResponseResponseTemplateType = "CLASH"
-	TemplateResponseResponseTemplateTypeSINGBOX    TemplateResponseResponseTemplateType = "SINGBOX"
+	TemplateRefTemplateTypeXRAYJSON   TemplateRefTemplateType = "XRAY_JSON"
+	TemplateRefTemplateTypeXRAYBASE64 TemplateRefTemplateType = "XRAY_BASE64"
+	TemplateRefTemplateTypeMIHOMO     TemplateRefTemplateType = "MIHOMO"
+	TemplateRefTemplateTypeSTASH      TemplateRefTemplateType = "STASH"
+	TemplateRefTemplateTypeCLASH      TemplateRefTemplateType = "CLASH"
+	TemplateRefTemplateTypeSINGBOX    TemplateRefTemplateType = "SINGBOX"
 )
 
-// AllValues returns all TemplateResponseResponseTemplateType values.
-func (TemplateResponseResponseTemplateType) AllValues() []TemplateResponseResponseTemplateType {
-	return []TemplateResponseResponseTemplateType{
-		TemplateResponseResponseTemplateTypeXRAYJSON,
-		TemplateResponseResponseTemplateTypeXRAYBASE64,
-		TemplateResponseResponseTemplateTypeMIHOMO,
-		TemplateResponseResponseTemplateTypeSTASH,
-		TemplateResponseResponseTemplateTypeCLASH,
-		TemplateResponseResponseTemplateTypeSINGBOX,
+// AllValues returns all TemplateRefTemplateType values.
+func (TemplateRefTemplateType) AllValues() []TemplateRefTemplateType {
+	return []TemplateRefTemplateType{
+		TemplateRefTemplateTypeXRAYJSON,
+		TemplateRefTemplateTypeXRAYBASE64,
+		TemplateRefTemplateTypeMIHOMO,
+		TemplateRefTemplateTypeSTASH,
+		TemplateRefTemplateTypeCLASH,
+		TemplateRefTemplateTypeSINGBOX,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s TemplateResponseResponseTemplateType) MarshalText() ([]byte, error) {
+func (s TemplateRefTemplateType) MarshalText() ([]byte, error) {
 	switch s {
-	case TemplateResponseResponseTemplateTypeXRAYJSON:
+	case TemplateRefTemplateTypeXRAYJSON:
 		return []byte(s), nil
-	case TemplateResponseResponseTemplateTypeXRAYBASE64:
+	case TemplateRefTemplateTypeXRAYBASE64:
 		return []byte(s), nil
-	case TemplateResponseResponseTemplateTypeMIHOMO:
+	case TemplateRefTemplateTypeMIHOMO:
 		return []byte(s), nil
-	case TemplateResponseResponseTemplateTypeSTASH:
+	case TemplateRefTemplateTypeSTASH:
 		return []byte(s), nil
-	case TemplateResponseResponseTemplateTypeCLASH:
+	case TemplateRefTemplateTypeCLASH:
 		return []byte(s), nil
-	case TemplateResponseResponseTemplateTypeSINGBOX:
+	case TemplateRefTemplateTypeSINGBOX:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -20589,29 +14866,154 @@ func (s TemplateResponseResponseTemplateType) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *TemplateResponseResponseTemplateType) UnmarshalText(data []byte) error {
-	switch TemplateResponseResponseTemplateType(data) {
-	case TemplateResponseResponseTemplateTypeXRAYJSON:
-		*s = TemplateResponseResponseTemplateTypeXRAYJSON
+func (s *TemplateRefTemplateType) UnmarshalText(data []byte) error {
+	switch TemplateRefTemplateType(data) {
+	case TemplateRefTemplateTypeXRAYJSON:
+		*s = TemplateRefTemplateTypeXRAYJSON
 		return nil
-	case TemplateResponseResponseTemplateTypeXRAYBASE64:
-		*s = TemplateResponseResponseTemplateTypeXRAYBASE64
+	case TemplateRefTemplateTypeXRAYBASE64:
+		*s = TemplateRefTemplateTypeXRAYBASE64
 		return nil
-	case TemplateResponseResponseTemplateTypeMIHOMO:
-		*s = TemplateResponseResponseTemplateTypeMIHOMO
+	case TemplateRefTemplateTypeMIHOMO:
+		*s = TemplateRefTemplateTypeMIHOMO
 		return nil
-	case TemplateResponseResponseTemplateTypeSTASH:
-		*s = TemplateResponseResponseTemplateTypeSTASH
+	case TemplateRefTemplateTypeSTASH:
+		*s = TemplateRefTemplateTypeSTASH
 		return nil
-	case TemplateResponseResponseTemplateTypeCLASH:
-		*s = TemplateResponseResponseTemplateTypeCLASH
+	case TemplateRefTemplateTypeCLASH:
+		*s = TemplateRefTemplateTypeCLASH
 		return nil
-	case TemplateResponseResponseTemplateTypeSINGBOX:
-		*s = TemplateResponseResponseTemplateTypeSINGBOX
+	case TemplateRefTemplateTypeSINGBOX:
+		*s = TemplateRefTemplateTypeSINGBOX
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
+}
+
+// Ref: #/components/schemas/TemplateResponse
+type TemplateResponse struct {
+	Response Template `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *TemplateResponse) GetResponse() Template {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *TemplateResponse) SetResponse(val Template) {
+	s.Response = val
+}
+
+func (*TemplateResponse) subscriptionTemplateControllerCreateTemplateRes()    {}
+func (*TemplateResponse) subscriptionTemplateControllerGetTemplateByUuidRes() {}
+func (*TemplateResponse) subscriptionTemplateControllerUpdateTemplateRes()    {}
+
+type TemplateTemplateType string
+
+const (
+	TemplateTemplateTypeXRAYJSON   TemplateTemplateType = "XRAY_JSON"
+	TemplateTemplateTypeXRAYBASE64 TemplateTemplateType = "XRAY_BASE64"
+	TemplateTemplateTypeMIHOMO     TemplateTemplateType = "MIHOMO"
+	TemplateTemplateTypeSTASH      TemplateTemplateType = "STASH"
+	TemplateTemplateTypeCLASH      TemplateTemplateType = "CLASH"
+	TemplateTemplateTypeSINGBOX    TemplateTemplateType = "SINGBOX"
+)
+
+// AllValues returns all TemplateTemplateType values.
+func (TemplateTemplateType) AllValues() []TemplateTemplateType {
+	return []TemplateTemplateType{
+		TemplateTemplateTypeXRAYJSON,
+		TemplateTemplateTypeXRAYBASE64,
+		TemplateTemplateTypeMIHOMO,
+		TemplateTemplateTypeSTASH,
+		TemplateTemplateTypeCLASH,
+		TemplateTemplateTypeSINGBOX,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s TemplateTemplateType) MarshalText() ([]byte, error) {
+	switch s {
+	case TemplateTemplateTypeXRAYJSON:
+		return []byte(s), nil
+	case TemplateTemplateTypeXRAYBASE64:
+		return []byte(s), nil
+	case TemplateTemplateTypeMIHOMO:
+		return []byte(s), nil
+	case TemplateTemplateTypeSTASH:
+		return []byte(s), nil
+	case TemplateTemplateTypeCLASH:
+		return []byte(s), nil
+	case TemplateTemplateTypeSINGBOX:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *TemplateTemplateType) UnmarshalText(data []byte) error {
+	switch TemplateTemplateType(data) {
+	case TemplateTemplateTypeXRAYJSON:
+		*s = TemplateTemplateTypeXRAYJSON
+		return nil
+	case TemplateTemplateTypeXRAYBASE64:
+		*s = TemplateTemplateTypeXRAYBASE64
+		return nil
+	case TemplateTemplateTypeMIHOMO:
+		*s = TemplateTemplateTypeMIHOMO
+		return nil
+	case TemplateTemplateTypeSTASH:
+		*s = TemplateTemplateTypeSTASH
+		return nil
+	case TemplateTemplateTypeCLASH:
+		*s = TemplateTemplateTypeCLASH
+		return nil
+	case TemplateTemplateTypeSINGBOX:
+		*s = TemplateTemplateTypeSINGBOX
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/TgAuthSettings
+type TgAuthSettings struct {
+	Enabled  bool      `json:"enabled"`
+	BotToken NilString `json:"botToken"`
+	AdminIds []string  `json:"adminIds"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *TgAuthSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetBotToken returns the value of BotToken.
+func (s *TgAuthSettings) GetBotToken() NilString {
+	return s.BotToken
+}
+
+// GetAdminIds returns the value of AdminIds.
+func (s *TgAuthSettings) GetAdminIds() []string {
+	return s.AdminIds
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *TgAuthSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetBotToken sets the value of BotToken.
+func (s *TgAuthSettings) SetBotToken(val NilString) {
+	s.BotToken = val
+}
+
+// SetAdminIds sets the value of AdminIds.
+func (s *TgAuthSettings) SetAdminIds(val []string) {
+	s.AdminIds = val
 }
 
 // Ref: #/components/schemas/TokenResponse
@@ -20744,12 +15146,12 @@ type UpdateConfigProfileRequestDtoConfig struct{}
 
 // Ref: #/components/schemas/UpdateExternalSquadRequestDto
 type UpdateExternalSquadRequestDto struct {
-	UUID                 uuid.UUID                                            `json:"uuid"`
-	Name                 OptString                                            `json:"name"`
-	Templates            []UpdateExternalSquadRequestDtoTemplatesItem         `json:"templates"`
-	SubscriptionSettings OptUpdateExternalSquadRequestDtoSubscriptionSettings `json:"subscriptionSettings"`
-	HostOverrides        OptUpdateExternalSquadRequestDtoHostOverrides        `json:"hostOverrides"`
-	ResponseHeaders      OptNilUpdateExternalSquadRequestDtoResponseHeaders   `json:"responseHeaders"`
+	UUID                 uuid.UUID                                          `json:"uuid"`
+	Name                 OptString                                          `json:"name"`
+	Templates            []TemplateRef                                      `json:"templates"`
+	SubscriptionSettings OptNilSubscriptionSettings                         `json:"subscriptionSettings"`
+	HostOverrides        OptNilHostOverride                                 `json:"hostOverrides"`
+	ResponseHeaders      OptNilUpdateExternalSquadRequestDtoResponseHeaders `json:"responseHeaders"`
 }
 
 // GetUUID returns the value of UUID.
@@ -20763,17 +15165,17 @@ func (s *UpdateExternalSquadRequestDto) GetName() OptString {
 }
 
 // GetTemplates returns the value of Templates.
-func (s *UpdateExternalSquadRequestDto) GetTemplates() []UpdateExternalSquadRequestDtoTemplatesItem {
+func (s *UpdateExternalSquadRequestDto) GetTemplates() []TemplateRef {
 	return s.Templates
 }
 
 // GetSubscriptionSettings returns the value of SubscriptionSettings.
-func (s *UpdateExternalSquadRequestDto) GetSubscriptionSettings() OptUpdateExternalSquadRequestDtoSubscriptionSettings {
+func (s *UpdateExternalSquadRequestDto) GetSubscriptionSettings() OptNilSubscriptionSettings {
 	return s.SubscriptionSettings
 }
 
 // GetHostOverrides returns the value of HostOverrides.
-func (s *UpdateExternalSquadRequestDto) GetHostOverrides() OptUpdateExternalSquadRequestDtoHostOverrides {
+func (s *UpdateExternalSquadRequestDto) GetHostOverrides() OptNilHostOverride {
 	return s.HostOverrides
 }
 
@@ -20793,48 +15195,23 @@ func (s *UpdateExternalSquadRequestDto) SetName(val OptString) {
 }
 
 // SetTemplates sets the value of Templates.
-func (s *UpdateExternalSquadRequestDto) SetTemplates(val []UpdateExternalSquadRequestDtoTemplatesItem) {
+func (s *UpdateExternalSquadRequestDto) SetTemplates(val []TemplateRef) {
 	s.Templates = val
 }
 
 // SetSubscriptionSettings sets the value of SubscriptionSettings.
-func (s *UpdateExternalSquadRequestDto) SetSubscriptionSettings(val OptUpdateExternalSquadRequestDtoSubscriptionSettings) {
+func (s *UpdateExternalSquadRequestDto) SetSubscriptionSettings(val OptNilSubscriptionSettings) {
 	s.SubscriptionSettings = val
 }
 
 // SetHostOverrides sets the value of HostOverrides.
-func (s *UpdateExternalSquadRequestDto) SetHostOverrides(val OptUpdateExternalSquadRequestDtoHostOverrides) {
+func (s *UpdateExternalSquadRequestDto) SetHostOverrides(val OptNilHostOverride) {
 	s.HostOverrides = val
 }
 
 // SetResponseHeaders sets the value of ResponseHeaders.
 func (s *UpdateExternalSquadRequestDto) SetResponseHeaders(val OptNilUpdateExternalSquadRequestDtoResponseHeaders) {
 	s.ResponseHeaders = val
-}
-
-type UpdateExternalSquadRequestDtoHostOverrides struct {
-	ServerDescription OptNilString `json:"serverDescription"`
-	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
-}
-
-// GetServerDescription returns the value of ServerDescription.
-func (s *UpdateExternalSquadRequestDtoHostOverrides) GetServerDescription() OptNilString {
-	return s.ServerDescription
-}
-
-// GetVlessRouteId returns the value of VlessRouteId.
-func (s *UpdateExternalSquadRequestDtoHostOverrides) GetVlessRouteId() OptNilInt {
-	return s.VlessRouteId
-}
-
-// SetServerDescription sets the value of ServerDescription.
-func (s *UpdateExternalSquadRequestDtoHostOverrides) SetServerDescription(val OptNilString) {
-	s.ServerDescription = val
-}
-
-// SetVlessRouteId sets the value of VlessRouteId.
-func (s *UpdateExternalSquadRequestDtoHostOverrides) SetVlessRouteId(val OptNilInt) {
-	s.VlessRouteId = val
 }
 
 type UpdateExternalSquadRequestDtoResponseHeaders map[string]string
@@ -20848,217 +15225,10 @@ func (s *UpdateExternalSquadRequestDtoResponseHeaders) init() UpdateExternalSqua
 	return m
 }
 
-type UpdateExternalSquadRequestDtoSubscriptionSettings struct {
-	ProfileTitle                  OptString    `json:"profileTitle"`
-	SupportLink                   OptString    `json:"supportLink"`
-	ProfileUpdateInterval         OptInt       `json:"profileUpdateInterval"`
-	IsProfileWebpageUrlEnabled    OptBool      `json:"isProfileWebpageUrlEnabled"`
-	ServeJsonAtBaseSubscription   OptBool      `json:"serveJsonAtBaseSubscription"`
-	AddUsernameToBaseSubscription OptBool      `json:"addUsernameToBaseSubscription"`
-	IsShowCustomRemarks           OptBool      `json:"isShowCustomRemarks"`
-	HappAnnounce                  OptNilString `json:"happAnnounce"`
-	HappRouting                   OptNilString `json:"happRouting"`
-	RandomizeHosts                OptBool      `json:"randomizeHosts"`
-}
-
-// GetProfileTitle returns the value of ProfileTitle.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetProfileTitle() OptString {
-	return s.ProfileTitle
-}
-
-// GetSupportLink returns the value of SupportLink.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetSupportLink() OptString {
-	return s.SupportLink
-}
-
-// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetProfileUpdateInterval() OptInt {
-	return s.ProfileUpdateInterval
-}
-
-// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetIsProfileWebpageUrlEnabled() OptBool {
-	return s.IsProfileWebpageUrlEnabled
-}
-
-// GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetServeJsonAtBaseSubscription() OptBool {
-	return s.ServeJsonAtBaseSubscription
-}
-
-// GetAddUsernameToBaseSubscription returns the value of AddUsernameToBaseSubscription.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetAddUsernameToBaseSubscription() OptBool {
-	return s.AddUsernameToBaseSubscription
-}
-
-// GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetIsShowCustomRemarks() OptBool {
-	return s.IsShowCustomRemarks
-}
-
-// GetHappAnnounce returns the value of HappAnnounce.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetHappAnnounce() OptNilString {
-	return s.HappAnnounce
-}
-
-// GetHappRouting returns the value of HappRouting.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetHappRouting() OptNilString {
-	return s.HappRouting
-}
-
-// GetRandomizeHosts returns the value of RandomizeHosts.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) GetRandomizeHosts() OptBool {
-	return s.RandomizeHosts
-}
-
-// SetProfileTitle sets the value of ProfileTitle.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetProfileTitle(val OptString) {
-	s.ProfileTitle = val
-}
-
-// SetSupportLink sets the value of SupportLink.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetSupportLink(val OptString) {
-	s.SupportLink = val
-}
-
-// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetProfileUpdateInterval(val OptInt) {
-	s.ProfileUpdateInterval = val
-}
-
-// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetIsProfileWebpageUrlEnabled(val OptBool) {
-	s.IsProfileWebpageUrlEnabled = val
-}
-
-// SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetServeJsonAtBaseSubscription(val OptBool) {
-	s.ServeJsonAtBaseSubscription = val
-}
-
-// SetAddUsernameToBaseSubscription sets the value of AddUsernameToBaseSubscription.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetAddUsernameToBaseSubscription(val OptBool) {
-	s.AddUsernameToBaseSubscription = val
-}
-
-// SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetIsShowCustomRemarks(val OptBool) {
-	s.IsShowCustomRemarks = val
-}
-
-// SetHappAnnounce sets the value of HappAnnounce.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetHappAnnounce(val OptNilString) {
-	s.HappAnnounce = val
-}
-
-// SetHappRouting sets the value of HappRouting.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetHappRouting(val OptNilString) {
-	s.HappRouting = val
-}
-
-// SetRandomizeHosts sets the value of RandomizeHosts.
-func (s *UpdateExternalSquadRequestDtoSubscriptionSettings) SetRandomizeHosts(val OptBool) {
-	s.RandomizeHosts = val
-}
-
-type UpdateExternalSquadRequestDtoTemplatesItem struct {
-	TemplateUuid uuid.UUID                                              `json:"templateUuid"`
-	TemplateType UpdateExternalSquadRequestDtoTemplatesItemTemplateType `json:"templateType"`
-}
-
-// GetTemplateUuid returns the value of TemplateUuid.
-func (s *UpdateExternalSquadRequestDtoTemplatesItem) GetTemplateUuid() uuid.UUID {
-	return s.TemplateUuid
-}
-
-// GetTemplateType returns the value of TemplateType.
-func (s *UpdateExternalSquadRequestDtoTemplatesItem) GetTemplateType() UpdateExternalSquadRequestDtoTemplatesItemTemplateType {
-	return s.TemplateType
-}
-
-// SetTemplateUuid sets the value of TemplateUuid.
-func (s *UpdateExternalSquadRequestDtoTemplatesItem) SetTemplateUuid(val uuid.UUID) {
-	s.TemplateUuid = val
-}
-
-// SetTemplateType sets the value of TemplateType.
-func (s *UpdateExternalSquadRequestDtoTemplatesItem) SetTemplateType(val UpdateExternalSquadRequestDtoTemplatesItemTemplateType) {
-	s.TemplateType = val
-}
-
-type UpdateExternalSquadRequestDtoTemplatesItemTemplateType string
-
-const (
-	UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYJSON   UpdateExternalSquadRequestDtoTemplatesItemTemplateType = "XRAY_JSON"
-	UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYBASE64 UpdateExternalSquadRequestDtoTemplatesItemTemplateType = "XRAY_BASE64"
-	UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeMIHOMO     UpdateExternalSquadRequestDtoTemplatesItemTemplateType = "MIHOMO"
-	UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSTASH      UpdateExternalSquadRequestDtoTemplatesItemTemplateType = "STASH"
-	UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeCLASH      UpdateExternalSquadRequestDtoTemplatesItemTemplateType = "CLASH"
-	UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSINGBOX    UpdateExternalSquadRequestDtoTemplatesItemTemplateType = "SINGBOX"
-)
-
-// AllValues returns all UpdateExternalSquadRequestDtoTemplatesItemTemplateType values.
-func (UpdateExternalSquadRequestDtoTemplatesItemTemplateType) AllValues() []UpdateExternalSquadRequestDtoTemplatesItemTemplateType {
-	return []UpdateExternalSquadRequestDtoTemplatesItemTemplateType{
-		UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYJSON,
-		UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYBASE64,
-		UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeMIHOMO,
-		UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSTASH,
-		UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeCLASH,
-		UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSINGBOX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UpdateExternalSquadRequestDtoTemplatesItemTemplateType) MarshalText() ([]byte, error) {
-	switch s {
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYJSON:
-		return []byte(s), nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYBASE64:
-		return []byte(s), nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeMIHOMO:
-		return []byte(s), nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSTASH:
-		return []byte(s), nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeCLASH:
-		return []byte(s), nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSINGBOX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateExternalSquadRequestDtoTemplatesItemTemplateType) UnmarshalText(data []byte) error {
-	switch UpdateExternalSquadRequestDtoTemplatesItemTemplateType(data) {
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYJSON:
-		*s = UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYJSON
-		return nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYBASE64:
-		*s = UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeXRAYBASE64
-		return nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeMIHOMO:
-		*s = UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeMIHOMO
-		return nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSTASH:
-		*s = UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSTASH
-		return nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeCLASH:
-		*s = UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeCLASH
-		return nil
-	case UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSINGBOX:
-		*s = UpdateExternalSquadRequestDtoTemplatesItemTemplateTypeSINGBOX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
 // Ref: #/components/schemas/UpdateHostRequestDto
 type UpdateHostRequestDto struct {
 	UUID              uuid.UUID                             `json:"uuid"`
-	Inbound           OptUpdateHostRequestDtoInbound        `json:"inbound"`
+	Inbound           OptInboundRef                         `json:"inbound"`
 	Remark            OptString                             `json:"remark"`
 	Address           OptString                             `json:"address"`
 	Port              OptInt                                `json:"port"`
@@ -21091,7 +15261,7 @@ func (s *UpdateHostRequestDto) GetUUID() uuid.UUID {
 }
 
 // GetInbound returns the value of Inbound.
-func (s *UpdateHostRequestDto) GetInbound() OptUpdateHostRequestDtoInbound {
+func (s *UpdateHostRequestDto) GetInbound() OptInboundRef {
 	return s.Inbound
 }
 
@@ -21211,7 +15381,7 @@ func (s *UpdateHostRequestDto) SetUUID(val uuid.UUID) {
 }
 
 // SetInbound sets the value of Inbound.
-func (s *UpdateHostRequestDto) SetInbound(val OptUpdateHostRequestDtoInbound) {
+func (s *UpdateHostRequestDto) SetInbound(val OptInboundRef) {
 	s.Inbound = val
 }
 
@@ -21484,31 +15654,6 @@ func (s *UpdateHostRequestDtoFingerprint) UnmarshalText(data []byte) error {
 	}
 }
 
-type UpdateHostRequestDtoInbound struct {
-	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
-	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
-}
-
-// GetConfigProfileUuid returns the value of ConfigProfileUuid.
-func (s *UpdateHostRequestDtoInbound) GetConfigProfileUuid() uuid.UUID {
-	return s.ConfigProfileUuid
-}
-
-// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
-func (s *UpdateHostRequestDtoInbound) GetConfigProfileInboundUuid() uuid.UUID {
-	return s.ConfigProfileInboundUuid
-}
-
-// SetConfigProfileUuid sets the value of ConfigProfileUuid.
-func (s *UpdateHostRequestDtoInbound) SetConfigProfileUuid(val uuid.UUID) {
-	s.ConfigProfileUuid = val
-}
-
-// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
-func (s *UpdateHostRequestDtoInbound) SetConfigProfileInboundUuid(val uuid.UUID) {
-	s.ConfigProfileInboundUuid = val
-}
-
 type UpdateHostRequestDtoSecurityLayer string
 
 const (
@@ -21670,18 +15815,18 @@ func (s *UpdateInternalSquadRequestDto) SetInbounds(val []uuid.UUID) {
 
 // Ref: #/components/schemas/UpdateNodeRequestDto
 type UpdateNodeRequestDto struct {
-	UUID                    uuid.UUID                            `json:"uuid"`
-	Name                    OptString                            `json:"name"`
-	Address                 OptString                            `json:"address"`
-	Port                    OptFloat64                           `json:"port"`
-	IsTrafficTrackingActive OptBool                              `json:"isTrafficTrackingActive"`
-	TrafficLimitBytes       OptFloat64                           `json:"trafficLimitBytes"`
-	NotifyPercent           OptFloat64                           `json:"notifyPercent"`
-	TrafficResetDay         OptFloat64                           `json:"trafficResetDay"`
-	CountryCode             OptString                            `json:"countryCode"`
-	ConsumptionMultiplier   OptFloat64                           `json:"consumptionMultiplier"`
-	ConfigProfile           OptUpdateNodeRequestDtoConfigProfile `json:"configProfile"`
-	ProviderUuid            OptNilUUID                           `json:"providerUuid"`
+	UUID                    uuid.UUID           `json:"uuid"`
+	Name                    OptString           `json:"name"`
+	Address                 OptString           `json:"address"`
+	Port                    OptFloat64          `json:"port"`
+	IsTrafficTrackingActive OptBool             `json:"isTrafficTrackingActive"`
+	TrafficLimitBytes       OptFloat64          `json:"trafficLimitBytes"`
+	NotifyPercent           OptFloat64          `json:"notifyPercent"`
+	TrafficResetDay         OptFloat64          `json:"trafficResetDay"`
+	CountryCode             OptString           `json:"countryCode"`
+	ConsumptionMultiplier   OptFloat64          `json:"consumptionMultiplier"`
+	ConfigProfile           OptConfigProfileRef `json:"configProfile"`
+	ProviderUuid            OptNilUUID          `json:"providerUuid"`
 }
 
 // GetUUID returns the value of UUID.
@@ -21735,7 +15880,7 @@ func (s *UpdateNodeRequestDto) GetConsumptionMultiplier() OptFloat64 {
 }
 
 // GetConfigProfile returns the value of ConfigProfile.
-func (s *UpdateNodeRequestDto) GetConfigProfile() OptUpdateNodeRequestDtoConfigProfile {
+func (s *UpdateNodeRequestDto) GetConfigProfile() OptConfigProfileRef {
 	return s.ConfigProfile
 }
 
@@ -21795,7 +15940,7 @@ func (s *UpdateNodeRequestDto) SetConsumptionMultiplier(val OptFloat64) {
 }
 
 // SetConfigProfile sets the value of ConfigProfile.
-func (s *UpdateNodeRequestDto) SetConfigProfile(val OptUpdateNodeRequestDtoConfigProfile) {
+func (s *UpdateNodeRequestDto) SetConfigProfile(val OptConfigProfileRef) {
 	s.ConfigProfile = val
 }
 
@@ -21804,387 +15949,63 @@ func (s *UpdateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
 	s.ProviderUuid = val
 }
 
-type UpdateNodeRequestDtoConfigProfile struct {
-	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
-	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
-}
-
-// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *UpdateNodeRequestDtoConfigProfile) GetActiveConfigProfileUuid() uuid.UUID {
-	return s.ActiveConfigProfileUuid
-}
-
-// GetActiveInbounds returns the value of ActiveInbounds.
-func (s *UpdateNodeRequestDtoConfigProfile) GetActiveInbounds() []uuid.UUID {
-	return s.ActiveInbounds
-}
-
-// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *UpdateNodeRequestDtoConfigProfile) SetActiveConfigProfileUuid(val uuid.UUID) {
-	s.ActiveConfigProfileUuid = val
-}
-
-// SetActiveInbounds sets the value of ActiveInbounds.
-func (s *UpdateNodeRequestDtoConfigProfile) SetActiveInbounds(val []uuid.UUID) {
-	s.ActiveInbounds = val
-}
-
 // Ref: #/components/schemas/UpdateRemnawaveSettingsRequestDto
 type UpdateRemnawaveSettingsRequestDto struct {
-	PasskeySettings  OptUpdateRemnawaveSettingsRequestDtoPasskeySettings  `json:"passkeySettings"`
-	Oauth2Settings   OptUpdateRemnawaveSettingsRequestDtoOauth2Settings   `json:"oauth2Settings"`
-	TgAuthSettings   OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings   `json:"tgAuthSettings"`
-	PasswordSettings OptUpdateRemnawaveSettingsRequestDtoPasswordSettings `json:"passwordSettings"`
-	BrandingSettings OptUpdateRemnawaveSettingsRequestDtoBrandingSettings `json:"brandingSettings"`
+	PasskeySettings  OptNilPasskeySettings  `json:"passkeySettings"`
+	Oauth2Settings   OptNilOauth2Settings   `json:"oauth2Settings"`
+	TgAuthSettings   OptNilTgAuthSettings   `json:"tgAuthSettings"`
+	PasswordSettings OptNilPasswordSettings `json:"passwordSettings"`
+	BrandingSettings OptNilBrandingSettings `json:"brandingSettings"`
 }
 
 // GetPasskeySettings returns the value of PasskeySettings.
-func (s *UpdateRemnawaveSettingsRequestDto) GetPasskeySettings() OptUpdateRemnawaveSettingsRequestDtoPasskeySettings {
+func (s *UpdateRemnawaveSettingsRequestDto) GetPasskeySettings() OptNilPasskeySettings {
 	return s.PasskeySettings
 }
 
 // GetOauth2Settings returns the value of Oauth2Settings.
-func (s *UpdateRemnawaveSettingsRequestDto) GetOauth2Settings() OptUpdateRemnawaveSettingsRequestDtoOauth2Settings {
+func (s *UpdateRemnawaveSettingsRequestDto) GetOauth2Settings() OptNilOauth2Settings {
 	return s.Oauth2Settings
 }
 
 // GetTgAuthSettings returns the value of TgAuthSettings.
-func (s *UpdateRemnawaveSettingsRequestDto) GetTgAuthSettings() OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings {
+func (s *UpdateRemnawaveSettingsRequestDto) GetTgAuthSettings() OptNilTgAuthSettings {
 	return s.TgAuthSettings
 }
 
 // GetPasswordSettings returns the value of PasswordSettings.
-func (s *UpdateRemnawaveSettingsRequestDto) GetPasswordSettings() OptUpdateRemnawaveSettingsRequestDtoPasswordSettings {
+func (s *UpdateRemnawaveSettingsRequestDto) GetPasswordSettings() OptNilPasswordSettings {
 	return s.PasswordSettings
 }
 
 // GetBrandingSettings returns the value of BrandingSettings.
-func (s *UpdateRemnawaveSettingsRequestDto) GetBrandingSettings() OptUpdateRemnawaveSettingsRequestDtoBrandingSettings {
+func (s *UpdateRemnawaveSettingsRequestDto) GetBrandingSettings() OptNilBrandingSettings {
 	return s.BrandingSettings
 }
 
 // SetPasskeySettings sets the value of PasskeySettings.
-func (s *UpdateRemnawaveSettingsRequestDto) SetPasskeySettings(val OptUpdateRemnawaveSettingsRequestDtoPasskeySettings) {
+func (s *UpdateRemnawaveSettingsRequestDto) SetPasskeySettings(val OptNilPasskeySettings) {
 	s.PasskeySettings = val
 }
 
 // SetOauth2Settings sets the value of Oauth2Settings.
-func (s *UpdateRemnawaveSettingsRequestDto) SetOauth2Settings(val OptUpdateRemnawaveSettingsRequestDtoOauth2Settings) {
+func (s *UpdateRemnawaveSettingsRequestDto) SetOauth2Settings(val OptNilOauth2Settings) {
 	s.Oauth2Settings = val
 }
 
 // SetTgAuthSettings sets the value of TgAuthSettings.
-func (s *UpdateRemnawaveSettingsRequestDto) SetTgAuthSettings(val OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) {
+func (s *UpdateRemnawaveSettingsRequestDto) SetTgAuthSettings(val OptNilTgAuthSettings) {
 	s.TgAuthSettings = val
 }
 
 // SetPasswordSettings sets the value of PasswordSettings.
-func (s *UpdateRemnawaveSettingsRequestDto) SetPasswordSettings(val OptUpdateRemnawaveSettingsRequestDtoPasswordSettings) {
+func (s *UpdateRemnawaveSettingsRequestDto) SetPasswordSettings(val OptNilPasswordSettings) {
 	s.PasswordSettings = val
 }
 
 // SetBrandingSettings sets the value of BrandingSettings.
-func (s *UpdateRemnawaveSettingsRequestDto) SetBrandingSettings(val OptUpdateRemnawaveSettingsRequestDtoBrandingSettings) {
+func (s *UpdateRemnawaveSettingsRequestDto) SetBrandingSettings(val OptNilBrandingSettings) {
 	s.BrandingSettings = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoBrandingSettings struct {
-	Title   NilString `json:"title"`
-	LogoUrl NilURI    `json:"logoUrl"`
-}
-
-// GetTitle returns the value of Title.
-func (s *UpdateRemnawaveSettingsRequestDtoBrandingSettings) GetTitle() NilString {
-	return s.Title
-}
-
-// GetLogoUrl returns the value of LogoUrl.
-func (s *UpdateRemnawaveSettingsRequestDtoBrandingSettings) GetLogoUrl() NilURI {
-	return s.LogoUrl
-}
-
-// SetTitle sets the value of Title.
-func (s *UpdateRemnawaveSettingsRequestDtoBrandingSettings) SetTitle(val NilString) {
-	s.Title = val
-}
-
-// SetLogoUrl sets the value of LogoUrl.
-func (s *UpdateRemnawaveSettingsRequestDtoBrandingSettings) SetLogoUrl(val NilURI) {
-	s.LogoUrl = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoOauth2Settings struct {
-	Github   UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub   `json:"github"`
-	Pocketid UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid `json:"pocketid"`
-	Yandex   UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex   `json:"yandex"`
-}
-
-// GetGithub returns the value of Github.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2Settings) GetGithub() UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub {
-	return s.Github
-}
-
-// GetPocketid returns the value of Pocketid.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2Settings) GetPocketid() UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid {
-	return s.Pocketid
-}
-
-// GetYandex returns the value of Yandex.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2Settings) GetYandex() UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex {
-	return s.Yandex
-}
-
-// SetGithub sets the value of Github.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2Settings) SetGithub(val UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) {
-	s.Github = val
-}
-
-// SetPocketid sets the value of Pocketid.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2Settings) SetPocketid(val UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) {
-	s.Pocketid = val
-}
-
-// SetYandex sets the value of Yandex.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2Settings) SetYandex(val UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) {
-	s.Yandex = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	AllowedEmails []string  `json:"allowedEmails"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetClientId returns the value of ClientId.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) GetClientId() NilString {
-	return s.ClientId
-}
-
-// GetClientSecret returns the value of ClientSecret.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) GetClientSecret() NilString {
-	return s.ClientSecret
-}
-
-// GetAllowedEmails returns the value of AllowedEmails.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) GetAllowedEmails() []string {
-	return s.AllowedEmails
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetClientId sets the value of ClientId.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) SetClientId(val NilString) {
-	s.ClientId = val
-}
-
-// SetClientSecret sets the value of ClientSecret.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) SetClientSecret(val NilString) {
-	s.ClientSecret = val
-}
-
-// SetAllowedEmails sets the value of AllowedEmails.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsGithub) SetAllowedEmails(val []string) {
-	s.AllowedEmails = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	PlainDomain   NilString `json:"plainDomain"`
-	AllowedEmails []string  `json:"allowedEmails"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetClientId returns the value of ClientId.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) GetClientId() NilString {
-	return s.ClientId
-}
-
-// GetClientSecret returns the value of ClientSecret.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) GetClientSecret() NilString {
-	return s.ClientSecret
-}
-
-// GetPlainDomain returns the value of PlainDomain.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) GetPlainDomain() NilString {
-	return s.PlainDomain
-}
-
-// GetAllowedEmails returns the value of AllowedEmails.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) GetAllowedEmails() []string {
-	return s.AllowedEmails
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetClientId sets the value of ClientId.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) SetClientId(val NilString) {
-	s.ClientId = val
-}
-
-// SetClientSecret sets the value of ClientSecret.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) SetClientSecret(val NilString) {
-	s.ClientSecret = val
-}
-
-// SetPlainDomain sets the value of PlainDomain.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) SetPlainDomain(val NilString) {
-	s.PlainDomain = val
-}
-
-// SetAllowedEmails sets the value of AllowedEmails.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsPocketid) SetAllowedEmails(val []string) {
-	s.AllowedEmails = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	AllowedEmails []string  `json:"allowedEmails"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetClientId returns the value of ClientId.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) GetClientId() NilString {
-	return s.ClientId
-}
-
-// GetClientSecret returns the value of ClientSecret.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) GetClientSecret() NilString {
-	return s.ClientSecret
-}
-
-// GetAllowedEmails returns the value of AllowedEmails.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) GetAllowedEmails() []string {
-	return s.AllowedEmails
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetClientId sets the value of ClientId.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) SetClientId(val NilString) {
-	s.ClientId = val
-}
-
-// SetClientSecret sets the value of ClientSecret.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) SetClientSecret(val NilString) {
-	s.ClientSecret = val
-}
-
-// SetAllowedEmails sets the value of AllowedEmails.
-func (s *UpdateRemnawaveSettingsRequestDtoOauth2SettingsYandex) SetAllowedEmails(val []string) {
-	s.AllowedEmails = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoPasskeySettings struct {
-	Enabled bool      `json:"enabled"`
-	RpId    NilString `json:"rpId"`
-	Origin  NilString `json:"origin"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoPasskeySettings) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetRpId returns the value of RpId.
-func (s *UpdateRemnawaveSettingsRequestDtoPasskeySettings) GetRpId() NilString {
-	return s.RpId
-}
-
-// GetOrigin returns the value of Origin.
-func (s *UpdateRemnawaveSettingsRequestDtoPasskeySettings) GetOrigin() NilString {
-	return s.Origin
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoPasskeySettings) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetRpId sets the value of RpId.
-func (s *UpdateRemnawaveSettingsRequestDtoPasskeySettings) SetRpId(val NilString) {
-	s.RpId = val
-}
-
-// SetOrigin sets the value of Origin.
-func (s *UpdateRemnawaveSettingsRequestDtoPasskeySettings) SetOrigin(val NilString) {
-	s.Origin = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoPasswordSettings struct {
-	Enabled bool `json:"enabled"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoPasswordSettings) GetEnabled() bool {
-	return s.Enabled
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoPasswordSettings) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-type UpdateRemnawaveSettingsRequestDtoTgAuthSettings struct {
-	Enabled  bool      `json:"enabled"`
-	BotToken NilString `json:"botToken"`
-	AdminIds []string  `json:"adminIds"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoTgAuthSettings) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetBotToken returns the value of BotToken.
-func (s *UpdateRemnawaveSettingsRequestDtoTgAuthSettings) GetBotToken() NilString {
-	return s.BotToken
-}
-
-// GetAdminIds returns the value of AdminIds.
-func (s *UpdateRemnawaveSettingsRequestDtoTgAuthSettings) GetAdminIds() []string {
-	return s.AdminIds
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateRemnawaveSettingsRequestDtoTgAuthSettings) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetBotToken sets the value of BotToken.
-func (s *UpdateRemnawaveSettingsRequestDtoTgAuthSettings) SetBotToken(val NilString) {
-	s.BotToken = val
-}
-
-// SetAdminIds sets the value of AdminIds.
-func (s *UpdateRemnawaveSettingsRequestDtoTgAuthSettings) SetAdminIds(val []string) {
-	s.AdminIds = val
 }
 
 // Ref: #/components/schemas/UpdateSubscriptionSettingsRequestDto
@@ -22204,7 +16025,7 @@ type UpdateSubscriptionSettingsRequestDto struct {
 	DisabledUsersRemarks          []string                                                     `json:"disabledUsersRemarks"`
 	CustomResponseHeaders         OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders `json:"customResponseHeaders"`
 	RandomizeHosts                OptBool                                                      `json:"randomizeHosts"`
-	ResponseRules                 OptUpdateSubscriptionSettingsRequestDtoResponseRules         `json:"responseRules"`
+	ResponseRules                 OptResponseRules                                             `json:"responseRules"`
 }
 
 // GetUUID returns the value of UUID.
@@ -22283,7 +16104,7 @@ func (s *UpdateSubscriptionSettingsRequestDto) GetRandomizeHosts() OptBool {
 }
 
 // GetResponseRules returns the value of ResponseRules.
-func (s *UpdateSubscriptionSettingsRequestDto) GetResponseRules() OptUpdateSubscriptionSettingsRequestDtoResponseRules {
+func (s *UpdateSubscriptionSettingsRequestDto) GetResponseRules() OptResponseRules {
 	return s.ResponseRules
 }
 
@@ -22363,7 +16184,7 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetRandomizeHosts(val OptBool) {
 }
 
 // SetResponseRules sets the value of ResponseRules.
-func (s *UpdateSubscriptionSettingsRequestDto) SetResponseRules(val OptUpdateSubscriptionSettingsRequestDtoResponseRules) {
+func (s *UpdateSubscriptionSettingsRequestDto) SetResponseRules(val OptResponseRules) {
 	s.ResponseRules = val
 }
 
@@ -22376,615 +16197,6 @@ func (s *UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) init() Updat
 		*s = m
 	}
 	return m
-}
-
-type UpdateSubscriptionSettingsRequestDtoResponseRules struct {
-	// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-	// config. Currently supported version is **1**."}.
-	Version UpdateSubscriptionSettingsRequestDtoResponseRulesVersion `json:"version"`
-	// {"title":"Response Rules","markdownDescription":"Array of **response rules**. Rules are evaluated
-	// in order and the first rule that matches is applied. If no rule matches, request will be blocked
-	// by default.\n\n**Example:**\n```json\n[\n  {\n    \"name\": \"Blank rule\",\n    \"description\":
-	// \"Blank rule\",\n    \"operator\": \"AND\",\n    \"enabled\": true,\n    \"conditions\": [],\n
-	// \"responseType\": \"BLOCK\",\n    \"responseModifications\": {\n      \"headers\": []\n    }\n
-	// }\n]\n```","defaultSnippets":[]}.
-	Rules []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem `json:"rules"`
-}
-
-// GetVersion returns the value of Version.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRules) GetVersion() UpdateSubscriptionSettingsRequestDtoResponseRulesVersion {
-	return s.Version
-}
-
-// GetRules returns the value of Rules.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRules) GetRules() []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem {
-	return s.Rules
-}
-
-// SetVersion sets the value of Version.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRules) SetVersion(val UpdateSubscriptionSettingsRequestDtoResponseRulesVersion) {
-	s.Version = val
-}
-
-// SetRules sets the value of Rules.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRules) SetRules(val []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) {
-	s.Rules = val
-}
-
-// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
-// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
-// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
-// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
-// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
-// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
-// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
-// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
-// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
-// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
-// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
-// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
-//
-//	}\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
-//
-// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
-// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
-// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
-// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
-// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
-// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
-// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
-// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
-// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
-// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
-// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
-// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
-// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
-// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
-// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
-//
-//	\"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
-//
-// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
-// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
-// \"BLOCK\"\n}\n```"}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem struct {
-	// {"markdownDescription":"Name of the response rule."}.
-	Name string `json:"name"`
-	// {"markdownDescription":"Description of the response rule. Optional."}.
-	Description OptString `json:"description"`
-	// {"markdownDescription":"Control whether the response rule is enabled or disabled. \n\n - `true`
-	// the rule will be applied. \n\n - `false` the rule will be always ignored."}.
-	Enabled bool `json:"enabled"`
-	// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-	Operator UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator `json:"operator"`
-	// {"markdownDescription":"Array of conditions to check against the request headers. Conditions are
-	// applied with **operator**. If conditions are empty, the rule will be matched."}.
-	Conditions []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem `json:"conditions"`
-	// {"errorMessage":"Invalid response type. Please select a valid response type.",
-	// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-	// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-	// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-	// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-	//  (Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-	// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-	// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-	// template) Format which is used by Singbox client application.","Return **subscription** as browser
-	// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-	// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-	// the socket connection."]}.
-	ResponseType UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType `json:"responseType"`
-	// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-	ResponseModifications OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications `json:"responseModifications"`
-}
-
-// GetName returns the value of Name.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetName() string {
-	return s.Name
-}
-
-// GetDescription returns the value of Description.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetDescription() OptString {
-	return s.Description
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetOperator returns the value of Operator.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetOperator() UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator {
-	return s.Operator
-}
-
-// GetConditions returns the value of Conditions.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetConditions() []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem {
-	return s.Conditions
-}
-
-// GetResponseType returns the value of ResponseType.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetResponseType() UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType {
-	return s.ResponseType
-}
-
-// GetResponseModifications returns the value of ResponseModifications.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) GetResponseModifications() OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications {
-	return s.ResponseModifications
-}
-
-// SetName sets the value of Name.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetDescription sets the value of Description.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetDescription(val OptString) {
-	s.Description = val
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetOperator(val UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator) {
-	s.Operator = val
-}
-
-// SetConditions sets the value of Conditions.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetConditions(val []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) {
-	s.Conditions = val
-}
-
-// SetResponseType sets the value of ResponseType.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetResponseType(val UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType) {
-	s.ResponseType = val
-}
-
-// SetResponseModifications sets the value of ResponseModifications.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItem) SetResponseModifications(val OptUpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) {
-	s.ResponseModifications = val
-}
-
-// {"markdownDescription":"Condition to check against the **headerName**.",
-// "defaultSnippets":[{"label":"Examples: Check if header contains \"text/html\"",
-// "markdownDescription":"Condition to check if **headerName** contains \"text/html\"",
-// "body":{"headerName":"accept","operator":"CONTAINS","value":"text/html","caseSensitive":true}}]}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem struct {
-	// {"markdownDescription":"**Name** of the HTTP header to check. Must comply with RFC 7230."}.
-	HeaderName string `json:"headerName"`
-	// {"errorMessage":"Invalid operator. Please select a valid operator.",
-	// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-	// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-	// string. `string === value`","Ensures the header value does not exactly match the specified string.
-	// `string !== value`","Checks if the header value contains the specified string as a substring.
-	// `string.includes()`","Verifies the header value does not contain the specified string as a
-	// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-	//  `string.startsWith()`","Validates that the header value does not begin with the specified string.
-	// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-	// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-	// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-	// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-	// pattern. `!regex.test()`"]}.
-	Operator UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator `json:"operator"`
-	// {"markdownDescription":"**Value** to check against the **headerName**."}.
-	Value string `json:"value"`
-	// {"markdownDescription":"Whether the value is **case sensitive**. \n\n - `true`: the value will be
-	// compared as is. \n\n - `false`: the value will be lowercased **before** comparison."}.
-	CaseSensitive bool `json:"caseSensitive"`
-}
-
-// GetHeaderName returns the value of HeaderName.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) GetHeaderName() string {
-	return s.HeaderName
-}
-
-// GetOperator returns the value of Operator.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) GetOperator() UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator {
-	return s.Operator
-}
-
-// GetValue returns the value of Value.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) GetValue() string {
-	return s.Value
-}
-
-// GetCaseSensitive returns the value of CaseSensitive.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) GetCaseSensitive() bool {
-	return s.CaseSensitive
-}
-
-// SetHeaderName sets the value of HeaderName.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) SetHeaderName(val string) {
-	s.HeaderName = val
-}
-
-// SetOperator sets the value of Operator.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) SetOperator(val UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator) {
-	s.Operator = val
-}
-
-// SetValue sets the value of Value.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) SetValue(val string) {
-	s.Value = val
-}
-
-// SetCaseSensitive sets the value of CaseSensitive.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItem) SetCaseSensitive(val bool) {
-	s.CaseSensitive = val
-}
-
-// {"errorMessage":"Invalid operator. Please select a valid operator.",
-// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-// string. `string === value`","Ensures the header value does not exactly match the specified string.
-// `string !== value`","Checks if the header value contains the specified string as a substring.
-// `string.includes()`","Verifies the header value does not contain the specified string as a
-// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-//
-//	`string.startsWith()`","Validates that the header value does not begin with the specified string.
-//
-// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-// pattern. `!regex.test()`"]}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator string
-
-const (
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS        UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "EQUALS"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS     UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_EQUALS"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS      UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "CONTAINS"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS   UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_CONTAINS"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH    UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "STARTS_WITH"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_STARTS_WITH"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH      UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "ENDS_WITH"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH   UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_ENDS_WITH"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX         UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "REGEX"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX      UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator = "NOT_REGEX"
-)
-
-// AllValues returns all UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator values.
-func (UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator) AllValues() []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator {
-	return []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator{
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator) UnmarshalText(data []byte) error {
-	switch UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperator(data) {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorEQUALS
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTEQUALS
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorCONTAINS
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTCONTAINS
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorSTARTSWITH
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTSTARTSWITH
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorENDSWITH
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTENDSWITH
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorREGEX
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemConditionsItemOperatorNOTREGEX
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator string
-
-const (
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorAND UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator = "AND"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorOR  UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator = "OR"
-)
-
-// AllValues returns all UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator values.
-func (UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator) AllValues() []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator {
-	return []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator{
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorAND,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorOR,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator) MarshalText() ([]byte, error) {
-	switch s {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorAND:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorOR:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator) UnmarshalText(data []byte) error {
-	switch UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperator(data) {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorAND:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorAND
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorOR:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemOperatorOR
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications struct {
-	// {"defaultSnippets":[{"label":"Examples: Add custom header","markdownDescription":"Add a custom
-	// header to the response","body":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Array of headers to be added when the rule is matched."}.
-	Headers []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem `json:"headers"`
-	// {"markdownDescription":"Override the subscription template with the given name. If not provided,
-	// the default subscription template will be used. If the template name is not found, the default
-	// subscription template for this type will be used. **This modification have higher priority than
-	// settings from External Squads.**"}.
-	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
-}
-
-// GetHeaders returns the value of Headers.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) GetHeaders() []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem {
-	return s.Headers
-}
-
-// GetSubscriptionTemplate returns the value of SubscriptionTemplate.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) GetSubscriptionTemplate() OptString {
-	return s.SubscriptionTemplate
-}
-
-// SetHeaders sets the value of Headers.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) SetHeaders(val []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) {
-	s.Headers = val
-}
-
-// SetSubscriptionTemplate sets the value of SubscriptionTemplate.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModifications) SetSubscriptionTemplate(val OptString) {
-	s.SubscriptionTemplate = val
-}
-
-// {"markdownDescription":"**Key** and **value** of the response header will be added to the response.
-// "}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem struct {
-	// {"markdownDescription":"Key of the response header. Must comply with RFC 7230."}.
-	Key string `json:"key"`
-	// {"markdownDescription":"Value of the response header. "}.
-	Value string `json:"value"`
-}
-
-// GetKey returns the value of Key.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) GetKey() string {
-	return s.Key
-}
-
-// GetValue returns the value of Value.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) GetValue() string {
-	return s.Value
-}
-
-// SetKey sets the value of Key.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) SetKey(val string) {
-	s.Key = val
-}
-
-// SetValue sets the value of Value.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseModificationsHeadersItem) SetValue(val string) {
-	s.Value = val
-}
-
-// {"errorMessage":"Invalid response type. Please select a valid response type.",
-// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-//
-//	(Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-//
-// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-// template) Format which is used by Singbox client application.","Return **subscription** as browser
-// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-// the socket connection."]}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType string
-
-const (
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON      UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "XRAY_JSON"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64    UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "XRAY_BASE64"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeMIHOMO        UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "MIHOMO"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTASH         UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "STASH"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeCLASH         UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "CLASH"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSINGBOX       UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "SINGBOX"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBROWSER       UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "BROWSER"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBLOCK         UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "BLOCK"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404 UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "STATUS_CODE_404"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451 UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "STATUS_CODE_451"
-	UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP    UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType = "SOCKET_DROP"
-)
-
-// AllValues returns all UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType values.
-func (UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType) AllValues() []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType {
-	return []UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType{
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeMIHOMO,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTASH,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeCLASH,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSINGBOX,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBROWSER,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBLOCK,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451,
-		UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType) MarshalText() ([]byte, error) {
-	switch s {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeMIHOMO:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTASH:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeCLASH:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSINGBOX:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBROWSER:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBLOCK:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451:
-		return []byte(s), nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType) UnmarshalText(data []byte) error {
-	switch UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseType(data) {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYJSON
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeXRAYBASE64
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeMIHOMO:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeMIHOMO
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTASH:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTASH
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeCLASH:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeCLASH
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSINGBOX:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSINGBOX
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBROWSER:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBROWSER
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBLOCK:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeBLOCK
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE404
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSTATUSCODE451
-		return nil
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesRulesItemResponseTypeSOCKETDROP
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-// config. Currently supported version is **1**."}.
-type UpdateSubscriptionSettingsRequestDtoResponseRulesVersion string
-
-const (
-	UpdateSubscriptionSettingsRequestDtoResponseRulesVersion1 UpdateSubscriptionSettingsRequestDtoResponseRulesVersion = "1"
-)
-
-// AllValues returns all UpdateSubscriptionSettingsRequestDtoResponseRulesVersion values.
-func (UpdateSubscriptionSettingsRequestDtoResponseRulesVersion) AllValues() []UpdateSubscriptionSettingsRequestDtoResponseRulesVersion {
-	return []UpdateSubscriptionSettingsRequestDtoResponseRulesVersion{
-		UpdateSubscriptionSettingsRequestDtoResponseRulesVersion1,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UpdateSubscriptionSettingsRequestDtoResponseRulesVersion) MarshalText() ([]byte, error) {
-	switch s {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesVersion1:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateSubscriptionSettingsRequestDtoResponseRulesVersion) UnmarshalText(data []byte) error {
-	switch UpdateSubscriptionSettingsRequestDtoResponseRulesVersion(data) {
-	case UpdateSubscriptionSettingsRequestDtoResponseRulesVersion1:
-		*s = UpdateSubscriptionSettingsRequestDtoResponseRulesVersion1
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
 }
 
 // Ref: #/components/schemas/UpdateTemplateRequestDto
@@ -23288,18 +16500,364 @@ func (s *UpdateUserRequestDtoTrafficLimitStrategy) UnmarshalText(data []byte) er
 	}
 }
 
+// Ref: #/components/schemas/User
+type User struct {
+	UUID                     uuid.UUID     `json:"uuid"`
+	ShortUuid                string        `json:"shortUuid"`
+	Username                 string        `json:"username"`
+	Status                   OptUserStatus `json:"status"`
+	UsedTrafficBytes         float64       `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64       `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt        `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy   OptUserTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                   `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                 `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                   `json:"expireAt"`
+	OnlineAt               NilDateTime                 `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                 `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                 `json:"lastTrafficResetAt"`
+	TrojanPassword         string                      `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                   `json:"vlessUuid"`
+	SsPassword             string                      `json:"ssPassword"`
+	Description            NilString                   `json:"description"`
+	Tag                    NilString                   `json:"tag"`
+	TelegramId             NilInt                      `json:"telegramId"`
+	Email                  NilString                   `json:"email"`
+	HwidDeviceLimit        NilInt                      `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                 `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                      `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                   `json:"createdAt"`
+	UpdatedAt              time.Time                   `json:"updatedAt"`
+	ActiveInternalSquads   []ActiveInternalSquad       `json:"activeInternalSquads"`
+	ExternalSquadUuid      NilUUID                     `json:"externalSquadUuid"`
+	SubscriptionUrl        string                      `json:"subscriptionUrl"`
+	LastConnectedNode      NilLastConnectedNodeItem    `json:"lastConnectedNode"`
+	Happ                   HappItem                    `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *User) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *User) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *User) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *User) GetStatus() OptUserStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *User) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *User) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *User) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *User) GetTrafficLimitStrategy() OptUserTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *User) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *User) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *User) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *User) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *User) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *User) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *User) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *User) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *User) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *User) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *User) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *User) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *User) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *User) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *User) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *User) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *User) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *User) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *User) GetActiveInternalSquads() []ActiveInternalSquad {
+	return s.ActiveInternalSquads
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *User) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *User) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *User) GetLastConnectedNode() NilLastConnectedNodeItem {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *User) GetHapp() HappItem {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *User) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *User) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *User) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *User) SetStatus(val OptUserStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *User) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *User) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *User) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *User) SetTrafficLimitStrategy(val OptUserTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *User) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *User) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *User) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *User) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *User) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *User) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *User) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *User) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *User) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *User) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *User) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *User) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *User) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *User) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *User) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *User) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *User) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *User) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *User) SetActiveInternalSquads(val []ActiveInternalSquad) {
+	s.ActiveInternalSquads = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *User) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *User) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *User) SetLastConnectedNode(val NilLastConnectedNodeItem) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *User) SetHapp(val HappItem) {
+	s.Happ = val
+}
+
 // Ref: #/components/schemas/UserResponse
 type UserResponse struct {
-	Response UserResponseResponse `json:"response"`
+	Response User `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *UserResponse) GetResponse() UserResponseResponse {
+func (s *UserResponse) GetResponse() User {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *UserResponse) SetResponse(val UserResponseResponse) {
+func (s *UserResponse) SetResponse(val User) {
 	s.Response = val
 }
 
@@ -23313,455 +16871,35 @@ func (*UserResponse) usersControllerResetUserTrafficRes()       {}
 func (*UserResponse) usersControllerRevokeUserSubscriptionRes() {}
 func (*UserResponse) usersControllerUpdateUserRes()             {}
 
-type UserResponseResponse struct {
-	UUID                     uuid.UUID                     `json:"uuid"`
-	ShortUuid                string                        `json:"shortUuid"`
-	Username                 string                        `json:"username"`
-	Status                   OptUserResponseResponseStatus `json:"status"`
-	UsedTrafficBytes         float64                       `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                       `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                        `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy   OptUserResponseResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                      `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                    `json:"subLastOpenedAt"`
-	ExpireAt               time.Time                                      `json:"expireAt"`
-	OnlineAt               NilDateTime                                    `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                    `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                    `json:"lastTrafficResetAt"`
-	TrojanPassword         string                                         `json:"trojanPassword"`
-	VlessUuid              uuid.UUID                                      `json:"vlessUuid"`
-	SsPassword             string                                         `json:"ssPassword"`
-	Description            NilString                                      `json:"description"`
-	Tag                    NilString                                      `json:"tag"`
-	TelegramId             NilInt                                         `json:"telegramId"`
-	Email                  NilString                                      `json:"email"`
-	HwidDeviceLimit        NilInt                                         `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                    `json:"firstConnectedAt"`
-	LastTriggeredThreshold OptInt                                         `json:"lastTriggeredThreshold"`
-	CreatedAt              time.Time                                      `json:"createdAt"`
-	UpdatedAt              time.Time                                      `json:"updatedAt"`
-	ActiveInternalSquads   []UserResponseResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                        `json:"externalSquadUuid"`
-	SubscriptionUrl        string                                         `json:"subscriptionUrl"`
-	LastConnectedNode      NilUserResponseResponseLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   UserResponseResponseHapp                       `json:"happ"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UserResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetShortUuid returns the value of ShortUuid.
-func (s *UserResponseResponse) GetShortUuid() string {
-	return s.ShortUuid
-}
-
-// GetUsername returns the value of Username.
-func (s *UserResponseResponse) GetUsername() string {
-	return s.Username
-}
-
-// GetStatus returns the value of Status.
-func (s *UserResponseResponse) GetStatus() OptUserResponseResponseStatus {
-	return s.Status
-}
-
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *UserResponseResponse) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *UserResponseResponse) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UserResponseResponse) GetTrafficLimitBytes() OptInt {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *UserResponseResponse) GetTrafficLimitStrategy() OptUserResponseResponseTrafficLimitStrategy {
-	return s.TrafficLimitStrategy
-}
-
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *UserResponseResponse) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *UserResponseResponse) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
-// GetExpireAt returns the value of ExpireAt.
-func (s *UserResponseResponse) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetOnlineAt returns the value of OnlineAt.
-func (s *UserResponseResponse) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
-}
-
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *UserResponseResponse) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
-}
-
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *UserResponseResponse) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
-}
-
-// GetTrojanPassword returns the value of TrojanPassword.
-func (s *UserResponseResponse) GetTrojanPassword() string {
-	return s.TrojanPassword
-}
-
-// GetVlessUuid returns the value of VlessUuid.
-func (s *UserResponseResponse) GetVlessUuid() uuid.UUID {
-	return s.VlessUuid
-}
-
-// GetSsPassword returns the value of SsPassword.
-func (s *UserResponseResponse) GetSsPassword() string {
-	return s.SsPassword
-}
-
-// GetDescription returns the value of Description.
-func (s *UserResponseResponse) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *UserResponseResponse) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *UserResponseResponse) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *UserResponseResponse) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UserResponseResponse) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *UserResponseResponse) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
-// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
-func (s *UserResponseResponse) GetLastTriggeredThreshold() OptInt {
-	return s.LastTriggeredThreshold
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *UserResponseResponse) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *UserResponseResponse) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *UserResponseResponse) GetActiveInternalSquads() []UserResponseResponseActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *UserResponseResponse) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
-// GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *UserResponseResponse) GetSubscriptionUrl() string {
-	return s.SubscriptionUrl
-}
-
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *UserResponseResponse) GetLastConnectedNode() NilUserResponseResponseLastConnectedNode {
-	return s.LastConnectedNode
-}
-
-// GetHapp returns the value of Happ.
-func (s *UserResponseResponse) GetHapp() UserResponseResponseHapp {
-	return s.Happ
-}
-
-// SetUUID sets the value of UUID.
-func (s *UserResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetShortUuid sets the value of ShortUuid.
-func (s *UserResponseResponse) SetShortUuid(val string) {
-	s.ShortUuid = val
-}
-
-// SetUsername sets the value of Username.
-func (s *UserResponseResponse) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetStatus sets the value of Status.
-func (s *UserResponseResponse) SetStatus(val OptUserResponseResponseStatus) {
-	s.Status = val
-}
-
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *UserResponseResponse) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *UserResponseResponse) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UserResponseResponse) SetTrafficLimitBytes(val OptInt) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *UserResponseResponse) SetTrafficLimitStrategy(val OptUserResponseResponseTrafficLimitStrategy) {
-	s.TrafficLimitStrategy = val
-}
-
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *UserResponseResponse) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *UserResponseResponse) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
-// SetExpireAt sets the value of ExpireAt.
-func (s *UserResponseResponse) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
-}
-
-// SetOnlineAt sets the value of OnlineAt.
-func (s *UserResponseResponse) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
-}
-
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *UserResponseResponse) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
-}
-
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *UserResponseResponse) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
-}
-
-// SetTrojanPassword sets the value of TrojanPassword.
-func (s *UserResponseResponse) SetTrojanPassword(val string) {
-	s.TrojanPassword = val
-}
-
-// SetVlessUuid sets the value of VlessUuid.
-func (s *UserResponseResponse) SetVlessUuid(val uuid.UUID) {
-	s.VlessUuid = val
-}
-
-// SetSsPassword sets the value of SsPassword.
-func (s *UserResponseResponse) SetSsPassword(val string) {
-	s.SsPassword = val
-}
-
-// SetDescription sets the value of Description.
-func (s *UserResponseResponse) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *UserResponseResponse) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *UserResponseResponse) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *UserResponseResponse) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UserResponseResponse) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *UserResponseResponse) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
-// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
-func (s *UserResponseResponse) SetLastTriggeredThreshold(val OptInt) {
-	s.LastTriggeredThreshold = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *UserResponseResponse) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *UserResponseResponse) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *UserResponseResponse) SetActiveInternalSquads(val []UserResponseResponseActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *UserResponseResponse) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
-// SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *UserResponseResponse) SetSubscriptionUrl(val string) {
-	s.SubscriptionUrl = val
-}
-
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *UserResponseResponse) SetLastConnectedNode(val NilUserResponseResponseLastConnectedNode) {
-	s.LastConnectedNode = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *UserResponseResponse) SetHapp(val UserResponseResponseHapp) {
-	s.Happ = val
-}
-
-type UserResponseResponseActiveInternalSquadsItem struct {
-	UUID uuid.UUID `json:"uuid"`
-	Name string    `json:"name"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UserResponseResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *UserResponseResponseActiveInternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// SetUUID sets the value of UUID.
-func (s *UserResponseResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *UserResponseResponseActiveInternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-type UserResponseResponseHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *UserResponseResponseHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *UserResponseResponseHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type UserResponseResponseLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *UserResponseResponseLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *UserResponseResponseLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *UserResponseResponseLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *UserResponseResponseLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *UserResponseResponseLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *UserResponseResponseLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-type UserResponseResponseStatus string
+type UserStatus string
 
 const (
-	UserResponseResponseStatusACTIVE   UserResponseResponseStatus = "ACTIVE"
-	UserResponseResponseStatusDISABLED UserResponseResponseStatus = "DISABLED"
-	UserResponseResponseStatusLIMITED  UserResponseResponseStatus = "LIMITED"
-	UserResponseResponseStatusEXPIRED  UserResponseResponseStatus = "EXPIRED"
+	UserStatusACTIVE   UserStatus = "ACTIVE"
+	UserStatusDISABLED UserStatus = "DISABLED"
+	UserStatusLIMITED  UserStatus = "LIMITED"
+	UserStatusEXPIRED  UserStatus = "EXPIRED"
 )
 
-// AllValues returns all UserResponseResponseStatus values.
-func (UserResponseResponseStatus) AllValues() []UserResponseResponseStatus {
-	return []UserResponseResponseStatus{
-		UserResponseResponseStatusACTIVE,
-		UserResponseResponseStatusDISABLED,
-		UserResponseResponseStatusLIMITED,
-		UserResponseResponseStatusEXPIRED,
+// AllValues returns all UserStatus values.
+func (UserStatus) AllValues() []UserStatus {
+	return []UserStatus{
+		UserStatusACTIVE,
+		UserStatusDISABLED,
+		UserStatusLIMITED,
+		UserStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UserResponseResponseStatus) MarshalText() ([]byte, error) {
+func (s UserStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case UserResponseResponseStatusACTIVE:
+	case UserStatusACTIVE:
 		return []byte(s), nil
-	case UserResponseResponseStatusDISABLED:
+	case UserStatusDISABLED:
 		return []byte(s), nil
-	case UserResponseResponseStatusLIMITED:
+	case UserStatusLIMITED:
 		return []byte(s), nil
-	case UserResponseResponseStatusEXPIRED:
+	case UserStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -23769,55 +16907,81 @@ func (s UserResponseResponseStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UserResponseResponseStatus) UnmarshalText(data []byte) error {
-	switch UserResponseResponseStatus(data) {
-	case UserResponseResponseStatusACTIVE:
-		*s = UserResponseResponseStatusACTIVE
+func (s *UserStatus) UnmarshalText(data []byte) error {
+	switch UserStatus(data) {
+	case UserStatusACTIVE:
+		*s = UserStatusACTIVE
 		return nil
-	case UserResponseResponseStatusDISABLED:
-		*s = UserResponseResponseStatusDISABLED
+	case UserStatusDISABLED:
+		*s = UserStatusDISABLED
 		return nil
-	case UserResponseResponseStatusLIMITED:
-		*s = UserResponseResponseStatusLIMITED
+	case UserStatusLIMITED:
+		*s = UserStatusLIMITED
 		return nil
-	case UserResponseResponseStatusEXPIRED:
-		*s = UserResponseResponseStatusEXPIRED
+	case UserStatusEXPIRED:
+		*s = UserStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
+// Ref: #/components/schemas/UserSubscriptionHistory
+type UserSubscriptionHistory struct {
+	Total   float64  `json:"total"`
+	Records []Record `json:"records"`
+}
+
+// GetTotal returns the value of Total.
+func (s *UserSubscriptionHistory) GetTotal() float64 {
+	return s.Total
+}
+
+// GetRecords returns the value of Records.
+func (s *UserSubscriptionHistory) GetRecords() []Record {
+	return s.Records
+}
+
+// SetTotal sets the value of Total.
+func (s *UserSubscriptionHistory) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetRecords sets the value of Records.
+func (s *UserSubscriptionHistory) SetRecords(val []Record) {
+	s.Records = val
+}
+
 // Available reset periods.
-type UserResponseResponseTrafficLimitStrategy string
+type UserTrafficLimitStrategy string
 
 const (
-	UserResponseResponseTrafficLimitStrategyNORESET UserResponseResponseTrafficLimitStrategy = "NO_RESET"
-	UserResponseResponseTrafficLimitStrategyDAY     UserResponseResponseTrafficLimitStrategy = "DAY"
-	UserResponseResponseTrafficLimitStrategyWEEK    UserResponseResponseTrafficLimitStrategy = "WEEK"
-	UserResponseResponseTrafficLimitStrategyMONTH   UserResponseResponseTrafficLimitStrategy = "MONTH"
+	UserTrafficLimitStrategyNORESET UserTrafficLimitStrategy = "NO_RESET"
+	UserTrafficLimitStrategyDAY     UserTrafficLimitStrategy = "DAY"
+	UserTrafficLimitStrategyWEEK    UserTrafficLimitStrategy = "WEEK"
+	UserTrafficLimitStrategyMONTH   UserTrafficLimitStrategy = "MONTH"
 )
 
-// AllValues returns all UserResponseResponseTrafficLimitStrategy values.
-func (UserResponseResponseTrafficLimitStrategy) AllValues() []UserResponseResponseTrafficLimitStrategy {
-	return []UserResponseResponseTrafficLimitStrategy{
-		UserResponseResponseTrafficLimitStrategyNORESET,
-		UserResponseResponseTrafficLimitStrategyDAY,
-		UserResponseResponseTrafficLimitStrategyWEEK,
-		UserResponseResponseTrafficLimitStrategyMONTH,
+// AllValues returns all UserTrafficLimitStrategy values.
+func (UserTrafficLimitStrategy) AllValues() []UserTrafficLimitStrategy {
+	return []UserTrafficLimitStrategy{
+		UserTrafficLimitStrategyNORESET,
+		UserTrafficLimitStrategyDAY,
+		UserTrafficLimitStrategyWEEK,
+		UserTrafficLimitStrategyMONTH,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UserResponseResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s UserTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case UserResponseResponseTrafficLimitStrategyNORESET:
+	case UserTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case UserResponseResponseTrafficLimitStrategyDAY:
+	case UserTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case UserResponseResponseTrafficLimitStrategyWEEK:
+	case UserTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case UserResponseResponseTrafficLimitStrategyMONTH:
+	case UserTrafficLimitStrategyMONTH:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -23825,19 +16989,19 @@ func (s UserResponseResponseTrafficLimitStrategy) MarshalText() ([]byte, error) 
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UserResponseResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch UserResponseResponseTrafficLimitStrategy(data) {
-	case UserResponseResponseTrafficLimitStrategyNORESET:
-		*s = UserResponseResponseTrafficLimitStrategyNORESET
+func (s *UserTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch UserTrafficLimitStrategy(data) {
+	case UserTrafficLimitStrategyNORESET:
+		*s = UserTrafficLimitStrategyNORESET
 		return nil
-	case UserResponseResponseTrafficLimitStrategyDAY:
-		*s = UserResponseResponseTrafficLimitStrategyDAY
+	case UserTrafficLimitStrategyDAY:
+		*s = UserTrafficLimitStrategyDAY
 		return nil
-	case UserResponseResponseTrafficLimitStrategyWEEK:
-		*s = UserResponseResponseTrafficLimitStrategyWEEK
+	case UserTrafficLimitStrategyWEEK:
+		*s = UserTrafficLimitStrategyWEEK
 		return nil
-	case UserResponseResponseTrafficLimitStrategyMONTH:
-		*s = UserResponseResponseTrafficLimitStrategyMONTH
+	case UserTrafficLimitStrategyMONTH:
+		*s = UserTrafficLimitStrategyMONTH
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -23912,553 +17076,22 @@ func (*UsersControllerRevokeUserSubscriptionNotFound) usersControllerRevokeUserS
 
 // Ref: #/components/schemas/UsersResponse
 type UsersResponse struct {
-	Response []UsersResponseResponseItem `json:"response"`
+	Response []User `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *UsersResponse) GetResponse() []UsersResponseResponseItem {
+func (s *UsersResponse) GetResponse() []User {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *UsersResponse) SetResponse(val []UsersResponseResponseItem) {
+func (s *UsersResponse) SetResponse(val []User) {
 	s.Response = val
 }
 
 func (*UsersResponse) usersControllerGetUserByTelegramIdRes() {}
 func (*UsersResponse) usersControllerGetUsersByEmailRes()     {}
 func (*UsersResponse) usersControllerGetUsersByTagRes()       {}
-
-type UsersResponseResponseItem struct {
-	UUID                     uuid.UUID                          `json:"uuid"`
-	ShortUuid                string                             `json:"shortUuid"`
-	Username                 string                             `json:"username"`
-	Status                   OptUsersResponseResponseItemStatus `json:"status"`
-	UsedTrafficBytes         float64                            `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                            `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                             `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy   OptUsersResponseResponseItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                           `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                         `json:"subLastOpenedAt"`
-	ExpireAt               time.Time                                           `json:"expireAt"`
-	OnlineAt               NilDateTime                                         `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                         `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                         `json:"lastTrafficResetAt"`
-	TrojanPassword         string                                              `json:"trojanPassword"`
-	VlessUuid              uuid.UUID                                           `json:"vlessUuid"`
-	SsPassword             string                                              `json:"ssPassword"`
-	Description            NilString                                           `json:"description"`
-	Tag                    NilString                                           `json:"tag"`
-	TelegramId             NilInt                                              `json:"telegramId"`
-	Email                  NilString                                           `json:"email"`
-	HwidDeviceLimit        NilInt                                              `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                         `json:"firstConnectedAt"`
-	LastTriggeredThreshold OptInt                                              `json:"lastTriggeredThreshold"`
-	CreatedAt              time.Time                                           `json:"createdAt"`
-	UpdatedAt              time.Time                                           `json:"updatedAt"`
-	ActiveInternalSquads   []UsersResponseResponseItemActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                             `json:"externalSquadUuid"`
-	SubscriptionUrl        string                                              `json:"subscriptionUrl"`
-	LastConnectedNode      NilUsersResponseResponseItemLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   UsersResponseResponseItemHapp                       `json:"happ"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UsersResponseResponseItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetShortUuid returns the value of ShortUuid.
-func (s *UsersResponseResponseItem) GetShortUuid() string {
-	return s.ShortUuid
-}
-
-// GetUsername returns the value of Username.
-func (s *UsersResponseResponseItem) GetUsername() string {
-	return s.Username
-}
-
-// GetStatus returns the value of Status.
-func (s *UsersResponseResponseItem) GetStatus() OptUsersResponseResponseItemStatus {
-	return s.Status
-}
-
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *UsersResponseResponseItem) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *UsersResponseResponseItem) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UsersResponseResponseItem) GetTrafficLimitBytes() OptInt {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *UsersResponseResponseItem) GetTrafficLimitStrategy() OptUsersResponseResponseItemTrafficLimitStrategy {
-	return s.TrafficLimitStrategy
-}
-
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *UsersResponseResponseItem) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *UsersResponseResponseItem) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
-// GetExpireAt returns the value of ExpireAt.
-func (s *UsersResponseResponseItem) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetOnlineAt returns the value of OnlineAt.
-func (s *UsersResponseResponseItem) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
-}
-
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *UsersResponseResponseItem) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
-}
-
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *UsersResponseResponseItem) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
-}
-
-// GetTrojanPassword returns the value of TrojanPassword.
-func (s *UsersResponseResponseItem) GetTrojanPassword() string {
-	return s.TrojanPassword
-}
-
-// GetVlessUuid returns the value of VlessUuid.
-func (s *UsersResponseResponseItem) GetVlessUuid() uuid.UUID {
-	return s.VlessUuid
-}
-
-// GetSsPassword returns the value of SsPassword.
-func (s *UsersResponseResponseItem) GetSsPassword() string {
-	return s.SsPassword
-}
-
-// GetDescription returns the value of Description.
-func (s *UsersResponseResponseItem) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *UsersResponseResponseItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *UsersResponseResponseItem) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *UsersResponseResponseItem) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UsersResponseResponseItem) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *UsersResponseResponseItem) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
-// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
-func (s *UsersResponseResponseItem) GetLastTriggeredThreshold() OptInt {
-	return s.LastTriggeredThreshold
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *UsersResponseResponseItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *UsersResponseResponseItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *UsersResponseResponseItem) GetActiveInternalSquads() []UsersResponseResponseItemActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *UsersResponseResponseItem) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
-// GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *UsersResponseResponseItem) GetSubscriptionUrl() string {
-	return s.SubscriptionUrl
-}
-
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *UsersResponseResponseItem) GetLastConnectedNode() NilUsersResponseResponseItemLastConnectedNode {
-	return s.LastConnectedNode
-}
-
-// GetHapp returns the value of Happ.
-func (s *UsersResponseResponseItem) GetHapp() UsersResponseResponseItemHapp {
-	return s.Happ
-}
-
-// SetUUID sets the value of UUID.
-func (s *UsersResponseResponseItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetShortUuid sets the value of ShortUuid.
-func (s *UsersResponseResponseItem) SetShortUuid(val string) {
-	s.ShortUuid = val
-}
-
-// SetUsername sets the value of Username.
-func (s *UsersResponseResponseItem) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetStatus sets the value of Status.
-func (s *UsersResponseResponseItem) SetStatus(val OptUsersResponseResponseItemStatus) {
-	s.Status = val
-}
-
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *UsersResponseResponseItem) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *UsersResponseResponseItem) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UsersResponseResponseItem) SetTrafficLimitBytes(val OptInt) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *UsersResponseResponseItem) SetTrafficLimitStrategy(val OptUsersResponseResponseItemTrafficLimitStrategy) {
-	s.TrafficLimitStrategy = val
-}
-
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *UsersResponseResponseItem) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *UsersResponseResponseItem) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
-// SetExpireAt sets the value of ExpireAt.
-func (s *UsersResponseResponseItem) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
-}
-
-// SetOnlineAt sets the value of OnlineAt.
-func (s *UsersResponseResponseItem) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
-}
-
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *UsersResponseResponseItem) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
-}
-
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *UsersResponseResponseItem) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
-}
-
-// SetTrojanPassword sets the value of TrojanPassword.
-func (s *UsersResponseResponseItem) SetTrojanPassword(val string) {
-	s.TrojanPassword = val
-}
-
-// SetVlessUuid sets the value of VlessUuid.
-func (s *UsersResponseResponseItem) SetVlessUuid(val uuid.UUID) {
-	s.VlessUuid = val
-}
-
-// SetSsPassword sets the value of SsPassword.
-func (s *UsersResponseResponseItem) SetSsPassword(val string) {
-	s.SsPassword = val
-}
-
-// SetDescription sets the value of Description.
-func (s *UsersResponseResponseItem) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *UsersResponseResponseItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *UsersResponseResponseItem) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *UsersResponseResponseItem) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UsersResponseResponseItem) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *UsersResponseResponseItem) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
-// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
-func (s *UsersResponseResponseItem) SetLastTriggeredThreshold(val OptInt) {
-	s.LastTriggeredThreshold = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *UsersResponseResponseItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *UsersResponseResponseItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *UsersResponseResponseItem) SetActiveInternalSquads(val []UsersResponseResponseItemActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *UsersResponseResponseItem) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
-// SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *UsersResponseResponseItem) SetSubscriptionUrl(val string) {
-	s.SubscriptionUrl = val
-}
-
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *UsersResponseResponseItem) SetLastConnectedNode(val NilUsersResponseResponseItemLastConnectedNode) {
-	s.LastConnectedNode = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *UsersResponseResponseItem) SetHapp(val UsersResponseResponseItemHapp) {
-	s.Happ = val
-}
-
-type UsersResponseResponseItemActiveInternalSquadsItem struct {
-	UUID uuid.UUID `json:"uuid"`
-	Name string    `json:"name"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UsersResponseResponseItemActiveInternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *UsersResponseResponseItemActiveInternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// SetUUID sets the value of UUID.
-func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-type UsersResponseResponseItemHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *UsersResponseResponseItemHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *UsersResponseResponseItemHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type UsersResponseResponseItemLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *UsersResponseResponseItemLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *UsersResponseResponseItemLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *UsersResponseResponseItemLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *UsersResponseResponseItemLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *UsersResponseResponseItemLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *UsersResponseResponseItemLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-type UsersResponseResponseItemStatus string
-
-const (
-	UsersResponseResponseItemStatusACTIVE   UsersResponseResponseItemStatus = "ACTIVE"
-	UsersResponseResponseItemStatusDISABLED UsersResponseResponseItemStatus = "DISABLED"
-	UsersResponseResponseItemStatusLIMITED  UsersResponseResponseItemStatus = "LIMITED"
-	UsersResponseResponseItemStatusEXPIRED  UsersResponseResponseItemStatus = "EXPIRED"
-)
-
-// AllValues returns all UsersResponseResponseItemStatus values.
-func (UsersResponseResponseItemStatus) AllValues() []UsersResponseResponseItemStatus {
-	return []UsersResponseResponseItemStatus{
-		UsersResponseResponseItemStatusACTIVE,
-		UsersResponseResponseItemStatusDISABLED,
-		UsersResponseResponseItemStatusLIMITED,
-		UsersResponseResponseItemStatusEXPIRED,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UsersResponseResponseItemStatus) MarshalText() ([]byte, error) {
-	switch s {
-	case UsersResponseResponseItemStatusACTIVE:
-		return []byte(s), nil
-	case UsersResponseResponseItemStatusDISABLED:
-		return []byte(s), nil
-	case UsersResponseResponseItemStatusLIMITED:
-		return []byte(s), nil
-	case UsersResponseResponseItemStatusEXPIRED:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UsersResponseResponseItemStatus) UnmarshalText(data []byte) error {
-	switch UsersResponseResponseItemStatus(data) {
-	case UsersResponseResponseItemStatusACTIVE:
-		*s = UsersResponseResponseItemStatusACTIVE
-		return nil
-	case UsersResponseResponseItemStatusDISABLED:
-		*s = UsersResponseResponseItemStatusDISABLED
-		return nil
-	case UsersResponseResponseItemStatusLIMITED:
-		*s = UsersResponseResponseItemStatusLIMITED
-		return nil
-	case UsersResponseResponseItemStatusEXPIRED:
-		*s = UsersResponseResponseItemStatusEXPIRED
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// Available reset periods.
-type UsersResponseResponseItemTrafficLimitStrategy string
-
-const (
-	UsersResponseResponseItemTrafficLimitStrategyNORESET UsersResponseResponseItemTrafficLimitStrategy = "NO_RESET"
-	UsersResponseResponseItemTrafficLimitStrategyDAY     UsersResponseResponseItemTrafficLimitStrategy = "DAY"
-	UsersResponseResponseItemTrafficLimitStrategyWEEK    UsersResponseResponseItemTrafficLimitStrategy = "WEEK"
-	UsersResponseResponseItemTrafficLimitStrategyMONTH   UsersResponseResponseItemTrafficLimitStrategy = "MONTH"
-)
-
-// AllValues returns all UsersResponseResponseItemTrafficLimitStrategy values.
-func (UsersResponseResponseItemTrafficLimitStrategy) AllValues() []UsersResponseResponseItemTrafficLimitStrategy {
-	return []UsersResponseResponseItemTrafficLimitStrategy{
-		UsersResponseResponseItemTrafficLimitStrategyNORESET,
-		UsersResponseResponseItemTrafficLimitStrategyDAY,
-		UsersResponseResponseItemTrafficLimitStrategyWEEK,
-		UsersResponseResponseItemTrafficLimitStrategyMONTH,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UsersResponseResponseItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
-	switch s {
-	case UsersResponseResponseItemTrafficLimitStrategyNORESET:
-		return []byte(s), nil
-	case UsersResponseResponseItemTrafficLimitStrategyDAY:
-		return []byte(s), nil
-	case UsersResponseResponseItemTrafficLimitStrategyWEEK:
-		return []byte(s), nil
-	case UsersResponseResponseItemTrafficLimitStrategyMONTH:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UsersResponseResponseItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch UsersResponseResponseItemTrafficLimitStrategy(data) {
-	case UsersResponseResponseItemTrafficLimitStrategyNORESET:
-		*s = UsersResponseResponseItemTrafficLimitStrategyNORESET
-		return nil
-	case UsersResponseResponseItemTrafficLimitStrategyDAY:
-		*s = UsersResponseResponseItemTrafficLimitStrategyDAY
-		return nil
-	case UsersResponseResponseItemTrafficLimitStrategyWEEK:
-		*s = UsersResponseResponseItemTrafficLimitStrategyWEEK
-		return nil
-	case UsersResponseResponseItemTrafficLimitStrategyMONTH:
-		*s = UsersResponseResponseItemTrafficLimitStrategyMONTH
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
 
 // UsersStatsControllerGetUserUsageByRangeNotFound is response for UsersStatsControllerGetUserUsageByRange operation.
 type UsersStatsControllerGetUserUsageByRangeNotFound struct{}

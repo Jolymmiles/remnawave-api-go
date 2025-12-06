@@ -523,10 +523,8 @@ def main():
     
     try:
         # Step 1: Smart consolidate (combines old Steps 1 & 2)
-        # Skip inline extraction for older API specs (can cause ogen conflicts)
-        skip_inline = 'api-2-2-' in input_spec or 'api-2-1-' in input_spec or 'api-2-0-' in input_spec
         print_step(1, 3, "SMART CONSOLIDATE SCHEMAS")
-        orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file, skip_inline_extraction=skip_inline)
+        orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file)
         
         # Step 2: Generate with ogen
         print_step(2, 3, "GENERATE GO CLIENT WITH OGEN")

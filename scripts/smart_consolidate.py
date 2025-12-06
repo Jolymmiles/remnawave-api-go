@@ -734,6 +734,9 @@ class InlineSchemaExtractor:
                     
                     # Direct inline object
                     if prop_schema.get('type') == 'object' and 'properties' in prop_schema:
+                        # Skip empty objects (no meaningful properties to share)
+                        if not prop_schema['properties']:
+                            continue
                         sig = self.get_inline_schema_signature(prop_schema)
                         if sig:
                             inline_schemas[sig].append((parent_name, prop_path, prop_schema))
@@ -744,6 +747,9 @@ class InlineSchemaExtractor:
                     elif prop_schema.get('type') == 'array':
                         items = prop_schema.get('items', {})
                         if items.get('type') == 'object' and 'properties' in items:
+                            # Skip empty objects
+                            if not items['properties']:
+                                continue
                             sig = self.get_inline_schema_signature(items)
                             if sig:
                                 inline_schemas[sig].append((parent_name, f"{prop_path}[]", items))
@@ -838,6 +844,69 @@ class InlineSchemaExtractor:
         first_path = paths[0].replace('[]', '').split('.')[-1]
         return f"{first_parent}{first_path[0].upper() + first_path[1:] if first_path else ''}"
     
+    def _resolve_conflict_suffix(self, base_name: str, locations: List[Tuple[str, str, dict]], 
+                                   all_groups: List[Tuple[str, List]]) -> str:
+        """
+        Generate a unique suffix for a conflicting schema name based on context.
+        """
+        paths = [loc[1] for loc in locations]
+        parents = [loc[0] for loc in locations]
+        
+        # Helper to check patterns
+        def has_pattern(pattern, in_paths=True, in_parents=False):
+            if in_paths:
+                return any(pattern in p for p in paths)
+            if in_parents:
+                return any(pattern in p for p in parents)
+            return False
+        
+        # Context-based suffix rules
+        rules = [
+            # Request types (CreateNodeRequestDto.configProfile -> ConfigProfileRef)
+            (lambda: any('Request' in p for p in parents) and not any('Response' in p for p in parents), 'Ref'),
+            
+            # Delete response (simple object with isDeleted field)
+            (lambda: any('Delete' in p for p in parents) and base_name == 'User', 'Deleted'),
+            
+            # Subscription user info (nested .user field)
+            (lambda: any('.user' in p for p in paths), 'Info'),
+            
+            # Subscription settings in squads vs global settings
+            (lambda: base_name == 'SubscriptionSettings' and has_pattern('Squad', in_parents=True), 'Squad'),
+            
+            # Templates in squads vs standalone templates
+            (lambda: base_name == 'Template' and has_pattern('Squad', in_parents=True), 'Ref'),
+            
+            # Billing records vs subscription request history records
+            (lambda: base_name == 'Record' and has_pattern('Billing', in_parents=True), 'Billing'),
+            
+            # Snippets response vs snippet items
+            (lambda: base_name == 'Snippet' and has_pattern('snippets[]', in_paths=True), 'Item'),
+            
+            # Inbounds in config profiles vs standalone inbounds
+            (lambda: base_name == 'Inbound' and has_pattern('GetAllInbounds', in_parents=True), 'Full'),
+            (lambda: base_name == 'Inbound' and has_pattern('.inbound', in_paths=True) and not has_pattern('inbounds[]', in_paths=True), 'Embed'),
+            
+            # Nodes in reorder requests
+            (lambda: base_name == 'Node' and has_pattern('Reorder', in_parents=True), 'Order'),
+            
+            # Billing nodes in providers vs standalone
+            (lambda: base_name == 'BillingNode' and has_pattern('Provider', in_parents=True), 'Ref'),
+            
+            # Provider in different contexts
+            (lambda: base_name == 'ProviderItem' and has_pattern('BillingHistory', in_parents=True), 'HistoryRef'),
+            (lambda: base_name == 'ProviderItem' and has_pattern('BillingNode', in_parents=True), 'BillingRef'),
+        ]
+        
+        for condition, suffix in rules:
+            try:
+                if condition():
+                    return suffix
+            except:
+                pass
+        
+        return ""
+    
     def extract_inline_schemas(self) -> Tuple[dict, Dict]:
         """
         Extract duplicate inline schemas into shared definitions.
@@ -867,7 +936,7 @@ class InlineSchemaExtractor:
         extraction_log = {}
         sig_to_name = {}  # Map signature to final name for conflict resolution
         
-        # Resolve name conflicts first
+        # Resolve name conflicts
         for base_name, groups in name_to_groups.items():
             if len(groups) == 1:
                 # No conflict
@@ -875,62 +944,15 @@ class InlineSchemaExtractor:
                 sig_to_name[sig] = base_name
             else:
                 # Conflict: need unique names for each structure
+                used_suffixes = set()
                 for i, (sig, locations) in enumerate(groups):
-                    # Try to differentiate by context
-                    paths = [loc[1] for loc in locations]
+                    suffix = self._resolve_conflict_suffix(base_name, locations, groups)
                     
-                    # Find distinguishing path elements
-                    suffix = ""
-                    if any('Request' in loc[0] for loc in locations):
-                        suffix = "Request"
-                    elif any('subscriptionSettings' in p for p in paths):
-                        suffix = "Settings"
-                    elif any('records[]' in p for p in paths):
-                        # Differentiate by parent entity
-                        parent = locations[0][0]
-                        if 'Billing' in parent:
-                            suffix = "Billing"
-                        elif 'Subscription' in parent:
-                            suffix = "History"
-                    elif any('.user' in p or 'user[]' in p for p in paths):
-                        suffix = "Info"
-                    elif any('billingNodes' in p for p in paths):
-                        parent = locations[0][0]
-                        if 'Provider' in parent:
-                            suffix = "Ref"
-                        else:
-                            suffix = "Full"
-                    elif any('provider' in p for p in paths):
-                        parent = locations[0][0]
-                        if 'Node' in parent:
-                            suffix = "NodeRef"
-                        elif 'Billing' in parent and 'History' in parent:
-                            suffix = "HistoryRef"
-                        else:
-                            suffix = "Ref"
-                    elif any('template' in p.lower() for p in paths):
-                        parent = locations[0][0]
-                        if 'Squad' in parent:
-                            suffix = "Ref"
-                    elif any('nodes[]' in p and 'configProfile' not in p for p in paths):
-                        # Check if it's a reorder request type
-                        if any('Reorder' in loc[0] for loc in locations):
-                            suffix = "Order"
-                    elif any('inbound' in p.lower() for p in paths):
-                        if any('configProfile' in p or 'configProfiles' in p for p in paths):
-                            suffix = "Ref"
-                        elif any('.inbound' == p[-8:] for p in paths):
-                            suffix = "Embed"
-                    elif any('configProfile' in p.lower() for p in paths):
-                        if any('CreateNode' in loc[0] or 'UpdateNode' in loc[0] for loc in locations):
-                            suffix = "Ref"
-                    elif any('snippets[]' in p for p in paths):
-                        suffix = "Item"
-                    
-                    if not suffix:
-                        # Fallback: use index
+                    # If suffix already used or empty, use index
+                    if not suffix or suffix in used_suffixes:
                         suffix = str(i + 1) if i > 0 else ""
                     
+                    used_suffixes.add(suffix)
                     final_name = f"{base_name}{suffix}" if suffix else base_name
                     sig_to_name[sig] = final_name
         
@@ -938,7 +960,7 @@ class InlineSchemaExtractor:
             # Get resolved name
             extracted_name = sig_to_name.get(sig, self.generate_extracted_name(locations))
             
-            # Ensure unique name (should be resolved, but safety check)
+            # Ensure unique name (safety check for edge cases)
             base_name = extracted_name
             counter = 2
             while extracted_name in self.schemas or extracted_name in extracted_schemas:
