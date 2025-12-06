@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from smart_consolidate import SmartConsolidator
+from smart_consolidate import SmartConsolidator, InlineSchemaExtractor
 
 
 class Colors:
@@ -96,6 +96,15 @@ def smart_consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, i
     # Apply consolidation
     new_spec = consolidator.apply_consolidation(rename_map)
     
+    # Extract inline schemas for reuse
+    print_info("Extracting inline schemas for reuse...")
+    extractor = InlineSchemaExtractor(new_spec)
+    new_spec, extract_stats = extractor.extract_inline_schemas()
+    
+    if extract_stats['extracted_count'] > 0:
+        print_info(f"Extracted {extract_stats['extracted_count']} inline schemas")
+        stats['extracted_schemas'] = extract_stats['extracted_count']
+    
     print_info(f"Writing {output_file}...")
     with open(output_file, 'w') as f:
         json.dump(new_spec, f, indent=2, ensure_ascii=False)
@@ -105,7 +114,8 @@ def smart_consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, i
     for name, schemas in sorted(stats['consolidated_names'].items(), key=lambda x: -len(x[1]))[:5]:
         print(f"    {name} <- {len(schemas)} schemas")
     
-    new_count = stats['final_count']
+    new_count = len(new_spec.get('components', {}).get('schemas', {}))
+    stats['final_count'] = new_count
     print_success(f"Consolidated {original_count} → {new_count} schemas (-{original_count - new_count}, -{(original_count-new_count)*100//original_count}%)")
     
     return original_count, new_count, stats

@@ -12,10 +12,11 @@ Key improvements over basic consolidation:
 4. No manual rename_map needed
 """
 
+import copy
 import json
 import re
 from collections import defaultdict
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Tuple, Set, Optional
 
 
 class SchemaStructureAnalyzer:
@@ -685,6 +686,207 @@ class SmartConsolidator:
         update_refs(new_spec)
         
         return new_spec
+
+
+class InlineSchemaExtractor:
+    """
+    Extracts inline schemas into $ref definitions to enable ogen reuse.
+    
+    For example, if UserResponse.response and UsersResponse.response[].item
+    have the same structure, extract it as a shared schema.
+    """
+    
+    def __init__(self, spec: dict):
+        self.spec = copy.deepcopy(spec)
+        self.schemas = self.spec.get('components', {}).get('schemas', {})
+        self.structure_analyzer = SchemaStructureAnalyzer()
+        self.extracted_count = 0
+    
+    def get_inline_schema_signature(self, schema: dict) -> Optional[str]:
+        """Get structural signature for an inline object schema"""
+        if not isinstance(schema, dict):
+            return None
+        if schema.get('type') != 'object' or 'properties' not in schema:
+            return None
+        return self.structure_analyzer.get_structural_signature(schema)
+    
+    def find_inline_duplicates(self, max_depth: int = 1) -> Dict[str, List[Tuple[str, str, dict]]]:
+        """
+        Find duplicate inline schemas across all schema definitions.
+        
+        Args:
+            max_depth: Maximum nesting depth to extract (1 = only top-level response, 
+                      2 = response + one level of nested properties)
+        
+        Returns: {signature: [(parent_schema, property_path, inline_schema), ...]}
+        """
+        inline_schemas = defaultdict(list)
+        
+        def extract_inlines(parent_name: str, obj: dict, path: str = "", depth: int = 0):
+            if not isinstance(obj, dict) or depth > max_depth:
+                return
+            
+            # Check properties
+            if 'properties' in obj:
+                for prop_name, prop_schema in obj['properties'].items():
+                    prop_path = f"{path}.{prop_name}" if path else prop_name
+                    
+                    # Only extract "response" field at top level to avoid conflicts
+                    if depth == 0 and prop_name != 'response':
+                        continue
+                    
+                    # Direct inline object
+                    if prop_schema.get('type') == 'object' and 'properties' in prop_schema:
+                        sig = self.get_inline_schema_signature(prop_schema)
+                        if sig:
+                            inline_schemas[sig].append((parent_name, prop_path, prop_schema))
+                        # Don't recurse further to avoid nested extraction issues
+                    
+                    # Array of inline objects
+                    elif prop_schema.get('type') == 'array':
+                        items = prop_schema.get('items', {})
+                        if items.get('type') == 'object' and 'properties' in items:
+                            sig = self.get_inline_schema_signature(items)
+                            if sig:
+                                inline_schemas[sig].append((parent_name, f"{prop_path}[]", items))
+        
+        for schema_name, schema_def in self.schemas.items():
+            extract_inlines(schema_name, schema_def)
+        
+        # Return only groups with duplicates
+        return {k: v for k, v in inline_schemas.items() if len(v) > 1}
+    
+    def generate_extracted_name(self, locations: List[Tuple[str, str, dict]]) -> str:
+        """Generate a name for extracted schema based on usage locations"""
+        from collections import Counter
+        
+        parent_names = [loc[0] for loc in locations]
+        paths = [loc[1] for loc in locations]
+        
+        # If all paths are "response" or "response[]", use parent entity
+        if all(p in ('response', 'response[]') for p in paths):
+            entities = []
+            for name in parent_names:
+                clean = name.replace('Response', '').replace('Request', '').replace('Dto', '')
+                for prefix in ['Create', 'Update', 'Get', 'Delete', 'Bulk', 'GetAll', 'GetOne']:
+                    if clean.startswith(prefix):
+                        clean = clean[len(prefix):]
+                        break
+                if clean:
+                    entities.append(clean)
+            
+            if entities:
+                common = Counter(entities).most_common(1)[0][0]
+                is_array = any('[]' in p for p in paths)
+                if is_array:
+                    return f"{common}Item"
+                return common
+        
+        # Extract context from parent + last property
+        # E.g., "CreateUserResponseDto.response.userTraffic" -> "UserTraffic"
+        # E.g., "GetConfigProfilesResponseDto.response.configProfiles[]" -> "ConfigProfileItem"
+        
+        last_props = []
+        for path in paths:
+            parts = path.replace('[]', '').split('.')
+            last_prop = parts[-1] if parts else ''
+            if last_prop and last_prop != 'response':
+                last_props.append(last_prop)
+        
+        if last_props:
+            common_prop = Counter(last_props).most_common(1)[0][0]
+            # Capitalize
+            name = common_prop[0].upper() + common_prop[1:] if common_prop else common_prop
+            
+            # If it's a generic name, add context from parent
+            generic_names = {'Config', 'Items', 'Data', 'Info', 'Details', 'Settings', 'Options', 'Params'}
+            if name in generic_names:
+                # Extract entity from first parent
+                first_parent = parent_names[0].replace('ResponseDto', '').replace('RequestDto', '').replace('Dto', '')
+                for prefix in ['Create', 'Update', 'Get', 'Delete', 'Bulk', 'GetAll', 'GetOne']:
+                    if first_parent.startswith(prefix):
+                        first_parent = first_parent[len(prefix):]
+                        break
+                name = f"{first_parent}{name}"
+            
+            # Check if array item
+            is_array = any('[]' in p for p in paths)
+            if is_array and not name.endswith('Item'):
+                name = f"{name}Item"
+            
+            return name
+        
+        # Fallback: use first parent + path
+        first_parent = parent_names[0].replace('ResponseDto', '').replace('RequestDto', '').replace('Dto', '')
+        first_path = paths[0].replace('[]', '').split('.')[-1]
+        return f"{first_parent}{first_path[0].upper() + first_path[1:] if first_path else ''}"
+    
+    def extract_inline_schemas(self) -> Tuple[dict, Dict]:
+        """
+        Extract duplicate inline schemas into shared definitions.
+        
+        Returns: (new_spec, stats)
+        """
+        duplicates = self.find_inline_duplicates()
+        
+        if not duplicates:
+            return self.spec, {'extracted_count': 0, 'extracted_schemas': {}}
+        
+        extracted_schemas = {}
+        
+        for sig, locations in duplicates.items():
+            # Generate name for extracted schema
+            extracted_name = self.generate_extracted_name(locations)
+            
+            # Ensure unique name
+            base_name = extracted_name
+            counter = 2
+            while extracted_name in self.schemas or extracted_name in extracted_schemas:
+                extracted_name = f"{base_name}{counter}"
+                counter += 1
+            
+            # Use first schema as the definition
+            schema_def = copy.deepcopy(locations[0][2])
+            extracted_schemas[extracted_name] = schema_def
+            
+            # Replace all occurrences with $ref
+            for parent_name, prop_path, _ in locations:
+                self._replace_with_ref(parent_name, prop_path, extracted_name)
+        
+        # Add extracted schemas to spec
+        self.spec['components']['schemas'].update(extracted_schemas)
+        
+        return self.spec, {
+            'extracted_count': len(extracted_schemas),
+            'extracted_schemas': {name: [f"{loc[0]}.{loc[1]}" for loc in locs] 
+                                  for name, (sig, locs) in zip(extracted_schemas.keys(), duplicates.items())}
+        }
+    
+    def _replace_with_ref(self, schema_name: str, prop_path: str, ref_name: str):
+        """Replace inline schema at path with $ref"""
+        schema = self.schemas.get(schema_name)
+        if not schema:
+            return
+        
+        parts = prop_path.replace('[]', '.[]').split('.')
+        parts = [p for p in parts if p]  # Remove empty strings
+        
+        current = schema
+        for i, part in enumerate(parts[:-1]):
+            if part == '[]':
+                current = current.get('items', {})
+            elif 'properties' in current:
+                current = current['properties'].get(part, {})
+            else:
+                return
+        
+        last_part = parts[-1]
+        if last_part == '[]':
+            # Replace array items
+            current['items'] = {'$ref': f'#/components/schemas/{ref_name}'}
+        elif 'properties' in current and last_part in current['properties']:
+            # Replace property
+            current['properties'][last_part] = {'$ref': f'#/components/schemas/{ref_name}'}
 
 
 def analyze_spec(spec_file: str):
