@@ -57,6 +57,10 @@ type ConfigProfileControllerGetAllInboundsRes interface {
 	configProfileControllerGetAllInboundsRes()
 }
 
+type ConfigProfileControllerGetComputedConfigProfileByUuidRes interface {
+	configProfileControllerGetComputedConfigProfileByUuidRes()
+}
+
 type ConfigProfileControllerGetConfigProfileByUuidRes interface {
 	configProfileControllerGetConfigProfileByUuidRes()
 }
@@ -67,6 +71,10 @@ type ConfigProfileControllerGetConfigProfilesRes interface {
 
 type ConfigProfileControllerGetInboundsByProfileUuidRes interface {
 	configProfileControllerGetInboundsByProfileUuidRes()
+}
+
+type ConfigProfileControllerReorderConfigProfilesRes interface {
+	configProfileControllerReorderConfigProfilesRes()
 }
 
 type ConfigProfileControllerUpdateConfigProfileRes interface {
@@ -95,6 +103,10 @@ type ExternalSquadControllerGetExternalSquadsRes interface {
 
 type ExternalSquadControllerRemoveUsersFromExternalSquadRes interface {
 	externalSquadControllerRemoveUsersFromExternalSquadRes()
+}
+
+type ExternalSquadControllerReorderExternalSquadsRes interface {
+	externalSquadControllerReorderExternalSquadsRes()
 }
 
 type ExternalSquadControllerUpdateExternalSquadRes interface {
@@ -249,6 +261,10 @@ type InternalSquadControllerRemoveUsersFromInternalSquadRes interface {
 	internalSquadControllerRemoveUsersFromInternalSquadRes()
 }
 
+type InternalSquadControllerReorderInternalSquadsRes interface {
+	internalSquadControllerReorderInternalSquadsRes()
+}
+
 type InternalSquadControllerUpdateInternalSquadRes interface {
 	internalSquadControllerUpdateInternalSquadRes()
 }
@@ -277,12 +293,20 @@ type NodesControllerGetAllNodesRes interface {
 	nodesControllerGetAllNodesRes()
 }
 
+type NodesControllerGetAllNodesTagsRes interface {
+	nodesControllerGetAllNodesTagsRes()
+}
+
 type NodesControllerGetOneNodeRes interface {
 	nodesControllerGetOneNodeRes()
 }
 
 type NodesControllerReorderNodesRes interface {
 	nodesControllerReorderNodesRes()
+}
+
+type NodesControllerResetNodeTrafficRes interface {
+	nodesControllerResetNodeTrafficRes()
 }
 
 type NodesControllerRestartAllNodesRes interface {
@@ -323,6 +347,10 @@ type PasskeyControllerPasskeyRegistrationOptionsRes interface {
 
 type PasskeyControllerPasskeyRegistrationVerifyRes interface {
 	passkeyControllerPasskeyRegistrationVerifyRes()
+}
+
+type PasskeyControllerUpdatePasskeyRes interface {
+	passkeyControllerUpdatePasskeyRes()
 }
 
 type RemnawaveSettingsControllerGetSettingsRes interface {
@@ -375,6 +403,10 @@ type SubscriptionTemplateControllerGetAllTemplatesRes interface {
 
 type SubscriptionTemplateControllerGetTemplateByUuidRes interface {
 	subscriptionTemplateControllerGetTemplateByUuidRes()
+}
+
+type SubscriptionTemplateControllerReorderSubscriptionTemplatesRes interface {
+	subscriptionTemplateControllerReorderSubscriptionTemplatesRes()
 }
 
 type SubscriptionTemplateControllerUpdateTemplateRes interface {

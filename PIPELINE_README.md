@@ -14,7 +14,7 @@ Pipeline выполняет 4 шага:
 ## Использование
 
 ```bash
-python3 pipeline.py api-2-2-2.json
+python3 pipeline.py api-2-3-0.json
 ```
 
 ## Результаты

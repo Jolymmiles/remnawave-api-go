@@ -38,6 +38,33 @@ func (s *ApiTokensControllerCreateBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ApiTokensControllerCreateBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -92,6 +119,33 @@ func (s *ApiTokensControllerDeleteBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ApiTokensControllerDeleteBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -146,6 +200,33 @@ func (s *ApiTokensControllerFindAllBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ApiTokensControllerFindAllBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -200,6 +281,33 @@ func (s *AuthControllerGetStatusBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerGetStatusBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -254,6 +362,33 @@ func (s *AuthControllerLoginBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerLoginBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -327,6 +462,33 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -381,6 +543,33 @@ func (s *AuthControllerOauth2CallbackBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -435,6 +624,33 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -489,6 +705,33 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -543,6 +786,33 @@ func (s *AuthControllerRegisterBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerRegisterBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -616,6 +886,33 @@ func (s *AuthControllerTelegramCallbackBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1145,6 +1442,33 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1199,6 +1523,33 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1253,10 +1604,118 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -1307,6 +1766,33 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1361,6 +1847,33 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1415,10 +1928,118 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerGetInboundsByProfileUuidInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -1469,6 +2090,33 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1509,6 +2157,11 @@ func (s *ConfigProfileResponseResponse) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
 		}
 	}
 	{
@@ -1803,6 +2456,23 @@ func (s *CreateHostRequestDto) SetFake() {
 			}
 		}
 	}
+	{
+		{
+			s.XrayJsonTemplateUuid.SetFake()
+		}
+	}
+	{
+		{
+			s.ExcludedInternalSquads = nil
+			for i := 0; i < 0; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.ExcludedInternalSquads = append(s.ExcludedInternalSquads, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1967,6 +2637,18 @@ func (s *CreateNodeRequestDto) SetFake() {
 	{
 		{
 			s.ProviderUuid.SetFake()
+		}
+	}
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Tags = append(s.Tags, elem)
+			}
 		}
 	}
 }
@@ -2642,6 +3324,33 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -2696,6 +3405,33 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -2750,6 +3486,33 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -2804,6 +3567,33 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -2858,6 +3648,33 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -2912,10 +3729,118 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) SetFake(
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerRemoveUsersFromExternalSquadInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -2966,6 +3891,33 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -3010,6 +3962,11 @@ func (s *ExternalSquadResponseResponse) SetFake() {
 	}
 	{
 		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
 			s.Name = "string"
 		}
 	}
@@ -3037,6 +3994,26 @@ func (s *ExternalSquadResponseResponse) SetFake() {
 	}
 	{
 		{
+			s.HostOverrides.SetFake()
+		}
+	}
+	{
+		{
+			s.ResponseHeaders.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidSettings.SetFake()
+		}
+	}
+	{
+		{
+			s.CustomRemarks.SetFake()
+		}
+	}
+	{
+		{
 			s.CreatedAt = time.Now()
 		}
 	}
@@ -3048,11 +4025,119 @@ func (s *ExternalSquadResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *ExternalSquadResponseResponseCustomRemarks) SetFake() {
+	{
+		{
+			s.ExpiredUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ExpiredUsers = append(s.ExpiredUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.LimitedUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.LimitedUsers = append(s.LimitedUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.DisabledUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.DisabledUsers = append(s.DisabledUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyHosts = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyHosts = append(s.EmptyHosts, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyInternalSquads = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyInternalSquads = append(s.EmptyInternalSquads, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ExternalSquadResponseResponseHostOverrides) SetFake() {
+	{
+		{
+			s.ServerDescription.SetFake()
+		}
+	}
+	{
+		{
+			s.VlessRouteId.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ExternalSquadResponseResponseHwidSettings) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.FallbackDeviceLimit = float64(0)
+		}
+	}
+	{
+		{
+			s.MaxDevicesAnnounce.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *ExternalSquadResponseResponseInfo) SetFake() {
 	{
 		{
 			s.MembersCount = float64(0)
 		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ExternalSquadResponseResponseResponseHeaders) SetFake() {
+	var (
+		elem string
+		m    map[string]string = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
 	}
 }
 
@@ -3421,6 +4506,26 @@ func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetFake() 
 	}
 	{
 		{
+			s.LifetimeTrafficUsed = "string"
+		}
+	}
+	{
+		{
+			s.TrafficUsedBytes = "string"
+		}
+	}
+	{
+		{
+			s.TrafficLimitBytes = "string"
+		}
+	}
+	{
+		{
+			s.LifetimeTrafficUsedBytes = "string"
+		}
+	}
+	{
+		{
 			s.Username = "string"
 		}
 	}
@@ -3510,16 +4615,6 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetFake() {
 	}
 	{
 		{
-			s.UsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
-			s.LifetimeUsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
 			s.TrafficLimitBytes.SetFake()
 		}
 	}
@@ -3530,32 +4625,37 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetFake() {
 	}
 	{
 		{
-			s.SubLastUserAgent.SetFake()
-		}
-	}
-	{
-		{
-			s.SubLastOpenedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.ExpireAt = time.Now()
 		}
 	}
 	{
 		{
-			s.OnlineAt.SetFake()
+			s.TelegramId.SetFake()
 		}
 	}
 	{
 		{
-			s.SubRevokedAt.SetFake()
+			s.Email.SetFake()
 		}
 	}
 	{
 		{
-			s.LastTrafficResetAt.SetFake()
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Tag.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidDeviceLimit.SetFake()
+		}
+	}
+	{
+		{
+			s.ExternalSquadUuid.SetFake()
 		}
 	}
 	{
@@ -3575,37 +4675,27 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetFake() {
 	}
 	{
 		{
-			s.Description.SetFake()
-		}
-	}
-	{
-		{
-			s.Tag.SetFake()
-		}
-	}
-	{
-		{
-			s.TelegramId.SetFake()
-		}
-	}
-	{
-		{
-			s.Email.SetFake()
-		}
-	}
-	{
-		{
-			s.HwidDeviceLimit.SetFake()
-		}
-	}
-	{
-		{
-			s.FirstConnectedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.LastTriggeredThreshold.SetFake()
+		}
+	}
+	{
+		{
+			s.SubRevokedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastUserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastOpenedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastTrafficResetAt.SetFake()
 		}
 	}
 	{
@@ -3616,6 +4706,11 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetFake() {
 	{
 		{
 			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.SubscriptionUrl = "string"
 		}
 	}
 	{
@@ -3632,22 +4727,7 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetFake() {
 	}
 	{
 		{
-			s.ExternalSquadUuid.SetFake()
-		}
-	}
-	{
-		{
-			s.SubscriptionUrl = "string"
-		}
-	}
-	{
-		{
-			s.LastConnectedNode.SetFake()
-		}
-	}
-	{
-		{
-			s.Happ.SetFake()
+			s.UserTraffic.SetFake()
 		}
 	}
 }
@@ -3667,34 +4747,6 @@ func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) SetFak
 }
 
 // SetFake set fake values.
-func (s *GetAllUsersResponseDtoResponseUsersItemHapp) SetFake() {
-	{
-		{
-			s.CryptoLink = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetFake() {
-	{
-		{
-			s.ConnectedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.NodeName = "string"
-		}
-	}
-	{
-		{
-			s.CountryCode = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *GetAllUsersResponseDtoResponseUsersItemStatus) SetFake() {
 	*s = GetAllUsersResponseDtoResponseUsersItemStatusACTIVE
 }
@@ -3702,6 +4754,35 @@ func (s *GetAllUsersResponseDtoResponseUsersItemStatus) SetFake() {
 // SetFake set fake values.
 func (s *GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) SetFake() {
 	*s = GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategyNORESET
+}
+
+// SetFake set fake values.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) SetFake() {
+	{
+		{
+			s.UsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.LifetimeUsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.OnlineAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FirstConnectedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastConnectedNodeUuid.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -3876,6 +4957,11 @@ func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetFake() {
 	}
 	{
 		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
 			s.Name = "string"
 		}
 	}
@@ -4022,6 +5108,11 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetFake() {
 	}
 	{
 		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
 			s.Name = "string"
 		}
 	}
@@ -4049,6 +5140,26 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetFake() {
 	}
 	{
 		{
+			s.HostOverrides.SetFake()
+		}
+	}
+	{
+		{
+			s.ResponseHeaders.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidSettings.SetFake()
+		}
+	}
+	{
+		{
+			s.CustomRemarks.SetFake()
+		}
+	}
+	{
+		{
 			s.CreatedAt = time.Now()
 		}
 	}
@@ -4060,11 +5171,119 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetFake() {
+	{
+		{
+			s.ExpiredUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ExpiredUsers = append(s.ExpiredUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.LimitedUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.LimitedUsers = append(s.LimitedUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.DisabledUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.DisabledUsers = append(s.DisabledUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyHosts = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyHosts = append(s.EmptyHosts, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyInternalSquads = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyInternalSquads = append(s.EmptyInternalSquads, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetFake() {
+	{
+		{
+			s.ServerDescription.SetFake()
+		}
+	}
+	{
+		{
+			s.VlessRouteId.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.FallbackDeviceLimit = float64(0)
+		}
+	}
+	{
+		{
+			s.MaxDevicesAnnounce.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) SetFake() {
 	{
 		{
 			s.MembersCount = float64(0)
 		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetFake() {
+	var (
+		elem string
+		m    map[string]string = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
 	}
 }
 
@@ -4450,6 +5669,11 @@ func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
 		}
 	}
 	{
@@ -5129,6 +6353,11 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetFake()
 			s.DbData.SetFake()
 		}
 	}
+	{
+		{
+			s.XrayJsonTemplate.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -5258,6 +6487,10 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraP
 }
 
 // SetFake set fake values.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) SetFake() {
+}
+
+// SetFake set fake values.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFake() {
 	{
 		{
@@ -5281,16 +6514,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFake() {
 	}
 	{
 		{
-			s.UsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
-			s.LifetimeUsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
 			s.TrafficLimitBytes.SetFake()
 		}
 	}
@@ -5301,32 +6524,37 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFake() {
 	}
 	{
 		{
-			s.SubLastUserAgent.SetFake()
-		}
-	}
-	{
-		{
-			s.SubLastOpenedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.ExpireAt = time.Now()
 		}
 	}
 	{
 		{
-			s.OnlineAt.SetFake()
+			s.TelegramId.SetFake()
 		}
 	}
 	{
 		{
-			s.SubRevokedAt.SetFake()
+			s.Email.SetFake()
 		}
 	}
 	{
 		{
-			s.LastTrafficResetAt.SetFake()
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Tag.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidDeviceLimit.SetFake()
+		}
+	}
+	{
+		{
+			s.ExternalSquadUuid.SetFake()
 		}
 	}
 	{
@@ -5346,37 +6574,27 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFake() {
 	}
 	{
 		{
-			s.Description.SetFake()
-		}
-	}
-	{
-		{
-			s.Tag.SetFake()
-		}
-	}
-	{
-		{
-			s.TelegramId.SetFake()
-		}
-	}
-	{
-		{
-			s.Email.SetFake()
-		}
-	}
-	{
-		{
-			s.HwidDeviceLimit.SetFake()
-		}
-	}
-	{
-		{
-			s.FirstConnectedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.LastTriggeredThreshold.SetFake()
+		}
+	}
+	{
+		{
+			s.SubRevokedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastUserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastOpenedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastTrafficResetAt.SetFake()
 		}
 	}
 	{
@@ -5387,6 +6605,11 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFake() {
 	{
 		{
 			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.SubscriptionUrl = "string"
 		}
 	}
 	{
@@ -5403,22 +6626,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFake() {
 	}
 	{
 		{
-			s.ExternalSquadUuid.SetFake()
-		}
-	}
-	{
-		{
-			s.SubscriptionUrl = "string"
-		}
-	}
-	{
-		{
-			s.LastConnectedNode.SetFake()
-		}
-	}
-	{
-		{
-			s.Happ.SetFake()
+			s.UserTraffic.SetFake()
 		}
 	}
 }
@@ -5438,34 +6646,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquad
 }
 
 // SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) SetFake() {
-	{
-		{
-			s.CryptoLink = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetFake() {
-	{
-		{
-			s.ConnectedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.NodeName = "string"
-		}
-	}
-	{
-		{
-			s.CountryCode = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) SetFake() {
 	*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserStatusACTIVE
 }
@@ -5473,6 +6653,35 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) SetFake() {
 // SetFake set fake values.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy) SetFake() {
 	*s = GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategyNORESET
+}
+
+// SetFake set fake values.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) SetFake() {
+	{
+		{
+			s.UsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.LifetimeUsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.OnlineAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FirstConnectedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastConnectedNodeUuid.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -5617,6 +6826,11 @@ func (s *GetStatsResponseDtoResponseNodes) SetFake() {
 			s.TotalOnline = float64(0)
 		}
 	}
+	{
+		{
+			s.TotalBytesLifetime = "string"
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -5653,11 +6867,6 @@ func (s *GetStatsResponseDtoResponseUsers) SetFake() {
 	{
 		{
 			s.TotalUsers = float64(0)
-		}
-	}
-	{
-		{
-			s.TotalTrafficBytes = "string"
 		}
 	}
 }
@@ -5955,6 +7164,11 @@ func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
 		}
 	}
 	{
@@ -6335,6 +7549,23 @@ func (s *HostListResponseResponseItem) SetFake() {
 			}
 		}
 	}
+	{
+		{
+			s.XrayJsonTemplateUuid.SetFake()
+		}
+	}
+	{
+		{
+			s.ExcludedInternalSquads = nil
+			for i := 0; i < 0; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.ExcludedInternalSquads = append(s.ExcludedInternalSquads, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6499,6 +7730,23 @@ func (s *HostResponseResponse) SetFake() {
 			}
 		}
 	}
+	{
+		{
+			s.XrayJsonTemplateUuid.SetFake()
+		}
+	}
+	{
+		{
+			s.ExcludedInternalSquads = nil
+			for i := 0; i < 0; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.ExcludedInternalSquads = append(s.ExcludedInternalSquads, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6548,6 +7796,33 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6602,6 +7877,33 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6656,6 +7958,33 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6710,6 +8039,33 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6764,6 +8120,33 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6818,6 +8201,33 @@ func (s *HostsControllerCreateHostBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerCreateHostBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6872,6 +8282,33 @@ func (s *HostsControllerDeleteHostBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerDeleteHostBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6926,6 +8363,33 @@ func (s *HostsControllerGetAllHostTagsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -6980,6 +8444,33 @@ func (s *HostsControllerGetAllHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerGetAllHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7034,6 +8525,33 @@ func (s *HostsControllerGetOneHostBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerGetOneHostBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7088,6 +8606,33 @@ func (s *HostsControllerReorderHostsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerReorderHostsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7142,6 +8687,33 @@ func (s *HostsControllerUpdateHostBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HostsControllerUpdateHostBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7270,6 +8842,33 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7324,6 +8923,33 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) SetFake() 
 
 // SetFake set fake values.
 func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7378,6 +9004,33 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7432,6 +9085,33 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7486,6 +9166,33 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7540,6 +9247,33 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7680,6 +9414,33 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) SetFak
 
 // SetFake set fake values.
 func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7734,6 +9495,33 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7788,6 +9576,33 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7842,6 +9657,33 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 
 // SetFake set fake values.
 func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7896,6 +9738,33 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) SetFake()
 
 // SetFake set fake values.
 func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -7950,6 +9819,33 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8004,6 +9900,33 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8058,6 +9981,33 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) SetFake(
 
 // SetFake set fake values.
 func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8112,6 +10062,33 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8166,6 +10143,33 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8220,6 +10224,33 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8274,6 +10305,33 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8421,6 +10479,33 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8475,6 +10560,33 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8529,6 +10641,33 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8583,6 +10722,33 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) SetFa
 
 // SetFake set fake values.
 func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8637,6 +10803,33 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8691,6 +10884,33 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8745,10 +10965,118 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) SetFake(
 
 // SetFake set fake values.
 func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -8799,6 +11127,33 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -8839,6 +11194,11 @@ func (s *InternalSquadResponseResponse) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
 		}
 	}
 	{
@@ -8961,6 +11321,33 @@ func (s *KeygenControllerGenerateKeyBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9012,6 +11399,26 @@ func (s *NilDebugSrrMatcherResponseDtoResponseMatchedRule) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *NilExternalSquadResponseResponseCustomRemarks) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilExternalSquadResponseResponseHostOverrides) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilExternalSquadResponseResponseHwidSettings) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilExternalSquadResponseResponseResponseHeaders) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
 func (s *NilExternalSquadResponseResponseSubscriptionSettings) SetFake() {
 	s.Null = true
 }
@@ -9022,17 +11429,27 @@ func (s *NilFloat64) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetFake() {
+func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetFake() {
 	s.Null = true
 }
 
 // SetFake set fake values.
 func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetFake() {
 	s.Null = true
 }
 
@@ -9092,6 +11509,11 @@ func (s *NilSubscriptionSettingsResponseResponseCustomResponseHeaders) SetFake()
 }
 
 // SetFake set fake values.
+func (s *NilSubscriptionSettingsResponseResponseHwidSettings) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
 func (s *NilSubscriptionSettingsResponseResponseResponseRules) SetFake() {
 	s.Null = true
 }
@@ -9103,16 +11525,6 @@ func (s *NilURI) SetFake() {
 
 // SetFake set fake values.
 func (s *NilUUID) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilUserResponseResponseLastConnectedNode) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilUsersResponseResponseItemLastConnectedNode) SetFake() {
 	s.Null = true
 }
 
@@ -9240,6 +11652,18 @@ func (s *NodeResponseResponse) SetFake() {
 	{
 		{
 			s.ConsumptionMultiplier = float64(0)
+		}
+	}
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Tags = append(s.Tags, elem)
+			}
 		}
 	}
 	{
@@ -9411,6 +11835,33 @@ func (s *NodesControllerCreateNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerCreateNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9465,6 +11916,33 @@ func (s *NodesControllerDeleteNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerDeleteNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9519,6 +11997,33 @@ func (s *NodesControllerDisableNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerDisableNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9573,6 +12078,33 @@ func (s *NodesControllerEnableNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerEnableNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9627,10 +12159,118 @@ func (s *NodesControllerGetAllNodesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerGetAllNodesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *NodesControllerGetAllNodesInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesControllerGetAllNodesTagsBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem NodesControllerGetAllNodesTagsBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -9681,6 +12321,33 @@ func (s *NodesControllerGetOneNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerGetOneNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9735,10 +12402,118 @@ func (s *NodesControllerReorderNodesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerReorderNodesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *NodesControllerReorderNodesInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem NodesControllerResetNodeTrafficBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -9789,6 +12564,33 @@ func (s *NodesControllerRestartAllNodesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9843,6 +12645,33 @@ func (s *NodesControllerRestartNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerRestartNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9897,6 +12726,33 @@ func (s *NodesControllerUpdateNodeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesControllerUpdateNodeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -10054,6 +12910,18 @@ func (s *NodesResponseResponseItem) SetFake() {
 	{
 		{
 			s.ConsumptionMultiplier = float64(0)
+		}
+	}
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Tags = append(s.Tags, elem)
+			}
 		}
 	}
 	{
@@ -10225,6 +13093,33 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -10279,6 +13174,33 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -10333,6 +13255,33 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) SetFake
 
 // SetFake set fake values.
 func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -10587,6 +13536,15 @@ func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExt
 }
 
 // SetFake set fake values.
+func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) SetFake() {
+	var elem *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate
+	{ // Keep pointer nil to prevent infinite recursion.
+		elem = nil
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) SetFake() {
 	var elem GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus
 	{
@@ -10698,6 +13656,24 @@ func (s *OptNilUUID) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptNilUpdateExternalSquadRequestDtoCustomRemarks) SetFake() {
+	s.Null = true
+	s.Set = true
+}
+
+// SetFake set fake values.
+func (s *OptNilUpdateExternalSquadRequestDtoHwidSettings) SetFake() {
+	s.Null = true
+	s.Set = true
+}
+
+// SetFake set fake values.
+func (s *OptNilUpdateExternalSquadRequestDtoResponseHeaders) SetFake() {
+	s.Null = true
+	s.Set = true
+}
+
+// SetFake set fake values.
 func (s *OptNilUpdateHostRequestDtoAlpn) SetFake() {
 	s.Null = true
 	s.Set = true
@@ -10741,6 +13717,15 @@ func (s *OptUUID) SetFake() {
 	var elem uuid.UUID
 	{
 		elem = uuid.New()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptUpdateExternalSquadRequestDtoHostOverrides) SetFake() {
+	var elem UpdateExternalSquadRequestDtoHostOverrides
+	{
+		elem.SetFake()
 	}
 	s.SetTo(elem)
 }
@@ -10827,8 +13812,26 @@ func (s *OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) SetFake() {
+	var elem UpdateSubscriptionSettingsRequestDtoCustomRemarks
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) SetFake() {
 	var elem UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptUpdateSubscriptionSettingsRequestDtoHwidSettings) SetFake() {
+	var elem UpdateSubscriptionSettingsRequestDtoHwidSettings
 	{
 		elem.SetFake()
 	}
@@ -10935,6 +13938,33 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -10989,6 +14019,33 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11043,6 +14100,33 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11097,10 +14181,118 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *PasskeyControllerPasskeyRegistrationVerifyInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem PasskeyControllerUpdatePasskeyBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -11223,6 +14415,33 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11277,6 +14496,33 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11369,6 +14615,36 @@ func (s *ReorderNodeRequestDto) SetFake() {
 
 // SetFake set fake values.
 func (s *ReorderNodeRequestDtoNodesItem) SetFake() {
+	{
+		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ReorderSubscriptionTemplatesRequestDto) SetFake() {
+	{
+		{
+			s.Items = nil
+			for i := 0; i < 0; i++ {
+				var elem ReorderSubscriptionTemplatesRequestDtoItemsItem
+				{
+					elem.SetFake()
+				}
+				s.Items = append(s.Items, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ReorderSubscriptionTemplatesRequestDtoItemsItem) SetFake() {
 	{
 		{
 			s.ViewPosition = int(0)
@@ -11722,6 +14998,33 @@ func (s *SnippetsControllerCreateSnippetBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11776,6 +15079,33 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11830,6 +15160,33 @@ func (s *SnippetsControllerGetSnippetsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11884,6 +15241,33 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -11982,6 +15366,33 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) SetFake
 
 // SetFake set fake values.
 func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12049,20 +15460,6 @@ func (s *SubscriptionResponseResponse) SetFake() {
 	{
 		{
 			s.SubscriptionUrl = "string"
-		}
-	}
-	{
-		{
-			s.Happ.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *SubscriptionResponseResponseHapp) SetFake() {
-	{
-		{
-			s.CryptoLink = "string"
 		}
 	}
 }
@@ -12185,6 +15582,33 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12239,6 +15663,33 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12318,48 +15769,17 @@ func (s *SubscriptionSettingsResponseResponse) SetFake() {
 	}
 	{
 		{
+			s.CustomRemarks.SetFake()
+		}
+	}
+	{
+		{
 			s.HappAnnounce.SetFake()
 		}
 	}
 	{
 		{
 			s.HappRouting.SetFake()
-		}
-	}
-	{
-		{
-			s.ExpiredUsersRemarks = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.ExpiredUsersRemarks = append(s.ExpiredUsersRemarks, elem)
-			}
-		}
-	}
-	{
-		{
-			s.LimitedUsersRemarks = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.LimitedUsersRemarks = append(s.LimitedUsersRemarks, elem)
-			}
-		}
-	}
-	{
-		{
-			s.DisabledUsersRemarks = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.DisabledUsersRemarks = append(s.DisabledUsersRemarks, elem)
-			}
 		}
 	}
 	{
@@ -12379,12 +15799,81 @@ func (s *SubscriptionSettingsResponseResponse) SetFake() {
 	}
 	{
 		{
+			s.HwidSettings.SetFake()
+		}
+	}
+	{
+		{
 			s.CreatedAt = time.Now()
 		}
 	}
 	{
 		{
 			s.UpdatedAt = time.Now()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) SetFake() {
+	{
+		{
+			s.ExpiredUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ExpiredUsers = append(s.ExpiredUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.LimitedUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.LimitedUsers = append(s.LimitedUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.DisabledUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.DisabledUsers = append(s.DisabledUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyHosts = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyHosts = append(s.EmptyHosts, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyInternalSquads = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyInternalSquads = append(s.EmptyInternalSquads, elem)
+			}
 		}
 	}
 }
@@ -12397,6 +15886,25 @@ func (s *SubscriptionSettingsResponseResponseCustomResponseHeaders) SetFake() {
 	)
 	for i := 0; i < 0; i++ {
 		m[fmt.Sprintf("fake%d", i)] = elem
+	}
+}
+
+// SetFake set fake values.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.FallbackDeviceLimit = float64(0)
+		}
+	}
+	{
+		{
+			s.MaxDevicesAnnounce.SetFake()
+		}
 	}
 }
 
@@ -12574,6 +16082,33 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12628,6 +16163,33 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12682,6 +16244,33 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12736,10 +16325,118 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
 func (s *SubscriptionTemplateControllerGetTemplateByUuidInternalServerError) SetFake() {
+	{
+		{
+			s.Timestamp.SetFake()
+		}
+	}
+	{
+		{
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) SetFake() {
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.StatusCode.SetFake()
+		}
+	}
+	{
+		{
+			s.Errors = nil
+			for i := 0; i < 0; i++ {
+				var elem SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem
+				{
+					elem.SetFake()
+				}
+				s.Errors = append(s.Errors, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) SetFake() {
 	{
 		{
 			s.Timestamp.SetFake()
@@ -12790,6 +16487,33 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12844,6 +16568,33 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12898,6 +16649,33 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) SetFake
 
 // SetFake set fake values.
 func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -12952,6 +16730,33 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) S
 
 // SetFake set fake values.
 func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13030,6 +16835,33 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13108,6 +16940,33 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13186,6 +17045,33 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13240,6 +17126,33 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13294,6 +17207,33 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13348,6 +17288,33 @@ func (s *SystemControllerGetNodesMetricsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13402,6 +17369,33 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13456,6 +17450,33 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13510,6 +17531,33 @@ func (s *SystemControllerGetStatsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerGetStatsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13564,6 +17612,33 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -13672,6 +17747,11 @@ func (s *TemplateResponseResponse) SetFake() {
 	}
 	{
 		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
 			s.Name = "string"
 		}
 	}
@@ -13766,6 +17846,134 @@ func (s *UpdateExternalSquadRequestDto) SetFake() {
 		{
 			s.SubscriptionSettings.SetFake()
 		}
+	}
+	{
+		{
+			s.HostOverrides.SetFake()
+		}
+	}
+	{
+		{
+			s.ResponseHeaders.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidSettings.SetFake()
+		}
+	}
+	{
+		{
+			s.CustomRemarks.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) SetFake() {
+	{
+		{
+			s.ExpiredUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ExpiredUsers = append(s.ExpiredUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.LimitedUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.LimitedUsers = append(s.LimitedUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.DisabledUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.DisabledUsers = append(s.DisabledUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyHosts = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyHosts = append(s.EmptyHosts, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyInternalSquads = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyInternalSquads = append(s.EmptyInternalSquads, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) SetFake() {
+	{
+		{
+			s.ServerDescription.SetFake()
+		}
+	}
+	{
+		{
+			s.VlessRouteId.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.FallbackDeviceLimit = float64(0)
+		}
+	}
+	{
+		{
+			s.MaxDevicesAnnounce.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateExternalSquadRequestDtoResponseHeaders) SetFake() {
+	var (
+		elem string
+		m    map[string]string = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
 	}
 }
 
@@ -13971,6 +18179,23 @@ func (s *UpdateHostRequestDto) SetFake() {
 			}
 		}
 	}
+	{
+		{
+			s.XrayJsonTemplateUuid.SetFake()
+		}
+	}
+	{
+		{
+			s.ExcludedInternalSquads = nil
+			for i := 0; i < 0; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.ExcludedInternalSquads = append(s.ExcludedInternalSquads, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -14135,6 +18360,18 @@ func (s *UpdateNodeRequestDto) SetFake() {
 			s.ProviderUuid.SetFake()
 		}
 	}
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Tags = append(s.Tags, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -14154,6 +18391,20 @@ func (s *UpdateNodeRequestDtoConfigProfile) SetFake() {
 				}
 				s.ActiveInbounds = append(s.ActiveInbounds, elem)
 			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdatePasskeyRequestDto) SetFake() {
+	{
+		{
+			s.ID = "string"
+		}
+	}
+	{
+		{
+			s.Name = "string"
 		}
 	}
 }
@@ -14411,11 +18662,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetFake() {
 	}
 	{
 		{
-			s.IsShowCustomRemarks.SetFake()
-		}
-	}
-	{
-		{
 			s.HappAnnounce.SetFake()
 		}
 	}
@@ -14426,38 +18672,12 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetFake() {
 	}
 	{
 		{
-			s.ExpiredUsersRemarks = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.ExpiredUsersRemarks = append(s.ExpiredUsersRemarks, elem)
-			}
+			s.IsShowCustomRemarks.SetFake()
 		}
 	}
 	{
 		{
-			s.LimitedUsersRemarks = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.LimitedUsersRemarks = append(s.LimitedUsersRemarks, elem)
-			}
-		}
-	}
-	{
-		{
-			s.DisabledUsersRemarks = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.DisabledUsersRemarks = append(s.DisabledUsersRemarks, elem)
-			}
+			s.CustomRemarks.SetFake()
 		}
 	}
 	{
@@ -14475,6 +18695,75 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetFake() {
 			s.ResponseRules.SetFake()
 		}
 	}
+	{
+		{
+			s.HwidSettings.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) SetFake() {
+	{
+		{
+			s.ExpiredUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ExpiredUsers = append(s.ExpiredUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.LimitedUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.LimitedUsers = append(s.LimitedUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.DisabledUsers = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.DisabledUsers = append(s.DisabledUsers, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyHosts = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyHosts = append(s.EmptyHosts, elem)
+			}
+		}
+	}
+	{
+		{
+			s.EmptyInternalSquads = nil
+			for i := 0; i < 1; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.EmptyInternalSquads = append(s.EmptyInternalSquads, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -14485,6 +18774,25 @@ func (s *UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) SetFake() {
 	)
 	for i := 0; i < 0; i++ {
 		m[fmt.Sprintf("fake%d", i)] = elem
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.FallbackDeviceLimit = float64(0)
+		}
+	}
+	{
+		{
+			s.MaxDevicesAnnounce.SetFake()
+		}
 	}
 }
 
@@ -14781,16 +19089,6 @@ func (s *UserResponseResponse) SetFake() {
 	}
 	{
 		{
-			s.UsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
-			s.LifetimeUsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
 			s.TrafficLimitBytes.SetFake()
 		}
 	}
@@ -14801,32 +19099,37 @@ func (s *UserResponseResponse) SetFake() {
 	}
 	{
 		{
-			s.SubLastUserAgent.SetFake()
-		}
-	}
-	{
-		{
-			s.SubLastOpenedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.ExpireAt = time.Now()
 		}
 	}
 	{
 		{
-			s.OnlineAt.SetFake()
+			s.TelegramId.SetFake()
 		}
 	}
 	{
 		{
-			s.SubRevokedAt.SetFake()
+			s.Email.SetFake()
 		}
 	}
 	{
 		{
-			s.LastTrafficResetAt.SetFake()
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Tag.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidDeviceLimit.SetFake()
+		}
+	}
+	{
+		{
+			s.ExternalSquadUuid.SetFake()
 		}
 	}
 	{
@@ -14846,37 +19149,27 @@ func (s *UserResponseResponse) SetFake() {
 	}
 	{
 		{
-			s.Description.SetFake()
-		}
-	}
-	{
-		{
-			s.Tag.SetFake()
-		}
-	}
-	{
-		{
-			s.TelegramId.SetFake()
-		}
-	}
-	{
-		{
-			s.Email.SetFake()
-		}
-	}
-	{
-		{
-			s.HwidDeviceLimit.SetFake()
-		}
-	}
-	{
-		{
-			s.FirstConnectedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.LastTriggeredThreshold.SetFake()
+		}
+	}
+	{
+		{
+			s.SubRevokedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastUserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastOpenedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastTrafficResetAt.SetFake()
 		}
 	}
 	{
@@ -14887,6 +19180,11 @@ func (s *UserResponseResponse) SetFake() {
 	{
 		{
 			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.SubscriptionUrl = "string"
 		}
 	}
 	{
@@ -14903,22 +19201,7 @@ func (s *UserResponseResponse) SetFake() {
 	}
 	{
 		{
-			s.ExternalSquadUuid.SetFake()
-		}
-	}
-	{
-		{
-			s.SubscriptionUrl = "string"
-		}
-	}
-	{
-		{
-			s.LastConnectedNode.SetFake()
-		}
-	}
-	{
-		{
-			s.Happ.SetFake()
+			s.UserTraffic.SetFake()
 		}
 	}
 }
@@ -14938,34 +19221,6 @@ func (s *UserResponseResponseActiveInternalSquadsItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UserResponseResponseHapp) SetFake() {
-	{
-		{
-			s.CryptoLink = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UserResponseResponseLastConnectedNode) SetFake() {
-	{
-		{
-			s.ConnectedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.NodeName = "string"
-		}
-	}
-	{
-		{
-			s.CountryCode = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *UserResponseResponseStatus) SetFake() {
 	*s = UserResponseResponseStatusACTIVE
 }
@@ -14973,6 +19228,35 @@ func (s *UserResponseResponseStatus) SetFake() {
 // SetFake set fake values.
 func (s *UserResponseResponseTrafficLimitStrategy) SetFake() {
 	*s = UserResponseResponseTrafficLimitStrategyNORESET
+}
+
+// SetFake set fake values.
+func (s *UserResponseResponseUserTraffic) SetFake() {
+	{
+		{
+			s.UsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.LifetimeUsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.OnlineAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FirstConnectedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastConnectedNodeUuid.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15003,6 +19287,33 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 
 // SetFake set fake values.
 func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15057,6 +19368,33 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 
 // SetFake set fake values.
 func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15111,6 +19449,33 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) SetFake() 
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15165,6 +19530,33 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15195,6 +19587,33 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) SetFake() 
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15273,6 +19692,33 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15327,6 +19773,33 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) SetFak
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15381,6 +19854,33 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15435,6 +19935,33 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15489,6 +20016,33 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) SetF
 
 // SetFake set fake values.
 func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15543,6 +20097,33 @@ func (s *UsersControllerCreateUserBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerCreateUserBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15597,6 +20178,33 @@ func (s *UsersControllerDeleteUserBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerDeleteUserBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15651,6 +20259,33 @@ func (s *UsersControllerDisableUserBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerDisableUserBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15705,6 +20340,33 @@ func (s *UsersControllerEnableUserBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerEnableUserBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15759,6 +20421,33 @@ func (s *UsersControllerGetAllTagsBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetAllTagsBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15813,6 +20502,33 @@ func (s *UsersControllerGetAllUsersBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetAllUsersBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15867,6 +20583,33 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15921,6 +20664,33 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -15975,6 +20745,33 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16029,6 +20826,33 @@ func (s *UsersControllerGetUserByUsernameBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16083,6 +20907,33 @@ func (s *UsersControllerGetUserByUuidBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16137,6 +20988,33 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16191,6 +21069,33 @@ func (s *UsersControllerGetUsersByEmailBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16245,6 +21150,33 @@ func (s *UsersControllerGetUsersByTagBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16299,6 +21231,33 @@ func (s *UsersControllerResetUserTrafficBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16353,6 +21312,33 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16407,6 +21393,33 @@ func (s *UsersControllerUpdateUserBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersControllerUpdateUserBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16473,16 +21486,6 @@ func (s *UsersResponseResponseItem) SetFake() {
 	}
 	{
 		{
-			s.UsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
-			s.LifetimeUsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
 			s.TrafficLimitBytes.SetFake()
 		}
 	}
@@ -16493,32 +21496,37 @@ func (s *UsersResponseResponseItem) SetFake() {
 	}
 	{
 		{
-			s.SubLastUserAgent.SetFake()
-		}
-	}
-	{
-		{
-			s.SubLastOpenedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.ExpireAt = time.Now()
 		}
 	}
 	{
 		{
-			s.OnlineAt.SetFake()
+			s.TelegramId.SetFake()
 		}
 	}
 	{
 		{
-			s.SubRevokedAt.SetFake()
+			s.Email.SetFake()
 		}
 	}
 	{
 		{
-			s.LastTrafficResetAt.SetFake()
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Tag.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidDeviceLimit.SetFake()
+		}
+	}
+	{
+		{
+			s.ExternalSquadUuid.SetFake()
 		}
 	}
 	{
@@ -16538,37 +21546,27 @@ func (s *UsersResponseResponseItem) SetFake() {
 	}
 	{
 		{
-			s.Description.SetFake()
-		}
-	}
-	{
-		{
-			s.Tag.SetFake()
-		}
-	}
-	{
-		{
-			s.TelegramId.SetFake()
-		}
-	}
-	{
-		{
-			s.Email.SetFake()
-		}
-	}
-	{
-		{
-			s.HwidDeviceLimit.SetFake()
-		}
-	}
-	{
-		{
-			s.FirstConnectedAt.SetFake()
-		}
-	}
-	{
-		{
 			s.LastTriggeredThreshold.SetFake()
+		}
+	}
+	{
+		{
+			s.SubRevokedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastUserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastOpenedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastTrafficResetAt.SetFake()
 		}
 	}
 	{
@@ -16579,6 +21577,11 @@ func (s *UsersResponseResponseItem) SetFake() {
 	{
 		{
 			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.SubscriptionUrl = "string"
 		}
 	}
 	{
@@ -16595,22 +21598,7 @@ func (s *UsersResponseResponseItem) SetFake() {
 	}
 	{
 		{
-			s.ExternalSquadUuid.SetFake()
-		}
-	}
-	{
-		{
-			s.SubscriptionUrl = "string"
-		}
-	}
-	{
-		{
-			s.LastConnectedNode.SetFake()
-		}
-	}
-	{
-		{
-			s.Happ.SetFake()
+			s.UserTraffic.SetFake()
 		}
 	}
 }
@@ -16630,34 +21618,6 @@ func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UsersResponseResponseItemHapp) SetFake() {
-	{
-		{
-			s.CryptoLink = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UsersResponseResponseItemLastConnectedNode) SetFake() {
-	{
-		{
-			s.ConnectedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.NodeName = "string"
-		}
-	}
-	{
-		{
-			s.CountryCode = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *UsersResponseResponseItemStatus) SetFake() {
 	*s = UsersResponseResponseItemStatusACTIVE
 }
@@ -16665,6 +21625,35 @@ func (s *UsersResponseResponseItemStatus) SetFake() {
 // SetFake set fake values.
 func (s *UsersResponseResponseItemTrafficLimitStrategy) SetFake() {
 	*s = UsersResponseResponseItemTrafficLimitStrategyNORESET
+}
+
+// SetFake set fake values.
+func (s *UsersResponseResponseItemUserTraffic) SetFake() {
+	{
+		{
+			s.UsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.LifetimeUsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.OnlineAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FirstConnectedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastConnectedNodeUuid.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -16695,6 +21684,33 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) SetFake() {
 
 // SetFake set fake values.
 func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) SetFake() {
+	{
+		{
+			s.Validation = "string"
+		}
+	}
+	{
+		{
+			s.Code = "string"
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+	{
+		{
+			s.Path = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Path = append(s.Path, elem)
+			}
+		}
+	}
 }
 
 // SetFake set fake values.

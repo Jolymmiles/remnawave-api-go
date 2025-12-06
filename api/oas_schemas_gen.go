@@ -49,7 +49,52 @@ func (s *ApiTokensControllerCreateBadRequest) SetErrors(val []ApiTokensControlle
 
 func (*ApiTokensControllerCreateBadRequest) apiTokensControllerCreateRes() {}
 
-type ApiTokensControllerCreateBadRequestErrorsItem struct{}
+type ApiTokensControllerCreateBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ApiTokensControllerCreateBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ApiTokensControllerCreateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -138,7 +183,52 @@ func (s *ApiTokensControllerDeleteBadRequest) SetErrors(val []ApiTokensControlle
 
 func (*ApiTokensControllerDeleteBadRequest) apiTokensControllerDeleteRes() {}
 
-type ApiTokensControllerDeleteBadRequestErrorsItem struct{}
+type ApiTokensControllerDeleteBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ApiTokensControllerDeleteBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ApiTokensControllerDeleteInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -227,7 +317,52 @@ func (s *ApiTokensControllerFindAllBadRequest) SetErrors(val []ApiTokensControll
 
 func (*ApiTokensControllerFindAllBadRequest) apiTokensControllerFindAllRes() {}
 
-type ApiTokensControllerFindAllBadRequestErrorsItem struct{}
+type ApiTokensControllerFindAllBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ApiTokensControllerFindAllBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ApiTokensControllerFindAllInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -316,7 +451,52 @@ func (s *AuthControllerGetStatusBadRequest) SetErrors(val []AuthControllerGetSta
 
 func (*AuthControllerGetStatusBadRequest) authControllerGetStatusRes() {}
 
-type AuthControllerGetStatusBadRequestErrorsItem struct{}
+type AuthControllerGetStatusBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerGetStatusBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerGetStatusInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -405,7 +585,52 @@ func (s *AuthControllerLoginBadRequest) SetErrors(val []AuthControllerLoginBadRe
 
 func (*AuthControllerLoginBadRequest) authControllerLoginRes() {}
 
-type AuthControllerLoginBadRequestErrorsItem struct{}
+type AuthControllerLoginBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerLoginBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerLoginBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerLoginBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerLoginBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerLoginBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerLoginBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerLoginBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerLoginBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerLoginInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -532,7 +757,52 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) SetErrors(val []AuthController
 
 func (*AuthControllerOauth2AuthorizeBadRequest) authControllerOauth2AuthorizeRes() {}
 
-type AuthControllerOauth2AuthorizeBadRequestErrorsItem struct{}
+type AuthControllerOauth2AuthorizeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerOauth2AuthorizeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -621,7 +891,52 @@ func (s *AuthControllerOauth2CallbackBadRequest) SetErrors(val []AuthControllerO
 
 func (*AuthControllerOauth2CallbackBadRequest) authControllerOauth2CallbackRes() {}
 
-type AuthControllerOauth2CallbackBadRequestErrorsItem struct{}
+type AuthControllerOauth2CallbackBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerOauth2CallbackInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -711,7 +1026,52 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) SetErrors(val []A
 func (*AuthControllerPasskeyAuthenticationOptionsBadRequest) authControllerPasskeyAuthenticationOptionsRes() {
 }
 
-type AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem struct{}
+type AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerPasskeyAuthenticationOptionsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -802,7 +1162,52 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) SetErrors(val []Au
 func (*AuthControllerPasskeyAuthenticationVerifyBadRequest) authControllerPasskeyAuthenticationVerifyRes() {
 }
 
-type AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem struct{}
+type AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerPasskeyAuthenticationVerifyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -892,7 +1297,52 @@ func (s *AuthControllerRegisterBadRequest) SetErrors(val []AuthControllerRegiste
 
 func (*AuthControllerRegisterBadRequest) authControllerRegisterRes() {}
 
-type AuthControllerRegisterBadRequestErrorsItem struct{}
+type AuthControllerRegisterBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerRegisterBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerRegisterBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerRegisterBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerRegisterBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerRegisterBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerRegisterBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerRegisterBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerRegisterBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerRegisterForbidden struct {
 	StatusCode OptFloat64 `json:"statusCode"`
@@ -1019,7 +1469,52 @@ func (s *AuthControllerTelegramCallbackBadRequest) SetErrors(val []AuthControlle
 
 func (*AuthControllerTelegramCallbackBadRequest) authControllerTelegramCallbackRes() {}
 
-type AuthControllerTelegramCallbackBadRequestErrorsItem struct{}
+type AuthControllerTelegramCallbackBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type AuthControllerTelegramCallbackInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2214,7 +2709,52 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) SetErrors(val []C
 func (*ConfigProfileControllerCreateConfigProfileBadRequest) configProfileControllerCreateConfigProfileRes() {
 }
 
-type ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem struct{}
+type ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // ConfigProfileControllerCreateConfigProfileConflict is response for ConfigProfileControllerCreateConfigProfile operation.
 type ConfigProfileControllerCreateConfigProfileConflict struct{}
@@ -2311,7 +2851,52 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) SetErrors(v
 func (*ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) configProfileControllerDeleteConfigProfileByUuidRes() {
 }
 
-type ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem struct{}
+type ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2407,7 +2992,52 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) SetErrors(val []Config
 
 func (*ConfigProfileControllerGetAllInboundsBadRequest) configProfileControllerGetAllInboundsRes() {}
 
-type ConfigProfileControllerGetAllInboundsBadRequestErrorsItem struct{}
+type ConfigProfileControllerGetAllInboundsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ConfigProfileControllerGetAllInboundsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2459,6 +3089,148 @@ func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetErrorCode(
 func (*ConfigProfileControllerGetAllInboundsInternalServerError) configProfileControllerGetAllInboundsRes() {
 }
 
+type ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest struct {
+	Message    OptString                                                                   `json:"message"`
+	StatusCode OptFloat64                                                                  `json:"statusCode"`
+	Errors     []ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) GetErrors() []ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetErrors(val []ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) configProfileControllerGetComputedConfigProfileByUuidRes() {
+}
+
+type ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) configProfileControllerGetComputedConfigProfileByUuidRes() {
+}
+
+// ConfigProfileControllerGetComputedConfigProfileByUuidNotFound is response for ConfigProfileControllerGetComputedConfigProfileByUuid operation.
+type ConfigProfileControllerGetComputedConfigProfileByUuidNotFound struct{}
+
+func (*ConfigProfileControllerGetComputedConfigProfileByUuidNotFound) configProfileControllerGetComputedConfigProfileByUuidRes() {
+}
+
 type ConfigProfileControllerGetConfigProfileByUuidBadRequest struct {
 	Message    OptString                                                           `json:"message"`
 	StatusCode OptFloat64                                                          `json:"statusCode"`
@@ -2498,7 +3270,52 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) SetErrors(val 
 func (*ConfigProfileControllerGetConfigProfileByUuidBadRequest) configProfileControllerGetConfigProfileByUuidRes() {
 }
 
-type ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem struct{}
+type ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ConfigProfileControllerGetConfigProfileByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2595,7 +3412,52 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) SetErrors(val []Con
 func (*ConfigProfileControllerGetConfigProfilesBadRequest) configProfileControllerGetConfigProfilesRes() {
 }
 
-type ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem struct{}
+type ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ConfigProfileControllerGetConfigProfilesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2686,7 +3548,52 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) SetErrors(va
 func (*ConfigProfileControllerGetInboundsByProfileUuidBadRequest) configProfileControllerGetInboundsByProfileUuidRes() {
 }
 
-type ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem struct{}
+type ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ConfigProfileControllerGetInboundsByProfileUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2744,6 +3651,142 @@ type ConfigProfileControllerGetInboundsByProfileUuidNotFound struct{}
 func (*ConfigProfileControllerGetInboundsByProfileUuidNotFound) configProfileControllerGetInboundsByProfileUuidRes() {
 }
 
+type ConfigProfileControllerReorderConfigProfilesBadRequest struct {
+	Message    OptString                                                          `json:"message"`
+	StatusCode OptFloat64                                                         `json:"statusCode"`
+	Errors     []ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) GetErrors() []ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequest) SetErrors(val []ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*ConfigProfileControllerReorderConfigProfilesBadRequest) configProfileControllerReorderConfigProfilesRes() {
+}
+
+type ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerReorderConfigProfilesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type ConfigProfileControllerReorderConfigProfilesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerReorderConfigProfilesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerReorderConfigProfilesInternalServerError) configProfileControllerReorderConfigProfilesRes() {
+}
+
 type ConfigProfileControllerUpdateConfigProfileBadRequest struct {
 	Message    OptString                                                        `json:"message"`
 	StatusCode OptFloat64                                                       `json:"statusCode"`
@@ -2783,7 +3826,52 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) SetErrors(val []C
 func (*ConfigProfileControllerUpdateConfigProfileBadRequest) configProfileControllerUpdateConfigProfileRes() {
 }
 
-type ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem struct{}
+type ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // ConfigProfileControllerUpdateConfigProfileConflict is response for ConfigProfileControllerUpdateConfigProfile operation.
 type ConfigProfileControllerUpdateConfigProfileConflict struct{}
@@ -2862,23 +3950,30 @@ func (s *ConfigProfileResponse) SetResponse(val ConfigProfileResponseResponse) {
 	s.Response = val
 }
 
-func (*ConfigProfileResponse) configProfileControllerCreateConfigProfileRes()    {}
-func (*ConfigProfileResponse) configProfileControllerGetConfigProfileByUuidRes() {}
-func (*ConfigProfileResponse) configProfileControllerUpdateConfigProfileRes()    {}
+func (*ConfigProfileResponse) configProfileControllerCreateConfigProfileRes()            {}
+func (*ConfigProfileResponse) configProfileControllerGetComputedConfigProfileByUuidRes() {}
+func (*ConfigProfileResponse) configProfileControllerGetConfigProfileByUuidRes()         {}
+func (*ConfigProfileResponse) configProfileControllerUpdateConfigProfileRes()            {}
 
 type ConfigProfileResponseResponse struct {
-	UUID      uuid.UUID                                   `json:"uuid"`
-	Name      string                                      `json:"name"`
-	Config    jx.Raw                                      `json:"config"`
-	Inbounds  []ConfigProfileResponseResponseInboundsItem `json:"inbounds"`
-	Nodes     []ConfigProfileResponseResponseNodesItem    `json:"nodes"`
-	CreatedAt time.Time                                   `json:"createdAt"`
-	UpdatedAt time.Time                                   `json:"updatedAt"`
+	UUID         uuid.UUID                                   `json:"uuid"`
+	ViewPosition int                                         `json:"viewPosition"`
+	Name         string                                      `json:"name"`
+	Config       jx.Raw                                      `json:"config"`
+	Inbounds     []ConfigProfileResponseResponseInboundsItem `json:"inbounds"`
+	Nodes        []ConfigProfileResponseResponseNodesItem    `json:"nodes"`
+	CreatedAt    time.Time                                   `json:"createdAt"`
+	UpdatedAt    time.Time                                   `json:"updatedAt"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *ConfigProfileResponseResponse) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *ConfigProfileResponseResponse) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -2914,6 +4009,11 @@ func (s *ConfigProfileResponseResponse) GetUpdatedAt() time.Time {
 // SetUUID sets the value of UUID.
 func (s *ConfigProfileResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *ConfigProfileResponseResponse) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -3200,6 +4300,9 @@ type CreateHostRequestDto struct {
 	ShuffleHost            OptBool      `json:"shuffleHost"`
 	MihomoX25519           OptBool      `json:"mihomoX25519"`
 	Nodes                  []uuid.UUID  `json:"nodes"`
+	XrayJsonTemplateUuid   OptNilUUID   `json:"xrayJsonTemplateUuid"`
+	// Optional. Internal squads from which the host will be excluded.
+	ExcludedInternalSquads []uuid.UUID `json:"excludedInternalSquads"`
 }
 
 // GetInbound returns the value of Inbound.
@@ -3317,6 +4420,16 @@ func (s *CreateHostRequestDto) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
+// GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
+func (s *CreateHostRequestDto) GetXrayJsonTemplateUuid() OptNilUUID {
+	return s.XrayJsonTemplateUuid
+}
+
+// GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
+func (s *CreateHostRequestDto) GetExcludedInternalSquads() []uuid.UUID {
+	return s.ExcludedInternalSquads
+}
+
 // SetInbound sets the value of Inbound.
 func (s *CreateHostRequestDto) SetInbound(val CreateHostRequestDtoInbound) {
 	s.Inbound = val
@@ -3430,6 +4543,16 @@ func (s *CreateHostRequestDto) SetMihomoX25519(val OptBool) {
 // SetNodes sets the value of Nodes.
 func (s *CreateHostRequestDto) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
+}
+
+// SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
+func (s *CreateHostRequestDto) SetXrayJsonTemplateUuid(val OptNilUUID) {
+	s.XrayJsonTemplateUuid = val
+}
+
+// SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
+func (s *CreateHostRequestDto) SetExcludedInternalSquads(val []uuid.UUID) {
+	s.ExcludedInternalSquads = val
 }
 
 type CreateHostRequestDtoAlpn string
@@ -3816,6 +4939,7 @@ type CreateNodeRequestDto struct {
 	ConsumptionMultiplier   OptFloat64                        `json:"consumptionMultiplier"`
 	ConfigProfile           CreateNodeRequestDtoConfigProfile `json:"configProfile"`
 	ProviderUuid            OptNilUUID                        `json:"providerUuid"`
+	Tags                    []string                          `json:"tags"`
 }
 
 // GetName returns the value of Name.
@@ -3873,6 +4997,11 @@ func (s *CreateNodeRequestDto) GetProviderUuid() OptNilUUID {
 	return s.ProviderUuid
 }
 
+// GetTags returns the value of Tags.
+func (s *CreateNodeRequestDto) GetTags() []string {
+	return s.Tags
+}
+
 // SetName sets the value of Name.
 func (s *CreateNodeRequestDto) SetName(val string) {
 	s.Name = val
@@ -3926,6 +5055,11 @@ func (s *CreateNodeRequestDto) SetConfigProfile(val CreateNodeRequestDtoConfigPr
 // SetProviderUuid sets the value of ProviderUuid.
 func (s *CreateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
 	s.ProviderUuid = val
+}
+
+// SetTags sets the value of Tags.
+func (s *CreateNodeRequestDto) SetTags(val []string) {
+	s.Tags = val
 }
 
 type CreateNodeRequestDtoConfigProfile struct {
@@ -6053,6 +7187,7 @@ func (*EventResponse) externalSquadControllerAddUsersToExternalSquadRes()      {
 func (*EventResponse) externalSquadControllerRemoveUsersFromExternalSquadRes() {}
 func (*EventResponse) internalSquadControllerAddUsersToInternalSquadRes()      {}
 func (*EventResponse) internalSquadControllerRemoveUsersFromInternalSquadRes() {}
+func (*EventResponse) nodesControllerResetNodeTrafficRes()                     {}
 func (*EventResponse) nodesControllerRestartAllNodesRes()                      {}
 func (*EventResponse) nodesControllerRestartNodeRes()                          {}
 func (*EventResponse) usersBulkActionsControllerBulkAllResetUserTrafficRes()   {}
@@ -6111,7 +7246,52 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) SetErrors(val
 func (*ExternalSquadControllerAddUsersToExternalSquadBadRequest) externalSquadControllerAddUsersToExternalSquadRes() {
 }
 
-type ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem struct{}
+type ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ExternalSquadControllerAddUsersToExternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6208,7 +7388,52 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) SetErrors(val []E
 func (*ExternalSquadControllerCreateExternalSquadBadRequest) externalSquadControllerCreateExternalSquadRes() {
 }
 
-type ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem struct{}
+type ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // ExternalSquadControllerCreateExternalSquadConflict is response for ExternalSquadControllerCreateExternalSquad operation.
 type ExternalSquadControllerCreateExternalSquadConflict struct{}
@@ -6305,7 +7530,52 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) SetErrors(val []E
 func (*ExternalSquadControllerDeleteExternalSquadBadRequest) externalSquadControllerDeleteExternalSquadRes() {
 }
 
-type ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem struct{}
+type ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ExternalSquadControllerDeleteExternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6402,7 +7672,52 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) SetErrors(val 
 func (*ExternalSquadControllerGetExternalSquadByUuidBadRequest) externalSquadControllerGetExternalSquadByUuidRes() {
 }
 
-type ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem struct{}
+type ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ExternalSquadControllerGetExternalSquadByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6493,7 +7808,52 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) SetErrors(val []Ext
 func (*ExternalSquadControllerGetExternalSquadsBadRequest) externalSquadControllerGetExternalSquadsRes() {
 }
 
-type ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem struct{}
+type ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ExternalSquadControllerGetExternalSquadsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6584,7 +7944,52 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) SetError
 func (*ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) externalSquadControllerRemoveUsersFromExternalSquadRes() {
 }
 
-type ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem struct{}
+type ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type ExternalSquadControllerRemoveUsersFromExternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6642,6 +8047,142 @@ type ExternalSquadControllerRemoveUsersFromExternalSquadNotFound struct{}
 func (*ExternalSquadControllerRemoveUsersFromExternalSquadNotFound) externalSquadControllerRemoveUsersFromExternalSquadRes() {
 }
 
+type ExternalSquadControllerReorderExternalSquadsBadRequest struct {
+	Message    OptString                                                          `json:"message"`
+	StatusCode OptFloat64                                                         `json:"statusCode"`
+	Errors     []ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) GetErrors() []ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequest) SetErrors(val []ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*ExternalSquadControllerReorderExternalSquadsBadRequest) externalSquadControllerReorderExternalSquadsRes() {
+}
+
+type ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerReorderExternalSquadsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type ExternalSquadControllerReorderExternalSquadsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ExternalSquadControllerReorderExternalSquadsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ExternalSquadControllerReorderExternalSquadsInternalServerError) externalSquadControllerReorderExternalSquadsRes() {
+}
+
 type ExternalSquadControllerUpdateExternalSquadBadRequest struct {
 	Message    OptString                                                        `json:"message"`
 	StatusCode OptFloat64                                                       `json:"statusCode"`
@@ -6681,7 +8222,52 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) SetErrors(val []E
 func (*ExternalSquadControllerUpdateExternalSquadBadRequest) externalSquadControllerUpdateExternalSquadRes() {
 }
 
-type ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem struct{}
+type ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // ExternalSquadControllerUpdateExternalSquadConflict is response for ExternalSquadControllerUpdateExternalSquad operation.
 type ExternalSquadControllerUpdateExternalSquadConflict struct{}
@@ -6766,10 +8352,15 @@ func (*ExternalSquadResponse) externalSquadControllerUpdateExternalSquadRes()   
 
 type ExternalSquadResponseResponse struct {
 	UUID                 uuid.UUID                                            `json:"uuid"`
+	ViewPosition         int                                                  `json:"viewPosition"`
 	Name                 string                                               `json:"name"`
 	Info                 ExternalSquadResponseResponseInfo                    `json:"info"`
 	Templates            []ExternalSquadResponseResponseTemplatesItem         `json:"templates"`
 	SubscriptionSettings NilExternalSquadResponseResponseSubscriptionSettings `json:"subscriptionSettings"`
+	HostOverrides        NilExternalSquadResponseResponseHostOverrides        `json:"hostOverrides"`
+	ResponseHeaders      NilExternalSquadResponseResponseResponseHeaders      `json:"responseHeaders"`
+	HwidSettings         NilExternalSquadResponseResponseHwidSettings         `json:"hwidSettings"`
+	CustomRemarks        NilExternalSquadResponseResponseCustomRemarks        `json:"customRemarks"`
 	CreatedAt            time.Time                                            `json:"createdAt"`
 	UpdatedAt            time.Time                                            `json:"updatedAt"`
 }
@@ -6777,6 +8368,11 @@ type ExternalSquadResponseResponse struct {
 // GetUUID returns the value of UUID.
 func (s *ExternalSquadResponseResponse) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *ExternalSquadResponseResponse) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -6799,6 +8395,26 @@ func (s *ExternalSquadResponseResponse) GetSubscriptionSettings() NilExternalSqu
 	return s.SubscriptionSettings
 }
 
+// GetHostOverrides returns the value of HostOverrides.
+func (s *ExternalSquadResponseResponse) GetHostOverrides() NilExternalSquadResponseResponseHostOverrides {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *ExternalSquadResponseResponse) GetResponseHeaders() NilExternalSquadResponseResponseResponseHeaders {
+	return s.ResponseHeaders
+}
+
+// GetHwidSettings returns the value of HwidSettings.
+func (s *ExternalSquadResponseResponse) GetHwidSettings() NilExternalSquadResponseResponseHwidSettings {
+	return s.HwidSettings
+}
+
+// GetCustomRemarks returns the value of CustomRemarks.
+func (s *ExternalSquadResponseResponse) GetCustomRemarks() NilExternalSquadResponseResponseCustomRemarks {
+	return s.CustomRemarks
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *ExternalSquadResponseResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -6812,6 +8428,11 @@ func (s *ExternalSquadResponseResponse) GetUpdatedAt() time.Time {
 // SetUUID sets the value of UUID.
 func (s *ExternalSquadResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *ExternalSquadResponseResponse) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -6834,6 +8455,26 @@ func (s *ExternalSquadResponseResponse) SetSubscriptionSettings(val NilExternalS
 	s.SubscriptionSettings = val
 }
 
+// SetHostOverrides sets the value of HostOverrides.
+func (s *ExternalSquadResponseResponse) SetHostOverrides(val NilExternalSquadResponseResponseHostOverrides) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *ExternalSquadResponseResponse) SetResponseHeaders(val NilExternalSquadResponseResponseResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
+// SetHwidSettings sets the value of HwidSettings.
+func (s *ExternalSquadResponseResponse) SetHwidSettings(val NilExternalSquadResponseResponseHwidSettings) {
+	s.HwidSettings = val
+}
+
+// SetCustomRemarks sets the value of CustomRemarks.
+func (s *ExternalSquadResponseResponse) SetCustomRemarks(val NilExternalSquadResponseResponseCustomRemarks) {
+	s.CustomRemarks = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *ExternalSquadResponseResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -6842,6 +8483,125 @@ func (s *ExternalSquadResponseResponse) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *ExternalSquadResponseResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+type ExternalSquadResponseResponseCustomRemarks struct {
+	ExpiredUsers        []string `json:"expiredUsers"`
+	LimitedUsers        []string `json:"limitedUsers"`
+	DisabledUsers       []string `json:"disabledUsers"`
+	EmptyHosts          []string `json:"emptyHosts"`
+	EmptyInternalSquads []string `json:"emptyInternalSquads"`
+}
+
+// GetExpiredUsers returns the value of ExpiredUsers.
+func (s *ExternalSquadResponseResponseCustomRemarks) GetExpiredUsers() []string {
+	return s.ExpiredUsers
+}
+
+// GetLimitedUsers returns the value of LimitedUsers.
+func (s *ExternalSquadResponseResponseCustomRemarks) GetLimitedUsers() []string {
+	return s.LimitedUsers
+}
+
+// GetDisabledUsers returns the value of DisabledUsers.
+func (s *ExternalSquadResponseResponseCustomRemarks) GetDisabledUsers() []string {
+	return s.DisabledUsers
+}
+
+// GetEmptyHosts returns the value of EmptyHosts.
+func (s *ExternalSquadResponseResponseCustomRemarks) GetEmptyHosts() []string {
+	return s.EmptyHosts
+}
+
+// GetEmptyInternalSquads returns the value of EmptyInternalSquads.
+func (s *ExternalSquadResponseResponseCustomRemarks) GetEmptyInternalSquads() []string {
+	return s.EmptyInternalSquads
+}
+
+// SetExpiredUsers sets the value of ExpiredUsers.
+func (s *ExternalSquadResponseResponseCustomRemarks) SetExpiredUsers(val []string) {
+	s.ExpiredUsers = val
+}
+
+// SetLimitedUsers sets the value of LimitedUsers.
+func (s *ExternalSquadResponseResponseCustomRemarks) SetLimitedUsers(val []string) {
+	s.LimitedUsers = val
+}
+
+// SetDisabledUsers sets the value of DisabledUsers.
+func (s *ExternalSquadResponseResponseCustomRemarks) SetDisabledUsers(val []string) {
+	s.DisabledUsers = val
+}
+
+// SetEmptyHosts sets the value of EmptyHosts.
+func (s *ExternalSquadResponseResponseCustomRemarks) SetEmptyHosts(val []string) {
+	s.EmptyHosts = val
+}
+
+// SetEmptyInternalSquads sets the value of EmptyInternalSquads.
+func (s *ExternalSquadResponseResponseCustomRemarks) SetEmptyInternalSquads(val []string) {
+	s.EmptyInternalSquads = val
+}
+
+type ExternalSquadResponseResponseHostOverrides struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *ExternalSquadResponseResponseHostOverrides) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *ExternalSquadResponseResponseHostOverrides) GetVlessRouteId() OptNilInt {
+	return s.VlessRouteId
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *ExternalSquadResponseResponseHostOverrides) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *ExternalSquadResponseResponseHostOverrides) SetVlessRouteId(val OptNilInt) {
+	s.VlessRouteId = val
+}
+
+type ExternalSquadResponseResponseHwidSettings struct {
+	Enabled             bool      `json:"enabled"`
+	FallbackDeviceLimit float64   `json:"fallbackDeviceLimit"`
+	MaxDevicesAnnounce  NilString `json:"maxDevicesAnnounce"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *ExternalSquadResponseResponseHwidSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetFallbackDeviceLimit returns the value of FallbackDeviceLimit.
+func (s *ExternalSquadResponseResponseHwidSettings) GetFallbackDeviceLimit() float64 {
+	return s.FallbackDeviceLimit
+}
+
+// GetMaxDevicesAnnounce returns the value of MaxDevicesAnnounce.
+func (s *ExternalSquadResponseResponseHwidSettings) GetMaxDevicesAnnounce() NilString {
+	return s.MaxDevicesAnnounce
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *ExternalSquadResponseResponseHwidSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetFallbackDeviceLimit sets the value of FallbackDeviceLimit.
+func (s *ExternalSquadResponseResponseHwidSettings) SetFallbackDeviceLimit(val float64) {
+	s.FallbackDeviceLimit = val
+}
+
+// SetMaxDevicesAnnounce sets the value of MaxDevicesAnnounce.
+func (s *ExternalSquadResponseResponseHwidSettings) SetMaxDevicesAnnounce(val NilString) {
+	s.MaxDevicesAnnounce = val
 }
 
 type ExternalSquadResponseResponseInfo struct {
@@ -6856,6 +8616,17 @@ func (s *ExternalSquadResponseResponseInfo) GetMembersCount() float64 {
 // SetMembersCount sets the value of MembersCount.
 func (s *ExternalSquadResponseResponseInfo) SetMembersCount(val float64) {
 	s.MembersCount = val
+}
+
+type ExternalSquadResponseResponseResponseHeaders map[string]string
+
+func (s *ExternalSquadResponseResponseResponseHeaders) init() ExternalSquadResponseResponseResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
 }
 
 type ExternalSquadResponseResponseSubscriptionSettings struct {
@@ -7502,15 +9273,19 @@ func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemSsConfLinks) ini
 }
 
 type GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser struct {
-	ShortUuid            string                                                                          `json:"shortUuid"`
-	DaysLeft             float64                                                                         `json:"daysLeft"`
-	TrafficUsed          string                                                                          `json:"trafficUsed"`
-	TrafficLimit         string                                                                          `json:"trafficLimit"`
-	Username             string                                                                          `json:"username"`
-	ExpiresAt            time.Time                                                                       `json:"expiresAt"`
-	IsActive             bool                                                                            `json:"isActive"`
-	UserStatus           GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus           `json:"userStatus"`
-	TrafficLimitStrategy GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	ShortUuid                string                                                                          `json:"shortUuid"`
+	DaysLeft                 float64                                                                         `json:"daysLeft"`
+	TrafficUsed              string                                                                          `json:"trafficUsed"`
+	TrafficLimit             string                                                                          `json:"trafficLimit"`
+	LifetimeTrafficUsed      string                                                                          `json:"lifetimeTrafficUsed"`
+	TrafficUsedBytes         string                                                                          `json:"trafficUsedBytes"`
+	TrafficLimitBytes        string                                                                          `json:"trafficLimitBytes"`
+	LifetimeTrafficUsedBytes string                                                                          `json:"lifetimeTrafficUsedBytes"`
+	Username                 string                                                                          `json:"username"`
+	ExpiresAt                time.Time                                                                       `json:"expiresAt"`
+	IsActive                 bool                                                                            `json:"isActive"`
+	UserStatus               GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserUserStatus           `json:"userStatus"`
+	TrafficLimitStrategy     GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUserTrafficLimitStrategy `json:"trafficLimitStrategy"`
 }
 
 // GetShortUuid returns the value of ShortUuid.
@@ -7531,6 +9306,26 @@ func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTraffic
 // GetTrafficLimit returns the value of TrafficLimit.
 func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTrafficLimit() string {
 	return s.TrafficLimit
+}
+
+// GetLifetimeTrafficUsed returns the value of LifetimeTrafficUsed.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetLifetimeTrafficUsed() string {
+	return s.LifetimeTrafficUsed
+}
+
+// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTrafficUsedBytes() string {
+	return s.TrafficUsedBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetTrafficLimitBytes() string {
+	return s.TrafficLimitBytes
+}
+
+// GetLifetimeTrafficUsedBytes returns the value of LifetimeTrafficUsedBytes.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) GetLifetimeTrafficUsedBytes() string {
+	return s.LifetimeTrafficUsedBytes
 }
 
 // GetUsername returns the value of Username.
@@ -7576,6 +9371,26 @@ func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTraffic
 // SetTrafficLimit sets the value of TrafficLimit.
 func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTrafficLimit(val string) {
 	s.TrafficLimit = val
+}
+
+// SetLifetimeTrafficUsed sets the value of LifetimeTrafficUsed.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetLifetimeTrafficUsed(val string) {
+	s.LifetimeTrafficUsed = val
+}
+
+// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTrafficUsedBytes(val string) {
+	s.TrafficUsedBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetTrafficLimitBytes(val string) {
+	s.TrafficLimitBytes = val
+}
+
+// SetLifetimeTrafficUsedBytes sets the value of LifetimeTrafficUsedBytes.
+func (s *GetAllSubscriptionsResponseDtoResponseSubscriptionsItemUser) SetLifetimeTrafficUsedBytes(val string) {
+	s.LifetimeTrafficUsedBytes = val
 }
 
 // SetUsername sets the value of Username.
@@ -7756,38 +9571,33 @@ func (s *GetAllUsersResponseDtoResponse) SetTotal(val float64) {
 }
 
 type GetAllUsersResponseDtoResponseUsersItem struct {
-	UUID                     uuid.UUID                                        `json:"uuid"`
-	ShortUuid                string                                           `json:"shortUuid"`
-	Username                 string                                           `json:"username"`
-	Status                   OptGetAllUsersResponseDtoResponseUsersItemStatus `json:"status"`
-	UsedTrafficBytes         float64                                          `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                                          `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                                           `json:"trafficLimitBytes"`
+	UUID              uuid.UUID                                        `json:"uuid"`
+	ShortUuid         string                                           `json:"shortUuid"`
+	Username          string                                           `json:"username"`
+	Status            OptGetAllUsersResponseDtoResponseUsersItemStatus `json:"status"`
+	TrafficLimitBytes OptInt                                           `json:"trafficLimitBytes"`
 	// Available reset periods.
 	TrafficLimitStrategy   OptGetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                                         `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                                       `json:"subLastOpenedAt"`
 	ExpireAt               time.Time                                                         `json:"expireAt"`
-	OnlineAt               NilDateTime                                                       `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                                       `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                                       `json:"lastTrafficResetAt"`
+	TelegramId             NilInt                                                            `json:"telegramId"`
+	Email                  NilString                                                         `json:"email"`
+	Description            NilString                                                         `json:"description"`
+	Tag                    NilString                                                         `json:"tag"`
+	HwidDeviceLimit        NilInt                                                            `json:"hwidDeviceLimit"`
+	ExternalSquadUuid      NilUUID                                                           `json:"externalSquadUuid"`
 	TrojanPassword         string                                                            `json:"trojanPassword"`
 	VlessUuid              uuid.UUID                                                         `json:"vlessUuid"`
 	SsPassword             string                                                            `json:"ssPassword"`
-	Description            NilString                                                         `json:"description"`
-	Tag                    NilString                                                         `json:"tag"`
-	TelegramId             NilInt                                                            `json:"telegramId"`
-	Email                  NilString                                                         `json:"email"`
-	HwidDeviceLimit        NilInt                                                            `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                                       `json:"firstConnectedAt"`
 	LastTriggeredThreshold OptInt                                                            `json:"lastTriggeredThreshold"`
+	SubRevokedAt           NilDateTime                                                       `json:"subRevokedAt"`
+	SubLastUserAgent       NilString                                                         `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                       `json:"subLastOpenedAt"`
+	LastTrafficResetAt     NilDateTime                                                       `json:"lastTrafficResetAt"`
 	CreatedAt              time.Time                                                         `json:"createdAt"`
 	UpdatedAt              time.Time                                                         `json:"updatedAt"`
-	ActiveInternalSquads   []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                                           `json:"externalSquadUuid"`
 	SubscriptionUrl        string                                                            `json:"subscriptionUrl"`
-	LastConnectedNode      NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   GetAllUsersResponseDtoResponseUsersItemHapp                       `json:"happ"`
+	ActiveInternalSquads   []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem `json:"activeInternalSquads"`
+	UserTraffic            GetAllUsersResponseDtoResponseUsersItemUserTraffic                `json:"userTraffic"`
 }
 
 // GetUUID returns the value of UUID.
@@ -7810,16 +9620,6 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) GetStatus() OptGetAllUsersResp
 	return s.Status
 }
 
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
 func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrafficLimitBytes() OptInt {
 	return s.TrafficLimitBytes
@@ -7830,34 +9630,39 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) GetTrafficLimitStrategy() OptG
 	return s.TrafficLimitStrategy
 }
 
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
 // GetExpireAt returns the value of ExpireAt.
 func (s *GetAllUsersResponseDtoResponseUsersItem) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
-// GetOnlineAt returns the value of OnlineAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
+// GetTelegramId returns the value of TelegramId.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTelegramId() NilInt {
+	return s.TelegramId
 }
 
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
+// GetEmail returns the value of Email.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetEmail() NilString {
+	return s.Email
 }
 
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
+// GetDescription returns the value of Description.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
@@ -7875,39 +9680,29 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) GetSsPassword() string {
 	return s.SsPassword
 }
 
-// GetDescription returns the value of Description.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
 // GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
 func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastTriggeredThreshold() OptInt {
 	return s.LastTriggeredThreshold
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -7920,29 +9715,19 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetActiveInternalSquads() []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
 func (s *GetAllUsersResponseDtoResponseUsersItem) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetLastConnectedNode() NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
-	return s.LastConnectedNode
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetActiveInternalSquads() []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
-// GetHapp returns the value of Happ.
-func (s *GetAllUsersResponseDtoResponseUsersItem) GetHapp() GetAllUsersResponseDtoResponseUsersItemHapp {
-	return s.Happ
+// GetUserTraffic returns the value of UserTraffic.
+func (s *GetAllUsersResponseDtoResponseUsersItem) GetUserTraffic() GetAllUsersResponseDtoResponseUsersItemUserTraffic {
+	return s.UserTraffic
 }
 
 // SetUUID sets the value of UUID.
@@ -7965,16 +9750,6 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetStatus(val OptGetAllUsersRe
 	s.Status = val
 }
 
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
 func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrafficLimitBytes(val OptInt) {
 	s.TrafficLimitBytes = val
@@ -7985,34 +9760,39 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetTrafficLimitStrategy(val Op
 	s.TrafficLimitStrategy = val
 }
 
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
 // SetExpireAt sets the value of ExpireAt.
 func (s *GetAllUsersResponseDtoResponseUsersItem) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
-// SetOnlineAt sets the value of OnlineAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
+// SetTelegramId sets the value of TelegramId.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
 }
 
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
+// SetEmail sets the value of Email.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetEmail(val NilString) {
+	s.Email = val
 }
 
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
+// SetDescription sets the value of Description.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
@@ -8030,39 +9810,29 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetSsPassword(val string) {
 	s.SsPassword = val
 }
 
-// SetDescription sets the value of Description.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
 // SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
 func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastTriggeredThreshold(val OptInt) {
 	s.LastTriggeredThreshold = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
@@ -8075,29 +9845,19 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetActiveInternalSquads(val []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
 func (s *GetAllUsersResponseDtoResponseUsersItem) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
 }
 
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetLastConnectedNode(val NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) {
-	s.LastConnectedNode = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetActiveInternalSquads(val []GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
-// SetHapp sets the value of Happ.
-func (s *GetAllUsersResponseDtoResponseUsersItem) SetHapp(val GetAllUsersResponseDtoResponseUsersItemHapp) {
-	s.Happ = val
+// SetUserTraffic sets the value of UserTraffic.
+func (s *GetAllUsersResponseDtoResponseUsersItem) SetUserTraffic(val GetAllUsersResponseDtoResponseUsersItemUserTraffic) {
+	s.UserTraffic = val
 }
 
 type GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem struct {
@@ -8123,56 +9883,6 @@ func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) SetUUI
 // SetName sets the value of Name.
 func (s *GetAllUsersResponseDtoResponseUsersItemActiveInternalSquadsItem) SetName(val string) {
 	s.Name = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItemHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *GetAllUsersResponseDtoResponseUsersItemHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *GetAllUsersResponseDtoResponseUsersItemHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type GetAllUsersResponseDtoResponseUsersItemLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 type GetAllUsersResponseDtoResponseUsersItemStatus string
@@ -8284,6 +9994,64 @@ func (s *GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) UnmarshalT
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
+}
+
+type GetAllUsersResponseDtoResponseUsersItemUserTraffic struct {
+	UsedTrafficBytes         float64     `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64     `json:"lifetimeUsedTrafficBytes"`
+	OnlineAt                 NilDateTime `json:"onlineAt"`
+	FirstConnectedAt         NilDateTime `json:"firstConnectedAt"`
+	LastConnectedNodeUuid    NilUUID     `json:"lastConnectedNodeUuid"`
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastConnectedNodeUuid returns the value of LastConnectedNodeUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) GetLastConnectedNodeUuid() NilUUID {
+	return s.LastConnectedNodeUuid
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastConnectedNodeUuid sets the value of LastConnectedNodeUuid.
+func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) SetLastConnectedNodeUuid(val NilUUID) {
+	s.LastConnectedNodeUuid = val
 }
 
 // Ref: #/components/schemas/GetBandwidthStatsResponseDto
@@ -8556,7 +10324,8 @@ func (s *GetConfigProfilesResponseDto) SetResponse(val GetConfigProfilesResponse
 	s.Response = val
 }
 
-func (*GetConfigProfilesResponseDto) configProfileControllerGetConfigProfilesRes() {}
+func (*GetConfigProfilesResponseDto) configProfileControllerGetConfigProfilesRes()     {}
+func (*GetConfigProfilesResponseDto) configProfileControllerReorderConfigProfilesRes() {}
 
 type GetConfigProfilesResponseDtoResponse struct {
 	Total          float64                                                  `json:"total"`
@@ -8584,18 +10353,24 @@ func (s *GetConfigProfilesResponseDtoResponse) SetConfigProfiles(val []GetConfig
 }
 
 type GetConfigProfilesResponseDtoResponseConfigProfilesItem struct {
-	UUID      uuid.UUID                                                            `json:"uuid"`
-	Name      string                                                               `json:"name"`
-	Config    jx.Raw                                                               `json:"config"`
-	Inbounds  []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem `json:"inbounds"`
-	Nodes     []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem    `json:"nodes"`
-	CreatedAt time.Time                                                            `json:"createdAt"`
-	UpdatedAt time.Time                                                            `json:"updatedAt"`
+	UUID         uuid.UUID                                                            `json:"uuid"`
+	ViewPosition int                                                                  `json:"viewPosition"`
+	Name         string                                                               `json:"name"`
+	Config       jx.Raw                                                               `json:"config"`
+	Inbounds     []GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem `json:"inbounds"`
+	Nodes        []GetConfigProfilesResponseDtoResponseConfigProfilesItemNodesItem    `json:"nodes"`
+	CreatedAt    time.Time                                                            `json:"createdAt"`
+	UpdatedAt    time.Time                                                            `json:"updatedAt"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -8631,6 +10406,11 @@ func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) GetUpdatedAt() 
 // SetUUID sets the value of UUID.
 func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -8805,7 +10585,8 @@ func (s *GetExternalSquadsResponseDto) SetResponse(val GetExternalSquadsResponse
 	s.Response = val
 }
 
-func (*GetExternalSquadsResponseDto) externalSquadControllerGetExternalSquadsRes() {}
+func (*GetExternalSquadsResponseDto) externalSquadControllerGetExternalSquadsRes()     {}
+func (*GetExternalSquadsResponseDto) externalSquadControllerReorderExternalSquadsRes() {}
 
 type GetExternalSquadsResponseDtoResponse struct {
 	Total          float64                                                  `json:"total"`
@@ -8834,10 +10615,15 @@ func (s *GetExternalSquadsResponseDtoResponse) SetExternalSquads(val []GetExtern
 
 type GetExternalSquadsResponseDtoResponseExternalSquadsItem struct {
 	UUID                 uuid.UUID                                                                     `json:"uuid"`
+	ViewPosition         int                                                                           `json:"viewPosition"`
 	Name                 string                                                                        `json:"name"`
 	Info                 GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo                    `json:"info"`
 	Templates            []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem         `json:"templates"`
 	SubscriptionSettings NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings `json:"subscriptionSettings"`
+	HostOverrides        NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides        `json:"hostOverrides"`
+	ResponseHeaders      NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders      `json:"responseHeaders"`
+	HwidSettings         NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings         `json:"hwidSettings"`
+	CustomRemarks        NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks        `json:"customRemarks"`
 	CreatedAt            time.Time                                                                     `json:"createdAt"`
 	UpdatedAt            time.Time                                                                     `json:"updatedAt"`
 }
@@ -8845,6 +10631,11 @@ type GetExternalSquadsResponseDtoResponseExternalSquadsItem struct {
 // GetUUID returns the value of UUID.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -8867,6 +10658,26 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetSubscription
 	return s.SubscriptionSettings
 }
 
+// GetHostOverrides returns the value of HostOverrides.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetHostOverrides() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetResponseHeaders() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
+	return s.ResponseHeaders
+}
+
+// GetHwidSettings returns the value of HwidSettings.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetHwidSettings() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings {
+	return s.HwidSettings
+}
+
+// GetCustomRemarks returns the value of CustomRemarks.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetCustomRemarks() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks {
+	return s.CustomRemarks
+}
+
 // GetCreatedAt returns the value of CreatedAt.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetCreatedAt() time.Time {
 	return s.CreatedAt
@@ -8880,6 +10691,11 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetUpdatedAt() 
 // SetUUID sets the value of UUID.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -8902,6 +10718,26 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetSubscription
 	s.SubscriptionSettings = val
 }
 
+// SetHostOverrides sets the value of HostOverrides.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetHostOverrides(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetResponseHeaders(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
+// SetHwidSettings sets the value of HwidSettings.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetHwidSettings(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) {
+	s.HwidSettings = val
+}
+
+// SetCustomRemarks sets the value of CustomRemarks.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetCustomRemarks(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) {
+	s.CustomRemarks = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -8910,6 +10746,125 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetCreatedAt(va
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+type GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks struct {
+	ExpiredUsers        []string `json:"expiredUsers"`
+	LimitedUsers        []string `json:"limitedUsers"`
+	DisabledUsers       []string `json:"disabledUsers"`
+	EmptyHosts          []string `json:"emptyHosts"`
+	EmptyInternalSquads []string `json:"emptyInternalSquads"`
+}
+
+// GetExpiredUsers returns the value of ExpiredUsers.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) GetExpiredUsers() []string {
+	return s.ExpiredUsers
+}
+
+// GetLimitedUsers returns the value of LimitedUsers.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) GetLimitedUsers() []string {
+	return s.LimitedUsers
+}
+
+// GetDisabledUsers returns the value of DisabledUsers.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) GetDisabledUsers() []string {
+	return s.DisabledUsers
+}
+
+// GetEmptyHosts returns the value of EmptyHosts.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) GetEmptyHosts() []string {
+	return s.EmptyHosts
+}
+
+// GetEmptyInternalSquads returns the value of EmptyInternalSquads.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) GetEmptyInternalSquads() []string {
+	return s.EmptyInternalSquads
+}
+
+// SetExpiredUsers sets the value of ExpiredUsers.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetExpiredUsers(val []string) {
+	s.ExpiredUsers = val
+}
+
+// SetLimitedUsers sets the value of LimitedUsers.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetLimitedUsers(val []string) {
+	s.LimitedUsers = val
+}
+
+// SetDisabledUsers sets the value of DisabledUsers.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetDisabledUsers(val []string) {
+	s.DisabledUsers = val
+}
+
+// SetEmptyHosts sets the value of EmptyHosts.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetEmptyHosts(val []string) {
+	s.EmptyHosts = val
+}
+
+// SetEmptyInternalSquads sets the value of EmptyInternalSquads.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetEmptyInternalSquads(val []string) {
+	s.EmptyInternalSquads = val
+}
+
+type GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetVlessRouteId() OptNilInt {
+	return s.VlessRouteId
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetVlessRouteId(val OptNilInt) {
+	s.VlessRouteId = val
+}
+
+type GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings struct {
+	Enabled             bool      `json:"enabled"`
+	FallbackDeviceLimit float64   `json:"fallbackDeviceLimit"`
+	MaxDevicesAnnounce  NilString `json:"maxDevicesAnnounce"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetFallbackDeviceLimit returns the value of FallbackDeviceLimit.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) GetFallbackDeviceLimit() float64 {
+	return s.FallbackDeviceLimit
+}
+
+// GetMaxDevicesAnnounce returns the value of MaxDevicesAnnounce.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) GetMaxDevicesAnnounce() NilString {
+	return s.MaxDevicesAnnounce
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetFallbackDeviceLimit sets the value of FallbackDeviceLimit.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetFallbackDeviceLimit(val float64) {
+	s.FallbackDeviceLimit = val
+}
+
+// SetMaxDevicesAnnounce sets the value of MaxDevicesAnnounce.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetMaxDevicesAnnounce(val NilString) {
+	s.MaxDevicesAnnounce = val
 }
 
 type GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo struct {
@@ -8924,6 +10879,17 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) GetMembersC
 // SetMembersCount sets the value of MembersCount.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) SetMembersCount(val float64) {
 	s.MembersCount = val
+}
+
+type GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders map[string]string
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) init() GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
 }
 
 type GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings struct {
@@ -9593,7 +11559,8 @@ func (s *GetInternalSquadsResponseDto) SetResponse(val GetInternalSquadsResponse
 	s.Response = val
 }
 
-func (*GetInternalSquadsResponseDto) internalSquadControllerGetInternalSquadsRes() {}
+func (*GetInternalSquadsResponseDto) internalSquadControllerGetInternalSquadsRes()     {}
+func (*GetInternalSquadsResponseDto) internalSquadControllerReorderInternalSquadsRes() {}
 
 type GetInternalSquadsResponseDtoResponse struct {
 	Total          float64                                                  `json:"total"`
@@ -9621,17 +11588,23 @@ func (s *GetInternalSquadsResponseDtoResponse) SetInternalSquads(val []GetIntern
 }
 
 type GetInternalSquadsResponseDtoResponseInternalSquadsItem struct {
-	UUID      uuid.UUID                                                            `json:"uuid"`
-	Name      string                                                               `json:"name"`
-	Info      GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo           `json:"info"`
-	Inbounds  []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem `json:"inbounds"`
-	CreatedAt time.Time                                                            `json:"createdAt"`
-	UpdatedAt time.Time                                                            `json:"updatedAt"`
+	UUID         uuid.UUID                                                            `json:"uuid"`
+	ViewPosition int                                                                  `json:"viewPosition"`
+	Name         string                                                               `json:"name"`
+	Info         GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo           `json:"info"`
+	Inbounds     []GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem `json:"inbounds"`
+	CreatedAt    time.Time                                                            `json:"createdAt"`
+	UpdatedAt    time.Time                                                            `json:"updatedAt"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -9662,6 +11635,11 @@ func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) GetUpdatedAt() 
 // SetUUID sets the value of UUID.
 func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -10574,6 +12552,7 @@ type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem struct {
 	Encryption        OptNilString                                                                       `json:"encryption"`
 	ProtocolOptions   OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptions  `json:"protocolOptions"`
 	DbData            OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData              `json:"dbData"`
+	XrayJsonTemplate  OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate    `json:"xrayJsonTemplate"`
 }
 
 // GetAddress returns the value of Address.
@@ -10721,6 +12700,11 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetDbData
 	return s.DbData
 }
 
+// GetXrayJsonTemplate returns the value of XrayJsonTemplate.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) GetXrayJsonTemplate() OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate {
+	return s.XrayJsonTemplate
+}
+
 // SetAddress sets the value of Address.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetAddress(val OptNilString) {
 	s.Address = val
@@ -10864,6 +12848,11 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetProtoc
 // SetDbData sets the value of DbData.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetDbData(val OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) {
 	s.DbData = val
+}
+
+// SetXrayJsonTemplate sets the value of XrayJsonTemplate.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) SetXrayJsonTemplate(val OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) {
+	s.XrayJsonTemplate = val
 }
 
 type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams struct {
@@ -11087,39 +13076,36 @@ type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams s
 
 type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams struct{}
 
+type GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate struct{}
+
 type GetRawSubscriptionByShortUuidResponseDtoResponseUser struct {
-	UUID                     uuid.UUID                                                     `json:"uuid"`
-	ShortUuid                string                                                        `json:"shortUuid"`
-	Username                 string                                                        `json:"username"`
-	Status                   OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus `json:"status"`
-	UsedTrafficBytes         float64                                                       `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                                                       `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                                                        `json:"trafficLimitBytes"`
+	UUID              uuid.UUID                                                     `json:"uuid"`
+	ShortUuid         string                                                        `json:"shortUuid"`
+	Username          string                                                        `json:"username"`
+	Status            OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus `json:"status"`
+	TrafficLimitBytes OptInt                                                        `json:"trafficLimitBytes"`
 	// Available reset periods.
 	TrafficLimitStrategy   OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                                                      `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                                                    `json:"subLastOpenedAt"`
 	ExpireAt               time.Time                                                                      `json:"expireAt"`
-	OnlineAt               NilDateTime                                                                    `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                                                    `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                                                    `json:"lastTrafficResetAt"`
+	TelegramId             NilInt                                                                         `json:"telegramId"`
+	Email                  NilString                                                                      `json:"email"`
+	Description            NilString                                                                      `json:"description"`
+	Tag                    NilString                                                                      `json:"tag"`
+	HwidDeviceLimit        NilInt                                                                         `json:"hwidDeviceLimit"`
+	ExternalSquadUuid      NilUUID                                                                        `json:"externalSquadUuid"`
 	TrojanPassword         string                                                                         `json:"trojanPassword"`
 	VlessUuid              uuid.UUID                                                                      `json:"vlessUuid"`
 	SsPassword             string                                                                         `json:"ssPassword"`
-	Description            NilString                                                                      `json:"description"`
-	Tag                    NilString                                                                      `json:"tag"`
-	TelegramId             NilInt                                                                         `json:"telegramId"`
-	Email                  NilString                                                                      `json:"email"`
-	HwidDeviceLimit        NilInt                                                                         `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                                                    `json:"firstConnectedAt"`
 	LastTriggeredThreshold OptInt                                                                         `json:"lastTriggeredThreshold"`
+	SubRevokedAt           NilDateTime                                                                    `json:"subRevokedAt"`
+	SubLastUserAgent       NilString                                                                      `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                                                    `json:"subLastOpenedAt"`
+	LastTrafficResetAt     NilDateTime                                                                    `json:"lastTrafficResetAt"`
 	CreatedAt              time.Time                                                                      `json:"createdAt"`
 	UpdatedAt              time.Time                                                                      `json:"updatedAt"`
-	ActiveInternalSquads   []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                                                        `json:"externalSquadUuid"`
 	SubscriptionUrl        string                                                                         `json:"subscriptionUrl"`
-	LastConnectedNode      NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp                       `json:"happ"`
+	ActiveInternalSquads   []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem `json:"activeInternalSquads"`
+	UserTraffic            GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic                `json:"userTraffic"`
 }
 
 // GetUUID returns the value of UUID.
@@ -11142,16 +13128,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetStatus() OptGe
 	return s.Status
 }
 
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficLimitBytes() OptInt {
 	return s.TrafficLimitBytes
@@ -11162,34 +13138,39 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTrafficLimitSt
 	return s.TrafficLimitStrategy
 }
 
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
 // GetExpireAt returns the value of ExpireAt.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
-// GetOnlineAt returns the value of OnlineAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
+// GetTelegramId returns the value of TelegramId.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTelegramId() NilInt {
+	return s.TelegramId
 }
 
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
+// GetEmail returns the value of Email.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetEmail() NilString {
+	return s.Email
 }
 
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
+// GetDescription returns the value of Description.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTag() NilString {
+	return s.Tag
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
@@ -11207,39 +13188,29 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSsPassword() s
 	return s.SsPassword
 }
 
-// GetDescription returns the value of Description.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
 // GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastTriggeredThreshold() OptInt {
 	return s.LastTriggeredThreshold
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -11252,29 +13223,19 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUpdatedAt() ti
 	return s.UpdatedAt
 }
 
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetActiveInternalSquads() []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetLastConnectedNode() NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode {
-	return s.LastConnectedNode
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetActiveInternalSquads() []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
-// GetHapp returns the value of Happ.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetHapp() GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp {
-	return s.Happ
+// GetUserTraffic returns the value of UserTraffic.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) GetUserTraffic() GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic {
+	return s.UserTraffic
 }
 
 // SetUUID sets the value of UUID.
@@ -11297,16 +13258,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetStatus(val Opt
 	s.Status = val
 }
 
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficLimitBytes(val OptInt) {
 	s.TrafficLimitBytes = val
@@ -11317,34 +13268,39 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTrafficLimitSt
 	s.TrafficLimitStrategy = val
 }
 
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
 // SetExpireAt sets the value of ExpireAt.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
-// SetOnlineAt sets the value of OnlineAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
+// SetTelegramId sets the value of TelegramId.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTelegramId(val NilInt) {
+	s.TelegramId = val
 }
 
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
+// SetEmail sets the value of Email.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetEmail(val NilString) {
+	s.Email = val
 }
 
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
+// SetDescription sets the value of Description.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
@@ -11362,39 +13318,29 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSsPassword(val
 	s.SsPassword = val
 }
 
-// SetDescription sets the value of Description.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
 // SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastTriggeredThreshold(val OptInt) {
 	s.LastTriggeredThreshold = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
@@ -11407,29 +13353,19 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUpdatedAt(val 
 	s.UpdatedAt = val
 }
 
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetActiveInternalSquads(val []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
 }
 
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetLastConnectedNode(val NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) {
-	s.LastConnectedNode = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetActiveInternalSquads(val []GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
-// SetHapp sets the value of Happ.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetHapp(val GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) {
-	s.Happ = val
+// SetUserTraffic sets the value of UserTraffic.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) SetUserTraffic(val GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) {
+	s.UserTraffic = val
 }
 
 type GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem struct {
@@ -11455,56 +13391,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquad
 // SetName sets the value of Name.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserActiveInternalSquadsItem) SetName(val string) {
 	s.Name = val
-}
-
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 type GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus string
@@ -11616,6 +13502,64 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrateg
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
+}
+
+type GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic struct {
+	UsedTrafficBytes         float64     `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64     `json:"lifetimeUsedTrafficBytes"`
+	OnlineAt                 NilDateTime `json:"onlineAt"`
+	FirstConnectedAt         NilDateTime `json:"firstConnectedAt"`
+	LastConnectedNodeUuid    NilUUID     `json:"lastConnectedNodeUuid"`
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastConnectedNodeUuid returns the value of LastConnectedNodeUuid.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) GetLastConnectedNodeUuid() NilUUID {
+	return s.LastConnectedNodeUuid
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastConnectedNodeUuid sets the value of LastConnectedNodeUuid.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) SetLastConnectedNodeUuid(val NilUUID) {
+	s.LastConnectedNodeUuid = val
 }
 
 // Ref: #/components/schemas/GetRemnawaveHealthResponseDto
@@ -11866,7 +13810,8 @@ func (s *GetStatsResponseDtoResponseMemory) SetAvailable(val float64) {
 }
 
 type GetStatsResponseDtoResponseNodes struct {
-	TotalOnline float64 `json:"totalOnline"`
+	TotalOnline        float64 `json:"totalOnline"`
+	TotalBytesLifetime string  `json:"totalBytesLifetime"`
 }
 
 // GetTotalOnline returns the value of TotalOnline.
@@ -11874,9 +13819,19 @@ func (s *GetStatsResponseDtoResponseNodes) GetTotalOnline() float64 {
 	return s.TotalOnline
 }
 
+// GetTotalBytesLifetime returns the value of TotalBytesLifetime.
+func (s *GetStatsResponseDtoResponseNodes) GetTotalBytesLifetime() string {
+	return s.TotalBytesLifetime
+}
+
 // SetTotalOnline sets the value of TotalOnline.
 func (s *GetStatsResponseDtoResponseNodes) SetTotalOnline(val float64) {
 	s.TotalOnline = val
+}
+
+// SetTotalBytesLifetime sets the value of TotalBytesLifetime.
+func (s *GetStatsResponseDtoResponseNodes) SetTotalBytesLifetime(val string) {
+	s.TotalBytesLifetime = val
 }
 
 type GetStatsResponseDtoResponseOnlineStats struct {
@@ -11927,9 +13882,8 @@ func (s *GetStatsResponseDtoResponseOnlineStats) SetOnlineNow(val float64) {
 }
 
 type GetStatsResponseDtoResponseUsers struct {
-	StatusCounts      GetStatsResponseDtoResponseUsersStatusCounts `json:"statusCounts"`
-	TotalUsers        float64                                      `json:"totalUsers"`
-	TotalTrafficBytes string                                       `json:"totalTrafficBytes"`
+	StatusCounts GetStatsResponseDtoResponseUsersStatusCounts `json:"statusCounts"`
+	TotalUsers   float64                                      `json:"totalUsers"`
 }
 
 // GetStatusCounts returns the value of StatusCounts.
@@ -11942,11 +13896,6 @@ func (s *GetStatsResponseDtoResponseUsers) GetTotalUsers() float64 {
 	return s.TotalUsers
 }
 
-// GetTotalTrafficBytes returns the value of TotalTrafficBytes.
-func (s *GetStatsResponseDtoResponseUsers) GetTotalTrafficBytes() string {
-	return s.TotalTrafficBytes
-}
-
 // SetStatusCounts sets the value of StatusCounts.
 func (s *GetStatsResponseDtoResponseUsers) SetStatusCounts(val GetStatsResponseDtoResponseUsersStatusCounts) {
 	s.StatusCounts = val
@@ -11955,11 +13904,6 @@ func (s *GetStatsResponseDtoResponseUsers) SetStatusCounts(val GetStatsResponseD
 // SetTotalUsers sets the value of TotalUsers.
 func (s *GetStatsResponseDtoResponseUsers) SetTotalUsers(val float64) {
 	s.TotalUsers = val
-}
-
-// SetTotalTrafficBytes sets the value of TotalTrafficBytes.
-func (s *GetStatsResponseDtoResponseUsers) SetTotalTrafficBytes(val string) {
-	s.TotalTrafficBytes = val
 }
 
 type GetStatsResponseDtoResponseUsersStatusCounts map[string]float64
@@ -12422,7 +14366,8 @@ func (s *GetTemplatesResponseDto) SetResponse(val GetTemplatesResponseDtoRespons
 	s.Response = val
 }
 
-func (*GetTemplatesResponseDto) subscriptionTemplateControllerGetAllTemplatesRes() {}
+func (*GetTemplatesResponseDto) subscriptionTemplateControllerGetAllTemplatesRes()              {}
+func (*GetTemplatesResponseDto) subscriptionTemplateControllerReorderSubscriptionTemplatesRes() {}
 
 type GetTemplatesResponseDtoResponse struct {
 	Total     float64                                        `json:"total"`
@@ -12451,6 +14396,7 @@ func (s *GetTemplatesResponseDtoResponse) SetTemplates(val []GetTemplatesRespons
 
 type GetTemplatesResponseDtoResponseTemplatesItem struct {
 	UUID                uuid.UUID                                                `json:"uuid"`
+	ViewPosition        int                                                      `json:"viewPosition"`
 	Name                string                                                   `json:"name"`
 	TemplateType        GetTemplatesResponseDtoResponseTemplatesItemTemplateType `json:"templateType"`
 	TemplateJson        jx.Raw                                                   `json:"templateJson"`
@@ -12460,6 +14406,11 @@ type GetTemplatesResponseDtoResponseTemplatesItem struct {
 // GetUUID returns the value of UUID.
 func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -12485,6 +14436,11 @@ func (s *GetTemplatesResponseDtoResponseTemplatesItem) GetEncodedTemplateYaml() 
 // SetUUID sets the value of UUID.
 func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *GetTemplatesResponseDtoResponseTemplatesItem) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -12947,6 +14903,8 @@ type HostListResponseResponseItem struct {
 	ShuffleHost            bool                                         `json:"shuffleHost"`
 	MihomoX25519           bool                                         `json:"mihomoX25519"`
 	Nodes                  []uuid.UUID                                  `json:"nodes"`
+	XrayJsonTemplateUuid   NilUUID                                      `json:"xrayJsonTemplateUuid"`
+	ExcludedInternalSquads []uuid.UUID                                  `json:"excludedInternalSquads"`
 }
 
 // GetUUID returns the value of UUID.
@@ -13074,6 +15032,16 @@ func (s *HostListResponseResponseItem) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
+// GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
+func (s *HostListResponseResponseItem) GetXrayJsonTemplateUuid() NilUUID {
+	return s.XrayJsonTemplateUuid
+}
+
+// GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
+func (s *HostListResponseResponseItem) GetExcludedInternalSquads() []uuid.UUID {
+	return s.ExcludedInternalSquads
+}
+
 // SetUUID sets the value of UUID.
 func (s *HostListResponseResponseItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -13199,6 +15167,16 @@ func (s *HostListResponseResponseItem) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
 }
 
+// SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
+func (s *HostListResponseResponseItem) SetXrayJsonTemplateUuid(val NilUUID) {
+	s.XrayJsonTemplateUuid = val
+}
+
+// SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
+func (s *HostListResponseResponseItem) SetExcludedInternalSquads(val []uuid.UUID) {
+	s.ExcludedInternalSquads = val
+}
+
 type HostListResponseResponseItemInbound struct {
 	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
 	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
@@ -13317,6 +15295,8 @@ type HostResponseResponse struct {
 	ShuffleHost            bool                                 `json:"shuffleHost"`
 	MihomoX25519           bool                                 `json:"mihomoX25519"`
 	Nodes                  []uuid.UUID                          `json:"nodes"`
+	XrayJsonTemplateUuid   NilUUID                              `json:"xrayJsonTemplateUuid"`
+	ExcludedInternalSquads []uuid.UUID                          `json:"excludedInternalSquads"`
 }
 
 // GetUUID returns the value of UUID.
@@ -13444,6 +15424,16 @@ func (s *HostResponseResponse) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
+// GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
+func (s *HostResponseResponse) GetXrayJsonTemplateUuid() NilUUID {
+	return s.XrayJsonTemplateUuid
+}
+
+// GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
+func (s *HostResponseResponse) GetExcludedInternalSquads() []uuid.UUID {
+	return s.ExcludedInternalSquads
+}
+
 // SetUUID sets the value of UUID.
 func (s *HostResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -13569,6 +15559,16 @@ func (s *HostResponseResponse) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
 }
 
+// SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
+func (s *HostResponseResponse) SetXrayJsonTemplateUuid(val NilUUID) {
+	s.XrayJsonTemplateUuid = val
+}
+
+// SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
+func (s *HostResponseResponse) SetExcludedInternalSquads(val []uuid.UUID) {
+	s.ExcludedInternalSquads = val
+}
+
 type HostResponseResponseInbound struct {
 	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
 	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
@@ -13680,7 +15680,52 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) SetErrors(val []HostsB
 
 func (*HostsBulkActionsControllerDeleteHostsBadRequest) hostsBulkActionsControllerDeleteHostsRes() {}
 
-type HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem struct{}
+type HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsBulkActionsControllerDeleteHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -13771,7 +15816,52 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) SetErrors(val []Hosts
 func (*HostsBulkActionsControllerDisableHostsBadRequest) hostsBulkActionsControllerDisableHostsRes() {
 }
 
-type HostsBulkActionsControllerDisableHostsBadRequestErrorsItem struct{}
+type HostsBulkActionsControllerDisableHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsBulkActionsControllerDisableHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -13861,7 +15951,52 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) SetErrors(val []HostsB
 
 func (*HostsBulkActionsControllerEnableHostsBadRequest) hostsBulkActionsControllerEnableHostsRes() {}
 
-type HostsBulkActionsControllerEnableHostsBadRequestErrorsItem struct{}
+type HostsBulkActionsControllerEnableHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsBulkActionsControllerEnableHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -13952,7 +16087,52 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) SetErrors(val []
 func (*HostsBulkActionsControllerSetInboundToHostsBadRequest) hostsBulkActionsControllerSetInboundToHostsRes() {
 }
 
-type HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem struct{}
+type HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsBulkActionsControllerSetInboundToHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14043,7 +16223,52 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) SetErrors(val []Hos
 func (*HostsBulkActionsControllerSetPortToHostsBadRequest) hostsBulkActionsControllerSetPortToHostsRes() {
 }
 
-type HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem struct{}
+type HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsBulkActionsControllerSetPortToHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14133,7 +16358,52 @@ func (s *HostsControllerCreateHostBadRequest) SetErrors(val []HostsControllerCre
 
 func (*HostsControllerCreateHostBadRequest) hostsControllerCreateHostRes() {}
 
-type HostsControllerCreateHostBadRequestErrorsItem struct{}
+type HostsControllerCreateHostBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerCreateHostBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerCreateHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14222,7 +16492,52 @@ func (s *HostsControllerDeleteHostBadRequest) SetErrors(val []HostsControllerDel
 
 func (*HostsControllerDeleteHostBadRequest) hostsControllerDeleteHostRes() {}
 
-type HostsControllerDeleteHostBadRequestErrorsItem struct{}
+type HostsControllerDeleteHostBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerDeleteHostBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerDeleteHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14316,7 +16631,52 @@ func (s *HostsControllerGetAllHostTagsBadRequest) SetErrors(val []HostsControlle
 
 func (*HostsControllerGetAllHostTagsBadRequest) hostsControllerGetAllHostTagsRes() {}
 
-type HostsControllerGetAllHostTagsBadRequestErrorsItem struct{}
+type HostsControllerGetAllHostTagsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerGetAllHostTagsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14405,7 +16765,52 @@ func (s *HostsControllerGetAllHostsBadRequest) SetErrors(val []HostsControllerGe
 
 func (*HostsControllerGetAllHostsBadRequest) hostsControllerGetAllHostsRes() {}
 
-type HostsControllerGetAllHostsBadRequestErrorsItem struct{}
+type HostsControllerGetAllHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerGetAllHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerGetAllHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14494,7 +16899,52 @@ func (s *HostsControllerGetOneHostBadRequest) SetErrors(val []HostsControllerGet
 
 func (*HostsControllerGetOneHostBadRequest) hostsControllerGetOneHostRes() {}
 
-type HostsControllerGetOneHostBadRequestErrorsItem struct{}
+type HostsControllerGetOneHostBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerGetOneHostBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerGetOneHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14583,7 +17033,52 @@ func (s *HostsControllerReorderHostsBadRequest) SetErrors(val []HostsControllerR
 
 func (*HostsControllerReorderHostsBadRequest) hostsControllerReorderHostsRes() {}
 
-type HostsControllerReorderHostsBadRequestErrorsItem struct{}
+type HostsControllerReorderHostsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerReorderHostsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerReorderHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14672,7 +17167,52 @@ func (s *HostsControllerUpdateHostBadRequest) SetErrors(val []HostsControllerUpd
 
 func (*HostsControllerUpdateHostBadRequest) hostsControllerUpdateHostRes() {}
 
-type HostsControllerUpdateHostBadRequestErrorsItem struct{}
+type HostsControllerUpdateHostBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostsControllerUpdateHostBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HostsControllerUpdateHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14898,7 +17438,52 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) SetErrors(val 
 func (*HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) hwidUserDevicesControllerCreateUserHwidDeviceRes() {
 }
 
-type HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem struct{}
+type HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14989,7 +17574,52 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) SetErrors(
 func (*HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) hwidUserDevicesControllerDeleteAllUserHwidDevicesRes() {
 }
 
-type HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem struct{}
+type HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HwidUserDevicesControllerDeleteAllUserHwidDevicesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15080,7 +17710,52 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) SetErrors(val 
 func (*HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) hwidUserDevicesControllerDeleteUserHwidDeviceRes() {
 }
 
-type HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem struct{}
+type HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15170,7 +17845,52 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) SetErrors(val []HwidUse
 
 func (*HwidUserDevicesControllerGetAllUsersBadRequest) hwidUserDevicesControllerGetAllUsersRes() {}
 
-type HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem struct{}
+type HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HwidUserDevicesControllerGetAllUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15261,7 +17981,52 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) SetErrors(val [
 func (*HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) hwidUserDevicesControllerGetHwidDevicesStatsRes() {
 }
 
-type HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem struct{}
+type HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HwidUserDevicesControllerGetHwidDevicesStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15352,7 +18117,52 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) SetErrors(val []
 func (*HwidUserDevicesControllerGetUserHwidDevicesBadRequest) hwidUserDevicesControllerGetUserHwidDevicesRes() {
 }
 
-type HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem struct{}
+type HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type HwidUserDevicesControllerGetUserHwidDevicesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15588,7 +18398,52 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) SetErr
 func (*InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) infraBillingControllerCreateInfraBillingHistoryRecordRes() {
 }
 
-type InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem struct{}
+type InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15679,7 +18534,52 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) SetErrors(val [
 func (*InfraBillingControllerCreateInfraBillingNodeBadRequest) infraBillingControllerCreateInfraBillingNodeRes() {
 }
 
-type InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem struct{}
+type InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerCreateInfraBillingNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15770,7 +18670,52 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) SetErrors(val []In
 func (*InfraBillingControllerCreateInfraProviderBadRequest) infraBillingControllerCreateInfraProviderRes() {
 }
 
-type InfraBillingControllerCreateInfraProviderBadRequestErrorsItem struct{}
+type InfraBillingControllerCreateInfraProviderBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerCreateInfraProviderInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15861,7 +18806,52 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 func (*InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) infraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes() {
 }
 
-type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem struct{}
+type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15952,7 +18942,52 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) SetErrors
 func (*InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) infraBillingControllerDeleteInfraBillingNodeByUuidRes() {
 }
 
-type InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem struct{}
+type InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16043,7 +19078,52 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) SetErrors(va
 func (*InfraBillingControllerDeleteInfraProviderByUuidBadRequest) infraBillingControllerDeleteInfraProviderByUuidRes() {
 }
 
-type InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem struct{}
+type InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerDeleteInfraProviderByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16133,7 +19213,52 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) SetErrors(val []InfraB
 
 func (*InfraBillingControllerGetBillingNodesBadRequest) infraBillingControllerGetBillingNodesRes() {}
 
-type InfraBillingControllerGetBillingNodesBadRequestErrorsItem struct{}
+type InfraBillingControllerGetBillingNodesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerGetBillingNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16224,7 +19349,52 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) SetError
 func (*InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) infraBillingControllerGetInfraBillingHistoryRecordsRes() {
 }
 
-type InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem struct{}
+type InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16315,7 +19485,52 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) SetErrors(val [
 func (*InfraBillingControllerGetInfraProviderByUuidBadRequest) infraBillingControllerGetInfraProviderByUuidRes() {
 }
 
-type InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem struct{}
+type InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerGetInfraProviderByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16412,7 +19627,52 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) SetErrors(val []Infr
 func (*InfraBillingControllerGetInfraProvidersBadRequest) infraBillingControllerGetInfraProvidersRes() {
 }
 
-type InfraBillingControllerGetInfraProvidersBadRequestErrorsItem struct{}
+type InfraBillingControllerGetInfraProvidersBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerGetInfraProvidersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16503,7 +19763,52 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) SetErrors(val [
 func (*InfraBillingControllerUpdateInfraBillingNodeBadRequest) infraBillingControllerUpdateInfraBillingNodeRes() {
 }
 
-type InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem struct{}
+type InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerUpdateInfraBillingNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16594,7 +19899,52 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) SetErrors(val []In
 func (*InfraBillingControllerUpdateInfraProviderBadRequest) infraBillingControllerUpdateInfraProviderRes() {
 }
 
-type InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem struct{}
+type InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InfraBillingControllerUpdateInfraProviderInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16856,7 +20206,52 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) SetErrors(val
 func (*InternalSquadControllerAddUsersToInternalSquadBadRequest) internalSquadControllerAddUsersToInternalSquadRes() {
 }
 
-type InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem struct{}
+type InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InternalSquadControllerAddUsersToInternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16953,7 +20348,52 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) SetErrors(val []I
 func (*InternalSquadControllerCreateInternalSquadBadRequest) internalSquadControllerCreateInternalSquadRes() {
 }
 
-type InternalSquadControllerCreateInternalSquadBadRequestErrorsItem struct{}
+type InternalSquadControllerCreateInternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // InternalSquadControllerCreateInternalSquadConflict is response for InternalSquadControllerCreateInternalSquad operation.
 type InternalSquadControllerCreateInternalSquadConflict struct{}
@@ -17050,7 +20490,52 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) SetErrors(val []I
 func (*InternalSquadControllerDeleteInternalSquadBadRequest) internalSquadControllerDeleteInternalSquadRes() {
 }
 
-type InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem struct{}
+type InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InternalSquadControllerDeleteInternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17147,7 +20632,52 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) SetEr
 func (*InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) internalSquadControllerGetInternalSquadAccessibleNodesRes() {
 }
 
-type InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem struct{}
+type InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InternalSquadControllerGetInternalSquadAccessibleNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17244,7 +20774,52 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) SetErrors(val 
 func (*InternalSquadControllerGetInternalSquadByUuidBadRequest) internalSquadControllerGetInternalSquadByUuidRes() {
 }
 
-type InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem struct{}
+type InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InternalSquadControllerGetInternalSquadByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17335,7 +20910,52 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) SetErrors(val []Int
 func (*InternalSquadControllerGetInternalSquadsBadRequest) internalSquadControllerGetInternalSquadsRes() {
 }
 
-type InternalSquadControllerGetInternalSquadsBadRequestErrorsItem struct{}
+type InternalSquadControllerGetInternalSquadsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InternalSquadControllerGetInternalSquadsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17426,7 +21046,52 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) SetError
 func (*InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) internalSquadControllerRemoveUsersFromInternalSquadRes() {
 }
 
-type InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem struct{}
+type InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17484,6 +21149,142 @@ type InternalSquadControllerRemoveUsersFromInternalSquadNotFound struct{}
 func (*InternalSquadControllerRemoveUsersFromInternalSquadNotFound) internalSquadControllerRemoveUsersFromInternalSquadRes() {
 }
 
+type InternalSquadControllerReorderInternalSquadsBadRequest struct {
+	Message    OptString                                                          `json:"message"`
+	StatusCode OptFloat64                                                         `json:"statusCode"`
+	Errors     []InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) GetErrors() []InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequest) SetErrors(val []InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*InternalSquadControllerReorderInternalSquadsBadRequest) internalSquadControllerReorderInternalSquadsRes() {
+}
+
+type InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerReorderInternalSquadsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type InternalSquadControllerReorderInternalSquadsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *InternalSquadControllerReorderInternalSquadsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*InternalSquadControllerReorderInternalSquadsInternalServerError) internalSquadControllerReorderInternalSquadsRes() {
+}
+
 type InternalSquadControllerUpdateInternalSquadBadRequest struct {
 	Message    OptString                                                        `json:"message"`
 	StatusCode OptFloat64                                                       `json:"statusCode"`
@@ -17523,7 +21324,52 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) SetErrors(val []I
 func (*InternalSquadControllerUpdateInternalSquadBadRequest) internalSquadControllerUpdateInternalSquadRes() {
 }
 
-type InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem struct{}
+type InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // InternalSquadControllerUpdateInternalSquadConflict is response for InternalSquadControllerUpdateInternalSquad operation.
 type InternalSquadControllerUpdateInternalSquadConflict struct{}
@@ -17607,17 +21453,23 @@ func (*InternalSquadResponse) internalSquadControllerGetInternalSquadByUuidRes()
 func (*InternalSquadResponse) internalSquadControllerUpdateInternalSquadRes()    {}
 
 type InternalSquadResponseResponse struct {
-	UUID      uuid.UUID                                   `json:"uuid"`
-	Name      string                                      `json:"name"`
-	Info      InternalSquadResponseResponseInfo           `json:"info"`
-	Inbounds  []InternalSquadResponseResponseInboundsItem `json:"inbounds"`
-	CreatedAt time.Time                                   `json:"createdAt"`
-	UpdatedAt time.Time                                   `json:"updatedAt"`
+	UUID         uuid.UUID                                   `json:"uuid"`
+	ViewPosition int                                         `json:"viewPosition"`
+	Name         string                                      `json:"name"`
+	Info         InternalSquadResponseResponseInfo           `json:"info"`
+	Inbounds     []InternalSquadResponseResponseInboundsItem `json:"inbounds"`
+	CreatedAt    time.Time                                   `json:"createdAt"`
+	UpdatedAt    time.Time                                   `json:"updatedAt"`
 }
 
 // GetUUID returns the value of UUID.
 func (s *InternalSquadResponseResponse) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *InternalSquadResponseResponse) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -17648,6 +21500,11 @@ func (s *InternalSquadResponseResponse) GetUpdatedAt() time.Time {
 // SetUUID sets the value of UUID.
 func (s *InternalSquadResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *InternalSquadResponseResponse) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -17829,7 +21686,52 @@ func (s *KeygenControllerGenerateKeyBadRequest) SetErrors(val []KeygenController
 
 func (*KeygenControllerGenerateKeyBadRequest) keygenControllerGenerateKeyRes() {}
 
-type KeygenControllerGenerateKeyBadRequestErrorsItem struct{}
+type KeygenControllerGenerateKeyBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type KeygenControllerGenerateKeyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17996,6 +21898,186 @@ func (o NilDebugSrrMatcherResponseDtoResponseMatchedRule) Or(d DebugSrrMatcherRe
 	return d
 }
 
+// NewNilExternalSquadResponseResponseCustomRemarks returns new NilExternalSquadResponseResponseCustomRemarks with value set to v.
+func NewNilExternalSquadResponseResponseCustomRemarks(v ExternalSquadResponseResponseCustomRemarks) NilExternalSquadResponseResponseCustomRemarks {
+	return NilExternalSquadResponseResponseCustomRemarks{
+		Value: v,
+	}
+}
+
+// NilExternalSquadResponseResponseCustomRemarks is nullable ExternalSquadResponseResponseCustomRemarks.
+type NilExternalSquadResponseResponseCustomRemarks struct {
+	Value ExternalSquadResponseResponseCustomRemarks
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilExternalSquadResponseResponseCustomRemarks) SetTo(v ExternalSquadResponseResponseCustomRemarks) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilExternalSquadResponseResponseCustomRemarks) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilExternalSquadResponseResponseCustomRemarks) SetToNull() {
+	o.Null = true
+	var v ExternalSquadResponseResponseCustomRemarks
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilExternalSquadResponseResponseCustomRemarks) Get() (v ExternalSquadResponseResponseCustomRemarks, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilExternalSquadResponseResponseCustomRemarks) Or(d ExternalSquadResponseResponseCustomRemarks) ExternalSquadResponseResponseCustomRemarks {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilExternalSquadResponseResponseHostOverrides returns new NilExternalSquadResponseResponseHostOverrides with value set to v.
+func NewNilExternalSquadResponseResponseHostOverrides(v ExternalSquadResponseResponseHostOverrides) NilExternalSquadResponseResponseHostOverrides {
+	return NilExternalSquadResponseResponseHostOverrides{
+		Value: v,
+	}
+}
+
+// NilExternalSquadResponseResponseHostOverrides is nullable ExternalSquadResponseResponseHostOverrides.
+type NilExternalSquadResponseResponseHostOverrides struct {
+	Value ExternalSquadResponseResponseHostOverrides
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilExternalSquadResponseResponseHostOverrides) SetTo(v ExternalSquadResponseResponseHostOverrides) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilExternalSquadResponseResponseHostOverrides) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilExternalSquadResponseResponseHostOverrides) SetToNull() {
+	o.Null = true
+	var v ExternalSquadResponseResponseHostOverrides
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilExternalSquadResponseResponseHostOverrides) Get() (v ExternalSquadResponseResponseHostOverrides, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilExternalSquadResponseResponseHostOverrides) Or(d ExternalSquadResponseResponseHostOverrides) ExternalSquadResponseResponseHostOverrides {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilExternalSquadResponseResponseHwidSettings returns new NilExternalSquadResponseResponseHwidSettings with value set to v.
+func NewNilExternalSquadResponseResponseHwidSettings(v ExternalSquadResponseResponseHwidSettings) NilExternalSquadResponseResponseHwidSettings {
+	return NilExternalSquadResponseResponseHwidSettings{
+		Value: v,
+	}
+}
+
+// NilExternalSquadResponseResponseHwidSettings is nullable ExternalSquadResponseResponseHwidSettings.
+type NilExternalSquadResponseResponseHwidSettings struct {
+	Value ExternalSquadResponseResponseHwidSettings
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilExternalSquadResponseResponseHwidSettings) SetTo(v ExternalSquadResponseResponseHwidSettings) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilExternalSquadResponseResponseHwidSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilExternalSquadResponseResponseHwidSettings) SetToNull() {
+	o.Null = true
+	var v ExternalSquadResponseResponseHwidSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilExternalSquadResponseResponseHwidSettings) Get() (v ExternalSquadResponseResponseHwidSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilExternalSquadResponseResponseHwidSettings) Or(d ExternalSquadResponseResponseHwidSettings) ExternalSquadResponseResponseHwidSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilExternalSquadResponseResponseResponseHeaders returns new NilExternalSquadResponseResponseResponseHeaders with value set to v.
+func NewNilExternalSquadResponseResponseResponseHeaders(v ExternalSquadResponseResponseResponseHeaders) NilExternalSquadResponseResponseResponseHeaders {
+	return NilExternalSquadResponseResponseResponseHeaders{
+		Value: v,
+	}
+}
+
+// NilExternalSquadResponseResponseResponseHeaders is nullable ExternalSquadResponseResponseResponseHeaders.
+type NilExternalSquadResponseResponseResponseHeaders struct {
+	Value ExternalSquadResponseResponseResponseHeaders
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilExternalSquadResponseResponseResponseHeaders) SetTo(v ExternalSquadResponseResponseResponseHeaders) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilExternalSquadResponseResponseResponseHeaders) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilExternalSquadResponseResponseResponseHeaders) SetToNull() {
+	o.Null = true
+	var v ExternalSquadResponseResponseResponseHeaders
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilExternalSquadResponseResponseResponseHeaders) Get() (v ExternalSquadResponseResponseResponseHeaders, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilExternalSquadResponseResponseResponseHeaders) Or(d ExternalSquadResponseResponseResponseHeaders) ExternalSquadResponseResponseResponseHeaders {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilExternalSquadResponseResponseSubscriptionSettings returns new NilExternalSquadResponseResponseSubscriptionSettings with value set to v.
 func NewNilExternalSquadResponseResponseSubscriptionSettings(v ExternalSquadResponseResponseSubscriptionSettings) NilExternalSquadResponseResponseSubscriptionSettings {
 	return NilExternalSquadResponseResponseSubscriptionSettings{
@@ -18086,37 +22168,39 @@ func (o NilFloat64) Or(d float64) float64 {
 	return d
 }
 
-// NewNilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode returns new NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode with value set to v.
-func NewNilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode(v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
-	return NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode{
+// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks with value set to v.
+func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks(v GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks {
+	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks{
 		Value: v,
 	}
 }
 
-// NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode is nullable GetAllUsersResponseDtoResponseUsersItemLastConnectedNode.
-type NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode struct {
-	Value GetAllUsersResponseDtoResponseUsersItemLastConnectedNode
+// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks.
+type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks struct {
+	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetTo(v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) {
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) IsNull() bool { return o.Null }
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) IsNull() bool {
+	return o.Null
+}
 
 // SetToNull sets value to null.
-func (o *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) SetToNull() {
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) SetToNull() {
 	o.Null = true
-	var v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode
+	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Get() (v GetAllUsersResponseDtoResponseUsersItemLastConnectedNode, ok bool) {
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -18124,7 +22208,148 @@ func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Get() (v Ge
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Or(d GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks) GetExternalSquadsResponseDtoResponseExternalSquadsItemCustomRemarks {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides with value set to v.
+func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
+	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides{
+		Value: v,
+	}
+}
+
+// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides.
+type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides struct {
+	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetToNull() {
+	o.Null = true
+	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings with value set to v.
+func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings {
+	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings{
+		Value: v,
+	}
+}
+
+// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings.
+type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings struct {
+	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) SetToNull() {
+	o.Null = true
+	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings) GetExternalSquadsResponseDtoResponseExternalSquadsItemHwidSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders with value set to v.
+func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders(v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
+	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders{
+		Value: v,
+	}
+}
+
+// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders.
+type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders struct {
+	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetToNull() {
+	o.Null = true
+	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -18172,53 +22397,6 @@ func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSet
 
 // Or returns value if set, or given parameter if does not.
 func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode returns new NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode with value set to v.
-func NewNilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode(v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode {
-	return NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode{
-		Value: v,
-	}
-}
-
-// NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode is nullable GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode.
-type NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode struct {
-	Value GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetTo(v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) Get() (v GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) Or(d GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode) GetRawSubscriptionByShortUuidResponseDtoResponseUserLastConnectedNode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -18720,6 +22898,51 @@ func (o NilSubscriptionSettingsResponseResponseCustomResponseHeaders) Or(d Subsc
 	return d
 }
 
+// NewNilSubscriptionSettingsResponseResponseHwidSettings returns new NilSubscriptionSettingsResponseResponseHwidSettings with value set to v.
+func NewNilSubscriptionSettingsResponseResponseHwidSettings(v SubscriptionSettingsResponseResponseHwidSettings) NilSubscriptionSettingsResponseResponseHwidSettings {
+	return NilSubscriptionSettingsResponseResponseHwidSettings{
+		Value: v,
+	}
+}
+
+// NilSubscriptionSettingsResponseResponseHwidSettings is nullable SubscriptionSettingsResponseResponseHwidSettings.
+type NilSubscriptionSettingsResponseResponseHwidSettings struct {
+	Value SubscriptionSettingsResponseResponseHwidSettings
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilSubscriptionSettingsResponseResponseHwidSettings) SetTo(v SubscriptionSettingsResponseResponseHwidSettings) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilSubscriptionSettingsResponseResponseHwidSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilSubscriptionSettingsResponseResponseHwidSettings) SetToNull() {
+	o.Null = true
+	var v SubscriptionSettingsResponseResponseHwidSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilSubscriptionSettingsResponseResponseHwidSettings) Get() (v SubscriptionSettingsResponseResponseHwidSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilSubscriptionSettingsResponseResponseHwidSettings) Or(d SubscriptionSettingsResponseResponseHwidSettings) SubscriptionSettingsResponseResponseHwidSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilSubscriptionSettingsResponseResponseResponseRules returns new NilSubscriptionSettingsResponseResponseResponseRules with value set to v.
 func NewNilSubscriptionSettingsResponseResponseResponseRules(v SubscriptionSettingsResponseResponseResponseRules) NilSubscriptionSettingsResponseResponseResponseRules {
 	return NilSubscriptionSettingsResponseResponseResponseRules{
@@ -18855,96 +23078,6 @@ func (o NilUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
-// NewNilUserResponseResponseLastConnectedNode returns new NilUserResponseResponseLastConnectedNode with value set to v.
-func NewNilUserResponseResponseLastConnectedNode(v UserResponseResponseLastConnectedNode) NilUserResponseResponseLastConnectedNode {
-	return NilUserResponseResponseLastConnectedNode{
-		Value: v,
-	}
-}
-
-// NilUserResponseResponseLastConnectedNode is nullable UserResponseResponseLastConnectedNode.
-type NilUserResponseResponseLastConnectedNode struct {
-	Value UserResponseResponseLastConnectedNode
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilUserResponseResponseLastConnectedNode) SetTo(v UserResponseResponseLastConnectedNode) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilUserResponseResponseLastConnectedNode) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilUserResponseResponseLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v UserResponseResponseLastConnectedNode
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilUserResponseResponseLastConnectedNode) Get() (v UserResponseResponseLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilUserResponseResponseLastConnectedNode) Or(d UserResponseResponseLastConnectedNode) UserResponseResponseLastConnectedNode {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilUsersResponseResponseItemLastConnectedNode returns new NilUsersResponseResponseItemLastConnectedNode with value set to v.
-func NewNilUsersResponseResponseItemLastConnectedNode(v UsersResponseResponseItemLastConnectedNode) NilUsersResponseResponseItemLastConnectedNode {
-	return NilUsersResponseResponseItemLastConnectedNode{
-		Value: v,
-	}
-}
-
-// NilUsersResponseResponseItemLastConnectedNode is nullable UsersResponseResponseItemLastConnectedNode.
-type NilUsersResponseResponseItemLastConnectedNode struct {
-	Value UsersResponseResponseItemLastConnectedNode
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilUsersResponseResponseItemLastConnectedNode) SetTo(v UsersResponseResponseItemLastConnectedNode) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilUsersResponseResponseItemLastConnectedNode) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilUsersResponseResponseItemLastConnectedNode) SetToNull() {
-	o.Null = true
-	var v UsersResponseResponseItemLastConnectedNode
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilUsersResponseResponseItemLastConnectedNode) Get() (v UsersResponseResponseItemLastConnectedNode, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilUsersResponseResponseItemLastConnectedNode) Or(d UsersResponseResponseItemLastConnectedNode) UsersResponseResponseItemLastConnectedNode {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // Ref: #/components/schemas/NodeResponse
 type NodeResponse struct {
 	Response NodeResponseResponse `json:"response"`
@@ -18990,6 +23123,7 @@ type NodeResponseResponse struct {
 	ViewPosition            int                               `json:"viewPosition"`
 	CountryCode             string                            `json:"countryCode"`
 	ConsumptionMultiplier   float64                           `json:"consumptionMultiplier"`
+	Tags                    []string                          `json:"tags"`
 	CpuCount                NilInt                            `json:"cpuCount"`
 	CpuModel                NilString                         `json:"cpuModel"`
 	TotalRam                NilString                         `json:"totalRam"`
@@ -19113,6 +23247,11 @@ func (s *NodeResponseResponse) GetCountryCode() string {
 // GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
 func (s *NodeResponseResponse) GetConsumptionMultiplier() float64 {
 	return s.ConsumptionMultiplier
+}
+
+// GetTags returns the value of Tags.
+func (s *NodeResponseResponse) GetTags() []string {
+	return s.Tags
 }
 
 // GetCpuCount returns the value of CpuCount.
@@ -19268,6 +23407,11 @@ func (s *NodeResponseResponse) SetCountryCode(val string) {
 // SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
 func (s *NodeResponseResponse) SetConsumptionMultiplier(val float64) {
 	s.ConsumptionMultiplier = val
+}
+
+// SetTags sets the value of Tags.
+func (s *NodeResponseResponse) SetTags(val []string) {
+	s.Tags = val
 }
 
 // SetCpuCount sets the value of CpuCount.
@@ -19533,7 +23677,52 @@ func (s *NodesControllerCreateNodeBadRequest) SetErrors(val []NodesControllerCre
 
 func (*NodesControllerCreateNodeBadRequest) nodesControllerCreateNodeRes() {}
 
-type NodesControllerCreateNodeBadRequestErrorsItem struct{}
+type NodesControllerCreateNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerCreateNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerCreateNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19622,7 +23811,52 @@ func (s *NodesControllerDeleteNodeBadRequest) SetErrors(val []NodesControllerDel
 
 func (*NodesControllerDeleteNodeBadRequest) nodesControllerDeleteNodeRes() {}
 
-type NodesControllerDeleteNodeBadRequestErrorsItem struct{}
+type NodesControllerDeleteNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerDeleteNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerDeleteNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19711,7 +23945,52 @@ func (s *NodesControllerDisableNodeBadRequest) SetErrors(val []NodesControllerDi
 
 func (*NodesControllerDisableNodeBadRequest) nodesControllerDisableNodeRes() {}
 
-type NodesControllerDisableNodeBadRequestErrorsItem struct{}
+type NodesControllerDisableNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerDisableNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerDisableNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19800,7 +24079,52 @@ func (s *NodesControllerEnableNodeBadRequest) SetErrors(val []NodesControllerEna
 
 func (*NodesControllerEnableNodeBadRequest) nodesControllerEnableNodeRes() {}
 
-type NodesControllerEnableNodeBadRequestErrorsItem struct{}
+type NodesControllerEnableNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerEnableNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerEnableNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19889,7 +24213,52 @@ func (s *NodesControllerGetAllNodesBadRequest) SetErrors(val []NodesControllerGe
 
 func (*NodesControllerGetAllNodesBadRequest) nodesControllerGetAllNodesRes() {}
 
-type NodesControllerGetAllNodesBadRequestErrorsItem struct{}
+type NodesControllerGetAllNodesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerGetAllNodesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerGetAllNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19940,6 +24309,140 @@ func (s *NodesControllerGetAllNodesInternalServerError) SetErrorCode(val OptStri
 
 func (*NodesControllerGetAllNodesInternalServerError) nodesControllerGetAllNodesRes() {}
 
+type NodesControllerGetAllNodesTagsBadRequest struct {
+	Message    OptString                                            `json:"message"`
+	StatusCode OptFloat64                                           `json:"statusCode"`
+	Errors     []NodesControllerGetAllNodesTagsBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetAllNodesTagsBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *NodesControllerGetAllNodesTagsBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *NodesControllerGetAllNodesTagsBadRequest) GetErrors() []NodesControllerGetAllNodesTagsBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetAllNodesTagsBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *NodesControllerGetAllNodesTagsBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *NodesControllerGetAllNodesTagsBadRequest) SetErrors(val []NodesControllerGetAllNodesTagsBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*NodesControllerGetAllNodesTagsBadRequest) nodesControllerGetAllNodesTagsRes() {}
+
+type NodesControllerGetAllNodesTagsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerGetAllNodesTagsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type NodesControllerGetAllNodesTagsInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerGetAllNodesTagsInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerGetAllNodesTagsInternalServerError) nodesControllerGetAllNodesTagsRes() {}
+
 type NodesControllerGetOneNodeBadRequest struct {
 	Message    OptString                                       `json:"message"`
 	StatusCode OptFloat64                                      `json:"statusCode"`
@@ -19978,7 +24481,52 @@ func (s *NodesControllerGetOneNodeBadRequest) SetErrors(val []NodesControllerGet
 
 func (*NodesControllerGetOneNodeBadRequest) nodesControllerGetOneNodeRes() {}
 
-type NodesControllerGetOneNodeBadRequestErrorsItem struct{}
+type NodesControllerGetOneNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerGetOneNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerGetOneNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20067,7 +24615,52 @@ func (s *NodesControllerReorderNodesBadRequest) SetErrors(val []NodesControllerR
 
 func (*NodesControllerReorderNodesBadRequest) nodesControllerReorderNodesRes() {}
 
-type NodesControllerReorderNodesBadRequestErrorsItem struct{}
+type NodesControllerReorderNodesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerReorderNodesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerReorderNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20118,6 +24711,140 @@ func (s *NodesControllerReorderNodesInternalServerError) SetErrorCode(val OptStr
 
 func (*NodesControllerReorderNodesInternalServerError) nodesControllerReorderNodesRes() {}
 
+type NodesControllerResetNodeTrafficBadRequest struct {
+	Message    OptString                                             `json:"message"`
+	StatusCode OptFloat64                                            `json:"statusCode"`
+	Errors     []NodesControllerResetNodeTrafficBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerResetNodeTrafficBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *NodesControllerResetNodeTrafficBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *NodesControllerResetNodeTrafficBadRequest) GetErrors() []NodesControllerResetNodeTrafficBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetErrors(val []NodesControllerResetNodeTrafficBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*NodesControllerResetNodeTrafficBadRequest) nodesControllerResetNodeTrafficRes() {}
+
+type NodesControllerResetNodeTrafficBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerResetNodeTrafficBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type NodesControllerResetNodeTrafficInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerResetNodeTrafficInternalServerError) nodesControllerResetNodeTrafficRes() {}
+
 type NodesControllerRestartAllNodesBadRequest struct {
 	Message    OptString                                            `json:"message"`
 	StatusCode OptFloat64                                           `json:"statusCode"`
@@ -20156,7 +24883,52 @@ func (s *NodesControllerRestartAllNodesBadRequest) SetErrors(val []NodesControll
 
 func (*NodesControllerRestartAllNodesBadRequest) nodesControllerRestartAllNodesRes() {}
 
-type NodesControllerRestartAllNodesBadRequestErrorsItem struct{}
+type NodesControllerRestartAllNodesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerRestartAllNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20245,7 +25017,52 @@ func (s *NodesControllerRestartNodeBadRequest) SetErrors(val []NodesControllerRe
 
 func (*NodesControllerRestartNodeBadRequest) nodesControllerRestartNodeRes() {}
 
-type NodesControllerRestartNodeBadRequestErrorsItem struct{}
+type NodesControllerRestartNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerRestartNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerRestartNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20334,7 +25151,52 @@ func (s *NodesControllerUpdateNodeBadRequest) SetErrors(val []NodesControllerUpd
 
 func (*NodesControllerUpdateNodeBadRequest) nodesControllerUpdateNodeRes() {}
 
-type NodesControllerUpdateNodeBadRequestErrorsItem struct{}
+type NodesControllerUpdateNodeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerUpdateNodeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesControllerUpdateNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20427,6 +25289,7 @@ type NodesResponseResponseItem struct {
 	ViewPosition            int                                    `json:"viewPosition"`
 	CountryCode             string                                 `json:"countryCode"`
 	ConsumptionMultiplier   float64                                `json:"consumptionMultiplier"`
+	Tags                    []string                               `json:"tags"`
 	CpuCount                NilInt                                 `json:"cpuCount"`
 	CpuModel                NilString                              `json:"cpuModel"`
 	TotalRam                NilString                              `json:"totalRam"`
@@ -20550,6 +25413,11 @@ func (s *NodesResponseResponseItem) GetCountryCode() string {
 // GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
 func (s *NodesResponseResponseItem) GetConsumptionMultiplier() float64 {
 	return s.ConsumptionMultiplier
+}
+
+// GetTags returns the value of Tags.
+func (s *NodesResponseResponseItem) GetTags() []string {
+	return s.Tags
 }
 
 // GetCpuCount returns the value of CpuCount.
@@ -20705,6 +25573,11 @@ func (s *NodesResponseResponseItem) SetCountryCode(val string) {
 // SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
 func (s *NodesResponseResponseItem) SetConsumptionMultiplier(val float64) {
 	s.ConsumptionMultiplier = val
+}
+
+// SetTags sets the value of Tags.
+func (s *NodesResponseResponseItem) SetTags(val []string) {
+	s.Tags = val
 }
 
 // SetCpuCount sets the value of CpuCount.
@@ -20971,7 +25844,52 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) SetErrors(va
 func (*NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) nodesUsageHistoryControllerGetNodesUsageByRangeRes() {
 }
 
-type NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem struct{}
+type NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -21062,7 +25980,52 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) SetErrors(va
 func (*NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) nodesUserUsageHistoryControllerGetNodeUserUsageRes() {
 }
 
-type NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem struct{}
+type NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -21153,7 +26116,52 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) SetErro
 func (*NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes() {
 }
 
-type NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem struct{}
+type NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -22296,6 +27304,54 @@ func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtr
 	return d
 }
 
+// NewOptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate returns new OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate with value set to v.
+func NewOptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate(v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate {
+	return OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate is optional *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate.
+type OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate struct {
+	Value *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate
+	Set   bool
+}
+
+// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate was set.
+func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) IsSet() bool {
+	return o.Set
+}
+
+// Reset unsets value.
+func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Reset() {
+	var v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) SetTo(v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Get() (v *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Or(d *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus returns new OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus with value set to v.
 func NewOptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus(v GetRawSubscriptionByShortUuidResponseDtoResponseUserStatus) OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus {
 	return OptGetRawSubscriptionByShortUuidResponseDtoResponseUserStatus{
@@ -23233,6 +28289,195 @@ func (o OptNilUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
+// NewOptNilUpdateExternalSquadRequestDtoCustomRemarks returns new OptNilUpdateExternalSquadRequestDtoCustomRemarks with value set to v.
+func NewOptNilUpdateExternalSquadRequestDtoCustomRemarks(v UpdateExternalSquadRequestDtoCustomRemarks) OptNilUpdateExternalSquadRequestDtoCustomRemarks {
+	return OptNilUpdateExternalSquadRequestDtoCustomRemarks{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilUpdateExternalSquadRequestDtoCustomRemarks is optional nullable UpdateExternalSquadRequestDtoCustomRemarks.
+type OptNilUpdateExternalSquadRequestDtoCustomRemarks struct {
+	Value UpdateExternalSquadRequestDtoCustomRemarks
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilUpdateExternalSquadRequestDtoCustomRemarks was set.
+func (o OptNilUpdateExternalSquadRequestDtoCustomRemarks) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilUpdateExternalSquadRequestDtoCustomRemarks) Reset() {
+	var v UpdateExternalSquadRequestDtoCustomRemarks
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilUpdateExternalSquadRequestDtoCustomRemarks) SetTo(v UpdateExternalSquadRequestDtoCustomRemarks) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilUpdateExternalSquadRequestDtoCustomRemarks) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilUpdateExternalSquadRequestDtoCustomRemarks) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v UpdateExternalSquadRequestDtoCustomRemarks
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilUpdateExternalSquadRequestDtoCustomRemarks) Get() (v UpdateExternalSquadRequestDtoCustomRemarks, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilUpdateExternalSquadRequestDtoCustomRemarks) Or(d UpdateExternalSquadRequestDtoCustomRemarks) UpdateExternalSquadRequestDtoCustomRemarks {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilUpdateExternalSquadRequestDtoHwidSettings returns new OptNilUpdateExternalSquadRequestDtoHwidSettings with value set to v.
+func NewOptNilUpdateExternalSquadRequestDtoHwidSettings(v UpdateExternalSquadRequestDtoHwidSettings) OptNilUpdateExternalSquadRequestDtoHwidSettings {
+	return OptNilUpdateExternalSquadRequestDtoHwidSettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilUpdateExternalSquadRequestDtoHwidSettings is optional nullable UpdateExternalSquadRequestDtoHwidSettings.
+type OptNilUpdateExternalSquadRequestDtoHwidSettings struct {
+	Value UpdateExternalSquadRequestDtoHwidSettings
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilUpdateExternalSquadRequestDtoHwidSettings was set.
+func (o OptNilUpdateExternalSquadRequestDtoHwidSettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilUpdateExternalSquadRequestDtoHwidSettings) Reset() {
+	var v UpdateExternalSquadRequestDtoHwidSettings
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilUpdateExternalSquadRequestDtoHwidSettings) SetTo(v UpdateExternalSquadRequestDtoHwidSettings) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilUpdateExternalSquadRequestDtoHwidSettings) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilUpdateExternalSquadRequestDtoHwidSettings) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v UpdateExternalSquadRequestDtoHwidSettings
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilUpdateExternalSquadRequestDtoHwidSettings) Get() (v UpdateExternalSquadRequestDtoHwidSettings, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilUpdateExternalSquadRequestDtoHwidSettings) Or(d UpdateExternalSquadRequestDtoHwidSettings) UpdateExternalSquadRequestDtoHwidSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilUpdateExternalSquadRequestDtoResponseHeaders returns new OptNilUpdateExternalSquadRequestDtoResponseHeaders with value set to v.
+func NewOptNilUpdateExternalSquadRequestDtoResponseHeaders(v UpdateExternalSquadRequestDtoResponseHeaders) OptNilUpdateExternalSquadRequestDtoResponseHeaders {
+	return OptNilUpdateExternalSquadRequestDtoResponseHeaders{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilUpdateExternalSquadRequestDtoResponseHeaders is optional nullable UpdateExternalSquadRequestDtoResponseHeaders.
+type OptNilUpdateExternalSquadRequestDtoResponseHeaders struct {
+	Value UpdateExternalSquadRequestDtoResponseHeaders
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilUpdateExternalSquadRequestDtoResponseHeaders was set.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) Reset() {
+	var v UpdateExternalSquadRequestDtoResponseHeaders
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) SetTo(v UpdateExternalSquadRequestDtoResponseHeaders) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v UpdateExternalSquadRequestDtoResponseHeaders
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) Get() (v UpdateExternalSquadRequestDtoResponseHeaders, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) Or(d UpdateExternalSquadRequestDtoResponseHeaders) UpdateExternalSquadRequestDtoResponseHeaders {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptNilUpdateHostRequestDtoAlpn returns new OptNilUpdateHostRequestDtoAlpn with value set to v.
 func NewOptNilUpdateHostRequestDtoAlpn(v UpdateHostRequestDtoAlpn) OptNilUpdateHostRequestDtoAlpn {
 	return OptNilUpdateHostRequestDtoAlpn{
@@ -23539,6 +28784,52 @@ func (o OptUUID) Get() (v uuid.UUID, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUpdateExternalSquadRequestDtoHostOverrides returns new OptUpdateExternalSquadRequestDtoHostOverrides with value set to v.
+func NewOptUpdateExternalSquadRequestDtoHostOverrides(v UpdateExternalSquadRequestDtoHostOverrides) OptUpdateExternalSquadRequestDtoHostOverrides {
+	return OptUpdateExternalSquadRequestDtoHostOverrides{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateExternalSquadRequestDtoHostOverrides is optional UpdateExternalSquadRequestDtoHostOverrides.
+type OptUpdateExternalSquadRequestDtoHostOverrides struct {
+	Value UpdateExternalSquadRequestDtoHostOverrides
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateExternalSquadRequestDtoHostOverrides was set.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateExternalSquadRequestDtoHostOverrides) Reset() {
+	var v UpdateExternalSquadRequestDtoHostOverrides
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateExternalSquadRequestDtoHostOverrides) SetTo(v UpdateExternalSquadRequestDtoHostOverrides) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) Get() (v UpdateExternalSquadRequestDtoHostOverrides, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) Or(d UpdateExternalSquadRequestDtoHostOverrides) UpdateExternalSquadRequestDtoHostOverrides {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -23959,6 +29250,52 @@ func (o OptUpdateRemnawaveSettingsRequestDtoTgAuthSettings) Or(d UpdateRemnawave
 	return d
 }
 
+// NewOptUpdateSubscriptionSettingsRequestDtoCustomRemarks returns new OptUpdateSubscriptionSettingsRequestDtoCustomRemarks with value set to v.
+func NewOptUpdateSubscriptionSettingsRequestDtoCustomRemarks(v UpdateSubscriptionSettingsRequestDtoCustomRemarks) OptUpdateSubscriptionSettingsRequestDtoCustomRemarks {
+	return OptUpdateSubscriptionSettingsRequestDtoCustomRemarks{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateSubscriptionSettingsRequestDtoCustomRemarks is optional UpdateSubscriptionSettingsRequestDtoCustomRemarks.
+type OptUpdateSubscriptionSettingsRequestDtoCustomRemarks struct {
+	Value UpdateSubscriptionSettingsRequestDtoCustomRemarks
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateSubscriptionSettingsRequestDtoCustomRemarks was set.
+func (o OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) Reset() {
+	var v UpdateSubscriptionSettingsRequestDtoCustomRemarks
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) SetTo(v UpdateSubscriptionSettingsRequestDtoCustomRemarks) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) Get() (v UpdateSubscriptionSettingsRequestDtoCustomRemarks, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) Or(d UpdateSubscriptionSettingsRequestDtoCustomRemarks) UpdateSubscriptionSettingsRequestDtoCustomRemarks {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders returns new OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders with value set to v.
 func NewOptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders(v UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders {
 	return OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders{
@@ -23999,6 +29336,52 @@ func (o OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) Get() (v U
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) Or(d UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUpdateSubscriptionSettingsRequestDtoHwidSettings returns new OptUpdateSubscriptionSettingsRequestDtoHwidSettings with value set to v.
+func NewOptUpdateSubscriptionSettingsRequestDtoHwidSettings(v UpdateSubscriptionSettingsRequestDtoHwidSettings) OptUpdateSubscriptionSettingsRequestDtoHwidSettings {
+	return OptUpdateSubscriptionSettingsRequestDtoHwidSettings{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateSubscriptionSettingsRequestDtoHwidSettings is optional UpdateSubscriptionSettingsRequestDtoHwidSettings.
+type OptUpdateSubscriptionSettingsRequestDtoHwidSettings struct {
+	Value UpdateSubscriptionSettingsRequestDtoHwidSettings
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateSubscriptionSettingsRequestDtoHwidSettings was set.
+func (o OptUpdateSubscriptionSettingsRequestDtoHwidSettings) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateSubscriptionSettingsRequestDtoHwidSettings) Reset() {
+	var v UpdateSubscriptionSettingsRequestDtoHwidSettings
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateSubscriptionSettingsRequestDtoHwidSettings) SetTo(v UpdateSubscriptionSettingsRequestDtoHwidSettings) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateSubscriptionSettingsRequestDtoHwidSettings) Get() (v UpdateSubscriptionSettingsRequestDtoHwidSettings, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateSubscriptionSettingsRequestDtoHwidSettings) Or(d UpdateSubscriptionSettingsRequestDtoHwidSettings) UpdateSubscriptionSettingsRequestDtoHwidSettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -24413,7 +29796,52 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) SetErrors(val []PasskeyContro
 
 func (*PasskeyControllerDeletePasskeyBadRequest) passkeyControllerDeletePasskeyRes() {}
 
-type PasskeyControllerDeletePasskeyBadRequestErrorsItem struct{}
+type PasskeyControllerDeletePasskeyBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type PasskeyControllerDeletePasskeyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24502,7 +29930,52 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) SetErrors(val []PasskeyCo
 
 func (*PasskeyControllerGetActivePasskeysBadRequest) passkeyControllerGetActivePasskeysRes() {}
 
-type PasskeyControllerGetActivePasskeysBadRequestErrorsItem struct{}
+type PasskeyControllerGetActivePasskeysBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type PasskeyControllerGetActivePasskeysInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24593,7 +30066,52 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) SetErrors(val []
 func (*PasskeyControllerPasskeyRegistrationOptionsBadRequest) passkeyControllerPasskeyRegistrationOptionsRes() {
 }
 
-type PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem struct{}
+type PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type PasskeyControllerPasskeyRegistrationOptionsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24684,7 +30202,52 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) SetErrors(val []P
 func (*PasskeyControllerPasskeyRegistrationVerifyBadRequest) passkeyControllerPasskeyRegistrationVerifyRes() {
 }
 
-type PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem struct{}
+type PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type PasskeyControllerPasskeyRegistrationVerifyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24735,6 +30298,140 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyInternalServerError) SetError
 
 func (*PasskeyControllerPasskeyRegistrationVerifyInternalServerError) passkeyControllerPasskeyRegistrationVerifyRes() {
 }
+
+type PasskeyControllerUpdatePasskeyBadRequest struct {
+	Message    OptString                                            `json:"message"`
+	StatusCode OptFloat64                                           `json:"statusCode"`
+	Errors     []PasskeyControllerUpdatePasskeyBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) GetErrors() []PasskeyControllerUpdatePasskeyBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *PasskeyControllerUpdatePasskeyBadRequest) SetErrors(val []PasskeyControllerUpdatePasskeyBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*PasskeyControllerUpdatePasskeyBadRequest) passkeyControllerUpdatePasskeyRes() {}
+
+type PasskeyControllerUpdatePasskeyBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *PasskeyControllerUpdatePasskeyBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type PasskeyControllerUpdatePasskeyInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *PasskeyControllerUpdatePasskeyInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*PasskeyControllerUpdatePasskeyInternalServerError) passkeyControllerUpdatePasskeyRes() {}
 
 // Ref: #/components/schemas/PasskeyOptionsResponse
 type PasskeyOptionsResponse struct {
@@ -24886,6 +30583,7 @@ func (s *PasskeysResponseStatusCode) SetResponse(val PasskeysResponse) {
 
 func (*PasskeysResponseStatusCode) passkeyControllerDeletePasskeyRes()     {}
 func (*PasskeysResponseStatusCode) passkeyControllerGetActivePasskeysRes() {}
+func (*PasskeysResponseStatusCode) passkeyControllerUpdatePasskeyRes()     {}
 
 // Ref: #/components/schemas/RegisterRequestDto
 type RegisterRequestDto struct {
@@ -24952,7 +30650,52 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) SetErrors(val []Remna
 func (*RemnawaveSettingsControllerGetSettingsBadRequest) remnawaveSettingsControllerGetSettingsRes() {
 }
 
-type RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem struct{}
+type RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type RemnawaveSettingsControllerGetSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25043,7 +30786,52 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) SetErrors(val []Re
 func (*RemnawaveSettingsControllerUpdateSettingsBadRequest) remnawaveSettingsControllerUpdateSettingsRes() {
 }
 
-type RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem struct{}
+type RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type RemnawaveSettingsControllerUpdateSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25203,6 +30991,46 @@ func (s *ReorderNodeRequestDtoNodesItem) SetViewPosition(val int) {
 
 // SetUUID sets the value of UUID.
 func (s *ReorderNodeRequestDtoNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// Ref: #/components/schemas/ReorderSubscriptionTemplatesRequestDto
+type ReorderSubscriptionTemplatesRequestDto struct {
+	Items []ReorderSubscriptionTemplatesRequestDtoItemsItem `json:"items"`
+}
+
+// GetItems returns the value of Items.
+func (s *ReorderSubscriptionTemplatesRequestDto) GetItems() []ReorderSubscriptionTemplatesRequestDtoItemsItem {
+	return s.Items
+}
+
+// SetItems sets the value of Items.
+func (s *ReorderSubscriptionTemplatesRequestDto) SetItems(val []ReorderSubscriptionTemplatesRequestDtoItemsItem) {
+	s.Items = val
+}
+
+type ReorderSubscriptionTemplatesRequestDtoItemsItem struct {
+	ViewPosition int       `json:"viewPosition"`
+	UUID         uuid.UUID `json:"uuid"`
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *ReorderSubscriptionTemplatesRequestDtoItemsItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetUUID returns the value of UUID.
+func (s *ReorderSubscriptionTemplatesRequestDtoItemsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *ReorderSubscriptionTemplatesRequestDtoItemsItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetUUID sets the value of UUID.
+func (s *ReorderSubscriptionTemplatesRequestDtoItemsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
@@ -25742,7 +31570,52 @@ func (s *SnippetsControllerCreateSnippetBadRequest) SetErrors(val []SnippetsCont
 
 func (*SnippetsControllerCreateSnippetBadRequest) snippetsControllerCreateSnippetRes() {}
 
-type SnippetsControllerCreateSnippetBadRequestErrorsItem struct{}
+type SnippetsControllerCreateSnippetBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // SnippetsControllerCreateSnippetConflict is response for SnippetsControllerCreateSnippet operation.
 type SnippetsControllerCreateSnippetConflict struct{}
@@ -25836,7 +31709,52 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) SetErrors(val []Snippe
 
 func (*SnippetsControllerDeleteSnippetByNameBadRequest) snippetsControllerDeleteSnippetByNameRes() {}
 
-type SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem struct{}
+type SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SnippetsControllerDeleteSnippetByNameInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25931,7 +31849,52 @@ func (s *SnippetsControllerGetSnippetsBadRequest) SetErrors(val []SnippetsContro
 
 func (*SnippetsControllerGetSnippetsBadRequest) snippetsControllerGetSnippetsRes() {}
 
-type SnippetsControllerGetSnippetsBadRequestErrorsItem struct{}
+type SnippetsControllerGetSnippetsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SnippetsControllerGetSnippetsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -26020,7 +31983,52 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) SetErrors(val []SnippetsCont
 
 func (*SnippetsControllerUpdateSnippetBadRequest) snippetsControllerUpdateSnippetRes() {}
 
-type SnippetsControllerUpdateSnippetBadRequestErrorsItem struct{}
+type SnippetsControllerUpdateSnippetBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 // SnippetsControllerUpdateSnippetConflict is response for SnippetsControllerUpdateSnippet operation.
 type SnippetsControllerUpdateSnippetConflict struct{}
@@ -26262,7 +32270,52 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) SetErro
 func (*SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) subscriptionControllerGetSubscriptionInfoByShortUuidRes() {
 }
 
-type SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem struct{}
+type SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -26346,7 +32399,6 @@ type SubscriptionResponseResponse struct {
 	Links           []string                                `json:"links"`
 	SsConfLinks     SubscriptionResponseResponseSsConfLinks `json:"ssConfLinks"`
 	SubscriptionUrl string                                  `json:"subscriptionUrl"`
-	Happ            SubscriptionResponseResponseHapp        `json:"happ"`
 }
 
 // GetIsFound returns the value of IsFound.
@@ -26374,11 +32426,6 @@ func (s *SubscriptionResponseResponse) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
-// GetHapp returns the value of Happ.
-func (s *SubscriptionResponseResponse) GetHapp() SubscriptionResponseResponseHapp {
-	return s.Happ
-}
-
 // SetIsFound sets the value of IsFound.
 func (s *SubscriptionResponseResponse) SetIsFound(val bool) {
 	s.IsFound = val
@@ -26402,25 +32449,6 @@ func (s *SubscriptionResponseResponse) SetSsConfLinks(val SubscriptionResponseRe
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
 func (s *SubscriptionResponseResponse) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *SubscriptionResponseResponse) SetHapp(val SubscriptionResponseResponseHapp) {
-	s.Happ = val
-}
-
-type SubscriptionResponseResponseHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *SubscriptionResponseResponseHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *SubscriptionResponseResponseHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
 }
 
 type SubscriptionResponseResponseSsConfLinks map[string]string
@@ -26729,7 +32757,52 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) SetErrors(val []Su
 func (*SubscriptionSettingsControllerGetSettingsBadRequest) subscriptionSettingsControllerGetSettingsRes() {
 }
 
-type SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem struct{}
+type SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionSettingsControllerGetSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -26820,7 +32893,52 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) SetErrors(val [
 func (*SubscriptionSettingsControllerUpdateSettingsBadRequest) subscriptionSettingsControllerUpdateSettingsRes() {
 }
 
-type SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem struct{}
+type SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionSettingsControllerUpdateSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -26899,14 +33017,13 @@ type SubscriptionSettingsResponseResponse struct {
 	ServeJsonAtBaseSubscription   bool                                                         `json:"serveJsonAtBaseSubscription"`
 	AddUsernameToBaseSubscription bool                                                         `json:"addUsernameToBaseSubscription"`
 	IsShowCustomRemarks           bool                                                         `json:"isShowCustomRemarks"`
+	CustomRemarks                 SubscriptionSettingsResponseResponseCustomRemarks            `json:"customRemarks"`
 	HappAnnounce                  NilString                                                    `json:"happAnnounce"`
 	HappRouting                   NilString                                                    `json:"happRouting"`
-	ExpiredUsersRemarks           []string                                                     `json:"expiredUsersRemarks"`
-	LimitedUsersRemarks           []string                                                     `json:"limitedUsersRemarks"`
-	DisabledUsersRemarks          []string                                                     `json:"disabledUsersRemarks"`
 	CustomResponseHeaders         NilSubscriptionSettingsResponseResponseCustomResponseHeaders `json:"customResponseHeaders"`
 	RandomizeHosts                bool                                                         `json:"randomizeHosts"`
 	ResponseRules                 NilSubscriptionSettingsResponseResponseResponseRules         `json:"responseRules"`
+	HwidSettings                  NilSubscriptionSettingsResponseResponseHwidSettings          `json:"hwidSettings"`
 	CreatedAt                     time.Time                                                    `json:"createdAt"`
 	UpdatedAt                     time.Time                                                    `json:"updatedAt"`
 }
@@ -26951,6 +33068,11 @@ func (s *SubscriptionSettingsResponseResponse) GetIsShowCustomRemarks() bool {
 	return s.IsShowCustomRemarks
 }
 
+// GetCustomRemarks returns the value of CustomRemarks.
+func (s *SubscriptionSettingsResponseResponse) GetCustomRemarks() SubscriptionSettingsResponseResponseCustomRemarks {
+	return s.CustomRemarks
+}
+
 // GetHappAnnounce returns the value of HappAnnounce.
 func (s *SubscriptionSettingsResponseResponse) GetHappAnnounce() NilString {
 	return s.HappAnnounce
@@ -26959,21 +33081,6 @@ func (s *SubscriptionSettingsResponseResponse) GetHappAnnounce() NilString {
 // GetHappRouting returns the value of HappRouting.
 func (s *SubscriptionSettingsResponseResponse) GetHappRouting() NilString {
 	return s.HappRouting
-}
-
-// GetExpiredUsersRemarks returns the value of ExpiredUsersRemarks.
-func (s *SubscriptionSettingsResponseResponse) GetExpiredUsersRemarks() []string {
-	return s.ExpiredUsersRemarks
-}
-
-// GetLimitedUsersRemarks returns the value of LimitedUsersRemarks.
-func (s *SubscriptionSettingsResponseResponse) GetLimitedUsersRemarks() []string {
-	return s.LimitedUsersRemarks
-}
-
-// GetDisabledUsersRemarks returns the value of DisabledUsersRemarks.
-func (s *SubscriptionSettingsResponseResponse) GetDisabledUsersRemarks() []string {
-	return s.DisabledUsersRemarks
 }
 
 // GetCustomResponseHeaders returns the value of CustomResponseHeaders.
@@ -26989,6 +33096,11 @@ func (s *SubscriptionSettingsResponseResponse) GetRandomizeHosts() bool {
 // GetResponseRules returns the value of ResponseRules.
 func (s *SubscriptionSettingsResponseResponse) GetResponseRules() NilSubscriptionSettingsResponseResponseResponseRules {
 	return s.ResponseRules
+}
+
+// GetHwidSettings returns the value of HwidSettings.
+func (s *SubscriptionSettingsResponseResponse) GetHwidSettings() NilSubscriptionSettingsResponseResponseHwidSettings {
+	return s.HwidSettings
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -27041,6 +33153,11 @@ func (s *SubscriptionSettingsResponseResponse) SetIsShowCustomRemarks(val bool) 
 	s.IsShowCustomRemarks = val
 }
 
+// SetCustomRemarks sets the value of CustomRemarks.
+func (s *SubscriptionSettingsResponseResponse) SetCustomRemarks(val SubscriptionSettingsResponseResponseCustomRemarks) {
+	s.CustomRemarks = val
+}
+
 // SetHappAnnounce sets the value of HappAnnounce.
 func (s *SubscriptionSettingsResponseResponse) SetHappAnnounce(val NilString) {
 	s.HappAnnounce = val
@@ -27049,21 +33166,6 @@ func (s *SubscriptionSettingsResponseResponse) SetHappAnnounce(val NilString) {
 // SetHappRouting sets the value of HappRouting.
 func (s *SubscriptionSettingsResponseResponse) SetHappRouting(val NilString) {
 	s.HappRouting = val
-}
-
-// SetExpiredUsersRemarks sets the value of ExpiredUsersRemarks.
-func (s *SubscriptionSettingsResponseResponse) SetExpiredUsersRemarks(val []string) {
-	s.ExpiredUsersRemarks = val
-}
-
-// SetLimitedUsersRemarks sets the value of LimitedUsersRemarks.
-func (s *SubscriptionSettingsResponseResponse) SetLimitedUsersRemarks(val []string) {
-	s.LimitedUsersRemarks = val
-}
-
-// SetDisabledUsersRemarks sets the value of DisabledUsersRemarks.
-func (s *SubscriptionSettingsResponseResponse) SetDisabledUsersRemarks(val []string) {
-	s.DisabledUsersRemarks = val
 }
 
 // SetCustomResponseHeaders sets the value of CustomResponseHeaders.
@@ -27081,6 +33183,11 @@ func (s *SubscriptionSettingsResponseResponse) SetResponseRules(val NilSubscript
 	s.ResponseRules = val
 }
 
+// SetHwidSettings sets the value of HwidSettings.
+func (s *SubscriptionSettingsResponseResponse) SetHwidSettings(val NilSubscriptionSettingsResponseResponseHwidSettings) {
+	s.HwidSettings = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *SubscriptionSettingsResponseResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -27089,6 +33196,64 @@ func (s *SubscriptionSettingsResponseResponse) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *SubscriptionSettingsResponseResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+type SubscriptionSettingsResponseResponseCustomRemarks struct {
+	ExpiredUsers        []string `json:"expiredUsers"`
+	LimitedUsers        []string `json:"limitedUsers"`
+	DisabledUsers       []string `json:"disabledUsers"`
+	EmptyHosts          []string `json:"emptyHosts"`
+	EmptyInternalSquads []string `json:"emptyInternalSquads"`
+}
+
+// GetExpiredUsers returns the value of ExpiredUsers.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) GetExpiredUsers() []string {
+	return s.ExpiredUsers
+}
+
+// GetLimitedUsers returns the value of LimitedUsers.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) GetLimitedUsers() []string {
+	return s.LimitedUsers
+}
+
+// GetDisabledUsers returns the value of DisabledUsers.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) GetDisabledUsers() []string {
+	return s.DisabledUsers
+}
+
+// GetEmptyHosts returns the value of EmptyHosts.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) GetEmptyHosts() []string {
+	return s.EmptyHosts
+}
+
+// GetEmptyInternalSquads returns the value of EmptyInternalSquads.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) GetEmptyInternalSquads() []string {
+	return s.EmptyInternalSquads
+}
+
+// SetExpiredUsers sets the value of ExpiredUsers.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) SetExpiredUsers(val []string) {
+	s.ExpiredUsers = val
+}
+
+// SetLimitedUsers sets the value of LimitedUsers.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) SetLimitedUsers(val []string) {
+	s.LimitedUsers = val
+}
+
+// SetDisabledUsers sets the value of DisabledUsers.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) SetDisabledUsers(val []string) {
+	s.DisabledUsers = val
+}
+
+// SetEmptyHosts sets the value of EmptyHosts.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) SetEmptyHosts(val []string) {
+	s.EmptyHosts = val
+}
+
+// SetEmptyInternalSquads sets the value of EmptyInternalSquads.
+func (s *SubscriptionSettingsResponseResponseCustomRemarks) SetEmptyInternalSquads(val []string) {
+	s.EmptyInternalSquads = val
 }
 
 type SubscriptionSettingsResponseResponseCustomResponseHeaders map[string]string
@@ -27100,6 +33265,42 @@ func (s *SubscriptionSettingsResponseResponseCustomResponseHeaders) init() Subsc
 		*s = m
 	}
 	return m
+}
+
+type SubscriptionSettingsResponseResponseHwidSettings struct {
+	Enabled             bool      `json:"enabled"`
+	FallbackDeviceLimit float64   `json:"fallbackDeviceLimit"`
+	MaxDevicesAnnounce  NilString `json:"maxDevicesAnnounce"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetFallbackDeviceLimit returns the value of FallbackDeviceLimit.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) GetFallbackDeviceLimit() float64 {
+	return s.FallbackDeviceLimit
+}
+
+// GetMaxDevicesAnnounce returns the value of MaxDevicesAnnounce.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) GetMaxDevicesAnnounce() NilString {
+	return s.MaxDevicesAnnounce
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetFallbackDeviceLimit sets the value of FallbackDeviceLimit.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) SetFallbackDeviceLimit(val float64) {
+	s.FallbackDeviceLimit = val
+}
+
+// SetMaxDevicesAnnounce sets the value of MaxDevicesAnnounce.
+func (s *SubscriptionSettingsResponseResponseHwidSettings) SetMaxDevicesAnnounce(val NilString) {
+	s.MaxDevicesAnnounce = val
 }
 
 type SubscriptionSettingsResponseResponseResponseRules struct {
@@ -27750,7 +33951,52 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) SetErrors(val [
 func (*SubscriptionTemplateControllerCreateTemplateBadRequest) subscriptionTemplateControllerCreateTemplateRes() {
 }
 
-type SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem struct{}
+type SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionTemplateControllerCreateTemplateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -27841,7 +34087,52 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) SetErrors(val [
 func (*SubscriptionTemplateControllerDeleteTemplateBadRequest) subscriptionTemplateControllerDeleteTemplateRes() {
 }
 
-type SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem struct{}
+type SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionTemplateControllerDeleteTemplateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -27932,7 +34223,52 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) SetErrors(val 
 func (*SubscriptionTemplateControllerGetAllTemplatesBadRequest) subscriptionTemplateControllerGetAllTemplatesRes() {
 }
 
-type SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem struct{}
+type SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionTemplateControllerGetAllTemplatesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28023,7 +34359,52 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) SetErrors(va
 func (*SubscriptionTemplateControllerGetTemplateByUuidBadRequest) subscriptionTemplateControllerGetTemplateByUuidRes() {
 }
 
-type SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem struct{}
+type SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionTemplateControllerGetTemplateByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28075,6 +34456,142 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidInternalServerError) Set
 func (*SubscriptionTemplateControllerGetTemplateByUuidInternalServerError) subscriptionTemplateControllerGetTemplateByUuidRes() {
 }
 
+type SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest struct {
+	Message    OptString                                                                        `json:"message"`
+	StatusCode OptFloat64                                                                       `json:"statusCode"`
+	Errors     []SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem `json:"errors"`
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetErrors returns the value of Errors.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) GetErrors() []SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem {
+	return s.Errors
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetErrors sets the value of Errors.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) SetErrors(val []SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) {
+	s.Errors = val
+}
+
+func (*SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequest) subscriptionTemplateControllerReorderSubscriptionTemplatesRes() {
+}
+
+type SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
+
+type SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError) subscriptionTemplateControllerReorderSubscriptionTemplatesRes() {
+}
+
 type SubscriptionTemplateControllerUpdateTemplateBadRequest struct {
 	Message    OptString                                                          `json:"message"`
 	StatusCode OptFloat64                                                         `json:"statusCode"`
@@ -28114,7 +34631,52 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) SetErrors(val [
 func (*SubscriptionTemplateControllerUpdateTemplateBadRequest) subscriptionTemplateControllerUpdateTemplateRes() {
 }
 
-type SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem struct{}
+type SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionTemplateControllerUpdateTemplateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28205,7 +34767,52 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) SetErrors(val []S
 func (*SubscriptionsControllerGetAllSubscriptionsBadRequest) subscriptionsControllerGetAllSubscriptionsRes() {
 }
 
-type SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem struct{}
+type SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionsControllerGetAllSubscriptionsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28296,7 +34903,52 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) SetErro
 func (*SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) subscriptionsControllerGetRawSubscriptionByShortUuidRes() {
 }
 
-type SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem struct{}
+type SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionsControllerGetRawSubscriptionByShortUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28387,7 +35039,52 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) S
 func (*SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) subscriptionsControllerGetSubscriptionByShortUuidProtectedRes() {
 }
 
-type SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem struct{}
+type SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionsControllerGetSubscriptionByShortUuidProtectedInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28528,7 +35225,52 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) SetErrors(v
 func (*SubscriptionsControllerGetSubscriptionByUsernameBadRequest) subscriptionsControllerGetSubscriptionByUsernameRes() {
 }
 
-type SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem struct{}
+type SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionsControllerGetSubscriptionByUsernameInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28669,7 +35411,52 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) SetErrors(val [
 func (*SubscriptionsControllerGetSubscriptionByUuidBadRequest) subscriptionsControllerGetSubscriptionByUuidRes() {
 }
 
-type SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem struct{}
+type SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SubscriptionsControllerGetSubscriptionByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28809,7 +35596,52 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) SetErrors(val []SystemContro
 
 func (*SystemControllerDebugSrrMatcherBadRequest) systemControllerDebugSrrMatcherRes() {}
 
-type SystemControllerDebugSrrMatcherBadRequestErrorsItem struct{}
+type SystemControllerDebugSrrMatcherBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerDebugSrrMatcherInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28898,7 +35730,52 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) SetErrors(val []System
 
 func (*SystemControllerEncryptHappCryptoLinkBadRequest) systemControllerEncryptHappCryptoLinkRes() {}
 
-type SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem struct{}
+type SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerEncryptHappCryptoLinkInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28988,7 +35865,52 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) SetErrors(val []SystemCont
 
 func (*SystemControllerGetBandwidthStatsBadRequest) systemControllerGetBandwidthStatsRes() {}
 
-type SystemControllerGetBandwidthStatsBadRequestErrorsItem struct{}
+type SystemControllerGetBandwidthStatsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerGetBandwidthStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29077,7 +35999,52 @@ func (s *SystemControllerGetNodesMetricsBadRequest) SetErrors(val []SystemContro
 
 func (*SystemControllerGetNodesMetricsBadRequest) systemControllerGetNodesMetricsRes() {}
 
-type SystemControllerGetNodesMetricsBadRequestErrorsItem struct{}
+type SystemControllerGetNodesMetricsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerGetNodesMetricsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29166,7 +36133,52 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) SetErrors(val []SystemCon
 
 func (*SystemControllerGetNodesStatisticsBadRequest) systemControllerGetNodesStatisticsRes() {}
 
-type SystemControllerGetNodesStatisticsBadRequestErrorsItem struct{}
+type SystemControllerGetNodesStatisticsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerGetNodesStatisticsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29256,7 +36268,52 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) SetErrors(val []SystemCon
 
 func (*SystemControllerGetRemnawaveHealthBadRequest) systemControllerGetRemnawaveHealthRes() {}
 
-type SystemControllerGetRemnawaveHealthBadRequestErrorsItem struct{}
+type SystemControllerGetRemnawaveHealthBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerGetRemnawaveHealthInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29346,7 +36403,52 @@ func (s *SystemControllerGetStatsBadRequest) SetErrors(val []SystemControllerGet
 
 func (*SystemControllerGetStatsBadRequest) systemControllerGetStatsRes() {}
 
-type SystemControllerGetStatsBadRequestErrorsItem struct{}
+type SystemControllerGetStatsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetStatsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerGetStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29435,7 +36537,52 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) SetErrors(val []SystemCont
 
 func (*SystemControllerGetX25519KeypairsBadRequest) systemControllerGetX25519KeypairsRes() {}
 
-type SystemControllerGetX25519KeypairsBadRequestErrorsItem struct{}
+type SystemControllerGetX25519KeypairsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type SystemControllerGetX25519KeypairsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29501,8 +36648,9 @@ func (s *TagsResponse) SetResponse(val TagsResponseResponse) {
 	s.Response = val
 }
 
-func (*TagsResponse) hostsControllerGetAllHostTagsRes() {}
-func (*TagsResponse) usersControllerGetAllTagsRes()     {}
+func (*TagsResponse) hostsControllerGetAllHostTagsRes()  {}
+func (*TagsResponse) nodesControllerGetAllNodesTagsRes() {}
+func (*TagsResponse) usersControllerGetAllTagsRes()      {}
 
 type TagsResponseResponse struct {
 	Tags []string `json:"tags"`
@@ -29620,6 +36768,7 @@ func (*TemplateResponse) subscriptionTemplateControllerUpdateTemplateRes()    {}
 
 type TemplateResponseResponse struct {
 	UUID                uuid.UUID                            `json:"uuid"`
+	ViewPosition        int                                  `json:"viewPosition"`
 	Name                string                               `json:"name"`
 	TemplateType        TemplateResponseResponseTemplateType `json:"templateType"`
 	TemplateJson        jx.Raw                               `json:"templateJson"`
@@ -29629,6 +36778,11 @@ type TemplateResponseResponse struct {
 // GetUUID returns the value of UUID.
 func (s *TemplateResponseResponse) GetUUID() uuid.UUID {
 	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *TemplateResponseResponse) GetViewPosition() int {
+	return s.ViewPosition
 }
 
 // GetName returns the value of Name.
@@ -29654,6 +36808,11 @@ func (s *TemplateResponseResponse) GetEncodedTemplateYaml() NilString {
 // SetUUID sets the value of UUID.
 func (s *TemplateResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *TemplateResponseResponse) SetViewPosition(val int) {
+	s.ViewPosition = val
 }
 
 // SetName sets the value of Name.
@@ -29851,6 +37010,10 @@ type UpdateExternalSquadRequestDto struct {
 	Name                 OptString                                            `json:"name"`
 	Templates            []UpdateExternalSquadRequestDtoTemplatesItem         `json:"templates"`
 	SubscriptionSettings OptUpdateExternalSquadRequestDtoSubscriptionSettings `json:"subscriptionSettings"`
+	HostOverrides        OptUpdateExternalSquadRequestDtoHostOverrides        `json:"hostOverrides"`
+	ResponseHeaders      OptNilUpdateExternalSquadRequestDtoResponseHeaders   `json:"responseHeaders"`
+	HwidSettings         OptNilUpdateExternalSquadRequestDtoHwidSettings      `json:"hwidSettings"`
+	CustomRemarks        OptNilUpdateExternalSquadRequestDtoCustomRemarks     `json:"customRemarks"`
 }
 
 // GetUUID returns the value of UUID.
@@ -29873,6 +37036,26 @@ func (s *UpdateExternalSquadRequestDto) GetSubscriptionSettings() OptUpdateExter
 	return s.SubscriptionSettings
 }
 
+// GetHostOverrides returns the value of HostOverrides.
+func (s *UpdateExternalSquadRequestDto) GetHostOverrides() OptUpdateExternalSquadRequestDtoHostOverrides {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *UpdateExternalSquadRequestDto) GetResponseHeaders() OptNilUpdateExternalSquadRequestDtoResponseHeaders {
+	return s.ResponseHeaders
+}
+
+// GetHwidSettings returns the value of HwidSettings.
+func (s *UpdateExternalSquadRequestDto) GetHwidSettings() OptNilUpdateExternalSquadRequestDtoHwidSettings {
+	return s.HwidSettings
+}
+
+// GetCustomRemarks returns the value of CustomRemarks.
+func (s *UpdateExternalSquadRequestDto) GetCustomRemarks() OptNilUpdateExternalSquadRequestDtoCustomRemarks {
+	return s.CustomRemarks
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateExternalSquadRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -29891,6 +37074,156 @@ func (s *UpdateExternalSquadRequestDto) SetTemplates(val []UpdateExternalSquadRe
 // SetSubscriptionSettings sets the value of SubscriptionSettings.
 func (s *UpdateExternalSquadRequestDto) SetSubscriptionSettings(val OptUpdateExternalSquadRequestDtoSubscriptionSettings) {
 	s.SubscriptionSettings = val
+}
+
+// SetHostOverrides sets the value of HostOverrides.
+func (s *UpdateExternalSquadRequestDto) SetHostOverrides(val OptUpdateExternalSquadRequestDtoHostOverrides) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *UpdateExternalSquadRequestDto) SetResponseHeaders(val OptNilUpdateExternalSquadRequestDtoResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
+// SetHwidSettings sets the value of HwidSettings.
+func (s *UpdateExternalSquadRequestDto) SetHwidSettings(val OptNilUpdateExternalSquadRequestDtoHwidSettings) {
+	s.HwidSettings = val
+}
+
+// SetCustomRemarks sets the value of CustomRemarks.
+func (s *UpdateExternalSquadRequestDto) SetCustomRemarks(val OptNilUpdateExternalSquadRequestDtoCustomRemarks) {
+	s.CustomRemarks = val
+}
+
+type UpdateExternalSquadRequestDtoCustomRemarks struct {
+	ExpiredUsers        []string `json:"expiredUsers"`
+	LimitedUsers        []string `json:"limitedUsers"`
+	DisabledUsers       []string `json:"disabledUsers"`
+	EmptyHosts          []string `json:"emptyHosts"`
+	EmptyInternalSquads []string `json:"emptyInternalSquads"`
+}
+
+// GetExpiredUsers returns the value of ExpiredUsers.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) GetExpiredUsers() []string {
+	return s.ExpiredUsers
+}
+
+// GetLimitedUsers returns the value of LimitedUsers.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) GetLimitedUsers() []string {
+	return s.LimitedUsers
+}
+
+// GetDisabledUsers returns the value of DisabledUsers.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) GetDisabledUsers() []string {
+	return s.DisabledUsers
+}
+
+// GetEmptyHosts returns the value of EmptyHosts.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) GetEmptyHosts() []string {
+	return s.EmptyHosts
+}
+
+// GetEmptyInternalSquads returns the value of EmptyInternalSquads.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) GetEmptyInternalSquads() []string {
+	return s.EmptyInternalSquads
+}
+
+// SetExpiredUsers sets the value of ExpiredUsers.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) SetExpiredUsers(val []string) {
+	s.ExpiredUsers = val
+}
+
+// SetLimitedUsers sets the value of LimitedUsers.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) SetLimitedUsers(val []string) {
+	s.LimitedUsers = val
+}
+
+// SetDisabledUsers sets the value of DisabledUsers.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) SetDisabledUsers(val []string) {
+	s.DisabledUsers = val
+}
+
+// SetEmptyHosts sets the value of EmptyHosts.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) SetEmptyHosts(val []string) {
+	s.EmptyHosts = val
+}
+
+// SetEmptyInternalSquads sets the value of EmptyInternalSquads.
+func (s *UpdateExternalSquadRequestDtoCustomRemarks) SetEmptyInternalSquads(val []string) {
+	s.EmptyInternalSquads = val
+}
+
+type UpdateExternalSquadRequestDtoHostOverrides struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) GetVlessRouteId() OptNilInt {
+	return s.VlessRouteId
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) SetVlessRouteId(val OptNilInt) {
+	s.VlessRouteId = val
+}
+
+type UpdateExternalSquadRequestDtoHwidSettings struct {
+	Enabled             bool      `json:"enabled"`
+	FallbackDeviceLimit float64   `json:"fallbackDeviceLimit"`
+	MaxDevicesAnnounce  NilString `json:"maxDevicesAnnounce"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetFallbackDeviceLimit returns the value of FallbackDeviceLimit.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) GetFallbackDeviceLimit() float64 {
+	return s.FallbackDeviceLimit
+}
+
+// GetMaxDevicesAnnounce returns the value of MaxDevicesAnnounce.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) GetMaxDevicesAnnounce() NilString {
+	return s.MaxDevicesAnnounce
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetFallbackDeviceLimit sets the value of FallbackDeviceLimit.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) SetFallbackDeviceLimit(val float64) {
+	s.FallbackDeviceLimit = val
+}
+
+// SetMaxDevicesAnnounce sets the value of MaxDevicesAnnounce.
+func (s *UpdateExternalSquadRequestDtoHwidSettings) SetMaxDevicesAnnounce(val NilString) {
+	s.MaxDevicesAnnounce = val
+}
+
+type UpdateExternalSquadRequestDtoResponseHeaders map[string]string
+
+func (s *UpdateExternalSquadRequestDtoResponseHeaders) init() UpdateExternalSquadRequestDtoResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
 }
 
 type UpdateExternalSquadRequestDtoSubscriptionSettings struct {
@@ -30128,6 +37461,9 @@ type UpdateHostRequestDto struct {
 	ShuffleHost            OptBool      `json:"shuffleHost"`
 	MihomoX25519           OptBool      `json:"mihomoX25519"`
 	Nodes                  []uuid.UUID  `json:"nodes"`
+	XrayJsonTemplateUuid   OptNilUUID   `json:"xrayJsonTemplateUuid"`
+	// Optional. Internal squads from which the host will be excluded.
+	ExcludedInternalSquads []uuid.UUID `json:"excludedInternalSquads"`
 }
 
 // GetUUID returns the value of UUID.
@@ -30250,6 +37586,16 @@ func (s *UpdateHostRequestDto) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
+// GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
+func (s *UpdateHostRequestDto) GetXrayJsonTemplateUuid() OptNilUUID {
+	return s.XrayJsonTemplateUuid
+}
+
+// GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
+func (s *UpdateHostRequestDto) GetExcludedInternalSquads() []uuid.UUID {
+	return s.ExcludedInternalSquads
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateHostRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -30368,6 +37714,16 @@ func (s *UpdateHostRequestDto) SetMihomoX25519(val OptBool) {
 // SetNodes sets the value of Nodes.
 func (s *UpdateHostRequestDto) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
+}
+
+// SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
+func (s *UpdateHostRequestDto) SetXrayJsonTemplateUuid(val OptNilUUID) {
+	s.XrayJsonTemplateUuid = val
+}
+
+// SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
+func (s *UpdateHostRequestDto) SetExcludedInternalSquads(val []uuid.UUID) {
+	s.ExcludedInternalSquads = val
 }
 
 type UpdateHostRequestDtoAlpn string
@@ -30727,6 +38083,7 @@ type UpdateNodeRequestDto struct {
 	ConsumptionMultiplier   OptFloat64                           `json:"consumptionMultiplier"`
 	ConfigProfile           OptUpdateNodeRequestDtoConfigProfile `json:"configProfile"`
 	ProviderUuid            OptNilUUID                           `json:"providerUuid"`
+	Tags                    []string                             `json:"tags"`
 }
 
 // GetUUID returns the value of UUID.
@@ -30789,6 +38146,11 @@ func (s *UpdateNodeRequestDto) GetProviderUuid() OptNilUUID {
 	return s.ProviderUuid
 }
 
+// GetTags returns the value of Tags.
+func (s *UpdateNodeRequestDto) GetTags() []string {
+	return s.Tags
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateNodeRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -30849,6 +38211,11 @@ func (s *UpdateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
 	s.ProviderUuid = val
 }
 
+// SetTags sets the value of Tags.
+func (s *UpdateNodeRequestDto) SetTags(val []string) {
+	s.Tags = val
+}
+
 type UpdateNodeRequestDtoConfigProfile struct {
 	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
 	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
@@ -30872,6 +38239,32 @@ func (s *UpdateNodeRequestDtoConfigProfile) SetActiveConfigProfileUuid(val uuid.
 // SetActiveInbounds sets the value of ActiveInbounds.
 func (s *UpdateNodeRequestDtoConfigProfile) SetActiveInbounds(val []uuid.UUID) {
 	s.ActiveInbounds = val
+}
+
+// Ref: #/components/schemas/UpdatePasskeyRequestDto
+type UpdatePasskeyRequestDto struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// GetID returns the value of ID.
+func (s *UpdatePasskeyRequestDto) GetID() string {
+	return s.ID
+}
+
+// GetName returns the value of Name.
+func (s *UpdatePasskeyRequestDto) GetName() string {
+	return s.Name
+}
+
+// SetID sets the value of ID.
+func (s *UpdatePasskeyRequestDto) SetID(val string) {
+	s.ID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdatePasskeyRequestDto) SetName(val string) {
+	s.Name = val
 }
 
 // Ref: #/components/schemas/UpdateRemnawaveSettingsRequestDto
@@ -31241,15 +38634,14 @@ type UpdateSubscriptionSettingsRequestDto struct {
 	IsProfileWebpageUrlEnabled    OptBool                                                      `json:"isProfileWebpageUrlEnabled"`
 	ServeJsonAtBaseSubscription   OptBool                                                      `json:"serveJsonAtBaseSubscription"`
 	AddUsernameToBaseSubscription OptBool                                                      `json:"addUsernameToBaseSubscription"`
-	IsShowCustomRemarks           OptBool                                                      `json:"isShowCustomRemarks"`
 	HappAnnounce                  OptNilString                                                 `json:"happAnnounce"`
 	HappRouting                   OptNilString                                                 `json:"happRouting"`
-	ExpiredUsersRemarks           []string                                                     `json:"expiredUsersRemarks"`
-	LimitedUsersRemarks           []string                                                     `json:"limitedUsersRemarks"`
-	DisabledUsersRemarks          []string                                                     `json:"disabledUsersRemarks"`
+	IsShowCustomRemarks           OptBool                                                      `json:"isShowCustomRemarks"`
+	CustomRemarks                 OptUpdateSubscriptionSettingsRequestDtoCustomRemarks         `json:"customRemarks"`
 	CustomResponseHeaders         OptUpdateSubscriptionSettingsRequestDtoCustomResponseHeaders `json:"customResponseHeaders"`
 	RandomizeHosts                OptBool                                                      `json:"randomizeHosts"`
 	ResponseRules                 OptUpdateSubscriptionSettingsRequestDtoResponseRules         `json:"responseRules"`
+	HwidSettings                  OptUpdateSubscriptionSettingsRequestDtoHwidSettings          `json:"hwidSettings"`
 }
 
 // GetUUID returns the value of UUID.
@@ -31287,11 +38679,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) GetAddUsernameToBaseSubscription(
 	return s.AddUsernameToBaseSubscription
 }
 
-// GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) GetIsShowCustomRemarks() OptBool {
-	return s.IsShowCustomRemarks
-}
-
 // GetHappAnnounce returns the value of HappAnnounce.
 func (s *UpdateSubscriptionSettingsRequestDto) GetHappAnnounce() OptNilString {
 	return s.HappAnnounce
@@ -31302,19 +38689,14 @@ func (s *UpdateSubscriptionSettingsRequestDto) GetHappRouting() OptNilString {
 	return s.HappRouting
 }
 
-// GetExpiredUsersRemarks returns the value of ExpiredUsersRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) GetExpiredUsersRemarks() []string {
-	return s.ExpiredUsersRemarks
+// GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
+func (s *UpdateSubscriptionSettingsRequestDto) GetIsShowCustomRemarks() OptBool {
+	return s.IsShowCustomRemarks
 }
 
-// GetLimitedUsersRemarks returns the value of LimitedUsersRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) GetLimitedUsersRemarks() []string {
-	return s.LimitedUsersRemarks
-}
-
-// GetDisabledUsersRemarks returns the value of DisabledUsersRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) GetDisabledUsersRemarks() []string {
-	return s.DisabledUsersRemarks
+// GetCustomRemarks returns the value of CustomRemarks.
+func (s *UpdateSubscriptionSettingsRequestDto) GetCustomRemarks() OptUpdateSubscriptionSettingsRequestDtoCustomRemarks {
+	return s.CustomRemarks
 }
 
 // GetCustomResponseHeaders returns the value of CustomResponseHeaders.
@@ -31330,6 +38712,11 @@ func (s *UpdateSubscriptionSettingsRequestDto) GetRandomizeHosts() OptBool {
 // GetResponseRules returns the value of ResponseRules.
 func (s *UpdateSubscriptionSettingsRequestDto) GetResponseRules() OptUpdateSubscriptionSettingsRequestDtoResponseRules {
 	return s.ResponseRules
+}
+
+// GetHwidSettings returns the value of HwidSettings.
+func (s *UpdateSubscriptionSettingsRequestDto) GetHwidSettings() OptUpdateSubscriptionSettingsRequestDtoHwidSettings {
+	return s.HwidSettings
 }
 
 // SetUUID sets the value of UUID.
@@ -31367,11 +38754,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetAddUsernameToBaseSubscription(
 	s.AddUsernameToBaseSubscription = val
 }
 
-// SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) SetIsShowCustomRemarks(val OptBool) {
-	s.IsShowCustomRemarks = val
-}
-
 // SetHappAnnounce sets the value of HappAnnounce.
 func (s *UpdateSubscriptionSettingsRequestDto) SetHappAnnounce(val OptNilString) {
 	s.HappAnnounce = val
@@ -31382,19 +38764,14 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetHappRouting(val OptNilString) 
 	s.HappRouting = val
 }
 
-// SetExpiredUsersRemarks sets the value of ExpiredUsersRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) SetExpiredUsersRemarks(val []string) {
-	s.ExpiredUsersRemarks = val
+// SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
+func (s *UpdateSubscriptionSettingsRequestDto) SetIsShowCustomRemarks(val OptBool) {
+	s.IsShowCustomRemarks = val
 }
 
-// SetLimitedUsersRemarks sets the value of LimitedUsersRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) SetLimitedUsersRemarks(val []string) {
-	s.LimitedUsersRemarks = val
-}
-
-// SetDisabledUsersRemarks sets the value of DisabledUsersRemarks.
-func (s *UpdateSubscriptionSettingsRequestDto) SetDisabledUsersRemarks(val []string) {
-	s.DisabledUsersRemarks = val
+// SetCustomRemarks sets the value of CustomRemarks.
+func (s *UpdateSubscriptionSettingsRequestDto) SetCustomRemarks(val OptUpdateSubscriptionSettingsRequestDtoCustomRemarks) {
+	s.CustomRemarks = val
 }
 
 // SetCustomResponseHeaders sets the value of CustomResponseHeaders.
@@ -31412,6 +38789,69 @@ func (s *UpdateSubscriptionSettingsRequestDto) SetResponseRules(val OptUpdateSub
 	s.ResponseRules = val
 }
 
+// SetHwidSettings sets the value of HwidSettings.
+func (s *UpdateSubscriptionSettingsRequestDto) SetHwidSettings(val OptUpdateSubscriptionSettingsRequestDtoHwidSettings) {
+	s.HwidSettings = val
+}
+
+type UpdateSubscriptionSettingsRequestDtoCustomRemarks struct {
+	ExpiredUsers        []string `json:"expiredUsers"`
+	LimitedUsers        []string `json:"limitedUsers"`
+	DisabledUsers       []string `json:"disabledUsers"`
+	EmptyHosts          []string `json:"emptyHosts"`
+	EmptyInternalSquads []string `json:"emptyInternalSquads"`
+}
+
+// GetExpiredUsers returns the value of ExpiredUsers.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) GetExpiredUsers() []string {
+	return s.ExpiredUsers
+}
+
+// GetLimitedUsers returns the value of LimitedUsers.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) GetLimitedUsers() []string {
+	return s.LimitedUsers
+}
+
+// GetDisabledUsers returns the value of DisabledUsers.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) GetDisabledUsers() []string {
+	return s.DisabledUsers
+}
+
+// GetEmptyHosts returns the value of EmptyHosts.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) GetEmptyHosts() []string {
+	return s.EmptyHosts
+}
+
+// GetEmptyInternalSquads returns the value of EmptyInternalSquads.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) GetEmptyInternalSquads() []string {
+	return s.EmptyInternalSquads
+}
+
+// SetExpiredUsers sets the value of ExpiredUsers.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) SetExpiredUsers(val []string) {
+	s.ExpiredUsers = val
+}
+
+// SetLimitedUsers sets the value of LimitedUsers.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) SetLimitedUsers(val []string) {
+	s.LimitedUsers = val
+}
+
+// SetDisabledUsers sets the value of DisabledUsers.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) SetDisabledUsers(val []string) {
+	s.DisabledUsers = val
+}
+
+// SetEmptyHosts sets the value of EmptyHosts.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) SetEmptyHosts(val []string) {
+	s.EmptyHosts = val
+}
+
+// SetEmptyInternalSquads sets the value of EmptyInternalSquads.
+func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) SetEmptyInternalSquads(val []string) {
+	s.EmptyInternalSquads = val
+}
+
 type UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders map[string]string
 
 func (s *UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) init() UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders {
@@ -31421,6 +38861,42 @@ func (s *UpdateSubscriptionSettingsRequestDtoCustomResponseHeaders) init() Updat
 		*s = m
 	}
 	return m
+}
+
+type UpdateSubscriptionSettingsRequestDtoHwidSettings struct {
+	Enabled             bool      `json:"enabled"`
+	FallbackDeviceLimit float64   `json:"fallbackDeviceLimit"`
+	MaxDevicesAnnounce  NilString `json:"maxDevicesAnnounce"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetFallbackDeviceLimit returns the value of FallbackDeviceLimit.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) GetFallbackDeviceLimit() float64 {
+	return s.FallbackDeviceLimit
+}
+
+// GetMaxDevicesAnnounce returns the value of MaxDevicesAnnounce.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) GetMaxDevicesAnnounce() NilString {
+	return s.MaxDevicesAnnounce
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetFallbackDeviceLimit sets the value of FallbackDeviceLimit.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) SetFallbackDeviceLimit(val float64) {
+	s.FallbackDeviceLimit = val
+}
+
+// SetMaxDevicesAnnounce sets the value of MaxDevicesAnnounce.
+func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) SetMaxDevicesAnnounce(val NilString) {
+	s.MaxDevicesAnnounce = val
 }
 
 type UpdateSubscriptionSettingsRequestDtoResponseRules struct {
@@ -32359,38 +39835,33 @@ func (*UserResponse) usersControllerRevokeUserSubscriptionRes() {}
 func (*UserResponse) usersControllerUpdateUserRes()             {}
 
 type UserResponseResponse struct {
-	UUID                     uuid.UUID                     `json:"uuid"`
-	ShortUuid                string                        `json:"shortUuid"`
-	Username                 string                        `json:"username"`
-	Status                   OptUserResponseResponseStatus `json:"status"`
-	UsedTrafficBytes         float64                       `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                       `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                        `json:"trafficLimitBytes"`
+	UUID              uuid.UUID                     `json:"uuid"`
+	ShortUuid         string                        `json:"shortUuid"`
+	Username          string                        `json:"username"`
+	Status            OptUserResponseResponseStatus `json:"status"`
+	TrafficLimitBytes OptInt                        `json:"trafficLimitBytes"`
 	// Available reset periods.
 	TrafficLimitStrategy   OptUserResponseResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                      `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                    `json:"subLastOpenedAt"`
 	ExpireAt               time.Time                                      `json:"expireAt"`
-	OnlineAt               NilDateTime                                    `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                    `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                    `json:"lastTrafficResetAt"`
+	TelegramId             NilInt                                         `json:"telegramId"`
+	Email                  NilString                                      `json:"email"`
+	Description            NilString                                      `json:"description"`
+	Tag                    NilString                                      `json:"tag"`
+	HwidDeviceLimit        NilInt                                         `json:"hwidDeviceLimit"`
+	ExternalSquadUuid      NilUUID                                        `json:"externalSquadUuid"`
 	TrojanPassword         string                                         `json:"trojanPassword"`
 	VlessUuid              uuid.UUID                                      `json:"vlessUuid"`
 	SsPassword             string                                         `json:"ssPassword"`
-	Description            NilString                                      `json:"description"`
-	Tag                    NilString                                      `json:"tag"`
-	TelegramId             NilInt                                         `json:"telegramId"`
-	Email                  NilString                                      `json:"email"`
-	HwidDeviceLimit        NilInt                                         `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                    `json:"firstConnectedAt"`
 	LastTriggeredThreshold OptInt                                         `json:"lastTriggeredThreshold"`
+	SubRevokedAt           NilDateTime                                    `json:"subRevokedAt"`
+	SubLastUserAgent       NilString                                      `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                    `json:"subLastOpenedAt"`
+	LastTrafficResetAt     NilDateTime                                    `json:"lastTrafficResetAt"`
 	CreatedAt              time.Time                                      `json:"createdAt"`
 	UpdatedAt              time.Time                                      `json:"updatedAt"`
-	ActiveInternalSquads   []UserResponseResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                        `json:"externalSquadUuid"`
 	SubscriptionUrl        string                                         `json:"subscriptionUrl"`
-	LastConnectedNode      NilUserResponseResponseLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   UserResponseResponseHapp                       `json:"happ"`
+	ActiveInternalSquads   []UserResponseResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	UserTraffic            UserResponseResponseUserTraffic                `json:"userTraffic"`
 }
 
 // GetUUID returns the value of UUID.
@@ -32413,16 +39884,6 @@ func (s *UserResponseResponse) GetStatus() OptUserResponseResponseStatus {
 	return s.Status
 }
 
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *UserResponseResponse) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *UserResponseResponse) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
 func (s *UserResponseResponse) GetTrafficLimitBytes() OptInt {
 	return s.TrafficLimitBytes
@@ -32433,34 +39894,39 @@ func (s *UserResponseResponse) GetTrafficLimitStrategy() OptUserResponseResponse
 	return s.TrafficLimitStrategy
 }
 
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *UserResponseResponse) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *UserResponseResponse) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
 // GetExpireAt returns the value of ExpireAt.
 func (s *UserResponseResponse) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
-// GetOnlineAt returns the value of OnlineAt.
-func (s *UserResponseResponse) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
+// GetTelegramId returns the value of TelegramId.
+func (s *UserResponseResponse) GetTelegramId() NilInt {
+	return s.TelegramId
 }
 
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *UserResponseResponse) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
+// GetEmail returns the value of Email.
+func (s *UserResponseResponse) GetEmail() NilString {
+	return s.Email
 }
 
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *UserResponseResponse) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
+// GetDescription returns the value of Description.
+func (s *UserResponseResponse) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *UserResponseResponse) GetTag() NilString {
+	return s.Tag
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *UserResponseResponse) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *UserResponseResponse) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
@@ -32478,39 +39944,29 @@ func (s *UserResponseResponse) GetSsPassword() string {
 	return s.SsPassword
 }
 
-// GetDescription returns the value of Description.
-func (s *UserResponseResponse) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *UserResponseResponse) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *UserResponseResponse) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *UserResponseResponse) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UserResponseResponse) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *UserResponseResponse) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
 // GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
 func (s *UserResponseResponse) GetLastTriggeredThreshold() OptInt {
 	return s.LastTriggeredThreshold
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *UserResponseResponse) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *UserResponseResponse) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *UserResponseResponse) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *UserResponseResponse) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -32523,29 +39979,19 @@ func (s *UserResponseResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *UserResponseResponse) GetActiveInternalSquads() []UserResponseResponseActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *UserResponseResponse) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
 func (s *UserResponseResponse) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *UserResponseResponse) GetLastConnectedNode() NilUserResponseResponseLastConnectedNode {
-	return s.LastConnectedNode
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *UserResponseResponse) GetActiveInternalSquads() []UserResponseResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
-// GetHapp returns the value of Happ.
-func (s *UserResponseResponse) GetHapp() UserResponseResponseHapp {
-	return s.Happ
+// GetUserTraffic returns the value of UserTraffic.
+func (s *UserResponseResponse) GetUserTraffic() UserResponseResponseUserTraffic {
+	return s.UserTraffic
 }
 
 // SetUUID sets the value of UUID.
@@ -32568,16 +40014,6 @@ func (s *UserResponseResponse) SetStatus(val OptUserResponseResponseStatus) {
 	s.Status = val
 }
 
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *UserResponseResponse) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *UserResponseResponse) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
 func (s *UserResponseResponse) SetTrafficLimitBytes(val OptInt) {
 	s.TrafficLimitBytes = val
@@ -32588,34 +40024,39 @@ func (s *UserResponseResponse) SetTrafficLimitStrategy(val OptUserResponseRespon
 	s.TrafficLimitStrategy = val
 }
 
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *UserResponseResponse) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *UserResponseResponse) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
 // SetExpireAt sets the value of ExpireAt.
 func (s *UserResponseResponse) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
-// SetOnlineAt sets the value of OnlineAt.
-func (s *UserResponseResponse) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
+// SetTelegramId sets the value of TelegramId.
+func (s *UserResponseResponse) SetTelegramId(val NilInt) {
+	s.TelegramId = val
 }
 
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *UserResponseResponse) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
+// SetEmail sets the value of Email.
+func (s *UserResponseResponse) SetEmail(val NilString) {
+	s.Email = val
 }
 
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *UserResponseResponse) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
+// SetDescription sets the value of Description.
+func (s *UserResponseResponse) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UserResponseResponse) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *UserResponseResponse) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *UserResponseResponse) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
@@ -32633,39 +40074,29 @@ func (s *UserResponseResponse) SetSsPassword(val string) {
 	s.SsPassword = val
 }
 
-// SetDescription sets the value of Description.
-func (s *UserResponseResponse) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *UserResponseResponse) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *UserResponseResponse) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *UserResponseResponse) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UserResponseResponse) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *UserResponseResponse) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
 // SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
 func (s *UserResponseResponse) SetLastTriggeredThreshold(val OptInt) {
 	s.LastTriggeredThreshold = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *UserResponseResponse) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *UserResponseResponse) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *UserResponseResponse) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *UserResponseResponse) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
@@ -32678,29 +40109,19 @@ func (s *UserResponseResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *UserResponseResponse) SetActiveInternalSquads(val []UserResponseResponseActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *UserResponseResponse) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
 func (s *UserResponseResponse) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
 }
 
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *UserResponseResponse) SetLastConnectedNode(val NilUserResponseResponseLastConnectedNode) {
-	s.LastConnectedNode = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *UserResponseResponse) SetActiveInternalSquads(val []UserResponseResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
-// SetHapp sets the value of Happ.
-func (s *UserResponseResponse) SetHapp(val UserResponseResponseHapp) {
-	s.Happ = val
+// SetUserTraffic sets the value of UserTraffic.
+func (s *UserResponseResponse) SetUserTraffic(val UserResponseResponseUserTraffic) {
+	s.UserTraffic = val
 }
 
 type UserResponseResponseActiveInternalSquadsItem struct {
@@ -32726,56 +40147,6 @@ func (s *UserResponseResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
 // SetName sets the value of Name.
 func (s *UserResponseResponseActiveInternalSquadsItem) SetName(val string) {
 	s.Name = val
-}
-
-type UserResponseResponseHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *UserResponseResponseHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *UserResponseResponseHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type UserResponseResponseLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *UserResponseResponseLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *UserResponseResponseLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *UserResponseResponseLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *UserResponseResponseLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *UserResponseResponseLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *UserResponseResponseLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 type UserResponseResponseStatus string
@@ -32889,6 +40260,64 @@ func (s *UserResponseResponseTrafficLimitStrategy) UnmarshalText(data []byte) er
 	}
 }
 
+type UserResponseResponseUserTraffic struct {
+	UsedTrafficBytes         float64     `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64     `json:"lifetimeUsedTrafficBytes"`
+	OnlineAt                 NilDateTime `json:"onlineAt"`
+	FirstConnectedAt         NilDateTime `json:"firstConnectedAt"`
+	LastConnectedNodeUuid    NilUUID     `json:"lastConnectedNodeUuid"`
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *UserResponseResponseUserTraffic) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *UserResponseResponseUserTraffic) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *UserResponseResponseUserTraffic) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *UserResponseResponseUserTraffic) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastConnectedNodeUuid returns the value of LastConnectedNodeUuid.
+func (s *UserResponseResponseUserTraffic) GetLastConnectedNodeUuid() NilUUID {
+	return s.LastConnectedNodeUuid
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *UserResponseResponseUserTraffic) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *UserResponseResponseUserTraffic) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *UserResponseResponseUserTraffic) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *UserResponseResponseUserTraffic) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastConnectedNodeUuid sets the value of LastConnectedNodeUuid.
+func (s *UserResponseResponseUserTraffic) SetLastConnectedNodeUuid(val NilUUID) {
+	s.LastConnectedNodeUuid = val
+}
+
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest struct {
 	Message    OptString                                                                                   `json:"message"`
 	StatusCode OptFloat64                                                                                  `json:"statusCode"`
@@ -32928,7 +40357,52 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 func (*UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes() {
 }
 
-type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem struct{}
+type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33019,7 +40493,52 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 func (*UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes() {
 }
 
-type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem struct{}
+type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33110,7 +40629,52 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) SetErrors(
 func (*UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) usersBulkActionsControllerBulkAllResetUserTrafficRes() {
 }
 
-type UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33201,7 +40765,52 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) SetErrors(val []Us
 func (*UsersBulkActionsControllerBulkDeleteUsersBadRequest) usersBulkActionsControllerBulkDeleteUsersRes() {
 }
 
-type UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest struct {
 	Message    OptString                                                               `json:"message"`
@@ -33242,7 +40851,52 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) SetErrors(
 func (*UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) usersBulkActionsControllerBulkDeleteUsersByStatusRes() {
 }
 
-type UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33383,7 +41037,52 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) SetErrors(val
 func (*UsersBulkActionsControllerBulkResetUserTrafficBadRequest) usersBulkActionsControllerBulkResetUserTrafficRes() {
 }
 
-type UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkResetUserTrafficInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33474,7 +41173,52 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) SetErr
 func (*UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) usersBulkActionsControllerBulkRevokeUsersSubscriptionRes() {
 }
 
-type UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33565,7 +41309,52 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) SetErrors(val [
 func (*UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) usersBulkActionsControllerBulkUpdateAllUsersRes() {
 }
 
-type UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33656,7 +41445,52 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) SetErrors(val []Us
 func (*UsersBulkActionsControllerBulkUpdateUsersBadRequest) usersBulkActionsControllerBulkUpdateUsersRes() {
 }
 
-type UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkUpdateUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33747,7 +41581,52 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) SetE
 func (*UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) usersBulkActionsControllerBulkUpdateUsersInternalSquadsRes() {
 }
 
-type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem struct{}
+type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33837,7 +41716,52 @@ func (s *UsersControllerCreateUserBadRequest) SetErrors(val []UsersControllerCre
 
 func (*UsersControllerCreateUserBadRequest) usersControllerCreateUserRes() {}
 
-type UsersControllerCreateUserBadRequestErrorsItem struct{}
+type UsersControllerCreateUserBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerCreateUserBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerCreateUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33926,7 +41850,52 @@ func (s *UsersControllerDeleteUserBadRequest) SetErrors(val []UsersControllerDel
 
 func (*UsersControllerDeleteUserBadRequest) usersControllerDeleteUserRes() {}
 
-type UsersControllerDeleteUserBadRequestErrorsItem struct{}
+type UsersControllerDeleteUserBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerDeleteUserBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerDeleteUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34020,7 +41989,52 @@ func (s *UsersControllerDisableUserBadRequest) SetErrors(val []UsersControllerDi
 
 func (*UsersControllerDisableUserBadRequest) usersControllerDisableUserRes() {}
 
-type UsersControllerDisableUserBadRequestErrorsItem struct{}
+type UsersControllerDisableUserBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerDisableUserBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerDisableUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34114,7 +42128,52 @@ func (s *UsersControllerEnableUserBadRequest) SetErrors(val []UsersControllerEna
 
 func (*UsersControllerEnableUserBadRequest) usersControllerEnableUserRes() {}
 
-type UsersControllerEnableUserBadRequestErrorsItem struct{}
+type UsersControllerEnableUserBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerEnableUserBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerEnableUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34208,7 +42267,52 @@ func (s *UsersControllerGetAllTagsBadRequest) SetErrors(val []UsersControllerGet
 
 func (*UsersControllerGetAllTagsBadRequest) usersControllerGetAllTagsRes() {}
 
-type UsersControllerGetAllTagsBadRequestErrorsItem struct{}
+type UsersControllerGetAllTagsBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetAllTagsBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetAllTagsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34297,7 +42401,52 @@ func (s *UsersControllerGetAllUsersBadRequest) SetErrors(val []UsersControllerGe
 
 func (*UsersControllerGetAllUsersBadRequest) usersControllerGetAllUsersRes() {}
 
-type UsersControllerGetAllUsersBadRequestErrorsItem struct{}
+type UsersControllerGetAllUsersBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetAllUsersBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetAllUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34386,7 +42535,52 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) SetErrors(val []UsersC
 
 func (*UsersControllerGetUserAccessibleNodesBadRequest) usersControllerGetUserAccessibleNodesRes() {}
 
-type UsersControllerGetUserAccessibleNodesBadRequestErrorsItem struct{}
+type UsersControllerGetUserAccessibleNodesBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUserAccessibleNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34481,7 +42675,52 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) SetErrors(val []UsersContr
 
 func (*UsersControllerGetUserByShortUuidBadRequest) usersControllerGetUserByShortUuidRes() {}
 
-type UsersControllerGetUserByShortUuidBadRequestErrorsItem struct{}
+type UsersControllerGetUserByShortUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUserByShortUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34575,7 +42814,52 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) SetErrors(val []UsersCont
 
 func (*UsersControllerGetUserByTelegramIdBadRequest) usersControllerGetUserByTelegramIdRes() {}
 
-type UsersControllerGetUserByTelegramIdBadRequestErrorsItem struct{}
+type UsersControllerGetUserByTelegramIdBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUserByTelegramIdInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34670,7 +42954,52 @@ func (s *UsersControllerGetUserByUsernameBadRequest) SetErrors(val []UsersContro
 
 func (*UsersControllerGetUserByUsernameBadRequest) usersControllerGetUserByUsernameRes() {}
 
-type UsersControllerGetUserByUsernameBadRequestErrorsItem struct{}
+type UsersControllerGetUserByUsernameBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUserByUsernameInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34764,7 +43093,52 @@ func (s *UsersControllerGetUserByUuidBadRequest) SetErrors(val []UsersController
 
 func (*UsersControllerGetUserByUuidBadRequest) usersControllerGetUserByUuidRes() {}
 
-type UsersControllerGetUserByUuidBadRequestErrorsItem struct{}
+type UsersControllerGetUserByUuidBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUserByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34859,7 +43233,52 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) SetErrors(v
 func (*UsersControllerGetUserSubscriptionRequestHistoryBadRequest) usersControllerGetUserSubscriptionRequestHistoryRes() {
 }
 
-type UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem struct{}
+type UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUserSubscriptionRequestHistoryInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34955,7 +43374,52 @@ func (s *UsersControllerGetUsersByEmailBadRequest) SetErrors(val []UsersControll
 
 func (*UsersControllerGetUsersByEmailBadRequest) usersControllerGetUsersByEmailRes() {}
 
-type UsersControllerGetUsersByEmailBadRequestErrorsItem struct{}
+type UsersControllerGetUsersByEmailBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUsersByEmailInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35049,7 +43513,52 @@ func (s *UsersControllerGetUsersByTagBadRequest) SetErrors(val []UsersController
 
 func (*UsersControllerGetUsersByTagBadRequest) usersControllerGetUsersByTagRes() {}
 
-type UsersControllerGetUsersByTagBadRequestErrorsItem struct{}
+type UsersControllerGetUsersByTagBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerGetUsersByTagInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35143,7 +43652,52 @@ func (s *UsersControllerResetUserTrafficBadRequest) SetErrors(val []UsersControl
 
 func (*UsersControllerResetUserTrafficBadRequest) usersControllerResetUserTrafficRes() {}
 
-type UsersControllerResetUserTrafficBadRequestErrorsItem struct{}
+type UsersControllerResetUserTrafficBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerResetUserTrafficInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35237,7 +43791,52 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) SetErrors(val []UsersC
 
 func (*UsersControllerRevokeUserSubscriptionBadRequest) usersControllerRevokeUserSubscriptionRes() {}
 
-type UsersControllerRevokeUserSubscriptionBadRequestErrorsItem struct{}
+type UsersControllerRevokeUserSubscriptionBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerRevokeUserSubscriptionInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35332,7 +43931,52 @@ func (s *UsersControllerUpdateUserBadRequest) SetErrors(val []UsersControllerUpd
 
 func (*UsersControllerUpdateUserBadRequest) usersControllerUpdateUserRes() {}
 
-type UsersControllerUpdateUserBadRequestErrorsItem struct{}
+type UsersControllerUpdateUserBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersControllerUpdateUserBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersControllerUpdateUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35403,38 +44047,33 @@ func (*UsersResponse) usersControllerGetUsersByEmailRes()     {}
 func (*UsersResponse) usersControllerGetUsersByTagRes()       {}
 
 type UsersResponseResponseItem struct {
-	UUID                     uuid.UUID                          `json:"uuid"`
-	ShortUuid                string                             `json:"shortUuid"`
-	Username                 string                             `json:"username"`
-	Status                   OptUsersResponseResponseItemStatus `json:"status"`
-	UsedTrafficBytes         float64                            `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64                            `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt                             `json:"trafficLimitBytes"`
+	UUID              uuid.UUID                          `json:"uuid"`
+	ShortUuid         string                             `json:"shortUuid"`
+	Username          string                             `json:"username"`
+	Status            OptUsersResponseResponseItemStatus `json:"status"`
+	TrafficLimitBytes OptInt                             `json:"trafficLimitBytes"`
 	// Available reset periods.
 	TrafficLimitStrategy   OptUsersResponseResponseItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                                           `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                                         `json:"subLastOpenedAt"`
 	ExpireAt               time.Time                                           `json:"expireAt"`
-	OnlineAt               NilDateTime                                         `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                                         `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                                         `json:"lastTrafficResetAt"`
+	TelegramId             NilInt                                              `json:"telegramId"`
+	Email                  NilString                                           `json:"email"`
+	Description            NilString                                           `json:"description"`
+	Tag                    NilString                                           `json:"tag"`
+	HwidDeviceLimit        NilInt                                              `json:"hwidDeviceLimit"`
+	ExternalSquadUuid      NilUUID                                             `json:"externalSquadUuid"`
 	TrojanPassword         string                                              `json:"trojanPassword"`
 	VlessUuid              uuid.UUID                                           `json:"vlessUuid"`
 	SsPassword             string                                              `json:"ssPassword"`
-	Description            NilString                                           `json:"description"`
-	Tag                    NilString                                           `json:"tag"`
-	TelegramId             NilInt                                              `json:"telegramId"`
-	Email                  NilString                                           `json:"email"`
-	HwidDeviceLimit        NilInt                                              `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                                         `json:"firstConnectedAt"`
 	LastTriggeredThreshold OptInt                                              `json:"lastTriggeredThreshold"`
+	SubRevokedAt           NilDateTime                                         `json:"subRevokedAt"`
+	SubLastUserAgent       NilString                                           `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                         `json:"subLastOpenedAt"`
+	LastTrafficResetAt     NilDateTime                                         `json:"lastTrafficResetAt"`
 	CreatedAt              time.Time                                           `json:"createdAt"`
 	UpdatedAt              time.Time                                           `json:"updatedAt"`
-	ActiveInternalSquads   []UsersResponseResponseItemActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                                             `json:"externalSquadUuid"`
 	SubscriptionUrl        string                                              `json:"subscriptionUrl"`
-	LastConnectedNode      NilUsersResponseResponseItemLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   UsersResponseResponseItemHapp                       `json:"happ"`
+	ActiveInternalSquads   []UsersResponseResponseItemActiveInternalSquadsItem `json:"activeInternalSquads"`
+	UserTraffic            UsersResponseResponseItemUserTraffic                `json:"userTraffic"`
 }
 
 // GetUUID returns the value of UUID.
@@ -35457,16 +44096,6 @@ func (s *UsersResponseResponseItem) GetStatus() OptUsersResponseResponseItemStat
 	return s.Status
 }
 
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *UsersResponseResponseItem) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *UsersResponseResponseItem) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
 func (s *UsersResponseResponseItem) GetTrafficLimitBytes() OptInt {
 	return s.TrafficLimitBytes
@@ -35477,34 +44106,39 @@ func (s *UsersResponseResponseItem) GetTrafficLimitStrategy() OptUsersResponseRe
 	return s.TrafficLimitStrategy
 }
 
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *UsersResponseResponseItem) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *UsersResponseResponseItem) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
 // GetExpireAt returns the value of ExpireAt.
 func (s *UsersResponseResponseItem) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
-// GetOnlineAt returns the value of OnlineAt.
-func (s *UsersResponseResponseItem) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
+// GetTelegramId returns the value of TelegramId.
+func (s *UsersResponseResponseItem) GetTelegramId() NilInt {
+	return s.TelegramId
 }
 
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *UsersResponseResponseItem) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
+// GetEmail returns the value of Email.
+func (s *UsersResponseResponseItem) GetEmail() NilString {
+	return s.Email
 }
 
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *UsersResponseResponseItem) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
+// GetDescription returns the value of Description.
+func (s *UsersResponseResponseItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *UsersResponseResponseItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *UsersResponseResponseItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *UsersResponseResponseItem) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
@@ -35522,39 +44156,29 @@ func (s *UsersResponseResponseItem) GetSsPassword() string {
 	return s.SsPassword
 }
 
-// GetDescription returns the value of Description.
-func (s *UsersResponseResponseItem) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *UsersResponseResponseItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *UsersResponseResponseItem) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *UsersResponseResponseItem) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UsersResponseResponseItem) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *UsersResponseResponseItem) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
 // GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
 func (s *UsersResponseResponseItem) GetLastTriggeredThreshold() OptInt {
 	return s.LastTriggeredThreshold
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *UsersResponseResponseItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *UsersResponseResponseItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *UsersResponseResponseItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *UsersResponseResponseItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -35567,29 +44191,19 @@ func (s *UsersResponseResponseItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *UsersResponseResponseItem) GetActiveInternalSquads() []UsersResponseResponseItemActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *UsersResponseResponseItem) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
 // GetSubscriptionUrl returns the value of SubscriptionUrl.
 func (s *UsersResponseResponseItem) GetSubscriptionUrl() string {
 	return s.SubscriptionUrl
 }
 
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *UsersResponseResponseItem) GetLastConnectedNode() NilUsersResponseResponseItemLastConnectedNode {
-	return s.LastConnectedNode
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *UsersResponseResponseItem) GetActiveInternalSquads() []UsersResponseResponseItemActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
 }
 
-// GetHapp returns the value of Happ.
-func (s *UsersResponseResponseItem) GetHapp() UsersResponseResponseItemHapp {
-	return s.Happ
+// GetUserTraffic returns the value of UserTraffic.
+func (s *UsersResponseResponseItem) GetUserTraffic() UsersResponseResponseItemUserTraffic {
+	return s.UserTraffic
 }
 
 // SetUUID sets the value of UUID.
@@ -35612,16 +44226,6 @@ func (s *UsersResponseResponseItem) SetStatus(val OptUsersResponseResponseItemSt
 	s.Status = val
 }
 
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *UsersResponseResponseItem) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *UsersResponseResponseItem) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
 func (s *UsersResponseResponseItem) SetTrafficLimitBytes(val OptInt) {
 	s.TrafficLimitBytes = val
@@ -35632,34 +44236,39 @@ func (s *UsersResponseResponseItem) SetTrafficLimitStrategy(val OptUsersResponse
 	s.TrafficLimitStrategy = val
 }
 
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *UsersResponseResponseItem) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *UsersResponseResponseItem) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
 // SetExpireAt sets the value of ExpireAt.
 func (s *UsersResponseResponseItem) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
-// SetOnlineAt sets the value of OnlineAt.
-func (s *UsersResponseResponseItem) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
+// SetTelegramId sets the value of TelegramId.
+func (s *UsersResponseResponseItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
 }
 
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *UsersResponseResponseItem) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
+// SetEmail sets the value of Email.
+func (s *UsersResponseResponseItem) SetEmail(val NilString) {
+	s.Email = val
 }
 
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *UsersResponseResponseItem) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
+// SetDescription sets the value of Description.
+func (s *UsersResponseResponseItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UsersResponseResponseItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *UsersResponseResponseItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *UsersResponseResponseItem) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
@@ -35677,39 +44286,29 @@ func (s *UsersResponseResponseItem) SetSsPassword(val string) {
 	s.SsPassword = val
 }
 
-// SetDescription sets the value of Description.
-func (s *UsersResponseResponseItem) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *UsersResponseResponseItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *UsersResponseResponseItem) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *UsersResponseResponseItem) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UsersResponseResponseItem) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *UsersResponseResponseItem) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
 // SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
 func (s *UsersResponseResponseItem) SetLastTriggeredThreshold(val OptInt) {
 	s.LastTriggeredThreshold = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *UsersResponseResponseItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *UsersResponseResponseItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *UsersResponseResponseItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *UsersResponseResponseItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
@@ -35722,29 +44321,19 @@ func (s *UsersResponseResponseItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *UsersResponseResponseItem) SetActiveInternalSquads(val []UsersResponseResponseItemActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *UsersResponseResponseItem) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
 // SetSubscriptionUrl sets the value of SubscriptionUrl.
 func (s *UsersResponseResponseItem) SetSubscriptionUrl(val string) {
 	s.SubscriptionUrl = val
 }
 
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *UsersResponseResponseItem) SetLastConnectedNode(val NilUsersResponseResponseItemLastConnectedNode) {
-	s.LastConnectedNode = val
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *UsersResponseResponseItem) SetActiveInternalSquads(val []UsersResponseResponseItemActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
 }
 
-// SetHapp sets the value of Happ.
-func (s *UsersResponseResponseItem) SetHapp(val UsersResponseResponseItemHapp) {
-	s.Happ = val
+// SetUserTraffic sets the value of UserTraffic.
+func (s *UsersResponseResponseItem) SetUserTraffic(val UsersResponseResponseItemUserTraffic) {
+	s.UserTraffic = val
 }
 
 type UsersResponseResponseItemActiveInternalSquadsItem struct {
@@ -35770,56 +44359,6 @@ func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetUUID(val uuid.UUI
 // SetName sets the value of Name.
 func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetName(val string) {
 	s.Name = val
-}
-
-type UsersResponseResponseItemHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *UsersResponseResponseItemHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *UsersResponseResponseItemHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type UsersResponseResponseItemLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *UsersResponseResponseItemLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *UsersResponseResponseItemLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *UsersResponseResponseItemLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *UsersResponseResponseItemLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *UsersResponseResponseItemLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *UsersResponseResponseItemLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
 }
 
 type UsersResponseResponseItemStatus string
@@ -35933,6 +44472,64 @@ func (s *UsersResponseResponseItemTrafficLimitStrategy) UnmarshalText(data []byt
 	}
 }
 
+type UsersResponseResponseItemUserTraffic struct {
+	UsedTrafficBytes         float64     `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64     `json:"lifetimeUsedTrafficBytes"`
+	OnlineAt                 NilDateTime `json:"onlineAt"`
+	FirstConnectedAt         NilDateTime `json:"firstConnectedAt"`
+	LastConnectedNodeUuid    NilUUID     `json:"lastConnectedNodeUuid"`
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *UsersResponseResponseItemUserTraffic) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *UsersResponseResponseItemUserTraffic) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *UsersResponseResponseItemUserTraffic) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *UsersResponseResponseItemUserTraffic) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastConnectedNodeUuid returns the value of LastConnectedNodeUuid.
+func (s *UsersResponseResponseItemUserTraffic) GetLastConnectedNodeUuid() NilUUID {
+	return s.LastConnectedNodeUuid
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *UsersResponseResponseItemUserTraffic) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *UsersResponseResponseItemUserTraffic) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *UsersResponseResponseItemUserTraffic) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *UsersResponseResponseItemUserTraffic) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastConnectedNodeUuid sets the value of LastConnectedNodeUuid.
+func (s *UsersResponseResponseItemUserTraffic) SetLastConnectedNodeUuid(val NilUUID) {
+	s.LastConnectedNodeUuid = val
+}
+
 type UsersStatsControllerGetUserUsageByRangeBadRequest struct {
 	Message    OptString                                                     `json:"message"`
 	StatusCode OptFloat64                                                    `json:"statusCode"`
@@ -35972,7 +44569,52 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) SetErrors(val []User
 func (*UsersStatsControllerGetUserUsageByRangeBadRequest) usersStatsControllerGetUserUsageByRangeRes() {
 }
 
-type UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem struct{}
+type UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem struct {
+	Validation string   `json:"validation"`
+	Code       string   `json:"code"`
+	Message    string   `json:"message"`
+	Path       []string `json:"path"`
+}
+
+// GetValidation returns the value of Validation.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) GetValidation() string {
+	return s.Validation
+}
+
+// GetCode returns the value of Code.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) GetCode() string {
+	return s.Code
+}
+
+// GetMessage returns the value of Message.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) GetMessage() string {
+	return s.Message
+}
+
+// GetPath returns the value of Path.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) GetPath() []string {
+	return s.Path
+}
+
+// SetValidation sets the value of Validation.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) SetValidation(val string) {
+	s.Validation = val
+}
+
+// SetCode sets the value of Code.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) SetCode(val string) {
+	s.Code = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) SetMessage(val string) {
+	s.Message = val
+}
+
+// SetPath sets the value of Path.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) SetPath(val []string) {
+	s.Path = val
+}
 
 type UsersStatsControllerGetUserUsageByRangeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
