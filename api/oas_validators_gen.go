@@ -1000,161 +1000,6 @@ func (s *ConfigProfileResponseResponseInboundsItem) Validate() error {
 	return nil
 }
 
-func (s *ConfigProfilesResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Response.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "response",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ConfigProfilesResponseResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "total",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.ConfigProfiles == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.ConfigProfiles {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "configProfiles",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ConfigProfilesResponseResponseConfigProfilesItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.Inbounds == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.Inbounds {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "inbounds",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.Nodes == nil {
-			return errors.New("nil is invalid value")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "nodes",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ConfigProfilesResponseResponseConfigProfilesItemInboundsItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if value, ok := s.Port.Get(); ok {
-			if err := func() error {
-				if err := (validate.Float{}).Validate(float64(value)); err != nil {
-					return errors.Wrap(err, "float")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "port",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
 func (s *CreateConfigProfileRequestDto) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -1803,54 +1648,6 @@ func (s *CreateNodeRequestDto) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "configProfile",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.Tags == nil {
-			return nil // optional
-		}
-		if err := (validate.Array{
-			MinLength:    0,
-			MinLengthSet: false,
-			MaxLength:    10,
-			MaxLengthSet: true,
-		}).ValidateLength(len(s.Tags)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.Tags {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     36,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         regexMap["^[A-Z0-9_:]+$"],
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(elem)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "tags",
 			Error: err,
 		})
 	}
@@ -3328,149 +3125,6 @@ func (s *ExternalSquadResponseResponseResponse) Validate() error {
 			Error: err,
 		})
 	}
-	if err := func() error {
-		if value, ok := s.HwidSettings.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "hwidSettings",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.CustomRemarks.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "customRemarks",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadResponseResponseResponseCustomRemarks) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.ExpiredUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.ExpiredUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "expiredUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.LimitedUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.LimitedUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "limitedUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.DisabledUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.DisabledUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "disabledUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyHosts == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyHosts)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyHosts",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyInternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyInternalSquads)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyInternalSquads",
-			Error: err,
-		})
-	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
@@ -3538,59 +3192,6 @@ func (s *ExternalSquadResponseResponseResponseHostOverrides) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "vlessRouteId",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadResponseResponseResponseHwidSettings) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.FallbackDeviceLimit)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "fallbackDeviceLimit",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.MaxDevicesAnnounce.Get(); ok {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     200,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         nil,
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(value)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "maxDevicesAnnounce",
 			Error: err,
 		})
 	}
@@ -3687,538 +3288,6 @@ func (s *ExternalSquadResponseResponseResponseTemplatesItem) Validate() error {
 }
 
 func (s ExternalSquadResponseResponseResponseTemplatesItemTemplateType) Validate() error {
-	switch s {
-	case "XRAY_JSON":
-		return nil
-	case "XRAY_BASE64":
-		return nil
-	case "MIHOMO":
-		return nil
-	case "STASH":
-		return nil
-	case "CLASH":
-		return nil
-	case "SINGBOX":
-		return nil
-	default:
-		return errors.Errorf("invalid value: %v", s)
-	}
-}
-
-func (s *ExternalSquadsResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Response.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "response",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "total",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.ExternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.ExternalSquads {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "externalSquads",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Info.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "info",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.Templates == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.Templates {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "templates",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.SubscriptionSettings.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "subscriptionSettings",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.HostOverrides.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "hostOverrides",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.HwidSettings.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "hwidSettings",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.CustomRemarks.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "customRemarks",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItemCustomRemarks) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.ExpiredUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.ExpiredUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "expiredUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.LimitedUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.LimitedUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "limitedUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.DisabledUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.DisabledUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "disabledUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyHosts == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyHosts)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyHosts",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyInternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyInternalSquads)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyInternalSquads",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItemHostOverrides) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if value, ok := s.ServerDescription.Get(); ok {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     30,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         nil,
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(value)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "serverDescription",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.VlessRouteId.Get(); ok {
-			if err := func() error {
-				if err := (validate.Int{
-					MinSet:        true,
-					Min:           0,
-					MaxSet:        true,
-					Max:           65535,
-					MinExclusive:  false,
-					MaxExclusive:  false,
-					MultipleOfSet: false,
-					MultipleOf:    0,
-					Pattern:       nil,
-				}).Validate(int64(value)); err != nil {
-					return errors.Wrap(err, "int")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "vlessRouteId",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItemHwidSettings) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.FallbackDeviceLimit)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "fallbackDeviceLimit",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.MaxDevicesAnnounce.Get(); ok {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     200,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         nil,
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(value)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "maxDevicesAnnounce",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItemInfo) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.MembersCount)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "membersCount",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItemSubscriptionSettings) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if value, ok := s.ProfileUpdateInterval.Get(); ok {
-			if err := func() error {
-				if err := (validate.Int{
-					MinSet:        true,
-					Min:           1,
-					MaxSet:        false,
-					Max:           0,
-					MinExclusive:  false,
-					MaxExclusive:  false,
-					MultipleOfSet: false,
-					MultipleOf:    0,
-					Pattern:       nil,
-				}).Validate(int64(value)); err != nil {
-					return errors.Wrap(err, "int")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "profileUpdateInterval",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ExternalSquadsResponseResponseExternalSquadsItemTemplatesItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.TemplateType.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "templateType",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s ExternalSquadsResponseResponseExternalSquadsItemTemplatesItemTemplateType) Validate() error {
 	switch s {
 	case "XRAY_JSON":
 		return nil
@@ -4657,6 +3726,28 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.UsedTrafficBytes)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "usedTrafficBytes",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.LifetimeUsedTrafficBytes)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "lifetimeUsedTrafficBytes",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if value, ok := s.TrafficLimitStrategy.Get(); ok {
 			if err := func() error {
 				if err := value.Validate(); err != nil {
@@ -4715,17 +3806,6 @@ func (s *GetAllUsersResponseDtoResponseUsersItem) Validate() error {
 			Error: err,
 		})
 	}
-	if err := func() error {
-		if err := s.UserTraffic.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "userTraffic",
-			Error: err,
-		})
-	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
@@ -4762,31 +3842,20 @@ func (s GetAllUsersResponseDtoResponseUsersItemTrafficLimitStrategy) Validate() 
 	}
 }
 
-func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) Validate() error {
+func (s *GetConfigProfilesResponseDto) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
 
 	var failures []validate.FieldError
 	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.UsedTrafficBytes)); err != nil {
-			return errors.Wrap(err, "float")
+		if err := s.Response.Validate(); err != nil {
+			return err
 		}
 		return nil
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
-			Name:  "usedTrafficBytes",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.LifetimeUsedTrafficBytes)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "lifetimeUsedTrafficBytes",
+			Name:  "response",
 			Error: err,
 		})
 	}
@@ -4794,6 +3863,474 @@ func (s *GetAllUsersResponseDtoResponseUsersItemUserTraffic) Validate() error {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s *GetConfigProfilesResponseDtoResponse) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "total",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.ConfigProfiles == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.ConfigProfiles {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "configProfiles",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if s.Inbounds == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Inbounds {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "inbounds",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.Nodes == nil {
+			return errors.New("nil is invalid value")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "nodes",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetConfigProfilesResponseDtoResponseConfigProfilesItemInboundsItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if value, ok := s.Port.Get(); ok {
+			if err := func() error {
+				if err := (validate.Float{}).Validate(float64(value)); err != nil {
+					return errors.Wrap(err, "float")
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "port",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDto) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.Response.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "response",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDtoResponse) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "total",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.ExternalSquads == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.ExternalSquads {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "externalSquads",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.Info.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "info",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.Templates == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Templates {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "templates",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if value, ok := s.SubscriptionSettings.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "subscriptionSettings",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if value, ok := s.HostOverrides.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "hostOverrides",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if value, ok := s.ServerDescription.Get(); ok {
+			if err := func() error {
+				if err := (validate.String{
+					MinLength:     0,
+					MinLengthSet:  false,
+					MaxLength:     30,
+					MaxLengthSet:  true,
+					Email:         false,
+					Hostname:      false,
+					Regex:         nil,
+					MinNumeric:    0,
+					MinNumericSet: false,
+					MaxNumeric:    0,
+					MaxNumericSet: false,
+				}).Validate(string(value)); err != nil {
+					return errors.Wrap(err, "string")
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "serverDescription",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if value, ok := s.VlessRouteId.Get(); ok {
+			if err := func() error {
+				if err := (validate.Int{
+					MinSet:        true,
+					Min:           0,
+					MaxSet:        true,
+					Max:           65535,
+					MinExclusive:  false,
+					MaxExclusive:  false,
+					MultipleOfSet: false,
+					MultipleOf:    0,
+					Pattern:       nil,
+				}).Validate(int64(value)); err != nil {
+					return errors.Wrap(err, "int")
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "vlessRouteId",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.MembersCount)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "membersCount",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if value, ok := s.ProfileUpdateInterval.Get(); ok {
+			if err := func() error {
+				if err := (validate.Int{
+					MinSet:        true,
+					Min:           1,
+					MaxSet:        false,
+					Max:           0,
+					MinExclusive:  false,
+					MaxExclusive:  false,
+					MultipleOfSet: false,
+					MultipleOf:    0,
+					Pattern:       nil,
+				}).Validate(int64(value)); err != nil {
+					return errors.Wrap(err, "int")
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "profileUpdateInterval",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.TemplateType.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "templateType",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItemTemplateType) Validate() error {
+	switch s {
+	case "XRAY_JSON":
+		return nil
+	case "XRAY_BASE64":
+		return nil
+	case "MIHOMO":
+		return nil
+	case "STASH":
+		return nil
+	case "CLASH":
+		return nil
+	case "SINGBOX":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s *GetHwidDevicesStatsResponseDto) Validate() error {
@@ -5208,6 +4745,195 @@ func (s *GetInternalSquadAccessibleNodesResponseDtoResponseAccessibleNodesItem) 
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "activeInbounds",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetInternalSquadsResponseDto) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.Response.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "response",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetInternalSquadsResponseDtoResponse) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "total",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.InternalSquads == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.InternalSquads {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "internalSquads",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.Info.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "info",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.Inbounds == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Inbounds {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "inbounds",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInboundsItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if value, ok := s.Port.Get(); ok {
+			if err := func() error {
+				if err := (validate.Float{}).Validate(float64(value)); err != nil {
+					return errors.Wrap(err, "float")
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "port",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetInternalSquadsResponseDtoResponseInternalSquadsItemInfo) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.MembersCount)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "membersCount",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.InboundsCount)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "inboundsCount",
 			Error: err,
 		})
 	}
@@ -5889,6 +5615,28 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) Validate() error 
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.UsedTrafficBytes)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "usedTrafficBytes",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.LifetimeUsedTrafficBytes)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "lifetimeUsedTrafficBytes",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if value, ok := s.TrafficLimitStrategy.Get(); ok {
 			if err := func() error {
 				if err := value.Validate(); err != nil {
@@ -5947,17 +5695,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUser) Validate() error 
 			Error: err,
 		})
 	}
-	if err := func() error {
-		if err := s.UserTraffic.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "userTraffic",
-			Error: err,
-		})
-	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
@@ -5992,40 +5729,6 @@ func (s GetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrategy
 	default:
 		return errors.Errorf("invalid value: %v", s)
 	}
-}
-
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseUserUserTraffic) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.UsedTrafficBytes)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "usedTrafficBytes",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.LifetimeUsedTrafficBytes)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "lifetimeUsedTrafficBytes",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
 }
 
 func (s *GetRemnawaveHealthResponseDto) Validate() error {
@@ -6711,6 +6414,122 @@ func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStats
 	return nil
 }
 
+func (s *GetTemplatesResponseDto) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.Response.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "response",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetTemplatesResponseDtoResponse) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "total",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.Templates == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Templates {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "templates",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetTemplatesResponseDtoResponseTemplatesItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := s.TemplateType.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "templateType",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s GetTemplatesResponseDtoResponseTemplatesItemTemplateType) Validate() error {
+	switch s {
+	case "XRAY_JSON":
+		return nil
+	case "XRAY_BASE64":
+		return nil
+	case "MIHOMO":
+		return nil
+	case "STASH":
+		return nil
+	case "CLASH":
+		return nil
+	case "SINGBOX":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
 func (s *GetUserAccessibleNodesResponseDto) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -7013,17 +6832,6 @@ func (s *HostItem) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "nodes",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.ExcludedInternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "excludedInternalSquads",
 			Error: err,
 		})
 	}
@@ -7476,195 +7284,6 @@ func (s *InternalSquadResponseResponseResponseInfo) Validate() error {
 	return nil
 }
 
-func (s *InternalSquadsResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Response.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "response",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *InternalSquadsResponseResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "total",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.InternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.InternalSquads {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "internalSquads",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *InternalSquadsResponseResponseInternalSquadsItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Info.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "info",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.Inbounds == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.Inbounds {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "inbounds",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *InternalSquadsResponseResponseInternalSquadsItemInboundsItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if value, ok := s.Port.Get(); ok {
-			if err := func() error {
-				if err := (validate.Float{}).Validate(float64(value)); err != nil {
-					return errors.Wrap(err, "float")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "port",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *InternalSquadsResponseResponseInternalSquadsItemInfo) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.MembersCount)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "membersCount",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.InboundsCount)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "inboundsCount",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
 func (s *NodeItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -7715,17 +7334,6 @@ func (s *NodeItem) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "consumptionMultiplier",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.Tags == nil {
-			return errors.New("nil is invalid value")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "tags",
 			Error: err,
 		})
 	}
@@ -8115,29 +7723,6 @@ func (s *ReorderNodeRequestDto) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "nodes",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *ReorderRequest) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.Items == nil {
-			return errors.New("nil is invalid value")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "items",
 			Error: err,
 		})
 	}
@@ -8769,13 +8354,35 @@ func (s *SubscriptionSettingsResponseResponse) Validate() error {
 		})
 	}
 	if err := func() error {
-		if err := s.CustomRemarks.Validate(); err != nil {
-			return err
+		if s.ExpiredUsersRemarks == nil {
+			return errors.New("nil is invalid value")
 		}
 		return nil
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
-			Name:  "customRemarks",
+			Name:  "expiredUsersRemarks",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.LimitedUsersRemarks == nil {
+			return errors.New("nil is invalid value")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "limitedUsersRemarks",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.DisabledUsersRemarks == nil {
+			return errors.New("nil is invalid value")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "disabledUsersRemarks",
 			Error: err,
 		})
 	}
@@ -8794,184 +8401,6 @@ func (s *SubscriptionSettingsResponseResponse) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "responseRules",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.HwidSettings.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "hwidSettings",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *SubscriptionSettingsResponseResponseCustomRemarks) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.ExpiredUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.ExpiredUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "expiredUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.LimitedUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.LimitedUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "limitedUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.DisabledUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.DisabledUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "disabledUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyHosts == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyHosts)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyHosts",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyInternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyInternalSquads)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyInternalSquads",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *SubscriptionSettingsResponseResponseHwidSettings) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.FallbackDeviceLimit)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "fallbackDeviceLimit",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.MaxDevicesAnnounce.Get(); ok {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     200,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         nil,
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(value)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "maxDevicesAnnounce",
 			Error: err,
 		})
 	}
@@ -9580,122 +9009,6 @@ func (s TemplateResponseResponseTemplateType) Validate() error {
 	}
 }
 
-func (s *TemplatesResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.Response.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "response",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *TemplatesResponseResponse) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.Total)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "total",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.Templates == nil {
-			return errors.New("nil is invalid value")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.Templates {
-			if err := func() error {
-				if err := elem.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "templates",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *TemplatesResponseResponseTemplatesItem) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := s.TemplateType.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "templateType",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s TemplatesResponseResponseTemplatesItemTemplateType) Validate() error {
-	switch s {
-	case "XRAY_JSON":
-		return nil
-	case "XRAY_BASE64":
-		return nil
-	case "MIHOMO":
-		return nil
-	case "STASH":
-		return nil
-	case "CLASH":
-		return nil
-	case "SINGBOX":
-		return nil
-	default:
-		return errors.Errorf("invalid value: %v", s)
-	}
-}
-
 func (s *UnauthorizedError) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -9858,149 +9171,6 @@ func (s *UpdateExternalSquadRequestDto) Validate() error {
 			Error: err,
 		})
 	}
-	if err := func() error {
-		if value, ok := s.HwidSettings.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "hwidSettings",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.CustomRemarks.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "customRemarks",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *UpdateExternalSquadRequestDtoCustomRemarks) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.ExpiredUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.ExpiredUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "expiredUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.LimitedUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.LimitedUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "limitedUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.DisabledUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.DisabledUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "disabledUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyHosts == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyHosts)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyHosts",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyInternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyInternalSquads)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyInternalSquads",
-			Error: err,
-		})
-	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
@@ -10068,59 +9238,6 @@ func (s *UpdateExternalSquadRequestDtoHostOverrides) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "vlessRouteId",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *UpdateExternalSquadRequestDtoHwidSettings) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.FallbackDeviceLimit)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "fallbackDeviceLimit",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.MaxDevicesAnnounce.Get(); ok {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     200,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         nil,
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(value)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "maxDevicesAnnounce",
 			Error: err,
 		})
 	}
@@ -10814,54 +9931,6 @@ func (s *UpdateNodeRequestDto) Validate() error {
 			Error: err,
 		})
 	}
-	if err := func() error {
-		if s.Tags == nil {
-			return nil // optional
-		}
-		if err := (validate.Array{
-			MinLength:    0,
-			MinLengthSet: false,
-			MaxLength:    10,
-			MaxLengthSet: true,
-		}).ValidateLength(len(s.Tags)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		var failures []validate.FieldError
-		for i, elem := range s.Tags {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     36,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         regexMap["^[A-Z0-9_:]+$"],
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(elem)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				failures = append(failures, validate.FieldError{
-					Name:  fmt.Sprintf("[%d]", i),
-					Error: err,
-				})
-			}
-		}
-		if len(failures) > 0 {
-			return &validate.Error{Fields: failures}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "tags",
-			Error: err,
-		})
-	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
@@ -10882,41 +9951,6 @@ func (s *UpdateNodeRequestDtoConfigProfile) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "activeInbounds",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *UpdatePasskeyRequestDto) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.String{
-			MinLength:     2,
-			MinLengthSet:  true,
-			MaxLength:     30,
-			MaxLengthSet:  true,
-			Email:         false,
-			Hostname:      false,
-			Regex:         regexMap["^[A-Za-z0-9_\\s-]+$"],
-			MinNumeric:    0,
-			MinNumericSet: false,
-			MaxNumeric:    0,
-			MaxNumericSet: false,
-		}).Validate(string(s.Name)); err != nil {
-			return errors.Wrap(err, "string")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "name",
 			Error: err,
 		})
 	}
@@ -11148,24 +10182,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) Validate() error {
 		})
 	}
 	if err := func() error {
-		if value, ok := s.CustomRemarks.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "customRemarks",
-			Error: err,
-		})
-	}
-	if err := func() error {
 		if value, ok := s.ResponseRules.Get(); ok {
 			if err := func() error {
 				if err := value.Validate(); err != nil {
@@ -11180,184 +10196,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) Validate() error {
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
 			Name:  "responseRules",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.HwidSettings.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "hwidSettings",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *UpdateSubscriptionSettingsRequestDtoCustomRemarks) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if s.ExpiredUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.ExpiredUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "expiredUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.LimitedUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.LimitedUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "limitedUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.DisabledUsers == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.DisabledUsers)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "disabledUsers",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyHosts == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyHosts)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyHosts",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if s.EmptyInternalSquads == nil {
-			return errors.New("nil is invalid value")
-		}
-		if err := (validate.Array{
-			MinLength:    1,
-			MinLengthSet: true,
-			MaxLength:    0,
-			MaxLengthSet: false,
-		}).ValidateLength(len(s.EmptyInternalSquads)); err != nil {
-			return errors.Wrap(err, "array")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "emptyInternalSquads",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
-}
-
-func (s *UpdateSubscriptionSettingsRequestDtoHwidSettings) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.FallbackDeviceLimit)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "fallbackDeviceLimit",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if value, ok := s.MaxDevicesAnnounce.Get(); ok {
-			if err := func() error {
-				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     200,
-					MaxLengthSet:  true,
-					Email:         false,
-					Hostname:      false,
-					Regex:         nil,
-					MinNumeric:    0,
-					MinNumericSet: false,
-					MaxNumeric:    0,
-					MaxNumericSet: false,
-				}).Validate(string(value)); err != nil {
-					return errors.Wrap(err, "string")
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "maxDevicesAnnounce",
 			Error: err,
 		})
 	}
@@ -12078,6 +10916,28 @@ func (s *UserItem) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.UsedTrafficBytes)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "usedTrafficBytes",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.LifetimeUsedTrafficBytes)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "lifetimeUsedTrafficBytes",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if value, ok := s.TrafficLimitStrategy.Get(); ok {
 			if err := func() error {
 				if err := value.Validate(); err != nil {
@@ -12136,17 +10996,6 @@ func (s *UserItem) Validate() error {
 			Error: err,
 		})
 	}
-	if err := func() error {
-		if err := s.UserTraffic.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "userTraffic",
-			Error: err,
-		})
-	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
@@ -12181,40 +11030,6 @@ func (s UserItemTrafficLimitStrategy) Validate() error {
 	default:
 		return errors.Errorf("invalid value: %v", s)
 	}
-}
-
-func (s *UserItemUserTraffic) Validate() error {
-	if s == nil {
-		return validate.ErrNilPointer
-	}
-
-	var failures []validate.FieldError
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.UsedTrafficBytes)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "usedTrafficBytes",
-			Error: err,
-		})
-	}
-	if err := func() error {
-		if err := (validate.Float{}).Validate(float64(s.LifetimeUsedTrafficBytes)); err != nil {
-			return errors.Wrap(err, "float")
-		}
-		return nil
-	}(); err != nil {
-		failures = append(failures, validate.FieldError{
-			Name:  "lifetimeUsedTrafficBytes",
-			Error: err,
-		})
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-	return nil
 }
 
 func (s *UserResponse) Validate() error {
