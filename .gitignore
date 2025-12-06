@@ -182,6 +182,7 @@ go.work
 # Python cache
 __pycache__/
 *.pyc
+scripts/__pycache__/
 
 ### GoLand template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

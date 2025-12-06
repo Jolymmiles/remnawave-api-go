@@ -4,13 +4,13 @@ Complete API Processing Pipeline
 =================================
 
 This script processes OpenAPI specs through the complete workflow:
-1. Consolidate duplicate schemas
-2. Rename schemas to common names
-3. Generate Go client via ogen
-4. Generate client_ext.go wrapper
+1. Smart consolidate schemas (unify duplicates + error responses)
+2. Generate Go client via ogen
+3. Generate client_ext.go wrapper
 
 Usage:
-    python3 pipeline.py api-2-2-2.json
+    cd /path/to/remnawave-api-go
+    python3 scripts/pipeline.py specs/api-2-3-0.json
 """
 
 import json
