@@ -5,8 +5,9 @@ package api
 import "context"
 
 // ClientExt wraps the base Client with organized sub-client access.
+// Use controller methods (e.g., client.Users().GetByUuid()) to call API operations.
 type ClientExt struct {
-	*Client
+	client *Client
 	apiTokens *ApiTokensClient
 	auth *AuthClient
 	configProfile *ConfigProfileClient
@@ -37,7 +38,7 @@ type ClientExt struct {
 // NewClientExt creates a new ClientExt wrapper.
 func NewClientExt(client *Client) *ClientExt {
 	return &ClientExt{
-		Client: client,
+		client: client,
 		apiTokens: NewApiTokensClient(client),
 		auth: NewAuthClient(client),
 		configProfile: NewConfigProfileClient(client),
@@ -64,6 +65,11 @@ func NewClientExt(client *Client) *ClientExt {
 		usersBulkActions: NewUsersBulkActionsClient(client),
 		usersStats: NewUsersStatsClient(client),
 	}
+}
+
+// Client returns the underlying ogen Client.
+func (ce *ClientExt) Client() *Client {
+	return ce.client
 }
 
 // ApiTokens returns the ApiTokensClient.

@@ -889,6 +889,114 @@ class InlineSchemaExtractor:
             current['properties'][last_part] = {'$ref': f'#/components/schemas/{ref_name}'}
 
 
+def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
+    """
+    Unify duplicate error response schemas (400 BadRequest, 401 Unauthorized, etc.)
+    by extracting common inline schemas into shared definitions.
+    
+    Returns: (new_spec, stats)
+    """
+    spec = copy.deepcopy(spec)
+    
+    # Define common error schemas to extract
+    ERROR_SCHEMAS = {
+        'BadRequestError': {
+            'type': 'object',
+            'properties': {
+                'message': {'type': 'string'},
+                'statusCode': {'type': 'number', 'example': 400},
+                'errors': {
+                    'type': 'array',
+                    'items': {
+                        '$ref': '#/components/schemas/ValidationError'
+                    }
+                }
+            },
+            'required': ['message', 'statusCode', 'errors']
+        },
+        'ValidationError': {
+            'type': 'object',
+            'properties': {
+                'validation': {'type': 'string', 'example': 'uuid'},
+                'code': {'type': 'string', 'example': 'invalid_string'},
+                'message': {'type': 'string', 'example': 'Invalid uuid'},
+                'path': {
+                    'type': 'array',
+                    'items': {'type': 'string'},
+                    'example': ['uuid']
+                }
+            },
+            'required': ['validation', 'code', 'message', 'path']
+        },
+        'UnauthorizedError': {
+            'type': 'object',
+            'properties': {
+                'message': {'type': 'string', 'example': 'Unauthorized'},
+                'statusCode': {'type': 'number', 'example': 401}
+            },
+            'required': ['message', 'statusCode']
+        },
+        'ForbiddenError': {
+            'type': 'object',
+            'properties': {
+                'message': {'type': 'string', 'example': 'Forbidden'},
+                'statusCode': {'type': 'number', 'example': 403}
+            },
+            'required': ['message', 'statusCode']
+        },
+        'NotFoundError': {
+            'type': 'object',
+            'properties': {
+                'message': {'type': 'string', 'example': 'Not Found'},
+                'statusCode': {'type': 'number', 'example': 404}
+            },
+            'required': ['message', 'statusCode']
+        }
+    }
+    
+    # Add schemas to spec
+    if 'components' not in spec:
+        spec['components'] = {}
+    if 'schemas' not in spec['components']:
+        spec['components']['schemas'] = {}
+    
+    spec['components']['schemas'].update(ERROR_SCHEMAS)
+    
+    # Map status codes to schema names
+    STATUS_TO_SCHEMA = {
+        '400': 'BadRequestError',
+        '401': 'UnauthorizedError',
+        '403': 'ForbiddenError',
+        '404': 'NotFoundError',
+    }
+    
+    # Replace inline error schemas with $ref
+    replaced_count = {status: 0 for status in STATUS_TO_SCHEMA}
+    
+    for path, methods in spec.get('paths', {}).items():
+        for method, op in methods.items():
+            if not isinstance(op, dict) or 'responses' not in op:
+                continue
+            
+            for status_code, schema_name in STATUS_TO_SCHEMA.items():
+                if status_code in op['responses']:
+                    response = op['responses'][status_code]
+                    if 'content' in response and 'application/json' in response['content']:
+                        # Replace inline schema with $ref
+                        response['content']['application/json']['schema'] = {
+                            '$ref': f'#/components/schemas/{schema_name}'
+                        }
+                        replaced_count[status_code] += 1
+    
+    total_replaced = sum(replaced_count.values())
+    
+    return spec, {
+        'schemas_added': len(ERROR_SCHEMAS),
+        'responses_unified': replaced_count,
+        'total_replaced': total_replaced
+    }
+
+
 def analyze_spec(spec_file: str):
     """Analyze a spec file and show consolidation suggestions"""
     with open(spec_file, 'r') as f:

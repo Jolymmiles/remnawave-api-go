@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from smart_consolidate import SmartConsolidator, InlineSchemaExtractor
+from smart_consolidate import SmartConsolidator, InlineSchemaExtractor, unify_error_responses
 
 
 class Colors:
@@ -95,6 +95,13 @@ def smart_consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, i
     
     # Apply consolidation
     new_spec = consolidator.apply_consolidation(rename_map)
+    
+    # Unify error responses
+    print_info("Unifying error responses...")
+    new_spec, error_stats = unify_error_responses(new_spec)
+    if error_stats['total_replaced'] > 0:
+        print_info(f"Unified {error_stats['total_replaced']} error responses (400: {error_stats['responses_unified'].get('400', 0)}, 401: {error_stats['responses_unified'].get('401', 0)})")
+        stats['unified_errors'] = error_stats['total_replaced']
     
     # Extract inline schemas for reuse
     print_info("Extracting inline schemas for reuse...")
@@ -262,8 +269,9 @@ package api
 import "context"
 
 // ClientExt wraps the base Client with organized sub-client access.
+// Use controller methods (e.g., client.Users().GetByUuid()) to call API operations.
 type ClientExt struct {
-\t*Client
+\tclient *Client
 '''
     
     for controller in sorted(operations_by_controller.keys()):
@@ -275,7 +283,7 @@ type ClientExt struct {
 // NewClientExt creates a new ClientExt wrapper.
 func NewClientExt(client *Client) *ClientExt {
 \treturn &ClientExt{
-\t\tClient: client,
+\t\tclient: client,
 '''
     
     for controller in sorted(operations_by_controller.keys()):
@@ -283,6 +291,11 @@ func NewClientExt(client *Client) *ClientExt {
         code += f'\t\t{field_name}: New{controller}Client(client),\n'
     
     code += '''\t}
+}
+
+// Client returns the underlying ogen Client.
+func (ce *ClientExt) Client() *Client {
+\treturn ce.client
 }
 
 '''
