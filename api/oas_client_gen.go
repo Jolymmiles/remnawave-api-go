@@ -81,7 +81,7 @@ type Invoker interface {
 	// Verify the authentication for passkey.
 	//
 	// POST /api/auth/passkey/authentication/verify
-	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error)
+	AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptions) (AuthControllerPasskeyAuthenticationVerifyRes, error)
 	// AuthControllerRegister invokes AuthController_register operation.
 	//
 	// Register as superadmin.
@@ -141,7 +141,7 @@ type Invoker interface {
 	// Reorder config profiles.
 	//
 	// POST /api/config-profiles/actions/reorder
-	ConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (ConfigProfileControllerReorderConfigProfilesRes, error)
+	ConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (ConfigProfileControllerReorderConfigProfilesRes, error)
 	// ConfigProfileControllerUpdateConfigProfile invokes ConfigProfileController_updateConfigProfile operation.
 	//
 	// Update Core Config in specific config profile.
@@ -189,7 +189,7 @@ type Invoker interface {
 	// Reorder external squads.
 	//
 	// POST /api/external-squads/actions/reorder
-	ExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (ExternalSquadControllerReorderExternalSquadsRes, error)
+	ExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderRequest) (ExternalSquadControllerReorderExternalSquadsRes, error)
 	// ExternalSquadControllerUpdateExternalSquad invokes ExternalSquadController_updateExternalSquad operation.
 	//
 	// Update external squad.
@@ -423,7 +423,7 @@ type Invoker interface {
 	// Reorder internal squads.
 	//
 	// POST /api/internal-squads/actions/reorder
-	InternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (InternalSquadControllerReorderInternalSquadsRes, error)
+	InternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderRequest) (InternalSquadControllerReorderInternalSquadsRes, error)
 	// InternalSquadControllerUpdateInternalSquad invokes InternalSquadController_updateInternalSquad operation.
 	//
 	// Update internal squad.
@@ -549,7 +549,7 @@ type Invoker interface {
 	// Verify registration for passkey.
 	//
 	// POST /api/passkeys/registration/verify
-	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
+	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptions) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
 	// PasskeyControllerUpdatePasskey invokes PasskeyController_updatePasskey operation.
 	//
 	// Update passkey.
@@ -651,7 +651,7 @@ type Invoker interface {
 	// Reorder subscription templates.
 	//
 	// POST /api/subscription-templates/actions/reorder
-	SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error)
+	SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error)
 	// SubscriptionTemplateControllerUpdateTemplate invokes SubscriptionTemplateController_updateTemplate operation.
 	//
 	// Update subscription template.
@@ -1683,12 +1683,12 @@ func (c *Client) sendAuthControllerPasskeyAuthenticationOptions(ctx context.Cont
 // Verify the authentication for passkey.
 //
 // POST /api/auth/passkey/authentication/verify
-func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+func (c *Client) AuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptions) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
 	res, err := c.sendAuthControllerPasskeyAuthenticationVerify(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
+func (c *Client) sendAuthControllerPasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptions) (res AuthControllerPasskeyAuthenticationVerifyRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("AuthController_passkeyAuthenticationVerify"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -2757,12 +2757,12 @@ func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context
 // Reorder config profiles.
 //
 // POST /api/config-profiles/actions/reorder
-func (c *Client) ConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (ConfigProfileControllerReorderConfigProfilesRes, error) {
+func (c *Client) ConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (ConfigProfileControllerReorderConfigProfilesRes, error) {
 	res, err := c.sendConfigProfileControllerReorderConfigProfiles(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (res ConfigProfileControllerReorderConfigProfilesRes, err error) {
+func (c *Client) sendConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (res ConfigProfileControllerReorderConfigProfilesRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3715,12 +3715,12 @@ func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx con
 // Reorder external squads.
 //
 // POST /api/external-squads/actions/reorder
-func (c *Client) ExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (ExternalSquadControllerReorderExternalSquadsRes, error) {
+func (c *Client) ExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderRequest) (ExternalSquadControllerReorderExternalSquadsRes, error) {
 	res, err := c.sendExternalSquadControllerReorderExternalSquads(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (res ExternalSquadControllerReorderExternalSquadsRes, err error) {
+func (c *Client) sendExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderRequest) (res ExternalSquadControllerReorderExternalSquadsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -8298,12 +8298,12 @@ func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx con
 // Reorder internal squads.
 //
 // POST /api/internal-squads/actions/reorder
-func (c *Client) InternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (InternalSquadControllerReorderInternalSquadsRes, error) {
+func (c *Client) InternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderRequest) (InternalSquadControllerReorderInternalSquadsRes, error) {
 	res, err := c.sendInternalSquadControllerReorderInternalSquads(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (res InternalSquadControllerReorderInternalSquadsRes, err error) {
+func (c *Client) sendInternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderRequest) (res InternalSquadControllerReorderInternalSquadsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10785,12 +10785,12 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationOptions(ctx context.Con
 // Verify registration for passkey.
 //
 // POST /api/passkeys/registration/verify
-func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+func (c *Client) PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptions) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
 	res, err := c.sendPasskeyControllerPasskeyRegistrationVerify(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
+func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptions) (res PasskeyControllerPasskeyRegistrationVerifyRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("PasskeyController_passkeyRegistrationVerify"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -12808,12 +12808,12 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 // Reorder subscription templates.
 //
 // POST /api/subscription-templates/actions/reorder
-func (c *Client) SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error) {
+func (c *Client) SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error) {
 	res, err := c.sendSubscriptionTemplateControllerReorderSubscriptionTemplates(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (res SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, err error) {
+func (c *Client) sendSubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (res SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {

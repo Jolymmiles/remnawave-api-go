@@ -252,7 +252,7 @@ func (sc *AuthClient) PasskeyAuthenticationOptions(ctx context.Context) (AuthCon
 }
 
 // PasskeyAuthenticationVerify calls AuthController_passkeyAuthenticationVerify.
-func (sc *AuthClient) PasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptionsResponse) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
+func (sc *AuthClient) PasskeyAuthenticationVerify(ctx context.Context, request *PasskeyOptions) (AuthControllerPasskeyAuthenticationVerifyRes, error) {
 	return sc.client.AuthControllerPasskeyAuthenticationVerify(ctx, request)
 }
 
@@ -312,7 +312,7 @@ func (sc *ConfigProfileClient) GetInboundsByProfileUuid(ctx context.Context, par
 }
 
 // ReorderConfigProfiles calls ConfigProfileController_reorderConfigProfiles.
-func (sc *ConfigProfileClient) ReorderConfigProfiles(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (ConfigProfileControllerReorderConfigProfilesRes, error) {
+func (sc *ConfigProfileClient) ReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (ConfigProfileControllerReorderConfigProfilesRes, error) {
 	return sc.client.ConfigProfileControllerReorderConfigProfiles(ctx, request)
 }
 
@@ -362,7 +362,7 @@ func (sc *ExternalSquadClient) RemoveUsersFromExternalSquad(ctx context.Context,
 }
 
 // ReorderExternalSquads calls ExternalSquadController_reorderExternalSquads.
-func (sc *ExternalSquadClient) ReorderExternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (ExternalSquadControllerReorderExternalSquadsRes, error) {
+func (sc *ExternalSquadClient) ReorderExternalSquads(ctx context.Context, request *ReorderRequest) (ExternalSquadControllerReorderExternalSquadsRes, error) {
 	return sc.client.ExternalSquadControllerReorderExternalSquads(ctx, request)
 }
 
@@ -607,7 +607,7 @@ func (sc *InternalSquadClient) RemoveUsersFromInternalSquad(ctx context.Context,
 }
 
 // ReorderInternalSquads calls InternalSquadController_reorderInternalSquads.
-func (sc *InternalSquadClient) ReorderInternalSquads(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (InternalSquadControllerReorderInternalSquadsRes, error) {
+func (sc *InternalSquadClient) ReorderInternalSquads(ctx context.Context, request *ReorderRequest) (InternalSquadControllerReorderInternalSquadsRes, error) {
 	return sc.client.InternalSquadControllerReorderInternalSquads(ctx, request)
 }
 
@@ -762,7 +762,7 @@ func (sc *PasskeyClient) PasskeyRegistrationOptions(ctx context.Context) (Passke
 }
 
 // PasskeyRegistrationVerify calls PasskeyController_passkeyRegistrationVerify.
-func (sc *PasskeyClient) PasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptionsResponse) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
+func (sc *PasskeyClient) PasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptions) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
 	return sc.client.PasskeyControllerPasskeyRegistrationVerify(ctx, request)
 }
 
@@ -887,7 +887,7 @@ func (sc *SubscriptionTemplateClient) GetTemplateByUuid(ctx context.Context, par
 }
 
 // ReorderSubscriptionTemplates calls SubscriptionTemplateController_reorderSubscriptionTemplates.
-func (sc *SubscriptionTemplateClient) ReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesRequestDto) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error) {
+func (sc *SubscriptionTemplateClient) ReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error) {
 	return sc.client.SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx, request)
 }
 

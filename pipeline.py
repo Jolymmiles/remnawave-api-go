@@ -20,6 +20,8 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+from smart_consolidate import SmartConsolidator
+
 
 class Colors:
     HEADER = '\033[95m'
@@ -56,311 +58,61 @@ def print_info(message: str):
 
 
 # ============================================================================
-# STEP 1: CONSOLIDATE SCHEMAS
+# STEP 1: SMART CONSOLIDATE SCHEMAS
 # ============================================================================
 
-def find_duplicate_schemas(spec: dict) -> Dict[str, List[str]]:
-    """Find duplicate schemas by comparing their JSON representations"""
-    schemas = spec.get('components', {}).get('schemas', {})
-    
-    # Group by content hash
-    content_to_names = {}
-    for name, schema_def in schemas.items():
-        content = json.dumps(schema_def, sort_keys=True)
-        if content not in content_to_names:
-            content_to_names[content] = []
-        content_to_names[content].append(name)
-    
-    # Return only groups with duplicates
-    duplicates = {
-        names[0]: names for names in content_to_names.values() if len(names) > 1
-    }
-    
-    return duplicates
-
-
-def consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, int]:
-    """Consolidate duplicate schemas"""
+def smart_consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, int, dict]:
+    """
+    Consolidate duplicate schemas using smart analysis.
+    Combines old Steps 1 (consolidate) and 2 (rename) into one step.
+    """
     print_info(f"Loading {input_file}...")
     with open(input_file, 'r') as f:
         spec = json.load(f)
     
     original_count = len(spec.get('components', {}).get('schemas', {}))
     
-    print_info("Finding duplicate schemas...")
-    duplicates = find_duplicate_schemas(spec)
+    print_info("Analyzing schemas with SmartConsolidator...")
+    consolidator = SmartConsolidator(spec)
     
-    if not duplicates:
-        print_warning("No duplicates found")
-        return original_count, original_count
+    # Analyze duplicates
+    report = consolidator.analyze_duplicates()
+    print_info(f"Found {report['exact']['count']} exact duplicate groups ({report['exact']['total_schemas']} schemas)")
+    print_info(f"Found {report['structural']['count']} structural duplicate groups")
     
-    print_info(f"Found {len(duplicates)} duplicate groups")
+    if report['near_duplicates']['count'] > 0:
+        print_warning(f"Found {report['near_duplicates']['count']} near-duplicate groups (metadata differs)")
     
-    # Create mapping from old names to canonical names
-    rename_map = {}
-    for canonical, group in duplicates.items():
-        for name in group:
-            rename_map[name] = canonical
+    if report['constraint_only']['count'] > 0:
+        print_warning(f"Found {report['constraint_only']['count']} constraint-only groups (validation differs)")
     
-    # Remove duplicate schemas, keep canonical ones
-    schemas = spec['components']['schemas']
-    new_schemas = {}
-    for name, schema_def in schemas.items():
-        canonical = rename_map.get(name, name)
-        if canonical == name or canonical not in new_schemas:
-            new_schemas[canonical] = schema_def
+    # Consolidate
+    rename_map, stats = consolidator.consolidate()
     
-    spec['components']['schemas'] = new_schemas
+    if not rename_map:
+        print_warning("No duplicates to consolidate")
+        return original_count, original_count, {}
     
-    # Update all $ref references
-    def update_refs(obj):
-        if isinstance(obj, dict):
-            for key, value in obj.items():
-                if key == '$ref' and isinstance(value, str):
-                    if value.startswith('#/components/schemas/'):
-                        old_name = value.replace('#/components/schemas/', '')
-                        new_name = rename_map.get(old_name, old_name)
-                        obj[key] = f'#/components/schemas/{new_name}'
-                else:
-                    update_refs(value)
-        elif isinstance(obj, list):
-            for item in obj:
-                update_refs(item)
-    
-    update_refs(spec)
+    # Apply consolidation
+    new_spec = consolidator.apply_consolidation(rename_map)
     
     print_info(f"Writing {output_file}...")
     with open(output_file, 'w') as f:
-        json.dump(spec, f, indent=2, ensure_ascii=False)
+        json.dump(new_spec, f, indent=2, ensure_ascii=False)
     
-    new_count = len(new_schemas)
-    print_success(f"Consolidated {original_count} → {new_count} schemas (-{original_count - new_count})")
+    # Print top consolidated groups
+    print_info("Top consolidated groups:")
+    for name, schemas in sorted(stats['consolidated_names'].items(), key=lambda x: -len(x[1]))[:5]:
+        print(f"    {name} <- {len(schemas)} schemas")
     
-    return original_count, new_count
+    new_count = stats['final_count']
+    print_success(f"Consolidated {original_count} → {new_count} schemas (-{original_count - new_count}, -{(original_count-new_count)*100//original_count}%)")
+    
+    return original_count, new_count, stats
 
 
 # ============================================================================
-# STEP 2: RENAME SCHEMAS
-# ============================================================================
-
-def create_rename_map() -> dict:
-    """Create mapping from verbose names to common names"""
-    return {
-        # User responses
-        'CreateUserResponseDto': 'UserResponse',
-        'DisableUserResponseDto': 'UserResponse',
-        'EnableUserResponseDto': 'UserResponse',
-        'GetUserByShortUuidResponseDto': 'UserResponse',
-        'GetUserByUsernameResponseDto': 'UserResponse',
-        'GetUserByUuidResponseDto': 'UserResponse',
-        'ResetUserTrafficResponseDto': 'UserResponse',
-        'RevokeUserSubscriptionResponseDto': 'UserResponse',
-        'UpdateUserResponseDto': 'UserResponse',
-        
-        # Delete operations
-        'DeleteConfigProfileResponseDto': 'DeleteResponse',
-        'DeleteExternalSquadResponseDto': 'DeleteResponse',
-        'DeleteHostResponseDto': 'DeleteResponse',
-        'DeleteInfraProviderByUuidResponseDto': 'DeleteResponse',
-        'DeleteInternalSquadResponseDto': 'DeleteResponse',
-        'DeleteNodeResponseDto': 'DeleteResponse',
-        'DeleteSubscriptionTemplateResponseDto': 'DeleteResponse',
-        'DeleteUserResponseDto': 'DeleteResponse',
-        'DeletePasskeyResponseDto': 'DeleteResponse',
-        
-        # Event operations
-        'AddUsersToExternalSquadResponseDto': 'EventResponse',
-        'AddUsersToInternalSquadResponseDto': 'EventResponse',
-        'BulkAllResetTrafficUsersResponseDto': 'EventResponse',
-        'BulkAllUpdateUsersResponseDto': 'EventResponse',
-        'RemoveUsersFromExternalSquadResponseDto': 'EventResponse',
-        'RemoveUsersFromInternalSquadResponseDto': 'EventResponse',
-        'RestartAllNodesResponseDto': 'EventResponse',
-        'RestartNodeResponseDto': 'EventResponse',
-        
-        # Bulk responses
-        'BulkDeleteUsersByStatusResponseDto': 'BulkActionResponse',
-        'BulkDeleteUsersResponseDto': 'BulkActionResponse',
-        'BulkResetTrafficUsersResponseDto': 'BulkActionResponse',
-        'BulkRevokeUsersSubscriptionResponseDto': 'BulkActionResponse',
-        'BulkUpdateUsersResponseDto': 'BulkActionResponse',
-        'BulkUpdateUsersSquadsResponseDto': 'BulkActionResponse',
-        
-        # Bulk requests
-        'BulkDeleteHostsRequestDto': 'BulkUuidsRequest',
-        'BulkDisableHostsRequestDto': 'BulkUuidsRequest',
-        'BulkEnableHostsRequestDto': 'BulkUuidsRequest',
-        'BulkResetTrafficUsersRequestDto': 'BulkUuidsRequest',
-        'BulkRevokeUsersSubscriptionRequestDto': 'BulkUuidsRequest',
-        'BulkUuidsRequestDto': 'BulkUuidsRequest',
-        'BulkDeleteUsersRequestDto': 'BulkUuidsRequest',
-        
-        # Hosts
-        'BulkDeleteHostsResponseDto': 'HostListResponse',
-        'BulkDisableHostsResponseDto': 'HostListResponse',
-        'BulkEnableHostsResponseDto': 'HostListResponse',
-        'GetAllHostsResponseDto': 'HostListResponse',
-        'SetInboundToManyHostsResponseDto': 'HostListResponse',
-        'SetPortToManyHostsResponseDto': 'HostListResponse',
-        
-        # Auth tokens
-        'LoginResponseDto': 'TokenResponse',
-        'OAuth2CallbackResponseDto': 'TokenResponse',
-        'RegisterResponseDto': 'TokenResponse',
-        'TelegramCallbackResponseDto': 'TokenResponse',
-        'VerifyPasskeyAuthenticationResponseDto': 'TokenResponse',
-        
-        # Node responses
-        'CreateNodeResponseDto': 'NodeResponse',
-        'DisableNodeResponseDto': 'NodeResponse',
-        'EnableNodeResponseDto': 'NodeResponse',
-        'GetOneNodeResponseDto': 'NodeResponse',
-        'UpdateNodeResponseDto': 'NodeResponse',
-        
-        # Passkey/Auth
-        'GetPasskeyRegistrationOptionsResponseDto': 'PasskeyOptionsResponse',
-        'GetPasskeyAuthenticationOptionsResponseDto': 'PasskeyOptionsResponse',
-        'VerifyPasskeyAuthenticationRequestDto': 'PasskeyOptionsResponse',
-        'VerifyPasskeyRegistrationRequestDto': 'PasskeyOptionsResponse',
-        
-        # Settings
-        'GetRemnawaveSettingsResponseDto': 'SettingsResponse',
-        'UpdateRemnawaveSettingsResponseDto': 'SettingsResponse',
-        
-        # Passkeys
-        'GetAllPasskeysResponseDto': 'PasskeysResponse',
-        
-        # Tags
-        'GetAllTagsResponseDto': 'TagsResponse',
-        'GetAllHostTagsResponseDto': 'TagsResponse',
-        
-        # Inbounds
-        'GetAllInboundsResponseDto': 'InboundsResponse',
-        'GetInboundsByProfileUuidResponseDto': 'InboundsResponse',
-        
-        # Snippets
-        'CreateSnippetRequestDto': 'SnippetRequest',
-        'UpdateSnippetRequestDto': 'SnippetRequest',
-        'CreateSnippetResponseDto': 'SnippetsResponse',
-        'DeleteSnippetResponseDto': 'SnippetsResponse',
-        'GetSnippetsResponseDto': 'SnippetsResponse',
-        'UpdateSnippetResponseDto': 'SnippetsResponse',
-        
-        # Nodes
-        'GetAllNodesResponseDto': 'NodesResponse',
-        'ReorderNodeResponseDto': 'NodesResponse',
-        
-        # Subscription Settings
-        'GetSubscriptionSettingsResponseDto': 'SubscriptionSettingsResponse',
-        'UpdateSubscriptionSettingsResponseDto': 'SubscriptionSettingsResponse',
-        
-        # HWID Devices
-        'CreateUserHwidDeviceResponseDto': 'HwidDevicesResponse',
-        'DeleteAllUserHwidDevicesResponseDto': 'HwidDevicesResponse',
-        'DeleteUserHwidDeviceResponseDto': 'HwidDevicesResponse',
-        'GetUserHwidDevicesResponseDto': 'HwidDevicesResponse',
-        
-        # Templates
-        'CreateSubscriptionTemplateResponseDto': 'TemplateResponse',
-        'GetTemplateResponseDto': 'TemplateResponse',
-        'UpdateTemplateResponseDto': 'TemplateResponse',
-        
-        # Config Profiles
-        'CreateConfigProfileResponseDto': 'ConfigProfileResponse',
-        'GetConfigProfileByUuidResponseDto': 'ConfigProfileResponse',
-        'UpdateConfigProfileResponseDto': 'ConfigProfileResponse',
-        
-        # Internal Squads
-        'CreateInternalSquadResponseDto': 'InternalSquadResponse',
-        'GetInternalSquadByUuidResponseDto': 'InternalSquadResponse',
-        'UpdateInternalSquadResponseDto': 'InternalSquadResponse',
-        
-        # External Squads
-        'CreateExternalSquadResponseDto': 'ExternalSquadResponse',
-        'GetExternalSquadByUuidResponseDto': 'ExternalSquadResponse',
-        'UpdateExternalSquadResponseDto': 'ExternalSquadResponse',
-        
-        # Hosts
-        'CreateHostResponseDto': 'HostResponse',
-        'GetOneHostResponseDto': 'HostResponse',
-        'UpdateHostResponseDto': 'HostResponse',
-        
-        # Infra Providers
-        'CreateInfraProviderResponseDto': 'InfraProviderResponse',
-        'GetInfraProviderByUuidResponseDto': 'InfraProviderResponse',
-        'UpdateInfraProviderResponseDto': 'InfraProviderResponse',
-        
-        # Billing
-        'CreateInfraBillingNodeResponseDto': 'BillingNodesResponse',
-        'DeleteInfraBillingNodeByUuidResponseDto': 'BillingNodesResponse',
-        'GetInfraBillingNodesResponseDto': 'BillingNodesResponse',
-        'UpdateInfraBillingNodeResponseDto': 'BillingNodesResponse',
-        'CreateInfraBillingHistoryRecordResponseDto': 'BillingHistoryResponse',
-        'DeleteInfraBillingHistoryRecordByUuidResponseDto': 'BillingHistoryResponse',
-        'GetInfraBillingHistoryRecordsResponseDto': 'BillingHistoryResponse',
-        
-        # Subscriptions
-        'GetSubscriptionByShortUuidProtectedResponseDto': 'SubscriptionResponse',
-        'GetSubscriptionByUsernameResponseDto': 'SubscriptionResponse',
-        'GetSubscriptionByUuidResponseDto': 'SubscriptionResponse',
-        'GetSubscriptionInfoResponseDto': 'SubscriptionResponse',
-        
-        # Users
-        'GetUserByEmailResponseDto': 'UsersResponse',
-        'GetUserByTagResponseDto': 'UsersResponse',
-        'GetUserByTelegramIdResponseDto': 'UsersResponse',
-    }
-
-
-def rename_schemas(input_file: str, output_file: str) -> int:
-    """Rename schemas to common names"""
-    print_info(f"Loading {input_file}...")
-    with open(input_file, 'r') as f:
-        spec = json.load(f)
-    
-    rename_map = create_rename_map()
-    
-    # Rename schemas
-    schemas = spec.get('components', {}).get('schemas', {})
-    new_schemas = {}
-    renamed_count = 0
-    
-    for old_name, schema_def in schemas.items():
-        new_name = rename_map.get(old_name, old_name)
-        if new_name != old_name:
-            renamed_count += 1
-        new_schemas[new_name] = schema_def
-    
-    spec['components']['schemas'] = new_schemas
-    
-    # Update all $ref references
-    def update_refs(obj):
-        if isinstance(obj, dict):
-            for key, value in obj.items():
-                if key == '$ref' and isinstance(value, str):
-                    if value.startswith('#/components/schemas/'):
-                        old_name = value.replace('#/components/schemas/', '')
-                        new_name = rename_map.get(old_name, old_name)
-                        obj[key] = f'#/components/schemas/{new_name}'
-                else:
-                    update_refs(value)
-        elif isinstance(obj, list):
-            for item in obj:
-                update_refs(item)
-    
-    update_refs(spec)
-    
-    print_info(f"Writing {output_file}...")
-    with open(output_file, 'w') as f:
-        json.dump(spec, f, indent=2, ensure_ascii=False)
-    
-    print_success(f"Renamed {renamed_count} schemas to common names")
-    
-    return renamed_count
-
-
-# ============================================================================
-# STEP 3: GENERATE GO CLIENT WITH OGEN
+# STEP 2: GENERATE GO CLIENT WITH OGEN
 # ============================================================================
 
 def generate_ogen_client(spec_file: str) -> bool:
@@ -397,7 +149,7 @@ def generate_ogen_client(spec_file: str) -> bool:
 
 
 # ============================================================================
-# STEP 4: GENERATE CLIENT_EXT.GO
+# STEP 3: GENERATE CLIENT_EXT.GO
 # ============================================================================
 
 def parse_oas_client_methods(client_file: str) -> dict:
@@ -630,30 +382,25 @@ def main():
     print(f"{Colors.END}")
     print(f"Input: {input_spec}")
     
-    # File paths
-    consolidated_file = input_spec.replace('.json', '-consolidated.json')
-    renamed_file = input_spec.replace('.json', '-final.json')
+    # File paths - now we only need one output file since smart_consolidate does both steps
+    final_file = input_spec.replace('.json', '-final.json')
     client_gen_file = 'api/oas_client_gen.go'
     client_ext_file = 'api/client_ext.go'
     
     try:
-        # Step 1: Consolidate
-        print_step(1, 4, "CONSOLIDATE DUPLICATE SCHEMAS")
-        orig_count, new_count = consolidate_schemas(input_spec, consolidated_file)
+        # Step 1: Smart consolidate (combines old Steps 1 & 2)
+        print_step(1, 3, "SMART CONSOLIDATE SCHEMAS")
+        orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file)
         
-        # Step 2: Rename
-        print_step(2, 4, "RENAME SCHEMAS TO COMMON NAMES")
-        renamed_count = rename_schemas(consolidated_file, renamed_file)
-        
-        # Step 3: Generate with ogen
-        print_step(3, 4, "GENERATE GO CLIENT WITH OGEN")
-        if not generate_ogen_client(renamed_file):
+        # Step 2: Generate with ogen
+        print_step(2, 3, "GENERATE GO CLIENT WITH OGEN")
+        if not generate_ogen_client(final_file):
             print_error("Failed to generate Go client")
             sys.exit(1)
         
-        # Step 4: Generate client_ext
-        print_step(4, 4, "GENERATE CLIENT_EXT.GO WRAPPER")
-        ctrl_count, method_count = generate_client_ext(renamed_file, client_gen_file, client_ext_file)
+        # Step 3: Generate client_ext
+        print_step(3, 3, "GENERATE CLIENT_EXT.GO WRAPPER")
+        ctrl_count, method_count = generate_client_ext(final_file, client_gen_file, client_ext_file)
         
         # Summary
         print(f"\n{Colors.BOLD}{Colors.GREEN}")
@@ -663,12 +410,11 @@ def main():
         print(f"{Colors.END}")
         print(f"\n{Colors.BOLD}Results:{Colors.END}")
         print(f"  • Schemas:     {orig_count} → {new_count} (-{orig_count - new_count}, -{(orig_count-new_count)*100//orig_count}%)")
-        print(f"  • Renamed:     {renamed_count} schemas")
+        print(f"  • Groups:      {stats.get('duplicate_groups', 0)} consolidated")
         print(f"  • Controllers: {ctrl_count}")
         print(f"  • Methods:     {method_count}")
         print(f"\n{Colors.BOLD}Generated files:{Colors.END}")
-        print(f"  • {consolidated_file}")
-        print(f"  • {renamed_file}")
+        print(f"  • {final_file}")
         print(f"  • {client_gen_file}")
         print(f"  • {client_ext_file}")
         print()

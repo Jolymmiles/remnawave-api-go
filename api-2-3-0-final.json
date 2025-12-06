@@ -337,7 +337,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                  "$ref": "#/components/schemas/PasskeyOptions"
                 }
               }
             }
@@ -363,7 +363,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                "$ref": "#/components/schemas/PasskeyOptions"
               }
             }
           }
@@ -1696,7 +1696,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                  "$ref": "#/components/schemas/PasskeyOptions"
                 }
               }
             }
@@ -1717,7 +1717,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PasskeyOptionsResponse"
+                "$ref": "#/components/schemas/PasskeyOptions"
               }
             }
           }
@@ -3109,7 +3109,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersResponse"
+                  "$ref": "#/components/schemas/UserResponse2"
                 }
               }
             }
@@ -3237,7 +3237,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersResponse"
+                  "$ref": "#/components/schemas/UserResponse2"
                 }
               }
             }
@@ -3366,7 +3366,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersResponse"
+                  "$ref": "#/components/schemas/UserResponse2"
                 }
               }
             }
@@ -6094,7 +6094,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetTemplatesResponseDto"
+                  "$ref": "#/components/schemas/TemplatesResponse"
                 }
               }
             }
@@ -6702,7 +6702,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReorderSubscriptionTemplatesRequestDto"
+                "$ref": "#/components/schemas/ReorderRequest"
               }
             }
           }
@@ -6713,7 +6713,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetTemplatesResponseDto"
+                  "$ref": "#/components/schemas/TemplatesResponse"
                 }
               }
             }
@@ -7194,7 +7194,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetConfigProfilesResponseDto"
+                  "$ref": "#/components/schemas/ConfigProfilesResponse"
                 }
               }
             }
@@ -8184,7 +8184,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReorderSubscriptionTemplatesRequestDto"
+                "$ref": "#/components/schemas/ReorderRequest"
               }
             }
           }
@@ -8195,7 +8195,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetConfigProfilesResponseDto"
+                  "$ref": "#/components/schemas/ConfigProfilesResponse"
                 }
               }
             }
@@ -8806,7 +8806,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetInternalSquadsResponseDto"
+                  "$ref": "#/components/schemas/InternalSquadsResponse"
                 }
               }
             }
@@ -8929,7 +8929,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InternalSquadResponse"
+                  "$ref": "#/components/schemas/InternalSquadResponseResponse"
                 }
               }
             }
@@ -9055,7 +9055,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InternalSquadResponse"
+                  "$ref": "#/components/schemas/InternalSquadResponseResponse"
                 }
               }
             }
@@ -9185,7 +9185,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InternalSquadResponse"
+                  "$ref": "#/components/schemas/InternalSquadResponseResponse"
                 }
               }
             }
@@ -9806,7 +9806,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReorderSubscriptionTemplatesRequestDto"
+                "$ref": "#/components/schemas/ReorderRequest"
               }
             }
           }
@@ -9817,7 +9817,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetInternalSquadsResponseDto"
+                  "$ref": "#/components/schemas/InternalSquadsResponse"
                 }
               }
             }
@@ -9932,7 +9932,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetExternalSquadsResponseDto"
+                  "$ref": "#/components/schemas/ExternalSquadsResponse"
                 }
               }
             }
@@ -10055,7 +10055,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExternalSquadResponse"
+                  "$ref": "#/components/schemas/ExternalSquadResponseResponse"
                 }
               }
             }
@@ -10181,7 +10181,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExternalSquadResponse"
+                  "$ref": "#/components/schemas/ExternalSquadResponseResponse"
                 }
               }
             }
@@ -10311,7 +10311,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExternalSquadResponse"
+                  "$ref": "#/components/schemas/ExternalSquadResponseResponse"
                 }
               }
             }
@@ -10804,7 +10804,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReorderSubscriptionTemplatesRequestDto"
+                "$ref": "#/components/schemas/ReorderRequest"
               }
             }
           }
@@ -10815,7 +10815,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetExternalSquadsResponseDto"
+                  "$ref": "#/components/schemas/ExternalSquadsResponse"
                 }
               }
             }
@@ -15262,7 +15262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InfraProviderResponse"
+                  "$ref": "#/components/schemas/InfraProviderResponseResponse"
                 }
               }
             }
@@ -15385,7 +15385,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InfraProviderResponse"
+                  "$ref": "#/components/schemas/InfraProviderResponseResponse"
                 }
               }
             }
@@ -15509,7 +15509,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InfraProviderResponse"
+                  "$ref": "#/components/schemas/InfraProviderResponseResponse"
                 }
               }
             }
@@ -18514,7 +18514,7 @@
           }
         }
       },
-      "PasskeyOptionsResponse": {
+      "PasskeyOptions": {
         "type": "object",
         "properties": {
           "response": {}
@@ -19708,7 +19708,7 @@
           "response"
         ]
       },
-      "UsersResponse": {
+      "UserResponse2": {
         "type": "object",
         "properties": {
           "response": {
@@ -20979,7 +20979,7 @@
           "response"
         ]
       },
-      "GetTemplatesResponseDto": {
+      "TemplatesResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -21167,7 +21167,7 @@
           "templateType"
         ]
       },
-      "ReorderSubscriptionTemplatesRequestDto": {
+      "ReorderRequest": {
         "type": "object",
         "properties": {
           "items": {
@@ -21310,7 +21310,7 @@
           "response"
         ]
       },
-      "GetConfigProfilesResponseDto": {
+      "ConfigProfilesResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -21737,7 +21737,7 @@
           "snippet"
         ]
       },
-      "GetInternalSquadsResponseDto": {
+      "InternalSquadsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -21854,7 +21854,7 @@
           "response"
         ]
       },
-      "InternalSquadResponse": {
+      "InternalSquadResponseResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -22063,7 +22063,7 @@
           "uuid"
         ]
       },
-      "GetExternalSquadsResponseDto": {
+      "ExternalSquadsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -22305,7 +22305,7 @@
           "response"
         ]
       },
-      "ExternalSquadResponse": {
+      "ExternalSquadResponseResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -24808,7 +24808,7 @@
           "response"
         ]
       },
-      "InfraProviderResponse": {
+      "InfraProviderResponseResponse": {
         "type": "object",
         "properties": {
           "response": {

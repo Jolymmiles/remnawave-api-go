@@ -67,7 +67,7 @@ func encodeAuthControllerOauth2CallbackRequest(
 }
 
 func encodeAuthControllerPasskeyAuthenticationVerifyRequest(
-	req *PasskeyOptionsResponse,
+	req *PasskeyOptions,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -123,7 +123,7 @@ func encodeConfigProfileControllerCreateConfigProfileRequest(
 }
 
 func encodeConfigProfileControllerReorderConfigProfilesRequest(
-	req *ReorderSubscriptionTemplatesRequestDto,
+	req *ReorderRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -165,7 +165,7 @@ func encodeExternalSquadControllerCreateExternalSquadRequest(
 }
 
 func encodeExternalSquadControllerReorderExternalSquadsRequest(
-	req *ReorderSubscriptionTemplatesRequestDto,
+	req *ReorderRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -431,7 +431,7 @@ func encodeInternalSquadControllerCreateInternalSquadRequest(
 }
 
 func encodeInternalSquadControllerReorderInternalSquadsRequest(
-	req *ReorderSubscriptionTemplatesRequestDto,
+	req *ReorderRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -529,7 +529,7 @@ func encodePasskeyControllerDeletePasskeyRequest(
 }
 
 func encodePasskeyControllerPasskeyRegistrationVerifyRequest(
-	req *PasskeyOptionsResponse,
+	req *PasskeyOptions,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -641,7 +641,7 @@ func encodeSubscriptionTemplateControllerCreateTemplateRequest(
 }
 
 func encodeSubscriptionTemplateControllerReorderSubscriptionTemplatesRequest(
-	req *ReorderSubscriptionTemplatesRequestDto,
+	req *ReorderRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
