@@ -3109,7 +3109,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse2"
+                  "$ref": "#/components/schemas/UsersResponse"
                 }
               }
             }
@@ -3237,7 +3237,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse2"
+                  "$ref": "#/components/schemas/UsersResponse"
                 }
               }
             }
@@ -3366,7 +3366,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse2"
+                  "$ref": "#/components/schemas/UsersResponse"
                 }
               }
             }
@@ -19708,7 +19708,7 @@
           "response"
         ]
       },
-      "UserResponse2": {
+      "UsersResponse": {
         "type": "object",
         "properties": {
           "response": {

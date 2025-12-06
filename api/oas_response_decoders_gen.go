@@ -17431,7 +17431,7 @@ func decodeUsersControllerGetUserByTelegramIdResponse(resp *http.Response) (res 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UserResponse2
+			var response UsersResponse
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17959,7 +17959,7 @@ func decodeUsersControllerGetUsersByEmailResponse(resp *http.Response) (res User
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UserResponse2
+			var response UsersResponse
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18091,7 +18091,7 @@ func decodeUsersControllerGetUsersByTagResponse(resp *http.Response) (res UsersC
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UserResponse2
+			var response UsersResponse
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err

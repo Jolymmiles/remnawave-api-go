@@ -8879,78 +8879,6 @@ func TestUserResponse_EncodeDecode(t *testing.T) {
 	var typ2 UserResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUserResponse2_EncodeDecode(t *testing.T) {
-	var typ UserResponse2
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserResponse2
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestUserResponse2ResponseItem_EncodeDecode(t *testing.T) {
-	var typ UserResponse2ResponseItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserResponse2ResponseItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestUserResponse2ResponseItemActiveInternalSquadsItem_EncodeDecode(t *testing.T) {
-	var typ UserResponse2ResponseItemActiveInternalSquadsItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserResponse2ResponseItemActiveInternalSquadsItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestUserResponse2ResponseItemStatus_EncodeDecode(t *testing.T) {
-	var typ UserResponse2ResponseItemStatus
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserResponse2ResponseItemStatus
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestUserResponse2ResponseItemTrafficLimitStrategy_EncodeDecode(t *testing.T) {
-	var typ UserResponse2ResponseItemTrafficLimitStrategy
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserResponse2ResponseItemTrafficLimitStrategy
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestUserResponse2ResponseItemUserTraffic_EncodeDecode(t *testing.T) {
-	var typ UserResponse2ResponseItemUserTraffic
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserResponse2ResponseItemUserTraffic
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestUserResponseResponse_EncodeDecode(t *testing.T) {
 	var typ UserResponseResponse
 	typ.SetFake()
@@ -9981,6 +9909,78 @@ func TestUsersControllerUpdateUserInternalServerError_EncodeDecode(t *testing.T)
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 UsersControllerUpdateUserInternalServerError
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersResponse_EncodeDecode(t *testing.T) {
+	var typ UsersResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersResponseResponseItem_EncodeDecode(t *testing.T) {
+	var typ UsersResponseResponseItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersResponseResponseItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersResponseResponseItemActiveInternalSquadsItem_EncodeDecode(t *testing.T) {
+	var typ UsersResponseResponseItemActiveInternalSquadsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersResponseResponseItemActiveInternalSquadsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersResponseResponseItemStatus_EncodeDecode(t *testing.T) {
+	var typ UsersResponseResponseItemStatus
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersResponseResponseItemStatus
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersResponseResponseItemTrafficLimitStrategy_EncodeDecode(t *testing.T) {
+	var typ UsersResponseResponseItemTrafficLimitStrategy
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersResponseResponseItemTrafficLimitStrategy
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersResponseResponseItemUserTraffic_EncodeDecode(t *testing.T) {
+	var typ UsersResponseResponseItemUserTraffic
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersResponseResponseItemUserTraffic
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestUsersStatsControllerGetUserUsageByRangeBadRequest_EncodeDecode(t *testing.T) {

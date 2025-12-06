@@ -13806,24 +13806,6 @@ func (s *OptUpdateUserRequestDtoTrafficLimitStrategy) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUserResponse2ResponseItemStatus) SetFake() {
-	var elem UserResponse2ResponseItemStatus
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptUserResponse2ResponseItemTrafficLimitStrategy) SetFake() {
-	var elem UserResponse2ResponseItemTrafficLimitStrategy
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptUserResponseResponseStatus) SetFake() {
 	var elem UserResponseResponseStatus
 	{
@@ -13835,6 +13817,24 @@ func (s *OptUserResponseResponseStatus) SetFake() {
 // SetFake set fake values.
 func (s *OptUserResponseResponseTrafficLimitStrategy) SetFake() {
 	var elem UserResponseResponseTrafficLimitStrategy
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptUsersResponseResponseItemStatus) SetFake() {
+	var elem UsersResponseResponseItemStatus
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptUsersResponseResponseItemTrafficLimitStrategy) SetFake() {
+	var elem UsersResponseResponseItemTrafficLimitStrategy
 	{
 		elem.SetFake()
 	}
@@ -19066,216 +19066,6 @@ func (s *UserResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UserResponse2) SetFake() {
-	{
-		{
-			s.Response = nil
-			for i := 0; i < 0; i++ {
-				var elem UserResponse2ResponseItem
-				{
-					elem.SetFake()
-				}
-				s.Response = append(s.Response, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UserResponse2ResponseItem) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.ShortUuid = "string"
-		}
-	}
-	{
-		{
-			s.Username = "string"
-		}
-	}
-	{
-		{
-			s.Status.SetFake()
-		}
-	}
-	{
-		{
-			s.TrafficLimitBytes.SetFake()
-		}
-	}
-	{
-		{
-			s.TrafficLimitStrategy.SetFake()
-		}
-	}
-	{
-		{
-			s.ExpireAt = time.Now()
-		}
-	}
-	{
-		{
-			s.TelegramId.SetFake()
-		}
-	}
-	{
-		{
-			s.Email.SetFake()
-		}
-	}
-	{
-		{
-			s.Description.SetFake()
-		}
-	}
-	{
-		{
-			s.Tag.SetFake()
-		}
-	}
-	{
-		{
-			s.HwidDeviceLimit.SetFake()
-		}
-	}
-	{
-		{
-			s.ExternalSquadUuid.SetFake()
-		}
-	}
-	{
-		{
-			s.TrojanPassword = "string"
-		}
-	}
-	{
-		{
-			s.VlessUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.SsPassword = "string"
-		}
-	}
-	{
-		{
-			s.LastTriggeredThreshold.SetFake()
-		}
-	}
-	{
-		{
-			s.SubRevokedAt.SetFake()
-		}
-	}
-	{
-		{
-			s.SubLastUserAgent.SetFake()
-		}
-	}
-	{
-		{
-			s.SubLastOpenedAt.SetFake()
-		}
-	}
-	{
-		{
-			s.LastTrafficResetAt.SetFake()
-		}
-	}
-	{
-		{
-			s.CreatedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.UpdatedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.SubscriptionUrl = "string"
-		}
-	}
-	{
-		{
-			s.ActiveInternalSquads = nil
-			for i := 0; i < 0; i++ {
-				var elem UserResponse2ResponseItemActiveInternalSquadsItem
-				{
-					elem.SetFake()
-				}
-				s.ActiveInternalSquads = append(s.ActiveInternalSquads, elem)
-			}
-		}
-	}
-	{
-		{
-			s.UserTraffic.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UserResponse2ResponseItemActiveInternalSquadsItem) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.Name = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UserResponse2ResponseItemStatus) SetFake() {
-	*s = UserResponse2ResponseItemStatusACTIVE
-}
-
-// SetFake set fake values.
-func (s *UserResponse2ResponseItemTrafficLimitStrategy) SetFake() {
-	*s = UserResponse2ResponseItemTrafficLimitStrategyNORESET
-}
-
-// SetFake set fake values.
-func (s *UserResponse2ResponseItemUserTraffic) SetFake() {
-	{
-		{
-			s.UsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
-			s.LifetimeUsedTrafficBytes = float64(0)
-		}
-	}
-	{
-		{
-			s.OnlineAt.SetFake()
-		}
-	}
-	{
-		{
-			s.FirstConnectedAt.SetFake()
-		}
-	}
-	{
-		{
-			s.LastConnectedNodeUuid.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *UserResponseResponse) SetFake() {
 	{
 		{
@@ -21652,6 +21442,216 @@ func (s *UsersControllerUpdateUserInternalServerError) SetFake() {
 	{
 		{
 			s.ErrorCode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UsersResponse) SetFake() {
+	{
+		{
+			s.Response = nil
+			for i := 0; i < 0; i++ {
+				var elem UsersResponseResponseItem
+				{
+					elem.SetFake()
+				}
+				s.Response = append(s.Response, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UsersResponseResponseItem) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ShortUuid = "string"
+		}
+	}
+	{
+		{
+			s.Username = "string"
+		}
+	}
+	{
+		{
+			s.Status.SetFake()
+		}
+	}
+	{
+		{
+			s.TrafficLimitBytes.SetFake()
+		}
+	}
+	{
+		{
+			s.TrafficLimitStrategy.SetFake()
+		}
+	}
+	{
+		{
+			s.ExpireAt = time.Now()
+		}
+	}
+	{
+		{
+			s.TelegramId.SetFake()
+		}
+	}
+	{
+		{
+			s.Email.SetFake()
+		}
+	}
+	{
+		{
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Tag.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidDeviceLimit.SetFake()
+		}
+	}
+	{
+		{
+			s.ExternalSquadUuid.SetFake()
+		}
+	}
+	{
+		{
+			s.TrojanPassword = "string"
+		}
+	}
+	{
+		{
+			s.VlessUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.SsPassword = "string"
+		}
+	}
+	{
+		{
+			s.LastTriggeredThreshold.SetFake()
+		}
+	}
+	{
+		{
+			s.SubRevokedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastUserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.SubLastOpenedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastTrafficResetAt.SetFake()
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.SubscriptionUrl = "string"
+		}
+	}
+	{
+		{
+			s.ActiveInternalSquads = nil
+			for i := 0; i < 0; i++ {
+				var elem UsersResponseResponseItemActiveInternalSquadsItem
+				{
+					elem.SetFake()
+				}
+				s.ActiveInternalSquads = append(s.ActiveInternalSquads, elem)
+			}
+		}
+	}
+	{
+		{
+			s.UserTraffic.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UsersResponseResponseItemStatus) SetFake() {
+	*s = UsersResponseResponseItemStatusACTIVE
+}
+
+// SetFake set fake values.
+func (s *UsersResponseResponseItemTrafficLimitStrategy) SetFake() {
+	*s = UsersResponseResponseItemTrafficLimitStrategyNORESET
+}
+
+// SetFake set fake values.
+func (s *UsersResponseResponseItemUserTraffic) SetFake() {
+	{
+		{
+			s.UsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.LifetimeUsedTrafficBytes = float64(0)
+		}
+	}
+	{
+		{
+			s.OnlineAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FirstConnectedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.LastConnectedNodeUuid.SetFake()
 		}
 	}
 }

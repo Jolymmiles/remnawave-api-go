@@ -377,15 +377,15 @@ class SmartConsolidator:
         
         # === MEDIUM PRIORITY: Entity-specific patterns ===
         
+        # Users list response (multiple users) - MUST BE BEFORE UserResponse!
+        'UsersResponse': [
+            r'^GetUserBy(Email|Tag|TelegramId)\w*Response',
+        ],
         # User single responses (CRUD on single user)
         'UserResponse': [
             r'^(Create|Update|Disable|Enable)UserResponse',
-            r'^GetUser(By\w+)?Response',
+            r'^GetUserBy(Uuid|Username|ShortUuid)\w*Response',
             r'^(Reset|Revoke)User\w+Response',
-        ],
-        # Users list response (multiple users)  
-        'UsersResponse': [
-            r'^GetUser(By(Email|Tag|TelegramId))\w*Response',
         ],
         # Host list responses  
         'HostListResponse': [
