@@ -11,123 +11,6 @@ import (
 	"github.com/google/uuid"
 )
 
-// Ref: #/components/schemas/AllHwidDevices
-type AllHwidDevices struct {
-	Devices []AllHwidDevicesDevicesItem `json:"devices"`
-	Total   float64                     `json:"total"`
-}
-
-// GetDevices returns the value of Devices.
-func (s *AllHwidDevices) GetDevices() []AllHwidDevicesDevicesItem {
-	return s.Devices
-}
-
-// GetTotal returns the value of Total.
-func (s *AllHwidDevices) GetTotal() float64 {
-	return s.Total
-}
-
-// SetDevices sets the value of Devices.
-func (s *AllHwidDevices) SetDevices(val []AllHwidDevicesDevicesItem) {
-	s.Devices = val
-}
-
-// SetTotal sets the value of Total.
-func (s *AllHwidDevices) SetTotal(val float64) {
-	s.Total = val
-}
-
-type AllHwidDevicesDevicesItem struct {
-	Hwid        string    `json:"hwid"`
-	UserUuid    uuid.UUID `json:"userUuid"`
-	Platform    NilString `json:"platform"`
-	OsVersion   NilString `json:"osVersion"`
-	DeviceModel NilString `json:"deviceModel"`
-	UserAgent   NilString `json:"userAgent"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
-}
-
-// GetHwid returns the value of Hwid.
-func (s *AllHwidDevicesDevicesItem) GetHwid() string {
-	return s.Hwid
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *AllHwidDevicesDevicesItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// GetPlatform returns the value of Platform.
-func (s *AllHwidDevicesDevicesItem) GetPlatform() NilString {
-	return s.Platform
-}
-
-// GetOsVersion returns the value of OsVersion.
-func (s *AllHwidDevicesDevicesItem) GetOsVersion() NilString {
-	return s.OsVersion
-}
-
-// GetDeviceModel returns the value of DeviceModel.
-func (s *AllHwidDevicesDevicesItem) GetDeviceModel() NilString {
-	return s.DeviceModel
-}
-
-// GetUserAgent returns the value of UserAgent.
-func (s *AllHwidDevicesDevicesItem) GetUserAgent() NilString {
-	return s.UserAgent
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *AllHwidDevicesDevicesItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *AllHwidDevicesDevicesItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetHwid sets the value of Hwid.
-func (s *AllHwidDevicesDevicesItem) SetHwid(val string) {
-	s.Hwid = val
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *AllHwidDevicesDevicesItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetPlatform sets the value of Platform.
-func (s *AllHwidDevicesDevicesItem) SetPlatform(val NilString) {
-	s.Platform = val
-}
-
-// SetOsVersion sets the value of OsVersion.
-func (s *AllHwidDevicesDevicesItem) SetOsVersion(val NilString) {
-	s.OsVersion = val
-}
-
-// SetDeviceModel sets the value of DeviceModel.
-func (s *AllHwidDevicesDevicesItem) SetDeviceModel(val NilString) {
-	s.DeviceModel = val
-}
-
-// SetUserAgent sets the value of UserAgent.
-func (s *AllHwidDevicesDevicesItem) SetUserAgent(val NilString) {
-	s.UserAgent = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *AllHwidDevicesDevicesItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *AllHwidDevicesDevicesItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
 type Authorization struct {
 	Token string
 	Roles []string
@@ -5315,20 +5198,136 @@ func (s *GenerateX25519ResponseDtoResponseKeypairsItem) SetPrivateKey(val string
 
 // Ref: #/components/schemas/GetAllHwidDevicesResponseDto
 type GetAllHwidDevicesResponseDto struct {
-	Response AllHwidDevices `json:"response"`
+	Response GetAllHwidDevicesResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetAllHwidDevicesResponseDto) GetResponse() AllHwidDevices {
+func (s *GetAllHwidDevicesResponseDto) GetResponse() GetAllHwidDevicesResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetAllHwidDevicesResponseDto) SetResponse(val AllHwidDevices) {
+func (s *GetAllHwidDevicesResponseDto) SetResponse(val GetAllHwidDevicesResponseDtoResponse) {
 	s.Response = val
 }
 
 func (*GetAllHwidDevicesResponseDto) hwidUserDevicesControllerGetAllUsersRes() {}
+
+type GetAllHwidDevicesResponseDtoResponse struct {
+	Devices []GetAllHwidDevicesResponseDtoResponseDevicesItem `json:"devices"`
+	Total   float64                                           `json:"total"`
+}
+
+// GetDevices returns the value of Devices.
+func (s *GetAllHwidDevicesResponseDtoResponse) GetDevices() []GetAllHwidDevicesResponseDtoResponseDevicesItem {
+	return s.Devices
+}
+
+// GetTotal returns the value of Total.
+func (s *GetAllHwidDevicesResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetDevices sets the value of Devices.
+func (s *GetAllHwidDevicesResponseDtoResponse) SetDevices(val []GetAllHwidDevicesResponseDtoResponseDevicesItem) {
+	s.Devices = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetAllHwidDevicesResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type GetAllHwidDevicesResponseDtoResponseDevicesItem struct {
+	Hwid        string    `json:"hwid"`
+	UserUuid    uuid.UUID `json:"userUuid"`
+	Platform    NilString `json:"platform"`
+	OsVersion   NilString `json:"osVersion"`
+	DeviceModel NilString `json:"deviceModel"`
+	UserAgent   NilString `json:"userAgent"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetHwid returns the value of Hwid.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetHwid() string {
+	return s.Hwid
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetPlatform returns the value of Platform.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetPlatform() NilString {
+	return s.Platform
+}
+
+// GetOsVersion returns the value of OsVersion.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetOsVersion() NilString {
+	return s.OsVersion
+}
+
+// GetDeviceModel returns the value of DeviceModel.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetDeviceModel() NilString {
+	return s.DeviceModel
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetHwid sets the value of Hwid.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetHwid(val string) {
+	s.Hwid = val
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetPlatform sets the value of Platform.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetPlatform(val NilString) {
+	s.Platform = val
+}
+
+// SetOsVersion sets the value of OsVersion.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetOsVersion(val NilString) {
+	s.OsVersion = val
+}
+
+// SetDeviceModel sets the value of DeviceModel.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetDeviceModel(val NilString) {
+	s.DeviceModel = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetUserAgent(val NilString) {
+	s.UserAgent = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetAllHwidDevicesResponseDtoResponseDevicesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
 
 // Ref: #/components/schemas/GetAllSubscriptionsResponseDto
 type GetAllSubscriptionsResponseDto struct {
@@ -10213,20 +10212,103 @@ func (*GetStatusResponseDtoStatusCode) authControllerGetStatusRes() {}
 
 // Ref: #/components/schemas/GetSubscriptionRequestHistoryResponseDto
 type GetSubscriptionRequestHistoryResponseDto struct {
-	Response UserSubscriptionHistory `json:"response"`
+	Response GetSubscriptionRequestHistoryResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetSubscriptionRequestHistoryResponseDto) GetResponse() UserSubscriptionHistory {
+func (s *GetSubscriptionRequestHistoryResponseDto) GetResponse() GetSubscriptionRequestHistoryResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetSubscriptionRequestHistoryResponseDto) SetResponse(val UserSubscriptionHistory) {
+func (s *GetSubscriptionRequestHistoryResponseDto) SetResponse(val GetSubscriptionRequestHistoryResponseDtoResponse) {
 	s.Response = val
 }
 
 func (*GetSubscriptionRequestHistoryResponseDto) userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes() {
+}
+
+type GetSubscriptionRequestHistoryResponseDtoResponse struct {
+	Records []GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem `json:"records"`
+	Total   float64                                                       `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponse) GetRecords() []GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponse) SetRecords(val []GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem struct {
+	ID        float64   `json:"id"`
+	UserUuid  uuid.UUID `json:"userUuid"`
+	RequestIp NilString `json:"requestIp"`
+	UserAgent NilString `json:"userAgent"`
+	RequestAt time.Time `json:"requestAt"`
+}
+
+// GetID returns the value of ID.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetID() float64 {
+	return s.ID
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetRequestIp returns the value of RequestIp.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestIp() NilString {
+	return s.RequestIp
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// GetRequestAt returns the value of RequestAt.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestAt() time.Time {
+	return s.RequestAt
+}
+
+// SetID sets the value of ID.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetID(val float64) {
+	s.ID = val
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetRequestIp sets the value of RequestIp.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestIp(val NilString) {
+	s.RequestIp = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserAgent(val NilString) {
+	s.UserAgent = val
+}
+
+// SetRequestAt sets the value of RequestAt.
+func (s *GetSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestAt(val time.Time) {
+	s.RequestAt = val
 }
 
 // Ref: #/components/schemas/GetSubscriptionRequestHistoryStatsResponseDto
@@ -10629,20 +10711,103 @@ func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsIte
 
 // Ref: #/components/schemas/GetUserSubscriptionRequestHistoryResponseDto
 type GetUserSubscriptionRequestHistoryResponseDto struct {
-	Response UserSubscriptionHistory `json:"response"`
+	Response GetUserSubscriptionRequestHistoryResponseDtoResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetUserSubscriptionRequestHistoryResponseDto) GetResponse() UserSubscriptionHistory {
+func (s *GetUserSubscriptionRequestHistoryResponseDto) GetResponse() GetUserSubscriptionRequestHistoryResponseDtoResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetUserSubscriptionRequestHistoryResponseDto) SetResponse(val UserSubscriptionHistory) {
+func (s *GetUserSubscriptionRequestHistoryResponseDto) SetResponse(val GetUserSubscriptionRequestHistoryResponseDtoResponse) {
 	s.Response = val
 }
 
 func (*GetUserSubscriptionRequestHistoryResponseDto) usersControllerGetUserSubscriptionRequestHistoryRes() {
+}
+
+type GetUserSubscriptionRequestHistoryResponseDtoResponse struct {
+	Total   float64                                                           `json:"total"`
+	Records []GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem `json:"records"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetRecords returns the value of Records.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) GetRecords() []GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem {
+	return s.Records
+}
+
+// SetTotal sets the value of Total.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetRecords sets the value of Records.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponse) SetRecords(val []GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) {
+	s.Records = val
+}
+
+type GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem struct {
+	ID        float64   `json:"id"`
+	UserUuid  uuid.UUID `json:"userUuid"`
+	RequestAt time.Time `json:"requestAt"`
+	RequestIp NilString `json:"requestIp"`
+	UserAgent NilString `json:"userAgent"`
+}
+
+// GetID returns the value of ID.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetID() float64 {
+	return s.ID
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetRequestAt returns the value of RequestAt.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestAt() time.Time {
+	return s.RequestAt
+}
+
+// GetRequestIp returns the value of RequestIp.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetRequestIp() NilString {
+	return s.RequestIp
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// SetID sets the value of ID.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetID(val float64) {
+	s.ID = val
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetRequestAt sets the value of RequestAt.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestAt(val time.Time) {
+	s.RequestAt = val
+}
+
+// SetRequestIp sets the value of RequestIp.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetRequestIp(val NilString) {
+	s.RequestIp = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *GetUserSubscriptionRequestHistoryResponseDtoResponseRecordsItem) SetUserAgent(val NilString) {
+	s.UserAgent = val
 }
 
 // Ref: #/components/schemas/GetUserUsageByRangeResponseDto
@@ -10731,370 +10896,18 @@ func (s *GetUserUsageByRangeResponseDtoResponseItem) SetDate(val string) {
 	s.Date = val
 }
 
-// Ref: #/components/schemas/HostItem
-type HostItem struct {
-	UUID                   uuid.UUID                `json:"uuid"`
-	ViewPosition           int                      `json:"viewPosition"`
-	Remark                 string                   `json:"remark"`
-	Address                string                   `json:"address"`
-	Port                   int                      `json:"port"`
-	Path                   NilString                `json:"path"`
-	Sni                    NilString                `json:"sni"`
-	Host                   NilString                `json:"host"`
-	Alpn                   NilString                `json:"alpn"`
-	Fingerprint            NilString                `json:"fingerprint"`
-	IsDisabled             OptBool                  `json:"isDisabled"`
-	SecurityLayer          OptHostItemSecurityLayer `json:"securityLayer"`
-	XHttpExtraParams       jx.Raw                   `json:"xHttpExtraParams"`
-	MuxParams              jx.Raw                   `json:"muxParams"`
-	SockoptParams          jx.Raw                   `json:"sockoptParams"`
-	Inbound                HostItemInbound          `json:"inbound"`
-	ServerDescription      NilString                `json:"serverDescription"`
-	Tag                    NilString                `json:"tag"`
-	IsHidden               OptBool                  `json:"isHidden"`
-	OverrideSniFromAddress OptBool                  `json:"overrideSniFromAddress"`
-	VlessRouteId           NilInt                   `json:"vlessRouteId"`
-	AllowInsecure          OptBool                  `json:"allowInsecure"`
-	ShuffleHost            bool                     `json:"shuffleHost"`
-	MihomoX25519           bool                     `json:"mihomoX25519"`
-	Nodes                  []uuid.UUID              `json:"nodes"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *HostItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *HostItem) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetRemark returns the value of Remark.
-func (s *HostItem) GetRemark() string {
-	return s.Remark
-}
-
-// GetAddress returns the value of Address.
-func (s *HostItem) GetAddress() string {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *HostItem) GetPort() int {
-	return s.Port
-}
-
-// GetPath returns the value of Path.
-func (s *HostItem) GetPath() NilString {
-	return s.Path
-}
-
-// GetSni returns the value of Sni.
-func (s *HostItem) GetSni() NilString {
-	return s.Sni
-}
-
-// GetHost returns the value of Host.
-func (s *HostItem) GetHost() NilString {
-	return s.Host
-}
-
-// GetAlpn returns the value of Alpn.
-func (s *HostItem) GetAlpn() NilString {
-	return s.Alpn
-}
-
-// GetFingerprint returns the value of Fingerprint.
-func (s *HostItem) GetFingerprint() NilString {
-	return s.Fingerprint
-}
-
-// GetIsDisabled returns the value of IsDisabled.
-func (s *HostItem) GetIsDisabled() OptBool {
-	return s.IsDisabled
-}
-
-// GetSecurityLayer returns the value of SecurityLayer.
-func (s *HostItem) GetSecurityLayer() OptHostItemSecurityLayer {
-	return s.SecurityLayer
-}
-
-// GetXHttpExtraParams returns the value of XHttpExtraParams.
-func (s *HostItem) GetXHttpExtraParams() jx.Raw {
-	return s.XHttpExtraParams
-}
-
-// GetMuxParams returns the value of MuxParams.
-func (s *HostItem) GetMuxParams() jx.Raw {
-	return s.MuxParams
-}
-
-// GetSockoptParams returns the value of SockoptParams.
-func (s *HostItem) GetSockoptParams() jx.Raw {
-	return s.SockoptParams
-}
-
-// GetInbound returns the value of Inbound.
-func (s *HostItem) GetInbound() HostItemInbound {
-	return s.Inbound
-}
-
-// GetServerDescription returns the value of ServerDescription.
-func (s *HostItem) GetServerDescription() NilString {
-	return s.ServerDescription
-}
-
-// GetTag returns the value of Tag.
-func (s *HostItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetIsHidden returns the value of IsHidden.
-func (s *HostItem) GetIsHidden() OptBool {
-	return s.IsHidden
-}
-
-// GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
-func (s *HostItem) GetOverrideSniFromAddress() OptBool {
-	return s.OverrideSniFromAddress
-}
-
-// GetVlessRouteId returns the value of VlessRouteId.
-func (s *HostItem) GetVlessRouteId() NilInt {
-	return s.VlessRouteId
-}
-
-// GetAllowInsecure returns the value of AllowInsecure.
-func (s *HostItem) GetAllowInsecure() OptBool {
-	return s.AllowInsecure
-}
-
-// GetShuffleHost returns the value of ShuffleHost.
-func (s *HostItem) GetShuffleHost() bool {
-	return s.ShuffleHost
-}
-
-// GetMihomoX25519 returns the value of MihomoX25519.
-func (s *HostItem) GetMihomoX25519() bool {
-	return s.MihomoX25519
-}
-
-// GetNodes returns the value of Nodes.
-func (s *HostItem) GetNodes() []uuid.UUID {
-	return s.Nodes
-}
-
-// SetUUID sets the value of UUID.
-func (s *HostItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *HostItem) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetRemark sets the value of Remark.
-func (s *HostItem) SetRemark(val string) {
-	s.Remark = val
-}
-
-// SetAddress sets the value of Address.
-func (s *HostItem) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *HostItem) SetPort(val int) {
-	s.Port = val
-}
-
-// SetPath sets the value of Path.
-func (s *HostItem) SetPath(val NilString) {
-	s.Path = val
-}
-
-// SetSni sets the value of Sni.
-func (s *HostItem) SetSni(val NilString) {
-	s.Sni = val
-}
-
-// SetHost sets the value of Host.
-func (s *HostItem) SetHost(val NilString) {
-	s.Host = val
-}
-
-// SetAlpn sets the value of Alpn.
-func (s *HostItem) SetAlpn(val NilString) {
-	s.Alpn = val
-}
-
-// SetFingerprint sets the value of Fingerprint.
-func (s *HostItem) SetFingerprint(val NilString) {
-	s.Fingerprint = val
-}
-
-// SetIsDisabled sets the value of IsDisabled.
-func (s *HostItem) SetIsDisabled(val OptBool) {
-	s.IsDisabled = val
-}
-
-// SetSecurityLayer sets the value of SecurityLayer.
-func (s *HostItem) SetSecurityLayer(val OptHostItemSecurityLayer) {
-	s.SecurityLayer = val
-}
-
-// SetXHttpExtraParams sets the value of XHttpExtraParams.
-func (s *HostItem) SetXHttpExtraParams(val jx.Raw) {
-	s.XHttpExtraParams = val
-}
-
-// SetMuxParams sets the value of MuxParams.
-func (s *HostItem) SetMuxParams(val jx.Raw) {
-	s.MuxParams = val
-}
-
-// SetSockoptParams sets the value of SockoptParams.
-func (s *HostItem) SetSockoptParams(val jx.Raw) {
-	s.SockoptParams = val
-}
-
-// SetInbound sets the value of Inbound.
-func (s *HostItem) SetInbound(val HostItemInbound) {
-	s.Inbound = val
-}
-
-// SetServerDescription sets the value of ServerDescription.
-func (s *HostItem) SetServerDescription(val NilString) {
-	s.ServerDescription = val
-}
-
-// SetTag sets the value of Tag.
-func (s *HostItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetIsHidden sets the value of IsHidden.
-func (s *HostItem) SetIsHidden(val OptBool) {
-	s.IsHidden = val
-}
-
-// SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
-func (s *HostItem) SetOverrideSniFromAddress(val OptBool) {
-	s.OverrideSniFromAddress = val
-}
-
-// SetVlessRouteId sets the value of VlessRouteId.
-func (s *HostItem) SetVlessRouteId(val NilInt) {
-	s.VlessRouteId = val
-}
-
-// SetAllowInsecure sets the value of AllowInsecure.
-func (s *HostItem) SetAllowInsecure(val OptBool) {
-	s.AllowInsecure = val
-}
-
-// SetShuffleHost sets the value of ShuffleHost.
-func (s *HostItem) SetShuffleHost(val bool) {
-	s.ShuffleHost = val
-}
-
-// SetMihomoX25519 sets the value of MihomoX25519.
-func (s *HostItem) SetMihomoX25519(val bool) {
-	s.MihomoX25519 = val
-}
-
-// SetNodes sets the value of Nodes.
-func (s *HostItem) SetNodes(val []uuid.UUID) {
-	s.Nodes = val
-}
-
-type HostItemInbound struct {
-	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
-	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
-}
-
-// GetConfigProfileUuid returns the value of ConfigProfileUuid.
-func (s *HostItemInbound) GetConfigProfileUuid() NilUUID {
-	return s.ConfigProfileUuid
-}
-
-// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
-func (s *HostItemInbound) GetConfigProfileInboundUuid() NilUUID {
-	return s.ConfigProfileInboundUuid
-}
-
-// SetConfigProfileUuid sets the value of ConfigProfileUuid.
-func (s *HostItemInbound) SetConfigProfileUuid(val NilUUID) {
-	s.ConfigProfileUuid = val
-}
-
-// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
-func (s *HostItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
-	s.ConfigProfileInboundUuid = val
-}
-
-type HostItemSecurityLayer string
-
-const (
-	HostItemSecurityLayerDEFAULT HostItemSecurityLayer = "DEFAULT"
-	HostItemSecurityLayerTLS     HostItemSecurityLayer = "TLS"
-	HostItemSecurityLayerNONE    HostItemSecurityLayer = "NONE"
-)
-
-// AllValues returns all HostItemSecurityLayer values.
-func (HostItemSecurityLayer) AllValues() []HostItemSecurityLayer {
-	return []HostItemSecurityLayer{
-		HostItemSecurityLayerDEFAULT,
-		HostItemSecurityLayerTLS,
-		HostItemSecurityLayerNONE,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s HostItemSecurityLayer) MarshalText() ([]byte, error) {
-	switch s {
-	case HostItemSecurityLayerDEFAULT:
-		return []byte(s), nil
-	case HostItemSecurityLayerTLS:
-		return []byte(s), nil
-	case HostItemSecurityLayerNONE:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *HostItemSecurityLayer) UnmarshalText(data []byte) error {
-	switch HostItemSecurityLayer(data) {
-	case HostItemSecurityLayerDEFAULT:
-		*s = HostItemSecurityLayerDEFAULT
-		return nil
-	case HostItemSecurityLayerTLS:
-		*s = HostItemSecurityLayerTLS
-		return nil
-	case HostItemSecurityLayerNONE:
-		*s = HostItemSecurityLayerNONE
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
 // Ref: #/components/schemas/HostListResponse
 type HostListResponse struct {
-	Response []HostItem `json:"response"`
+	Response []HostListResponseResponseItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HostListResponse) GetResponse() []HostItem {
+func (s *HostListResponse) GetResponse() []HostListResponseResponseItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HostListResponse) SetResponse(val []HostItem) {
+func (s *HostListResponse) SetResponse(val []HostListResponseResponseItem) {
 	s.Response = val
 }
 
@@ -11105,24 +10918,726 @@ func (*HostListResponse) hostsBulkActionsControllerSetInboundToHostsRes() {}
 func (*HostListResponse) hostsBulkActionsControllerSetPortToHostsRes()    {}
 func (*HostListResponse) hostsControllerGetAllHostsRes()                  {}
 
+type HostListResponseResponseItem struct {
+	UUID                   uuid.UUID                                    `json:"uuid"`
+	ViewPosition           int                                          `json:"viewPosition"`
+	Remark                 string                                       `json:"remark"`
+	Address                string                                       `json:"address"`
+	Port                   int                                          `json:"port"`
+	Path                   NilString                                    `json:"path"`
+	Sni                    NilString                                    `json:"sni"`
+	Host                   NilString                                    `json:"host"`
+	Alpn                   NilString                                    `json:"alpn"`
+	Fingerprint            NilString                                    `json:"fingerprint"`
+	IsDisabled             OptBool                                      `json:"isDisabled"`
+	SecurityLayer          OptHostListResponseResponseItemSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams       jx.Raw                                       `json:"xHttpExtraParams"`
+	MuxParams              jx.Raw                                       `json:"muxParams"`
+	SockoptParams          jx.Raw                                       `json:"sockoptParams"`
+	Inbound                HostListResponseResponseItemInbound          `json:"inbound"`
+	ServerDescription      NilString                                    `json:"serverDescription"`
+	Tag                    NilString                                    `json:"tag"`
+	IsHidden               OptBool                                      `json:"isHidden"`
+	OverrideSniFromAddress OptBool                                      `json:"overrideSniFromAddress"`
+	VlessRouteId           NilInt                                       `json:"vlessRouteId"`
+	AllowInsecure          OptBool                                      `json:"allowInsecure"`
+	ShuffleHost            bool                                         `json:"shuffleHost"`
+	MihomoX25519           bool                                         `json:"mihomoX25519"`
+	Nodes                  []uuid.UUID                                  `json:"nodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *HostListResponseResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *HostListResponseResponseItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetRemark returns the value of Remark.
+func (s *HostListResponseResponseItem) GetRemark() string {
+	return s.Remark
+}
+
+// GetAddress returns the value of Address.
+func (s *HostListResponseResponseItem) GetAddress() string {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *HostListResponseResponseItem) GetPort() int {
+	return s.Port
+}
+
+// GetPath returns the value of Path.
+func (s *HostListResponseResponseItem) GetPath() NilString {
+	return s.Path
+}
+
+// GetSni returns the value of Sni.
+func (s *HostListResponseResponseItem) GetSni() NilString {
+	return s.Sni
+}
+
+// GetHost returns the value of Host.
+func (s *HostListResponseResponseItem) GetHost() NilString {
+	return s.Host
+}
+
+// GetAlpn returns the value of Alpn.
+func (s *HostListResponseResponseItem) GetAlpn() NilString {
+	return s.Alpn
+}
+
+// GetFingerprint returns the value of Fingerprint.
+func (s *HostListResponseResponseItem) GetFingerprint() NilString {
+	return s.Fingerprint
+}
+
+// GetIsDisabled returns the value of IsDisabled.
+func (s *HostListResponseResponseItem) GetIsDisabled() OptBool {
+	return s.IsDisabled
+}
+
+// GetSecurityLayer returns the value of SecurityLayer.
+func (s *HostListResponseResponseItem) GetSecurityLayer() OptHostListResponseResponseItemSecurityLayer {
+	return s.SecurityLayer
+}
+
+// GetXHttpExtraParams returns the value of XHttpExtraParams.
+func (s *HostListResponseResponseItem) GetXHttpExtraParams() jx.Raw {
+	return s.XHttpExtraParams
+}
+
+// GetMuxParams returns the value of MuxParams.
+func (s *HostListResponseResponseItem) GetMuxParams() jx.Raw {
+	return s.MuxParams
+}
+
+// GetSockoptParams returns the value of SockoptParams.
+func (s *HostListResponseResponseItem) GetSockoptParams() jx.Raw {
+	return s.SockoptParams
+}
+
+// GetInbound returns the value of Inbound.
+func (s *HostListResponseResponseItem) GetInbound() HostListResponseResponseItemInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *HostListResponseResponseItem) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
+// GetTag returns the value of Tag.
+func (s *HostListResponseResponseItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetIsHidden returns the value of IsHidden.
+func (s *HostListResponseResponseItem) GetIsHidden() OptBool {
+	return s.IsHidden
+}
+
+// GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
+func (s *HostListResponseResponseItem) GetOverrideSniFromAddress() OptBool {
+	return s.OverrideSniFromAddress
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *HostListResponseResponseItem) GetVlessRouteId() NilInt {
+	return s.VlessRouteId
+}
+
+// GetAllowInsecure returns the value of AllowInsecure.
+func (s *HostListResponseResponseItem) GetAllowInsecure() OptBool {
+	return s.AllowInsecure
+}
+
+// GetShuffleHost returns the value of ShuffleHost.
+func (s *HostListResponseResponseItem) GetShuffleHost() bool {
+	return s.ShuffleHost
+}
+
+// GetMihomoX25519 returns the value of MihomoX25519.
+func (s *HostListResponseResponseItem) GetMihomoX25519() bool {
+	return s.MihomoX25519
+}
+
+// GetNodes returns the value of Nodes.
+func (s *HostListResponseResponseItem) GetNodes() []uuid.UUID {
+	return s.Nodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *HostListResponseResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *HostListResponseResponseItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetRemark sets the value of Remark.
+func (s *HostListResponseResponseItem) SetRemark(val string) {
+	s.Remark = val
+}
+
+// SetAddress sets the value of Address.
+func (s *HostListResponseResponseItem) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *HostListResponseResponseItem) SetPort(val int) {
+	s.Port = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostListResponseResponseItem) SetPath(val NilString) {
+	s.Path = val
+}
+
+// SetSni sets the value of Sni.
+func (s *HostListResponseResponseItem) SetSni(val NilString) {
+	s.Sni = val
+}
+
+// SetHost sets the value of Host.
+func (s *HostListResponseResponseItem) SetHost(val NilString) {
+	s.Host = val
+}
+
+// SetAlpn sets the value of Alpn.
+func (s *HostListResponseResponseItem) SetAlpn(val NilString) {
+	s.Alpn = val
+}
+
+// SetFingerprint sets the value of Fingerprint.
+func (s *HostListResponseResponseItem) SetFingerprint(val NilString) {
+	s.Fingerprint = val
+}
+
+// SetIsDisabled sets the value of IsDisabled.
+func (s *HostListResponseResponseItem) SetIsDisabled(val OptBool) {
+	s.IsDisabled = val
+}
+
+// SetSecurityLayer sets the value of SecurityLayer.
+func (s *HostListResponseResponseItem) SetSecurityLayer(val OptHostListResponseResponseItemSecurityLayer) {
+	s.SecurityLayer = val
+}
+
+// SetXHttpExtraParams sets the value of XHttpExtraParams.
+func (s *HostListResponseResponseItem) SetXHttpExtraParams(val jx.Raw) {
+	s.XHttpExtraParams = val
+}
+
+// SetMuxParams sets the value of MuxParams.
+func (s *HostListResponseResponseItem) SetMuxParams(val jx.Raw) {
+	s.MuxParams = val
+}
+
+// SetSockoptParams sets the value of SockoptParams.
+func (s *HostListResponseResponseItem) SetSockoptParams(val jx.Raw) {
+	s.SockoptParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *HostListResponseResponseItem) SetInbound(val HostListResponseResponseItemInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *HostListResponseResponseItem) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+// SetTag sets the value of Tag.
+func (s *HostListResponseResponseItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetIsHidden sets the value of IsHidden.
+func (s *HostListResponseResponseItem) SetIsHidden(val OptBool) {
+	s.IsHidden = val
+}
+
+// SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
+func (s *HostListResponseResponseItem) SetOverrideSniFromAddress(val OptBool) {
+	s.OverrideSniFromAddress = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *HostListResponseResponseItem) SetVlessRouteId(val NilInt) {
+	s.VlessRouteId = val
+}
+
+// SetAllowInsecure sets the value of AllowInsecure.
+func (s *HostListResponseResponseItem) SetAllowInsecure(val OptBool) {
+	s.AllowInsecure = val
+}
+
+// SetShuffleHost sets the value of ShuffleHost.
+func (s *HostListResponseResponseItem) SetShuffleHost(val bool) {
+	s.ShuffleHost = val
+}
+
+// SetMihomoX25519 sets the value of MihomoX25519.
+func (s *HostListResponseResponseItem) SetMihomoX25519(val bool) {
+	s.MihomoX25519 = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *HostListResponseResponseItem) SetNodes(val []uuid.UUID) {
+	s.Nodes = val
+}
+
+type HostListResponseResponseItemInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *HostListResponseResponseItemInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *HostListResponseResponseItemInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *HostListResponseResponseItemInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *HostListResponseResponseItemInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
+}
+
+type HostListResponseResponseItemSecurityLayer string
+
+const (
+	HostListResponseResponseItemSecurityLayerDEFAULT HostListResponseResponseItemSecurityLayer = "DEFAULT"
+	HostListResponseResponseItemSecurityLayerTLS     HostListResponseResponseItemSecurityLayer = "TLS"
+	HostListResponseResponseItemSecurityLayerNONE    HostListResponseResponseItemSecurityLayer = "NONE"
+)
+
+// AllValues returns all HostListResponseResponseItemSecurityLayer values.
+func (HostListResponseResponseItemSecurityLayer) AllValues() []HostListResponseResponseItemSecurityLayer {
+	return []HostListResponseResponseItemSecurityLayer{
+		HostListResponseResponseItemSecurityLayerDEFAULT,
+		HostListResponseResponseItemSecurityLayerTLS,
+		HostListResponseResponseItemSecurityLayerNONE,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s HostListResponseResponseItemSecurityLayer) MarshalText() ([]byte, error) {
+	switch s {
+	case HostListResponseResponseItemSecurityLayerDEFAULT:
+		return []byte(s), nil
+	case HostListResponseResponseItemSecurityLayerTLS:
+		return []byte(s), nil
+	case HostListResponseResponseItemSecurityLayerNONE:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *HostListResponseResponseItemSecurityLayer) UnmarshalText(data []byte) error {
+	switch HostListResponseResponseItemSecurityLayer(data) {
+	case HostListResponseResponseItemSecurityLayerDEFAULT:
+		*s = HostListResponseResponseItemSecurityLayerDEFAULT
+		return nil
+	case HostListResponseResponseItemSecurityLayerTLS:
+		*s = HostListResponseResponseItemSecurityLayerTLS
+		return nil
+	case HostListResponseResponseItemSecurityLayerNONE:
+		*s = HostListResponseResponseItemSecurityLayerNONE
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 // Ref: #/components/schemas/HostResponse
 type HostResponse struct {
-	Response HostItem `json:"response"`
+	Response HostResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HostResponse) GetResponse() HostItem {
+func (s *HostResponse) GetResponse() HostResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HostResponse) SetResponse(val HostItem) {
+func (s *HostResponse) SetResponse(val HostResponseResponse) {
 	s.Response = val
 }
 
 func (*HostResponse) hostsControllerCreateHostRes() {}
 func (*HostResponse) hostsControllerGetOneHostRes() {}
 func (*HostResponse) hostsControllerUpdateHostRes() {}
+
+type HostResponseResponse struct {
+	UUID                   uuid.UUID                            `json:"uuid"`
+	ViewPosition           int                                  `json:"viewPosition"`
+	Remark                 string                               `json:"remark"`
+	Address                string                               `json:"address"`
+	Port                   int                                  `json:"port"`
+	Path                   NilString                            `json:"path"`
+	Sni                    NilString                            `json:"sni"`
+	Host                   NilString                            `json:"host"`
+	Alpn                   NilString                            `json:"alpn"`
+	Fingerprint            NilString                            `json:"fingerprint"`
+	IsDisabled             OptBool                              `json:"isDisabled"`
+	SecurityLayer          OptHostResponseResponseSecurityLayer `json:"securityLayer"`
+	XHttpExtraParams       jx.Raw                               `json:"xHttpExtraParams"`
+	MuxParams              jx.Raw                               `json:"muxParams"`
+	SockoptParams          jx.Raw                               `json:"sockoptParams"`
+	Inbound                HostResponseResponseInbound          `json:"inbound"`
+	ServerDescription      NilString                            `json:"serverDescription"`
+	Tag                    NilString                            `json:"tag"`
+	IsHidden               OptBool                              `json:"isHidden"`
+	OverrideSniFromAddress OptBool                              `json:"overrideSniFromAddress"`
+	VlessRouteId           NilInt                               `json:"vlessRouteId"`
+	AllowInsecure          OptBool                              `json:"allowInsecure"`
+	ShuffleHost            bool                                 `json:"shuffleHost"`
+	MihomoX25519           bool                                 `json:"mihomoX25519"`
+	Nodes                  []uuid.UUID                          `json:"nodes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *HostResponseResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *HostResponseResponse) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetRemark returns the value of Remark.
+func (s *HostResponseResponse) GetRemark() string {
+	return s.Remark
+}
+
+// GetAddress returns the value of Address.
+func (s *HostResponseResponse) GetAddress() string {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *HostResponseResponse) GetPort() int {
+	return s.Port
+}
+
+// GetPath returns the value of Path.
+func (s *HostResponseResponse) GetPath() NilString {
+	return s.Path
+}
+
+// GetSni returns the value of Sni.
+func (s *HostResponseResponse) GetSni() NilString {
+	return s.Sni
+}
+
+// GetHost returns the value of Host.
+func (s *HostResponseResponse) GetHost() NilString {
+	return s.Host
+}
+
+// GetAlpn returns the value of Alpn.
+func (s *HostResponseResponse) GetAlpn() NilString {
+	return s.Alpn
+}
+
+// GetFingerprint returns the value of Fingerprint.
+func (s *HostResponseResponse) GetFingerprint() NilString {
+	return s.Fingerprint
+}
+
+// GetIsDisabled returns the value of IsDisabled.
+func (s *HostResponseResponse) GetIsDisabled() OptBool {
+	return s.IsDisabled
+}
+
+// GetSecurityLayer returns the value of SecurityLayer.
+func (s *HostResponseResponse) GetSecurityLayer() OptHostResponseResponseSecurityLayer {
+	return s.SecurityLayer
+}
+
+// GetXHttpExtraParams returns the value of XHttpExtraParams.
+func (s *HostResponseResponse) GetXHttpExtraParams() jx.Raw {
+	return s.XHttpExtraParams
+}
+
+// GetMuxParams returns the value of MuxParams.
+func (s *HostResponseResponse) GetMuxParams() jx.Raw {
+	return s.MuxParams
+}
+
+// GetSockoptParams returns the value of SockoptParams.
+func (s *HostResponseResponse) GetSockoptParams() jx.Raw {
+	return s.SockoptParams
+}
+
+// GetInbound returns the value of Inbound.
+func (s *HostResponseResponse) GetInbound() HostResponseResponseInbound {
+	return s.Inbound
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *HostResponseResponse) GetServerDescription() NilString {
+	return s.ServerDescription
+}
+
+// GetTag returns the value of Tag.
+func (s *HostResponseResponse) GetTag() NilString {
+	return s.Tag
+}
+
+// GetIsHidden returns the value of IsHidden.
+func (s *HostResponseResponse) GetIsHidden() OptBool {
+	return s.IsHidden
+}
+
+// GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
+func (s *HostResponseResponse) GetOverrideSniFromAddress() OptBool {
+	return s.OverrideSniFromAddress
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *HostResponseResponse) GetVlessRouteId() NilInt {
+	return s.VlessRouteId
+}
+
+// GetAllowInsecure returns the value of AllowInsecure.
+func (s *HostResponseResponse) GetAllowInsecure() OptBool {
+	return s.AllowInsecure
+}
+
+// GetShuffleHost returns the value of ShuffleHost.
+func (s *HostResponseResponse) GetShuffleHost() bool {
+	return s.ShuffleHost
+}
+
+// GetMihomoX25519 returns the value of MihomoX25519.
+func (s *HostResponseResponse) GetMihomoX25519() bool {
+	return s.MihomoX25519
+}
+
+// GetNodes returns the value of Nodes.
+func (s *HostResponseResponse) GetNodes() []uuid.UUID {
+	return s.Nodes
+}
+
+// SetUUID sets the value of UUID.
+func (s *HostResponseResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *HostResponseResponse) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetRemark sets the value of Remark.
+func (s *HostResponseResponse) SetRemark(val string) {
+	s.Remark = val
+}
+
+// SetAddress sets the value of Address.
+func (s *HostResponseResponse) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *HostResponseResponse) SetPort(val int) {
+	s.Port = val
+}
+
+// SetPath sets the value of Path.
+func (s *HostResponseResponse) SetPath(val NilString) {
+	s.Path = val
+}
+
+// SetSni sets the value of Sni.
+func (s *HostResponseResponse) SetSni(val NilString) {
+	s.Sni = val
+}
+
+// SetHost sets the value of Host.
+func (s *HostResponseResponse) SetHost(val NilString) {
+	s.Host = val
+}
+
+// SetAlpn sets the value of Alpn.
+func (s *HostResponseResponse) SetAlpn(val NilString) {
+	s.Alpn = val
+}
+
+// SetFingerprint sets the value of Fingerprint.
+func (s *HostResponseResponse) SetFingerprint(val NilString) {
+	s.Fingerprint = val
+}
+
+// SetIsDisabled sets the value of IsDisabled.
+func (s *HostResponseResponse) SetIsDisabled(val OptBool) {
+	s.IsDisabled = val
+}
+
+// SetSecurityLayer sets the value of SecurityLayer.
+func (s *HostResponseResponse) SetSecurityLayer(val OptHostResponseResponseSecurityLayer) {
+	s.SecurityLayer = val
+}
+
+// SetXHttpExtraParams sets the value of XHttpExtraParams.
+func (s *HostResponseResponse) SetXHttpExtraParams(val jx.Raw) {
+	s.XHttpExtraParams = val
+}
+
+// SetMuxParams sets the value of MuxParams.
+func (s *HostResponseResponse) SetMuxParams(val jx.Raw) {
+	s.MuxParams = val
+}
+
+// SetSockoptParams sets the value of SockoptParams.
+func (s *HostResponseResponse) SetSockoptParams(val jx.Raw) {
+	s.SockoptParams = val
+}
+
+// SetInbound sets the value of Inbound.
+func (s *HostResponseResponse) SetInbound(val HostResponseResponseInbound) {
+	s.Inbound = val
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *HostResponseResponse) SetServerDescription(val NilString) {
+	s.ServerDescription = val
+}
+
+// SetTag sets the value of Tag.
+func (s *HostResponseResponse) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetIsHidden sets the value of IsHidden.
+func (s *HostResponseResponse) SetIsHidden(val OptBool) {
+	s.IsHidden = val
+}
+
+// SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
+func (s *HostResponseResponse) SetOverrideSniFromAddress(val OptBool) {
+	s.OverrideSniFromAddress = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *HostResponseResponse) SetVlessRouteId(val NilInt) {
+	s.VlessRouteId = val
+}
+
+// SetAllowInsecure sets the value of AllowInsecure.
+func (s *HostResponseResponse) SetAllowInsecure(val OptBool) {
+	s.AllowInsecure = val
+}
+
+// SetShuffleHost sets the value of ShuffleHost.
+func (s *HostResponseResponse) SetShuffleHost(val bool) {
+	s.ShuffleHost = val
+}
+
+// SetMihomoX25519 sets the value of MihomoX25519.
+func (s *HostResponseResponse) SetMihomoX25519(val bool) {
+	s.MihomoX25519 = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *HostResponseResponse) SetNodes(val []uuid.UUID) {
+	s.Nodes = val
+}
+
+type HostResponseResponseInbound struct {
+	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid NilUUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *HostResponseResponseInbound) GetConfigProfileUuid() NilUUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *HostResponseResponseInbound) GetConfigProfileInboundUuid() NilUUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *HostResponseResponseInbound) SetConfigProfileUuid(val NilUUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *HostResponseResponseInbound) SetConfigProfileInboundUuid(val NilUUID) {
+	s.ConfigProfileInboundUuid = val
+}
+
+type HostResponseResponseSecurityLayer string
+
+const (
+	HostResponseResponseSecurityLayerDEFAULT HostResponseResponseSecurityLayer = "DEFAULT"
+	HostResponseResponseSecurityLayerTLS     HostResponseResponseSecurityLayer = "TLS"
+	HostResponseResponseSecurityLayerNONE    HostResponseResponseSecurityLayer = "NONE"
+)
+
+// AllValues returns all HostResponseResponseSecurityLayer values.
+func (HostResponseResponseSecurityLayer) AllValues() []HostResponseResponseSecurityLayer {
+	return []HostResponseResponseSecurityLayer{
+		HostResponseResponseSecurityLayerDEFAULT,
+		HostResponseResponseSecurityLayerTLS,
+		HostResponseResponseSecurityLayerNONE,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s HostResponseResponseSecurityLayer) MarshalText() ([]byte, error) {
+	switch s {
+	case HostResponseResponseSecurityLayerDEFAULT:
+		return []byte(s), nil
+	case HostResponseResponseSecurityLayerTLS:
+		return []byte(s), nil
+	case HostResponseResponseSecurityLayerNONE:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *HostResponseResponseSecurityLayer) UnmarshalText(data []byte) error {
+	switch HostResponseResponseSecurityLayer(data) {
+	case HostResponseResponseSecurityLayerDEFAULT:
+		*s = HostResponseResponseSecurityLayerDEFAULT
+		return nil
+	case HostResponseResponseSecurityLayerTLS:
+		*s = HostResponseResponseSecurityLayerTLS
+		return nil
+	case HostResponseResponseSecurityLayerNONE:
+		*s = HostResponseResponseSecurityLayerNONE
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
 
 // HostsControllerDeleteHostNotFound is response for HostsControllerDeleteHost operation.
 type HostsControllerDeleteHostNotFound struct{}
@@ -11131,16 +11646,16 @@ func (*HostsControllerDeleteHostNotFound) hostsControllerDeleteHostRes() {}
 
 // Ref: #/components/schemas/HwidDevicesResponse
 type HwidDevicesResponse struct {
-	Response AllHwidDevices `json:"response"`
+	Response HwidDevicesResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HwidDevicesResponse) GetResponse() AllHwidDevices {
+func (s *HwidDevicesResponse) GetResponse() HwidDevicesResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HwidDevicesResponse) SetResponse(val AllHwidDevices) {
+func (s *HwidDevicesResponse) SetResponse(val HwidDevicesResponseResponse) {
 	s.Response = val
 }
 
@@ -11148,6 +11663,122 @@ func (*HwidDevicesResponse) hwidUserDevicesControllerCreateUserHwidDeviceRes()  
 func (*HwidDevicesResponse) hwidUserDevicesControllerDeleteAllUserHwidDevicesRes() {}
 func (*HwidDevicesResponse) hwidUserDevicesControllerDeleteUserHwidDeviceRes()     {}
 func (*HwidDevicesResponse) hwidUserDevicesControllerGetUserHwidDevicesRes()       {}
+
+type HwidDevicesResponseResponse struct {
+	Total   float64                                  `json:"total"`
+	Devices []HwidDevicesResponseResponseDevicesItem `json:"devices"`
+}
+
+// GetTotal returns the value of Total.
+func (s *HwidDevicesResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetDevices returns the value of Devices.
+func (s *HwidDevicesResponseResponse) GetDevices() []HwidDevicesResponseResponseDevicesItem {
+	return s.Devices
+}
+
+// SetTotal sets the value of Total.
+func (s *HwidDevicesResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetDevices sets the value of Devices.
+func (s *HwidDevicesResponseResponse) SetDevices(val []HwidDevicesResponseResponseDevicesItem) {
+	s.Devices = val
+}
+
+type HwidDevicesResponseResponseDevicesItem struct {
+	Hwid        string    `json:"hwid"`
+	UserUuid    uuid.UUID `json:"userUuid"`
+	Platform    NilString `json:"platform"`
+	OsVersion   NilString `json:"osVersion"`
+	DeviceModel NilString `json:"deviceModel"`
+	UserAgent   NilString `json:"userAgent"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetHwid returns the value of Hwid.
+func (s *HwidDevicesResponseResponseDevicesItem) GetHwid() string {
+	return s.Hwid
+}
+
+// GetUserUuid returns the value of UserUuid.
+func (s *HwidDevicesResponseResponseDevicesItem) GetUserUuid() uuid.UUID {
+	return s.UserUuid
+}
+
+// GetPlatform returns the value of Platform.
+func (s *HwidDevicesResponseResponseDevicesItem) GetPlatform() NilString {
+	return s.Platform
+}
+
+// GetOsVersion returns the value of OsVersion.
+func (s *HwidDevicesResponseResponseDevicesItem) GetOsVersion() NilString {
+	return s.OsVersion
+}
+
+// GetDeviceModel returns the value of DeviceModel.
+func (s *HwidDevicesResponseResponseDevicesItem) GetDeviceModel() NilString {
+	return s.DeviceModel
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *HwidDevicesResponseResponseDevicesItem) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *HwidDevicesResponseResponseDevicesItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *HwidDevicesResponseResponseDevicesItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetHwid sets the value of Hwid.
+func (s *HwidDevicesResponseResponseDevicesItem) SetHwid(val string) {
+	s.Hwid = val
+}
+
+// SetUserUuid sets the value of UserUuid.
+func (s *HwidDevicesResponseResponseDevicesItem) SetUserUuid(val uuid.UUID) {
+	s.UserUuid = val
+}
+
+// SetPlatform sets the value of Platform.
+func (s *HwidDevicesResponseResponseDevicesItem) SetPlatform(val NilString) {
+	s.Platform = val
+}
+
+// SetOsVersion sets the value of OsVersion.
+func (s *HwidDevicesResponseResponseDevicesItem) SetOsVersion(val NilString) {
+	s.OsVersion = val
+}
+
+// SetDeviceModel sets the value of DeviceModel.
+func (s *HwidDevicesResponseResponseDevicesItem) SetDeviceModel(val NilString) {
+	s.DeviceModel = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *HwidDevicesResponseResponseDevicesItem) SetUserAgent(val NilString) {
+	s.UserAgent = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *HwidDevicesResponseResponseDevicesItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *HwidDevicesResponseResponseDevicesItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
 
 // Ref: #/components/schemas/InboundsResponse
 type InboundsResponse struct {
@@ -12525,37 +13156,37 @@ func (o NilInt) Or(d int) int {
 	return d
 }
 
-// NewNilNodeItemProvider returns new NilNodeItemProvider with value set to v.
-func NewNilNodeItemProvider(v NodeItemProvider) NilNodeItemProvider {
-	return NilNodeItemProvider{
+// NewNilNodeResponseResponseProvider returns new NilNodeResponseResponseProvider with value set to v.
+func NewNilNodeResponseResponseProvider(v NodeResponseResponseProvider) NilNodeResponseResponseProvider {
+	return NilNodeResponseResponseProvider{
 		Value: v,
 	}
 }
 
-// NilNodeItemProvider is nullable NodeItemProvider.
-type NilNodeItemProvider struct {
-	Value NodeItemProvider
+// NilNodeResponseResponseProvider is nullable NodeResponseResponseProvider.
+type NilNodeResponseResponseProvider struct {
+	Value NodeResponseResponseProvider
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilNodeItemProvider) SetTo(v NodeItemProvider) {
+func (o *NilNodeResponseResponseProvider) SetTo(v NodeResponseResponseProvider) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilNodeItemProvider) IsNull() bool { return o.Null }
+func (o NilNodeResponseResponseProvider) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilNodeItemProvider) SetToNull() {
+func (o *NilNodeResponseResponseProvider) SetToNull() {
 	o.Null = true
-	var v NodeItemProvider
+	var v NodeResponseResponseProvider
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilNodeItemProvider) Get() (v NodeItemProvider, ok bool) {
+func (o NilNodeResponseResponseProvider) Get() (v NodeResponseResponseProvider, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -12563,7 +13194,52 @@ func (o NilNodeItemProvider) Get() (v NodeItemProvider, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilNodeItemProvider) Or(d NodeItemProvider) NodeItemProvider {
+func (o NilNodeResponseResponseProvider) Or(d NodeResponseResponseProvider) NodeResponseResponseProvider {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilNodesResponseResponseItemProvider returns new NilNodesResponseResponseItemProvider with value set to v.
+func NewNilNodesResponseResponseItemProvider(v NodesResponseResponseItemProvider) NilNodesResponseResponseItemProvider {
+	return NilNodesResponseResponseItemProvider{
+		Value: v,
+	}
+}
+
+// NilNodesResponseResponseItemProvider is nullable NodesResponseResponseItemProvider.
+type NilNodesResponseResponseItemProvider struct {
+	Value NodesResponseResponseItemProvider
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilNodesResponseResponseItemProvider) SetTo(v NodesResponseResponseItemProvider) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilNodesResponseResponseItemProvider) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilNodesResponseResponseItemProvider) SetToNull() {
+	o.Null = true
+	var v NodesResponseResponseItemProvider
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilNodesResponseResponseItemProvider) Get() (v NodesResponseResponseItemProvider, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilNodesResponseResponseItemProvider) Or(d NodesResponseResponseItemProvider) NodesResponseResponseItemProvider {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13020,37 +13696,37 @@ func (o NilUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
-// NewNilUserItemLastConnectedNode returns new NilUserItemLastConnectedNode with value set to v.
-func NewNilUserItemLastConnectedNode(v UserItemLastConnectedNode) NilUserItemLastConnectedNode {
-	return NilUserItemLastConnectedNode{
+// NewNilUserResponseResponseLastConnectedNode returns new NilUserResponseResponseLastConnectedNode with value set to v.
+func NewNilUserResponseResponseLastConnectedNode(v UserResponseResponseLastConnectedNode) NilUserResponseResponseLastConnectedNode {
+	return NilUserResponseResponseLastConnectedNode{
 		Value: v,
 	}
 }
 
-// NilUserItemLastConnectedNode is nullable UserItemLastConnectedNode.
-type NilUserItemLastConnectedNode struct {
-	Value UserItemLastConnectedNode
+// NilUserResponseResponseLastConnectedNode is nullable UserResponseResponseLastConnectedNode.
+type NilUserResponseResponseLastConnectedNode struct {
+	Value UserResponseResponseLastConnectedNode
 	Null  bool
 }
 
 // SetTo sets value to v.
-func (o *NilUserItemLastConnectedNode) SetTo(v UserItemLastConnectedNode) {
+func (o *NilUserResponseResponseLastConnectedNode) SetTo(v UserResponseResponseLastConnectedNode) {
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o NilUserItemLastConnectedNode) IsNull() bool { return o.Null }
+func (o NilUserResponseResponseLastConnectedNode) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *NilUserItemLastConnectedNode) SetToNull() {
+func (o *NilUserResponseResponseLastConnectedNode) SetToNull() {
 	o.Null = true
-	var v UserItemLastConnectedNode
+	var v UserResponseResponseLastConnectedNode
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o NilUserItemLastConnectedNode) Get() (v UserItemLastConnectedNode, ok bool) {
+func (o NilUserResponseResponseLastConnectedNode) Get() (v UserResponseResponseLastConnectedNode, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -13058,384 +13734,449 @@ func (o NilUserItemLastConnectedNode) Get() (v UserItemLastConnectedNode, ok boo
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o NilUserItemLastConnectedNode) Or(d UserItemLastConnectedNode) UserItemLastConnectedNode {
+func (o NilUserResponseResponseLastConnectedNode) Or(d UserResponseResponseLastConnectedNode) UserResponseResponseLastConnectedNode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// Ref: #/components/schemas/NodeItem
-type NodeItem struct {
-	UUID                    uuid.UUID             `json:"uuid"`
-	Name                    string                `json:"name"`
-	Address                 string                `json:"address"`
-	Port                    NilInt                `json:"port"`
-	IsConnected             bool                  `json:"isConnected"`
-	IsDisabled              bool                  `json:"isDisabled"`
-	IsConnecting            bool                  `json:"isConnecting"`
-	IsNodeOnline            bool                  `json:"isNodeOnline"`
-	IsXrayRunning           bool                  `json:"isXrayRunning"`
-	LastStatusChange        NilDateTime           `json:"lastStatusChange"`
-	LastStatusMessage       NilString             `json:"lastStatusMessage"`
-	XrayVersion             NilString             `json:"xrayVersion"`
-	NodeVersion             NilString             `json:"nodeVersion"`
-	XrayUptime              string                `json:"xrayUptime"`
-	IsTrafficTrackingActive bool                  `json:"isTrafficTrackingActive"`
-	TrafficResetDay         NilInt                `json:"trafficResetDay"`
-	TrafficLimitBytes       NilFloat64            `json:"trafficLimitBytes"`
-	TrafficUsedBytes        NilFloat64            `json:"trafficUsedBytes"`
-	NotifyPercent           NilInt                `json:"notifyPercent"`
-	UsersOnline             NilInt                `json:"usersOnline"`
-	ViewPosition            int                   `json:"viewPosition"`
-	CountryCode             string                `json:"countryCode"`
-	ConsumptionMultiplier   float64               `json:"consumptionMultiplier"`
-	CpuCount                NilInt                `json:"cpuCount"`
-	CpuModel                NilString             `json:"cpuModel"`
-	TotalRam                NilString             `json:"totalRam"`
-	CreatedAt               time.Time             `json:"createdAt"`
-	UpdatedAt               time.Time             `json:"updatedAt"`
-	ConfigProfile           NodeItemConfigProfile `json:"configProfile"`
-	ProviderUuid            NilUUID               `json:"providerUuid"`
-	Provider                NilNodeItemProvider   `json:"provider"`
+// NewNilUsersResponseResponseItemLastConnectedNode returns new NilUsersResponseResponseItemLastConnectedNode with value set to v.
+func NewNilUsersResponseResponseItemLastConnectedNode(v UsersResponseResponseItemLastConnectedNode) NilUsersResponseResponseItemLastConnectedNode {
+	return NilUsersResponseResponseItemLastConnectedNode{
+		Value: v,
+	}
+}
+
+// NilUsersResponseResponseItemLastConnectedNode is nullable UsersResponseResponseItemLastConnectedNode.
+type NilUsersResponseResponseItemLastConnectedNode struct {
+	Value UsersResponseResponseItemLastConnectedNode
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilUsersResponseResponseItemLastConnectedNode) SetTo(v UsersResponseResponseItemLastConnectedNode) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilUsersResponseResponseItemLastConnectedNode) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilUsersResponseResponseItemLastConnectedNode) SetToNull() {
+	o.Null = true
+	var v UsersResponseResponseItemLastConnectedNode
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilUsersResponseResponseItemLastConnectedNode) Get() (v UsersResponseResponseItemLastConnectedNode, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilUsersResponseResponseItemLastConnectedNode) Or(d UsersResponseResponseItemLastConnectedNode) UsersResponseResponseItemLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// Ref: #/components/schemas/NodeResponse
+type NodeResponse struct {
+	Response NodeResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *NodeResponse) GetResponse() NodeResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *NodeResponse) SetResponse(val NodeResponseResponse) {
+	s.Response = val
+}
+
+func (*NodeResponse) nodesControllerCreateNodeRes()  {}
+func (*NodeResponse) nodesControllerDisableNodeRes() {}
+func (*NodeResponse) nodesControllerEnableNodeRes()  {}
+func (*NodeResponse) nodesControllerGetOneNodeRes()  {}
+func (*NodeResponse) nodesControllerUpdateNodeRes()  {}
+
+type NodeResponseResponse struct {
+	UUID                    uuid.UUID                         `json:"uuid"`
+	Name                    string                            `json:"name"`
+	Address                 string                            `json:"address"`
+	Port                    NilInt                            `json:"port"`
+	IsConnected             bool                              `json:"isConnected"`
+	IsDisabled              bool                              `json:"isDisabled"`
+	IsConnecting            bool                              `json:"isConnecting"`
+	IsNodeOnline            bool                              `json:"isNodeOnline"`
+	IsXrayRunning           bool                              `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                       `json:"lastStatusChange"`
+	LastStatusMessage       NilString                         `json:"lastStatusMessage"`
+	XrayVersion             NilString                         `json:"xrayVersion"`
+	NodeVersion             NilString                         `json:"nodeVersion"`
+	XrayUptime              string                            `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                              `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                            `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                        `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                        `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                            `json:"notifyPercent"`
+	UsersOnline             NilInt                            `json:"usersOnline"`
+	ViewPosition            int                               `json:"viewPosition"`
+	CountryCode             string                            `json:"countryCode"`
+	ConsumptionMultiplier   float64                           `json:"consumptionMultiplier"`
+	CpuCount                NilInt                            `json:"cpuCount"`
+	CpuModel                NilString                         `json:"cpuModel"`
+	TotalRam                NilString                         `json:"totalRam"`
+	CreatedAt               time.Time                         `json:"createdAt"`
+	UpdatedAt               time.Time                         `json:"updatedAt"`
+	ConfigProfile           NodeResponseResponseConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                           `json:"providerUuid"`
+	Provider                NilNodeResponseResponseProvider   `json:"provider"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *NodeItem) GetUUID() uuid.UUID {
+func (s *NodeResponseResponse) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *NodeItem) GetName() string {
+func (s *NodeResponseResponse) GetName() string {
 	return s.Name
 }
 
 // GetAddress returns the value of Address.
-func (s *NodeItem) GetAddress() string {
+func (s *NodeResponseResponse) GetAddress() string {
 	return s.Address
 }
 
 // GetPort returns the value of Port.
-func (s *NodeItem) GetPort() NilInt {
+func (s *NodeResponseResponse) GetPort() NilInt {
 	return s.Port
 }
 
 // GetIsConnected returns the value of IsConnected.
-func (s *NodeItem) GetIsConnected() bool {
+func (s *NodeResponseResponse) GetIsConnected() bool {
 	return s.IsConnected
 }
 
 // GetIsDisabled returns the value of IsDisabled.
-func (s *NodeItem) GetIsDisabled() bool {
+func (s *NodeResponseResponse) GetIsDisabled() bool {
 	return s.IsDisabled
 }
 
 // GetIsConnecting returns the value of IsConnecting.
-func (s *NodeItem) GetIsConnecting() bool {
+func (s *NodeResponseResponse) GetIsConnecting() bool {
 	return s.IsConnecting
 }
 
 // GetIsNodeOnline returns the value of IsNodeOnline.
-func (s *NodeItem) GetIsNodeOnline() bool {
+func (s *NodeResponseResponse) GetIsNodeOnline() bool {
 	return s.IsNodeOnline
 }
 
 // GetIsXrayRunning returns the value of IsXrayRunning.
-func (s *NodeItem) GetIsXrayRunning() bool {
+func (s *NodeResponseResponse) GetIsXrayRunning() bool {
 	return s.IsXrayRunning
 }
 
 // GetLastStatusChange returns the value of LastStatusChange.
-func (s *NodeItem) GetLastStatusChange() NilDateTime {
+func (s *NodeResponseResponse) GetLastStatusChange() NilDateTime {
 	return s.LastStatusChange
 }
 
 // GetLastStatusMessage returns the value of LastStatusMessage.
-func (s *NodeItem) GetLastStatusMessage() NilString {
+func (s *NodeResponseResponse) GetLastStatusMessage() NilString {
 	return s.LastStatusMessage
 }
 
 // GetXrayVersion returns the value of XrayVersion.
-func (s *NodeItem) GetXrayVersion() NilString {
+func (s *NodeResponseResponse) GetXrayVersion() NilString {
 	return s.XrayVersion
 }
 
 // GetNodeVersion returns the value of NodeVersion.
-func (s *NodeItem) GetNodeVersion() NilString {
+func (s *NodeResponseResponse) GetNodeVersion() NilString {
 	return s.NodeVersion
 }
 
 // GetXrayUptime returns the value of XrayUptime.
-func (s *NodeItem) GetXrayUptime() string {
+func (s *NodeResponseResponse) GetXrayUptime() string {
 	return s.XrayUptime
 }
 
 // GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
-func (s *NodeItem) GetIsTrafficTrackingActive() bool {
+func (s *NodeResponseResponse) GetIsTrafficTrackingActive() bool {
 	return s.IsTrafficTrackingActive
 }
 
 // GetTrafficResetDay returns the value of TrafficResetDay.
-func (s *NodeItem) GetTrafficResetDay() NilInt {
+func (s *NodeResponseResponse) GetTrafficResetDay() NilInt {
 	return s.TrafficResetDay
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *NodeItem) GetTrafficLimitBytes() NilFloat64 {
+func (s *NodeResponseResponse) GetTrafficLimitBytes() NilFloat64 {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficUsedBytes returns the value of TrafficUsedBytes.
-func (s *NodeItem) GetTrafficUsedBytes() NilFloat64 {
+func (s *NodeResponseResponse) GetTrafficUsedBytes() NilFloat64 {
 	return s.TrafficUsedBytes
 }
 
 // GetNotifyPercent returns the value of NotifyPercent.
-func (s *NodeItem) GetNotifyPercent() NilInt {
+func (s *NodeResponseResponse) GetNotifyPercent() NilInt {
 	return s.NotifyPercent
 }
 
 // GetUsersOnline returns the value of UsersOnline.
-func (s *NodeItem) GetUsersOnline() NilInt {
+func (s *NodeResponseResponse) GetUsersOnline() NilInt {
 	return s.UsersOnline
 }
 
 // GetViewPosition returns the value of ViewPosition.
-func (s *NodeItem) GetViewPosition() int {
+func (s *NodeResponseResponse) GetViewPosition() int {
 	return s.ViewPosition
 }
 
 // GetCountryCode returns the value of CountryCode.
-func (s *NodeItem) GetCountryCode() string {
+func (s *NodeResponseResponse) GetCountryCode() string {
 	return s.CountryCode
 }
 
 // GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *NodeItem) GetConsumptionMultiplier() float64 {
+func (s *NodeResponseResponse) GetConsumptionMultiplier() float64 {
 	return s.ConsumptionMultiplier
 }
 
 // GetCpuCount returns the value of CpuCount.
-func (s *NodeItem) GetCpuCount() NilInt {
+func (s *NodeResponseResponse) GetCpuCount() NilInt {
 	return s.CpuCount
 }
 
 // GetCpuModel returns the value of CpuModel.
-func (s *NodeItem) GetCpuModel() NilString {
+func (s *NodeResponseResponse) GetCpuModel() NilString {
 	return s.CpuModel
 }
 
 // GetTotalRam returns the value of TotalRam.
-func (s *NodeItem) GetTotalRam() NilString {
+func (s *NodeResponseResponse) GetTotalRam() NilString {
 	return s.TotalRam
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *NodeItem) GetCreatedAt() time.Time {
+func (s *NodeResponseResponse) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodeItem) GetUpdatedAt() time.Time {
+func (s *NodeResponseResponse) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
 // GetConfigProfile returns the value of ConfigProfile.
-func (s *NodeItem) GetConfigProfile() NodeItemConfigProfile {
+func (s *NodeResponseResponse) GetConfigProfile() NodeResponseResponseConfigProfile {
 	return s.ConfigProfile
 }
 
 // GetProviderUuid returns the value of ProviderUuid.
-func (s *NodeItem) GetProviderUuid() NilUUID {
+func (s *NodeResponseResponse) GetProviderUuid() NilUUID {
 	return s.ProviderUuid
 }
 
 // GetProvider returns the value of Provider.
-func (s *NodeItem) GetProvider() NilNodeItemProvider {
+func (s *NodeResponseResponse) GetProvider() NilNodeResponseResponseProvider {
 	return s.Provider
 }
 
 // SetUUID sets the value of UUID.
-func (s *NodeItem) SetUUID(val uuid.UUID) {
+func (s *NodeResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *NodeItem) SetName(val string) {
+func (s *NodeResponseResponse) SetName(val string) {
 	s.Name = val
 }
 
 // SetAddress sets the value of Address.
-func (s *NodeItem) SetAddress(val string) {
+func (s *NodeResponseResponse) SetAddress(val string) {
 	s.Address = val
 }
 
 // SetPort sets the value of Port.
-func (s *NodeItem) SetPort(val NilInt) {
+func (s *NodeResponseResponse) SetPort(val NilInt) {
 	s.Port = val
 }
 
 // SetIsConnected sets the value of IsConnected.
-func (s *NodeItem) SetIsConnected(val bool) {
+func (s *NodeResponseResponse) SetIsConnected(val bool) {
 	s.IsConnected = val
 }
 
 // SetIsDisabled sets the value of IsDisabled.
-func (s *NodeItem) SetIsDisabled(val bool) {
+func (s *NodeResponseResponse) SetIsDisabled(val bool) {
 	s.IsDisabled = val
 }
 
 // SetIsConnecting sets the value of IsConnecting.
-func (s *NodeItem) SetIsConnecting(val bool) {
+func (s *NodeResponseResponse) SetIsConnecting(val bool) {
 	s.IsConnecting = val
 }
 
 // SetIsNodeOnline sets the value of IsNodeOnline.
-func (s *NodeItem) SetIsNodeOnline(val bool) {
+func (s *NodeResponseResponse) SetIsNodeOnline(val bool) {
 	s.IsNodeOnline = val
 }
 
 // SetIsXrayRunning sets the value of IsXrayRunning.
-func (s *NodeItem) SetIsXrayRunning(val bool) {
+func (s *NodeResponseResponse) SetIsXrayRunning(val bool) {
 	s.IsXrayRunning = val
 }
 
 // SetLastStatusChange sets the value of LastStatusChange.
-func (s *NodeItem) SetLastStatusChange(val NilDateTime) {
+func (s *NodeResponseResponse) SetLastStatusChange(val NilDateTime) {
 	s.LastStatusChange = val
 }
 
 // SetLastStatusMessage sets the value of LastStatusMessage.
-func (s *NodeItem) SetLastStatusMessage(val NilString) {
+func (s *NodeResponseResponse) SetLastStatusMessage(val NilString) {
 	s.LastStatusMessage = val
 }
 
 // SetXrayVersion sets the value of XrayVersion.
-func (s *NodeItem) SetXrayVersion(val NilString) {
+func (s *NodeResponseResponse) SetXrayVersion(val NilString) {
 	s.XrayVersion = val
 }
 
 // SetNodeVersion sets the value of NodeVersion.
-func (s *NodeItem) SetNodeVersion(val NilString) {
+func (s *NodeResponseResponse) SetNodeVersion(val NilString) {
 	s.NodeVersion = val
 }
 
 // SetXrayUptime sets the value of XrayUptime.
-func (s *NodeItem) SetXrayUptime(val string) {
+func (s *NodeResponseResponse) SetXrayUptime(val string) {
 	s.XrayUptime = val
 }
 
 // SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
-func (s *NodeItem) SetIsTrafficTrackingActive(val bool) {
+func (s *NodeResponseResponse) SetIsTrafficTrackingActive(val bool) {
 	s.IsTrafficTrackingActive = val
 }
 
 // SetTrafficResetDay sets the value of TrafficResetDay.
-func (s *NodeItem) SetTrafficResetDay(val NilInt) {
+func (s *NodeResponseResponse) SetTrafficResetDay(val NilInt) {
 	s.TrafficResetDay = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *NodeItem) SetTrafficLimitBytes(val NilFloat64) {
+func (s *NodeResponseResponse) SetTrafficLimitBytes(val NilFloat64) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficUsedBytes sets the value of TrafficUsedBytes.
-func (s *NodeItem) SetTrafficUsedBytes(val NilFloat64) {
+func (s *NodeResponseResponse) SetTrafficUsedBytes(val NilFloat64) {
 	s.TrafficUsedBytes = val
 }
 
 // SetNotifyPercent sets the value of NotifyPercent.
-func (s *NodeItem) SetNotifyPercent(val NilInt) {
+func (s *NodeResponseResponse) SetNotifyPercent(val NilInt) {
 	s.NotifyPercent = val
 }
 
 // SetUsersOnline sets the value of UsersOnline.
-func (s *NodeItem) SetUsersOnline(val NilInt) {
+func (s *NodeResponseResponse) SetUsersOnline(val NilInt) {
 	s.UsersOnline = val
 }
 
 // SetViewPosition sets the value of ViewPosition.
-func (s *NodeItem) SetViewPosition(val int) {
+func (s *NodeResponseResponse) SetViewPosition(val int) {
 	s.ViewPosition = val
 }
 
 // SetCountryCode sets the value of CountryCode.
-func (s *NodeItem) SetCountryCode(val string) {
+func (s *NodeResponseResponse) SetCountryCode(val string) {
 	s.CountryCode = val
 }
 
 // SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *NodeItem) SetConsumptionMultiplier(val float64) {
+func (s *NodeResponseResponse) SetConsumptionMultiplier(val float64) {
 	s.ConsumptionMultiplier = val
 }
 
 // SetCpuCount sets the value of CpuCount.
-func (s *NodeItem) SetCpuCount(val NilInt) {
+func (s *NodeResponseResponse) SetCpuCount(val NilInt) {
 	s.CpuCount = val
 }
 
 // SetCpuModel sets the value of CpuModel.
-func (s *NodeItem) SetCpuModel(val NilString) {
+func (s *NodeResponseResponse) SetCpuModel(val NilString) {
 	s.CpuModel = val
 }
 
 // SetTotalRam sets the value of TotalRam.
-func (s *NodeItem) SetTotalRam(val NilString) {
+func (s *NodeResponseResponse) SetTotalRam(val NilString) {
 	s.TotalRam = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *NodeItem) SetCreatedAt(val time.Time) {
+func (s *NodeResponseResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodeItem) SetUpdatedAt(val time.Time) {
+func (s *NodeResponseResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
 // SetConfigProfile sets the value of ConfigProfile.
-func (s *NodeItem) SetConfigProfile(val NodeItemConfigProfile) {
+func (s *NodeResponseResponse) SetConfigProfile(val NodeResponseResponseConfigProfile) {
 	s.ConfigProfile = val
 }
 
 // SetProviderUuid sets the value of ProviderUuid.
-func (s *NodeItem) SetProviderUuid(val NilUUID) {
+func (s *NodeResponseResponse) SetProviderUuid(val NilUUID) {
 	s.ProviderUuid = val
 }
 
 // SetProvider sets the value of Provider.
-func (s *NodeItem) SetProvider(val NilNodeItemProvider) {
+func (s *NodeResponseResponse) SetProvider(val NilNodeResponseResponseProvider) {
 	s.Provider = val
 }
 
-type NodeItemConfigProfile struct {
-	ActiveConfigProfileUuid NilUUID                                   `json:"activeConfigProfileUuid"`
-	ActiveInbounds          []NodeItemConfigProfileActiveInboundsItem `json:"activeInbounds"`
+type NodeResponseResponseConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                               `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []NodeResponseResponseConfigProfileActiveInboundsItem `json:"activeInbounds"`
 }
 
 // GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *NodeItemConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+func (s *NodeResponseResponseConfigProfile) GetActiveConfigProfileUuid() NilUUID {
 	return s.ActiveConfigProfileUuid
 }
 
 // GetActiveInbounds returns the value of ActiveInbounds.
-func (s *NodeItemConfigProfile) GetActiveInbounds() []NodeItemConfigProfileActiveInboundsItem {
+func (s *NodeResponseResponseConfigProfile) GetActiveInbounds() []NodeResponseResponseConfigProfileActiveInboundsItem {
 	return s.ActiveInbounds
 }
 
 // SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *NodeItemConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+func (s *NodeResponseResponseConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
 	s.ActiveConfigProfileUuid = val
 }
 
 // SetActiveInbounds sets the value of ActiveInbounds.
-func (s *NodeItemConfigProfile) SetActiveInbounds(val []NodeItemConfigProfileActiveInboundsItem) {
+func (s *NodeResponseResponseConfigProfile) SetActiveInbounds(val []NodeResponseResponseConfigProfileActiveInboundsItem) {
 	s.ActiveInbounds = val
 }
 
-type NodeItemConfigProfileActiveInboundsItem struct {
+type NodeResponseResponseConfigProfileActiveInboundsItem struct {
 	UUID        uuid.UUID  `json:"uuid"`
 	ProfileUuid uuid.UUID  `json:"profileUuid"`
 	Tag         string     `json:"tag"`
@@ -13447,86 +14188,86 @@ type NodeItemConfigProfileActiveInboundsItem struct {
 }
 
 // GetUUID returns the value of UUID.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetProfileUuid returns the value of ProfileUuid.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
 	return s.ProfileUuid
 }
 
 // GetTag returns the value of Tag.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetTag() string {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetTag() string {
 	return s.Tag
 }
 
 // GetType returns the value of Type.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetType() string {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetType() string {
 	return s.Type
 }
 
 // GetNetwork returns the value of Network.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetNetwork() NilString {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetNetwork() NilString {
 	return s.Network
 }
 
 // GetSecurity returns the value of Security.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetSecurity() NilString {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetSecurity() NilString {
 	return s.Security
 }
 
 // GetPort returns the value of Port.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
 	return s.Port
 }
 
 // GetRawInbound returns the value of RawInbound.
-func (s *NodeItemConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
 	return s.RawInbound
 }
 
 // SetUUID sets the value of UUID.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetProfileUuid sets the value of ProfileUuid.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
 	s.ProfileUuid = val
 }
 
 // SetTag sets the value of Tag.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetTag(val string) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetTag(val string) {
 	s.Tag = val
 }
 
 // SetType sets the value of Type.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetType(val string) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetType(val string) {
 	s.Type = val
 }
 
 // SetNetwork sets the value of Network.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
 	s.Network = val
 }
 
 // SetSecurity sets the value of Security.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
 	s.Security = val
 }
 
 // SetPort sets the value of Port.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
 	s.Port = val
 }
 
 // SetRawInbound sets the value of RawInbound.
-func (s *NodeItemConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+func (s *NodeResponseResponseConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
 	s.RawInbound = val
 }
 
-type NodeItemProvider struct {
+type NodeResponseResponseProvider struct {
 	UUID        uuid.UUID `json:"uuid"`
 	Name        string    `json:"name"`
 	FaviconLink NilString `json:"faviconLink"`
@@ -13536,103 +14277,611 @@ type NodeItemProvider struct {
 }
 
 // GetUUID returns the value of UUID.
-func (s *NodeItemProvider) GetUUID() uuid.UUID {
+func (s *NodeResponseResponseProvider) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *NodeItemProvider) GetName() string {
+func (s *NodeResponseResponseProvider) GetName() string {
 	return s.Name
 }
 
 // GetFaviconLink returns the value of FaviconLink.
-func (s *NodeItemProvider) GetFaviconLink() NilString {
+func (s *NodeResponseResponseProvider) GetFaviconLink() NilString {
 	return s.FaviconLink
 }
 
 // GetLoginUrl returns the value of LoginUrl.
-func (s *NodeItemProvider) GetLoginUrl() NilString {
+func (s *NodeResponseResponseProvider) GetLoginUrl() NilString {
 	return s.LoginUrl
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *NodeItemProvider) GetCreatedAt() time.Time {
+func (s *NodeResponseResponseProvider) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodeItemProvider) GetUpdatedAt() time.Time {
+func (s *NodeResponseResponseProvider) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
 // SetUUID sets the value of UUID.
-func (s *NodeItemProvider) SetUUID(val uuid.UUID) {
+func (s *NodeResponseResponseProvider) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *NodeItemProvider) SetName(val string) {
+func (s *NodeResponseResponseProvider) SetName(val string) {
 	s.Name = val
 }
 
 // SetFaviconLink sets the value of FaviconLink.
-func (s *NodeItemProvider) SetFaviconLink(val NilString) {
+func (s *NodeResponseResponseProvider) SetFaviconLink(val NilString) {
 	s.FaviconLink = val
 }
 
 // SetLoginUrl sets the value of LoginUrl.
-func (s *NodeItemProvider) SetLoginUrl(val NilString) {
+func (s *NodeResponseResponseProvider) SetLoginUrl(val NilString) {
 	s.LoginUrl = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *NodeItemProvider) SetCreatedAt(val time.Time) {
+func (s *NodeResponseResponseProvider) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodeItemProvider) SetUpdatedAt(val time.Time) {
+func (s *NodeResponseResponseProvider) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// Ref: #/components/schemas/NodeResponse
-type NodeResponse struct {
-	Response NodeItem `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *NodeResponse) GetResponse() NodeItem {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *NodeResponse) SetResponse(val NodeItem) {
-	s.Response = val
-}
-
-func (*NodeResponse) nodesControllerCreateNodeRes()  {}
-func (*NodeResponse) nodesControllerDisableNodeRes() {}
-func (*NodeResponse) nodesControllerEnableNodeRes()  {}
-func (*NodeResponse) nodesControllerGetOneNodeRes()  {}
-func (*NodeResponse) nodesControllerUpdateNodeRes()  {}
-
 // Ref: #/components/schemas/NodesResponse
 type NodesResponse struct {
-	Response []NodeItem `json:"response"`
+	Response []NodesResponseResponseItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *NodesResponse) GetResponse() []NodeItem {
+func (s *NodesResponse) GetResponse() []NodesResponseResponseItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *NodesResponse) SetResponse(val []NodeItem) {
+func (s *NodesResponse) SetResponse(val []NodesResponseResponseItem) {
 	s.Response = val
 }
 
 func (*NodesResponse) nodesControllerGetAllNodesRes()  {}
 func (*NodesResponse) nodesControllerReorderNodesRes() {}
+
+type NodesResponseResponseItem struct {
+	UUID                    uuid.UUID                              `json:"uuid"`
+	Name                    string                                 `json:"name"`
+	Address                 string                                 `json:"address"`
+	Port                    NilInt                                 `json:"port"`
+	IsConnected             bool                                   `json:"isConnected"`
+	IsDisabled              bool                                   `json:"isDisabled"`
+	IsConnecting            bool                                   `json:"isConnecting"`
+	IsNodeOnline            bool                                   `json:"isNodeOnline"`
+	IsXrayRunning           bool                                   `json:"isXrayRunning"`
+	LastStatusChange        NilDateTime                            `json:"lastStatusChange"`
+	LastStatusMessage       NilString                              `json:"lastStatusMessage"`
+	XrayVersion             NilString                              `json:"xrayVersion"`
+	NodeVersion             NilString                              `json:"nodeVersion"`
+	XrayUptime              string                                 `json:"xrayUptime"`
+	IsTrafficTrackingActive bool                                   `json:"isTrafficTrackingActive"`
+	TrafficResetDay         NilInt                                 `json:"trafficResetDay"`
+	TrafficLimitBytes       NilFloat64                             `json:"trafficLimitBytes"`
+	TrafficUsedBytes        NilFloat64                             `json:"trafficUsedBytes"`
+	NotifyPercent           NilInt                                 `json:"notifyPercent"`
+	UsersOnline             NilInt                                 `json:"usersOnline"`
+	ViewPosition            int                                    `json:"viewPosition"`
+	CountryCode             string                                 `json:"countryCode"`
+	ConsumptionMultiplier   float64                                `json:"consumptionMultiplier"`
+	CpuCount                NilInt                                 `json:"cpuCount"`
+	CpuModel                NilString                              `json:"cpuModel"`
+	TotalRam                NilString                              `json:"totalRam"`
+	CreatedAt               time.Time                              `json:"createdAt"`
+	UpdatedAt               time.Time                              `json:"updatedAt"`
+	ConfigProfile           NodesResponseResponseItemConfigProfile `json:"configProfile"`
+	ProviderUuid            NilUUID                                `json:"providerUuid"`
+	Provider                NilNodesResponseResponseItemProvider   `json:"provider"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *NodesResponseResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *NodesResponseResponseItem) GetName() string {
+	return s.Name
+}
+
+// GetAddress returns the value of Address.
+func (s *NodesResponseResponseItem) GetAddress() string {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *NodesResponseResponseItem) GetPort() NilInt {
+	return s.Port
+}
+
+// GetIsConnected returns the value of IsConnected.
+func (s *NodesResponseResponseItem) GetIsConnected() bool {
+	return s.IsConnected
+}
+
+// GetIsDisabled returns the value of IsDisabled.
+func (s *NodesResponseResponseItem) GetIsDisabled() bool {
+	return s.IsDisabled
+}
+
+// GetIsConnecting returns the value of IsConnecting.
+func (s *NodesResponseResponseItem) GetIsConnecting() bool {
+	return s.IsConnecting
+}
+
+// GetIsNodeOnline returns the value of IsNodeOnline.
+func (s *NodesResponseResponseItem) GetIsNodeOnline() bool {
+	return s.IsNodeOnline
+}
+
+// GetIsXrayRunning returns the value of IsXrayRunning.
+func (s *NodesResponseResponseItem) GetIsXrayRunning() bool {
+	return s.IsXrayRunning
+}
+
+// GetLastStatusChange returns the value of LastStatusChange.
+func (s *NodesResponseResponseItem) GetLastStatusChange() NilDateTime {
+	return s.LastStatusChange
+}
+
+// GetLastStatusMessage returns the value of LastStatusMessage.
+func (s *NodesResponseResponseItem) GetLastStatusMessage() NilString {
+	return s.LastStatusMessage
+}
+
+// GetXrayVersion returns the value of XrayVersion.
+func (s *NodesResponseResponseItem) GetXrayVersion() NilString {
+	return s.XrayVersion
+}
+
+// GetNodeVersion returns the value of NodeVersion.
+func (s *NodesResponseResponseItem) GetNodeVersion() NilString {
+	return s.NodeVersion
+}
+
+// GetXrayUptime returns the value of XrayUptime.
+func (s *NodesResponseResponseItem) GetXrayUptime() string {
+	return s.XrayUptime
+}
+
+// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
+func (s *NodesResponseResponseItem) GetIsTrafficTrackingActive() bool {
+	return s.IsTrafficTrackingActive
+}
+
+// GetTrafficResetDay returns the value of TrafficResetDay.
+func (s *NodesResponseResponseItem) GetTrafficResetDay() NilInt {
+	return s.TrafficResetDay
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *NodesResponseResponseItem) GetTrafficLimitBytes() NilFloat64 {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
+func (s *NodesResponseResponseItem) GetTrafficUsedBytes() NilFloat64 {
+	return s.TrafficUsedBytes
+}
+
+// GetNotifyPercent returns the value of NotifyPercent.
+func (s *NodesResponseResponseItem) GetNotifyPercent() NilInt {
+	return s.NotifyPercent
+}
+
+// GetUsersOnline returns the value of UsersOnline.
+func (s *NodesResponseResponseItem) GetUsersOnline() NilInt {
+	return s.UsersOnline
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *NodesResponseResponseItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *NodesResponseResponseItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
+func (s *NodesResponseResponseItem) GetConsumptionMultiplier() float64 {
+	return s.ConsumptionMultiplier
+}
+
+// GetCpuCount returns the value of CpuCount.
+func (s *NodesResponseResponseItem) GetCpuCount() NilInt {
+	return s.CpuCount
+}
+
+// GetCpuModel returns the value of CpuModel.
+func (s *NodesResponseResponseItem) GetCpuModel() NilString {
+	return s.CpuModel
+}
+
+// GetTotalRam returns the value of TotalRam.
+func (s *NodesResponseResponseItem) GetTotalRam() NilString {
+	return s.TotalRam
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *NodesResponseResponseItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *NodesResponseResponseItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *NodesResponseResponseItem) GetConfigProfile() NodesResponseResponseItemConfigProfile {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *NodesResponseResponseItem) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *NodesResponseResponseItem) GetProvider() NilNodesResponseResponseItemProvider {
+	return s.Provider
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodesResponseResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *NodesResponseResponseItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetAddress sets the value of Address.
+func (s *NodesResponseResponseItem) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *NodesResponseResponseItem) SetPort(val NilInt) {
+	s.Port = val
+}
+
+// SetIsConnected sets the value of IsConnected.
+func (s *NodesResponseResponseItem) SetIsConnected(val bool) {
+	s.IsConnected = val
+}
+
+// SetIsDisabled sets the value of IsDisabled.
+func (s *NodesResponseResponseItem) SetIsDisabled(val bool) {
+	s.IsDisabled = val
+}
+
+// SetIsConnecting sets the value of IsConnecting.
+func (s *NodesResponseResponseItem) SetIsConnecting(val bool) {
+	s.IsConnecting = val
+}
+
+// SetIsNodeOnline sets the value of IsNodeOnline.
+func (s *NodesResponseResponseItem) SetIsNodeOnline(val bool) {
+	s.IsNodeOnline = val
+}
+
+// SetIsXrayRunning sets the value of IsXrayRunning.
+func (s *NodesResponseResponseItem) SetIsXrayRunning(val bool) {
+	s.IsXrayRunning = val
+}
+
+// SetLastStatusChange sets the value of LastStatusChange.
+func (s *NodesResponseResponseItem) SetLastStatusChange(val NilDateTime) {
+	s.LastStatusChange = val
+}
+
+// SetLastStatusMessage sets the value of LastStatusMessage.
+func (s *NodesResponseResponseItem) SetLastStatusMessage(val NilString) {
+	s.LastStatusMessage = val
+}
+
+// SetXrayVersion sets the value of XrayVersion.
+func (s *NodesResponseResponseItem) SetXrayVersion(val NilString) {
+	s.XrayVersion = val
+}
+
+// SetNodeVersion sets the value of NodeVersion.
+func (s *NodesResponseResponseItem) SetNodeVersion(val NilString) {
+	s.NodeVersion = val
+}
+
+// SetXrayUptime sets the value of XrayUptime.
+func (s *NodesResponseResponseItem) SetXrayUptime(val string) {
+	s.XrayUptime = val
+}
+
+// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
+func (s *NodesResponseResponseItem) SetIsTrafficTrackingActive(val bool) {
+	s.IsTrafficTrackingActive = val
+}
+
+// SetTrafficResetDay sets the value of TrafficResetDay.
+func (s *NodesResponseResponseItem) SetTrafficResetDay(val NilInt) {
+	s.TrafficResetDay = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *NodesResponseResponseItem) SetTrafficLimitBytes(val NilFloat64) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
+func (s *NodesResponseResponseItem) SetTrafficUsedBytes(val NilFloat64) {
+	s.TrafficUsedBytes = val
+}
+
+// SetNotifyPercent sets the value of NotifyPercent.
+func (s *NodesResponseResponseItem) SetNotifyPercent(val NilInt) {
+	s.NotifyPercent = val
+}
+
+// SetUsersOnline sets the value of UsersOnline.
+func (s *NodesResponseResponseItem) SetUsersOnline(val NilInt) {
+	s.UsersOnline = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *NodesResponseResponseItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *NodesResponseResponseItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
+func (s *NodesResponseResponseItem) SetConsumptionMultiplier(val float64) {
+	s.ConsumptionMultiplier = val
+}
+
+// SetCpuCount sets the value of CpuCount.
+func (s *NodesResponseResponseItem) SetCpuCount(val NilInt) {
+	s.CpuCount = val
+}
+
+// SetCpuModel sets the value of CpuModel.
+func (s *NodesResponseResponseItem) SetCpuModel(val NilString) {
+	s.CpuModel = val
+}
+
+// SetTotalRam sets the value of TotalRam.
+func (s *NodesResponseResponseItem) SetTotalRam(val NilString) {
+	s.TotalRam = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *NodesResponseResponseItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *NodesResponseResponseItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *NodesResponseResponseItem) SetConfigProfile(val NodesResponseResponseItemConfigProfile) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *NodesResponseResponseItem) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *NodesResponseResponseItem) SetProvider(val NilNodesResponseResponseItemProvider) {
+	s.Provider = val
+}
+
+type NodesResponseResponseItemConfigProfile struct {
+	ActiveConfigProfileUuid NilUUID                                                    `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []NodesResponseResponseItemConfigProfileActiveInboundsItem `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *NodesResponseResponseItemConfigProfile) GetActiveConfigProfileUuid() NilUUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *NodesResponseResponseItemConfigProfile) GetActiveInbounds() []NodesResponseResponseItemConfigProfileActiveInboundsItem {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *NodesResponseResponseItemConfigProfile) SetActiveConfigProfileUuid(val NilUUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *NodesResponseResponseItemConfigProfile) SetActiveInbounds(val []NodesResponseResponseItemConfigProfileActiveInboundsItem) {
+	s.ActiveInbounds = val
+}
+
+type NodesResponseResponseItemConfigProfileActiveInboundsItem struct {
+	UUID        uuid.UUID  `json:"uuid"`
+	ProfileUuid uuid.UUID  `json:"profileUuid"`
+	Tag         string     `json:"tag"`
+	Type        string     `json:"type"`
+	Network     NilString  `json:"network"`
+	Security    NilString  `json:"security"`
+	Port        NilFloat64 `json:"port"`
+	RawInbound  jx.Raw     `json:"rawInbound"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProfileUuid returns the value of ProfileUuid.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetProfileUuid() uuid.UUID {
+	return s.ProfileUuid
+}
+
+// GetTag returns the value of Tag.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetTag() string {
+	return s.Tag
+}
+
+// GetType returns the value of Type.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetType() string {
+	return s.Type
+}
+
+// GetNetwork returns the value of Network.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetNetwork() NilString {
+	return s.Network
+}
+
+// GetSecurity returns the value of Security.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetSecurity() NilString {
+	return s.Security
+}
+
+// GetPort returns the value of Port.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetPort() NilFloat64 {
+	return s.Port
+}
+
+// GetRawInbound returns the value of RawInbound.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) GetRawInbound() jx.Raw {
+	return s.RawInbound
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProfileUuid sets the value of ProfileUuid.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetProfileUuid(val uuid.UUID) {
+	s.ProfileUuid = val
+}
+
+// SetTag sets the value of Tag.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetTag(val string) {
+	s.Tag = val
+}
+
+// SetType sets the value of Type.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetNetwork sets the value of Network.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetNetwork(val NilString) {
+	s.Network = val
+}
+
+// SetSecurity sets the value of Security.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetSecurity(val NilString) {
+	s.Security = val
+}
+
+// SetPort sets the value of Port.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetPort(val NilFloat64) {
+	s.Port = val
+}
+
+// SetRawInbound sets the value of RawInbound.
+func (s *NodesResponseResponseItemConfigProfileActiveInboundsItem) SetRawInbound(val jx.Raw) {
+	s.RawInbound = val
+}
+
+type NodesResponseResponseItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+	LoginUrl    NilString `json:"loginUrl"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *NodesResponseResponseItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *NodesResponseResponseItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *NodesResponseResponseItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// GetLoginUrl returns the value of LoginUrl.
+func (s *NodesResponseResponseItemProvider) GetLoginUrl() NilString {
+	return s.LoginUrl
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *NodesResponseResponseItemProvider) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *NodesResponseResponseItemProvider) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodesResponseResponseItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *NodesResponseResponseItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *NodesResponseResponseItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
+// SetLoginUrl sets the value of LoginUrl.
+func (s *NodesResponseResponseItemProvider) SetLoginUrl(val NilString) {
+	s.LoginUrl = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *NodesResponseResponseItemProvider) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *NodesResponseResponseItemProvider) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
 
 // Ref: #/components/schemas/NotFoundError
 type NotFoundError struct {
@@ -14849,38 +16098,38 @@ func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseUserTrafficLimitStrat
 	return d
 }
 
-// NewOptHostItemSecurityLayer returns new OptHostItemSecurityLayer with value set to v.
-func NewOptHostItemSecurityLayer(v HostItemSecurityLayer) OptHostItemSecurityLayer {
-	return OptHostItemSecurityLayer{
+// NewOptHostListResponseResponseItemSecurityLayer returns new OptHostListResponseResponseItemSecurityLayer with value set to v.
+func NewOptHostListResponseResponseItemSecurityLayer(v HostListResponseResponseItemSecurityLayer) OptHostListResponseResponseItemSecurityLayer {
+	return OptHostListResponseResponseItemSecurityLayer{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptHostItemSecurityLayer is optional HostItemSecurityLayer.
-type OptHostItemSecurityLayer struct {
-	Value HostItemSecurityLayer
+// OptHostListResponseResponseItemSecurityLayer is optional HostListResponseResponseItemSecurityLayer.
+type OptHostListResponseResponseItemSecurityLayer struct {
+	Value HostListResponseResponseItemSecurityLayer
 	Set   bool
 }
 
-// IsSet returns true if OptHostItemSecurityLayer was set.
-func (o OptHostItemSecurityLayer) IsSet() bool { return o.Set }
+// IsSet returns true if OptHostListResponseResponseItemSecurityLayer was set.
+func (o OptHostListResponseResponseItemSecurityLayer) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptHostItemSecurityLayer) Reset() {
-	var v HostItemSecurityLayer
+func (o *OptHostListResponseResponseItemSecurityLayer) Reset() {
+	var v HostListResponseResponseItemSecurityLayer
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptHostItemSecurityLayer) SetTo(v HostItemSecurityLayer) {
+func (o *OptHostListResponseResponseItemSecurityLayer) SetTo(v HostListResponseResponseItemSecurityLayer) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptHostItemSecurityLayer) Get() (v HostItemSecurityLayer, ok bool) {
+func (o OptHostListResponseResponseItemSecurityLayer) Get() (v HostListResponseResponseItemSecurityLayer, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -14888,7 +16137,53 @@ func (o OptHostItemSecurityLayer) Get() (v HostItemSecurityLayer, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptHostItemSecurityLayer) Or(d HostItemSecurityLayer) HostItemSecurityLayer {
+func (o OptHostListResponseResponseItemSecurityLayer) Or(d HostListResponseResponseItemSecurityLayer) HostListResponseResponseItemSecurityLayer {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptHostResponseResponseSecurityLayer returns new OptHostResponseResponseSecurityLayer with value set to v.
+func NewOptHostResponseResponseSecurityLayer(v HostResponseResponseSecurityLayer) OptHostResponseResponseSecurityLayer {
+	return OptHostResponseResponseSecurityLayer{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptHostResponseResponseSecurityLayer is optional HostResponseResponseSecurityLayer.
+type OptHostResponseResponseSecurityLayer struct {
+	Value HostResponseResponseSecurityLayer
+	Set   bool
+}
+
+// IsSet returns true if OptHostResponseResponseSecurityLayer was set.
+func (o OptHostResponseResponseSecurityLayer) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptHostResponseResponseSecurityLayer) Reset() {
+	var v HostResponseResponseSecurityLayer
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptHostResponseResponseSecurityLayer) SetTo(v HostResponseResponseSecurityLayer) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptHostResponseResponseSecurityLayer) Get() (v HostResponseResponseSecurityLayer, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptHostResponseResponseSecurityLayer) Or(d HostResponseResponseSecurityLayer) HostResponseResponseSecurityLayer {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16713,38 +18008,38 @@ func (o OptUpdateUserRequestDtoTrafficLimitStrategy) Or(d UpdateUserRequestDtoTr
 	return d
 }
 
-// NewOptUserItemStatus returns new OptUserItemStatus with value set to v.
-func NewOptUserItemStatus(v UserItemStatus) OptUserItemStatus {
-	return OptUserItemStatus{
+// NewOptUserResponseResponseStatus returns new OptUserResponseResponseStatus with value set to v.
+func NewOptUserResponseResponseStatus(v UserResponseResponseStatus) OptUserResponseResponseStatus {
+	return OptUserResponseResponseStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserItemStatus is optional UserItemStatus.
-type OptUserItemStatus struct {
-	Value UserItemStatus
+// OptUserResponseResponseStatus is optional UserResponseResponseStatus.
+type OptUserResponseResponseStatus struct {
+	Value UserResponseResponseStatus
 	Set   bool
 }
 
-// IsSet returns true if OptUserItemStatus was set.
-func (o OptUserItemStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptUserResponseResponseStatus was set.
+func (o OptUserResponseResponseStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserItemStatus) Reset() {
-	var v UserItemStatus
+func (o *OptUserResponseResponseStatus) Reset() {
+	var v UserResponseResponseStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserItemStatus) SetTo(v UserItemStatus) {
+func (o *OptUserResponseResponseStatus) SetTo(v UserResponseResponseStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserItemStatus) Get() (v UserItemStatus, ok bool) {
+func (o OptUserResponseResponseStatus) Get() (v UserResponseResponseStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -16752,45 +18047,45 @@ func (o OptUserItemStatus) Get() (v UserItemStatus, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserItemStatus) Or(d UserItemStatus) UserItemStatus {
+func (o OptUserResponseResponseStatus) Or(d UserResponseResponseStatus) UserResponseResponseStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUserItemTrafficLimitStrategy returns new OptUserItemTrafficLimitStrategy with value set to v.
-func NewOptUserItemTrafficLimitStrategy(v UserItemTrafficLimitStrategy) OptUserItemTrafficLimitStrategy {
-	return OptUserItemTrafficLimitStrategy{
+// NewOptUserResponseResponseTrafficLimitStrategy returns new OptUserResponseResponseTrafficLimitStrategy with value set to v.
+func NewOptUserResponseResponseTrafficLimitStrategy(v UserResponseResponseTrafficLimitStrategy) OptUserResponseResponseTrafficLimitStrategy {
+	return OptUserResponseResponseTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserItemTrafficLimitStrategy is optional UserItemTrafficLimitStrategy.
-type OptUserItemTrafficLimitStrategy struct {
-	Value UserItemTrafficLimitStrategy
+// OptUserResponseResponseTrafficLimitStrategy is optional UserResponseResponseTrafficLimitStrategy.
+type OptUserResponseResponseTrafficLimitStrategy struct {
+	Value UserResponseResponseTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptUserItemTrafficLimitStrategy was set.
-func (o OptUserItemTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptUserResponseResponseTrafficLimitStrategy was set.
+func (o OptUserResponseResponseTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserItemTrafficLimitStrategy) Reset() {
-	var v UserItemTrafficLimitStrategy
+func (o *OptUserResponseResponseTrafficLimitStrategy) Reset() {
+	var v UserResponseResponseTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserItemTrafficLimitStrategy) SetTo(v UserItemTrafficLimitStrategy) {
+func (o *OptUserResponseResponseTrafficLimitStrategy) SetTo(v UserResponseResponseTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserItemTrafficLimitStrategy) Get() (v UserItemTrafficLimitStrategy, ok bool) {
+func (o OptUserResponseResponseTrafficLimitStrategy) Get() (v UserResponseResponseTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -16798,7 +18093,99 @@ func (o OptUserItemTrafficLimitStrategy) Get() (v UserItemTrafficLimitStrategy, 
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserItemTrafficLimitStrategy) Or(d UserItemTrafficLimitStrategy) UserItemTrafficLimitStrategy {
+func (o OptUserResponseResponseTrafficLimitStrategy) Or(d UserResponseResponseTrafficLimitStrategy) UserResponseResponseTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUsersResponseResponseItemStatus returns new OptUsersResponseResponseItemStatus with value set to v.
+func NewOptUsersResponseResponseItemStatus(v UsersResponseResponseItemStatus) OptUsersResponseResponseItemStatus {
+	return OptUsersResponseResponseItemStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUsersResponseResponseItemStatus is optional UsersResponseResponseItemStatus.
+type OptUsersResponseResponseItemStatus struct {
+	Value UsersResponseResponseItemStatus
+	Set   bool
+}
+
+// IsSet returns true if OptUsersResponseResponseItemStatus was set.
+func (o OptUsersResponseResponseItemStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUsersResponseResponseItemStatus) Reset() {
+	var v UsersResponseResponseItemStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUsersResponseResponseItemStatus) SetTo(v UsersResponseResponseItemStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUsersResponseResponseItemStatus) Get() (v UsersResponseResponseItemStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUsersResponseResponseItemStatus) Or(d UsersResponseResponseItemStatus) UsersResponseResponseItemStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUsersResponseResponseItemTrafficLimitStrategy returns new OptUsersResponseResponseItemTrafficLimitStrategy with value set to v.
+func NewOptUsersResponseResponseItemTrafficLimitStrategy(v UsersResponseResponseItemTrafficLimitStrategy) OptUsersResponseResponseItemTrafficLimitStrategy {
+	return OptUsersResponseResponseItemTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUsersResponseResponseItemTrafficLimitStrategy is optional UsersResponseResponseItemTrafficLimitStrategy.
+type OptUsersResponseResponseItemTrafficLimitStrategy struct {
+	Value UsersResponseResponseItemTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptUsersResponseResponseItemTrafficLimitStrategy was set.
+func (o OptUsersResponseResponseItemTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUsersResponseResponseItemTrafficLimitStrategy) Reset() {
+	var v UsersResponseResponseItemTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUsersResponseResponseItemTrafficLimitStrategy) SetTo(v UsersResponseResponseItemTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUsersResponseResponseItemTrafficLimitStrategy) Get() (v UsersResponseResponseItemTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUsersResponseResponseItemTrafficLimitStrategy) Or(d UsersResponseResponseItemTrafficLimitStrategy) UsersResponseResponseItemTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -21901,550 +23288,18 @@ func (s *UpdateUserRequestDtoTrafficLimitStrategy) UnmarshalText(data []byte) er
 	}
 }
 
-// Ref: #/components/schemas/UserItem
-type UserItem struct {
-	UUID                     uuid.UUID         `json:"uuid"`
-	ShortUuid                string            `json:"shortUuid"`
-	Username                 string            `json:"username"`
-	Status                   OptUserItemStatus `json:"status"`
-	UsedTrafficBytes         float64           `json:"usedTrafficBytes"`
-	LifetimeUsedTrafficBytes float64           `json:"lifetimeUsedTrafficBytes"`
-	TrafficLimitBytes        OptInt            `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy   OptUserItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
-	SubLastUserAgent       NilString                          `json:"subLastUserAgent"`
-	SubLastOpenedAt        NilDateTime                        `json:"subLastOpenedAt"`
-	ExpireAt               time.Time                          `json:"expireAt"`
-	OnlineAt               NilDateTime                        `json:"onlineAt"`
-	SubRevokedAt           NilDateTime                        `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                        `json:"lastTrafficResetAt"`
-	TrojanPassword         string                             `json:"trojanPassword"`
-	VlessUuid              uuid.UUID                          `json:"vlessUuid"`
-	SsPassword             string                             `json:"ssPassword"`
-	Description            NilString                          `json:"description"`
-	Tag                    NilString                          `json:"tag"`
-	TelegramId             NilInt                             `json:"telegramId"`
-	Email                  NilString                          `json:"email"`
-	HwidDeviceLimit        NilInt                             `json:"hwidDeviceLimit"`
-	FirstConnectedAt       NilDateTime                        `json:"firstConnectedAt"`
-	LastTriggeredThreshold OptInt                             `json:"lastTriggeredThreshold"`
-	CreatedAt              time.Time                          `json:"createdAt"`
-	UpdatedAt              time.Time                          `json:"updatedAt"`
-	ActiveInternalSquads   []UserItemActiveInternalSquadsItem `json:"activeInternalSquads"`
-	ExternalSquadUuid      NilUUID                            `json:"externalSquadUuid"`
-	SubscriptionUrl        string                             `json:"subscriptionUrl"`
-	LastConnectedNode      NilUserItemLastConnectedNode       `json:"lastConnectedNode"`
-	Happ                   UserItemHapp                       `json:"happ"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UserItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetShortUuid returns the value of ShortUuid.
-func (s *UserItem) GetShortUuid() string {
-	return s.ShortUuid
-}
-
-// GetUsername returns the value of Username.
-func (s *UserItem) GetUsername() string {
-	return s.Username
-}
-
-// GetStatus returns the value of Status.
-func (s *UserItem) GetStatus() OptUserItemStatus {
-	return s.Status
-}
-
-// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
-func (s *UserItem) GetUsedTrafficBytes() float64 {
-	return s.UsedTrafficBytes
-}
-
-// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
-func (s *UserItem) GetLifetimeUsedTrafficBytes() float64 {
-	return s.LifetimeUsedTrafficBytes
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UserItem) GetTrafficLimitBytes() OptInt {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *UserItem) GetTrafficLimitStrategy() OptUserItemTrafficLimitStrategy {
-	return s.TrafficLimitStrategy
-}
-
-// GetSubLastUserAgent returns the value of SubLastUserAgent.
-func (s *UserItem) GetSubLastUserAgent() NilString {
-	return s.SubLastUserAgent
-}
-
-// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
-func (s *UserItem) GetSubLastOpenedAt() NilDateTime {
-	return s.SubLastOpenedAt
-}
-
-// GetExpireAt returns the value of ExpireAt.
-func (s *UserItem) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetOnlineAt returns the value of OnlineAt.
-func (s *UserItem) GetOnlineAt() NilDateTime {
-	return s.OnlineAt
-}
-
-// GetSubRevokedAt returns the value of SubRevokedAt.
-func (s *UserItem) GetSubRevokedAt() NilDateTime {
-	return s.SubRevokedAt
-}
-
-// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *UserItem) GetLastTrafficResetAt() NilDateTime {
-	return s.LastTrafficResetAt
-}
-
-// GetTrojanPassword returns the value of TrojanPassword.
-func (s *UserItem) GetTrojanPassword() string {
-	return s.TrojanPassword
-}
-
-// GetVlessUuid returns the value of VlessUuid.
-func (s *UserItem) GetVlessUuid() uuid.UUID {
-	return s.VlessUuid
-}
-
-// GetSsPassword returns the value of SsPassword.
-func (s *UserItem) GetSsPassword() string {
-	return s.SsPassword
-}
-
-// GetDescription returns the value of Description.
-func (s *UserItem) GetDescription() NilString {
-	return s.Description
-}
-
-// GetTag returns the value of Tag.
-func (s *UserItem) GetTag() NilString {
-	return s.Tag
-}
-
-// GetTelegramId returns the value of TelegramId.
-func (s *UserItem) GetTelegramId() NilInt {
-	return s.TelegramId
-}
-
-// GetEmail returns the value of Email.
-func (s *UserItem) GetEmail() NilString {
-	return s.Email
-}
-
-// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UserItem) GetHwidDeviceLimit() NilInt {
-	return s.HwidDeviceLimit
-}
-
-// GetFirstConnectedAt returns the value of FirstConnectedAt.
-func (s *UserItem) GetFirstConnectedAt() NilDateTime {
-	return s.FirstConnectedAt
-}
-
-// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
-func (s *UserItem) GetLastTriggeredThreshold() OptInt {
-	return s.LastTriggeredThreshold
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *UserItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *UserItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *UserItem) GetActiveInternalSquads() []UserItemActiveInternalSquadsItem {
-	return s.ActiveInternalSquads
-}
-
-// GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *UserItem) GetExternalSquadUuid() NilUUID {
-	return s.ExternalSquadUuid
-}
-
-// GetSubscriptionUrl returns the value of SubscriptionUrl.
-func (s *UserItem) GetSubscriptionUrl() string {
-	return s.SubscriptionUrl
-}
-
-// GetLastConnectedNode returns the value of LastConnectedNode.
-func (s *UserItem) GetLastConnectedNode() NilUserItemLastConnectedNode {
-	return s.LastConnectedNode
-}
-
-// GetHapp returns the value of Happ.
-func (s *UserItem) GetHapp() UserItemHapp {
-	return s.Happ
-}
-
-// SetUUID sets the value of UUID.
-func (s *UserItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetShortUuid sets the value of ShortUuid.
-func (s *UserItem) SetShortUuid(val string) {
-	s.ShortUuid = val
-}
-
-// SetUsername sets the value of Username.
-func (s *UserItem) SetUsername(val string) {
-	s.Username = val
-}
-
-// SetStatus sets the value of Status.
-func (s *UserItem) SetStatus(val OptUserItemStatus) {
-	s.Status = val
-}
-
-// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
-func (s *UserItem) SetUsedTrafficBytes(val float64) {
-	s.UsedTrafficBytes = val
-}
-
-// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
-func (s *UserItem) SetLifetimeUsedTrafficBytes(val float64) {
-	s.LifetimeUsedTrafficBytes = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UserItem) SetTrafficLimitBytes(val OptInt) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *UserItem) SetTrafficLimitStrategy(val OptUserItemTrafficLimitStrategy) {
-	s.TrafficLimitStrategy = val
-}
-
-// SetSubLastUserAgent sets the value of SubLastUserAgent.
-func (s *UserItem) SetSubLastUserAgent(val NilString) {
-	s.SubLastUserAgent = val
-}
-
-// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
-func (s *UserItem) SetSubLastOpenedAt(val NilDateTime) {
-	s.SubLastOpenedAt = val
-}
-
-// SetExpireAt sets the value of ExpireAt.
-func (s *UserItem) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
-}
-
-// SetOnlineAt sets the value of OnlineAt.
-func (s *UserItem) SetOnlineAt(val NilDateTime) {
-	s.OnlineAt = val
-}
-
-// SetSubRevokedAt sets the value of SubRevokedAt.
-func (s *UserItem) SetSubRevokedAt(val NilDateTime) {
-	s.SubRevokedAt = val
-}
-
-// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *UserItem) SetLastTrafficResetAt(val NilDateTime) {
-	s.LastTrafficResetAt = val
-}
-
-// SetTrojanPassword sets the value of TrojanPassword.
-func (s *UserItem) SetTrojanPassword(val string) {
-	s.TrojanPassword = val
-}
-
-// SetVlessUuid sets the value of VlessUuid.
-func (s *UserItem) SetVlessUuid(val uuid.UUID) {
-	s.VlessUuid = val
-}
-
-// SetSsPassword sets the value of SsPassword.
-func (s *UserItem) SetSsPassword(val string) {
-	s.SsPassword = val
-}
-
-// SetDescription sets the value of Description.
-func (s *UserItem) SetDescription(val NilString) {
-	s.Description = val
-}
-
-// SetTag sets the value of Tag.
-func (s *UserItem) SetTag(val NilString) {
-	s.Tag = val
-}
-
-// SetTelegramId sets the value of TelegramId.
-func (s *UserItem) SetTelegramId(val NilInt) {
-	s.TelegramId = val
-}
-
-// SetEmail sets the value of Email.
-func (s *UserItem) SetEmail(val NilString) {
-	s.Email = val
-}
-
-// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UserItem) SetHwidDeviceLimit(val NilInt) {
-	s.HwidDeviceLimit = val
-}
-
-// SetFirstConnectedAt sets the value of FirstConnectedAt.
-func (s *UserItem) SetFirstConnectedAt(val NilDateTime) {
-	s.FirstConnectedAt = val
-}
-
-// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
-func (s *UserItem) SetLastTriggeredThreshold(val OptInt) {
-	s.LastTriggeredThreshold = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *UserItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *UserItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *UserItem) SetActiveInternalSquads(val []UserItemActiveInternalSquadsItem) {
-	s.ActiveInternalSquads = val
-}
-
-// SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *UserItem) SetExternalSquadUuid(val NilUUID) {
-	s.ExternalSquadUuid = val
-}
-
-// SetSubscriptionUrl sets the value of SubscriptionUrl.
-func (s *UserItem) SetSubscriptionUrl(val string) {
-	s.SubscriptionUrl = val
-}
-
-// SetLastConnectedNode sets the value of LastConnectedNode.
-func (s *UserItem) SetLastConnectedNode(val NilUserItemLastConnectedNode) {
-	s.LastConnectedNode = val
-}
-
-// SetHapp sets the value of Happ.
-func (s *UserItem) SetHapp(val UserItemHapp) {
-	s.Happ = val
-}
-
-type UserItemActiveInternalSquadsItem struct {
-	UUID uuid.UUID `json:"uuid"`
-	Name string    `json:"name"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UserItemActiveInternalSquadsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *UserItemActiveInternalSquadsItem) GetName() string {
-	return s.Name
-}
-
-// SetUUID sets the value of UUID.
-func (s *UserItemActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *UserItemActiveInternalSquadsItem) SetName(val string) {
-	s.Name = val
-}
-
-type UserItemHapp struct {
-	CryptoLink string `json:"cryptoLink"`
-}
-
-// GetCryptoLink returns the value of CryptoLink.
-func (s *UserItemHapp) GetCryptoLink() string {
-	return s.CryptoLink
-}
-
-// SetCryptoLink sets the value of CryptoLink.
-func (s *UserItemHapp) SetCryptoLink(val string) {
-	s.CryptoLink = val
-}
-
-type UserItemLastConnectedNode struct {
-	ConnectedAt time.Time `json:"connectedAt"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-}
-
-// GetConnectedAt returns the value of ConnectedAt.
-func (s *UserItemLastConnectedNode) GetConnectedAt() time.Time {
-	return s.ConnectedAt
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *UserItemLastConnectedNode) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *UserItemLastConnectedNode) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// SetConnectedAt sets the value of ConnectedAt.
-func (s *UserItemLastConnectedNode) SetConnectedAt(val time.Time) {
-	s.ConnectedAt = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *UserItemLastConnectedNode) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *UserItemLastConnectedNode) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-type UserItemStatus string
-
-const (
-	UserItemStatusACTIVE   UserItemStatus = "ACTIVE"
-	UserItemStatusDISABLED UserItemStatus = "DISABLED"
-	UserItemStatusLIMITED  UserItemStatus = "LIMITED"
-	UserItemStatusEXPIRED  UserItemStatus = "EXPIRED"
-)
-
-// AllValues returns all UserItemStatus values.
-func (UserItemStatus) AllValues() []UserItemStatus {
-	return []UserItemStatus{
-		UserItemStatusACTIVE,
-		UserItemStatusDISABLED,
-		UserItemStatusLIMITED,
-		UserItemStatusEXPIRED,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UserItemStatus) MarshalText() ([]byte, error) {
-	switch s {
-	case UserItemStatusACTIVE:
-		return []byte(s), nil
-	case UserItemStatusDISABLED:
-		return []byte(s), nil
-	case UserItemStatusLIMITED:
-		return []byte(s), nil
-	case UserItemStatusEXPIRED:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UserItemStatus) UnmarshalText(data []byte) error {
-	switch UserItemStatus(data) {
-	case UserItemStatusACTIVE:
-		*s = UserItemStatusACTIVE
-		return nil
-	case UserItemStatusDISABLED:
-		*s = UserItemStatusDISABLED
-		return nil
-	case UserItemStatusLIMITED:
-		*s = UserItemStatusLIMITED
-		return nil
-	case UserItemStatusEXPIRED:
-		*s = UserItemStatusEXPIRED
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-// Available reset periods.
-type UserItemTrafficLimitStrategy string
-
-const (
-	UserItemTrafficLimitStrategyNORESET UserItemTrafficLimitStrategy = "NO_RESET"
-	UserItemTrafficLimitStrategyDAY     UserItemTrafficLimitStrategy = "DAY"
-	UserItemTrafficLimitStrategyWEEK    UserItemTrafficLimitStrategy = "WEEK"
-	UserItemTrafficLimitStrategyMONTH   UserItemTrafficLimitStrategy = "MONTH"
-)
-
-// AllValues returns all UserItemTrafficLimitStrategy values.
-func (UserItemTrafficLimitStrategy) AllValues() []UserItemTrafficLimitStrategy {
-	return []UserItemTrafficLimitStrategy{
-		UserItemTrafficLimitStrategyNORESET,
-		UserItemTrafficLimitStrategyDAY,
-		UserItemTrafficLimitStrategyWEEK,
-		UserItemTrafficLimitStrategyMONTH,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s UserItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
-	switch s {
-	case UserItemTrafficLimitStrategyNORESET:
-		return []byte(s), nil
-	case UserItemTrafficLimitStrategyDAY:
-		return []byte(s), nil
-	case UserItemTrafficLimitStrategyWEEK:
-		return []byte(s), nil
-	case UserItemTrafficLimitStrategyMONTH:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UserItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch UserItemTrafficLimitStrategy(data) {
-	case UserItemTrafficLimitStrategyNORESET:
-		*s = UserItemTrafficLimitStrategyNORESET
-		return nil
-	case UserItemTrafficLimitStrategyDAY:
-		*s = UserItemTrafficLimitStrategyDAY
-		return nil
-	case UserItemTrafficLimitStrategyWEEK:
-		*s = UserItemTrafficLimitStrategyWEEK
-		return nil
-	case UserItemTrafficLimitStrategyMONTH:
-		*s = UserItemTrafficLimitStrategyMONTH
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
 // Ref: #/components/schemas/UserResponse
 type UserResponse struct {
-	Response UserItem `json:"response"`
+	Response UserResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *UserResponse) GetResponse() UserItem {
+func (s *UserResponse) GetResponse() UserResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *UserResponse) SetResponse(val UserItem) {
+func (s *UserResponse) SetResponse(val UserResponseResponse) {
 	s.Response = val
 }
 
@@ -22458,88 +23313,535 @@ func (*UserResponse) usersControllerResetUserTrafficRes()       {}
 func (*UserResponse) usersControllerRevokeUserSubscriptionRes() {}
 func (*UserResponse) usersControllerUpdateUserRes()             {}
 
-// Ref: #/components/schemas/UserSubscriptionHistory
-type UserSubscriptionHistory struct {
-	Total   float64                              `json:"total"`
-	Records []UserSubscriptionHistoryRecordsItem `json:"records"`
+type UserResponseResponse struct {
+	UUID                     uuid.UUID                     `json:"uuid"`
+	ShortUuid                string                        `json:"shortUuid"`
+	Username                 string                        `json:"username"`
+	Status                   OptUserResponseResponseStatus `json:"status"`
+	UsedTrafficBytes         float64                       `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                       `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                        `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy   OptUserResponseResponseTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                      `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                    `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                      `json:"expireAt"`
+	OnlineAt               NilDateTime                                    `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                    `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                    `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                         `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                      `json:"vlessUuid"`
+	SsPassword             string                                         `json:"ssPassword"`
+	Description            NilString                                      `json:"description"`
+	Tag                    NilString                                      `json:"tag"`
+	TelegramId             NilInt                                         `json:"telegramId"`
+	Email                  NilString                                      `json:"email"`
+	HwidDeviceLimit        NilInt                                         `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                    `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                         `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                      `json:"createdAt"`
+	UpdatedAt              time.Time                                      `json:"updatedAt"`
+	ActiveInternalSquads   []UserResponseResponseActiveInternalSquadsItem `json:"activeInternalSquads"`
+	ExternalSquadUuid      NilUUID                                        `json:"externalSquadUuid"`
+	SubscriptionUrl        string                                         `json:"subscriptionUrl"`
+	LastConnectedNode      NilUserResponseResponseLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   UserResponseResponseHapp                       `json:"happ"`
 }
 
-// GetTotal returns the value of Total.
-func (s *UserSubscriptionHistory) GetTotal() float64 {
-	return s.Total
+// GetUUID returns the value of UUID.
+func (s *UserResponseResponse) GetUUID() uuid.UUID {
+	return s.UUID
 }
 
-// GetRecords returns the value of Records.
-func (s *UserSubscriptionHistory) GetRecords() []UserSubscriptionHistoryRecordsItem {
-	return s.Records
+// GetShortUuid returns the value of ShortUuid.
+func (s *UserResponseResponse) GetShortUuid() string {
+	return s.ShortUuid
 }
 
-// SetTotal sets the value of Total.
-func (s *UserSubscriptionHistory) SetTotal(val float64) {
-	s.Total = val
+// GetUsername returns the value of Username.
+func (s *UserResponseResponse) GetUsername() string {
+	return s.Username
 }
 
-// SetRecords sets the value of Records.
-func (s *UserSubscriptionHistory) SetRecords(val []UserSubscriptionHistoryRecordsItem) {
-	s.Records = val
+// GetStatus returns the value of Status.
+func (s *UserResponseResponse) GetStatus() OptUserResponseResponseStatus {
+	return s.Status
 }
 
-type UserSubscriptionHistoryRecordsItem struct {
-	ID        float64   `json:"id"`
-	UserUuid  uuid.UUID `json:"userUuid"`
-	RequestAt time.Time `json:"requestAt"`
-	RequestIp NilString `json:"requestIp"`
-	UserAgent NilString `json:"userAgent"`
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *UserResponseResponse) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
 }
 
-// GetID returns the value of ID.
-func (s *UserSubscriptionHistoryRecordsItem) GetID() float64 {
-	return s.ID
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *UserResponseResponse) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
 }
 
-// GetUserUuid returns the value of UserUuid.
-func (s *UserSubscriptionHistoryRecordsItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *UserResponseResponse) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
 }
 
-// GetRequestAt returns the value of RequestAt.
-func (s *UserSubscriptionHistoryRecordsItem) GetRequestAt() time.Time {
-	return s.RequestAt
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *UserResponseResponse) GetTrafficLimitStrategy() OptUserResponseResponseTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
 }
 
-// GetRequestIp returns the value of RequestIp.
-func (s *UserSubscriptionHistoryRecordsItem) GetRequestIp() NilString {
-	return s.RequestIp
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *UserResponseResponse) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
 }
 
-// GetUserAgent returns the value of UserAgent.
-func (s *UserSubscriptionHistoryRecordsItem) GetUserAgent() NilString {
-	return s.UserAgent
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *UserResponseResponse) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
 }
 
-// SetID sets the value of ID.
-func (s *UserSubscriptionHistoryRecordsItem) SetID(val float64) {
-	s.ID = val
+// GetExpireAt returns the value of ExpireAt.
+func (s *UserResponseResponse) GetExpireAt() time.Time {
+	return s.ExpireAt
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *UserSubscriptionHistoryRecordsItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
+// GetOnlineAt returns the value of OnlineAt.
+func (s *UserResponseResponse) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
 }
 
-// SetRequestAt sets the value of RequestAt.
-func (s *UserSubscriptionHistoryRecordsItem) SetRequestAt(val time.Time) {
-	s.RequestAt = val
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *UserResponseResponse) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
 }
 
-// SetRequestIp sets the value of RequestIp.
-func (s *UserSubscriptionHistoryRecordsItem) SetRequestIp(val NilString) {
-	s.RequestIp = val
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *UserResponseResponse) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
 }
 
-// SetUserAgent sets the value of UserAgent.
-func (s *UserSubscriptionHistoryRecordsItem) SetUserAgent(val NilString) {
-	s.UserAgent = val
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *UserResponseResponse) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *UserResponseResponse) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *UserResponseResponse) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *UserResponseResponse) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *UserResponseResponse) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *UserResponseResponse) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *UserResponseResponse) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *UserResponseResponse) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *UserResponseResponse) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *UserResponseResponse) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UserResponseResponse) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UserResponseResponse) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *UserResponseResponse) GetActiveInternalSquads() []UserResponseResponseActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *UserResponseResponse) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *UserResponseResponse) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *UserResponseResponse) GetLastConnectedNode() NilUserResponseResponseLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *UserResponseResponse) GetHapp() UserResponseResponseHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *UserResponseResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *UserResponseResponse) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *UserResponseResponse) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *UserResponseResponse) SetStatus(val OptUserResponseResponseStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *UserResponseResponse) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *UserResponseResponse) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *UserResponseResponse) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *UserResponseResponse) SetTrafficLimitStrategy(val OptUserResponseResponseTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *UserResponseResponse) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *UserResponseResponse) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *UserResponseResponse) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *UserResponseResponse) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *UserResponseResponse) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *UserResponseResponse) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *UserResponseResponse) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *UserResponseResponse) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *UserResponseResponse) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *UserResponseResponse) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UserResponseResponse) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *UserResponseResponse) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *UserResponseResponse) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *UserResponseResponse) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *UserResponseResponse) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *UserResponseResponse) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UserResponseResponse) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UserResponseResponse) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *UserResponseResponse) SetActiveInternalSquads(val []UserResponseResponseActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *UserResponseResponse) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *UserResponseResponse) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *UserResponseResponse) SetLastConnectedNode(val NilUserResponseResponseLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *UserResponseResponse) SetHapp(val UserResponseResponseHapp) {
+	s.Happ = val
+}
+
+type UserResponseResponseActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UserResponseResponseActiveInternalSquadsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UserResponseResponseActiveInternalSquadsItem) GetName() string {
+	return s.Name
+}
+
+// SetUUID sets the value of UUID.
+func (s *UserResponseResponseActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UserResponseResponseActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
+}
+
+type UserResponseResponseHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *UserResponseResponseHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *UserResponseResponseHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type UserResponseResponseLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *UserResponseResponseLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *UserResponseResponseLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UserResponseResponseLastConnectedNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *UserResponseResponseLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *UserResponseResponseLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UserResponseResponseLastConnectedNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type UserResponseResponseStatus string
+
+const (
+	UserResponseResponseStatusACTIVE   UserResponseResponseStatus = "ACTIVE"
+	UserResponseResponseStatusDISABLED UserResponseResponseStatus = "DISABLED"
+	UserResponseResponseStatusLIMITED  UserResponseResponseStatus = "LIMITED"
+	UserResponseResponseStatusEXPIRED  UserResponseResponseStatus = "EXPIRED"
+)
+
+// AllValues returns all UserResponseResponseStatus values.
+func (UserResponseResponseStatus) AllValues() []UserResponseResponseStatus {
+	return []UserResponseResponseStatus{
+		UserResponseResponseStatusACTIVE,
+		UserResponseResponseStatusDISABLED,
+		UserResponseResponseStatusLIMITED,
+		UserResponseResponseStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UserResponseResponseStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case UserResponseResponseStatusACTIVE:
+		return []byte(s), nil
+	case UserResponseResponseStatusDISABLED:
+		return []byte(s), nil
+	case UserResponseResponseStatusLIMITED:
+		return []byte(s), nil
+	case UserResponseResponseStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UserResponseResponseStatus) UnmarshalText(data []byte) error {
+	switch UserResponseResponseStatus(data) {
+	case UserResponseResponseStatusACTIVE:
+		*s = UserResponseResponseStatusACTIVE
+		return nil
+	case UserResponseResponseStatusDISABLED:
+		*s = UserResponseResponseStatusDISABLED
+		return nil
+	case UserResponseResponseStatusLIMITED:
+		*s = UserResponseResponseStatusLIMITED
+		return nil
+	case UserResponseResponseStatusEXPIRED:
+		*s = UserResponseResponseStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type UserResponseResponseTrafficLimitStrategy string
+
+const (
+	UserResponseResponseTrafficLimitStrategyNORESET UserResponseResponseTrafficLimitStrategy = "NO_RESET"
+	UserResponseResponseTrafficLimitStrategyDAY     UserResponseResponseTrafficLimitStrategy = "DAY"
+	UserResponseResponseTrafficLimitStrategyWEEK    UserResponseResponseTrafficLimitStrategy = "WEEK"
+	UserResponseResponseTrafficLimitStrategyMONTH   UserResponseResponseTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all UserResponseResponseTrafficLimitStrategy values.
+func (UserResponseResponseTrafficLimitStrategy) AllValues() []UserResponseResponseTrafficLimitStrategy {
+	return []UserResponseResponseTrafficLimitStrategy{
+		UserResponseResponseTrafficLimitStrategyNORESET,
+		UserResponseResponseTrafficLimitStrategyDAY,
+		UserResponseResponseTrafficLimitStrategyWEEK,
+		UserResponseResponseTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UserResponseResponseTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case UserResponseResponseTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case UserResponseResponseTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case UserResponseResponseTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case UserResponseResponseTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UserResponseResponseTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch UserResponseResponseTrafficLimitStrategy(data) {
+	case UserResponseResponseTrafficLimitStrategyNORESET:
+		*s = UserResponseResponseTrafficLimitStrategyNORESET
+		return nil
+	case UserResponseResponseTrafficLimitStrategyDAY:
+		*s = UserResponseResponseTrafficLimitStrategyDAY
+		return nil
+	case UserResponseResponseTrafficLimitStrategyWEEK:
+		*s = UserResponseResponseTrafficLimitStrategyWEEK
+		return nil
+	case UserResponseResponseTrafficLimitStrategyMONTH:
+		*s = UserResponseResponseTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // UsersControllerDeleteUserNotFound is response for UsersControllerDeleteUser operation.
@@ -22610,22 +23912,553 @@ func (*UsersControllerRevokeUserSubscriptionNotFound) usersControllerRevokeUserS
 
 // Ref: #/components/schemas/UsersResponse
 type UsersResponse struct {
-	Response []UserItem `json:"response"`
+	Response []UsersResponseResponseItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *UsersResponse) GetResponse() []UserItem {
+func (s *UsersResponse) GetResponse() []UsersResponseResponseItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *UsersResponse) SetResponse(val []UserItem) {
+func (s *UsersResponse) SetResponse(val []UsersResponseResponseItem) {
 	s.Response = val
 }
 
 func (*UsersResponse) usersControllerGetUserByTelegramIdRes() {}
 func (*UsersResponse) usersControllerGetUsersByEmailRes()     {}
 func (*UsersResponse) usersControllerGetUsersByTagRes()       {}
+
+type UsersResponseResponseItem struct {
+	UUID                     uuid.UUID                          `json:"uuid"`
+	ShortUuid                string                             `json:"shortUuid"`
+	Username                 string                             `json:"username"`
+	Status                   OptUsersResponseResponseItemStatus `json:"status"`
+	UsedTrafficBytes         float64                            `json:"usedTrafficBytes"`
+	LifetimeUsedTrafficBytes float64                            `json:"lifetimeUsedTrafficBytes"`
+	TrafficLimitBytes        OptInt                             `json:"trafficLimitBytes"`
+	// Available reset periods.
+	TrafficLimitStrategy   OptUsersResponseResponseItemTrafficLimitStrategy    `json:"trafficLimitStrategy"`
+	SubLastUserAgent       NilString                                           `json:"subLastUserAgent"`
+	SubLastOpenedAt        NilDateTime                                         `json:"subLastOpenedAt"`
+	ExpireAt               time.Time                                           `json:"expireAt"`
+	OnlineAt               NilDateTime                                         `json:"onlineAt"`
+	SubRevokedAt           NilDateTime                                         `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                                         `json:"lastTrafficResetAt"`
+	TrojanPassword         string                                              `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                                           `json:"vlessUuid"`
+	SsPassword             string                                              `json:"ssPassword"`
+	Description            NilString                                           `json:"description"`
+	Tag                    NilString                                           `json:"tag"`
+	TelegramId             NilInt                                              `json:"telegramId"`
+	Email                  NilString                                           `json:"email"`
+	HwidDeviceLimit        NilInt                                              `json:"hwidDeviceLimit"`
+	FirstConnectedAt       NilDateTime                                         `json:"firstConnectedAt"`
+	LastTriggeredThreshold OptInt                                              `json:"lastTriggeredThreshold"`
+	CreatedAt              time.Time                                           `json:"createdAt"`
+	UpdatedAt              time.Time                                           `json:"updatedAt"`
+	ActiveInternalSquads   []UsersResponseResponseItemActiveInternalSquadsItem `json:"activeInternalSquads"`
+	ExternalSquadUuid      NilUUID                                             `json:"externalSquadUuid"`
+	SubscriptionUrl        string                                              `json:"subscriptionUrl"`
+	LastConnectedNode      NilUsersResponseResponseItemLastConnectedNode       `json:"lastConnectedNode"`
+	Happ                   UsersResponseResponseItemHapp                       `json:"happ"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UsersResponseResponseItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetShortUuid returns the value of ShortUuid.
+func (s *UsersResponseResponseItem) GetShortUuid() string {
+	return s.ShortUuid
+}
+
+// GetUsername returns the value of Username.
+func (s *UsersResponseResponseItem) GetUsername() string {
+	return s.Username
+}
+
+// GetStatus returns the value of Status.
+func (s *UsersResponseResponseItem) GetStatus() OptUsersResponseResponseItemStatus {
+	return s.Status
+}
+
+// GetUsedTrafficBytes returns the value of UsedTrafficBytes.
+func (s *UsersResponseResponseItem) GetUsedTrafficBytes() float64 {
+	return s.UsedTrafficBytes
+}
+
+// GetLifetimeUsedTrafficBytes returns the value of LifetimeUsedTrafficBytes.
+func (s *UsersResponseResponseItem) GetLifetimeUsedTrafficBytes() float64 {
+	return s.LifetimeUsedTrafficBytes
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *UsersResponseResponseItem) GetTrafficLimitBytes() OptInt {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
+func (s *UsersResponseResponseItem) GetTrafficLimitStrategy() OptUsersResponseResponseItemTrafficLimitStrategy {
+	return s.TrafficLimitStrategy
+}
+
+// GetSubLastUserAgent returns the value of SubLastUserAgent.
+func (s *UsersResponseResponseItem) GetSubLastUserAgent() NilString {
+	return s.SubLastUserAgent
+}
+
+// GetSubLastOpenedAt returns the value of SubLastOpenedAt.
+func (s *UsersResponseResponseItem) GetSubLastOpenedAt() NilDateTime {
+	return s.SubLastOpenedAt
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *UsersResponseResponseItem) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetOnlineAt returns the value of OnlineAt.
+func (s *UsersResponseResponseItem) GetOnlineAt() NilDateTime {
+	return s.OnlineAt
+}
+
+// GetSubRevokedAt returns the value of SubRevokedAt.
+func (s *UsersResponseResponseItem) GetSubRevokedAt() NilDateTime {
+	return s.SubRevokedAt
+}
+
+// GetLastTrafficResetAt returns the value of LastTrafficResetAt.
+func (s *UsersResponseResponseItem) GetLastTrafficResetAt() NilDateTime {
+	return s.LastTrafficResetAt
+}
+
+// GetTrojanPassword returns the value of TrojanPassword.
+func (s *UsersResponseResponseItem) GetTrojanPassword() string {
+	return s.TrojanPassword
+}
+
+// GetVlessUuid returns the value of VlessUuid.
+func (s *UsersResponseResponseItem) GetVlessUuid() uuid.UUID {
+	return s.VlessUuid
+}
+
+// GetSsPassword returns the value of SsPassword.
+func (s *UsersResponseResponseItem) GetSsPassword() string {
+	return s.SsPassword
+}
+
+// GetDescription returns the value of Description.
+func (s *UsersResponseResponseItem) GetDescription() NilString {
+	return s.Description
+}
+
+// GetTag returns the value of Tag.
+func (s *UsersResponseResponseItem) GetTag() NilString {
+	return s.Tag
+}
+
+// GetTelegramId returns the value of TelegramId.
+func (s *UsersResponseResponseItem) GetTelegramId() NilInt {
+	return s.TelegramId
+}
+
+// GetEmail returns the value of Email.
+func (s *UsersResponseResponseItem) GetEmail() NilString {
+	return s.Email
+}
+
+// GetHwidDeviceLimit returns the value of HwidDeviceLimit.
+func (s *UsersResponseResponseItem) GetHwidDeviceLimit() NilInt {
+	return s.HwidDeviceLimit
+}
+
+// GetFirstConnectedAt returns the value of FirstConnectedAt.
+func (s *UsersResponseResponseItem) GetFirstConnectedAt() NilDateTime {
+	return s.FirstConnectedAt
+}
+
+// GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
+func (s *UsersResponseResponseItem) GetLastTriggeredThreshold() OptInt {
+	return s.LastTriggeredThreshold
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *UsersResponseResponseItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *UsersResponseResponseItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetActiveInternalSquads returns the value of ActiveInternalSquads.
+func (s *UsersResponseResponseItem) GetActiveInternalSquads() []UsersResponseResponseItemActiveInternalSquadsItem {
+	return s.ActiveInternalSquads
+}
+
+// GetExternalSquadUuid returns the value of ExternalSquadUuid.
+func (s *UsersResponseResponseItem) GetExternalSquadUuid() NilUUID {
+	return s.ExternalSquadUuid
+}
+
+// GetSubscriptionUrl returns the value of SubscriptionUrl.
+func (s *UsersResponseResponseItem) GetSubscriptionUrl() string {
+	return s.SubscriptionUrl
+}
+
+// GetLastConnectedNode returns the value of LastConnectedNode.
+func (s *UsersResponseResponseItem) GetLastConnectedNode() NilUsersResponseResponseItemLastConnectedNode {
+	return s.LastConnectedNode
+}
+
+// GetHapp returns the value of Happ.
+func (s *UsersResponseResponseItem) GetHapp() UsersResponseResponseItemHapp {
+	return s.Happ
+}
+
+// SetUUID sets the value of UUID.
+func (s *UsersResponseResponseItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetShortUuid sets the value of ShortUuid.
+func (s *UsersResponseResponseItem) SetShortUuid(val string) {
+	s.ShortUuid = val
+}
+
+// SetUsername sets the value of Username.
+func (s *UsersResponseResponseItem) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetStatus sets the value of Status.
+func (s *UsersResponseResponseItem) SetStatus(val OptUsersResponseResponseItemStatus) {
+	s.Status = val
+}
+
+// SetUsedTrafficBytes sets the value of UsedTrafficBytes.
+func (s *UsersResponseResponseItem) SetUsedTrafficBytes(val float64) {
+	s.UsedTrafficBytes = val
+}
+
+// SetLifetimeUsedTrafficBytes sets the value of LifetimeUsedTrafficBytes.
+func (s *UsersResponseResponseItem) SetLifetimeUsedTrafficBytes(val float64) {
+	s.LifetimeUsedTrafficBytes = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *UsersResponseResponseItem) SetTrafficLimitBytes(val OptInt) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
+func (s *UsersResponseResponseItem) SetTrafficLimitStrategy(val OptUsersResponseResponseItemTrafficLimitStrategy) {
+	s.TrafficLimitStrategy = val
+}
+
+// SetSubLastUserAgent sets the value of SubLastUserAgent.
+func (s *UsersResponseResponseItem) SetSubLastUserAgent(val NilString) {
+	s.SubLastUserAgent = val
+}
+
+// SetSubLastOpenedAt sets the value of SubLastOpenedAt.
+func (s *UsersResponseResponseItem) SetSubLastOpenedAt(val NilDateTime) {
+	s.SubLastOpenedAt = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *UsersResponseResponseItem) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetOnlineAt sets the value of OnlineAt.
+func (s *UsersResponseResponseItem) SetOnlineAt(val NilDateTime) {
+	s.OnlineAt = val
+}
+
+// SetSubRevokedAt sets the value of SubRevokedAt.
+func (s *UsersResponseResponseItem) SetSubRevokedAt(val NilDateTime) {
+	s.SubRevokedAt = val
+}
+
+// SetLastTrafficResetAt sets the value of LastTrafficResetAt.
+func (s *UsersResponseResponseItem) SetLastTrafficResetAt(val NilDateTime) {
+	s.LastTrafficResetAt = val
+}
+
+// SetTrojanPassword sets the value of TrojanPassword.
+func (s *UsersResponseResponseItem) SetTrojanPassword(val string) {
+	s.TrojanPassword = val
+}
+
+// SetVlessUuid sets the value of VlessUuid.
+func (s *UsersResponseResponseItem) SetVlessUuid(val uuid.UUID) {
+	s.VlessUuid = val
+}
+
+// SetSsPassword sets the value of SsPassword.
+func (s *UsersResponseResponseItem) SetSsPassword(val string) {
+	s.SsPassword = val
+}
+
+// SetDescription sets the value of Description.
+func (s *UsersResponseResponseItem) SetDescription(val NilString) {
+	s.Description = val
+}
+
+// SetTag sets the value of Tag.
+func (s *UsersResponseResponseItem) SetTag(val NilString) {
+	s.Tag = val
+}
+
+// SetTelegramId sets the value of TelegramId.
+func (s *UsersResponseResponseItem) SetTelegramId(val NilInt) {
+	s.TelegramId = val
+}
+
+// SetEmail sets the value of Email.
+func (s *UsersResponseResponseItem) SetEmail(val NilString) {
+	s.Email = val
+}
+
+// SetHwidDeviceLimit sets the value of HwidDeviceLimit.
+func (s *UsersResponseResponseItem) SetHwidDeviceLimit(val NilInt) {
+	s.HwidDeviceLimit = val
+}
+
+// SetFirstConnectedAt sets the value of FirstConnectedAt.
+func (s *UsersResponseResponseItem) SetFirstConnectedAt(val NilDateTime) {
+	s.FirstConnectedAt = val
+}
+
+// SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
+func (s *UsersResponseResponseItem) SetLastTriggeredThreshold(val OptInt) {
+	s.LastTriggeredThreshold = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *UsersResponseResponseItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *UsersResponseResponseItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetActiveInternalSquads sets the value of ActiveInternalSquads.
+func (s *UsersResponseResponseItem) SetActiveInternalSquads(val []UsersResponseResponseItemActiveInternalSquadsItem) {
+	s.ActiveInternalSquads = val
+}
+
+// SetExternalSquadUuid sets the value of ExternalSquadUuid.
+func (s *UsersResponseResponseItem) SetExternalSquadUuid(val NilUUID) {
+	s.ExternalSquadUuid = val
+}
+
+// SetSubscriptionUrl sets the value of SubscriptionUrl.
+func (s *UsersResponseResponseItem) SetSubscriptionUrl(val string) {
+	s.SubscriptionUrl = val
+}
+
+// SetLastConnectedNode sets the value of LastConnectedNode.
+func (s *UsersResponseResponseItem) SetLastConnectedNode(val NilUsersResponseResponseItemLastConnectedNode) {
+	s.LastConnectedNode = val
+}
+
+// SetHapp sets the value of Happ.
+func (s *UsersResponseResponseItem) SetHapp(val UsersResponseResponseItemHapp) {
+	s.Happ = val
+}
+
+type UsersResponseResponseItemActiveInternalSquadsItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	Name string    `json:"name"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UsersResponseResponseItemActiveInternalSquadsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UsersResponseResponseItemActiveInternalSquadsItem) GetName() string {
+	return s.Name
+}
+
+// SetUUID sets the value of UUID.
+func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UsersResponseResponseItemActiveInternalSquadsItem) SetName(val string) {
+	s.Name = val
+}
+
+type UsersResponseResponseItemHapp struct {
+	CryptoLink string `json:"cryptoLink"`
+}
+
+// GetCryptoLink returns the value of CryptoLink.
+func (s *UsersResponseResponseItemHapp) GetCryptoLink() string {
+	return s.CryptoLink
+}
+
+// SetCryptoLink sets the value of CryptoLink.
+func (s *UsersResponseResponseItemHapp) SetCryptoLink(val string) {
+	s.CryptoLink = val
+}
+
+type UsersResponseResponseItemLastConnectedNode struct {
+	ConnectedAt time.Time `json:"connectedAt"`
+	NodeName    string    `json:"nodeName"`
+	CountryCode string    `json:"countryCode"`
+}
+
+// GetConnectedAt returns the value of ConnectedAt.
+func (s *UsersResponseResponseItemLastConnectedNode) GetConnectedAt() time.Time {
+	return s.ConnectedAt
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *UsersResponseResponseItemLastConnectedNode) GetNodeName() string {
+	return s.NodeName
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UsersResponseResponseItemLastConnectedNode) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// SetConnectedAt sets the value of ConnectedAt.
+func (s *UsersResponseResponseItemLastConnectedNode) SetConnectedAt(val time.Time) {
+	s.ConnectedAt = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *UsersResponseResponseItemLastConnectedNode) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UsersResponseResponseItemLastConnectedNode) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+type UsersResponseResponseItemStatus string
+
+const (
+	UsersResponseResponseItemStatusACTIVE   UsersResponseResponseItemStatus = "ACTIVE"
+	UsersResponseResponseItemStatusDISABLED UsersResponseResponseItemStatus = "DISABLED"
+	UsersResponseResponseItemStatusLIMITED  UsersResponseResponseItemStatus = "LIMITED"
+	UsersResponseResponseItemStatusEXPIRED  UsersResponseResponseItemStatus = "EXPIRED"
+)
+
+// AllValues returns all UsersResponseResponseItemStatus values.
+func (UsersResponseResponseItemStatus) AllValues() []UsersResponseResponseItemStatus {
+	return []UsersResponseResponseItemStatus{
+		UsersResponseResponseItemStatusACTIVE,
+		UsersResponseResponseItemStatusDISABLED,
+		UsersResponseResponseItemStatusLIMITED,
+		UsersResponseResponseItemStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UsersResponseResponseItemStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case UsersResponseResponseItemStatusACTIVE:
+		return []byte(s), nil
+	case UsersResponseResponseItemStatusDISABLED:
+		return []byte(s), nil
+	case UsersResponseResponseItemStatusLIMITED:
+		return []byte(s), nil
+	case UsersResponseResponseItemStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UsersResponseResponseItemStatus) UnmarshalText(data []byte) error {
+	switch UsersResponseResponseItemStatus(data) {
+	case UsersResponseResponseItemStatusACTIVE:
+		*s = UsersResponseResponseItemStatusACTIVE
+		return nil
+	case UsersResponseResponseItemStatusDISABLED:
+		*s = UsersResponseResponseItemStatusDISABLED
+		return nil
+	case UsersResponseResponseItemStatusLIMITED:
+		*s = UsersResponseResponseItemStatusLIMITED
+		return nil
+	case UsersResponseResponseItemStatusEXPIRED:
+		*s = UsersResponseResponseItemStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Available reset periods.
+type UsersResponseResponseItemTrafficLimitStrategy string
+
+const (
+	UsersResponseResponseItemTrafficLimitStrategyNORESET UsersResponseResponseItemTrafficLimitStrategy = "NO_RESET"
+	UsersResponseResponseItemTrafficLimitStrategyDAY     UsersResponseResponseItemTrafficLimitStrategy = "DAY"
+	UsersResponseResponseItemTrafficLimitStrategyWEEK    UsersResponseResponseItemTrafficLimitStrategy = "WEEK"
+	UsersResponseResponseItemTrafficLimitStrategyMONTH   UsersResponseResponseItemTrafficLimitStrategy = "MONTH"
+)
+
+// AllValues returns all UsersResponseResponseItemTrafficLimitStrategy values.
+func (UsersResponseResponseItemTrafficLimitStrategy) AllValues() []UsersResponseResponseItemTrafficLimitStrategy {
+	return []UsersResponseResponseItemTrafficLimitStrategy{
+		UsersResponseResponseItemTrafficLimitStrategyNORESET,
+		UsersResponseResponseItemTrafficLimitStrategyDAY,
+		UsersResponseResponseItemTrafficLimitStrategyWEEK,
+		UsersResponseResponseItemTrafficLimitStrategyMONTH,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UsersResponseResponseItemTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case UsersResponseResponseItemTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case UsersResponseResponseItemTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case UsersResponseResponseItemTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case UsersResponseResponseItemTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UsersResponseResponseItemTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch UsersResponseResponseItemTrafficLimitStrategy(data) {
+	case UsersResponseResponseItemTrafficLimitStrategyNORESET:
+		*s = UsersResponseResponseItemTrafficLimitStrategyNORESET
+		return nil
+	case UsersResponseResponseItemTrafficLimitStrategyDAY:
+		*s = UsersResponseResponseItemTrafficLimitStrategyDAY
+		return nil
+	case UsersResponseResponseItemTrafficLimitStrategyWEEK:
+		*s = UsersResponseResponseItemTrafficLimitStrategyWEEK
+		return nil
+	case UsersResponseResponseItemTrafficLimitStrategyMONTH:
+		*s = UsersResponseResponseItemTrafficLimitStrategyMONTH
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
 
 // UsersStatsControllerGetUserUsageByRangeNotFound is response for UsersStatsControllerGetUserUsageByRange operation.
 type UsersStatsControllerGetUserUsageByRangeNotFound struct{}

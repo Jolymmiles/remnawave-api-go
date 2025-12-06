@@ -61,7 +61,7 @@ def print_info(message: str):
 # STEP 1: SMART CONSOLIDATE SCHEMAS
 # ============================================================================
 
-def smart_consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, int, dict]:
+def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_extraction: bool = False) -> Tuple[int, int, dict]:
     """
     Consolidate duplicate schemas using smart analysis.
     Combines old Steps 1 (consolidate) and 2 (rename) into one step.
@@ -103,14 +103,17 @@ def smart_consolidate_schemas(input_file: str, output_file: str) -> Tuple[int, i
         print_info(f"Unified {error_stats['total_replaced']} error responses (400: {error_stats['responses_unified'].get('400', 0)}, 401: {error_stats['responses_unified'].get('401', 0)})")
         stats['unified_errors'] = error_stats['total_replaced']
     
-    # Extract inline schemas for reuse
-    print_info("Extracting inline schemas for reuse...")
-    extractor = InlineSchemaExtractor(new_spec)
-    new_spec, extract_stats = extractor.extract_inline_schemas()
-    
-    if extract_stats['extracted_count'] > 0:
-        print_info(f"Extracted {extract_stats['extracted_count']} inline schemas")
-        stats['extracted_schemas'] = extract_stats['extracted_count']
+    # Extract inline schemas for reuse (optional - can cause conflicts in some specs)
+    if not skip_inline_extraction:
+        print_info("Extracting inline schemas for reuse...")
+        extractor = InlineSchemaExtractor(new_spec)
+        new_spec, extract_stats = extractor.extract_inline_schemas()
+        
+        if extract_stats['extracted_count'] > 0:
+            print_info(f"Extracted {extract_stats['extracted_count']} inline schemas")
+            stats['extracted_schemas'] = extract_stats['extracted_count']
+    else:
+        print_info("Skipping inline schema extraction")
     
     print_info(f"Writing {output_file}...")
     with open(output_file, 'w') as f:
@@ -520,8 +523,10 @@ def main():
     
     try:
         # Step 1: Smart consolidate (combines old Steps 1 & 2)
+        # Skip inline extraction for older API specs (can cause ogen conflicts)
+        skip_inline = 'api-2-2-' in input_spec or 'api-2-1-' in input_spec or 'api-2-0-' in input_spec
         print_step(1, 3, "SMART CONSOLIDATE SCHEMAS")
-        orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file)
+        orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file, skip_inline_extraction=skip_inline)
         
         # Step 2: Generate with ogen
         print_step(2, 3, "GENERATE GO CLIENT WITH OGEN")
