@@ -57,6 +57,10 @@ type ConfigProfileControllerGetAllInboundsRes interface {
 	configProfileControllerGetAllInboundsRes()
 }
 
+type ConfigProfileControllerGetComputedConfigProfileByUuidRes interface {
+	configProfileControllerGetComputedConfigProfileByUuidRes()
+}
+
 type ConfigProfileControllerGetConfigProfileByUuidRes interface {
 	configProfileControllerGetConfigProfileByUuidRes()
 }
@@ -283,6 +287,10 @@ type NodesControllerGetOneNodeRes interface {
 
 type NodesControllerReorderNodesRes interface {
 	nodesControllerReorderNodesRes()
+}
+
+type NodesControllerResetNodeTrafficRes interface {
+	nodesControllerResetNodeTrafficRes()
 }
 
 type NodesControllerRestartAllNodesRes interface {

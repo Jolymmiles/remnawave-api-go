@@ -4,8 +4,6 @@ package api
 
 import (
 	"time"
-
-	"github.com/google/uuid"
 )
 
 // ApiTokensControllerDeleteParams is parameters of ApiTokensController_delete operation.
@@ -16,6 +14,11 @@ type ApiTokensControllerDeleteParams struct {
 
 // ConfigProfileControllerDeleteConfigProfileByUuidParams is parameters of ConfigProfileController_deleteConfigProfileByUuid operation.
 type ConfigProfileControllerDeleteConfigProfileByUuidParams struct {
+	UUID string
+}
+
+// ConfigProfileControllerGetComputedConfigProfileByUuidParams is parameters of ConfigProfileController_getComputedConfigProfileByUuid operation.
+type ConfigProfileControllerGetComputedConfigProfileByUuidParams struct {
 	UUID string
 }
 
@@ -145,6 +148,12 @@ type NodesControllerGetOneNodeParams struct {
 	UUID string
 }
 
+// NodesControllerResetNodeTrafficParams is parameters of NodesController_resetNodeTraffic operation.
+type NodesControllerResetNodeTrafficParams struct {
+	// Node UUID.
+	UUID string
+}
+
 // NodesControllerRestartNodeParams is parameters of NodesController_restartNode operation.
 type NodesControllerRestartNodeParams struct {
 	// Node UUID.
@@ -207,8 +216,8 @@ type SubscriptionTemplateControllerDeleteTemplateParams struct {
 
 // SubscriptionTemplateControllerGetTemplateByUuidParams is parameters of SubscriptionTemplateController_getTemplateByUuid operation.
 type SubscriptionTemplateControllerGetTemplateByUuidParams struct {
-	// UUID of the subscription template.
-	UUID uuid.UUID
+	// UUID of the template.
+	UUID string
 }
 
 // SubscriptionsControllerGetAllSubscriptionsParams is parameters of SubscriptionsController_getAllSubscriptions operation.

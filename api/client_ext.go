@@ -291,6 +291,11 @@ func (sc *ConfigProfileClient) GetAllInbounds(ctx context.Context) (ConfigProfil
 	return sc.client.ConfigProfileControllerGetAllInbounds(ctx)
 }
 
+// GetComputedConfigProfileByUuid calls ConfigProfileController_getComputedConfigProfileByUuid.
+func (sc *ConfigProfileClient) GetComputedConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetComputedConfigProfileByUuidParams) (ConfigProfileControllerGetComputedConfigProfileByUuidRes, error) {
+	return sc.client.ConfigProfileControllerGetComputedConfigProfileByUuid(ctx, params)
+}
+
 // GetConfigProfileByUuid calls ConfigProfileController_getConfigProfileByUuid.
 func (sc *ConfigProfileClient) GetConfigProfileByUuid(ctx context.Context, params ConfigProfileControllerGetConfigProfileByUuidParams) (ConfigProfileControllerGetConfigProfileByUuidRes, error) {
 	return sc.client.ConfigProfileControllerGetConfigProfileByUuid(ctx, params)
@@ -654,6 +659,11 @@ func (sc *NodesClient) GetOneNode(ctx context.Context, params NodesControllerGet
 // ReorderNodes calls NodesController_reorderNodes.
 func (sc *NodesClient) ReorderNodes(ctx context.Context, request *ReorderNodeRequestDto) (NodesControllerReorderNodesRes, error) {
 	return sc.client.NodesControllerReorderNodes(ctx, request)
+}
+
+// ResetNodeTraffic calls NodesController_resetNodeTraffic.
+func (sc *NodesClient) ResetNodeTraffic(ctx context.Context, params NodesControllerResetNodeTrafficParams) (NodesControllerResetNodeTrafficRes, error) {
+	return sc.client.NodesControllerResetNodeTraffic(ctx, params)
 }
 
 // RestartAllNodes calls NodesController_restartAllNodes.

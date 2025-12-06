@@ -12,9 +12,9 @@ import (
 )
 
 type ApiTokensControllerCreateBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []ApiTokensControllerCreateBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -27,9 +27,9 @@ func (s *ApiTokensControllerCreateBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ApiTokensControllerCreateBadRequest) GetErrors() []ApiTokensControllerCreateBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ApiTokensControllerCreateBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -42,14 +42,12 @@ func (s *ApiTokensControllerCreateBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ApiTokensControllerCreateBadRequest) SetErrors(val []ApiTokensControllerCreateBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ApiTokensControllerCreateBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ApiTokensControllerCreateBadRequest) apiTokensControllerCreateRes() {}
-
-type ApiTokensControllerCreateBadRequestErrorsItem struct{}
 
 type ApiTokensControllerCreateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -101,9 +99,9 @@ func (s *ApiTokensControllerCreateInternalServerError) SetErrorCode(val OptStrin
 func (*ApiTokensControllerCreateInternalServerError) apiTokensControllerCreateRes() {}
 
 type ApiTokensControllerDeleteBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []ApiTokensControllerDeleteBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -116,9 +114,9 @@ func (s *ApiTokensControllerDeleteBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ApiTokensControllerDeleteBadRequest) GetErrors() []ApiTokensControllerDeleteBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ApiTokensControllerDeleteBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -131,14 +129,12 @@ func (s *ApiTokensControllerDeleteBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ApiTokensControllerDeleteBadRequest) SetErrors(val []ApiTokensControllerDeleteBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ApiTokensControllerDeleteBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ApiTokensControllerDeleteBadRequest) apiTokensControllerDeleteRes() {}
-
-type ApiTokensControllerDeleteBadRequestErrorsItem struct{}
 
 type ApiTokensControllerDeleteInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -190,9 +186,9 @@ func (s *ApiTokensControllerDeleteInternalServerError) SetErrorCode(val OptStrin
 func (*ApiTokensControllerDeleteInternalServerError) apiTokensControllerDeleteRes() {}
 
 type ApiTokensControllerFindAllBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []ApiTokensControllerFindAllBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -205,9 +201,9 @@ func (s *ApiTokensControllerFindAllBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ApiTokensControllerFindAllBadRequest) GetErrors() []ApiTokensControllerFindAllBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ApiTokensControllerFindAllBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -220,14 +216,12 @@ func (s *ApiTokensControllerFindAllBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ApiTokensControllerFindAllBadRequest) SetErrors(val []ApiTokensControllerFindAllBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ApiTokensControllerFindAllBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ApiTokensControllerFindAllBadRequest) apiTokensControllerFindAllRes() {}
-
-type ApiTokensControllerFindAllBadRequestErrorsItem struct{}
 
 type ApiTokensControllerFindAllInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -279,9 +273,9 @@ func (s *ApiTokensControllerFindAllInternalServerError) SetErrorCode(val OptStri
 func (*ApiTokensControllerFindAllInternalServerError) apiTokensControllerFindAllRes() {}
 
 type AuthControllerGetStatusBadRequest struct {
-	Message    OptString                                     `json:"message"`
-	StatusCode OptFloat64                                    `json:"statusCode"`
-	Errors     []AuthControllerGetStatusBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -294,9 +288,9 @@ func (s *AuthControllerGetStatusBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerGetStatusBadRequest) GetErrors() []AuthControllerGetStatusBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerGetStatusBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -309,14 +303,12 @@ func (s *AuthControllerGetStatusBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerGetStatusBadRequest) SetErrors(val []AuthControllerGetStatusBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerGetStatusBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerGetStatusBadRequest) authControllerGetStatusRes() {}
-
-type AuthControllerGetStatusBadRequestErrorsItem struct{}
 
 type AuthControllerGetStatusInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -368,9 +360,9 @@ func (s *AuthControllerGetStatusInternalServerError) SetErrorCode(val OptString)
 func (*AuthControllerGetStatusInternalServerError) authControllerGetStatusRes() {}
 
 type AuthControllerLoginBadRequest struct {
-	Message    OptString                                 `json:"message"`
-	StatusCode OptFloat64                                `json:"statusCode"`
-	Errors     []AuthControllerLoginBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -383,9 +375,9 @@ func (s *AuthControllerLoginBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerLoginBadRequest) GetErrors() []AuthControllerLoginBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerLoginBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -398,14 +390,12 @@ func (s *AuthControllerLoginBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerLoginBadRequest) SetErrors(val []AuthControllerLoginBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerLoginBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerLoginBadRequest) authControllerLoginRes() {}
-
-type AuthControllerLoginBadRequestErrorsItem struct{}
 
 type AuthControllerLoginInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -495,9 +485,9 @@ func (s *AuthControllerLoginUnauthorized) SetError(val OptString) {
 func (*AuthControllerLoginUnauthorized) authControllerLoginRes() {}
 
 type AuthControllerOauth2AuthorizeBadRequest struct {
-	Message    OptString                                           `json:"message"`
-	StatusCode OptFloat64                                          `json:"statusCode"`
-	Errors     []AuthControllerOauth2AuthorizeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -510,9 +500,9 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerOauth2AuthorizeBadRequest) GetErrors() []AuthControllerOauth2AuthorizeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerOauth2AuthorizeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -525,14 +515,12 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) SetStatusCode(val OptFloat64) 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerOauth2AuthorizeBadRequest) SetErrors(val []AuthControllerOauth2AuthorizeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerOauth2AuthorizeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerOauth2AuthorizeBadRequest) authControllerOauth2AuthorizeRes() {}
-
-type AuthControllerOauth2AuthorizeBadRequestErrorsItem struct{}
 
 type AuthControllerOauth2AuthorizeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -584,9 +572,9 @@ func (s *AuthControllerOauth2AuthorizeInternalServerError) SetErrorCode(val OptS
 func (*AuthControllerOauth2AuthorizeInternalServerError) authControllerOauth2AuthorizeRes() {}
 
 type AuthControllerOauth2CallbackBadRequest struct {
-	Message    OptString                                          `json:"message"`
-	StatusCode OptFloat64                                         `json:"statusCode"`
-	Errors     []AuthControllerOauth2CallbackBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -599,9 +587,9 @@ func (s *AuthControllerOauth2CallbackBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerOauth2CallbackBadRequest) GetErrors() []AuthControllerOauth2CallbackBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerOauth2CallbackBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -614,14 +602,12 @@ func (s *AuthControllerOauth2CallbackBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerOauth2CallbackBadRequest) SetErrors(val []AuthControllerOauth2CallbackBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerOauth2CallbackBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerOauth2CallbackBadRequest) authControllerOauth2CallbackRes() {}
-
-type AuthControllerOauth2CallbackBadRequestErrorsItem struct{}
 
 type AuthControllerOauth2CallbackInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -673,9 +659,9 @@ func (s *AuthControllerOauth2CallbackInternalServerError) SetErrorCode(val OptSt
 func (*AuthControllerOauth2CallbackInternalServerError) authControllerOauth2CallbackRes() {}
 
 type AuthControllerPasskeyAuthenticationOptionsBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -688,9 +674,9 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) GetErrors() []AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -703,15 +689,13 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) SetErrors(val []AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerPasskeyAuthenticationOptionsBadRequest) authControllerPasskeyAuthenticationOptionsRes() {
 }
-
-type AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem struct{}
 
 type AuthControllerPasskeyAuthenticationOptionsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -764,9 +748,9 @@ func (*AuthControllerPasskeyAuthenticationOptionsInternalServerError) authContro
 }
 
 type AuthControllerPasskeyAuthenticationVerifyBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -779,9 +763,9 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) GetErrors() []AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -794,15 +778,13 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) SetErrors(val []AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerPasskeyAuthenticationVerifyBadRequest) authControllerPasskeyAuthenticationVerifyRes() {
 }
-
-type AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem struct{}
 
 type AuthControllerPasskeyAuthenticationVerifyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -855,9 +837,9 @@ func (*AuthControllerPasskeyAuthenticationVerifyInternalServerError) authControl
 }
 
 type AuthControllerRegisterBadRequest struct {
-	Message    OptString                                    `json:"message"`
-	StatusCode OptFloat64                                   `json:"statusCode"`
-	Errors     []AuthControllerRegisterBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -870,9 +852,9 @@ func (s *AuthControllerRegisterBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerRegisterBadRequest) GetErrors() []AuthControllerRegisterBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerRegisterBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -885,14 +867,12 @@ func (s *AuthControllerRegisterBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerRegisterBadRequest) SetErrors(val []AuthControllerRegisterBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerRegisterBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerRegisterBadRequest) authControllerRegisterRes() {}
-
-type AuthControllerRegisterBadRequestErrorsItem struct{}
 
 type AuthControllerRegisterForbidden struct {
 	StatusCode OptFloat64 `json:"statusCode"`
@@ -982,9 +962,9 @@ func (s *AuthControllerRegisterInternalServerError) SetErrorCode(val OptString) 
 func (*AuthControllerRegisterInternalServerError) authControllerRegisterRes() {}
 
 type AuthControllerTelegramCallbackBadRequest struct {
-	Message    OptString                                            `json:"message"`
-	StatusCode OptFloat64                                           `json:"statusCode"`
-	Errors     []AuthControllerTelegramCallbackBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -997,9 +977,9 @@ func (s *AuthControllerTelegramCallbackBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *AuthControllerTelegramCallbackBadRequest) GetErrors() []AuthControllerTelegramCallbackBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *AuthControllerTelegramCallbackBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -1012,14 +992,12 @@ func (s *AuthControllerTelegramCallbackBadRequest) SetStatusCode(val OptFloat64)
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *AuthControllerTelegramCallbackBadRequest) SetErrors(val []AuthControllerTelegramCallbackBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *AuthControllerTelegramCallbackBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*AuthControllerTelegramCallbackBadRequest) authControllerTelegramCallbackRes() {}
-
-type AuthControllerTelegramCallbackBadRequestErrorsItem struct{}
 
 type AuthControllerTelegramCallbackInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2176,9 +2154,9 @@ func (s *BulkUuidsRequest) SetUuids(val []uuid.UUID) {
 }
 
 type ConfigProfileControllerCreateConfigProfileBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2191,9 +2169,9 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequest) GetErrors() []ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2206,15 +2184,13 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequest) SetErrors(val []ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerCreateConfigProfileBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerCreateConfigProfileBadRequest) configProfileControllerCreateConfigProfileRes() {
 }
-
-type ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem struct{}
 
 // ConfigProfileControllerCreateConfigProfileConflict is response for ConfigProfileControllerCreateConfigProfile operation.
 type ConfigProfileControllerCreateConfigProfileConflict struct{}
@@ -2273,9 +2249,9 @@ func (*ConfigProfileControllerCreateConfigProfileInternalServerError) configProf
 }
 
 type ConfigProfileControllerDeleteConfigProfileByUuidBadRequest struct {
-	Message    OptString                                                              `json:"message"`
-	StatusCode OptFloat64                                                             `json:"statusCode"`
-	Errors     []ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2288,9 +2264,9 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) GetStatusCo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) GetErrors() []ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2303,15 +2279,13 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) SetStatusCo
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) SetErrors(val []ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) configProfileControllerDeleteConfigProfileByUuidRes() {
 }
-
-type ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem struct{}
 
 type ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2370,9 +2344,9 @@ func (*ConfigProfileControllerDeleteConfigProfileByUuidNotFound) configProfileCo
 }
 
 type ConfigProfileControllerGetAllInboundsBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []ConfigProfileControllerGetAllInboundsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2385,9 +2359,9 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerGetAllInboundsBadRequest) GetErrors() []ConfigProfileControllerGetAllInboundsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerGetAllInboundsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2400,14 +2374,12 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerGetAllInboundsBadRequest) SetErrors(val []ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerGetAllInboundsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerGetAllInboundsBadRequest) configProfileControllerGetAllInboundsRes() {}
-
-type ConfigProfileControllerGetAllInboundsBadRequestErrorsItem struct{}
 
 type ConfigProfileControllerGetAllInboundsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2459,10 +2431,105 @@ func (s *ConfigProfileControllerGetAllInboundsInternalServerError) SetErrorCode(
 func (*ConfigProfileControllerGetAllInboundsInternalServerError) configProfileControllerGetAllInboundsRes() {
 }
 
+type ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest struct {
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) GetError() OptString {
+	return s.Error
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
+}
+
+func (*ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) configProfileControllerGetComputedConfigProfileByUuidRes() {
+}
+
+type ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) configProfileControllerGetComputedConfigProfileByUuidRes() {
+}
+
+// ConfigProfileControllerGetComputedConfigProfileByUuidNotFound is response for ConfigProfileControllerGetComputedConfigProfileByUuid operation.
+type ConfigProfileControllerGetComputedConfigProfileByUuidNotFound struct{}
+
+func (*ConfigProfileControllerGetComputedConfigProfileByUuidNotFound) configProfileControllerGetComputedConfigProfileByUuidRes() {
+}
+
 type ConfigProfileControllerGetConfigProfileByUuidBadRequest struct {
-	Message    OptString                                                           `json:"message"`
-	StatusCode OptFloat64                                                          `json:"statusCode"`
-	Errors     []ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2475,9 +2542,9 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) GetStatusCode(
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) GetErrors() []ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2490,15 +2557,13 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) SetStatusCode(
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) SetErrors(val []ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerGetConfigProfileByUuidBadRequest) configProfileControllerGetConfigProfileByUuidRes() {
 }
-
-type ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem struct{}
 
 type ConfigProfileControllerGetConfigProfileByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2557,9 +2622,9 @@ func (*ConfigProfileControllerGetConfigProfileByUuidNotFound) configProfileContr
 }
 
 type ConfigProfileControllerGetConfigProfilesBadRequest struct {
-	Message    OptString                                                      `json:"message"`
-	StatusCode OptFloat64                                                     `json:"statusCode"`
-	Errors     []ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2572,9 +2637,9 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) GetStatusCode() Opt
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequest) GetErrors() []ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2587,15 +2652,13 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) SetStatusCode(val O
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequest) SetErrors(val []ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerGetConfigProfilesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerGetConfigProfilesBadRequest) configProfileControllerGetConfigProfilesRes() {
 }
-
-type ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem struct{}
 
 type ConfigProfileControllerGetConfigProfilesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2648,9 +2711,9 @@ func (*ConfigProfileControllerGetConfigProfilesInternalServerError) configProfil
 }
 
 type ConfigProfileControllerGetInboundsByProfileUuidBadRequest struct {
-	Message    OptString                                                             `json:"message"`
-	StatusCode OptFloat64                                                            `json:"statusCode"`
-	Errors     []ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2663,9 +2726,9 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) GetStatusCod
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) GetErrors() []ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2678,15 +2741,13 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) SetStatusCod
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) SetErrors(val []ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerGetInboundsByProfileUuidBadRequest) configProfileControllerGetInboundsByProfileUuidRes() {
 }
-
-type ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem struct{}
 
 type ConfigProfileControllerGetInboundsByProfileUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -2745,9 +2806,9 @@ func (*ConfigProfileControllerGetInboundsByProfileUuidNotFound) configProfileCon
 }
 
 type ConfigProfileControllerUpdateConfigProfileBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -2760,9 +2821,9 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) GetErrors() []ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -2775,15 +2836,13 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) SetErrors(val []ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ConfigProfileControllerUpdateConfigProfileBadRequest) configProfileControllerUpdateConfigProfileRes() {
 }
-
-type ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem struct{}
 
 // ConfigProfileControllerUpdateConfigProfileConflict is response for ConfigProfileControllerUpdateConfigProfile operation.
 type ConfigProfileControllerUpdateConfigProfileConflict struct{}
@@ -2862,9 +2921,10 @@ func (s *ConfigProfileResponse) SetResponse(val ConfigProfileResponseResponse) {
 	s.Response = val
 }
 
-func (*ConfigProfileResponse) configProfileControllerCreateConfigProfileRes()    {}
-func (*ConfigProfileResponse) configProfileControllerGetConfigProfileByUuidRes() {}
-func (*ConfigProfileResponse) configProfileControllerUpdateConfigProfileRes()    {}
+func (*ConfigProfileResponse) configProfileControllerCreateConfigProfileRes()            {}
+func (*ConfigProfileResponse) configProfileControllerGetComputedConfigProfileByUuidRes() {}
+func (*ConfigProfileResponse) configProfileControllerGetConfigProfileByUuidRes()         {}
+func (*ConfigProfileResponse) configProfileControllerUpdateConfigProfileRes()            {}
 
 type ConfigProfileResponseResponse struct {
 	UUID      uuid.UUID                                   `json:"uuid"`
@@ -6053,6 +6113,7 @@ func (*EventResponse) externalSquadControllerAddUsersToExternalSquadRes()      {
 func (*EventResponse) externalSquadControllerRemoveUsersFromExternalSquadRes() {}
 func (*EventResponse) internalSquadControllerAddUsersToInternalSquadRes()      {}
 func (*EventResponse) internalSquadControllerRemoveUsersFromInternalSquadRes() {}
+func (*EventResponse) nodesControllerResetNodeTrafficRes()                     {}
 func (*EventResponse) nodesControllerRestartAllNodesRes()                      {}
 func (*EventResponse) nodesControllerRestartNodeRes()                          {}
 func (*EventResponse) usersBulkActionsControllerBulkAllResetUserTrafficRes()   {}
@@ -6073,9 +6134,9 @@ func (s *EventResponseResponse) SetEventSent(val bool) {
 }
 
 type ExternalSquadControllerAddUsersToExternalSquadBadRequest struct {
-	Message    OptString                                                            `json:"message"`
-	StatusCode OptFloat64                                                           `json:"statusCode"`
-	Errors     []ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6088,9 +6149,9 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) GetStatusCode
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) GetErrors() []ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6103,15 +6164,13 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) SetStatusCode
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) SetErrors(val []ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerAddUsersToExternalSquadBadRequest) externalSquadControllerAddUsersToExternalSquadRes() {
 }
-
-type ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem struct{}
 
 type ExternalSquadControllerAddUsersToExternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6170,9 +6229,9 @@ func (*ExternalSquadControllerAddUsersToExternalSquadNotFound) externalSquadCont
 }
 
 type ExternalSquadControllerCreateExternalSquadBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6185,9 +6244,9 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequest) GetErrors() []ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6200,15 +6259,13 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequest) SetErrors(val []ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerCreateExternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerCreateExternalSquadBadRequest) externalSquadControllerCreateExternalSquadRes() {
 }
-
-type ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem struct{}
 
 // ExternalSquadControllerCreateExternalSquadConflict is response for ExternalSquadControllerCreateExternalSquad operation.
 type ExternalSquadControllerCreateExternalSquadConflict struct{}
@@ -6267,9 +6324,9 @@ func (*ExternalSquadControllerCreateExternalSquadInternalServerError) externalSq
 }
 
 type ExternalSquadControllerDeleteExternalSquadBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6282,9 +6339,9 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) GetErrors() []ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6297,15 +6354,13 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) SetErrors(val []ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerDeleteExternalSquadBadRequest) externalSquadControllerDeleteExternalSquadRes() {
 }
-
-type ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem struct{}
 
 type ExternalSquadControllerDeleteExternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6364,9 +6419,9 @@ func (*ExternalSquadControllerDeleteExternalSquadNotFound) externalSquadControll
 }
 
 type ExternalSquadControllerGetExternalSquadByUuidBadRequest struct {
-	Message    OptString                                                           `json:"message"`
-	StatusCode OptFloat64                                                          `json:"statusCode"`
-	Errors     []ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6379,9 +6434,9 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) GetStatusCode(
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) GetErrors() []ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6394,15 +6449,13 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) SetStatusCode(
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) SetErrors(val []ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerGetExternalSquadByUuidBadRequest) externalSquadControllerGetExternalSquadByUuidRes() {
 }
-
-type ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem struct{}
 
 type ExternalSquadControllerGetExternalSquadByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6455,9 +6508,9 @@ func (*ExternalSquadControllerGetExternalSquadByUuidInternalServerError) externa
 }
 
 type ExternalSquadControllerGetExternalSquadsBadRequest struct {
-	Message    OptString                                                      `json:"message"`
-	StatusCode OptFloat64                                                     `json:"statusCode"`
-	Errors     []ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6470,9 +6523,9 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) GetStatusCode() Opt
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequest) GetErrors() []ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6485,15 +6538,13 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) SetStatusCode(val O
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequest) SetErrors(val []ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerGetExternalSquadsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerGetExternalSquadsBadRequest) externalSquadControllerGetExternalSquadsRes() {
 }
-
-type ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem struct{}
 
 type ExternalSquadControllerGetExternalSquadsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6546,9 +6597,9 @@ func (*ExternalSquadControllerGetExternalSquadsInternalServerError) externalSqua
 }
 
 type ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest struct {
-	Message    OptString                                                                 `json:"message"`
-	StatusCode OptFloat64                                                                `json:"statusCode"`
-	Errors     []ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6561,9 +6612,9 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) GetStatu
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) GetErrors() []ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6576,15 +6627,13 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) SetStatu
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) SetErrors(val []ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) externalSquadControllerRemoveUsersFromExternalSquadRes() {
 }
-
-type ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem struct{}
 
 type ExternalSquadControllerRemoveUsersFromExternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -6643,9 +6692,9 @@ func (*ExternalSquadControllerRemoveUsersFromExternalSquadNotFound) externalSqua
 }
 
 type ExternalSquadControllerUpdateExternalSquadBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -6658,9 +6707,9 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) GetErrors() []ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -6673,15 +6722,13 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) SetErrors(val []ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*ExternalSquadControllerUpdateExternalSquadBadRequest) externalSquadControllerUpdateExternalSquadRes() {
 }
-
-type ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem struct{}
 
 // ExternalSquadControllerUpdateExternalSquadConflict is response for ExternalSquadControllerUpdateExternalSquad operation.
 type ExternalSquadControllerUpdateExternalSquadConflict struct{}
@@ -6770,6 +6817,8 @@ type ExternalSquadResponseResponse struct {
 	Info                 ExternalSquadResponseResponseInfo                    `json:"info"`
 	Templates            []ExternalSquadResponseResponseTemplatesItem         `json:"templates"`
 	SubscriptionSettings NilExternalSquadResponseResponseSubscriptionSettings `json:"subscriptionSettings"`
+	HostOverrides        NilExternalSquadResponseResponseHostOverrides        `json:"hostOverrides"`
+	ResponseHeaders      NilExternalSquadResponseResponseResponseHeaders      `json:"responseHeaders"`
 	CreatedAt            time.Time                                            `json:"createdAt"`
 	UpdatedAt            time.Time                                            `json:"updatedAt"`
 }
@@ -6797,6 +6846,16 @@ func (s *ExternalSquadResponseResponse) GetTemplates() []ExternalSquadResponseRe
 // GetSubscriptionSettings returns the value of SubscriptionSettings.
 func (s *ExternalSquadResponseResponse) GetSubscriptionSettings() NilExternalSquadResponseResponseSubscriptionSettings {
 	return s.SubscriptionSettings
+}
+
+// GetHostOverrides returns the value of HostOverrides.
+func (s *ExternalSquadResponseResponse) GetHostOverrides() NilExternalSquadResponseResponseHostOverrides {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *ExternalSquadResponseResponse) GetResponseHeaders() NilExternalSquadResponseResponseResponseHeaders {
+	return s.ResponseHeaders
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -6834,6 +6893,16 @@ func (s *ExternalSquadResponseResponse) SetSubscriptionSettings(val NilExternalS
 	s.SubscriptionSettings = val
 }
 
+// SetHostOverrides sets the value of HostOverrides.
+func (s *ExternalSquadResponseResponse) SetHostOverrides(val NilExternalSquadResponseResponseHostOverrides) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *ExternalSquadResponseResponse) SetResponseHeaders(val NilExternalSquadResponseResponseResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *ExternalSquadResponseResponse) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -6842,6 +6911,31 @@ func (s *ExternalSquadResponseResponse) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *ExternalSquadResponseResponse) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+type ExternalSquadResponseResponseHostOverrides struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *ExternalSquadResponseResponseHostOverrides) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *ExternalSquadResponseResponseHostOverrides) GetVlessRouteId() OptNilInt {
+	return s.VlessRouteId
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *ExternalSquadResponseResponseHostOverrides) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *ExternalSquadResponseResponseHostOverrides) SetVlessRouteId(val OptNilInt) {
+	s.VlessRouteId = val
 }
 
 type ExternalSquadResponseResponseInfo struct {
@@ -6856,6 +6950,17 @@ func (s *ExternalSquadResponseResponseInfo) GetMembersCount() float64 {
 // SetMembersCount sets the value of MembersCount.
 func (s *ExternalSquadResponseResponseInfo) SetMembersCount(val float64) {
 	s.MembersCount = val
+}
+
+type ExternalSquadResponseResponseResponseHeaders map[string]string
+
+func (s *ExternalSquadResponseResponseResponseHeaders) init() ExternalSquadResponseResponseResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
 }
 
 type ExternalSquadResponseResponseSubscriptionSettings struct {
@@ -8838,6 +8943,8 @@ type GetExternalSquadsResponseDtoResponseExternalSquadsItem struct {
 	Info                 GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo                    `json:"info"`
 	Templates            []GetExternalSquadsResponseDtoResponseExternalSquadsItemTemplatesItem         `json:"templates"`
 	SubscriptionSettings NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings `json:"subscriptionSettings"`
+	HostOverrides        NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides        `json:"hostOverrides"`
+	ResponseHeaders      NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders      `json:"responseHeaders"`
 	CreatedAt            time.Time                                                                     `json:"createdAt"`
 	UpdatedAt            time.Time                                                                     `json:"updatedAt"`
 }
@@ -8865,6 +8972,16 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetTemplates() 
 // GetSubscriptionSettings returns the value of SubscriptionSettings.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetSubscriptionSettings() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings {
 	return s.SubscriptionSettings
+}
+
+// GetHostOverrides returns the value of HostOverrides.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetHostOverrides() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) GetResponseHeaders() NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
+	return s.ResponseHeaders
 }
 
 // GetCreatedAt returns the value of CreatedAt.
@@ -8902,6 +9019,16 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetSubscription
 	s.SubscriptionSettings = val
 }
 
+// SetHostOverrides sets the value of HostOverrides.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetHostOverrides(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetResponseHeaders(val NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
 // SetCreatedAt sets the value of CreatedAt.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
@@ -8910,6 +9037,31 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetCreatedAt(va
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+type GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetVlessRouteId() OptNilInt {
+	return s.VlessRouteId
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetVlessRouteId(val OptNilInt) {
+	s.VlessRouteId = val
 }
 
 type GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo struct {
@@ -8924,6 +9076,17 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) GetMembersC
 // SetMembersCount sets the value of MembersCount.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) SetMembersCount(val float64) {
 	s.MembersCount = val
+}
+
+type GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders map[string]string
+
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) init() GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
 }
 
 type GetExternalSquadsResponseDtoResponseExternalSquadsItemSubscriptionSettings struct {
@@ -13643,9 +13806,9 @@ func (s *HostResponseResponseSecurityLayer) UnmarshalText(data []byte) error {
 }
 
 type HostsBulkActionsControllerDeleteHostsBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -13658,9 +13821,9 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequest) GetErrors() []HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -13673,14 +13836,12 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequest) SetErrors(val []HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsBulkActionsControllerDeleteHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsBulkActionsControllerDeleteHostsBadRequest) hostsBulkActionsControllerDeleteHostsRes() {}
-
-type HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem struct{}
 
 type HostsBulkActionsControllerDeleteHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -13733,9 +13894,9 @@ func (*HostsBulkActionsControllerDeleteHostsInternalServerError) hostsBulkAction
 }
 
 type HostsBulkActionsControllerDisableHostsBadRequest struct {
-	Message    OptString                                                    `json:"message"`
-	StatusCode OptFloat64                                                   `json:"statusCode"`
-	Errors     []HostsBulkActionsControllerDisableHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -13748,9 +13909,9 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) GetStatusCode() OptFl
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsBulkActionsControllerDisableHostsBadRequest) GetErrors() []HostsBulkActionsControllerDisableHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsBulkActionsControllerDisableHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -13763,15 +13924,13 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) SetStatusCode(val Opt
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsBulkActionsControllerDisableHostsBadRequest) SetErrors(val []HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsBulkActionsControllerDisableHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsBulkActionsControllerDisableHostsBadRequest) hostsBulkActionsControllerDisableHostsRes() {
 }
-
-type HostsBulkActionsControllerDisableHostsBadRequestErrorsItem struct{}
 
 type HostsBulkActionsControllerDisableHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -13824,9 +13983,9 @@ func (*HostsBulkActionsControllerDisableHostsInternalServerError) hostsBulkActio
 }
 
 type HostsBulkActionsControllerEnableHostsBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []HostsBulkActionsControllerEnableHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -13839,9 +13998,9 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsBulkActionsControllerEnableHostsBadRequest) GetErrors() []HostsBulkActionsControllerEnableHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsBulkActionsControllerEnableHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -13854,14 +14013,12 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsBulkActionsControllerEnableHostsBadRequest) SetErrors(val []HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsBulkActionsControllerEnableHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsBulkActionsControllerEnableHostsBadRequest) hostsBulkActionsControllerEnableHostsRes() {}
-
-type HostsBulkActionsControllerEnableHostsBadRequestErrorsItem struct{}
 
 type HostsBulkActionsControllerEnableHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -13914,9 +14071,9 @@ func (*HostsBulkActionsControllerEnableHostsInternalServerError) hostsBulkAction
 }
 
 type HostsBulkActionsControllerSetInboundToHostsBadRequest struct {
-	Message    OptString                                                         `json:"message"`
-	StatusCode OptFloat64                                                        `json:"statusCode"`
-	Errors     []HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -13929,9 +14086,9 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) GetStatusCode() 
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) GetErrors() []HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -13944,15 +14101,13 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) SetStatusCode(va
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) SetErrors(val []HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsBulkActionsControllerSetInboundToHostsBadRequest) hostsBulkActionsControllerSetInboundToHostsRes() {
 }
-
-type HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem struct{}
 
 type HostsBulkActionsControllerSetInboundToHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14005,9 +14160,9 @@ func (*HostsBulkActionsControllerSetInboundToHostsInternalServerError) hostsBulk
 }
 
 type HostsBulkActionsControllerSetPortToHostsBadRequest struct {
-	Message    OptString                                                      `json:"message"`
-	StatusCode OptFloat64                                                     `json:"statusCode"`
-	Errors     []HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14020,9 +14175,9 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) GetStatusCode() Opt
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) GetErrors() []HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14035,15 +14190,13 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) SetStatusCode(val O
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) SetErrors(val []HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsBulkActionsControllerSetPortToHostsBadRequest) hostsBulkActionsControllerSetPortToHostsRes() {
 }
-
-type HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem struct{}
 
 type HostsBulkActionsControllerSetPortToHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14096,9 +14249,9 @@ func (*HostsBulkActionsControllerSetPortToHostsInternalServerError) hostsBulkAct
 }
 
 type HostsControllerCreateHostBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []HostsControllerCreateHostBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14111,9 +14264,9 @@ func (s *HostsControllerCreateHostBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerCreateHostBadRequest) GetErrors() []HostsControllerCreateHostBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerCreateHostBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14126,14 +14279,12 @@ func (s *HostsControllerCreateHostBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerCreateHostBadRequest) SetErrors(val []HostsControllerCreateHostBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerCreateHostBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerCreateHostBadRequest) hostsControllerCreateHostRes() {}
-
-type HostsControllerCreateHostBadRequestErrorsItem struct{}
 
 type HostsControllerCreateHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14185,9 +14336,9 @@ func (s *HostsControllerCreateHostInternalServerError) SetErrorCode(val OptStrin
 func (*HostsControllerCreateHostInternalServerError) hostsControllerCreateHostRes() {}
 
 type HostsControllerDeleteHostBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []HostsControllerDeleteHostBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14200,9 +14351,9 @@ func (s *HostsControllerDeleteHostBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerDeleteHostBadRequest) GetErrors() []HostsControllerDeleteHostBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerDeleteHostBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14215,14 +14366,12 @@ func (s *HostsControllerDeleteHostBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerDeleteHostBadRequest) SetErrors(val []HostsControllerDeleteHostBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerDeleteHostBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerDeleteHostBadRequest) hostsControllerDeleteHostRes() {}
-
-type HostsControllerDeleteHostBadRequestErrorsItem struct{}
 
 type HostsControllerDeleteHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14279,9 +14428,9 @@ type HostsControllerDeleteHostNotFound struct{}
 func (*HostsControllerDeleteHostNotFound) hostsControllerDeleteHostRes() {}
 
 type HostsControllerGetAllHostTagsBadRequest struct {
-	Message    OptString                                           `json:"message"`
-	StatusCode OptFloat64                                          `json:"statusCode"`
-	Errors     []HostsControllerGetAllHostTagsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14294,9 +14443,9 @@ func (s *HostsControllerGetAllHostTagsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerGetAllHostTagsBadRequest) GetErrors() []HostsControllerGetAllHostTagsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerGetAllHostTagsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14309,14 +14458,12 @@ func (s *HostsControllerGetAllHostTagsBadRequest) SetStatusCode(val OptFloat64) 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerGetAllHostTagsBadRequest) SetErrors(val []HostsControllerGetAllHostTagsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerGetAllHostTagsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerGetAllHostTagsBadRequest) hostsControllerGetAllHostTagsRes() {}
-
-type HostsControllerGetAllHostTagsBadRequestErrorsItem struct{}
 
 type HostsControllerGetAllHostTagsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14368,9 +14515,9 @@ func (s *HostsControllerGetAllHostTagsInternalServerError) SetErrorCode(val OptS
 func (*HostsControllerGetAllHostTagsInternalServerError) hostsControllerGetAllHostTagsRes() {}
 
 type HostsControllerGetAllHostsBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []HostsControllerGetAllHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14383,9 +14530,9 @@ func (s *HostsControllerGetAllHostsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerGetAllHostsBadRequest) GetErrors() []HostsControllerGetAllHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerGetAllHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14398,14 +14545,12 @@ func (s *HostsControllerGetAllHostsBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerGetAllHostsBadRequest) SetErrors(val []HostsControllerGetAllHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerGetAllHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerGetAllHostsBadRequest) hostsControllerGetAllHostsRes() {}
-
-type HostsControllerGetAllHostsBadRequestErrorsItem struct{}
 
 type HostsControllerGetAllHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14457,9 +14602,9 @@ func (s *HostsControllerGetAllHostsInternalServerError) SetErrorCode(val OptStri
 func (*HostsControllerGetAllHostsInternalServerError) hostsControllerGetAllHostsRes() {}
 
 type HostsControllerGetOneHostBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []HostsControllerGetOneHostBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14472,9 +14617,9 @@ func (s *HostsControllerGetOneHostBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerGetOneHostBadRequest) GetErrors() []HostsControllerGetOneHostBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerGetOneHostBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14487,14 +14632,12 @@ func (s *HostsControllerGetOneHostBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerGetOneHostBadRequest) SetErrors(val []HostsControllerGetOneHostBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerGetOneHostBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerGetOneHostBadRequest) hostsControllerGetOneHostRes() {}
-
-type HostsControllerGetOneHostBadRequestErrorsItem struct{}
 
 type HostsControllerGetOneHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14546,9 +14689,9 @@ func (s *HostsControllerGetOneHostInternalServerError) SetErrorCode(val OptStrin
 func (*HostsControllerGetOneHostInternalServerError) hostsControllerGetOneHostRes() {}
 
 type HostsControllerReorderHostsBadRequest struct {
-	Message    OptString                                         `json:"message"`
-	StatusCode OptFloat64                                        `json:"statusCode"`
-	Errors     []HostsControllerReorderHostsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14561,9 +14704,9 @@ func (s *HostsControllerReorderHostsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerReorderHostsBadRequest) GetErrors() []HostsControllerReorderHostsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerReorderHostsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14576,14 +14719,12 @@ func (s *HostsControllerReorderHostsBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerReorderHostsBadRequest) SetErrors(val []HostsControllerReorderHostsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerReorderHostsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerReorderHostsBadRequest) hostsControllerReorderHostsRes() {}
-
-type HostsControllerReorderHostsBadRequestErrorsItem struct{}
 
 type HostsControllerReorderHostsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14635,9 +14776,9 @@ func (s *HostsControllerReorderHostsInternalServerError) SetErrorCode(val OptStr
 func (*HostsControllerReorderHostsInternalServerError) hostsControllerReorderHostsRes() {}
 
 type HostsControllerUpdateHostBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []HostsControllerUpdateHostBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14650,9 +14791,9 @@ func (s *HostsControllerUpdateHostBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HostsControllerUpdateHostBadRequest) GetErrors() []HostsControllerUpdateHostBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HostsControllerUpdateHostBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14665,14 +14806,12 @@ func (s *HostsControllerUpdateHostBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HostsControllerUpdateHostBadRequest) SetErrors(val []HostsControllerUpdateHostBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HostsControllerUpdateHostBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HostsControllerUpdateHostBadRequest) hostsControllerUpdateHostRes() {}
-
-type HostsControllerUpdateHostBadRequestErrorsItem struct{}
 
 type HostsControllerUpdateHostInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14860,9 +14999,9 @@ func (s *HwidDevicesResponseResponseDevicesItem) SetUpdatedAt(val time.Time) {
 }
 
 type HwidUserDevicesControllerCreateUserHwidDeviceBadRequest struct {
-	Message    OptString                                                           `json:"message"`
-	StatusCode OptFloat64                                                          `json:"statusCode"`
-	Errors     []HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14875,9 +15014,9 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) GetStatusCode(
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) GetErrors() []HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14890,15 +15029,13 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) SetStatusCode(
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) SetErrors(val []HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) hwidUserDevicesControllerCreateUserHwidDeviceRes() {
 }
-
-type HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem struct{}
 
 type HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -14951,9 +15088,9 @@ func (*HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError) hwidUse
 }
 
 type HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest struct {
-	Message    OptString                                                               `json:"message"`
-	StatusCode OptFloat64                                                              `json:"statusCode"`
-	Errors     []HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -14966,9 +15103,9 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) GetStatusC
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) GetErrors() []HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -14981,15 +15118,13 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) SetStatusC
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) SetErrors(val []HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) hwidUserDevicesControllerDeleteAllUserHwidDevicesRes() {
 }
-
-type HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem struct{}
 
 type HwidUserDevicesControllerDeleteAllUserHwidDevicesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15042,9 +15177,9 @@ func (*HwidUserDevicesControllerDeleteAllUserHwidDevicesInternalServerError) hwi
 }
 
 type HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest struct {
-	Message    OptString                                                           `json:"message"`
-	StatusCode OptFloat64                                                          `json:"statusCode"`
-	Errors     []HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15057,9 +15192,9 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) GetStatusCode(
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) GetErrors() []HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15072,15 +15207,13 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) SetStatusCode(
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) SetErrors(val []HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) hwidUserDevicesControllerDeleteUserHwidDeviceRes() {
 }
-
-type HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem struct{}
 
 type HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15133,9 +15266,9 @@ func (*HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError) hwidUse
 }
 
 type HwidUserDevicesControllerGetAllUsersBadRequest struct {
-	Message    OptString                                                  `json:"message"`
-	StatusCode OptFloat64                                                 `json:"statusCode"`
-	Errors     []HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15148,9 +15281,9 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) GetStatusCode() OptFloa
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequest) GetErrors() []HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15163,14 +15296,12 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) SetStatusCode(val OptFl
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequest) SetErrors(val []HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HwidUserDevicesControllerGetAllUsersBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HwidUserDevicesControllerGetAllUsersBadRequest) hwidUserDevicesControllerGetAllUsersRes() {}
-
-type HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem struct{}
 
 type HwidUserDevicesControllerGetAllUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15223,9 +15354,9 @@ func (*HwidUserDevicesControllerGetAllUsersInternalServerError) hwidUserDevicesC
 }
 
 type HwidUserDevicesControllerGetHwidDevicesStatsBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15238,9 +15369,9 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) GetErrors() []HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15253,15 +15384,13 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) SetErrors(val []HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) hwidUserDevicesControllerGetHwidDevicesStatsRes() {
 }
-
-type HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem struct{}
 
 type HwidUserDevicesControllerGetHwidDevicesStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15314,9 +15443,9 @@ func (*HwidUserDevicesControllerGetHwidDevicesStatsInternalServerError) hwidUser
 }
 
 type HwidUserDevicesControllerGetUserHwidDevicesBadRequest struct {
-	Message    OptString                                                         `json:"message"`
-	StatusCode OptFloat64                                                        `json:"statusCode"`
-	Errors     []HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15329,9 +15458,9 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) GetStatusCode() 
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) GetErrors() []HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15344,15 +15473,13 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) SetStatusCode(va
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) SetErrors(val []HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*HwidUserDevicesControllerGetUserHwidDevicesBadRequest) hwidUserDevicesControllerGetUserHwidDevicesRes() {
 }
-
-type HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem struct{}
 
 type HwidUserDevicesControllerGetUserHwidDevicesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15550,9 +15677,9 @@ func (s *InboundsResponseResponseInboundsItem) SetActiveSquads(val []uuid.UUID) 
 }
 
 type InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest struct {
-	Message    OptString                                                                   `json:"message"`
-	StatusCode OptFloat64                                                                  `json:"statusCode"`
-	Errors     []InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15565,9 +15692,9 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) GetSta
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) GetErrors() []InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15580,15 +15707,13 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) SetSta
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) SetErrors(val []InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) infraBillingControllerCreateInfraBillingHistoryRecordRes() {
 }
-
-type InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem struct{}
 
 type InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15641,9 +15766,9 @@ func (*InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError)
 }
 
 type InfraBillingControllerCreateInfraBillingNodeBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15656,9 +15781,9 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) GetErrors() []InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15671,15 +15796,13 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) SetErrors(val []InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerCreateInfraBillingNodeBadRequest) infraBillingControllerCreateInfraBillingNodeRes() {
 }
-
-type InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem struct{}
 
 type InfraBillingControllerCreateInfraBillingNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15732,9 +15855,9 @@ func (*InfraBillingControllerCreateInfraBillingNodeInternalServerError) infraBil
 }
 
 type InfraBillingControllerCreateInfraProviderBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []InfraBillingControllerCreateInfraProviderBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15747,9 +15870,9 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerCreateInfraProviderBadRequest) GetErrors() []InfraBillingControllerCreateInfraProviderBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerCreateInfraProviderBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15762,15 +15885,13 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerCreateInfraProviderBadRequest) SetErrors(val []InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerCreateInfraProviderBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerCreateInfraProviderBadRequest) infraBillingControllerCreateInfraProviderRes() {
 }
-
-type InfraBillingControllerCreateInfraProviderBadRequestErrorsItem struct{}
 
 type InfraBillingControllerCreateInfraProviderInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15823,9 +15944,9 @@ func (*InfraBillingControllerCreateInfraProviderInternalServerError) infraBillin
 }
 
 type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest struct {
-	Message    OptString                                                                         `json:"message"`
-	StatusCode OptFloat64                                                                        `json:"statusCode"`
-	Errors     []InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15838,9 +15959,9 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) GetErrors() []InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15853,15 +15974,13 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) SetErrors(val []InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) infraBillingControllerDeleteInfraBillingHistoryRecordByUuidRes() {
 }
-
-type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem struct{}
 
 type InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -15914,9 +16033,9 @@ func (*InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServer
 }
 
 type InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest struct {
-	Message    OptString                                                                `json:"message"`
-	StatusCode OptFloat64                                                               `json:"statusCode"`
-	Errors     []InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -15929,9 +16048,9 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) GetStatus
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) GetErrors() []InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -15944,15 +16063,13 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) SetStatus
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) SetErrors(val []InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) infraBillingControllerDeleteInfraBillingNodeByUuidRes() {
 }
-
-type InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem struct{}
 
 type InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16005,9 +16122,9 @@ func (*InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError) in
 }
 
 type InfraBillingControllerDeleteInfraProviderByUuidBadRequest struct {
-	Message    OptString                                                             `json:"message"`
-	StatusCode OptFloat64                                                            `json:"statusCode"`
-	Errors     []InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16020,9 +16137,9 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) GetStatusCod
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) GetErrors() []InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16035,15 +16152,13 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) SetStatusCod
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) SetErrors(val []InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerDeleteInfraProviderByUuidBadRequest) infraBillingControllerDeleteInfraProviderByUuidRes() {
 }
-
-type InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem struct{}
 
 type InfraBillingControllerDeleteInfraProviderByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16096,9 +16211,9 @@ func (*InfraBillingControllerDeleteInfraProviderByUuidInternalServerError) infra
 }
 
 type InfraBillingControllerGetBillingNodesBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []InfraBillingControllerGetBillingNodesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16111,9 +16226,9 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerGetBillingNodesBadRequest) GetErrors() []InfraBillingControllerGetBillingNodesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerGetBillingNodesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16126,14 +16241,12 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerGetBillingNodesBadRequest) SetErrors(val []InfraBillingControllerGetBillingNodesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerGetBillingNodesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerGetBillingNodesBadRequest) infraBillingControllerGetBillingNodesRes() {}
-
-type InfraBillingControllerGetBillingNodesBadRequestErrorsItem struct{}
 
 type InfraBillingControllerGetBillingNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16186,9 +16299,9 @@ func (*InfraBillingControllerGetBillingNodesInternalServerError) infraBillingCon
 }
 
 type InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest struct {
-	Message    OptString                                                                 `json:"message"`
-	StatusCode OptFloat64                                                                `json:"statusCode"`
-	Errors     []InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16201,9 +16314,9 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) GetStatu
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) GetErrors() []InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16216,15 +16329,13 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) SetStatu
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) SetErrors(val []InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) infraBillingControllerGetInfraBillingHistoryRecordsRes() {
 }
-
-type InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem struct{}
 
 type InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16277,9 +16388,9 @@ func (*InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError) i
 }
 
 type InfraBillingControllerGetInfraProviderByUuidBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16292,9 +16403,9 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) GetErrors() []InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16307,15 +16418,13 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) SetErrors(val []InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerGetInfraProviderByUuidBadRequest) infraBillingControllerGetInfraProviderByUuidRes() {
 }
-
-type InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem struct{}
 
 type InfraBillingControllerGetInfraProviderByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16374,9 +16483,9 @@ func (*InfraBillingControllerGetInfraProviderByUuidNotFound) infraBillingControl
 }
 
 type InfraBillingControllerGetInfraProvidersBadRequest struct {
-	Message    OptString                                                     `json:"message"`
-	StatusCode OptFloat64                                                    `json:"statusCode"`
-	Errors     []InfraBillingControllerGetInfraProvidersBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16389,9 +16498,9 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) GetStatusCode() OptF
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerGetInfraProvidersBadRequest) GetErrors() []InfraBillingControllerGetInfraProvidersBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerGetInfraProvidersBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16404,15 +16513,13 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) SetStatusCode(val Op
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerGetInfraProvidersBadRequest) SetErrors(val []InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerGetInfraProvidersBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerGetInfraProvidersBadRequest) infraBillingControllerGetInfraProvidersRes() {
 }
-
-type InfraBillingControllerGetInfraProvidersBadRequestErrorsItem struct{}
 
 type InfraBillingControllerGetInfraProvidersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16465,9 +16572,9 @@ func (*InfraBillingControllerGetInfraProvidersInternalServerError) infraBillingC
 }
 
 type InfraBillingControllerUpdateInfraBillingNodeBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16480,9 +16587,9 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) GetErrors() []InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16495,15 +16602,13 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) SetErrors(val []InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerUpdateInfraBillingNodeBadRequest) infraBillingControllerUpdateInfraBillingNodeRes() {
 }
-
-type InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem struct{}
 
 type InfraBillingControllerUpdateInfraBillingNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16556,9 +16661,9 @@ func (*InfraBillingControllerUpdateInfraBillingNodeInternalServerError) infraBil
 }
 
 type InfraBillingControllerUpdateInfraProviderBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16571,9 +16676,9 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequest) GetErrors() []InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16586,15 +16691,13 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequest) SetErrors(val []InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InfraBillingControllerUpdateInfraProviderBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InfraBillingControllerUpdateInfraProviderBadRequest) infraBillingControllerUpdateInfraProviderRes() {
 }
-
-type InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem struct{}
 
 type InfraBillingControllerUpdateInfraProviderInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16818,9 +16921,9 @@ func (s *InfraProviderResponseResponseBillingNodesItem) SetCountryCode(val strin
 }
 
 type InternalSquadControllerAddUsersToInternalSquadBadRequest struct {
-	Message    OptString                                                            `json:"message"`
-	StatusCode OptFloat64                                                           `json:"statusCode"`
-	Errors     []InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16833,9 +16936,9 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) GetStatusCode
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) GetErrors() []InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16848,15 +16951,13 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) SetStatusCode
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) SetErrors(val []InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerAddUsersToInternalSquadBadRequest) internalSquadControllerAddUsersToInternalSquadRes() {
 }
-
-type InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem struct{}
 
 type InternalSquadControllerAddUsersToInternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -16915,9 +17016,9 @@ func (*InternalSquadControllerAddUsersToInternalSquadNotFound) internalSquadCont
 }
 
 type InternalSquadControllerCreateInternalSquadBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []InternalSquadControllerCreateInternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -16930,9 +17031,9 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerCreateInternalSquadBadRequest) GetErrors() []InternalSquadControllerCreateInternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerCreateInternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -16945,15 +17046,13 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerCreateInternalSquadBadRequest) SetErrors(val []InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerCreateInternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerCreateInternalSquadBadRequest) internalSquadControllerCreateInternalSquadRes() {
 }
-
-type InternalSquadControllerCreateInternalSquadBadRequestErrorsItem struct{}
 
 // InternalSquadControllerCreateInternalSquadConflict is response for InternalSquadControllerCreateInternalSquad operation.
 type InternalSquadControllerCreateInternalSquadConflict struct{}
@@ -17012,9 +17111,9 @@ func (*InternalSquadControllerCreateInternalSquadInternalServerError) internalSq
 }
 
 type InternalSquadControllerDeleteInternalSquadBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17027,9 +17126,9 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequest) GetErrors() []InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17042,15 +17141,13 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequest) SetErrors(val []InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerDeleteInternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerDeleteInternalSquadBadRequest) internalSquadControllerDeleteInternalSquadRes() {
 }
-
-type InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem struct{}
 
 type InternalSquadControllerDeleteInternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17109,9 +17206,9 @@ func (*InternalSquadControllerDeleteInternalSquadNotFound) internalSquadControll
 }
 
 type InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest struct {
-	Message    OptString                                                                    `json:"message"`
-	StatusCode OptFloat64                                                                   `json:"statusCode"`
-	Errors     []InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17124,9 +17221,9 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) GetSt
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) GetErrors() []InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17139,15 +17236,13 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) SetSt
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) SetErrors(val []InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) internalSquadControllerGetInternalSquadAccessibleNodesRes() {
 }
-
-type InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem struct{}
 
 type InternalSquadControllerGetInternalSquadAccessibleNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17206,9 +17301,9 @@ func (*InternalSquadControllerGetInternalSquadAccessibleNodesNotFound) internalS
 }
 
 type InternalSquadControllerGetInternalSquadByUuidBadRequest struct {
-	Message    OptString                                                           `json:"message"`
-	StatusCode OptFloat64                                                          `json:"statusCode"`
-	Errors     []InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17221,9 +17316,9 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) GetStatusCode(
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) GetErrors() []InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17236,15 +17331,13 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) SetStatusCode(
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) SetErrors(val []InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerGetInternalSquadByUuidBadRequest) internalSquadControllerGetInternalSquadByUuidRes() {
 }
-
-type InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem struct{}
 
 type InternalSquadControllerGetInternalSquadByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17297,9 +17390,9 @@ func (*InternalSquadControllerGetInternalSquadByUuidInternalServerError) interna
 }
 
 type InternalSquadControllerGetInternalSquadsBadRequest struct {
-	Message    OptString                                                      `json:"message"`
-	StatusCode OptFloat64                                                     `json:"statusCode"`
-	Errors     []InternalSquadControllerGetInternalSquadsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17312,9 +17405,9 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) GetStatusCode() Opt
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerGetInternalSquadsBadRequest) GetErrors() []InternalSquadControllerGetInternalSquadsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerGetInternalSquadsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17327,15 +17420,13 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) SetStatusCode(val O
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerGetInternalSquadsBadRequest) SetErrors(val []InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerGetInternalSquadsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerGetInternalSquadsBadRequest) internalSquadControllerGetInternalSquadsRes() {
 }
-
-type InternalSquadControllerGetInternalSquadsBadRequestErrorsItem struct{}
 
 type InternalSquadControllerGetInternalSquadsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17388,9 +17479,9 @@ func (*InternalSquadControllerGetInternalSquadsInternalServerError) internalSqua
 }
 
 type InternalSquadControllerRemoveUsersFromInternalSquadBadRequest struct {
-	Message    OptString                                                                 `json:"message"`
-	StatusCode OptFloat64                                                                `json:"statusCode"`
-	Errors     []InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17403,9 +17494,9 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) GetStatu
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) GetErrors() []InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17418,15 +17509,13 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) SetStatu
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) SetErrors(val []InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) internalSquadControllerRemoveUsersFromInternalSquadRes() {
 }
-
-type InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem struct{}
 
 type InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17485,9 +17574,9 @@ func (*InternalSquadControllerRemoveUsersFromInternalSquadNotFound) internalSqua
 }
 
 type InternalSquadControllerUpdateInternalSquadBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17500,9 +17589,9 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequest) GetErrors() []InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17515,15 +17604,13 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequest) SetErrors(val []InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *InternalSquadControllerUpdateInternalSquadBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*InternalSquadControllerUpdateInternalSquadBadRequest) internalSquadControllerUpdateInternalSquadRes() {
 }
-
-type InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem struct{}
 
 // InternalSquadControllerUpdateInternalSquadConflict is response for InternalSquadControllerUpdateInternalSquad operation.
 type InternalSquadControllerUpdateInternalSquadConflict struct{}
@@ -17792,9 +17879,9 @@ func (s *InternalSquadResponseResponseInfo) SetInboundsCount(val float64) {
 }
 
 type KeygenControllerGenerateKeyBadRequest struct {
-	Message    OptString                                         `json:"message"`
-	StatusCode OptFloat64                                        `json:"statusCode"`
-	Errors     []KeygenControllerGenerateKeyBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -17807,9 +17894,9 @@ func (s *KeygenControllerGenerateKeyBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *KeygenControllerGenerateKeyBadRequest) GetErrors() []KeygenControllerGenerateKeyBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *KeygenControllerGenerateKeyBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -17822,14 +17909,12 @@ func (s *KeygenControllerGenerateKeyBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *KeygenControllerGenerateKeyBadRequest) SetErrors(val []KeygenControllerGenerateKeyBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *KeygenControllerGenerateKeyBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*KeygenControllerGenerateKeyBadRequest) keygenControllerGenerateKeyRes() {}
-
-type KeygenControllerGenerateKeyBadRequestErrorsItem struct{}
 
 type KeygenControllerGenerateKeyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -17996,6 +18081,96 @@ func (o NilDebugSrrMatcherResponseDtoResponseMatchedRule) Or(d DebugSrrMatcherRe
 	return d
 }
 
+// NewNilExternalSquadResponseResponseHostOverrides returns new NilExternalSquadResponseResponseHostOverrides with value set to v.
+func NewNilExternalSquadResponseResponseHostOverrides(v ExternalSquadResponseResponseHostOverrides) NilExternalSquadResponseResponseHostOverrides {
+	return NilExternalSquadResponseResponseHostOverrides{
+		Value: v,
+	}
+}
+
+// NilExternalSquadResponseResponseHostOverrides is nullable ExternalSquadResponseResponseHostOverrides.
+type NilExternalSquadResponseResponseHostOverrides struct {
+	Value ExternalSquadResponseResponseHostOverrides
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilExternalSquadResponseResponseHostOverrides) SetTo(v ExternalSquadResponseResponseHostOverrides) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilExternalSquadResponseResponseHostOverrides) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilExternalSquadResponseResponseHostOverrides) SetToNull() {
+	o.Null = true
+	var v ExternalSquadResponseResponseHostOverrides
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilExternalSquadResponseResponseHostOverrides) Get() (v ExternalSquadResponseResponseHostOverrides, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilExternalSquadResponseResponseHostOverrides) Or(d ExternalSquadResponseResponseHostOverrides) ExternalSquadResponseResponseHostOverrides {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilExternalSquadResponseResponseResponseHeaders returns new NilExternalSquadResponseResponseResponseHeaders with value set to v.
+func NewNilExternalSquadResponseResponseResponseHeaders(v ExternalSquadResponseResponseResponseHeaders) NilExternalSquadResponseResponseResponseHeaders {
+	return NilExternalSquadResponseResponseResponseHeaders{
+		Value: v,
+	}
+}
+
+// NilExternalSquadResponseResponseResponseHeaders is nullable ExternalSquadResponseResponseResponseHeaders.
+type NilExternalSquadResponseResponseResponseHeaders struct {
+	Value ExternalSquadResponseResponseResponseHeaders
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilExternalSquadResponseResponseResponseHeaders) SetTo(v ExternalSquadResponseResponseResponseHeaders) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilExternalSquadResponseResponseResponseHeaders) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilExternalSquadResponseResponseResponseHeaders) SetToNull() {
+	o.Null = true
+	var v ExternalSquadResponseResponseResponseHeaders
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilExternalSquadResponseResponseResponseHeaders) Get() (v ExternalSquadResponseResponseResponseHeaders, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilExternalSquadResponseResponseResponseHeaders) Or(d ExternalSquadResponseResponseResponseHeaders) ExternalSquadResponseResponseResponseHeaders {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewNilExternalSquadResponseResponseSubscriptionSettings returns new NilExternalSquadResponseResponseSubscriptionSettings with value set to v.
 func NewNilExternalSquadResponseResponseSubscriptionSettings(v ExternalSquadResponseResponseSubscriptionSettings) NilExternalSquadResponseResponseSubscriptionSettings {
 	return NilExternalSquadResponseResponseSubscriptionSettings{
@@ -18125,6 +18300,100 @@ func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Get() (v Ge
 
 // Or returns value if set, or given parameter if does not.
 func (o NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) Or(d GetAllUsersResponseDtoResponseUsersItemLastConnectedNode) GetAllUsersResponseDtoResponseUsersItemLastConnectedNode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides with value set to v.
+func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
+	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides{
+		Value: v,
+	}
+}
+
+// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides.
+type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides struct {
+	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) SetToNull() {
+	o.Null = true
+	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders returns new NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders with value set to v.
+func NewNilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders(v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
+	return NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders{
+		Value: v,
+	}
+}
+
+// NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders is nullable GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders.
+type NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders struct {
+	Value GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetTo(v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) IsNull() bool {
+	return o.Null
+}
+
+// SetToNull sets value to null.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) SetToNull() {
+	o.Null = true
+	var v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Get() (v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Or(d GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -19496,9 +19765,9 @@ func (s *NodeResponseResponseProvider) SetUpdatedAt(val time.Time) {
 }
 
 type NodesControllerCreateNodeBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []NodesControllerCreateNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -19511,9 +19780,9 @@ func (s *NodesControllerCreateNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerCreateNodeBadRequest) GetErrors() []NodesControllerCreateNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerCreateNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -19526,14 +19795,12 @@ func (s *NodesControllerCreateNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerCreateNodeBadRequest) SetErrors(val []NodesControllerCreateNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerCreateNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerCreateNodeBadRequest) nodesControllerCreateNodeRes() {}
-
-type NodesControllerCreateNodeBadRequestErrorsItem struct{}
 
 type NodesControllerCreateNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19585,9 +19852,9 @@ func (s *NodesControllerCreateNodeInternalServerError) SetErrorCode(val OptStrin
 func (*NodesControllerCreateNodeInternalServerError) nodesControllerCreateNodeRes() {}
 
 type NodesControllerDeleteNodeBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []NodesControllerDeleteNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -19600,9 +19867,9 @@ func (s *NodesControllerDeleteNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerDeleteNodeBadRequest) GetErrors() []NodesControllerDeleteNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerDeleteNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -19615,14 +19882,12 @@ func (s *NodesControllerDeleteNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerDeleteNodeBadRequest) SetErrors(val []NodesControllerDeleteNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerDeleteNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerDeleteNodeBadRequest) nodesControllerDeleteNodeRes() {}
-
-type NodesControllerDeleteNodeBadRequestErrorsItem struct{}
 
 type NodesControllerDeleteNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19674,9 +19939,9 @@ func (s *NodesControllerDeleteNodeInternalServerError) SetErrorCode(val OptStrin
 func (*NodesControllerDeleteNodeInternalServerError) nodesControllerDeleteNodeRes() {}
 
 type NodesControllerDisableNodeBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []NodesControllerDisableNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -19689,9 +19954,9 @@ func (s *NodesControllerDisableNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerDisableNodeBadRequest) GetErrors() []NodesControllerDisableNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerDisableNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -19704,14 +19969,12 @@ func (s *NodesControllerDisableNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerDisableNodeBadRequest) SetErrors(val []NodesControllerDisableNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerDisableNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerDisableNodeBadRequest) nodesControllerDisableNodeRes() {}
-
-type NodesControllerDisableNodeBadRequestErrorsItem struct{}
 
 type NodesControllerDisableNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19763,9 +20026,9 @@ func (s *NodesControllerDisableNodeInternalServerError) SetErrorCode(val OptStri
 func (*NodesControllerDisableNodeInternalServerError) nodesControllerDisableNodeRes() {}
 
 type NodesControllerEnableNodeBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []NodesControllerEnableNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -19778,9 +20041,9 @@ func (s *NodesControllerEnableNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerEnableNodeBadRequest) GetErrors() []NodesControllerEnableNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerEnableNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -19793,14 +20056,12 @@ func (s *NodesControllerEnableNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerEnableNodeBadRequest) SetErrors(val []NodesControllerEnableNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerEnableNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerEnableNodeBadRequest) nodesControllerEnableNodeRes() {}
-
-type NodesControllerEnableNodeBadRequestErrorsItem struct{}
 
 type NodesControllerEnableNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19852,9 +20113,9 @@ func (s *NodesControllerEnableNodeInternalServerError) SetErrorCode(val OptStrin
 func (*NodesControllerEnableNodeInternalServerError) nodesControllerEnableNodeRes() {}
 
 type NodesControllerGetAllNodesBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []NodesControllerGetAllNodesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -19867,9 +20128,9 @@ func (s *NodesControllerGetAllNodesBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerGetAllNodesBadRequest) GetErrors() []NodesControllerGetAllNodesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerGetAllNodesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -19882,14 +20143,12 @@ func (s *NodesControllerGetAllNodesBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerGetAllNodesBadRequest) SetErrors(val []NodesControllerGetAllNodesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerGetAllNodesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerGetAllNodesBadRequest) nodesControllerGetAllNodesRes() {}
-
-type NodesControllerGetAllNodesBadRequestErrorsItem struct{}
 
 type NodesControllerGetAllNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -19941,9 +20200,9 @@ func (s *NodesControllerGetAllNodesInternalServerError) SetErrorCode(val OptStri
 func (*NodesControllerGetAllNodesInternalServerError) nodesControllerGetAllNodesRes() {}
 
 type NodesControllerGetOneNodeBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []NodesControllerGetOneNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -19956,9 +20215,9 @@ func (s *NodesControllerGetOneNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerGetOneNodeBadRequest) GetErrors() []NodesControllerGetOneNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerGetOneNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -19971,14 +20230,12 @@ func (s *NodesControllerGetOneNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerGetOneNodeBadRequest) SetErrors(val []NodesControllerGetOneNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerGetOneNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerGetOneNodeBadRequest) nodesControllerGetOneNodeRes() {}
-
-type NodesControllerGetOneNodeBadRequestErrorsItem struct{}
 
 type NodesControllerGetOneNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20030,9 +20287,9 @@ func (s *NodesControllerGetOneNodeInternalServerError) SetErrorCode(val OptStrin
 func (*NodesControllerGetOneNodeInternalServerError) nodesControllerGetOneNodeRes() {}
 
 type NodesControllerReorderNodesBadRequest struct {
-	Message    OptString                                         `json:"message"`
-	StatusCode OptFloat64                                        `json:"statusCode"`
-	Errors     []NodesControllerReorderNodesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -20045,9 +20302,9 @@ func (s *NodesControllerReorderNodesBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerReorderNodesBadRequest) GetErrors() []NodesControllerReorderNodesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerReorderNodesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -20060,14 +20317,12 @@ func (s *NodesControllerReorderNodesBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerReorderNodesBadRequest) SetErrors(val []NodesControllerReorderNodesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerReorderNodesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerReorderNodesBadRequest) nodesControllerReorderNodesRes() {}
-
-type NodesControllerReorderNodesBadRequestErrorsItem struct{}
 
 type NodesControllerReorderNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20118,10 +20373,97 @@ func (s *NodesControllerReorderNodesInternalServerError) SetErrorCode(val OptStr
 
 func (*NodesControllerReorderNodesInternalServerError) nodesControllerReorderNodesRes() {}
 
+type NodesControllerResetNodeTrafficBadRequest struct {
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerResetNodeTrafficBadRequest) GetMessage() OptString {
+	return s.Message
+}
+
+// GetStatusCode returns the value of StatusCode.
+func (s *NodesControllerResetNodeTrafficBadRequest) GetStatusCode() OptFloat64 {
+	return s.StatusCode
+}
+
+// GetError returns the value of Error.
+func (s *NodesControllerResetNodeTrafficBadRequest) GetError() OptString {
+	return s.Error
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetStatusCode sets the value of StatusCode.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetStatusCode(val OptFloat64) {
+	s.StatusCode = val
+}
+
+// SetError sets the value of Error.
+func (s *NodesControllerResetNodeTrafficBadRequest) SetError(val OptString) {
+	s.Error = val
+}
+
+func (*NodesControllerResetNodeTrafficBadRequest) nodesControllerResetNodeTrafficRes() {}
+
+type NodesControllerResetNodeTrafficInternalServerError struct {
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetPath() OptString {
+	return s.Path
+}
+
+// GetMessage returns the value of Message.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetMessage() OptString {
+	return s.Message
+}
+
+// GetErrorCode returns the value of ErrorCode.
+func (s *NodesControllerResetNodeTrafficInternalServerError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetPath(val OptString) {
+	s.Path = val
+}
+
+// SetMessage sets the value of Message.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetMessage(val OptString) {
+	s.Message = val
+}
+
+// SetErrorCode sets the value of ErrorCode.
+func (s *NodesControllerResetNodeTrafficInternalServerError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
+}
+
+func (*NodesControllerResetNodeTrafficInternalServerError) nodesControllerResetNodeTrafficRes() {}
+
 type NodesControllerRestartAllNodesBadRequest struct {
-	Message    OptString                                            `json:"message"`
-	StatusCode OptFloat64                                           `json:"statusCode"`
-	Errors     []NodesControllerRestartAllNodesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -20134,9 +20476,9 @@ func (s *NodesControllerRestartAllNodesBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerRestartAllNodesBadRequest) GetErrors() []NodesControllerRestartAllNodesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerRestartAllNodesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -20149,14 +20491,12 @@ func (s *NodesControllerRestartAllNodesBadRequest) SetStatusCode(val OptFloat64)
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerRestartAllNodesBadRequest) SetErrors(val []NodesControllerRestartAllNodesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerRestartAllNodesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerRestartAllNodesBadRequest) nodesControllerRestartAllNodesRes() {}
-
-type NodesControllerRestartAllNodesBadRequestErrorsItem struct{}
 
 type NodesControllerRestartAllNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20208,9 +20548,9 @@ func (s *NodesControllerRestartAllNodesInternalServerError) SetErrorCode(val Opt
 func (*NodesControllerRestartAllNodesInternalServerError) nodesControllerRestartAllNodesRes() {}
 
 type NodesControllerRestartNodeBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []NodesControllerRestartNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -20223,9 +20563,9 @@ func (s *NodesControllerRestartNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerRestartNodeBadRequest) GetErrors() []NodesControllerRestartNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerRestartNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -20238,14 +20578,12 @@ func (s *NodesControllerRestartNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerRestartNodeBadRequest) SetErrors(val []NodesControllerRestartNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerRestartNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerRestartNodeBadRequest) nodesControllerRestartNodeRes() {}
-
-type NodesControllerRestartNodeBadRequestErrorsItem struct{}
 
 type NodesControllerRestartNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20297,9 +20635,9 @@ func (s *NodesControllerRestartNodeInternalServerError) SetErrorCode(val OptStri
 func (*NodesControllerRestartNodeInternalServerError) nodesControllerRestartNodeRes() {}
 
 type NodesControllerUpdateNodeBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []NodesControllerUpdateNodeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -20312,9 +20650,9 @@ func (s *NodesControllerUpdateNodeBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesControllerUpdateNodeBadRequest) GetErrors() []NodesControllerUpdateNodeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesControllerUpdateNodeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -20327,14 +20665,12 @@ func (s *NodesControllerUpdateNodeBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesControllerUpdateNodeBadRequest) SetErrors(val []NodesControllerUpdateNodeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesControllerUpdateNodeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesControllerUpdateNodeBadRequest) nodesControllerUpdateNodeRes() {}
-
-type NodesControllerUpdateNodeBadRequestErrorsItem struct{}
 
 type NodesControllerUpdateNodeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -20933,9 +21269,9 @@ func (s *NodesResponseResponseItemProvider) SetUpdatedAt(val time.Time) {
 }
 
 type NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest struct {
-	Message    OptString                                                             `json:"message"`
-	StatusCode OptFloat64                                                            `json:"statusCode"`
-	Errors     []NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -20948,9 +21284,9 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) GetStatusCod
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) GetErrors() []NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -20963,15 +21299,13 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) SetStatusCod
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) SetErrors(val []NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) nodesUsageHistoryControllerGetNodesUsageByRangeRes() {
 }
-
-type NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem struct{}
 
 type NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -21024,9 +21358,9 @@ func (*NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError) nodes
 }
 
 type NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest struct {
-	Message    OptString                                                             `json:"message"`
-	StatusCode OptFloat64                                                            `json:"statusCode"`
-	Errors     []NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -21039,9 +21373,9 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) GetStatusCod
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) GetErrors() []NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -21054,15 +21388,13 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) SetStatusCod
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) SetErrors(val []NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) nodesUserUsageHistoryControllerGetNodeUserUsageRes() {
 }
-
-type NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem struct{}
 
 type NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -21115,9 +21447,9 @@ func (*NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError) nodes
 }
 
 type NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest struct {
-	Message    OptString                                                                  `json:"message"`
-	StatusCode OptFloat64                                                                 `json:"statusCode"`
-	Errors     []NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -21130,9 +21462,9 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) GetStat
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) GetErrors() []NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -21145,15 +21477,13 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) SetStat
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) SetErrors(val []NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes() {
 }
-
-type NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem struct{}
 
 type NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -23233,6 +23563,69 @@ func (o OptNilUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
+// NewOptNilUpdateExternalSquadRequestDtoResponseHeaders returns new OptNilUpdateExternalSquadRequestDtoResponseHeaders with value set to v.
+func NewOptNilUpdateExternalSquadRequestDtoResponseHeaders(v UpdateExternalSquadRequestDtoResponseHeaders) OptNilUpdateExternalSquadRequestDtoResponseHeaders {
+	return OptNilUpdateExternalSquadRequestDtoResponseHeaders{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilUpdateExternalSquadRequestDtoResponseHeaders is optional nullable UpdateExternalSquadRequestDtoResponseHeaders.
+type OptNilUpdateExternalSquadRequestDtoResponseHeaders struct {
+	Value UpdateExternalSquadRequestDtoResponseHeaders
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilUpdateExternalSquadRequestDtoResponseHeaders was set.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) Reset() {
+	var v UpdateExternalSquadRequestDtoResponseHeaders
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) SetTo(v UpdateExternalSquadRequestDtoResponseHeaders) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v UpdateExternalSquadRequestDtoResponseHeaders
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) Get() (v UpdateExternalSquadRequestDtoResponseHeaders, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) Or(d UpdateExternalSquadRequestDtoResponseHeaders) UpdateExternalSquadRequestDtoResponseHeaders {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptNilUpdateHostRequestDtoAlpn returns new OptNilUpdateHostRequestDtoAlpn with value set to v.
 func NewOptNilUpdateHostRequestDtoAlpn(v UpdateHostRequestDtoAlpn) OptNilUpdateHostRequestDtoAlpn {
 	return OptNilUpdateHostRequestDtoAlpn{
@@ -23539,6 +23932,52 @@ func (o OptUUID) Get() (v uuid.UUID, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUpdateExternalSquadRequestDtoHostOverrides returns new OptUpdateExternalSquadRequestDtoHostOverrides with value set to v.
+func NewOptUpdateExternalSquadRequestDtoHostOverrides(v UpdateExternalSquadRequestDtoHostOverrides) OptUpdateExternalSquadRequestDtoHostOverrides {
+	return OptUpdateExternalSquadRequestDtoHostOverrides{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateExternalSquadRequestDtoHostOverrides is optional UpdateExternalSquadRequestDtoHostOverrides.
+type OptUpdateExternalSquadRequestDtoHostOverrides struct {
+	Value UpdateExternalSquadRequestDtoHostOverrides
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateExternalSquadRequestDtoHostOverrides was set.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateExternalSquadRequestDtoHostOverrides) Reset() {
+	var v UpdateExternalSquadRequestDtoHostOverrides
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateExternalSquadRequestDtoHostOverrides) SetTo(v UpdateExternalSquadRequestDtoHostOverrides) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) Get() (v UpdateExternalSquadRequestDtoHostOverrides, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) Or(d UpdateExternalSquadRequestDtoHostOverrides) UpdateExternalSquadRequestDtoHostOverrides {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -24376,9 +24815,9 @@ func (o OptUsersResponseResponseItemTrafficLimitStrategy) Or(d UsersResponseResp
 }
 
 type PasskeyControllerDeletePasskeyBadRequest struct {
-	Message    OptString                                            `json:"message"`
-	StatusCode OptFloat64                                           `json:"statusCode"`
-	Errors     []PasskeyControllerDeletePasskeyBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -24391,9 +24830,9 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *PasskeyControllerDeletePasskeyBadRequest) GetErrors() []PasskeyControllerDeletePasskeyBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *PasskeyControllerDeletePasskeyBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -24406,14 +24845,12 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) SetStatusCode(val OptFloat64)
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *PasskeyControllerDeletePasskeyBadRequest) SetErrors(val []PasskeyControllerDeletePasskeyBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *PasskeyControllerDeletePasskeyBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*PasskeyControllerDeletePasskeyBadRequest) passkeyControllerDeletePasskeyRes() {}
-
-type PasskeyControllerDeletePasskeyBadRequestErrorsItem struct{}
 
 type PasskeyControllerDeletePasskeyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24465,9 +24902,9 @@ func (s *PasskeyControllerDeletePasskeyInternalServerError) SetErrorCode(val Opt
 func (*PasskeyControllerDeletePasskeyInternalServerError) passkeyControllerDeletePasskeyRes() {}
 
 type PasskeyControllerGetActivePasskeysBadRequest struct {
-	Message    OptString                                                `json:"message"`
-	StatusCode OptFloat64                                               `json:"statusCode"`
-	Errors     []PasskeyControllerGetActivePasskeysBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -24480,9 +24917,9 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) GetStatusCode() OptFloat6
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *PasskeyControllerGetActivePasskeysBadRequest) GetErrors() []PasskeyControllerGetActivePasskeysBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *PasskeyControllerGetActivePasskeysBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -24495,14 +24932,12 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) SetStatusCode(val OptFloa
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *PasskeyControllerGetActivePasskeysBadRequest) SetErrors(val []PasskeyControllerGetActivePasskeysBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *PasskeyControllerGetActivePasskeysBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*PasskeyControllerGetActivePasskeysBadRequest) passkeyControllerGetActivePasskeysRes() {}
-
-type PasskeyControllerGetActivePasskeysBadRequestErrorsItem struct{}
 
 type PasskeyControllerGetActivePasskeysInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24555,9 +24990,9 @@ func (*PasskeyControllerGetActivePasskeysInternalServerError) passkeyControllerG
 }
 
 type PasskeyControllerPasskeyRegistrationOptionsBadRequest struct {
-	Message    OptString                                                         `json:"message"`
-	StatusCode OptFloat64                                                        `json:"statusCode"`
-	Errors     []PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -24570,9 +25005,9 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) GetStatusCode() 
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) GetErrors() []PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -24585,15 +25020,13 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) SetStatusCode(va
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) SetErrors(val []PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*PasskeyControllerPasskeyRegistrationOptionsBadRequest) passkeyControllerPasskeyRegistrationOptionsRes() {
 }
-
-type PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem struct{}
 
 type PasskeyControllerPasskeyRegistrationOptionsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24646,9 +25079,9 @@ func (*PasskeyControllerPasskeyRegistrationOptionsInternalServerError) passkeyCo
 }
 
 type PasskeyControllerPasskeyRegistrationVerifyBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -24661,9 +25094,9 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) GetErrors() []PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -24676,15 +25109,13 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) SetErrors(val []PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*PasskeyControllerPasskeyRegistrationVerifyBadRequest) passkeyControllerPasskeyRegistrationVerifyRes() {
 }
-
-type PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem struct{}
 
 type PasskeyControllerPasskeyRegistrationVerifyInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -24914,9 +25345,9 @@ func (s *RegisterRequestDto) SetPassword(val string) {
 }
 
 type RemnawaveSettingsControllerGetSettingsBadRequest struct {
-	Message    OptString                                                    `json:"message"`
-	StatusCode OptFloat64                                                   `json:"statusCode"`
-	Errors     []RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -24929,9 +25360,9 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) GetStatusCode() OptFl
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequest) GetErrors() []RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -24944,15 +25375,13 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) SetStatusCode(val Opt
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequest) SetErrors(val []RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *RemnawaveSettingsControllerGetSettingsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*RemnawaveSettingsControllerGetSettingsBadRequest) remnawaveSettingsControllerGetSettingsRes() {
 }
-
-type RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem struct{}
 
 type RemnawaveSettingsControllerGetSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25005,9 +25434,9 @@ func (*RemnawaveSettingsControllerGetSettingsInternalServerError) remnawaveSetti
 }
 
 type RemnawaveSettingsControllerUpdateSettingsBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -25020,9 +25449,9 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) GetErrors() []RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -25035,15 +25464,13 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) SetErrors(val []RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*RemnawaveSettingsControllerUpdateSettingsBadRequest) remnawaveSettingsControllerUpdateSettingsRes() {
 }
-
-type RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem struct{}
 
 type RemnawaveSettingsControllerUpdateSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25705,9 +26132,9 @@ func (s *SnippetRequest) SetSnippet(val []SnippetRequestSnippetItem) {
 type SnippetRequestSnippetItem struct{}
 
 type SnippetsControllerCreateSnippetBadRequest struct {
-	Message    OptString                                             `json:"message"`
-	StatusCode OptFloat64                                            `json:"statusCode"`
-	Errors     []SnippetsControllerCreateSnippetBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -25720,9 +26147,9 @@ func (s *SnippetsControllerCreateSnippetBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SnippetsControllerCreateSnippetBadRequest) GetErrors() []SnippetsControllerCreateSnippetBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SnippetsControllerCreateSnippetBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -25735,14 +26162,12 @@ func (s *SnippetsControllerCreateSnippetBadRequest) SetStatusCode(val OptFloat64
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SnippetsControllerCreateSnippetBadRequest) SetErrors(val []SnippetsControllerCreateSnippetBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SnippetsControllerCreateSnippetBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SnippetsControllerCreateSnippetBadRequest) snippetsControllerCreateSnippetRes() {}
-
-type SnippetsControllerCreateSnippetBadRequestErrorsItem struct{}
 
 // SnippetsControllerCreateSnippetConflict is response for SnippetsControllerCreateSnippet operation.
 type SnippetsControllerCreateSnippetConflict struct{}
@@ -25799,9 +26224,9 @@ func (s *SnippetsControllerCreateSnippetInternalServerError) SetErrorCode(val Op
 func (*SnippetsControllerCreateSnippetInternalServerError) snippetsControllerCreateSnippetRes() {}
 
 type SnippetsControllerDeleteSnippetByNameBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -25814,9 +26239,9 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequest) GetErrors() []SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -25829,14 +26254,12 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequest) SetErrors(val []SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SnippetsControllerDeleteSnippetByNameBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SnippetsControllerDeleteSnippetByNameBadRequest) snippetsControllerDeleteSnippetByNameRes() {}
-
-type SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem struct{}
 
 type SnippetsControllerDeleteSnippetByNameInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25894,9 +26317,9 @@ type SnippetsControllerDeleteSnippetByNameNotFound struct{}
 func (*SnippetsControllerDeleteSnippetByNameNotFound) snippetsControllerDeleteSnippetByNameRes() {}
 
 type SnippetsControllerGetSnippetsBadRequest struct {
-	Message    OptString                                           `json:"message"`
-	StatusCode OptFloat64                                          `json:"statusCode"`
-	Errors     []SnippetsControllerGetSnippetsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -25909,9 +26332,9 @@ func (s *SnippetsControllerGetSnippetsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SnippetsControllerGetSnippetsBadRequest) GetErrors() []SnippetsControllerGetSnippetsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SnippetsControllerGetSnippetsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -25924,14 +26347,12 @@ func (s *SnippetsControllerGetSnippetsBadRequest) SetStatusCode(val OptFloat64) 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SnippetsControllerGetSnippetsBadRequest) SetErrors(val []SnippetsControllerGetSnippetsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SnippetsControllerGetSnippetsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SnippetsControllerGetSnippetsBadRequest) snippetsControllerGetSnippetsRes() {}
-
-type SnippetsControllerGetSnippetsBadRequestErrorsItem struct{}
 
 type SnippetsControllerGetSnippetsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -25983,9 +26404,9 @@ func (s *SnippetsControllerGetSnippetsInternalServerError) SetErrorCode(val OptS
 func (*SnippetsControllerGetSnippetsInternalServerError) snippetsControllerGetSnippetsRes() {}
 
 type SnippetsControllerUpdateSnippetBadRequest struct {
-	Message    OptString                                             `json:"message"`
-	StatusCode OptFloat64                                            `json:"statusCode"`
-	Errors     []SnippetsControllerUpdateSnippetBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -25998,9 +26419,9 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SnippetsControllerUpdateSnippetBadRequest) GetErrors() []SnippetsControllerUpdateSnippetBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SnippetsControllerUpdateSnippetBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -26013,14 +26434,12 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) SetStatusCode(val OptFloat64
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SnippetsControllerUpdateSnippetBadRequest) SetErrors(val []SnippetsControllerUpdateSnippetBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SnippetsControllerUpdateSnippetBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SnippetsControllerUpdateSnippetBadRequest) snippetsControllerUpdateSnippetRes() {}
-
-type SnippetsControllerUpdateSnippetBadRequestErrorsItem struct{}
 
 // SnippetsControllerUpdateSnippetConflict is response for SnippetsControllerUpdateSnippet operation.
 type SnippetsControllerUpdateSnippetConflict struct{}
@@ -26224,9 +26643,9 @@ func (s *SubscriptionControllerGetSubscriptionByClientTypeClientType) UnmarshalT
 type SubscriptionControllerGetSubscriptionByClientTypeOK struct{}
 
 type SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest struct {
-	Message    OptString                                                                  `json:"message"`
-	StatusCode OptFloat64                                                                 `json:"statusCode"`
-	Errors     []SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -26239,9 +26658,9 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) GetStat
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) GetErrors() []SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -26254,15 +26673,13 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) SetStat
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) SetErrors(val []SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) subscriptionControllerGetSubscriptionInfoByShortUuidRes() {
 }
-
-type SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem struct{}
 
 type SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -26691,9 +27108,9 @@ func (s *SubscriptionResponseResponseUserUserStatus) UnmarshalText(data []byte) 
 }
 
 type SubscriptionSettingsControllerGetSettingsBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -26706,9 +27123,9 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequest) GetErrors() []SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -26721,15 +27138,13 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequest) SetErrors(val []SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionSettingsControllerGetSettingsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionSettingsControllerGetSettingsBadRequest) subscriptionSettingsControllerGetSettingsRes() {
 }
-
-type SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem struct{}
 
 type SubscriptionSettingsControllerGetSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -26782,9 +27197,9 @@ func (*SubscriptionSettingsControllerGetSettingsInternalServerError) subscriptio
 }
 
 type SubscriptionSettingsControllerUpdateSettingsBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -26797,9 +27212,9 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) GetErrors() []SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -26812,15 +27227,13 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) SetErrors(val []SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionSettingsControllerUpdateSettingsBadRequest) subscriptionSettingsControllerUpdateSettingsRes() {
 }
-
-type SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem struct{}
 
 type SubscriptionSettingsControllerUpdateSettingsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -27712,9 +28125,9 @@ func (s *SubscriptionSettingsResponseResponseResponseRulesVersion) UnmarshalText
 }
 
 type SubscriptionTemplateControllerCreateTemplateBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -27727,9 +28140,9 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) GetErrors() []SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -27742,15 +28155,13 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) SetErrors(val []SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionTemplateControllerCreateTemplateBadRequest) subscriptionTemplateControllerCreateTemplateRes() {
 }
-
-type SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem struct{}
 
 type SubscriptionTemplateControllerCreateTemplateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -27803,9 +28214,9 @@ func (*SubscriptionTemplateControllerCreateTemplateInternalServerError) subscrip
 }
 
 type SubscriptionTemplateControllerDeleteTemplateBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -27818,9 +28229,9 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) GetErrors() []SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -27833,15 +28244,13 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) SetErrors(val []SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionTemplateControllerDeleteTemplateBadRequest) subscriptionTemplateControllerDeleteTemplateRes() {
 }
-
-type SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem struct{}
 
 type SubscriptionTemplateControllerDeleteTemplateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -27894,9 +28303,9 @@ func (*SubscriptionTemplateControllerDeleteTemplateInternalServerError) subscrip
 }
 
 type SubscriptionTemplateControllerGetAllTemplatesBadRequest struct {
-	Message    OptString                                                           `json:"message"`
-	StatusCode OptFloat64                                                          `json:"statusCode"`
-	Errors     []SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -27909,9 +28318,9 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) GetStatusCode(
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) GetErrors() []SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -27924,15 +28333,13 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) SetStatusCode(
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) SetErrors(val []SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionTemplateControllerGetAllTemplatesBadRequest) subscriptionTemplateControllerGetAllTemplatesRes() {
 }
-
-type SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem struct{}
 
 type SubscriptionTemplateControllerGetAllTemplatesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -27985,9 +28392,9 @@ func (*SubscriptionTemplateControllerGetAllTemplatesInternalServerError) subscri
 }
 
 type SubscriptionTemplateControllerGetTemplateByUuidBadRequest struct {
-	Message    OptString                                                             `json:"message"`
-	StatusCode OptFloat64                                                            `json:"statusCode"`
-	Errors     []SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28000,9 +28407,9 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) GetStatusCod
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) GetErrors() []SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28015,15 +28422,13 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) SetStatusCod
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) SetErrors(val []SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionTemplateControllerGetTemplateByUuidBadRequest) subscriptionTemplateControllerGetTemplateByUuidRes() {
 }
-
-type SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem struct{}
 
 type SubscriptionTemplateControllerGetTemplateByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28076,9 +28481,9 @@ func (*SubscriptionTemplateControllerGetTemplateByUuidInternalServerError) subsc
 }
 
 type SubscriptionTemplateControllerUpdateTemplateBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28091,9 +28496,9 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) GetErrors() []SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28106,15 +28511,13 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) SetErrors(val []SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionTemplateControllerUpdateTemplateBadRequest) subscriptionTemplateControllerUpdateTemplateRes() {
 }
-
-type SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem struct{}
 
 type SubscriptionTemplateControllerUpdateTemplateInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28167,9 +28570,9 @@ func (*SubscriptionTemplateControllerUpdateTemplateInternalServerError) subscrip
 }
 
 type SubscriptionsControllerGetAllSubscriptionsBadRequest struct {
-	Message    OptString                                                        `json:"message"`
-	StatusCode OptFloat64                                                       `json:"statusCode"`
-	Errors     []SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28182,9 +28585,9 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) GetStatusCode() O
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) GetErrors() []SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28197,15 +28600,13 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) SetStatusCode(val
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) SetErrors(val []SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionsControllerGetAllSubscriptionsBadRequest) subscriptionsControllerGetAllSubscriptionsRes() {
 }
-
-type SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem struct{}
 
 type SubscriptionsControllerGetAllSubscriptionsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28258,9 +28659,9 @@ func (*SubscriptionsControllerGetAllSubscriptionsInternalServerError) subscripti
 }
 
 type SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest struct {
-	Message    OptString                                                                  `json:"message"`
-	StatusCode OptFloat64                                                                 `json:"statusCode"`
-	Errors     []SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28273,9 +28674,9 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) GetStat
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) GetErrors() []SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28288,15 +28689,13 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) SetStat
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) SetErrors(val []SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) subscriptionsControllerGetRawSubscriptionByShortUuidRes() {
 }
-
-type SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem struct{}
 
 type SubscriptionsControllerGetRawSubscriptionByShortUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28349,9 +28748,9 @@ func (*SubscriptionsControllerGetRawSubscriptionByShortUuidInternalServerError) 
 }
 
 type SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest struct {
-	Message    OptString                                                                        `json:"message"`
-	StatusCode OptFloat64                                                                       `json:"statusCode"`
-	Errors     []SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28364,9 +28763,9 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) G
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) GetErrors() []SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28379,15 +28778,13 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) S
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) SetErrors(val []SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) subscriptionsControllerGetSubscriptionByShortUuidProtectedRes() {
 }
-
-type SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem struct{}
 
 type SubscriptionsControllerGetSubscriptionByShortUuidProtectedInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28490,9 +28887,9 @@ func (*SubscriptionsControllerGetSubscriptionByShortUuidProtectedNotFound) subsc
 }
 
 type SubscriptionsControllerGetSubscriptionByUsernameBadRequest struct {
-	Message    OptString                                                              `json:"message"`
-	StatusCode OptFloat64                                                             `json:"statusCode"`
-	Errors     []SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28505,9 +28902,9 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) GetStatusCo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) GetErrors() []SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28520,15 +28917,13 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) SetStatusCo
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) SetErrors(val []SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionsControllerGetSubscriptionByUsernameBadRequest) subscriptionsControllerGetSubscriptionByUsernameRes() {
 }
-
-type SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem struct{}
 
 type SubscriptionsControllerGetSubscriptionByUsernameInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28631,9 +29026,9 @@ func (*SubscriptionsControllerGetSubscriptionByUsernameNotFound) subscriptionsCo
 }
 
 type SubscriptionsControllerGetSubscriptionByUuidBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28646,9 +29041,9 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) GetErrors() []SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28661,15 +29056,13 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) SetErrors(val []SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SubscriptionsControllerGetSubscriptionByUuidBadRequest) subscriptionsControllerGetSubscriptionByUuidRes() {
 }
-
-type SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem struct{}
 
 type SubscriptionsControllerGetSubscriptionByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28772,9 +29165,9 @@ func (*SubscriptionsControllerGetSubscriptionByUuidNotFound) subscriptionsContro
 }
 
 type SystemControllerDebugSrrMatcherBadRequest struct {
-	Message    OptString                                             `json:"message"`
-	StatusCode OptFloat64                                            `json:"statusCode"`
-	Errors     []SystemControllerDebugSrrMatcherBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28787,9 +29180,9 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerDebugSrrMatcherBadRequest) GetErrors() []SystemControllerDebugSrrMatcherBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerDebugSrrMatcherBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28802,14 +29195,12 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) SetStatusCode(val OptFloat64
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerDebugSrrMatcherBadRequest) SetErrors(val []SystemControllerDebugSrrMatcherBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerDebugSrrMatcherBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerDebugSrrMatcherBadRequest) systemControllerDebugSrrMatcherRes() {}
-
-type SystemControllerDebugSrrMatcherBadRequestErrorsItem struct{}
 
 type SystemControllerDebugSrrMatcherInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28861,9 +29252,9 @@ func (s *SystemControllerDebugSrrMatcherInternalServerError) SetErrorCode(val Op
 func (*SystemControllerDebugSrrMatcherInternalServerError) systemControllerDebugSrrMatcherRes() {}
 
 type SystemControllerEncryptHappCryptoLinkBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28876,9 +29267,9 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequest) GetErrors() []SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28891,14 +29282,12 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequest) SetErrors(val []SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerEncryptHappCryptoLinkBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerEncryptHappCryptoLinkBadRequest) systemControllerEncryptHappCryptoLinkRes() {}
-
-type SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem struct{}
 
 type SystemControllerEncryptHappCryptoLinkInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -28951,9 +29340,9 @@ func (*SystemControllerEncryptHappCryptoLinkInternalServerError) systemControlle
 }
 
 type SystemControllerGetBandwidthStatsBadRequest struct {
-	Message    OptString                                               `json:"message"`
-	StatusCode OptFloat64                                              `json:"statusCode"`
-	Errors     []SystemControllerGetBandwidthStatsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -28966,9 +29355,9 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) GetStatusCode() OptFloat64
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerGetBandwidthStatsBadRequest) GetErrors() []SystemControllerGetBandwidthStatsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerGetBandwidthStatsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -28981,14 +29370,12 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) SetStatusCode(val OptFloat
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerGetBandwidthStatsBadRequest) SetErrors(val []SystemControllerGetBandwidthStatsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerGetBandwidthStatsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerGetBandwidthStatsBadRequest) systemControllerGetBandwidthStatsRes() {}
-
-type SystemControllerGetBandwidthStatsBadRequestErrorsItem struct{}
 
 type SystemControllerGetBandwidthStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29040,9 +29427,9 @@ func (s *SystemControllerGetBandwidthStatsInternalServerError) SetErrorCode(val 
 func (*SystemControllerGetBandwidthStatsInternalServerError) systemControllerGetBandwidthStatsRes() {}
 
 type SystemControllerGetNodesMetricsBadRequest struct {
-	Message    OptString                                             `json:"message"`
-	StatusCode OptFloat64                                            `json:"statusCode"`
-	Errors     []SystemControllerGetNodesMetricsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -29055,9 +29442,9 @@ func (s *SystemControllerGetNodesMetricsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerGetNodesMetricsBadRequest) GetErrors() []SystemControllerGetNodesMetricsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerGetNodesMetricsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -29070,14 +29457,12 @@ func (s *SystemControllerGetNodesMetricsBadRequest) SetStatusCode(val OptFloat64
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerGetNodesMetricsBadRequest) SetErrors(val []SystemControllerGetNodesMetricsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerGetNodesMetricsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerGetNodesMetricsBadRequest) systemControllerGetNodesMetricsRes() {}
-
-type SystemControllerGetNodesMetricsBadRequestErrorsItem struct{}
 
 type SystemControllerGetNodesMetricsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29129,9 +29514,9 @@ func (s *SystemControllerGetNodesMetricsInternalServerError) SetErrorCode(val Op
 func (*SystemControllerGetNodesMetricsInternalServerError) systemControllerGetNodesMetricsRes() {}
 
 type SystemControllerGetNodesStatisticsBadRequest struct {
-	Message    OptString                                                `json:"message"`
-	StatusCode OptFloat64                                               `json:"statusCode"`
-	Errors     []SystemControllerGetNodesStatisticsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -29144,9 +29529,9 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) GetStatusCode() OptFloat6
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerGetNodesStatisticsBadRequest) GetErrors() []SystemControllerGetNodesStatisticsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerGetNodesStatisticsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -29159,14 +29544,12 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) SetStatusCode(val OptFloa
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerGetNodesStatisticsBadRequest) SetErrors(val []SystemControllerGetNodesStatisticsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerGetNodesStatisticsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerGetNodesStatisticsBadRequest) systemControllerGetNodesStatisticsRes() {}
-
-type SystemControllerGetNodesStatisticsBadRequestErrorsItem struct{}
 
 type SystemControllerGetNodesStatisticsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29219,9 +29602,9 @@ func (*SystemControllerGetNodesStatisticsInternalServerError) systemControllerGe
 }
 
 type SystemControllerGetRemnawaveHealthBadRequest struct {
-	Message    OptString                                                `json:"message"`
-	StatusCode OptFloat64                                               `json:"statusCode"`
-	Errors     []SystemControllerGetRemnawaveHealthBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -29234,9 +29617,9 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) GetStatusCode() OptFloat6
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerGetRemnawaveHealthBadRequest) GetErrors() []SystemControllerGetRemnawaveHealthBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerGetRemnawaveHealthBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -29249,14 +29632,12 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) SetStatusCode(val OptFloa
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerGetRemnawaveHealthBadRequest) SetErrors(val []SystemControllerGetRemnawaveHealthBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerGetRemnawaveHealthBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerGetRemnawaveHealthBadRequest) systemControllerGetRemnawaveHealthRes() {}
-
-type SystemControllerGetRemnawaveHealthBadRequestErrorsItem struct{}
 
 type SystemControllerGetRemnawaveHealthInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29309,9 +29690,9 @@ func (*SystemControllerGetRemnawaveHealthInternalServerError) systemControllerGe
 }
 
 type SystemControllerGetStatsBadRequest struct {
-	Message    OptString                                      `json:"message"`
-	StatusCode OptFloat64                                     `json:"statusCode"`
-	Errors     []SystemControllerGetStatsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -29324,9 +29705,9 @@ func (s *SystemControllerGetStatsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerGetStatsBadRequest) GetErrors() []SystemControllerGetStatsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerGetStatsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -29339,14 +29720,12 @@ func (s *SystemControllerGetStatsBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerGetStatsBadRequest) SetErrors(val []SystemControllerGetStatsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerGetStatsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerGetStatsBadRequest) systemControllerGetStatsRes() {}
-
-type SystemControllerGetStatsBadRequestErrorsItem struct{}
 
 type SystemControllerGetStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29398,9 +29777,9 @@ func (s *SystemControllerGetStatsInternalServerError) SetErrorCode(val OptString
 func (*SystemControllerGetStatsInternalServerError) systemControllerGetStatsRes() {}
 
 type SystemControllerGetX25519KeypairsBadRequest struct {
-	Message    OptString                                               `json:"message"`
-	StatusCode OptFloat64                                              `json:"statusCode"`
-	Errors     []SystemControllerGetX25519KeypairsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -29413,9 +29792,9 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) GetStatusCode() OptFloat64
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *SystemControllerGetX25519KeypairsBadRequest) GetErrors() []SystemControllerGetX25519KeypairsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *SystemControllerGetX25519KeypairsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -29428,14 +29807,12 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) SetStatusCode(val OptFloat
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *SystemControllerGetX25519KeypairsBadRequest) SetErrors(val []SystemControllerGetX25519KeypairsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *SystemControllerGetX25519KeypairsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*SystemControllerGetX25519KeypairsBadRequest) systemControllerGetX25519KeypairsRes() {}
-
-type SystemControllerGetX25519KeypairsBadRequestErrorsItem struct{}
 
 type SystemControllerGetX25519KeypairsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -29851,6 +30228,8 @@ type UpdateExternalSquadRequestDto struct {
 	Name                 OptString                                            `json:"name"`
 	Templates            []UpdateExternalSquadRequestDtoTemplatesItem         `json:"templates"`
 	SubscriptionSettings OptUpdateExternalSquadRequestDtoSubscriptionSettings `json:"subscriptionSettings"`
+	HostOverrides        OptUpdateExternalSquadRequestDtoHostOverrides        `json:"hostOverrides"`
+	ResponseHeaders      OptNilUpdateExternalSquadRequestDtoResponseHeaders   `json:"responseHeaders"`
 }
 
 // GetUUID returns the value of UUID.
@@ -29873,6 +30252,16 @@ func (s *UpdateExternalSquadRequestDto) GetSubscriptionSettings() OptUpdateExter
 	return s.SubscriptionSettings
 }
 
+// GetHostOverrides returns the value of HostOverrides.
+func (s *UpdateExternalSquadRequestDto) GetHostOverrides() OptUpdateExternalSquadRequestDtoHostOverrides {
+	return s.HostOverrides
+}
+
+// GetResponseHeaders returns the value of ResponseHeaders.
+func (s *UpdateExternalSquadRequestDto) GetResponseHeaders() OptNilUpdateExternalSquadRequestDtoResponseHeaders {
+	return s.ResponseHeaders
+}
+
 // SetUUID sets the value of UUID.
 func (s *UpdateExternalSquadRequestDto) SetUUID(val uuid.UUID) {
 	s.UUID = val
@@ -29891,6 +30280,52 @@ func (s *UpdateExternalSquadRequestDto) SetTemplates(val []UpdateExternalSquadRe
 // SetSubscriptionSettings sets the value of SubscriptionSettings.
 func (s *UpdateExternalSquadRequestDto) SetSubscriptionSettings(val OptUpdateExternalSquadRequestDtoSubscriptionSettings) {
 	s.SubscriptionSettings = val
+}
+
+// SetHostOverrides sets the value of HostOverrides.
+func (s *UpdateExternalSquadRequestDto) SetHostOverrides(val OptUpdateExternalSquadRequestDtoHostOverrides) {
+	s.HostOverrides = val
+}
+
+// SetResponseHeaders sets the value of ResponseHeaders.
+func (s *UpdateExternalSquadRequestDto) SetResponseHeaders(val OptNilUpdateExternalSquadRequestDtoResponseHeaders) {
+	s.ResponseHeaders = val
+}
+
+type UpdateExternalSquadRequestDtoHostOverrides struct {
+	ServerDescription OptNilString `json:"serverDescription"`
+	VlessRouteId      OptNilInt    `json:"vlessRouteId"`
+}
+
+// GetServerDescription returns the value of ServerDescription.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) GetServerDescription() OptNilString {
+	return s.ServerDescription
+}
+
+// GetVlessRouteId returns the value of VlessRouteId.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) GetVlessRouteId() OptNilInt {
+	return s.VlessRouteId
+}
+
+// SetServerDescription sets the value of ServerDescription.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) SetServerDescription(val OptNilString) {
+	s.ServerDescription = val
+}
+
+// SetVlessRouteId sets the value of VlessRouteId.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) SetVlessRouteId(val OptNilInt) {
+	s.VlessRouteId = val
+}
+
+type UpdateExternalSquadRequestDtoResponseHeaders map[string]string
+
+func (s *UpdateExternalSquadRequestDtoResponseHeaders) init() UpdateExternalSquadRequestDtoResponseHeaders {
+	m := *s
+	if m == nil {
+		m = map[string]string{}
+		*s = m
+	}
+	return m
 }
 
 type UpdateExternalSquadRequestDtoSubscriptionSettings struct {
@@ -32890,9 +33325,9 @@ func (s *UserResponseResponseTrafficLimitStrategy) UnmarshalText(data []byte) er
 }
 
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest struct {
-	Message    OptString                                                                                   `json:"message"`
-	StatusCode OptFloat64                                                                                  `json:"statusCode"`
-	Errors     []UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -32905,9 +33340,9 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) GetErrors() []UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -32920,15 +33355,13 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) SetErrors(val []UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryRes() {
 }
-
-type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem struct{}
 
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -32981,9 +33414,9 @@ func (*UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryInte
 }
 
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest struct {
-	Message    OptString                                                                                        `json:"message"`
-	StatusCode OptFloat64                                                                                       `json:"statusCode"`
-	Errors     []UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -32996,9 +33429,9 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) GetErrors() []UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33011,15 +33444,13 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) SetErrors(val []UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes() {
 }
-
-type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem struct{}
 
 type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33072,9 +33503,9 @@ func (*UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStat
 }
 
 type UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest struct {
-	Message    OptString                                                               `json:"message"`
-	StatusCode OptFloat64                                                              `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33087,9 +33518,9 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) GetStatusC
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) GetErrors() []UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33102,15 +33533,13 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) SetStatusC
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) SetErrors(val []UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) usersBulkActionsControllerBulkAllResetUserTrafficRes() {
 }
-
-type UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33163,9 +33592,9 @@ func (*UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError) use
 }
 
 type UsersBulkActionsControllerBulkDeleteUsersBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33178,9 +33607,9 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) GetErrors() []UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33193,20 +33622,18 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) SetErrors(val []UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkDeleteUsersBadRequest) usersBulkActionsControllerBulkDeleteUsersRes() {
 }
 
-type UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem struct{}
-
 type UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest struct {
-	Message    OptString                                                               `json:"message"`
-	StatusCode OptFloat64                                                              `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33219,9 +33646,9 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) GetStatusC
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) GetErrors() []UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33234,15 +33661,13 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) SetStatusC
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) SetErrors(val []UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) usersBulkActionsControllerBulkDeleteUsersByStatusRes() {
 }
-
-type UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33345,9 +33770,9 @@ func (*UsersBulkActionsControllerBulkDeleteUsersInternalServerError) usersBulkAc
 }
 
 type UsersBulkActionsControllerBulkResetUserTrafficBadRequest struct {
-	Message    OptString                                                            `json:"message"`
-	StatusCode OptFloat64                                                           `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33360,9 +33785,9 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) GetStatusCode
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) GetErrors() []UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33375,15 +33800,13 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) SetStatusCode
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) SetErrors(val []UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkResetUserTrafficBadRequest) usersBulkActionsControllerBulkResetUserTrafficRes() {
 }
-
-type UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkResetUserTrafficInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33436,9 +33859,9 @@ func (*UsersBulkActionsControllerBulkResetUserTrafficInternalServerError) usersB
 }
 
 type UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest struct {
-	Message    OptString                                                                   `json:"message"`
-	StatusCode OptFloat64                                                                  `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33451,9 +33874,9 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) GetSta
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) GetErrors() []UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33466,15 +33889,13 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) SetSta
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) SetErrors(val []UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) usersBulkActionsControllerBulkRevokeUsersSubscriptionRes() {
 }
-
-type UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33527,9 +33948,9 @@ func (*UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError)
 }
 
 type UsersBulkActionsControllerBulkUpdateAllUsersBadRequest struct {
-	Message    OptString                                                          `json:"message"`
-	StatusCode OptFloat64                                                         `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33542,9 +33963,9 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) GetStatusCode()
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) GetErrors() []UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33557,15 +33978,13 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) SetStatusCode(v
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) SetErrors(val []UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) usersBulkActionsControllerBulkUpdateAllUsersRes() {
 }
-
-type UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33618,9 +34037,9 @@ func (*UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError) usersBul
 }
 
 type UsersBulkActionsControllerBulkUpdateUsersBadRequest struct {
-	Message    OptString                                                       `json:"message"`
-	StatusCode OptFloat64                                                      `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33633,9 +34052,9 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) GetStatusCode() Op
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) GetErrors() []UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33648,15 +34067,13 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) SetStatusCode(val 
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) SetErrors(val []UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkUpdateUsersBadRequest) usersBulkActionsControllerBulkUpdateUsersRes() {
 }
-
-type UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkUpdateUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33709,9 +34126,9 @@ func (*UsersBulkActionsControllerBulkUpdateUsersInternalServerError) usersBulkAc
 }
 
 type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest struct {
-	Message    OptString                                                                     `json:"message"`
-	StatusCode OptFloat64                                                                    `json:"statusCode"`
-	Errors     []UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33724,9 +34141,9 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) GetS
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) GetErrors() []UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33739,15 +34156,13 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) SetS
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) SetErrors(val []UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) usersBulkActionsControllerBulkUpdateUsersInternalSquadsRes() {
 }
-
-type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem struct{}
 
 type UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33800,9 +34215,9 @@ func (*UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerErro
 }
 
 type UsersControllerCreateUserBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []UsersControllerCreateUserBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33815,9 +34230,9 @@ func (s *UsersControllerCreateUserBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerCreateUserBadRequest) GetErrors() []UsersControllerCreateUserBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerCreateUserBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33830,14 +34245,12 @@ func (s *UsersControllerCreateUserBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerCreateUserBadRequest) SetErrors(val []UsersControllerCreateUserBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerCreateUserBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerCreateUserBadRequest) usersControllerCreateUserRes() {}
-
-type UsersControllerCreateUserBadRequestErrorsItem struct{}
 
 type UsersControllerCreateUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33889,9 +34302,9 @@ func (s *UsersControllerCreateUserInternalServerError) SetErrorCode(val OptStrin
 func (*UsersControllerCreateUserInternalServerError) usersControllerCreateUserRes() {}
 
 type UsersControllerDeleteUserBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []UsersControllerDeleteUserBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33904,9 +34317,9 @@ func (s *UsersControllerDeleteUserBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerDeleteUserBadRequest) GetErrors() []UsersControllerDeleteUserBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerDeleteUserBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -33919,14 +34332,12 @@ func (s *UsersControllerDeleteUserBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerDeleteUserBadRequest) SetErrors(val []UsersControllerDeleteUserBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerDeleteUserBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerDeleteUserBadRequest) usersControllerDeleteUserRes() {}
-
-type UsersControllerDeleteUserBadRequestErrorsItem struct{}
 
 type UsersControllerDeleteUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -33983,9 +34394,9 @@ type UsersControllerDeleteUserNotFound struct{}
 func (*UsersControllerDeleteUserNotFound) usersControllerDeleteUserRes() {}
 
 type UsersControllerDisableUserBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []UsersControllerDisableUserBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -33998,9 +34409,9 @@ func (s *UsersControllerDisableUserBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerDisableUserBadRequest) GetErrors() []UsersControllerDisableUserBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerDisableUserBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34013,14 +34424,12 @@ func (s *UsersControllerDisableUserBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerDisableUserBadRequest) SetErrors(val []UsersControllerDisableUserBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerDisableUserBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerDisableUserBadRequest) usersControllerDisableUserRes() {}
-
-type UsersControllerDisableUserBadRequestErrorsItem struct{}
 
 type UsersControllerDisableUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34077,9 +34486,9 @@ type UsersControllerDisableUserNotFound struct{}
 func (*UsersControllerDisableUserNotFound) usersControllerDisableUserRes() {}
 
 type UsersControllerEnableUserBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []UsersControllerEnableUserBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34092,9 +34501,9 @@ func (s *UsersControllerEnableUserBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerEnableUserBadRequest) GetErrors() []UsersControllerEnableUserBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerEnableUserBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34107,14 +34516,12 @@ func (s *UsersControllerEnableUserBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerEnableUserBadRequest) SetErrors(val []UsersControllerEnableUserBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerEnableUserBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerEnableUserBadRequest) usersControllerEnableUserRes() {}
-
-type UsersControllerEnableUserBadRequestErrorsItem struct{}
 
 type UsersControllerEnableUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34171,9 +34578,9 @@ type UsersControllerEnableUserNotFound struct{}
 func (*UsersControllerEnableUserNotFound) usersControllerEnableUserRes() {}
 
 type UsersControllerGetAllTagsBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []UsersControllerGetAllTagsBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34186,9 +34593,9 @@ func (s *UsersControllerGetAllTagsBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetAllTagsBadRequest) GetErrors() []UsersControllerGetAllTagsBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetAllTagsBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34201,14 +34608,12 @@ func (s *UsersControllerGetAllTagsBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetAllTagsBadRequest) SetErrors(val []UsersControllerGetAllTagsBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetAllTagsBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetAllTagsBadRequest) usersControllerGetAllTagsRes() {}
-
-type UsersControllerGetAllTagsBadRequestErrorsItem struct{}
 
 type UsersControllerGetAllTagsInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34260,9 +34665,9 @@ func (s *UsersControllerGetAllTagsInternalServerError) SetErrorCode(val OptStrin
 func (*UsersControllerGetAllTagsInternalServerError) usersControllerGetAllTagsRes() {}
 
 type UsersControllerGetAllUsersBadRequest struct {
-	Message    OptString                                        `json:"message"`
-	StatusCode OptFloat64                                       `json:"statusCode"`
-	Errors     []UsersControllerGetAllUsersBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34275,9 +34680,9 @@ func (s *UsersControllerGetAllUsersBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetAllUsersBadRequest) GetErrors() []UsersControllerGetAllUsersBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetAllUsersBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34290,14 +34695,12 @@ func (s *UsersControllerGetAllUsersBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetAllUsersBadRequest) SetErrors(val []UsersControllerGetAllUsersBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetAllUsersBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetAllUsersBadRequest) usersControllerGetAllUsersRes() {}
-
-type UsersControllerGetAllUsersBadRequestErrorsItem struct{}
 
 type UsersControllerGetAllUsersInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34349,9 +34752,9 @@ func (s *UsersControllerGetAllUsersInternalServerError) SetErrorCode(val OptStri
 func (*UsersControllerGetAllUsersInternalServerError) usersControllerGetAllUsersRes() {}
 
 type UsersControllerGetUserAccessibleNodesBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []UsersControllerGetUserAccessibleNodesBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34364,9 +34767,9 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUserAccessibleNodesBadRequest) GetErrors() []UsersControllerGetUserAccessibleNodesBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUserAccessibleNodesBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34379,14 +34782,12 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUserAccessibleNodesBadRequest) SetErrors(val []UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUserAccessibleNodesBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUserAccessibleNodesBadRequest) usersControllerGetUserAccessibleNodesRes() {}
-
-type UsersControllerGetUserAccessibleNodesBadRequestErrorsItem struct{}
 
 type UsersControllerGetUserAccessibleNodesInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34444,9 +34845,9 @@ type UsersControllerGetUserAccessibleNodesNotFound struct{}
 func (*UsersControllerGetUserAccessibleNodesNotFound) usersControllerGetUserAccessibleNodesRes() {}
 
 type UsersControllerGetUserByShortUuidBadRequest struct {
-	Message    OptString                                               `json:"message"`
-	StatusCode OptFloat64                                              `json:"statusCode"`
-	Errors     []UsersControllerGetUserByShortUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34459,9 +34860,9 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) GetStatusCode() OptFloat64
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUserByShortUuidBadRequest) GetErrors() []UsersControllerGetUserByShortUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUserByShortUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34474,14 +34875,12 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) SetStatusCode(val OptFloat
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUserByShortUuidBadRequest) SetErrors(val []UsersControllerGetUserByShortUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUserByShortUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUserByShortUuidBadRequest) usersControllerGetUserByShortUuidRes() {}
-
-type UsersControllerGetUserByShortUuidBadRequestErrorsItem struct{}
 
 type UsersControllerGetUserByShortUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34538,9 +34937,9 @@ type UsersControllerGetUserByShortUuidNotFound struct{}
 func (*UsersControllerGetUserByShortUuidNotFound) usersControllerGetUserByShortUuidRes() {}
 
 type UsersControllerGetUserByTelegramIdBadRequest struct {
-	Message    OptString                                                `json:"message"`
-	StatusCode OptFloat64                                               `json:"statusCode"`
-	Errors     []UsersControllerGetUserByTelegramIdBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34553,9 +34952,9 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) GetStatusCode() OptFloat6
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUserByTelegramIdBadRequest) GetErrors() []UsersControllerGetUserByTelegramIdBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUserByTelegramIdBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34568,14 +34967,12 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) SetStatusCode(val OptFloa
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUserByTelegramIdBadRequest) SetErrors(val []UsersControllerGetUserByTelegramIdBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUserByTelegramIdBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUserByTelegramIdBadRequest) usersControllerGetUserByTelegramIdRes() {}
-
-type UsersControllerGetUserByTelegramIdBadRequestErrorsItem struct{}
 
 type UsersControllerGetUserByTelegramIdInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34633,9 +35030,9 @@ type UsersControllerGetUserByTelegramIdNotFound struct{}
 func (*UsersControllerGetUserByTelegramIdNotFound) usersControllerGetUserByTelegramIdRes() {}
 
 type UsersControllerGetUserByUsernameBadRequest struct {
-	Message    OptString                                              `json:"message"`
-	StatusCode OptFloat64                                             `json:"statusCode"`
-	Errors     []UsersControllerGetUserByUsernameBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34648,9 +35045,9 @@ func (s *UsersControllerGetUserByUsernameBadRequest) GetStatusCode() OptFloat64 
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUserByUsernameBadRequest) GetErrors() []UsersControllerGetUserByUsernameBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUserByUsernameBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34663,14 +35060,12 @@ func (s *UsersControllerGetUserByUsernameBadRequest) SetStatusCode(val OptFloat6
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUserByUsernameBadRequest) SetErrors(val []UsersControllerGetUserByUsernameBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUserByUsernameBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUserByUsernameBadRequest) usersControllerGetUserByUsernameRes() {}
-
-type UsersControllerGetUserByUsernameBadRequestErrorsItem struct{}
 
 type UsersControllerGetUserByUsernameInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34727,9 +35122,9 @@ type UsersControllerGetUserByUsernameNotFound struct{}
 func (*UsersControllerGetUserByUsernameNotFound) usersControllerGetUserByUsernameRes() {}
 
 type UsersControllerGetUserByUuidBadRequest struct {
-	Message    OptString                                          `json:"message"`
-	StatusCode OptFloat64                                         `json:"statusCode"`
-	Errors     []UsersControllerGetUserByUuidBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34742,9 +35137,9 @@ func (s *UsersControllerGetUserByUuidBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUserByUuidBadRequest) GetErrors() []UsersControllerGetUserByUuidBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUserByUuidBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34757,14 +35152,12 @@ func (s *UsersControllerGetUserByUuidBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUserByUuidBadRequest) SetErrors(val []UsersControllerGetUserByUuidBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUserByUuidBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUserByUuidBadRequest) usersControllerGetUserByUuidRes() {}
-
-type UsersControllerGetUserByUuidBadRequestErrorsItem struct{}
 
 type UsersControllerGetUserByUuidInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34821,9 +35214,9 @@ type UsersControllerGetUserByUuidNotFound struct{}
 func (*UsersControllerGetUserByUuidNotFound) usersControllerGetUserByUuidRes() {}
 
 type UsersControllerGetUserSubscriptionRequestHistoryBadRequest struct {
-	Message    OptString                                                              `json:"message"`
-	StatusCode OptFloat64                                                             `json:"statusCode"`
-	Errors     []UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34836,9 +35229,9 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) GetStatusCo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) GetErrors() []UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34851,15 +35244,13 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) SetStatusCo
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) SetErrors(val []UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUserSubscriptionRequestHistoryBadRequest) usersControllerGetUserSubscriptionRequestHistoryRes() {
 }
-
-type UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem struct{}
 
 type UsersControllerGetUserSubscriptionRequestHistoryInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -34918,9 +35309,9 @@ func (*UsersControllerGetUserSubscriptionRequestHistoryNotFound) usersController
 }
 
 type UsersControllerGetUsersByEmailBadRequest struct {
-	Message    OptString                                            `json:"message"`
-	StatusCode OptFloat64                                           `json:"statusCode"`
-	Errors     []UsersControllerGetUsersByEmailBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -34933,9 +35324,9 @@ func (s *UsersControllerGetUsersByEmailBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUsersByEmailBadRequest) GetErrors() []UsersControllerGetUsersByEmailBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUsersByEmailBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -34948,14 +35339,12 @@ func (s *UsersControllerGetUsersByEmailBadRequest) SetStatusCode(val OptFloat64)
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUsersByEmailBadRequest) SetErrors(val []UsersControllerGetUsersByEmailBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUsersByEmailBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUsersByEmailBadRequest) usersControllerGetUsersByEmailRes() {}
-
-type UsersControllerGetUsersByEmailBadRequestErrorsItem struct{}
 
 type UsersControllerGetUsersByEmailInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35012,9 +35401,9 @@ type UsersControllerGetUsersByEmailNotFound struct{}
 func (*UsersControllerGetUsersByEmailNotFound) usersControllerGetUsersByEmailRes() {}
 
 type UsersControllerGetUsersByTagBadRequest struct {
-	Message    OptString                                          `json:"message"`
-	StatusCode OptFloat64                                         `json:"statusCode"`
-	Errors     []UsersControllerGetUsersByTagBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -35027,9 +35416,9 @@ func (s *UsersControllerGetUsersByTagBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerGetUsersByTagBadRequest) GetErrors() []UsersControllerGetUsersByTagBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerGetUsersByTagBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -35042,14 +35431,12 @@ func (s *UsersControllerGetUsersByTagBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerGetUsersByTagBadRequest) SetErrors(val []UsersControllerGetUsersByTagBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerGetUsersByTagBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerGetUsersByTagBadRequest) usersControllerGetUsersByTagRes() {}
-
-type UsersControllerGetUsersByTagBadRequestErrorsItem struct{}
 
 type UsersControllerGetUsersByTagInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35106,9 +35493,9 @@ type UsersControllerGetUsersByTagNotFound struct{}
 func (*UsersControllerGetUsersByTagNotFound) usersControllerGetUsersByTagRes() {}
 
 type UsersControllerResetUserTrafficBadRequest struct {
-	Message    OptString                                             `json:"message"`
-	StatusCode OptFloat64                                            `json:"statusCode"`
-	Errors     []UsersControllerResetUserTrafficBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -35121,9 +35508,9 @@ func (s *UsersControllerResetUserTrafficBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerResetUserTrafficBadRequest) GetErrors() []UsersControllerResetUserTrafficBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerResetUserTrafficBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -35136,14 +35523,12 @@ func (s *UsersControllerResetUserTrafficBadRequest) SetStatusCode(val OptFloat64
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerResetUserTrafficBadRequest) SetErrors(val []UsersControllerResetUserTrafficBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerResetUserTrafficBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerResetUserTrafficBadRequest) usersControllerResetUserTrafficRes() {}
-
-type UsersControllerResetUserTrafficBadRequestErrorsItem struct{}
 
 type UsersControllerResetUserTrafficInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35200,9 +35585,9 @@ type UsersControllerResetUserTrafficNotFound struct{}
 func (*UsersControllerResetUserTrafficNotFound) usersControllerResetUserTrafficRes() {}
 
 type UsersControllerRevokeUserSubscriptionBadRequest struct {
-	Message    OptString                                                   `json:"message"`
-	StatusCode OptFloat64                                                  `json:"statusCode"`
-	Errors     []UsersControllerRevokeUserSubscriptionBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -35215,9 +35600,9 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) GetStatusCode() OptFlo
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerRevokeUserSubscriptionBadRequest) GetErrors() []UsersControllerRevokeUserSubscriptionBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerRevokeUserSubscriptionBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -35230,14 +35615,12 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) SetStatusCode(val OptF
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerRevokeUserSubscriptionBadRequest) SetErrors(val []UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerRevokeUserSubscriptionBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerRevokeUserSubscriptionBadRequest) usersControllerRevokeUserSubscriptionRes() {}
-
-type UsersControllerRevokeUserSubscriptionBadRequestErrorsItem struct{}
 
 type UsersControllerRevokeUserSubscriptionInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35295,9 +35678,9 @@ type UsersControllerRevokeUserSubscriptionNotFound struct{}
 func (*UsersControllerRevokeUserSubscriptionNotFound) usersControllerRevokeUserSubscriptionRes() {}
 
 type UsersControllerUpdateUserBadRequest struct {
-	Message    OptString                                       `json:"message"`
-	StatusCode OptFloat64                                      `json:"statusCode"`
-	Errors     []UsersControllerUpdateUserBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -35310,9 +35693,9 @@ func (s *UsersControllerUpdateUserBadRequest) GetStatusCode() OptFloat64 {
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersControllerUpdateUserBadRequest) GetErrors() []UsersControllerUpdateUserBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersControllerUpdateUserBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -35325,14 +35708,12 @@ func (s *UsersControllerUpdateUserBadRequest) SetStatusCode(val OptFloat64) {
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersControllerUpdateUserBadRequest) SetErrors(val []UsersControllerUpdateUserBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersControllerUpdateUserBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersControllerUpdateUserBadRequest) usersControllerUpdateUserRes() {}
-
-type UsersControllerUpdateUserBadRequestErrorsItem struct{}
 
 type UsersControllerUpdateUserInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`
@@ -35934,9 +36315,9 @@ func (s *UsersResponseResponseItemTrafficLimitStrategy) UnmarshalText(data []byt
 }
 
 type UsersStatsControllerGetUserUsageByRangeBadRequest struct {
-	Message    OptString                                                     `json:"message"`
-	StatusCode OptFloat64                                                    `json:"statusCode"`
-	Errors     []UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem `json:"errors"`
+	Message    OptString  `json:"message"`
+	StatusCode OptFloat64 `json:"statusCode"`
+	Error      OptString  `json:"error"`
 }
 
 // GetMessage returns the value of Message.
@@ -35949,9 +36330,9 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) GetStatusCode() OptF
 	return s.StatusCode
 }
 
-// GetErrors returns the value of Errors.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) GetErrors() []UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem {
-	return s.Errors
+// GetError returns the value of Error.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) GetError() OptString {
+	return s.Error
 }
 
 // SetMessage sets the value of Message.
@@ -35964,15 +36345,13 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) SetStatusCode(val Op
 	s.StatusCode = val
 }
 
-// SetErrors sets the value of Errors.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) SetErrors(val []UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) {
-	s.Errors = val
+// SetError sets the value of Error.
+func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) SetError(val OptString) {
+	s.Error = val
 }
 
 func (*UsersStatsControllerGetUserUsageByRangeBadRequest) usersStatsControllerGetUserUsageByRangeRes() {
 }
-
-type UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem struct{}
 
 type UsersStatsControllerGetUserUsageByRangeInternalServerError struct {
 	Timestamp OptString `json:"timestamp"`

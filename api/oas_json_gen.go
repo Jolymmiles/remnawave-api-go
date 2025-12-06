@@ -37,13 +37,9 @@ func (s *ApiTokensControllerCreateBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -51,7 +47,7 @@ func (s *ApiTokensControllerCreateBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfApiTokensControllerCreateBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ApiTokensControllerCreateBadRequest from json.
@@ -82,22 +78,15 @@ func (s *ApiTokensControllerCreateBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ApiTokensControllerCreateBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ApiTokensControllerCreateBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -119,50 +108,6 @@ func (s *ApiTokensControllerCreateBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ApiTokensControllerCreateBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ApiTokensControllerCreateBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ApiTokensControllerCreateBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfApiTokensControllerCreateBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ApiTokensControllerCreateBadRequestErrorsItem from json.
-func (s *ApiTokensControllerCreateBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ApiTokensControllerCreateBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ApiTokensControllerCreateBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ApiTokensControllerCreateBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ApiTokensControllerCreateBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -303,13 +248,9 @@ func (s *ApiTokensControllerDeleteBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -317,7 +258,7 @@ func (s *ApiTokensControllerDeleteBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfApiTokensControllerDeleteBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ApiTokensControllerDeleteBadRequest from json.
@@ -348,22 +289,15 @@ func (s *ApiTokensControllerDeleteBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ApiTokensControllerDeleteBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ApiTokensControllerDeleteBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -385,50 +319,6 @@ func (s *ApiTokensControllerDeleteBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ApiTokensControllerDeleteBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ApiTokensControllerDeleteBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ApiTokensControllerDeleteBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfApiTokensControllerDeleteBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ApiTokensControllerDeleteBadRequestErrorsItem from json.
-func (s *ApiTokensControllerDeleteBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ApiTokensControllerDeleteBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ApiTokensControllerDeleteBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ApiTokensControllerDeleteBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ApiTokensControllerDeleteBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -569,13 +459,9 @@ func (s *ApiTokensControllerFindAllBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -583,7 +469,7 @@ func (s *ApiTokensControllerFindAllBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfApiTokensControllerFindAllBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ApiTokensControllerFindAllBadRequest from json.
@@ -614,22 +500,15 @@ func (s *ApiTokensControllerFindAllBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ApiTokensControllerFindAllBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ApiTokensControllerFindAllBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -651,50 +530,6 @@ func (s *ApiTokensControllerFindAllBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ApiTokensControllerFindAllBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ApiTokensControllerFindAllBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ApiTokensControllerFindAllBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfApiTokensControllerFindAllBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ApiTokensControllerFindAllBadRequestErrorsItem from json.
-func (s *ApiTokensControllerFindAllBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ApiTokensControllerFindAllBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ApiTokensControllerFindAllBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ApiTokensControllerFindAllBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ApiTokensControllerFindAllBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -835,13 +670,9 @@ func (s *AuthControllerGetStatusBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -849,7 +680,7 @@ func (s *AuthControllerGetStatusBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfAuthControllerGetStatusBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerGetStatusBadRequest from json.
@@ -880,22 +711,15 @@ func (s *AuthControllerGetStatusBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerGetStatusBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerGetStatusBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -917,50 +741,6 @@ func (s *AuthControllerGetStatusBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerGetStatusBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerGetStatusBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerGetStatusBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerGetStatusBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerGetStatusBadRequestErrorsItem from json.
-func (s *AuthControllerGetStatusBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerGetStatusBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerGetStatusBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerGetStatusBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerGetStatusBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -1101,13 +881,9 @@ func (s *AuthControllerLoginBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -1115,7 +891,7 @@ func (s *AuthControllerLoginBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfAuthControllerLoginBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerLoginBadRequest from json.
@@ -1146,22 +922,15 @@ func (s *AuthControllerLoginBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerLoginBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerLoginBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -1183,50 +952,6 @@ func (s *AuthControllerLoginBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerLoginBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerLoginBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerLoginBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerLoginBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerLoginBadRequestErrorsItem from json.
-func (s *AuthControllerLoginBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerLoginBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerLoginBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerLoginBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerLoginBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -1464,13 +1189,9 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -1478,7 +1199,7 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfAuthControllerOauth2AuthorizeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerOauth2AuthorizeBadRequest from json.
@@ -1509,22 +1230,15 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerOauth2AuthorizeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerOauth2AuthorizeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -1546,50 +1260,6 @@ func (s *AuthControllerOauth2AuthorizeBadRequest) MarshalJSON() ([]byte, error) 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerOauth2AuthorizeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerOauth2AuthorizeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerOauth2AuthorizeBadRequestErrorsItem from json.
-func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerOauth2AuthorizeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerOauth2AuthorizeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerOauth2AuthorizeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -1730,13 +1400,9 @@ func (s *AuthControllerOauth2CallbackBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -1744,7 +1410,7 @@ func (s *AuthControllerOauth2CallbackBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfAuthControllerOauth2CallbackBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerOauth2CallbackBadRequest from json.
@@ -1775,22 +1441,15 @@ func (s *AuthControllerOauth2CallbackBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerOauth2CallbackBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerOauth2CallbackBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -1812,50 +1471,6 @@ func (s *AuthControllerOauth2CallbackBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerOauth2CallbackBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerOauth2CallbackBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerOauth2CallbackBadRequestErrorsItem from json.
-func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerOauth2CallbackBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerOauth2CallbackBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerOauth2CallbackBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -1996,13 +1611,9 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -2010,7 +1621,7 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) encodeFields(e *j
 var jsonFieldsNameOfAuthControllerPasskeyAuthenticationOptionsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerPasskeyAuthenticationOptionsBadRequest from json.
@@ -2041,22 +1652,15 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -2078,50 +1682,6 @@ func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerPasskeyAuthenticationOptionsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem from json.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerPasskeyAuthenticationOptionsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -2262,13 +1822,9 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -2276,7 +1832,7 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfAuthControllerPasskeyAuthenticationVerifyBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerPasskeyAuthenticationVerifyBadRequest from json.
@@ -2307,22 +1863,15 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -2344,50 +1893,6 @@ func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerPasskeyAuthenticationVerifyBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem from json.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerPasskeyAuthenticationVerifyBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -2528,13 +2033,9 @@ func (s *AuthControllerRegisterBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -2542,7 +2043,7 @@ func (s *AuthControllerRegisterBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfAuthControllerRegisterBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerRegisterBadRequest from json.
@@ -2573,22 +2074,15 @@ func (s *AuthControllerRegisterBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerRegisterBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerRegisterBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -2610,50 +2104,6 @@ func (s *AuthControllerRegisterBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerRegisterBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerRegisterBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerRegisterBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerRegisterBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerRegisterBadRequestErrorsItem from json.
-func (s *AuthControllerRegisterBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerRegisterBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerRegisterBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerRegisterBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerRegisterBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -2891,13 +2341,9 @@ func (s *AuthControllerTelegramCallbackBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -2905,7 +2351,7 @@ func (s *AuthControllerTelegramCallbackBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfAuthControllerTelegramCallbackBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes AuthControllerTelegramCallbackBadRequest from json.
@@ -2936,22 +2382,15 @@ func (s *AuthControllerTelegramCallbackBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]AuthControllerTelegramCallbackBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem AuthControllerTelegramCallbackBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -2973,50 +2412,6 @@ func (s *AuthControllerTelegramCallbackBadRequest) MarshalJSON() ([]byte, error)
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *AuthControllerTelegramCallbackBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfAuthControllerTelegramCallbackBadRequestErrorsItem = [0]string{}
-
-// Decode decodes AuthControllerTelegramCallbackBadRequestErrorsItem from json.
-func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode AuthControllerTelegramCallbackBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode AuthControllerTelegramCallbackBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *AuthControllerTelegramCallbackBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -5943,13 +5338,9 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -5957,7 +5348,7 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) encodeFields(e *j
 var jsonFieldsNameOfConfigProfileControllerCreateConfigProfileBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerCreateConfigProfileBadRequest from json.
@@ -5988,22 +5379,15 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -6025,50 +5409,6 @@ func (s *ConfigProfileControllerCreateConfigProfileBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerCreateConfigProfileBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerCreateConfigProfileBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerCreateConfigProfileBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -6209,13 +5549,9 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) encodeField
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -6223,7 +5559,7 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) encodeField
 var jsonFieldsNameOfConfigProfileControllerDeleteConfigProfileByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerDeleteConfigProfileByUuidBadRequest from json.
@@ -6254,22 +5590,15 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) Decode(d *j
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -6291,50 +5620,6 @@ func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) MarshalJSON
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerDeleteConfigProfileByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -6475,13 +5760,9 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -6489,7 +5770,7 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfConfigProfileControllerGetAllInboundsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerGetAllInboundsBadRequest from json.
@@ -6520,22 +5801,15 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerGetAllInboundsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerGetAllInboundsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -6557,50 +5831,6 @@ func (s *ConfigProfileControllerGetAllInboundsBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerGetAllInboundsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerGetAllInboundsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerGetAllInboundsBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerGetAllInboundsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerGetAllInboundsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerGetAllInboundsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -6720,6 +5950,217 @@ func (s *ConfigProfileControllerGetAllInboundsInternalServerError) UnmarshalJSON
 }
 
 // Encode implements json.Marshaler.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) encodeFields(e *jx.Encoder) {
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.StatusCode.Set {
+			e.FieldStart("statusCode")
+			s.StatusCode.Encode(e)
+		}
+	}
+	{
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfConfigProfileControllerGetComputedConfigProfileByUuidBadRequest = [3]string{
+	0: "message",
+	1: "statusCode",
+	2: "error",
+}
+
+// Decode decodes ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest from json.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"message\"")
+			}
+		case "statusCode":
+			if err := func() error {
+				s.StatusCode.Reset()
+				if err := s.StatusCode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"statusCode\"")
+			}
+		case "error":
+			if err := func() error {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"error\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidBadRequest) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) encodeFields(e *jx.Encoder) {
+	{
+		if s.Timestamp.Set {
+			e.FieldStart("timestamp")
+			s.Timestamp.Encode(e)
+		}
+	}
+	{
+		if s.Path.Set {
+			e.FieldStart("path")
+			s.Path.Encode(e)
+		}
+	}
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.ErrorCode.Set {
+			e.FieldStart("errorCode")
+			s.ErrorCode.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError = [4]string{
+	0: "timestamp",
+	1: "path",
+	2: "message",
+	3: "errorCode",
+}
+
+// Decode decodes ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError from json.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "timestamp":
+			if err := func() error {
+				s.Timestamp.Reset()
+				if err := s.Timestamp.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"timestamp\"")
+			}
+		case "path":
+			if err := func() error {
+				s.Path.Reset()
+				if err := s.Path.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"path\"")
+			}
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"message\"")
+			}
+		case "errorCode":
+			if err := func() error {
+				s.ErrorCode.Reset()
+				if err := s.ErrorCode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"errorCode\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
 func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -6741,13 +6182,9 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) encodeFields(e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -6755,7 +6192,7 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) encodeFields(e
 var jsonFieldsNameOfConfigProfileControllerGetConfigProfileByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerGetConfigProfileByUuidBadRequest from json.
@@ -6786,22 +6223,15 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) Decode(d *jx.D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -6823,50 +6253,6 @@ func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) MarshalJSON() 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerGetConfigProfileByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -7007,13 +6393,9 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) encodeFields(e *jx.
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -7021,7 +6403,7 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) encodeFields(e *jx.
 var jsonFieldsNameOfConfigProfileControllerGetConfigProfilesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerGetConfigProfilesBadRequest from json.
@@ -7052,22 +6434,15 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) Decode(d *jx.Decode
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -7089,50 +6464,6 @@ func (s *ConfigProfileControllerGetConfigProfilesBadRequest) MarshalJSON() ([]by
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerGetConfigProfilesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerGetConfigProfilesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerGetConfigProfilesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -7273,13 +6604,9 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) encodeFields
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -7287,7 +6614,7 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) encodeFields
 var jsonFieldsNameOfConfigProfileControllerGetInboundsByProfileUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerGetInboundsByProfileUuidBadRequest from json.
@@ -7318,22 +6645,15 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) Decode(d *jx
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -7355,50 +6675,6 @@ func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) MarshalJSON(
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerGetInboundsByProfileUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -7539,13 +6815,9 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -7553,7 +6825,7 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) encodeFields(e *j
 var jsonFieldsNameOfConfigProfileControllerUpdateConfigProfileBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ConfigProfileControllerUpdateConfigProfileBadRequest from json.
@@ -7584,22 +6856,15 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -7621,50 +6886,6 @@ func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ConfigProfileControllerUpdateConfigProfileBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem from json.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ConfigProfileControllerUpdateConfigProfileBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -14760,13 +13981,9 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) encodeFields(
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -14774,7 +13991,7 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) encodeFields(
 var jsonFieldsNameOfExternalSquadControllerAddUsersToExternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerAddUsersToExternalSquadBadRequest from json.
@@ -14805,22 +14022,15 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) Decode(d *jx.
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -14842,50 +14052,6 @@ func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) MarshalJSON()
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerAddUsersToExternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -15026,13 +14192,9 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -15040,7 +14202,7 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) encodeFields(e *j
 var jsonFieldsNameOfExternalSquadControllerCreateExternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerCreateExternalSquadBadRequest from json.
@@ -15071,22 +14233,15 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -15108,50 +14263,6 @@ func (s *ExternalSquadControllerCreateExternalSquadBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerCreateExternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerCreateExternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerCreateExternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -15292,13 +14403,9 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -15306,7 +14413,7 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) encodeFields(e *j
 var jsonFieldsNameOfExternalSquadControllerDeleteExternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerDeleteExternalSquadBadRequest from json.
@@ -15337,22 +14444,15 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -15374,50 +14474,6 @@ func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerDeleteExternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerDeleteExternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -15558,13 +14614,9 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) encodeFields(e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -15572,7 +14624,7 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) encodeFields(e
 var jsonFieldsNameOfExternalSquadControllerGetExternalSquadByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerGetExternalSquadByUuidBadRequest from json.
@@ -15603,22 +14655,15 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) Decode(d *jx.D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -15640,50 +14685,6 @@ func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) MarshalJSON() 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerGetExternalSquadByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -15824,13 +14825,9 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) encodeFields(e *jx.
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -15838,7 +14835,7 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) encodeFields(e *jx.
 var jsonFieldsNameOfExternalSquadControllerGetExternalSquadsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerGetExternalSquadsBadRequest from json.
@@ -15869,22 +14866,15 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) Decode(d *jx.Decode
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -15906,50 +14896,6 @@ func (s *ExternalSquadControllerGetExternalSquadsBadRequest) MarshalJSON() ([]by
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerGetExternalSquadsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerGetExternalSquadsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerGetExternalSquadsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -16090,13 +15036,9 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) encodeFi
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -16104,7 +15046,7 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) encodeFi
 var jsonFieldsNameOfExternalSquadControllerRemoveUsersFromExternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest from json.
@@ -16135,22 +15077,15 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) Decode(d
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -16172,50 +15107,6 @@ func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) MarshalJ
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerRemoveUsersFromExternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -16356,13 +15247,9 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -16370,7 +15257,7 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) encodeFields(e *j
 var jsonFieldsNameOfExternalSquadControllerUpdateExternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes ExternalSquadControllerUpdateExternalSquadBadRequest from json.
@@ -16401,22 +15288,15 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -16438,50 +15318,6 @@ func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadControllerUpdateExternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem from json.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *ExternalSquadControllerUpdateExternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -16728,6 +15564,14 @@ func (s *ExternalSquadResponseResponse) encodeFields(e *jx.Encoder) {
 		s.SubscriptionSettings.Encode(e)
 	}
 	{
+		e.FieldStart("hostOverrides")
+		s.HostOverrides.Encode(e)
+	}
+	{
+		e.FieldStart("responseHeaders")
+		s.ResponseHeaders.Encode(e)
+	}
+	{
 		e.FieldStart("createdAt")
 		json.EncodeDateTime(e, s.CreatedAt)
 	}
@@ -16737,14 +15581,16 @@ func (s *ExternalSquadResponseResponse) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfExternalSquadResponseResponse = [7]string{
+var jsonFieldsNameOfExternalSquadResponseResponse = [9]string{
 	0: "uuid",
 	1: "name",
 	2: "info",
 	3: "templates",
 	4: "subscriptionSettings",
-	5: "createdAt",
-	6: "updatedAt",
+	5: "hostOverrides",
+	6: "responseHeaders",
+	7: "createdAt",
+	8: "updatedAt",
 }
 
 // Decode decodes ExternalSquadResponseResponse from json.
@@ -16752,7 +15598,7 @@ func (s *ExternalSquadResponseResponse) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode ExternalSquadResponseResponse to nil")
 	}
-	var requiredBitSet [1]uint8
+	var requiredBitSet [2]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
@@ -16818,8 +15664,28 @@ func (s *ExternalSquadResponseResponse) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"subscriptionSettings\"")
 			}
-		case "createdAt":
+		case "hostOverrides":
 			requiredBitSet[0] |= 1 << 5
+			if err := func() error {
+				if err := s.HostOverrides.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"hostOverrides\"")
+			}
+		case "responseHeaders":
+			requiredBitSet[0] |= 1 << 6
+			if err := func() error {
+				if err := s.ResponseHeaders.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"responseHeaders\"")
+			}
+		case "createdAt":
+			requiredBitSet[0] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -16831,7 +15697,7 @@ func (s *ExternalSquadResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"createdAt\"")
 			}
 		case "updatedAt":
-			requiredBitSet[0] |= 1 << 6
+			requiredBitSet[1] |= 1 << 0
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -16851,8 +15717,9 @@ func (s *ExternalSquadResponseResponse) Decode(d *jx.Decoder) error {
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b01111111,
+	for i, mask := range [2]uint8{
+		0b11111111,
+		0b00000001,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -16894,6 +15761,86 @@ func (s *ExternalSquadResponseResponse) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadResponseResponse) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *ExternalSquadResponseResponseHostOverrides) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *ExternalSquadResponseResponseHostOverrides) encodeFields(e *jx.Encoder) {
+	{
+		if s.ServerDescription.Set {
+			e.FieldStart("serverDescription")
+			s.ServerDescription.Encode(e)
+		}
+	}
+	{
+		if s.VlessRouteId.Set {
+			e.FieldStart("vlessRouteId")
+			s.VlessRouteId.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfExternalSquadResponseResponseHostOverrides = [2]string{
+	0: "serverDescription",
+	1: "vlessRouteId",
+}
+
+// Decode decodes ExternalSquadResponseResponseHostOverrides from json.
+func (s *ExternalSquadResponseResponseHostOverrides) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ExternalSquadResponseResponseHostOverrides to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "serverDescription":
+			if err := func() error {
+				s.ServerDescription.Reset()
+				if err := s.ServerDescription.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"serverDescription\"")
+			}
+		case "vlessRouteId":
+			if err := func() error {
+				s.VlessRouteId.Reset()
+				if err := s.VlessRouteId.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"vlessRouteId\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode ExternalSquadResponseResponseHostOverrides")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *ExternalSquadResponseResponseHostOverrides) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ExternalSquadResponseResponseHostOverrides) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -16990,6 +15937,62 @@ func (s *ExternalSquadResponseResponseInfo) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ExternalSquadResponseResponseInfo) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s ExternalSquadResponseResponseResponseHeaders) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields implements json.Marshaler.
+func (s ExternalSquadResponseResponseResponseHeaders) encodeFields(e *jx.Encoder) {
+	for k, elem := range s {
+		e.FieldStart(k)
+
+		e.Str(elem)
+	}
+}
+
+// Decode decodes ExternalSquadResponseResponseResponseHeaders from json.
+func (s *ExternalSquadResponseResponseResponseHeaders) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ExternalSquadResponseResponseResponseHeaders to nil")
+	}
+	m := s.init()
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		var elem string
+		if err := func() error {
+			v, err := d.Str()
+			elem = string(v)
+			if err != nil {
+				return err
+			}
+			return nil
+		}(); err != nil {
+			return errors.Wrapf(err, "decode field %q", k)
+		}
+		m[string(k)] = elem
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode ExternalSquadResponseResponseResponseHeaders")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s ExternalSquadResponseResponseResponseHeaders) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ExternalSquadResponseResponseResponseHeaders) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -22536,6 +21539,14 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) encodeFields(e 
 		s.SubscriptionSettings.Encode(e)
 	}
 	{
+		e.FieldStart("hostOverrides")
+		s.HostOverrides.Encode(e)
+	}
+	{
+		e.FieldStart("responseHeaders")
+		s.ResponseHeaders.Encode(e)
+	}
+	{
 		e.FieldStart("createdAt")
 		json.EncodeDateTime(e, s.CreatedAt)
 	}
@@ -22545,14 +21556,16 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) encodeFields(e 
 	}
 }
 
-var jsonFieldsNameOfGetExternalSquadsResponseDtoResponseExternalSquadsItem = [7]string{
+var jsonFieldsNameOfGetExternalSquadsResponseDtoResponseExternalSquadsItem = [9]string{
 	0: "uuid",
 	1: "name",
 	2: "info",
 	3: "templates",
 	4: "subscriptionSettings",
-	5: "createdAt",
-	6: "updatedAt",
+	5: "hostOverrides",
+	6: "responseHeaders",
+	7: "createdAt",
+	8: "updatedAt",
 }
 
 // Decode decodes GetExternalSquadsResponseDtoResponseExternalSquadsItem from json.
@@ -22560,7 +21573,7 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) Decode(d *jx.De
 	if s == nil {
 		return errors.New("invalid: unable to decode GetExternalSquadsResponseDtoResponseExternalSquadsItem to nil")
 	}
-	var requiredBitSet [1]uint8
+	var requiredBitSet [2]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
@@ -22626,8 +21639,28 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"subscriptionSettings\"")
 			}
-		case "createdAt":
+		case "hostOverrides":
 			requiredBitSet[0] |= 1 << 5
+			if err := func() error {
+				if err := s.HostOverrides.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"hostOverrides\"")
+			}
+		case "responseHeaders":
+			requiredBitSet[0] |= 1 << 6
+			if err := func() error {
+				if err := s.ResponseHeaders.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"responseHeaders\"")
+			}
+		case "createdAt":
+			requiredBitSet[0] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -22639,7 +21672,7 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) Decode(d *jx.De
 				return errors.Wrap(err, "decode field \"createdAt\"")
 			}
 		case "updatedAt":
-			requiredBitSet[0] |= 1 << 6
+			requiredBitSet[1] |= 1 << 0
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -22659,8 +21692,9 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) Decode(d *jx.De
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b01111111,
+	for i, mask := range [2]uint8{
+		0b11111111,
+		0b00000001,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -22702,6 +21736,86 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItem) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) encodeFields(e *jx.Encoder) {
+	{
+		if s.ServerDescription.Set {
+			e.FieldStart("serverDescription")
+			s.ServerDescription.Encode(e)
+		}
+	}
+	{
+		if s.VlessRouteId.Set {
+			e.FieldStart("vlessRouteId")
+			s.VlessRouteId.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides = [2]string{
+	0: "serverDescription",
+	1: "vlessRouteId",
+}
+
+// Decode decodes GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides from json.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "serverDescription":
+			if err := func() error {
+				s.ServerDescription.Reset()
+				if err := s.ServerDescription.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"serverDescription\"")
+			}
+		case "vlessRouteId":
+			if err := func() error {
+				s.VlessRouteId.Reset()
+				if err := s.VlessRouteId.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"vlessRouteId\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -22798,6 +21912,62 @@ func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) MarshalJSON
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemInfo) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields implements json.Marshaler.
+func (s GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) encodeFields(e *jx.Encoder) {
+	for k, elem := range s {
+		e.FieldStart(k)
+
+		e.Str(elem)
+	}
+}
+
+// Decode decodes GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders from json.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders to nil")
+	}
+	m := s.init()
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		var elem string
+		if err := func() error {
+			v, err := d.Str()
+			elem = string(v)
+			if err != nil {
+				return err
+			}
+			return nil
+		}(); err != nil {
+			return errors.Wrapf(err, "decode field %q", k)
+		}
+		m[string(k)] = elem
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -36838,13 +36008,9 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -36852,7 +36018,7 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfHostsBulkActionsControllerDeleteHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsBulkActionsControllerDeleteHostsBadRequest from json.
@@ -36883,22 +36049,15 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -36920,50 +36079,6 @@ func (s *HostsBulkActionsControllerDeleteHostsBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsBulkActionsControllerDeleteHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsBulkActionsControllerDeleteHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem from json.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsBulkActionsControllerDeleteHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -37104,13 +36219,9 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) encodeFields(e *jx.En
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -37118,7 +36229,7 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) encodeFields(e *jx.En
 var jsonFieldsNameOfHostsBulkActionsControllerDisableHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsBulkActionsControllerDisableHostsBadRequest from json.
@@ -37149,22 +36260,15 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) Decode(d *jx.Decoder)
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsBulkActionsControllerDisableHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsBulkActionsControllerDisableHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -37186,50 +36290,6 @@ func (s *HostsBulkActionsControllerDisableHostsBadRequest) MarshalJSON() ([]byte
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsBulkActionsControllerDisableHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsBulkActionsControllerDisableHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsBulkActionsControllerDisableHostsBadRequestErrorsItem from json.
-func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsBulkActionsControllerDisableHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsBulkActionsControllerDisableHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsBulkActionsControllerDisableHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -37370,13 +36430,9 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -37384,7 +36440,7 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfHostsBulkActionsControllerEnableHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsBulkActionsControllerEnableHostsBadRequest from json.
@@ -37415,22 +36471,15 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsBulkActionsControllerEnableHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsBulkActionsControllerEnableHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -37452,50 +36501,6 @@ func (s *HostsBulkActionsControllerEnableHostsBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsBulkActionsControllerEnableHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsBulkActionsControllerEnableHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsBulkActionsControllerEnableHostsBadRequestErrorsItem from json.
-func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsBulkActionsControllerEnableHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsBulkActionsControllerEnableHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsBulkActionsControllerEnableHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -37636,13 +36641,9 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) encodeFields(e *
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -37650,7 +36651,7 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) encodeFields(e *
 var jsonFieldsNameOfHostsBulkActionsControllerSetInboundToHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsBulkActionsControllerSetInboundToHostsBadRequest from json.
@@ -37681,22 +36682,15 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) Decode(d *jx.Dec
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -37718,50 +36712,6 @@ func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) MarshalJSON() ([
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsBulkActionsControllerSetInboundToHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem from json.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsBulkActionsControllerSetInboundToHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -37902,13 +36852,9 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) encodeFields(e *jx.
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -37916,7 +36862,7 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) encodeFields(e *jx.
 var jsonFieldsNameOfHostsBulkActionsControllerSetPortToHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsBulkActionsControllerSetPortToHostsBadRequest from json.
@@ -37947,22 +36893,15 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) Decode(d *jx.Decode
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -37984,50 +36923,6 @@ func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) MarshalJSON() ([]by
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsBulkActionsControllerSetPortToHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem from json.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsBulkActionsControllerSetPortToHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -38168,13 +37063,9 @@ func (s *HostsControllerCreateHostBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -38182,7 +37073,7 @@ func (s *HostsControllerCreateHostBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerCreateHostBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerCreateHostBadRequest from json.
@@ -38213,22 +37104,15 @@ func (s *HostsControllerCreateHostBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerCreateHostBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerCreateHostBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -38250,50 +37134,6 @@ func (s *HostsControllerCreateHostBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerCreateHostBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerCreateHostBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerCreateHostBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerCreateHostBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerCreateHostBadRequestErrorsItem from json.
-func (s *HostsControllerCreateHostBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerCreateHostBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerCreateHostBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerCreateHostBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerCreateHostBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -38434,13 +37274,9 @@ func (s *HostsControllerDeleteHostBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -38448,7 +37284,7 @@ func (s *HostsControllerDeleteHostBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerDeleteHostBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerDeleteHostBadRequest from json.
@@ -38479,22 +37315,15 @@ func (s *HostsControllerDeleteHostBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerDeleteHostBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerDeleteHostBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -38516,50 +37345,6 @@ func (s *HostsControllerDeleteHostBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerDeleteHostBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerDeleteHostBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerDeleteHostBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerDeleteHostBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerDeleteHostBadRequestErrorsItem from json.
-func (s *HostsControllerDeleteHostBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerDeleteHostBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerDeleteHostBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerDeleteHostBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerDeleteHostBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -38700,13 +37485,9 @@ func (s *HostsControllerGetAllHostTagsBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -38714,7 +37495,7 @@ func (s *HostsControllerGetAllHostTagsBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerGetAllHostTagsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerGetAllHostTagsBadRequest from json.
@@ -38745,22 +37526,15 @@ func (s *HostsControllerGetAllHostTagsBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerGetAllHostTagsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerGetAllHostTagsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -38782,50 +37556,6 @@ func (s *HostsControllerGetAllHostTagsBadRequest) MarshalJSON() ([]byte, error) 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerGetAllHostTagsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerGetAllHostTagsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerGetAllHostTagsBadRequestErrorsItem from json.
-func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerGetAllHostTagsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerGetAllHostTagsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerGetAllHostTagsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -38966,13 +37696,9 @@ func (s *HostsControllerGetAllHostsBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -38980,7 +37706,7 @@ func (s *HostsControllerGetAllHostsBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerGetAllHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerGetAllHostsBadRequest from json.
@@ -39011,22 +37737,15 @@ func (s *HostsControllerGetAllHostsBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerGetAllHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerGetAllHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -39048,50 +37767,6 @@ func (s *HostsControllerGetAllHostsBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerGetAllHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerGetAllHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerGetAllHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerGetAllHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerGetAllHostsBadRequestErrorsItem from json.
-func (s *HostsControllerGetAllHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerGetAllHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerGetAllHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerGetAllHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerGetAllHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -39232,13 +37907,9 @@ func (s *HostsControllerGetOneHostBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -39246,7 +37917,7 @@ func (s *HostsControllerGetOneHostBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerGetOneHostBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerGetOneHostBadRequest from json.
@@ -39277,22 +37948,15 @@ func (s *HostsControllerGetOneHostBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerGetOneHostBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerGetOneHostBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -39314,50 +37978,6 @@ func (s *HostsControllerGetOneHostBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerGetOneHostBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerGetOneHostBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerGetOneHostBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerGetOneHostBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerGetOneHostBadRequestErrorsItem from json.
-func (s *HostsControllerGetOneHostBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerGetOneHostBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerGetOneHostBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerGetOneHostBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerGetOneHostBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -39498,13 +38118,9 @@ func (s *HostsControllerReorderHostsBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -39512,7 +38128,7 @@ func (s *HostsControllerReorderHostsBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerReorderHostsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerReorderHostsBadRequest from json.
@@ -39543,22 +38159,15 @@ func (s *HostsControllerReorderHostsBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerReorderHostsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerReorderHostsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -39580,50 +38189,6 @@ func (s *HostsControllerReorderHostsBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerReorderHostsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerReorderHostsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerReorderHostsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerReorderHostsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerReorderHostsBadRequestErrorsItem from json.
-func (s *HostsControllerReorderHostsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerReorderHostsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerReorderHostsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerReorderHostsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerReorderHostsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -39764,13 +38329,9 @@ func (s *HostsControllerUpdateHostBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -39778,7 +38339,7 @@ func (s *HostsControllerUpdateHostBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfHostsControllerUpdateHostBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HostsControllerUpdateHostBadRequest from json.
@@ -39809,22 +38370,15 @@ func (s *HostsControllerUpdateHostBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HostsControllerUpdateHostBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HostsControllerUpdateHostBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -39846,50 +38400,6 @@ func (s *HostsControllerUpdateHostBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HostsControllerUpdateHostBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HostsControllerUpdateHostBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HostsControllerUpdateHostBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHostsControllerUpdateHostBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HostsControllerUpdateHostBadRequestErrorsItem from json.
-func (s *HostsControllerUpdateHostBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HostsControllerUpdateHostBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HostsControllerUpdateHostBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HostsControllerUpdateHostBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HostsControllerUpdateHostBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -40454,13 +38964,9 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) encodeFields(e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -40468,7 +38974,7 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) encodeFields(e
 var jsonFieldsNameOfHwidUserDevicesControllerCreateUserHwidDeviceBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HwidUserDevicesControllerCreateUserHwidDeviceBadRequest from json.
@@ -40499,22 +39005,15 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) Decode(d *jx.D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -40536,50 +39035,6 @@ func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) MarshalJSON() 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem from json.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HwidUserDevicesControllerCreateUserHwidDeviceBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -40720,13 +39175,9 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) encodeFiel
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -40734,7 +39185,7 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) encodeFiel
 var jsonFieldsNameOfHwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest from json.
@@ -40765,22 +39216,15 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) Decode(d *
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -40802,50 +39246,6 @@ func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) MarshalJSO
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem from json.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HwidUserDevicesControllerDeleteAllUserHwidDevicesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -40986,13 +39386,9 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) encodeFields(e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -41000,7 +39396,7 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) encodeFields(e
 var jsonFieldsNameOfHwidUserDevicesControllerDeleteUserHwidDeviceBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest from json.
@@ -41031,22 +39427,15 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) Decode(d *jx.D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -41068,50 +39457,6 @@ func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) MarshalJSON() 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem from json.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HwidUserDevicesControllerDeleteUserHwidDeviceBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -41252,13 +39597,9 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) encodeFields(e *jx.Enco
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -41266,7 +39607,7 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) encodeFields(e *jx.Enco
 var jsonFieldsNameOfHwidUserDevicesControllerGetAllUsersBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HwidUserDevicesControllerGetAllUsersBadRequest from json.
@@ -41297,22 +39638,15 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) Decode(d *jx.Decoder) e
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -41334,50 +39668,6 @@ func (s *HwidUserDevicesControllerGetAllUsersBadRequest) MarshalJSON() ([]byte, 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HwidUserDevicesControllerGetAllUsersBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHwidUserDevicesControllerGetAllUsersBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem from json.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HwidUserDevicesControllerGetAllUsersBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -41518,13 +39808,9 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -41532,7 +39818,7 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) encodeFields(e 
 var jsonFieldsNameOfHwidUserDevicesControllerGetHwidDevicesStatsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HwidUserDevicesControllerGetHwidDevicesStatsBadRequest from json.
@@ -41563,22 +39849,15 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -41600,50 +39879,6 @@ func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem from json.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HwidUserDevicesControllerGetHwidDevicesStatsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -41784,13 +40019,9 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) encodeFields(e *
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -41798,7 +40029,7 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) encodeFields(e *
 var jsonFieldsNameOfHwidUserDevicesControllerGetUserHwidDevicesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes HwidUserDevicesControllerGetUserHwidDevicesBadRequest from json.
@@ -41829,22 +40060,15 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) Decode(d *jx.Dec
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -41866,50 +40090,6 @@ func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) MarshalJSON() ([
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfHwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem from json.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *HwidUserDevicesControllerGetUserHwidDevicesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -42508,13 +40688,9 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) encode
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -42522,7 +40698,7 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) encode
 var jsonFieldsNameOfInfraBillingControllerCreateInfraBillingHistoryRecordBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest from json.
@@ -42553,22 +40729,15 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) Decode
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -42590,50 +40759,6 @@ func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) Marsha
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem from json.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerCreateInfraBillingHistoryRecordBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -42774,13 +40899,9 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -42788,7 +40909,7 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) encodeFields(e 
 var jsonFieldsNameOfInfraBillingControllerCreateInfraBillingNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerCreateInfraBillingNodeBadRequest from json.
@@ -42819,22 +40940,15 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -42856,50 +40970,6 @@ func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerCreateInfraBillingNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem from json.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerCreateInfraBillingNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -43040,13 +41110,9 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -43054,7 +41120,7 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfInfraBillingControllerCreateInfraProviderBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerCreateInfraProviderBadRequest from json.
@@ -43085,22 +41151,15 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerCreateInfraProviderBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerCreateInfraProviderBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -43122,50 +41181,6 @@ func (s *InfraBillingControllerCreateInfraProviderBadRequest) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerCreateInfraProviderBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerCreateInfraProviderBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerCreateInfraProviderBadRequestErrorsItem from json.
-func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerCreateInfraProviderBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerCreateInfraProviderBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerCreateInfraProviderBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -43306,13 +41321,9 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -43320,7 +41331,7 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 var jsonFieldsNameOfInfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest from json.
@@ -43351,22 +41362,15 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -43388,50 +41392,6 @@ func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem from json.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -43572,13 +41532,9 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) encodeFie
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -43586,7 +41542,7 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) encodeFie
 var jsonFieldsNameOfInfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest from json.
@@ -43617,22 +41573,15 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) Decode(d 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -43654,50 +41603,6 @@ func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) MarshalJS
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem from json.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerDeleteInfraBillingNodeByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -43838,13 +41743,9 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) encodeFields
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -43852,7 +41753,7 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) encodeFields
 var jsonFieldsNameOfInfraBillingControllerDeleteInfraProviderByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerDeleteInfraProviderByUuidBadRequest from json.
@@ -43883,22 +41784,15 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) Decode(d *jx
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -43920,50 +41814,6 @@ func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) MarshalJSON(
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem from json.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerDeleteInfraProviderByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -44104,13 +41954,9 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -44118,7 +41964,7 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfInfraBillingControllerGetBillingNodesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerGetBillingNodesBadRequest from json.
@@ -44149,22 +41995,15 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerGetBillingNodesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerGetBillingNodesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -44186,50 +42025,6 @@ func (s *InfraBillingControllerGetBillingNodesBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerGetBillingNodesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerGetBillingNodesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerGetBillingNodesBadRequestErrorsItem from json.
-func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerGetBillingNodesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerGetBillingNodesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerGetBillingNodesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -44370,13 +42165,9 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) encodeFi
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -44384,7 +42175,7 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) encodeFi
 var jsonFieldsNameOfInfraBillingControllerGetInfraBillingHistoryRecordsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest from json.
@@ -44415,22 +42206,15 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) Decode(d
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -44452,50 +42236,6 @@ func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) MarshalJ
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem from json.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerGetInfraBillingHistoryRecordsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -44636,13 +42376,9 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -44650,7 +42386,7 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) encodeFields(e 
 var jsonFieldsNameOfInfraBillingControllerGetInfraProviderByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerGetInfraProviderByUuidBadRequest from json.
@@ -44681,22 +42417,15 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -44718,50 +42447,6 @@ func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerGetInfraProviderByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem from json.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerGetInfraProviderByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -44902,13 +42587,9 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) encodeFields(e *jx.E
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -44916,7 +42597,7 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) encodeFields(e *jx.E
 var jsonFieldsNameOfInfraBillingControllerGetInfraProvidersBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerGetInfraProvidersBadRequest from json.
@@ -44947,22 +42628,15 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) Decode(d *jx.Decoder
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerGetInfraProvidersBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerGetInfraProvidersBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -44984,50 +42658,6 @@ func (s *InfraBillingControllerGetInfraProvidersBadRequest) MarshalJSON() ([]byt
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerGetInfraProvidersBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerGetInfraProvidersBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerGetInfraProvidersBadRequestErrorsItem from json.
-func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerGetInfraProvidersBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerGetInfraProvidersBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerGetInfraProvidersBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -45168,13 +42798,9 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -45182,7 +42808,7 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) encodeFields(e 
 var jsonFieldsNameOfInfraBillingControllerUpdateInfraBillingNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerUpdateInfraBillingNodeBadRequest from json.
@@ -45213,22 +42839,15 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -45250,50 +42869,6 @@ func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem from json.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerUpdateInfraBillingNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -45434,13 +43009,9 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -45448,7 +43019,7 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfInfraBillingControllerUpdateInfraProviderBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InfraBillingControllerUpdateInfraProviderBadRequest from json.
@@ -45479,22 +43050,15 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -45516,50 +43080,6 @@ func (s *InfraBillingControllerUpdateInfraProviderBadRequest) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InfraBillingControllerUpdateInfraProviderBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInfraBillingControllerUpdateInfraProviderBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem from json.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InfraBillingControllerUpdateInfraProviderBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -46256,13 +43776,9 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) encodeFields(
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -46270,7 +43786,7 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) encodeFields(
 var jsonFieldsNameOfInternalSquadControllerAddUsersToInternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerAddUsersToInternalSquadBadRequest from json.
@@ -46301,22 +43817,15 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) Decode(d *jx.
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -46338,50 +43847,6 @@ func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) MarshalJSON()
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerAddUsersToInternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem from json.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerAddUsersToInternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -46522,13 +43987,9 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -46536,7 +43997,7 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) encodeFields(e *j
 var jsonFieldsNameOfInternalSquadControllerCreateInternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerCreateInternalSquadBadRequest from json.
@@ -46567,22 +44028,15 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerCreateInternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerCreateInternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -46604,50 +44058,6 @@ func (s *InternalSquadControllerCreateInternalSquadBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerCreateInternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerCreateInternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerCreateInternalSquadBadRequestErrorsItem from json.
-func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerCreateInternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerCreateInternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerCreateInternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -46788,13 +44198,9 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -46802,7 +44208,7 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) encodeFields(e *j
 var jsonFieldsNameOfInternalSquadControllerDeleteInternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerDeleteInternalSquadBadRequest from json.
@@ -46833,22 +44239,15 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -46870,50 +44269,6 @@ func (s *InternalSquadControllerDeleteInternalSquadBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerDeleteInternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerDeleteInternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem from json.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerDeleteInternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -47054,13 +44409,9 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) encod
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -47068,7 +44419,7 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) encod
 var jsonFieldsNameOfInternalSquadControllerGetInternalSquadAccessibleNodesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest from json.
@@ -47099,22 +44450,15 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -47136,50 +44480,6 @@ func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) Marsh
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem from json.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerGetInternalSquadAccessibleNodesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -47320,13 +44620,9 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) encodeFields(e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -47334,7 +44630,7 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) encodeFields(e
 var jsonFieldsNameOfInternalSquadControllerGetInternalSquadByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerGetInternalSquadByUuidBadRequest from json.
@@ -47365,22 +44661,15 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) Decode(d *jx.D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -47402,50 +44691,6 @@ func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) MarshalJSON() 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerGetInternalSquadByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem from json.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerGetInternalSquadByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -47586,13 +44831,9 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) encodeFields(e *jx.
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -47600,7 +44841,7 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) encodeFields(e *jx.
 var jsonFieldsNameOfInternalSquadControllerGetInternalSquadsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerGetInternalSquadsBadRequest from json.
@@ -47631,22 +44872,15 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) Decode(d *jx.Decode
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerGetInternalSquadsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerGetInternalSquadsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -47668,50 +44902,6 @@ func (s *InternalSquadControllerGetInternalSquadsBadRequest) MarshalJSON() ([]by
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerGetInternalSquadsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerGetInternalSquadsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerGetInternalSquadsBadRequestErrorsItem from json.
-func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerGetInternalSquadsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerGetInternalSquadsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerGetInternalSquadsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -47852,13 +45042,9 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) encodeFi
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -47866,7 +45052,7 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) encodeFi
 var jsonFieldsNameOfInternalSquadControllerRemoveUsersFromInternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerRemoveUsersFromInternalSquadBadRequest from json.
@@ -47897,22 +45083,15 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) Decode(d
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -47934,50 +45113,6 @@ func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) MarshalJ
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem from json.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerRemoveUsersFromInternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -48118,13 +45253,9 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -48132,7 +45263,7 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) encodeFields(e *j
 var jsonFieldsNameOfInternalSquadControllerUpdateInternalSquadBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes InternalSquadControllerUpdateInternalSquadBadRequest from json.
@@ -48163,22 +45294,15 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -48200,50 +45324,6 @@ func (s *InternalSquadControllerUpdateInternalSquadBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *InternalSquadControllerUpdateInternalSquadBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfInternalSquadControllerUpdateInternalSquadBadRequestErrorsItem = [0]string{}
-
-// Decode decodes InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem from json.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *InternalSquadControllerUpdateInternalSquadBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -48991,13 +46071,9 @@ func (s *KeygenControllerGenerateKeyBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -49005,7 +46081,7 @@ func (s *KeygenControllerGenerateKeyBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfKeygenControllerGenerateKeyBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes KeygenControllerGenerateKeyBadRequest from json.
@@ -49036,22 +46112,15 @@ func (s *KeygenControllerGenerateKeyBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]KeygenControllerGenerateKeyBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem KeygenControllerGenerateKeyBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -49073,50 +46142,6 @@ func (s *KeygenControllerGenerateKeyBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *KeygenControllerGenerateKeyBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfKeygenControllerGenerateKeyBadRequestErrorsItem = [0]string{}
-
-// Decode decodes KeygenControllerGenerateKeyBadRequestErrorsItem from json.
-func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode KeygenControllerGenerateKeyBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode KeygenControllerGenerateKeyBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *KeygenControllerGenerateKeyBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -49438,6 +46463,95 @@ func (s *NilDebugSrrMatcherResponseDtoResponseMatchedRule) UnmarshalJSON(data []
 	return s.Decode(d)
 }
 
+// Encode encodes ExternalSquadResponseResponseHostOverrides as json.
+func (o NilExternalSquadResponseResponseHostOverrides) Encode(e *jx.Encoder) {
+	if o.Null {
+		e.Null()
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes ExternalSquadResponseResponseHostOverrides from json.
+func (o *NilExternalSquadResponseResponseHostOverrides) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode NilExternalSquadResponseResponseHostOverrides to nil")
+	}
+	if d.Next() == jx.Null {
+		if err := d.Null(); err != nil {
+			return err
+		}
+
+		var v ExternalSquadResponseResponseHostOverrides
+		o.Value = v
+		o.Null = true
+		return nil
+	}
+	o.Null = false
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s NilExternalSquadResponseResponseHostOverrides) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *NilExternalSquadResponseResponseHostOverrides) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes ExternalSquadResponseResponseResponseHeaders as json.
+func (o NilExternalSquadResponseResponseResponseHeaders) Encode(e *jx.Encoder) {
+	if o.Null {
+		e.Null()
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes ExternalSquadResponseResponseResponseHeaders from json.
+func (o *NilExternalSquadResponseResponseResponseHeaders) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode NilExternalSquadResponseResponseResponseHeaders to nil")
+	}
+	if d.Next() == jx.Null {
+		if err := d.Null(); err != nil {
+			return err
+		}
+
+		var v ExternalSquadResponseResponseResponseHeaders
+		o.Value = v
+		o.Null = true
+		return nil
+	}
+	o.Null = false
+	o.Value = make(ExternalSquadResponseResponseResponseHeaders)
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s NilExternalSquadResponseResponseResponseHeaders) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *NilExternalSquadResponseResponseResponseHeaders) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes ExternalSquadResponseResponseSubscriptionSettings as json.
 func (o NilExternalSquadResponseResponseSubscriptionSettings) Encode(e *jx.Encoder) {
 	if o.Null {
@@ -49568,6 +46682,95 @@ func (s NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) MarshalJSON
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NilGetAllUsersResponseDtoResponseUsersItemLastConnectedNode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides as json.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Encode(e *jx.Encoder) {
+	if o.Null {
+		e.Null()
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides from json.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides to nil")
+	}
+	if d.Next() == jx.Null {
+		if err := d.Null(); err != nil {
+			return err
+		}
+
+		var v GetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides
+		o.Value = v
+		o.Null = true
+		return nil
+	}
+	o.Null = false
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemHostOverrides) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders as json.
+func (o NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Encode(e *jx.Encoder) {
+	if o.Null {
+		e.Null()
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders from json.
+func (o *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders to nil")
+	}
+	if d.Next() == jx.Null {
+		if err := d.Null(); err != nil {
+			return err
+		}
+
+		var v GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders
+		o.Value = v
+		o.Null = true
+		return nil
+	}
+	o.Null = false
+	o.Value = make(GetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders)
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *NilGetExternalSquadsResponseDtoResponseExternalSquadsItemResponseHeaders) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -51575,13 +48778,9 @@ func (s *NodesControllerCreateNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -51589,7 +48788,7 @@ func (s *NodesControllerCreateNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerCreateNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerCreateNodeBadRequest from json.
@@ -51620,22 +48819,15 @@ func (s *NodesControllerCreateNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerCreateNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerCreateNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -51657,50 +48849,6 @@ func (s *NodesControllerCreateNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerCreateNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerCreateNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerCreateNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerCreateNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerCreateNodeBadRequestErrorsItem from json.
-func (s *NodesControllerCreateNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerCreateNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerCreateNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerCreateNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerCreateNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -51841,13 +48989,9 @@ func (s *NodesControllerDeleteNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -51855,7 +48999,7 @@ func (s *NodesControllerDeleteNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerDeleteNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerDeleteNodeBadRequest from json.
@@ -51886,22 +49030,15 @@ func (s *NodesControllerDeleteNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerDeleteNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerDeleteNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -51923,50 +49060,6 @@ func (s *NodesControllerDeleteNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerDeleteNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerDeleteNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerDeleteNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerDeleteNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerDeleteNodeBadRequestErrorsItem from json.
-func (s *NodesControllerDeleteNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerDeleteNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerDeleteNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerDeleteNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerDeleteNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -52107,13 +49200,9 @@ func (s *NodesControllerDisableNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -52121,7 +49210,7 @@ func (s *NodesControllerDisableNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerDisableNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerDisableNodeBadRequest from json.
@@ -52152,22 +49241,15 @@ func (s *NodesControllerDisableNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerDisableNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerDisableNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -52189,50 +49271,6 @@ func (s *NodesControllerDisableNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerDisableNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerDisableNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerDisableNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerDisableNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerDisableNodeBadRequestErrorsItem from json.
-func (s *NodesControllerDisableNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerDisableNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerDisableNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerDisableNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerDisableNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -52373,13 +49411,9 @@ func (s *NodesControllerEnableNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -52387,7 +49421,7 @@ func (s *NodesControllerEnableNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerEnableNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerEnableNodeBadRequest from json.
@@ -52418,22 +49452,15 @@ func (s *NodesControllerEnableNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerEnableNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerEnableNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -52455,50 +49482,6 @@ func (s *NodesControllerEnableNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerEnableNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerEnableNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerEnableNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerEnableNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerEnableNodeBadRequestErrorsItem from json.
-func (s *NodesControllerEnableNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerEnableNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerEnableNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerEnableNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerEnableNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -52639,13 +49622,9 @@ func (s *NodesControllerGetAllNodesBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -52653,7 +49632,7 @@ func (s *NodesControllerGetAllNodesBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerGetAllNodesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerGetAllNodesBadRequest from json.
@@ -52684,22 +49663,15 @@ func (s *NodesControllerGetAllNodesBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerGetAllNodesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerGetAllNodesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -52721,50 +49693,6 @@ func (s *NodesControllerGetAllNodesBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerGetAllNodesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerGetAllNodesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerGetAllNodesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerGetAllNodesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerGetAllNodesBadRequestErrorsItem from json.
-func (s *NodesControllerGetAllNodesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerGetAllNodesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerGetAllNodesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerGetAllNodesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerGetAllNodesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -52905,13 +49833,9 @@ func (s *NodesControllerGetOneNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -52919,7 +49843,7 @@ func (s *NodesControllerGetOneNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerGetOneNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerGetOneNodeBadRequest from json.
@@ -52950,22 +49874,15 @@ func (s *NodesControllerGetOneNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerGetOneNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerGetOneNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -52987,50 +49904,6 @@ func (s *NodesControllerGetOneNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerGetOneNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerGetOneNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerGetOneNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerGetOneNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerGetOneNodeBadRequestErrorsItem from json.
-func (s *NodesControllerGetOneNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerGetOneNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerGetOneNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerGetOneNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerGetOneNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -53171,13 +50044,9 @@ func (s *NodesControllerReorderNodesBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -53185,7 +50054,7 @@ func (s *NodesControllerReorderNodesBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerReorderNodesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerReorderNodesBadRequest from json.
@@ -53216,22 +50085,15 @@ func (s *NodesControllerReorderNodesBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerReorderNodesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerReorderNodesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -53253,50 +50115,6 @@ func (s *NodesControllerReorderNodesBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerReorderNodesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerReorderNodesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerReorderNodesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerReorderNodesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerReorderNodesBadRequestErrorsItem from json.
-func (s *NodesControllerReorderNodesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerReorderNodesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerReorderNodesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerReorderNodesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerReorderNodesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -53416,6 +50234,217 @@ func (s *NodesControllerReorderNodesInternalServerError) UnmarshalJSON(data []by
 }
 
 // Encode implements json.Marshaler.
+func (s *NodesControllerResetNodeTrafficBadRequest) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *NodesControllerResetNodeTrafficBadRequest) encodeFields(e *jx.Encoder) {
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.StatusCode.Set {
+			e.FieldStart("statusCode")
+			s.StatusCode.Encode(e)
+		}
+	}
+	{
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfNodesControllerResetNodeTrafficBadRequest = [3]string{
+	0: "message",
+	1: "statusCode",
+	2: "error",
+}
+
+// Decode decodes NodesControllerResetNodeTrafficBadRequest from json.
+func (s *NodesControllerResetNodeTrafficBadRequest) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode NodesControllerResetNodeTrafficBadRequest to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"message\"")
+			}
+		case "statusCode":
+			if err := func() error {
+				s.StatusCode.Reset()
+				if err := s.StatusCode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"statusCode\"")
+			}
+		case "error":
+			if err := func() error {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"error\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode NodesControllerResetNodeTrafficBadRequest")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *NodesControllerResetNodeTrafficBadRequest) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *NodesControllerResetNodeTrafficBadRequest) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *NodesControllerResetNodeTrafficInternalServerError) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *NodesControllerResetNodeTrafficInternalServerError) encodeFields(e *jx.Encoder) {
+	{
+		if s.Timestamp.Set {
+			e.FieldStart("timestamp")
+			s.Timestamp.Encode(e)
+		}
+	}
+	{
+		if s.Path.Set {
+			e.FieldStart("path")
+			s.Path.Encode(e)
+		}
+	}
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.ErrorCode.Set {
+			e.FieldStart("errorCode")
+			s.ErrorCode.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfNodesControllerResetNodeTrafficInternalServerError = [4]string{
+	0: "timestamp",
+	1: "path",
+	2: "message",
+	3: "errorCode",
+}
+
+// Decode decodes NodesControllerResetNodeTrafficInternalServerError from json.
+func (s *NodesControllerResetNodeTrafficInternalServerError) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode NodesControllerResetNodeTrafficInternalServerError to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "timestamp":
+			if err := func() error {
+				s.Timestamp.Reset()
+				if err := s.Timestamp.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"timestamp\"")
+			}
+		case "path":
+			if err := func() error {
+				s.Path.Reset()
+				if err := s.Path.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"path\"")
+			}
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"message\"")
+			}
+		case "errorCode":
+			if err := func() error {
+				s.ErrorCode.Reset()
+				if err := s.ErrorCode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"errorCode\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode NodesControllerResetNodeTrafficInternalServerError")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *NodesControllerResetNodeTrafficInternalServerError) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *NodesControllerResetNodeTrafficInternalServerError) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
 func (s *NodesControllerRestartAllNodesBadRequest) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -53437,13 +50466,9 @@ func (s *NodesControllerRestartAllNodesBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -53451,7 +50476,7 @@ func (s *NodesControllerRestartAllNodesBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerRestartAllNodesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerRestartAllNodesBadRequest from json.
@@ -53482,22 +50507,15 @@ func (s *NodesControllerRestartAllNodesBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerRestartAllNodesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerRestartAllNodesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -53519,50 +50537,6 @@ func (s *NodesControllerRestartAllNodesBadRequest) MarshalJSON() ([]byte, error)
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerRestartAllNodesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerRestartAllNodesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerRestartAllNodesBadRequestErrorsItem from json.
-func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerRestartAllNodesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerRestartAllNodesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerRestartAllNodesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -53703,13 +50677,9 @@ func (s *NodesControllerRestartNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -53717,7 +50687,7 @@ func (s *NodesControllerRestartNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerRestartNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerRestartNodeBadRequest from json.
@@ -53748,22 +50718,15 @@ func (s *NodesControllerRestartNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerRestartNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerRestartNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -53785,50 +50748,6 @@ func (s *NodesControllerRestartNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerRestartNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerRestartNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerRestartNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerRestartNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerRestartNodeBadRequestErrorsItem from json.
-func (s *NodesControllerRestartNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerRestartNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerRestartNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerRestartNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerRestartNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -53969,13 +50888,9 @@ func (s *NodesControllerUpdateNodeBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -53983,7 +50898,7 @@ func (s *NodesControllerUpdateNodeBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfNodesControllerUpdateNodeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesControllerUpdateNodeBadRequest from json.
@@ -54014,22 +50929,15 @@ func (s *NodesControllerUpdateNodeBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesControllerUpdateNodeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesControllerUpdateNodeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -54051,50 +50959,6 @@ func (s *NodesControllerUpdateNodeBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesControllerUpdateNodeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesControllerUpdateNodeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesControllerUpdateNodeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesControllerUpdateNodeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesControllerUpdateNodeBadRequestErrorsItem from json.
-func (s *NodesControllerUpdateNodeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesControllerUpdateNodeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesControllerUpdateNodeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesControllerUpdateNodeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesControllerUpdateNodeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -55427,13 +52291,9 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) encodeFields
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -55441,7 +52301,7 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) encodeFields
 var jsonFieldsNameOfNodesUsageHistoryControllerGetNodesUsageByRangeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest from json.
@@ -55472,22 +52332,15 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) Decode(d *jx
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -55509,50 +52362,6 @@ func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) MarshalJSON(
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem from json.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesUsageHistoryControllerGetNodesUsageByRangeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -55693,13 +52502,9 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) encodeFields
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -55707,7 +52512,7 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) encodeFields
 var jsonFieldsNameOfNodesUserUsageHistoryControllerGetNodeUserUsageBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest from json.
@@ -55738,22 +52543,15 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) Decode(d *jx
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -55775,50 +52573,6 @@ func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) MarshalJSON(
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem from json.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesUserUsageHistoryControllerGetNodeUserUsageBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -55959,13 +52713,9 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) encodeF
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -55973,7 +52723,7 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) encodeF
 var jsonFieldsNameOfNodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest from json.
@@ -56004,22 +52754,15 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) Decode(
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -56041,50 +52784,6 @@ func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) Marshal
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfNodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem = [0]string{}
-
-// Decode decodes NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem from json.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NodesUserUsageHistoryControllerGetNodesRealtimeUsageBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -58051,6 +54750,56 @@ func (s *OptNilUUID) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes UpdateExternalSquadRequestDtoResponseHeaders as json.
+func (o OptNilUpdateExternalSquadRequestDtoResponseHeaders) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	if o.Null {
+		e.Null()
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes UpdateExternalSquadRequestDtoResponseHeaders from json.
+func (o *OptNilUpdateExternalSquadRequestDtoResponseHeaders) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptNilUpdateExternalSquadRequestDtoResponseHeaders to nil")
+	}
+	if d.Next() == jx.Null {
+		if err := d.Null(); err != nil {
+			return err
+		}
+
+		var v UpdateExternalSquadRequestDtoResponseHeaders
+		o.Value = v
+		o.Set = true
+		o.Null = true
+		return nil
+	}
+	o.Set = true
+	o.Null = false
+	o.Value = make(UpdateExternalSquadRequestDtoResponseHeaders)
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptNilUpdateExternalSquadRequestDtoResponseHeaders) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptNilUpdateExternalSquadRequestDtoResponseHeaders) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes UpdateHostRequestDtoAlpn as json.
 func (o OptNilUpdateHostRequestDtoAlpn) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -58283,6 +55032,39 @@ func (s OptUUID) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptUUID) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes UpdateExternalSquadRequestDtoHostOverrides as json.
+func (o OptUpdateExternalSquadRequestDtoHostOverrides) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes UpdateExternalSquadRequestDtoHostOverrides from json.
+func (o *OptUpdateExternalSquadRequestDtoHostOverrides) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptUpdateExternalSquadRequestDtoHostOverrides to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptUpdateExternalSquadRequestDtoHostOverrides) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptUpdateExternalSquadRequestDtoHostOverrides) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -58904,13 +55686,9 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -58918,7 +55696,7 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfPasskeyControllerDeletePasskeyBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes PasskeyControllerDeletePasskeyBadRequest from json.
@@ -58949,22 +55727,15 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]PasskeyControllerDeletePasskeyBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem PasskeyControllerDeletePasskeyBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -58986,50 +55757,6 @@ func (s *PasskeyControllerDeletePasskeyBadRequest) MarshalJSON() ([]byte, error)
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *PasskeyControllerDeletePasskeyBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfPasskeyControllerDeletePasskeyBadRequestErrorsItem = [0]string{}
-
-// Decode decodes PasskeyControllerDeletePasskeyBadRequestErrorsItem from json.
-func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode PasskeyControllerDeletePasskeyBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode PasskeyControllerDeletePasskeyBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *PasskeyControllerDeletePasskeyBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -59170,13 +55897,9 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) encodeFields(e *jx.Encode
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -59184,7 +55907,7 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) encodeFields(e *jx.Encode
 var jsonFieldsNameOfPasskeyControllerGetActivePasskeysBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes PasskeyControllerGetActivePasskeysBadRequest from json.
@@ -59215,22 +55938,15 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) Decode(d *jx.Decoder) err
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]PasskeyControllerGetActivePasskeysBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem PasskeyControllerGetActivePasskeysBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -59252,50 +55968,6 @@ func (s *PasskeyControllerGetActivePasskeysBadRequest) MarshalJSON() ([]byte, er
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *PasskeyControllerGetActivePasskeysBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfPasskeyControllerGetActivePasskeysBadRequestErrorsItem = [0]string{}
-
-// Decode decodes PasskeyControllerGetActivePasskeysBadRequestErrorsItem from json.
-func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode PasskeyControllerGetActivePasskeysBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode PasskeyControllerGetActivePasskeysBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *PasskeyControllerGetActivePasskeysBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -59436,13 +56108,9 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) encodeFields(e *
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -59450,7 +56118,7 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) encodeFields(e *
 var jsonFieldsNameOfPasskeyControllerPasskeyRegistrationOptionsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes PasskeyControllerPasskeyRegistrationOptionsBadRequest from json.
@@ -59481,22 +56149,15 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) Decode(d *jx.Dec
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -59518,50 +56179,6 @@ func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) MarshalJSON() ([
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfPasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem from json.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *PasskeyControllerPasskeyRegistrationOptionsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -59702,13 +56319,9 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -59716,7 +56329,7 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) encodeFields(e *j
 var jsonFieldsNameOfPasskeyControllerPasskeyRegistrationVerifyBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes PasskeyControllerPasskeyRegistrationVerifyBadRequest from json.
@@ -59747,22 +56360,15 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -59784,50 +56390,6 @@ func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfPasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem = [0]string{}
-
-// Decode decodes PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem from json.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *PasskeyControllerPasskeyRegistrationVerifyBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -60526,13 +57088,9 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) encodeFields(e *jx.En
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -60540,7 +57098,7 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) encodeFields(e *jx.En
 var jsonFieldsNameOfRemnawaveSettingsControllerGetSettingsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes RemnawaveSettingsControllerGetSettingsBadRequest from json.
@@ -60571,22 +57129,15 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) Decode(d *jx.Decoder)
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -60608,50 +57159,6 @@ func (s *RemnawaveSettingsControllerGetSettingsBadRequest) MarshalJSON() ([]byte
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *RemnawaveSettingsControllerGetSettingsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfRemnawaveSettingsControllerGetSettingsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem from json.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *RemnawaveSettingsControllerGetSettingsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -60792,13 +57299,9 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -60806,7 +57309,7 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfRemnawaveSettingsControllerUpdateSettingsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes RemnawaveSettingsControllerUpdateSettingsBadRequest from json.
@@ -60837,22 +57340,15 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -60874,50 +57370,6 @@ func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *RemnawaveSettingsControllerUpdateSettingsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfRemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem from json.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *RemnawaveSettingsControllerUpdateSettingsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -63569,13 +60021,9 @@ func (s *SnippetsControllerCreateSnippetBadRequest) encodeFields(e *jx.Encoder) 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -63583,7 +60031,7 @@ func (s *SnippetsControllerCreateSnippetBadRequest) encodeFields(e *jx.Encoder) 
 var jsonFieldsNameOfSnippetsControllerCreateSnippetBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SnippetsControllerCreateSnippetBadRequest from json.
@@ -63614,22 +60062,15 @@ func (s *SnippetsControllerCreateSnippetBadRequest) Decode(d *jx.Decoder) error 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SnippetsControllerCreateSnippetBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SnippetsControllerCreateSnippetBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -63651,50 +60092,6 @@ func (s *SnippetsControllerCreateSnippetBadRequest) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SnippetsControllerCreateSnippetBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSnippetsControllerCreateSnippetBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SnippetsControllerCreateSnippetBadRequestErrorsItem from json.
-func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SnippetsControllerCreateSnippetBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SnippetsControllerCreateSnippetBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SnippetsControllerCreateSnippetBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -63835,13 +60232,9 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -63849,7 +60242,7 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfSnippetsControllerDeleteSnippetByNameBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SnippetsControllerDeleteSnippetByNameBadRequest from json.
@@ -63880,22 +60273,15 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -63917,50 +60303,6 @@ func (s *SnippetsControllerDeleteSnippetByNameBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SnippetsControllerDeleteSnippetByNameBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSnippetsControllerDeleteSnippetByNameBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem from json.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SnippetsControllerDeleteSnippetByNameBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -64101,13 +60443,9 @@ func (s *SnippetsControllerGetSnippetsBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -64115,7 +60453,7 @@ func (s *SnippetsControllerGetSnippetsBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfSnippetsControllerGetSnippetsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SnippetsControllerGetSnippetsBadRequest from json.
@@ -64146,22 +60484,15 @@ func (s *SnippetsControllerGetSnippetsBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SnippetsControllerGetSnippetsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SnippetsControllerGetSnippetsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -64183,50 +60514,6 @@ func (s *SnippetsControllerGetSnippetsBadRequest) MarshalJSON() ([]byte, error) 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SnippetsControllerGetSnippetsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSnippetsControllerGetSnippetsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SnippetsControllerGetSnippetsBadRequestErrorsItem from json.
-func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SnippetsControllerGetSnippetsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SnippetsControllerGetSnippetsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SnippetsControllerGetSnippetsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -64367,13 +60654,9 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) encodeFields(e *jx.Encoder) 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -64381,7 +60664,7 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) encodeFields(e *jx.Encoder) 
 var jsonFieldsNameOfSnippetsControllerUpdateSnippetBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SnippetsControllerUpdateSnippetBadRequest from json.
@@ -64412,22 +60695,15 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) Decode(d *jx.Decoder) error 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SnippetsControllerUpdateSnippetBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SnippetsControllerUpdateSnippetBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -64449,50 +60725,6 @@ func (s *SnippetsControllerUpdateSnippetBadRequest) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SnippetsControllerUpdateSnippetBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSnippetsControllerUpdateSnippetBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SnippetsControllerUpdateSnippetBadRequestErrorsItem from json.
-func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SnippetsControllerUpdateSnippetBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SnippetsControllerUpdateSnippetBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SnippetsControllerUpdateSnippetBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -64965,13 +61197,9 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) encodeF
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -64979,7 +61207,7 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) encodeF
 var jsonFieldsNameOfSubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest from json.
@@ -65010,22 +61238,15 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) Decode(
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -65047,50 +61268,6 @@ func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) Marshal
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem from json.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionControllerGetSubscriptionInfoByShortUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -66049,13 +62226,9 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -66063,7 +62236,7 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfSubscriptionSettingsControllerGetSettingsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionSettingsControllerGetSettingsBadRequest from json.
@@ -66094,22 +62267,15 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -66131,50 +62297,6 @@ func (s *SubscriptionSettingsControllerGetSettingsBadRequest) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionSettingsControllerGetSettingsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionSettingsControllerGetSettingsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem from json.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionSettingsControllerGetSettingsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -66315,13 +62437,9 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -66329,7 +62447,7 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) encodeFields(e 
 var jsonFieldsNameOfSubscriptionSettingsControllerUpdateSettingsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionSettingsControllerUpdateSettingsBadRequest from json.
@@ -66360,22 +62478,15 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -66397,50 +62508,6 @@ func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionSettingsControllerUpdateSettingsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem from json.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionSettingsControllerUpdateSettingsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -68012,13 +64079,9 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -68026,7 +64089,7 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) encodeFields(e 
 var jsonFieldsNameOfSubscriptionTemplateControllerCreateTemplateBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionTemplateControllerCreateTemplateBadRequest from json.
@@ -68057,22 +64120,15 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -68094,50 +64150,6 @@ func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionTemplateControllerCreateTemplateBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem from json.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionTemplateControllerCreateTemplateBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -68278,13 +64290,9 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -68292,7 +64300,7 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) encodeFields(e 
 var jsonFieldsNameOfSubscriptionTemplateControllerDeleteTemplateBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionTemplateControllerDeleteTemplateBadRequest from json.
@@ -68323,22 +64331,15 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -68360,50 +64361,6 @@ func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionTemplateControllerDeleteTemplateBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem from json.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionTemplateControllerDeleteTemplateBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -68544,13 +64501,9 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) encodeFields(e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -68558,7 +64511,7 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) encodeFields(e
 var jsonFieldsNameOfSubscriptionTemplateControllerGetAllTemplatesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionTemplateControllerGetAllTemplatesBadRequest from json.
@@ -68589,22 +64542,15 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) Decode(d *jx.D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -68626,50 +64572,6 @@ func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) MarshalJSON() 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem from json.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionTemplateControllerGetAllTemplatesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -68810,13 +64712,9 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) encodeFields
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -68824,7 +64722,7 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) encodeFields
 var jsonFieldsNameOfSubscriptionTemplateControllerGetTemplateByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionTemplateControllerGetTemplateByUuidBadRequest from json.
@@ -68855,22 +64753,15 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) Decode(d *jx
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -68892,50 +64783,6 @@ func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) MarshalJSON(
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem from json.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionTemplateControllerGetTemplateByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -69076,13 +64923,9 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -69090,7 +64933,7 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) encodeFields(e 
 var jsonFieldsNameOfSubscriptionTemplateControllerUpdateTemplateBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionTemplateControllerUpdateTemplateBadRequest from json.
@@ -69121,22 +64964,15 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -69158,50 +64994,6 @@ func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionTemplateControllerUpdateTemplateBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem from json.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionTemplateControllerUpdateTemplateBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -69342,13 +65134,9 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) encodeFields(e *j
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -69356,7 +65144,7 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) encodeFields(e *j
 var jsonFieldsNameOfSubscriptionsControllerGetAllSubscriptionsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionsControllerGetAllSubscriptionsBadRequest from json.
@@ -69387,22 +65175,15 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) Decode(d *jx.Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -69424,50 +65205,6 @@ func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) MarshalJSON() ([]
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionsControllerGetAllSubscriptionsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem from json.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionsControllerGetAllSubscriptionsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -69608,13 +65345,9 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) encodeF
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -69622,7 +65355,7 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) encodeF
 var jsonFieldsNameOfSubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest from json.
@@ -69653,22 +65386,15 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) Decode(
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -69690,50 +65416,6 @@ func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) Marshal
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem from json.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionsControllerGetRawSubscriptionByShortUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -69874,13 +65556,9 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) e
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -69888,7 +65566,7 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) e
 var jsonFieldsNameOfSubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest from json.
@@ -69919,22 +65597,15 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) D
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -69956,50 +65627,6 @@ func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) M
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem from json.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionsControllerGetSubscriptionByShortUuidProtectedBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -70254,13 +65881,9 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) encodeField
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -70268,7 +65891,7 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) encodeField
 var jsonFieldsNameOfSubscriptionsControllerGetSubscriptionByUsernameBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionsControllerGetSubscriptionByUsernameBadRequest from json.
@@ -70299,22 +65922,15 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) Decode(d *j
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -70336,50 +65952,6 @@ func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) MarshalJSON
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem from json.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionsControllerGetSubscriptionByUsernameBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -70634,13 +66206,9 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -70648,7 +66216,7 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) encodeFields(e 
 var jsonFieldsNameOfSubscriptionsControllerGetSubscriptionByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SubscriptionsControllerGetSubscriptionByUuidBadRequest from json.
@@ -70679,22 +66247,15 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -70716,50 +66277,6 @@ func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem from json.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SubscriptionsControllerGetSubscriptionByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -71014,13 +66531,9 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) encodeFields(e *jx.Encoder) 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -71028,7 +66541,7 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) encodeFields(e *jx.Encoder) 
 var jsonFieldsNameOfSystemControllerDebugSrrMatcherBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerDebugSrrMatcherBadRequest from json.
@@ -71059,22 +66572,15 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) Decode(d *jx.Decoder) error 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerDebugSrrMatcherBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerDebugSrrMatcherBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -71096,50 +66602,6 @@ func (s *SystemControllerDebugSrrMatcherBadRequest) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerDebugSrrMatcherBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerDebugSrrMatcherBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerDebugSrrMatcherBadRequestErrorsItem from json.
-func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerDebugSrrMatcherBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerDebugSrrMatcherBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerDebugSrrMatcherBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -71280,13 +66742,9 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -71294,7 +66752,7 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfSystemControllerEncryptHappCryptoLinkBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerEncryptHappCryptoLinkBadRequest from json.
@@ -71325,22 +66783,15 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -71362,50 +66813,6 @@ func (s *SystemControllerEncryptHappCryptoLinkBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerEncryptHappCryptoLinkBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerEncryptHappCryptoLinkBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem from json.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerEncryptHappCryptoLinkBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -71546,13 +66953,9 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) encodeFields(e *jx.Encoder
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -71560,7 +66963,7 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) encodeFields(e *jx.Encoder
 var jsonFieldsNameOfSystemControllerGetBandwidthStatsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerGetBandwidthStatsBadRequest from json.
@@ -71591,22 +66994,15 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) Decode(d *jx.Decoder) erro
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerGetBandwidthStatsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerGetBandwidthStatsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -71628,50 +67024,6 @@ func (s *SystemControllerGetBandwidthStatsBadRequest) MarshalJSON() ([]byte, err
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerGetBandwidthStatsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerGetBandwidthStatsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerGetBandwidthStatsBadRequestErrorsItem from json.
-func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerGetBandwidthStatsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerGetBandwidthStatsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerGetBandwidthStatsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -71812,13 +67164,9 @@ func (s *SystemControllerGetNodesMetricsBadRequest) encodeFields(e *jx.Encoder) 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -71826,7 +67174,7 @@ func (s *SystemControllerGetNodesMetricsBadRequest) encodeFields(e *jx.Encoder) 
 var jsonFieldsNameOfSystemControllerGetNodesMetricsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerGetNodesMetricsBadRequest from json.
@@ -71857,22 +67205,15 @@ func (s *SystemControllerGetNodesMetricsBadRequest) Decode(d *jx.Decoder) error 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerGetNodesMetricsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerGetNodesMetricsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -71894,50 +67235,6 @@ func (s *SystemControllerGetNodesMetricsBadRequest) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerGetNodesMetricsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerGetNodesMetricsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerGetNodesMetricsBadRequestErrorsItem from json.
-func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerGetNodesMetricsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerGetNodesMetricsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerGetNodesMetricsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -72078,13 +67375,9 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) encodeFields(e *jx.Encode
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -72092,7 +67385,7 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) encodeFields(e *jx.Encode
 var jsonFieldsNameOfSystemControllerGetNodesStatisticsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerGetNodesStatisticsBadRequest from json.
@@ -72123,22 +67416,15 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) Decode(d *jx.Decoder) err
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerGetNodesStatisticsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerGetNodesStatisticsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -72160,50 +67446,6 @@ func (s *SystemControllerGetNodesStatisticsBadRequest) MarshalJSON() ([]byte, er
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerGetNodesStatisticsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerGetNodesStatisticsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerGetNodesStatisticsBadRequestErrorsItem from json.
-func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerGetNodesStatisticsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerGetNodesStatisticsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerGetNodesStatisticsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -72344,13 +67586,9 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) encodeFields(e *jx.Encode
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -72358,7 +67596,7 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) encodeFields(e *jx.Encode
 var jsonFieldsNameOfSystemControllerGetRemnawaveHealthBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerGetRemnawaveHealthBadRequest from json.
@@ -72389,22 +67627,15 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) Decode(d *jx.Decoder) err
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerGetRemnawaveHealthBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerGetRemnawaveHealthBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -72426,50 +67657,6 @@ func (s *SystemControllerGetRemnawaveHealthBadRequest) MarshalJSON() ([]byte, er
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerGetRemnawaveHealthBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerGetRemnawaveHealthBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerGetRemnawaveHealthBadRequestErrorsItem from json.
-func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerGetRemnawaveHealthBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerGetRemnawaveHealthBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerGetRemnawaveHealthBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -72610,13 +67797,9 @@ func (s *SystemControllerGetStatsBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -72624,7 +67807,7 @@ func (s *SystemControllerGetStatsBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfSystemControllerGetStatsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerGetStatsBadRequest from json.
@@ -72655,22 +67838,15 @@ func (s *SystemControllerGetStatsBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerGetStatsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerGetStatsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -72692,50 +67868,6 @@ func (s *SystemControllerGetStatsBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerGetStatsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerGetStatsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerGetStatsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerGetStatsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerGetStatsBadRequestErrorsItem from json.
-func (s *SystemControllerGetStatsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerGetStatsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerGetStatsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerGetStatsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerGetStatsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -72876,13 +68008,9 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) encodeFields(e *jx.Encoder
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -72890,7 +68018,7 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) encodeFields(e *jx.Encoder
 var jsonFieldsNameOfSystemControllerGetX25519KeypairsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes SystemControllerGetX25519KeypairsBadRequest from json.
@@ -72921,22 +68049,15 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) Decode(d *jx.Decoder) erro
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]SystemControllerGetX25519KeypairsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem SystemControllerGetX25519KeypairsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -72958,50 +68079,6 @@ func (s *SystemControllerGetX25519KeypairsBadRequest) MarshalJSON() ([]byte, err
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *SystemControllerGetX25519KeypairsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfSystemControllerGetX25519KeypairsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes SystemControllerGetX25519KeypairsBadRequestErrorsItem from json.
-func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode SystemControllerGetX25519KeypairsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode SystemControllerGetX25519KeypairsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *SystemControllerGetX25519KeypairsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -74225,13 +69302,27 @@ func (s *UpdateExternalSquadRequestDto) encodeFields(e *jx.Encoder) {
 			s.SubscriptionSettings.Encode(e)
 		}
 	}
+	{
+		if s.HostOverrides.Set {
+			e.FieldStart("hostOverrides")
+			s.HostOverrides.Encode(e)
+		}
+	}
+	{
+		if s.ResponseHeaders.Set {
+			e.FieldStart("responseHeaders")
+			s.ResponseHeaders.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfUpdateExternalSquadRequestDto = [4]string{
+var jsonFieldsNameOfUpdateExternalSquadRequestDto = [6]string{
 	0: "uuid",
 	1: "name",
 	2: "templates",
 	3: "subscriptionSettings",
+	4: "hostOverrides",
+	5: "responseHeaders",
 }
 
 // Decode decodes UpdateExternalSquadRequestDto from json.
@@ -74292,6 +69383,26 @@ func (s *UpdateExternalSquadRequestDto) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"subscriptionSettings\"")
 			}
+		case "hostOverrides":
+			if err := func() error {
+				s.HostOverrides.Reset()
+				if err := s.HostOverrides.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"hostOverrides\"")
+			}
+		case "responseHeaders":
+			if err := func() error {
+				s.ResponseHeaders.Reset()
+				if err := s.ResponseHeaders.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"responseHeaders\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -74344,6 +69455,142 @@ func (s *UpdateExternalSquadRequestDto) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UpdateExternalSquadRequestDto) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) encodeFields(e *jx.Encoder) {
+	{
+		if s.ServerDescription.Set {
+			e.FieldStart("serverDescription")
+			s.ServerDescription.Encode(e)
+		}
+	}
+	{
+		if s.VlessRouteId.Set {
+			e.FieldStart("vlessRouteId")
+			s.VlessRouteId.Encode(e)
+		}
+	}
+}
+
+var jsonFieldsNameOfUpdateExternalSquadRequestDtoHostOverrides = [2]string{
+	0: "serverDescription",
+	1: "vlessRouteId",
+}
+
+// Decode decodes UpdateExternalSquadRequestDtoHostOverrides from json.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode UpdateExternalSquadRequestDtoHostOverrides to nil")
+	}
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "serverDescription":
+			if err := func() error {
+				s.ServerDescription.Reset()
+				if err := s.ServerDescription.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"serverDescription\"")
+			}
+		case "vlessRouteId":
+			if err := func() error {
+				s.VlessRouteId.Reset()
+				if err := s.VlessRouteId.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"vlessRouteId\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode UpdateExternalSquadRequestDtoHostOverrides")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *UpdateExternalSquadRequestDtoHostOverrides) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s UpdateExternalSquadRequestDtoResponseHeaders) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields implements json.Marshaler.
+func (s UpdateExternalSquadRequestDtoResponseHeaders) encodeFields(e *jx.Encoder) {
+	for k, elem := range s {
+		e.FieldStart(k)
+
+		e.Str(elem)
+	}
+}
+
+// Decode decodes UpdateExternalSquadRequestDtoResponseHeaders from json.
+func (s *UpdateExternalSquadRequestDtoResponseHeaders) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode UpdateExternalSquadRequestDtoResponseHeaders to nil")
+	}
+	m := s.init()
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		var elem string
+		if err := func() error {
+			v, err := d.Str()
+			elem = string(v)
+			if err != nil {
+				return err
+			}
+			return nil
+		}(); err != nil {
+			return errors.Wrapf(err, "decode field %q", k)
+		}
+		m[string(k)] = elem
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode UpdateExternalSquadRequestDtoResponseHeaders")
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s UpdateExternalSquadRequestDtoResponseHeaders) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *UpdateExternalSquadRequestDtoResponseHeaders) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -80521,13 +75768,9 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -80535,7 +75778,7 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 var jsonFieldsNameOfUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest from json.
@@ -80566,22 +75809,15 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -80603,50 +75839,6 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBa
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem from json.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -80787,13 +75979,9 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -80801,7 +75989,7 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 var jsonFieldsNameOfUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest from json.
@@ -80832,22 +76020,15 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -80869,50 +76050,6 @@ func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistorySt
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem from json.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -81053,13 +76190,9 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) encodeFiel
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -81067,7 +76200,7 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) encodeFiel
 var jsonFieldsNameOfUsersBulkActionsControllerBulkAllResetUserTrafficBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest from json.
@@ -81098,22 +76231,15 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) Decode(d *
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -81135,50 +76261,6 @@ func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) MarshalJSO
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkAllResetUserTrafficBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -81319,13 +76401,9 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -81333,7 +76411,7 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfUsersBulkActionsControllerBulkDeleteUsersBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkDeleteUsersBadRequest from json.
@@ -81364,22 +76442,15 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -81406,50 +76477,6 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequest) UnmarshalJSON(data
 }
 
 // Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkDeleteUsersBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
 func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -81471,13 +76498,9 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) encodeFiel
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -81485,7 +76508,7 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) encodeFiel
 var jsonFieldsNameOfUsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest from json.
@@ -81516,22 +76539,15 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) Decode(d *
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -81553,50 +76569,6 @@ func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) MarshalJSO
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkDeleteUsersByStatusBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -81851,13 +76823,9 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) encodeFields(
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -81865,7 +76833,7 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) encodeFields(
 var jsonFieldsNameOfUsersBulkActionsControllerBulkResetUserTrafficBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkResetUserTrafficBadRequest from json.
@@ -81896,22 +76864,15 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) Decode(d *jx.
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -81933,50 +76894,6 @@ func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) MarshalJSON()
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkResetUserTrafficBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -82117,13 +77034,9 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) encode
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -82131,7 +77044,7 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) encode
 var jsonFieldsNameOfUsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest from json.
@@ -82162,22 +77075,15 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) Decode
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -82199,50 +77105,6 @@ func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) Marsha
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkRevokeUsersSubscriptionBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -82383,13 +77245,9 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) encodeFields(e 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -82397,7 +77255,7 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) encodeFields(e 
 var jsonFieldsNameOfUsersBulkActionsControllerBulkUpdateAllUsersBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkUpdateAllUsersBadRequest from json.
@@ -82428,22 +77286,15 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) Decode(d *jx.De
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -82465,50 +77316,6 @@ func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkUpdateAllUsersBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -82649,13 +77456,9 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) encodeFields(e *jx
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -82663,7 +77466,7 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) encodeFields(e *jx
 var jsonFieldsNameOfUsersBulkActionsControllerBulkUpdateUsersBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkUpdateUsersBadRequest from json.
@@ -82694,22 +77497,15 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) Decode(d *jx.Decod
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -82731,50 +77527,6 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkUpdateUsersBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -82915,13 +77667,9 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) enco
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -82929,7 +77677,7 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) enco
 var jsonFieldsNameOfUsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest from json.
@@ -82960,22 +77708,15 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) Deco
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -82997,50 +77738,6 @@ func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) Mars
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem from json.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersBulkActionsControllerBulkUpdateUsersInternalSquadsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -83181,13 +77878,9 @@ func (s *UsersControllerCreateUserBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -83195,7 +77888,7 @@ func (s *UsersControllerCreateUserBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerCreateUserBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerCreateUserBadRequest from json.
@@ -83226,22 +77919,15 @@ func (s *UsersControllerCreateUserBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerCreateUserBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerCreateUserBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -83263,50 +77949,6 @@ func (s *UsersControllerCreateUserBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerCreateUserBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerCreateUserBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerCreateUserBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerCreateUserBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerCreateUserBadRequestErrorsItem from json.
-func (s *UsersControllerCreateUserBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerCreateUserBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerCreateUserBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerCreateUserBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerCreateUserBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -83447,13 +78089,9 @@ func (s *UsersControllerDeleteUserBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -83461,7 +78099,7 @@ func (s *UsersControllerDeleteUserBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerDeleteUserBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerDeleteUserBadRequest from json.
@@ -83492,22 +78130,15 @@ func (s *UsersControllerDeleteUserBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerDeleteUserBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerDeleteUserBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -83529,50 +78160,6 @@ func (s *UsersControllerDeleteUserBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerDeleteUserBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerDeleteUserBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerDeleteUserBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerDeleteUserBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerDeleteUserBadRequestErrorsItem from json.
-func (s *UsersControllerDeleteUserBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerDeleteUserBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerDeleteUserBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerDeleteUserBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerDeleteUserBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -83713,13 +78300,9 @@ func (s *UsersControllerDisableUserBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -83727,7 +78310,7 @@ func (s *UsersControllerDisableUserBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerDisableUserBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerDisableUserBadRequest from json.
@@ -83758,22 +78341,15 @@ func (s *UsersControllerDisableUserBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerDisableUserBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerDisableUserBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -83795,50 +78371,6 @@ func (s *UsersControllerDisableUserBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerDisableUserBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerDisableUserBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerDisableUserBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerDisableUserBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerDisableUserBadRequestErrorsItem from json.
-func (s *UsersControllerDisableUserBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerDisableUserBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerDisableUserBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerDisableUserBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerDisableUserBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -83979,13 +78511,9 @@ func (s *UsersControllerEnableUserBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -83993,7 +78521,7 @@ func (s *UsersControllerEnableUserBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerEnableUserBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerEnableUserBadRequest from json.
@@ -84024,22 +78552,15 @@ func (s *UsersControllerEnableUserBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerEnableUserBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerEnableUserBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -84061,50 +78582,6 @@ func (s *UsersControllerEnableUserBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerEnableUserBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerEnableUserBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerEnableUserBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerEnableUserBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerEnableUserBadRequestErrorsItem from json.
-func (s *UsersControllerEnableUserBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerEnableUserBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerEnableUserBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerEnableUserBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerEnableUserBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -84245,13 +78722,9 @@ func (s *UsersControllerGetAllTagsBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -84259,7 +78732,7 @@ func (s *UsersControllerGetAllTagsBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerGetAllTagsBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetAllTagsBadRequest from json.
@@ -84290,22 +78763,15 @@ func (s *UsersControllerGetAllTagsBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetAllTagsBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetAllTagsBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -84327,50 +78793,6 @@ func (s *UsersControllerGetAllTagsBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetAllTagsBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetAllTagsBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetAllTagsBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetAllTagsBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetAllTagsBadRequestErrorsItem from json.
-func (s *UsersControllerGetAllTagsBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetAllTagsBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetAllTagsBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetAllTagsBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetAllTagsBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -84511,13 +78933,9 @@ func (s *UsersControllerGetAllUsersBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -84525,7 +78943,7 @@ func (s *UsersControllerGetAllUsersBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerGetAllUsersBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetAllUsersBadRequest from json.
@@ -84556,22 +78974,15 @@ func (s *UsersControllerGetAllUsersBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetAllUsersBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetAllUsersBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -84593,50 +79004,6 @@ func (s *UsersControllerGetAllUsersBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetAllUsersBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetAllUsersBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetAllUsersBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetAllUsersBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetAllUsersBadRequestErrorsItem from json.
-func (s *UsersControllerGetAllUsersBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetAllUsersBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetAllUsersBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetAllUsersBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetAllUsersBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -84777,13 +79144,9 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -84791,7 +79154,7 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfUsersControllerGetUserAccessibleNodesBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUserAccessibleNodesBadRequest from json.
@@ -84822,22 +79185,15 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUserAccessibleNodesBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUserAccessibleNodesBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -84859,50 +79215,6 @@ func (s *UsersControllerGetUserAccessibleNodesBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUserAccessibleNodesBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUserAccessibleNodesBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUserAccessibleNodesBadRequestErrorsItem from json.
-func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUserAccessibleNodesBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUserAccessibleNodesBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUserAccessibleNodesBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -85043,13 +79355,9 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) encodeFields(e *jx.Encoder
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -85057,7 +79365,7 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) encodeFields(e *jx.Encoder
 var jsonFieldsNameOfUsersControllerGetUserByShortUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUserByShortUuidBadRequest from json.
@@ -85088,22 +79396,15 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) Decode(d *jx.Decoder) erro
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUserByShortUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUserByShortUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -85125,50 +79426,6 @@ func (s *UsersControllerGetUserByShortUuidBadRequest) MarshalJSON() ([]byte, err
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUserByShortUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUserByShortUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUserByShortUuidBadRequestErrorsItem from json.
-func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUserByShortUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUserByShortUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUserByShortUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -85309,13 +79566,9 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) encodeFields(e *jx.Encode
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -85323,7 +79576,7 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) encodeFields(e *jx.Encode
 var jsonFieldsNameOfUsersControllerGetUserByTelegramIdBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUserByTelegramIdBadRequest from json.
@@ -85354,22 +79607,15 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) Decode(d *jx.Decoder) err
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUserByTelegramIdBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUserByTelegramIdBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -85391,50 +79637,6 @@ func (s *UsersControllerGetUserByTelegramIdBadRequest) MarshalJSON() ([]byte, er
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUserByTelegramIdBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUserByTelegramIdBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUserByTelegramIdBadRequestErrorsItem from json.
-func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUserByTelegramIdBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUserByTelegramIdBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUserByTelegramIdBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -85575,13 +79777,9 @@ func (s *UsersControllerGetUserByUsernameBadRequest) encodeFields(e *jx.Encoder)
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -85589,7 +79787,7 @@ func (s *UsersControllerGetUserByUsernameBadRequest) encodeFields(e *jx.Encoder)
 var jsonFieldsNameOfUsersControllerGetUserByUsernameBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUserByUsernameBadRequest from json.
@@ -85620,22 +79818,15 @@ func (s *UsersControllerGetUserByUsernameBadRequest) Decode(d *jx.Decoder) error
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUserByUsernameBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUserByUsernameBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -85657,50 +79848,6 @@ func (s *UsersControllerGetUserByUsernameBadRequest) MarshalJSON() ([]byte, erro
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUserByUsernameBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUserByUsernameBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUserByUsernameBadRequestErrorsItem from json.
-func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUserByUsernameBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUserByUsernameBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUserByUsernameBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -85841,13 +79988,9 @@ func (s *UsersControllerGetUserByUuidBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -85855,7 +79998,7 @@ func (s *UsersControllerGetUserByUuidBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerGetUserByUuidBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUserByUuidBadRequest from json.
@@ -85886,22 +80029,15 @@ func (s *UsersControllerGetUserByUuidBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUserByUuidBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUserByUuidBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -85923,50 +80059,6 @@ func (s *UsersControllerGetUserByUuidBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUserByUuidBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUserByUuidBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUserByUuidBadRequestErrorsItem from json.
-func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUserByUuidBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUserByUuidBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUserByUuidBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -86107,13 +80199,9 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) encodeField
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -86121,7 +80209,7 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) encodeField
 var jsonFieldsNameOfUsersControllerGetUserSubscriptionRequestHistoryBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUserSubscriptionRequestHistoryBadRequest from json.
@@ -86152,22 +80240,15 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) Decode(d *j
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -86189,50 +80270,6 @@ func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) MarshalJSON
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem from json.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUserSubscriptionRequestHistoryBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -86373,13 +80410,9 @@ func (s *UsersControllerGetUsersByEmailBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -86387,7 +80420,7 @@ func (s *UsersControllerGetUsersByEmailBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerGetUsersByEmailBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUsersByEmailBadRequest from json.
@@ -86418,22 +80451,15 @@ func (s *UsersControllerGetUsersByEmailBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUsersByEmailBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUsersByEmailBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -86455,50 +80481,6 @@ func (s *UsersControllerGetUsersByEmailBadRequest) MarshalJSON() ([]byte, error)
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUsersByEmailBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUsersByEmailBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUsersByEmailBadRequestErrorsItem from json.
-func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUsersByEmailBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUsersByEmailBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUsersByEmailBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -86639,13 +80621,9 @@ func (s *UsersControllerGetUsersByTagBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -86653,7 +80631,7 @@ func (s *UsersControllerGetUsersByTagBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerGetUsersByTagBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerGetUsersByTagBadRequest from json.
@@ -86684,22 +80662,15 @@ func (s *UsersControllerGetUsersByTagBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerGetUsersByTagBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerGetUsersByTagBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -86721,50 +80692,6 @@ func (s *UsersControllerGetUsersByTagBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerGetUsersByTagBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerGetUsersByTagBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerGetUsersByTagBadRequestErrorsItem from json.
-func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerGetUsersByTagBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerGetUsersByTagBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerGetUsersByTagBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -86905,13 +80832,9 @@ func (s *UsersControllerResetUserTrafficBadRequest) encodeFields(e *jx.Encoder) 
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -86919,7 +80842,7 @@ func (s *UsersControllerResetUserTrafficBadRequest) encodeFields(e *jx.Encoder) 
 var jsonFieldsNameOfUsersControllerResetUserTrafficBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerResetUserTrafficBadRequest from json.
@@ -86950,22 +80873,15 @@ func (s *UsersControllerResetUserTrafficBadRequest) Decode(d *jx.Decoder) error 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerResetUserTrafficBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerResetUserTrafficBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -86987,50 +80903,6 @@ func (s *UsersControllerResetUserTrafficBadRequest) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerResetUserTrafficBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerResetUserTrafficBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerResetUserTrafficBadRequestErrorsItem from json.
-func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerResetUserTrafficBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerResetUserTrafficBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerResetUserTrafficBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -87171,13 +81043,9 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) encodeFields(e *jx.Enc
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -87185,7 +81053,7 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) encodeFields(e *jx.Enc
 var jsonFieldsNameOfUsersControllerRevokeUserSubscriptionBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerRevokeUserSubscriptionBadRequest from json.
@@ -87216,22 +81084,15 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) Decode(d *jx.Decoder) 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerRevokeUserSubscriptionBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerRevokeUserSubscriptionBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -87253,50 +81114,6 @@ func (s *UsersControllerRevokeUserSubscriptionBadRequest) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerRevokeUserSubscriptionBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerRevokeUserSubscriptionBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerRevokeUserSubscriptionBadRequestErrorsItem from json.
-func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerRevokeUserSubscriptionBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerRevokeUserSubscriptionBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerRevokeUserSubscriptionBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -87437,13 +81254,9 @@ func (s *UsersControllerUpdateUserBadRequest) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -87451,7 +81264,7 @@ func (s *UsersControllerUpdateUserBadRequest) encodeFields(e *jx.Encoder) {
 var jsonFieldsNameOfUsersControllerUpdateUserBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersControllerUpdateUserBadRequest from json.
@@ -87482,22 +81295,15 @@ func (s *UsersControllerUpdateUserBadRequest) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersControllerUpdateUserBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersControllerUpdateUserBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -87519,50 +81325,6 @@ func (s *UsersControllerUpdateUserBadRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersControllerUpdateUserBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersControllerUpdateUserBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersControllerUpdateUserBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersControllerUpdateUserBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersControllerUpdateUserBadRequestErrorsItem from json.
-func (s *UsersControllerUpdateUserBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersControllerUpdateUserBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersControllerUpdateUserBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersControllerUpdateUserBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersControllerUpdateUserBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -88828,13 +82590,9 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) encodeFields(e *jx.E
 		}
 	}
 	{
-		if s.Errors != nil {
-			e.FieldStart("errors")
-			e.ArrStart()
-			for _, elem := range s.Errors {
-				elem.Encode(e)
-			}
-			e.ArrEnd()
+		if s.Error.Set {
+			e.FieldStart("error")
+			s.Error.Encode(e)
 		}
 	}
 }
@@ -88842,7 +82600,7 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) encodeFields(e *jx.E
 var jsonFieldsNameOfUsersStatsControllerGetUserUsageByRangeBadRequest = [3]string{
 	0: "message",
 	1: "statusCode",
-	2: "errors",
+	2: "error",
 }
 
 // Decode decodes UsersStatsControllerGetUserUsageByRangeBadRequest from json.
@@ -88873,22 +82631,15 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) Decode(d *jx.Decoder
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"statusCode\"")
 			}
-		case "errors":
+		case "error":
 			if err := func() error {
-				s.Errors = make([]UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Errors = append(s.Errors, elem)
-					return nil
-				}); err != nil {
+				s.Error.Reset()
+				if err := s.Error.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"errors\"")
+				return errors.Wrap(err, "decode field \"error\"")
 			}
 		default:
 			return d.Skip()
@@ -88910,50 +82661,6 @@ func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) MarshalJSON() ([]byt
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UsersStatsControllerGetUserUsageByRangeBadRequest) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfUsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem = [0]string{}
-
-// Decode decodes UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem from json.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *UsersStatsControllerGetUserUsageByRangeBadRequestErrorsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
