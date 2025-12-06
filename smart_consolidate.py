@@ -951,6 +951,15 @@ def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
                 'statusCode': {'type': 'number', 'example': 404}
             },
             'required': ['message', 'statusCode']
+        },
+        'InternalServerError': {
+            'type': 'object',
+            'properties': {
+                'timestamp': {'type': 'string'},
+                'path': {'type': 'string'},
+                'message': {'type': 'string'},
+                'errorCode': {'type': 'string'}
+            }
         }
     }
     
@@ -968,6 +977,7 @@ def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
         '401': 'UnauthorizedError',
         '403': 'ForbiddenError',
         '404': 'NotFoundError',
+        '500': 'InternalServerError',
     }
     
     # Replace inline error schemas with $ref

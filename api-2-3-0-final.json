@@ -31,21 +31,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -100,21 +86,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -151,21 +123,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -222,21 +180,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -283,21 +227,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -352,21 +282,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -421,21 +337,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -502,21 +404,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -578,21 +466,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -634,21 +508,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -700,21 +560,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -766,21 +612,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -832,21 +664,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -888,21 +706,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -954,21 +758,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1030,21 +820,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1099,21 +875,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1177,21 +939,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1251,21 +999,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1323,21 +1057,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1384,21 +1104,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1458,21 +1164,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1532,21 +1224,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1606,21 +1284,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1680,21 +1344,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1754,21 +1404,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1828,21 +1464,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1903,21 +1525,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -1987,21 +1595,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2061,21 +1655,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2135,21 +1715,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2209,21 +1775,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2280,21 +1832,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2351,21 +1889,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2422,21 +1946,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2493,21 +2003,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2564,21 +2060,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2635,21 +2117,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2706,21 +2174,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2768,21 +2222,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2862,21 +2302,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -2933,21 +2359,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3119,21 +2531,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3200,21 +2598,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3281,21 +2665,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3362,21 +2732,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3442,21 +2798,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3503,21 +2845,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3572,21 +2900,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3641,21 +2955,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3712,21 +3012,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3781,21 +3067,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3852,21 +3124,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3924,21 +3182,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -3984,21 +3228,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4056,21 +3286,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4117,21 +3333,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4189,21 +3391,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4264,21 +3452,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4325,21 +3499,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4398,21 +3558,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4471,21 +3617,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4542,21 +3674,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4615,21 +3733,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4686,21 +3790,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4747,21 +3837,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4819,21 +3895,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4891,21 +3953,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -4966,21 +4014,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5027,21 +4061,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5099,21 +4119,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5174,21 +4180,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5244,21 +4236,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5315,21 +4293,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5389,21 +4353,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5462,21 +4412,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5535,21 +4471,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5606,21 +4528,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5667,21 +4575,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5739,21 +4633,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5814,21 +4694,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5884,21 +4750,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -5955,21 +4807,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6028,21 +4866,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6101,21 +4925,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6172,21 +4982,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6233,21 +5029,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6294,21 +5076,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6365,21 +5133,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6424,21 +5178,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6493,21 +5233,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6564,21 +5290,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6633,21 +5345,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6704,21 +5402,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6775,21 +5459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6846,21 +5516,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6917,21 +5573,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -6988,21 +5630,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7059,21 +5687,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7120,21 +5734,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7191,21 +5791,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7260,21 +5846,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7319,21 +5891,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7390,21 +5948,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7462,21 +6006,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7533,21 +6063,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7604,21 +6120,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7675,21 +6177,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7746,21 +6234,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7817,21 +6291,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7888,21 +6348,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -7979,21 +6425,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8040,21 +6472,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8120,21 +6538,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8189,21 +6593,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8260,21 +6650,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8331,21 +6707,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8392,21 +6754,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8463,21 +6811,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8545,21 +6879,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8606,21 +6926,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8675,21 +6981,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8744,21 +7036,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8817,21 +7095,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8885,21 +7149,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -8956,21 +7206,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9015,21 +7251,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9085,21 +7307,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9146,21 +7354,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9215,21 +7409,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9284,21 +7464,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9354,21 +7520,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9434,21 +7586,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9495,21 +7633,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9556,21 +7680,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9617,21 +7727,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9678,21 +7774,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9739,21 +7821,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9800,21 +7868,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9861,21 +7915,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -9932,21 +7972,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -10003,21 +8029,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -10064,21 +8076,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -10133,21 +8131,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "path": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "errorCode": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
@@ -17731,6 +15715,23 @@
           "message",
           "statusCode"
         ]
+      },
+      "InternalServerError": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
+          }
+        }
       },
       "UserItem": {
         "type": "object",

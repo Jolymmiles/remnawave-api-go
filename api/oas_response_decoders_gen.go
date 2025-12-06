@@ -108,7 +108,7 @@ func decodeApiTokensControllerCreateResponse(resp *http.Response) (res ApiTokens
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ApiTokensControllerCreateInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -228,7 +228,7 @@ func decodeApiTokensControllerDeleteResponse(resp *http.Response) (res ApiTokens
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ApiTokensControllerDeleteInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -357,7 +357,7 @@ func decodeApiTokensControllerFindAllResponse(resp *http.Response) (res ApiToken
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ApiTokensControllerFindAllInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -442,7 +442,7 @@ func decodeAuthControllerGetStatusResponse(resp *http.Response) (res AuthControl
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerGetStatusInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -622,7 +622,7 @@ func decodeAuthControllerLoginResponse(resp *http.Response) (res AuthControllerL
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerLoginInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -749,7 +749,7 @@ func decodeAuthControllerOauth2AuthorizeResponse(resp *http.Response) (res AuthC
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerOauth2AuthorizeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -876,7 +876,7 @@ func decodeAuthControllerOauth2CallbackResponse(resp *http.Response) (res AuthCo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerOauth2CallbackInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1003,7 +1003,7 @@ func decodeAuthControllerPasskeyAuthenticationOptionsResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerPasskeyAuthenticationOptionsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1130,7 +1130,7 @@ func decodeAuthControllerPasskeyAuthenticationVerifyResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerPasskeyAuthenticationVerifyInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1301,7 +1301,7 @@ func decodeAuthControllerRegisterResponse(resp *http.Response) (res AuthControll
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerRegisterInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1428,7 +1428,7 @@ func decodeAuthControllerTelegramCallbackResponse(resp *http.Response) (res Auth
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response AuthControllerTelegramCallbackInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1602,7 +1602,7 @@ func decodeConfigProfileControllerCreateConfigProfileResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerCreateConfigProfileInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1725,7 +1725,7 @@ func decodeConfigProfileControllerDeleteConfigProfileByUuidResponse(resp *http.R
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerDeleteConfigProfileByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1854,7 +1854,7 @@ func decodeConfigProfileControllerGetAllInboundsResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerGetAllInboundsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -1986,7 +1986,7 @@ func decodeConfigProfileControllerGetComputedConfigProfileByUuidResponse(resp *h
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerGetComputedConfigProfileByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2118,7 +2118,7 @@ func decodeConfigProfileControllerGetConfigProfileByUuidResponse(resp *http.Resp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerGetConfigProfileByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2247,7 +2247,7 @@ func decodeConfigProfileControllerGetConfigProfilesResponse(resp *http.Response)
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerGetConfigProfilesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2379,7 +2379,7 @@ func decodeConfigProfileControllerGetInboundsByProfileUuidResponse(resp *http.Re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerGetInboundsByProfileUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2508,7 +2508,7 @@ func decodeConfigProfileControllerReorderConfigProfilesResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerReorderConfigProfilesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2643,7 +2643,7 @@ func decodeConfigProfileControllerUpdateConfigProfileResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ConfigProfileControllerUpdateConfigProfileInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2766,7 +2766,7 @@ func decodeExternalSquadControllerAddUsersToExternalSquadResponse(resp *http.Res
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerAddUsersToExternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -2898,7 +2898,7 @@ func decodeExternalSquadControllerCreateExternalSquadResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerCreateExternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3021,7 +3021,7 @@ func decodeExternalSquadControllerDeleteExternalSquadResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerDeleteExternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3150,7 +3150,7 @@ func decodeExternalSquadControllerGetExternalSquadByUuidResponse(resp *http.Resp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerGetExternalSquadByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3279,7 +3279,7 @@ func decodeExternalSquadControllerGetExternalSquadsResponse(resp *http.Response)
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerGetExternalSquadsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3402,7 +3402,7 @@ func decodeExternalSquadControllerRemoveUsersFromExternalSquadResponse(resp *htt
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerRemoveUsersFromExternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3531,7 +3531,7 @@ func decodeExternalSquadControllerReorderExternalSquadsResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerReorderExternalSquadsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3666,7 +3666,7 @@ func decodeExternalSquadControllerUpdateExternalSquadResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ExternalSquadControllerUpdateExternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3795,7 +3795,7 @@ func decodeHostsBulkActionsControllerDeleteHostsResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsBulkActionsControllerDeleteHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -3924,7 +3924,7 @@ func decodeHostsBulkActionsControllerDisableHostsResponse(resp *http.Response) (
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsBulkActionsControllerDisableHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4053,7 +4053,7 @@ func decodeHostsBulkActionsControllerEnableHostsResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsBulkActionsControllerEnableHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4182,7 +4182,7 @@ func decodeHostsBulkActionsControllerSetInboundToHostsResponse(resp *http.Respon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsBulkActionsControllerSetInboundToHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4311,7 +4311,7 @@ func decodeHostsBulkActionsControllerSetPortToHostsResponse(resp *http.Response)
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsBulkActionsControllerSetPortToHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4440,7 +4440,7 @@ func decodeHostsControllerCreateHostResponse(resp *http.Response) (res HostsCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerCreateHostInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4563,7 +4563,7 @@ func decodeHostsControllerDeleteHostResponse(resp *http.Response) (res HostsCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerDeleteHostInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4692,7 +4692,7 @@ func decodeHostsControllerGetAllHostTagsResponse(resp *http.Response) (res Hosts
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerGetAllHostTagsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4821,7 +4821,7 @@ func decodeHostsControllerGetAllHostsResponse(resp *http.Response) (res HostsCon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerGetAllHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -4950,7 +4950,7 @@ func decodeHostsControllerGetOneHostResponse(resp *http.Response) (res HostsCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerGetOneHostInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5070,7 +5070,7 @@ func decodeHostsControllerReorderHostsResponse(resp *http.Response) (res HostsCo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerReorderHostsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5199,7 +5199,7 @@ func decodeHostsControllerUpdateHostResponse(resp *http.Response) (res HostsCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HostsControllerUpdateHostInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5328,7 +5328,7 @@ func decodeHwidUserDevicesControllerCreateUserHwidDeviceResponse(resp *http.Resp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HwidUserDevicesControllerCreateUserHwidDeviceInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5457,7 +5457,7 @@ func decodeHwidUserDevicesControllerDeleteAllUserHwidDevicesResponse(resp *http.
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HwidUserDevicesControllerDeleteAllUserHwidDevicesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5586,7 +5586,7 @@ func decodeHwidUserDevicesControllerDeleteUserHwidDeviceResponse(resp *http.Resp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HwidUserDevicesControllerDeleteUserHwidDeviceInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5715,7 +5715,7 @@ func decodeHwidUserDevicesControllerGetAllUsersResponse(resp *http.Response) (re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HwidUserDevicesControllerGetAllUsersInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5844,7 +5844,7 @@ func decodeHwidUserDevicesControllerGetHwidDevicesStatsResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HwidUserDevicesControllerGetHwidDevicesStatsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -5973,7 +5973,7 @@ func decodeHwidUserDevicesControllerGetUserHwidDevicesResponse(resp *http.Respon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response HwidUserDevicesControllerGetUserHwidDevicesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6102,7 +6102,7 @@ func decodeInfraBillingControllerCreateInfraBillingHistoryRecordResponse(resp *h
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerCreateInfraBillingHistoryRecordInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6231,7 +6231,7 @@ func decodeInfraBillingControllerCreateInfraBillingNodeResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerCreateInfraBillingNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6360,7 +6360,7 @@ func decodeInfraBillingControllerCreateInfraProviderResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerCreateInfraProviderInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6489,7 +6489,7 @@ func decodeInfraBillingControllerDeleteInfraBillingHistoryRecordByUuidResponse(r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerDeleteInfraBillingHistoryRecordByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6618,7 +6618,7 @@ func decodeInfraBillingControllerDeleteInfraBillingNodeByUuidResponse(resp *http
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerDeleteInfraBillingNodeByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6738,7 +6738,7 @@ func decodeInfraBillingControllerDeleteInfraProviderByUuidResponse(resp *http.Re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerDeleteInfraProviderByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6867,7 +6867,7 @@ func decodeInfraBillingControllerGetBillingNodesResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerGetBillingNodesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -6996,7 +6996,7 @@ func decodeInfraBillingControllerGetInfraBillingHistoryRecordsResponse(resp *htt
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerGetInfraBillingHistoryRecordsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7128,7 +7128,7 @@ func decodeInfraBillingControllerGetInfraProviderByUuidResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerGetInfraProviderByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7257,7 +7257,7 @@ func decodeInfraBillingControllerGetInfraProvidersResponse(resp *http.Response) 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerGetInfraProvidersInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7386,7 +7386,7 @@ func decodeInfraBillingControllerUpdateInfraBillingNodeResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerUpdateInfraBillingNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7515,7 +7515,7 @@ func decodeInfraBillingControllerUpdateInfraProviderResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InfraBillingControllerUpdateInfraProviderInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7638,7 +7638,7 @@ func decodeInternalSquadControllerAddUsersToInternalSquadResponse(resp *http.Res
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerAddUsersToInternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7770,7 +7770,7 @@ func decodeInternalSquadControllerCreateInternalSquadResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerCreateInternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -7893,7 +7893,7 @@ func decodeInternalSquadControllerDeleteInternalSquadResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerDeleteInternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8025,7 +8025,7 @@ func decodeInternalSquadControllerGetInternalSquadAccessibleNodesResponse(resp *
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerGetInternalSquadAccessibleNodesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8154,7 +8154,7 @@ func decodeInternalSquadControllerGetInternalSquadByUuidResponse(resp *http.Resp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerGetInternalSquadByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8283,7 +8283,7 @@ func decodeInternalSquadControllerGetInternalSquadsResponse(resp *http.Response)
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerGetInternalSquadsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8406,7 +8406,7 @@ func decodeInternalSquadControllerRemoveUsersFromInternalSquadResponse(resp *htt
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerRemoveUsersFromInternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8535,7 +8535,7 @@ func decodeInternalSquadControllerReorderInternalSquadsResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerReorderInternalSquadsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8670,7 +8670,7 @@ func decodeInternalSquadControllerUpdateInternalSquadResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response InternalSquadControllerUpdateInternalSquadInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8790,7 +8790,7 @@ func decodeKeygenControllerGenerateKeyResponse(resp *http.Response) (res KeygenC
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response KeygenControllerGenerateKeyInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -8919,7 +8919,7 @@ func decodeNodesControllerCreateNodeResponse(resp *http.Response) (res NodesCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerCreateNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9039,7 +9039,7 @@ func decodeNodesControllerDeleteNodeResponse(resp *http.Response) (res NodesCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerDeleteNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9168,7 +9168,7 @@ func decodeNodesControllerDisableNodeResponse(resp *http.Response) (res NodesCon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerDisableNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9297,7 +9297,7 @@ func decodeNodesControllerEnableNodeResponse(resp *http.Response) (res NodesCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerEnableNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9426,7 +9426,7 @@ func decodeNodesControllerGetAllNodesResponse(resp *http.Response) (res NodesCon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerGetAllNodesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9555,7 +9555,7 @@ func decodeNodesControllerGetAllNodesTagsResponse(resp *http.Response) (res Node
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerGetAllNodesTagsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9684,7 +9684,7 @@ func decodeNodesControllerGetOneNodeResponse(resp *http.Response) (res NodesCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerGetOneNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9813,7 +9813,7 @@ func decodeNodesControllerReorderNodesResponse(resp *http.Response) (res NodesCo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerReorderNodesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -9933,7 +9933,7 @@ func decodeNodesControllerResetNodeTrafficResponse(resp *http.Response) (res Nod
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerResetNodeTrafficInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10053,7 +10053,7 @@ func decodeNodesControllerRestartAllNodesResponse(resp *http.Response) (res Node
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerRestartAllNodesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10173,7 +10173,7 @@ func decodeNodesControllerRestartNodeResponse(resp *http.Response) (res NodesCon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerRestartNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10302,7 +10302,7 @@ func decodeNodesControllerUpdateNodeResponse(resp *http.Response) (res NodesCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesControllerUpdateNodeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10431,7 +10431,7 @@ func decodeNodesUsageHistoryControllerGetNodesUsageByRangeResponse(resp *http.Re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesUsageHistoryControllerGetNodesUsageByRangeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10560,7 +10560,7 @@ func decodeNodesUserUsageHistoryControllerGetNodeUserUsageResponse(resp *http.Re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesUserUsageHistoryControllerGetNodeUserUsageInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10689,7 +10689,7 @@ func decodeNodesUserUsageHistoryControllerGetNodesRealtimeUsageResponse(resp *ht
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response NodesUserUsageHistoryControllerGetNodesRealtimeUsageInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10774,7 +10774,7 @@ func decodePasskeyControllerDeletePasskeyResponse(resp *http.Response) (res Pass
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response PasskeyControllerDeletePasskeyInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -10910,7 +10910,7 @@ func decodePasskeyControllerGetActivePasskeysResponse(resp *http.Response) (res 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response PasskeyControllerGetActivePasskeysInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11046,7 +11046,7 @@ func decodePasskeyControllerPasskeyRegistrationOptionsResponse(resp *http.Respon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response PasskeyControllerPasskeyRegistrationOptionsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11173,7 +11173,7 @@ func decodePasskeyControllerPasskeyRegistrationVerifyResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response PasskeyControllerPasskeyRegistrationVerifyInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11300,7 +11300,7 @@ func decodePasskeyControllerUpdatePasskeyResponse(resp *http.Response) (res Pass
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response PasskeyControllerUpdatePasskeyInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11480,7 +11480,7 @@ func decodeRemnawaveSettingsControllerGetSettingsResponse(resp *http.Response) (
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response RemnawaveSettingsControllerGetSettingsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11609,7 +11609,7 @@ func decodeRemnawaveSettingsControllerUpdateSettingsResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response RemnawaveSettingsControllerUpdateSettingsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11741,7 +11741,7 @@ func decodeSnippetsControllerCreateSnippetResponse(resp *http.Response) (res Sni
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SnippetsControllerCreateSnippetInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -11873,7 +11873,7 @@ func decodeSnippetsControllerDeleteSnippetByNameResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SnippetsControllerDeleteSnippetByNameInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12002,7 +12002,7 @@ func decodeSnippetsControllerGetSnippetsResponse(resp *http.Response) (res Snipp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SnippetsControllerGetSnippetsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12137,7 +12137,7 @@ func decodeSnippetsControllerUpdateSnippetResponse(resp *http.Response) (res Sni
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SnippetsControllerUpdateSnippetInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12284,7 +12284,7 @@ func decodeSubscriptionControllerGetSubscriptionInfoByShortUuidResponse(resp *ht
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionControllerGetSubscriptionInfoByShortUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12422,7 +12422,7 @@ func decodeSubscriptionSettingsControllerGetSettingsResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionSettingsControllerGetSettingsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12551,7 +12551,7 @@ func decodeSubscriptionSettingsControllerUpdateSettingsResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionSettingsControllerUpdateSettingsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12680,7 +12680,7 @@ func decodeSubscriptionTemplateControllerCreateTemplateResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionTemplateControllerCreateTemplateInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12800,7 +12800,7 @@ func decodeSubscriptionTemplateControllerDeleteTemplateResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionTemplateControllerDeleteTemplateInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -12929,7 +12929,7 @@ func decodeSubscriptionTemplateControllerGetAllTemplatesResponse(resp *http.Resp
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionTemplateControllerGetAllTemplatesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13058,7 +13058,7 @@ func decodeSubscriptionTemplateControllerGetTemplateByUuidResponse(resp *http.Re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionTemplateControllerGetTemplateByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13187,7 +13187,7 @@ func decodeSubscriptionTemplateControllerReorderSubscriptionTemplatesResponse(re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionTemplateControllerReorderSubscriptionTemplatesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13316,7 +13316,7 @@ func decodeSubscriptionTemplateControllerUpdateTemplateResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionTemplateControllerUpdateTemplateInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13445,7 +13445,7 @@ func decodeSubscriptionsControllerGetAllSubscriptionsResponse(resp *http.Respons
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionsControllerGetAllSubscriptionsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13574,7 +13574,7 @@ func decodeSubscriptionsControllerGetRawSubscriptionByShortUuidResponse(resp *ht
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionsControllerGetRawSubscriptionByShortUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13747,7 +13747,7 @@ func decodeSubscriptionsControllerGetSubscriptionByShortUuidProtectedResponse(re
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionsControllerGetSubscriptionByShortUuidProtectedInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -13920,7 +13920,7 @@ func decodeSubscriptionsControllerGetSubscriptionByUsernameResponse(resp *http.R
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionsControllerGetSubscriptionByUsernameInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14093,7 +14093,7 @@ func decodeSubscriptionsControllerGetSubscriptionByUuidResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SubscriptionsControllerGetSubscriptionByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14222,7 +14222,7 @@ func decodeSystemControllerDebugSrrMatcherResponse(resp *http.Response) (res Sys
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerDebugSrrMatcherInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14342,7 +14342,7 @@ func decodeSystemControllerEncryptHappCryptoLinkResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerEncryptHappCryptoLinkInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14462,7 +14462,7 @@ func decodeSystemControllerGetBandwidthStatsResponse(resp *http.Response) (res S
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerGetBandwidthStatsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14591,7 +14591,7 @@ func decodeSystemControllerGetNodesMetricsResponse(resp *http.Response) (res Sys
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerGetNodesMetricsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14720,7 +14720,7 @@ func decodeSystemControllerGetNodesStatisticsResponse(resp *http.Response) (res 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerGetNodesStatisticsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14849,7 +14849,7 @@ func decodeSystemControllerGetRemnawaveHealthResponse(resp *http.Response) (res 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerGetRemnawaveHealthInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -14978,7 +14978,7 @@ func decodeSystemControllerGetStatsResponse(resp *http.Response) (res SystemCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerGetStatsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15107,7 +15107,7 @@ func decodeSystemControllerGetX25519KeypairsResponse(resp *http.Response) (res S
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response SystemControllerGetX25519KeypairsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15236,7 +15236,7 @@ func decodeUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15365,7 +15365,7 @@ func decodeUserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistory
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15485,7 +15485,7 @@ func decodeUsersBulkActionsControllerBulkAllResetUserTrafficResponse(resp *http.
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkAllResetUserTrafficInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15614,7 +15614,7 @@ func decodeUsersBulkActionsControllerBulkDeleteUsersResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkDeleteUsersInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15743,7 +15743,7 @@ func decodeUsersBulkActionsControllerBulkDeleteUsersByStatusResponse(resp *http.
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkDeleteUsersByStatusInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -15872,7 +15872,7 @@ func decodeUsersBulkActionsControllerBulkResetUserTrafficResponse(resp *http.Res
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkResetUserTrafficInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16001,7 +16001,7 @@ func decodeUsersBulkActionsControllerBulkRevokeUsersSubscriptionResponse(resp *h
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkRevokeUsersSubscriptionInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16121,7 +16121,7 @@ func decodeUsersBulkActionsControllerBulkUpdateAllUsersResponse(resp *http.Respo
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkUpdateAllUsersInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16250,7 +16250,7 @@ func decodeUsersBulkActionsControllerBulkUpdateUsersResponse(resp *http.Response
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkUpdateUsersInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16379,7 +16379,7 @@ func decodeUsersBulkActionsControllerBulkUpdateUsersInternalSquadsResponse(resp 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersBulkActionsControllerBulkUpdateUsersInternalSquadsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16508,7 +16508,7 @@ func decodeUsersControllerCreateUserResponse(resp *http.Response) (res UsersCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerCreateUserInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16631,7 +16631,7 @@ func decodeUsersControllerDeleteUserResponse(resp *http.Response) (res UsersCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerDeleteUserInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16763,7 +16763,7 @@ func decodeUsersControllerDisableUserResponse(resp *http.Response) (res UsersCon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerDisableUserInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -16895,7 +16895,7 @@ func decodeUsersControllerEnableUserResponse(resp *http.Response) (res UsersCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerEnableUserInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17024,7 +17024,7 @@ func decodeUsersControllerGetAllTagsResponse(resp *http.Response) (res UsersCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetAllTagsInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17153,7 +17153,7 @@ func decodeUsersControllerGetAllUsersResponse(resp *http.Response) (res UsersCon
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetAllUsersInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17285,7 +17285,7 @@ func decodeUsersControllerGetUserAccessibleNodesResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserAccessibleNodesInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17417,7 +17417,7 @@ func decodeUsersControllerGetUserByShortUuidResponse(resp *http.Response) (res U
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserByShortUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17549,7 +17549,7 @@ func decodeUsersControllerGetUserByTelegramIdResponse(resp *http.Response) (res 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserByTelegramIdInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17681,7 +17681,7 @@ func decodeUsersControllerGetUserByUsernameResponse(resp *http.Response) (res Us
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserByUsernameInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17813,7 +17813,7 @@ func decodeUsersControllerGetUserByUuidResponse(resp *http.Response) (res UsersC
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserByUuidInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -17945,7 +17945,7 @@ func decodeUsersControllerGetUserSubscriptionRequestHistoryResponse(resp *http.R
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUserSubscriptionRequestHistoryInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18077,7 +18077,7 @@ func decodeUsersControllerGetUsersByEmailResponse(resp *http.Response) (res User
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUsersByEmailInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18209,7 +18209,7 @@ func decodeUsersControllerGetUsersByTagResponse(resp *http.Response) (res UsersC
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerGetUsersByTagInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18341,7 +18341,7 @@ func decodeUsersControllerResetUserTrafficResponse(resp *http.Response) (res Use
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerResetUserTrafficInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18473,7 +18473,7 @@ func decodeUsersControllerRevokeUserSubscriptionResponse(resp *http.Response) (r
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerRevokeUserSubscriptionInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18602,7 +18602,7 @@ func decodeUsersControllerUpdateUserResponse(resp *http.Response) (res UsersCont
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersControllerUpdateUserInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -18734,7 +18734,7 @@ func decodeUsersStatsControllerGetUserUsageByRangeResponse(resp *http.Response) 
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response UsersStatsControllerGetUserUsageByRangeInternalServerError
+			var response InternalServerError
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
