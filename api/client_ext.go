@@ -1198,8 +1198,10 @@ func (sc *UsersClient) ResetUserTraffic(ctx context.Context, uuid string) (Users
 }
 
 // RevokeUserSubscription calls UsersController_revokeUserSubscription.
-func (sc *UsersClient) RevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, params UsersControllerRevokeUserSubscriptionParams) (UsersControllerRevokeUserSubscriptionRes, error) {
-	return sc.client.UsersControllerRevokeUserSubscription(ctx, request, params)
+func (sc *UsersClient) RevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBodyDto, uuid string) (UsersControllerRevokeUserSubscriptionRes, error) {
+	return sc.client.UsersControllerRevokeUserSubscription(ctx, request, UsersControllerRevokeUserSubscriptionParams{
+		UUID: uuid,
+	})
 }
 
 // UpdateUser calls UsersController_updateUser.

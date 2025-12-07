@@ -422,11 +422,16 @@ func New{controller}Client(client *Client) *{controller}Client {{
             returns = method_info['returns']
             
             # Check if we can simplify Params struct to individual args
+            # Find params struct (can be with or without body)
             simplified_params = None
-            if len(params) == 1 and params[0][1].endswith('Params'):
-                can_simplify, simplified = can_simplify_params(params[0][1])
-                if can_simplify:
-                    simplified_params = simplified
+            params_index = None
+            for i, (pname, ptype) in enumerate(params):
+                if ptype.endswith('Params'):
+                    can_simplify, simplified = can_simplify_params(ptype)
+                    if can_simplify:
+                        simplified_params = simplified
+                        params_index = i
+                    break
             
             if returns:
                 ret_type = ', '.join(returns)
@@ -436,23 +441,50 @@ func New{controller}Client(client *Client) *{controller}Client {{
                 ret_type = ''
             
             # Generate method with simplified params or original
-            if simplified_params:
+            if simplified_params and params_index is not None:
                 # Simplified: GetByUuid(ctx, uuid string) instead of GetByUuid(ctx, params XxxParams)
-                simple_args = ', '.join([f'{f[0].lower()} {f[2]}' for f in simplified_params])
-                params_type = params[0][1]
+                # Build signature with other params (body) + simplified params
+                params_type = params[params_index][1]
+                
+                # Build args: other params first, then simplified params
+                sig_parts = []
+                call_parts = []
+                for i, (pname, ptype) in enumerate(params):
+                    if i == params_index:
+                        # This is the Params struct - add simplified args
+                        for field_name, field_type, simple_type in simplified_params:
+                            sig_parts.append(f'{field_name.lower()} {simple_type}')
+                    else:
+                        # Regular param (body)
+                        sig_parts.append(f'{pname} {ptype}')
+                        call_parts.append(pname)
+                
+                simple_args = ', '.join(sig_parts)
+                
+                # Build params struct initialization
+                params_init = f'{params_type}{{\n'
+                for field_name, field_type, simple_type in simplified_params:
+                    arg_name = field_name.lower()
+                    if field_type.startswith('Opt'):
+                        params_init += f'\t\t{field_name}: NewOpt{simple_type.title()}({arg_name}),\n'
+                    else:
+                        params_init += f'\t\t{field_name}: {arg_name},\n'
+                params_init += '\t}'
+                
+                # Build call args in correct order
+                call_args = []
+                for i, (pname, ptype) in enumerate(params):
+                    if i == params_index:
+                        call_args.append(params_init)
+                    else:
+                        call_args.append(pname)
                 
                 code += f'''// {display_method} calls {op_id}.
 func (sc *{controller}Client) {display_method}(ctx context.Context, {simple_args}) {ret_type} {{
-\treturn sc.client.{go_method}(ctx, {params_type}{{
+\treturn sc.client.{go_method}(ctx, {', '.join(call_args)})
+}}
+
 '''
-                for field_name, field_type, simple_type in simplified_params:
-                    arg_name = field_name.lower()
-                    # Convert simple type to Opt type if needed
-                    if field_type.startswith('Opt'):
-                        code += f'\t\t{field_name}: NewOpt{simple_type.title()}({arg_name}),\n'
-                    else:
-                        code += f'\t\t{field_name}: {arg_name},\n'
-                code += '\t})\n}\n\n'
             else:
                 # Original params
                 if params:
