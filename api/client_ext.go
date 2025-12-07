@@ -327,6 +327,11 @@ func (sc *ConfigProfileClient) GetInboundsByProfileUuid(ctx context.Context, uui
 	})
 }
 
+// ReorderConfigProfiles calls ConfigProfileController_reorderConfigProfiles.
+func (sc *ConfigProfileClient) ReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (ConfigProfileControllerReorderConfigProfilesRes, error) {
+	return sc.client.ConfigProfileControllerReorderConfigProfiles(ctx, request)
+}
+
 // UpdateConfigProfile calls ConfigProfileController_updateConfigProfile.
 func (sc *ConfigProfileClient) UpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequestDto) (ConfigProfileControllerUpdateConfigProfileRes, error) {
 	return sc.client.ConfigProfileControllerUpdateConfigProfile(ctx, request)
@@ -378,6 +383,11 @@ func (sc *ExternalSquadClient) RemoveUsersFromExternalSquad(ctx context.Context,
 	return sc.client.ExternalSquadControllerRemoveUsersFromExternalSquad(ctx, ExternalSquadControllerRemoveUsersFromExternalSquadParams{
 		UUID: uuid,
 	})
+}
+
+// ReorderExternalSquads calls ExternalSquadController_reorderExternalSquads.
+func (sc *ExternalSquadClient) ReorderExternalSquads(ctx context.Context, request *ReorderRequest) (ExternalSquadControllerReorderExternalSquadsRes, error) {
+	return sc.client.ExternalSquadControllerReorderExternalSquads(ctx, request)
 }
 
 // UpdateExternalSquad calls ExternalSquadController_updateExternalSquad.
@@ -647,6 +657,11 @@ func (sc *InternalSquadClient) RemoveUsersFromInternalSquad(ctx context.Context,
 	})
 }
 
+// ReorderInternalSquads calls InternalSquadController_reorderInternalSquads.
+func (sc *InternalSquadClient) ReorderInternalSquads(ctx context.Context, request *ReorderRequest) (InternalSquadControllerReorderInternalSquadsRes, error) {
+	return sc.client.InternalSquadControllerReorderInternalSquads(ctx, request)
+}
+
 // UpdateInternalSquad calls InternalSquadController_updateInternalSquad.
 func (sc *InternalSquadClient) UpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequestDto) (InternalSquadControllerUpdateInternalSquadRes, error) {
 	return sc.client.InternalSquadControllerUpdateInternalSquad(ctx, request)
@@ -706,6 +721,11 @@ func (sc *NodesClient) EnableNode(ctx context.Context, uuid string) (NodesContro
 // GetAllNodes calls NodesController_getAllNodes.
 func (sc *NodesClient) GetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error) {
 	return sc.client.NodesControllerGetAllNodes(ctx)
+}
+
+// GetAllNodesTags calls NodesController_getAllNodesTags.
+func (sc *NodesClient) GetAllNodesTags(ctx context.Context) (NodesControllerGetAllNodesTagsRes, error) {
+	return sc.client.NodesControllerGetAllNodesTags(ctx)
 }
 
 // GetOneNode calls NodesController_getOneNode.
@@ -807,6 +827,11 @@ func (sc *PasskeyClient) PasskeyRegistrationOptions(ctx context.Context) (Passke
 // PasskeyRegistrationVerify calls PasskeyController_passkeyRegistrationVerify.
 func (sc *PasskeyClient) PasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptions) (PasskeyControllerPasskeyRegistrationVerifyRes, error) {
 	return sc.client.PasskeyControllerPasskeyRegistrationVerify(ctx, request)
+}
+
+// UpdatePasskey calls PasskeyController_updatePasskey.
+func (sc *PasskeyClient) UpdatePasskey(ctx context.Context, request *UpdatePasskeyRequestDto) (PasskeyControllerUpdatePasskeyRes, error) {
+	return sc.client.PasskeyControllerUpdatePasskey(ctx, request)
 }
 
 // RemnawaveSettingsClient provides RemnawaveSettings operations.
@@ -928,6 +953,11 @@ func (sc *SubscriptionTemplateClient) GetTemplateByUuid(ctx context.Context, uui
 	return sc.client.SubscriptionTemplateControllerGetTemplateByUuid(ctx, SubscriptionTemplateControllerGetTemplateByUuidParams{
 		UUID: uuid,
 	})
+}
+
+// ReorderSubscriptionTemplates calls SubscriptionTemplateController_reorderSubscriptionTemplates.
+func (sc *SubscriptionTemplateClient) ReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error) {
+	return sc.client.SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx, request)
 }
 
 // UpdateTemplate calls SubscriptionTemplateController_updateTemplate.

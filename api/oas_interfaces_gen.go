@@ -73,6 +73,10 @@ type ConfigProfileControllerGetInboundsByProfileUuidRes interface {
 	configProfileControllerGetInboundsByProfileUuidRes()
 }
 
+type ConfigProfileControllerReorderConfigProfilesRes interface {
+	configProfileControllerReorderConfigProfilesRes()
+}
+
 type ConfigProfileControllerUpdateConfigProfileRes interface {
 	configProfileControllerUpdateConfigProfileRes()
 }
@@ -99,6 +103,10 @@ type ExternalSquadControllerGetExternalSquadsRes interface {
 
 type ExternalSquadControllerRemoveUsersFromExternalSquadRes interface {
 	externalSquadControllerRemoveUsersFromExternalSquadRes()
+}
+
+type ExternalSquadControllerReorderExternalSquadsRes interface {
+	externalSquadControllerReorderExternalSquadsRes()
 }
 
 type ExternalSquadControllerUpdateExternalSquadRes interface {
@@ -253,6 +261,10 @@ type InternalSquadControllerRemoveUsersFromInternalSquadRes interface {
 	internalSquadControllerRemoveUsersFromInternalSquadRes()
 }
 
+type InternalSquadControllerReorderInternalSquadsRes interface {
+	internalSquadControllerReorderInternalSquadsRes()
+}
+
 type InternalSquadControllerUpdateInternalSquadRes interface {
 	internalSquadControllerUpdateInternalSquadRes()
 }
@@ -279,6 +291,10 @@ type NodesControllerEnableNodeRes interface {
 
 type NodesControllerGetAllNodesRes interface {
 	nodesControllerGetAllNodesRes()
+}
+
+type NodesControllerGetAllNodesTagsRes interface {
+	nodesControllerGetAllNodesTagsRes()
 }
 
 type NodesControllerGetOneNodeRes interface {
@@ -333,6 +349,10 @@ type PasskeyControllerPasskeyRegistrationVerifyRes interface {
 	passkeyControllerPasskeyRegistrationVerifyRes()
 }
 
+type PasskeyControllerUpdatePasskeyRes interface {
+	passkeyControllerUpdatePasskeyRes()
+}
+
 type RemnawaveSettingsControllerGetSettingsRes interface {
 	remnawaveSettingsControllerGetSettingsRes()
 }
@@ -383,6 +403,10 @@ type SubscriptionTemplateControllerGetAllTemplatesRes interface {
 
 type SubscriptionTemplateControllerGetTemplateByUuidRes interface {
 	subscriptionTemplateControllerGetTemplateByUuidRes()
+}
+
+type SubscriptionTemplateControllerReorderSubscriptionTemplatesRes interface {
+	subscriptionTemplateControllerReorderSubscriptionTemplatesRes()
 }
 
 type SubscriptionTemplateControllerUpdateTemplateRes interface {

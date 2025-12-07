@@ -136,6 +136,12 @@ type Invoker interface {
 	//
 	// GET /api/config-profiles/{uuid}/inbounds
 	ConfigProfileControllerGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileControllerGetInboundsByProfileUuidParams) (ConfigProfileControllerGetInboundsByProfileUuidRes, error)
+	// ConfigProfileControllerReorderConfigProfiles invokes ConfigProfileController_reorderConfigProfiles operation.
+	//
+	// Reorder config profiles.
+	//
+	// POST /api/config-profiles/actions/reorder
+	ConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (ConfigProfileControllerReorderConfigProfilesRes, error)
 	// ConfigProfileControllerUpdateConfigProfile invokes ConfigProfileController_updateConfigProfile operation.
 	//
 	// Update Core Config in specific config profile.
@@ -178,6 +184,12 @@ type Invoker interface {
 	//
 	// DELETE /api/external-squads/{uuid}/bulk-actions/remove-users
 	ExternalSquadControllerRemoveUsersFromExternalSquad(ctx context.Context, params ExternalSquadControllerRemoveUsersFromExternalSquadParams) (ExternalSquadControllerRemoveUsersFromExternalSquadRes, error)
+	// ExternalSquadControllerReorderExternalSquads invokes ExternalSquadController_reorderExternalSquads operation.
+	//
+	// Reorder external squads.
+	//
+	// POST /api/external-squads/actions/reorder
+	ExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderRequest) (ExternalSquadControllerReorderExternalSquadsRes, error)
 	// ExternalSquadControllerUpdateExternalSquad invokes ExternalSquadController_updateExternalSquad operation.
 	//
 	// Update external squad.
@@ -406,6 +418,12 @@ type Invoker interface {
 	//
 	// DELETE /api/internal-squads/{uuid}/bulk-actions/remove-users
 	InternalSquadControllerRemoveUsersFromInternalSquad(ctx context.Context, params InternalSquadControllerRemoveUsersFromInternalSquadParams) (InternalSquadControllerRemoveUsersFromInternalSquadRes, error)
+	// InternalSquadControllerReorderInternalSquads invokes InternalSquadController_reorderInternalSquads operation.
+	//
+	// Reorder internal squads.
+	//
+	// POST /api/internal-squads/actions/reorder
+	InternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderRequest) (InternalSquadControllerReorderInternalSquadsRes, error)
 	// InternalSquadControllerUpdateInternalSquad invokes InternalSquadController_updateInternalSquad operation.
 	//
 	// Update internal squad.
@@ -448,6 +466,12 @@ type Invoker interface {
 	//
 	// GET /api/nodes
 	NodesControllerGetAllNodes(ctx context.Context) (NodesControllerGetAllNodesRes, error)
+	// NodesControllerGetAllNodesTags invokes NodesController_getAllNodesTags operation.
+	//
+	// Get all existing nodes tags.
+	//
+	// GET /api/nodes/tags
+	NodesControllerGetAllNodesTags(ctx context.Context) (NodesControllerGetAllNodesTagsRes, error)
 	// NodesControllerGetOneNode invokes NodesController_getOneNode operation.
 	//
 	// Get node by UUID.
@@ -526,6 +550,12 @@ type Invoker interface {
 	//
 	// POST /api/passkeys/registration/verify
 	PasskeyControllerPasskeyRegistrationVerify(ctx context.Context, request *PasskeyOptions) (PasskeyControllerPasskeyRegistrationVerifyRes, error)
+	// PasskeyControllerUpdatePasskey invokes PasskeyController_updatePasskey operation.
+	//
+	// Update passkey.
+	//
+	// PATCH /api/passkeys
+	PasskeyControllerUpdatePasskey(ctx context.Context, request *UpdatePasskeyRequestDto) (PasskeyControllerUpdatePasskeyRes, error)
 	// RemnawaveSettingsControllerGetSettings invokes RemnawaveSettingsController_getSettings operation.
 	//
 	// Get Remnawave settings.
@@ -616,6 +646,12 @@ type Invoker interface {
 	//
 	// GET /api/subscription-templates/{uuid}
 	SubscriptionTemplateControllerGetTemplateByUuid(ctx context.Context, params SubscriptionTemplateControllerGetTemplateByUuidParams) (SubscriptionTemplateControllerGetTemplateByUuidRes, error)
+	// SubscriptionTemplateControllerReorderSubscriptionTemplates invokes SubscriptionTemplateController_reorderSubscriptionTemplates operation.
+	//
+	// Reorder subscription templates.
+	//
+	// POST /api/subscription-templates/actions/reorder
+	SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error)
 	// SubscriptionTemplateControllerUpdateTemplate invokes SubscriptionTemplateController_updateTemplate operation.
 	//
 	// Update subscription template.
@@ -2716,6 +2752,124 @@ func (c *Client) sendConfigProfileControllerGetInboundsByProfileUuid(ctx context
 	return result, nil
 }
 
+// ConfigProfileControllerReorderConfigProfiles invokes ConfigProfileController_reorderConfigProfiles operation.
+//
+// Reorder config profiles.
+//
+// POST /api/config-profiles/actions/reorder
+func (c *Client) ConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (ConfigProfileControllerReorderConfigProfilesRes, error) {
+	res, err := c.sendConfigProfileControllerReorderConfigProfiles(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendConfigProfileControllerReorderConfigProfiles(ctx context.Context, request *ReorderRequest) (res ConfigProfileControllerReorderConfigProfilesRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfileController_reorderConfigProfiles"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/config-profiles/actions/reorder"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileControllerReorderConfigProfilesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/config-profiles/actions/reorder"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeConfigProfileControllerReorderConfigProfilesRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConfigProfileControllerReorderConfigProfilesOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeConfigProfileControllerReorderConfigProfilesResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // ConfigProfileControllerUpdateConfigProfile invokes ConfigProfileController_updateConfigProfile operation.
 //
 // Update Core Config in specific config profile.
@@ -3549,6 +3703,124 @@ func (c *Client) sendExternalSquadControllerRemoveUsersFromExternalSquad(ctx con
 
 	stage = "DecodeResponse"
 	result, err := decodeExternalSquadControllerRemoveUsersFromExternalSquadResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadControllerReorderExternalSquads invokes ExternalSquadController_reorderExternalSquads operation.
+//
+// Reorder external squads.
+//
+// POST /api/external-squads/actions/reorder
+func (c *Client) ExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderRequest) (ExternalSquadControllerReorderExternalSquadsRes, error) {
+	res, err := c.sendExternalSquadControllerReorderExternalSquads(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadControllerReorderExternalSquads(ctx context.Context, request *ReorderRequest) (res ExternalSquadControllerReorderExternalSquadsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquadController_reorderExternalSquads"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/external-squads/actions/reorder"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadControllerReorderExternalSquadsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/external-squads/actions/reorder"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeExternalSquadControllerReorderExternalSquadsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ExternalSquadControllerReorderExternalSquadsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeExternalSquadControllerReorderExternalSquadsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -8021,6 +8293,124 @@ func (c *Client) sendInternalSquadControllerRemoveUsersFromInternalSquad(ctx con
 	return result, nil
 }
 
+// InternalSquadControllerReorderInternalSquads invokes InternalSquadController_reorderInternalSquads operation.
+//
+// Reorder internal squads.
+//
+// POST /api/internal-squads/actions/reorder
+func (c *Client) InternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderRequest) (InternalSquadControllerReorderInternalSquadsRes, error) {
+	res, err := c.sendInternalSquadControllerReorderInternalSquads(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadControllerReorderInternalSquads(ctx context.Context, request *ReorderRequest) (res InternalSquadControllerReorderInternalSquadsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadController_reorderInternalSquads"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/internal-squads/actions/reorder"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadControllerReorderInternalSquadsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/internal-squads/actions/reorder"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeInternalSquadControllerReorderInternalSquadsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadControllerReorderInternalSquadsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadControllerReorderInternalSquadsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // InternalSquadControllerUpdateInternalSquad invokes InternalSquadController_updateInternalSquad operation.
 //
 // Update internal squad.
@@ -8836,6 +9226,112 @@ func (c *Client) sendNodesControllerGetAllNodes(ctx context.Context) (res NodesC
 
 	stage = "DecodeResponse"
 	result, err := decodeNodesControllerGetAllNodesResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodesControllerGetAllNodesTags invokes NodesController_getAllNodesTags operation.
+//
+// Get all existing nodes tags.
+//
+// GET /api/nodes/tags
+func (c *Client) NodesControllerGetAllNodesTags(ctx context.Context) (NodesControllerGetAllNodesTagsRes, error) {
+	res, err := c.sendNodesControllerGetAllNodesTags(ctx)
+	return res, err
+}
+
+func (c *Client) sendNodesControllerGetAllNodesTags(ctx context.Context) (res NodesControllerGetAllNodesTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_getAllNodesTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerGetAllNodesTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/nodes/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodesControllerGetAllNodesTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeNodesControllerGetAllNodesTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -10386,6 +10882,124 @@ func (c *Client) sendPasskeyControllerPasskeyRegistrationVerify(ctx context.Cont
 
 	stage = "DecodeResponse"
 	result, err := decodePasskeyControllerPasskeyRegistrationVerifyResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// PasskeyControllerUpdatePasskey invokes PasskeyController_updatePasskey operation.
+//
+// Update passkey.
+//
+// PATCH /api/passkeys
+func (c *Client) PasskeyControllerUpdatePasskey(ctx context.Context, request *UpdatePasskeyRequestDto) (PasskeyControllerUpdatePasskeyRes, error) {
+	res, err := c.sendPasskeyControllerUpdatePasskey(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendPasskeyControllerUpdatePasskey(ctx context.Context, request *UpdatePasskeyRequestDto) (res PasskeyControllerUpdatePasskeyRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("PasskeyController_updatePasskey"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/passkeys"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, PasskeyControllerUpdatePasskeyOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/passkeys"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodePasskeyControllerUpdatePasskeyRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, PasskeyControllerUpdatePasskeyOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodePasskeyControllerUpdatePasskeyResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -12182,6 +12796,124 @@ func (c *Client) sendSubscriptionTemplateControllerGetTemplateByUuid(ctx context
 
 	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateControllerGetTemplateByUuidResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionTemplateControllerReorderSubscriptionTemplates invokes SubscriptionTemplateController_reorderSubscriptionTemplates operation.
+//
+// Reorder subscription templates.
+//
+// POST /api/subscription-templates/actions/reorder
+func (c *Client) SubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, error) {
+	res, err := c.sendSubscriptionTemplateControllerReorderSubscriptionTemplates(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateControllerReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest) (res SubscriptionTemplateControllerReorderSubscriptionTemplatesRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplateController_reorderSubscriptionTemplates"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/subscription-templates/actions/reorder"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateControllerReorderSubscriptionTemplatesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-templates/actions/reorder"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSubscriptionTemplateControllerReorderSubscriptionTemplatesRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateControllerReorderSubscriptionTemplatesOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeSubscriptionTemplateControllerReorderSubscriptionTemplatesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}

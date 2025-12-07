@@ -122,6 +122,20 @@ func encodeConfigProfileControllerCreateConfigProfileRequest(
 	return nil
 }
 
+func encodeConfigProfileControllerReorderConfigProfilesRequest(
+	req *ReorderRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeConfigProfileControllerUpdateConfigProfileRequest(
 	req *UpdateConfigProfileRequestDto,
 	r *http.Request,
@@ -138,6 +152,20 @@ func encodeConfigProfileControllerUpdateConfigProfileRequest(
 
 func encodeExternalSquadControllerCreateExternalSquadRequest(
 	req *CreateExternalSquadRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeExternalSquadControllerReorderExternalSquadsRequest(
+	req *ReorderRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -402,6 +430,20 @@ func encodeInternalSquadControllerCreateInternalSquadRequest(
 	return nil
 }
 
+func encodeInternalSquadControllerReorderInternalSquadsRequest(
+	req *ReorderRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeInternalSquadControllerUpdateInternalSquadRequest(
 	req *UpdateInternalSquadRequestDto,
 	r *http.Request,
@@ -500,6 +542,20 @@ func encodePasskeyControllerPasskeyRegistrationVerifyRequest(
 	return nil
 }
 
+func encodePasskeyControllerUpdatePasskeyRequest(
+	req *UpdatePasskeyRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeRemnawaveSettingsControllerUpdateSettingsRequest(
 	req *UpdateRemnawaveSettingsRequestDto,
 	r *http.Request,
@@ -572,6 +628,20 @@ func encodeSubscriptionSettingsControllerUpdateSettingsRequest(
 
 func encodeSubscriptionTemplateControllerCreateTemplateRequest(
 	req *CreateSubscriptionTemplateRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSubscriptionTemplateControllerReorderSubscriptionTemplatesRequest(
+	req *ReorderRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
