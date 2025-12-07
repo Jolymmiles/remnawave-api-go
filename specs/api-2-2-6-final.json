@@ -937,7 +937,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -995,7 +1002,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1102,7 +1116,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1162,7 +1183,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1222,7 +1250,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1282,7 +1317,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1342,7 +1384,14 @@
             }
           },
           "404": {
-            "description": "Users not found"
+            "description": "Users not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1402,7 +1451,14 @@
             }
           },
           "404": {
-            "description": "Users not found"
+            "description": "Users not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1463,7 +1519,14 @@
             }
           },
           "404": {
-            "description": "Users not found"
+            "description": "Users not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1533,7 +1596,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1593,7 +1663,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1653,7 +1730,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -1713,7 +1797,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -2240,7 +2331,14 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -3330,7 +3428,14 @@
             }
           },
           "404": {
-            "description": "Config profile not found"
+            "description": "Config profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "409": {
             "description": "Config profile name already exists or inbound tags are not unique. Inbound tags must be unique in global scope."
@@ -3439,7 +3544,14 @@
             }
           },
           "404": {
-            "description": "Config profile not found"
+            "description": "Config profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -3498,7 +3610,14 @@
             }
           },
           "404": {
-            "description": "Config profile not found"
+            "description": "Config profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -3555,7 +3674,14 @@
             }
           },
           "404": {
-            "description": "Config profile not found"
+            "description": "Config profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -3614,7 +3740,14 @@
             }
           },
           "404": {
-            "description": "Config profile not found"
+            "description": "Config profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -3719,7 +3852,14 @@
             }
           },
           "404": {
-            "description": "Snippet not found"
+            "description": "Snippet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -3835,7 +3975,14 @@
             }
           },
           "404": {
-            "description": "Snippet not found"
+            "description": "Snippet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "409": {
             "description": "Snippet name already exists."
@@ -4001,7 +4148,14 @@
             }
           },
           "404": {
-            "description": "Internal squad not found"
+            "description": "Internal squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "409": {
             "description": "Internal squad already exists"
@@ -4117,7 +4271,14 @@
             }
           },
           "404": {
-            "description": "Internal squad not found"
+            "description": "Internal squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -4177,7 +4338,14 @@
             }
           },
           "404": {
-            "description": "Internal squad not found"
+            "description": "Internal squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -4236,7 +4404,14 @@
             }
           },
           "404": {
-            "description": "Internal squad not found"
+            "description": "Internal squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -4295,7 +4470,14 @@
             }
           },
           "404": {
-            "description": "Internal squad not found"
+            "description": "Internal squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -4458,7 +4640,14 @@
             }
           },
           "404": {
-            "description": "External squad not found"
+            "description": "External squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "409": {
             "description": "External squad already exists"
@@ -4574,7 +4763,14 @@
             }
           },
           "404": {
-            "description": "External squad not found"
+            "description": "External squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -4633,7 +4829,14 @@
             }
           },
           "404": {
-            "description": "External squad not found"
+            "description": "External squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -4692,7 +4895,14 @@
             }
           },
           "404": {
-            "description": "External squad not found"
+            "description": "External squad not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -5669,7 +5879,14 @@
             }
           },
           "404": {
-            "description": "Host not found"
+            "description": "Host not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -6758,7 +6975,14 @@
             }
           },
           "404": {
-            "description": "Infra provider not found"
+            "description": "Infra provider not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",

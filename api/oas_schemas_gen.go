@@ -1693,40 +1693,10 @@ type ConfigProfileControllerCreateConfigProfileConflict struct{}
 func (*ConfigProfileControllerCreateConfigProfileConflict) configProfileControllerCreateConfigProfileRes() {
 }
 
-// ConfigProfileControllerDeleteConfigProfileByUuidNotFound is response for ConfigProfileControllerDeleteConfigProfileByUuid operation.
-type ConfigProfileControllerDeleteConfigProfileByUuidNotFound struct{}
-
-func (*ConfigProfileControllerDeleteConfigProfileByUuidNotFound) configProfileControllerDeleteConfigProfileByUuidRes() {
-}
-
-// ConfigProfileControllerGetComputedConfigProfileByUuidNotFound is response for ConfigProfileControllerGetComputedConfigProfileByUuid operation.
-type ConfigProfileControllerGetComputedConfigProfileByUuidNotFound struct{}
-
-func (*ConfigProfileControllerGetComputedConfigProfileByUuidNotFound) configProfileControllerGetComputedConfigProfileByUuidRes() {
-}
-
-// ConfigProfileControllerGetConfigProfileByUuidNotFound is response for ConfigProfileControllerGetConfigProfileByUuid operation.
-type ConfigProfileControllerGetConfigProfileByUuidNotFound struct{}
-
-func (*ConfigProfileControllerGetConfigProfileByUuidNotFound) configProfileControllerGetConfigProfileByUuidRes() {
-}
-
-// ConfigProfileControllerGetInboundsByProfileUuidNotFound is response for ConfigProfileControllerGetInboundsByProfileUuid operation.
-type ConfigProfileControllerGetInboundsByProfileUuidNotFound struct{}
-
-func (*ConfigProfileControllerGetInboundsByProfileUuidNotFound) configProfileControllerGetInboundsByProfileUuidRes() {
-}
-
 // ConfigProfileControllerUpdateConfigProfileConflict is response for ConfigProfileControllerUpdateConfigProfile operation.
 type ConfigProfileControllerUpdateConfigProfileConflict struct{}
 
 func (*ConfigProfileControllerUpdateConfigProfileConflict) configProfileControllerUpdateConfigProfileRes() {
-}
-
-// ConfigProfileControllerUpdateConfigProfileNotFound is response for ConfigProfileControllerUpdateConfigProfile operation.
-type ConfigProfileControllerUpdateConfigProfileNotFound struct{}
-
-func (*ConfigProfileControllerUpdateConfigProfileNotFound) configProfileControllerUpdateConfigProfileRes() {
 }
 
 // Ref: #/components/schemas/ConfigProfileItem
@@ -3765,40 +3735,16 @@ func (s *ExternalSquad) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// ExternalSquadControllerAddUsersToExternalSquadNotFound is response for ExternalSquadControllerAddUsersToExternalSquad operation.
-type ExternalSquadControllerAddUsersToExternalSquadNotFound struct{}
-
-func (*ExternalSquadControllerAddUsersToExternalSquadNotFound) externalSquadControllerAddUsersToExternalSquadRes() {
-}
-
 // ExternalSquadControllerCreateExternalSquadConflict is response for ExternalSquadControllerCreateExternalSquad operation.
 type ExternalSquadControllerCreateExternalSquadConflict struct{}
 
 func (*ExternalSquadControllerCreateExternalSquadConflict) externalSquadControllerCreateExternalSquadRes() {
 }
 
-// ExternalSquadControllerDeleteExternalSquadNotFound is response for ExternalSquadControllerDeleteExternalSquad operation.
-type ExternalSquadControllerDeleteExternalSquadNotFound struct{}
-
-func (*ExternalSquadControllerDeleteExternalSquadNotFound) externalSquadControllerDeleteExternalSquadRes() {
-}
-
-// ExternalSquadControllerRemoveUsersFromExternalSquadNotFound is response for ExternalSquadControllerRemoveUsersFromExternalSquad operation.
-type ExternalSquadControllerRemoveUsersFromExternalSquadNotFound struct{}
-
-func (*ExternalSquadControllerRemoveUsersFromExternalSquadNotFound) externalSquadControllerRemoveUsersFromExternalSquadRes() {
-}
-
 // ExternalSquadControllerUpdateExternalSquadConflict is response for ExternalSquadControllerUpdateExternalSquad operation.
 type ExternalSquadControllerUpdateExternalSquadConflict struct{}
 
 func (*ExternalSquadControllerUpdateExternalSquadConflict) externalSquadControllerUpdateExternalSquadRes() {
-}
-
-// ExternalSquadControllerUpdateExternalSquadNotFound is response for ExternalSquadControllerUpdateExternalSquad operation.
-type ExternalSquadControllerUpdateExternalSquadNotFound struct{}
-
-func (*ExternalSquadControllerUpdateExternalSquadNotFound) externalSquadControllerUpdateExternalSquadRes() {
 }
 
 type ExternalSquadResponseHeaders map[string]string
@@ -7549,11 +7495,6 @@ func (*HostResponse) hostsControllerCreateHostRes() {}
 func (*HostResponse) hostsControllerGetOneHostRes() {}
 func (*HostResponse) hostsControllerUpdateHostRes() {}
 
-// HostsControllerDeleteHostNotFound is response for HostsControllerDeleteHost operation.
-type HostsControllerDeleteHostNotFound struct{}
-
-func (*HostsControllerDeleteHostNotFound) hostsControllerDeleteHostRes() {}
-
 // Ref: #/components/schemas/HwidDevicesResponse
 type HwidDevicesResponse struct {
 	Response AllHwidDevices `json:"response"`
@@ -7900,12 +7841,6 @@ func (s *InboundsStat) SetDownload(val string) {
 	s.Download = val
 }
 
-// InfraBillingControllerGetInfraProviderByUuidNotFound is response for InfraBillingControllerGetInfraProviderByUuid operation.
-type InfraBillingControllerGetInfraProviderByUuidNotFound struct{}
-
-func (*InfraBillingControllerGetInfraProviderByUuidNotFound) infraBillingControllerGetInfraProviderByUuidRes() {
-}
-
 // Ref: #/components/schemas/InfraProviderResponseResponse
 type InfraProviderResponseResponse struct {
 	Response Provider `json:"response"`
@@ -8184,46 +8119,16 @@ func (s *InternalSquad) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// InternalSquadControllerAddUsersToInternalSquadNotFound is response for InternalSquadControllerAddUsersToInternalSquad operation.
-type InternalSquadControllerAddUsersToInternalSquadNotFound struct{}
-
-func (*InternalSquadControllerAddUsersToInternalSquadNotFound) internalSquadControllerAddUsersToInternalSquadRes() {
-}
-
 // InternalSquadControllerCreateInternalSquadConflict is response for InternalSquadControllerCreateInternalSquad operation.
 type InternalSquadControllerCreateInternalSquadConflict struct{}
 
 func (*InternalSquadControllerCreateInternalSquadConflict) internalSquadControllerCreateInternalSquadRes() {
 }
 
-// InternalSquadControllerDeleteInternalSquadNotFound is response for InternalSquadControllerDeleteInternalSquad operation.
-type InternalSquadControllerDeleteInternalSquadNotFound struct{}
-
-func (*InternalSquadControllerDeleteInternalSquadNotFound) internalSquadControllerDeleteInternalSquadRes() {
-}
-
-// InternalSquadControllerGetInternalSquadAccessibleNodesNotFound is response for InternalSquadControllerGetInternalSquadAccessibleNodes operation.
-type InternalSquadControllerGetInternalSquadAccessibleNodesNotFound struct{}
-
-func (*InternalSquadControllerGetInternalSquadAccessibleNodesNotFound) internalSquadControllerGetInternalSquadAccessibleNodesRes() {
-}
-
-// InternalSquadControllerRemoveUsersFromInternalSquadNotFound is response for InternalSquadControllerRemoveUsersFromInternalSquad operation.
-type InternalSquadControllerRemoveUsersFromInternalSquadNotFound struct{}
-
-func (*InternalSquadControllerRemoveUsersFromInternalSquadNotFound) internalSquadControllerRemoveUsersFromInternalSquadRes() {
-}
-
 // InternalSquadControllerUpdateInternalSquadConflict is response for InternalSquadControllerUpdateInternalSquad operation.
 type InternalSquadControllerUpdateInternalSquadConflict struct{}
 
 func (*InternalSquadControllerUpdateInternalSquadConflict) internalSquadControllerUpdateInternalSquadRes() {
-}
-
-// InternalSquadControllerUpdateInternalSquadNotFound is response for InternalSquadControllerUpdateInternalSquad operation.
-type InternalSquadControllerUpdateInternalSquadNotFound struct{}
-
-func (*InternalSquadControllerUpdateInternalSquadNotFound) internalSquadControllerUpdateInternalSquadRes() {
 }
 
 // Ref: #/components/schemas/InternalSquadResponseResponse
@@ -9617,9 +9522,41 @@ func (s *NotFoundError) SetStatusCode(val float64) {
 	s.StatusCode = val
 }
 
+func (*NotFoundError) configProfileControllerDeleteConfigProfileByUuidRes()           {}
+func (*NotFoundError) configProfileControllerGetComputedConfigProfileByUuidRes()      {}
+func (*NotFoundError) configProfileControllerGetConfigProfileByUuidRes()              {}
+func (*NotFoundError) configProfileControllerGetInboundsByProfileUuidRes()            {}
+func (*NotFoundError) configProfileControllerUpdateConfigProfileRes()                 {}
+func (*NotFoundError) externalSquadControllerAddUsersToExternalSquadRes()             {}
+func (*NotFoundError) externalSquadControllerDeleteExternalSquadRes()                 {}
+func (*NotFoundError) externalSquadControllerRemoveUsersFromExternalSquadRes()        {}
+func (*NotFoundError) externalSquadControllerUpdateExternalSquadRes()                 {}
+func (*NotFoundError) hostsControllerDeleteHostRes()                                  {}
+func (*NotFoundError) infraBillingControllerGetInfraProviderByUuidRes()               {}
+func (*NotFoundError) internalSquadControllerAddUsersToInternalSquadRes()             {}
+func (*NotFoundError) internalSquadControllerDeleteInternalSquadRes()                 {}
+func (*NotFoundError) internalSquadControllerGetInternalSquadAccessibleNodesRes()     {}
+func (*NotFoundError) internalSquadControllerRemoveUsersFromInternalSquadRes()        {}
+func (*NotFoundError) internalSquadControllerUpdateInternalSquadRes()                 {}
+func (*NotFoundError) snippetsControllerDeleteSnippetByNameRes()                      {}
+func (*NotFoundError) snippetsControllerUpdateSnippetRes()                            {}
 func (*NotFoundError) subscriptionsControllerGetSubscriptionByShortUuidProtectedRes() {}
 func (*NotFoundError) subscriptionsControllerGetSubscriptionByUsernameRes()           {}
 func (*NotFoundError) subscriptionsControllerGetSubscriptionByUuidRes()               {}
+func (*NotFoundError) usersControllerDeleteUserRes()                                  {}
+func (*NotFoundError) usersControllerDisableUserRes()                                 {}
+func (*NotFoundError) usersControllerEnableUserRes()                                  {}
+func (*NotFoundError) usersControllerGetUserAccessibleNodesRes()                      {}
+func (*NotFoundError) usersControllerGetUserByShortUuidRes()                          {}
+func (*NotFoundError) usersControllerGetUserByTelegramIdRes()                         {}
+func (*NotFoundError) usersControllerGetUserByUsernameRes()                           {}
+func (*NotFoundError) usersControllerGetUserByUuidRes()                               {}
+func (*NotFoundError) usersControllerGetUserSubscriptionRequestHistoryRes()           {}
+func (*NotFoundError) usersControllerGetUsersByEmailRes()                             {}
+func (*NotFoundError) usersControllerGetUsersByTagRes()                               {}
+func (*NotFoundError) usersControllerResetUserTrafficRes()                            {}
+func (*NotFoundError) usersControllerRevokeUserSubscriptionRes()                      {}
+func (*NotFoundError) usersStatsControllerGetUserUsageByRangeRes()                    {}
 
 // Ref: #/components/schemas/OAuth2AuthorizeRequestDto
 type OAuth2AuthorizeRequestDto struct {
@@ -13761,20 +13698,10 @@ type SnippetsControllerCreateSnippetConflict struct{}
 
 func (*SnippetsControllerCreateSnippetConflict) snippetsControllerCreateSnippetRes() {}
 
-// SnippetsControllerDeleteSnippetByNameNotFound is response for SnippetsControllerDeleteSnippetByName operation.
-type SnippetsControllerDeleteSnippetByNameNotFound struct{}
-
-func (*SnippetsControllerDeleteSnippetByNameNotFound) snippetsControllerDeleteSnippetByNameRes() {}
-
 // SnippetsControllerUpdateSnippetConflict is response for SnippetsControllerUpdateSnippet operation.
 type SnippetsControllerUpdateSnippetConflict struct{}
 
 func (*SnippetsControllerUpdateSnippetConflict) snippetsControllerUpdateSnippetRes() {}
-
-// SnippetsControllerUpdateSnippetNotFound is response for SnippetsControllerUpdateSnippet operation.
-type SnippetsControllerUpdateSnippetNotFound struct{}
-
-func (*SnippetsControllerUpdateSnippetNotFound) snippetsControllerUpdateSnippetRes() {}
 
 // Ref: #/components/schemas/SnippetsResponse
 type SnippetsResponse struct {
@@ -17008,72 +16935,6 @@ func (s *UserTrafficLimitStrategy) UnmarshalText(data []byte) error {
 	}
 }
 
-// UsersControllerDeleteUserNotFound is response for UsersControllerDeleteUser operation.
-type UsersControllerDeleteUserNotFound struct{}
-
-func (*UsersControllerDeleteUserNotFound) usersControllerDeleteUserRes() {}
-
-// UsersControllerDisableUserNotFound is response for UsersControllerDisableUser operation.
-type UsersControllerDisableUserNotFound struct{}
-
-func (*UsersControllerDisableUserNotFound) usersControllerDisableUserRes() {}
-
-// UsersControllerEnableUserNotFound is response for UsersControllerEnableUser operation.
-type UsersControllerEnableUserNotFound struct{}
-
-func (*UsersControllerEnableUserNotFound) usersControllerEnableUserRes() {}
-
-// UsersControllerGetUserAccessibleNodesNotFound is response for UsersControllerGetUserAccessibleNodes operation.
-type UsersControllerGetUserAccessibleNodesNotFound struct{}
-
-func (*UsersControllerGetUserAccessibleNodesNotFound) usersControllerGetUserAccessibleNodesRes() {}
-
-// UsersControllerGetUserByShortUuidNotFound is response for UsersControllerGetUserByShortUuid operation.
-type UsersControllerGetUserByShortUuidNotFound struct{}
-
-func (*UsersControllerGetUserByShortUuidNotFound) usersControllerGetUserByShortUuidRes() {}
-
-// UsersControllerGetUserByTelegramIdNotFound is response for UsersControllerGetUserByTelegramId operation.
-type UsersControllerGetUserByTelegramIdNotFound struct{}
-
-func (*UsersControllerGetUserByTelegramIdNotFound) usersControllerGetUserByTelegramIdRes() {}
-
-// UsersControllerGetUserByUsernameNotFound is response for UsersControllerGetUserByUsername operation.
-type UsersControllerGetUserByUsernameNotFound struct{}
-
-func (*UsersControllerGetUserByUsernameNotFound) usersControllerGetUserByUsernameRes() {}
-
-// UsersControllerGetUserByUuidNotFound is response for UsersControllerGetUserByUuid operation.
-type UsersControllerGetUserByUuidNotFound struct{}
-
-func (*UsersControllerGetUserByUuidNotFound) usersControllerGetUserByUuidRes() {}
-
-// UsersControllerGetUserSubscriptionRequestHistoryNotFound is response for UsersControllerGetUserSubscriptionRequestHistory operation.
-type UsersControllerGetUserSubscriptionRequestHistoryNotFound struct{}
-
-func (*UsersControllerGetUserSubscriptionRequestHistoryNotFound) usersControllerGetUserSubscriptionRequestHistoryRes() {
-}
-
-// UsersControllerGetUsersByEmailNotFound is response for UsersControllerGetUsersByEmail operation.
-type UsersControllerGetUsersByEmailNotFound struct{}
-
-func (*UsersControllerGetUsersByEmailNotFound) usersControllerGetUsersByEmailRes() {}
-
-// UsersControllerGetUsersByTagNotFound is response for UsersControllerGetUsersByTag operation.
-type UsersControllerGetUsersByTagNotFound struct{}
-
-func (*UsersControllerGetUsersByTagNotFound) usersControllerGetUsersByTagRes() {}
-
-// UsersControllerResetUserTrafficNotFound is response for UsersControllerResetUserTraffic operation.
-type UsersControllerResetUserTrafficNotFound struct{}
-
-func (*UsersControllerResetUserTrafficNotFound) usersControllerResetUserTrafficRes() {}
-
-// UsersControllerRevokeUserSubscriptionNotFound is response for UsersControllerRevokeUserSubscription operation.
-type UsersControllerRevokeUserSubscriptionNotFound struct{}
-
-func (*UsersControllerRevokeUserSubscriptionNotFound) usersControllerRevokeUserSubscriptionRes() {}
-
 // Ref: #/components/schemas/UsersResponse
 type UsersResponse struct {
 	Response []User `json:"response"`
@@ -17092,12 +16953,6 @@ func (s *UsersResponse) SetResponse(val []User) {
 func (*UsersResponse) usersControllerGetUserByTelegramIdRes() {}
 func (*UsersResponse) usersControllerGetUsersByEmailRes()     {}
 func (*UsersResponse) usersControllerGetUsersByTagRes()       {}
-
-// UsersStatsControllerGetUserUsageByRangeNotFound is response for UsersStatsControllerGetUserUsageByRange operation.
-type UsersStatsControllerGetUserUsageByRangeNotFound struct{}
-
-func (*UsersStatsControllerGetUserUsageByRangeNotFound) usersStatsControllerGetUserUsageByRangeRes() {
-}
 
 // Ref: #/components/schemas/ValidationError
 type ValidationError struct {

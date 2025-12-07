@@ -1113,7 +1113,19 @@ def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
             for status_code, schema_name in STATUS_TO_SCHEMA.items():
                 if status_code in op['responses']:
                     response = op['responses'][status_code]
-                    if 'content' in response and 'application/json' in response['content']:
+                    
+                    # For 404 responses without content, add content with NotFoundError schema
+                    # This prevents ogen from generating empty per-operation NotFound structs
+                    if status_code == '404' and 'content' not in response:
+                        response['content'] = {
+                            'application/json': {
+                                'schema': {
+                                    '$ref': f'#/components/schemas/{schema_name}'
+                                }
+                            }
+                        }
+                        replaced_count[status_code] += 1
+                    elif 'content' in response and 'application/json' in response['content']:
                         # Replace inline schema with $ref
                         response['content']['application/json']['schema'] = {
                             '$ref': f'#/components/schemas/{schema_name}'
