@@ -193,7 +193,7 @@ func encodeExternalSquadControllerUpdateExternalSquadRequest(
 }
 
 func encodeHostsBulkActionsControllerDeleteHostsRequest(
-	req *BulkUuidsRequest,
+	req *BulkUuidsRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -207,7 +207,7 @@ func encodeHostsBulkActionsControllerDeleteHostsRequest(
 }
 
 func encodeHostsBulkActionsControllerDisableHostsRequest(
-	req *BulkUuidsRequest,
+	req *BulkUuidsRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -221,7 +221,7 @@ func encodeHostsBulkActionsControllerDisableHostsRequest(
 }
 
 func encodeHostsBulkActionsControllerEnableHostsRequest(
-	req *BulkUuidsRequest,
+	req *BulkUuidsRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -472,6 +472,20 @@ func encodeNodesControllerCreateNodeRequest(
 	return nil
 }
 
+func encodeNodesControllerProfileModificationRequest(
+	req *ProfileModificationRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeNodesControllerReorderNodesRequest(
 	req *ReorderNodeRequestDto,
 	r *http.Request,
@@ -696,6 +710,20 @@ func encodeSystemControllerEncryptHappCryptoLinkRequest(
 	return nil
 }
 
+func encodeUsersBulkActionsControllerBulkAllExtendExpirationDateRequest(
+	req *BulkAllExtendExpirationDateRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeUsersBulkActionsControllerBulkDeleteUsersRequest(
 	req *BulkUuidsRequest,
 	r *http.Request,
@@ -712,6 +740,20 @@ func encodeUsersBulkActionsControllerBulkDeleteUsersRequest(
 
 func encodeUsersBulkActionsControllerBulkDeleteUsersByStatusRequest(
 	req *BulkDeleteUsersByStatusRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeUsersBulkActionsControllerBulkExtendExpirationDateRequest(
+	req *BulkExtendExpirationDateRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"

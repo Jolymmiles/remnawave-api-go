@@ -201,19 +201,19 @@ type Invoker interface {
 	// Delete hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/delete
-	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error)
+	HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerDeleteHostsRes, error)
 	// HostsBulkActionsControllerDisableHosts invokes HostsBulkActionsController_disableHosts operation.
 	//
 	// Disable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/disable
-	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error)
+	HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerDisableHostsRes, error)
 	// HostsBulkActionsControllerEnableHosts invokes HostsBulkActionsController_enableHosts operation.
 	//
 	// Enable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/enable
-	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error)
+	HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerEnableHostsRes, error)
 	// HostsBulkActionsControllerSetInboundToHosts invokes HostsBulkActionsController_setInboundToHosts operation.
 	//
 	// Set inbound to hosts by UUIDs.
@@ -298,6 +298,12 @@ type Invoker interface {
 	//
 	// GET /api/hwid/devices/stats
 	HwidUserDevicesControllerGetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error)
+	// HwidUserDevicesControllerGetTopUsersByHwidDevices invokes HwidUserDevicesController_getTopUsersByHwidDevices operation.
+	//
+	// Get top users by HWID devices.
+	//
+	// GET /api/hwid/devices/top-users
+	HwidUserDevicesControllerGetTopUsersByHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetTopUsersByHwidDevicesParams) (HwidUserDevicesControllerGetTopUsersByHwidDevicesRes, error)
 	// HwidUserDevicesControllerGetUserHwidDevices invokes HwidUserDevicesController_getUserHwidDevices operation.
 	//
 	// Get user HWID devices.
@@ -478,6 +484,12 @@ type Invoker interface {
 	//
 	// GET /api/nodes/{uuid}
 	NodesControllerGetOneNode(ctx context.Context, params NodesControllerGetOneNodeParams) (NodesControllerGetOneNodeRes, error)
+	// NodesControllerProfileModification invokes NodesController_profileModification operation.
+	//
+	// Modify Inbounds & Profile for many nodes.
+	//
+	// POST /api/nodes/bulk-actions/profile-modification
+	NodesControllerProfileModification(ctx context.Context, request *ProfileModificationRequestDto) (NodesControllerProfileModificationRes, error)
 	// NodesControllerReorderNodes invokes NodesController_reorderNodes operation.
 	//
 	// Reorder nodes.
@@ -748,6 +760,12 @@ type Invoker interface {
 	//
 	// GET /api/subscription-request-history/stats
 	UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStats(ctx context.Context) (UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes, error)
+	// UsersBulkActionsControllerBulkAllExtendExpirationDate invokes UsersBulkActionsController_bulkAllExtendExpirationDate operation.
+	//
+	// Bulk extend all users expiration date.
+	//
+	// POST /api/users/bulk/all/extend-expiration-date
+	UsersBulkActionsControllerBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequestDto) (UsersBulkActionsControllerBulkAllExtendExpirationDateRes, error)
 	// UsersBulkActionsControllerBulkAllResetUserTraffic invokes UsersBulkActionsController_bulkAllResetUserTraffic operation.
 	//
 	// Bulk reset all users traffic.
@@ -766,6 +784,12 @@ type Invoker interface {
 	//
 	// POST /api/users/bulk/delete-by-status
 	UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error)
+	// UsersBulkActionsControllerBulkExtendExpirationDate invokes UsersBulkActionsController_bulkExtendExpirationDate operation.
+	//
+	// Bulk extend all users expiration date.
+	//
+	// POST /api/users/bulk/extend-expiration-date
+	UsersBulkActionsControllerBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequestDto) (UsersBulkActionsControllerBulkExtendExpirationDateRes, error)
 	// UsersBulkActionsControllerBulkResetUserTraffic invokes UsersBulkActionsController_bulkResetUserTraffic operation.
 	//
 	// Bulk reset traffic users by UUIDs.
@@ -838,6 +862,12 @@ type Invoker interface {
 	//
 	// GET /api/users/{uuid}/accessible-nodes
 	UsersControllerGetUserAccessibleNodes(ctx context.Context, params UsersControllerGetUserAccessibleNodesParams) (UsersControllerGetUserAccessibleNodesRes, error)
+	// UsersControllerGetUserById invokes UsersController_getUserById operation.
+	//
+	// Get user by ID.
+	//
+	// GET /api/users/by-id/{id}
+	UsersControllerGetUserById(ctx context.Context, params UsersControllerGetUserByIdParams) (UsersControllerGetUserByIdRes, error)
 	// UsersControllerGetUserByShortUuid invokes UsersController_getUserByShortUuid operation.
 	//
 	// Get user by Short UUID.
@@ -3951,12 +3981,12 @@ func (c *Client) sendExternalSquadControllerUpdateExternalSquad(ctx context.Cont
 // Delete hosts by UUIDs.
 //
 // POST /api/hosts/bulk/delete
-func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error) {
+func (c *Client) HostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerDeleteHostsRes, error) {
 	res, err := c.sendHostsBulkActionsControllerDeleteHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest) (res HostsBulkActionsControllerDeleteHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, request *BulkUuidsRequest2) (res HostsBulkActionsControllerDeleteHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4069,12 +4099,12 @@ func (c *Client) sendHostsBulkActionsControllerDeleteHosts(ctx context.Context, 
 // Disable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/disable
-func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error) {
+func (c *Client) HostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerDisableHostsRes, error) {
 	res, err := c.sendHostsBulkActionsControllerDisableHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest) (res HostsBulkActionsControllerDisableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context, request *BulkUuidsRequest2) (res HostsBulkActionsControllerDisableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4187,12 +4217,12 @@ func (c *Client) sendHostsBulkActionsControllerDisableHosts(ctx context.Context,
 // Enable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/enable
-func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error) {
+func (c *Client) HostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerEnableHostsRes, error) {
 	res, err := c.sendHostsBulkActionsControllerEnableHosts(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest) (res HostsBulkActionsControllerEnableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsControllerEnableHosts(ctx context.Context, request *BulkUuidsRequest2) (res HostsBulkActionsControllerEnableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5920,6 +5950,150 @@ func (c *Client) sendHwidUserDevicesControllerGetHwidDevicesStats(ctx context.Co
 
 	stage = "DecodeResponse"
 	result, err := decodeHwidUserDevicesControllerGetHwidDevicesStatsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// HwidUserDevicesControllerGetTopUsersByHwidDevices invokes HwidUserDevicesController_getTopUsersByHwidDevices operation.
+//
+// Get top users by HWID devices.
+//
+// GET /api/hwid/devices/top-users
+func (c *Client) HwidUserDevicesControllerGetTopUsersByHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetTopUsersByHwidDevicesParams) (HwidUserDevicesControllerGetTopUsersByHwidDevicesRes, error) {
+	res, err := c.sendHwidUserDevicesControllerGetTopUsersByHwidDevices(ctx, params)
+	return res, err
+}
+
+func (c *Client) sendHwidUserDevicesControllerGetTopUsersByHwidDevices(ctx context.Context, params HwidUserDevicesControllerGetTopUsersByHwidDevicesParams) (res HwidUserDevicesControllerGetTopUsersByHwidDevicesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("HwidUserDevicesController_getTopUsersByHwidDevices"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hwid/devices/top-users"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HwidUserDevicesControllerGetTopUsersByHwidDevicesOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/hwid/devices/top-users"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.Float64ToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, HwidUserDevicesControllerGetTopUsersByHwidDevicesOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeHwidUserDevicesControllerGetTopUsersByHwidDevicesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -9456,6 +9630,124 @@ func (c *Client) sendNodesControllerGetOneNode(ctx context.Context, params Nodes
 
 	stage = "DecodeResponse"
 	result, err := decodeNodesControllerGetOneNodeResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodesControllerProfileModification invokes NodesController_profileModification operation.
+//
+// Modify Inbounds & Profile for many nodes.
+//
+// POST /api/nodes/bulk-actions/profile-modification
+func (c *Client) NodesControllerProfileModification(ctx context.Context, request *ProfileModificationRequestDto) (NodesControllerProfileModificationRes, error) {
+	res, err := c.sendNodesControllerProfileModification(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendNodesControllerProfileModification(ctx context.Context, request *ProfileModificationRequestDto) (res NodesControllerProfileModificationRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_profileModification"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/bulk-actions/profile-modification"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerProfileModificationOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/nodes/bulk-actions/profile-modification"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodesControllerProfileModificationRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodesControllerProfileModificationOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeNodesControllerProfileModificationResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -14814,6 +15106,124 @@ func (c *Client) sendUserSubscriptionRequestHistoryControllerGetSubscriptionRequ
 	return result, nil
 }
 
+// UsersBulkActionsControllerBulkAllExtendExpirationDate invokes UsersBulkActionsController_bulkAllExtendExpirationDate operation.
+//
+// Bulk extend all users expiration date.
+//
+// POST /api/users/bulk/all/extend-expiration-date
+func (c *Client) UsersBulkActionsControllerBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequestDto) (UsersBulkActionsControllerBulkAllExtendExpirationDateRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkAllExtendExpirationDate(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendUsersBulkActionsControllerBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequestDto) (res UsersBulkActionsControllerBulkAllExtendExpirationDateRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkAllExtendExpirationDate"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/all/extend-expiration-date"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkAllExtendExpirationDateOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/users/bulk/all/extend-expiration-date"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeUsersBulkActionsControllerBulkAllExtendExpirationDateRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkAllExtendExpirationDateOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeUsersBulkActionsControllerBulkAllExtendExpirationDateResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // UsersBulkActionsControllerBulkAllResetUserTraffic invokes UsersBulkActionsController_bulkAllResetUserTraffic operation.
 //
 // Bulk reset all users traffic.
@@ -15149,6 +15559,124 @@ func (c *Client) sendUsersBulkActionsControllerBulkDeleteUsersByStatus(ctx conte
 
 	stage = "DecodeResponse"
 	result, err := decodeUsersBulkActionsControllerBulkDeleteUsersByStatusResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// UsersBulkActionsControllerBulkExtendExpirationDate invokes UsersBulkActionsController_bulkExtendExpirationDate operation.
+//
+// Bulk extend all users expiration date.
+//
+// POST /api/users/bulk/extend-expiration-date
+func (c *Client) UsersBulkActionsControllerBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequestDto) (UsersBulkActionsControllerBulkExtendExpirationDateRes, error) {
+	res, err := c.sendUsersBulkActionsControllerBulkExtendExpirationDate(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendUsersBulkActionsControllerBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequestDto) (res UsersBulkActionsControllerBulkExtendExpirationDateRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersBulkActionsController_bulkExtendExpirationDate"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/bulk/extend-expiration-date"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersBulkActionsControllerBulkExtendExpirationDateOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/users/bulk/extend-expiration-date"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeUsersBulkActionsControllerBulkExtendExpirationDateRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, UsersBulkActionsControllerBulkExtendExpirationDateOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeUsersBulkActionsControllerBulkExtendExpirationDateResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -16606,6 +17134,130 @@ func (c *Client) sendUsersControllerGetUserAccessibleNodes(ctx context.Context, 
 
 	stage = "DecodeResponse"
 	result, err := decodeUsersControllerGetUserAccessibleNodesResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// UsersControllerGetUserById invokes UsersController_getUserById operation.
+//
+// Get user by ID.
+//
+// GET /api/users/by-id/{id}
+func (c *Client) UsersControllerGetUserById(ctx context.Context, params UsersControllerGetUserByIdParams) (UsersControllerGetUserByIdRes, error) {
+	res, err := c.sendUsersControllerGetUserById(ctx, params)
+	return res, err
+}
+
+func (c *Client) sendUsersControllerGetUserById(ctx context.Context, params UsersControllerGetUserByIdParams) (res UsersControllerGetUserByIdRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("UsersController_getUserById"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/by-id/{id}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersControllerGetUserByIdOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [2]string
+	pathParts[0] = "/api/users/by-id/"
+	{
+		// Encode "id" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "id",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.ID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, UsersControllerGetUserByIdOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeUsersControllerGetUserByIdResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}

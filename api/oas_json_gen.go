@@ -2331,6 +2331,102 @@ func (s *BulkActionResponseResponse) UnmarshalJSON(data []byte) error {
 }
 
 // Encode implements json.Marshaler.
+func (s *BulkAllExtendExpirationDateRequestDto) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *BulkAllExtendExpirationDateRequestDto) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("extendDays")
+		e.Int(s.ExtendDays)
+	}
+}
+
+var jsonFieldsNameOfBulkAllExtendExpirationDateRequestDto = [1]string{
+	0: "extendDays",
+}
+
+// Decode decodes BulkAllExtendExpirationDateRequestDto from json.
+func (s *BulkAllExtendExpirationDateRequestDto) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode BulkAllExtendExpirationDateRequestDto to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "extendDays":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := d.Int()
+				s.ExtendDays = int(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"extendDays\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode BulkAllExtendExpirationDateRequestDto")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000001,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfBulkAllExtendExpirationDateRequestDto) {
+					name = jsonFieldsNameOfBulkAllExtendExpirationDateRequestDto[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *BulkAllExtendExpirationDateRequestDto) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *BulkAllExtendExpirationDateRequestDto) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
 func (s *BulkAllUpdateUsersRequestDto) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -2722,6 +2818,131 @@ func (s BulkDeleteUsersByStatusRequestDtoStatus) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *BulkDeleteUsersByStatusRequestDtoStatus) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *BulkExtendExpirationDateRequestDto) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *BulkExtendExpirationDateRequestDto) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("uuids")
+		e.ArrStart()
+		for _, elem := range s.Uuids {
+			json.EncodeUUID(e, elem)
+		}
+		e.ArrEnd()
+	}
+	{
+		e.FieldStart("extendDays")
+		e.Int(s.ExtendDays)
+	}
+}
+
+var jsonFieldsNameOfBulkExtendExpirationDateRequestDto = [2]string{
+	0: "uuids",
+	1: "extendDays",
+}
+
+// Decode decodes BulkExtendExpirationDateRequestDto from json.
+func (s *BulkExtendExpirationDateRequestDto) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode BulkExtendExpirationDateRequestDto to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "uuids":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				s.Uuids = make([]uuid.UUID, 0)
+				if err := d.Arr(func(d *jx.Decoder) error {
+					var elem uuid.UUID
+					v, err := json.DecodeUUID(d)
+					elem = v
+					if err != nil {
+						return err
+					}
+					s.Uuids = append(s.Uuids, elem)
+					return nil
+				}); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"uuids\"")
+			}
+		case "extendDays":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				v, err := d.Int()
+				s.ExtendDays = int(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"extendDays\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode BulkExtendExpirationDateRequestDto")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000011,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfBulkExtendExpirationDateRequestDto) {
+					name = jsonFieldsNameOfBulkExtendExpirationDateRequestDto[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *BulkExtendExpirationDateRequestDto) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *BulkExtendExpirationDateRequestDto) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -3395,6 +3616,114 @@ func (s *BulkUuidsRequest) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *BulkUuidsRequest) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *BulkUuidsRequest2) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *BulkUuidsRequest2) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("uuids")
+		e.ArrStart()
+		for _, elem := range s.Uuids {
+			json.EncodeUUID(e, elem)
+		}
+		e.ArrEnd()
+	}
+}
+
+var jsonFieldsNameOfBulkUuidsRequest2 = [1]string{
+	0: "uuids",
+}
+
+// Decode decodes BulkUuidsRequest2 from json.
+func (s *BulkUuidsRequest2) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode BulkUuidsRequest2 to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "uuids":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				s.Uuids = make([]uuid.UUID, 0)
+				if err := d.Arr(func(d *jx.Decoder) error {
+					var elem uuid.UUID
+					v, err := json.DecodeUUID(d)
+					elem = v
+					if err != nil {
+						return err
+					}
+					s.Uuids = append(s.Uuids, elem)
+					return nil
+				}); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"uuids\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode BulkUuidsRequest2")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000001,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfBulkUuidsRequest2) {
+					name = jsonFieldsNameOfBulkUuidsRequest2[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *BulkUuidsRequest2) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *BulkUuidsRequest2) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -5171,6 +5500,12 @@ func (s *CreateHostRequestDto) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
+		if s.KeepSniBlank.Set {
+			e.FieldStart("keepSniBlank")
+			s.KeepSniBlank.Encode(e)
+		}
+	}
+	{
 		if s.AllowInsecure.Set {
 			e.FieldStart("allowInsecure")
 			s.AllowInsecure.Encode(e)
@@ -5222,7 +5557,7 @@ func (s *CreateHostRequestDto) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfCreateHostRequestDto = [25]string{
+var jsonFieldsNameOfCreateHostRequestDto = [26]string{
 	0:  "inbound",
 	1:  "remark",
 	2:  "address",
@@ -5241,13 +5576,14 @@ var jsonFieldsNameOfCreateHostRequestDto = [25]string{
 	15: "tag",
 	16: "isHidden",
 	17: "overrideSniFromAddress",
-	18: "allowInsecure",
-	19: "vlessRouteId",
-	20: "shuffleHost",
-	21: "mihomoX25519",
-	22: "nodes",
-	23: "xrayJsonTemplateUuid",
-	24: "excludedInternalSquads",
+	18: "keepSniBlank",
+	19: "allowInsecure",
+	20: "vlessRouteId",
+	21: "shuffleHost",
+	22: "mihomoX25519",
+	23: "nodes",
+	24: "xrayJsonTemplateUuid",
+	25: "excludedInternalSquads",
 }
 
 // Decode decodes CreateHostRequestDto from json.
@@ -5448,6 +5784,16 @@ func (s *CreateHostRequestDto) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"overrideSniFromAddress\"")
+			}
+		case "keepSniBlank":
+			if err := func() error {
+				s.KeepSniBlank.Reset()
+				if err := s.KeepSniBlank.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"keepSniBlank\"")
 			}
 		case "allowInsecure":
 			if err := func() error {
@@ -15535,9 +15881,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) encodeFie
 		}
 	}
 	{
-		if s.HeaderType.Set {
-			e.FieldStart("headerType")
-			s.HeaderType.Encode(e)
+		if s.RawSettings.Set {
+			e.FieldStart("rawSettings")
+			s.RawSettings.Encode(e)
 		}
 	}
 	{
@@ -15547,21 +15893,21 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) encodeFie
 		}
 	}
 	{
-		if s.XHttpExtraParams.Set {
+		if len(s.XHttpExtraParams) != 0 {
 			e.FieldStart("xHttpExtraParams")
-			s.XHttpExtraParams.Encode(e)
+			e.Raw(s.XHttpExtraParams)
 		}
 	}
 	{
-		if s.MuxParams.Set {
+		if len(s.MuxParams) != 0 {
 			e.FieldStart("muxParams")
-			s.MuxParams.Encode(e)
+			e.Raw(s.MuxParams)
 		}
 	}
 	{
-		if s.SockoptParams.Set {
+		if len(s.SockoptParams) != 0 {
 			e.FieldStart("sockoptParams")
-			s.SockoptParams.Encode(e)
+			e.Raw(s.SockoptParams)
 		}
 	}
 	{
@@ -15619,9 +15965,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) encodeFie
 		}
 	}
 	{
-		if s.XrayJsonTemplate.Set {
+		if len(s.XrayJsonTemplate) != 0 {
 			e.FieldStart("xrayJsonTemplate")
-			s.XrayJsonTemplate.Encode(e)
+			e.Raw(s.XrayJsonTemplate)
 		}
 	}
 }
@@ -15642,7 +15988,7 @@ var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem
 	12: "sni",
 	13: "spiderX",
 	14: "tls",
-	15: "headerType",
+	15: "rawSettings",
 	16: "additionalParams",
 	17: "xHttpExtraParams",
 	18: "muxParams",
@@ -15818,15 +16164,15 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Decode(d 
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"tls\"")
 			}
-		case "headerType":
+		case "rawSettings":
 			if err := func() error {
-				s.HeaderType.Reset()
-				if err := s.HeaderType.Decode(d); err != nil {
+				s.RawSettings.Reset()
+				if err := s.RawSettings.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"headerType\"")
+				return errors.Wrap(err, "decode field \"rawSettings\"")
 			}
 		case "additionalParams":
 			if err := func() error {
@@ -15840,8 +16186,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Decode(d 
 			}
 		case "xHttpExtraParams":
 			if err := func() error {
-				s.XHttpExtraParams.Reset()
-				if err := s.XHttpExtraParams.Decode(d); err != nil {
+				v, err := d.RawAppend(nil)
+				s.XHttpExtraParams = jx.Raw(v)
+				if err != nil {
 					return err
 				}
 				return nil
@@ -15850,8 +16197,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Decode(d 
 			}
 		case "muxParams":
 			if err := func() error {
-				s.MuxParams.Reset()
-				if err := s.MuxParams.Decode(d); err != nil {
+				v, err := d.RawAppend(nil)
+				s.MuxParams = jx.Raw(v)
+				if err != nil {
 					return err
 				}
 				return nil
@@ -15860,8 +16208,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Decode(d 
 			}
 		case "sockoptParams":
 			if err := func() error {
-				s.SockoptParams.Reset()
-				if err := s.SockoptParams.Decode(d); err != nil {
+				v, err := d.RawAppend(nil)
+				s.SockoptParams = jx.Raw(v)
+				if err != nil {
 					return err
 				}
 				return nil
@@ -15960,8 +16309,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Decode(d 
 			}
 		case "xrayJsonTemplate":
 			if err := func() error {
-				s.XrayJsonTemplate.Reset()
-				if err := s.XrayJsonTemplate.Decode(d); err != nil {
+				v, err := d.RawAppend(nil)
+				s.XrayJsonTemplate = jx.Raw(v)
+				if err != nil {
 					return err
 				}
 				return nil
@@ -16117,11 +16467,9 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) Enc
 // encodeFields encodes fields.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) encodeFields(e *jx.Encoder) {
 	{
-		e.FieldStart("rawInbound")
-		if s.RawInbound == nil {
-			e.Null()
-		} else {
-			s.RawInbound.Encode(e)
+		if len(s.RawInbound) != 0 {
+			e.FieldStart("rawInbound")
+			e.Raw(s.RawInbound)
 		}
 	}
 	{
@@ -16192,12 +16540,11 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) Dec
 		case "rawInbound":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				s.RawInbound = nil
-				var elem GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound
-				if err := elem.Decode(d); err != nil {
+				v, err := d.RawAppend(nil)
+				s.RawInbound = jx.Raw(v)
+				if err != nil {
 					return err
 				}
-				s.RawInbound = &elem
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"rawInbound\"")
@@ -16367,94 +16714,6 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) Mar
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound = [0]string{}
-
-// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound from json.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbDataRawInbound) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams = [0]string{}
-
-// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams from json.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -16716,133 +16975,82 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOpt
 }
 
 // Encode implements json.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) Encode(e *jx.Encoder) {
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) encodeFields(e *jx.Encoder) {
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) encodeFields(e *jx.Encoder) {
+	{
+		if s.HeaderType.Set {
+			e.FieldStart("headerType")
+			s.HeaderType.Encode(e)
+		}
+	}
+	{
+		if len(s.Request) != 0 {
+			e.FieldStart("request")
+			e.Raw(s.Request)
+		}
+	}
 }
 
-var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams = [0]string{}
+var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings = [2]string{
+	0: "headerType",
+	1: "request",
+}
 
-// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams from json.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) Decode(d *jx.Decoder) error {
+// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings from json.
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams to nil")
+		return errors.New("invalid: unable to decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings to nil")
 	}
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
+		case "headerType":
+			if err := func() error {
+				s.HeaderType.Reset()
+				if err := s.HeaderType.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"headerType\"")
+			}
+		case "request":
+			if err := func() error {
+				v, err := d.RawAppend(nil)
+				s.Request = jx.Raw(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"request\"")
+			}
 		default:
 			return d.Skip()
 		}
+		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams")
+		return errors.Wrap(err, "decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings")
 	}
 
 	return nil
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) MarshalJSON() ([]byte, error) {
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams = [0]string{}
-
-// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams from json.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) encodeFields(e *jx.Encoder) {
-}
-
-var jsonFieldsNameOfGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate = [0]string{}
-
-// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate from json.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate to nil")
-	}
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		default:
-			return d.Skip()
-		}
-	}); err != nil {
-		return errors.Wrap(err, "decode GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate")
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) UnmarshalJSON(data []byte) error {
+func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -19344,6 +19552,370 @@ func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStats
 }
 
 // Encode implements json.Marshaler.
+func (s *GetTopUsersByHwidDevicesResponseDto) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *GetTopUsersByHwidDevicesResponseDto) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("response")
+		s.Response.Encode(e)
+	}
+}
+
+var jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDto = [1]string{
+	0: "response",
+}
+
+// Decode decodes GetTopUsersByHwidDevicesResponseDto from json.
+func (s *GetTopUsersByHwidDevicesResponseDto) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetTopUsersByHwidDevicesResponseDto to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "response":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				if err := s.Response.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"response\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode GetTopUsersByHwidDevicesResponseDto")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000001,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDto) {
+					name = jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDto[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *GetTopUsersByHwidDevicesResponseDto) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetTopUsersByHwidDevicesResponseDto) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponse) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponse) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("users")
+		e.ArrStart()
+		for _, elem := range s.Users {
+			elem.Encode(e)
+		}
+		e.ArrEnd()
+	}
+	{
+		e.FieldStart("total")
+		e.Float64(s.Total)
+	}
+}
+
+var jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDtoResponse = [2]string{
+	0: "users",
+	1: "total",
+}
+
+// Decode decodes GetTopUsersByHwidDevicesResponseDtoResponse from json.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponse) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetTopUsersByHwidDevicesResponseDtoResponse to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "users":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				s.Users = make([]GetTopUsersByHwidDevicesResponseDtoResponseUsersItem, 0)
+				if err := d.Arr(func(d *jx.Decoder) error {
+					var elem GetTopUsersByHwidDevicesResponseDtoResponseUsersItem
+					if err := elem.Decode(d); err != nil {
+						return err
+					}
+					s.Users = append(s.Users, elem)
+					return nil
+				}); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"users\"")
+			}
+		case "total":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				v, err := d.Float64()
+				s.Total = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"total\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode GetTopUsersByHwidDevicesResponseDtoResponse")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000011,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDtoResponse) {
+					name = jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDtoResponse[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponse) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponse) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("userUuid")
+		json.EncodeUUID(e, s.UserUuid)
+	}
+	{
+		e.FieldStart("id")
+		e.Float64(s.ID)
+	}
+	{
+		e.FieldStart("username")
+		e.Str(s.Username)
+	}
+	{
+		e.FieldStart("devicesCount")
+		e.Float64(s.DevicesCount)
+	}
+}
+
+var jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDtoResponseUsersItem = [4]string{
+	0: "userUuid",
+	1: "id",
+	2: "username",
+	3: "devicesCount",
+}
+
+// Decode decodes GetTopUsersByHwidDevicesResponseDtoResponseUsersItem from json.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetTopUsersByHwidDevicesResponseDtoResponseUsersItem to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "userUuid":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := json.DecodeUUID(d)
+				s.UserUuid = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"userUuid\"")
+			}
+		case "id":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				v, err := d.Float64()
+				s.ID = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"id\"")
+			}
+		case "username":
+			requiredBitSet[0] |= 1 << 2
+			if err := func() error {
+				v, err := d.Str()
+				s.Username = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"username\"")
+			}
+		case "devicesCount":
+			requiredBitSet[0] |= 1 << 3
+			if err := func() error {
+				v, err := d.Float64()
+				s.DevicesCount = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"devicesCount\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode GetTopUsersByHwidDevicesResponseDtoResponseUsersItem")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00001111,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDtoResponseUsersItem) {
+					name = jsonFieldsNameOfGetTopUsersByHwidDevicesResponseDtoResponseUsersItem[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
 func (s *GetUserAccessibleNodesResponseDto) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -20629,6 +21201,12 @@ func (s *HostItem) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
+		if s.KeepSniBlank.Set {
+			e.FieldStart("keepSniBlank")
+			s.KeepSniBlank.Encode(e)
+		}
+	}
+	{
 		e.FieldStart("vlessRouteId")
 		s.VlessRouteId.Encode(e)
 	}
@@ -20668,7 +21246,7 @@ func (s *HostItem) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfHostItem = [27]string{
+var jsonFieldsNameOfHostItem = [28]string{
 	0:  "uuid",
 	1:  "viewPosition",
 	2:  "remark",
@@ -20689,13 +21267,14 @@ var jsonFieldsNameOfHostItem = [27]string{
 	17: "tag",
 	18: "isHidden",
 	19: "overrideSniFromAddress",
-	20: "vlessRouteId",
-	21: "allowInsecure",
-	22: "shuffleHost",
-	23: "mihomoX25519",
-	24: "nodes",
-	25: "xrayJsonTemplateUuid",
-	26: "excludedInternalSquads",
+	20: "keepSniBlank",
+	21: "vlessRouteId",
+	22: "allowInsecure",
+	23: "shuffleHost",
+	24: "mihomoX25519",
+	25: "nodes",
+	26: "xrayJsonTemplateUuid",
+	27: "excludedInternalSquads",
 }
 
 // Decode decodes HostItem from json.
@@ -20924,8 +21503,18 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"overrideSniFromAddress\"")
 			}
+		case "keepSniBlank":
+			if err := func() error {
+				s.KeepSniBlank.Reset()
+				if err := s.KeepSniBlank.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"keepSniBlank\"")
+			}
 		case "vlessRouteId":
-			requiredBitSet[2] |= 1 << 4
+			requiredBitSet[2] |= 1 << 5
 			if err := func() error {
 				if err := s.VlessRouteId.Decode(d); err != nil {
 					return err
@@ -20945,7 +21534,7 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"allowInsecure\"")
 			}
 		case "shuffleHost":
-			requiredBitSet[2] |= 1 << 6
+			requiredBitSet[2] |= 1 << 7
 			if err := func() error {
 				v, err := d.Bool()
 				s.ShuffleHost = bool(v)
@@ -20957,7 +21546,7 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"shuffleHost\"")
 			}
 		case "mihomoX25519":
-			requiredBitSet[2] |= 1 << 7
+			requiredBitSet[3] |= 1 << 0
 			if err := func() error {
 				v, err := d.Bool()
 				s.MihomoX25519 = bool(v)
@@ -20969,7 +21558,7 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"mihomoX25519\"")
 			}
 		case "nodes":
-			requiredBitSet[3] |= 1 << 0
+			requiredBitSet[3] |= 1 << 1
 			if err := func() error {
 				s.Nodes = make([]uuid.UUID, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
@@ -20989,7 +21578,7 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"nodes\"")
 			}
 		case "xrayJsonTemplateUuid":
-			requiredBitSet[3] |= 1 << 1
+			requiredBitSet[3] |= 1 << 2
 			if err := func() error {
 				if err := s.XrayJsonTemplateUuid.Decode(d); err != nil {
 					return err
@@ -20999,7 +21588,7 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"xrayJsonTemplateUuid\"")
 			}
 		case "excludedInternalSquads":
-			requiredBitSet[3] |= 1 << 2
+			requiredBitSet[3] |= 1 << 3
 			if err := func() error {
 				s.ExcludedInternalSquads = make([]uuid.UUID, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
@@ -21030,8 +21619,8 @@ func (s *HostItem) Decode(d *jx.Decoder) error {
 	for i, mask := range [4]uint8{
 		0b11111111,
 		0b11110011,
-		0b11010011,
-		0b00000111,
+		0b10100011,
+		0b00001111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -24611,14 +25200,6 @@ func (s *NodeItem) encodeFields(e *jx.Encoder) {
 		e.Bool(s.IsConnecting)
 	}
 	{
-		e.FieldStart("isNodeOnline")
-		e.Bool(s.IsNodeOnline)
-	}
-	{
-		e.FieldStart("isXrayRunning")
-		e.Bool(s.IsXrayRunning)
-	}
-	{
 		e.FieldStart("lastStatusChange")
 		s.LastStatusChange.Encode(e, json.EncodeDateTime)
 	}
@@ -24716,7 +25297,7 @@ func (s *NodeItem) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfNodeItem = [32]string{
+var jsonFieldsNameOfNodeItem = [30]string{
 	0:  "uuid",
 	1:  "name",
 	2:  "address",
@@ -24724,31 +25305,29 @@ var jsonFieldsNameOfNodeItem = [32]string{
 	4:  "isConnected",
 	5:  "isDisabled",
 	6:  "isConnecting",
-	7:  "isNodeOnline",
-	8:  "isXrayRunning",
-	9:  "lastStatusChange",
-	10: "lastStatusMessage",
-	11: "xrayVersion",
-	12: "nodeVersion",
-	13: "xrayUptime",
-	14: "isTrafficTrackingActive",
-	15: "trafficResetDay",
-	16: "trafficLimitBytes",
-	17: "trafficUsedBytes",
-	18: "notifyPercent",
-	19: "usersOnline",
-	20: "viewPosition",
-	21: "countryCode",
-	22: "consumptionMultiplier",
-	23: "tags",
-	24: "cpuCount",
-	25: "cpuModel",
-	26: "totalRam",
-	27: "createdAt",
-	28: "updatedAt",
-	29: "configProfile",
-	30: "providerUuid",
-	31: "provider",
+	7:  "lastStatusChange",
+	8:  "lastStatusMessage",
+	9:  "xrayVersion",
+	10: "nodeVersion",
+	11: "xrayUptime",
+	12: "isTrafficTrackingActive",
+	13: "trafficResetDay",
+	14: "trafficLimitBytes",
+	15: "trafficUsedBytes",
+	16: "notifyPercent",
+	17: "usersOnline",
+	18: "viewPosition",
+	19: "countryCode",
+	20: "consumptionMultiplier",
+	21: "tags",
+	22: "cpuCount",
+	23: "cpuModel",
+	24: "totalRam",
+	25: "createdAt",
+	26: "updatedAt",
+	27: "configProfile",
+	28: "providerUuid",
+	29: "provider",
 }
 
 // Decode decodes NodeItem from json.
@@ -24842,32 +25421,8 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"isConnecting\"")
 			}
-		case "isNodeOnline":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := d.Bool()
-				s.IsNodeOnline = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"isNodeOnline\"")
-			}
-		case "isXrayRunning":
-			requiredBitSet[1] |= 1 << 0
-			if err := func() error {
-				v, err := d.Bool()
-				s.IsXrayRunning = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"isXrayRunning\"")
-			}
 		case "lastStatusChange":
-			requiredBitSet[1] |= 1 << 1
+			requiredBitSet[0] |= 1 << 7
 			if err := func() error {
 				if err := s.LastStatusChange.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -24877,7 +25432,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"lastStatusChange\"")
 			}
 		case "lastStatusMessage":
-			requiredBitSet[1] |= 1 << 2
+			requiredBitSet[1] |= 1 << 0
 			if err := func() error {
 				if err := s.LastStatusMessage.Decode(d); err != nil {
 					return err
@@ -24887,7 +25442,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"lastStatusMessage\"")
 			}
 		case "xrayVersion":
-			requiredBitSet[1] |= 1 << 3
+			requiredBitSet[1] |= 1 << 1
 			if err := func() error {
 				if err := s.XrayVersion.Decode(d); err != nil {
 					return err
@@ -24897,7 +25452,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"xrayVersion\"")
 			}
 		case "nodeVersion":
-			requiredBitSet[1] |= 1 << 4
+			requiredBitSet[1] |= 1 << 2
 			if err := func() error {
 				if err := s.NodeVersion.Decode(d); err != nil {
 					return err
@@ -24907,7 +25462,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"nodeVersion\"")
 			}
 		case "xrayUptime":
-			requiredBitSet[1] |= 1 << 5
+			requiredBitSet[1] |= 1 << 3
 			if err := func() error {
 				v, err := d.Str()
 				s.XrayUptime = string(v)
@@ -24919,7 +25474,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"xrayUptime\"")
 			}
 		case "isTrafficTrackingActive":
-			requiredBitSet[1] |= 1 << 6
+			requiredBitSet[1] |= 1 << 4
 			if err := func() error {
 				v, err := d.Bool()
 				s.IsTrafficTrackingActive = bool(v)
@@ -24931,7 +25486,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"isTrafficTrackingActive\"")
 			}
 		case "trafficResetDay":
-			requiredBitSet[1] |= 1 << 7
+			requiredBitSet[1] |= 1 << 5
 			if err := func() error {
 				if err := s.TrafficResetDay.Decode(d); err != nil {
 					return err
@@ -24941,7 +25496,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trafficResetDay\"")
 			}
 		case "trafficLimitBytes":
-			requiredBitSet[2] |= 1 << 0
+			requiredBitSet[1] |= 1 << 6
 			if err := func() error {
 				if err := s.TrafficLimitBytes.Decode(d); err != nil {
 					return err
@@ -24951,7 +25506,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trafficLimitBytes\"")
 			}
 		case "trafficUsedBytes":
-			requiredBitSet[2] |= 1 << 1
+			requiredBitSet[1] |= 1 << 7
 			if err := func() error {
 				if err := s.TrafficUsedBytes.Decode(d); err != nil {
 					return err
@@ -24961,7 +25516,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trafficUsedBytes\"")
 			}
 		case "notifyPercent":
-			requiredBitSet[2] |= 1 << 2
+			requiredBitSet[2] |= 1 << 0
 			if err := func() error {
 				if err := s.NotifyPercent.Decode(d); err != nil {
 					return err
@@ -24971,7 +25526,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"notifyPercent\"")
 			}
 		case "usersOnline":
-			requiredBitSet[2] |= 1 << 3
+			requiredBitSet[2] |= 1 << 1
 			if err := func() error {
 				if err := s.UsersOnline.Decode(d); err != nil {
 					return err
@@ -24981,7 +25536,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"usersOnline\"")
 			}
 		case "viewPosition":
-			requiredBitSet[2] |= 1 << 4
+			requiredBitSet[2] |= 1 << 2
 			if err := func() error {
 				v, err := d.Int()
 				s.ViewPosition = int(v)
@@ -24993,7 +25548,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"viewPosition\"")
 			}
 		case "countryCode":
-			requiredBitSet[2] |= 1 << 5
+			requiredBitSet[2] |= 1 << 3
 			if err := func() error {
 				v, err := d.Str()
 				s.CountryCode = string(v)
@@ -25005,7 +25560,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"countryCode\"")
 			}
 		case "consumptionMultiplier":
-			requiredBitSet[2] |= 1 << 6
+			requiredBitSet[2] |= 1 << 4
 			if err := func() error {
 				v, err := d.Float64()
 				s.ConsumptionMultiplier = float64(v)
@@ -25017,7 +25572,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"consumptionMultiplier\"")
 			}
 		case "tags":
-			requiredBitSet[2] |= 1 << 7
+			requiredBitSet[2] |= 1 << 5
 			if err := func() error {
 				s.Tags = make([]string, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
@@ -25037,7 +25592,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"tags\"")
 			}
 		case "cpuCount":
-			requiredBitSet[3] |= 1 << 0
+			requiredBitSet[2] |= 1 << 6
 			if err := func() error {
 				if err := s.CpuCount.Decode(d); err != nil {
 					return err
@@ -25047,7 +25602,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"cpuCount\"")
 			}
 		case "cpuModel":
-			requiredBitSet[3] |= 1 << 1
+			requiredBitSet[2] |= 1 << 7
 			if err := func() error {
 				if err := s.CpuModel.Decode(d); err != nil {
 					return err
@@ -25057,7 +25612,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"cpuModel\"")
 			}
 		case "totalRam":
-			requiredBitSet[3] |= 1 << 2
+			requiredBitSet[3] |= 1 << 0
 			if err := func() error {
 				if err := s.TotalRam.Decode(d); err != nil {
 					return err
@@ -25067,7 +25622,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"totalRam\"")
 			}
 		case "createdAt":
-			requiredBitSet[3] |= 1 << 3
+			requiredBitSet[3] |= 1 << 1
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -25079,7 +25634,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"createdAt\"")
 			}
 		case "updatedAt":
-			requiredBitSet[3] |= 1 << 4
+			requiredBitSet[3] |= 1 << 2
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -25091,7 +25646,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"updatedAt\"")
 			}
 		case "configProfile":
-			requiredBitSet[3] |= 1 << 5
+			requiredBitSet[3] |= 1 << 3
 			if err := func() error {
 				if err := s.ConfigProfile.Decode(d); err != nil {
 					return err
@@ -25101,7 +25656,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"configProfile\"")
 			}
 		case "providerUuid":
-			requiredBitSet[3] |= 1 << 6
+			requiredBitSet[3] |= 1 << 4
 			if err := func() error {
 				if err := s.ProviderUuid.Decode(d); err != nil {
 					return err
@@ -25111,7 +25666,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"providerUuid\"")
 			}
 		case "provider":
-			requiredBitSet[3] |= 1 << 7
+			requiredBitSet[3] |= 1 << 5
 			if err := func() error {
 				if err := s.Provider.Decode(d); err != nil {
 					return err
@@ -25133,7 +25688,7 @@ func (s *NodeItem) Decode(d *jx.Decoder) error {
 		0b11111111,
 		0b11111111,
 		0b11111111,
-		0b11111111,
+		0b00111111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -26545,142 +27100,6 @@ func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) 
 	return s.Decode(d)
 }
 
-// Encode encodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams as json.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams from json.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams to nil")
-	}
-	o.Set = true
-	o.Value = new(GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams)
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemMuxParams) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams as json.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams from json.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams to nil")
-	}
-	o.Set = true
-	o.Value = new(GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams)
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemSockoptParams) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams as json.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams from json.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams to nil")
-	}
-	o.Set = true
-	o.Value = new(GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams)
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXHttpExtraParams) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate as json.
-func (o OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate from json.
-func (o *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate to nil")
-	}
-	o.Set = true
-	o.Value = new(GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate)
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemXrayJsonTemplate) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
 // Encode encodes HostItemSecurityLayer as json.
 func (o OptHostItemSecurityLayer) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -27223,6 +27642,55 @@ func (s OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtoc
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemProtocolOptionsSs) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings as json.
+func (o OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	if o.Null {
+		e.Null()
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings from json.
+func (o *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings to nil")
+	}
+	if d.Next() == jx.Null {
+		if err := d.Null(); err != nil {
+			return err
+		}
+
+		var v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings
+		o.Value = v
+		o.Set = true
+		o.Null = true
+		return nil
+	}
+	o.Set = true
+	o.Null = false
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptNilGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemRawSettings) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -29125,6 +29593,254 @@ func (s *Pocketid) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *Pocketid) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *ProfileModificationRequestDto) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *ProfileModificationRequestDto) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("uuids")
+		e.ArrStart()
+		for _, elem := range s.Uuids {
+			json.EncodeUUID(e, elem)
+		}
+		e.ArrEnd()
+	}
+	{
+		e.FieldStart("configProfile")
+		s.ConfigProfile.Encode(e)
+	}
+}
+
+var jsonFieldsNameOfProfileModificationRequestDto = [2]string{
+	0: "uuids",
+	1: "configProfile",
+}
+
+// Decode decodes ProfileModificationRequestDto from json.
+func (s *ProfileModificationRequestDto) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ProfileModificationRequestDto to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "uuids":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				s.Uuids = make([]uuid.UUID, 0)
+				if err := d.Arr(func(d *jx.Decoder) error {
+					var elem uuid.UUID
+					v, err := json.DecodeUUID(d)
+					elem = v
+					if err != nil {
+						return err
+					}
+					s.Uuids = append(s.Uuids, elem)
+					return nil
+				}); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"uuids\"")
+			}
+		case "configProfile":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				if err := s.ConfigProfile.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"configProfile\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode ProfileModificationRequestDto")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000011,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfProfileModificationRequestDto) {
+					name = jsonFieldsNameOfProfileModificationRequestDto[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *ProfileModificationRequestDto) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ProfileModificationRequestDto) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *ProfileModificationRequestDtoConfigProfile) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *ProfileModificationRequestDtoConfigProfile) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("activeConfigProfileUuid")
+		json.EncodeUUID(e, s.ActiveConfigProfileUuid)
+	}
+	{
+		e.FieldStart("activeInbounds")
+		e.ArrStart()
+		for _, elem := range s.ActiveInbounds {
+			json.EncodeUUID(e, elem)
+		}
+		e.ArrEnd()
+	}
+}
+
+var jsonFieldsNameOfProfileModificationRequestDtoConfigProfile = [2]string{
+	0: "activeConfigProfileUuid",
+	1: "activeInbounds",
+}
+
+// Decode decodes ProfileModificationRequestDtoConfigProfile from json.
+func (s *ProfileModificationRequestDtoConfigProfile) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ProfileModificationRequestDtoConfigProfile to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "activeConfigProfileUuid":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := json.DecodeUUID(d)
+				s.ActiveConfigProfileUuid = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"activeConfigProfileUuid\"")
+			}
+		case "activeInbounds":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				s.ActiveInbounds = make([]uuid.UUID, 0)
+				if err := d.Arr(func(d *jx.Decoder) error {
+					var elem uuid.UUID
+					v, err := json.DecodeUUID(d)
+					elem = v
+					if err != nil {
+						return err
+					}
+					s.ActiveInbounds = append(s.ActiveInbounds, elem)
+					return nil
+				}); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"activeInbounds\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode ProfileModificationRequestDtoConfigProfile")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000011,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfProfileModificationRequestDtoConfigProfile) {
+					name = jsonFieldsNameOfProfileModificationRequestDtoConfigProfile[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *ProfileModificationRequestDtoConfigProfile) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ProfileModificationRequestDtoConfigProfile) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -32417,12 +33133,6 @@ func (s *SubscriptionSettings) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.AddUsernameToBaseSubscription.Set {
-			e.FieldStart("addUsernameToBaseSubscription")
-			s.AddUsernameToBaseSubscription.Encode(e)
-		}
-	}
-	{
 		if s.IsShowCustomRemarks.Set {
 			e.FieldStart("isShowCustomRemarks")
 			s.IsShowCustomRemarks.Encode(e)
@@ -32448,17 +33158,16 @@ func (s *SubscriptionSettings) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfSubscriptionSettings = [10]string{
+var jsonFieldsNameOfSubscriptionSettings = [9]string{
 	0: "profileTitle",
 	1: "supportLink",
 	2: "profileUpdateInterval",
 	3: "isProfileWebpageUrlEnabled",
 	4: "serveJsonAtBaseSubscription",
-	5: "addUsernameToBaseSubscription",
-	6: "isShowCustomRemarks",
-	7: "happAnnounce",
-	8: "happRouting",
-	9: "randomizeHosts",
+	5: "isShowCustomRemarks",
+	6: "happAnnounce",
+	7: "happRouting",
+	8: "randomizeHosts",
 }
 
 // Decode decodes SubscriptionSettings from json.
@@ -32518,16 +33227,6 @@ func (s *SubscriptionSettings) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"serveJsonAtBaseSubscription\"")
-			}
-		case "addUsernameToBaseSubscription":
-			if err := func() error {
-				s.AddUsernameToBaseSubscription.Reset()
-				if err := s.AddUsernameToBaseSubscription.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"addUsernameToBaseSubscription\"")
 			}
 		case "isShowCustomRemarks":
 			if err := func() error {
@@ -32721,10 +33420,6 @@ func (s *SubscriptionSettingsResponseResponse) encodeFields(e *jx.Encoder) {
 		e.Bool(s.ServeJsonAtBaseSubscription)
 	}
 	{
-		e.FieldStart("addUsernameToBaseSubscription")
-		e.Bool(s.AddUsernameToBaseSubscription)
-	}
-	{
 		e.FieldStart("isShowCustomRemarks")
 		e.Bool(s.IsShowCustomRemarks)
 	}
@@ -32766,24 +33461,23 @@ func (s *SubscriptionSettingsResponseResponse) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfSubscriptionSettingsResponseResponse = [17]string{
+var jsonFieldsNameOfSubscriptionSettingsResponseResponse = [16]string{
 	0:  "uuid",
 	1:  "profileTitle",
 	2:  "supportLink",
 	3:  "profileUpdateInterval",
 	4:  "isProfileWebpageUrlEnabled",
 	5:  "serveJsonAtBaseSubscription",
-	6:  "addUsernameToBaseSubscription",
-	7:  "isShowCustomRemarks",
-	8:  "customRemarks",
-	9:  "happAnnounce",
-	10: "happRouting",
-	11: "customResponseHeaders",
-	12: "randomizeHosts",
-	13: "responseRules",
-	14: "hwidSettings",
-	15: "createdAt",
-	16: "updatedAt",
+	6:  "isShowCustomRemarks",
+	7:  "customRemarks",
+	8:  "happAnnounce",
+	9:  "happRouting",
+	10: "customResponseHeaders",
+	11: "randomizeHosts",
+	12: "responseRules",
+	13: "hwidSettings",
+	14: "createdAt",
+	15: "updatedAt",
 }
 
 // Decode decodes SubscriptionSettingsResponseResponse from json.
@@ -32791,7 +33485,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode SubscriptionSettingsResponseResponse to nil")
 	}
-	var requiredBitSet [3]uint8
+	var requiredBitSet [2]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
@@ -32867,20 +33561,8 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"serveJsonAtBaseSubscription\"")
 			}
-		case "addUsernameToBaseSubscription":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Bool()
-				s.AddUsernameToBaseSubscription = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"addUsernameToBaseSubscription\"")
-			}
 		case "isShowCustomRemarks":
-			requiredBitSet[0] |= 1 << 7
+			requiredBitSet[0] |= 1 << 6
 			if err := func() error {
 				v, err := d.Bool()
 				s.IsShowCustomRemarks = bool(v)
@@ -32892,7 +33574,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"isShowCustomRemarks\"")
 			}
 		case "customRemarks":
-			requiredBitSet[1] |= 1 << 0
+			requiredBitSet[0] |= 1 << 7
 			if err := func() error {
 				if err := s.CustomRemarks.Decode(d); err != nil {
 					return err
@@ -32902,7 +33584,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"customRemarks\"")
 			}
 		case "happAnnounce":
-			requiredBitSet[1] |= 1 << 1
+			requiredBitSet[1] |= 1 << 0
 			if err := func() error {
 				if err := s.HappAnnounce.Decode(d); err != nil {
 					return err
@@ -32912,7 +33594,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"happAnnounce\"")
 			}
 		case "happRouting":
-			requiredBitSet[1] |= 1 << 2
+			requiredBitSet[1] |= 1 << 1
 			if err := func() error {
 				if err := s.HappRouting.Decode(d); err != nil {
 					return err
@@ -32922,7 +33604,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"happRouting\"")
 			}
 		case "customResponseHeaders":
-			requiredBitSet[1] |= 1 << 3
+			requiredBitSet[1] |= 1 << 2
 			if err := func() error {
 				if err := s.CustomResponseHeaders.Decode(d); err != nil {
 					return err
@@ -32932,7 +33614,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"customResponseHeaders\"")
 			}
 		case "randomizeHosts":
-			requiredBitSet[1] |= 1 << 4
+			requiredBitSet[1] |= 1 << 3
 			if err := func() error {
 				v, err := d.Bool()
 				s.RandomizeHosts = bool(v)
@@ -32944,7 +33626,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"randomizeHosts\"")
 			}
 		case "responseRules":
-			requiredBitSet[1] |= 1 << 5
+			requiredBitSet[1] |= 1 << 4
 			if err := func() error {
 				if err := s.ResponseRules.Decode(d); err != nil {
 					return err
@@ -32954,7 +33636,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"responseRules\"")
 			}
 		case "hwidSettings":
-			requiredBitSet[1] |= 1 << 6
+			requiredBitSet[1] |= 1 << 5
 			if err := func() error {
 				if err := s.HwidSettings.Decode(d); err != nil {
 					return err
@@ -32964,7 +33646,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"hwidSettings\"")
 			}
 		case "createdAt":
-			requiredBitSet[1] |= 1 << 7
+			requiredBitSet[1] |= 1 << 6
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -32976,7 +33658,7 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"createdAt\"")
 			}
 		case "updatedAt":
-			requiredBitSet[2] |= 1 << 0
+			requiredBitSet[1] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -32996,10 +33678,9 @@ func (s *SubscriptionSettingsResponseResponse) Decode(d *jx.Decoder) error {
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
-	for i, mask := range [3]uint8{
+	for i, mask := range [2]uint8{
 		0b11111111,
 		0b11111111,
-		0b00000001,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -35277,6 +35958,12 @@ func (s *UpdateHostRequestDto) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
+		if s.KeepSniBlank.Set {
+			e.FieldStart("keepSniBlank")
+			s.KeepSniBlank.Encode(e)
+		}
+	}
+	{
 		if s.VlessRouteId.Set {
 			e.FieldStart("vlessRouteId")
 			s.VlessRouteId.Encode(e)
@@ -35328,7 +36015,7 @@ func (s *UpdateHostRequestDto) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfUpdateHostRequestDto = [26]string{
+var jsonFieldsNameOfUpdateHostRequestDto = [27]string{
 	0:  "uuid",
 	1:  "inbound",
 	2:  "remark",
@@ -35348,13 +36035,14 @@ var jsonFieldsNameOfUpdateHostRequestDto = [26]string{
 	16: "tag",
 	17: "isHidden",
 	18: "overrideSniFromAddress",
-	19: "vlessRouteId",
-	20: "allowInsecure",
-	21: "shuffleHost",
-	22: "mihomoX25519",
-	23: "nodes",
-	24: "xrayJsonTemplateUuid",
-	25: "excludedInternalSquads",
+	19: "keepSniBlank",
+	20: "vlessRouteId",
+	21: "allowInsecure",
+	22: "shuffleHost",
+	23: "mihomoX25519",
+	24: "nodes",
+	25: "xrayJsonTemplateUuid",
+	26: "excludedInternalSquads",
 }
 
 // Decode decodes UpdateHostRequestDto from json.
@@ -35560,6 +36248,16 @@ func (s *UpdateHostRequestDto) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"overrideSniFromAddress\"")
+			}
+		case "keepSniBlank":
+			if err := func() error {
+				s.KeepSniBlank.Reset()
+				if err := s.KeepSniBlank.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"keepSniBlank\"")
 			}
 		case "vlessRouteId":
 			if err := func() error {
@@ -36869,12 +37567,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) encodeFields(e *jx.Encoder) {
 		}
 	}
 	{
-		if s.AddUsernameToBaseSubscription.Set {
-			e.FieldStart("addUsernameToBaseSubscription")
-			s.AddUsernameToBaseSubscription.Encode(e)
-		}
-	}
-	{
 		if s.HappAnnounce.Set {
 			e.FieldStart("happAnnounce")
 			s.HappAnnounce.Encode(e)
@@ -36924,22 +37616,21 @@ func (s *UpdateSubscriptionSettingsRequestDto) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfUpdateSubscriptionSettingsRequestDto = [15]string{
+var jsonFieldsNameOfUpdateSubscriptionSettingsRequestDto = [14]string{
 	0:  "uuid",
 	1:  "profileTitle",
 	2:  "supportLink",
 	3:  "profileUpdateInterval",
 	4:  "isProfileWebpageUrlEnabled",
 	5:  "serveJsonAtBaseSubscription",
-	6:  "addUsernameToBaseSubscription",
-	7:  "happAnnounce",
-	8:  "happRouting",
-	9:  "isShowCustomRemarks",
-	10: "customRemarks",
-	11: "customResponseHeaders",
-	12: "randomizeHosts",
-	13: "responseRules",
-	14: "hwidSettings",
+	6:  "happAnnounce",
+	7:  "happRouting",
+	8:  "isShowCustomRemarks",
+	9:  "customRemarks",
+	10: "customResponseHeaders",
+	11: "randomizeHosts",
+	12: "responseRules",
+	13: "hwidSettings",
 }
 
 // Decode decodes UpdateSubscriptionSettingsRequestDto from json.
@@ -37012,16 +37703,6 @@ func (s *UpdateSubscriptionSettingsRequestDto) Decode(d *jx.Decoder) error {
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"serveJsonAtBaseSubscription\"")
-			}
-		case "addUsernameToBaseSubscription":
-			if err := func() error {
-				s.AddUsernameToBaseSubscription.Reset()
-				if err := s.AddUsernameToBaseSubscription.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"addUsernameToBaseSubscription\"")
 			}
 		case "happAnnounce":
 			if err := func() error {
@@ -37788,6 +38469,10 @@ func (s *User) encodeFields(e *jx.Encoder) {
 		json.EncodeUUID(e, s.UUID)
 	}
 	{
+		e.FieldStart("id")
+		e.Float64(s.ID)
+	}
+	{
 		e.FieldStart("shortUuid")
 		e.Str(s.ShortUuid)
 	}
@@ -37901,33 +38586,34 @@ func (s *User) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfUser = [26]string{
+var jsonFieldsNameOfUser = [27]string{
 	0:  "uuid",
-	1:  "shortUuid",
-	2:  "username",
-	3:  "status",
-	4:  "trafficLimitBytes",
-	5:  "trafficLimitStrategy",
-	6:  "expireAt",
-	7:  "telegramId",
-	8:  "email",
-	9:  "description",
-	10: "tag",
-	11: "hwidDeviceLimit",
-	12: "externalSquadUuid",
-	13: "trojanPassword",
-	14: "vlessUuid",
-	15: "ssPassword",
-	16: "lastTriggeredThreshold",
-	17: "subRevokedAt",
-	18: "subLastUserAgent",
-	19: "subLastOpenedAt",
-	20: "lastTrafficResetAt",
-	21: "createdAt",
-	22: "updatedAt",
-	23: "subscriptionUrl",
-	24: "activeInternalSquads",
-	25: "userTraffic",
+	1:  "id",
+	2:  "shortUuid",
+	3:  "username",
+	4:  "status",
+	5:  "trafficLimitBytes",
+	6:  "trafficLimitStrategy",
+	7:  "expireAt",
+	8:  "telegramId",
+	9:  "email",
+	10: "description",
+	11: "tag",
+	12: "hwidDeviceLimit",
+	13: "externalSquadUuid",
+	14: "trojanPassword",
+	15: "vlessUuid",
+	16: "ssPassword",
+	17: "lastTriggeredThreshold",
+	18: "subRevokedAt",
+	19: "subLastUserAgent",
+	20: "subLastOpenedAt",
+	21: "lastTrafficResetAt",
+	22: "createdAt",
+	23: "updatedAt",
+	24: "subscriptionUrl",
+	25: "activeInternalSquads",
+	26: "userTraffic",
 }
 
 // Decode decodes User from json.
@@ -37952,8 +38638,20 @@ func (s *User) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"uuid\"")
 			}
-		case "shortUuid":
+		case "id":
 			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				v, err := d.Float64()
+				s.ID = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"id\"")
+			}
+		case "shortUuid":
+			requiredBitSet[0] |= 1 << 2
 			if err := func() error {
 				v, err := d.Str()
 				s.ShortUuid = string(v)
@@ -37965,7 +38663,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"shortUuid\"")
 			}
 		case "username":
-			requiredBitSet[0] |= 1 << 2
+			requiredBitSet[0] |= 1 << 3
 			if err := func() error {
 				v, err := d.Str()
 				s.Username = string(v)
@@ -38007,7 +38705,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trafficLimitStrategy\"")
 			}
 		case "expireAt":
-			requiredBitSet[0] |= 1 << 6
+			requiredBitSet[0] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.ExpireAt = v
@@ -38019,7 +38717,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"expireAt\"")
 			}
 		case "telegramId":
-			requiredBitSet[0] |= 1 << 7
+			requiredBitSet[1] |= 1 << 0
 			if err := func() error {
 				if err := s.TelegramId.Decode(d); err != nil {
 					return err
@@ -38029,7 +38727,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"telegramId\"")
 			}
 		case "email":
-			requiredBitSet[1] |= 1 << 0
+			requiredBitSet[1] |= 1 << 1
 			if err := func() error {
 				if err := s.Email.Decode(d); err != nil {
 					return err
@@ -38039,7 +38737,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"email\"")
 			}
 		case "description":
-			requiredBitSet[1] |= 1 << 1
+			requiredBitSet[1] |= 1 << 2
 			if err := func() error {
 				if err := s.Description.Decode(d); err != nil {
 					return err
@@ -38049,7 +38747,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"description\"")
 			}
 		case "tag":
-			requiredBitSet[1] |= 1 << 2
+			requiredBitSet[1] |= 1 << 3
 			if err := func() error {
 				if err := s.Tag.Decode(d); err != nil {
 					return err
@@ -38059,7 +38757,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"tag\"")
 			}
 		case "hwidDeviceLimit":
-			requiredBitSet[1] |= 1 << 3
+			requiredBitSet[1] |= 1 << 4
 			if err := func() error {
 				if err := s.HwidDeviceLimit.Decode(d); err != nil {
 					return err
@@ -38069,7 +38767,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"hwidDeviceLimit\"")
 			}
 		case "externalSquadUuid":
-			requiredBitSet[1] |= 1 << 4
+			requiredBitSet[1] |= 1 << 5
 			if err := func() error {
 				if err := s.ExternalSquadUuid.Decode(d); err != nil {
 					return err
@@ -38079,7 +38777,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"externalSquadUuid\"")
 			}
 		case "trojanPassword":
-			requiredBitSet[1] |= 1 << 5
+			requiredBitSet[1] |= 1 << 6
 			if err := func() error {
 				v, err := d.Str()
 				s.TrojanPassword = string(v)
@@ -38091,7 +38789,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"trojanPassword\"")
 			}
 		case "vlessUuid":
-			requiredBitSet[1] |= 1 << 6
+			requiredBitSet[1] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeUUID(d)
 				s.VlessUuid = v
@@ -38103,7 +38801,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"vlessUuid\"")
 			}
 		case "ssPassword":
-			requiredBitSet[1] |= 1 << 7
+			requiredBitSet[2] |= 1 << 0
 			if err := func() error {
 				v, err := d.Str()
 				s.SsPassword = string(v)
@@ -38125,7 +38823,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"lastTriggeredThreshold\"")
 			}
 		case "subRevokedAt":
-			requiredBitSet[2] |= 1 << 1
+			requiredBitSet[2] |= 1 << 2
 			if err := func() error {
 				if err := s.SubRevokedAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -38135,7 +38833,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subRevokedAt\"")
 			}
 		case "subLastUserAgent":
-			requiredBitSet[2] |= 1 << 2
+			requiredBitSet[2] |= 1 << 3
 			if err := func() error {
 				if err := s.SubLastUserAgent.Decode(d); err != nil {
 					return err
@@ -38145,7 +38843,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subLastUserAgent\"")
 			}
 		case "subLastOpenedAt":
-			requiredBitSet[2] |= 1 << 3
+			requiredBitSet[2] |= 1 << 4
 			if err := func() error {
 				if err := s.SubLastOpenedAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -38155,7 +38853,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subLastOpenedAt\"")
 			}
 		case "lastTrafficResetAt":
-			requiredBitSet[2] |= 1 << 4
+			requiredBitSet[2] |= 1 << 5
 			if err := func() error {
 				if err := s.LastTrafficResetAt.Decode(d, json.DecodeDateTime); err != nil {
 					return err
@@ -38165,7 +38863,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"lastTrafficResetAt\"")
 			}
 		case "createdAt":
-			requiredBitSet[2] |= 1 << 5
+			requiredBitSet[2] |= 1 << 6
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -38177,7 +38875,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"createdAt\"")
 			}
 		case "updatedAt":
-			requiredBitSet[2] |= 1 << 6
+			requiredBitSet[2] |= 1 << 7
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -38189,7 +38887,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"updatedAt\"")
 			}
 		case "subscriptionUrl":
-			requiredBitSet[2] |= 1 << 7
+			requiredBitSet[3] |= 1 << 0
 			if err := func() error {
 				v, err := d.Str()
 				s.SubscriptionUrl = string(v)
@@ -38201,7 +38899,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"subscriptionUrl\"")
 			}
 		case "activeInternalSquads":
-			requiredBitSet[3] |= 1 << 0
+			requiredBitSet[3] |= 1 << 1
 			if err := func() error {
 				s.ActiveInternalSquads = make([]ActiveInternalSquad, 0)
 				if err := d.Arr(func(d *jx.Decoder) error {
@@ -38219,7 +38917,7 @@ func (s *User) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"activeInternalSquads\"")
 			}
 		case "userTraffic":
-			requiredBitSet[3] |= 1 << 1
+			requiredBitSet[3] |= 1 << 2
 			if err := func() error {
 				if err := s.UserTraffic.Decode(d); err != nil {
 					return err
@@ -38238,10 +38936,10 @@ func (s *User) Decode(d *jx.Decoder) error {
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [4]uint8{
-		0b11000111,
+		0b10001111,
 		0b11111111,
-		0b11111110,
-		0b00000011,
+		0b11111101,
+		0b00000111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.

@@ -46,6 +46,10 @@ func (s *CreateHostRequestDto) setDefaults() {
 	}
 	{
 		val := bool(false)
+		s.KeepSniBlank.SetTo(val)
+	}
+	{
+		val := bool(false)
 		s.AllowInsecure.SetTo(val)
 	}
 	{
@@ -99,6 +103,10 @@ func (s *HostItem) setDefaults() {
 	{
 		val := bool(false)
 		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.KeepSniBlank.SetTo(val)
 	}
 	{
 		val := bool(false)

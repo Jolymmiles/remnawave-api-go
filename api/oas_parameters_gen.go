@@ -72,6 +72,14 @@ type HwidUserDevicesControllerGetAllUsersParams struct {
 	Start OptFloat64 `json:",omitempty,omitzero"`
 }
 
+// HwidUserDevicesControllerGetTopUsersByHwidDevicesParams is parameters of HwidUserDevicesController_getTopUsersByHwidDevices operation.
+type HwidUserDevicesControllerGetTopUsersByHwidDevicesParams struct {
+	// Page size for pagination.
+	Size OptFloat64 `json:",omitempty,omitzero"`
+	// Offset for pagination.
+	Start OptFloat64 `json:",omitempty,omitzero"`
+}
+
 // HwidUserDevicesControllerGetUserHwidDevicesParams is parameters of HwidUserDevicesController_getUserHwidDevices operation.
 type HwidUserDevicesControllerGetUserHwidDevicesParams struct {
 	// UUID of the user.
@@ -292,6 +300,12 @@ type UsersControllerGetAllUsersParams struct {
 type UsersControllerGetUserAccessibleNodesParams struct {
 	// UUID of the user.
 	UUID string
+}
+
+// UsersControllerGetUserByIdParams is parameters of UsersController_getUserById operation.
+type UsersControllerGetUserByIdParams struct {
+	// ID of the user.
+	ID string
 }
 
 // UsersControllerGetUserByShortUuidParams is parameters of UsersController_getUserByShortUuid operation.

@@ -1011,6 +1011,96 @@ class InlineSchemaExtractor:
             current['properties'][last_part] = {'$ref': f'#/components/schemas/{ref_name}'}
 
 
+def fix_nullable_without_type(spec: dict) -> Tuple[dict, int]:
+    """
+    Fix schema properties that have 'nullable: true' but no 'type' field.
+    Ogen generates invalid code for such properties.
+    
+    For empty objects with nullable: true, we use x-ogen-name with {} to make ogen
+    generate jx.Raw type which properly handles null values.
+    
+    Returns: (spec, count_of_fixed_properties)
+    """
+    spec = copy.deepcopy(spec)
+    fixed_count = 0
+    
+    def is_empty_object(schema: dict) -> bool:
+        """Check if schema is an empty object (type: object with no/empty properties)"""
+        if schema.get('type') != 'object':
+            return False
+        props = schema.get('properties', {})
+        return len(props) == 0
+    
+    def fix_schema(schema: dict, path: str = "") -> int:
+        """Recursively fix nullable properties without type"""
+        count = 0
+        
+        if not isinstance(schema, dict):
+            return 0
+        
+        # Check if this schema has nullable but no type
+        if schema.get('nullable') is True and 'type' not in schema and '$ref' not in schema:
+            schema['type'] = 'object'
+            count += 1
+        
+        # For nullable empty objects, convert to {} (additionalProperties: true)
+        # This makes ogen generate jx.Raw which properly handles null
+        if schema.get('nullable') is True and is_empty_object(schema):
+            # Remove properties and type, use empty schema with additionalProperties
+            schema.pop('properties', None)
+            schema.pop('type', None)
+            # Empty schema {} means any JSON value including null
+            count += 1
+        
+        # Recurse into properties
+        if 'properties' in schema:
+            for prop_name, prop_def in schema['properties'].items():
+                if isinstance(prop_def, dict):
+                    count += fix_schema(prop_def, f"{path}.properties.{prop_name}")
+        
+        # Recurse into items
+        if 'items' in schema and isinstance(schema['items'], dict):
+            count += fix_schema(schema['items'], f"{path}.items")
+        
+        # Recurse into allOf/oneOf/anyOf
+        for key in ['allOf', 'oneOf', 'anyOf']:
+            if key in schema:
+                for i, sub_schema in enumerate(schema[key]):
+                    if isinstance(sub_schema, dict):
+                        count += fix_schema(sub_schema, f"{path}.{key}[{i}]")
+        
+        # Recurse into additionalProperties
+        if 'additionalProperties' in schema and isinstance(schema['additionalProperties'], dict):
+            count += fix_schema(schema['additionalProperties'], f"{path}.additionalProperties")
+        
+        return count
+    
+    # Fix schemas in components
+    for schema_name, schema_def in spec.get('components', {}).get('schemas', {}).items():
+        fixed_count += fix_schema(schema_def, f"#/components/schemas/{schema_name}")
+    
+    # Fix inline schemas in paths
+    for path, methods in spec.get('paths', {}).items():
+        for method, op in methods.items():
+            if not isinstance(op, dict):
+                continue
+            
+            # Fix request body
+            if 'requestBody' in op:
+                for content_type, content in op['requestBody'].get('content', {}).items():
+                    if 'schema' in content:
+                        fixed_count += fix_schema(content['schema'], f"paths.{path}.{method}.requestBody")
+            
+            # Fix responses
+            for status, response in op.get('responses', {}).items():
+                if isinstance(response, dict):
+                    for content_type, content in response.get('content', {}).items():
+                        if 'schema' in content:
+                            fixed_count += fix_schema(content['schema'], f"paths.{path}.{method}.responses.{status}")
+    
+    return spec, fixed_count
+
+
 def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
     """
     Unify duplicate error response schemas (400 BadRequest, 401 Unauthorized, etc.)

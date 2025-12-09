@@ -181,6 +181,10 @@ type HwidUserDevicesControllerGetHwidDevicesStatsRes interface {
 	hwidUserDevicesControllerGetHwidDevicesStatsRes()
 }
 
+type HwidUserDevicesControllerGetTopUsersByHwidDevicesRes interface {
+	hwidUserDevicesControllerGetTopUsersByHwidDevicesRes()
+}
+
 type HwidUserDevicesControllerGetUserHwidDevicesRes interface {
 	hwidUserDevicesControllerGetUserHwidDevicesRes()
 }
@@ -299,6 +303,10 @@ type NodesControllerGetAllNodesTagsRes interface {
 
 type NodesControllerGetOneNodeRes interface {
 	nodesControllerGetOneNodeRes()
+}
+
+type NodesControllerProfileModificationRes interface {
+	nodesControllerProfileModificationRes()
 }
 
 type NodesControllerReorderNodesRes interface {
@@ -473,6 +481,10 @@ type UserSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsR
 	userSubscriptionRequestHistoryControllerGetSubscriptionRequestHistoryStatsRes()
 }
 
+type UsersBulkActionsControllerBulkAllExtendExpirationDateRes interface {
+	usersBulkActionsControllerBulkAllExtendExpirationDateRes()
+}
+
 type UsersBulkActionsControllerBulkAllResetUserTrafficRes interface {
 	usersBulkActionsControllerBulkAllResetUserTrafficRes()
 }
@@ -483,6 +495,10 @@ type UsersBulkActionsControllerBulkDeleteUsersByStatusRes interface {
 
 type UsersBulkActionsControllerBulkDeleteUsersRes interface {
 	usersBulkActionsControllerBulkDeleteUsersRes()
+}
+
+type UsersBulkActionsControllerBulkExtendExpirationDateRes interface {
+	usersBulkActionsControllerBulkExtendExpirationDateRes()
 }
 
 type UsersBulkActionsControllerBulkResetUserTrafficRes interface {
@@ -531,6 +547,10 @@ type UsersControllerGetAllUsersRes interface {
 
 type UsersControllerGetUserAccessibleNodesRes interface {
 	usersControllerGetUserAccessibleNodesRes()
+}
+
+type UsersControllerGetUserByIdRes interface {
+	usersControllerGetUserByIdRes()
 }
 
 type UsersControllerGetUserByShortUuidRes interface {

@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from smart_consolidate import SmartConsolidator, InlineSchemaExtractor, unify_error_responses
+from smart_consolidate import SmartConsolidator, InlineSchemaExtractor, unify_error_responses, fix_nullable_without_type
 
 
 class Colors:
@@ -102,6 +102,13 @@ def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_ext
     if error_stats['total_replaced'] > 0:
         print_info(f"Unified {error_stats['total_replaced']} error responses (400: {error_stats['responses_unified'].get('400', 0)}, 401: {error_stats['responses_unified'].get('401', 0)})")
         stats['unified_errors'] = error_stats['total_replaced']
+    
+    # Fix nullable properties without type (ogen requires type for nullable fields)
+    print_info("Fixing nullable properties without type...")
+    new_spec, nullable_fixed = fix_nullable_without_type(new_spec)
+    if nullable_fixed > 0:
+        print_info(f"Fixed {nullable_fixed} nullable properties without type")
+        stats['nullable_fixed'] = nullable_fixed
     
     # Extract inline schemas for reuse (optional - can cause conflicts in some specs)
     if not skip_inline_extraction:

@@ -455,17 +455,17 @@ func NewHostsBulkActionsClient(client *Client) *HostsBulkActionsClient {
 }
 
 // DeleteHosts calls HostsBulkActionsController_deleteHosts.
-func (sc *HostsBulkActionsClient) DeleteHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDeleteHostsRes, error) {
+func (sc *HostsBulkActionsClient) DeleteHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerDeleteHostsRes, error) {
 	return sc.client.HostsBulkActionsControllerDeleteHosts(ctx, request)
 }
 
 // DisableHosts calls HostsBulkActionsController_disableHosts.
-func (sc *HostsBulkActionsClient) DisableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerDisableHostsRes, error) {
+func (sc *HostsBulkActionsClient) DisableHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerDisableHostsRes, error) {
 	return sc.client.HostsBulkActionsControllerDisableHosts(ctx, request)
 }
 
 // EnableHosts calls HostsBulkActionsController_enableHosts.
-func (sc *HostsBulkActionsClient) EnableHosts(ctx context.Context, request *BulkUuidsRequest) (HostsBulkActionsControllerEnableHostsRes, error) {
+func (sc *HostsBulkActionsClient) EnableHosts(ctx context.Context, request *BulkUuidsRequest2) (HostsBulkActionsControllerEnableHostsRes, error) {
 	return sc.client.HostsBulkActionsControllerEnableHosts(ctx, request)
 }
 
@@ -515,6 +515,14 @@ func (sc *HwidUserDevicesClient) GetAllUsers(ctx context.Context, size float64, 
 // GetHwidDevicesStats calls HwidUserDevicesController_getHwidDevicesStats.
 func (sc *HwidUserDevicesClient) GetHwidDevicesStats(ctx context.Context) (HwidUserDevicesControllerGetHwidDevicesStatsRes, error) {
 	return sc.client.HwidUserDevicesControllerGetHwidDevicesStats(ctx)
+}
+
+// GetTopUsersByHwidDevices calls HwidUserDevicesController_getTopUsersByHwidDevices.
+func (sc *HwidUserDevicesClient) GetTopUsersByHwidDevices(ctx context.Context, size float64, start float64) (HwidUserDevicesControllerGetTopUsersByHwidDevicesRes, error) {
+	return sc.client.HwidUserDevicesControllerGetTopUsersByHwidDevices(ctx, HwidUserDevicesControllerGetTopUsersByHwidDevicesParams{
+		Size: NewOptFloat64(size),
+		Start: NewOptFloat64(start),
+	})
 }
 
 // GetUserHwidDevices calls HwidUserDevicesController_getUserHwidDevices.
@@ -733,6 +741,11 @@ func (sc *NodesClient) GetOneNode(ctx context.Context, uuid string) (NodesContro
 	return sc.client.NodesControllerGetOneNode(ctx, NodesControllerGetOneNodeParams{
 		UUID: uuid,
 	})
+}
+
+// ProfileModification calls NodesController_profileModification.
+func (sc *NodesClient) ProfileModification(ctx context.Context, request *ProfileModificationRequestDto) (NodesControllerProfileModificationRes, error) {
+	return sc.client.NodesControllerProfileModification(ctx, request)
 }
 
 // ReorderNodes calls NodesController_reorderNodes.
@@ -1141,6 +1154,13 @@ func (sc *UsersClient) GetUserAccessibleNodes(ctx context.Context, uuid string) 
 	})
 }
 
+// GetUserById calls UsersController_getUserById.
+func (sc *UsersClient) GetUserById(ctx context.Context, id string) (UsersControllerGetUserByIdRes, error) {
+	return sc.client.UsersControllerGetUserById(ctx, UsersControllerGetUserByIdParams{
+		ID: id,
+	})
+}
+
 // GetUserByShortUuid calls UsersController_getUserByShortUuid.
 func (sc *UsersClient) GetUserByShortUuid(ctx context.Context, shortuuid string) (UsersControllerGetUserByShortUuidRes, error) {
 	return sc.client.UsersControllerGetUserByShortUuid(ctx, UsersControllerGetUserByShortUuidParams{
@@ -1219,6 +1239,11 @@ func NewUsersBulkActionsClient(client *Client) *UsersBulkActionsClient {
 	return &UsersBulkActionsClient{client: client}
 }
 
+// BulkAllExtendExpirationDate calls UsersBulkActionsController_bulkAllExtendExpirationDate.
+func (sc *UsersBulkActionsClient) BulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequestDto) (UsersBulkActionsControllerBulkAllExtendExpirationDateRes, error) {
+	return sc.client.UsersBulkActionsControllerBulkAllExtendExpirationDate(ctx, request)
+}
+
 // BulkAllResetUserTraffic calls UsersBulkActionsController_bulkAllResetUserTraffic.
 func (sc *UsersBulkActionsClient) BulkAllResetUserTraffic(ctx context.Context) (UsersBulkActionsControllerBulkAllResetUserTrafficRes, error) {
 	return sc.client.UsersBulkActionsControllerBulkAllResetUserTraffic(ctx)
@@ -1232,6 +1257,11 @@ func (sc *UsersBulkActionsClient) BulkDeleteUsers(ctx context.Context, request *
 // BulkDeleteUsersByStatus calls UsersBulkActionsController_bulkDeleteUsersByStatus.
 func (sc *UsersBulkActionsClient) BulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequestDto) (UsersBulkActionsControllerBulkDeleteUsersByStatusRes, error) {
 	return sc.client.UsersBulkActionsControllerBulkDeleteUsersByStatus(ctx, request)
+}
+
+// BulkExtendExpirationDate calls UsersBulkActionsController_bulkExtendExpirationDate.
+func (sc *UsersBulkActionsClient) BulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequestDto) (UsersBulkActionsControllerBulkExtendExpirationDateRes, error) {
+	return sc.client.UsersBulkActionsControllerBulkExtendExpirationDate(ctx, request)
 }
 
 // BulkResetUserTraffic calls UsersBulkActionsController_bulkResetUserTraffic.
