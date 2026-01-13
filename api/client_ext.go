@@ -10,6 +10,8 @@ type ClientExt struct {
 	client *Client
 	apiTokens *ApiTokensClient
 	auth *AuthClient
+	bandwidthStatsNodes *BandwidthStatsNodesClient
+	bandwidthStatsUsers *BandwidthStatsUsersClient
 	configProfile *ConfigProfileClient
 	externalSquad *ExternalSquadClient
 	hosts *HostsClient
@@ -20,11 +22,11 @@ type ClientExt struct {
 	keygen *KeygenClient
 	nodes *NodesClient
 	nodesUsageHistory *NodesUsageHistoryClient
-	nodesUserUsageHistory *NodesUserUsageHistoryClient
 	passkey *PasskeyClient
 	remnawaveSettings *RemnawaveSettingsClient
 	snippets *SnippetsClient
 	subscription *SubscriptionClient
+	subscriptionPageConfig *SubscriptionPageConfigClient
 	subscriptionSettings *SubscriptionSettingsClient
 	subscriptionTemplate *SubscriptionTemplateClient
 	subscriptions *SubscriptionsClient
@@ -32,7 +34,6 @@ type ClientExt struct {
 	userSubscriptionRequestHistory *UserSubscriptionRequestHistoryClient
 	users *UsersClient
 	usersBulkActions *UsersBulkActionsClient
-	usersStats *UsersStatsClient
 }
 
 // NewClientExt creates a new ClientExt wrapper.
@@ -41,6 +42,8 @@ func NewClientExt(client *Client) *ClientExt {
 		client: client,
 		apiTokens: NewApiTokensClient(client),
 		auth: NewAuthClient(client),
+		bandwidthStatsNodes: NewBandwidthStatsNodesClient(client),
+		bandwidthStatsUsers: NewBandwidthStatsUsersClient(client),
 		configProfile: NewConfigProfileClient(client),
 		externalSquad: NewExternalSquadClient(client),
 		hosts: NewHostsClient(client),
@@ -51,11 +54,11 @@ func NewClientExt(client *Client) *ClientExt {
 		keygen: NewKeygenClient(client),
 		nodes: NewNodesClient(client),
 		nodesUsageHistory: NewNodesUsageHistoryClient(client),
-		nodesUserUsageHistory: NewNodesUserUsageHistoryClient(client),
 		passkey: NewPasskeyClient(client),
 		remnawaveSettings: NewRemnawaveSettingsClient(client),
 		snippets: NewSnippetsClient(client),
 		subscription: NewSubscriptionClient(client),
+		subscriptionPageConfig: NewSubscriptionPageConfigClient(client),
 		subscriptionSettings: NewSubscriptionSettingsClient(client),
 		subscriptionTemplate: NewSubscriptionTemplateClient(client),
 		subscriptions: NewSubscriptionsClient(client),
@@ -63,7 +66,6 @@ func NewClientExt(client *Client) *ClientExt {
 		userSubscriptionRequestHistory: NewUserSubscriptionRequestHistoryClient(client),
 		users: NewUsersClient(client),
 		usersBulkActions: NewUsersBulkActionsClient(client),
-		usersStats: NewUsersStatsClient(client),
 	}
 }
 
@@ -80,6 +82,16 @@ func (ce *ClientExt) ApiTokens() *ApiTokensClient {
 // Auth returns the AuthClient.
 func (ce *ClientExt) Auth() *AuthClient {
 	return ce.auth
+}
+
+// BandwidthStatsNodes returns the BandwidthStatsNodesClient.
+func (ce *ClientExt) BandwidthStatsNodes() *BandwidthStatsNodesClient {
+	return ce.bandwidthStatsNodes
+}
+
+// BandwidthStatsUsers returns the BandwidthStatsUsersClient.
+func (ce *ClientExt) BandwidthStatsUsers() *BandwidthStatsUsersClient {
+	return ce.bandwidthStatsUsers
 }
 
 // ConfigProfile returns the ConfigProfileClient.
@@ -132,11 +144,6 @@ func (ce *ClientExt) NodesUsageHistory() *NodesUsageHistoryClient {
 	return ce.nodesUsageHistory
 }
 
-// NodesUserUsageHistory returns the NodesUserUsageHistoryClient.
-func (ce *ClientExt) NodesUserUsageHistory() *NodesUserUsageHistoryClient {
-	return ce.nodesUserUsageHistory
-}
-
 // Passkey returns the PasskeyClient.
 func (ce *ClientExt) Passkey() *PasskeyClient {
 	return ce.passkey
@@ -155,6 +162,11 @@ func (ce *ClientExt) Snippets() *SnippetsClient {
 // Subscription returns the SubscriptionClient.
 func (ce *ClientExt) Subscription() *SubscriptionClient {
 	return ce.subscription
+}
+
+// SubscriptionPageConfig returns the SubscriptionPageConfigClient.
+func (ce *ClientExt) SubscriptionPageConfig() *SubscriptionPageConfigClient {
+	return ce.subscriptionPageConfig
 }
 
 // SubscriptionSettings returns the SubscriptionSettingsClient.
@@ -190,11 +202,6 @@ func (ce *ClientExt) Users() *UsersClient {
 // UsersBulkActions returns the UsersBulkActionsClient.
 func (ce *ClientExt) UsersBulkActions() *UsersBulkActionsClient {
 	return ce.usersBulkActions
-}
-
-// UsersStats returns the UsersStatsClient.
-func (ce *ClientExt) UsersStats() *UsersStatsClient {
-	return ce.usersStats
 }
 
 // ApiTokensClient provides ApiTokens operations.
@@ -272,6 +279,51 @@ func (sc *AuthClient) Register(ctx context.Context, request *RegisterRequestDto)
 // TelegramCallback calls AuthController_telegramCallback.
 func (sc *AuthClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequestDto) (AuthControllerTelegramCallbackRes, error) {
 	return sc.client.AuthControllerTelegramCallback(ctx, request)
+}
+
+// BandwidthStatsNodesClient provides BandwidthStatsNodes operations.
+type BandwidthStatsNodesClient struct {
+	client *Client
+}
+
+// NewBandwidthStatsNodesClient creates a new BandwidthStatsNodesClient.
+func NewBandwidthStatsNodesClient(client *Client) *BandwidthStatsNodesClient {
+	return &BandwidthStatsNodesClient{client: client}
+}
+
+// GetNodeUserUsage calls BandwidthStatsNodesController_getNodeUserUsage.
+func (sc *BandwidthStatsNodesClient) GetNodeUserUsage(ctx context.Context, params BandwidthStatsNodesControllerGetNodeUserUsageParams) (BandwidthStatsNodesControllerGetNodeUserUsageRes, error) {
+	return sc.client.BandwidthStatsNodesControllerGetNodeUserUsage(ctx, params)
+}
+
+// GetNodesRealtimeUsage calls BandwidthStatsNodesController_getNodesRealtimeUsage.
+func (sc *BandwidthStatsNodesClient) GetNodesRealtimeUsage(ctx context.Context) (BandwidthStatsNodesControllerGetNodesRealtimeUsageRes, error) {
+	return sc.client.BandwidthStatsNodesControllerGetNodesRealtimeUsage(ctx)
+}
+
+// GetStatsNodeUsersUsage calls BandwidthStatsNodesController_getStatsNodeUsersUsage.
+func (sc *BandwidthStatsNodesClient) GetStatsNodeUsersUsage(ctx context.Context, params BandwidthStatsNodesControllerGetStatsNodeUsersUsageParams) (BandwidthStatsNodesControllerGetStatsNodeUsersUsageRes, error) {
+	return sc.client.BandwidthStatsNodesControllerGetStatsNodeUsersUsage(ctx, params)
+}
+
+// BandwidthStatsUsersClient provides BandwidthStatsUsers operations.
+type BandwidthStatsUsersClient struct {
+	client *Client
+}
+
+// NewBandwidthStatsUsersClient creates a new BandwidthStatsUsersClient.
+func NewBandwidthStatsUsersClient(client *Client) *BandwidthStatsUsersClient {
+	return &BandwidthStatsUsersClient{client: client}
+}
+
+// GetStatsNodesUsage calls BandwidthStatsUsersController_getStatsNodesUsage.
+func (sc *BandwidthStatsUsersClient) GetStatsNodesUsage(ctx context.Context, params BandwidthStatsUsersControllerGetStatsNodesUsageParams) (BandwidthStatsUsersControllerGetStatsNodesUsageRes, error) {
+	return sc.client.BandwidthStatsUsersControllerGetStatsNodesUsage(ctx, params)
+}
+
+// GetUserUsageByRange calls BandwidthStatsUsersController_getUserUsageByRange.
+func (sc *BandwidthStatsUsersClient) GetUserUsageByRange(ctx context.Context, params BandwidthStatsUsersControllerGetUserUsageByRangeParams) (BandwidthStatsUsersControllerGetUserUsageByRangeRes, error) {
+	return sc.client.BandwidthStatsUsersControllerGetUserUsageByRange(ctx, params)
 }
 
 // ConfigProfileClient provides ConfigProfile operations.
@@ -355,7 +407,7 @@ func (sc *ExternalSquadClient) AddUsersToExternalSquad(ctx context.Context, uuid
 }
 
 // CreateExternalSquad calls ExternalSquadController_createExternalSquad.
-func (sc *ExternalSquadClient) CreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
+func (sc *ExternalSquadClient) CreateExternalSquad(ctx context.Context, request *ExternalSquadRequestRequest) (ExternalSquadControllerCreateExternalSquadRes, error) {
 	return sc.client.ExternalSquadControllerCreateExternalSquad(ctx, request)
 }
 
@@ -787,29 +839,9 @@ func NewNodesUsageHistoryClient(client *Client) *NodesUsageHistoryClient {
 	return &NodesUsageHistoryClient{client: client}
 }
 
-// GetNodesUsageByRange calls NodesUsageHistoryController_getNodesUsageByRange.
-func (sc *NodesUsageHistoryClient) GetNodesUsageByRange(ctx context.Context, params NodesUsageHistoryControllerGetNodesUsageByRangeParams) (NodesUsageHistoryControllerGetNodesUsageByRangeRes, error) {
-	return sc.client.NodesUsageHistoryControllerGetNodesUsageByRange(ctx, params)
-}
-
-// NodesUserUsageHistoryClient provides NodesUserUsageHistory operations.
-type NodesUserUsageHistoryClient struct {
-	client *Client
-}
-
-// NewNodesUserUsageHistoryClient creates a new NodesUserUsageHistoryClient.
-func NewNodesUserUsageHistoryClient(client *Client) *NodesUserUsageHistoryClient {
-	return &NodesUserUsageHistoryClient{client: client}
-}
-
-// GetNodeUserUsage calls NodesUserUsageHistoryController_getNodeUserUsage.
-func (sc *NodesUserUsageHistoryClient) GetNodeUserUsage(ctx context.Context, params NodesUserUsageHistoryControllerGetNodeUserUsageParams) (NodesUserUsageHistoryControllerGetNodeUserUsageRes, error) {
-	return sc.client.NodesUserUsageHistoryControllerGetNodeUserUsage(ctx, params)
-}
-
-// GetNodesRealtimeUsage calls NodesUserUsageHistoryController_getNodesRealtimeUsage.
-func (sc *NodesUserUsageHistoryClient) GetNodesRealtimeUsage(ctx context.Context) (NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes, error) {
-	return sc.client.NodesUserUsageHistoryControllerGetNodesRealtimeUsage(ctx)
+// GetStatsNodesUsage calls NodesUsageHistoryController_getStatsNodesUsage.
+func (sc *NodesUsageHistoryClient) GetStatsNodesUsage(ctx context.Context, params NodesUsageHistoryControllerGetStatsNodesUsageParams) (NodesUsageHistoryControllerGetStatsNodesUsageRes, error) {
+	return sc.client.NodesUsageHistoryControllerGetStatsNodesUsage(ctx, params)
 }
 
 // PasskeyClient provides Passkey operations.
@@ -914,6 +946,55 @@ func (sc *SubscriptionClient) GetSubscriptionInfoByShortUuid(ctx context.Context
 	})
 }
 
+// SubscriptionPageConfigClient provides SubscriptionPageConfig operations.
+type SubscriptionPageConfigClient struct {
+	client *Client
+}
+
+// NewSubscriptionPageConfigClient creates a new SubscriptionPageConfigClient.
+func NewSubscriptionPageConfigClient(client *Client) *SubscriptionPageConfigClient {
+	return &SubscriptionPageConfigClient{client: client}
+}
+
+// CloneSubscriptionPageConfig calls SubscriptionPageConfigController_cloneSubscriptionPageConfig.
+func (sc *SubscriptionPageConfigClient) CloneSubscriptionPageConfig(ctx context.Context, request *CloneSubscriptionPageConfigRequestDto) (SubscriptionPageConfigControllerCloneSubscriptionPageConfigRes, error) {
+	return sc.client.SubscriptionPageConfigControllerCloneSubscriptionPageConfig(ctx, request)
+}
+
+// CreateConfig calls SubscriptionPageConfigController_createConfig.
+func (sc *SubscriptionPageConfigClient) CreateConfig(ctx context.Context, request *ExternalSquadRequestRequest) (SubscriptionPageConfigControllerCreateConfigRes, error) {
+	return sc.client.SubscriptionPageConfigControllerCreateConfig(ctx, request)
+}
+
+// DeleteConfig calls SubscriptionPageConfigController_deleteConfig.
+func (sc *SubscriptionPageConfigClient) DeleteConfig(ctx context.Context, uuid string) (SubscriptionPageConfigControllerDeleteConfigRes, error) {
+	return sc.client.SubscriptionPageConfigControllerDeleteConfig(ctx, SubscriptionPageConfigControllerDeleteConfigParams{
+		UUID: uuid,
+	})
+}
+
+// GetAllConfigs calls SubscriptionPageConfigController_getAllConfigs.
+func (sc *SubscriptionPageConfigClient) GetAllConfigs(ctx context.Context) (SubscriptionPageConfigControllerGetAllConfigsRes, error) {
+	return sc.client.SubscriptionPageConfigControllerGetAllConfigs(ctx)
+}
+
+// GetConfigByUuid calls SubscriptionPageConfigController_getConfigByUuid.
+func (sc *SubscriptionPageConfigClient) GetConfigByUuid(ctx context.Context, uuid string) (SubscriptionPageConfigControllerGetConfigByUuidRes, error) {
+	return sc.client.SubscriptionPageConfigControllerGetConfigByUuid(ctx, SubscriptionPageConfigControllerGetConfigByUuidParams{
+		UUID: uuid,
+	})
+}
+
+// ReorderSubscriptionPageConfigs calls SubscriptionPageConfigController_reorderSubscriptionPageConfigs.
+func (sc *SubscriptionPageConfigClient) ReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderRequest) (SubscriptionPageConfigControllerReorderSubscriptionPageConfigsRes, error) {
+	return sc.client.SubscriptionPageConfigControllerReorderSubscriptionPageConfigs(ctx, request)
+}
+
+// UpdateConfig calls SubscriptionPageConfigController_updateConfig.
+func (sc *SubscriptionPageConfigClient) UpdateConfig(ctx context.Context, request *UpdateSubscriptionPageConfigRequestDto) (SubscriptionPageConfigControllerUpdateConfigRes, error) {
+	return sc.client.SubscriptionPageConfigControllerUpdateConfig(ctx, request)
+}
+
 // SubscriptionSettingsClient provides SubscriptionSettings operations.
 type SubscriptionSettingsClient struct {
 	client *Client
@@ -1004,6 +1085,13 @@ func (sc *SubscriptionsClient) GetRawSubscriptionByShortUuid(ctx context.Context
 	})
 }
 
+// GetSubpageConfigByShortUuid calls SubscriptionsController_getSubpageConfigByShortUuid.
+func (sc *SubscriptionsClient) GetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidRequestBodyDto, shortuuid string) (SubscriptionsControllerGetSubpageConfigByShortUuidRes, error) {
+	return sc.client.SubscriptionsControllerGetSubpageConfigByShortUuid(ctx, request, SubscriptionsControllerGetSubpageConfigByShortUuidParams{
+		ShortUuid: shortuuid,
+	})
+}
+
 // GetSubscriptionByShortUuidProtected calls SubscriptionsController_getSubscriptionByShortUuidProtected.
 func (sc *SubscriptionsClient) GetSubscriptionByShortUuidProtected(ctx context.Context, shortuuid string) (SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes, error) {
 	return sc.client.SubscriptionsControllerGetSubscriptionByShortUuidProtected(ctx, SubscriptionsControllerGetSubscriptionByShortUuidProtectedParams{
@@ -1048,6 +1136,11 @@ func (sc *SystemClient) EncryptHappCryptoLink(ctx context.Context, request *Encr
 // GetBandwidthStats calls SystemController_getBandwidthStats.
 func (sc *SystemClient) GetBandwidthStats(ctx context.Context) (SystemControllerGetBandwidthStatsRes, error) {
 	return sc.client.SystemControllerGetBandwidthStats(ctx)
+}
+
+// GetMetadata calls SystemController_getMetadata.
+func (sc *SystemClient) GetMetadata(ctx context.Context) (SystemControllerGetMetadataRes, error) {
+	return sc.client.SystemControllerGetMetadata(ctx)
 }
 
 // GetNodesMetrics calls SystemController_getNodesMetrics.
@@ -1287,20 +1380,5 @@ func (sc *UsersBulkActionsClient) BulkUpdateUsers(ctx context.Context, request *
 // BulkUpdateUsersInternalSquads calls UsersBulkActionsController_bulkUpdateUsersInternalSquads.
 func (sc *UsersBulkActionsClient) BulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequestDto) (UsersBulkActionsControllerBulkUpdateUsersInternalSquadsRes, error) {
 	return sc.client.UsersBulkActionsControllerBulkUpdateUsersInternalSquads(ctx, request)
-}
-
-// UsersStatsClient provides UsersStats operations.
-type UsersStatsClient struct {
-	client *Client
-}
-
-// NewUsersStatsClient creates a new UsersStatsClient.
-func NewUsersStatsClient(client *Client) *UsersStatsClient {
-	return &UsersStatsClient{client: client}
-}
-
-// GetUserUsageByRange calls UsersStatsController_getUserUsageByRange.
-func (sc *UsersStatsClient) GetUserUsageByRange(ctx context.Context, params UsersStatsControllerGetUserUsageByRangeParams) (UsersStatsControllerGetUserUsageByRangeRes, error) {
-	return sc.client.UsersStatsControllerGetUserUsageByRange(ctx, params)
 }
 

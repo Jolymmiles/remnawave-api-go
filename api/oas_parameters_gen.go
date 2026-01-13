@@ -12,6 +12,50 @@ type ApiTokensControllerDeleteParams struct {
 	UUID string
 }
 
+// BandwidthStatsNodesControllerGetNodeUserUsageParams is parameters of BandwidthStatsNodesController_getNodeUserUsage operation.
+type BandwidthStatsNodesControllerGetNodeUserUsageParams struct {
+	// Start date.
+	Start time.Time
+	// End date.
+	End time.Time
+	// UUID of the node.
+	UUID string
+}
+
+// BandwidthStatsNodesControllerGetStatsNodeUsersUsageParams is parameters of BandwidthStatsNodesController_getStatsNodeUsersUsage operation.
+type BandwidthStatsNodesControllerGetStatsNodeUsersUsageParams struct {
+	// Limit of top users to return.
+	TopUsersLimit float64
+	// Start date.
+	Start time.Time
+	// End date.
+	End time.Time
+	// UUID of the node.
+	UUID string
+}
+
+// BandwidthStatsUsersControllerGetStatsNodesUsageParams is parameters of BandwidthStatsUsersController_getStatsNodesUsage operation.
+type BandwidthStatsUsersControllerGetStatsNodesUsageParams struct {
+	// Limit of top nodes to return.
+	TopNodesLimit float64
+	// Start date.
+	Start time.Time
+	// End date.
+	End time.Time
+	// UUID of the user.
+	UUID string
+}
+
+// BandwidthStatsUsersControllerGetUserUsageByRangeParams is parameters of BandwidthStatsUsersController_getUserUsageByRange operation.
+type BandwidthStatsUsersControllerGetUserUsageByRangeParams struct {
+	// Start date.
+	Start time.Time
+	// End date.
+	End time.Time
+	// UUID of the user.
+	UUID string
+}
+
 // ConfigProfileControllerDeleteConfigProfileByUuidParams is parameters of ConfigProfileController_deleteConfigProfileByUuid operation.
 type ConfigProfileControllerDeleteConfigProfileByUuidParams struct {
 	UUID string
@@ -168,22 +212,14 @@ type NodesControllerRestartNodeParams struct {
 	UUID string
 }
 
-// NodesUsageHistoryControllerGetNodesUsageByRangeParams is parameters of NodesUsageHistoryController_getNodesUsageByRange operation.
-type NodesUsageHistoryControllerGetNodesUsageByRangeParams struct {
+// NodesUsageHistoryControllerGetStatsNodesUsageParams is parameters of NodesUsageHistoryController_getStatsNodesUsage operation.
+type NodesUsageHistoryControllerGetStatsNodesUsageParams struct {
+	// Limit of top nodes to return.
+	TopNodesLimit float64
 	// Start date.
 	Start time.Time
 	// End date.
 	End time.Time
-}
-
-// NodesUserUsageHistoryControllerGetNodeUserUsageParams is parameters of NodesUserUsageHistoryController_getNodeUserUsage operation.
-type NodesUserUsageHistoryControllerGetNodeUserUsageParams struct {
-	// Start date.
-	Start time.Time
-	// End date.
-	End time.Time
-	// UUID of the node.
-	UUID string
 }
 
 // SubscriptionControllerGetSubscriptionParams is parameters of SubscriptionController_getSubscription operation.
@@ -216,6 +252,18 @@ type SubscriptionControllerGetSubscriptionWithTypeParams struct {
 	ShortUuid string
 }
 
+// SubscriptionPageConfigControllerDeleteConfigParams is parameters of SubscriptionPageConfigController_deleteConfig operation.
+type SubscriptionPageConfigControllerDeleteConfigParams struct {
+	// Subscription page config UUID.
+	UUID string
+}
+
+// SubscriptionPageConfigControllerGetConfigByUuidParams is parameters of SubscriptionPageConfigController_getConfigByUuid operation.
+type SubscriptionPageConfigControllerGetConfigByUuidParams struct {
+	// Subscription page config UUID.
+	UUID string
+}
+
 // SubscriptionTemplateControllerDeleteTemplateParams is parameters of SubscriptionTemplateController_deleteTemplate operation.
 type SubscriptionTemplateControllerDeleteTemplateParams struct {
 	// Template UUID.
@@ -240,6 +288,12 @@ type SubscriptionsControllerGetAllSubscriptionsParams struct {
 type SubscriptionsControllerGetRawSubscriptionByShortUuidParams struct {
 	// Include disabled hosts in the subscription. Default is false.
 	WithDisabledHosts OptBool `json:",omitempty,omitzero"`
+	// Short UUID of the user.
+	ShortUuid string
+}
+
+// SubscriptionsControllerGetSubpageConfigByShortUuidParams is parameters of SubscriptionsController_getSubpageConfigByShortUuid operation.
+type SubscriptionsControllerGetSubpageConfigByShortUuidParams struct {
 	// Short UUID of the user.
 	ShortUuid string
 }
@@ -358,16 +412,6 @@ type UsersControllerResetUserTrafficParams struct {
 
 // UsersControllerRevokeUserSubscriptionParams is parameters of UsersController_revokeUserSubscription operation.
 type UsersControllerRevokeUserSubscriptionParams struct {
-	// UUID of the user.
-	UUID string
-}
-
-// UsersStatsControllerGetUserUsageByRangeParams is parameters of UsersStatsController_getUserUsageByRange operation.
-type UsersStatsControllerGetUserUsageByRangeParams struct {
-	// Start date.
-	Start time.Time
-	// End date.
-	End time.Time
 	// UUID of the user.
 	UUID string
 }

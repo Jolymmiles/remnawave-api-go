@@ -115,6 +115,14 @@ func (s *HostItem) setDefaults() {
 }
 
 // setDefaults set default value of fields.
+func (s *RevokeUserSubscriptionBodyDto) setDefaults() {
+	{
+		val := bool(false)
+		s.RevokeOnlyPasswords.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
 func (s *UpdateUserRequestDto) setDefaults() {
 	{
 		val := UpdateUserRequestDtoTrafficLimitStrategy("NO_RESET")
@@ -123,9 +131,9 @@ func (s *UpdateUserRequestDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *User) setDefaults() {
+func (s *UserItemInfo) setDefaults() {
 	{
-		val := UserStatus("ACTIVE")
+		val := UserItemInfoStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 	{
@@ -133,7 +141,7 @@ func (s *User) setDefaults() {
 		s.TrafficLimitBytes.SetTo(val)
 	}
 	{
-		val := UserTrafficLimitStrategy("NO_RESET")
+		val := UserItemInfoTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 	{

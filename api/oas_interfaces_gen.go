@@ -45,6 +45,26 @@ type AuthControllerTelegramCallbackRes interface {
 	authControllerTelegramCallbackRes()
 }
 
+type BandwidthStatsNodesControllerGetNodeUserUsageRes interface {
+	bandwidthStatsNodesControllerGetNodeUserUsageRes()
+}
+
+type BandwidthStatsNodesControllerGetNodesRealtimeUsageRes interface {
+	bandwidthStatsNodesControllerGetNodesRealtimeUsageRes()
+}
+
+type BandwidthStatsNodesControllerGetStatsNodeUsersUsageRes interface {
+	bandwidthStatsNodesControllerGetStatsNodeUsersUsageRes()
+}
+
+type BandwidthStatsUsersControllerGetStatsNodesUsageRes interface {
+	bandwidthStatsUsersControllerGetStatsNodesUsageRes()
+}
+
+type BandwidthStatsUsersControllerGetUserUsageByRangeRes interface {
+	bandwidthStatsUsersControllerGetUserUsageByRangeRes()
+}
+
 type ConfigProfileControllerCreateConfigProfileRes interface {
 	configProfileControllerCreateConfigProfileRes()
 }
@@ -329,16 +349,8 @@ type NodesControllerUpdateNodeRes interface {
 	nodesControllerUpdateNodeRes()
 }
 
-type NodesUsageHistoryControllerGetNodesUsageByRangeRes interface {
-	nodesUsageHistoryControllerGetNodesUsageByRangeRes()
-}
-
-type NodesUserUsageHistoryControllerGetNodeUserUsageRes interface {
-	nodesUserUsageHistoryControllerGetNodeUserUsageRes()
-}
-
-type NodesUserUsageHistoryControllerGetNodesRealtimeUsageRes interface {
-	nodesUserUsageHistoryControllerGetNodesRealtimeUsageRes()
+type NodesUsageHistoryControllerGetStatsNodesUsageRes interface {
+	nodesUsageHistoryControllerGetStatsNodesUsageRes()
 }
 
 type PasskeyControllerDeletePasskeyRes interface {
@@ -389,6 +401,34 @@ type SubscriptionControllerGetSubscriptionInfoByShortUuidRes interface {
 	subscriptionControllerGetSubscriptionInfoByShortUuidRes()
 }
 
+type SubscriptionPageConfigControllerCloneSubscriptionPageConfigRes interface {
+	subscriptionPageConfigControllerCloneSubscriptionPageConfigRes()
+}
+
+type SubscriptionPageConfigControllerCreateConfigRes interface {
+	subscriptionPageConfigControllerCreateConfigRes()
+}
+
+type SubscriptionPageConfigControllerDeleteConfigRes interface {
+	subscriptionPageConfigControllerDeleteConfigRes()
+}
+
+type SubscriptionPageConfigControllerGetAllConfigsRes interface {
+	subscriptionPageConfigControllerGetAllConfigsRes()
+}
+
+type SubscriptionPageConfigControllerGetConfigByUuidRes interface {
+	subscriptionPageConfigControllerGetConfigByUuidRes()
+}
+
+type SubscriptionPageConfigControllerReorderSubscriptionPageConfigsRes interface {
+	subscriptionPageConfigControllerReorderSubscriptionPageConfigsRes()
+}
+
+type SubscriptionPageConfigControllerUpdateConfigRes interface {
+	subscriptionPageConfigControllerUpdateConfigRes()
+}
+
 type SubscriptionSettingsControllerGetSettingsRes interface {
 	subscriptionSettingsControllerGetSettingsRes()
 }
@@ -429,6 +469,10 @@ type SubscriptionsControllerGetRawSubscriptionByShortUuidRes interface {
 	subscriptionsControllerGetRawSubscriptionByShortUuidRes()
 }
 
+type SubscriptionsControllerGetSubpageConfigByShortUuidRes interface {
+	subscriptionsControllerGetSubpageConfigByShortUuidRes()
+}
+
 type SubscriptionsControllerGetSubscriptionByShortUuidProtectedRes interface {
 	subscriptionsControllerGetSubscriptionByShortUuidProtectedRes()
 }
@@ -451,6 +495,10 @@ type SystemControllerEncryptHappCryptoLinkRes interface {
 
 type SystemControllerGetBandwidthStatsRes interface {
 	systemControllerGetBandwidthStatsRes()
+}
+
+type SystemControllerGetMetadataRes interface {
+	systemControllerGetMetadataRes()
 }
 
 type SystemControllerGetNodesMetricsRes interface {
@@ -591,8 +639,4 @@ type UsersControllerRevokeUserSubscriptionRes interface {
 
 type UsersControllerUpdateUserRes interface {
 	usersControllerUpdateUserRes()
-}
-
-type UsersStatsControllerGetUserUsageByRangeRes interface {
-	usersStatsControllerGetUserUsageByRangeRes()
 }
