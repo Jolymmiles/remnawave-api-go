@@ -3,6 +3,7 @@
 package api
 
 import (
+	"io"
 	"net/url"
 	"time"
 
@@ -199,6 +200,7 @@ func (*BadRequestError) internalSquadControllerRemoveUsersFromInternalSquadRes()
 func (*BadRequestError) internalSquadControllerReorderInternalSquadsRes()                          {}
 func (*BadRequestError) internalSquadControllerUpdateInternalSquadRes()                            {}
 func (*BadRequestError) keygenControllerGenerateKeyRes()                                           {}
+func (*BadRequestError) nodesControllerBulkNodesActionsRes()                                       {}
 func (*BadRequestError) nodesControllerCreateNodeRes()                                             {}
 func (*BadRequestError) nodesControllerDeleteNodeRes()                                             {}
 func (*BadRequestError) nodesControllerDisableNodeRes()                                            {}
@@ -1168,6 +1170,87 @@ func (s *BulkExtendExpirationDateRequestDto) SetExtendDays(val int) {
 	s.ExtendDays = val
 }
 
+// Ref: #/components/schemas/BulkNodesActionsRequestDto
+type BulkNodesActionsRequestDto struct {
+	Uuids  []uuid.UUID                      `json:"uuids"`
+	Action BulkNodesActionsRequestDtoAction `json:"action"`
+}
+
+// GetUuids returns the value of Uuids.
+func (s *BulkNodesActionsRequestDto) GetUuids() []uuid.UUID {
+	return s.Uuids
+}
+
+// GetAction returns the value of Action.
+func (s *BulkNodesActionsRequestDto) GetAction() BulkNodesActionsRequestDtoAction {
+	return s.Action
+}
+
+// SetUuids sets the value of Uuids.
+func (s *BulkNodesActionsRequestDto) SetUuids(val []uuid.UUID) {
+	s.Uuids = val
+}
+
+// SetAction sets the value of Action.
+func (s *BulkNodesActionsRequestDto) SetAction(val BulkNodesActionsRequestDtoAction) {
+	s.Action = val
+}
+
+type BulkNodesActionsRequestDtoAction string
+
+const (
+	BulkNodesActionsRequestDtoActionENABLE       BulkNodesActionsRequestDtoAction = "ENABLE"
+	BulkNodesActionsRequestDtoActionDISABLE      BulkNodesActionsRequestDtoAction = "DISABLE"
+	BulkNodesActionsRequestDtoActionRESTART      BulkNodesActionsRequestDtoAction = "RESTART"
+	BulkNodesActionsRequestDtoActionRESETTRAFFIC BulkNodesActionsRequestDtoAction = "RESET_TRAFFIC"
+)
+
+// AllValues returns all BulkNodesActionsRequestDtoAction values.
+func (BulkNodesActionsRequestDtoAction) AllValues() []BulkNodesActionsRequestDtoAction {
+	return []BulkNodesActionsRequestDtoAction{
+		BulkNodesActionsRequestDtoActionENABLE,
+		BulkNodesActionsRequestDtoActionDISABLE,
+		BulkNodesActionsRequestDtoActionRESTART,
+		BulkNodesActionsRequestDtoActionRESETTRAFFIC,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s BulkNodesActionsRequestDtoAction) MarshalText() ([]byte, error) {
+	switch s {
+	case BulkNodesActionsRequestDtoActionENABLE:
+		return []byte(s), nil
+	case BulkNodesActionsRequestDtoActionDISABLE:
+		return []byte(s), nil
+	case BulkNodesActionsRequestDtoActionRESTART:
+		return []byte(s), nil
+	case BulkNodesActionsRequestDtoActionRESETTRAFFIC:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *BulkNodesActionsRequestDtoAction) UnmarshalText(data []byte) error {
+	switch BulkNodesActionsRequestDtoAction(data) {
+	case BulkNodesActionsRequestDtoActionENABLE:
+		*s = BulkNodesActionsRequestDtoActionENABLE
+		return nil
+	case BulkNodesActionsRequestDtoActionDISABLE:
+		*s = BulkNodesActionsRequestDtoActionDISABLE
+		return nil
+	case BulkNodesActionsRequestDtoActionRESTART:
+		*s = BulkNodesActionsRequestDtoActionRESTART
+		return nil
+	case BulkNodesActionsRequestDtoActionRESETTRAFFIC:
+		*s = BulkNodesActionsRequestDtoActionRESETTRAFFIC
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
 // Ref: #/components/schemas/BulkUpdateUsersRequestDto
 type BulkUpdateUsersRequestDto struct {
 	Uuids  []uuid.UUID                     `json:"uuids"`
@@ -2052,6 +2135,21 @@ func (s *CreateConfigProfileRequestDto) SetConfig(val CreateConfigProfileRequest
 
 type CreateConfigProfileRequestDtoConfig struct{}
 
+// Ref: #/components/schemas/CreateExternalSquadRequestDto
+type CreateExternalSquadRequestDto struct {
+	Name string `json:"name"`
+}
+
+// GetName returns the value of Name.
+func (s *CreateExternalSquadRequestDto) GetName() string {
+	return s.Name
+}
+
+// SetName sets the value of Name.
+func (s *CreateExternalSquadRequestDto) SetName(val string) {
+	s.Name = val
+}
+
 // Ref: #/components/schemas/CreateHostRequestDto
 type CreateHostRequestDto struct {
 	Inbound           InboundRef                            `json:"inbound"`
@@ -2825,6 +2923,21 @@ func (s *CreateNodeRequestDto) SetProviderUuid(val OptNilUUID) {
 // SetTags sets the value of Tags.
 func (s *CreateNodeRequestDto) SetTags(val []string) {
 	s.Tags = val
+}
+
+// Ref: #/components/schemas/CreateSubscriptionPageConfigRequestDto
+type CreateSubscriptionPageConfigRequestDto struct {
+	Name string `json:"name"`
+}
+
+// GetName returns the value of Name.
+func (s *CreateSubscriptionPageConfigRequestDto) GetName() string {
+	return s.Name
+}
+
+// SetName sets the value of Name.
+func (s *CreateSubscriptionPageConfigRequestDto) SetName(val string) {
+	s.Name = val
 }
 
 // Ref: #/components/schemas/CreateSubscriptionPageConfigResponseDto
@@ -3926,6 +4039,7 @@ func (*EventResponse) externalSquadControllerAddUsersToExternalSquadRes()       
 func (*EventResponse) externalSquadControllerRemoveUsersFromExternalSquadRes()   {}
 func (*EventResponse) internalSquadControllerAddUsersToInternalSquadRes()        {}
 func (*EventResponse) internalSquadControllerRemoveUsersFromInternalSquadRes()   {}
+func (*EventResponse) nodesControllerBulkNodesActionsRes()                       {}
 func (*EventResponse) nodesControllerProfileModificationRes()                    {}
 func (*EventResponse) nodesControllerResetNodeTrafficRes()                       {}
 func (*EventResponse) nodesControllerRestartAllNodesRes()                        {}
@@ -4105,21 +4219,6 @@ func (*ExternalSquadControllerCreateExternalSquadConflict) externalSquadControll
 type ExternalSquadControllerUpdateExternalSquadConflict struct{}
 
 func (*ExternalSquadControllerUpdateExternalSquadConflict) externalSquadControllerUpdateExternalSquadRes() {
-}
-
-// Ref: #/components/schemas/ExternalSquadRequestRequest
-type ExternalSquadRequestRequest struct {
-	Name string `json:"name"`
-}
-
-// GetName returns the value of Name.
-func (s *ExternalSquadRequestRequest) GetName() string {
-	return s.Name
-}
-
-// SetName sets the value of Name.
-func (s *ExternalSquadRequestRequest) SetName(val string) {
-	s.Name = val
 }
 
 type ExternalSquadResponseHeaders map[string]string
@@ -4428,6 +4527,98 @@ func (s *GenerateX25519ResponseDtoResponseKeypairsItem) SetPublicKey(val string)
 // SetPrivateKey sets the value of PrivateKey.
 func (s *GenerateX25519ResponseDtoResponseKeypairsItem) SetPrivateKey(val string) {
 	s.PrivateKey = val
+}
+
+// Ref: #/components/schemas/Generic
+type Generic struct {
+	Enabled          bool      `json:"enabled"`
+	ClientId         NilString `json:"clientId"`
+	ClientSecret     NilString `json:"clientSecret"`
+	WithPkce         bool      `json:"withPkce"`
+	AuthorizationUrl NilString `json:"authorizationUrl"`
+	TokenUrl         NilString `json:"tokenUrl"`
+	FrontendDomain   NilString `json:"frontendDomain"`
+	AllowedEmails    []string  `json:"allowedEmails"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *Generic) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetClientId returns the value of ClientId.
+func (s *Generic) GetClientId() NilString {
+	return s.ClientId
+}
+
+// GetClientSecret returns the value of ClientSecret.
+func (s *Generic) GetClientSecret() NilString {
+	return s.ClientSecret
+}
+
+// GetWithPkce returns the value of WithPkce.
+func (s *Generic) GetWithPkce() bool {
+	return s.WithPkce
+}
+
+// GetAuthorizationUrl returns the value of AuthorizationUrl.
+func (s *Generic) GetAuthorizationUrl() NilString {
+	return s.AuthorizationUrl
+}
+
+// GetTokenUrl returns the value of TokenUrl.
+func (s *Generic) GetTokenUrl() NilString {
+	return s.TokenUrl
+}
+
+// GetFrontendDomain returns the value of FrontendDomain.
+func (s *Generic) GetFrontendDomain() NilString {
+	return s.FrontendDomain
+}
+
+// GetAllowedEmails returns the value of AllowedEmails.
+func (s *Generic) GetAllowedEmails() []string {
+	return s.AllowedEmails
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *Generic) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetClientId sets the value of ClientId.
+func (s *Generic) SetClientId(val NilString) {
+	s.ClientId = val
+}
+
+// SetClientSecret sets the value of ClientSecret.
+func (s *Generic) SetClientSecret(val NilString) {
+	s.ClientSecret = val
+}
+
+// SetWithPkce sets the value of WithPkce.
+func (s *Generic) SetWithPkce(val bool) {
+	s.WithPkce = val
+}
+
+// SetAuthorizationUrl sets the value of AuthorizationUrl.
+func (s *Generic) SetAuthorizationUrl(val NilString) {
+	s.AuthorizationUrl = val
+}
+
+// SetTokenUrl sets the value of TokenUrl.
+func (s *Generic) SetTokenUrl(val NilString) {
+	s.TokenUrl = val
+}
+
+// SetFrontendDomain sets the value of FrontendDomain.
+func (s *Generic) SetFrontendDomain(val NilString) {
+	s.FrontendDomain = val
+}
+
+// SetAllowedEmails sets the value of AllowedEmails.
+func (s *Generic) SetAllowedEmails(val []string) {
+	s.AllowedEmails = val
 }
 
 // Ref: #/components/schemas/GetAllHwidDevicesResponseDto
@@ -8316,6 +8507,7 @@ func (*InternalServerError) internalSquadControllerRemoveUsersFromInternalSquadR
 func (*InternalServerError) internalSquadControllerReorderInternalSquadsRes()                   {}
 func (*InternalServerError) internalSquadControllerUpdateInternalSquadRes()                     {}
 func (*InternalServerError) keygenControllerGenerateKeyRes()                                    {}
+func (*InternalServerError) nodesControllerBulkNodesActionsRes()                                {}
 func (*InternalServerError) nodesControllerCreateNodeRes()                                      {}
 func (*InternalServerError) nodesControllerDeleteNodeRes()                                      {}
 func (*InternalServerError) nodesControllerDisableNodeRes()                                     {}
@@ -8584,6 +8776,87 @@ func (s *InternalSquadsResponseResponse) SetTotal(val float64) {
 // SetInternalSquads sets the value of InternalSquads.
 func (s *InternalSquadsResponseResponse) SetInternalSquads(val []InternalSquad) {
 	s.InternalSquads = val
+}
+
+// Ref: #/components/schemas/Keycloak
+type Keycloak struct {
+	Enabled        bool      `json:"enabled"`
+	Realm          NilString `json:"realm"`
+	ClientId       NilString `json:"clientId"`
+	ClientSecret   NilString `json:"clientSecret"`
+	FrontendDomain NilString `json:"frontendDomain"`
+	KeycloakDomain NilString `json:"keycloakDomain"`
+	AllowedEmails  []string  `json:"allowedEmails"`
+}
+
+// GetEnabled returns the value of Enabled.
+func (s *Keycloak) GetEnabled() bool {
+	return s.Enabled
+}
+
+// GetRealm returns the value of Realm.
+func (s *Keycloak) GetRealm() NilString {
+	return s.Realm
+}
+
+// GetClientId returns the value of ClientId.
+func (s *Keycloak) GetClientId() NilString {
+	return s.ClientId
+}
+
+// GetClientSecret returns the value of ClientSecret.
+func (s *Keycloak) GetClientSecret() NilString {
+	return s.ClientSecret
+}
+
+// GetFrontendDomain returns the value of FrontendDomain.
+func (s *Keycloak) GetFrontendDomain() NilString {
+	return s.FrontendDomain
+}
+
+// GetKeycloakDomain returns the value of KeycloakDomain.
+func (s *Keycloak) GetKeycloakDomain() NilString {
+	return s.KeycloakDomain
+}
+
+// GetAllowedEmails returns the value of AllowedEmails.
+func (s *Keycloak) GetAllowedEmails() []string {
+	return s.AllowedEmails
+}
+
+// SetEnabled sets the value of Enabled.
+func (s *Keycloak) SetEnabled(val bool) {
+	s.Enabled = val
+}
+
+// SetRealm sets the value of Realm.
+func (s *Keycloak) SetRealm(val NilString) {
+	s.Realm = val
+}
+
+// SetClientId sets the value of ClientId.
+func (s *Keycloak) SetClientId(val NilString) {
+	s.ClientId = val
+}
+
+// SetClientSecret sets the value of ClientSecret.
+func (s *Keycloak) SetClientSecret(val NilString) {
+	s.ClientSecret = val
+}
+
+// SetFrontendDomain sets the value of FrontendDomain.
+func (s *Keycloak) SetFrontendDomain(val NilString) {
+	s.FrontendDomain = val
+}
+
+// SetKeycloakDomain sets the value of KeycloakDomain.
+func (s *Keycloak) SetKeycloakDomain(val NilString) {
+	s.KeycloakDomain = val
+}
+
+// SetAllowedEmails sets the value of AllowedEmails.
+func (s *Keycloak) SetAllowedEmails(val []string) {
+	s.AllowedEmails = val
 }
 
 // Ref: #/components/schemas/LoginRequestDto
@@ -9962,6 +10235,8 @@ const (
 	OAuth2AuthorizeRequestDtoProviderGithub   OAuth2AuthorizeRequestDtoProvider = "github"
 	OAuth2AuthorizeRequestDtoProviderPocketid OAuth2AuthorizeRequestDtoProvider = "pocketid"
 	OAuth2AuthorizeRequestDtoProviderYandex   OAuth2AuthorizeRequestDtoProvider = "yandex"
+	OAuth2AuthorizeRequestDtoProviderKeycloak OAuth2AuthorizeRequestDtoProvider = "keycloak"
+	OAuth2AuthorizeRequestDtoProviderGeneric  OAuth2AuthorizeRequestDtoProvider = "generic"
 )
 
 // AllValues returns all OAuth2AuthorizeRequestDtoProvider values.
@@ -9970,6 +10245,8 @@ func (OAuth2AuthorizeRequestDtoProvider) AllValues() []OAuth2AuthorizeRequestDto
 		OAuth2AuthorizeRequestDtoProviderGithub,
 		OAuth2AuthorizeRequestDtoProviderPocketid,
 		OAuth2AuthorizeRequestDtoProviderYandex,
+		OAuth2AuthorizeRequestDtoProviderKeycloak,
+		OAuth2AuthorizeRequestDtoProviderGeneric,
 	}
 }
 
@@ -9981,6 +10258,10 @@ func (s OAuth2AuthorizeRequestDtoProvider) MarshalText() ([]byte, error) {
 	case OAuth2AuthorizeRequestDtoProviderPocketid:
 		return []byte(s), nil
 	case OAuth2AuthorizeRequestDtoProviderYandex:
+		return []byte(s), nil
+	case OAuth2AuthorizeRequestDtoProviderKeycloak:
+		return []byte(s), nil
+	case OAuth2AuthorizeRequestDtoProviderGeneric:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -9998,6 +10279,12 @@ func (s *OAuth2AuthorizeRequestDtoProvider) UnmarshalText(data []byte) error {
 		return nil
 	case OAuth2AuthorizeRequestDtoProviderYandex:
 		*s = OAuth2AuthorizeRequestDtoProviderYandex
+		return nil
+	case OAuth2AuthorizeRequestDtoProviderKeycloak:
+		*s = OAuth2AuthorizeRequestDtoProviderKeycloak
+		return nil
+	case OAuth2AuthorizeRequestDtoProviderGeneric:
+		*s = OAuth2AuthorizeRequestDtoProviderGeneric
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -10104,6 +10391,8 @@ const (
 	OAuth2CallbackRequestDtoProviderGithub   OAuth2CallbackRequestDtoProvider = "github"
 	OAuth2CallbackRequestDtoProviderPocketid OAuth2CallbackRequestDtoProvider = "pocketid"
 	OAuth2CallbackRequestDtoProviderYandex   OAuth2CallbackRequestDtoProvider = "yandex"
+	OAuth2CallbackRequestDtoProviderKeycloak OAuth2CallbackRequestDtoProvider = "keycloak"
+	OAuth2CallbackRequestDtoProviderGeneric  OAuth2CallbackRequestDtoProvider = "generic"
 )
 
 // AllValues returns all OAuth2CallbackRequestDtoProvider values.
@@ -10112,6 +10401,8 @@ func (OAuth2CallbackRequestDtoProvider) AllValues() []OAuth2CallbackRequestDtoPr
 		OAuth2CallbackRequestDtoProviderGithub,
 		OAuth2CallbackRequestDtoProviderPocketid,
 		OAuth2CallbackRequestDtoProviderYandex,
+		OAuth2CallbackRequestDtoProviderKeycloak,
+		OAuth2CallbackRequestDtoProviderGeneric,
 	}
 }
 
@@ -10123,6 +10414,10 @@ func (s OAuth2CallbackRequestDtoProvider) MarshalText() ([]byte, error) {
 	case OAuth2CallbackRequestDtoProviderPocketid:
 		return []byte(s), nil
 	case OAuth2CallbackRequestDtoProviderYandex:
+		return []byte(s), nil
+	case OAuth2CallbackRequestDtoProviderKeycloak:
+		return []byte(s), nil
+	case OAuth2CallbackRequestDtoProviderGeneric:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -10141,6 +10436,12 @@ func (s *OAuth2CallbackRequestDtoProvider) UnmarshalText(data []byte) error {
 	case OAuth2CallbackRequestDtoProviderYandex:
 		*s = OAuth2CallbackRequestDtoProviderYandex
 		return nil
+	case OAuth2CallbackRequestDtoProviderKeycloak:
+		*s = OAuth2CallbackRequestDtoProviderKeycloak
+		return nil
+	case OAuth2CallbackRequestDtoProviderGeneric:
+		*s = OAuth2CallbackRequestDtoProviderGeneric
+		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
@@ -10148,9 +10449,11 @@ func (s *OAuth2CallbackRequestDtoProvider) UnmarshalText(data []byte) error {
 
 // Ref: #/components/schemas/Oauth2Settings
 type Oauth2Settings struct {
-	Github   Github   `json:"github"`
-	Pocketid Pocketid `json:"pocketid"`
-	Yandex   Github   `json:"yandex"`
+	Github   Github      `json:"github"`
+	Pocketid Pocketid    `json:"pocketid"`
+	Yandex   Github      `json:"yandex"`
+	Keycloak OptKeycloak `json:"keycloak"`
+	Generic  OptGeneric  `json:"generic"`
 }
 
 // GetGithub returns the value of Github.
@@ -10168,6 +10471,16 @@ func (s *Oauth2Settings) GetYandex() Github {
 	return s.Yandex
 }
 
+// GetKeycloak returns the value of Keycloak.
+func (s *Oauth2Settings) GetKeycloak() OptKeycloak {
+	return s.Keycloak
+}
+
+// GetGeneric returns the value of Generic.
+func (s *Oauth2Settings) GetGeneric() OptGeneric {
+	return s.Generic
+}
+
 // SetGithub sets the value of Github.
 func (s *Oauth2Settings) SetGithub(val Github) {
 	s.Github = val
@@ -10181,6 +10494,16 @@ func (s *Oauth2Settings) SetPocketid(val Pocketid) {
 // SetYandex sets the value of Yandex.
 func (s *Oauth2Settings) SetYandex(val Github) {
 	s.Yandex = val
+}
+
+// SetKeycloak sets the value of Keycloak.
+func (s *Oauth2Settings) SetKeycloak(val OptKeycloak) {
+	s.Keycloak = val
+}
+
+// SetGeneric sets the value of Generic.
+func (s *Oauth2Settings) SetGeneric(val OptGeneric) {
+	s.Generic = val
 }
 
 // NewOptBool returns new OptBool with value set to v.
@@ -10735,6 +11058,52 @@ func (o OptFloat64) Or(d float64) float64 {
 	return d
 }
 
+// NewOptGeneric returns new OptGeneric with value set to v.
+func NewOptGeneric(v Generic) OptGeneric {
+	return OptGeneric{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGeneric is optional Generic.
+type OptGeneric struct {
+	Value Generic
+	Set   bool
+}
+
+// IsSet returns true if OptGeneric was set.
+func (o OptGeneric) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGeneric) Reset() {
+	var v Generic
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGeneric) SetTo(v Generic) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGeneric) Get() (v Generic, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGeneric) Or(d Generic) Generic {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData returns new OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData with value set to v.
 func NewOptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData(v GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData {
 	return OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData{
@@ -10915,6 +11284,52 @@ func (o OptInt) Get() (v int, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptInt) Or(d int) int {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptKeycloak returns new OptKeycloak with value set to v.
+func NewOptKeycloak(v Keycloak) OptKeycloak {
+	return OptKeycloak{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptKeycloak is optional Keycloak.
+type OptKeycloak struct {
+	Value Keycloak
+	Set   bool
+}
+
+// IsSet returns true if OptKeycloak was set.
+func (o OptKeycloak) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptKeycloak) Reset() {
+	var v Keycloak
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptKeycloak) SetTo(v Keycloak) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptKeycloak) Get() (v Keycloak, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptKeycloak) Or(d Keycloak) Keycloak {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13631,6 +14046,10 @@ type ResponseModification struct {
 	// subscription template for this type will be used. **This modification have higher priority than
 	// settings from External Squads.**"}.
 	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
+	// {"markdownDescription":"Each Host may have its own Xray Json Template. If you set this flag to
+	// **true**, the Xray Json Template defined by the SRR will be used. **The Host's Xray Json Template
+	// will be ignored.**"}.
+	IgnoreHostXrayJsonTemplate OptBool `json:"ignoreHostXrayJsonTemplate"`
 }
 
 // GetHeaders returns the value of Headers.
@@ -13643,6 +14062,11 @@ func (s *ResponseModification) GetSubscriptionTemplate() OptString {
 	return s.SubscriptionTemplate
 }
 
+// GetIgnoreHostXrayJsonTemplate returns the value of IgnoreHostXrayJsonTemplate.
+func (s *ResponseModification) GetIgnoreHostXrayJsonTemplate() OptBool {
+	return s.IgnoreHostXrayJsonTemplate
+}
+
 // SetHeaders sets the value of Headers.
 func (s *ResponseModification) SetHeaders(val []Header) {
 	s.Headers = val
@@ -13651,6 +14075,11 @@ func (s *ResponseModification) SetHeaders(val []Header) {
 // SetSubscriptionTemplate sets the value of SubscriptionTemplate.
 func (s *ResponseModification) SetSubscriptionTemplate(val OptString) {
 	s.SubscriptionTemplate = val
+}
+
+// SetIgnoreHostXrayJsonTemplate sets the value of IgnoreHostXrayJsonTemplate.
+func (s *ResponseModification) SetIgnoreHostXrayJsonTemplate(val OptBool) {
+	s.IgnoreHostXrayJsonTemplate = val
 }
 
 // Ref: #/components/schemas/ResponseRules
@@ -14631,14 +15060,47 @@ func (s *SubscriptionControllerGetSubscriptionByClientTypeClientType) UnmarshalT
 	}
 }
 
-// SubscriptionControllerGetSubscriptionByClientTypeOK is response for SubscriptionControllerGetSubscriptionByClientType operation.
-type SubscriptionControllerGetSubscriptionByClientTypeOK struct{}
+type SubscriptionControllerGetSubscriptionByClientTypeOK struct {
+	Data io.Reader
+}
 
-// SubscriptionControllerGetSubscriptionOK is response for SubscriptionControllerGetSubscription operation.
-type SubscriptionControllerGetSubscriptionOK struct{}
+// Read reads data from the Data reader.
+//
+// Kept to satisfy the io.Reader interface.
+func (s SubscriptionControllerGetSubscriptionByClientTypeOK) Read(p []byte) (n int, err error) {
+	if s.Data == nil {
+		return 0, io.EOF
+	}
+	return s.Data.Read(p)
+}
 
-// SubscriptionControllerGetSubscriptionWithTypeOK is response for SubscriptionControllerGetSubscriptionWithType operation.
-type SubscriptionControllerGetSubscriptionWithTypeOK struct{}
+type SubscriptionControllerGetSubscriptionOK struct {
+	Data io.Reader
+}
+
+// Read reads data from the Data reader.
+//
+// Kept to satisfy the io.Reader interface.
+func (s SubscriptionControllerGetSubscriptionOK) Read(p []byte) (n int, err error) {
+	if s.Data == nil {
+		return 0, io.EOF
+	}
+	return s.Data.Read(p)
+}
+
+type SubscriptionControllerGetSubscriptionWithTypeOK struct {
+	Data io.Reader
+}
+
+// Read reads data from the Data reader.
+//
+// Kept to satisfy the io.Reader interface.
+func (s SubscriptionControllerGetSubscriptionWithTypeOK) Read(p []byte) (n int, err error) {
+	if s.Data == nil {
+		return 0, io.EOF
+	}
+	return s.Data.Read(p)
+}
 
 // Ref: #/components/schemas/SubscriptionPageConfigResponseResponse
 type SubscriptionPageConfigResponseResponse struct {

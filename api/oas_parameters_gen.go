@@ -26,9 +26,9 @@ type BandwidthStatsNodesControllerGetNodeUserUsageParams struct {
 type BandwidthStatsNodesControllerGetStatsNodeUsersUsageParams struct {
 	// Limit of top users to return.
 	TopUsersLimit float64
-	// Start date.
+	// Start date (YYYY-MM-DD).
 	Start time.Time
-	// End date.
+	// End date (YYYY-MM-DD).
 	End time.Time
 	// UUID of the node.
 	UUID string
@@ -38,9 +38,9 @@ type BandwidthStatsNodesControllerGetStatsNodeUsersUsageParams struct {
 type BandwidthStatsUsersControllerGetStatsNodesUsageParams struct {
 	// Limit of top nodes to return.
 	TopNodesLimit float64
-	// Start date.
+	// Start date (YYYY-MM-DD).
 	Start time.Time
-	// End date.
+	// End date (YYYY-MM-DD).
 	End time.Time
 	// UUID of the user.
 	UUID string
@@ -216,9 +216,9 @@ type NodesControllerRestartNodeParams struct {
 type NodesUsageHistoryControllerGetStatsNodesUsageParams struct {
 	// Limit of top nodes to return.
 	TopNodesLimit float64
-	// Start date.
+	// Start date (YYYY-MM-DD).
 	Start time.Time
-	// End date.
+	// End date (YYYY-MM-DD).
 	End time.Time
 }
 

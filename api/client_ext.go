@@ -407,7 +407,7 @@ func (sc *ExternalSquadClient) AddUsersToExternalSquad(ctx context.Context, uuid
 }
 
 // CreateExternalSquad calls ExternalSquadController_createExternalSquad.
-func (sc *ExternalSquadClient) CreateExternalSquad(ctx context.Context, request *ExternalSquadRequestRequest) (ExternalSquadControllerCreateExternalSquadRes, error) {
+func (sc *ExternalSquadClient) CreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
 	return sc.client.ExternalSquadControllerCreateExternalSquad(ctx, request)
 }
 
@@ -752,6 +752,11 @@ func NewNodesClient(client *Client) *NodesClient {
 	return &NodesClient{client: client}
 }
 
+// BulkNodesActions calls NodesController_bulkNodesActions.
+func (sc *NodesClient) BulkNodesActions(ctx context.Context, request *BulkNodesActionsRequestDto) (NodesControllerBulkNodesActionsRes, error) {
+	return sc.client.NodesControllerBulkNodesActions(ctx, request)
+}
+
 // CreateNode calls NodesController_createNode.
 func (sc *NodesClient) CreateNode(ctx context.Context, request *CreateNodeRequestDto) (NodesControllerCreateNodeRes, error) {
 	return sc.client.NodesControllerCreateNode(ctx, request)
@@ -939,9 +944,30 @@ func NewSubscriptionClient(client *Client) *SubscriptionClient {
 	return &SubscriptionClient{client: client}
 }
 
+// GetSubscription calls SubscriptionController_getSubscription.
+func (sc *SubscriptionClient) GetSubscription(ctx context.Context, shortuuid string) (SubscriptionControllerGetSubscriptionOK, error) {
+	return sc.client.SubscriptionControllerGetSubscription(ctx, SubscriptionControllerGetSubscriptionParams{
+		ShortUuid: shortuuid,
+	})
+}
+
+// GetSubscriptionByClientType calls SubscriptionController_getSubscriptionByClientType.
+func (sc *SubscriptionClient) GetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (SubscriptionControllerGetSubscriptionByClientTypeOK, error) {
+	return sc.client.SubscriptionControllerGetSubscriptionByClientType(ctx, params)
+}
+
 // GetSubscriptionInfoByShortUuid calls SubscriptionController_getSubscriptionInfoByShortUuid.
 func (sc *SubscriptionClient) GetSubscriptionInfoByShortUuid(ctx context.Context, shortuuid string) (SubscriptionControllerGetSubscriptionInfoByShortUuidRes, error) {
 	return sc.client.SubscriptionControllerGetSubscriptionInfoByShortUuid(ctx, SubscriptionControllerGetSubscriptionInfoByShortUuidParams{
+		ShortUuid: shortuuid,
+	})
+}
+
+// GetSubscriptionWithType calls SubscriptionController_getSubscriptionWithType.
+func (sc *SubscriptionClient) GetSubscriptionWithType(ctx context.Context, typeVal string, encodedtag string, shortuuid string) (SubscriptionControllerGetSubscriptionWithTypeOK, error) {
+	return sc.client.SubscriptionControllerGetSubscriptionWithType(ctx, SubscriptionControllerGetSubscriptionWithTypeParams{
+		Type: typeVal,
+		EncodedTag: encodedtag,
 		ShortUuid: shortuuid,
 	})
 }
@@ -962,7 +988,7 @@ func (sc *SubscriptionPageConfigClient) CloneSubscriptionPageConfig(ctx context.
 }
 
 // CreateConfig calls SubscriptionPageConfigController_createConfig.
-func (sc *SubscriptionPageConfigClient) CreateConfig(ctx context.Context, request *ExternalSquadRequestRequest) (SubscriptionPageConfigControllerCreateConfigRes, error) {
+func (sc *SubscriptionPageConfigClient) CreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequestDto) (SubscriptionPageConfigControllerCreateConfigRes, error) {
 	return sc.client.SubscriptionPageConfigControllerCreateConfig(ctx, request)
 }
 

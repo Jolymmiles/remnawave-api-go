@@ -5,6 +5,7 @@ parser:
   allow_remote: true
 
 generator:
+  ignore_not_implemented: ["object defaults"]
   features:
     disable_all: true
     enable:

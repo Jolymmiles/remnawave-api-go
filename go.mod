@@ -3,7 +3,6 @@ module github.com/Jolymmiles/remnawave-api-go/v2
 go 1.25
 
 require (
-	github.com/Jolymmiles/remnawave-api-go v1.6.3
 	github.com/go-faster/errors v0.7.1
 	github.com/go-faster/jx v1.2.0
 	github.com/google/uuid v1.6.0

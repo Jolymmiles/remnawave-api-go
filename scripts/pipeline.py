@@ -139,6 +139,60 @@ def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_ext
 
 
 # ============================================================================
+# STEP 1.5: PATCH SPEC FOR TEXT/PLAIN SUBSCRIPTION ENDPOINTS
+# ============================================================================
+
+# These subscription endpoints return text/plain (subscription configs as strings),
+# but the OpenAPI spec doesn't declare response content, causing ogen to skip them.
+SUBSCRIPTION_TEXT_OPERATIONS = [
+    'SubscriptionController_getSubscription',
+    'SubscriptionController_getSubscriptionByClientType',
+    'SubscriptionController_getSubscriptionWithType',
+]
+
+
+def patch_subscription_text_responses(spec_file: str) -> int:
+    """
+    Patch the consolidated spec to add text/plain response content
+    for subscription endpoints that return raw subscription configs.
+
+    Returns the number of operations patched.
+    """
+    with open(spec_file, 'r') as f:
+        spec = json.load(f)
+
+    patched = 0
+    for path, path_item in spec.get('paths', {}).items():
+        for http_method, op in path_item.items():
+            if not isinstance(op, dict):
+                continue
+            op_id = op.get('operationId', '')
+            if op_id not in SUBSCRIPTION_TEXT_OPERATIONS:
+                continue
+
+            responses = op.get('responses', {})
+            resp_200 = responses.get('200', {})
+
+            # Add text/plain content if not already present
+            if 'content' not in resp_200:
+                resp_200['content'] = {}
+            if 'text/plain' not in resp_200['content']:
+                resp_200['content']['text/plain'] = {
+                    'schema': {'type': 'string'}
+                }
+                patched += 1
+                print_info(f"Patched {op_id} with text/plain response")
+
+            responses['200'] = resp_200
+            op['responses'] = responses
+
+    with open(spec_file, 'w') as f:
+        json.dump(spec, f, indent=2, ensure_ascii=False)
+
+    return patched
+
+
+# ============================================================================
 # STEP 2: GENERATE GO CLIENT WITH OGEN
 # ============================================================================
 
@@ -257,6 +311,23 @@ def simplify_param_type(param_type: str) -> str:
         'uuid.UUID': 'string',  # Accept string, convert inside
     }
     return type_map.get(param_type, param_type)
+
+
+# Go reserved keywords that cannot be used as identifiers
+GO_KEYWORDS = {
+    'break', 'case', 'chan', 'const', 'continue', 'default', 'defer', 'else',
+    'fallthrough', 'for', 'func', 'go', 'goto', 'if', 'import', 'interface',
+    'map', 'package', 'range', 'return', 'select', 'struct', 'switch', 'type',
+    'var',
+}
+
+
+def safe_param_name(name: str) -> str:
+    """Convert a field name to a safe Go parameter name, avoiding reserved keywords."""
+    lower = name.lower()
+    if lower in GO_KEYWORDS:
+        return lower + 'Val'
+    return lower
 
 
 def parse_operations(spec_file: str) -> dict:
@@ -460,7 +531,7 @@ func New{controller}Client(client *Client) *{controller}Client {{
                     if i == params_index:
                         # This is the Params struct - add simplified args
                         for field_name, field_type, simple_type in simplified_params:
-                            sig_parts.append(f'{field_name.lower()} {simple_type}')
+                            sig_parts.append(f'{safe_param_name(field_name)} {simple_type}')
                     else:
                         # Regular param (body)
                         sig_parts.append(f'{pname} {ptype}')
@@ -471,7 +542,7 @@ func New{controller}Client(client *Client) *{controller}Client {{
                 # Build params struct initialization
                 params_init = f'{params_type}{{\n'
                 for field_name, field_type, simple_type in simplified_params:
-                    arg_name = field_name.lower()
+                    arg_name = safe_param_name(field_name)
                     if field_type.startswith('Opt'):
                         params_init += f'\t\t{field_name}: NewOpt{simple_type.title()}({arg_name}),\n'
                     else:
@@ -565,6 +636,12 @@ def main():
         print_step(1, 3, "SMART CONSOLIDATE SCHEMAS")
         orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file)
         
+        # Step 1.5: Patch subscription text/plain responses
+        print_info("Patching subscription text/plain responses...")
+        patched_count = patch_subscription_text_responses(final_file)
+        if patched_count > 0:
+            print_success(f"Patched {patched_count} subscription endpoints with text/plain response")
+
         # Step 2: Generate with ogen
         print_step(2, 3, "GENERATE GO CLIENT WITH OGEN")
         if not generate_ogen_client(final_file):

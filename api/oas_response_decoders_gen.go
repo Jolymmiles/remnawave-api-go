@@ -3,6 +3,7 @@
 package api
 
 import (
+	"bytes"
 	"io"
 	"mime"
 	"net/http"
@@ -10465,6 +10466,126 @@ func decodeKeygenControllerGenerateKeyResponse(resp *http.Response) (res KeygenC
 	return res, validate.UnexpectedStatusCodeWithResponse(resp)
 }
 
+func decodeNodesControllerBulkNodesActionsResponse(resp *http.Response) (res NodesControllerBulkNodesActionsRes, _ error) {
+	switch resp.StatusCode {
+	case 200:
+		// Code 200.
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "application/json":
+			buf, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return res, err
+			}
+			d := jx.DecodeBytes(buf)
+
+			var response EventResponse
+			if err := func() error {
+				if err := response.Decode(d); err != nil {
+					return err
+				}
+				if err := d.Skip(); err != io.EOF {
+					return errors.New("unexpected trailing data")
+				}
+				return nil
+			}(); err != nil {
+				err = &ogenerrors.DecodeBodyError{
+					ContentType: ct,
+					Body:        buf,
+					Err:         err,
+				}
+				return res, err
+			}
+			return &response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
+	case 400:
+		// Code 400.
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "application/json":
+			buf, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return res, err
+			}
+			d := jx.DecodeBytes(buf)
+
+			var response BadRequestError
+			if err := func() error {
+				if err := response.Decode(d); err != nil {
+					return err
+				}
+				if err := d.Skip(); err != io.EOF {
+					return errors.New("unexpected trailing data")
+				}
+				return nil
+			}(); err != nil {
+				err = &ogenerrors.DecodeBodyError{
+					ContentType: ct,
+					Body:        buf,
+					Err:         err,
+				}
+				return res, err
+			}
+			// Validate response.
+			if err := func() error {
+				if err := response.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return res, errors.Wrap(err, "validate")
+			}
+			return &response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
+	case 500:
+		// Code 500.
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "application/json":
+			buf, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return res, err
+			}
+			d := jx.DecodeBytes(buf)
+
+			var response InternalServerError
+			if err := func() error {
+				if err := response.Decode(d); err != nil {
+					return err
+				}
+				if err := d.Skip(); err != io.EOF {
+					return errors.New("unexpected trailing data")
+				}
+				return nil
+			}(); err != nil {
+				err = &ogenerrors.DecodeBodyError{
+					ContentType: ct,
+					Body:        buf,
+					Err:         err,
+				}
+				return res, err
+			}
+			return &response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
+	}
+	return res, validate.UnexpectedStatusCodeWithResponse(resp)
+}
+
 func decodeNodesControllerCreateNodeResponse(resp *http.Response) (res NodesControllerCreateNodeRes, _ error) {
 	switch resp.StatusCode {
 	case 201:
@@ -13756,20 +13877,52 @@ func decodeSnippetsControllerUpdateSnippetResponse(resp *http.Response) (res Sni
 	return res, validate.UnexpectedStatusCodeWithResponse(resp)
 }
 
-func decodeSubscriptionControllerGetSubscriptionResponse(resp *http.Response) (res *SubscriptionControllerGetSubscriptionOK, _ error) {
+func decodeSubscriptionControllerGetSubscriptionResponse(resp *http.Response) (res SubscriptionControllerGetSubscriptionOK, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
-		return &SubscriptionControllerGetSubscriptionOK{}, nil
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "text/plain":
+			reader := resp.Body
+			b, err := io.ReadAll(reader)
+			if err != nil {
+				return res, err
+			}
+
+			response := SubscriptionControllerGetSubscriptionOK{Data: bytes.NewReader(b)}
+			return response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
 	}
 	return res, validate.UnexpectedStatusCodeWithResponse(resp)
 }
 
-func decodeSubscriptionControllerGetSubscriptionByClientTypeResponse(resp *http.Response) (res *SubscriptionControllerGetSubscriptionByClientTypeOK, _ error) {
+func decodeSubscriptionControllerGetSubscriptionByClientTypeResponse(resp *http.Response) (res SubscriptionControllerGetSubscriptionByClientTypeOK, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
-		return &SubscriptionControllerGetSubscriptionByClientTypeOK{}, nil
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "text/plain":
+			reader := resp.Body
+			b, err := io.ReadAll(reader)
+			if err != nil {
+				return res, err
+			}
+
+			response := SubscriptionControllerGetSubscriptionByClientTypeOK{Data: bytes.NewReader(b)}
+			return response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
 	}
 	return res, validate.UnexpectedStatusCodeWithResponse(resp)
 }
@@ -13903,11 +14056,27 @@ func decodeSubscriptionControllerGetSubscriptionInfoByShortUuidResponse(resp *ht
 	return res, validate.UnexpectedStatusCodeWithResponse(resp)
 }
 
-func decodeSubscriptionControllerGetSubscriptionWithTypeResponse(resp *http.Response) (res *SubscriptionControllerGetSubscriptionWithTypeOK, _ error) {
+func decodeSubscriptionControllerGetSubscriptionWithTypeResponse(resp *http.Response) (res SubscriptionControllerGetSubscriptionWithTypeOK, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
-		return &SubscriptionControllerGetSubscriptionWithTypeOK{}, nil
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "text/plain":
+			reader := resp.Body
+			b, err := io.ReadAll(reader)
+			if err != nil {
+				return res, err
+			}
+
+			response := SubscriptionControllerGetSubscriptionWithTypeOK{Data: bytes.NewReader(b)}
+			return response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
 	}
 	return res, validate.UnexpectedStatusCodeWithResponse(resp)
 }

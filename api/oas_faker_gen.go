@@ -476,6 +476,32 @@ func (s *BulkExtendExpirationDateRequestDto) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *BulkNodesActionsRequestDto) SetFake() {
+	{
+		{
+			s.Uuids = nil
+			for i := 0; i < 1; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.Uuids = append(s.Uuids, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Action.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *BulkNodesActionsRequestDtoAction) SetFake() {
+	*s = BulkNodesActionsRequestDtoActionENABLE
+}
+
+// SetFake set fake values.
 func (s *BulkUpdateUsersRequestDto) SetFake() {
 	{
 		{
@@ -886,6 +912,15 @@ func (s *CreateConfigProfileRequestDtoConfig) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CreateExternalSquadRequestDto) SetFake() {
+	{
+		{
+			s.Name = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CreateHostRequestDto) SetFake() {
 	{
 		{
@@ -1193,6 +1228,15 @@ func (s *CreateNodeRequestDto) SetFake() {
 				}
 				s.Tags = append(s.Tags, elem)
 			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionPageConfigRequestDto) SetFake() {
+	{
+		{
+			s.Name = "string"
 		}
 	}
 }
@@ -1759,15 +1803,6 @@ func (s *ExternalSquad) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ExternalSquadRequestRequest) SetFake() {
-	{
-		{
-			s.Name = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *ExternalSquadResponseHeaders) SetFake() {
 	var (
 		elem string
@@ -1953,6 +1988,57 @@ func (s *GenerateX25519ResponseDtoResponseKeypairsItem) SetFake() {
 	{
 		{
 			s.PrivateKey = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *Generic) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.ClientId.SetFake()
+		}
+	}
+	{
+		{
+			s.ClientSecret.SetFake()
+		}
+	}
+	{
+		{
+			s.WithPkce = true
+		}
+	}
+	{
+		{
+			s.AuthorizationUrl.SetFake()
+		}
+	}
+	{
+		{
+			s.TokenUrl.SetFake()
+		}
+	}
+	{
+		{
+			s.FrontendDomain.SetFake()
+		}
+	}
+	{
+		{
+			s.AllowedEmails = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.AllowedEmails = append(s.AllowedEmails, elem)
+			}
 		}
 	}
 }
@@ -4201,6 +4287,52 @@ func (s *InternalSquadsResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *Keycloak) SetFake() {
+	{
+		{
+			s.Enabled = true
+		}
+	}
+	{
+		{
+			s.Realm.SetFake()
+		}
+	}
+	{
+		{
+			s.ClientId.SetFake()
+		}
+	}
+	{
+		{
+			s.ClientSecret.SetFake()
+		}
+	}
+	{
+		{
+			s.FrontendDomain.SetFake()
+		}
+	}
+	{
+		{
+			s.KeycloakDomain.SetFake()
+		}
+	}
+	{
+		{
+			s.AllowedEmails = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.AllowedEmails = append(s.AllowedEmails, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *LoginRequestDto) SetFake() {
 	{
 		{
@@ -4601,6 +4733,16 @@ func (s *Oauth2Settings) SetFake() {
 			s.Yandex.SetFake()
 		}
 	}
+	{
+		{
+			s.Keycloak.SetFake()
+		}
+	}
+	{
+		{
+			s.Generic.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -4712,6 +4854,15 @@ func (s *OptFloat64) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptGeneric) SetFake() {
+	var elem Generic
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptGetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) SetFake() {
 	var elem GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData
 	{
@@ -4743,6 +4894,15 @@ func (s *OptInt) SetFake() {
 	var elem int
 	{
 		elem = int(0)
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptKeycloak) SetFake() {
+	var elem Keycloak
+	{
+		elem.SetFake()
 	}
 	s.SetTo(elem)
 }
@@ -5379,6 +5539,11 @@ func (s *ResponseModification) SetFake() {
 	{
 		{
 			s.SubscriptionTemplate.SetFake()
+		}
+	}
+	{
+		{
+			s.IgnoreHostXrayJsonTemplate.SetFake()
 		}
 	}
 }

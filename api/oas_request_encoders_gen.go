@@ -151,7 +151,7 @@ func encodeConfigProfileControllerUpdateConfigProfileRequest(
 }
 
 func encodeExternalSquadControllerCreateExternalSquadRequest(
-	req *ExternalSquadRequestRequest,
+	req *CreateExternalSquadRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -458,6 +458,20 @@ func encodeInternalSquadControllerUpdateInternalSquadRequest(
 	return nil
 }
 
+func encodeNodesControllerBulkNodesActionsRequest(
+	req *BulkNodesActionsRequestDto,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeNodesControllerCreateNodeRequest(
 	req *CreateNodeRequestDto,
 	r *http.Request,
@@ -641,7 +655,7 @@ func encodeSubscriptionPageConfigControllerCloneSubscriptionPageConfigRequest(
 }
 
 func encodeSubscriptionPageConfigControllerCreateConfigRequest(
-	req *ExternalSquadRequestRequest,
+	req *CreateSubscriptionPageConfigRequestDto,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"

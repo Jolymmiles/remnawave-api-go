@@ -80,6 +80,7 @@ const (
 	InternalSquadControllerReorderInternalSquadsOperation                               OperationName = "InternalSquadControllerReorderInternalSquads"
 	InternalSquadControllerUpdateInternalSquadOperation                                 OperationName = "InternalSquadControllerUpdateInternalSquad"
 	KeygenControllerGenerateKeyOperation                                                OperationName = "KeygenControllerGenerateKey"
+	NodesControllerBulkNodesActionsOperation                                            OperationName = "NodesControllerBulkNodesActions"
 	NodesControllerCreateNodeOperation                                                  OperationName = "NodesControllerCreateNode"
 	NodesControllerDeleteNodeOperation                                                  OperationName = "NodesControllerDeleteNode"
 	NodesControllerDisableNodeOperation                                                 OperationName = "NodesControllerDisableNode"

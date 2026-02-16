@@ -297,6 +297,10 @@ type KeygenControllerGenerateKeyRes interface {
 	keygenControllerGenerateKeyRes()
 }
 
+type NodesControllerBulkNodesActionsRes interface {
+	nodesControllerBulkNodesActionsRes()
+}
+
 type NodesControllerCreateNodeRes interface {
 	nodesControllerCreateNodeRes()
 }

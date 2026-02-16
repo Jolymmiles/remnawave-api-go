@@ -189,7 +189,7 @@ type Invoker interface {
 	// Create external squad.
 	//
 	// POST /api/external-squads
-	ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *ExternalSquadRequestRequest) (ExternalSquadControllerCreateExternalSquadRes, error)
+	ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error)
 	// ExternalSquadControllerDeleteExternalSquad invokes ExternalSquadController_deleteExternalSquad operation.
 	//
 	// Delete external squad.
@@ -472,6 +472,12 @@ type Invoker interface {
 	//
 	// GET /api/keygen
 	KeygenControllerGenerateKey(ctx context.Context) (KeygenControllerGenerateKeyRes, error)
+	// NodesControllerBulkNodesActions invokes NodesController_bulkNodesActions operation.
+	//
+	// Perform actions for many nodes.
+	//
+	// POST /api/nodes/bulk-actions
+	NodesControllerBulkNodesActions(ctx context.Context, request *BulkNodesActionsRequestDto) (NodesControllerBulkNodesActionsRes, error)
 	// NodesControllerCreateNode invokes NodesController_createNode operation.
 	//
 	// Create a new node.
@@ -625,11 +631,11 @@ type Invoker interface {
 	// SubscriptionControllerGetSubscription invokes SubscriptionController_getSubscription operation.
 	//
 	// GET /api/sub/{shortUuid}
-	SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error
+	SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (SubscriptionControllerGetSubscriptionOK, error)
 	// SubscriptionControllerGetSubscriptionByClientType invokes SubscriptionController_getSubscriptionByClientType operation.
 	//
 	// GET /api/sub/{shortUuid}/{clientType}
-	SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error
+	SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (SubscriptionControllerGetSubscriptionByClientTypeOK, error)
 	// SubscriptionControllerGetSubscriptionInfoByShortUuid invokes SubscriptionController_getSubscriptionInfoByShortUuid operation.
 	//
 	// Get Subscription Info by Short UUID.
@@ -639,7 +645,7 @@ type Invoker interface {
 	// SubscriptionControllerGetSubscriptionWithType invokes SubscriptionController_getSubscriptionWithType operation.
 	//
 	// GET /api/sub/outline/{shortUuid}/{type}/{encodedTag}
-	SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error
+	SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (SubscriptionControllerGetSubscriptionWithTypeOK, error)
 	// SubscriptionPageConfigControllerCloneSubscriptionPageConfig invokes SubscriptionPageConfigController_cloneSubscriptionPageConfig operation.
 	//
 	// Clone subscription page config.
@@ -651,7 +657,7 @@ type Invoker interface {
 	// Create subscription page config.
 	//
 	// POST /api/subscription-page-configs
-	SubscriptionPageConfigControllerCreateConfig(ctx context.Context, request *ExternalSquadRequestRequest) (SubscriptionPageConfigControllerCreateConfigRes, error)
+	SubscriptionPageConfigControllerCreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequestDto) (SubscriptionPageConfigControllerCreateConfigRes, error)
 	// SubscriptionPageConfigControllerDeleteConfig invokes SubscriptionPageConfigController_deleteConfig operation.
 	//
 	// Delete subscription page config.
@@ -2378,7 +2384,7 @@ func (c *Client) sendBandwidthStatsNodesControllerGetStatsNodeUsersUsage(ctx con
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Start))
+			return e.EncodeValue(conv.DateToString(params.Start))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -2392,7 +2398,7 @@ func (c *Client) sendBandwidthStatsNodesControllerGetStatsNodeUsersUsage(ctx con
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateToString(params.End))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -2548,7 +2554,7 @@ func (c *Client) sendBandwidthStatsUsersControllerGetStatsNodesUsage(ctx context
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Start))
+			return e.EncodeValue(conv.DateToString(params.Start))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -2562,7 +2568,7 @@ func (c *Client) sendBandwidthStatsUsersControllerGetStatsNodesUsage(ctx context
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateToString(params.End))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -3975,12 +3981,12 @@ func (c *Client) sendExternalSquadControllerAddUsersToExternalSquad(ctx context.
 // Create external squad.
 //
 // POST /api/external-squads
-func (c *Client) ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *ExternalSquadRequestRequest) (ExternalSquadControllerCreateExternalSquadRes, error) {
+func (c *Client) ExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (ExternalSquadControllerCreateExternalSquadRes, error) {
 	res, err := c.sendExternalSquadControllerCreateExternalSquad(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Context, request *ExternalSquadRequestRequest) (res ExternalSquadControllerCreateExternalSquadRes, err error) {
+func (c *Client) sendExternalSquadControllerCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequestDto) (res ExternalSquadControllerCreateExternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -9636,6 +9642,124 @@ func (c *Client) sendKeygenControllerGenerateKey(ctx context.Context) (res Keyge
 	return result, nil
 }
 
+// NodesControllerBulkNodesActions invokes NodesController_bulkNodesActions operation.
+//
+// Perform actions for many nodes.
+//
+// POST /api/nodes/bulk-actions
+func (c *Client) NodesControllerBulkNodesActions(ctx context.Context, request *BulkNodesActionsRequestDto) (NodesControllerBulkNodesActionsRes, error) {
+	res, err := c.sendNodesControllerBulkNodesActions(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendNodesControllerBulkNodesActions(ctx context.Context, request *BulkNodesActionsRequestDto) (res NodesControllerBulkNodesActionsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodesController_bulkNodesActions"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/nodes/bulk-actions"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesControllerBulkNodesActionsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	stage = "BuildURL"
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/api/nodes/bulk-actions"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodesControllerBulkNodesActionsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodesControllerBulkNodesActionsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	stage = "SendRequest"
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	stage = "DecodeResponse"
+	result, err := decodeNodesControllerBulkNodesActionsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // NodesControllerCreateNode invokes NodesController_createNode operation.
 //
 // Create a new node.
@@ -11253,7 +11377,7 @@ func (c *Client) sendNodesUsageHistoryControllerGetStatsNodesUsage(ctx context.C
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Start))
+			return e.EncodeValue(conv.DateToString(params.Start))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -11267,7 +11391,7 @@ func (c *Client) sendNodesUsageHistoryControllerGetStatsNodesUsage(ctx context.C
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateToString(params.End))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -12564,12 +12688,12 @@ func (c *Client) sendSnippetsControllerUpdateSnippet(ctx context.Context, reques
 // SubscriptionControllerGetSubscription invokes SubscriptionController_getSubscription operation.
 //
 // GET /api/sub/{shortUuid}
-func (c *Client) SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) error {
-	_, err := c.sendSubscriptionControllerGetSubscription(ctx, params)
-	return err
+func (c *Client) SubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (SubscriptionControllerGetSubscriptionOK, error) {
+	res, err := c.sendSubscriptionControllerGetSubscription(ctx, params)
+	return res, err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (res *SubscriptionControllerGetSubscriptionOK, err error) {
+func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, params SubscriptionControllerGetSubscriptionParams) (res SubscriptionControllerGetSubscriptionOK, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("SubscriptionController_getSubscription"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -12653,12 +12777,12 @@ func (c *Client) sendSubscriptionControllerGetSubscription(ctx context.Context, 
 // SubscriptionControllerGetSubscriptionByClientType invokes SubscriptionController_getSubscriptionByClientType operation.
 //
 // GET /api/sub/{shortUuid}/{clientType}
-func (c *Client) SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) error {
-	_, err := c.sendSubscriptionControllerGetSubscriptionByClientType(ctx, params)
-	return err
+func (c *Client) SubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (SubscriptionControllerGetSubscriptionByClientTypeOK, error) {
+	res, err := c.sendSubscriptionControllerGetSubscriptionByClientType(ctx, params)
+	return res, err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (res *SubscriptionControllerGetSubscriptionByClientTypeOK, err error) {
+func (c *Client) sendSubscriptionControllerGetSubscriptionByClientType(ctx context.Context, params SubscriptionControllerGetSubscriptionByClientTypeParams) (res SubscriptionControllerGetSubscriptionByClientTypeOK, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("SubscriptionController_getSubscriptionByClientType"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -12853,12 +12977,12 @@ func (c *Client) sendSubscriptionControllerGetSubscriptionInfoByShortUuid(ctx co
 // SubscriptionControllerGetSubscriptionWithType invokes SubscriptionController_getSubscriptionWithType operation.
 //
 // GET /api/sub/outline/{shortUuid}/{type}/{encodedTag}
-func (c *Client) SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) error {
-	_, err := c.sendSubscriptionControllerGetSubscriptionWithType(ctx, params)
-	return err
+func (c *Client) SubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (SubscriptionControllerGetSubscriptionWithTypeOK, error) {
+	res, err := c.sendSubscriptionControllerGetSubscriptionWithType(ctx, params)
+	return res, err
 }
 
-func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (res *SubscriptionControllerGetSubscriptionWithTypeOK, err error) {
+func (c *Client) sendSubscriptionControllerGetSubscriptionWithType(ctx context.Context, params SubscriptionControllerGetSubscriptionWithTypeParams) (res SubscriptionControllerGetSubscriptionWithTypeOK, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("SubscriptionController_getSubscriptionWithType"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -13091,12 +13215,12 @@ func (c *Client) sendSubscriptionPageConfigControllerCloneSubscriptionPageConfig
 // Create subscription page config.
 //
 // POST /api/subscription-page-configs
-func (c *Client) SubscriptionPageConfigControllerCreateConfig(ctx context.Context, request *ExternalSquadRequestRequest) (SubscriptionPageConfigControllerCreateConfigRes, error) {
+func (c *Client) SubscriptionPageConfigControllerCreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequestDto) (SubscriptionPageConfigControllerCreateConfigRes, error) {
 	res, err := c.sendSubscriptionPageConfigControllerCreateConfig(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionPageConfigControllerCreateConfig(ctx context.Context, request *ExternalSquadRequestRequest) (res SubscriptionPageConfigControllerCreateConfigRes, err error) {
+func (c *Client) sendSubscriptionPageConfigControllerCreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequestDto) (res SubscriptionPageConfigControllerCreateConfigRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {

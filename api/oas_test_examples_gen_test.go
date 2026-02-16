@@ -311,6 +311,30 @@ func TestBulkExtendExpirationDateRequestDto_EncodeDecode(t *testing.T) {
 	var typ2 BulkExtendExpirationDateRequestDto
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestBulkNodesActionsRequestDto_EncodeDecode(t *testing.T) {
+	var typ BulkNodesActionsRequestDto
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 BulkNodesActionsRequestDto
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestBulkNodesActionsRequestDtoAction_EncodeDecode(t *testing.T) {
+	var typ BulkNodesActionsRequestDtoAction
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 BulkNodesActionsRequestDtoAction
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestBulkUpdateUsersRequestDto_EncodeDecode(t *testing.T) {
 	var typ BulkUpdateUsersRequestDto
 	typ.SetFake()
@@ -587,6 +611,18 @@ func TestCreateConfigProfileRequestDtoConfig_EncodeDecode(t *testing.T) {
 	var typ2 CreateConfigProfileRequestDtoConfig
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestCreateExternalSquadRequestDto_EncodeDecode(t *testing.T) {
+	var typ CreateExternalSquadRequestDto
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateExternalSquadRequestDto
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestCreateHostRequestDto_EncodeDecode(t *testing.T) {
 	var typ CreateHostRequestDto
 	typ.SetFake()
@@ -693,6 +729,18 @@ func TestCreateNodeRequestDto_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 CreateNodeRequestDto
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateSubscriptionPageConfigRequestDto_EncodeDecode(t *testing.T) {
+	var typ CreateSubscriptionPageConfigRequestDto
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateSubscriptionPageConfigRequestDto
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCreateSubscriptionPageConfigResponseDto_EncodeDecode(t *testing.T) {
@@ -1035,18 +1083,6 @@ func TestExternalSquad_EncodeDecode(t *testing.T) {
 	var typ2 ExternalSquad
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestExternalSquadRequestRequest_EncodeDecode(t *testing.T) {
-	var typ ExternalSquadRequestRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 ExternalSquadRequestRequest
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestExternalSquadResponseHeaders_EncodeDecode(t *testing.T) {
 	var typ ExternalSquadResponseHeaders
 	typ = make(ExternalSquadResponseHeaders)
@@ -1203,6 +1239,18 @@ func TestGenerateX25519ResponseDtoResponseKeypairsItem_EncodeDecode(t *testing.T
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 GenerateX25519ResponseDtoResponseKeypairsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeneric_EncodeDecode(t *testing.T) {
+	var typ Generic
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 Generic
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetAllHwidDevicesResponseDto_EncodeDecode(t *testing.T) {
@@ -2495,6 +2543,18 @@ func TestInternalSquadsResponseResponse_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 InternalSquadsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestKeycloak_EncodeDecode(t *testing.T) {
+	var typ Keycloak
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 Keycloak
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestLoginRequestDto_EncodeDecode(t *testing.T) {

@@ -10,6 +10,8 @@ A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 
 | API Version | SDK Version | Install |
 |-------------|-------------|---------|
+| 2.6.1 | v2.6.1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.6.1` |
+| 2.5.3 | v2.5.3 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.5.3` |
 | 2.3.0 | v2.3.0-6 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-6` |
 | 2.2.6 | v2.2.6-1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.2.6-1` |
 
@@ -23,7 +25,7 @@ Generated with [**ogen**](https://github.com/ogen-go/ogen):
 ## Installation
 
 ```bash
-go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-6
+go get github.com/Jolymmiles/remnawave-api-go/v2@v2.6.1
 ```
 
 ## Quick Start
@@ -69,31 +71,32 @@ func main() {
 
 | Controller | Description |
 |------------|-------------|
-| `client.Users()` | User management |
-| `client.UsersBulkActions()` | Bulk user operations |
-| `client.UsersStats()` | User statistics |
-| `client.Nodes()` | Node management |
+| `client.ApiTokens()` | API token management |
+| `client.Auth()` | Authentication |
+| `client.BandwidthStatsNodes()` | Node bandwidth statistics |
+| `client.BandwidthStatsUsers()` | User bandwidth statistics |
+| `client.ConfigProfile()` | Config profiles |
+| `client.ExternalSquad()` | External squads |
 | `client.Hosts()` | Host management |
 | `client.HostsBulkActions()` | Bulk host operations |
-| `client.Auth()` | Authentication |
-| `client.Passkey()` | Passkey authentication |
-| `client.Subscription()` | Subscription management |
-| `client.Subscriptions()` | Multiple subscriptions |
-| `client.SubscriptionSettings()` | Subscription settings |
-| `client.SubscriptionTemplate()` | Templates |
-| `client.ConfigProfile()` | Config profiles |
-| `client.InternalSquad()` | Internal squads |
-| `client.ExternalSquad()` | External squads |
-| `client.Snippets()` | Code snippets |
-| `client.System()` | System info |
-| `client.ApiTokens()` | API tokens |
-| `client.RemnawaveSettings()` | Panel settings |
 | `client.HwidUserDevices()` | HWID devices |
 | `client.InfraBilling()` | Infrastructure billing |
+| `client.InternalSquad()` | Internal squads |
 | `client.Keygen()` | Key generation |
+| `client.Nodes()` | Node management |
 | `client.NodesUsageHistory()` | Node usage history |
-| `client.NodesUserUsageHistory()` | User usage on nodes |
+| `client.Passkey()` | Passkey authentication |
+| `client.RemnawaveSettings()` | Panel settings |
+| `client.Snippets()` | Code snippets |
+| `client.Subscription()` | Subscription management |
+| `client.SubscriptionPageConfig()` | Subscription page config |
+| `client.SubscriptionSettings()` | Subscription settings |
+| `client.SubscriptionTemplate()` | Subscription templates |
+| `client.Subscriptions()` | Multiple subscriptions |
+| `client.System()` | System info |
 | `client.UserSubscriptionRequestHistory()` | Request history |
+| `client.Users()` | User management |
+| `client.UsersBulkActions()` | Bulk user operations |
 
 ## Error Handling
 
@@ -248,7 +251,7 @@ baseClient := client.Client()
 | Requirement | Version |
 |-------------|---------|
 | Go | 1.21+ |
-| Remnawave API | 2.3.0+ |
+| Remnawave API | 2.6.1+ |
 
 ## License
 

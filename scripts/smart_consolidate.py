@@ -297,7 +297,13 @@ class SchemaNameAnalyzer:
 
 class SmartConsolidator:
     """Smart schema consolidation with intelligent naming"""
-    
+
+    # Schema name pairs that must NEVER be consolidated, even if structurally identical.
+    # Each entry is a frozenset of schema names that should remain separate.
+    DO_NOT_MERGE = [
+        frozenset({'CreateExternalSquadRequestDto', 'CreateSubscriptionPageConfigRequestDto'}),
+    ]
+
     # Known entity groupings (for disambiguation)
     ENTITY_GROUPS = {
         # Auth-related
@@ -634,8 +640,28 @@ class SmartConsolidator:
         }
         
         for content, names in duplicates.items():
+            # Check DO_NOT_MERGE: split the group if it contains schemas that must stay separate
+            names_set = set(names)
+            must_split = False
+            for exclusion in self.DO_NOT_MERGE:
+                if exclusion.issubset(names_set):
+                    must_split = True
+                    break
+
+            if must_split:
+                # Exclude the protected schemas from this group
+                excluded = set()
+                for exclusion in self.DO_NOT_MERGE:
+                    if exclusion.issubset(names_set):
+                        excluded.update(exclusion)
+                remaining = [n for n in names if n not in excluded]
+                # Only consolidate the remaining names (if 2+)
+                if len(remaining) < 2:
+                    continue
+                names = remaining
+
             canonical = self.generate_canonical_name(names)
-            
+
             # Ensure unique canonical names - if already used, make unique
             base_canonical = canonical
             counter = 2
