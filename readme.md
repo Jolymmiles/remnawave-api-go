@@ -15,10 +15,13 @@ A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 | 2.3.0 | v2.3.0-6 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-6` |
 | 2.2.6 | v2.2.6-1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.2.6-1` |
 
-Generated with [**ogen**](https://github.com/ogen-go/ogen):
+Generated with [**ogen**](https://github.com/ogen-go/ogen) v1.19.0:
 * Zero-reflection JSON decoder for high throughput
 * Compile-time validation against OpenAPI 3.0 spec
 * First-class `context.Context` support
+* Built-in OpenTelemetry instrumentation
+* Per-request options via `RequestOption`
+* Request/response editors (middleware)
 * Organized sub-clients for clean API access
 * Simplified method signatures (no verbose Params structs)
 
@@ -60,7 +63,7 @@ func main() {
     fmt.Printf("Node: %s\n", node.(*remapi.NodeResponse).Response.Name)
 
     // Create user
-    newUser, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequestDto{
+    newUser, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequest{
         Username: "john_doe",
     })
     fmt.Printf("Created: %s\n", newUser.(*remapi.UserResponse).Response.Username)
@@ -109,18 +112,16 @@ if err != nil {
 }
 
 switch e := resp.(type) {
+case *remapi.UserResponse:
+    fmt.Printf("User: %s\n", e.Response.Username)
 case *remapi.BadRequestError:
     for _, validationErr := range e.Errors {
         fmt.Printf("Field: %v, Error: %s\n", validationErr.Path, validationErr.Message)
     }
-case *remapi.UnauthorizedError:
-    fmt.Println("Invalid token")
 case *remapi.NotFoundError:
     fmt.Println("User not found")
 case *remapi.InternalServerError:
     fmt.Printf("Server error: %s\n", e.Message.Value)
-case *remapi.UserResponse:
-    fmt.Printf("User: %s\n", e.Response.Username)
 }
 ```
 
@@ -160,12 +161,12 @@ user, _ := client.Users().GetUserByUsername(ctx, "john")
 user, _ := client.Users().GetUserByShortUuid(ctx, "short-uuid")
 
 // Create
-user, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequestDto{
+user, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequest{
     Username: "new_user",
 })
 
 // Update
-user, _ := client.Users().UpdateUser(ctx, &remapi.UpdateUserRequestDto{
+user, _ := client.Users().UpdateUser(ctx, &remapi.UpdateUserRequest{
     Uuid: "uuid-here",
 })
 
@@ -190,7 +191,7 @@ nodes, _ := client.Nodes().GetAllNodes(ctx)
 node, _ := client.Nodes().GetOneNode(ctx, "uuid-here")
 
 // Create
-node, _ := client.Nodes().CreateNode(ctx, &remapi.CreateNodeRequestDto{
+node, _ := client.Nodes().CreateNode(ctx, &remapi.CreateNodeRequest{
     Name: "Node-1",
 })
 
@@ -218,7 +219,7 @@ hosts, _ := client.Hosts().GetAllHosts(ctx)
 host, _ := client.Hosts().GetOneHost(ctx, "uuid-here")
 
 // Create
-host, _ := client.Hosts().CreateHost(ctx, &remapi.CreateHostRequestDto{...})
+host, _ := client.Hosts().CreateHost(ctx, &remapi.CreateHostRequest{...})
 
 // Delete
 client.Hosts().DeleteHost(ctx, "uuid-here")
@@ -228,7 +229,7 @@ client.Hosts().DeleteHost(ctx, "uuid-here")
 
 ```go
 // Login
-resp, _ := client.Auth().Login(ctx, &remapi.LoginRequestDto{
+resp, _ := client.Auth().Login(ctx, &remapi.LoginRequest{
     Username: "admin",
     Password: "password",
 })
@@ -238,6 +239,15 @@ token := resp.(*remapi.TokenResponse).Response.AccessToken
 status, _ := client.Auth().GetStatus(ctx)
 ```
 
+## Request Options
+
+All methods support per-request `RequestOption` for customization:
+
+```go
+// Pass options as the last variadic argument
+user, err := client.Users().GetUserByUuid(ctx, "uuid-here", opts...)
+```
+
 ## Access to Base Client
 
 If you need direct access to the underlying ogen client:
@@ -245,6 +255,13 @@ If you need direct access to the underlying ogen client:
 ```go
 baseClient := client.Client()
 ```
+
+## Examples
+
+See the [`examples/`](examples/) directory for complete working examples:
+- [`basic/`](examples/basic/) — CRUD operations
+- [`pagination/`](examples/pagination/) — Paginated listing with PaginationHelper
+- [`error_handling/`](examples/error_handling/) — Type-switch error handling
 
 ## Requirements
 

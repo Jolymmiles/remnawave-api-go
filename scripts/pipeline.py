@@ -151,16 +151,12 @@ SUBSCRIPTION_TEXT_OPERATIONS = [
 ]
 
 
-def patch_subscription_text_responses(spec_file: str) -> int:
+def patch_subscription_text_responses(spec: dict) -> int:
     """
-    Patch the consolidated spec to add text/plain response content
+    Patch the spec to add text/plain response content
     for subscription endpoints that return raw subscription configs.
-
-    Returns the number of operations patched.
+    Modifies spec in-place. Returns the number of operations patched.
     """
-    with open(spec_file, 'r') as f:
-        spec = json.load(f)
-
     patched = 0
     for path, path_item in spec.get('paths', {}).items():
         for http_method, op in path_item.items():
@@ -186,10 +182,107 @@ def patch_subscription_text_responses(spec_file: str) -> int:
             responses['200'] = resp_200
             op['responses'] = responses
 
-    with open(spec_file, 'w') as f:
-        json.dump(spec, f, indent=2, ensure_ascii=False)
-
     return patched
+
+
+# ============================================================================
+# STEP 1.6: SHORTEN OPERATION IDS
+# ============================================================================
+
+def shorten_operation_ids(spec: dict) -> int:
+    """
+    Strip 'Controller' from all operationIds to produce shorter Go type names.
+    E.g. SubscriptionController_getSubscription → Subscription_getSubscription
+    Modifies spec in-place. Returns the number of operations renamed.
+    """
+    renamed = 0
+    for path, path_item in spec.get('paths', {}).items():
+        for http_method, op in path_item.items():
+            if not isinstance(op, dict):
+                continue
+            op_id = op.get('operationId', '')
+            if 'Controller' in op_id:
+                op['operationId'] = op_id.replace('Controller', '')
+                renamed += 1
+    return renamed
+
+
+# ============================================================================
+# STEP 1.7: STRIP 'Dto' SUFFIX FROM SCHEMA NAMES
+# ============================================================================
+
+def strip_dto_suffix(spec: dict) -> int:
+    """
+    Remove 'Dto' suffix from all schema names and update all $ref pointers.
+    E.g. CreateUserRequestDto → CreateUserRequest
+    Modifies spec in-place. Returns the number of schemas renamed.
+    """
+    schemas = spec.get('components', {}).get('schemas', {})
+    rename_map = {}
+
+    for name in list(schemas.keys()):
+        if name.endswith('Dto'):
+            new_name = name[:-3]
+            # Avoid collision with existing schema
+            if new_name not in schemas and new_name not in rename_map.values():
+                rename_map[name] = new_name
+
+    if not rename_map:
+        return 0
+
+    # Rename schemas
+    new_schemas = {}
+    for name, schema in schemas.items():
+        new_name = rename_map.get(name, name)
+        new_schemas[new_name] = schema
+    spec['components']['schemas'] = new_schemas
+
+    # Update all $ref pointers throughout the spec
+    old_prefix = '#/components/schemas/'
+    ref_map = {f'{old_prefix}{old}': f'{old_prefix}{new}' for old, new in rename_map.items()}
+
+    def _update_refs(obj):
+        if isinstance(obj, dict):
+            if '$ref' in obj and obj['$ref'] in ref_map:
+                obj['$ref'] = ref_map[obj['$ref']]
+            for v in obj.values():
+                _update_refs(v)
+        elif isinstance(obj, list):
+            for item in obj:
+                _update_refs(item)
+
+    _update_refs(spec)
+    return len(rename_map)
+
+
+# ============================================================================
+# STEP 1.8: FIX NUMERIC QUERY PARAMETERS THAT SHOULD BE INTEGERS
+# ============================================================================
+
+# Query parameter names that are semantically integers (pagination, limits, counts)
+INTEGER_QUERY_PARAMS = {'size', 'start', 'topUsersLimit', 'topNodesLimit', 'limit', 'offset', 'page', 'count'}
+
+
+def fix_number_query_params(spec: dict) -> int:
+    """
+    Change query parameters with type 'number' to 'integer' when they represent
+    pagination or limit values. The upstream OpenAPI spec incorrectly uses 'number'
+    for these, which produces float64 in Go instead of int.
+    Modifies spec in-place. Returns the number of parameters fixed.
+    """
+    fixed = 0
+    for path, path_item in spec.get('paths', {}).items():
+        for http_method, op in path_item.items():
+            if not isinstance(op, dict):
+                continue
+            for param in op.get('parameters', []):
+                if param.get('in') != 'query':
+                    continue
+                schema = param.get('schema', {})
+                if schema.get('type') == 'number' and param.get('name') in INTEGER_QUERY_PARAMS:
+                    schema['type'] = 'integer'
+                    fixed += 1
+    return fixed
 
 
 # ============================================================================
@@ -203,7 +296,7 @@ def generate_ogen_client(spec_file: str) -> bool:
     try:
         result = subprocess.run(
             [
-                'go', 'run', 'github.com/ogen-go/ogen/cmd/ogen@latest',
+                'go', 'run', 'github.com/ogen-go/ogen/cmd/ogen@v1.19.0',
                 '--config', '.ogen.yml',
                 '--target', 'api',
                 '--package', 'api',
@@ -237,32 +330,39 @@ def parse_oas_client_methods(client_file: str) -> dict:
     """Parse method signatures from oas_client_gen.go"""
     with open(client_file, 'r') as f:
         content = f.read()
-    
+
     methods = {}
     pattern = r'func \(c \*Client\) (\w+)\((ctx context\.Context(?:,\s*[^)]+)?)\)\s*\(([^)]+)\)'
-    
+
     for match in re.finditer(pattern, content, re.MULTILINE):
         method_name = match.group(1)
         if method_name in ['requestURL'] or method_name.startswith('send'):
             continue
-        
+
         full_params = match.group(2)
         returns = match.group(3)
-        
-        # Parse params (skip ctx)
+
+        # Parse params (skip ctx and variadic options)
         params_list = []
+        has_options = False
         if ', ' in full_params:
             params_str = full_params.split(', ', 1)[1]
+            # Detect variadic ...RequestOption
+            if '...RequestOption' in params_str:
+                has_options = True
+                # Remove variadic param before parsing regular params
+                params_str = re.sub(r',?\s*options\s+\.\.\.RequestOption', '', params_str).strip()
             for param in re.findall(r'(\w+)\s+([\*\w\.]+)', params_str):
                 params_list.append((param[0], param[1]))
-        
+
         returns_list = [r.strip() for r in returns.split(',')]
-        
+
         methods[method_name] = {
             'params': params_list,
-            'returns': returns_list
+            'returns': returns_list,
+            'has_options': has_options,
         }
-    
+
     return methods
 
 
@@ -305,10 +405,8 @@ def simplify_param_type(param_type: str) -> str:
     type_map = {
         'OptString': 'string',
         'OptInt': 'int',
-        'OptInt64': 'int64',
         'OptFloat64': 'float64',
         'OptBool': 'bool',
-        'uuid.UUID': 'string',  # Accept string, convert inside
     }
     return type_map.get(param_type, param_type)
 
@@ -330,48 +428,49 @@ def safe_param_name(name: str) -> str:
     return lower
 
 
+def _to_pascal(s: str) -> str:
+    """Convert first letter to uppercase, preserving camelCase."""
+    if not s:
+        return s
+    return s[0].upper() + s[1:]
+
+
 def parse_operations(spec_file: str) -> dict:
     """Parse operations from OpenAPI spec"""
     with open(spec_file, 'r') as f:
         spec = json.load(f)
-    
+
     operations_by_controller = {}
-    
+
     for path, path_item in spec.get('paths', {}).items():
         for http_method, op_spec in path_item.items():
             if http_method not in ['get', 'post', 'put', 'patch', 'delete']:
                 continue
-            
+
             op_id = op_spec.get('operationId')
             if not op_id or '_' not in op_id:
                 continue
-            
+
             parts = op_id.split('_', 1)
             controller_full = parts[0]
             method_snake = parts[1]
-            
+
             controller = controller_full.replace('Controller', '')
-            
-            # Convert to PascalCase preserving camelCase
-            def to_pascal(s):
-                if not s:
-                    return s
-                return s[0].upper() + s[1:]
-            
-            parts = method_snake.split('_')
-            method_pascal = ''.join(to_pascal(p) for p in parts)
-            
+
+            method_parts = method_snake.split('_')
+            method_pascal = ''.join(_to_pascal(p) for p in method_parts)
+
             go_method = controller_full + method_pascal
-            
+
             if controller not in operations_by_controller:
                 operations_by_controller[controller] = []
-            
+
             operations_by_controller[controller].append({
                 'operationId': op_id,
                 'goMethod': go_method,
                 'displayMethod': method_pascal
             })
-    
+
     return operations_by_controller
 
 
@@ -498,9 +597,13 @@ func New{controller}Client(client *Client) *{controller}Client {{
             method_info = methods[go_method]
             params = method_info['params']
             returns = method_info['returns']
-            
+            has_options = method_info.get('has_options', False)
+
+            # options suffix for signature and call
+            opts_sig = ', options ...RequestOption' if has_options else ''
+            opts_call = ', options...' if has_options else ''
+
             # Check if we can simplify Params struct to individual args
-            # Find params struct (can be with or without body)
             simplified_params = None
             params_index = None
             for i, (pname, ptype) in enumerate(params):
@@ -510,36 +613,28 @@ func New{controller}Client(client *Client) *{controller}Client {{
                         simplified_params = simplified
                         params_index = i
                     break
-            
+
             if returns:
                 ret_type = ', '.join(returns)
                 if len(returns) > 1:
                     ret_type = f'({ret_type})'
             else:
                 ret_type = ''
-            
+
             # Generate method with simplified params or original
             if simplified_params and params_index is not None:
-                # Simplified: GetByUuid(ctx, uuid string) instead of GetByUuid(ctx, params XxxParams)
-                # Build signature with other params (body) + simplified params
                 params_type = params[params_index][1]
-                
-                # Build args: other params first, then simplified params
+
                 sig_parts = []
-                call_parts = []
                 for i, (pname, ptype) in enumerate(params):
                     if i == params_index:
-                        # This is the Params struct - add simplified args
                         for field_name, field_type, simple_type in simplified_params:
                             sig_parts.append(f'{safe_param_name(field_name)} {simple_type}')
                     else:
-                        # Regular param (body)
                         sig_parts.append(f'{pname} {ptype}')
-                        call_parts.append(pname)
-                
+
                 simple_args = ', '.join(sig_parts)
-                
-                # Build params struct initialization
+
                 params_init = f'{params_type}{{\n'
                 for field_name, field_type, simple_type in simplified_params:
                     arg_name = safe_param_name(field_name)
@@ -548,18 +643,17 @@ func New{controller}Client(client *Client) *{controller}Client {{
                     else:
                         params_init += f'\t\t{field_name}: {arg_name},\n'
                 params_init += '\t}'
-                
-                # Build call args in correct order
+
                 call_args = []
                 for i, (pname, ptype) in enumerate(params):
                     if i == params_index:
                         call_args.append(params_init)
                     else:
                         call_args.append(pname)
-                
+
                 code += f'''// {display_method} calls {op_id}.
-func (sc *{controller}Client) {display_method}(ctx context.Context, {simple_args}) {ret_type} {{
-\treturn sc.client.{go_method}(ctx, {', '.join(call_args)})
+func (sc *{controller}Client) {display_method}(ctx context.Context, {simple_args}{opts_sig}) {ret_type} {{
+\treturn sc.client.{go_method}(ctx, {', '.join(call_args)}{opts_call})
 }}
 
 '''
@@ -571,29 +665,29 @@ func (sc *{controller}Client) {display_method}(ctx context.Context, {simple_args
                 else:
                     params_sig = ''
                     params_call = ''
-                
+
                 code += f'''// {display_method} calls {op_id}.
 func (sc *{controller}Client) {display_method}(ctx context.Context'''
-                
+
                 if params_sig:
                     code += f', {params_sig}'
-                
-                code += ')'
-                
+
+                code += opts_sig + ')'
+
                 if ret_type:
                     code += f' {ret_type}'
-                
+
                 code += ' {\n'
-                
+
                 if returns:
                     code += f'\treturn sc.client.{go_method}(ctx'
                 else:
                     code += f'\tsc.client.{go_method}(ctx'
-                
+
                 if params_call:
                     code += f', {params_call}'
-                
-                code += ')\n}\n\n'
+
+                code += opts_call + ')\n}\n\n'
     
     print_info(f"Writing {output_file}...")
     with open(output_file, 'w') as f:
@@ -636,11 +730,29 @@ def main():
         print_step(1, 3, "SMART CONSOLIDATE SCHEMAS")
         orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file)
         
-        # Step 1.5: Patch subscription text/plain responses
-        print_info("Patching subscription text/plain responses...")
-        patched_count = patch_subscription_text_responses(final_file)
+        # Step 1.5: Post-process the consolidated spec (in-memory)
+        print_info("Post-processing consolidated spec...")
+        with open(final_file, 'r') as f:
+            final_spec = json.load(f)
+
+        patched_count = patch_subscription_text_responses(final_spec)
         if patched_count > 0:
             print_success(f"Patched {patched_count} subscription endpoints with text/plain response")
+
+        renamed_count = shorten_operation_ids(final_spec)
+        if renamed_count > 0:
+            print_success(f"Shortened {renamed_count} operationIds (removed 'Controller')")
+
+        dto_count = strip_dto_suffix(final_spec)
+        if dto_count > 0:
+            print_success(f"Stripped 'Dto' suffix from {dto_count} schema names")
+
+        int_count = fix_number_query_params(final_spec)
+        if int_count > 0:
+            print_success(f"Fixed {int_count} query parameters: number → integer")
+
+        with open(final_file, 'w') as f:
+            json.dump(final_spec, f, indent=2, ensure_ascii=False)
 
         # Step 2: Generate with ogen
         print_step(2, 3, "GENERATE GO CLIENT WITH OGEN")

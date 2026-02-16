@@ -3,6 +3,7 @@
 package api
 
 import (
+	"context"
 	"net/http"
 
 	ht "github.com/ogen-go/ogen/http"
@@ -57,7 +58,12 @@ func (cfg *otelConfig) initOTEL() {
 
 type clientConfig struct {
 	otelConfig
-	Client ht.Client
+	// A list of callbacks for modifying requests which are generated before sending over
+	// the network.
+	RequestEditors []RequestEditor
+	// A list of callbacks for modifying response.
+	ResponseEditors []ResponseEditor
+	Client          ht.Client
 }
 
 // ClientOption is client config option.
@@ -149,5 +155,27 @@ func WithClient(client ht.Client) ClientOption {
 		if client != nil {
 			cfg.Client = client
 		}
+	})
+}
+
+// RequestEditor is the function signature for the RequestEditor callback function
+type RequestEditor func(ctx context.Context, req *http.Request) error
+
+// ResponseEditor is the function signature for the ResponseEditor callback function
+type ResponseEditor func(ctx context.Context, resp *http.Response) error
+
+// WithRequestEditor allows setting up a callback function, which will be
+// called right before sending the request. This can be used to mutate the request.
+func WithRequestEditor(fn RequestEditor) ClientOption {
+	return optionFunc[clientConfig](func(cfg *clientConfig) {
+		cfg.RequestEditors = append(cfg.RequestEditors, fn)
+	})
+}
+
+// WithResponseEditor allows setting up a callback function, which will be
+// called right after receiving the response. This can be used to mutate the response.
+func WithResponseEditor(fn ResponseEditor) ClientOption {
+	return optionFunc[clientConfig](func(cfg *clientConfig) {
+		cfg.ResponseEditors = append(cfg.ResponseEditors, fn)
 	})
 }

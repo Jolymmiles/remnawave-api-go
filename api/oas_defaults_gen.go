@@ -3,37 +3,37 @@
 package api
 
 // setDefaults set default value of fields.
-func (s *BulkAllUpdateUsersRequestDto) setDefaults() {
+func (s *BulkAllUpdateUsersRequest) setDefaults() {
 	{
-		val := BulkAllUpdateUsersRequestDtoStatus("ACTIVE")
+		val := BulkAllUpdateUsersRequestStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 }
 
 // setDefaults set default value of fields.
-func (s *BulkDeleteUsersByStatusRequestDto) setDefaults() {
+func (s *BulkDeleteUsersByStatusRequest) setDefaults() {
 	{
-		val := BulkDeleteUsersByStatusRequestDtoStatus("ACTIVE")
+		val := BulkDeleteUsersByStatusRequestStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 }
 
 // setDefaults set default value of fields.
-func (s *BulkUpdateUsersRequestDtoFields) setDefaults() {
+func (s *BulkUpdateUsersRequestFields) setDefaults() {
 	{
-		val := BulkUpdateUsersRequestDtoFieldsStatus("ACTIVE")
+		val := BulkUpdateUsersRequestFieldsStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 }
 
 // setDefaults set default value of fields.
-func (s *CreateHostRequestDto) setDefaults() {
+func (s *CreateHostRequest) setDefaults() {
 	{
 		val := bool(false)
 		s.IsDisabled.SetTo(val)
 	}
 	{
-		val := CreateHostRequestDtoSecurityLayer("DEFAULT")
+		val := CreateHostRequestSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
 	{
@@ -63,7 +63,7 @@ func (s *CreateHostRequestDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *CreateNodeRequestDto) setDefaults() {
+func (s *CreateNodeRequest) setDefaults() {
 	{
 		val := bool(false)
 		s.IsTrafficTrackingActive.SetTo(val)
@@ -75,13 +75,13 @@ func (s *CreateNodeRequestDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *CreateUserRequestDto) setDefaults() {
+func (s *CreateUserRequest) setDefaults() {
 	{
-		val := CreateUserRequestDtoStatus("ACTIVE")
+		val := CreateUserRequestStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 	{
-		val := CreateUserRequestDtoTrafficLimitStrategy("NO_RESET")
+		val := CreateUserRequestTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 }
@@ -115,7 +115,7 @@ func (s *HostItem) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *RevokeUserSubscriptionBodyDto) setDefaults() {
+func (s *RevokeUserSubscriptionBody) setDefaults() {
 	{
 		val := bool(false)
 		s.RevokeOnlyPasswords.SetTo(val)
@@ -123,9 +123,9 @@ func (s *RevokeUserSubscriptionBodyDto) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *UpdateUserRequestDto) setDefaults() {
+func (s *UpdateUserRequest) setDefaults() {
 	{
-		val := UpdateUserRequestDtoTrafficLimitStrategy("NO_RESET")
+		val := UpdateUserRequestTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 }

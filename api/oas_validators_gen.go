@@ -406,7 +406,7 @@ func (s *BulkActionResponseResponse) Validate() error {
 	return nil
 }
 
-func (s *BulkAllExtendExpirationDateRequestDto) Validate() error {
+func (s *BulkAllExtendExpirationDateRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -439,7 +439,7 @@ func (s *BulkAllExtendExpirationDateRequestDto) Validate() error {
 	return nil
 }
 
-func (s *BulkAllUpdateUsersRequestDto) Validate() error {
+func (s *BulkAllUpdateUsersRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -603,7 +603,7 @@ func (s *BulkAllUpdateUsersRequestDto) Validate() error {
 	return nil
 }
 
-func (s BulkAllUpdateUsersRequestDtoStatus) Validate() error {
+func (s BulkAllUpdateUsersRequestStatus) Validate() error {
 	switch s {
 	case "ACTIVE":
 		return nil
@@ -618,7 +618,7 @@ func (s BulkAllUpdateUsersRequestDtoStatus) Validate() error {
 	}
 }
 
-func (s BulkAllUpdateUsersRequestDtoTrafficLimitStrategy) Validate() error {
+func (s BulkAllUpdateUsersRequestTrafficLimitStrategy) Validate() error {
 	switch s {
 	case "NO_RESET":
 		return nil
@@ -633,7 +633,7 @@ func (s BulkAllUpdateUsersRequestDtoTrafficLimitStrategy) Validate() error {
 	}
 }
 
-func (s *BulkDeleteUsersByStatusRequestDto) Validate() error {
+func (s *BulkDeleteUsersByStatusRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -663,7 +663,7 @@ func (s *BulkDeleteUsersByStatusRequestDto) Validate() error {
 	return nil
 }
 
-func (s BulkDeleteUsersByStatusRequestDtoStatus) Validate() error {
+func (s BulkDeleteUsersByStatusRequestStatus) Validate() error {
 	switch s {
 	case "ACTIVE":
 		return nil
@@ -678,7 +678,7 @@ func (s BulkDeleteUsersByStatusRequestDtoStatus) Validate() error {
 	}
 }
 
-func (s *BulkExtendExpirationDateRequestDto) Validate() error {
+func (s *BulkExtendExpirationDateRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -730,7 +730,7 @@ func (s *BulkExtendExpirationDateRequestDto) Validate() error {
 	return nil
 }
 
-func (s *BulkNodesActionsRequestDto) Validate() error {
+func (s *BulkNodesActionsRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -772,7 +772,7 @@ func (s *BulkNodesActionsRequestDto) Validate() error {
 	return nil
 }
 
-func (s BulkNodesActionsRequestDtoAction) Validate() error {
+func (s BulkNodesActionsRequestAction) Validate() error {
 	switch s {
 	case "ENABLE":
 		return nil
@@ -787,7 +787,7 @@ func (s BulkNodesActionsRequestDtoAction) Validate() error {
 	}
 }
 
-func (s *BulkUpdateUsersRequestDto) Validate() error {
+func (s *BulkUpdateUsersRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -829,7 +829,7 @@ func (s *BulkUpdateUsersRequestDto) Validate() error {
 	return nil
 }
 
-func (s *BulkUpdateUsersRequestDtoFields) Validate() error {
+func (s *BulkUpdateUsersRequestFields) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -993,7 +993,7 @@ func (s *BulkUpdateUsersRequestDtoFields) Validate() error {
 	return nil
 }
 
-func (s BulkUpdateUsersRequestDtoFieldsStatus) Validate() error {
+func (s BulkUpdateUsersRequestFieldsStatus) Validate() error {
 	switch s {
 	case "ACTIVE":
 		return nil
@@ -1008,7 +1008,7 @@ func (s BulkUpdateUsersRequestDtoFieldsStatus) Validate() error {
 	}
 }
 
-func (s BulkUpdateUsersRequestDtoFieldsTrafficLimitStrategy) Validate() error {
+func (s BulkUpdateUsersRequestFieldsTrafficLimitStrategy) Validate() error {
 	switch s {
 	case "NO_RESET":
 		return nil
@@ -1023,7 +1023,7 @@ func (s BulkUpdateUsersRequestDtoFieldsTrafficLimitStrategy) Validate() error {
 	}
 }
 
-func (s *BulkUpdateUsersSquadsRequestDto) Validate() error {
+func (s *BulkUpdateUsersSquadsRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1449,7 +1449,7 @@ func (s *ConfigProfilesResponseResponse) Validate() error {
 	return nil
 }
 
-func (s *CreateConfigProfileRequestDto) Validate() error {
+func (s *CreateConfigProfileRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1484,7 +1484,7 @@ func (s *CreateConfigProfileRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateExternalSquadRequestDto) Validate() error {
+func (s *CreateExternalSquadRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1519,7 +1519,7 @@ func (s *CreateExternalSquadRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateHostRequestDto) Validate() error {
+func (s *CreateHostRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1696,7 +1696,7 @@ func (s *CreateHostRequestDto) Validate() error {
 	return nil
 }
 
-func (s CreateHostRequestDtoAlpn) Validate() error {
+func (s CreateHostRequestAlpn) Validate() error {
 	switch s {
 	case "h3":
 		return nil
@@ -1715,7 +1715,7 @@ func (s CreateHostRequestDtoAlpn) Validate() error {
 	}
 }
 
-func (s CreateHostRequestDtoFingerprint) Validate() error {
+func (s CreateHostRequestFingerprint) Validate() error {
 	switch s {
 	case "chrome":
 		return nil
@@ -1740,7 +1740,7 @@ func (s CreateHostRequestDtoFingerprint) Validate() error {
 	}
 }
 
-func (s CreateHostRequestDtoSecurityLayer) Validate() error {
+func (s CreateHostRequestSecurityLayer) Validate() error {
 	switch s {
 	case "DEFAULT":
 		return nil
@@ -1753,7 +1753,7 @@ func (s CreateHostRequestDtoSecurityLayer) Validate() error {
 	}
 }
 
-func (s *CreateInfraBillingHistoryRecordRequestDto) Validate() error {
+func (s *CreateInfraBillingHistoryRecordRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1786,7 +1786,7 @@ func (s *CreateInfraBillingHistoryRecordRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateInfraProviderRequestDto) Validate() error {
+func (s *CreateInfraProviderRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1821,7 +1821,7 @@ func (s *CreateInfraProviderRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateInternalSquadRequestDto) Validate() error {
+func (s *CreateInternalSquadRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1867,7 +1867,7 @@ func (s *CreateInternalSquadRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateNodeRequestDto) Validate() error {
+func (s *CreateNodeRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2154,7 +2154,7 @@ func (s *CreateNodeRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateSubscriptionPageConfigRequestDto) Validate() error {
+func (s *CreateSubscriptionPageConfigRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2189,7 +2189,7 @@ func (s *CreateSubscriptionPageConfigRequestDto) Validate() error {
 	return nil
 }
 
-func (s *CreateSubscriptionTemplateRequestDto) Validate() error {
+func (s *CreateSubscriptionTemplateRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2235,7 +2235,7 @@ func (s *CreateSubscriptionTemplateRequestDto) Validate() error {
 	return nil
 }
 
-func (s CreateSubscriptionTemplateRequestDtoTemplateType) Validate() error {
+func (s CreateSubscriptionTemplateRequestTemplateType) Validate() error {
 	switch s {
 	case "XRAY_JSON":
 		return nil
@@ -2254,7 +2254,7 @@ func (s CreateSubscriptionTemplateRequestDtoTemplateType) Validate() error {
 	}
 }
 
-func (s *CreateUserRequestDto) Validate() error {
+func (s *CreateUserRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2501,7 +2501,7 @@ func (s *CreateUserRequestDto) Validate() error {
 	return nil
 }
 
-func (s CreateUserRequestDtoStatus) Validate() error {
+func (s CreateUserRequestStatus) Validate() error {
 	switch s {
 	case "ACTIVE":
 		return nil
@@ -2516,7 +2516,7 @@ func (s CreateUserRequestDtoStatus) Validate() error {
 	}
 }
 
-func (s CreateUserRequestDtoTrafficLimitStrategy) Validate() error {
+func (s CreateUserRequestTrafficLimitStrategy) Validate() error {
 	switch s {
 	case "NO_RESET":
 		return nil
@@ -2657,7 +2657,7 @@ func (s *CustomRemark) Validate() error {
 	return nil
 }
 
-func (s *DebugSrrMatcherRequestDto) Validate() error {
+func (s *DebugSrrMatcherRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2680,7 +2680,7 @@ func (s *DebugSrrMatcherRequestDto) Validate() error {
 	return nil
 }
 
-func (s *DebugSrrMatcherResponseDto) Validate() error {
+func (s *DebugSrrMatcherResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2703,7 +2703,7 @@ func (s *DebugSrrMatcherResponseDto) Validate() error {
 	return nil
 }
 
-func (s *DebugSrrMatcherResponseDtoResponse) Validate() error {
+func (s *DebugSrrMatcherResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -2737,7 +2737,7 @@ func (s *DebugSrrMatcherResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s DebugSrrMatcherResponseDtoResponseResponseType) Validate() error {
+func (s DebugSrrMatcherResponseResponseResponseType) Validate() error {
 	switch s {
 	case "XRAY_JSON":
 		return nil
@@ -2766,7 +2766,7 @@ func (s DebugSrrMatcherResponseDtoResponseResponseType) Validate() error {
 	}
 }
 
-func (s *DeleteSnippetRequestDto) Validate() error {
+func (s *DeleteSnippetRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3044,7 +3044,7 @@ func (s *ExternalSquadsResponseResponse) Validate() error {
 	return nil
 }
 
-func (s *FindAllApiTokensResponseDto) Validate() error {
+func (s *FindAllApiTokensResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3067,7 +3067,7 @@ func (s *FindAllApiTokensResponseDto) Validate() error {
 	return nil
 }
 
-func (s *FindAllApiTokensResponseDtoResponse) Validate() error {
+func (s *FindAllApiTokensResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3113,7 +3113,7 @@ func (s *ForbiddenError) Validate() error {
 	return nil
 }
 
-func (s *GenerateX25519ResponseDto) Validate() error {
+func (s *GenerateX25519Response) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3136,7 +3136,7 @@ func (s *GenerateX25519ResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GenerateX25519ResponseDtoResponse) Validate() error {
+func (s *GenerateX25519ResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3182,7 +3182,7 @@ func (s *Generic) Validate() error {
 	return nil
 }
 
-func (s *GetAllHwidDevicesResponseDto) Validate() error {
+func (s *GetAllHwidDevicesResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3205,7 +3205,7 @@ func (s *GetAllHwidDevicesResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetAllSubscriptionsResponseDto) Validate() error {
+func (s *GetAllSubscriptionsResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3228,7 +3228,7 @@ func (s *GetAllSubscriptionsResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetAllSubscriptionsResponseDtoResponse) Validate() error {
+func (s *GetAllSubscriptionsResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3279,7 +3279,7 @@ func (s *GetAllSubscriptionsResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetAllUsersResponseDto) Validate() error {
+func (s *GetAllUsersResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3302,7 +3302,7 @@ func (s *GetAllUsersResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetAllUsersResponseDtoResponse) Validate() error {
+func (s *GetAllUsersResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3353,7 +3353,7 @@ func (s *GetAllUsersResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetHwidDevicesStatsResponseDto) Validate() error {
+func (s *GetHwidDevicesStatsResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3376,7 +3376,7 @@ func (s *GetHwidDevicesStatsResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetHwidDevicesStatsResponseDtoResponse) Validate() error {
+func (s *GetHwidDevicesStatsResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3455,7 +3455,7 @@ func (s *GetHwidDevicesStatsResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetHwidDevicesStatsResponseDtoResponseByPlatformItem) Validate() error {
+func (s *GetHwidDevicesStatsResponseResponseByPlatformItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3478,7 +3478,7 @@ func (s *GetHwidDevicesStatsResponseDtoResponseByPlatformItem) Validate() error 
 	return nil
 }
 
-func (s *GetHwidDevicesStatsResponseDtoResponseStats) Validate() error {
+func (s *GetHwidDevicesStatsResponseResponseStats) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3523,7 +3523,7 @@ func (s *GetHwidDevicesStatsResponseDtoResponseStats) Validate() error {
 	return nil
 }
 
-func (s *GetInfraProvidersResponseDto) Validate() error {
+func (s *GetInfraProvidersResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3546,7 +3546,7 @@ func (s *GetInfraProvidersResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetInfraProvidersResponseDtoResponse) Validate() error {
+func (s *GetInfraProvidersResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3597,7 +3597,7 @@ func (s *GetInfraProvidersResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetInternalSquadAccessibleNodesResponseDto) Validate() error {
+func (s *GetInternalSquadAccessibleNodesResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3620,7 +3620,7 @@ func (s *GetInternalSquadAccessibleNodesResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetInternalSquadAccessibleNodesResponseDtoResponse) Validate() error {
+func (s *GetInternalSquadAccessibleNodesResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3660,7 +3660,7 @@ func (s *GetInternalSquadAccessibleNodesResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetInternalSquadAccessibleNodesResponseDtoResponseAccessibleNodesItem) Validate() error {
+func (s *GetInternalSquadAccessibleNodesResponseResponseAccessibleNodesItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3683,7 +3683,7 @@ func (s *GetInternalSquadAccessibleNodesResponseDtoResponseAccessibleNodesItem) 
 	return nil
 }
 
-func (s *GetLegacyStatsNodesUsersUsageResponseDto) Validate() error {
+func (s *GetLegacyStatsNodesUsersUsageResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3723,7 +3723,7 @@ func (s *GetLegacyStatsNodesUsersUsageResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetLegacyStatsNodesUsersUsageResponseDtoResponseItem) Validate() error {
+func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3746,7 +3746,7 @@ func (s *GetLegacyStatsNodesUsersUsageResponseDtoResponseItem) Validate() error 
 	return nil
 }
 
-func (s *GetLegacyStatsUserUsageResponseDto) Validate() error {
+func (s *GetLegacyStatsUserUsageResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3786,7 +3786,7 @@ func (s *GetLegacyStatsUserUsageResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetLegacyStatsUserUsageResponseDtoResponseItem) Validate() error {
+func (s *GetLegacyStatsUserUsageResponseResponseItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3809,7 +3809,7 @@ func (s *GetLegacyStatsUserUsageResponseDtoResponseItem) Validate() error {
 	return nil
 }
 
-func (s *GetNodesMetricsResponseDto) Validate() error {
+func (s *GetNodesMetricsResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3832,7 +3832,7 @@ func (s *GetNodesMetricsResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetNodesMetricsResponseDtoResponse) Validate() error {
+func (s *GetNodesMetricsResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3872,7 +3872,7 @@ func (s *GetNodesMetricsResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetNodesMetricsResponseDtoResponseNodesItem) Validate() error {
+func (s *GetNodesMetricsResponseResponseNodesItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3917,7 +3917,7 @@ func (s *GetNodesMetricsResponseDtoResponseNodesItem) Validate() error {
 	return nil
 }
 
-func (s *GetNodesStatisticsResponseDto) Validate() error {
+func (s *GetNodesStatisticsResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3940,7 +3940,7 @@ func (s *GetNodesStatisticsResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetNodesStatisticsResponseDtoResponse) Validate() error {
+func (s *GetNodesStatisticsResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3963,7 +3963,7 @@ func (s *GetNodesStatisticsResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetRawSubscriptionByShortUuidResponseDto) Validate() error {
+func (s *GetRawSubscriptionByShortUuidResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -3986,7 +3986,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) Validate() error {
+func (s *GetRawSubscriptionByShortUuidResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4048,7 +4048,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseConvertedUserInfo) Validate() error {
+func (s *GetRawSubscriptionByShortUuidResponseResponseConvertedUserInfo) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4071,7 +4071,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseConvertedUserInfo) Vali
 	return nil
 }
 
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Validate() error {
+func (s *GetRawSubscriptionByShortUuidResponseResponseRawHostsItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4137,7 +4137,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItem) Validate(
 	return nil
 }
 
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalParams) Validate() error {
+func (s *GetRawSubscriptionByShortUuidResponseResponseRawHostsItemAdditionalParams) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4167,7 +4167,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemAdditionalP
 	return nil
 }
 
-func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) Validate() error {
+func (s *GetRawSubscriptionByShortUuidResponseResponseRawHostsItemDbData) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4190,7 +4190,7 @@ func (s *GetRawSubscriptionByShortUuidResponseDtoResponseRawHostsItemDbData) Val
 	return nil
 }
 
-func (s *GetRemnawaveHealthResponseDto) Validate() error {
+func (s *GetRemnawaveHealthResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4213,7 +4213,7 @@ func (s *GetRemnawaveHealthResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetRemnawaveHealthResponseDtoResponse) Validate() error {
+func (s *GetRemnawaveHealthResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4236,7 +4236,7 @@ func (s *GetRemnawaveHealthResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetStatsNodeUsersUsageResponseDto) Validate() error {
+func (s *GetStatsNodeUsersUsageResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4259,7 +4259,7 @@ func (s *GetStatsNodeUsersUsageResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetStatsNodeUsersUsageResponseDtoResponse) Validate() error {
+func (s *GetStatsNodeUsersUsageResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4338,7 +4338,7 @@ func (s *GetStatsNodeUsersUsageResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetStatsNodeUsersUsageResponseDtoResponseTopUsersItem) Validate() error {
+func (s *GetStatsNodeUsersUsageResponseResponseTopUsersItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4361,7 +4361,7 @@ func (s *GetStatsNodeUsersUsageResponseDtoResponseTopUsersItem) Validate() error
 	return nil
 }
 
-func (s *GetStatsNodesRealtimeUsageResponseDto) Validate() error {
+func (s *GetStatsNodesRealtimeUsageResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4401,7 +4401,7 @@ func (s *GetStatsNodesRealtimeUsageResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetStatsNodesRealtimeUsageResponseDtoResponseItem) Validate() error {
+func (s *GetStatsNodesRealtimeUsageResponseResponseItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4479,7 +4479,7 @@ func (s *GetStatsNodesRealtimeUsageResponseDtoResponseItem) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDto) Validate() error {
+func (s *GetStatsResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4502,7 +4502,7 @@ func (s *GetStatsResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDtoResponse) Validate() error {
+func (s *GetStatsResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4591,7 +4591,7 @@ func (s *GetStatsResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDtoResponseCPU) Validate() error {
+func (s *GetStatsResponseResponseCPU) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4625,7 +4625,7 @@ func (s *GetStatsResponseDtoResponseCPU) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDtoResponseMemory) Validate() error {
+func (s *GetStatsResponseResponseMemory) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4692,7 +4692,7 @@ func (s *GetStatsResponseDtoResponseMemory) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDtoResponseNodes) Validate() error {
+func (s *GetStatsResponseResponseNodes) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4715,7 +4715,7 @@ func (s *GetStatsResponseDtoResponseNodes) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDtoResponseOnlineStats) Validate() error {
+func (s *GetStatsResponseResponseOnlineStats) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4771,7 +4771,7 @@ func (s *GetStatsResponseDtoResponseOnlineStats) Validate() error {
 	return nil
 }
 
-func (s *GetStatsResponseDtoResponseUsers) Validate() error {
+func (s *GetStatsResponseResponseUsers) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4805,7 +4805,7 @@ func (s *GetStatsResponseDtoResponseUsers) Validate() error {
 	return nil
 }
 
-func (s GetStatsResponseDtoResponseUsersStatusCounts) Validate() error {
+func (s GetStatsResponseResponseUsersStatusCounts) Validate() error {
 	var failures []validate.FieldError
 	for key, elem := range s {
 		if err := func() error {
@@ -4827,7 +4827,7 @@ func (s GetStatsResponseDtoResponseUsersStatusCounts) Validate() error {
 	return nil
 }
 
-func (s *GetStatusResponseDto) Validate() error {
+func (s *GetStatusResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4850,7 +4850,7 @@ func (s *GetStatusResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetStatusResponseDtoResponse) Validate() error {
+func (s *GetStatusResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4880,7 +4880,7 @@ func (s *GetStatusResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetStatusResponseDtoResponseAuthentication) Validate() error {
+func (s *GetStatusResponseResponseAuthentication) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4903,7 +4903,7 @@ func (s *GetStatusResponseDtoResponseAuthentication) Validate() error {
 	return nil
 }
 
-func (s *GetStatusResponseDtoResponseAuthenticationTgAuth) Validate() error {
+func (s *GetStatusResponseResponseAuthenticationTgAuth) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4933,7 +4933,7 @@ func (s *GetStatusResponseDtoResponseAuthenticationTgAuth) Validate() error {
 	return nil
 }
 
-func (s *GetStatusResponseDtoStatusCode) Validate() error {
+func (s *GetStatusResponseStatusCode) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4956,7 +4956,7 @@ func (s *GetStatusResponseDtoStatusCode) Validate() error {
 	return nil
 }
 
-func (s *GetSubscriptionRequestHistoryResponseDto) Validate() error {
+func (s *GetSubscriptionRequestHistoryResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -4979,7 +4979,7 @@ func (s *GetSubscriptionRequestHistoryResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetSubscriptionRequestHistoryStatsResponseDto) Validate() error {
+func (s *GetSubscriptionRequestHistoryStatsResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5002,7 +5002,7 @@ func (s *GetSubscriptionRequestHistoryStatsResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) Validate() error {
+func (s *GetSubscriptionRequestHistoryStatsResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5070,7 +5070,7 @@ func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponse) Validate() error
 	return nil
 }
 
-func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStatsItem) Validate() error {
+func (s *GetSubscriptionRequestHistoryStatsResponseResponseHourlyRequestStatsItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5093,7 +5093,7 @@ func (s *GetSubscriptionRequestHistoryStatsResponseDtoResponseHourlyRequestStats
 	return nil
 }
 
-func (s *GetTopUsersByHwidDevicesResponseDto) Validate() error {
+func (s *GetTopUsersByHwidDevicesResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5116,7 +5116,7 @@ func (s *GetTopUsersByHwidDevicesResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetTopUsersByHwidDevicesResponseDtoResponse) Validate() error {
+func (s *GetTopUsersByHwidDevicesResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5167,7 +5167,7 @@ func (s *GetTopUsersByHwidDevicesResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) Validate() error {
+func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5201,7 +5201,7 @@ func (s *GetTopUsersByHwidDevicesResponseDtoResponseUsersItem) Validate() error 
 	return nil
 }
 
-func (s *GetUserAccessibleNodesResponseDto) Validate() error {
+func (s *GetUserAccessibleNodesResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5224,7 +5224,7 @@ func (s *GetUserAccessibleNodesResponseDto) Validate() error {
 	return nil
 }
 
-func (s *GetUserAccessibleNodesResponseDtoResponse) Validate() error {
+func (s *GetUserAccessibleNodesResponseResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5264,7 +5264,7 @@ func (s *GetUserAccessibleNodesResponseDtoResponse) Validate() error {
 	return nil
 }
 
-func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) Validate() error {
+func (s *GetUserAccessibleNodesResponseResponseActiveNodesItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5304,7 +5304,7 @@ func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItem) Validate() er
 	return nil
 }
 
-func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsItem) Validate() error {
+func (s *GetUserAccessibleNodesResponseResponseActiveNodesItemActiveSquadsItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -5327,7 +5327,7 @@ func (s *GetUserAccessibleNodesResponseDtoResponseActiveNodesItemActiveSquadsIte
 	return nil
 }
 
-func (s *GetUserSubscriptionRequestHistoryResponseDto) Validate() error {
+func (s *GetUserSubscriptionRequestHistoryResponse) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6303,7 +6303,7 @@ func (s *NotFoundError) Validate() error {
 	return nil
 }
 
-func (s *OAuth2AuthorizeRequestDto) Validate() error {
+func (s *OAuth2AuthorizeRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6326,7 +6326,7 @@ func (s *OAuth2AuthorizeRequestDto) Validate() error {
 	return nil
 }
 
-func (s OAuth2AuthorizeRequestDtoProvider) Validate() error {
+func (s OAuth2AuthorizeRequestProvider) Validate() error {
 	switch s {
 	case "github":
 		return nil
@@ -6343,7 +6343,7 @@ func (s OAuth2AuthorizeRequestDtoProvider) Validate() error {
 	}
 }
 
-func (s *OAuth2CallbackRequestDto) Validate() error {
+func (s *OAuth2CallbackRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6366,7 +6366,7 @@ func (s *OAuth2CallbackRequestDto) Validate() error {
 	return nil
 }
 
-func (s OAuth2CallbackRequestDtoProvider) Validate() error {
+func (s OAuth2CallbackRequestProvider) Validate() error {
 	switch s {
 	case "github":
 		return nil
@@ -6556,7 +6556,7 @@ func (s *Pocketid) Validate() error {
 	return nil
 }
 
-func (s *ProfileModificationRequestDto) Validate() error {
+func (s *ProfileModificationRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6598,7 +6598,7 @@ func (s *ProfileModificationRequestDto) Validate() error {
 	return nil
 }
 
-func (s *ProfileModificationRequestDtoConfigProfile) Validate() error {
+func (s *ProfileModificationRequestConfigProfile) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6686,7 +6686,7 @@ func (s *Record) Validate() error {
 	return nil
 }
 
-func (s *RegisterRequestDto) Validate() error {
+func (s *RegisterRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6721,7 +6721,7 @@ func (s *RegisterRequestDto) Validate() error {
 	return nil
 }
 
-func (s *ReorderHostRequestDto) Validate() error {
+func (s *ReorderHostRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6744,7 +6744,7 @@ func (s *ReorderHostRequestDto) Validate() error {
 	return nil
 }
 
-func (s *ReorderNodeRequestDto) Validate() error {
+func (s *ReorderNodeRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -6917,7 +6917,7 @@ func (s ResponseRulesVersion) Validate() error {
 	}
 }
 
-func (s *RevokeUserSubscriptionBodyDto) Validate() error {
+func (s *RevokeUserSubscriptionBody) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -7132,7 +7132,7 @@ func (s RuleResponseType) Validate() error {
 	}
 }
 
-func (s *SetInboundToManyHostsRequestDto) Validate() error {
+func (s *SetInboundToManyHostsRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -7155,7 +7155,7 @@ func (s *SetInboundToManyHostsRequestDto) Validate() error {
 	return nil
 }
 
-func (s *SetPortToManyHostsRequestDto) Validate() error {
+func (s *SetPortToManyHostsRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -7611,7 +7611,7 @@ func (s *Subscription) Validate() error {
 	return nil
 }
 
-func (s SubscriptionControllerGetSubscriptionByClientTypeClientType) Validate() error {
+func (s SubscriptionGetSubscriptionByClientTypeClientType) Validate() error {
 	switch s {
 	case "stash":
 		return nil
@@ -7899,7 +7899,7 @@ func (s *TagsResponseResponse) Validate() error {
 	return nil
 }
 
-func (s *TelegramCallbackRequestDto) Validate() error {
+func (s *TelegramCallbackRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8160,7 +8160,7 @@ func (s *UnauthorizedError) Validate() error {
 	return nil
 }
 
-func (s *UpdateConfigProfileRequestDto) Validate() error {
+func (s *UpdateConfigProfileRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8202,7 +8202,7 @@ func (s *UpdateConfigProfileRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateExternalSquadRequestDto) Validate() error {
+func (s *UpdateExternalSquadRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8341,7 +8341,7 @@ func (s *UpdateExternalSquadRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateHostRequestDto) Validate() error {
+func (s *UpdateHostRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8525,7 +8525,7 @@ func (s *UpdateHostRequestDto) Validate() error {
 	return nil
 }
 
-func (s UpdateHostRequestDtoAlpn) Validate() error {
+func (s UpdateHostRequestAlpn) Validate() error {
 	switch s {
 	case "h3":
 		return nil
@@ -8544,7 +8544,7 @@ func (s UpdateHostRequestDtoAlpn) Validate() error {
 	}
 }
 
-func (s UpdateHostRequestDtoFingerprint) Validate() error {
+func (s UpdateHostRequestFingerprint) Validate() error {
 	switch s {
 	case "chrome":
 		return nil
@@ -8569,7 +8569,7 @@ func (s UpdateHostRequestDtoFingerprint) Validate() error {
 	}
 }
 
-func (s UpdateHostRequestDtoSecurityLayer) Validate() error {
+func (s UpdateHostRequestSecurityLayer) Validate() error {
 	switch s {
 	case "DEFAULT":
 		return nil
@@ -8582,7 +8582,7 @@ func (s UpdateHostRequestDtoSecurityLayer) Validate() error {
 	}
 }
 
-func (s *UpdateInfraBillingNodeRequestDto) Validate() error {
+func (s *UpdateInfraBillingNodeRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8605,7 +8605,7 @@ func (s *UpdateInfraBillingNodeRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateInfraProviderRequestDto) Validate() error {
+func (s *UpdateInfraProviderRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8647,7 +8647,7 @@ func (s *UpdateInfraProviderRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateInternalSquadRequestDto) Validate() error {
+func (s *UpdateInternalSquadRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8689,7 +8689,7 @@ func (s *UpdateInternalSquadRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateNodeRequestDto) Validate() error {
+func (s *UpdateNodeRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -8997,7 +8997,7 @@ func (s *UpdateNodeRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdatePasskeyRequestDto) Validate() error {
+func (s *UpdatePasskeyRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -9032,7 +9032,7 @@ func (s *UpdatePasskeyRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateRemnawaveSettingsRequestDto) Validate() error {
+func (s *UpdateRemnawaveSettingsRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -9080,7 +9080,7 @@ func (s *UpdateRemnawaveSettingsRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateSubscriptionPageConfigRequestDto) Validate() error {
+func (s *UpdateSubscriptionPageConfigRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -9122,7 +9122,7 @@ func (s *UpdateSubscriptionPageConfigRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateSubscriptionSettingsRequestDto) Validate() error {
+func (s *UpdateSubscriptionSettingsRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -9218,7 +9218,7 @@ func (s *UpdateSubscriptionSettingsRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateTemplateRequestDto) Validate() error {
+func (s *UpdateTemplateRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -9260,7 +9260,7 @@ func (s *UpdateTemplateRequestDto) Validate() error {
 	return nil
 }
 
-func (s *UpdateUserRequestDto) Validate() error {
+func (s *UpdateUserRequest) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -9424,7 +9424,7 @@ func (s *UpdateUserRequestDto) Validate() error {
 	return nil
 }
 
-func (s UpdateUserRequestDtoStatus) Validate() error {
+func (s UpdateUserRequestStatus) Validate() error {
 	switch s {
 	case "ACTIVE":
 		return nil
@@ -9435,7 +9435,7 @@ func (s UpdateUserRequestDtoStatus) Validate() error {
 	}
 }
 
-func (s UpdateUserRequestDtoTrafficLimitStrategy) Validate() error {
+func (s UpdateUserRequestTrafficLimitStrategy) Validate() error {
 	switch s {
 	case "NO_RESET":
 		return nil

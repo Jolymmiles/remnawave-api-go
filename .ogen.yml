@@ -12,10 +12,12 @@ generator:
       # Core features
       - "paths/client"
       - "client/request/validation"
-      
-      # Observability & Instrumentation (HIGH Priority)
+      - "client/request/options"
+      - "client/editors"
+
+      # Observability & Instrumentation
       - "ogen/otel"
-      
+
       # Code quality improvements
       - "ogen/unimplemented"
       - "debug/example_tests"

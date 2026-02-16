@@ -3,7 +3,7 @@
   "paths": {
     "/api/remnawave-settings": {
       "get": {
-        "operationId": "RemnawaveSettingsController_getSettings",
+        "operationId": "RemnawaveSettings_getSettings",
         "parameters": [],
         "responses": {
           "200": {
@@ -48,14 +48,14 @@
         ]
       },
       "patch": {
-        "operationId": "RemnawaveSettingsController_updateSettings",
+        "operationId": "RemnawaveSettings_updateSettings",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateRemnawaveSettingsRequestDto"
+                "$ref": "#/components/schemas/UpdateRemnawaveSettingsRequest"
               }
             }
           }
@@ -105,7 +105,7 @@
     },
     "/api/passkeys/registration/options": {
       "get": {
-        "operationId": "PasskeyController_passkeyRegistrationOptions",
+        "operationId": "Passkey_passkeyRegistrationOptions",
         "parameters": [],
         "responses": {
           "400": {
@@ -152,7 +152,7 @@
     },
     "/api/passkeys/registration/verify": {
       "post": {
-        "operationId": "PasskeyController_passkeyRegistrationVerify",
+        "operationId": "Passkey_passkeyRegistrationVerify",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -190,7 +190,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VerifyPasskeyRegistrationResponseDto"
+                  "$ref": "#/components/schemas/VerifyPasskeyRegistrationResponse"
                 }
               }
             }
@@ -209,7 +209,7 @@
     },
     "/api/passkeys": {
       "get": {
-        "operationId": "PasskeyController_getActivePasskeys",
+        "operationId": "Passkey_getActivePasskeys",
         "parameters": [],
         "responses": {
           "400": {
@@ -254,14 +254,14 @@
         ]
       },
       "delete": {
-        "operationId": "PasskeyController_deletePasskey",
+        "operationId": "Passkey_deletePasskey",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeletePasskeyRequestDto"
+                "$ref": "#/components/schemas/DeletePasskeyRequest"
               }
             }
           }
@@ -309,14 +309,14 @@
         ]
       },
       "patch": {
-        "operationId": "PasskeyController_updatePasskey",
+        "operationId": "Passkey_updatePasskey",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdatePasskeyRequestDto"
+                "$ref": "#/components/schemas/UpdatePasskeyRequest"
               }
             }
           }
@@ -366,14 +366,14 @@
     },
     "/api/auth/login": {
       "post": {
-        "operationId": "AuthController_login",
+        "operationId": "Auth_login",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestDto"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           }
@@ -428,14 +428,14 @@
     },
     "/api/auth/register": {
       "post": {
-        "operationId": "AuthController_register",
+        "operationId": "Auth_register",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequestDto"
+                "$ref": "#/components/schemas/RegisterRequest"
               }
             }
           }
@@ -490,7 +490,7 @@
     },
     "/api/auth/status": {
       "get": {
-        "operationId": "AuthController_getStatus",
+        "operationId": "Auth_getStatus",
         "parameters": [],
         "responses": {
           "400": {
@@ -518,7 +518,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetStatusResponseDto"
+                  "$ref": "#/components/schemas/GetStatusResponse"
                 }
               }
             }
@@ -532,14 +532,14 @@
     },
     "/api/auth/oauth2/tg/callback": {
       "post": {
-        "operationId": "AuthController_telegramCallback",
+        "operationId": "Auth_telegramCallback",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TelegramCallbackRequestDto"
+                "$ref": "#/components/schemas/TelegramCallbackRequest"
               }
             }
           }
@@ -584,14 +584,14 @@
     },
     "/api/auth/oauth2/authorize": {
       "post": {
-        "operationId": "AuthController_oauth2Authorize",
+        "operationId": "Auth_oauth2Authorize",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OAuth2AuthorizeRequestDto"
+                "$ref": "#/components/schemas/OAuth2AuthorizeRequest"
               }
             }
           }
@@ -622,7 +622,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OAuth2AuthorizeResponseDto"
+                  "$ref": "#/components/schemas/OAuth2AuthorizeResponse"
                 }
               }
             }
@@ -636,14 +636,14 @@
     },
     "/api/auth/oauth2/callback": {
       "post": {
-        "operationId": "AuthController_oauth2Callback",
+        "operationId": "Auth_oauth2Callback",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OAuth2CallbackRequestDto"
+                "$ref": "#/components/schemas/OAuth2CallbackRequest"
               }
             }
           }
@@ -688,7 +688,7 @@
     },
     "/api/auth/passkey/authentication/options": {
       "get": {
-        "operationId": "AuthController_passkeyAuthenticationOptions",
+        "operationId": "Auth_passkeyAuthenticationOptions",
         "parameters": [],
         "responses": {
           "400": {
@@ -730,7 +730,7 @@
     },
     "/api/auth/passkey/authentication/verify": {
       "post": {
-        "operationId": "AuthController_passkeyAuthenticationVerify",
+        "operationId": "Auth_passkeyAuthenticationVerify",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -782,7 +782,7 @@
     },
     "/api/subscription-page-configs": {
       "get": {
-        "operationId": "SubscriptionPageConfigController_getAllConfigs",
+        "operationId": "SubscriptionPageConfig_getAllConfigs",
         "parameters": [],
         "responses": {
           "200": {
@@ -827,14 +827,14 @@
         ]
       },
       "patch": {
-        "operationId": "SubscriptionPageConfigController_updateConfig",
+        "operationId": "SubscriptionPageConfig_updateConfig",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateSubscriptionPageConfigRequestDto"
+                "$ref": "#/components/schemas/UpdateSubscriptionPageConfigRequest"
               }
             }
           }
@@ -882,14 +882,14 @@
         ]
       },
       "post": {
-        "operationId": "SubscriptionPageConfigController_createConfig",
+        "operationId": "SubscriptionPageConfig_createConfig",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateSubscriptionPageConfigRequestDto"
+                "$ref": "#/components/schemas/CreateSubscriptionPageConfigRequest"
               }
             }
           }
@@ -900,7 +900,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateSubscriptionPageConfigResponseDto"
+                  "$ref": "#/components/schemas/CreateSubscriptionPageConfigResponse"
                 }
               }
             }
@@ -939,7 +939,7 @@
     },
     "/api/subscription-page-configs/{uuid}": {
       "get": {
-        "operationId": "SubscriptionPageConfigController_getConfigByUuid",
+        "operationId": "SubscriptionPageConfig_getConfigByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -994,7 +994,7 @@
         ]
       },
       "delete": {
-        "operationId": "SubscriptionPageConfigController_deleteConfig",
+        "operationId": "SubscriptionPageConfig_deleteConfig",
         "parameters": [
           {
             "name": "uuid",
@@ -1051,7 +1051,7 @@
     },
     "/api/subscription-page-configs/actions/reorder": {
       "post": {
-        "operationId": "SubscriptionPageConfigController_reorderSubscriptionPageConfigs",
+        "operationId": "SubscriptionPageConfig_reorderSubscriptionPageConfigs",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1108,14 +1108,14 @@
     },
     "/api/subscription-page-configs/actions/clone": {
       "post": {
-        "operationId": "SubscriptionPageConfigController_cloneSubscriptionPageConfig",
+        "operationId": "SubscriptionPageConfig_cloneSubscriptionPageConfig",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CloneSubscriptionPageConfigRequestDto"
+                "$ref": "#/components/schemas/CloneSubscriptionPageConfigRequest"
               }
             }
           }
@@ -1165,14 +1165,14 @@
     },
     "/api/users": {
       "post": {
-        "operationId": "UsersController_createUser",
+        "operationId": "Users_createUser",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserRequestDto"
+                "$ref": "#/components/schemas/CreateUserRequest"
               }
             }
           }
@@ -1220,14 +1220,14 @@
         ]
       },
       "patch": {
-        "operationId": "UsersController_updateUser",
+        "operationId": "Users_updateUser",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateUserRequestDto"
+                "$ref": "#/components/schemas/UpdateUserRequest"
               }
             }
           }
@@ -1275,7 +1275,7 @@
         ]
       },
       "get": {
-        "operationId": "UsersController_getAllUsers",
+        "operationId": "Users_getAllUsers",
         "parameters": [
           {
             "name": "size",
@@ -1283,7 +1283,7 @@
             "in": "query",
             "description": "Page size for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -1292,7 +1292,7 @@
             "in": "query",
             "description": "Offset for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           }
         ],
@@ -1302,7 +1302,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetAllUsersResponseDto"
+                  "$ref": "#/components/schemas/GetAllUsersResponse"
                 }
               }
             }
@@ -1341,7 +1341,7 @@
     },
     "/api/users/{uuid}": {
       "delete": {
-        "operationId": "UsersController_deleteUser",
+        "operationId": "Users_deleteUser",
         "parameters": [
           {
             "name": "uuid",
@@ -1406,7 +1406,7 @@
         ]
       },
       "get": {
-        "operationId": "UsersController_getUserByUuid",
+        "operationId": "Users_getUserByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -1473,7 +1473,7 @@
     },
     "/api/users/tags": {
       "get": {
-        "operationId": "UsersController_getAllTags",
+        "operationId": "Users_getAllTags",
         "parameters": [],
         "responses": {
           "200": {
@@ -1520,7 +1520,7 @@
     },
     "/api/users/{uuid}/accessible-nodes": {
       "get": {
-        "operationId": "UsersController_getUserAccessibleNodes",
+        "operationId": "Users_getUserAccessibleNodes",
         "parameters": [
           {
             "name": "uuid",
@@ -1538,7 +1538,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetUserAccessibleNodesResponseDto"
+                  "$ref": "#/components/schemas/GetUserAccessibleNodesResponse"
                 }
               }
             }
@@ -1587,7 +1587,7 @@
     },
     "/api/users/{uuid}/subscription-request-history": {
       "get": {
-        "operationId": "UsersController_getUserSubscriptionRequestHistory",
+        "operationId": "Users_getUserSubscriptionRequestHistory",
         "parameters": [
           {
             "name": "uuid",
@@ -1605,7 +1605,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetUserSubscriptionRequestHistoryResponseDto"
+                  "$ref": "#/components/schemas/GetUserSubscriptionRequestHistoryResponse"
                 }
               }
             }
@@ -1654,7 +1654,7 @@
     },
     "/api/users/by-short-uuid/{shortUuid}": {
       "get": {
-        "operationId": "UsersController_getUserByShortUuid",
+        "operationId": "Users_getUserByShortUuid",
         "parameters": [
           {
             "name": "shortUuid",
@@ -1721,7 +1721,7 @@
     },
     "/api/users/by-username/{username}": {
       "get": {
-        "operationId": "UsersController_getUserByUsername",
+        "operationId": "Users_getUserByUsername",
         "parameters": [
           {
             "name": "username",
@@ -1788,7 +1788,7 @@
     },
     "/api/users/by-id/{id}": {
       "get": {
-        "operationId": "UsersController_getUserById",
+        "operationId": "Users_getUserById",
         "parameters": [
           {
             "name": "id",
@@ -1855,7 +1855,7 @@
     },
     "/api/users/by-telegram-id/{telegramId}": {
       "get": {
-        "operationId": "UsersController_getUserByTelegramId",
+        "operationId": "Users_getUserByTelegramId",
         "parameters": [
           {
             "name": "telegramId",
@@ -1912,7 +1912,7 @@
     },
     "/api/users/by-email/{email}": {
       "get": {
-        "operationId": "UsersController_getUsersByEmail",
+        "operationId": "Users_getUsersByEmail",
         "parameters": [
           {
             "name": "email",
@@ -1969,7 +1969,7 @@
     },
     "/api/users/by-tag/{tag}": {
       "get": {
-        "operationId": "UsersController_getUsersByTag",
+        "operationId": "Users_getUsersByTag",
         "parameters": [
           {
             "name": "tag",
@@ -2027,7 +2027,7 @@
     },
     "/api/users/{uuid}/actions/revoke": {
       "post": {
-        "operationId": "UsersController_revokeUserSubscription",
+        "operationId": "Users_revokeUserSubscription",
         "parameters": [
           {
             "name": "uuid",
@@ -2044,7 +2044,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RevokeUserSubscriptionBodyDto"
+                "$ref": "#/components/schemas/RevokeUserSubscriptionBody"
               }
             }
           }
@@ -2104,7 +2104,7 @@
     },
     "/api/users/{uuid}/actions/disable": {
       "post": {
-        "operationId": "UsersController_disableUser",
+        "operationId": "Users_disableUser",
         "parameters": [
           {
             "name": "uuid",
@@ -2171,7 +2171,7 @@
     },
     "/api/users/{uuid}/actions/enable": {
       "post": {
-        "operationId": "UsersController_enableUser",
+        "operationId": "Users_enableUser",
         "parameters": [
           {
             "name": "uuid",
@@ -2238,7 +2238,7 @@
     },
     "/api/users/{uuid}/actions/reset-traffic": {
       "post": {
-        "operationId": "UsersController_resetUserTraffic",
+        "operationId": "Users_resetUserTraffic",
         "parameters": [
           {
             "name": "uuid",
@@ -2305,14 +2305,14 @@
     },
     "/api/users/bulk/delete-by-status": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkDeleteUsersByStatus",
+        "operationId": "UsersBulkActions_bulkDeleteUsersByStatus",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkDeleteUsersByStatusRequestDto"
+                "$ref": "#/components/schemas/BulkDeleteUsersByStatusRequest"
               }
             }
           }
@@ -2362,7 +2362,7 @@
     },
     "/api/users/bulk/delete": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkDeleteUsers",
+        "operationId": "UsersBulkActions_bulkDeleteUsers",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -2419,7 +2419,7 @@
     },
     "/api/users/bulk/revoke-subscription": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkRevokeUsersSubscription",
+        "operationId": "UsersBulkActions_bulkRevokeUsersSubscription",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -2476,7 +2476,7 @@
     },
     "/api/users/bulk/reset-traffic": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkResetUserTraffic",
+        "operationId": "UsersBulkActions_bulkResetUserTraffic",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -2533,14 +2533,14 @@
     },
     "/api/users/bulk/update": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkUpdateUsers",
+        "operationId": "UsersBulkActions_bulkUpdateUsers",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUpdateUsersRequestDto"
+                "$ref": "#/components/schemas/BulkUpdateUsersRequest"
               }
             }
           }
@@ -2590,14 +2590,14 @@
     },
     "/api/users/bulk/update-squads": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkUpdateUsersInternalSquads",
+        "operationId": "UsersBulkActions_bulkUpdateUsersInternalSquads",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkUpdateUsersSquadsRequestDto"
+                "$ref": "#/components/schemas/BulkUpdateUsersSquadsRequest"
               }
             }
           }
@@ -2648,14 +2648,14 @@
     "/api/users/bulk/extend-expiration-date": {
       "post": {
         "description": "Bulk extend all users expiration date",
-        "operationId": "UsersBulkActionsController_bulkExtendExpirationDate",
+        "operationId": "UsersBulkActions_bulkExtendExpirationDate",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkExtendExpirationDateRequestDto"
+                "$ref": "#/components/schemas/BulkExtendExpirationDateRequest"
               }
             }
           }
@@ -2705,14 +2705,14 @@
     },
     "/api/users/bulk/all/update": {
       "post": {
-        "operationId": "UsersBulkActionsController_bulkUpdateAllUsers",
+        "operationId": "UsersBulkActions_bulkUpdateAllUsers",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkAllUpdateUsersRequestDto"
+                "$ref": "#/components/schemas/BulkAllUpdateUsersRequest"
               }
             }
           }
@@ -2763,7 +2763,7 @@
     "/api/users/bulk/all/reset-traffic": {
       "post": {
         "description": "Bulk reset all users traffic",
-        "operationId": "UsersBulkActionsController_bulkAllResetUserTraffic",
+        "operationId": "UsersBulkActions_bulkAllResetUserTraffic",
         "parameters": [],
         "responses": {
           "200": {
@@ -2811,14 +2811,14 @@
     "/api/users/bulk/all/extend-expiration-date": {
       "post": {
         "description": "Bulk extend all users expiration date",
-        "operationId": "UsersBulkActionsController_bulkAllExtendExpirationDate",
+        "operationId": "UsersBulkActions_bulkAllExtendExpirationDate",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkAllExtendExpirationDateRequestDto"
+                "$ref": "#/components/schemas/BulkAllExtendExpirationDateRequest"
               }
             }
           }
@@ -2868,7 +2868,7 @@
     },
     "/api/sub/{shortUuid}/info": {
       "get": {
-        "operationId": "SubscriptionController_getSubscriptionInfoByShortUuid",
+        "operationId": "Subscription_getSubscriptionInfoByShortUuid",
         "parameters": [
           {
             "name": "shortUuid",
@@ -2920,7 +2920,7 @@
     },
     "/api/sub/{shortUuid}": {
       "get": {
-        "operationId": "SubscriptionController_getSubscription",
+        "operationId": "Subscription_getSubscription",
         "parameters": [
           {
             "name": "shortUuid",
@@ -2951,7 +2951,7 @@
     },
     "/api/sub/{shortUuid}/{clientType}": {
       "get": {
-        "operationId": "SubscriptionController_getSubscriptionByClientType",
+        "operationId": "Subscription_getSubscriptionByClientType",
         "parameters": [
           {
             "name": "clientType",
@@ -2999,7 +2999,7 @@
     },
     "/api/sub/outline/{shortUuid}/{type}/{encodedTag}": {
       "get": {
-        "operationId": "SubscriptionController_getSubscriptionWithType",
+        "operationId": "Subscription_getSubscriptionWithType",
         "parameters": [
           {
             "name": "type",
@@ -3050,7 +3050,7 @@
     },
     "/api/subscriptions": {
       "get": {
-        "operationId": "SubscriptionsController_getAllSubscriptions",
+        "operationId": "Subscriptions_getAllSubscriptions",
         "parameters": [
           {
             "name": "size",
@@ -3059,7 +3059,7 @@
             "description": "Number of subscriptions to return, no more than 500",
             "schema": {
               "example": 25,
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -3069,7 +3069,7 @@
             "description": "Start index (offset) of the users to return, default is 0",
             "schema": {
               "example": 0,
-              "type": "number"
+              "type": "integer"
             }
           }
         ],
@@ -3079,7 +3079,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetAllSubscriptionsResponseDto"
+                  "$ref": "#/components/schemas/GetAllSubscriptionsResponse"
                 }
               }
             }
@@ -3118,7 +3118,7 @@
     },
     "/api/subscriptions/by-username/{username}": {
       "get": {
-        "operationId": "SubscriptionsController_getSubscriptionByUsername",
+        "operationId": "Subscriptions_getSubscriptionByUsername",
         "parameters": [
           {
             "name": "username",
@@ -3185,7 +3185,7 @@
     },
     "/api/subscriptions/by-short-uuid/{shortUuid}": {
       "get": {
-        "operationId": "SubscriptionsController_getSubscriptionByShortUuidProtected",
+        "operationId": "Subscriptions_getSubscriptionByShortUuidProtected",
         "parameters": [
           {
             "name": "shortUuid",
@@ -3252,7 +3252,7 @@
     },
     "/api/subscriptions/by-uuid/{uuid}": {
       "get": {
-        "operationId": "SubscriptionsController_getSubscriptionByUuid",
+        "operationId": "Subscriptions_getSubscriptionByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -3319,7 +3319,7 @@
     },
     "/api/subscriptions/by-short-uuid/{shortUuid}/raw": {
       "get": {
-        "operationId": "SubscriptionsController_getRawSubscriptionByShortUuid",
+        "operationId": "Subscriptions_getRawSubscriptionByShortUuid",
         "parameters": [
           {
             "name": "withDisabledHosts",
@@ -3346,7 +3346,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetRawSubscriptionByShortUuidResponseDto"
+                  "$ref": "#/components/schemas/GetRawSubscriptionByShortUuidResponse"
                 }
               }
             }
@@ -3385,7 +3385,7 @@
     },
     "/api/subscriptions/subpage-config/{shortUuid}": {
       "get": {
-        "operationId": "SubscriptionsController_getSubpageConfigByShortUuid",
+        "operationId": "Subscriptions_getSubpageConfigByShortUuid",
         "parameters": [
           {
             "name": "shortUuid",
@@ -3402,7 +3402,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GetSubpageConfigByShortUuidRequestBodyDto"
+                "$ref": "#/components/schemas/GetSubpageConfigByShortUuidRequestBody"
               }
             }
           }
@@ -3413,7 +3413,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetSubpageConfigByShortUuidResponseDto"
+                  "$ref": "#/components/schemas/GetSubpageConfigByShortUuidResponse"
                 }
               }
             }
@@ -3452,7 +3452,7 @@
     },
     "/api/subscription-templates": {
       "get": {
-        "operationId": "SubscriptionTemplateController_getAllTemplates",
+        "operationId": "SubscriptionTemplate_getAllTemplates",
         "parameters": [],
         "responses": {
           "200": {
@@ -3497,14 +3497,14 @@
         ]
       },
       "patch": {
-        "operationId": "SubscriptionTemplateController_updateTemplate",
+        "operationId": "SubscriptionTemplate_updateTemplate",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateTemplateRequestDto"
+                "$ref": "#/components/schemas/UpdateTemplateRequest"
               }
             }
           }
@@ -3552,14 +3552,14 @@
         ]
       },
       "post": {
-        "operationId": "SubscriptionTemplateController_createTemplate",
+        "operationId": "SubscriptionTemplate_createTemplate",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateSubscriptionTemplateRequestDto"
+                "$ref": "#/components/schemas/CreateSubscriptionTemplateRequest"
               }
             }
           }
@@ -3609,7 +3609,7 @@
     },
     "/api/subscription-templates/{uuid}": {
       "get": {
-        "operationId": "SubscriptionTemplateController_getTemplateByUuid",
+        "operationId": "SubscriptionTemplate_getTemplateByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -3664,7 +3664,7 @@
         ]
       },
       "delete": {
-        "operationId": "SubscriptionTemplateController_deleteTemplate",
+        "operationId": "SubscriptionTemplate_deleteTemplate",
         "parameters": [
           {
             "name": "uuid",
@@ -3721,7 +3721,7 @@
     },
     "/api/subscription-templates/actions/reorder": {
       "post": {
-        "operationId": "SubscriptionTemplateController_reorderSubscriptionTemplates",
+        "operationId": "SubscriptionTemplate_reorderSubscriptionTemplates",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -3779,14 +3779,14 @@
     "/api/tokens": {
       "post": {
         "description": "This endpoint is forbidden to use via \"API-key\". It can only be used with an admin JWT-token.",
-        "operationId": "ApiTokensController_create",
+        "operationId": "ApiTokens_create",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateApiTokenRequestDto"
+                "$ref": "#/components/schemas/CreateApiTokenRequest"
               }
             }
           }
@@ -3797,7 +3797,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateApiTokenResponseDto"
+                  "$ref": "#/components/schemas/CreateApiTokenResponse"
                 }
               }
             }
@@ -3835,7 +3835,7 @@
       },
       "get": {
         "description": "This endpoint is forbidden to use via \"API-key\". It can only be used with admin JWT-token.",
-        "operationId": "ApiTokensController_findAll",
+        "operationId": "ApiTokens_findAll",
         "parameters": [],
         "responses": {
           "200": {
@@ -3843,7 +3843,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FindAllApiTokensResponseDto"
+                  "$ref": "#/components/schemas/FindAllApiTokensResponse"
                 }
               }
             }
@@ -3883,7 +3883,7 @@
     "/api/tokens/{uuid}": {
       "delete": {
         "description": "This endpoint is forbidden to use via \"API-key\". It can be used only with an admin JWT-token.",
-        "operationId": "ApiTokensController_delete",
+        "operationId": "ApiTokens_delete",
         "parameters": [
           {
             "name": "uuid",
@@ -3901,7 +3901,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteApiTokenResponseDto"
+                  "$ref": "#/components/schemas/DeleteApiTokenResponse"
                 }
               }
             }
@@ -3940,7 +3940,7 @@
     },
     "/api/config-profiles": {
       "get": {
-        "operationId": "ConfigProfileController_getConfigProfiles",
+        "operationId": "ConfigProfile_getConfigProfiles",
         "parameters": [],
         "responses": {
           "200": {
@@ -3985,14 +3985,14 @@
         ]
       },
       "post": {
-        "operationId": "ConfigProfileController_createConfigProfile",
+        "operationId": "ConfigProfile_createConfigProfile",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateConfigProfileRequestDto"
+                "$ref": "#/components/schemas/CreateConfigProfileRequest"
               }
             }
           }
@@ -4043,14 +4043,14 @@
         ]
       },
       "patch": {
-        "operationId": "ConfigProfileController_updateConfigProfile",
+        "operationId": "ConfigProfile_updateConfigProfile",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateConfigProfileRequestDto"
+                "$ref": "#/components/schemas/UpdateConfigProfileRequest"
               }
             }
           }
@@ -4113,7 +4113,7 @@
     },
     "/api/config-profiles/inbounds": {
       "get": {
-        "operationId": "ConfigProfileController_getAllInbounds",
+        "operationId": "ConfigProfile_getAllInbounds",
         "parameters": [],
         "responses": {
           "200": {
@@ -4160,7 +4160,7 @@
     },
     "/api/config-profiles/{uuid}/inbounds": {
       "get": {
-        "operationId": "ConfigProfileController_getInboundsByProfileUuid",
+        "operationId": "ConfigProfile_getInboundsByProfileUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -4226,7 +4226,7 @@
     },
     "/api/config-profiles/{uuid}": {
       "get": {
-        "operationId": "ConfigProfileController_getConfigProfileByUuid",
+        "operationId": "ConfigProfile_getConfigProfileByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -4290,7 +4290,7 @@
         ]
       },
       "delete": {
-        "operationId": "ConfigProfileController_deleteConfigProfileByUuid",
+        "operationId": "ConfigProfile_deleteConfigProfileByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -4356,7 +4356,7 @@
     },
     "/api/config-profiles/{uuid}/computed-config": {
       "get": {
-        "operationId": "ConfigProfileController_getComputedConfigProfileByUuid",
+        "operationId": "ConfigProfile_getComputedConfigProfileByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -4422,7 +4422,7 @@
     },
     "/api/config-profiles/actions/reorder": {
       "post": {
-        "operationId": "ConfigProfileController_reorderConfigProfiles",
+        "operationId": "ConfigProfile_reorderConfigProfiles",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -4479,7 +4479,7 @@
     },
     "/api/snippets": {
       "get": {
-        "operationId": "SnippetsController_getSnippets",
+        "operationId": "Snippets_getSnippets",
         "parameters": [],
         "responses": {
           "200": {
@@ -4524,14 +4524,14 @@
         ]
       },
       "delete": {
-        "operationId": "SnippetsController_deleteSnippetByName",
+        "operationId": "Snippets_deleteSnippetByName",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeleteSnippetRequestDto"
+                "$ref": "#/components/schemas/DeleteSnippetRequest"
               }
             }
           }
@@ -4589,7 +4589,7 @@
         ]
       },
       "post": {
-        "operationId": "SnippetsController_createSnippet",
+        "operationId": "Snippets_createSnippet",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -4647,7 +4647,7 @@
         ]
       },
       "patch": {
-        "operationId": "SnippetsController_updateSnippet",
+        "operationId": "Snippets_updateSnippet",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -4717,7 +4717,7 @@
     },
     "/api/internal-squads": {
       "get": {
-        "operationId": "InternalSquadController_getInternalSquads",
+        "operationId": "InternalSquad_getInternalSquads",
         "parameters": [],
         "responses": {
           "200": {
@@ -4762,14 +4762,14 @@
         ]
       },
       "post": {
-        "operationId": "InternalSquadController_createInternalSquad",
+        "operationId": "InternalSquad_createInternalSquad",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateInternalSquadRequestDto"
+                "$ref": "#/components/schemas/CreateInternalSquadRequest"
               }
             }
           }
@@ -4820,14 +4820,14 @@
         ]
       },
       "patch": {
-        "operationId": "InternalSquadController_updateInternalSquad",
+        "operationId": "InternalSquad_updateInternalSquad",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateInternalSquadRequestDto"
+                "$ref": "#/components/schemas/UpdateInternalSquadRequest"
               }
             }
           }
@@ -4890,7 +4890,7 @@
     },
     "/api/internal-squads/{uuid}": {
       "get": {
-        "operationId": "InternalSquadController_getInternalSquadByUuid",
+        "operationId": "InternalSquad_getInternalSquadByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -4944,7 +4944,7 @@
         ]
       },
       "delete": {
-        "operationId": "InternalSquadController_deleteInternalSquad",
+        "operationId": "InternalSquad_deleteInternalSquad",
         "parameters": [
           {
             "name": "uuid",
@@ -5010,7 +5010,7 @@
     },
     "/api/internal-squads/{uuid}/accessible-nodes": {
       "get": {
-        "operationId": "InternalSquadController_getInternalSquadAccessibleNodes",
+        "operationId": "InternalSquad_getInternalSquadAccessibleNodes",
         "parameters": [
           {
             "name": "uuid",
@@ -5028,7 +5028,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetInternalSquadAccessibleNodesResponseDto"
+                  "$ref": "#/components/schemas/GetInternalSquadAccessibleNodesResponse"
                 }
               }
             }
@@ -5077,7 +5077,7 @@
     },
     "/api/internal-squads/{uuid}/bulk-actions/add-users": {
       "post": {
-        "operationId": "InternalSquadController_addUsersToInternalSquad",
+        "operationId": "InternalSquad_addUsersToInternalSquad",
         "parameters": [
           {
             "name": "uuid",
@@ -5143,7 +5143,7 @@
     },
     "/api/internal-squads/{uuid}/bulk-actions/remove-users": {
       "delete": {
-        "operationId": "InternalSquadController_removeUsersFromInternalSquad",
+        "operationId": "InternalSquad_removeUsersFromInternalSquad",
         "parameters": [
           {
             "name": "uuid",
@@ -5209,7 +5209,7 @@
     },
     "/api/internal-squads/actions/reorder": {
       "post": {
-        "operationId": "InternalSquadController_reorderInternalSquads",
+        "operationId": "InternalSquad_reorderInternalSquads",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -5266,7 +5266,7 @@
     },
     "/api/external-squads": {
       "get": {
-        "operationId": "ExternalSquadController_getExternalSquads",
+        "operationId": "ExternalSquad_getExternalSquads",
         "parameters": [],
         "responses": {
           "200": {
@@ -5311,14 +5311,14 @@
         ]
       },
       "post": {
-        "operationId": "ExternalSquadController_createExternalSquad",
+        "operationId": "ExternalSquad_createExternalSquad",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateExternalSquadRequestDto"
+                "$ref": "#/components/schemas/CreateExternalSquadRequest"
               }
             }
           }
@@ -5369,14 +5369,14 @@
         ]
       },
       "patch": {
-        "operationId": "ExternalSquadController_updateExternalSquad",
+        "operationId": "ExternalSquad_updateExternalSquad",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateExternalSquadRequestDto"
+                "$ref": "#/components/schemas/UpdateExternalSquadRequest"
               }
             }
           }
@@ -5439,7 +5439,7 @@
     },
     "/api/external-squads/{uuid}": {
       "get": {
-        "operationId": "ExternalSquadController_getExternalSquadByUuid",
+        "operationId": "ExternalSquad_getExternalSquadByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -5493,7 +5493,7 @@
         ]
       },
       "delete": {
-        "operationId": "ExternalSquadController_deleteExternalSquad",
+        "operationId": "ExternalSquad_deleteExternalSquad",
         "parameters": [
           {
             "name": "uuid",
@@ -5559,7 +5559,7 @@
     },
     "/api/external-squads/{uuid}/bulk-actions/add-users": {
       "post": {
-        "operationId": "ExternalSquadController_addUsersToExternalSquad",
+        "operationId": "ExternalSquad_addUsersToExternalSquad",
         "parameters": [
           {
             "name": "uuid",
@@ -5625,7 +5625,7 @@
     },
     "/api/external-squads/{uuid}/bulk-actions/remove-users": {
       "delete": {
-        "operationId": "ExternalSquadController_removeUsersFromExternalSquad",
+        "operationId": "ExternalSquad_removeUsersFromExternalSquad",
         "parameters": [
           {
             "name": "uuid",
@@ -5691,7 +5691,7 @@
     },
     "/api/external-squads/actions/reorder": {
       "post": {
-        "operationId": "ExternalSquadController_reorderExternalSquads",
+        "operationId": "ExternalSquad_reorderExternalSquads",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -5748,7 +5748,7 @@
     },
     "/api/keygen": {
       "get": {
-        "operationId": "KeygenController_generateKey",
+        "operationId": "Keygen_generateKey",
         "parameters": [],
         "responses": {
           "200": {
@@ -5756,7 +5756,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetPubKeyResponseDto"
+                  "$ref": "#/components/schemas/GetPubKeyResponse"
                 }
               }
             }
@@ -5795,7 +5795,7 @@
     },
     "/api/nodes/tags": {
       "get": {
-        "operationId": "NodesController_getAllNodesTags",
+        "operationId": "Nodes_getAllNodesTags",
         "parameters": [],
         "responses": {
           "200": {
@@ -5842,14 +5842,14 @@
     },
     "/api/nodes": {
       "post": {
-        "operationId": "NodesController_createNode",
+        "operationId": "Nodes_createNode",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateNodeRequestDto"
+                "$ref": "#/components/schemas/CreateNodeRequest"
               }
             }
           }
@@ -5897,7 +5897,7 @@
         ]
       },
       "get": {
-        "operationId": "NodesController_getAllNodes",
+        "operationId": "Nodes_getAllNodes",
         "parameters": [],
         "responses": {
           "200": {
@@ -5942,14 +5942,14 @@
         ]
       },
       "patch": {
-        "operationId": "NodesController_updateNode",
+        "operationId": "Nodes_updateNode",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateNodeRequestDto"
+                "$ref": "#/components/schemas/UpdateNodeRequest"
               }
             }
           }
@@ -5999,7 +5999,7 @@
     },
     "/api/nodes/{uuid}": {
       "get": {
-        "operationId": "NodesController_getOneNode",
+        "operationId": "Nodes_getOneNode",
         "parameters": [
           {
             "name": "uuid",
@@ -6054,7 +6054,7 @@
         ]
       },
       "delete": {
-        "operationId": "NodesController_deleteNode",
+        "operationId": "Nodes_deleteNode",
         "parameters": [
           {
             "name": "uuid",
@@ -6111,7 +6111,7 @@
     },
     "/api/nodes/{uuid}/actions/enable": {
       "post": {
-        "operationId": "NodesController_enableNode",
+        "operationId": "Nodes_enableNode",
         "parameters": [
           {
             "name": "uuid",
@@ -6168,7 +6168,7 @@
     },
     "/api/nodes/{uuid}/actions/disable": {
       "post": {
-        "operationId": "NodesController_disableNode",
+        "operationId": "Nodes_disableNode",
         "parameters": [
           {
             "name": "uuid",
@@ -6225,7 +6225,7 @@
     },
     "/api/nodes/{uuid}/actions/restart": {
       "post": {
-        "operationId": "NodesController_restartNode",
+        "operationId": "Nodes_restartNode",
         "parameters": [
           {
             "name": "uuid",
@@ -6282,7 +6282,7 @@
     },
     "/api/nodes/{uuid}/actions/reset-traffic": {
       "post": {
-        "operationId": "NodesController_resetNodeTraffic",
+        "operationId": "Nodes_resetNodeTraffic",
         "parameters": [
           {
             "name": "uuid",
@@ -6339,14 +6339,14 @@
     },
     "/api/nodes/actions/restart-all": {
       "post": {
-        "operationId": "NodesController_restartAllNodes",
+        "operationId": "Nodes_restartAllNodes",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RestartAllNodesRequestBodyDto"
+                "$ref": "#/components/schemas/RestartAllNodesRequestBody"
               }
             }
           }
@@ -6396,14 +6396,14 @@
     },
     "/api/nodes/actions/reorder": {
       "post": {
-        "operationId": "NodesController_reorderNodes",
+        "operationId": "Nodes_reorderNodes",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReorderNodeRequestDto"
+                "$ref": "#/components/schemas/ReorderNodeRequest"
               }
             }
           }
@@ -6453,14 +6453,14 @@
     },
     "/api/nodes/bulk-actions/profile-modification": {
       "post": {
-        "operationId": "NodesController_profileModification",
+        "operationId": "Nodes_profileModification",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProfileModificationRequestDto"
+                "$ref": "#/components/schemas/ProfileModificationRequest"
               }
             }
           }
@@ -6510,14 +6510,14 @@
     },
     "/api/nodes/bulk-actions": {
       "post": {
-        "operationId": "NodesController_bulkNodesActions",
+        "operationId": "Nodes_bulkNodesActions",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BulkNodesActionsRequestDto"
+                "$ref": "#/components/schemas/BulkNodesActionsRequest"
               }
             }
           }
@@ -6567,7 +6567,7 @@
     },
     "/api/hosts/tags": {
       "get": {
-        "operationId": "HostsController_getAllHostTags",
+        "operationId": "Hosts_getAllHostTags",
         "parameters": [],
         "responses": {
           "200": {
@@ -6614,14 +6614,14 @@
     },
     "/api/hosts": {
       "post": {
-        "operationId": "HostsController_createHost",
+        "operationId": "Hosts_createHost",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateHostRequestDto"
+                "$ref": "#/components/schemas/CreateHostRequest"
               }
             }
           }
@@ -6669,14 +6669,14 @@
         ]
       },
       "patch": {
-        "operationId": "HostsController_updateHost",
+        "operationId": "Hosts_updateHost",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateHostRequestDto"
+                "$ref": "#/components/schemas/UpdateHostRequest"
               }
             }
           }
@@ -6724,7 +6724,7 @@
         ]
       },
       "get": {
-        "operationId": "HostsController_getAllHosts",
+        "operationId": "Hosts_getAllHosts",
         "parameters": [],
         "responses": {
           "200": {
@@ -6771,7 +6771,7 @@
     },
     "/api/hosts/{uuid}": {
       "get": {
-        "operationId": "HostsController_getOneHost",
+        "operationId": "Hosts_getOneHost",
         "parameters": [
           {
             "name": "uuid",
@@ -6826,7 +6826,7 @@
         ]
       },
       "delete": {
-        "operationId": "HostsController_deleteHost",
+        "operationId": "Hosts_deleteHost",
         "parameters": [
           {
             "name": "uuid",
@@ -6893,14 +6893,14 @@
     },
     "/api/hosts/actions/reorder": {
       "post": {
-        "operationId": "HostsController_reorderHosts",
+        "operationId": "Hosts_reorderHosts",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReorderHostRequestDto"
+                "$ref": "#/components/schemas/ReorderHostRequest"
               }
             }
           }
@@ -6911,7 +6911,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReorderHostResponseDto"
+                  "$ref": "#/components/schemas/ReorderHostResponse"
                 }
               }
             }
@@ -6950,7 +6950,7 @@
     },
     "/api/hosts/bulk/delete": {
       "post": {
-        "operationId": "HostsBulkActionsController_deleteHosts",
+        "operationId": "HostsBulkActions_deleteHosts",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -7007,7 +7007,7 @@
     },
     "/api/hosts/bulk/disable": {
       "post": {
-        "operationId": "HostsBulkActionsController_disableHosts",
+        "operationId": "HostsBulkActions_disableHosts",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -7064,7 +7064,7 @@
     },
     "/api/hosts/bulk/enable": {
       "post": {
-        "operationId": "HostsBulkActionsController_enableHosts",
+        "operationId": "HostsBulkActions_enableHosts",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -7121,14 +7121,14 @@
     },
     "/api/hosts/bulk/set-inbound": {
       "post": {
-        "operationId": "HostsBulkActionsController_setInboundToHosts",
+        "operationId": "HostsBulkActions_setInboundToHosts",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SetInboundToManyHostsRequestDto"
+                "$ref": "#/components/schemas/SetInboundToManyHostsRequest"
               }
             }
           }
@@ -7178,14 +7178,14 @@
     },
     "/api/hosts/bulk/set-port": {
       "post": {
-        "operationId": "HostsBulkActionsController_setPortToHosts",
+        "operationId": "HostsBulkActions_setPortToHosts",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SetPortToManyHostsRequestDto"
+                "$ref": "#/components/schemas/SetPortToManyHostsRequest"
               }
             }
           }
@@ -7235,7 +7235,7 @@
     },
     "/api/bandwidth-stats/nodes/{uuid}/users/legacy": {
       "get": {
-        "operationId": "BandwidthStatsNodesController_getNodeUserUsage",
+        "operationId": "BandwidthStatsNodes_getNodeUserUsage",
         "parameters": [
           {
             "name": "start",
@@ -7273,7 +7273,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetLegacyStatsNodesUsersUsageResponseDto"
+                  "$ref": "#/components/schemas/GetLegacyStatsNodesUsersUsageResponse"
                 }
               }
             }
@@ -7312,7 +7312,7 @@
     },
     "/api/bandwidth-stats/nodes/realtime": {
       "get": {
-        "operationId": "BandwidthStatsNodesController_getNodesRealtimeUsage",
+        "operationId": "BandwidthStatsNodes_getNodesRealtimeUsage",
         "parameters": [],
         "responses": {
           "200": {
@@ -7320,7 +7320,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetStatsNodesRealtimeUsageResponseDto"
+                  "$ref": "#/components/schemas/GetStatsNodesRealtimeUsageResponse"
                 }
               }
             }
@@ -7359,7 +7359,7 @@
     },
     "/api/bandwidth-stats/nodes/{uuid}/users": {
       "get": {
-        "operationId": "BandwidthStatsNodesController_getStatsNodeUsersUsage",
+        "operationId": "BandwidthStatsNodes_getStatsNodeUsersUsage",
         "parameters": [
           {
             "name": "topUsersLimit",
@@ -7367,7 +7367,7 @@
             "in": "query",
             "description": "Limit of top users to return",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -7408,7 +7408,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetStatsNodeUsersUsageResponseDto"
+                  "$ref": "#/components/schemas/GetStatsNodeUsersUsageResponse"
                 }
               }
             }
@@ -7447,7 +7447,7 @@
     },
     "/api/bandwidth-stats/users/{uuid}/legacy": {
       "get": {
-        "operationId": "BandwidthStatsUsersController_getUserUsageByRange",
+        "operationId": "BandwidthStatsUsers_getUserUsageByRange",
         "parameters": [
           {
             "name": "start",
@@ -7485,7 +7485,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetLegacyStatsUserUsageResponseDto"
+                  "$ref": "#/components/schemas/GetLegacyStatsUserUsageResponse"
                 }
               }
             }
@@ -7534,7 +7534,7 @@
     },
     "/api/bandwidth-stats/users/{uuid}": {
       "get": {
-        "operationId": "BandwidthStatsUsersController_getStatsNodesUsage",
+        "operationId": "BandwidthStatsUsers_getStatsNodesUsage",
         "parameters": [
           {
             "name": "topNodesLimit",
@@ -7542,7 +7542,7 @@
             "in": "query",
             "description": "Limit of top nodes to return",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -7622,7 +7622,7 @@
     },
     "/api/hwid/devices": {
       "get": {
-        "operationId": "HwidUserDevicesController_getAllUsers",
+        "operationId": "HwidUserDevices_getAllUsers",
         "parameters": [
           {
             "name": "size",
@@ -7630,7 +7630,7 @@
             "in": "query",
             "description": "Page size for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -7639,7 +7639,7 @@
             "in": "query",
             "description": "Offset for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           }
         ],
@@ -7649,7 +7649,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetAllHwidDevicesResponseDto"
+                  "$ref": "#/components/schemas/GetAllHwidDevicesResponse"
                 }
               }
             }
@@ -7686,14 +7686,14 @@
         ]
       },
       "post": {
-        "operationId": "HwidUserDevicesController_createUserHwidDevice",
+        "operationId": "HwidUserDevices_createUserHwidDevice",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserHwidDeviceRequestDto"
+                "$ref": "#/components/schemas/CreateUserHwidDeviceRequest"
               }
             }
           }
@@ -7753,14 +7753,14 @@
     },
     "/api/hwid/devices/delete": {
       "post": {
-        "operationId": "HwidUserDevicesController_deleteUserHwidDevice",
+        "operationId": "HwidUserDevices_deleteUserHwidDevice",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeleteUserHwidDeviceRequestDto"
+                "$ref": "#/components/schemas/DeleteUserHwidDeviceRequest"
               }
             }
           }
@@ -7820,14 +7820,14 @@
     },
     "/api/hwid/devices/delete-all": {
       "post": {
-        "operationId": "HwidUserDevicesController_deleteAllUserHwidDevices",
+        "operationId": "HwidUserDevices_deleteAllUserHwidDevices",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeleteAllUserHwidDevicesRequestDto"
+                "$ref": "#/components/schemas/DeleteAllUserHwidDevicesRequest"
               }
             }
           }
@@ -7887,7 +7887,7 @@
     },
     "/api/hwid/devices/stats": {
       "get": {
-        "operationId": "HwidUserDevicesController_getHwidDevicesStats",
+        "operationId": "HwidUserDevices_getHwidDevicesStats",
         "parameters": [],
         "responses": {
           "200": {
@@ -7895,7 +7895,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetHwidDevicesStatsResponseDto"
+                  "$ref": "#/components/schemas/GetHwidDevicesStatsResponse"
                 }
               }
             }
@@ -7934,7 +7934,7 @@
     },
     "/api/hwid/devices/top-users": {
       "get": {
-        "operationId": "HwidUserDevicesController_getTopUsersByHwidDevices",
+        "operationId": "HwidUserDevices_getTopUsersByHwidDevices",
         "parameters": [
           {
             "name": "size",
@@ -7942,7 +7942,7 @@
             "in": "query",
             "description": "Page size for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -7951,7 +7951,7 @@
             "in": "query",
             "description": "Offset for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           }
         ],
@@ -7961,7 +7961,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetTopUsersByHwidDevicesResponseDto"
+                  "$ref": "#/components/schemas/GetTopUsersByHwidDevicesResponse"
                 }
               }
             }
@@ -8000,7 +8000,7 @@
     },
     "/api/hwid/devices/{userUuid}": {
       "get": {
-        "operationId": "HwidUserDevicesController_getUserHwidDevices",
+        "operationId": "HwidUserDevices_getUserHwidDevices",
         "parameters": [
           {
             "name": "userUuid",
@@ -8067,7 +8067,7 @@
     },
     "/api/bandwidth-stats/nodes": {
       "get": {
-        "operationId": "NodesUsageHistoryController_getStatsNodesUsage",
+        "operationId": "NodesUsageHistory_getStatsNodesUsage",
         "parameters": [
           {
             "name": "topNodesLimit",
@@ -8075,7 +8075,7 @@
             "in": "query",
             "description": "Limit of top nodes to return",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -8146,7 +8146,7 @@
     },
     "/api/infra-billing/providers": {
       "get": {
-        "operationId": "InfraBillingController_getInfraProviders",
+        "operationId": "InfraBilling_getInfraProviders",
         "parameters": [],
         "responses": {
           "200": {
@@ -8154,7 +8154,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetInfraProvidersResponseDto"
+                  "$ref": "#/components/schemas/GetInfraProvidersResponse"
                 }
               }
             }
@@ -8191,14 +8191,14 @@
         ]
       },
       "post": {
-        "operationId": "InfraBillingController_createInfraProvider",
+        "operationId": "InfraBilling_createInfraProvider",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateInfraProviderRequestDto"
+                "$ref": "#/components/schemas/CreateInfraProviderRequest"
               }
             }
           }
@@ -8246,14 +8246,14 @@
         ]
       },
       "patch": {
-        "operationId": "InfraBillingController_updateInfraProvider",
+        "operationId": "InfraBilling_updateInfraProvider",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateInfraProviderRequestDto"
+                "$ref": "#/components/schemas/UpdateInfraProviderRequest"
               }
             }
           }
@@ -8303,7 +8303,7 @@
     },
     "/api/infra-billing/providers/{uuid}": {
       "get": {
-        "operationId": "InfraBillingController_getInfraProviderByUuid",
+        "operationId": "InfraBilling_getInfraProviderByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -8367,7 +8367,7 @@
         ]
       },
       "delete": {
-        "operationId": "InfraBillingController_deleteInfraProviderByUuid",
+        "operationId": "InfraBilling_deleteInfraProviderByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -8423,14 +8423,14 @@
     },
     "/api/infra-billing/history": {
       "post": {
-        "operationId": "InfraBillingController_createInfraBillingHistoryRecord",
+        "operationId": "InfraBilling_createInfraBillingHistoryRecord",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateInfraBillingHistoryRecordRequestDto"
+                "$ref": "#/components/schemas/CreateInfraBillingHistoryRecordRequest"
               }
             }
           }
@@ -8478,7 +8478,7 @@
         ]
       },
       "get": {
-        "operationId": "InfraBillingController_getInfraBillingHistoryRecords",
+        "operationId": "InfraBilling_getInfraBillingHistoryRecords",
         "parameters": [],
         "responses": {
           "200": {
@@ -8525,7 +8525,7 @@
     },
     "/api/infra-billing/history/{uuid}": {
       "delete": {
-        "operationId": "InfraBillingController_deleteInfraBillingHistoryRecordByUuid",
+        "operationId": "InfraBilling_deleteInfraBillingHistoryRecordByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -8581,7 +8581,7 @@
     },
     "/api/infra-billing/nodes": {
       "get": {
-        "operationId": "InfraBillingController_getBillingNodes",
+        "operationId": "InfraBilling_getBillingNodes",
         "parameters": [],
         "responses": {
           "200": {
@@ -8626,14 +8626,14 @@
         ]
       },
       "patch": {
-        "operationId": "InfraBillingController_updateInfraBillingNode",
+        "operationId": "InfraBilling_updateInfraBillingNode",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateInfraBillingNodeRequestDto"
+                "$ref": "#/components/schemas/UpdateInfraBillingNodeRequest"
               }
             }
           }
@@ -8681,14 +8681,14 @@
         ]
       },
       "post": {
-        "operationId": "InfraBillingController_createInfraBillingNode",
+        "operationId": "InfraBilling_createInfraBillingNode",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateInfraBillingNodeRequestDto"
+                "$ref": "#/components/schemas/CreateInfraBillingNodeRequest"
               }
             }
           }
@@ -8738,7 +8738,7 @@
     },
     "/api/infra-billing/nodes/{uuid}": {
       "delete": {
-        "operationId": "InfraBillingController_deleteInfraBillingNodeByUuid",
+        "operationId": "InfraBilling_deleteInfraBillingNodeByUuid",
         "parameters": [
           {
             "name": "uuid",
@@ -8794,7 +8794,7 @@
     },
     "/api/subscription-request-history": {
       "get": {
-        "operationId": "UserSubscriptionRequestHistoryController_getSubscriptionRequestHistory",
+        "operationId": "UserSubscriptionRequestHistory_getSubscriptionRequestHistory",
         "parameters": [
           {
             "name": "size",
@@ -8802,7 +8802,7 @@
             "in": "query",
             "description": "Page size for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -8811,7 +8811,7 @@
             "in": "query",
             "description": "Offset for pagination",
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           }
         ],
@@ -8821,7 +8821,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetSubscriptionRequestHistoryResponseDto"
+                  "$ref": "#/components/schemas/GetSubscriptionRequestHistoryResponse"
                 }
               }
             }
@@ -8860,7 +8860,7 @@
     },
     "/api/subscription-request-history/stats": {
       "get": {
-        "operationId": "UserSubscriptionRequestHistoryController_getSubscriptionRequestHistoryStats",
+        "operationId": "UserSubscriptionRequestHistory_getSubscriptionRequestHistoryStats",
         "parameters": [],
         "responses": {
           "200": {
@@ -8868,7 +8868,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetSubscriptionRequestHistoryStatsResponseDto"
+                  "$ref": "#/components/schemas/GetSubscriptionRequestHistoryStatsResponse"
                 }
               }
             }
@@ -8907,7 +8907,7 @@
     },
     "/api/system/metadata": {
       "get": {
-        "operationId": "SystemController_getMetadata",
+        "operationId": "System_getMetadata",
         "parameters": [],
         "responses": {
           "200": {
@@ -8915,7 +8915,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetMetadataResponseDto"
+                  "$ref": "#/components/schemas/GetMetadataResponse"
                 }
               }
             }
@@ -8954,7 +8954,7 @@
     },
     "/api/system/stats": {
       "get": {
-        "operationId": "SystemController_getStats",
+        "operationId": "System_getStats",
         "parameters": [],
         "responses": {
           "200": {
@@ -8962,7 +8962,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetStatsResponseDto"
+                  "$ref": "#/components/schemas/GetStatsResponse"
                 }
               }
             }
@@ -9001,7 +9001,7 @@
     },
     "/api/system/stats/bandwidth": {
       "get": {
-        "operationId": "SystemController_getBandwidthStats",
+        "operationId": "System_getBandwidthStats",
         "parameters": [],
         "responses": {
           "200": {
@@ -9009,7 +9009,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetBandwidthStatsResponseDto"
+                  "$ref": "#/components/schemas/GetBandwidthStatsResponse"
                 }
               }
             }
@@ -9048,7 +9048,7 @@
     },
     "/api/system/stats/nodes": {
       "get": {
-        "operationId": "SystemController_getNodesStatistics",
+        "operationId": "System_getNodesStatistics",
         "parameters": [],
         "responses": {
           "200": {
@@ -9056,7 +9056,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetNodesStatisticsResponseDto"
+                  "$ref": "#/components/schemas/GetNodesStatisticsResponse"
                 }
               }
             }
@@ -9095,7 +9095,7 @@
     },
     "/api/system/health": {
       "get": {
-        "operationId": "SystemController_getRemnawaveHealth",
+        "operationId": "System_getRemnawaveHealth",
         "parameters": [],
         "responses": {
           "200": {
@@ -9103,7 +9103,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetRemnawaveHealthResponseDto"
+                  "$ref": "#/components/schemas/GetRemnawaveHealthResponse"
                 }
               }
             }
@@ -9142,7 +9142,7 @@
     },
     "/api/system/nodes/metrics": {
       "get": {
-        "operationId": "SystemController_getNodesMetrics",
+        "operationId": "System_getNodesMetrics",
         "parameters": [],
         "responses": {
           "200": {
@@ -9150,7 +9150,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetNodesMetricsResponseDto"
+                  "$ref": "#/components/schemas/GetNodesMetricsResponse"
                 }
               }
             }
@@ -9189,7 +9189,7 @@
     },
     "/api/system/tools/x25519/generate": {
       "get": {
-        "operationId": "SystemController_getX25519Keypairs",
+        "operationId": "System_getX25519Keypairs",
         "parameters": [],
         "responses": {
           "200": {
@@ -9197,7 +9197,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenerateX25519ResponseDto"
+                  "$ref": "#/components/schemas/GenerateX25519Response"
                 }
               }
             }
@@ -9236,14 +9236,14 @@
     },
     "/api/system/tools/happ/encrypt": {
       "post": {
-        "operationId": "SystemController_encryptHappCryptoLink",
+        "operationId": "System_encryptHappCryptoLink",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EncryptHappCryptoLinkRequestDto"
+                "$ref": "#/components/schemas/EncryptHappCryptoLinkRequest"
               }
             }
           }
@@ -9254,7 +9254,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EncryptHappCryptoLinkResponseDto"
+                  "$ref": "#/components/schemas/EncryptHappCryptoLinkResponse"
                 }
               }
             }
@@ -9293,14 +9293,14 @@
     },
     "/api/system/testers/srr-matcher": {
       "post": {
-        "operationId": "SystemController_debugSrrMatcher",
+        "operationId": "System_debugSrrMatcher",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DebugSrrMatcherRequestDto"
+                "$ref": "#/components/schemas/DebugSrrMatcherRequest"
               }
             }
           }
@@ -9311,7 +9311,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DebugSrrMatcherResponseDto"
+                  "$ref": "#/components/schemas/DebugSrrMatcherResponse"
                 }
               }
             }
@@ -9350,7 +9350,7 @@
     },
     "/api/subscription-settings": {
       "get": {
-        "operationId": "SubscriptionSettingsController_getSettings",
+        "operationId": "SubscriptionSettings_getSettings",
         "parameters": [],
         "responses": {
           "200": {
@@ -9395,14 +9395,14 @@
         ]
       },
       "patch": {
-        "operationId": "SubscriptionSettingsController_updateSettings",
+        "operationId": "SubscriptionSettings_updateSettings",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateSubscriptionSettingsRequestDto"
+                "$ref": "#/components/schemas/UpdateSubscriptionSettingsRequest"
               }
             }
           }
@@ -9612,7 +9612,7 @@
           "response"
         ]
       },
-      "UpdateRemnawaveSettingsRequestDto": {
+      "UpdateRemnawaveSettingsRequest": {
         "type": "object",
         "properties": {
           "passkeySettings": {
@@ -9641,7 +9641,7 @@
           "response"
         ]
       },
-      "VerifyPasskeyRegistrationResponseDto": {
+      "VerifyPasskeyRegistrationResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -9706,7 +9706,7 @@
           "response"
         ]
       },
-      "DeletePasskeyRequestDto": {
+      "DeletePasskeyRequest": {
         "type": "object",
         "properties": {
           "id": {
@@ -9717,7 +9717,7 @@
           "id"
         ]
       },
-      "UpdatePasskeyRequestDto": {
+      "UpdatePasskeyRequest": {
         "type": "object",
         "properties": {
           "id": {
@@ -9735,7 +9735,7 @@
           "name"
         ]
       },
-      "LoginRequestDto": {
+      "LoginRequest": {
         "type": "object",
         "properties": {
           "username": {
@@ -9769,7 +9769,7 @@
           "response"
         ]
       },
-      "RegisterRequestDto": {
+      "RegisterRequest": {
         "type": "object",
         "properties": {
           "username": {
@@ -9786,7 +9786,7 @@
           "password"
         ]
       },
-      "GetStatusResponseDto": {
+      "GetStatusResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -9876,7 +9876,7 @@
           "response"
         ]
       },
-      "TelegramCallbackRequestDto": {
+      "TelegramCallbackRequest": {
         "type": "object",
         "properties": {
           "id": {
@@ -9908,7 +9908,7 @@
           "hash"
         ]
       },
-      "OAuth2AuthorizeRequestDto": {
+      "OAuth2AuthorizeRequest": {
         "type": "object",
         "properties": {
           "provider": {
@@ -9933,7 +9933,7 @@
           "provider"
         ]
       },
-      "OAuth2AuthorizeResponseDto": {
+      "OAuth2AuthorizeResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -9954,7 +9954,7 @@
           "response"
         ]
       },
-      "OAuth2CallbackRequestDto": {
+      "OAuth2CallbackRequest": {
         "type": "object",
         "properties": {
           "provider": {
@@ -10043,7 +10043,7 @@
           "response"
         ]
       },
-      "UpdateSubscriptionPageConfigRequestDto": {
+      "UpdateSubscriptionPageConfigRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -10081,7 +10081,7 @@
           "response"
         ]
       },
-      "CreateSubscriptionPageConfigRequestDto": {
+      "CreateSubscriptionPageConfigRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -10095,7 +10095,7 @@
           "name"
         ]
       },
-      "CreateSubscriptionPageConfigResponseDto": {
+      "CreateSubscriptionPageConfigResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -10120,7 +10120,7 @@
           "items"
         ]
       },
-      "CloneSubscriptionPageConfigRequestDto": {
+      "CloneSubscriptionPageConfigRequest": {
         "type": "object",
         "properties": {
           "cloneFromUuid": {
@@ -10132,7 +10132,7 @@
           "cloneFromUuid"
         ]
       },
-      "CreateUserRequestDto": {
+      "CreateUserRequest": {
         "type": "object",
         "properties": {
           "username": {
@@ -10282,7 +10282,7 @@
           "response"
         ]
       },
-      "UpdateUserRequestDto": {
+      "UpdateUserRequest": {
         "type": "object",
         "properties": {
           "username": {
@@ -10369,7 +10369,7 @@
           }
         }
       },
-      "GetAllUsersResponseDto": {
+      "GetAllUsersResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -10417,7 +10417,7 @@
           "response"
         ]
       },
-      "GetUserAccessibleNodesResponseDto": {
+      "GetUserAccessibleNodesResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -10492,7 +10492,7 @@
           "response"
         ]
       },
-      "GetUserSubscriptionRequestHistoryResponseDto": {
+      "GetUserSubscriptionRequestHistoryResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -10517,7 +10517,7 @@
           "response"
         ]
       },
-      "RevokeUserSubscriptionBodyDto": {
+      "RevokeUserSubscriptionBody": {
         "type": "object",
         "properties": {
           "revokeOnlyPasswords": {
@@ -10533,7 +10533,7 @@
           }
         }
       },
-      "BulkDeleteUsersByStatusRequestDto": {
+      "BulkDeleteUsersByStatusRequest": {
         "type": "object",
         "properties": {
           "status": {
@@ -10590,7 +10590,7 @@
           "uuids"
         ]
       },
-      "BulkUpdateUsersRequestDto": {
+      "BulkUpdateUsersRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -10687,7 +10687,7 @@
           "fields"
         ]
       },
-      "BulkUpdateUsersSquadsRequestDto": {
+      "BulkUpdateUsersSquadsRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -10712,7 +10712,7 @@
           "activeInternalSquads"
         ]
       },
-      "BulkExtendExpirationDateRequestDto": {
+      "BulkExtendExpirationDateRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -10737,7 +10737,7 @@
           "extendDays"
         ]
       },
-      "BulkAllUpdateUsersRequestDto": {
+      "BulkAllUpdateUsersRequest": {
         "type": "object",
         "properties": {
           "status": {
@@ -10829,7 +10829,7 @@
           "response"
         ]
       },
-      "BulkAllExtendExpirationDateRequestDto": {
+      "BulkAllExtendExpirationDateRequest": {
         "type": "object",
         "properties": {
           "extendDays": {
@@ -10853,7 +10853,7 @@
           "response"
         ]
       },
-      "GetAllSubscriptionsResponseDto": {
+      "GetAllSubscriptionsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -10879,7 +10879,7 @@
           "response"
         ]
       },
-      "GetRawSubscriptionByShortUuidResponseDto": {
+      "GetRawSubscriptionByShortUuidResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11158,7 +11158,7 @@
           "response"
         ]
       },
-      "GetSubpageConfigByShortUuidRequestBodyDto": {
+      "GetSubpageConfigByShortUuidRequestBody": {
         "type": "object",
         "properties": {
           "requestHeaders": {
@@ -11172,7 +11172,7 @@
           "requestHeaders"
         ]
       },
-      "GetSubpageConfigByShortUuidResponseDto": {
+      "GetSubpageConfigByShortUuidResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11234,7 +11234,7 @@
           "response"
         ]
       },
-      "UpdateTemplateRequestDto": {
+      "UpdateTemplateRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -11259,7 +11259,7 @@
           "uuid"
         ]
       },
-      "CreateSubscriptionTemplateRequestDto": {
+      "CreateSubscriptionTemplateRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -11293,7 +11293,7 @@
           "templateType"
         ]
       },
-      "CreateApiTokenRequestDto": {
+      "CreateApiTokenRequest": {
         "type": "object",
         "properties": {
           "tokenName": {
@@ -11304,7 +11304,7 @@
           "tokenName"
         ]
       },
-      "CreateApiTokenResponseDto": {
+      "CreateApiTokenResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11327,7 +11327,7 @@
           "response"
         ]
       },
-      "DeleteApiTokenResponseDto": {
+      "DeleteApiTokenResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11338,7 +11338,7 @@
           "response"
         ]
       },
-      "FindAllApiTokensResponseDto": {
+      "FindAllApiTokensResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11521,7 +11521,7 @@
           "response"
         ]
       },
-      "CreateConfigProfileRequestDto": {
+      "CreateConfigProfileRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -11540,7 +11540,7 @@
           "config"
         ]
       },
-      "UpdateConfigProfileRequestDto": {
+      "UpdateConfigProfileRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -11598,7 +11598,7 @@
           "response"
         ]
       },
-      "DeleteSnippetRequestDto": {
+      "DeleteSnippetRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -11671,7 +11671,7 @@
           "response"
         ]
       },
-      "CreateInternalSquadRequestDto": {
+      "CreateInternalSquadRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -11693,7 +11693,7 @@
           "inbounds"
         ]
       },
-      "GetInternalSquadAccessibleNodesResponseDto": {
+      "GetInternalSquadAccessibleNodesResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11753,7 +11753,7 @@
           "response"
         ]
       },
-      "UpdateInternalSquadRequestDto": {
+      "UpdateInternalSquadRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -11815,7 +11815,7 @@
           "response"
         ]
       },
-      "CreateExternalSquadRequestDto": {
+      "CreateExternalSquadRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -11829,7 +11829,7 @@
           "name"
         ]
       },
-      "UpdateExternalSquadRequestDto": {
+      "UpdateExternalSquadRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -11876,7 +11876,7 @@
           "uuid"
         ]
       },
-      "GetPubKeyResponseDto": {
+      "GetPubKeyResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -11895,7 +11895,7 @@
           "response"
         ]
       },
-      "CreateNodeRequestDto": {
+      "CreateNodeRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -11998,7 +11998,7 @@
           "response"
         ]
       },
-      "UpdateNodeRequestDto": {
+      "UpdateNodeRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -12076,7 +12076,7 @@
           "uuid"
         ]
       },
-      "RestartAllNodesRequestBodyDto": {
+      "RestartAllNodesRequestBody": {
         "type": "object",
         "properties": {
           "forceRestart": {
@@ -12084,7 +12084,7 @@
           }
         }
       },
-      "ReorderNodeRequestDto": {
+      "ReorderNodeRequest": {
         "type": "object",
         "properties": {
           "nodes": {
@@ -12098,7 +12098,7 @@
           "nodes"
         ]
       },
-      "ProfileModificationRequestDto": {
+      "ProfileModificationRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -12136,7 +12136,7 @@
           "configProfile"
         ]
       },
-      "BulkNodesActionsRequestDto": {
+      "BulkNodesActionsRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -12168,7 +12168,7 @@
           "action"
         ]
       },
-      "CreateHostRequestDto": {
+      "CreateHostRequest": {
         "type": "object",
         "properties": {
           "inbound": {
@@ -12350,7 +12350,7 @@
           "response"
         ]
       },
-      "UpdateHostRequestDto": {
+      "UpdateHostRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -12527,7 +12527,7 @@
           "response"
         ]
       },
-      "ReorderHostRequestDto": {
+      "ReorderHostRequest": {
         "type": "object",
         "properties": {
           "hosts": {
@@ -12541,7 +12541,7 @@
           "hosts"
         ]
       },
-      "ReorderHostResponseDto": {
+      "ReorderHostResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -12575,7 +12575,7 @@
           "uuids"
         ]
       },
-      "SetInboundToManyHostsRequestDto": {
+      "SetInboundToManyHostsRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -12600,7 +12600,7 @@
           "configProfileInboundUuid"
         ]
       },
-      "SetPortToManyHostsRequestDto": {
+      "SetPortToManyHostsRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -12623,7 +12623,7 @@
           "port"
         ]
       },
-      "GetLegacyStatsNodesUsersUsageResponseDto": {
+      "GetLegacyStatsNodesUsersUsageResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -12663,7 +12663,7 @@
           "response"
         ]
       },
-      "GetStatsNodesRealtimeUsageResponseDto": {
+      "GetStatsNodesRealtimeUsageResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -12718,7 +12718,7 @@
           "response"
         ]
       },
-      "GetStatsNodeUsersUsageResponseDto": {
+      "GetStatsNodeUsersUsageResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -12770,7 +12770,7 @@
           "response"
         ]
       },
-      "GetLegacyStatsUserUsageResponseDto": {
+      "GetLegacyStatsUserUsageResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -12914,7 +12914,7 @@
           "response"
         ]
       },
-      "GetAllHwidDevicesResponseDto": {
+      "GetAllHwidDevicesResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -12925,7 +12925,7 @@
           "response"
         ]
       },
-      "CreateUserHwidDeviceRequestDto": {
+      "CreateUserHwidDeviceRequest": {
         "type": "object",
         "properties": {
           "hwid": {
@@ -12964,7 +12964,7 @@
           "response"
         ]
       },
-      "DeleteUserHwidDeviceRequestDto": {
+      "DeleteUserHwidDeviceRequest": {
         "type": "object",
         "properties": {
           "userUuid": {
@@ -12980,7 +12980,7 @@
           "hwid"
         ]
       },
-      "DeleteAllUserHwidDevicesRequestDto": {
+      "DeleteAllUserHwidDevicesRequest": {
         "type": "object",
         "properties": {
           "userUuid": {
@@ -12992,7 +12992,7 @@
           "userUuid"
         ]
       },
-      "GetHwidDevicesStatsResponseDto": {
+      "GetHwidDevicesStatsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13053,7 +13053,7 @@
           "response"
         ]
       },
-      "GetTopUsersByHwidDevicesResponseDto": {
+      "GetTopUsersByHwidDevicesResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13100,7 +13100,7 @@
           "response"
         ]
       },
-      "GetInfraProvidersResponseDto": {
+      "GetInfraProvidersResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13137,7 +13137,7 @@
           "response"
         ]
       },
-      "CreateInfraProviderRequestDto": {
+      "CreateInfraProviderRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -13158,7 +13158,7 @@
           "name"
         ]
       },
-      "UpdateInfraProviderRequestDto": {
+      "UpdateInfraProviderRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -13185,7 +13185,7 @@
           "uuid"
         ]
       },
-      "CreateInfraBillingHistoryRecordRequestDto": {
+      "CreateInfraBillingHistoryRecordRequest": {
         "type": "object",
         "properties": {
           "providerUuid": {
@@ -13402,7 +13402,7 @@
           "response"
         ]
       },
-      "UpdateInfraBillingNodeRequestDto": {
+      "UpdateInfraBillingNodeRequest": {
         "type": "object",
         "properties": {
           "uuids": {
@@ -13422,7 +13422,7 @@
           "nextBillingAt"
         ]
       },
-      "CreateInfraBillingNodeRequestDto": {
+      "CreateInfraBillingNodeRequest": {
         "type": "object",
         "properties": {
           "providerUuid": {
@@ -13444,7 +13444,7 @@
           "nodeUuid"
         ]
       },
-      "GetSubscriptionRequestHistoryResponseDto": {
+      "GetSubscriptionRequestHistoryResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13455,7 +13455,7 @@
           "response"
         ]
       },
-      "GetSubscriptionRequestHistoryStatsResponseDto": {
+      "GetSubscriptionRequestHistoryStatsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13497,7 +13497,7 @@
           "response"
         ]
       },
-      "GetMetadataResponseDto": {
+      "GetMetadataResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13576,7 +13576,7 @@
           "response"
         ]
       },
-      "GetStatsResponseDto": {
+      "GetStatsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13702,7 +13702,7 @@
           "response"
         ]
       },
-      "GetBandwidthStatsResponseDto": {
+      "GetBandwidthStatsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13737,7 +13737,7 @@
           "response"
         ]
       },
-      "GetNodesStatisticsResponseDto": {
+      "GetNodesStatisticsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13775,7 +13775,7 @@
           "response"
         ]
       },
-      "GetRemnawaveHealthResponseDto": {
+      "GetRemnawaveHealthResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13813,7 +13813,7 @@
           "response"
         ]
       },
-      "GetNodesMetricsResponseDto": {
+      "GetNodesMetricsResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13873,7 +13873,7 @@
           "response"
         ]
       },
-      "GenerateX25519ResponseDto": {
+      "GenerateX25519Response": {
         "type": "object",
         "properties": {
           "response": {
@@ -13907,7 +13907,7 @@
           "response"
         ]
       },
-      "EncryptHappCryptoLinkRequestDto": {
+      "EncryptHappCryptoLinkRequest": {
         "type": "object",
         "properties": {
           "linkToEncrypt": {
@@ -13919,7 +13919,7 @@
           "linkToEncrypt"
         ]
       },
-      "EncryptHappCryptoLinkResponseDto": {
+      "EncryptHappCryptoLinkResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -13938,7 +13938,7 @@
           "response"
         ]
       },
-      "DebugSrrMatcherRequestDto": {
+      "DebugSrrMatcherRequest": {
         "type": "object",
         "properties": {
           "responseRules": {
@@ -13949,7 +13949,7 @@
           "responseRules"
         ]
       },
-      "DebugSrrMatcherResponseDto": {
+      "DebugSrrMatcherResponse": {
         "type": "object",
         "properties": {
           "response": {
@@ -14105,7 +14105,7 @@
           "response"
         ]
       },
-      "UpdateSubscriptionSettingsRequestDto": {
+      "UpdateSubscriptionSettingsRequest": {
         "type": "object",
         "properties": {
           "uuid": {
@@ -14162,7 +14162,7 @@
           "uuid"
         ]
       },
-      "RemnawaveWebhookUserEventsDto": {
+      "RemnawaveWebhookUserEvents": {
         "type": "object",
         "properties": {
           "scope": {
@@ -14218,7 +14218,7 @@
           "meta"
         ]
       },
-      "RemnawaveWebhookUserHwidDevicesEventsDto": {
+      "RemnawaveWebhookUserHwidDevicesEvents": {
         "type": "object",
         "properties": {
           "scope": {
@@ -14261,7 +14261,7 @@
           "data"
         ]
       },
-      "RemnawaveWebhookNodeEventsDto": {
+      "RemnawaveWebhookNodeEvents": {
         "type": "object",
         "properties": {
           "scope": {
@@ -14298,7 +14298,7 @@
           "data"
         ]
       },
-      "RemnawaveWebhookServiceEventsDto": {
+      "RemnawaveWebhookServiceEvents": {
         "type": "object",
         "properties": {
           "scope": {
@@ -14382,7 +14382,7 @@
           "data"
         ]
       },
-      "RemnawaveWebhookErrorsEventsDto": {
+      "RemnawaveWebhookErrorsEvents": {
         "type": "object",
         "properties": {
           "scope": {
@@ -14420,7 +14420,7 @@
           "data"
         ]
       },
-      "RemnawaveWebhookCrmEventsDto": {
+      "RemnawaveWebhookCrmEvents": {
         "type": "object",
         "properties": {
           "scope": {

@@ -15,16 +15,12 @@ Key improvements over basic consolidation:
 import copy
 import json
 import re
-from collections import defaultdict
-from typing import Dict, List, Tuple, Set, Optional
+from collections import Counter, defaultdict
+from typing import Dict, List, Tuple, Optional
 
 
 class SchemaStructureAnalyzer:
     """Analyzes schema structure to find duplicates based on attributes"""
-    
-    # Metadata fields to ignore when comparing structure
-    METADATA_FIELDS = {'description', 'example', 'examples', 'title', 'default', 
-                       'deprecated', 'externalDocs', 'xml', 'x-'}
     
     @classmethod
     def get_structural_signature(cls, schema: dict, depth: int = 0, include_constraints: bool = True) -> str:
@@ -128,8 +124,6 @@ class SchemaStructureAnalyzer:
                 - missing_in_1: set - attributes in schema2 but not schema1
                 - missing_in_2: set - attributes in schema1 but not schema2
         """
-        import json
-        
         exact = json.dumps(schema1, sort_keys=True) == json.dumps(schema2, sort_keys=True)
         structural = cls.get_structural_signature(schema1) == cls.get_structural_signature(schema2)
         
@@ -154,16 +148,7 @@ class SchemaStructureAnalyzer:
 
 class SchemaNameAnalyzer:
     """Analyzes schema names to extract semantic information"""
-    
-    # Action prefixes that indicate CRUD operations
-    CRUD_ACTIONS = {'Create', 'Get', 'Update', 'Delete', 'List', 'Find', 'Fetch'}
-    
-    # Action prefixes that indicate state changes
-    STATE_ACTIONS = {'Enable', 'Disable', 'Activate', 'Deactivate', 'Reset', 'Revoke', 'Restart'}
-    
-    # Bulk operation prefixes
-    BULK_ACTIONS = {'Bulk', 'BulkAll', 'BulkDelete', 'BulkUpdate', 'BulkReset'}
-    
+
     # Operations that return lists
     LIST_INDICATORS = {'GetAll', 'FindAll', 'List', 'Bulk'}
     
@@ -675,14 +660,16 @@ class SmartConsolidator:
             for name in names:
                 rename_map[name] = canonical
         
-        stats['final_count'] = len(self.schemas) - sum(len(v) - 1 for v in duplicates.values())
+        # Calculate actual reduction from rename_map (accounts for DO_NOT_MERGE splits)
+        renamed_count = len(rename_map)
+        canonical_count = len(set(rename_map.values()))
+        stats['final_count'] = len(self.schemas) - renamed_count + canonical_count
         stats['reduction'] = stats['original_count'] - stats['final_count']
         
         return rename_map, stats
     
     def apply_consolidation(self, rename_map: Dict[str, str]) -> dict:
         """Apply consolidation to the spec"""
-        import copy
         new_spec = copy.deepcopy(self.spec)
         
         # Update schemas
@@ -730,7 +717,6 @@ class InlineSchemaExtractor:
         self.spec = copy.deepcopy(spec)
         self.schemas = self.spec.get('components', {}).get('schemas', {})
         self.structure_analyzer = SchemaStructureAnalyzer()
-        self.extracted_count = 0
     
     def get_inline_schema_signature(self, schema: dict) -> Optional[str]:
         """Get structural signature for an inline object schema"""
@@ -788,13 +774,8 @@ class InlineSchemaExtractor:
         # Return only groups with duplicates (2+ occurrences)
         return {k: v for k, v in inline_schemas.items() if len(v) >= 2}
     
-    def find_inline_duplicates(self, max_depth: int = 1) -> Dict[str, List[Tuple[str, str, dict]]]:
-        """Legacy method - now calls find_all_inline_schemas for full depth"""
-        return self.find_all_inline_schemas()
-    
     def generate_extracted_name(self, locations: List[Tuple[str, str, dict]]) -> str:
         """Generate a name for extracted schema based on usage locations"""
-        from collections import Counter
         
         parent_names = [loc[0] for loc in locations]
         paths = [loc[1] for loc in locations]
@@ -928,7 +909,7 @@ class InlineSchemaExtractor:
             try:
                 if condition():
                     return suffix
-            except:
+            except Exception:
                 pass
         
         return ""
@@ -1064,18 +1045,16 @@ def fix_nullable_without_type(spec: dict) -> Tuple[dict, int]:
         if not isinstance(schema, dict):
             return 0
         
-        # Check if this schema has nullable but no type
-        if schema.get('nullable') is True and 'type' not in schema and '$ref' not in schema:
-            schema['type'] = 'object'
-            count += 1
-        
-        # For nullable empty objects, convert to {} (additionalProperties: true)
+        # For nullable empty objects (or nullable without type), convert to {} (any JSON)
         # This makes ogen generate jx.Raw which properly handles null
-        if schema.get('nullable') is True and is_empty_object(schema):
-            # Remove properties and type, use empty schema with additionalProperties
+        if schema.get('nullable') is True and 'type' not in schema and '$ref' not in schema:
+            # No type → treat as empty object, strip to bare {nullable: true}
+            schema.pop('properties', None)
+            count += 1
+        elif schema.get('nullable') is True and is_empty_object(schema):
+            # Has type: object but no properties → strip to bare {nullable: true}
             schema.pop('properties', None)
             schema.pop('type', None)
-            # Empty schema {} means any JSON value including null
             count += 1
         
         # Recurse into properties
