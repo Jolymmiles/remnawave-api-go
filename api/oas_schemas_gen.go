@@ -4442,28 +4442,50 @@ func (s *FindAllApiTokensResponseResponseDocs) SetSwaggerPath(val NilString) {
 
 // Ref: #/components/schemas/ForbiddenError
 type ForbiddenError struct {
-	Message    string  `json:"message"`
-	StatusCode float64 `json:"statusCode"`
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *ForbiddenError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *ForbiddenError) GetPath() OptString {
+	return s.Path
 }
 
 // GetMessage returns the value of Message.
-func (s *ForbiddenError) GetMessage() string {
+func (s *ForbiddenError) GetMessage() OptString {
 	return s.Message
 }
 
-// GetStatusCode returns the value of StatusCode.
-func (s *ForbiddenError) GetStatusCode() float64 {
-	return s.StatusCode
+// GetErrorCode returns the value of ErrorCode.
+func (s *ForbiddenError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *ForbiddenError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *ForbiddenError) SetPath(val OptString) {
+	s.Path = val
 }
 
 // SetMessage sets the value of Message.
-func (s *ForbiddenError) SetMessage(val string) {
+func (s *ForbiddenError) SetMessage(val OptString) {
 	s.Message = val
 }
 
-// SetStatusCode sets the value of StatusCode.
-func (s *ForbiddenError) SetStatusCode(val float64) {
-	s.StatusCode = val
+// SetErrorCode sets the value of ErrorCode.
+func (s *ForbiddenError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
 func (*ForbiddenError) authRegisterRes() {}
@@ -10138,28 +10160,50 @@ func (*NodesResponse) nodesReorderNodesRes() {}
 
 // Ref: #/components/schemas/NotFoundError
 type NotFoundError struct {
-	Message    string  `json:"message"`
-	StatusCode float64 `json:"statusCode"`
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *NotFoundError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *NotFoundError) GetPath() OptString {
+	return s.Path
 }
 
 // GetMessage returns the value of Message.
-func (s *NotFoundError) GetMessage() string {
+func (s *NotFoundError) GetMessage() OptString {
 	return s.Message
 }
 
-// GetStatusCode returns the value of StatusCode.
-func (s *NotFoundError) GetStatusCode() float64 {
-	return s.StatusCode
+// GetErrorCode returns the value of ErrorCode.
+func (s *NotFoundError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *NotFoundError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *NotFoundError) SetPath(val OptString) {
+	s.Path = val
 }
 
 // SetMessage sets the value of Message.
-func (s *NotFoundError) SetMessage(val string) {
+func (s *NotFoundError) SetMessage(val OptString) {
 	s.Message = val
 }
 
-// SetStatusCode sets the value of StatusCode.
-func (s *NotFoundError) SetStatusCode(val float64) {
-	s.StatusCode = val
+// SetErrorCode sets the value of ErrorCode.
+func (s *NotFoundError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
 func (*NotFoundError) bandwidthStatsUsersGetUserUsageByRangeRes()           {}
@@ -16051,28 +16095,50 @@ func (*TokenResponseStatusCode) authTelegramCallbackRes()            {}
 
 // Ref: #/components/schemas/UnauthorizedError
 type UnauthorizedError struct {
-	Message    string  `json:"message"`
-	StatusCode float64 `json:"statusCode"`
+	Timestamp OptString `json:"timestamp"`
+	Path      OptString `json:"path"`
+	Message   OptString `json:"message"`
+	ErrorCode OptString `json:"errorCode"`
+}
+
+// GetTimestamp returns the value of Timestamp.
+func (s *UnauthorizedError) GetTimestamp() OptString {
+	return s.Timestamp
+}
+
+// GetPath returns the value of Path.
+func (s *UnauthorizedError) GetPath() OptString {
+	return s.Path
 }
 
 // GetMessage returns the value of Message.
-func (s *UnauthorizedError) GetMessage() string {
+func (s *UnauthorizedError) GetMessage() OptString {
 	return s.Message
 }
 
-// GetStatusCode returns the value of StatusCode.
-func (s *UnauthorizedError) GetStatusCode() float64 {
-	return s.StatusCode
+// GetErrorCode returns the value of ErrorCode.
+func (s *UnauthorizedError) GetErrorCode() OptString {
+	return s.ErrorCode
+}
+
+// SetTimestamp sets the value of Timestamp.
+func (s *UnauthorizedError) SetTimestamp(val OptString) {
+	s.Timestamp = val
+}
+
+// SetPath sets the value of Path.
+func (s *UnauthorizedError) SetPath(val OptString) {
+	s.Path = val
 }
 
 // SetMessage sets the value of Message.
-func (s *UnauthorizedError) SetMessage(val string) {
+func (s *UnauthorizedError) SetMessage(val OptString) {
 	s.Message = val
 }
 
-// SetStatusCode sets the value of StatusCode.
-func (s *UnauthorizedError) SetStatusCode(val float64) {
-	s.StatusCode = val
+// SetErrorCode sets the value of ErrorCode.
+func (s *UnauthorizedError) SetErrorCode(val OptString) {
+	s.ErrorCode = val
 }
 
 func (*UnauthorizedError) authLoginRes() {}

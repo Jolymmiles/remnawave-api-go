@@ -11757,18 +11757,36 @@ func (s *ForbiddenError) Encode(e *jx.Encoder) {
 // encodeFields encodes fields.
 func (s *ForbiddenError) encodeFields(e *jx.Encoder) {
 	{
-		e.FieldStart("message")
-		e.Str(s.Message)
+		if s.Timestamp.Set {
+			e.FieldStart("timestamp")
+			s.Timestamp.Encode(e)
+		}
 	}
 	{
-		e.FieldStart("statusCode")
-		e.Float64(s.StatusCode)
+		if s.Path.Set {
+			e.FieldStart("path")
+			s.Path.Encode(e)
+		}
+	}
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.ErrorCode.Set {
+			e.FieldStart("errorCode")
+			s.ErrorCode.Encode(e)
+		}
 	}
 }
 
-var jsonFieldsNameOfForbiddenError = [2]string{
-	0: "message",
-	1: "statusCode",
+var jsonFieldsNameOfForbiddenError = [4]string{
+	0: "timestamp",
+	1: "path",
+	2: "message",
+	3: "errorCode",
 }
 
 // Decode decodes ForbiddenError from json.
@@ -11776,33 +11794,48 @@ func (s *ForbiddenError) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode ForbiddenError to nil")
 	}
-	var requiredBitSet [1]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
-		case "message":
-			requiredBitSet[0] |= 1 << 0
+		case "timestamp":
 			if err := func() error {
-				v, err := d.Str()
-				s.Message = string(v)
-				if err != nil {
+				s.Timestamp.Reset()
+				if err := s.Timestamp.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"timestamp\"")
+			}
+		case "path":
+			if err := func() error {
+				s.Path.Reset()
+				if err := s.Path.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"path\"")
+			}
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"message\"")
 			}
-		case "statusCode":
-			requiredBitSet[0] |= 1 << 1
+		case "errorCode":
 			if err := func() error {
-				v, err := d.Float64()
-				s.StatusCode = float64(v)
-				if err != nil {
+				s.ErrorCode.Reset()
+				if err := s.ErrorCode.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"statusCode\"")
+				return errors.Wrap(err, "decode field \"errorCode\"")
 			}
 		default:
 			return d.Skip()
@@ -11810,38 +11843,6 @@ func (s *ForbiddenError) Decode(d *jx.Decoder) error {
 		return nil
 	}); err != nil {
 		return errors.Wrap(err, "decode ForbiddenError")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000011,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfForbiddenError) {
-					name = jsonFieldsNameOfForbiddenError[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
 	}
 
 	return nil
@@ -28079,18 +28080,36 @@ func (s *NotFoundError) Encode(e *jx.Encoder) {
 // encodeFields encodes fields.
 func (s *NotFoundError) encodeFields(e *jx.Encoder) {
 	{
-		e.FieldStart("message")
-		e.Str(s.Message)
+		if s.Timestamp.Set {
+			e.FieldStart("timestamp")
+			s.Timestamp.Encode(e)
+		}
 	}
 	{
-		e.FieldStart("statusCode")
-		e.Float64(s.StatusCode)
+		if s.Path.Set {
+			e.FieldStart("path")
+			s.Path.Encode(e)
+		}
+	}
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.ErrorCode.Set {
+			e.FieldStart("errorCode")
+			s.ErrorCode.Encode(e)
+		}
 	}
 }
 
-var jsonFieldsNameOfNotFoundError = [2]string{
-	0: "message",
-	1: "statusCode",
+var jsonFieldsNameOfNotFoundError = [4]string{
+	0: "timestamp",
+	1: "path",
+	2: "message",
+	3: "errorCode",
 }
 
 // Decode decodes NotFoundError from json.
@@ -28098,33 +28117,48 @@ func (s *NotFoundError) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode NotFoundError to nil")
 	}
-	var requiredBitSet [1]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
-		case "message":
-			requiredBitSet[0] |= 1 << 0
+		case "timestamp":
 			if err := func() error {
-				v, err := d.Str()
-				s.Message = string(v)
-				if err != nil {
+				s.Timestamp.Reset()
+				if err := s.Timestamp.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"timestamp\"")
+			}
+		case "path":
+			if err := func() error {
+				s.Path.Reset()
+				if err := s.Path.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"path\"")
+			}
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"message\"")
 			}
-		case "statusCode":
-			requiredBitSet[0] |= 1 << 1
+		case "errorCode":
 			if err := func() error {
-				v, err := d.Float64()
-				s.StatusCode = float64(v)
-				if err != nil {
+				s.ErrorCode.Reset()
+				if err := s.ErrorCode.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"statusCode\"")
+				return errors.Wrap(err, "decode field \"errorCode\"")
 			}
 		default:
 			return d.Skip()
@@ -28132,38 +28166,6 @@ func (s *NotFoundError) Decode(d *jx.Decoder) error {
 		return nil
 	}); err != nil {
 		return errors.Wrap(err, "decode NotFoundError")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000011,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfNotFoundError) {
-					name = jsonFieldsNameOfNotFoundError[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
 	}
 
 	return nil
@@ -38655,18 +38657,36 @@ func (s *UnauthorizedError) Encode(e *jx.Encoder) {
 // encodeFields encodes fields.
 func (s *UnauthorizedError) encodeFields(e *jx.Encoder) {
 	{
-		e.FieldStart("message")
-		e.Str(s.Message)
+		if s.Timestamp.Set {
+			e.FieldStart("timestamp")
+			s.Timestamp.Encode(e)
+		}
 	}
 	{
-		e.FieldStart("statusCode")
-		e.Float64(s.StatusCode)
+		if s.Path.Set {
+			e.FieldStart("path")
+			s.Path.Encode(e)
+		}
+	}
+	{
+		if s.Message.Set {
+			e.FieldStart("message")
+			s.Message.Encode(e)
+		}
+	}
+	{
+		if s.ErrorCode.Set {
+			e.FieldStart("errorCode")
+			s.ErrorCode.Encode(e)
+		}
 	}
 }
 
-var jsonFieldsNameOfUnauthorizedError = [2]string{
-	0: "message",
-	1: "statusCode",
+var jsonFieldsNameOfUnauthorizedError = [4]string{
+	0: "timestamp",
+	1: "path",
+	2: "message",
+	3: "errorCode",
 }
 
 // Decode decodes UnauthorizedError from json.
@@ -38674,33 +38694,48 @@ func (s *UnauthorizedError) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode UnauthorizedError to nil")
 	}
-	var requiredBitSet [1]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
-		case "message":
-			requiredBitSet[0] |= 1 << 0
+		case "timestamp":
 			if err := func() error {
-				v, err := d.Str()
-				s.Message = string(v)
-				if err != nil {
+				s.Timestamp.Reset()
+				if err := s.Timestamp.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"timestamp\"")
+			}
+		case "path":
+			if err := func() error {
+				s.Path.Reset()
+				if err := s.Path.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"path\"")
+			}
+		case "message":
+			if err := func() error {
+				s.Message.Reset()
+				if err := s.Message.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"message\"")
 			}
-		case "statusCode":
-			requiredBitSet[0] |= 1 << 1
+		case "errorCode":
 			if err := func() error {
-				v, err := d.Float64()
-				s.StatusCode = float64(v)
-				if err != nil {
+				s.ErrorCode.Reset()
+				if err := s.ErrorCode.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"statusCode\"")
+				return errors.Wrap(err, "decode field \"errorCode\"")
 			}
 		default:
 			return d.Skip()
@@ -38708,38 +38743,6 @@ func (s *UnauthorizedError) Decode(d *jx.Decoder) error {
 		return nil
 	}); err != nil {
 		return errors.Wrap(err, "decode UnauthorizedError")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000011,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfUnauthorizedError) {
-					name = jsonFieldsNameOfUnauthorizedError[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
 	}
 
 	return nil

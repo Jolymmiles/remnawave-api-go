@@ -1943,12 +1943,22 @@ func (s *FindAllApiTokensResponseResponseDocs) SetFake() {
 func (s *ForbiddenError) SetFake() {
 	{
 		{
-			s.Message = "string"
+			s.Timestamp.SetFake()
 		}
 	}
 	{
 		{
-			s.StatusCode = float64(0)
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
 		}
 	}
 }
@@ -4650,12 +4660,22 @@ func (s *NodesResponse) SetFake() {
 func (s *NotFoundError) SetFake() {
 	{
 		{
-			s.Message = "string"
+			s.Timestamp.SetFake()
 		}
 	}
 	{
 		{
-			s.StatusCode = float64(0)
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
 		}
 	}
 }
@@ -6419,12 +6439,22 @@ func (s *TokenResponseResponse) SetFake() {
 func (s *UnauthorizedError) SetFake() {
 	{
 		{
-			s.Message = "string"
+			s.Timestamp.SetFake()
 		}
 	}
 	{
 		{
-			s.StatusCode = float64(0)
+			s.Path.SetFake()
+		}
+	}
+	{
+		{
+			s.Message.SetFake()
+		}
+	}
+	{
+		{
+			s.ErrorCode.SetFake()
 		}
 	}
 }

@@ -14535,53 +14535,53 @@
       "UnauthorizedError": {
         "type": "object",
         "properties": {
-          "message": {
-            "type": "string",
-            "example": "Unauthorized"
+          "timestamp": {
+            "type": "string"
           },
-          "statusCode": {
-            "type": "number",
-            "example": 401
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
           }
-        },
-        "required": [
-          "message",
-          "statusCode"
-        ]
+        }
       },
       "ForbiddenError": {
         "type": "object",
         "properties": {
-          "message": {
-            "type": "string",
-            "example": "Forbidden"
+          "timestamp": {
+            "type": "string"
           },
-          "statusCode": {
-            "type": "number",
-            "example": 403
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
           }
-        },
-        "required": [
-          "message",
-          "statusCode"
-        ]
+        }
       },
       "NotFoundError": {
         "type": "object",
         "properties": {
-          "message": {
-            "type": "string",
-            "example": "Not Found"
+          "timestamp": {
+            "type": "string"
           },
-          "statusCode": {
-            "type": "number",
-            "example": 404
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
           }
-        },
-        "required": [
-          "message",
-          "statusCode"
-        ]
+        }
       },
       "InternalServerError": {
         "type": "object",
