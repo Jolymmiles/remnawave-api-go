@@ -94,20 +94,6 @@ func encodeAuthRegisterRequest(
 	return nil
 }
 
-func encodeAuthTelegramCallbackRequest(
-	req *TelegramCallbackRequest,
-	r *http.Request,
-) error {
-	const contentType = "application/json"
-	e := new(jx.Encoder)
-	{
-		req.Encode(e)
-	}
-	encoded := e.Bytes()
-	ht.SetBody(r, bytes.NewReader(encoded), contentType)
-	return nil
-}
-
 func encodeConfigProfileCreateConfigProfileRequest(
 	req *CreateConfigProfileRequest,
 	r *http.Request,
@@ -458,8 +444,134 @@ func encodeInternalSquadUpdateInternalSquadRequest(
 	return nil
 }
 
+func encodeIpControlDropConnectionsRequest(
+	req *DropConnectionsRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeMetadataUpsertNodeMetadataRequest(
+	req *UpsertUserMetadataRequestBodyRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeMetadataUpsertUserMetadataRequest(
+	req *UpsertUserMetadataRequestBodyRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginCloneNodePluginRequest(
+	req *CloneNodePluginRequestRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginCreateConfigRequest(
+	req *CreateNodePluginRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginPluginExecutorRequest(
+	req *PluginExecutorRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginReorderNodePluginsRequest(
+	req *ReorderRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginUpdateConfigRequest(
+	req *UpdateNodePluginRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeNodesBulkNodesActionsRequest(
 	req *BulkNodesActionsRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodesBulkNodesUpdateRequest(
+	req *BulkNodesUpdateRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -641,7 +753,7 @@ func encodeSnippetsUpdateSnippetRequest(
 }
 
 func encodeSubscriptionPageConfigCloneSubscriptionPageConfigRequest(
-	req *CloneSubscriptionPageConfigRequest,
+	req *CloneNodePluginRequestRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -922,6 +1034,20 @@ func encodeUsersBulkActionsBulkUpdateUsersInternalSquadsRequest(
 
 func encodeUsersCreateUserRequest(
 	req *CreateUserRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeUsersResolveUserRequest(
+	req *ResolveUserRequestBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"

@@ -19,7 +19,10 @@ type ClientExt struct {
 	hwidUserDevices *HwidUserDevicesClient
 	infraBilling *InfraBillingClient
 	internalSquad *InternalSquadClient
+	ipControl *IpControlClient
 	keygen *KeygenClient
+	metadata *MetadataClient
+	nodePlugin *NodePluginClient
 	nodes *NodesClient
 	nodesUsageHistory *NodesUsageHistoryClient
 	passkey *PasskeyClient
@@ -31,6 +34,7 @@ type ClientExt struct {
 	subscriptionTemplate *SubscriptionTemplateClient
 	subscriptions *SubscriptionsClient
 	system *SystemClient
+	torrentBlockerReports *TorrentBlockerReportsClient
 	userSubscriptionRequestHistory *UserSubscriptionRequestHistoryClient
 	users *UsersClient
 	usersBulkActions *UsersBulkActionsClient
@@ -51,7 +55,10 @@ func NewClientExt(client *Client) *ClientExt {
 		hwidUserDevices: NewHwidUserDevicesClient(client),
 		infraBilling: NewInfraBillingClient(client),
 		internalSquad: NewInternalSquadClient(client),
+		ipControl: NewIpControlClient(client),
 		keygen: NewKeygenClient(client),
+		metadata: NewMetadataClient(client),
+		nodePlugin: NewNodePluginClient(client),
 		nodes: NewNodesClient(client),
 		nodesUsageHistory: NewNodesUsageHistoryClient(client),
 		passkey: NewPasskeyClient(client),
@@ -63,6 +70,7 @@ func NewClientExt(client *Client) *ClientExt {
 		subscriptionTemplate: NewSubscriptionTemplateClient(client),
 		subscriptions: NewSubscriptionsClient(client),
 		system: NewSystemClient(client),
+		torrentBlockerReports: NewTorrentBlockerReportsClient(client),
 		userSubscriptionRequestHistory: NewUserSubscriptionRequestHistoryClient(client),
 		users: NewUsersClient(client),
 		usersBulkActions: NewUsersBulkActionsClient(client),
@@ -129,9 +137,24 @@ func (ce *ClientExt) InternalSquad() *InternalSquadClient {
 	return ce.internalSquad
 }
 
+// IpControl returns the IpControlClient.
+func (ce *ClientExt) IpControl() *IpControlClient {
+	return ce.ipControl
+}
+
 // Keygen returns the KeygenClient.
 func (ce *ClientExt) Keygen() *KeygenClient {
 	return ce.keygen
+}
+
+// Metadata returns the MetadataClient.
+func (ce *ClientExt) Metadata() *MetadataClient {
+	return ce.metadata
+}
+
+// NodePlugin returns the NodePluginClient.
+func (ce *ClientExt) NodePlugin() *NodePluginClient {
+	return ce.nodePlugin
 }
 
 // Nodes returns the NodesClient.
@@ -187,6 +210,11 @@ func (ce *ClientExt) Subscriptions() *SubscriptionsClient {
 // System returns the SystemClient.
 func (ce *ClientExt) System() *SystemClient {
 	return ce.system
+}
+
+// TorrentBlockerReports returns the TorrentBlockerReportsClient.
+func (ce *ClientExt) TorrentBlockerReports() *TorrentBlockerReportsClient {
+	return ce.torrentBlockerReports
 }
 
 // UserSubscriptionRequestHistory returns the UserSubscriptionRequestHistoryClient.
@@ -276,11 +304,6 @@ func (sc *AuthClient) Register(ctx context.Context, request *RegisterRequest, op
 	return sc.client.AuthRegister(ctx, request, options...)
 }
 
-// TelegramCallback calls Auth_telegramCallback.
-func (sc *AuthClient) TelegramCallback(ctx context.Context, request *TelegramCallbackRequest, options ...RequestOption) (AuthTelegramCallbackRes, error) {
-	return sc.client.AuthTelegramCallback(ctx, request, options...)
-}
-
 // BandwidthStatsNodesClient provides BandwidthStatsNodes operations.
 type BandwidthStatsNodesClient struct {
 	client *Client
@@ -294,11 +317,6 @@ func NewBandwidthStatsNodesClient(client *Client) *BandwidthStatsNodesClient {
 // GetNodeUserUsage calls BandwidthStatsNodes_getNodeUserUsage.
 func (sc *BandwidthStatsNodesClient) GetNodeUserUsage(ctx context.Context, params BandwidthStatsNodesGetNodeUserUsageParams, options ...RequestOption) (BandwidthStatsNodesGetNodeUserUsageRes, error) {
 	return sc.client.BandwidthStatsNodesGetNodeUserUsage(ctx, params, options...)
-}
-
-// GetNodesRealtimeUsage calls BandwidthStatsNodes_getNodesRealtimeUsage.
-func (sc *BandwidthStatsNodesClient) GetNodesRealtimeUsage(ctx context.Context, options ...RequestOption) (BandwidthStatsNodesGetNodesRealtimeUsageRes, error) {
-	return sc.client.BandwidthStatsNodesGetNodesRealtimeUsage(ctx, options...)
 }
 
 // GetStatsNodeUsersUsage calls BandwidthStatsNodes_getStatsNodeUsersUsage.
@@ -727,6 +745,49 @@ func (sc *InternalSquadClient) UpdateInternalSquad(ctx context.Context, request 
 	return sc.client.InternalSquadUpdateInternalSquad(ctx, request, options...)
 }
 
+// IpControlClient provides IpControl operations.
+type IpControlClient struct {
+	client *Client
+}
+
+// NewIpControlClient creates a new IpControlClient.
+func NewIpControlClient(client *Client) *IpControlClient {
+	return &IpControlClient{client: client}
+}
+
+// DropConnections calls IpControl_dropConnections.
+func (sc *IpControlClient) DropConnections(ctx context.Context, request *DropConnectionsRequest, options ...RequestOption) (IpControlDropConnectionsRes, error) {
+	return sc.client.IpControlDropConnections(ctx, request, options...)
+}
+
+// FetchUserIps calls IpControl_fetchUserIps.
+func (sc *IpControlClient) FetchUserIps(ctx context.Context, uuid string, options ...RequestOption) (IpControlFetchUserIpsRes, error) {
+	return sc.client.IpControlFetchUserIps(ctx, IpControlFetchUserIpsParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// FetchUsersIps calls IpControl_fetchUsersIps.
+func (sc *IpControlClient) FetchUsersIps(ctx context.Context, nodeuuid string, options ...RequestOption) (IpControlFetchUsersIpsRes, error) {
+	return sc.client.IpControlFetchUsersIps(ctx, IpControlFetchUsersIpsParams{
+		NodeUuid: nodeuuid,
+	}, options...)
+}
+
+// GetFetchIpsResult calls IpControl_getFetchIpsResult.
+func (sc *IpControlClient) GetFetchIpsResult(ctx context.Context, jobid string, options ...RequestOption) (IpControlGetFetchIpsResultRes, error) {
+	return sc.client.IpControlGetFetchIpsResult(ctx, IpControlGetFetchIpsResultParams{
+		JobId: jobid,
+	}, options...)
+}
+
+// GetFetchUsersIpsResult calls IpControl_getFetchUsersIpsResult.
+func (sc *IpControlClient) GetFetchUsersIpsResult(ctx context.Context, jobid string, options ...RequestOption) (IpControlGetFetchUsersIpsResultRes, error) {
+	return sc.client.IpControlGetFetchUsersIpsResult(ctx, IpControlGetFetchUsersIpsResultParams{
+		JobId: jobid,
+	}, options...)
+}
+
 // KeygenClient provides Keygen operations.
 type KeygenClient struct {
 	client *Client
@@ -742,6 +803,98 @@ func (sc *KeygenClient) GenerateKey(ctx context.Context, options ...RequestOptio
 	return sc.client.KeygenGenerateKey(ctx, options...)
 }
 
+// MetadataClient provides Metadata operations.
+type MetadataClient struct {
+	client *Client
+}
+
+// NewMetadataClient creates a new MetadataClient.
+func NewMetadataClient(client *Client) *MetadataClient {
+	return &MetadataClient{client: client}
+}
+
+// GetNodeMetadata calls Metadata_getNodeMetadata.
+func (sc *MetadataClient) GetNodeMetadata(ctx context.Context, uuid string, options ...RequestOption) (MetadataGetNodeMetadataRes, error) {
+	return sc.client.MetadataGetNodeMetadata(ctx, MetadataGetNodeMetadataParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// GetUserMetadata calls Metadata_getUserMetadata.
+func (sc *MetadataClient) GetUserMetadata(ctx context.Context, uuid string, options ...RequestOption) (MetadataGetUserMetadataRes, error) {
+	return sc.client.MetadataGetUserMetadata(ctx, MetadataGetUserMetadataParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// UpsertNodeMetadata calls Metadata_upsertNodeMetadata.
+func (sc *MetadataClient) UpsertNodeMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, uuid string, options ...RequestOption) (MetadataUpsertNodeMetadataRes, error) {
+	return sc.client.MetadataUpsertNodeMetadata(ctx, request, MetadataUpsertNodeMetadataParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// UpsertUserMetadata calls Metadata_upsertUserMetadata.
+func (sc *MetadataClient) UpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, uuid string, options ...RequestOption) (MetadataUpsertUserMetadataRes, error) {
+	return sc.client.MetadataUpsertUserMetadata(ctx, request, MetadataUpsertUserMetadataParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// NodePluginClient provides NodePlugin operations.
+type NodePluginClient struct {
+	client *Client
+}
+
+// NewNodePluginClient creates a new NodePluginClient.
+func NewNodePluginClient(client *Client) *NodePluginClient {
+	return &NodePluginClient{client: client}
+}
+
+// CloneNodePlugin calls NodePlugin_cloneNodePlugin.
+func (sc *NodePluginClient) CloneNodePlugin(ctx context.Context, request *CloneNodePluginRequestRequest, options ...RequestOption) (NodePluginCloneNodePluginRes, error) {
+	return sc.client.NodePluginCloneNodePlugin(ctx, request, options...)
+}
+
+// CreateConfig calls NodePlugin_createConfig.
+func (sc *NodePluginClient) CreateConfig(ctx context.Context, request *CreateNodePluginRequest, options ...RequestOption) (NodePluginCreateConfigRes, error) {
+	return sc.client.NodePluginCreateConfig(ctx, request, options...)
+}
+
+// DeleteConfig calls NodePlugin_deleteConfig.
+func (sc *NodePluginClient) DeleteConfig(ctx context.Context, uuid string, options ...RequestOption) (NodePluginDeleteConfigRes, error) {
+	return sc.client.NodePluginDeleteConfig(ctx, NodePluginDeleteConfigParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// GetAllConfigs calls NodePlugin_getAllConfigs.
+func (sc *NodePluginClient) GetAllConfigs(ctx context.Context, options ...RequestOption) (NodePluginGetAllConfigsRes, error) {
+	return sc.client.NodePluginGetAllConfigs(ctx, options...)
+}
+
+// GetConfigByUuid calls NodePlugin_getConfigByUuid.
+func (sc *NodePluginClient) GetConfigByUuid(ctx context.Context, uuid string, options ...RequestOption) (NodePluginGetConfigByUuidRes, error) {
+	return sc.client.NodePluginGetConfigByUuid(ctx, NodePluginGetConfigByUuidParams{
+		UUID: uuid,
+	}, options...)
+}
+
+// PluginExecutor calls NodePlugin_pluginExecutor.
+func (sc *NodePluginClient) PluginExecutor(ctx context.Context, request *PluginExecutorRequest, options ...RequestOption) (NodePluginPluginExecutorRes, error) {
+	return sc.client.NodePluginPluginExecutor(ctx, request, options...)
+}
+
+// ReorderNodePlugins calls NodePlugin_reorderNodePlugins.
+func (sc *NodePluginClient) ReorderNodePlugins(ctx context.Context, request *ReorderRequest, options ...RequestOption) (NodePluginReorderNodePluginsRes, error) {
+	return sc.client.NodePluginReorderNodePlugins(ctx, request, options...)
+}
+
+// UpdateConfig calls NodePlugin_updateConfig.
+func (sc *NodePluginClient) UpdateConfig(ctx context.Context, request *UpdateNodePluginRequest, options ...RequestOption) (NodePluginUpdateConfigRes, error) {
+	return sc.client.NodePluginUpdateConfig(ctx, request, options...)
+}
+
 // NodesClient provides Nodes operations.
 type NodesClient struct {
 	client *Client
@@ -755,6 +908,11 @@ func NewNodesClient(client *Client) *NodesClient {
 // BulkNodesActions calls Nodes_bulkNodesActions.
 func (sc *NodesClient) BulkNodesActions(ctx context.Context, request *BulkNodesActionsRequest, options ...RequestOption) (NodesBulkNodesActionsRes, error) {
 	return sc.client.NodesBulkNodesActions(ctx, request, options...)
+}
+
+// BulkNodesUpdate calls Nodes_bulkNodesUpdate.
+func (sc *NodesClient) BulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateRequest, options ...RequestOption) (NodesBulkNodesUpdateRes, error) {
+	return sc.client.NodesBulkNodesUpdate(ctx, request, options...)
 }
 
 // CreateNode calls Nodes_createNode.
@@ -963,15 +1121,6 @@ func (sc *SubscriptionClient) GetSubscriptionInfoByShortUuid(ctx context.Context
 	}, options...)
 }
 
-// GetSubscriptionWithType calls Subscription_getSubscriptionWithType.
-func (sc *SubscriptionClient) GetSubscriptionWithType(ctx context.Context, typeVal string, encodedtag string, shortuuid string, options ...RequestOption) (SubscriptionGetSubscriptionWithTypeOK, error) {
-	return sc.client.SubscriptionGetSubscriptionWithType(ctx, SubscriptionGetSubscriptionWithTypeParams{
-		Type: typeVal,
-		EncodedTag: encodedtag,
-		ShortUuid: shortuuid,
-	}, options...)
-}
-
 // SubscriptionPageConfigClient provides SubscriptionPageConfig operations.
 type SubscriptionPageConfigClient struct {
 	client *Client
@@ -983,7 +1132,7 @@ func NewSubscriptionPageConfigClient(client *Client) *SubscriptionPageConfigClie
 }
 
 // CloneSubscriptionPageConfig calls SubscriptionPageConfig_cloneSubscriptionPageConfig.
-func (sc *SubscriptionPageConfigClient) CloneSubscriptionPageConfig(ctx context.Context, request *CloneSubscriptionPageConfigRequest, options ...RequestOption) (SubscriptionPageConfigCloneSubscriptionPageConfigRes, error) {
+func (sc *SubscriptionPageConfigClient) CloneSubscriptionPageConfig(ctx context.Context, request *CloneNodePluginRequestRequest, options ...RequestOption) (SubscriptionPageConfigCloneSubscriptionPageConfigRes, error) {
 	return sc.client.SubscriptionPageConfigCloneSubscriptionPageConfig(ctx, request, options...)
 }
 
@@ -1103,6 +1252,13 @@ func (sc *SubscriptionsClient) GetAllSubscriptions(ctx context.Context, size int
 	}, options...)
 }
 
+// GetConnectionKeysByUuid calls Subscriptions_getConnectionKeysByUuid.
+func (sc *SubscriptionsClient) GetConnectionKeysByUuid(ctx context.Context, uuid string, options ...RequestOption) (SubscriptionsGetConnectionKeysByUuidRes, error) {
+	return sc.client.SubscriptionsGetConnectionKeysByUuid(ctx, SubscriptionsGetConnectionKeysByUuidParams{
+		UUID: uuid,
+	}, options...)
+}
+
 // GetRawSubscriptionByShortUuid calls Subscriptions_getRawSubscriptionByShortUuid.
 func (sc *SubscriptionsClient) GetRawSubscriptionByShortUuid(ctx context.Context, withdisabledhosts bool, shortuuid string, options ...RequestOption) (SubscriptionsGetRawSubscriptionByShortUuidRes, error) {
 	return sc.client.SubscriptionsGetRawSubscriptionByShortUuid(ctx, SubscriptionsGetRawSubscriptionByShortUuidParams{
@@ -1179,6 +1335,11 @@ func (sc *SystemClient) GetNodesStatistics(ctx context.Context, options ...Reque
 	return sc.client.SystemGetNodesStatistics(ctx, options...)
 }
 
+// GetRecap calls System_getRecap.
+func (sc *SystemClient) GetRecap(ctx context.Context, options ...RequestOption) (SystemGetRecapRes, error) {
+	return sc.client.SystemGetRecap(ctx, options...)
+}
+
 // GetRemnawaveHealth calls System_getRemnawaveHealth.
 func (sc *SystemClient) GetRemnawaveHealth(ctx context.Context, options ...RequestOption) (SystemGetRemnawaveHealthRes, error) {
 	return sc.client.SystemGetRemnawaveHealth(ctx, options...)
@@ -1192,6 +1353,34 @@ func (sc *SystemClient) GetStats(ctx context.Context, options ...RequestOption) 
 // GetX25519Keypairs calls System_getX25519Keypairs.
 func (sc *SystemClient) GetX25519Keypairs(ctx context.Context, options ...RequestOption) (SystemGetX25519KeypairsRes, error) {
 	return sc.client.SystemGetX25519Keypairs(ctx, options...)
+}
+
+// TorrentBlockerReportsClient provides TorrentBlockerReports operations.
+type TorrentBlockerReportsClient struct {
+	client *Client
+}
+
+// NewTorrentBlockerReportsClient creates a new TorrentBlockerReportsClient.
+func NewTorrentBlockerReportsClient(client *Client) *TorrentBlockerReportsClient {
+	return &TorrentBlockerReportsClient{client: client}
+}
+
+// GetTorrentBlockerReports calls TorrentBlockerReports_getTorrentBlockerReports.
+func (sc *TorrentBlockerReportsClient) GetTorrentBlockerReports(ctx context.Context, size int, start int, options ...RequestOption) (TorrentBlockerReportsGetTorrentBlockerReportsRes, error) {
+	return sc.client.TorrentBlockerReportsGetTorrentBlockerReports(ctx, TorrentBlockerReportsGetTorrentBlockerReportsParams{
+		Size: NewOptInt(size),
+		Start: NewOptInt(start),
+	}, options...)
+}
+
+// GetTorrentBlockerReportsStats calls TorrentBlockerReports_getTorrentBlockerReportsStats.
+func (sc *TorrentBlockerReportsClient) GetTorrentBlockerReportsStats(ctx context.Context, options ...RequestOption) (TorrentBlockerReportsGetTorrentBlockerReportsStatsRes, error) {
+	return sc.client.TorrentBlockerReportsGetTorrentBlockerReportsStats(ctx, options...)
+}
+
+// TruncateTorrentBlockerReports calls TorrentBlockerReports_truncateTorrentBlockerReports.
+func (sc *TorrentBlockerReportsClient) TruncateTorrentBlockerReports(ctx context.Context, options ...RequestOption) (TorrentBlockerReportsTruncateTorrentBlockerReportsRes, error) {
+	return sc.client.TorrentBlockerReportsTruncateTorrentBlockerReports(ctx, options...)
 }
 
 // UserSubscriptionRequestHistoryClient provides UserSubscriptionRequestHistory operations.
@@ -1334,6 +1523,11 @@ func (sc *UsersClient) ResetUserTraffic(ctx context.Context, uuid string, option
 	return sc.client.UsersResetUserTraffic(ctx, UsersResetUserTrafficParams{
 		UUID: uuid,
 	}, options...)
+}
+
+// ResolveUser calls Users_resolveUser.
+func (sc *UsersClient) ResolveUser(ctx context.Context, request *ResolveUserRequestBody, options ...RequestOption) (UsersResolveUserRes, error) {
+	return sc.client.UsersResolveUser(ctx, request, options...)
 }
 
 // RevokeUserSubscription calls Users_revokeUserSubscription.
