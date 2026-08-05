@@ -506,8 +506,7 @@ type UsersGetUsersParams struct {
 
 // UsersGetUsersStreamParams is parameters of Users_getUsersStream operation.
 type UsersGetUsersStreamParams struct {
-	// Cursor for pagination — pass the nextCursor from the previous response. Omit on the first
-	// request.
+	// Cursor for pagination — pass the nextCursor from the previous response. Omit on the first request.
 	Cursor OptFloat64 `json:",omitempty,omitzero"`
 	// Number of results to return, no more than 1000.
 	Size OptInt `json:",omitempty,omitzero"`

@@ -6101,6 +6101,7 @@ func (s *CreateApiTokenBody) Decode(d *jx.Decoder) error {
 		return errors.New("invalid: unable to decode CreateApiTokenBody to nil")
 	}
 	var requiredBitSet [1]uint8
+	s.setDefaults()
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {

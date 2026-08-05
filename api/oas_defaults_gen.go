@@ -3,6 +3,21 @@
 package api
 
 // setDefaults set default value of fields.
+func (s *CreateApiTokenBody) setDefaults() {
+	{
+		var defaultVal0 []string
+		{
+			var defaultVal0Elem string
+
+			val := string("*")
+			defaultVal0Elem = val
+			defaultVal0 = append(defaultVal0, defaultVal0Elem)
+		}
+		s.Scopes = defaultVal0
+	}
+}
+
+// setDefaults set default value of fields.
 func (s *CreateHostBody) setDefaults() {
 	{
 		val := bool(false)
@@ -63,6 +78,10 @@ func (s *HostItem) setDefaults() {
 	{
 		val := HostItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+	{
+		var defaultVal0 []string
+		s.Tags = defaultVal0
 	}
 	{
 		val := bool(false)

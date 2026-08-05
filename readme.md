@@ -17,7 +17,7 @@ A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 | 2.3.0 | v2.3.0-6 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.3.0-6` |
 | 2.2.6 | v2.2.6-1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.2.6-1` |
 
-Generated with [**ogen**](https://github.com/ogen-go/ogen) v1.19.0:
+Generated with [**ogen**](https://github.com/ogen-go/ogen) v1.23.0:
 * Zero-reflection JSON decoder for high throughput
 * Compile-time validation against OpenAPI 3.0 spec
 * First-class `context.Context` support

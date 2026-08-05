@@ -137,7 +137,9 @@ def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_ext
 
     new_count = len(new_spec.get('components', {}).get('schemas', {}))
     stats['final_count'] = new_count
-    print_success(f"Consolidated {original_count} → {new_count} schemas (-{original_count - new_count}, -{(original_count-new_count)*100//original_count}%)")
+    schema_delta = new_count - original_count
+    schema_delta_percent = schema_delta * 100 // original_count
+    print_success(f"Consolidated {original_count} → {new_count} schemas ({schema_delta:+d}, {schema_delta_percent:+d}%)")
 
     return original_count, new_count, stats
 
@@ -364,7 +366,7 @@ def generate_ogen_client(spec_file: str) -> bool:
     try:
         result = subprocess.run(
             [
-                'go', 'run', 'github.com/ogen-go/ogen/cmd/ogen@v1.19.0',
+                'go', 'run', 'github.com/ogen-go/ogen/cmd/ogen@v1.23.0',
                 '--config', '.ogen.yml',
                 '--target', 'api',
                 '--package', 'api',
@@ -919,7 +921,9 @@ def main():
         print("="*70)
         print(f"{Colors.END}")
         print(f"\n{Colors.BOLD}Results:{Colors.END}")
-        print(f"  • Schemas:     {orig_count} → {new_count} (-{orig_count - new_count}, -{(orig_count-new_count)*100//orig_count}%)")
+        schema_delta = new_count - orig_count
+        schema_delta_percent = schema_delta * 100 // orig_count
+        print(f"  • Schemas:     {orig_count} → {new_count} ({schema_delta:+d}, {schema_delta_percent:+d}%)")
         print(f"  • Groups:      {stats.get('duplicate_groups', 0)} consolidated")
         print(f"  • Controllers: {ctrl_count}")
         print(f"  • Methods:     {method_count}")

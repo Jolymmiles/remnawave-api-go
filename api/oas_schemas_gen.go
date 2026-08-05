@@ -3586,8 +3586,8 @@ type CreateUserBody struct {
 	LastTrafficResetAt OptDateTime `json:"lastTrafficResetAt"`
 	// Optional. Additional notes or description for the user account.
 	Description OptString `json:"description"`
-	// Optional. User tag for categorization. Max 16 characters, uppercase letters, numbers and
-	// underscores only.
+	// Optional. User tag for categorization. Max 16 characters, uppercase letters, numbers and underscores
+	// only.
 	Tag OptNilString `json:"tag"`
 	// Optional. Telegram user ID for notifications. Must be an integer.
 	TelegramId OptNilFloat64 `json:"telegramId"`
@@ -4484,7 +4484,8 @@ func (s *DropConnectionsBody) SetTargetNodes(val DropConnectionsBodyTargetNodes)
 
 // DropConnectionsBodyDropBy represents sum type.
 type DropConnectionsBodyDropBy struct {
-	Type                       DropConnectionsBodyDropByType // switch on this field
+	// Type selects the active sum variant, switch on this field.
+	Type                       DropConnectionsBodyDropByType
 	DropConnectionsBodyDropBy0 DropConnectionsBodyDropBy0
 	DropConnectionsBodyDropBy1 DropConnectionsBodyDropBy1
 }
@@ -4672,7 +4673,8 @@ func (s *DropConnectionsBodyDropBy1By) UnmarshalText(data []byte) error {
 
 // DropConnectionsBodyTargetNodes represents sum type.
 type DropConnectionsBodyTargetNodes struct {
-	Type                            DropConnectionsBodyTargetNodesType // switch on this field
+	// Type selects the active sum variant, switch on this field.
+	Type                            DropConnectionsBodyTargetNodesType
 	DropConnectionsBodyTargetNodes0 DropConnectionsBodyTargetNodes0
 	DropConnectionsBodyTargetNodes1 DropConnectionsBodyTargetNodes1
 }
@@ -15114,6 +15116,11 @@ func (o *OptNilBrandingSettings) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilBrandingSettings) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilBrandingSettings) Get() (v BrandingSettings, ok bool) {
 	if o.Null {
@@ -15175,6 +15182,11 @@ func (o *OptNilCreateHostBodyAlpn) SetToNull() {
 	o.Null = true
 	var v CreateHostBodyAlpn
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilCreateHostBodyAlpn) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15240,6 +15252,11 @@ func (o *OptNilCreateHostBodyMihomoIpVersion) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilCreateHostBodyMihomoIpVersion) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilCreateHostBodyMihomoIpVersion) Get() (v CreateHostBodyMihomoIpVersion, ok bool) {
 	if o.Null {
@@ -15301,6 +15318,11 @@ func (o *OptNilCustomRemark) SetToNull() {
 	o.Null = true
 	var v CustomRemark
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilCustomRemark) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15366,6 +15388,11 @@ func (o *OptNilFloat64) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilFloat64) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilFloat64) Get() (v float64, ok bool) {
 	if o.Null {
@@ -15427,6 +15454,11 @@ func (o *OptNilHostOverride) SetToNull() {
 	o.Null = true
 	var v HostOverride
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilHostOverride) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15492,6 +15524,11 @@ func (o *OptNilHwidSettings) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilHwidSettings) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilHwidSettings) Get() (v HwidSettings, ok bool) {
 	if o.Null {
@@ -15553,6 +15590,11 @@ func (o *OptNilInt) SetToNull() {
 	o.Null = true
 	var v int
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilInt) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15618,6 +15660,11 @@ func (o *OptNilOauth2Settings) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilOauth2Settings) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilOauth2Settings) Get() (v Oauth2Settings, ok bool) {
 	if o.Null {
@@ -15679,6 +15726,11 @@ func (o *OptNilPasskeySettings) SetToNull() {
 	o.Null = true
 	var v PasskeySettings
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilPasskeySettings) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15744,6 +15796,11 @@ func (o *OptNilPasswordSettings) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilPasswordSettings) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilPasswordSettings) Get() (v PasswordSettings, ok bool) {
 	if o.Null {
@@ -15805,6 +15862,11 @@ func (o *OptNilString) SetToNull() {
 	o.Null = true
 	var v string
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilString) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15870,6 +15932,11 @@ func (o *OptNilSubscriptionSettings) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilSubscriptionSettings) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilSubscriptionSettings) Get() (v SubscriptionSettings, ok bool) {
 	if o.Null {
@@ -15931,6 +15998,11 @@ func (o *OptNilURI) SetToNull() {
 	o.Null = true
 	var v url.URL
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilURI) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -15996,6 +16068,11 @@ func (o *OptNilUUID) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilUUID) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilUUID) Get() (v uuid.UUID, ok bool) {
 	if o.Null {
@@ -16057,6 +16134,11 @@ func (o *OptNilUpdateHostBodyAlpn) SetToNull() {
 	o.Null = true
 	var v UpdateHostBodyAlpn
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilUpdateHostBodyAlpn) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -16122,6 +16204,11 @@ func (o *OptNilUpdateHostBodyMihomoIpVersion) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilUpdateHostBodyMihomoIpVersion) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilUpdateHostBodyMihomoIpVersion) Get() (v UpdateHostBodyMihomoIpVersion, ok bool) {
 	if o.Null {
@@ -16185,6 +16272,11 @@ func (o *OptNilUpdateManyHostsBodyAlpn) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilUpdateManyHostsBodyAlpn) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilUpdateManyHostsBodyAlpn) Get() (v UpdateManyHostsBodyAlpn, ok bool) {
 	if o.Null {
@@ -16246,6 +16338,11 @@ func (o *OptNilUpdateManyHostsBodyMihomoIpVersion) SetToNull() {
 	o.Null = true
 	var v UpdateManyHostsBodyMihomoIpVersion
 	o.Value = v
+}
+
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilUpdateManyHostsBodyMihomoIpVersion) IsEmpty() bool {
+	return !o.Set && !o.Null
 }
 
 // Get returns value and boolean that denotes whether value was set.
@@ -17187,7 +17284,8 @@ func (s *PluginExecutorBody) SetTargetNodes(val PluginExecutorBodyTargetNodes) {
 
 // PluginExecutorBodyCommand represents sum type.
 type PluginExecutorBodyCommand struct {
-	Type                       PluginExecutorBodyCommandType // switch on this field
+	// Type selects the active sum variant, switch on this field.
+	Type                       PluginExecutorBodyCommandType
 	PluginExecutorBodyCommand0 PluginExecutorBodyCommand0
 	PluginExecutorBodyCommand1 PluginExecutorBodyCommand1
 	PluginExecutorBodyCommand2 PluginExecutorBodyCommand2
@@ -17477,7 +17575,8 @@ func (s *PluginExecutorBodyCommand2Command) UnmarshalText(data []byte) error {
 
 // PluginExecutorBodyTargetNodes represents sum type.
 type PluginExecutorBodyTargetNodes struct {
-	Type                           PluginExecutorBodyTargetNodesType // switch on this field
+	// Type selects the active sum variant, switch on this field.
+	Type                           PluginExecutorBodyTargetNodesType
 	PluginExecutorBodyTargetNodes0 PluginExecutorBodyTargetNodes0
 	PluginExecutorBodyTargetNodes1 PluginExecutorBodyTargetNodes1
 }
