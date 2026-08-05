@@ -108,31 +108,10 @@ func (s *ActiveInternalSquad) SetName(val string) {
 	s.Name = val
 }
 
-// Ref: #/components/schemas/AllHwidDevices
-type AllHwidDevices struct {
-	Devices []Device `json:"devices"`
-	Total   float64  `json:"total"`
-}
+// ApiTokensDeleteApiTokenNoContent is response for ApiTokensDeleteApiToken operation.
+type ApiTokensDeleteApiTokenNoContent struct{}
 
-// GetDevices returns the value of Devices.
-func (s *AllHwidDevices) GetDevices() []Device {
-	return s.Devices
-}
-
-// GetTotal returns the value of Total.
-func (s *AllHwidDevices) GetTotal() float64 {
-	return s.Total
-}
-
-// SetDevices sets the value of Devices.
-func (s *AllHwidDevices) SetDevices(val []Device) {
-	s.Devices = val
-}
-
-// SetTotal sets the value of Total.
-func (s *AllHwidDevices) SetTotal(val float64) {
-	s.Total = val
-}
+func (*ApiTokensDeleteApiTokenNoContent) apiTokensDeleteApiTokenRes() {}
 
 type Authorization struct {
 	Token string
@@ -196,9 +175,9 @@ func (s *BadRequestError) SetErrors(val []ValidationError) {
 	s.Errors = val
 }
 
-func (*BadRequestError) apiTokensCreateRes()                                                  {}
-func (*BadRequestError) apiTokensDeleteRes()                                                  {}
-func (*BadRequestError) apiTokensFindAllRes()                                                 {}
+func (*BadRequestError) apiTokensCreateApiTokenRes()                                          {}
+func (*BadRequestError) apiTokensDeleteApiTokenRes()                                          {}
+func (*BadRequestError) apiTokensGetApiTokensRes()                                            {}
 func (*BadRequestError) apiTokensGetScopesRes()                                               {}
 func (*BadRequestError) authGetStatusRes()                                                    {}
 func (*BadRequestError) authLoginRes()                                                        {}
@@ -207,11 +186,10 @@ func (*BadRequestError) authOauth2CallbackRes()                                 
 func (*BadRequestError) authPasskeyAuthenticationOptionsRes()                                 {}
 func (*BadRequestError) authPasskeyAuthenticationVerifyRes()                                  {}
 func (*BadRequestError) authRegisterRes()                                                     {}
-func (*BadRequestError) bandwidthStatsNodesGetNodeUserUsageRes()                              {}
+func (*BadRequestError) bandwidthStatsNodesGetNodeUsageRes()                                  {}
 func (*BadRequestError) bandwidthStatsNodesGetStatsNodeUsersUsageRes()                        {}
 func (*BadRequestError) bandwidthStatsNodesGetStatsNodesUsersUsageRes()                       {}
 func (*BadRequestError) bandwidthStatsUsersGetStatsNodesUsageRes()                            {}
-func (*BadRequestError) bandwidthStatsUsersGetUserUsageByRangeRes()                           {}
 func (*BadRequestError) configProfileCreateConfigProfileRes()                                 {}
 func (*BadRequestError) configProfileDeleteConfigProfileByUuidRes()                           {}
 func (*BadRequestError) configProfileGetAllInboundsRes()                                      {}
@@ -221,6 +199,11 @@ func (*BadRequestError) configProfileGetConfigProfilesRes()                     
 func (*BadRequestError) configProfileGetInboundsByProfileUuidRes()                            {}
 func (*BadRequestError) configProfileReorderConfigProfilesRes()                               {}
 func (*BadRequestError) configProfileUpdateConfigProfileRes()                                 {}
+func (*BadRequestError) connectionsConnectionsByNodeRes()                                     {}
+func (*BadRequestError) connectionsConnectionsByNodeResultRes()                               {}
+func (*BadRequestError) connectionsConnectionsByUserRes()                                     {}
+func (*BadRequestError) connectionsConnectionsByUserResultRes()                               {}
+func (*BadRequestError) connectionsDropConnectionsRes()                                       {}
 func (*BadRequestError) externalSquadAddUsersToExternalSquadRes()                             {}
 func (*BadRequestError) externalSquadCreateExternalSquadRes()                                 {}
 func (*BadRequestError) externalSquadDeleteExternalSquadRes()                                 {}
@@ -235,8 +218,8 @@ func (*BadRequestError) hostsBulkActionsEnableHostsRes()                        
 func (*BadRequestError) hostsBulkActionsSetPortToHostsRes()                                   {}
 func (*BadRequestError) hostsCreateHostRes()                                                  {}
 func (*BadRequestError) hostsDeleteHostRes()                                                  {}
-func (*BadRequestError) hostsGetAllHostTagsRes()                                              {}
-func (*BadRequestError) hostsGetAllHostsRes()                                                 {}
+func (*BadRequestError) hostsGetHostsRes()                                                    {}
+func (*BadRequestError) hostsGetHostsTagsRes()                                                {}
 func (*BadRequestError) hostsGetOneHostRes()                                                  {}
 func (*BadRequestError) hostsReorderHostsRes()                                                {}
 func (*BadRequestError) hostsUpdateHostRes()                                                  {}
@@ -247,32 +230,32 @@ func (*BadRequestError) hwidUserDevicesGetAllUsersRes()                         
 func (*BadRequestError) hwidUserDevicesGetHwidDevicesStatsRes()                               {}
 func (*BadRequestError) hwidUserDevicesGetTopUsersByHwidDevicesRes()                          {}
 func (*BadRequestError) hwidUserDevicesGetUserHwidDevicesRes()                                {}
-func (*BadRequestError) infraBillingCreateInfraBillingHistoryRecordRes()                      {}
 func (*BadRequestError) infraBillingCreateInfraBillingNodeRes()                               {}
+func (*BadRequestError) infraBillingCreateInfraBillingRecordRes()                             {}
 func (*BadRequestError) infraBillingCreateInfraProviderRes()                                  {}
-func (*BadRequestError) infraBillingDeleteInfraBillingHistoryRecordByUuidRes()                {}
-func (*BadRequestError) infraBillingDeleteInfraBillingNodeByUuidRes()                         {}
-func (*BadRequestError) infraBillingDeleteInfraProviderByUuidRes()                            {}
+func (*BadRequestError) infraBillingDeleteInfraBillingNodeRes()                               {}
+func (*BadRequestError) infraBillingDeleteInfraBillingRecordRes()                             {}
+func (*BadRequestError) infraBillingDelteInfraProviderRes()                                   {}
 func (*BadRequestError) infraBillingGetBillingNodesRes()                                      {}
-func (*BadRequestError) infraBillingGetInfraBillingHistoryRecordsRes()                        {}
-func (*BadRequestError) infraBillingGetInfraProviderByUuidRes()                               {}
+func (*BadRequestError) infraBillingGetInfraBillingRecordsRes()                               {}
+func (*BadRequestError) infraBillingGetInfraProviderRes()                                     {}
 func (*BadRequestError) infraBillingGetInfraProvidersRes()                                    {}
 func (*BadRequestError) infraBillingUpdateInfraBillingNodeRes()                               {}
 func (*BadRequestError) infraBillingUpdateInfraProviderRes()                                  {}
+func (*BadRequestError) internalSquadAddManyUsersToInternalSquadRes()                         {}
 func (*BadRequestError) internalSquadAddUsersToInternalSquadRes()                             {}
 func (*BadRequestError) internalSquadCreateInternalSquadRes()                                 {}
 func (*BadRequestError) internalSquadDeleteInternalSquadRes()                                 {}
 func (*BadRequestError) internalSquadGetInternalSquadAccessibleNodesRes()                     {}
 func (*BadRequestError) internalSquadGetInternalSquadByUuidRes()                              {}
+func (*BadRequestError) internalSquadGetInternalSquadUsageRes()                               {}
 func (*BadRequestError) internalSquadGetInternalSquadsRes()                                   {}
+func (*BadRequestError) internalSquadRemoveManyUsersFromInternalSquadRes()                    {}
 func (*BadRequestError) internalSquadRemoveUsersFromInternalSquadRes()                        {}
 func (*BadRequestError) internalSquadReorderInternalSquadsRes()                               {}
+func (*BadRequestError) internalSquadStatsGetInternalSquadUsageRes()                          {}
+func (*BadRequestError) internalSquadStatsGetInternalSquadUserUsageRes()                      {}
 func (*BadRequestError) internalSquadUpdateInternalSquadRes()                                 {}
-func (*BadRequestError) ipControlDropConnectionsRes()                                         {}
-func (*BadRequestError) ipControlFetchUserIpsRes()                                            {}
-func (*BadRequestError) ipControlFetchUsersIpsRes()                                           {}
-func (*BadRequestError) ipControlGetFetchIpsResultRes()                                       {}
-func (*BadRequestError) ipControlGetFetchUsersIpsResultRes()                                  {}
 func (*BadRequestError) keygenGenerateKeyRes()                                                {}
 func (*BadRequestError) metadataGetNodeMetadataRes()                                          {}
 func (*BadRequestError) metadataGetUserMetadataRes()                                          {}
@@ -292,9 +275,9 @@ func (*BadRequestError) nodesCreateNodeRes()                                    
 func (*BadRequestError) nodesDeleteNodeRes()                                                  {}
 func (*BadRequestError) nodesDisableNodeRes()                                                 {}
 func (*BadRequestError) nodesEnableNodeRes()                                                  {}
-func (*BadRequestError) nodesGetAllNodesRes()                                                 {}
-func (*BadRequestError) nodesGetAllNodesTagsRes()                                             {}
-func (*BadRequestError) nodesGetOneNodeRes()                                                  {}
+func (*BadRequestError) nodesGetNodeRes()                                                     {}
+func (*BadRequestError) nodesGetNodesRes()                                                    {}
+func (*BadRequestError) nodesGetNodesTagsRes()                                                {}
 func (*BadRequestError) nodesProfileModificationRes()                                         {}
 func (*BadRequestError) nodesReorderNodesRes()                                                {}
 func (*BadRequestError) nodesResetNodeTrafficRes()                                            {}
@@ -313,7 +296,9 @@ func (*BadRequestError) snippetsCreateSnippetRes()                              
 func (*BadRequestError) snippetsDeleteSnippetByNameRes()                                      {}
 func (*BadRequestError) snippetsGetSnippetsRes()                                              {}
 func (*BadRequestError) snippetsUpdateSnippetRes()                                            {}
+func (*BadRequestError) subscriptionGetSubscriptionByClientTypeRes()                          {}
 func (*BadRequestError) subscriptionGetSubscriptionInfoByShortUuidRes()                       {}
+func (*BadRequestError) subscriptionGetSubscriptionRes()                                      {}
 func (*BadRequestError) subscriptionPageConfigCloneSubscriptionPageConfigRes()                {}
 func (*BadRequestError) subscriptionPageConfigCreateConfigRes()                               {}
 func (*BadRequestError) subscriptionPageConfigDeleteConfigRes()                               {}
@@ -330,7 +315,7 @@ func (*BadRequestError) subscriptionTemplateGetTemplateByUuidRes()              
 func (*BadRequestError) subscriptionTemplateReorderSubscriptionTemplatesRes()                 {}
 func (*BadRequestError) subscriptionTemplateUpdateTemplateRes()                               {}
 func (*BadRequestError) subscriptionsGetAllSubscriptionsRes()                                 {}
-func (*BadRequestError) subscriptionsGetConnectionKeysByUuidRes()                             {}
+func (*BadRequestError) subscriptionsGetConnectionKeysByUserIdRes()                           {}
 func (*BadRequestError) subscriptionsGetRawSubscriptionByShortUuidRes()                       {}
 func (*BadRequestError) subscriptionsGetSubpageConfigByShortUuidRes()                         {}
 func (*BadRequestError) subscriptionsGetSubscriptionByShortUuidProtectedRes()                 {}
@@ -338,11 +323,14 @@ func (*BadRequestError) subscriptionsGetSubscriptionByUsernameRes()             
 func (*BadRequestError) subscriptionsGetSubscriptionByUuidRes()                               {}
 func (*BadRequestError) systemDebugSrrMatcherRes()                                            {}
 func (*BadRequestError) systemGetBandwidthStatsRes()                                          {}
+func (*BadRequestError) systemGetConfigurationRes()                                           {}
+func (*BadRequestError) systemGetHttpStatsRes()                                               {}
 func (*BadRequestError) systemGetMetadataRes()                                                {}
 func (*BadRequestError) systemGetNodesMetricsRes()                                            {}
 func (*BadRequestError) systemGetNodesStatisticsRes()                                         {}
 func (*BadRequestError) systemGetRecapRes()                                                   {}
 func (*BadRequestError) systemGetRemnawaveHealthRes()                                         {}
+func (*BadRequestError) systemGetStatsDigestRes()                                             {}
 func (*BadRequestError) systemGetStatsRes()                                                   {}
 func (*BadRequestError) systemGetX25519KeypairsRes()                                          {}
 func (*BadRequestError) torrentBlockerReportsGetTorrentBlockerReportsRes()                    {}
@@ -364,18 +352,15 @@ func (*BadRequestError) usersCreateUserRes()                                    
 func (*BadRequestError) usersDeleteUserRes()                                                  {}
 func (*BadRequestError) usersDisableUserRes()                                                 {}
 func (*BadRequestError) usersEnableUserRes()                                                  {}
-func (*BadRequestError) usersGetAllTagsRes()                                                  {}
-func (*BadRequestError) usersGetAllUsersRes()                                                 {}
+func (*BadRequestError) usersExtendUserExpirationDateRes()                                    {}
 func (*BadRequestError) usersGetUserAccessibleNodesRes()                                      {}
 func (*BadRequestError) usersGetUserByIdRes()                                                 {}
 func (*BadRequestError) usersGetUserByShortUuidRes()                                          {}
-func (*BadRequestError) usersGetUserByTelegramIdRes()                                         {}
 func (*BadRequestError) usersGetUserByUsernameRes()                                           {}
-func (*BadRequestError) usersGetUserByUuidRes()                                               {}
 func (*BadRequestError) usersGetUserSubscriptionRequestHistoryRes()                           {}
-func (*BadRequestError) usersGetUsersByEmailRes()                                             {}
-func (*BadRequestError) usersGetUsersByTagRes()                                               {}
+func (*BadRequestError) usersGetUsersRes()                                                    {}
 func (*BadRequestError) usersGetUsersStreamRes()                                              {}
+func (*BadRequestError) usersGetUsersTagsRes()                                                {}
 func (*BadRequestError) usersResetUserTrafficRes()                                            {}
 func (*BadRequestError) usersResolveUserRes()                                                 {}
 func (*BadRequestError) usersRevokeUserSubscriptionRes()                                      {}
@@ -444,144 +429,6 @@ func (s *BillingHistoryItem) SetTotalBills(val float64) {
 	s.TotalBills = val
 }
 
-// Ref: #/components/schemas/BillingHistoryResponse
-type BillingHistoryResponse struct {
-	Response BillingHistoryResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *BillingHistoryResponse) GetResponse() BillingHistoryResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *BillingHistoryResponse) SetResponse(val BillingHistoryResponseResponse) {
-	s.Response = val
-}
-
-func (*BillingHistoryResponse) infraBillingCreateInfraBillingHistoryRecordRes()       {}
-func (*BillingHistoryResponse) infraBillingDeleteInfraBillingHistoryRecordByUuidRes() {}
-func (*BillingHistoryResponse) infraBillingGetInfraBillingHistoryRecordsRes()         {}
-
-type BillingHistoryResponseResponse struct {
-	Records []BillingHistoryResponseResponseRecordsItem `json:"records"`
-	Total   float64                                     `json:"total"`
-}
-
-// GetRecords returns the value of Records.
-func (s *BillingHistoryResponseResponse) GetRecords() []BillingHistoryResponseResponseRecordsItem {
-	return s.Records
-}
-
-// GetTotal returns the value of Total.
-func (s *BillingHistoryResponseResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// SetRecords sets the value of Records.
-func (s *BillingHistoryResponseResponse) SetRecords(val []BillingHistoryResponseResponseRecordsItem) {
-	s.Records = val
-}
-
-// SetTotal sets the value of Total.
-func (s *BillingHistoryResponseResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-type BillingHistoryResponseResponseRecordsItem struct {
-	UUID         uuid.UUID                                         `json:"uuid"`
-	ProviderUuid uuid.UUID                                         `json:"providerUuid"`
-	Amount       float64                                           `json:"amount"`
-	BilledAt     time.Time                                         `json:"billedAt"`
-	Provider     BillingHistoryResponseResponseRecordsItemProvider `json:"provider"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *BillingHistoryResponseResponseRecordsItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *BillingHistoryResponseResponseRecordsItem) GetProviderUuid() uuid.UUID {
-	return s.ProviderUuid
-}
-
-// GetAmount returns the value of Amount.
-func (s *BillingHistoryResponseResponseRecordsItem) GetAmount() float64 {
-	return s.Amount
-}
-
-// GetBilledAt returns the value of BilledAt.
-func (s *BillingHistoryResponseResponseRecordsItem) GetBilledAt() time.Time {
-	return s.BilledAt
-}
-
-// GetProvider returns the value of Provider.
-func (s *BillingHistoryResponseResponseRecordsItem) GetProvider() BillingHistoryResponseResponseRecordsItemProvider {
-	return s.Provider
-}
-
-// SetUUID sets the value of UUID.
-func (s *BillingHistoryResponseResponseRecordsItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *BillingHistoryResponseResponseRecordsItem) SetProviderUuid(val uuid.UUID) {
-	s.ProviderUuid = val
-}
-
-// SetAmount sets the value of Amount.
-func (s *BillingHistoryResponseResponseRecordsItem) SetAmount(val float64) {
-	s.Amount = val
-}
-
-// SetBilledAt sets the value of BilledAt.
-func (s *BillingHistoryResponseResponseRecordsItem) SetBilledAt(val time.Time) {
-	s.BilledAt = val
-}
-
-// SetProvider sets the value of Provider.
-func (s *BillingHistoryResponseResponseRecordsItem) SetProvider(val BillingHistoryResponseResponseRecordsItemProvider) {
-	s.Provider = val
-}
-
-type BillingHistoryResponseResponseRecordsItemProvider struct {
-	UUID        uuid.UUID `json:"uuid"`
-	Name        string    `json:"name"`
-	FaviconLink NilString `json:"faviconLink"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) GetName() string {
-	return s.Name
-}
-
-// GetFaviconLink returns the value of FaviconLink.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) GetFaviconLink() NilString {
-	return s.FaviconLink
-}
-
-// SetUUID sets the value of UUID.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) SetName(val string) {
-	s.Name = val
-}
-
-// SetFaviconLink sets the value of FaviconLink.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) SetFaviconLink(val NilString) {
-	s.FaviconLink = val
-}
-
 // Ref: #/components/schemas/BillingNode
 type BillingNode struct {
 	Name    string                  `json:"name"`
@@ -623,10 +470,9 @@ func (s *BillingNodesResponse) SetResponse(val BillingNodesResponseResponse) {
 	s.Response = val
 }
 
-func (*BillingNodesResponse) infraBillingCreateInfraBillingNodeRes()       {}
-func (*BillingNodesResponse) infraBillingDeleteInfraBillingNodeByUuidRes() {}
-func (*BillingNodesResponse) infraBillingGetBillingNodesRes()              {}
-func (*BillingNodesResponse) infraBillingUpdateInfraBillingNodeRes()       {}
+func (*BillingNodesResponse) infraBillingCreateInfraBillingNodeRes() {}
+func (*BillingNodesResponse) infraBillingGetBillingNodesRes()        {}
+func (*BillingNodesResponse) infraBillingUpdateInfraBillingNodeRes() {}
 
 type BillingNodesResponseResponse struct {
 	TotalBillingNodes          float64                                        `json:"totalBillingNodes"`
@@ -897,193 +743,156 @@ func (s *BrandingSettings) SetLogoUrl(val NilURI) {
 	s.LogoUrl = val
 }
 
-// Ref: #/components/schemas/BulkActionResponse
-type BulkActionResponse struct {
-	Response BulkActionResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *BulkActionResponse) GetResponse() BulkActionResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *BulkActionResponse) SetResponse(val BulkActionResponseResponse) {
-	s.Response = val
-}
-
-func (*BulkActionResponse) usersBulkActionsBulkDeleteUsersByStatusRes()       {}
-func (*BulkActionResponse) usersBulkActionsBulkDeleteUsersRes()               {}
-func (*BulkActionResponse) usersBulkActionsBulkExtendExpirationDateRes()      {}
-func (*BulkActionResponse) usersBulkActionsBulkResetUserTrafficRes()          {}
-func (*BulkActionResponse) usersBulkActionsBulkRevokeUsersSubscriptionRes()   {}
-func (*BulkActionResponse) usersBulkActionsBulkUpdateUsersInternalSquadsRes() {}
-func (*BulkActionResponse) usersBulkActionsBulkUpdateUsersRes()               {}
-
-type BulkActionResponseResponse struct {
-	AffectedRows float64 `json:"affectedRows"`
-}
-
-// GetAffectedRows returns the value of AffectedRows.
-func (s *BulkActionResponseResponse) GetAffectedRows() float64 {
-	return s.AffectedRows
-}
-
-// SetAffectedRows sets the value of AffectedRows.
-func (s *BulkActionResponseResponse) SetAffectedRows(val float64) {
-	s.AffectedRows = val
-}
-
-// Ref: #/components/schemas/BulkAllExtendExpirationDateRequest
-type BulkAllExtendExpirationDateRequest struct {
+// Ref: #/components/schemas/BulkAllExtendExpirationDateBody
+type BulkAllExtendExpirationDateBody struct {
 	ExtendDays int `json:"extendDays"`
 }
 
 // GetExtendDays returns the value of ExtendDays.
-func (s *BulkAllExtendExpirationDateRequest) GetExtendDays() int {
+func (s *BulkAllExtendExpirationDateBody) GetExtendDays() int {
 	return s.ExtendDays
 }
 
 // SetExtendDays sets the value of ExtendDays.
-func (s *BulkAllExtendExpirationDateRequest) SetExtendDays(val int) {
+func (s *BulkAllExtendExpirationDateBody) SetExtendDays(val int) {
 	s.ExtendDays = val
 }
 
-// Ref: #/components/schemas/BulkAllUpdateUsersRequest
-type BulkAllUpdateUsersRequest struct {
-	Status OptBulkAllUpdateUsersRequestStatus `json:"status"`
+// Ref: #/components/schemas/BulkAllUpdateUsersBody
+type BulkAllUpdateUsersBody struct {
+	Status OptBulkAllUpdateUsersBodyStatus `json:"status"`
 	// Traffic limit in bytes. 0 - unlimited.
 	TrafficLimitBytes OptFloat64 `json:"trafficLimitBytes"`
-	// Traffic limit reset strategy.
-	TrafficLimitStrategy OptBulkAllUpdateUsersRequestTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	// Available reset periods.
+	TrafficLimitStrategy OptBulkAllUpdateUsersBodyTrafficLimitStrategy `json:"trafficLimitStrategy"`
 	// Expiration date: 2025-01-17T15:38:45.065Z.
-	ExpireAt        OptDateTime  `json:"expireAt"`
-	Description     OptNilString `json:"description"`
-	TelegramId      OptNilInt    `json:"telegramId"`
-	Email           OptNilString `json:"email"`
-	Tag             OptNilString `json:"tag"`
-	HwidDeviceLimit OptNilInt    `json:"hwidDeviceLimit"`
+	ExpireAt        OptDateTime   `json:"expireAt"`
+	Description     OptNilString  `json:"description"`
+	TelegramId      OptNilFloat64 `json:"telegramId"`
+	Email           OptNilString  `json:"email"`
+	Tag             OptNilString  `json:"tag"`
+	HwidDeviceLimit OptNilInt     `json:"hwidDeviceLimit"`
 }
 
 // GetStatus returns the value of Status.
-func (s *BulkAllUpdateUsersRequest) GetStatus() OptBulkAllUpdateUsersRequestStatus {
+func (s *BulkAllUpdateUsersBody) GetStatus() OptBulkAllUpdateUsersBodyStatus {
 	return s.Status
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *BulkAllUpdateUsersRequest) GetTrafficLimitBytes() OptFloat64 {
+func (s *BulkAllUpdateUsersBody) GetTrafficLimitBytes() OptFloat64 {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *BulkAllUpdateUsersRequest) GetTrafficLimitStrategy() OptBulkAllUpdateUsersRequestTrafficLimitStrategy {
+func (s *BulkAllUpdateUsersBody) GetTrafficLimitStrategy() OptBulkAllUpdateUsersBodyTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
 // GetExpireAt returns the value of ExpireAt.
-func (s *BulkAllUpdateUsersRequest) GetExpireAt() OptDateTime {
+func (s *BulkAllUpdateUsersBody) GetExpireAt() OptDateTime {
 	return s.ExpireAt
 }
 
 // GetDescription returns the value of Description.
-func (s *BulkAllUpdateUsersRequest) GetDescription() OptNilString {
+func (s *BulkAllUpdateUsersBody) GetDescription() OptNilString {
 	return s.Description
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *BulkAllUpdateUsersRequest) GetTelegramId() OptNilInt {
+func (s *BulkAllUpdateUsersBody) GetTelegramId() OptNilFloat64 {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *BulkAllUpdateUsersRequest) GetEmail() OptNilString {
+func (s *BulkAllUpdateUsersBody) GetEmail() OptNilString {
 	return s.Email
 }
 
 // GetTag returns the value of Tag.
-func (s *BulkAllUpdateUsersRequest) GetTag() OptNilString {
+func (s *BulkAllUpdateUsersBody) GetTag() OptNilString {
 	return s.Tag
 }
 
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *BulkAllUpdateUsersRequest) GetHwidDeviceLimit() OptNilInt {
+func (s *BulkAllUpdateUsersBody) GetHwidDeviceLimit() OptNilInt {
 	return s.HwidDeviceLimit
 }
 
 // SetStatus sets the value of Status.
-func (s *BulkAllUpdateUsersRequest) SetStatus(val OptBulkAllUpdateUsersRequestStatus) {
+func (s *BulkAllUpdateUsersBody) SetStatus(val OptBulkAllUpdateUsersBodyStatus) {
 	s.Status = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *BulkAllUpdateUsersRequest) SetTrafficLimitBytes(val OptFloat64) {
+func (s *BulkAllUpdateUsersBody) SetTrafficLimitBytes(val OptFloat64) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *BulkAllUpdateUsersRequest) SetTrafficLimitStrategy(val OptBulkAllUpdateUsersRequestTrafficLimitStrategy) {
+func (s *BulkAllUpdateUsersBody) SetTrafficLimitStrategy(val OptBulkAllUpdateUsersBodyTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
-func (s *BulkAllUpdateUsersRequest) SetExpireAt(val OptDateTime) {
+func (s *BulkAllUpdateUsersBody) SetExpireAt(val OptDateTime) {
 	s.ExpireAt = val
 }
 
 // SetDescription sets the value of Description.
-func (s *BulkAllUpdateUsersRequest) SetDescription(val OptNilString) {
+func (s *BulkAllUpdateUsersBody) SetDescription(val OptNilString) {
 	s.Description = val
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *BulkAllUpdateUsersRequest) SetTelegramId(val OptNilInt) {
+func (s *BulkAllUpdateUsersBody) SetTelegramId(val OptNilFloat64) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *BulkAllUpdateUsersRequest) SetEmail(val OptNilString) {
+func (s *BulkAllUpdateUsersBody) SetEmail(val OptNilString) {
 	s.Email = val
 }
 
 // SetTag sets the value of Tag.
-func (s *BulkAllUpdateUsersRequest) SetTag(val OptNilString) {
+func (s *BulkAllUpdateUsersBody) SetTag(val OptNilString) {
 	s.Tag = val
 }
 
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *BulkAllUpdateUsersRequest) SetHwidDeviceLimit(val OptNilInt) {
+func (s *BulkAllUpdateUsersBody) SetHwidDeviceLimit(val OptNilInt) {
 	s.HwidDeviceLimit = val
 }
 
-type BulkAllUpdateUsersRequestStatus string
+type BulkAllUpdateUsersBodyStatus string
 
 const (
-	BulkAllUpdateUsersRequestStatusACTIVE   BulkAllUpdateUsersRequestStatus = "ACTIVE"
-	BulkAllUpdateUsersRequestStatusDISABLED BulkAllUpdateUsersRequestStatus = "DISABLED"
-	BulkAllUpdateUsersRequestStatusLIMITED  BulkAllUpdateUsersRequestStatus = "LIMITED"
-	BulkAllUpdateUsersRequestStatusEXPIRED  BulkAllUpdateUsersRequestStatus = "EXPIRED"
+	BulkAllUpdateUsersBodyStatusACTIVE   BulkAllUpdateUsersBodyStatus = "ACTIVE"
+	BulkAllUpdateUsersBodyStatusDISABLED BulkAllUpdateUsersBodyStatus = "DISABLED"
+	BulkAllUpdateUsersBodyStatusLIMITED  BulkAllUpdateUsersBodyStatus = "LIMITED"
+	BulkAllUpdateUsersBodyStatusEXPIRED  BulkAllUpdateUsersBodyStatus = "EXPIRED"
 )
 
-// AllValues returns all BulkAllUpdateUsersRequestStatus values.
-func (BulkAllUpdateUsersRequestStatus) AllValues() []BulkAllUpdateUsersRequestStatus {
-	return []BulkAllUpdateUsersRequestStatus{
-		BulkAllUpdateUsersRequestStatusACTIVE,
-		BulkAllUpdateUsersRequestStatusDISABLED,
-		BulkAllUpdateUsersRequestStatusLIMITED,
-		BulkAllUpdateUsersRequestStatusEXPIRED,
+// AllValues returns all BulkAllUpdateUsersBodyStatus values.
+func (BulkAllUpdateUsersBodyStatus) AllValues() []BulkAllUpdateUsersBodyStatus {
+	return []BulkAllUpdateUsersBodyStatus{
+		BulkAllUpdateUsersBodyStatusACTIVE,
+		BulkAllUpdateUsersBodyStatusDISABLED,
+		BulkAllUpdateUsersBodyStatusLIMITED,
+		BulkAllUpdateUsersBodyStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s BulkAllUpdateUsersRequestStatus) MarshalText() ([]byte, error) {
+func (s BulkAllUpdateUsersBodyStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case BulkAllUpdateUsersRequestStatusACTIVE:
+	case BulkAllUpdateUsersBodyStatusACTIVE:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestStatusDISABLED:
+	case BulkAllUpdateUsersBodyStatusDISABLED:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestStatusLIMITED:
+	case BulkAllUpdateUsersBodyStatusLIMITED:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestStatusEXPIRED:
+	case BulkAllUpdateUsersBodyStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -1091,59 +900,59 @@ func (s BulkAllUpdateUsersRequestStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *BulkAllUpdateUsersRequestStatus) UnmarshalText(data []byte) error {
-	switch BulkAllUpdateUsersRequestStatus(data) {
-	case BulkAllUpdateUsersRequestStatusACTIVE:
-		*s = BulkAllUpdateUsersRequestStatusACTIVE
+func (s *BulkAllUpdateUsersBodyStatus) UnmarshalText(data []byte) error {
+	switch BulkAllUpdateUsersBodyStatus(data) {
+	case BulkAllUpdateUsersBodyStatusACTIVE:
+		*s = BulkAllUpdateUsersBodyStatusACTIVE
 		return nil
-	case BulkAllUpdateUsersRequestStatusDISABLED:
-		*s = BulkAllUpdateUsersRequestStatusDISABLED
+	case BulkAllUpdateUsersBodyStatusDISABLED:
+		*s = BulkAllUpdateUsersBodyStatusDISABLED
 		return nil
-	case BulkAllUpdateUsersRequestStatusLIMITED:
-		*s = BulkAllUpdateUsersRequestStatusLIMITED
+	case BulkAllUpdateUsersBodyStatusLIMITED:
+		*s = BulkAllUpdateUsersBodyStatusLIMITED
 		return nil
-	case BulkAllUpdateUsersRequestStatusEXPIRED:
-		*s = BulkAllUpdateUsersRequestStatusEXPIRED
+	case BulkAllUpdateUsersBodyStatusEXPIRED:
+		*s = BulkAllUpdateUsersBodyStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Traffic limit reset strategy.
-type BulkAllUpdateUsersRequestTrafficLimitStrategy string
+// Available reset periods.
+type BulkAllUpdateUsersBodyTrafficLimitStrategy string
 
 const (
-	BulkAllUpdateUsersRequestTrafficLimitStrategyNORESET      BulkAllUpdateUsersRequestTrafficLimitStrategy = "NO_RESET"
-	BulkAllUpdateUsersRequestTrafficLimitStrategyDAY          BulkAllUpdateUsersRequestTrafficLimitStrategy = "DAY"
-	BulkAllUpdateUsersRequestTrafficLimitStrategyWEEK         BulkAllUpdateUsersRequestTrafficLimitStrategy = "WEEK"
-	BulkAllUpdateUsersRequestTrafficLimitStrategyMONTH        BulkAllUpdateUsersRequestTrafficLimitStrategy = "MONTH"
-	BulkAllUpdateUsersRequestTrafficLimitStrategyMONTHROLLING BulkAllUpdateUsersRequestTrafficLimitStrategy = "MONTH_ROLLING"
+	BulkAllUpdateUsersBodyTrafficLimitStrategyNORESET      BulkAllUpdateUsersBodyTrafficLimitStrategy = "NO_RESET"
+	BulkAllUpdateUsersBodyTrafficLimitStrategyDAY          BulkAllUpdateUsersBodyTrafficLimitStrategy = "DAY"
+	BulkAllUpdateUsersBodyTrafficLimitStrategyWEEK         BulkAllUpdateUsersBodyTrafficLimitStrategy = "WEEK"
+	BulkAllUpdateUsersBodyTrafficLimitStrategyMONTH        BulkAllUpdateUsersBodyTrafficLimitStrategy = "MONTH"
+	BulkAllUpdateUsersBodyTrafficLimitStrategyMONTHROLLING BulkAllUpdateUsersBodyTrafficLimitStrategy = "MONTH_ROLLING"
 )
 
-// AllValues returns all BulkAllUpdateUsersRequestTrafficLimitStrategy values.
-func (BulkAllUpdateUsersRequestTrafficLimitStrategy) AllValues() []BulkAllUpdateUsersRequestTrafficLimitStrategy {
-	return []BulkAllUpdateUsersRequestTrafficLimitStrategy{
-		BulkAllUpdateUsersRequestTrafficLimitStrategyNORESET,
-		BulkAllUpdateUsersRequestTrafficLimitStrategyDAY,
-		BulkAllUpdateUsersRequestTrafficLimitStrategyWEEK,
-		BulkAllUpdateUsersRequestTrafficLimitStrategyMONTH,
-		BulkAllUpdateUsersRequestTrafficLimitStrategyMONTHROLLING,
+// AllValues returns all BulkAllUpdateUsersBodyTrafficLimitStrategy values.
+func (BulkAllUpdateUsersBodyTrafficLimitStrategy) AllValues() []BulkAllUpdateUsersBodyTrafficLimitStrategy {
+	return []BulkAllUpdateUsersBodyTrafficLimitStrategy{
+		BulkAllUpdateUsersBodyTrafficLimitStrategyNORESET,
+		BulkAllUpdateUsersBodyTrafficLimitStrategyDAY,
+		BulkAllUpdateUsersBodyTrafficLimitStrategyWEEK,
+		BulkAllUpdateUsersBodyTrafficLimitStrategyMONTH,
+		BulkAllUpdateUsersBodyTrafficLimitStrategyMONTHROLLING,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s BulkAllUpdateUsersRequestTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s BulkAllUpdateUsersBodyTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyNORESET:
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyDAY:
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyWEEK:
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyMONTH:
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyMONTH:
 		return []byte(s), nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyMONTHROLLING:
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyMONTHROLLING:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -1151,72 +960,72 @@ func (s BulkAllUpdateUsersRequestTrafficLimitStrategy) MarshalText() ([]byte, er
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *BulkAllUpdateUsersRequestTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch BulkAllUpdateUsersRequestTrafficLimitStrategy(data) {
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyNORESET:
-		*s = BulkAllUpdateUsersRequestTrafficLimitStrategyNORESET
+func (s *BulkAllUpdateUsersBodyTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch BulkAllUpdateUsersBodyTrafficLimitStrategy(data) {
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyNORESET:
+		*s = BulkAllUpdateUsersBodyTrafficLimitStrategyNORESET
 		return nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyDAY:
-		*s = BulkAllUpdateUsersRequestTrafficLimitStrategyDAY
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyDAY:
+		*s = BulkAllUpdateUsersBodyTrafficLimitStrategyDAY
 		return nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyWEEK:
-		*s = BulkAllUpdateUsersRequestTrafficLimitStrategyWEEK
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyWEEK:
+		*s = BulkAllUpdateUsersBodyTrafficLimitStrategyWEEK
 		return nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyMONTH:
-		*s = BulkAllUpdateUsersRequestTrafficLimitStrategyMONTH
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyMONTH:
+		*s = BulkAllUpdateUsersBodyTrafficLimitStrategyMONTH
 		return nil
-	case BulkAllUpdateUsersRequestTrafficLimitStrategyMONTHROLLING:
-		*s = BulkAllUpdateUsersRequestTrafficLimitStrategyMONTHROLLING
+	case BulkAllUpdateUsersBodyTrafficLimitStrategyMONTHROLLING:
+		*s = BulkAllUpdateUsersBodyTrafficLimitStrategyMONTHROLLING
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/BulkDeleteUsersByStatusRequest
-type BulkDeleteUsersByStatusRequest struct {
-	Status OptBulkDeleteUsersByStatusRequestStatus `json:"status"`
+// Ref: #/components/schemas/BulkDeleteUsersByStatusBody
+type BulkDeleteUsersByStatusBody struct {
+	Status BulkDeleteUsersByStatusBodyStatus `json:"status"`
 }
 
 // GetStatus returns the value of Status.
-func (s *BulkDeleteUsersByStatusRequest) GetStatus() OptBulkDeleteUsersByStatusRequestStatus {
+func (s *BulkDeleteUsersByStatusBody) GetStatus() BulkDeleteUsersByStatusBodyStatus {
 	return s.Status
 }
 
 // SetStatus sets the value of Status.
-func (s *BulkDeleteUsersByStatusRequest) SetStatus(val OptBulkDeleteUsersByStatusRequestStatus) {
+func (s *BulkDeleteUsersByStatusBody) SetStatus(val BulkDeleteUsersByStatusBodyStatus) {
 	s.Status = val
 }
 
-type BulkDeleteUsersByStatusRequestStatus string
+type BulkDeleteUsersByStatusBodyStatus string
 
 const (
-	BulkDeleteUsersByStatusRequestStatusACTIVE   BulkDeleteUsersByStatusRequestStatus = "ACTIVE"
-	BulkDeleteUsersByStatusRequestStatusDISABLED BulkDeleteUsersByStatusRequestStatus = "DISABLED"
-	BulkDeleteUsersByStatusRequestStatusLIMITED  BulkDeleteUsersByStatusRequestStatus = "LIMITED"
-	BulkDeleteUsersByStatusRequestStatusEXPIRED  BulkDeleteUsersByStatusRequestStatus = "EXPIRED"
+	BulkDeleteUsersByStatusBodyStatusACTIVE   BulkDeleteUsersByStatusBodyStatus = "ACTIVE"
+	BulkDeleteUsersByStatusBodyStatusDISABLED BulkDeleteUsersByStatusBodyStatus = "DISABLED"
+	BulkDeleteUsersByStatusBodyStatusLIMITED  BulkDeleteUsersByStatusBodyStatus = "LIMITED"
+	BulkDeleteUsersByStatusBodyStatusEXPIRED  BulkDeleteUsersByStatusBodyStatus = "EXPIRED"
 )
 
-// AllValues returns all BulkDeleteUsersByStatusRequestStatus values.
-func (BulkDeleteUsersByStatusRequestStatus) AllValues() []BulkDeleteUsersByStatusRequestStatus {
-	return []BulkDeleteUsersByStatusRequestStatus{
-		BulkDeleteUsersByStatusRequestStatusACTIVE,
-		BulkDeleteUsersByStatusRequestStatusDISABLED,
-		BulkDeleteUsersByStatusRequestStatusLIMITED,
-		BulkDeleteUsersByStatusRequestStatusEXPIRED,
+// AllValues returns all BulkDeleteUsersByStatusBodyStatus values.
+func (BulkDeleteUsersByStatusBodyStatus) AllValues() []BulkDeleteUsersByStatusBodyStatus {
+	return []BulkDeleteUsersByStatusBodyStatus{
+		BulkDeleteUsersByStatusBodyStatusACTIVE,
+		BulkDeleteUsersByStatusBodyStatusDISABLED,
+		BulkDeleteUsersByStatusBodyStatusLIMITED,
+		BulkDeleteUsersByStatusBodyStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s BulkDeleteUsersByStatusRequestStatus) MarshalText() ([]byte, error) {
+func (s BulkDeleteUsersByStatusBodyStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case BulkDeleteUsersByStatusRequestStatusACTIVE:
+	case BulkDeleteUsersByStatusBodyStatusACTIVE:
 		return []byte(s), nil
-	case BulkDeleteUsersByStatusRequestStatusDISABLED:
+	case BulkDeleteUsersByStatusBodyStatusDISABLED:
 		return []byte(s), nil
-	case BulkDeleteUsersByStatusRequestStatusLIMITED:
+	case BulkDeleteUsersByStatusBodyStatusLIMITED:
 		return []byte(s), nil
-	case BulkDeleteUsersByStatusRequestStatusEXPIRED:
+	case BulkDeleteUsersByStatusBodyStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -1224,106 +1033,106 @@ func (s BulkDeleteUsersByStatusRequestStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *BulkDeleteUsersByStatusRequestStatus) UnmarshalText(data []byte) error {
-	switch BulkDeleteUsersByStatusRequestStatus(data) {
-	case BulkDeleteUsersByStatusRequestStatusACTIVE:
-		*s = BulkDeleteUsersByStatusRequestStatusACTIVE
+func (s *BulkDeleteUsersByStatusBodyStatus) UnmarshalText(data []byte) error {
+	switch BulkDeleteUsersByStatusBodyStatus(data) {
+	case BulkDeleteUsersByStatusBodyStatusACTIVE:
+		*s = BulkDeleteUsersByStatusBodyStatusACTIVE
 		return nil
-	case BulkDeleteUsersByStatusRequestStatusDISABLED:
-		*s = BulkDeleteUsersByStatusRequestStatusDISABLED
+	case BulkDeleteUsersByStatusBodyStatusDISABLED:
+		*s = BulkDeleteUsersByStatusBodyStatusDISABLED
 		return nil
-	case BulkDeleteUsersByStatusRequestStatusLIMITED:
-		*s = BulkDeleteUsersByStatusRequestStatusLIMITED
+	case BulkDeleteUsersByStatusBodyStatusLIMITED:
+		*s = BulkDeleteUsersByStatusBodyStatusLIMITED
 		return nil
-	case BulkDeleteUsersByStatusRequestStatusEXPIRED:
-		*s = BulkDeleteUsersByStatusRequestStatusEXPIRED
+	case BulkDeleteUsersByStatusBodyStatusEXPIRED:
+		*s = BulkDeleteUsersByStatusBodyStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/BulkExtendExpirationDateRequest
-type BulkExtendExpirationDateRequest struct {
-	Uuids      []uuid.UUID `json:"uuids"`
-	ExtendDays int         `json:"extendDays"`
+// Ref: #/components/schemas/BulkExtendExpirationDateBody
+type BulkExtendExpirationDateBody struct {
+	UserIds    []float64 `json:"userIds"`
+	ExtendDays int       `json:"extendDays"`
 }
 
-// GetUuids returns the value of Uuids.
-func (s *BulkExtendExpirationDateRequest) GetUuids() []uuid.UUID {
-	return s.Uuids
+// GetUserIds returns the value of UserIds.
+func (s *BulkExtendExpirationDateBody) GetUserIds() []float64 {
+	return s.UserIds
 }
 
 // GetExtendDays returns the value of ExtendDays.
-func (s *BulkExtendExpirationDateRequest) GetExtendDays() int {
+func (s *BulkExtendExpirationDateBody) GetExtendDays() int {
 	return s.ExtendDays
 }
 
-// SetUuids sets the value of Uuids.
-func (s *BulkExtendExpirationDateRequest) SetUuids(val []uuid.UUID) {
-	s.Uuids = val
+// SetUserIds sets the value of UserIds.
+func (s *BulkExtendExpirationDateBody) SetUserIds(val []float64) {
+	s.UserIds = val
 }
 
 // SetExtendDays sets the value of ExtendDays.
-func (s *BulkExtendExpirationDateRequest) SetExtendDays(val int) {
+func (s *BulkExtendExpirationDateBody) SetExtendDays(val int) {
 	s.ExtendDays = val
 }
 
-// Ref: #/components/schemas/BulkNodesActionsRequest
-type BulkNodesActionsRequest struct {
-	Uuids  []uuid.UUID                   `json:"uuids"`
-	Action BulkNodesActionsRequestAction `json:"action"`
+// Ref: #/components/schemas/BulkNodesActionsBody
+type BulkNodesActionsBody struct {
+	Uuids  []uuid.UUID                `json:"uuids"`
+	Action BulkNodesActionsBodyAction `json:"action"`
 }
 
 // GetUuids returns the value of Uuids.
-func (s *BulkNodesActionsRequest) GetUuids() []uuid.UUID {
+func (s *BulkNodesActionsBody) GetUuids() []uuid.UUID {
 	return s.Uuids
 }
 
 // GetAction returns the value of Action.
-func (s *BulkNodesActionsRequest) GetAction() BulkNodesActionsRequestAction {
+func (s *BulkNodesActionsBody) GetAction() BulkNodesActionsBodyAction {
 	return s.Action
 }
 
 // SetUuids sets the value of Uuids.
-func (s *BulkNodesActionsRequest) SetUuids(val []uuid.UUID) {
+func (s *BulkNodesActionsBody) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
 // SetAction sets the value of Action.
-func (s *BulkNodesActionsRequest) SetAction(val BulkNodesActionsRequestAction) {
+func (s *BulkNodesActionsBody) SetAction(val BulkNodesActionsBodyAction) {
 	s.Action = val
 }
 
-type BulkNodesActionsRequestAction string
+type BulkNodesActionsBodyAction string
 
 const (
-	BulkNodesActionsRequestActionENABLE       BulkNodesActionsRequestAction = "ENABLE"
-	BulkNodesActionsRequestActionDISABLE      BulkNodesActionsRequestAction = "DISABLE"
-	BulkNodesActionsRequestActionRESTART      BulkNodesActionsRequestAction = "RESTART"
-	BulkNodesActionsRequestActionRESETTRAFFIC BulkNodesActionsRequestAction = "RESET_TRAFFIC"
+	BulkNodesActionsBodyActionENABLE       BulkNodesActionsBodyAction = "ENABLE"
+	BulkNodesActionsBodyActionDISABLE      BulkNodesActionsBodyAction = "DISABLE"
+	BulkNodesActionsBodyActionRESTART      BulkNodesActionsBodyAction = "RESTART"
+	BulkNodesActionsBodyActionRESETTRAFFIC BulkNodesActionsBodyAction = "RESET_TRAFFIC"
 )
 
-// AllValues returns all BulkNodesActionsRequestAction values.
-func (BulkNodesActionsRequestAction) AllValues() []BulkNodesActionsRequestAction {
-	return []BulkNodesActionsRequestAction{
-		BulkNodesActionsRequestActionENABLE,
-		BulkNodesActionsRequestActionDISABLE,
-		BulkNodesActionsRequestActionRESTART,
-		BulkNodesActionsRequestActionRESETTRAFFIC,
+// AllValues returns all BulkNodesActionsBodyAction values.
+func (BulkNodesActionsBodyAction) AllValues() []BulkNodesActionsBodyAction {
+	return []BulkNodesActionsBodyAction{
+		BulkNodesActionsBodyActionENABLE,
+		BulkNodesActionsBodyActionDISABLE,
+		BulkNodesActionsBodyActionRESTART,
+		BulkNodesActionsBodyActionRESETTRAFFIC,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s BulkNodesActionsRequestAction) MarshalText() ([]byte, error) {
+func (s BulkNodesActionsBodyAction) MarshalText() ([]byte, error) {
 	switch s {
-	case BulkNodesActionsRequestActionENABLE:
+	case BulkNodesActionsBodyActionENABLE:
 		return []byte(s), nil
-	case BulkNodesActionsRequestActionDISABLE:
+	case BulkNodesActionsBodyActionDISABLE:
 		return []byte(s), nil
-	case BulkNodesActionsRequestActionRESTART:
+	case BulkNodesActionsBodyActionRESTART:
 		return []byte(s), nil
-	case BulkNodesActionsRequestActionRESETTRAFFIC:
+	case BulkNodesActionsBodyActionRESETTRAFFIC:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -1331,52 +1140,52 @@ func (s BulkNodesActionsRequestAction) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *BulkNodesActionsRequestAction) UnmarshalText(data []byte) error {
-	switch BulkNodesActionsRequestAction(data) {
-	case BulkNodesActionsRequestActionENABLE:
-		*s = BulkNodesActionsRequestActionENABLE
+func (s *BulkNodesActionsBodyAction) UnmarshalText(data []byte) error {
+	switch BulkNodesActionsBodyAction(data) {
+	case BulkNodesActionsBodyActionENABLE:
+		*s = BulkNodesActionsBodyActionENABLE
 		return nil
-	case BulkNodesActionsRequestActionDISABLE:
-		*s = BulkNodesActionsRequestActionDISABLE
+	case BulkNodesActionsBodyActionDISABLE:
+		*s = BulkNodesActionsBodyActionDISABLE
 		return nil
-	case BulkNodesActionsRequestActionRESTART:
-		*s = BulkNodesActionsRequestActionRESTART
+	case BulkNodesActionsBodyActionRESTART:
+		*s = BulkNodesActionsBodyActionRESTART
 		return nil
-	case BulkNodesActionsRequestActionRESETTRAFFIC:
-		*s = BulkNodesActionsRequestActionRESETTRAFFIC
+	case BulkNodesActionsBodyActionRESETTRAFFIC:
+		*s = BulkNodesActionsBodyActionRESETTRAFFIC
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/BulkNodesUpdateRequest
-type BulkNodesUpdateRequest struct {
-	Uuids  []uuid.UUID                  `json:"uuids"`
-	Fields BulkNodesUpdateRequestFields `json:"fields"`
+// Ref: #/components/schemas/BulkNodesUpdateBody
+type BulkNodesUpdateBody struct {
+	Uuids  []uuid.UUID               `json:"uuids"`
+	Fields BulkNodesUpdateBodyFields `json:"fields"`
 }
 
 // GetUuids returns the value of Uuids.
-func (s *BulkNodesUpdateRequest) GetUuids() []uuid.UUID {
+func (s *BulkNodesUpdateBody) GetUuids() []uuid.UUID {
 	return s.Uuids
 }
 
 // GetFields returns the value of Fields.
-func (s *BulkNodesUpdateRequest) GetFields() BulkNodesUpdateRequestFields {
+func (s *BulkNodesUpdateBody) GetFields() BulkNodesUpdateBodyFields {
 	return s.Fields
 }
 
 // SetUuids sets the value of Uuids.
-func (s *BulkNodesUpdateRequest) SetUuids(val []uuid.UUID) {
+func (s *BulkNodesUpdateBody) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
 // SetFields sets the value of Fields.
-func (s *BulkNodesUpdateRequest) SetFields(val BulkNodesUpdateRequestFields) {
+func (s *BulkNodesUpdateBody) SetFields(val BulkNodesUpdateBodyFields) {
 	s.Fields = val
 }
 
-type BulkNodesUpdateRequestFields struct {
+type BulkNodesUpdateBodyFields struct {
 	CountryCode               OptString    `json:"countryCode"`
 	ConsumptionMultiplier     OptFloat64   `json:"consumptionMultiplier"`
 	NodeConsumptionMultiplier OptFloat64   `json:"nodeConsumptionMultiplier"`
@@ -1387,247 +1196,247 @@ type BulkNodesUpdateRequestFields struct {
 }
 
 // GetCountryCode returns the value of CountryCode.
-func (s *BulkNodesUpdateRequestFields) GetCountryCode() OptString {
+func (s *BulkNodesUpdateBodyFields) GetCountryCode() OptString {
 	return s.CountryCode
 }
 
 // GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *BulkNodesUpdateRequestFields) GetConsumptionMultiplier() OptFloat64 {
+func (s *BulkNodesUpdateBodyFields) GetConsumptionMultiplier() OptFloat64 {
 	return s.ConsumptionMultiplier
 }
 
 // GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
-func (s *BulkNodesUpdateRequestFields) GetNodeConsumptionMultiplier() OptFloat64 {
+func (s *BulkNodesUpdateBodyFields) GetNodeConsumptionMultiplier() OptFloat64 {
 	return s.NodeConsumptionMultiplier
 }
 
 // GetProviderUuid returns the value of ProviderUuid.
-func (s *BulkNodesUpdateRequestFields) GetProviderUuid() OptNilUUID {
+func (s *BulkNodesUpdateBodyFields) GetProviderUuid() OptNilUUID {
 	return s.ProviderUuid
 }
 
 // GetTags returns the value of Tags.
-func (s *BulkNodesUpdateRequestFields) GetTags() []string {
+func (s *BulkNodesUpdateBodyFields) GetTags() []string {
 	return s.Tags
 }
 
 // GetActivePluginUuid returns the value of ActivePluginUuid.
-func (s *BulkNodesUpdateRequestFields) GetActivePluginUuid() OptNilUUID {
+func (s *BulkNodesUpdateBodyFields) GetActivePluginUuid() OptNilUUID {
 	return s.ActivePluginUuid
 }
 
 // GetNote returns the value of Note.
-func (s *BulkNodesUpdateRequestFields) GetNote() OptNilString {
+func (s *BulkNodesUpdateBodyFields) GetNote() OptNilString {
 	return s.Note
 }
 
 // SetCountryCode sets the value of CountryCode.
-func (s *BulkNodesUpdateRequestFields) SetCountryCode(val OptString) {
+func (s *BulkNodesUpdateBodyFields) SetCountryCode(val OptString) {
 	s.CountryCode = val
 }
 
 // SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *BulkNodesUpdateRequestFields) SetConsumptionMultiplier(val OptFloat64) {
+func (s *BulkNodesUpdateBodyFields) SetConsumptionMultiplier(val OptFloat64) {
 	s.ConsumptionMultiplier = val
 }
 
 // SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
-func (s *BulkNodesUpdateRequestFields) SetNodeConsumptionMultiplier(val OptFloat64) {
+func (s *BulkNodesUpdateBodyFields) SetNodeConsumptionMultiplier(val OptFloat64) {
 	s.NodeConsumptionMultiplier = val
 }
 
 // SetProviderUuid sets the value of ProviderUuid.
-func (s *BulkNodesUpdateRequestFields) SetProviderUuid(val OptNilUUID) {
+func (s *BulkNodesUpdateBodyFields) SetProviderUuid(val OptNilUUID) {
 	s.ProviderUuid = val
 }
 
 // SetTags sets the value of Tags.
-func (s *BulkNodesUpdateRequestFields) SetTags(val []string) {
+func (s *BulkNodesUpdateBodyFields) SetTags(val []string) {
 	s.Tags = val
 }
 
 // SetActivePluginUuid sets the value of ActivePluginUuid.
-func (s *BulkNodesUpdateRequestFields) SetActivePluginUuid(val OptNilUUID) {
+func (s *BulkNodesUpdateBodyFields) SetActivePluginUuid(val OptNilUUID) {
 	s.ActivePluginUuid = val
 }
 
 // SetNote sets the value of Note.
-func (s *BulkNodesUpdateRequestFields) SetNote(val OptNilString) {
+func (s *BulkNodesUpdateBodyFields) SetNote(val OptNilString) {
 	s.Note = val
 }
 
-// Ref: #/components/schemas/BulkUpdateUsersRequest
-type BulkUpdateUsersRequest struct {
-	Uuids  []uuid.UUID                  `json:"uuids"`
-	Fields BulkUpdateUsersRequestFields `json:"fields"`
+// Ref: #/components/schemas/BulkUpdateUsersBody
+type BulkUpdateUsersBody struct {
+	UserIds []float64                 `json:"userIds"`
+	Fields  BulkUpdateUsersBodyFields `json:"fields"`
 }
 
-// GetUuids returns the value of Uuids.
-func (s *BulkUpdateUsersRequest) GetUuids() []uuid.UUID {
-	return s.Uuids
+// GetUserIds returns the value of UserIds.
+func (s *BulkUpdateUsersBody) GetUserIds() []float64 {
+	return s.UserIds
 }
 
 // GetFields returns the value of Fields.
-func (s *BulkUpdateUsersRequest) GetFields() BulkUpdateUsersRequestFields {
+func (s *BulkUpdateUsersBody) GetFields() BulkUpdateUsersBodyFields {
 	return s.Fields
 }
 
-// SetUuids sets the value of Uuids.
-func (s *BulkUpdateUsersRequest) SetUuids(val []uuid.UUID) {
-	s.Uuids = val
+// SetUserIds sets the value of UserIds.
+func (s *BulkUpdateUsersBody) SetUserIds(val []float64) {
+	s.UserIds = val
 }
 
 // SetFields sets the value of Fields.
-func (s *BulkUpdateUsersRequest) SetFields(val BulkUpdateUsersRequestFields) {
+func (s *BulkUpdateUsersBody) SetFields(val BulkUpdateUsersBodyFields) {
 	s.Fields = val
 }
 
-type BulkUpdateUsersRequestFields struct {
-	Status OptBulkUpdateUsersRequestFieldsStatus `json:"status"`
+type BulkUpdateUsersBodyFields struct {
+	Status OptBulkUpdateUsersBodyFieldsStatus `json:"status"`
 	// Traffic limit in bytes. 0 - unlimited.
 	TrafficLimitBytes OptFloat64 `json:"trafficLimitBytes"`
-	// Traffic limit reset strategy.
-	TrafficLimitStrategy OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	// Available reset periods.
+	TrafficLimitStrategy OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy `json:"trafficLimitStrategy"`
 	// Expiration date: 2025-01-17T15:38:45.065Z.
-	ExpireAt        OptDateTime  `json:"expireAt"`
-	Description     OptNilString `json:"description"`
-	TelegramId      OptNilInt    `json:"telegramId"`
-	Email           OptNilString `json:"email"`
-	Tag             OptNilString `json:"tag"`
-	HwidDeviceLimit OptNilInt    `json:"hwidDeviceLimit"`
+	ExpireAt        OptDateTime   `json:"expireAt"`
+	Description     OptNilString  `json:"description"`
+	TelegramId      OptNilFloat64 `json:"telegramId"`
+	Email           OptNilString  `json:"email"`
+	Tag             OptNilString  `json:"tag"`
+	HwidDeviceLimit OptNilInt     `json:"hwidDeviceLimit"`
 	// Optional. External squad UUID.
 	ExternalSquadUuid OptNilUUID `json:"externalSquadUuid"`
 }
 
 // GetStatus returns the value of Status.
-func (s *BulkUpdateUsersRequestFields) GetStatus() OptBulkUpdateUsersRequestFieldsStatus {
+func (s *BulkUpdateUsersBodyFields) GetStatus() OptBulkUpdateUsersBodyFieldsStatus {
 	return s.Status
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *BulkUpdateUsersRequestFields) GetTrafficLimitBytes() OptFloat64 {
+func (s *BulkUpdateUsersBodyFields) GetTrafficLimitBytes() OptFloat64 {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *BulkUpdateUsersRequestFields) GetTrafficLimitStrategy() OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy {
+func (s *BulkUpdateUsersBodyFields) GetTrafficLimitStrategy() OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
 // GetExpireAt returns the value of ExpireAt.
-func (s *BulkUpdateUsersRequestFields) GetExpireAt() OptDateTime {
+func (s *BulkUpdateUsersBodyFields) GetExpireAt() OptDateTime {
 	return s.ExpireAt
 }
 
 // GetDescription returns the value of Description.
-func (s *BulkUpdateUsersRequestFields) GetDescription() OptNilString {
+func (s *BulkUpdateUsersBodyFields) GetDescription() OptNilString {
 	return s.Description
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *BulkUpdateUsersRequestFields) GetTelegramId() OptNilInt {
+func (s *BulkUpdateUsersBodyFields) GetTelegramId() OptNilFloat64 {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *BulkUpdateUsersRequestFields) GetEmail() OptNilString {
+func (s *BulkUpdateUsersBodyFields) GetEmail() OptNilString {
 	return s.Email
 }
 
 // GetTag returns the value of Tag.
-func (s *BulkUpdateUsersRequestFields) GetTag() OptNilString {
+func (s *BulkUpdateUsersBodyFields) GetTag() OptNilString {
 	return s.Tag
 }
 
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *BulkUpdateUsersRequestFields) GetHwidDeviceLimit() OptNilInt {
+func (s *BulkUpdateUsersBodyFields) GetHwidDeviceLimit() OptNilInt {
 	return s.HwidDeviceLimit
 }
 
 // GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *BulkUpdateUsersRequestFields) GetExternalSquadUuid() OptNilUUID {
+func (s *BulkUpdateUsersBodyFields) GetExternalSquadUuid() OptNilUUID {
 	return s.ExternalSquadUuid
 }
 
 // SetStatus sets the value of Status.
-func (s *BulkUpdateUsersRequestFields) SetStatus(val OptBulkUpdateUsersRequestFieldsStatus) {
+func (s *BulkUpdateUsersBodyFields) SetStatus(val OptBulkUpdateUsersBodyFieldsStatus) {
 	s.Status = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *BulkUpdateUsersRequestFields) SetTrafficLimitBytes(val OptFloat64) {
+func (s *BulkUpdateUsersBodyFields) SetTrafficLimitBytes(val OptFloat64) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *BulkUpdateUsersRequestFields) SetTrafficLimitStrategy(val OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) {
+func (s *BulkUpdateUsersBodyFields) SetTrafficLimitStrategy(val OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
-func (s *BulkUpdateUsersRequestFields) SetExpireAt(val OptDateTime) {
+func (s *BulkUpdateUsersBodyFields) SetExpireAt(val OptDateTime) {
 	s.ExpireAt = val
 }
 
 // SetDescription sets the value of Description.
-func (s *BulkUpdateUsersRequestFields) SetDescription(val OptNilString) {
+func (s *BulkUpdateUsersBodyFields) SetDescription(val OptNilString) {
 	s.Description = val
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *BulkUpdateUsersRequestFields) SetTelegramId(val OptNilInt) {
+func (s *BulkUpdateUsersBodyFields) SetTelegramId(val OptNilFloat64) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *BulkUpdateUsersRequestFields) SetEmail(val OptNilString) {
+func (s *BulkUpdateUsersBodyFields) SetEmail(val OptNilString) {
 	s.Email = val
 }
 
 // SetTag sets the value of Tag.
-func (s *BulkUpdateUsersRequestFields) SetTag(val OptNilString) {
+func (s *BulkUpdateUsersBodyFields) SetTag(val OptNilString) {
 	s.Tag = val
 }
 
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *BulkUpdateUsersRequestFields) SetHwidDeviceLimit(val OptNilInt) {
+func (s *BulkUpdateUsersBodyFields) SetHwidDeviceLimit(val OptNilInt) {
 	s.HwidDeviceLimit = val
 }
 
 // SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *BulkUpdateUsersRequestFields) SetExternalSquadUuid(val OptNilUUID) {
+func (s *BulkUpdateUsersBodyFields) SetExternalSquadUuid(val OptNilUUID) {
 	s.ExternalSquadUuid = val
 }
 
-type BulkUpdateUsersRequestFieldsStatus string
+type BulkUpdateUsersBodyFieldsStatus string
 
 const (
-	BulkUpdateUsersRequestFieldsStatusACTIVE   BulkUpdateUsersRequestFieldsStatus = "ACTIVE"
-	BulkUpdateUsersRequestFieldsStatusDISABLED BulkUpdateUsersRequestFieldsStatus = "DISABLED"
-	BulkUpdateUsersRequestFieldsStatusLIMITED  BulkUpdateUsersRequestFieldsStatus = "LIMITED"
-	BulkUpdateUsersRequestFieldsStatusEXPIRED  BulkUpdateUsersRequestFieldsStatus = "EXPIRED"
+	BulkUpdateUsersBodyFieldsStatusACTIVE   BulkUpdateUsersBodyFieldsStatus = "ACTIVE"
+	BulkUpdateUsersBodyFieldsStatusDISABLED BulkUpdateUsersBodyFieldsStatus = "DISABLED"
+	BulkUpdateUsersBodyFieldsStatusLIMITED  BulkUpdateUsersBodyFieldsStatus = "LIMITED"
+	BulkUpdateUsersBodyFieldsStatusEXPIRED  BulkUpdateUsersBodyFieldsStatus = "EXPIRED"
 )
 
-// AllValues returns all BulkUpdateUsersRequestFieldsStatus values.
-func (BulkUpdateUsersRequestFieldsStatus) AllValues() []BulkUpdateUsersRequestFieldsStatus {
-	return []BulkUpdateUsersRequestFieldsStatus{
-		BulkUpdateUsersRequestFieldsStatusACTIVE,
-		BulkUpdateUsersRequestFieldsStatusDISABLED,
-		BulkUpdateUsersRequestFieldsStatusLIMITED,
-		BulkUpdateUsersRequestFieldsStatusEXPIRED,
+// AllValues returns all BulkUpdateUsersBodyFieldsStatus values.
+func (BulkUpdateUsersBodyFieldsStatus) AllValues() []BulkUpdateUsersBodyFieldsStatus {
+	return []BulkUpdateUsersBodyFieldsStatus{
+		BulkUpdateUsersBodyFieldsStatusACTIVE,
+		BulkUpdateUsersBodyFieldsStatusDISABLED,
+		BulkUpdateUsersBodyFieldsStatusLIMITED,
+		BulkUpdateUsersBodyFieldsStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s BulkUpdateUsersRequestFieldsStatus) MarshalText() ([]byte, error) {
+func (s BulkUpdateUsersBodyFieldsStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case BulkUpdateUsersRequestFieldsStatusACTIVE:
+	case BulkUpdateUsersBodyFieldsStatusACTIVE:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsStatusDISABLED:
+	case BulkUpdateUsersBodyFieldsStatusDISABLED:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsStatusLIMITED:
+	case BulkUpdateUsersBodyFieldsStatusLIMITED:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsStatusEXPIRED:
+	case BulkUpdateUsersBodyFieldsStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -1635,59 +1444,59 @@ func (s BulkUpdateUsersRequestFieldsStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *BulkUpdateUsersRequestFieldsStatus) UnmarshalText(data []byte) error {
-	switch BulkUpdateUsersRequestFieldsStatus(data) {
-	case BulkUpdateUsersRequestFieldsStatusACTIVE:
-		*s = BulkUpdateUsersRequestFieldsStatusACTIVE
+func (s *BulkUpdateUsersBodyFieldsStatus) UnmarshalText(data []byte) error {
+	switch BulkUpdateUsersBodyFieldsStatus(data) {
+	case BulkUpdateUsersBodyFieldsStatusACTIVE:
+		*s = BulkUpdateUsersBodyFieldsStatusACTIVE
 		return nil
-	case BulkUpdateUsersRequestFieldsStatusDISABLED:
-		*s = BulkUpdateUsersRequestFieldsStatusDISABLED
+	case BulkUpdateUsersBodyFieldsStatusDISABLED:
+		*s = BulkUpdateUsersBodyFieldsStatusDISABLED
 		return nil
-	case BulkUpdateUsersRequestFieldsStatusLIMITED:
-		*s = BulkUpdateUsersRequestFieldsStatusLIMITED
+	case BulkUpdateUsersBodyFieldsStatusLIMITED:
+		*s = BulkUpdateUsersBodyFieldsStatusLIMITED
 		return nil
-	case BulkUpdateUsersRequestFieldsStatusEXPIRED:
-		*s = BulkUpdateUsersRequestFieldsStatusEXPIRED
+	case BulkUpdateUsersBodyFieldsStatusEXPIRED:
+		*s = BulkUpdateUsersBodyFieldsStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Traffic limit reset strategy.
-type BulkUpdateUsersRequestFieldsTrafficLimitStrategy string
+// Available reset periods.
+type BulkUpdateUsersBodyFieldsTrafficLimitStrategy string
 
 const (
-	BulkUpdateUsersRequestFieldsTrafficLimitStrategyNORESET      BulkUpdateUsersRequestFieldsTrafficLimitStrategy = "NO_RESET"
-	BulkUpdateUsersRequestFieldsTrafficLimitStrategyDAY          BulkUpdateUsersRequestFieldsTrafficLimitStrategy = "DAY"
-	BulkUpdateUsersRequestFieldsTrafficLimitStrategyWEEK         BulkUpdateUsersRequestFieldsTrafficLimitStrategy = "WEEK"
-	BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTH        BulkUpdateUsersRequestFieldsTrafficLimitStrategy = "MONTH"
-	BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTHROLLING BulkUpdateUsersRequestFieldsTrafficLimitStrategy = "MONTH_ROLLING"
+	BulkUpdateUsersBodyFieldsTrafficLimitStrategyNORESET      BulkUpdateUsersBodyFieldsTrafficLimitStrategy = "NO_RESET"
+	BulkUpdateUsersBodyFieldsTrafficLimitStrategyDAY          BulkUpdateUsersBodyFieldsTrafficLimitStrategy = "DAY"
+	BulkUpdateUsersBodyFieldsTrafficLimitStrategyWEEK         BulkUpdateUsersBodyFieldsTrafficLimitStrategy = "WEEK"
+	BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTH        BulkUpdateUsersBodyFieldsTrafficLimitStrategy = "MONTH"
+	BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTHROLLING BulkUpdateUsersBodyFieldsTrafficLimitStrategy = "MONTH_ROLLING"
 )
 
-// AllValues returns all BulkUpdateUsersRequestFieldsTrafficLimitStrategy values.
-func (BulkUpdateUsersRequestFieldsTrafficLimitStrategy) AllValues() []BulkUpdateUsersRequestFieldsTrafficLimitStrategy {
-	return []BulkUpdateUsersRequestFieldsTrafficLimitStrategy{
-		BulkUpdateUsersRequestFieldsTrafficLimitStrategyNORESET,
-		BulkUpdateUsersRequestFieldsTrafficLimitStrategyDAY,
-		BulkUpdateUsersRequestFieldsTrafficLimitStrategyWEEK,
-		BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTH,
-		BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTHROLLING,
+// AllValues returns all BulkUpdateUsersBodyFieldsTrafficLimitStrategy values.
+func (BulkUpdateUsersBodyFieldsTrafficLimitStrategy) AllValues() []BulkUpdateUsersBodyFieldsTrafficLimitStrategy {
+	return []BulkUpdateUsersBodyFieldsTrafficLimitStrategy{
+		BulkUpdateUsersBodyFieldsTrafficLimitStrategyNORESET,
+		BulkUpdateUsersBodyFieldsTrafficLimitStrategyDAY,
+		BulkUpdateUsersBodyFieldsTrafficLimitStrategyWEEK,
+		BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTH,
+		BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTHROLLING,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s BulkUpdateUsersRequestFieldsTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s BulkUpdateUsersBodyFieldsTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyNORESET:
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyDAY:
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyWEEK:
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTH:
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTH:
 		return []byte(s), nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTHROLLING:
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTHROLLING:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -1695,82 +1504,52 @@ func (s BulkUpdateUsersRequestFieldsTrafficLimitStrategy) MarshalText() ([]byte,
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *BulkUpdateUsersRequestFieldsTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch BulkUpdateUsersRequestFieldsTrafficLimitStrategy(data) {
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyNORESET:
-		*s = BulkUpdateUsersRequestFieldsTrafficLimitStrategyNORESET
+func (s *BulkUpdateUsersBodyFieldsTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch BulkUpdateUsersBodyFieldsTrafficLimitStrategy(data) {
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyNORESET:
+		*s = BulkUpdateUsersBodyFieldsTrafficLimitStrategyNORESET
 		return nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyDAY:
-		*s = BulkUpdateUsersRequestFieldsTrafficLimitStrategyDAY
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyDAY:
+		*s = BulkUpdateUsersBodyFieldsTrafficLimitStrategyDAY
 		return nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyWEEK:
-		*s = BulkUpdateUsersRequestFieldsTrafficLimitStrategyWEEK
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyWEEK:
+		*s = BulkUpdateUsersBodyFieldsTrafficLimitStrategyWEEK
 		return nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTH:
-		*s = BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTH
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTH:
+		*s = BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTH
 		return nil
-	case BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTHROLLING:
-		*s = BulkUpdateUsersRequestFieldsTrafficLimitStrategyMONTHROLLING
+	case BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTHROLLING:
+		*s = BulkUpdateUsersBodyFieldsTrafficLimitStrategyMONTHROLLING
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/BulkUpdateUsersSquadsRequest
-type BulkUpdateUsersSquadsRequest struct {
-	Uuids                []uuid.UUID `json:"uuids"`
+// Ref: #/components/schemas/BulkUpdateUsersSquadsBody
+type BulkUpdateUsersSquadsBody struct {
+	UserIds              []float64   `json:"userIds"`
 	ActiveInternalSquads []uuid.UUID `json:"activeInternalSquads"`
 }
 
-// GetUuids returns the value of Uuids.
-func (s *BulkUpdateUsersSquadsRequest) GetUuids() []uuid.UUID {
-	return s.Uuids
+// GetUserIds returns the value of UserIds.
+func (s *BulkUpdateUsersSquadsBody) GetUserIds() []float64 {
+	return s.UserIds
 }
 
 // GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *BulkUpdateUsersSquadsRequest) GetActiveInternalSquads() []uuid.UUID {
+func (s *BulkUpdateUsersSquadsBody) GetActiveInternalSquads() []uuid.UUID {
 	return s.ActiveInternalSquads
 }
 
-// SetUuids sets the value of Uuids.
-func (s *BulkUpdateUsersSquadsRequest) SetUuids(val []uuid.UUID) {
-	s.Uuids = val
+// SetUserIds sets the value of UserIds.
+func (s *BulkUpdateUsersSquadsBody) SetUserIds(val []float64) {
+	s.UserIds = val
 }
 
 // SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *BulkUpdateUsersSquadsRequest) SetActiveInternalSquads(val []uuid.UUID) {
+func (s *BulkUpdateUsersSquadsBody) SetActiveInternalSquads(val []uuid.UUID) {
 	s.ActiveInternalSquads = val
-}
-
-// Ref: #/components/schemas/BulkUuidsRequest
-type BulkUuidsRequest struct {
-	Uuids []uuid.UUID `json:"uuids"`
-}
-
-// GetUuids returns the value of Uuids.
-func (s *BulkUuidsRequest) GetUuids() []uuid.UUID {
-	return s.Uuids
-}
-
-// SetUuids sets the value of Uuids.
-func (s *BulkUuidsRequest) SetUuids(val []uuid.UUID) {
-	s.Uuids = val
-}
-
-// Ref: #/components/schemas/BulkUuidsRequest2
-type BulkUuidsRequest2 struct {
-	Uuids []uuid.UUID `json:"uuids"`
-}
-
-// GetUuids returns the value of Uuids.
-func (s *BulkUuidsRequest2) GetUuids() []uuid.UUID {
-	return s.Uuids
-}
-
-// SetUuids sets the value of Uuids.
-func (s *BulkUuidsRequest2) SetUuids(val []uuid.UUID) {
-	s.Uuids = val
 }
 
 // Ref: #/components/schemas/ByAppItem
@@ -1799,48 +1578,27 @@ func (s *ByAppItem) SetCount(val float64) {
 	s.Count = val
 }
 
-// Ref: #/components/schemas/CloneNodePluginRequestRequest
-type CloneNodePluginRequestRequest struct {
+// Ref: #/components/schemas/CloneNodePluginBodyRequest
+type CloneNodePluginBodyRequest struct {
 	CloneFromUuid uuid.UUID `json:"cloneFromUuid"`
 }
 
 // GetCloneFromUuid returns the value of CloneFromUuid.
-func (s *CloneNodePluginRequestRequest) GetCloneFromUuid() uuid.UUID {
+func (s *CloneNodePluginBodyRequest) GetCloneFromUuid() uuid.UUID {
 	return s.CloneFromUuid
 }
 
 // SetCloneFromUuid sets the value of CloneFromUuid.
-func (s *CloneNodePluginRequestRequest) SetCloneFromUuid(val uuid.UUID) {
+func (s *CloneNodePluginBodyRequest) SetCloneFromUuid(val uuid.UUID) {
 	s.CloneFromUuid = val
 }
 
-// {"markdownDescription":"Condition to check against the **headerName**.",
-// "defaultSnippets":[{"label":"Examples: Check if header contains \"text/html\"",
-// "markdownDescription":"Condition to check if **headerName** contains \"text/html\"",
-// "body":{"headerName":"accept","operator":"CONTAINS","value":"text/html","caseSensitive":true}}]}.
 // Ref: #/components/schemas/Condition
 type Condition struct {
-	// {"markdownDescription":"**Name** of the HTTP header to check. Must comply with RFC 7230."}.
-	HeaderName string `json:"headerName"`
-	// {"errorMessage":"Invalid operator. Please select a valid operator.",
-	// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-	// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-	// string. `string === value`","Ensures the header value does not exactly match the specified string.
-	// `string !== value`","Checks if the header value contains the specified string as a substring.
-	// `string.includes()`","Verifies the header value does not contain the specified string as a
-	// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-	//  `string.startsWith()`","Validates that the header value does not begin with the specified string.
-	// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-	// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-	// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-	// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-	// pattern. `!regex.test()`"]}.
-	Operator ConditionOperator `json:"operator"`
-	// {"markdownDescription":"**Value** to check against the **headerName**."}.
-	Value string `json:"value"`
-	// {"markdownDescription":"Whether the value is **case sensitive**. \n\n - `true`: the value will be
-	// compared as is. \n\n - `false`: the value will be lowercased **before** comparison."}.
-	CaseSensitive bool `json:"caseSensitive"`
+	HeaderName    string            `json:"headerName"`
+	Operator      ConditionOperator `json:"operator"`
+	Value         string            `json:"value"`
+	CaseSensitive bool              `json:"caseSensitive"`
 }
 
 // GetHeaderName returns the value of HeaderName.
@@ -1883,21 +1641,6 @@ func (s *Condition) SetCaseSensitive(val bool) {
 	s.CaseSensitive = val
 }
 
-// {"errorMessage":"Invalid operator. Please select a valid operator.",
-// "markdownDescription":"Operator to use for comparing the `headerName` with `value`.",
-// "markdownEnumDescriptions":["Performs an exact, comparison between the header value and specified
-// string. `string === value`","Ensures the header value does not exactly match the specified string.
-// `string !== value`","Checks if the header value contains the specified string as a substring.
-// `string.includes()`","Verifies the header value does not contain the specified string as a
-// substring. `!string.includes()`","Validates that the header value begins with the specified string.
-//
-//	`string.startsWith()`","Validates that the header value does not begin with the specified string.
-//
-// `!string.startsWith()`","Confirms the header value ends with the specified string. `string.
-// endsWith()`","Confirms the header value does not end with the specified string. `!string.
-// endsWith()`","Evaluates if the header value matches the specified regular expression pattern.
-// `regex.test()`","Evaluates if the header value does not match the specified regular expression
-// pattern. `!regex.test()`"]}.
 type ConditionOperator string
 
 const (
@@ -2135,10 +1878,41 @@ func (s *ConfigProfile) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
+// Ref: #/components/schemas/ConfigProfile2
+type ConfigProfile2 struct {
+	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
+	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
+}
+
+// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
+func (s *ConfigProfile2) GetActiveConfigProfileUuid() uuid.UUID {
+	return s.ActiveConfigProfileUuid
+}
+
+// GetActiveInbounds returns the value of ActiveInbounds.
+func (s *ConfigProfile2) GetActiveInbounds() []uuid.UUID {
+	return s.ActiveInbounds
+}
+
+// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
+func (s *ConfigProfile2) SetActiveConfigProfileUuid(val uuid.UUID) {
+	s.ActiveConfigProfileUuid = val
+}
+
+// SetActiveInbounds sets the value of ActiveInbounds.
+func (s *ConfigProfile2) SetActiveInbounds(val []uuid.UUID) {
+	s.ActiveInbounds = val
+}
+
 // ConfigProfileCreateConfigProfileConflict is response for ConfigProfileCreateConfigProfile operation.
 type ConfigProfileCreateConfigProfileConflict struct{}
 
 func (*ConfigProfileCreateConfigProfileConflict) configProfileCreateConfigProfileRes() {}
+
+// ConfigProfileDeleteConfigProfileByUuidNoContent is response for ConfigProfileDeleteConfigProfileByUuid operation.
+type ConfigProfileDeleteConfigProfileByUuidNoContent struct{}
+
+func (*ConfigProfileDeleteConfigProfileByUuidNoContent) configProfileDeleteConfigProfileByUuidRes() {}
 
 // Ref: #/components/schemas/ConfigProfileItem
 type ConfigProfileItem struct {
@@ -2163,32 +1937,6 @@ func (s *ConfigProfileItem) SetActiveConfigProfileUuid(val NilUUID) {
 
 // SetActiveInbounds sets the value of ActiveInbounds.
 func (s *ConfigProfileItem) SetActiveInbounds(val []Inbound) {
-	s.ActiveInbounds = val
-}
-
-// Ref: #/components/schemas/ConfigProfileRef
-type ConfigProfileRef struct {
-	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
-	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
-}
-
-// GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *ConfigProfileRef) GetActiveConfigProfileUuid() uuid.UUID {
-	return s.ActiveConfigProfileUuid
-}
-
-// GetActiveInbounds returns the value of ActiveInbounds.
-func (s *ConfigProfileRef) GetActiveInbounds() []uuid.UUID {
-	return s.ActiveInbounds
-}
-
-// SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *ConfigProfileRef) SetActiveConfigProfileUuid(val uuid.UUID) {
-	s.ActiveConfigProfileUuid = val
-}
-
-// SetActiveInbounds sets the value of ActiveInbounds.
-func (s *ConfigProfileRef) SetActiveInbounds(val []uuid.UUID) {
 	s.ActiveInbounds = val
 }
 
@@ -2260,40 +2008,377 @@ func (s *ConfigProfilesResponseResponse) SetConfigProfiles(val []ConfigProfile) 
 	s.ConfigProfiles = val
 }
 
-// Ref: #/components/schemas/CreateApiTokenRequest
-type CreateApiTokenRequest struct {
-	Name          string   `json:"name"`
-	ExpiresInDays float64  `json:"expiresInDays"`
-	Scopes        []string `json:"scopes"`
+// Ref: #/components/schemas/ConnectionsByNodeResultResponse
+type ConnectionsByNodeResultResponse struct {
+	Response ConnectionsByNodeResultResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *ConnectionsByNodeResultResponse) GetResponse() ConnectionsByNodeResultResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *ConnectionsByNodeResultResponse) SetResponse(val ConnectionsByNodeResultResponseResponse) {
+	s.Response = val
+}
+
+func (*ConnectionsByNodeResultResponse) connectionsConnectionsByNodeResultRes() {}
+
+type ConnectionsByNodeResultResponseResponse struct {
+	IsCompleted bool                                             `json:"isCompleted"`
+	IsFailed    bool                                             `json:"isFailed"`
+	Result      NilConnectionsByNodeResultResponseResponseResult `json:"result"`
+}
+
+// GetIsCompleted returns the value of IsCompleted.
+func (s *ConnectionsByNodeResultResponseResponse) GetIsCompleted() bool {
+	return s.IsCompleted
+}
+
+// GetIsFailed returns the value of IsFailed.
+func (s *ConnectionsByNodeResultResponseResponse) GetIsFailed() bool {
+	return s.IsFailed
+}
+
+// GetResult returns the value of Result.
+func (s *ConnectionsByNodeResultResponseResponse) GetResult() NilConnectionsByNodeResultResponseResponseResult {
+	return s.Result
+}
+
+// SetIsCompleted sets the value of IsCompleted.
+func (s *ConnectionsByNodeResultResponseResponse) SetIsCompleted(val bool) {
+	s.IsCompleted = val
+}
+
+// SetIsFailed sets the value of IsFailed.
+func (s *ConnectionsByNodeResultResponseResponse) SetIsFailed(val bool) {
+	s.IsFailed = val
+}
+
+// SetResult sets the value of Result.
+func (s *ConnectionsByNodeResultResponseResponse) SetResult(val NilConnectionsByNodeResultResponseResponseResult) {
+	s.Result = val
+}
+
+type ConnectionsByNodeResultResponseResponseResult struct {
+	Success  bool                                                     `json:"success"`
+	NodeUuid uuid.UUID                                                `json:"nodeUuid"`
+	Users    []ConnectionsByNodeResultResponseResponseResultUsersItem `json:"users"`
+}
+
+// GetSuccess returns the value of Success.
+func (s *ConnectionsByNodeResultResponseResponseResult) GetSuccess() bool {
+	return s.Success
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *ConnectionsByNodeResultResponseResponseResult) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetUsers returns the value of Users.
+func (s *ConnectionsByNodeResultResponseResponseResult) GetUsers() []ConnectionsByNodeResultResponseResponseResultUsersItem {
+	return s.Users
+}
+
+// SetSuccess sets the value of Success.
+func (s *ConnectionsByNodeResultResponseResponseResult) SetSuccess(val bool) {
+	s.Success = val
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *ConnectionsByNodeResultResponseResponseResult) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetUsers sets the value of Users.
+func (s *ConnectionsByNodeResultResponseResponseResult) SetUsers(val []ConnectionsByNodeResultResponseResponseResultUsersItem) {
+	s.Users = val
+}
+
+type ConnectionsByNodeResultResponseResponseResultUsersItem struct {
+	UserId float64 `json:"userId"`
+	Ips    []Ips   `json:"ips"`
+}
+
+// GetUserId returns the value of UserId.
+func (s *ConnectionsByNodeResultResponseResponseResultUsersItem) GetUserId() float64 {
+	return s.UserId
+}
+
+// GetIps returns the value of Ips.
+func (s *ConnectionsByNodeResultResponseResponseResultUsersItem) GetIps() []Ips {
+	return s.Ips
+}
+
+// SetUserId sets the value of UserId.
+func (s *ConnectionsByNodeResultResponseResponseResultUsersItem) SetUserId(val float64) {
+	s.UserId = val
+}
+
+// SetIps sets the value of Ips.
+func (s *ConnectionsByNodeResultResponseResponseResultUsersItem) SetIps(val []Ips) {
+	s.Ips = val
+}
+
+// Ref: #/components/schemas/ConnectionsByUserResponseResponse
+type ConnectionsByUserResponseResponse struct {
+	Response ConnectionsByUserResponseResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *ConnectionsByUserResponseResponse) GetResponse() ConnectionsByUserResponseResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *ConnectionsByUserResponseResponse) SetResponse(val ConnectionsByUserResponseResponseResponse) {
+	s.Response = val
+}
+
+func (*ConnectionsByUserResponseResponse) connectionsConnectionsByNodeRes() {}
+func (*ConnectionsByUserResponseResponse) connectionsConnectionsByUserRes() {}
+
+type ConnectionsByUserResponseResponseResponse struct {
+	JobId string `json:"jobId"`
+}
+
+// GetJobId returns the value of JobId.
+func (s *ConnectionsByUserResponseResponseResponse) GetJobId() string {
+	return s.JobId
+}
+
+// SetJobId sets the value of JobId.
+func (s *ConnectionsByUserResponseResponseResponse) SetJobId(val string) {
+	s.JobId = val
+}
+
+// Ref: #/components/schemas/ConnectionsByUserResultResponse
+type ConnectionsByUserResultResponse struct {
+	Response ConnectionsByUserResultResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *ConnectionsByUserResultResponse) GetResponse() ConnectionsByUserResultResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *ConnectionsByUserResultResponse) SetResponse(val ConnectionsByUserResultResponseResponse) {
+	s.Response = val
+}
+
+func (*ConnectionsByUserResultResponse) connectionsConnectionsByUserResultRes() {}
+
+type ConnectionsByUserResultResponseResponse struct {
+	IsCompleted bool                                             `json:"isCompleted"`
+	IsFailed    bool                                             `json:"isFailed"`
+	Progress    ConnectionsByUserResultResponseResponseProgress  `json:"progress"`
+	Result      NilConnectionsByUserResultResponseResponseResult `json:"result"`
+}
+
+// GetIsCompleted returns the value of IsCompleted.
+func (s *ConnectionsByUserResultResponseResponse) GetIsCompleted() bool {
+	return s.IsCompleted
+}
+
+// GetIsFailed returns the value of IsFailed.
+func (s *ConnectionsByUserResultResponseResponse) GetIsFailed() bool {
+	return s.IsFailed
+}
+
+// GetProgress returns the value of Progress.
+func (s *ConnectionsByUserResultResponseResponse) GetProgress() ConnectionsByUserResultResponseResponseProgress {
+	return s.Progress
+}
+
+// GetResult returns the value of Result.
+func (s *ConnectionsByUserResultResponseResponse) GetResult() NilConnectionsByUserResultResponseResponseResult {
+	return s.Result
+}
+
+// SetIsCompleted sets the value of IsCompleted.
+func (s *ConnectionsByUserResultResponseResponse) SetIsCompleted(val bool) {
+	s.IsCompleted = val
+}
+
+// SetIsFailed sets the value of IsFailed.
+func (s *ConnectionsByUserResultResponseResponse) SetIsFailed(val bool) {
+	s.IsFailed = val
+}
+
+// SetProgress sets the value of Progress.
+func (s *ConnectionsByUserResultResponseResponse) SetProgress(val ConnectionsByUserResultResponseResponseProgress) {
+	s.Progress = val
+}
+
+// SetResult sets the value of Result.
+func (s *ConnectionsByUserResultResponseResponse) SetResult(val NilConnectionsByUserResultResponseResponseResult) {
+	s.Result = val
+}
+
+type ConnectionsByUserResultResponseResponseProgress struct {
+	Total     float64 `json:"total"`
+	Completed float64 `json:"completed"`
+	Percent   float64 `json:"percent"`
+}
+
+// GetTotal returns the value of Total.
+func (s *ConnectionsByUserResultResponseResponseProgress) GetTotal() float64 {
+	return s.Total
+}
+
+// GetCompleted returns the value of Completed.
+func (s *ConnectionsByUserResultResponseResponseProgress) GetCompleted() float64 {
+	return s.Completed
+}
+
+// GetPercent returns the value of Percent.
+func (s *ConnectionsByUserResultResponseResponseProgress) GetPercent() float64 {
+	return s.Percent
+}
+
+// SetTotal sets the value of Total.
+func (s *ConnectionsByUserResultResponseResponseProgress) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetCompleted sets the value of Completed.
+func (s *ConnectionsByUserResultResponseResponseProgress) SetCompleted(val float64) {
+	s.Completed = val
+}
+
+// SetPercent sets the value of Percent.
+func (s *ConnectionsByUserResultResponseResponseProgress) SetPercent(val float64) {
+	s.Percent = val
+}
+
+type ConnectionsByUserResultResponseResponseResult struct {
+	Success bool                                                     `json:"success"`
+	UserId  float64                                                  `json:"userId"`
+	Nodes   []ConnectionsByUserResultResponseResponseResultNodesItem `json:"nodes"`
+}
+
+// GetSuccess returns the value of Success.
+func (s *ConnectionsByUserResultResponseResponseResult) GetSuccess() bool {
+	return s.Success
+}
+
+// GetUserId returns the value of UserId.
+func (s *ConnectionsByUserResultResponseResponseResult) GetUserId() float64 {
+	return s.UserId
+}
+
+// GetNodes returns the value of Nodes.
+func (s *ConnectionsByUserResultResponseResponseResult) GetNodes() []ConnectionsByUserResultResponseResponseResultNodesItem {
+	return s.Nodes
+}
+
+// SetSuccess sets the value of Success.
+func (s *ConnectionsByUserResultResponseResponseResult) SetSuccess(val bool) {
+	s.Success = val
+}
+
+// SetUserId sets the value of UserId.
+func (s *ConnectionsByUserResultResponseResponseResult) SetUserId(val float64) {
+	s.UserId = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *ConnectionsByUserResultResponseResponseResult) SetNodes(val []ConnectionsByUserResultResponseResponseResultNodesItem) {
+	s.Nodes = val
+}
+
+type ConnectionsByUserResultResponseResponseResultNodesItem struct {
+	NodeUuid    uuid.UUID `json:"nodeUuid"`
+	NodeName    string    `json:"nodeName"`
+	CountryCode string    `json:"countryCode"`
+	Ips         []Ips     `json:"ips"`
+}
+
+// GetNodeUuid returns the value of NodeUuid.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) GetNodeUuid() uuid.UUID {
+	return s.NodeUuid
+}
+
+// GetNodeName returns the value of NodeName.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) GetNodeName() string {
+	return s.NodeName
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// GetIps returns the value of Ips.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) GetIps() []Ips {
+	return s.Ips
+}
+
+// SetNodeUuid sets the value of NodeUuid.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) SetNodeUuid(val uuid.UUID) {
+	s.NodeUuid = val
+}
+
+// SetNodeName sets the value of NodeName.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) SetNodeName(val string) {
+	s.NodeName = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// SetIps sets the value of Ips.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) SetIps(val []Ips) {
+	s.Ips = val
+}
+
+// ConnectionsDropConnectionsAccepted is response for ConnectionsDropConnections operation.
+type ConnectionsDropConnectionsAccepted struct{}
+
+func (*ConnectionsDropConnectionsAccepted) connectionsDropConnectionsRes() {}
+
+// Ref: #/components/schemas/CreateApiTokenBody
+type CreateApiTokenBody struct {
+	// Name of the API token.
+	Name string `json:"name"`
+	// Expiration days of the API token.
+	ExpiresInDays float64 `json:"expiresInDays"`
+	// Scopes of the API token.
+	Scopes []string `json:"scopes"`
 }
 
 // GetName returns the value of Name.
-func (s *CreateApiTokenRequest) GetName() string {
+func (s *CreateApiTokenBody) GetName() string {
 	return s.Name
 }
 
 // GetExpiresInDays returns the value of ExpiresInDays.
-func (s *CreateApiTokenRequest) GetExpiresInDays() float64 {
+func (s *CreateApiTokenBody) GetExpiresInDays() float64 {
 	return s.ExpiresInDays
 }
 
 // GetScopes returns the value of Scopes.
-func (s *CreateApiTokenRequest) GetScopes() []string {
+func (s *CreateApiTokenBody) GetScopes() []string {
 	return s.Scopes
 }
 
 // SetName sets the value of Name.
-func (s *CreateApiTokenRequest) SetName(val string) {
+func (s *CreateApiTokenBody) SetName(val string) {
 	s.Name = val
 }
 
 // SetExpiresInDays sets the value of ExpiresInDays.
-func (s *CreateApiTokenRequest) SetExpiresInDays(val float64) {
+func (s *CreateApiTokenBody) SetExpiresInDays(val float64) {
 	s.ExpiresInDays = val
 }
 
 // SetScopes sets the value of Scopes.
-func (s *CreateApiTokenRequest) SetScopes(val []string) {
+func (s *CreateApiTokenBody) SetScopes(val []string) {
 	s.Scopes = val
 }
 
@@ -2312,7 +2397,7 @@ func (s *CreateApiTokenResponse) SetResponse(val CreateApiTokenResponseResponse)
 	s.Response = val
 }
 
-func (*CreateApiTokenResponse) apiTokensCreateRes() {}
+func (*CreateApiTokenResponse) apiTokensCreateApiTokenRes() {}
 
 type CreateApiTokenResponseResponse struct {
 	UUID      uuid.UUID `json:"uuid"`
@@ -2394,422 +2479,416 @@ func (s *CreateApiTokenResponseResponse) SetToken(val string) {
 	s.Token = val
 }
 
-// Ref: #/components/schemas/CreateConfigProfileRequest
-type CreateConfigProfileRequest struct {
-	Name   string                           `json:"name"`
-	Config CreateConfigProfileRequestConfig `json:"config"`
+// Ref: #/components/schemas/CreateConfigProfileBody
+type CreateConfigProfileBody struct {
+	Name   string                        `json:"name"`
+	Config CreateConfigProfileBodyConfig `json:"config"`
 }
 
 // GetName returns the value of Name.
-func (s *CreateConfigProfileRequest) GetName() string {
+func (s *CreateConfigProfileBody) GetName() string {
 	return s.Name
 }
 
 // GetConfig returns the value of Config.
-func (s *CreateConfigProfileRequest) GetConfig() CreateConfigProfileRequestConfig {
+func (s *CreateConfigProfileBody) GetConfig() CreateConfigProfileBodyConfig {
 	return s.Config
 }
 
 // SetName sets the value of Name.
-func (s *CreateConfigProfileRequest) SetName(val string) {
+func (s *CreateConfigProfileBody) SetName(val string) {
 	s.Name = val
 }
 
 // SetConfig sets the value of Config.
-func (s *CreateConfigProfileRequest) SetConfig(val CreateConfigProfileRequestConfig) {
+func (s *CreateConfigProfileBody) SetConfig(val CreateConfigProfileBodyConfig) {
 	s.Config = val
 }
 
-type CreateConfigProfileRequestConfig struct{}
+type CreateConfigProfileBodyConfig map[string]jx.Raw
 
-// Ref: #/components/schemas/CreateExternalSquadRequest
-type CreateExternalSquadRequest struct {
-	Name string `json:"name"`
+func (s *CreateConfigProfileBodyConfig) init() CreateConfigProfileBodyConfig {
+	m := *s
+	if m == nil {
+		m = map[string]jx.Raw{}
+		*s = m
+	}
+	return m
 }
 
-// GetName returns the value of Name.
-func (s *CreateExternalSquadRequest) GetName() string {
-	return s.Name
-}
-
-// SetName sets the value of Name.
-func (s *CreateExternalSquadRequest) SetName(val string) {
-	s.Name = val
-}
-
-// Ref: #/components/schemas/CreateHostRequest
-type CreateHostRequest struct {
-	Inbound                InboundRef                             `json:"inbound"`
-	Remark                 string                                 `json:"remark"`
-	Address                string                                 `json:"address"`
-	Port                   int                                    `json:"port"`
-	Path                   OptNilString                           `json:"path"`
-	Sni                    OptNilString                           `json:"sni"`
-	Host                   OptNilString                           `json:"host"`
-	Alpn                   OptNilCreateHostRequestAlpn            `json:"alpn"`
-	Fingerprint            OptNilString                           `json:"fingerprint"`
-	IsDisabled             OptBool                                `json:"isDisabled"`
-	SecurityLayer          OptCreateHostRequestSecurityLayer      `json:"securityLayer"`
-	XhttpExtraParams       jx.Raw                                 `json:"xhttpExtraParams"`
-	MuxParams              jx.Raw                                 `json:"muxParams"`
-	SockoptParams          jx.Raw                                 `json:"sockoptParams"`
-	FinalMask              jx.Raw                                 `json:"finalMask"`
-	ServerDescription      OptNilString                           `json:"serverDescription"`
-	Tags                   []string                               `json:"tags"`
-	IsHidden               OptBool                                `json:"isHidden"`
-	OverrideSniFromAddress OptBool                                `json:"overrideSniFromAddress"`
-	KeepSniBlank           OptBool                                `json:"keepSniBlank"`
-	PinnedPeerCertSha256   OptNilString                           `json:"pinnedPeerCertSha256"`
-	VerifyPeerCertByName   OptNilString                           `json:"verifyPeerCertByName"`
-	VlessRouteId           OptNilInt                              `json:"vlessRouteId"`
-	ShuffleHost            OptBool                                `json:"shuffleHost"`
-	MihomoX25519           OptBool                                `json:"mihomoX25519"`
-	MihomoIpVersion        OptNilCreateHostRequestMihomoIpVersion `json:"mihomoIpVersion"`
-	Nodes                  []uuid.UUID                            `json:"nodes"`
-	XrayJsonTemplateUuid   OptNilUUID                             `json:"xrayJsonTemplateUuid"`
+// Ref: #/components/schemas/CreateHostBody
+type CreateHostBody struct {
+	Inbound                Inbound2                            `json:"inbound"`
+	Remark                 string                              `json:"remark"`
+	Address                string                              `json:"address"`
+	Port                   int                                 `json:"port"`
+	Path                   OptNilString                        `json:"path"`
+	Sni                    OptNilString                        `json:"sni"`
+	Host                   OptNilString                        `json:"host"`
+	Alpn                   OptNilCreateHostBodyAlpn            `json:"alpn"`
+	Fingerprint            OptNilString                        `json:"fingerprint"`
+	IsDisabled             OptBool                             `json:"isDisabled"`
+	SecurityLayer          OptCreateHostBodySecurityLayer      `json:"securityLayer"`
+	XhttpExtraParams       jx.Raw                              `json:"xhttpExtraParams"`
+	MuxParams              jx.Raw                              `json:"muxParams"`
+	SockoptParams          jx.Raw                              `json:"sockoptParams"`
+	FinalMask              jx.Raw                              `json:"finalMask"`
+	ServerDescription      OptNilString                        `json:"serverDescription"`
+	Tags                   []string                            `json:"tags"`
+	IsHidden               OptBool                             `json:"isHidden"`
+	OverrideSniFromAddress OptBool                             `json:"overrideSniFromAddress"`
+	KeepSniBlank           OptBool                             `json:"keepSniBlank"`
+	PinnedPeerCertSha256   OptNilString                        `json:"pinnedPeerCertSha256"`
+	VerifyPeerCertByName   OptNilString                        `json:"verifyPeerCertByName"`
+	VlessRouteId           OptNilInt                           `json:"vlessRouteId"`
+	ShuffleHost            OptBool                             `json:"shuffleHost"`
+	MihomoX25519           OptBool                             `json:"mihomoX25519"`
+	MihomoIpVersion        OptNilCreateHostBodyMihomoIpVersion `json:"mihomoIpVersion"`
+	Nodes                  []uuid.UUID                         `json:"nodes"`
+	XrayJsonTemplateUuid   OptNilUUID                          `json:"xrayJsonTemplateUuid"`
 	// Optional. Internal squads from which the host will be excluded.
 	ExcludedInternalSquads []uuid.UUID `json:"excludedInternalSquads"`
 	// Optional. Subscription types from which the host will be excluded from.
-	ExcludeFromSubscriptionTypes []CreateHostRequestExcludeFromSubscriptionTypesItem `json:"excludeFromSubscriptionTypes"`
+	ExcludeFromSubscriptionTypes []CreateHostBodyExcludeFromSubscriptionTypesItem `json:"excludeFromSubscriptionTypes"`
 }
 
 // GetInbound returns the value of Inbound.
-func (s *CreateHostRequest) GetInbound() InboundRef {
+func (s *CreateHostBody) GetInbound() Inbound2 {
 	return s.Inbound
 }
 
 // GetRemark returns the value of Remark.
-func (s *CreateHostRequest) GetRemark() string {
+func (s *CreateHostBody) GetRemark() string {
 	return s.Remark
 }
 
 // GetAddress returns the value of Address.
-func (s *CreateHostRequest) GetAddress() string {
+func (s *CreateHostBody) GetAddress() string {
 	return s.Address
 }
 
 // GetPort returns the value of Port.
-func (s *CreateHostRequest) GetPort() int {
+func (s *CreateHostBody) GetPort() int {
 	return s.Port
 }
 
 // GetPath returns the value of Path.
-func (s *CreateHostRequest) GetPath() OptNilString {
+func (s *CreateHostBody) GetPath() OptNilString {
 	return s.Path
 }
 
 // GetSni returns the value of Sni.
-func (s *CreateHostRequest) GetSni() OptNilString {
+func (s *CreateHostBody) GetSni() OptNilString {
 	return s.Sni
 }
 
 // GetHost returns the value of Host.
-func (s *CreateHostRequest) GetHost() OptNilString {
+func (s *CreateHostBody) GetHost() OptNilString {
 	return s.Host
 }
 
 // GetAlpn returns the value of Alpn.
-func (s *CreateHostRequest) GetAlpn() OptNilCreateHostRequestAlpn {
+func (s *CreateHostBody) GetAlpn() OptNilCreateHostBodyAlpn {
 	return s.Alpn
 }
 
 // GetFingerprint returns the value of Fingerprint.
-func (s *CreateHostRequest) GetFingerprint() OptNilString {
+func (s *CreateHostBody) GetFingerprint() OptNilString {
 	return s.Fingerprint
 }
 
 // GetIsDisabled returns the value of IsDisabled.
-func (s *CreateHostRequest) GetIsDisabled() OptBool {
+func (s *CreateHostBody) GetIsDisabled() OptBool {
 	return s.IsDisabled
 }
 
 // GetSecurityLayer returns the value of SecurityLayer.
-func (s *CreateHostRequest) GetSecurityLayer() OptCreateHostRequestSecurityLayer {
+func (s *CreateHostBody) GetSecurityLayer() OptCreateHostBodySecurityLayer {
 	return s.SecurityLayer
 }
 
 // GetXhttpExtraParams returns the value of XhttpExtraParams.
-func (s *CreateHostRequest) GetXhttpExtraParams() jx.Raw {
+func (s *CreateHostBody) GetXhttpExtraParams() jx.Raw {
 	return s.XhttpExtraParams
 }
 
 // GetMuxParams returns the value of MuxParams.
-func (s *CreateHostRequest) GetMuxParams() jx.Raw {
+func (s *CreateHostBody) GetMuxParams() jx.Raw {
 	return s.MuxParams
 }
 
 // GetSockoptParams returns the value of SockoptParams.
-func (s *CreateHostRequest) GetSockoptParams() jx.Raw {
+func (s *CreateHostBody) GetSockoptParams() jx.Raw {
 	return s.SockoptParams
 }
 
 // GetFinalMask returns the value of FinalMask.
-func (s *CreateHostRequest) GetFinalMask() jx.Raw {
+func (s *CreateHostBody) GetFinalMask() jx.Raw {
 	return s.FinalMask
 }
 
 // GetServerDescription returns the value of ServerDescription.
-func (s *CreateHostRequest) GetServerDescription() OptNilString {
+func (s *CreateHostBody) GetServerDescription() OptNilString {
 	return s.ServerDescription
 }
 
 // GetTags returns the value of Tags.
-func (s *CreateHostRequest) GetTags() []string {
+func (s *CreateHostBody) GetTags() []string {
 	return s.Tags
 }
 
 // GetIsHidden returns the value of IsHidden.
-func (s *CreateHostRequest) GetIsHidden() OptBool {
+func (s *CreateHostBody) GetIsHidden() OptBool {
 	return s.IsHidden
 }
 
 // GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
-func (s *CreateHostRequest) GetOverrideSniFromAddress() OptBool {
+func (s *CreateHostBody) GetOverrideSniFromAddress() OptBool {
 	return s.OverrideSniFromAddress
 }
 
 // GetKeepSniBlank returns the value of KeepSniBlank.
-func (s *CreateHostRequest) GetKeepSniBlank() OptBool {
+func (s *CreateHostBody) GetKeepSniBlank() OptBool {
 	return s.KeepSniBlank
 }
 
 // GetPinnedPeerCertSha256 returns the value of PinnedPeerCertSha256.
-func (s *CreateHostRequest) GetPinnedPeerCertSha256() OptNilString {
+func (s *CreateHostBody) GetPinnedPeerCertSha256() OptNilString {
 	return s.PinnedPeerCertSha256
 }
 
 // GetVerifyPeerCertByName returns the value of VerifyPeerCertByName.
-func (s *CreateHostRequest) GetVerifyPeerCertByName() OptNilString {
+func (s *CreateHostBody) GetVerifyPeerCertByName() OptNilString {
 	return s.VerifyPeerCertByName
 }
 
 // GetVlessRouteId returns the value of VlessRouteId.
-func (s *CreateHostRequest) GetVlessRouteId() OptNilInt {
+func (s *CreateHostBody) GetVlessRouteId() OptNilInt {
 	return s.VlessRouteId
 }
 
 // GetShuffleHost returns the value of ShuffleHost.
-func (s *CreateHostRequest) GetShuffleHost() OptBool {
+func (s *CreateHostBody) GetShuffleHost() OptBool {
 	return s.ShuffleHost
 }
 
 // GetMihomoX25519 returns the value of MihomoX25519.
-func (s *CreateHostRequest) GetMihomoX25519() OptBool {
+func (s *CreateHostBody) GetMihomoX25519() OptBool {
 	return s.MihomoX25519
 }
 
 // GetMihomoIpVersion returns the value of MihomoIpVersion.
-func (s *CreateHostRequest) GetMihomoIpVersion() OptNilCreateHostRequestMihomoIpVersion {
+func (s *CreateHostBody) GetMihomoIpVersion() OptNilCreateHostBodyMihomoIpVersion {
 	return s.MihomoIpVersion
 }
 
 // GetNodes returns the value of Nodes.
-func (s *CreateHostRequest) GetNodes() []uuid.UUID {
+func (s *CreateHostBody) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
 // GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
-func (s *CreateHostRequest) GetXrayJsonTemplateUuid() OptNilUUID {
+func (s *CreateHostBody) GetXrayJsonTemplateUuid() OptNilUUID {
 	return s.XrayJsonTemplateUuid
 }
 
 // GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
-func (s *CreateHostRequest) GetExcludedInternalSquads() []uuid.UUID {
+func (s *CreateHostBody) GetExcludedInternalSquads() []uuid.UUID {
 	return s.ExcludedInternalSquads
 }
 
 // GetExcludeFromSubscriptionTypes returns the value of ExcludeFromSubscriptionTypes.
-func (s *CreateHostRequest) GetExcludeFromSubscriptionTypes() []CreateHostRequestExcludeFromSubscriptionTypesItem {
+func (s *CreateHostBody) GetExcludeFromSubscriptionTypes() []CreateHostBodyExcludeFromSubscriptionTypesItem {
 	return s.ExcludeFromSubscriptionTypes
 }
 
 // SetInbound sets the value of Inbound.
-func (s *CreateHostRequest) SetInbound(val InboundRef) {
+func (s *CreateHostBody) SetInbound(val Inbound2) {
 	s.Inbound = val
 }
 
 // SetRemark sets the value of Remark.
-func (s *CreateHostRequest) SetRemark(val string) {
+func (s *CreateHostBody) SetRemark(val string) {
 	s.Remark = val
 }
 
 // SetAddress sets the value of Address.
-func (s *CreateHostRequest) SetAddress(val string) {
+func (s *CreateHostBody) SetAddress(val string) {
 	s.Address = val
 }
 
 // SetPort sets the value of Port.
-func (s *CreateHostRequest) SetPort(val int) {
+func (s *CreateHostBody) SetPort(val int) {
 	s.Port = val
 }
 
 // SetPath sets the value of Path.
-func (s *CreateHostRequest) SetPath(val OptNilString) {
+func (s *CreateHostBody) SetPath(val OptNilString) {
 	s.Path = val
 }
 
 // SetSni sets the value of Sni.
-func (s *CreateHostRequest) SetSni(val OptNilString) {
+func (s *CreateHostBody) SetSni(val OptNilString) {
 	s.Sni = val
 }
 
 // SetHost sets the value of Host.
-func (s *CreateHostRequest) SetHost(val OptNilString) {
+func (s *CreateHostBody) SetHost(val OptNilString) {
 	s.Host = val
 }
 
 // SetAlpn sets the value of Alpn.
-func (s *CreateHostRequest) SetAlpn(val OptNilCreateHostRequestAlpn) {
+func (s *CreateHostBody) SetAlpn(val OptNilCreateHostBodyAlpn) {
 	s.Alpn = val
 }
 
 // SetFingerprint sets the value of Fingerprint.
-func (s *CreateHostRequest) SetFingerprint(val OptNilString) {
+func (s *CreateHostBody) SetFingerprint(val OptNilString) {
 	s.Fingerprint = val
 }
 
 // SetIsDisabled sets the value of IsDisabled.
-func (s *CreateHostRequest) SetIsDisabled(val OptBool) {
+func (s *CreateHostBody) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
 }
 
 // SetSecurityLayer sets the value of SecurityLayer.
-func (s *CreateHostRequest) SetSecurityLayer(val OptCreateHostRequestSecurityLayer) {
+func (s *CreateHostBody) SetSecurityLayer(val OptCreateHostBodySecurityLayer) {
 	s.SecurityLayer = val
 }
 
 // SetXhttpExtraParams sets the value of XhttpExtraParams.
-func (s *CreateHostRequest) SetXhttpExtraParams(val jx.Raw) {
+func (s *CreateHostBody) SetXhttpExtraParams(val jx.Raw) {
 	s.XhttpExtraParams = val
 }
 
 // SetMuxParams sets the value of MuxParams.
-func (s *CreateHostRequest) SetMuxParams(val jx.Raw) {
+func (s *CreateHostBody) SetMuxParams(val jx.Raw) {
 	s.MuxParams = val
 }
 
 // SetSockoptParams sets the value of SockoptParams.
-func (s *CreateHostRequest) SetSockoptParams(val jx.Raw) {
+func (s *CreateHostBody) SetSockoptParams(val jx.Raw) {
 	s.SockoptParams = val
 }
 
 // SetFinalMask sets the value of FinalMask.
-func (s *CreateHostRequest) SetFinalMask(val jx.Raw) {
+func (s *CreateHostBody) SetFinalMask(val jx.Raw) {
 	s.FinalMask = val
 }
 
 // SetServerDescription sets the value of ServerDescription.
-func (s *CreateHostRequest) SetServerDescription(val OptNilString) {
+func (s *CreateHostBody) SetServerDescription(val OptNilString) {
 	s.ServerDescription = val
 }
 
 // SetTags sets the value of Tags.
-func (s *CreateHostRequest) SetTags(val []string) {
+func (s *CreateHostBody) SetTags(val []string) {
 	s.Tags = val
 }
 
 // SetIsHidden sets the value of IsHidden.
-func (s *CreateHostRequest) SetIsHidden(val OptBool) {
+func (s *CreateHostBody) SetIsHidden(val OptBool) {
 	s.IsHidden = val
 }
 
 // SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
-func (s *CreateHostRequest) SetOverrideSniFromAddress(val OptBool) {
+func (s *CreateHostBody) SetOverrideSniFromAddress(val OptBool) {
 	s.OverrideSniFromAddress = val
 }
 
 // SetKeepSniBlank sets the value of KeepSniBlank.
-func (s *CreateHostRequest) SetKeepSniBlank(val OptBool) {
+func (s *CreateHostBody) SetKeepSniBlank(val OptBool) {
 	s.KeepSniBlank = val
 }
 
 // SetPinnedPeerCertSha256 sets the value of PinnedPeerCertSha256.
-func (s *CreateHostRequest) SetPinnedPeerCertSha256(val OptNilString) {
+func (s *CreateHostBody) SetPinnedPeerCertSha256(val OptNilString) {
 	s.PinnedPeerCertSha256 = val
 }
 
 // SetVerifyPeerCertByName sets the value of VerifyPeerCertByName.
-func (s *CreateHostRequest) SetVerifyPeerCertByName(val OptNilString) {
+func (s *CreateHostBody) SetVerifyPeerCertByName(val OptNilString) {
 	s.VerifyPeerCertByName = val
 }
 
 // SetVlessRouteId sets the value of VlessRouteId.
-func (s *CreateHostRequest) SetVlessRouteId(val OptNilInt) {
+func (s *CreateHostBody) SetVlessRouteId(val OptNilInt) {
 	s.VlessRouteId = val
 }
 
 // SetShuffleHost sets the value of ShuffleHost.
-func (s *CreateHostRequest) SetShuffleHost(val OptBool) {
+func (s *CreateHostBody) SetShuffleHost(val OptBool) {
 	s.ShuffleHost = val
 }
 
 // SetMihomoX25519 sets the value of MihomoX25519.
-func (s *CreateHostRequest) SetMihomoX25519(val OptBool) {
+func (s *CreateHostBody) SetMihomoX25519(val OptBool) {
 	s.MihomoX25519 = val
 }
 
 // SetMihomoIpVersion sets the value of MihomoIpVersion.
-func (s *CreateHostRequest) SetMihomoIpVersion(val OptNilCreateHostRequestMihomoIpVersion) {
+func (s *CreateHostBody) SetMihomoIpVersion(val OptNilCreateHostBodyMihomoIpVersion) {
 	s.MihomoIpVersion = val
 }
 
 // SetNodes sets the value of Nodes.
-func (s *CreateHostRequest) SetNodes(val []uuid.UUID) {
+func (s *CreateHostBody) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
 }
 
 // SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
-func (s *CreateHostRequest) SetXrayJsonTemplateUuid(val OptNilUUID) {
+func (s *CreateHostBody) SetXrayJsonTemplateUuid(val OptNilUUID) {
 	s.XrayJsonTemplateUuid = val
 }
 
 // SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
-func (s *CreateHostRequest) SetExcludedInternalSquads(val []uuid.UUID) {
+func (s *CreateHostBody) SetExcludedInternalSquads(val []uuid.UUID) {
 	s.ExcludedInternalSquads = val
 }
 
 // SetExcludeFromSubscriptionTypes sets the value of ExcludeFromSubscriptionTypes.
-func (s *CreateHostRequest) SetExcludeFromSubscriptionTypes(val []CreateHostRequestExcludeFromSubscriptionTypesItem) {
+func (s *CreateHostBody) SetExcludeFromSubscriptionTypes(val []CreateHostBodyExcludeFromSubscriptionTypesItem) {
 	s.ExcludeFromSubscriptionTypes = val
 }
 
-type CreateHostRequestAlpn string
+type CreateHostBodyAlpn string
 
 const (
-	CreateHostRequestAlpnH3         CreateHostRequestAlpn = "h3"
-	CreateHostRequestAlpnH2         CreateHostRequestAlpn = "h2"
-	CreateHostRequestAlpnHTTP11     CreateHostRequestAlpn = "http/1.1"
-	CreateHostRequestAlpnH2HTTP11   CreateHostRequestAlpn = "h2,http/1.1"
-	CreateHostRequestAlpnH3H2HTTP11 CreateHostRequestAlpn = "h3,h2,http/1.1"
-	CreateHostRequestAlpnH3H2       CreateHostRequestAlpn = "h3,h2"
+	CreateHostBodyAlpnH3         CreateHostBodyAlpn = "h3"
+	CreateHostBodyAlpnH2         CreateHostBodyAlpn = "h2"
+	CreateHostBodyAlpnHTTP11     CreateHostBodyAlpn = "http/1.1"
+	CreateHostBodyAlpnH2HTTP11   CreateHostBodyAlpn = "h2,http/1.1"
+	CreateHostBodyAlpnH3H2HTTP11 CreateHostBodyAlpn = "h3,h2,http/1.1"
+	CreateHostBodyAlpnH3H2       CreateHostBodyAlpn = "h3,h2"
 )
 
-// AllValues returns all CreateHostRequestAlpn values.
-func (CreateHostRequestAlpn) AllValues() []CreateHostRequestAlpn {
-	return []CreateHostRequestAlpn{
-		CreateHostRequestAlpnH3,
-		CreateHostRequestAlpnH2,
-		CreateHostRequestAlpnHTTP11,
-		CreateHostRequestAlpnH2HTTP11,
-		CreateHostRequestAlpnH3H2HTTP11,
-		CreateHostRequestAlpnH3H2,
+// AllValues returns all CreateHostBodyAlpn values.
+func (CreateHostBodyAlpn) AllValues() []CreateHostBodyAlpn {
+	return []CreateHostBodyAlpn{
+		CreateHostBodyAlpnH3,
+		CreateHostBodyAlpnH2,
+		CreateHostBodyAlpnHTTP11,
+		CreateHostBodyAlpnH2HTTP11,
+		CreateHostBodyAlpnH3H2HTTP11,
+		CreateHostBodyAlpnH3H2,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateHostRequestAlpn) MarshalText() ([]byte, error) {
+func (s CreateHostBodyAlpn) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateHostRequestAlpnH3:
+	case CreateHostBodyAlpnH3:
 		return []byte(s), nil
-	case CreateHostRequestAlpnH2:
+	case CreateHostBodyAlpnH2:
 		return []byte(s), nil
-	case CreateHostRequestAlpnHTTP11:
+	case CreateHostBodyAlpnHTTP11:
 		return []byte(s), nil
-	case CreateHostRequestAlpnH2HTTP11:
+	case CreateHostBodyAlpnH2HTTP11:
 		return []byte(s), nil
-	case CreateHostRequestAlpnH3H2HTTP11:
+	case CreateHostBodyAlpnH3H2HTTP11:
 		return []byte(s), nil
-	case CreateHostRequestAlpnH3H2:
+	case CreateHostBodyAlpnH3H2:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -2817,68 +2896,68 @@ func (s CreateHostRequestAlpn) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateHostRequestAlpn) UnmarshalText(data []byte) error {
-	switch CreateHostRequestAlpn(data) {
-	case CreateHostRequestAlpnH3:
-		*s = CreateHostRequestAlpnH3
+func (s *CreateHostBodyAlpn) UnmarshalText(data []byte) error {
+	switch CreateHostBodyAlpn(data) {
+	case CreateHostBodyAlpnH3:
+		*s = CreateHostBodyAlpnH3
 		return nil
-	case CreateHostRequestAlpnH2:
-		*s = CreateHostRequestAlpnH2
+	case CreateHostBodyAlpnH2:
+		*s = CreateHostBodyAlpnH2
 		return nil
-	case CreateHostRequestAlpnHTTP11:
-		*s = CreateHostRequestAlpnHTTP11
+	case CreateHostBodyAlpnHTTP11:
+		*s = CreateHostBodyAlpnHTTP11
 		return nil
-	case CreateHostRequestAlpnH2HTTP11:
-		*s = CreateHostRequestAlpnH2HTTP11
+	case CreateHostBodyAlpnH2HTTP11:
+		*s = CreateHostBodyAlpnH2HTTP11
 		return nil
-	case CreateHostRequestAlpnH3H2HTTP11:
-		*s = CreateHostRequestAlpnH3H2HTTP11
+	case CreateHostBodyAlpnH3H2HTTP11:
+		*s = CreateHostBodyAlpnH3H2HTTP11
 		return nil
-	case CreateHostRequestAlpnH3H2:
-		*s = CreateHostRequestAlpnH3H2
+	case CreateHostBodyAlpnH3H2:
+		*s = CreateHostBodyAlpnH3H2
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type CreateHostRequestExcludeFromSubscriptionTypesItem string
+type CreateHostBodyExcludeFromSubscriptionTypesItem string
 
 const (
-	CreateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON   CreateHostRequestExcludeFromSubscriptionTypesItem = "XRAY_JSON"
-	CreateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64 CreateHostRequestExcludeFromSubscriptionTypesItem = "XRAY_BASE64"
-	CreateHostRequestExcludeFromSubscriptionTypesItemMIHOMO     CreateHostRequestExcludeFromSubscriptionTypesItem = "MIHOMO"
-	CreateHostRequestExcludeFromSubscriptionTypesItemSTASH      CreateHostRequestExcludeFromSubscriptionTypesItem = "STASH"
-	CreateHostRequestExcludeFromSubscriptionTypesItemCLASH      CreateHostRequestExcludeFromSubscriptionTypesItem = "CLASH"
-	CreateHostRequestExcludeFromSubscriptionTypesItemSINGBOX    CreateHostRequestExcludeFromSubscriptionTypesItem = "SINGBOX"
+	CreateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON   CreateHostBodyExcludeFromSubscriptionTypesItem = "XRAY_JSON"
+	CreateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64 CreateHostBodyExcludeFromSubscriptionTypesItem = "XRAY_BASE64"
+	CreateHostBodyExcludeFromSubscriptionTypesItemMIHOMO     CreateHostBodyExcludeFromSubscriptionTypesItem = "MIHOMO"
+	CreateHostBodyExcludeFromSubscriptionTypesItemSTASH      CreateHostBodyExcludeFromSubscriptionTypesItem = "STASH"
+	CreateHostBodyExcludeFromSubscriptionTypesItemCLASH      CreateHostBodyExcludeFromSubscriptionTypesItem = "CLASH"
+	CreateHostBodyExcludeFromSubscriptionTypesItemSINGBOX    CreateHostBodyExcludeFromSubscriptionTypesItem = "SINGBOX"
 )
 
-// AllValues returns all CreateHostRequestExcludeFromSubscriptionTypesItem values.
-func (CreateHostRequestExcludeFromSubscriptionTypesItem) AllValues() []CreateHostRequestExcludeFromSubscriptionTypesItem {
-	return []CreateHostRequestExcludeFromSubscriptionTypesItem{
-		CreateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON,
-		CreateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64,
-		CreateHostRequestExcludeFromSubscriptionTypesItemMIHOMO,
-		CreateHostRequestExcludeFromSubscriptionTypesItemSTASH,
-		CreateHostRequestExcludeFromSubscriptionTypesItemCLASH,
-		CreateHostRequestExcludeFromSubscriptionTypesItemSINGBOX,
+// AllValues returns all CreateHostBodyExcludeFromSubscriptionTypesItem values.
+func (CreateHostBodyExcludeFromSubscriptionTypesItem) AllValues() []CreateHostBodyExcludeFromSubscriptionTypesItem {
+	return []CreateHostBodyExcludeFromSubscriptionTypesItem{
+		CreateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON,
+		CreateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64,
+		CreateHostBodyExcludeFromSubscriptionTypesItemMIHOMO,
+		CreateHostBodyExcludeFromSubscriptionTypesItemSTASH,
+		CreateHostBodyExcludeFromSubscriptionTypesItemCLASH,
+		CreateHostBodyExcludeFromSubscriptionTypesItemSINGBOX,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateHostRequestExcludeFromSubscriptionTypesItem) MarshalText() ([]byte, error) {
+func (s CreateHostBodyExcludeFromSubscriptionTypesItem) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON:
+	case CreateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON:
 		return []byte(s), nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64:
+	case CreateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64:
 		return []byte(s), nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemMIHOMO:
+	case CreateHostBodyExcludeFromSubscriptionTypesItemMIHOMO:
 		return []byte(s), nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemSTASH:
+	case CreateHostBodyExcludeFromSubscriptionTypesItemSTASH:
 		return []byte(s), nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemCLASH:
+	case CreateHostBodyExcludeFromSubscriptionTypesItemCLASH:
 		return []byte(s), nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemSINGBOX:
+	case CreateHostBodyExcludeFromSubscriptionTypesItemSINGBOX:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -2886,64 +2965,64 @@ func (s CreateHostRequestExcludeFromSubscriptionTypesItem) MarshalText() ([]byte
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateHostRequestExcludeFromSubscriptionTypesItem) UnmarshalText(data []byte) error {
-	switch CreateHostRequestExcludeFromSubscriptionTypesItem(data) {
-	case CreateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON:
-		*s = CreateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON
+func (s *CreateHostBodyExcludeFromSubscriptionTypesItem) UnmarshalText(data []byte) error {
+	switch CreateHostBodyExcludeFromSubscriptionTypesItem(data) {
+	case CreateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON:
+		*s = CreateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON
 		return nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64:
-		*s = CreateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64
+	case CreateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64:
+		*s = CreateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64
 		return nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemMIHOMO:
-		*s = CreateHostRequestExcludeFromSubscriptionTypesItemMIHOMO
+	case CreateHostBodyExcludeFromSubscriptionTypesItemMIHOMO:
+		*s = CreateHostBodyExcludeFromSubscriptionTypesItemMIHOMO
 		return nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemSTASH:
-		*s = CreateHostRequestExcludeFromSubscriptionTypesItemSTASH
+	case CreateHostBodyExcludeFromSubscriptionTypesItemSTASH:
+		*s = CreateHostBodyExcludeFromSubscriptionTypesItemSTASH
 		return nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemCLASH:
-		*s = CreateHostRequestExcludeFromSubscriptionTypesItemCLASH
+	case CreateHostBodyExcludeFromSubscriptionTypesItemCLASH:
+		*s = CreateHostBodyExcludeFromSubscriptionTypesItemCLASH
 		return nil
-	case CreateHostRequestExcludeFromSubscriptionTypesItemSINGBOX:
-		*s = CreateHostRequestExcludeFromSubscriptionTypesItemSINGBOX
+	case CreateHostBodyExcludeFromSubscriptionTypesItemSINGBOX:
+		*s = CreateHostBodyExcludeFromSubscriptionTypesItemSINGBOX
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type CreateHostRequestMihomoIpVersion string
+type CreateHostBodyMihomoIpVersion string
 
 const (
-	CreateHostRequestMihomoIpVersionDual       CreateHostRequestMihomoIpVersion = "dual"
-	CreateHostRequestMihomoIpVersionIpv4       CreateHostRequestMihomoIpVersion = "ipv4"
-	CreateHostRequestMihomoIpVersionIpv6       CreateHostRequestMihomoIpVersion = "ipv6"
-	CreateHostRequestMihomoIpVersionIpv4Prefer CreateHostRequestMihomoIpVersion = "ipv4-prefer"
-	CreateHostRequestMihomoIpVersionIpv6Prefer CreateHostRequestMihomoIpVersion = "ipv6-prefer"
+	CreateHostBodyMihomoIpVersionDual       CreateHostBodyMihomoIpVersion = "dual"
+	CreateHostBodyMihomoIpVersionIpv4       CreateHostBodyMihomoIpVersion = "ipv4"
+	CreateHostBodyMihomoIpVersionIpv6       CreateHostBodyMihomoIpVersion = "ipv6"
+	CreateHostBodyMihomoIpVersionIpv4Prefer CreateHostBodyMihomoIpVersion = "ipv4-prefer"
+	CreateHostBodyMihomoIpVersionIpv6Prefer CreateHostBodyMihomoIpVersion = "ipv6-prefer"
 )
 
-// AllValues returns all CreateHostRequestMihomoIpVersion values.
-func (CreateHostRequestMihomoIpVersion) AllValues() []CreateHostRequestMihomoIpVersion {
-	return []CreateHostRequestMihomoIpVersion{
-		CreateHostRequestMihomoIpVersionDual,
-		CreateHostRequestMihomoIpVersionIpv4,
-		CreateHostRequestMihomoIpVersionIpv6,
-		CreateHostRequestMihomoIpVersionIpv4Prefer,
-		CreateHostRequestMihomoIpVersionIpv6Prefer,
+// AllValues returns all CreateHostBodyMihomoIpVersion values.
+func (CreateHostBodyMihomoIpVersion) AllValues() []CreateHostBodyMihomoIpVersion {
+	return []CreateHostBodyMihomoIpVersion{
+		CreateHostBodyMihomoIpVersionDual,
+		CreateHostBodyMihomoIpVersionIpv4,
+		CreateHostBodyMihomoIpVersionIpv6,
+		CreateHostBodyMihomoIpVersionIpv4Prefer,
+		CreateHostBodyMihomoIpVersionIpv6Prefer,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateHostRequestMihomoIpVersion) MarshalText() ([]byte, error) {
+func (s CreateHostBodyMihomoIpVersion) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateHostRequestMihomoIpVersionDual:
+	case CreateHostBodyMihomoIpVersionDual:
 		return []byte(s), nil
-	case CreateHostRequestMihomoIpVersionIpv4:
+	case CreateHostBodyMihomoIpVersionIpv4:
 		return []byte(s), nil
-	case CreateHostRequestMihomoIpVersionIpv6:
+	case CreateHostBodyMihomoIpVersionIpv6:
 		return []byte(s), nil
-	case CreateHostRequestMihomoIpVersionIpv4Prefer:
+	case CreateHostBodyMihomoIpVersionIpv4Prefer:
 		return []byte(s), nil
-	case CreateHostRequestMihomoIpVersionIpv6Prefer:
+	case CreateHostBodyMihomoIpVersionIpv6Prefer:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -2951,53 +3030,53 @@ func (s CreateHostRequestMihomoIpVersion) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateHostRequestMihomoIpVersion) UnmarshalText(data []byte) error {
-	switch CreateHostRequestMihomoIpVersion(data) {
-	case CreateHostRequestMihomoIpVersionDual:
-		*s = CreateHostRequestMihomoIpVersionDual
+func (s *CreateHostBodyMihomoIpVersion) UnmarshalText(data []byte) error {
+	switch CreateHostBodyMihomoIpVersion(data) {
+	case CreateHostBodyMihomoIpVersionDual:
+		*s = CreateHostBodyMihomoIpVersionDual
 		return nil
-	case CreateHostRequestMihomoIpVersionIpv4:
-		*s = CreateHostRequestMihomoIpVersionIpv4
+	case CreateHostBodyMihomoIpVersionIpv4:
+		*s = CreateHostBodyMihomoIpVersionIpv4
 		return nil
-	case CreateHostRequestMihomoIpVersionIpv6:
-		*s = CreateHostRequestMihomoIpVersionIpv6
+	case CreateHostBodyMihomoIpVersionIpv6:
+		*s = CreateHostBodyMihomoIpVersionIpv6
 		return nil
-	case CreateHostRequestMihomoIpVersionIpv4Prefer:
-		*s = CreateHostRequestMihomoIpVersionIpv4Prefer
+	case CreateHostBodyMihomoIpVersionIpv4Prefer:
+		*s = CreateHostBodyMihomoIpVersionIpv4Prefer
 		return nil
-	case CreateHostRequestMihomoIpVersionIpv6Prefer:
-		*s = CreateHostRequestMihomoIpVersionIpv6Prefer
+	case CreateHostBodyMihomoIpVersionIpv6Prefer:
+		*s = CreateHostBodyMihomoIpVersionIpv6Prefer
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type CreateHostRequestSecurityLayer string
+type CreateHostBodySecurityLayer string
 
 const (
-	CreateHostRequestSecurityLayerDEFAULT CreateHostRequestSecurityLayer = "DEFAULT"
-	CreateHostRequestSecurityLayerTLS     CreateHostRequestSecurityLayer = "TLS"
-	CreateHostRequestSecurityLayerNONE    CreateHostRequestSecurityLayer = "NONE"
+	CreateHostBodySecurityLayerDEFAULT CreateHostBodySecurityLayer = "DEFAULT"
+	CreateHostBodySecurityLayerTLS     CreateHostBodySecurityLayer = "TLS"
+	CreateHostBodySecurityLayerNONE    CreateHostBodySecurityLayer = "NONE"
 )
 
-// AllValues returns all CreateHostRequestSecurityLayer values.
-func (CreateHostRequestSecurityLayer) AllValues() []CreateHostRequestSecurityLayer {
-	return []CreateHostRequestSecurityLayer{
-		CreateHostRequestSecurityLayerDEFAULT,
-		CreateHostRequestSecurityLayerTLS,
-		CreateHostRequestSecurityLayerNONE,
+// AllValues returns all CreateHostBodySecurityLayer values.
+func (CreateHostBodySecurityLayer) AllValues() []CreateHostBodySecurityLayer {
+	return []CreateHostBodySecurityLayer{
+		CreateHostBodySecurityLayerDEFAULT,
+		CreateHostBodySecurityLayerTLS,
+		CreateHostBodySecurityLayerNONE,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateHostRequestSecurityLayer) MarshalText() ([]byte, error) {
+func (s CreateHostBodySecurityLayer) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateHostRequestSecurityLayerDEFAULT:
+	case CreateHostBodySecurityLayerDEFAULT:
 		return []byte(s), nil
-	case CreateHostRequestSecurityLayerTLS:
+	case CreateHostBodySecurityLayerTLS:
 		return []byte(s), nil
-	case CreateHostRequestSecurityLayerNONE:
+	case CreateHostBodySecurityLayerNONE:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -3005,62 +3084,24 @@ func (s CreateHostRequestSecurityLayer) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateHostRequestSecurityLayer) UnmarshalText(data []byte) error {
-	switch CreateHostRequestSecurityLayer(data) {
-	case CreateHostRequestSecurityLayerDEFAULT:
-		*s = CreateHostRequestSecurityLayerDEFAULT
+func (s *CreateHostBodySecurityLayer) UnmarshalText(data []byte) error {
+	switch CreateHostBodySecurityLayer(data) {
+	case CreateHostBodySecurityLayerDEFAULT:
+		*s = CreateHostBodySecurityLayerDEFAULT
 		return nil
-	case CreateHostRequestSecurityLayerTLS:
-		*s = CreateHostRequestSecurityLayerTLS
+	case CreateHostBodySecurityLayerTLS:
+		*s = CreateHostBodySecurityLayerTLS
 		return nil
-	case CreateHostRequestSecurityLayerNONE:
-		*s = CreateHostRequestSecurityLayerNONE
+	case CreateHostBodySecurityLayerNONE:
+		*s = CreateHostBodySecurityLayerNONE
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/CreateInfraBillingHistoryRecordRequest
-type CreateInfraBillingHistoryRecordRequest struct {
-	ProviderUuid uuid.UUID `json:"providerUuid"`
-	Amount       float64   `json:"amount"`
-	// Billing date. Format: 2025-01-17T15:38:45.065Z.
-	BilledAt time.Time `json:"billedAt"`
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *CreateInfraBillingHistoryRecordRequest) GetProviderUuid() uuid.UUID {
-	return s.ProviderUuid
-}
-
-// GetAmount returns the value of Amount.
-func (s *CreateInfraBillingHistoryRecordRequest) GetAmount() float64 {
-	return s.Amount
-}
-
-// GetBilledAt returns the value of BilledAt.
-func (s *CreateInfraBillingHistoryRecordRequest) GetBilledAt() time.Time {
-	return s.BilledAt
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *CreateInfraBillingHistoryRecordRequest) SetProviderUuid(val uuid.UUID) {
-	s.ProviderUuid = val
-}
-
-// SetAmount sets the value of Amount.
-func (s *CreateInfraBillingHistoryRecordRequest) SetAmount(val float64) {
-	s.Amount = val
-}
-
-// SetBilledAt sets the value of BilledAt.
-func (s *CreateInfraBillingHistoryRecordRequest) SetBilledAt(val time.Time) {
-	s.BilledAt = val
-}
-
-// Ref: #/components/schemas/CreateInfraBillingNodeRequest
-type CreateInfraBillingNodeRequest struct {
+// Ref: #/components/schemas/CreateInfraBillingNodeBody
+type CreateInfraBillingNodeBody struct {
 	ProviderUuid uuid.UUID `json:"providerUuid"`
 	NodeUuid     NilUUID   `json:"nodeUuid"`
 	Name         NilString `json:"name"`
@@ -3069,121 +3110,324 @@ type CreateInfraBillingNodeRequest struct {
 }
 
 // GetProviderUuid returns the value of ProviderUuid.
-func (s *CreateInfraBillingNodeRequest) GetProviderUuid() uuid.UUID {
+func (s *CreateInfraBillingNodeBody) GetProviderUuid() uuid.UUID {
 	return s.ProviderUuid
 }
 
 // GetNodeUuid returns the value of NodeUuid.
-func (s *CreateInfraBillingNodeRequest) GetNodeUuid() NilUUID {
+func (s *CreateInfraBillingNodeBody) GetNodeUuid() NilUUID {
 	return s.NodeUuid
 }
 
 // GetName returns the value of Name.
-func (s *CreateInfraBillingNodeRequest) GetName() NilString {
+func (s *CreateInfraBillingNodeBody) GetName() NilString {
 	return s.Name
 }
 
 // GetNextBillingAt returns the value of NextBillingAt.
-func (s *CreateInfraBillingNodeRequest) GetNextBillingAt() time.Time {
+func (s *CreateInfraBillingNodeBody) GetNextBillingAt() time.Time {
 	return s.NextBillingAt
 }
 
 // SetProviderUuid sets the value of ProviderUuid.
-func (s *CreateInfraBillingNodeRequest) SetProviderUuid(val uuid.UUID) {
+func (s *CreateInfraBillingNodeBody) SetProviderUuid(val uuid.UUID) {
 	s.ProviderUuid = val
 }
 
 // SetNodeUuid sets the value of NodeUuid.
-func (s *CreateInfraBillingNodeRequest) SetNodeUuid(val NilUUID) {
+func (s *CreateInfraBillingNodeBody) SetNodeUuid(val NilUUID) {
 	s.NodeUuid = val
 }
 
 // SetName sets the value of Name.
-func (s *CreateInfraBillingNodeRequest) SetName(val NilString) {
+func (s *CreateInfraBillingNodeBody) SetName(val NilString) {
 	s.Name = val
 }
 
 // SetNextBillingAt sets the value of NextBillingAt.
-func (s *CreateInfraBillingNodeRequest) SetNextBillingAt(val time.Time) {
+func (s *CreateInfraBillingNodeBody) SetNextBillingAt(val time.Time) {
 	s.NextBillingAt = val
 }
 
-// Ref: #/components/schemas/CreateInfraProviderRequest
-type CreateInfraProviderRequest struct {
+// Ref: #/components/schemas/CreateInfraBillingRecordBody
+type CreateInfraBillingRecordBody struct {
+	ProviderUuid uuid.UUID `json:"providerUuid"`
+	Amount       float64   `json:"amount"`
+	// Billing date. Format: 2025-01-17T15:38:45.065Z.
+	BilledAt time.Time `json:"billedAt"`
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateInfraBillingRecordBody) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetAmount returns the value of Amount.
+func (s *CreateInfraBillingRecordBody) GetAmount() float64 {
+	return s.Amount
+}
+
+// GetBilledAt returns the value of BilledAt.
+func (s *CreateInfraBillingRecordBody) GetBilledAt() time.Time {
+	return s.BilledAt
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateInfraBillingRecordBody) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *CreateInfraBillingRecordBody) SetAmount(val float64) {
+	s.Amount = val
+}
+
+// SetBilledAt sets the value of BilledAt.
+func (s *CreateInfraBillingRecordBody) SetBilledAt(val time.Time) {
+	s.BilledAt = val
+}
+
+// Ref: #/components/schemas/CreateInfraProviderBody
+type CreateInfraProviderBody struct {
 	Name        string `json:"name"`
 	FaviconLink OptURI `json:"faviconLink"`
 	LoginUrl    OptURI `json:"loginUrl"`
 }
 
 // GetName returns the value of Name.
-func (s *CreateInfraProviderRequest) GetName() string {
+func (s *CreateInfraProviderBody) GetName() string {
 	return s.Name
 }
 
 // GetFaviconLink returns the value of FaviconLink.
-func (s *CreateInfraProviderRequest) GetFaviconLink() OptURI {
+func (s *CreateInfraProviderBody) GetFaviconLink() OptURI {
 	return s.FaviconLink
 }
 
 // GetLoginUrl returns the value of LoginUrl.
-func (s *CreateInfraProviderRequest) GetLoginUrl() OptURI {
+func (s *CreateInfraProviderBody) GetLoginUrl() OptURI {
 	return s.LoginUrl
 }
 
 // SetName sets the value of Name.
-func (s *CreateInfraProviderRequest) SetName(val string) {
+func (s *CreateInfraProviderBody) SetName(val string) {
 	s.Name = val
 }
 
 // SetFaviconLink sets the value of FaviconLink.
-func (s *CreateInfraProviderRequest) SetFaviconLink(val OptURI) {
+func (s *CreateInfraProviderBody) SetFaviconLink(val OptURI) {
 	s.FaviconLink = val
 }
 
 // SetLoginUrl sets the value of LoginUrl.
-func (s *CreateInfraProviderRequest) SetLoginUrl(val OptURI) {
+func (s *CreateInfraProviderBody) SetLoginUrl(val OptURI) {
 	s.LoginUrl = val
 }
 
-// Ref: #/components/schemas/CreateInternalSquadRequest
-type CreateInternalSquadRequest struct {
+// Ref: #/components/schemas/CreateInternalSquadBody
+type CreateInternalSquadBody struct {
 	Name     string      `json:"name"`
 	Inbounds []uuid.UUID `json:"inbounds"`
 }
 
 // GetName returns the value of Name.
-func (s *CreateInternalSquadRequest) GetName() string {
+func (s *CreateInternalSquadBody) GetName() string {
 	return s.Name
 }
 
 // GetInbounds returns the value of Inbounds.
-func (s *CreateInternalSquadRequest) GetInbounds() []uuid.UUID {
+func (s *CreateInternalSquadBody) GetInbounds() []uuid.UUID {
 	return s.Inbounds
 }
 
 // SetName sets the value of Name.
-func (s *CreateInternalSquadRequest) SetName(val string) {
+func (s *CreateInternalSquadBody) SetName(val string) {
 	s.Name = val
 }
 
 // SetInbounds sets the value of Inbounds.
-func (s *CreateInternalSquadRequest) SetInbounds(val []uuid.UUID) {
+func (s *CreateInternalSquadBody) SetInbounds(val []uuid.UUID) {
 	s.Inbounds = val
 }
 
-// Ref: #/components/schemas/CreateNodePluginRequest
-type CreateNodePluginRequest struct {
-	Name string `json:"name"`
+// Ref: #/components/schemas/CreateNodeBody
+type CreateNodeBody struct {
+	Name                      string         `json:"name"`
+	Address                   string         `json:"address"`
+	Port                      OptInt         `json:"port"`
+	ProxyUrl                  OptNilString   `json:"proxyUrl"`
+	IsTrafficTrackingActive   OptBool        `json:"isTrafficTrackingActive"`
+	TrafficLimitBytes         OptFloat64     `json:"trafficLimitBytes"`
+	NotifyPercent             OptInt         `json:"notifyPercent"`
+	TrafficResetDay           OptInt         `json:"trafficResetDay"`
+	CountryCode               OptString      `json:"countryCode"`
+	ConsumptionMultiplier     OptFloat64     `json:"consumptionMultiplier"`
+	NodeConsumptionMultiplier OptFloat64     `json:"nodeConsumptionMultiplier"`
+	ConfigProfile             ConfigProfile2 `json:"configProfile"`
+	ProviderUuid              OptNilUUID     `json:"providerUuid"`
+	Tags                      []string       `json:"tags"`
+	ActivePluginUuid          OptNilUUID     `json:"activePluginUuid"`
+	Note                      OptString      `json:"note"`
 }
 
 // GetName returns the value of Name.
-func (s *CreateNodePluginRequest) GetName() string {
+func (s *CreateNodeBody) GetName() string {
 	return s.Name
 }
 
+// GetAddress returns the value of Address.
+func (s *CreateNodeBody) GetAddress() string {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *CreateNodeBody) GetPort() OptInt {
+	return s.Port
+}
+
+// GetProxyUrl returns the value of ProxyUrl.
+func (s *CreateNodeBody) GetProxyUrl() OptNilString {
+	return s.ProxyUrl
+}
+
+// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
+func (s *CreateNodeBody) GetIsTrafficTrackingActive() OptBool {
+	return s.IsTrafficTrackingActive
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *CreateNodeBody) GetTrafficLimitBytes() OptFloat64 {
+	return s.TrafficLimitBytes
+}
+
+// GetNotifyPercent returns the value of NotifyPercent.
+func (s *CreateNodeBody) GetNotifyPercent() OptInt {
+	return s.NotifyPercent
+}
+
+// GetTrafficResetDay returns the value of TrafficResetDay.
+func (s *CreateNodeBody) GetTrafficResetDay() OptInt {
+	return s.TrafficResetDay
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *CreateNodeBody) GetCountryCode() OptString {
+	return s.CountryCode
+}
+
+// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
+func (s *CreateNodeBody) GetConsumptionMultiplier() OptFloat64 {
+	return s.ConsumptionMultiplier
+}
+
+// GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
+func (s *CreateNodeBody) GetNodeConsumptionMultiplier() OptFloat64 {
+	return s.NodeConsumptionMultiplier
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *CreateNodeBody) GetConfigProfile() ConfigProfile2 {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *CreateNodeBody) GetProviderUuid() OptNilUUID {
+	return s.ProviderUuid
+}
+
+// GetTags returns the value of Tags.
+func (s *CreateNodeBody) GetTags() []string {
+	return s.Tags
+}
+
+// GetActivePluginUuid returns the value of ActivePluginUuid.
+func (s *CreateNodeBody) GetActivePluginUuid() OptNilUUID {
+	return s.ActivePluginUuid
+}
+
+// GetNote returns the value of Note.
+func (s *CreateNodeBody) GetNote() OptString {
+	return s.Note
+}
+
 // SetName sets the value of Name.
-func (s *CreateNodePluginRequest) SetName(val string) {
+func (s *CreateNodeBody) SetName(val string) {
 	s.Name = val
+}
+
+// SetAddress sets the value of Address.
+func (s *CreateNodeBody) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *CreateNodeBody) SetPort(val OptInt) {
+	s.Port = val
+}
+
+// SetProxyUrl sets the value of ProxyUrl.
+func (s *CreateNodeBody) SetProxyUrl(val OptNilString) {
+	s.ProxyUrl = val
+}
+
+// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
+func (s *CreateNodeBody) SetIsTrafficTrackingActive(val OptBool) {
+	s.IsTrafficTrackingActive = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *CreateNodeBody) SetTrafficLimitBytes(val OptFloat64) {
+	s.TrafficLimitBytes = val
+}
+
+// SetNotifyPercent sets the value of NotifyPercent.
+func (s *CreateNodeBody) SetNotifyPercent(val OptInt) {
+	s.NotifyPercent = val
+}
+
+// SetTrafficResetDay sets the value of TrafficResetDay.
+func (s *CreateNodeBody) SetTrafficResetDay(val OptInt) {
+	s.TrafficResetDay = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *CreateNodeBody) SetCountryCode(val OptString) {
+	s.CountryCode = val
+}
+
+// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
+func (s *CreateNodeBody) SetConsumptionMultiplier(val OptFloat64) {
+	s.ConsumptionMultiplier = val
+}
+
+// SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
+func (s *CreateNodeBody) SetNodeConsumptionMultiplier(val OptFloat64) {
+	s.NodeConsumptionMultiplier = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *CreateNodeBody) SetConfigProfile(val ConfigProfile2) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *CreateNodeBody) SetProviderUuid(val OptNilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetTags sets the value of Tags.
+func (s *CreateNodeBody) SetTags(val []string) {
+	s.Tags = val
+}
+
+// SetActivePluginUuid sets the value of ActivePluginUuid.
+func (s *CreateNodeBody) SetActivePluginUuid(val OptNilUUID) {
+	s.ActivePluginUuid = val
+}
+
+// SetNote sets the value of Note.
+func (s *CreateNodeBody) SetNote(val OptString) {
+	s.Note = val
 }
 
 // Ref: #/components/schemas/CreateNodePluginResponse
@@ -3203,281 +3447,86 @@ func (s *CreateNodePluginResponse) SetResponse(val NodePlugin) {
 
 func (*CreateNodePluginResponse) nodePluginCreateConfigRes() {}
 
-// Ref: #/components/schemas/CreateNodeRequest
-type CreateNodeRequest struct {
-	Name                      string           `json:"name"`
-	Address                   string           `json:"address"`
-	Port                      OptInt           `json:"port"`
-	ProxyUrl                  OptNilString     `json:"proxyUrl"`
-	IsTrafficTrackingActive   OptBool          `json:"isTrafficTrackingActive"`
-	TrafficLimitBytes         OptFloat64       `json:"trafficLimitBytes"`
-	NotifyPercent             OptInt           `json:"notifyPercent"`
-	TrafficResetDay           OptInt           `json:"trafficResetDay"`
-	CountryCode               OptString        `json:"countryCode"`
-	ConsumptionMultiplier     OptFloat64       `json:"consumptionMultiplier"`
-	NodeConsumptionMultiplier OptFloat64       `json:"nodeConsumptionMultiplier"`
-	ConfigProfile             ConfigProfileRef `json:"configProfile"`
-	ProviderUuid              OptNilUUID       `json:"providerUuid"`
-	Tags                      []string         `json:"tags"`
-	ActivePluginUuid          OptNilUUID       `json:"activePluginUuid"`
-	Note                      OptString        `json:"note"`
-}
-
-// GetName returns the value of Name.
-func (s *CreateNodeRequest) GetName() string {
-	return s.Name
-}
-
-// GetAddress returns the value of Address.
-func (s *CreateNodeRequest) GetAddress() string {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *CreateNodeRequest) GetPort() OptInt {
-	return s.Port
-}
-
-// GetProxyUrl returns the value of ProxyUrl.
-func (s *CreateNodeRequest) GetProxyUrl() OptNilString {
-	return s.ProxyUrl
-}
-
-// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
-func (s *CreateNodeRequest) GetIsTrafficTrackingActive() OptBool {
-	return s.IsTrafficTrackingActive
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *CreateNodeRequest) GetTrafficLimitBytes() OptFloat64 {
-	return s.TrafficLimitBytes
-}
-
-// GetNotifyPercent returns the value of NotifyPercent.
-func (s *CreateNodeRequest) GetNotifyPercent() OptInt {
-	return s.NotifyPercent
-}
-
-// GetTrafficResetDay returns the value of TrafficResetDay.
-func (s *CreateNodeRequest) GetTrafficResetDay() OptInt {
-	return s.TrafficResetDay
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *CreateNodeRequest) GetCountryCode() OptString {
-	return s.CountryCode
-}
-
-// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *CreateNodeRequest) GetConsumptionMultiplier() OptFloat64 {
-	return s.ConsumptionMultiplier
-}
-
-// GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
-func (s *CreateNodeRequest) GetNodeConsumptionMultiplier() OptFloat64 {
-	return s.NodeConsumptionMultiplier
-}
-
-// GetConfigProfile returns the value of ConfigProfile.
-func (s *CreateNodeRequest) GetConfigProfile() ConfigProfileRef {
-	return s.ConfigProfile
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *CreateNodeRequest) GetProviderUuid() OptNilUUID {
-	return s.ProviderUuid
-}
-
-// GetTags returns the value of Tags.
-func (s *CreateNodeRequest) GetTags() []string {
-	return s.Tags
-}
-
-// GetActivePluginUuid returns the value of ActivePluginUuid.
-func (s *CreateNodeRequest) GetActivePluginUuid() OptNilUUID {
-	return s.ActivePluginUuid
-}
-
-// GetNote returns the value of Note.
-func (s *CreateNodeRequest) GetNote() OptString {
-	return s.Note
-}
-
-// SetName sets the value of Name.
-func (s *CreateNodeRequest) SetName(val string) {
-	s.Name = val
-}
-
-// SetAddress sets the value of Address.
-func (s *CreateNodeRequest) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *CreateNodeRequest) SetPort(val OptInt) {
-	s.Port = val
-}
-
-// SetProxyUrl sets the value of ProxyUrl.
-func (s *CreateNodeRequest) SetProxyUrl(val OptNilString) {
-	s.ProxyUrl = val
-}
-
-// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
-func (s *CreateNodeRequest) SetIsTrafficTrackingActive(val OptBool) {
-	s.IsTrafficTrackingActive = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *CreateNodeRequest) SetTrafficLimitBytes(val OptFloat64) {
-	s.TrafficLimitBytes = val
-}
-
-// SetNotifyPercent sets the value of NotifyPercent.
-func (s *CreateNodeRequest) SetNotifyPercent(val OptInt) {
-	s.NotifyPercent = val
-}
-
-// SetTrafficResetDay sets the value of TrafficResetDay.
-func (s *CreateNodeRequest) SetTrafficResetDay(val OptInt) {
-	s.TrafficResetDay = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *CreateNodeRequest) SetCountryCode(val OptString) {
-	s.CountryCode = val
-}
-
-// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *CreateNodeRequest) SetConsumptionMultiplier(val OptFloat64) {
-	s.ConsumptionMultiplier = val
-}
-
-// SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
-func (s *CreateNodeRequest) SetNodeConsumptionMultiplier(val OptFloat64) {
-	s.NodeConsumptionMultiplier = val
-}
-
-// SetConfigProfile sets the value of ConfigProfile.
-func (s *CreateNodeRequest) SetConfigProfile(val ConfigProfileRef) {
-	s.ConfigProfile = val
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *CreateNodeRequest) SetProviderUuid(val OptNilUUID) {
-	s.ProviderUuid = val
-}
-
-// SetTags sets the value of Tags.
-func (s *CreateNodeRequest) SetTags(val []string) {
-	s.Tags = val
-}
-
-// SetActivePluginUuid sets the value of ActivePluginUuid.
-func (s *CreateNodeRequest) SetActivePluginUuid(val OptNilUUID) {
-	s.ActivePluginUuid = val
-}
-
-// SetNote sets the value of Note.
-func (s *CreateNodeRequest) SetNote(val OptString) {
-	s.Note = val
-}
-
-// Ref: #/components/schemas/CreateSubscriptionPageConfigRequest
-type CreateSubscriptionPageConfigRequest struct {
-	Name string `json:"name"`
-}
-
-// GetName returns the value of Name.
-func (s *CreateSubscriptionPageConfigRequest) GetName() string {
-	return s.Name
-}
-
-// SetName sets the value of Name.
-func (s *CreateSubscriptionPageConfigRequest) SetName(val string) {
-	s.Name = val
-}
-
-// Ref: #/components/schemas/CreateSubscriptionPageConfigResponse
-type CreateSubscriptionPageConfigResponse struct {
+// Ref: #/components/schemas/CreateSubpageConfigResponse
+type CreateSubpageConfigResponse struct {
 	Response Config `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *CreateSubscriptionPageConfigResponse) GetResponse() Config {
+func (s *CreateSubpageConfigResponse) GetResponse() Config {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *CreateSubscriptionPageConfigResponse) SetResponse(val Config) {
+func (s *CreateSubpageConfigResponse) SetResponse(val Config) {
 	s.Response = val
 }
 
-func (*CreateSubscriptionPageConfigResponse) subscriptionPageConfigCreateConfigRes() {}
+func (*CreateSubpageConfigResponse) subscriptionPageConfigCreateConfigRes() {}
 
-// Ref: #/components/schemas/CreateSubscriptionTemplateRequest
-type CreateSubscriptionTemplateRequest struct {
-	Name         string                                        `json:"name"`
-	TemplateType CreateSubscriptionTemplateRequestTemplateType `json:"templateType"`
+// Ref: #/components/schemas/CreateSubscriptionTemplateBody
+type CreateSubscriptionTemplateBody struct {
+	Name         string                                     `json:"name"`
+	TemplateType CreateSubscriptionTemplateBodyTemplateType `json:"templateType"`
 }
 
 // GetName returns the value of Name.
-func (s *CreateSubscriptionTemplateRequest) GetName() string {
+func (s *CreateSubscriptionTemplateBody) GetName() string {
 	return s.Name
 }
 
 // GetTemplateType returns the value of TemplateType.
-func (s *CreateSubscriptionTemplateRequest) GetTemplateType() CreateSubscriptionTemplateRequestTemplateType {
+func (s *CreateSubscriptionTemplateBody) GetTemplateType() CreateSubscriptionTemplateBodyTemplateType {
 	return s.TemplateType
 }
 
 // SetName sets the value of Name.
-func (s *CreateSubscriptionTemplateRequest) SetName(val string) {
+func (s *CreateSubscriptionTemplateBody) SetName(val string) {
 	s.Name = val
 }
 
 // SetTemplateType sets the value of TemplateType.
-func (s *CreateSubscriptionTemplateRequest) SetTemplateType(val CreateSubscriptionTemplateRequestTemplateType) {
+func (s *CreateSubscriptionTemplateBody) SetTemplateType(val CreateSubscriptionTemplateBodyTemplateType) {
 	s.TemplateType = val
 }
 
-type CreateSubscriptionTemplateRequestTemplateType string
+type CreateSubscriptionTemplateBodyTemplateType string
 
 const (
-	CreateSubscriptionTemplateRequestTemplateTypeXRAYJSON   CreateSubscriptionTemplateRequestTemplateType = "XRAY_JSON"
-	CreateSubscriptionTemplateRequestTemplateTypeXRAYBASE64 CreateSubscriptionTemplateRequestTemplateType = "XRAY_BASE64"
-	CreateSubscriptionTemplateRequestTemplateTypeMIHOMO     CreateSubscriptionTemplateRequestTemplateType = "MIHOMO"
-	CreateSubscriptionTemplateRequestTemplateTypeSTASH      CreateSubscriptionTemplateRequestTemplateType = "STASH"
-	CreateSubscriptionTemplateRequestTemplateTypeCLASH      CreateSubscriptionTemplateRequestTemplateType = "CLASH"
-	CreateSubscriptionTemplateRequestTemplateTypeSINGBOX    CreateSubscriptionTemplateRequestTemplateType = "SINGBOX"
+	CreateSubscriptionTemplateBodyTemplateTypeXRAYJSON   CreateSubscriptionTemplateBodyTemplateType = "XRAY_JSON"
+	CreateSubscriptionTemplateBodyTemplateTypeXRAYBASE64 CreateSubscriptionTemplateBodyTemplateType = "XRAY_BASE64"
+	CreateSubscriptionTemplateBodyTemplateTypeMIHOMO     CreateSubscriptionTemplateBodyTemplateType = "MIHOMO"
+	CreateSubscriptionTemplateBodyTemplateTypeSTASH      CreateSubscriptionTemplateBodyTemplateType = "STASH"
+	CreateSubscriptionTemplateBodyTemplateTypeCLASH      CreateSubscriptionTemplateBodyTemplateType = "CLASH"
+	CreateSubscriptionTemplateBodyTemplateTypeSINGBOX    CreateSubscriptionTemplateBodyTemplateType = "SINGBOX"
 )
 
-// AllValues returns all CreateSubscriptionTemplateRequestTemplateType values.
-func (CreateSubscriptionTemplateRequestTemplateType) AllValues() []CreateSubscriptionTemplateRequestTemplateType {
-	return []CreateSubscriptionTemplateRequestTemplateType{
-		CreateSubscriptionTemplateRequestTemplateTypeXRAYJSON,
-		CreateSubscriptionTemplateRequestTemplateTypeXRAYBASE64,
-		CreateSubscriptionTemplateRequestTemplateTypeMIHOMO,
-		CreateSubscriptionTemplateRequestTemplateTypeSTASH,
-		CreateSubscriptionTemplateRequestTemplateTypeCLASH,
-		CreateSubscriptionTemplateRequestTemplateTypeSINGBOX,
+// AllValues returns all CreateSubscriptionTemplateBodyTemplateType values.
+func (CreateSubscriptionTemplateBodyTemplateType) AllValues() []CreateSubscriptionTemplateBodyTemplateType {
+	return []CreateSubscriptionTemplateBodyTemplateType{
+		CreateSubscriptionTemplateBodyTemplateTypeXRAYJSON,
+		CreateSubscriptionTemplateBodyTemplateTypeXRAYBASE64,
+		CreateSubscriptionTemplateBodyTemplateTypeMIHOMO,
+		CreateSubscriptionTemplateBodyTemplateTypeSTASH,
+		CreateSubscriptionTemplateBodyTemplateTypeCLASH,
+		CreateSubscriptionTemplateBodyTemplateTypeSINGBOX,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateSubscriptionTemplateRequestTemplateType) MarshalText() ([]byte, error) {
+func (s CreateSubscriptionTemplateBodyTemplateType) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateSubscriptionTemplateRequestTemplateTypeXRAYJSON:
+	case CreateSubscriptionTemplateBodyTemplateTypeXRAYJSON:
 		return []byte(s), nil
-	case CreateSubscriptionTemplateRequestTemplateTypeXRAYBASE64:
+	case CreateSubscriptionTemplateBodyTemplateTypeXRAYBASE64:
 		return []byte(s), nil
-	case CreateSubscriptionTemplateRequestTemplateTypeMIHOMO:
+	case CreateSubscriptionTemplateBodyTemplateTypeMIHOMO:
 		return []byte(s), nil
-	case CreateSubscriptionTemplateRequestTemplateTypeSTASH:
+	case CreateSubscriptionTemplateBodyTemplateTypeSTASH:
 		return []byte(s), nil
-	case CreateSubscriptionTemplateRequestTemplateTypeCLASH:
+	case CreateSubscriptionTemplateBodyTemplateTypeCLASH:
 		return []byte(s), nil
-	case CreateSubscriptionTemplateRequestTemplateTypeSINGBOX:
+	case CreateSubscriptionTemplateBodyTemplateTypeSINGBOX:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -3485,119 +3534,38 @@ func (s CreateSubscriptionTemplateRequestTemplateType) MarshalText() ([]byte, er
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateSubscriptionTemplateRequestTemplateType) UnmarshalText(data []byte) error {
-	switch CreateSubscriptionTemplateRequestTemplateType(data) {
-	case CreateSubscriptionTemplateRequestTemplateTypeXRAYJSON:
-		*s = CreateSubscriptionTemplateRequestTemplateTypeXRAYJSON
+func (s *CreateSubscriptionTemplateBodyTemplateType) UnmarshalText(data []byte) error {
+	switch CreateSubscriptionTemplateBodyTemplateType(data) {
+	case CreateSubscriptionTemplateBodyTemplateTypeXRAYJSON:
+		*s = CreateSubscriptionTemplateBodyTemplateTypeXRAYJSON
 		return nil
-	case CreateSubscriptionTemplateRequestTemplateTypeXRAYBASE64:
-		*s = CreateSubscriptionTemplateRequestTemplateTypeXRAYBASE64
+	case CreateSubscriptionTemplateBodyTemplateTypeXRAYBASE64:
+		*s = CreateSubscriptionTemplateBodyTemplateTypeXRAYBASE64
 		return nil
-	case CreateSubscriptionTemplateRequestTemplateTypeMIHOMO:
-		*s = CreateSubscriptionTemplateRequestTemplateTypeMIHOMO
+	case CreateSubscriptionTemplateBodyTemplateTypeMIHOMO:
+		*s = CreateSubscriptionTemplateBodyTemplateTypeMIHOMO
 		return nil
-	case CreateSubscriptionTemplateRequestTemplateTypeSTASH:
-		*s = CreateSubscriptionTemplateRequestTemplateTypeSTASH
+	case CreateSubscriptionTemplateBodyTemplateTypeSTASH:
+		*s = CreateSubscriptionTemplateBodyTemplateTypeSTASH
 		return nil
-	case CreateSubscriptionTemplateRequestTemplateTypeCLASH:
-		*s = CreateSubscriptionTemplateRequestTemplateTypeCLASH
+	case CreateSubscriptionTemplateBodyTemplateTypeCLASH:
+		*s = CreateSubscriptionTemplateBodyTemplateTypeCLASH
 		return nil
-	case CreateSubscriptionTemplateRequestTemplateTypeSINGBOX:
-		*s = CreateSubscriptionTemplateRequestTemplateTypeSINGBOX
+	case CreateSubscriptionTemplateBodyTemplateTypeSINGBOX:
+		*s = CreateSubscriptionTemplateBodyTemplateTypeSINGBOX
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/CreateUserHwidDeviceRequest
-type CreateUserHwidDeviceRequest struct {
-	Hwid        string    `json:"hwid"`
-	UserUuid    uuid.UUID `json:"userUuid"`
-	Platform    OptString `json:"platform"`
-	OsVersion   OptString `json:"osVersion"`
-	DeviceModel OptString `json:"deviceModel"`
-	UserAgent   OptString `json:"userAgent"`
-	RequestIp   OptString `json:"requestIp"`
-}
-
-// GetHwid returns the value of Hwid.
-func (s *CreateUserHwidDeviceRequest) GetHwid() string {
-	return s.Hwid
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *CreateUserHwidDeviceRequest) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// GetPlatform returns the value of Platform.
-func (s *CreateUserHwidDeviceRequest) GetPlatform() OptString {
-	return s.Platform
-}
-
-// GetOsVersion returns the value of OsVersion.
-func (s *CreateUserHwidDeviceRequest) GetOsVersion() OptString {
-	return s.OsVersion
-}
-
-// GetDeviceModel returns the value of DeviceModel.
-func (s *CreateUserHwidDeviceRequest) GetDeviceModel() OptString {
-	return s.DeviceModel
-}
-
-// GetUserAgent returns the value of UserAgent.
-func (s *CreateUserHwidDeviceRequest) GetUserAgent() OptString {
-	return s.UserAgent
-}
-
-// GetRequestIp returns the value of RequestIp.
-func (s *CreateUserHwidDeviceRequest) GetRequestIp() OptString {
-	return s.RequestIp
-}
-
-// SetHwid sets the value of Hwid.
-func (s *CreateUserHwidDeviceRequest) SetHwid(val string) {
-	s.Hwid = val
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *CreateUserHwidDeviceRequest) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetPlatform sets the value of Platform.
-func (s *CreateUserHwidDeviceRequest) SetPlatform(val OptString) {
-	s.Platform = val
-}
-
-// SetOsVersion sets the value of OsVersion.
-func (s *CreateUserHwidDeviceRequest) SetOsVersion(val OptString) {
-	s.OsVersion = val
-}
-
-// SetDeviceModel sets the value of DeviceModel.
-func (s *CreateUserHwidDeviceRequest) SetDeviceModel(val OptString) {
-	s.DeviceModel = val
-}
-
-// SetUserAgent sets the value of UserAgent.
-func (s *CreateUserHwidDeviceRequest) SetUserAgent(val OptString) {
-	s.UserAgent = val
-}
-
-// SetRequestIp sets the value of RequestIp.
-func (s *CreateUserHwidDeviceRequest) SetRequestIp(val OptString) {
-	s.RequestIp = val
-}
-
-// Ref: #/components/schemas/CreateUserRequest
-type CreateUserRequest struct {
+// Ref: #/components/schemas/CreateUserBody
+type CreateUserBody struct {
 	// Unique username for the user. Required. Must be 3-36 characters long and contain only letters,
 	// numbers, underscores and dashes.
 	Username string `json:"username"`
 	// Optional. User account status. Defaults to ACTIVE.
-	Status OptCreateUserRequestStatus `json:"status"`
+	Status OptCreateUserBodyStatus `json:"status"`
 	// Optional. Short UUID identifier for the user.
 	ShortUuid OptString `json:"shortUuid"`
 	// Optional. Password for Trojan protocol. Must be 8-32 characters.
@@ -3609,7 +3577,7 @@ type CreateUserRequest struct {
 	// Optional. Traffic limit in bytes. Set to 0 for unlimited traffic.
 	TrafficLimitBytes OptFloat64 `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy OptCreateUserRequestTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	TrafficLimitStrategy OptCreateUserBodyTrafficLimitStrategy `json:"trafficLimitStrategy"`
 	// Account expiration date. Required. Format: 2025-01-17T15:38:45.065Z.
 	ExpireAt time.Time `json:"expireAt"`
 	// Optional. Account creation date. Format: 2025-01-17T15:38:45.065Z.
@@ -3622,240 +3590,227 @@ type CreateUserRequest struct {
 	// underscores only.
 	Tag OptNilString `json:"tag"`
 	// Optional. Telegram user ID for notifications. Must be an integer.
-	TelegramId OptNilInt `json:"telegramId"`
+	TelegramId OptNilFloat64 `json:"telegramId"`
 	// Optional. User email address. Must be a valid email format.
 	Email OptNilString `json:"email"`
 	// Optional. Maximum number of hardware devices allowed. Must be a positive integer.
 	HwidDeviceLimit OptInt `json:"hwidDeviceLimit"`
 	// Optional. Array of UUIDs representing enabled internal squads.
 	ActiveInternalSquads []uuid.UUID `json:"activeInternalSquads"`
-	// Optional. Pass UUID to create user with specific UUID, otherwise it will be generated
-	// automatically.
-	UUID OptUUID `json:"uuid"`
 	// Optional. External squad UUID.
 	ExternalSquadUuid OptNilUUID `json:"externalSquadUuid"`
 }
 
 // GetUsername returns the value of Username.
-func (s *CreateUserRequest) GetUsername() string {
+func (s *CreateUserBody) GetUsername() string {
 	return s.Username
 }
 
 // GetStatus returns the value of Status.
-func (s *CreateUserRequest) GetStatus() OptCreateUserRequestStatus {
+func (s *CreateUserBody) GetStatus() OptCreateUserBodyStatus {
 	return s.Status
 }
 
 // GetShortUuid returns the value of ShortUuid.
-func (s *CreateUserRequest) GetShortUuid() OptString {
+func (s *CreateUserBody) GetShortUuid() OptString {
 	return s.ShortUuid
 }
 
 // GetTrojanPassword returns the value of TrojanPassword.
-func (s *CreateUserRequest) GetTrojanPassword() OptString {
+func (s *CreateUserBody) GetTrojanPassword() OptString {
 	return s.TrojanPassword
 }
 
 // GetVlessUuid returns the value of VlessUuid.
-func (s *CreateUserRequest) GetVlessUuid() OptUUID {
+func (s *CreateUserBody) GetVlessUuid() OptUUID {
 	return s.VlessUuid
 }
 
 // GetSsPassword returns the value of SsPassword.
-func (s *CreateUserRequest) GetSsPassword() OptString {
+func (s *CreateUserBody) GetSsPassword() OptString {
 	return s.SsPassword
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *CreateUserRequest) GetTrafficLimitBytes() OptFloat64 {
+func (s *CreateUserBody) GetTrafficLimitBytes() OptFloat64 {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *CreateUserRequest) GetTrafficLimitStrategy() OptCreateUserRequestTrafficLimitStrategy {
+func (s *CreateUserBody) GetTrafficLimitStrategy() OptCreateUserBodyTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
 // GetExpireAt returns the value of ExpireAt.
-func (s *CreateUserRequest) GetExpireAt() time.Time {
+func (s *CreateUserBody) GetExpireAt() time.Time {
 	return s.ExpireAt
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *CreateUserRequest) GetCreatedAt() OptDateTime {
+func (s *CreateUserBody) GetCreatedAt() OptDateTime {
 	return s.CreatedAt
 }
 
 // GetLastTrafficResetAt returns the value of LastTrafficResetAt.
-func (s *CreateUserRequest) GetLastTrafficResetAt() OptDateTime {
+func (s *CreateUserBody) GetLastTrafficResetAt() OptDateTime {
 	return s.LastTrafficResetAt
 }
 
 // GetDescription returns the value of Description.
-func (s *CreateUserRequest) GetDescription() OptString {
+func (s *CreateUserBody) GetDescription() OptString {
 	return s.Description
 }
 
 // GetTag returns the value of Tag.
-func (s *CreateUserRequest) GetTag() OptNilString {
+func (s *CreateUserBody) GetTag() OptNilString {
 	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *CreateUserRequest) GetTelegramId() OptNilInt {
+func (s *CreateUserBody) GetTelegramId() OptNilFloat64 {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *CreateUserRequest) GetEmail() OptNilString {
+func (s *CreateUserBody) GetEmail() OptNilString {
 	return s.Email
 }
 
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *CreateUserRequest) GetHwidDeviceLimit() OptInt {
+func (s *CreateUserBody) GetHwidDeviceLimit() OptInt {
 	return s.HwidDeviceLimit
 }
 
 // GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *CreateUserRequest) GetActiveInternalSquads() []uuid.UUID {
+func (s *CreateUserBody) GetActiveInternalSquads() []uuid.UUID {
 	return s.ActiveInternalSquads
 }
 
-// GetUUID returns the value of UUID.
-func (s *CreateUserRequest) GetUUID() OptUUID {
-	return s.UUID
-}
-
 // GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *CreateUserRequest) GetExternalSquadUuid() OptNilUUID {
+func (s *CreateUserBody) GetExternalSquadUuid() OptNilUUID {
 	return s.ExternalSquadUuid
 }
 
 // SetUsername sets the value of Username.
-func (s *CreateUserRequest) SetUsername(val string) {
+func (s *CreateUserBody) SetUsername(val string) {
 	s.Username = val
 }
 
 // SetStatus sets the value of Status.
-func (s *CreateUserRequest) SetStatus(val OptCreateUserRequestStatus) {
+func (s *CreateUserBody) SetStatus(val OptCreateUserBodyStatus) {
 	s.Status = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
-func (s *CreateUserRequest) SetShortUuid(val OptString) {
+func (s *CreateUserBody) SetShortUuid(val OptString) {
 	s.ShortUuid = val
 }
 
 // SetTrojanPassword sets the value of TrojanPassword.
-func (s *CreateUserRequest) SetTrojanPassword(val OptString) {
+func (s *CreateUserBody) SetTrojanPassword(val OptString) {
 	s.TrojanPassword = val
 }
 
 // SetVlessUuid sets the value of VlessUuid.
-func (s *CreateUserRequest) SetVlessUuid(val OptUUID) {
+func (s *CreateUserBody) SetVlessUuid(val OptUUID) {
 	s.VlessUuid = val
 }
 
 // SetSsPassword sets the value of SsPassword.
-func (s *CreateUserRequest) SetSsPassword(val OptString) {
+func (s *CreateUserBody) SetSsPassword(val OptString) {
 	s.SsPassword = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *CreateUserRequest) SetTrafficLimitBytes(val OptFloat64) {
+func (s *CreateUserBody) SetTrafficLimitBytes(val OptFloat64) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *CreateUserRequest) SetTrafficLimitStrategy(val OptCreateUserRequestTrafficLimitStrategy) {
+func (s *CreateUserBody) SetTrafficLimitStrategy(val OptCreateUserBodyTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
-func (s *CreateUserRequest) SetExpireAt(val time.Time) {
+func (s *CreateUserBody) SetExpireAt(val time.Time) {
 	s.ExpireAt = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *CreateUserRequest) SetCreatedAt(val OptDateTime) {
+func (s *CreateUserBody) SetCreatedAt(val OptDateTime) {
 	s.CreatedAt = val
 }
 
 // SetLastTrafficResetAt sets the value of LastTrafficResetAt.
-func (s *CreateUserRequest) SetLastTrafficResetAt(val OptDateTime) {
+func (s *CreateUserBody) SetLastTrafficResetAt(val OptDateTime) {
 	s.LastTrafficResetAt = val
 }
 
 // SetDescription sets the value of Description.
-func (s *CreateUserRequest) SetDescription(val OptString) {
+func (s *CreateUserBody) SetDescription(val OptString) {
 	s.Description = val
 }
 
 // SetTag sets the value of Tag.
-func (s *CreateUserRequest) SetTag(val OptNilString) {
+func (s *CreateUserBody) SetTag(val OptNilString) {
 	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *CreateUserRequest) SetTelegramId(val OptNilInt) {
+func (s *CreateUserBody) SetTelegramId(val OptNilFloat64) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *CreateUserRequest) SetEmail(val OptNilString) {
+func (s *CreateUserBody) SetEmail(val OptNilString) {
 	s.Email = val
 }
 
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *CreateUserRequest) SetHwidDeviceLimit(val OptInt) {
+func (s *CreateUserBody) SetHwidDeviceLimit(val OptInt) {
 	s.HwidDeviceLimit = val
 }
 
 // SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *CreateUserRequest) SetActiveInternalSquads(val []uuid.UUID) {
+func (s *CreateUserBody) SetActiveInternalSquads(val []uuid.UUID) {
 	s.ActiveInternalSquads = val
 }
 
-// SetUUID sets the value of UUID.
-func (s *CreateUserRequest) SetUUID(val OptUUID) {
-	s.UUID = val
-}
-
 // SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *CreateUserRequest) SetExternalSquadUuid(val OptNilUUID) {
+func (s *CreateUserBody) SetExternalSquadUuid(val OptNilUUID) {
 	s.ExternalSquadUuid = val
 }
 
 // Optional. User account status. Defaults to ACTIVE.
-type CreateUserRequestStatus string
+type CreateUserBodyStatus string
 
 const (
-	CreateUserRequestStatusACTIVE   CreateUserRequestStatus = "ACTIVE"
-	CreateUserRequestStatusDISABLED CreateUserRequestStatus = "DISABLED"
-	CreateUserRequestStatusLIMITED  CreateUserRequestStatus = "LIMITED"
-	CreateUserRequestStatusEXPIRED  CreateUserRequestStatus = "EXPIRED"
+	CreateUserBodyStatusACTIVE   CreateUserBodyStatus = "ACTIVE"
+	CreateUserBodyStatusDISABLED CreateUserBodyStatus = "DISABLED"
+	CreateUserBodyStatusLIMITED  CreateUserBodyStatus = "LIMITED"
+	CreateUserBodyStatusEXPIRED  CreateUserBodyStatus = "EXPIRED"
 )
 
-// AllValues returns all CreateUserRequestStatus values.
-func (CreateUserRequestStatus) AllValues() []CreateUserRequestStatus {
-	return []CreateUserRequestStatus{
-		CreateUserRequestStatusACTIVE,
-		CreateUserRequestStatusDISABLED,
-		CreateUserRequestStatusLIMITED,
-		CreateUserRequestStatusEXPIRED,
+// AllValues returns all CreateUserBodyStatus values.
+func (CreateUserBodyStatus) AllValues() []CreateUserBodyStatus {
+	return []CreateUserBodyStatus{
+		CreateUserBodyStatusACTIVE,
+		CreateUserBodyStatusDISABLED,
+		CreateUserBodyStatusLIMITED,
+		CreateUserBodyStatusEXPIRED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateUserRequestStatus) MarshalText() ([]byte, error) {
+func (s CreateUserBodyStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateUserRequestStatusACTIVE:
+	case CreateUserBodyStatusACTIVE:
 		return []byte(s), nil
-	case CreateUserRequestStatusDISABLED:
+	case CreateUserBodyStatusDISABLED:
 		return []byte(s), nil
-	case CreateUserRequestStatusLIMITED:
+	case CreateUserBodyStatusLIMITED:
 		return []byte(s), nil
-	case CreateUserRequestStatusEXPIRED:
+	case CreateUserBodyStatusEXPIRED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -3863,19 +3818,19 @@ func (s CreateUserRequestStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateUserRequestStatus) UnmarshalText(data []byte) error {
-	switch CreateUserRequestStatus(data) {
-	case CreateUserRequestStatusACTIVE:
-		*s = CreateUserRequestStatusACTIVE
+func (s *CreateUserBodyStatus) UnmarshalText(data []byte) error {
+	switch CreateUserBodyStatus(data) {
+	case CreateUserBodyStatusACTIVE:
+		*s = CreateUserBodyStatusACTIVE
 		return nil
-	case CreateUserRequestStatusDISABLED:
-		*s = CreateUserRequestStatusDISABLED
+	case CreateUserBodyStatusDISABLED:
+		*s = CreateUserBodyStatusDISABLED
 		return nil
-	case CreateUserRequestStatusLIMITED:
-		*s = CreateUserRequestStatusLIMITED
+	case CreateUserBodyStatusLIMITED:
+		*s = CreateUserBodyStatusLIMITED
 		return nil
-	case CreateUserRequestStatusEXPIRED:
-		*s = CreateUserRequestStatusEXPIRED
+	case CreateUserBodyStatusEXPIRED:
+		*s = CreateUserBodyStatusEXPIRED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -3883,39 +3838,39 @@ func (s *CreateUserRequestStatus) UnmarshalText(data []byte) error {
 }
 
 // Available reset periods.
-type CreateUserRequestTrafficLimitStrategy string
+type CreateUserBodyTrafficLimitStrategy string
 
 const (
-	CreateUserRequestTrafficLimitStrategyNORESET      CreateUserRequestTrafficLimitStrategy = "NO_RESET"
-	CreateUserRequestTrafficLimitStrategyDAY          CreateUserRequestTrafficLimitStrategy = "DAY"
-	CreateUserRequestTrafficLimitStrategyWEEK         CreateUserRequestTrafficLimitStrategy = "WEEK"
-	CreateUserRequestTrafficLimitStrategyMONTH        CreateUserRequestTrafficLimitStrategy = "MONTH"
-	CreateUserRequestTrafficLimitStrategyMONTHROLLING CreateUserRequestTrafficLimitStrategy = "MONTH_ROLLING"
+	CreateUserBodyTrafficLimitStrategyNORESET      CreateUserBodyTrafficLimitStrategy = "NO_RESET"
+	CreateUserBodyTrafficLimitStrategyDAY          CreateUserBodyTrafficLimitStrategy = "DAY"
+	CreateUserBodyTrafficLimitStrategyWEEK         CreateUserBodyTrafficLimitStrategy = "WEEK"
+	CreateUserBodyTrafficLimitStrategyMONTH        CreateUserBodyTrafficLimitStrategy = "MONTH"
+	CreateUserBodyTrafficLimitStrategyMONTHROLLING CreateUserBodyTrafficLimitStrategy = "MONTH_ROLLING"
 )
 
-// AllValues returns all CreateUserRequestTrafficLimitStrategy values.
-func (CreateUserRequestTrafficLimitStrategy) AllValues() []CreateUserRequestTrafficLimitStrategy {
-	return []CreateUserRequestTrafficLimitStrategy{
-		CreateUserRequestTrafficLimitStrategyNORESET,
-		CreateUserRequestTrafficLimitStrategyDAY,
-		CreateUserRequestTrafficLimitStrategyWEEK,
-		CreateUserRequestTrafficLimitStrategyMONTH,
-		CreateUserRequestTrafficLimitStrategyMONTHROLLING,
+// AllValues returns all CreateUserBodyTrafficLimitStrategy values.
+func (CreateUserBodyTrafficLimitStrategy) AllValues() []CreateUserBodyTrafficLimitStrategy {
+	return []CreateUserBodyTrafficLimitStrategy{
+		CreateUserBodyTrafficLimitStrategyNORESET,
+		CreateUserBodyTrafficLimitStrategyDAY,
+		CreateUserBodyTrafficLimitStrategyWEEK,
+		CreateUserBodyTrafficLimitStrategyMONTH,
+		CreateUserBodyTrafficLimitStrategyMONTHROLLING,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s CreateUserRequestTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s CreateUserBodyTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case CreateUserRequestTrafficLimitStrategyNORESET:
+	case CreateUserBodyTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case CreateUserRequestTrafficLimitStrategyDAY:
+	case CreateUserBodyTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case CreateUserRequestTrafficLimitStrategyWEEK:
+	case CreateUserBodyTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case CreateUserRequestTrafficLimitStrategyMONTH:
+	case CreateUserBodyTrafficLimitStrategyMONTH:
 		return []byte(s), nil
-	case CreateUserRequestTrafficLimitStrategyMONTHROLLING:
+	case CreateUserBodyTrafficLimitStrategyMONTHROLLING:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -3923,26 +3878,107 @@ func (s CreateUserRequestTrafficLimitStrategy) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *CreateUserRequestTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch CreateUserRequestTrafficLimitStrategy(data) {
-	case CreateUserRequestTrafficLimitStrategyNORESET:
-		*s = CreateUserRequestTrafficLimitStrategyNORESET
+func (s *CreateUserBodyTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch CreateUserBodyTrafficLimitStrategy(data) {
+	case CreateUserBodyTrafficLimitStrategyNORESET:
+		*s = CreateUserBodyTrafficLimitStrategyNORESET
 		return nil
-	case CreateUserRequestTrafficLimitStrategyDAY:
-		*s = CreateUserRequestTrafficLimitStrategyDAY
+	case CreateUserBodyTrafficLimitStrategyDAY:
+		*s = CreateUserBodyTrafficLimitStrategyDAY
 		return nil
-	case CreateUserRequestTrafficLimitStrategyWEEK:
-		*s = CreateUserRequestTrafficLimitStrategyWEEK
+	case CreateUserBodyTrafficLimitStrategyWEEK:
+		*s = CreateUserBodyTrafficLimitStrategyWEEK
 		return nil
-	case CreateUserRequestTrafficLimitStrategyMONTH:
-		*s = CreateUserRequestTrafficLimitStrategyMONTH
+	case CreateUserBodyTrafficLimitStrategyMONTH:
+		*s = CreateUserBodyTrafficLimitStrategyMONTH
 		return nil
-	case CreateUserRequestTrafficLimitStrategyMONTHROLLING:
-		*s = CreateUserRequestTrafficLimitStrategyMONTHROLLING
+	case CreateUserBodyTrafficLimitStrategyMONTHROLLING:
+		*s = CreateUserBodyTrafficLimitStrategyMONTHROLLING
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
+}
+
+// Ref: #/components/schemas/CreateUserHwidDeviceBody
+type CreateUserHwidDeviceBody struct {
+	Hwid        string    `json:"hwid"`
+	UserId      float64   `json:"userId"`
+	Platform    OptString `json:"platform"`
+	OsVersion   OptString `json:"osVersion"`
+	DeviceModel OptString `json:"deviceModel"`
+	UserAgent   OptString `json:"userAgent"`
+	RequestIp   OptString `json:"requestIp"`
+}
+
+// GetHwid returns the value of Hwid.
+func (s *CreateUserHwidDeviceBody) GetHwid() string {
+	return s.Hwid
+}
+
+// GetUserId returns the value of UserId.
+func (s *CreateUserHwidDeviceBody) GetUserId() float64 {
+	return s.UserId
+}
+
+// GetPlatform returns the value of Platform.
+func (s *CreateUserHwidDeviceBody) GetPlatform() OptString {
+	return s.Platform
+}
+
+// GetOsVersion returns the value of OsVersion.
+func (s *CreateUserHwidDeviceBody) GetOsVersion() OptString {
+	return s.OsVersion
+}
+
+// GetDeviceModel returns the value of DeviceModel.
+func (s *CreateUserHwidDeviceBody) GetDeviceModel() OptString {
+	return s.DeviceModel
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *CreateUserHwidDeviceBody) GetUserAgent() OptString {
+	return s.UserAgent
+}
+
+// GetRequestIp returns the value of RequestIp.
+func (s *CreateUserHwidDeviceBody) GetRequestIp() OptString {
+	return s.RequestIp
+}
+
+// SetHwid sets the value of Hwid.
+func (s *CreateUserHwidDeviceBody) SetHwid(val string) {
+	s.Hwid = val
+}
+
+// SetUserId sets the value of UserId.
+func (s *CreateUserHwidDeviceBody) SetUserId(val float64) {
+	s.UserId = val
+}
+
+// SetPlatform sets the value of Platform.
+func (s *CreateUserHwidDeviceBody) SetPlatform(val OptString) {
+	s.Platform = val
+}
+
+// SetOsVersion sets the value of OsVersion.
+func (s *CreateUserHwidDeviceBody) SetOsVersion(val OptString) {
+	s.OsVersion = val
+}
+
+// SetDeviceModel sets the value of DeviceModel.
+func (s *CreateUserHwidDeviceBody) SetDeviceModel(val OptString) {
+	s.DeviceModel = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *CreateUserHwidDeviceBody) SetUserAgent(val OptString) {
+	s.UserAgent = val
+}
+
+// SetRequestIp sets the value of RequestIp.
+func (s *CreateUserHwidDeviceBody) SetRequestIp(val OptString) {
+	s.RequestIp = val
 }
 
 // Ref: #/components/schemas/CustomRemark
@@ -4015,19 +4051,34 @@ func (s *CustomRemark) SetHWIDNotSupported(val []string) {
 	s.HWIDNotSupported = val
 }
 
-// Ref: #/components/schemas/DebugSrrMatcherRequest
-type DebugSrrMatcherRequest struct {
+// Ref: #/components/schemas/DebugSrrMatcherBody
+type DebugSrrMatcherBody struct {
 	ResponseRules ResponseRules `json:"responseRules"`
 }
 
 // GetResponseRules returns the value of ResponseRules.
-func (s *DebugSrrMatcherRequest) GetResponseRules() ResponseRules {
+func (s *DebugSrrMatcherBody) GetResponseRules() ResponseRules {
 	return s.ResponseRules
 }
 
 // SetResponseRules sets the value of ResponseRules.
-func (s *DebugSrrMatcherRequest) SetResponseRules(val ResponseRules) {
+func (s *DebugSrrMatcherBody) SetResponseRules(val ResponseRules) {
 	s.ResponseRules = val
+}
+
+// Ref: #/components/schemas/DebugSrrMatcherBodySettings
+type DebugSrrMatcherBodySettings struct {
+	DisableSubscriptionAccessByPath OptBool `json:"disableSubscriptionAccessByPath"`
+}
+
+// GetDisableSubscriptionAccessByPath returns the value of DisableSubscriptionAccessByPath.
+func (s *DebugSrrMatcherBodySettings) GetDisableSubscriptionAccessByPath() OptBool {
+	return s.DisableSubscriptionAccessByPath
+}
+
+// SetDisableSubscriptionAccessByPath sets the value of DisableSubscriptionAccessByPath.
+func (s *DebugSrrMatcherBodySettings) SetDisableSubscriptionAccessByPath(val OptBool) {
+	s.DisableSubscriptionAccessByPath = val
 }
 
 // Ref: #/components/schemas/DebugSrrMatcherResponse
@@ -4231,150 +4282,74 @@ func (s *DebugSrrMatcherResponseResponseResponseType) UnmarshalText(data []byte)
 	}
 }
 
-// {"markdownDescription":"Settings for the **response rules** config. Optional."}.
-// Ref: #/components/schemas/DebugSrrMatcherSettings
-type DebugSrrMatcherSettings struct {
-	// {"markdownDescription":"Usually, a user's subscription may also be available via additional paths
-	// such as **/json**, **/stash**, or **/mihomo**. If this flag is set to **true**, access via these
-	// additional paths will be disabled."}.
-	DisableSubscriptionAccessByPath OptBool `json:"disableSubscriptionAccessByPath"`
+// Ref: #/components/schemas/DeleteAllUserHwidDevicesBody
+type DeleteAllUserHwidDevicesBody struct {
+	UserId float64 `json:"userId"`
 }
 
-// GetDisableSubscriptionAccessByPath returns the value of DisableSubscriptionAccessByPath.
-func (s *DebugSrrMatcherSettings) GetDisableSubscriptionAccessByPath() OptBool {
-	return s.DisableSubscriptionAccessByPath
+// GetUserId returns the value of UserId.
+func (s *DeleteAllUserHwidDevicesBody) GetUserId() float64 {
+	return s.UserId
 }
 
-// SetDisableSubscriptionAccessByPath sets the value of DisableSubscriptionAccessByPath.
-func (s *DebugSrrMatcherSettings) SetDisableSubscriptionAccessByPath(val OptBool) {
-	s.DisableSubscriptionAccessByPath = val
+// SetUserId sets the value of UserId.
+func (s *DeleteAllUserHwidDevicesBody) SetUserId(val float64) {
+	s.UserId = val
 }
 
-// Ref: #/components/schemas/DeleteAllUserHwidDevicesRequest
-type DeleteAllUserHwidDevicesRequest struct {
-	UserUuid uuid.UUID `json:"userUuid"`
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *DeleteAllUserHwidDevicesRequest) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *DeleteAllUserHwidDevicesRequest) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// Ref: #/components/schemas/DeleteApiTokenResponse
-type DeleteApiTokenResponse struct {
-	Response bool `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *DeleteApiTokenResponse) GetResponse() bool {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *DeleteApiTokenResponse) SetResponse(val bool) {
-	s.Response = val
-}
-
-func (*DeleteApiTokenResponse) apiTokensDeleteRes() {}
-
-// Ref: #/components/schemas/DeletePasskeyRequest
-type DeletePasskeyRequest struct {
+// Ref: #/components/schemas/DeletePasskeyBody
+type DeletePasskeyBody struct {
 	ID string `json:"id"`
 }
 
 // GetID returns the value of ID.
-func (s *DeletePasskeyRequest) GetID() string {
+func (s *DeletePasskeyBody) GetID() string {
 	return s.ID
 }
 
 // SetID sets the value of ID.
-func (s *DeletePasskeyRequest) SetID(val string) {
+func (s *DeletePasskeyBody) SetID(val string) {
 	s.ID = val
 }
 
-// Ref: #/components/schemas/DeleteResponse
-type DeleteResponse struct {
-	Response DeleteResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *DeleteResponse) GetResponse() DeleteResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *DeleteResponse) SetResponse(val DeleteResponseResponse) {
-	s.Response = val
-}
-
-func (*DeleteResponse) configProfileDeleteConfigProfileByUuidRes() {}
-func (*DeleteResponse) externalSquadDeleteExternalSquadRes()       {}
-func (*DeleteResponse) hostsDeleteHostRes()                        {}
-func (*DeleteResponse) infraBillingDeleteInfraProviderByUuidRes()  {}
-func (*DeleteResponse) internalSquadDeleteInternalSquadRes()       {}
-func (*DeleteResponse) nodePluginDeleteConfigRes()                 {}
-func (*DeleteResponse) nodesDeleteNodeRes()                        {}
-func (*DeleteResponse) subscriptionPageConfigDeleteConfigRes()     {}
-func (*DeleteResponse) subscriptionTemplateDeleteTemplateRes()     {}
-func (*DeleteResponse) usersDeleteUserRes()                        {}
-
-type DeleteResponseResponse struct {
-	IsDeleted bool `json:"isDeleted"`
-}
-
-// GetIsDeleted returns the value of IsDeleted.
-func (s *DeleteResponseResponse) GetIsDeleted() bool {
-	return s.IsDeleted
-}
-
-// SetIsDeleted sets the value of IsDeleted.
-func (s *DeleteResponseResponse) SetIsDeleted(val bool) {
-	s.IsDeleted = val
-}
-
-// Ref: #/components/schemas/DeleteSnippetRequest
-type DeleteSnippetRequest struct {
+// Ref: #/components/schemas/DeleteSnippetBody
+type DeleteSnippetBody struct {
 	Name string `json:"name"`
 }
 
 // GetName returns the value of Name.
-func (s *DeleteSnippetRequest) GetName() string {
+func (s *DeleteSnippetBody) GetName() string {
 	return s.Name
 }
 
 // SetName sets the value of Name.
-func (s *DeleteSnippetRequest) SetName(val string) {
+func (s *DeleteSnippetBody) SetName(val string) {
 	s.Name = val
 }
 
-// Ref: #/components/schemas/DeleteUserHwidDeviceRequest
-type DeleteUserHwidDeviceRequest struct {
-	UserUuid uuid.UUID `json:"userUuid"`
-	Hwid     string    `json:"hwid"`
+// Ref: #/components/schemas/DeleteUserHwidDeviceBody
+type DeleteUserHwidDeviceBody struct {
+	UserId float64 `json:"userId"`
+	Hwid   string  `json:"hwid"`
 }
 
-// GetUserUuid returns the value of UserUuid.
-func (s *DeleteUserHwidDeviceRequest) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+// GetUserId returns the value of UserId.
+func (s *DeleteUserHwidDeviceBody) GetUserId() float64 {
+	return s.UserId
 }
 
 // GetHwid returns the value of Hwid.
-func (s *DeleteUserHwidDeviceRequest) GetHwid() string {
+func (s *DeleteUserHwidDeviceBody) GetHwid() string {
 	return s.Hwid
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *DeleteUserHwidDeviceRequest) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
+// SetUserId sets the value of UserId.
+func (s *DeleteUserHwidDeviceBody) SetUserId(val float64) {
+	s.UserId = val
 }
 
 // SetHwid sets the value of Hwid.
-func (s *DeleteUserHwidDeviceRequest) SetHwid(val string) {
+func (s *DeleteUserHwidDeviceBody) SetHwid(val string) {
 	s.Hwid = val
 }
 
@@ -4481,143 +4456,143 @@ func (s *Device) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// Ref: #/components/schemas/DropConnectionsRequest
-type DropConnectionsRequest struct {
-	DropBy      DropConnectionsRequestDropBy      `json:"dropBy"`
-	TargetNodes DropConnectionsRequestTargetNodes `json:"targetNodes"`
+// Ref: #/components/schemas/DropConnectionsBody
+type DropConnectionsBody struct {
+	DropBy      DropConnectionsBodyDropBy      `json:"dropBy"`
+	TargetNodes DropConnectionsBodyTargetNodes `json:"targetNodes"`
 }
 
 // GetDropBy returns the value of DropBy.
-func (s *DropConnectionsRequest) GetDropBy() DropConnectionsRequestDropBy {
+func (s *DropConnectionsBody) GetDropBy() DropConnectionsBodyDropBy {
 	return s.DropBy
 }
 
 // GetTargetNodes returns the value of TargetNodes.
-func (s *DropConnectionsRequest) GetTargetNodes() DropConnectionsRequestTargetNodes {
+func (s *DropConnectionsBody) GetTargetNodes() DropConnectionsBodyTargetNodes {
 	return s.TargetNodes
 }
 
 // SetDropBy sets the value of DropBy.
-func (s *DropConnectionsRequest) SetDropBy(val DropConnectionsRequestDropBy) {
+func (s *DropConnectionsBody) SetDropBy(val DropConnectionsBodyDropBy) {
 	s.DropBy = val
 }
 
 // SetTargetNodes sets the value of TargetNodes.
-func (s *DropConnectionsRequest) SetTargetNodes(val DropConnectionsRequestTargetNodes) {
+func (s *DropConnectionsBody) SetTargetNodes(val DropConnectionsBodyTargetNodes) {
 	s.TargetNodes = val
 }
 
-// DropConnectionsRequestDropBy represents sum type.
-type DropConnectionsRequestDropBy struct {
-	Type                          DropConnectionsRequestDropByType // switch on this field
-	DropConnectionsRequestDropBy0 DropConnectionsRequestDropBy0
-	DropConnectionsRequestDropBy1 DropConnectionsRequestDropBy1
+// DropConnectionsBodyDropBy represents sum type.
+type DropConnectionsBodyDropBy struct {
+	Type                       DropConnectionsBodyDropByType // switch on this field
+	DropConnectionsBodyDropBy0 DropConnectionsBodyDropBy0
+	DropConnectionsBodyDropBy1 DropConnectionsBodyDropBy1
 }
 
-// DropConnectionsRequestDropByType is oneOf type of DropConnectionsRequestDropBy.
-type DropConnectionsRequestDropByType string
+// DropConnectionsBodyDropByType is oneOf type of DropConnectionsBodyDropBy.
+type DropConnectionsBodyDropByType string
 
-// Possible values for DropConnectionsRequestDropByType.
+// Possible values for DropConnectionsBodyDropByType.
 const (
-	DropConnectionsRequestDropBy0DropConnectionsRequestDropBy DropConnectionsRequestDropByType = "DropConnectionsRequestDropBy0"
-	DropConnectionsRequestDropBy1DropConnectionsRequestDropBy DropConnectionsRequestDropByType = "DropConnectionsRequestDropBy1"
+	DropConnectionsBodyDropBy0DropConnectionsBodyDropBy DropConnectionsBodyDropByType = "DropConnectionsBodyDropBy0"
+	DropConnectionsBodyDropBy1DropConnectionsBodyDropBy DropConnectionsBodyDropByType = "DropConnectionsBodyDropBy1"
 )
 
-// IsDropConnectionsRequestDropBy0 reports whether DropConnectionsRequestDropBy is DropConnectionsRequestDropBy0.
-func (s DropConnectionsRequestDropBy) IsDropConnectionsRequestDropBy0() bool {
-	return s.Type == DropConnectionsRequestDropBy0DropConnectionsRequestDropBy
+// IsDropConnectionsBodyDropBy0 reports whether DropConnectionsBodyDropBy is DropConnectionsBodyDropBy0.
+func (s DropConnectionsBodyDropBy) IsDropConnectionsBodyDropBy0() bool {
+	return s.Type == DropConnectionsBodyDropBy0DropConnectionsBodyDropBy
 }
 
-// IsDropConnectionsRequestDropBy1 reports whether DropConnectionsRequestDropBy is DropConnectionsRequestDropBy1.
-func (s DropConnectionsRequestDropBy) IsDropConnectionsRequestDropBy1() bool {
-	return s.Type == DropConnectionsRequestDropBy1DropConnectionsRequestDropBy
+// IsDropConnectionsBodyDropBy1 reports whether DropConnectionsBodyDropBy is DropConnectionsBodyDropBy1.
+func (s DropConnectionsBodyDropBy) IsDropConnectionsBodyDropBy1() bool {
+	return s.Type == DropConnectionsBodyDropBy1DropConnectionsBodyDropBy
 }
 
-// SetDropConnectionsRequestDropBy0 sets DropConnectionsRequestDropBy to DropConnectionsRequestDropBy0.
-func (s *DropConnectionsRequestDropBy) SetDropConnectionsRequestDropBy0(v DropConnectionsRequestDropBy0) {
-	s.Type = DropConnectionsRequestDropBy0DropConnectionsRequestDropBy
-	s.DropConnectionsRequestDropBy0 = v
+// SetDropConnectionsBodyDropBy0 sets DropConnectionsBodyDropBy to DropConnectionsBodyDropBy0.
+func (s *DropConnectionsBodyDropBy) SetDropConnectionsBodyDropBy0(v DropConnectionsBodyDropBy0) {
+	s.Type = DropConnectionsBodyDropBy0DropConnectionsBodyDropBy
+	s.DropConnectionsBodyDropBy0 = v
 }
 
-// GetDropConnectionsRequestDropBy0 returns DropConnectionsRequestDropBy0 and true boolean if DropConnectionsRequestDropBy is DropConnectionsRequestDropBy0.
-func (s DropConnectionsRequestDropBy) GetDropConnectionsRequestDropBy0() (v DropConnectionsRequestDropBy0, ok bool) {
-	if !s.IsDropConnectionsRequestDropBy0() {
+// GetDropConnectionsBodyDropBy0 returns DropConnectionsBodyDropBy0 and true boolean if DropConnectionsBodyDropBy is DropConnectionsBodyDropBy0.
+func (s DropConnectionsBodyDropBy) GetDropConnectionsBodyDropBy0() (v DropConnectionsBodyDropBy0, ok bool) {
+	if !s.IsDropConnectionsBodyDropBy0() {
 		return v, false
 	}
-	return s.DropConnectionsRequestDropBy0, true
+	return s.DropConnectionsBodyDropBy0, true
 }
 
-// NewDropConnectionsRequestDropBy0DropConnectionsRequestDropBy returns new DropConnectionsRequestDropBy from DropConnectionsRequestDropBy0.
-func NewDropConnectionsRequestDropBy0DropConnectionsRequestDropBy(v DropConnectionsRequestDropBy0) DropConnectionsRequestDropBy {
-	var s DropConnectionsRequestDropBy
-	s.SetDropConnectionsRequestDropBy0(v)
+// NewDropConnectionsBodyDropBy0DropConnectionsBodyDropBy returns new DropConnectionsBodyDropBy from DropConnectionsBodyDropBy0.
+func NewDropConnectionsBodyDropBy0DropConnectionsBodyDropBy(v DropConnectionsBodyDropBy0) DropConnectionsBodyDropBy {
+	var s DropConnectionsBodyDropBy
+	s.SetDropConnectionsBodyDropBy0(v)
 	return s
 }
 
-// SetDropConnectionsRequestDropBy1 sets DropConnectionsRequestDropBy to DropConnectionsRequestDropBy1.
-func (s *DropConnectionsRequestDropBy) SetDropConnectionsRequestDropBy1(v DropConnectionsRequestDropBy1) {
-	s.Type = DropConnectionsRequestDropBy1DropConnectionsRequestDropBy
-	s.DropConnectionsRequestDropBy1 = v
+// SetDropConnectionsBodyDropBy1 sets DropConnectionsBodyDropBy to DropConnectionsBodyDropBy1.
+func (s *DropConnectionsBodyDropBy) SetDropConnectionsBodyDropBy1(v DropConnectionsBodyDropBy1) {
+	s.Type = DropConnectionsBodyDropBy1DropConnectionsBodyDropBy
+	s.DropConnectionsBodyDropBy1 = v
 }
 
-// GetDropConnectionsRequestDropBy1 returns DropConnectionsRequestDropBy1 and true boolean if DropConnectionsRequestDropBy is DropConnectionsRequestDropBy1.
-func (s DropConnectionsRequestDropBy) GetDropConnectionsRequestDropBy1() (v DropConnectionsRequestDropBy1, ok bool) {
-	if !s.IsDropConnectionsRequestDropBy1() {
+// GetDropConnectionsBodyDropBy1 returns DropConnectionsBodyDropBy1 and true boolean if DropConnectionsBodyDropBy is DropConnectionsBodyDropBy1.
+func (s DropConnectionsBodyDropBy) GetDropConnectionsBodyDropBy1() (v DropConnectionsBodyDropBy1, ok bool) {
+	if !s.IsDropConnectionsBodyDropBy1() {
 		return v, false
 	}
-	return s.DropConnectionsRequestDropBy1, true
+	return s.DropConnectionsBodyDropBy1, true
 }
 
-// NewDropConnectionsRequestDropBy1DropConnectionsRequestDropBy returns new DropConnectionsRequestDropBy from DropConnectionsRequestDropBy1.
-func NewDropConnectionsRequestDropBy1DropConnectionsRequestDropBy(v DropConnectionsRequestDropBy1) DropConnectionsRequestDropBy {
-	var s DropConnectionsRequestDropBy
-	s.SetDropConnectionsRequestDropBy1(v)
+// NewDropConnectionsBodyDropBy1DropConnectionsBodyDropBy returns new DropConnectionsBodyDropBy from DropConnectionsBodyDropBy1.
+func NewDropConnectionsBodyDropBy1DropConnectionsBodyDropBy(v DropConnectionsBodyDropBy1) DropConnectionsBodyDropBy {
+	var s DropConnectionsBodyDropBy
+	s.SetDropConnectionsBodyDropBy1(v)
 	return s
 }
 
-// Drop by user UUIDs.
-type DropConnectionsRequestDropBy0 struct {
-	By        DropConnectionsRequestDropBy0By `json:"by"`
-	UserUuids []uuid.UUID                     `json:"userUuids"`
+// Drop by user IDs.
+type DropConnectionsBodyDropBy0 struct {
+	By      DropConnectionsBodyDropBy0By `json:"by"`
+	UserIds []float64                    `json:"userIds"`
 }
 
 // GetBy returns the value of By.
-func (s *DropConnectionsRequestDropBy0) GetBy() DropConnectionsRequestDropBy0By {
+func (s *DropConnectionsBodyDropBy0) GetBy() DropConnectionsBodyDropBy0By {
 	return s.By
 }
 
-// GetUserUuids returns the value of UserUuids.
-func (s *DropConnectionsRequestDropBy0) GetUserUuids() []uuid.UUID {
-	return s.UserUuids
+// GetUserIds returns the value of UserIds.
+func (s *DropConnectionsBodyDropBy0) GetUserIds() []float64 {
+	return s.UserIds
 }
 
 // SetBy sets the value of By.
-func (s *DropConnectionsRequestDropBy0) SetBy(val DropConnectionsRequestDropBy0By) {
+func (s *DropConnectionsBodyDropBy0) SetBy(val DropConnectionsBodyDropBy0By) {
 	s.By = val
 }
 
-// SetUserUuids sets the value of UserUuids.
-func (s *DropConnectionsRequestDropBy0) SetUserUuids(val []uuid.UUID) {
-	s.UserUuids = val
+// SetUserIds sets the value of UserIds.
+func (s *DropConnectionsBodyDropBy0) SetUserIds(val []float64) {
+	s.UserIds = val
 }
 
-type DropConnectionsRequestDropBy0By string
+type DropConnectionsBodyDropBy0By string
 
 const (
-	DropConnectionsRequestDropBy0ByUserUuids DropConnectionsRequestDropBy0By = "userUuids"
+	DropConnectionsBodyDropBy0ByUserIds DropConnectionsBodyDropBy0By = "userIds"
 )
 
-// AllValues returns all DropConnectionsRequestDropBy0By values.
-func (DropConnectionsRequestDropBy0By) AllValues() []DropConnectionsRequestDropBy0By {
-	return []DropConnectionsRequestDropBy0By{
-		DropConnectionsRequestDropBy0ByUserUuids,
+// AllValues returns all DropConnectionsBodyDropBy0By values.
+func (DropConnectionsBodyDropBy0By) AllValues() []DropConnectionsBodyDropBy0By {
+	return []DropConnectionsBodyDropBy0By{
+		DropConnectionsBodyDropBy0ByUserIds,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s DropConnectionsRequestDropBy0By) MarshalText() ([]byte, error) {
+func (s DropConnectionsBodyDropBy0By) MarshalText() ([]byte, error) {
 	switch s {
-	case DropConnectionsRequestDropBy0ByUserUuids:
+	case DropConnectionsBodyDropBy0ByUserIds:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -4625,10 +4600,10 @@ func (s DropConnectionsRequestDropBy0By) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DropConnectionsRequestDropBy0By) UnmarshalText(data []byte) error {
-	switch DropConnectionsRequestDropBy0By(data) {
-	case DropConnectionsRequestDropBy0ByUserUuids:
-		*s = DropConnectionsRequestDropBy0ByUserUuids
+func (s *DropConnectionsBodyDropBy0By) UnmarshalText(data []byte) error {
+	switch DropConnectionsBodyDropBy0By(data) {
+	case DropConnectionsBodyDropBy0ByUserIds:
+		*s = DropConnectionsBodyDropBy0ByUserIds
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -4636,48 +4611,48 @@ func (s *DropConnectionsRequestDropBy0By) UnmarshalText(data []byte) error {
 }
 
 // Drop by IP addresses.
-type DropConnectionsRequestDropBy1 struct {
-	By          DropConnectionsRequestDropBy1By `json:"by"`
-	IpAddresses []string                        `json:"ipAddresses"`
+type DropConnectionsBodyDropBy1 struct {
+	By          DropConnectionsBodyDropBy1By `json:"by"`
+	IpAddresses []string                     `json:"ipAddresses"`
 }
 
 // GetBy returns the value of By.
-func (s *DropConnectionsRequestDropBy1) GetBy() DropConnectionsRequestDropBy1By {
+func (s *DropConnectionsBodyDropBy1) GetBy() DropConnectionsBodyDropBy1By {
 	return s.By
 }
 
 // GetIpAddresses returns the value of IpAddresses.
-func (s *DropConnectionsRequestDropBy1) GetIpAddresses() []string {
+func (s *DropConnectionsBodyDropBy1) GetIpAddresses() []string {
 	return s.IpAddresses
 }
 
 // SetBy sets the value of By.
-func (s *DropConnectionsRequestDropBy1) SetBy(val DropConnectionsRequestDropBy1By) {
+func (s *DropConnectionsBodyDropBy1) SetBy(val DropConnectionsBodyDropBy1By) {
 	s.By = val
 }
 
 // SetIpAddresses sets the value of IpAddresses.
-func (s *DropConnectionsRequestDropBy1) SetIpAddresses(val []string) {
+func (s *DropConnectionsBodyDropBy1) SetIpAddresses(val []string) {
 	s.IpAddresses = val
 }
 
-type DropConnectionsRequestDropBy1By string
+type DropConnectionsBodyDropBy1By string
 
 const (
-	DropConnectionsRequestDropBy1ByIpAddresses DropConnectionsRequestDropBy1By = "ipAddresses"
+	DropConnectionsBodyDropBy1ByIpAddresses DropConnectionsBodyDropBy1By = "ipAddresses"
 )
 
-// AllValues returns all DropConnectionsRequestDropBy1By values.
-func (DropConnectionsRequestDropBy1By) AllValues() []DropConnectionsRequestDropBy1By {
-	return []DropConnectionsRequestDropBy1By{
-		DropConnectionsRequestDropBy1ByIpAddresses,
+// AllValues returns all DropConnectionsBodyDropBy1By values.
+func (DropConnectionsBodyDropBy1By) AllValues() []DropConnectionsBodyDropBy1By {
+	return []DropConnectionsBodyDropBy1By{
+		DropConnectionsBodyDropBy1ByIpAddresses,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s DropConnectionsRequestDropBy1By) MarshalText() ([]byte, error) {
+func (s DropConnectionsBodyDropBy1By) MarshalText() ([]byte, error) {
 	switch s {
-	case DropConnectionsRequestDropBy1ByIpAddresses:
+	case DropConnectionsBodyDropBy1ByIpAddresses:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -4685,116 +4660,116 @@ func (s DropConnectionsRequestDropBy1By) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DropConnectionsRequestDropBy1By) UnmarshalText(data []byte) error {
-	switch DropConnectionsRequestDropBy1By(data) {
-	case DropConnectionsRequestDropBy1ByIpAddresses:
-		*s = DropConnectionsRequestDropBy1ByIpAddresses
+func (s *DropConnectionsBodyDropBy1By) UnmarshalText(data []byte) error {
+	switch DropConnectionsBodyDropBy1By(data) {
+	case DropConnectionsBodyDropBy1ByIpAddresses:
+		*s = DropConnectionsBodyDropBy1ByIpAddresses
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// DropConnectionsRequestTargetNodes represents sum type.
-type DropConnectionsRequestTargetNodes struct {
-	Type                               DropConnectionsRequestTargetNodesType // switch on this field
-	DropConnectionsRequestTargetNodes0 DropConnectionsRequestTargetNodes0
-	DropConnectionsRequestTargetNodes1 DropConnectionsRequestTargetNodes1
+// DropConnectionsBodyTargetNodes represents sum type.
+type DropConnectionsBodyTargetNodes struct {
+	Type                            DropConnectionsBodyTargetNodesType // switch on this field
+	DropConnectionsBodyTargetNodes0 DropConnectionsBodyTargetNodes0
+	DropConnectionsBodyTargetNodes1 DropConnectionsBodyTargetNodes1
 }
 
-// DropConnectionsRequestTargetNodesType is oneOf type of DropConnectionsRequestTargetNodes.
-type DropConnectionsRequestTargetNodesType string
+// DropConnectionsBodyTargetNodesType is oneOf type of DropConnectionsBodyTargetNodes.
+type DropConnectionsBodyTargetNodesType string
 
-// Possible values for DropConnectionsRequestTargetNodesType.
+// Possible values for DropConnectionsBodyTargetNodesType.
 const (
-	DropConnectionsRequestTargetNodes0DropConnectionsRequestTargetNodes DropConnectionsRequestTargetNodesType = "DropConnectionsRequestTargetNodes0"
-	DropConnectionsRequestTargetNodes1DropConnectionsRequestTargetNodes DropConnectionsRequestTargetNodesType = "DropConnectionsRequestTargetNodes1"
+	DropConnectionsBodyTargetNodes0DropConnectionsBodyTargetNodes DropConnectionsBodyTargetNodesType = "DropConnectionsBodyTargetNodes0"
+	DropConnectionsBodyTargetNodes1DropConnectionsBodyTargetNodes DropConnectionsBodyTargetNodesType = "DropConnectionsBodyTargetNodes1"
 )
 
-// IsDropConnectionsRequestTargetNodes0 reports whether DropConnectionsRequestTargetNodes is DropConnectionsRequestTargetNodes0.
-func (s DropConnectionsRequestTargetNodes) IsDropConnectionsRequestTargetNodes0() bool {
-	return s.Type == DropConnectionsRequestTargetNodes0DropConnectionsRequestTargetNodes
+// IsDropConnectionsBodyTargetNodes0 reports whether DropConnectionsBodyTargetNodes is DropConnectionsBodyTargetNodes0.
+func (s DropConnectionsBodyTargetNodes) IsDropConnectionsBodyTargetNodes0() bool {
+	return s.Type == DropConnectionsBodyTargetNodes0DropConnectionsBodyTargetNodes
 }
 
-// IsDropConnectionsRequestTargetNodes1 reports whether DropConnectionsRequestTargetNodes is DropConnectionsRequestTargetNodes1.
-func (s DropConnectionsRequestTargetNodes) IsDropConnectionsRequestTargetNodes1() bool {
-	return s.Type == DropConnectionsRequestTargetNodes1DropConnectionsRequestTargetNodes
+// IsDropConnectionsBodyTargetNodes1 reports whether DropConnectionsBodyTargetNodes is DropConnectionsBodyTargetNodes1.
+func (s DropConnectionsBodyTargetNodes) IsDropConnectionsBodyTargetNodes1() bool {
+	return s.Type == DropConnectionsBodyTargetNodes1DropConnectionsBodyTargetNodes
 }
 
-// SetDropConnectionsRequestTargetNodes0 sets DropConnectionsRequestTargetNodes to DropConnectionsRequestTargetNodes0.
-func (s *DropConnectionsRequestTargetNodes) SetDropConnectionsRequestTargetNodes0(v DropConnectionsRequestTargetNodes0) {
-	s.Type = DropConnectionsRequestTargetNodes0DropConnectionsRequestTargetNodes
-	s.DropConnectionsRequestTargetNodes0 = v
+// SetDropConnectionsBodyTargetNodes0 sets DropConnectionsBodyTargetNodes to DropConnectionsBodyTargetNodes0.
+func (s *DropConnectionsBodyTargetNodes) SetDropConnectionsBodyTargetNodes0(v DropConnectionsBodyTargetNodes0) {
+	s.Type = DropConnectionsBodyTargetNodes0DropConnectionsBodyTargetNodes
+	s.DropConnectionsBodyTargetNodes0 = v
 }
 
-// GetDropConnectionsRequestTargetNodes0 returns DropConnectionsRequestTargetNodes0 and true boolean if DropConnectionsRequestTargetNodes is DropConnectionsRequestTargetNodes0.
-func (s DropConnectionsRequestTargetNodes) GetDropConnectionsRequestTargetNodes0() (v DropConnectionsRequestTargetNodes0, ok bool) {
-	if !s.IsDropConnectionsRequestTargetNodes0() {
+// GetDropConnectionsBodyTargetNodes0 returns DropConnectionsBodyTargetNodes0 and true boolean if DropConnectionsBodyTargetNodes is DropConnectionsBodyTargetNodes0.
+func (s DropConnectionsBodyTargetNodes) GetDropConnectionsBodyTargetNodes0() (v DropConnectionsBodyTargetNodes0, ok bool) {
+	if !s.IsDropConnectionsBodyTargetNodes0() {
 		return v, false
 	}
-	return s.DropConnectionsRequestTargetNodes0, true
+	return s.DropConnectionsBodyTargetNodes0, true
 }
 
-// NewDropConnectionsRequestTargetNodes0DropConnectionsRequestTargetNodes returns new DropConnectionsRequestTargetNodes from DropConnectionsRequestTargetNodes0.
-func NewDropConnectionsRequestTargetNodes0DropConnectionsRequestTargetNodes(v DropConnectionsRequestTargetNodes0) DropConnectionsRequestTargetNodes {
-	var s DropConnectionsRequestTargetNodes
-	s.SetDropConnectionsRequestTargetNodes0(v)
+// NewDropConnectionsBodyTargetNodes0DropConnectionsBodyTargetNodes returns new DropConnectionsBodyTargetNodes from DropConnectionsBodyTargetNodes0.
+func NewDropConnectionsBodyTargetNodes0DropConnectionsBodyTargetNodes(v DropConnectionsBodyTargetNodes0) DropConnectionsBodyTargetNodes {
+	var s DropConnectionsBodyTargetNodes
+	s.SetDropConnectionsBodyTargetNodes0(v)
 	return s
 }
 
-// SetDropConnectionsRequestTargetNodes1 sets DropConnectionsRequestTargetNodes to DropConnectionsRequestTargetNodes1.
-func (s *DropConnectionsRequestTargetNodes) SetDropConnectionsRequestTargetNodes1(v DropConnectionsRequestTargetNodes1) {
-	s.Type = DropConnectionsRequestTargetNodes1DropConnectionsRequestTargetNodes
-	s.DropConnectionsRequestTargetNodes1 = v
+// SetDropConnectionsBodyTargetNodes1 sets DropConnectionsBodyTargetNodes to DropConnectionsBodyTargetNodes1.
+func (s *DropConnectionsBodyTargetNodes) SetDropConnectionsBodyTargetNodes1(v DropConnectionsBodyTargetNodes1) {
+	s.Type = DropConnectionsBodyTargetNodes1DropConnectionsBodyTargetNodes
+	s.DropConnectionsBodyTargetNodes1 = v
 }
 
-// GetDropConnectionsRequestTargetNodes1 returns DropConnectionsRequestTargetNodes1 and true boolean if DropConnectionsRequestTargetNodes is DropConnectionsRequestTargetNodes1.
-func (s DropConnectionsRequestTargetNodes) GetDropConnectionsRequestTargetNodes1() (v DropConnectionsRequestTargetNodes1, ok bool) {
-	if !s.IsDropConnectionsRequestTargetNodes1() {
+// GetDropConnectionsBodyTargetNodes1 returns DropConnectionsBodyTargetNodes1 and true boolean if DropConnectionsBodyTargetNodes is DropConnectionsBodyTargetNodes1.
+func (s DropConnectionsBodyTargetNodes) GetDropConnectionsBodyTargetNodes1() (v DropConnectionsBodyTargetNodes1, ok bool) {
+	if !s.IsDropConnectionsBodyTargetNodes1() {
 		return v, false
 	}
-	return s.DropConnectionsRequestTargetNodes1, true
+	return s.DropConnectionsBodyTargetNodes1, true
 }
 
-// NewDropConnectionsRequestTargetNodes1DropConnectionsRequestTargetNodes returns new DropConnectionsRequestTargetNodes from DropConnectionsRequestTargetNodes1.
-func NewDropConnectionsRequestTargetNodes1DropConnectionsRequestTargetNodes(v DropConnectionsRequestTargetNodes1) DropConnectionsRequestTargetNodes {
-	var s DropConnectionsRequestTargetNodes
-	s.SetDropConnectionsRequestTargetNodes1(v)
+// NewDropConnectionsBodyTargetNodes1DropConnectionsBodyTargetNodes returns new DropConnectionsBodyTargetNodes from DropConnectionsBodyTargetNodes1.
+func NewDropConnectionsBodyTargetNodes1DropConnectionsBodyTargetNodes(v DropConnectionsBodyTargetNodes1) DropConnectionsBodyTargetNodes {
+	var s DropConnectionsBodyTargetNodes
+	s.SetDropConnectionsBodyTargetNodes1(v)
 	return s
 }
 
 // Target all connected nodes.
-type DropConnectionsRequestTargetNodes0 struct {
-	Target DropConnectionsRequestTargetNodes0Target `json:"target"`
+type DropConnectionsBodyTargetNodes0 struct {
+	Target DropConnectionsBodyTargetNodes0Target `json:"target"`
 }
 
 // GetTarget returns the value of Target.
-func (s *DropConnectionsRequestTargetNodes0) GetTarget() DropConnectionsRequestTargetNodes0Target {
+func (s *DropConnectionsBodyTargetNodes0) GetTarget() DropConnectionsBodyTargetNodes0Target {
 	return s.Target
 }
 
 // SetTarget sets the value of Target.
-func (s *DropConnectionsRequestTargetNodes0) SetTarget(val DropConnectionsRequestTargetNodes0Target) {
+func (s *DropConnectionsBodyTargetNodes0) SetTarget(val DropConnectionsBodyTargetNodes0Target) {
 	s.Target = val
 }
 
-type DropConnectionsRequestTargetNodes0Target string
+type DropConnectionsBodyTargetNodes0Target string
 
 const (
-	DropConnectionsRequestTargetNodes0TargetAllNodes DropConnectionsRequestTargetNodes0Target = "allNodes"
+	DropConnectionsBodyTargetNodes0TargetAllNodes DropConnectionsBodyTargetNodes0Target = "allNodes"
 )
 
-// AllValues returns all DropConnectionsRequestTargetNodes0Target values.
-func (DropConnectionsRequestTargetNodes0Target) AllValues() []DropConnectionsRequestTargetNodes0Target {
-	return []DropConnectionsRequestTargetNodes0Target{
-		DropConnectionsRequestTargetNodes0TargetAllNodes,
+// AllValues returns all DropConnectionsBodyTargetNodes0Target values.
+func (DropConnectionsBodyTargetNodes0Target) AllValues() []DropConnectionsBodyTargetNodes0Target {
+	return []DropConnectionsBodyTargetNodes0Target{
+		DropConnectionsBodyTargetNodes0TargetAllNodes,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s DropConnectionsRequestTargetNodes0Target) MarshalText() ([]byte, error) {
+func (s DropConnectionsBodyTargetNodes0Target) MarshalText() ([]byte, error) {
 	switch s {
-	case DropConnectionsRequestTargetNodes0TargetAllNodes:
+	case DropConnectionsBodyTargetNodes0TargetAllNodes:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -4802,10 +4777,10 @@ func (s DropConnectionsRequestTargetNodes0Target) MarshalText() ([]byte, error) 
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DropConnectionsRequestTargetNodes0Target) UnmarshalText(data []byte) error {
-	switch DropConnectionsRequestTargetNodes0Target(data) {
-	case DropConnectionsRequestTargetNodes0TargetAllNodes:
-		*s = DropConnectionsRequestTargetNodes0TargetAllNodes
+func (s *DropConnectionsBodyTargetNodes0Target) UnmarshalText(data []byte) error {
+	switch DropConnectionsBodyTargetNodes0Target(data) {
+	case DropConnectionsBodyTargetNodes0TargetAllNodes:
+		*s = DropConnectionsBodyTargetNodes0TargetAllNodes
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -4813,48 +4788,48 @@ func (s *DropConnectionsRequestTargetNodes0Target) UnmarshalText(data []byte) er
 }
 
 // Target specific nodes.
-type DropConnectionsRequestTargetNodes1 struct {
-	Target    DropConnectionsRequestTargetNodes1Target `json:"target"`
-	NodeUuids []uuid.UUID                              `json:"nodeUuids"`
+type DropConnectionsBodyTargetNodes1 struct {
+	Target    DropConnectionsBodyTargetNodes1Target `json:"target"`
+	NodeUuids []uuid.UUID                           `json:"nodeUuids"`
 }
 
 // GetTarget returns the value of Target.
-func (s *DropConnectionsRequestTargetNodes1) GetTarget() DropConnectionsRequestTargetNodes1Target {
+func (s *DropConnectionsBodyTargetNodes1) GetTarget() DropConnectionsBodyTargetNodes1Target {
 	return s.Target
 }
 
 // GetNodeUuids returns the value of NodeUuids.
-func (s *DropConnectionsRequestTargetNodes1) GetNodeUuids() []uuid.UUID {
+func (s *DropConnectionsBodyTargetNodes1) GetNodeUuids() []uuid.UUID {
 	return s.NodeUuids
 }
 
 // SetTarget sets the value of Target.
-func (s *DropConnectionsRequestTargetNodes1) SetTarget(val DropConnectionsRequestTargetNodes1Target) {
+func (s *DropConnectionsBodyTargetNodes1) SetTarget(val DropConnectionsBodyTargetNodes1Target) {
 	s.Target = val
 }
 
 // SetNodeUuids sets the value of NodeUuids.
-func (s *DropConnectionsRequestTargetNodes1) SetNodeUuids(val []uuid.UUID) {
+func (s *DropConnectionsBodyTargetNodes1) SetNodeUuids(val []uuid.UUID) {
 	s.NodeUuids = val
 }
 
-type DropConnectionsRequestTargetNodes1Target string
+type DropConnectionsBodyTargetNodes1Target string
 
 const (
-	DropConnectionsRequestTargetNodes1TargetSpecificNodes DropConnectionsRequestTargetNodes1Target = "specificNodes"
+	DropConnectionsBodyTargetNodes1TargetSpecificNodes DropConnectionsBodyTargetNodes1Target = "specificNodes"
 )
 
-// AllValues returns all DropConnectionsRequestTargetNodes1Target values.
-func (DropConnectionsRequestTargetNodes1Target) AllValues() []DropConnectionsRequestTargetNodes1Target {
-	return []DropConnectionsRequestTargetNodes1Target{
-		DropConnectionsRequestTargetNodes1TargetSpecificNodes,
+// AllValues returns all DropConnectionsBodyTargetNodes1Target values.
+func (DropConnectionsBodyTargetNodes1Target) AllValues() []DropConnectionsBodyTargetNodes1Target {
+	return []DropConnectionsBodyTargetNodes1Target{
+		DropConnectionsBodyTargetNodes1TargetSpecificNodes,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s DropConnectionsRequestTargetNodes1Target) MarshalText() ([]byte, error) {
+func (s DropConnectionsBodyTargetNodes1Target) MarshalText() ([]byte, error) {
 	switch s {
-	case DropConnectionsRequestTargetNodes1TargetSpecificNodes:
+	case DropConnectionsBodyTargetNodes1TargetSpecificNodes:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -4862,18 +4837,16 @@ func (s DropConnectionsRequestTargetNodes1Target) MarshalText() ([]byte, error) 
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *DropConnectionsRequestTargetNodes1Target) UnmarshalText(data []byte) error {
-	switch DropConnectionsRequestTargetNodes1Target(data) {
-	case DropConnectionsRequestTargetNodes1TargetSpecificNodes:
-		*s = DropConnectionsRequestTargetNodes1TargetSpecificNodes
+func (s *DropConnectionsBodyTargetNodes1Target) UnmarshalText(data []byte) error {
+	switch DropConnectionsBodyTargetNodes1Target(data) {
+	case DropConnectionsBodyTargetNodes1TargetSpecificNodes:
+		*s = DropConnectionsBodyTargetNodes1TargetSpecificNodes
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// {"markdownDescription":"Encrypt response body with given parameters. Generate keypairs with Rescue
-// CLI: `docker exec -it remnawave cli`, select \"Generate keypairs\"."}.
 // Ref: #/components/schemas/EncryptionItem
 type EncryptionItem struct {
 	Method EncryptionItemMethod `json:"method"`
@@ -4941,66 +4914,38 @@ func (s *EncryptionItemMethod) UnmarshalText(data []byte) error {
 	}
 }
 
-// Ref: #/components/schemas/EventResponse
-type EventResponse struct {
-	Response EventResponseResponse `json:"response"`
+// Ref: #/components/schemas/ExtendUserBody
+type ExtendUserBody struct {
+	// The number of days to extend the expiration date.
+	Days float64 `json:"days"`
 }
 
-// GetResponse returns the value of Response.
-func (s *EventResponse) GetResponse() EventResponseResponse {
-	return s.Response
+// GetDays returns the value of Days.
+func (s *ExtendUserBody) GetDays() float64 {
+	return s.Days
 }
 
-// SetResponse sets the value of Response.
-func (s *EventResponse) SetResponse(val EventResponseResponse) {
-	s.Response = val
-}
-
-func (*EventResponse) externalSquadAddUsersToExternalSquadRes()        {}
-func (*EventResponse) externalSquadRemoveUsersFromExternalSquadRes()   {}
-func (*EventResponse) internalSquadAddUsersToInternalSquadRes()        {}
-func (*EventResponse) internalSquadRemoveUsersFromInternalSquadRes()   {}
-func (*EventResponse) ipControlDropConnectionsRes()                    {}
-func (*EventResponse) nodePluginPluginExecutorRes()                    {}
-func (*EventResponse) nodesBulkNodesActionsRes()                       {}
-func (*EventResponse) nodesBulkNodesUpdateRes()                        {}
-func (*EventResponse) nodesProfileModificationRes()                    {}
-func (*EventResponse) nodesResetNodeTrafficRes()                       {}
-func (*EventResponse) nodesRestartAllNodesRes()                        {}
-func (*EventResponse) nodesRestartNodeRes()                            {}
-func (*EventResponse) usersBulkActionsBulkAllExtendExpirationDateRes() {}
-func (*EventResponse) usersBulkActionsBulkAllResetUserTrafficRes()     {}
-func (*EventResponse) usersBulkActionsBulkUpdateAllUsersRes()          {}
-
-type EventResponseResponse struct {
-	EventSent bool `json:"eventSent"`
-}
-
-// GetEventSent returns the value of EventSent.
-func (s *EventResponseResponse) GetEventSent() bool {
-	return s.EventSent
-}
-
-// SetEventSent sets the value of EventSent.
-func (s *EventResponseResponse) SetEventSent(val bool) {
-	s.EventSent = val
+// SetDays sets the value of Days.
+func (s *ExtendUserBody) SetDays(val float64) {
+	s.Days = val
 }
 
 // Ref: #/components/schemas/ExternalSquad
 type ExternalSquad struct {
-	UUID                 uuid.UUID                       `json:"uuid"`
-	ViewPosition         int                             `json:"viewPosition"`
-	Name                 string                          `json:"name"`
-	Info                 ExternalSquadsResponInfoItem    `json:"info"`
-	Templates            []TemplateRef                   `json:"templates"`
-	SubscriptionSettings NilSubscriptionSettings         `json:"subscriptionSettings"`
-	HostOverrides        NilHostOverride                 `json:"hostOverrides"`
-	ResponseHeaders      NilExternalSquadResponseHeaders `json:"responseHeaders"`
-	HwidSettings         NilHwidSettings                 `json:"hwidSettings"`
-	CustomRemarks        NilCustomRemark                 `json:"customRemarks"`
-	SubpageConfigUuid    NilUUID                         `json:"subpageConfigUuid"`
-	CreatedAt            time.Time                       `json:"createdAt"`
-	UpdatedAt            time.Time                       `json:"updatedAt"`
+	UUID                  uuid.UUID                       `json:"uuid"`
+	ViewPosition          int                             `json:"viewPosition"`
+	Name                  string                          `json:"name"`
+	Info                  ExternalSquadsResponInfoItem    `json:"info"`
+	Templates             []TemplateRef                   `json:"templates"`
+	SubscriptionSettings  NilSubscriptionSettings         `json:"subscriptionSettings"`
+	HostOverrides         NilHostOverride                 `json:"hostOverrides"`
+	ResponseHeadersAdd    ExternalSquadResponseHeadersAdd `json:"responseHeadersAdd"`
+	ResponseHeadersRemove []string                        `json:"responseHeadersRemove"`
+	HwidSettings          NilHwidSettings                 `json:"hwidSettings"`
+	CustomRemarks         NilCustomRemark                 `json:"customRemarks"`
+	SubpageConfigUuid     NilUUID                         `json:"subpageConfigUuid"`
+	CreatedAt             time.Time                       `json:"createdAt"`
+	UpdatedAt             time.Time                       `json:"updatedAt"`
 }
 
 // GetUUID returns the value of UUID.
@@ -5038,9 +4983,14 @@ func (s *ExternalSquad) GetHostOverrides() NilHostOverride {
 	return s.HostOverrides
 }
 
-// GetResponseHeaders returns the value of ResponseHeaders.
-func (s *ExternalSquad) GetResponseHeaders() NilExternalSquadResponseHeaders {
-	return s.ResponseHeaders
+// GetResponseHeadersAdd returns the value of ResponseHeadersAdd.
+func (s *ExternalSquad) GetResponseHeadersAdd() ExternalSquadResponseHeadersAdd {
+	return s.ResponseHeadersAdd
+}
+
+// GetResponseHeadersRemove returns the value of ResponseHeadersRemove.
+func (s *ExternalSquad) GetResponseHeadersRemove() []string {
+	return s.ResponseHeadersRemove
 }
 
 // GetHwidSettings returns the value of HwidSettings.
@@ -5103,9 +5053,14 @@ func (s *ExternalSquad) SetHostOverrides(val NilHostOverride) {
 	s.HostOverrides = val
 }
 
-// SetResponseHeaders sets the value of ResponseHeaders.
-func (s *ExternalSquad) SetResponseHeaders(val NilExternalSquadResponseHeaders) {
-	s.ResponseHeaders = val
+// SetResponseHeadersAdd sets the value of ResponseHeadersAdd.
+func (s *ExternalSquad) SetResponseHeadersAdd(val ExternalSquadResponseHeadersAdd) {
+	s.ResponseHeadersAdd = val
+}
+
+// SetResponseHeadersRemove sets the value of ResponseHeadersRemove.
+func (s *ExternalSquad) SetResponseHeadersRemove(val []string) {
+	s.ResponseHeadersRemove = val
 }
 
 // SetHwidSettings sets the value of HwidSettings.
@@ -5133,14 +5088,30 @@ func (s *ExternalSquad) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
+// ExternalSquadAddUsersToExternalSquadAccepted is response for ExternalSquadAddUsersToExternalSquad operation.
+type ExternalSquadAddUsersToExternalSquadAccepted struct{}
+
+func (*ExternalSquadAddUsersToExternalSquadAccepted) externalSquadAddUsersToExternalSquadRes() {}
+
 // ExternalSquadCreateExternalSquadConflict is response for ExternalSquadCreateExternalSquad operation.
 type ExternalSquadCreateExternalSquadConflict struct{}
 
 func (*ExternalSquadCreateExternalSquadConflict) externalSquadCreateExternalSquadRes() {}
 
-type ExternalSquadResponseHeaders map[string]string
+// ExternalSquadDeleteExternalSquadNoContent is response for ExternalSquadDeleteExternalSquad operation.
+type ExternalSquadDeleteExternalSquadNoContent struct{}
 
-func (s *ExternalSquadResponseHeaders) init() ExternalSquadResponseHeaders {
+func (*ExternalSquadDeleteExternalSquadNoContent) externalSquadDeleteExternalSquadRes() {}
+
+// ExternalSquadRemoveUsersFromExternalSquadAccepted is response for ExternalSquadRemoveUsersFromExternalSquad operation.
+type ExternalSquadRemoveUsersFromExternalSquadAccepted struct{}
+
+func (*ExternalSquadRemoveUsersFromExternalSquadAccepted) externalSquadRemoveUsersFromExternalSquadRes() {
+}
+
+type ExternalSquadResponseHeadersAdd map[string]string
+
+func (s *ExternalSquadResponseHeadersAdd) init() ExternalSquadResponseHeadersAdd {
 	m := *s
 	if m == nil {
 		m = map[string]string{}
@@ -5230,489 +5201,6 @@ func (s *ExternalSquadsResponseResponse) SetTotal(val float64) {
 func (s *ExternalSquadsResponseResponse) SetExternalSquads(val []ExternalSquad) {
 	s.ExternalSquads = val
 }
-
-// Ref: #/components/schemas/FetchIpsResultResponse
-type FetchIpsResultResponse struct {
-	Response FetchIpsResultResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *FetchIpsResultResponse) GetResponse() FetchIpsResultResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *FetchIpsResultResponse) SetResponse(val FetchIpsResultResponseResponse) {
-	s.Response = val
-}
-
-func (*FetchIpsResultResponse) ipControlGetFetchIpsResultRes() {}
-
-type FetchIpsResultResponseResponse struct {
-	IsCompleted bool                                    `json:"isCompleted"`
-	IsFailed    bool                                    `json:"isFailed"`
-	Progress    FetchIpsResultResponseResponseProgress  `json:"progress"`
-	Result      NilFetchIpsResultResponseResponseResult `json:"result"`
-}
-
-// GetIsCompleted returns the value of IsCompleted.
-func (s *FetchIpsResultResponseResponse) GetIsCompleted() bool {
-	return s.IsCompleted
-}
-
-// GetIsFailed returns the value of IsFailed.
-func (s *FetchIpsResultResponseResponse) GetIsFailed() bool {
-	return s.IsFailed
-}
-
-// GetProgress returns the value of Progress.
-func (s *FetchIpsResultResponseResponse) GetProgress() FetchIpsResultResponseResponseProgress {
-	return s.Progress
-}
-
-// GetResult returns the value of Result.
-func (s *FetchIpsResultResponseResponse) GetResult() NilFetchIpsResultResponseResponseResult {
-	return s.Result
-}
-
-// SetIsCompleted sets the value of IsCompleted.
-func (s *FetchIpsResultResponseResponse) SetIsCompleted(val bool) {
-	s.IsCompleted = val
-}
-
-// SetIsFailed sets the value of IsFailed.
-func (s *FetchIpsResultResponseResponse) SetIsFailed(val bool) {
-	s.IsFailed = val
-}
-
-// SetProgress sets the value of Progress.
-func (s *FetchIpsResultResponseResponse) SetProgress(val FetchIpsResultResponseResponseProgress) {
-	s.Progress = val
-}
-
-// SetResult sets the value of Result.
-func (s *FetchIpsResultResponseResponse) SetResult(val NilFetchIpsResultResponseResponseResult) {
-	s.Result = val
-}
-
-type FetchIpsResultResponseResponseProgress struct {
-	Total     float64 `json:"total"`
-	Completed float64 `json:"completed"`
-	Percent   float64 `json:"percent"`
-}
-
-// GetTotal returns the value of Total.
-func (s *FetchIpsResultResponseResponseProgress) GetTotal() float64 {
-	return s.Total
-}
-
-// GetCompleted returns the value of Completed.
-func (s *FetchIpsResultResponseResponseProgress) GetCompleted() float64 {
-	return s.Completed
-}
-
-// GetPercent returns the value of Percent.
-func (s *FetchIpsResultResponseResponseProgress) GetPercent() float64 {
-	return s.Percent
-}
-
-// SetTotal sets the value of Total.
-func (s *FetchIpsResultResponseResponseProgress) SetTotal(val float64) {
-	s.Total = val
-}
-
-// SetCompleted sets the value of Completed.
-func (s *FetchIpsResultResponseResponseProgress) SetCompleted(val float64) {
-	s.Completed = val
-}
-
-// SetPercent sets the value of Percent.
-func (s *FetchIpsResultResponseResponseProgress) SetPercent(val float64) {
-	s.Percent = val
-}
-
-type FetchIpsResultResponseResponseResult struct {
-	Success  bool                                            `json:"success"`
-	UserUuid uuid.UUID                                       `json:"userUuid"`
-	UserId   string                                          `json:"userId"`
-	Nodes    []FetchIpsResultResponseResponseResultNodesItem `json:"nodes"`
-}
-
-// GetSuccess returns the value of Success.
-func (s *FetchIpsResultResponseResponseResult) GetSuccess() bool {
-	return s.Success
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *FetchIpsResultResponseResponseResult) GetUserUuid() uuid.UUID {
-	return s.UserUuid
-}
-
-// GetUserId returns the value of UserId.
-func (s *FetchIpsResultResponseResponseResult) GetUserId() string {
-	return s.UserId
-}
-
-// GetNodes returns the value of Nodes.
-func (s *FetchIpsResultResponseResponseResult) GetNodes() []FetchIpsResultResponseResponseResultNodesItem {
-	return s.Nodes
-}
-
-// SetSuccess sets the value of Success.
-func (s *FetchIpsResultResponseResponseResult) SetSuccess(val bool) {
-	s.Success = val
-}
-
-// SetUserUuid sets the value of UserUuid.
-func (s *FetchIpsResultResponseResponseResult) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetUserId sets the value of UserId.
-func (s *FetchIpsResultResponseResponseResult) SetUserId(val string) {
-	s.UserId = val
-}
-
-// SetNodes sets the value of Nodes.
-func (s *FetchIpsResultResponseResponseResult) SetNodes(val []FetchIpsResultResponseResponseResultNodesItem) {
-	s.Nodes = val
-}
-
-type FetchIpsResultResponseResponseResultNodesItem struct {
-	NodeUuid    uuid.UUID `json:"nodeUuid"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-	Ips         []Ips     `json:"ips"`
-}
-
-// GetNodeUuid returns the value of NodeUuid.
-func (s *FetchIpsResultResponseResponseResultNodesItem) GetNodeUuid() uuid.UUID {
-	return s.NodeUuid
-}
-
-// GetNodeName returns the value of NodeName.
-func (s *FetchIpsResultResponseResponseResultNodesItem) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *FetchIpsResultResponseResponseResultNodesItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// GetIps returns the value of Ips.
-func (s *FetchIpsResultResponseResponseResultNodesItem) GetIps() []Ips {
-	return s.Ips
-}
-
-// SetNodeUuid sets the value of NodeUuid.
-func (s *FetchIpsResultResponseResponseResultNodesItem) SetNodeUuid(val uuid.UUID) {
-	s.NodeUuid = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *FetchIpsResultResponseResponseResultNodesItem) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *FetchIpsResultResponseResponseResultNodesItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-// SetIps sets the value of Ips.
-func (s *FetchIpsResultResponseResponseResultNodesItem) SetIps(val []Ips) {
-	s.Ips = val
-}
-
-// Ref: #/components/schemas/FetchUsersIpsResultResponse
-type FetchUsersIpsResultResponse struct {
-	Response FetchUsersIpsResultResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *FetchUsersIpsResultResponse) GetResponse() FetchUsersIpsResultResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *FetchUsersIpsResultResponse) SetResponse(val FetchUsersIpsResultResponseResponse) {
-	s.Response = val
-}
-
-func (*FetchUsersIpsResultResponse) ipControlGetFetchUsersIpsResultRes() {}
-
-type FetchUsersIpsResultResponseResponse struct {
-	IsCompleted bool                                         `json:"isCompleted"`
-	IsFailed    bool                                         `json:"isFailed"`
-	Result      NilFetchUsersIpsResultResponseResponseResult `json:"result"`
-}
-
-// GetIsCompleted returns the value of IsCompleted.
-func (s *FetchUsersIpsResultResponseResponse) GetIsCompleted() bool {
-	return s.IsCompleted
-}
-
-// GetIsFailed returns the value of IsFailed.
-func (s *FetchUsersIpsResultResponseResponse) GetIsFailed() bool {
-	return s.IsFailed
-}
-
-// GetResult returns the value of Result.
-func (s *FetchUsersIpsResultResponseResponse) GetResult() NilFetchUsersIpsResultResponseResponseResult {
-	return s.Result
-}
-
-// SetIsCompleted sets the value of IsCompleted.
-func (s *FetchUsersIpsResultResponseResponse) SetIsCompleted(val bool) {
-	s.IsCompleted = val
-}
-
-// SetIsFailed sets the value of IsFailed.
-func (s *FetchUsersIpsResultResponseResponse) SetIsFailed(val bool) {
-	s.IsFailed = val
-}
-
-// SetResult sets the value of Result.
-func (s *FetchUsersIpsResultResponseResponse) SetResult(val NilFetchUsersIpsResultResponseResponseResult) {
-	s.Result = val
-}
-
-type FetchUsersIpsResultResponseResponseResult struct {
-	Success  bool                                                 `json:"success"`
-	NodeUuid uuid.UUID                                            `json:"nodeUuid"`
-	Users    []FetchUsersIpsResultResponseResponseResultUsersItem `json:"users"`
-}
-
-// GetSuccess returns the value of Success.
-func (s *FetchUsersIpsResultResponseResponseResult) GetSuccess() bool {
-	return s.Success
-}
-
-// GetNodeUuid returns the value of NodeUuid.
-func (s *FetchUsersIpsResultResponseResponseResult) GetNodeUuid() uuid.UUID {
-	return s.NodeUuid
-}
-
-// GetUsers returns the value of Users.
-func (s *FetchUsersIpsResultResponseResponseResult) GetUsers() []FetchUsersIpsResultResponseResponseResultUsersItem {
-	return s.Users
-}
-
-// SetSuccess sets the value of Success.
-func (s *FetchUsersIpsResultResponseResponseResult) SetSuccess(val bool) {
-	s.Success = val
-}
-
-// SetNodeUuid sets the value of NodeUuid.
-func (s *FetchUsersIpsResultResponseResponseResult) SetNodeUuid(val uuid.UUID) {
-	s.NodeUuid = val
-}
-
-// SetUsers sets the value of Users.
-func (s *FetchUsersIpsResultResponseResponseResult) SetUsers(val []FetchUsersIpsResultResponseResponseResultUsersItem) {
-	s.Users = val
-}
-
-type FetchUsersIpsResultResponseResponseResultUsersItem struct {
-	UserId string `json:"userId"`
-	Ips    []Ips  `json:"ips"`
-}
-
-// GetUserId returns the value of UserId.
-func (s *FetchUsersIpsResultResponseResponseResultUsersItem) GetUserId() string {
-	return s.UserId
-}
-
-// GetIps returns the value of Ips.
-func (s *FetchUsersIpsResultResponseResponseResultUsersItem) GetIps() []Ips {
-	return s.Ips
-}
-
-// SetUserId sets the value of UserId.
-func (s *FetchUsersIpsResultResponseResponseResultUsersItem) SetUserId(val string) {
-	s.UserId = val
-}
-
-// SetIps sets the value of Ips.
-func (s *FetchUsersIpsResultResponseResponseResultUsersItem) SetIps(val []Ips) {
-	s.Ips = val
-}
-
-// Ref: #/components/schemas/FindAllApiTokensResponse
-type FindAllApiTokensResponse struct {
-	Response FindAllApiTokensResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *FindAllApiTokensResponse) GetResponse() FindAllApiTokensResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *FindAllApiTokensResponse) SetResponse(val FindAllApiTokensResponseResponse) {
-	s.Response = val
-}
-
-func (*FindAllApiTokensResponse) apiTokensFindAllRes() {}
-
-type FindAllApiTokensResponseResponse struct {
-	Tokens []FindAllApiTokensResponseResponseTokensItem `json:"tokens"`
-	Docs   FindAllApiTokensResponseResponseDocs         `json:"docs"`
-}
-
-// GetTokens returns the value of Tokens.
-func (s *FindAllApiTokensResponseResponse) GetTokens() []FindAllApiTokensResponseResponseTokensItem {
-	return s.Tokens
-}
-
-// GetDocs returns the value of Docs.
-func (s *FindAllApiTokensResponseResponse) GetDocs() FindAllApiTokensResponseResponseDocs {
-	return s.Docs
-}
-
-// SetTokens sets the value of Tokens.
-func (s *FindAllApiTokensResponseResponse) SetTokens(val []FindAllApiTokensResponseResponseTokensItem) {
-	s.Tokens = val
-}
-
-// SetDocs sets the value of Docs.
-func (s *FindAllApiTokensResponseResponse) SetDocs(val FindAllApiTokensResponseResponseDocs) {
-	s.Docs = val
-}
-
-type FindAllApiTokensResponseResponseDocs struct {
-	Enabled     bool      `json:"enabled"`
-	ScalarPath  NilString `json:"scalarPath"`
-	SwaggerPath NilString `json:"swaggerPath"`
-}
-
-// GetEnabled returns the value of Enabled.
-func (s *FindAllApiTokensResponseResponseDocs) GetEnabled() bool {
-	return s.Enabled
-}
-
-// GetScalarPath returns the value of ScalarPath.
-func (s *FindAllApiTokensResponseResponseDocs) GetScalarPath() NilString {
-	return s.ScalarPath
-}
-
-// GetSwaggerPath returns the value of SwaggerPath.
-func (s *FindAllApiTokensResponseResponseDocs) GetSwaggerPath() NilString {
-	return s.SwaggerPath
-}
-
-// SetEnabled sets the value of Enabled.
-func (s *FindAllApiTokensResponseResponseDocs) SetEnabled(val bool) {
-	s.Enabled = val
-}
-
-// SetScalarPath sets the value of ScalarPath.
-func (s *FindAllApiTokensResponseResponseDocs) SetScalarPath(val NilString) {
-	s.ScalarPath = val
-}
-
-// SetSwaggerPath sets the value of SwaggerPath.
-func (s *FindAllApiTokensResponseResponseDocs) SetSwaggerPath(val NilString) {
-	s.SwaggerPath = val
-}
-
-type FindAllApiTokensResponseResponseTokensItem struct {
-	UUID      uuid.UUID `json:"uuid"`
-	Name      string    `json:"name"`
-	ExpireAt  time.Time `json:"expireAt"`
-	Scopes    []string  `json:"scopes"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *FindAllApiTokensResponseResponseTokensItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *FindAllApiTokensResponseResponseTokensItem) GetName() string {
-	return s.Name
-}
-
-// GetExpireAt returns the value of ExpireAt.
-func (s *FindAllApiTokensResponseResponseTokensItem) GetExpireAt() time.Time {
-	return s.ExpireAt
-}
-
-// GetScopes returns the value of Scopes.
-func (s *FindAllApiTokensResponseResponseTokensItem) GetScopes() []string {
-	return s.Scopes
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *FindAllApiTokensResponseResponseTokensItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *FindAllApiTokensResponseResponseTokensItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// SetUUID sets the value of UUID.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetExpireAt sets the value of ExpireAt.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetExpireAt(val time.Time) {
-	s.ExpireAt = val
-}
-
-// SetScopes sets the value of Scopes.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetScopes(val []string) {
-	s.Scopes = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// Ref: #/components/schemas/ForbiddenError
-type ForbiddenError struct {
-	Message    string  `json:"message"`
-	StatusCode float64 `json:"statusCode"`
-}
-
-// GetMessage returns the value of Message.
-func (s *ForbiddenError) GetMessage() string {
-	return s.Message
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *ForbiddenError) GetStatusCode() float64 {
-	return s.StatusCode
-}
-
-// SetMessage sets the value of Message.
-func (s *ForbiddenError) SetMessage(val string) {
-	s.Message = val
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *ForbiddenError) SetStatusCode(val float64) {
-	s.StatusCode = val
-}
-
-func (*ForbiddenError) authRegisterRes() {}
 
 // Ref: #/components/schemas/GenerateX25519Response
 type GenerateX25519Response struct {
@@ -5860,107 +5348,6 @@ func (s *Generic) SetFrontendDomain(val NilString) {
 // SetAllowedEmails sets the value of AllowedEmails.
 func (s *Generic) SetAllowedEmails(val []string) {
 	s.AllowedEmails = val
-}
-
-// Ref: #/components/schemas/GetAllHwidDevicesResponse
-type GetAllHwidDevicesResponse struct {
-	Response AllHwidDevices `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *GetAllHwidDevicesResponse) GetResponse() AllHwidDevices {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *GetAllHwidDevicesResponse) SetResponse(val AllHwidDevices) {
-	s.Response = val
-}
-
-func (*GetAllHwidDevicesResponse) hwidUserDevicesGetAllUsersRes() {}
-
-// Ref: #/components/schemas/GetAllSubscriptionsResponse
-type GetAllSubscriptionsResponse struct {
-	Response GetAllSubscriptionsResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *GetAllSubscriptionsResponse) GetResponse() GetAllSubscriptionsResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *GetAllSubscriptionsResponse) SetResponse(val GetAllSubscriptionsResponseResponse) {
-	s.Response = val
-}
-
-func (*GetAllSubscriptionsResponse) subscriptionsGetAllSubscriptionsRes() {}
-
-type GetAllSubscriptionsResponseResponse struct {
-	Subscriptions []Subscription `json:"subscriptions"`
-	Total         float64        `json:"total"`
-}
-
-// GetSubscriptions returns the value of Subscriptions.
-func (s *GetAllSubscriptionsResponseResponse) GetSubscriptions() []Subscription {
-	return s.Subscriptions
-}
-
-// GetTotal returns the value of Total.
-func (s *GetAllSubscriptionsResponseResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// SetSubscriptions sets the value of Subscriptions.
-func (s *GetAllSubscriptionsResponseResponse) SetSubscriptions(val []Subscription) {
-	s.Subscriptions = val
-}
-
-// SetTotal sets the value of Total.
-func (s *GetAllSubscriptionsResponseResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-// Ref: #/components/schemas/GetAllUsersResponse
-type GetAllUsersResponse struct {
-	Response GetAllUsersResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *GetAllUsersResponse) GetResponse() GetAllUsersResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *GetAllUsersResponse) SetResponse(val GetAllUsersResponseResponse) {
-	s.Response = val
-}
-
-func (*GetAllUsersResponse) usersGetAllUsersRes() {}
-
-type GetAllUsersResponseResponse struct {
-	Users []UserItemInfo `json:"users"`
-	Total float64        `json:"total"`
-}
-
-// GetUsers returns the value of Users.
-func (s *GetAllUsersResponseResponse) GetUsers() []UserItemInfo {
-	return s.Users
-}
-
-// GetTotal returns the value of Total.
-func (s *GetAllUsersResponseResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// SetUsers sets the value of Users.
-func (s *GetAllUsersResponseResponse) SetUsers(val []UserItemInfo) {
-	s.Users = val
-}
-
-// SetTotal sets the value of Total.
-func (s *GetAllUsersResponseResponse) SetTotal(val float64) {
-	s.Total = val
 }
 
 // Ref: #/components/schemas/GetApiTokenScopesResponse
@@ -6140,6 +5527,106 @@ func (s *GetApiTokenScopesResponseResponseResourcesItemEndpointsItemKind) Unmars
 	}
 }
 
+// Ref: #/components/schemas/GetApiTokensResponse
+type GetApiTokensResponse struct {
+	Response GetApiTokensResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetApiTokensResponse) GetResponse() GetApiTokensResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetApiTokensResponse) SetResponse(val GetApiTokensResponseResponse) {
+	s.Response = val
+}
+
+func (*GetApiTokensResponse) apiTokensGetApiTokensRes() {}
+
+type GetApiTokensResponseResponse struct {
+	Tokens []GetApiTokensResponseResponseTokensItem `json:"tokens"`
+}
+
+// GetTokens returns the value of Tokens.
+func (s *GetApiTokensResponseResponse) GetTokens() []GetApiTokensResponseResponseTokensItem {
+	return s.Tokens
+}
+
+// SetTokens sets the value of Tokens.
+func (s *GetApiTokensResponseResponse) SetTokens(val []GetApiTokensResponseResponseTokensItem) {
+	s.Tokens = val
+}
+
+type GetApiTokensResponseResponseTokensItem struct {
+	UUID      uuid.UUID `json:"uuid"`
+	Name      string    `json:"name"`
+	ExpireAt  time.Time `json:"expireAt"`
+	Scopes    []string  `json:"scopes"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetApiTokensResponseResponseTokensItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *GetApiTokensResponseResponseTokensItem) GetName() string {
+	return s.Name
+}
+
+// GetExpireAt returns the value of ExpireAt.
+func (s *GetApiTokensResponseResponseTokensItem) GetExpireAt() time.Time {
+	return s.ExpireAt
+}
+
+// GetScopes returns the value of Scopes.
+func (s *GetApiTokensResponseResponseTokensItem) GetScopes() []string {
+	return s.Scopes
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetApiTokensResponseResponseTokensItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *GetApiTokensResponseResponseTokensItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetApiTokensResponseResponseTokensItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *GetApiTokensResponseResponseTokensItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetExpireAt sets the value of ExpireAt.
+func (s *GetApiTokensResponseResponseTokensItem) SetExpireAt(val time.Time) {
+	s.ExpireAt = val
+}
+
+// SetScopes sets the value of Scopes.
+func (s *GetApiTokensResponseResponseTokensItem) SetScopes(val []string) {
+	s.Scopes = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetApiTokensResponseResponseTokensItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *GetApiTokensResponseResponseTokensItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
 // Ref: #/components/schemas/GetBandwidthStatsResponse
 type GetBandwidthStatsResponse struct {
 	Response GetBandwidthStatsResponseResponse `json:"response"`
@@ -6215,58 +5702,363 @@ func (s *GetBandwidthStatsResponseResponse) SetBandwidthCurrentYear(val Bandwidt
 	s.BandwidthCurrentYear = val
 }
 
-// Ref: #/components/schemas/GetConnectionKeysByUuidResponse
-type GetConnectionKeysByUuidResponse struct {
-	Response GetConnectionKeysByUuidResponseResponse `json:"response"`
+// Ref: #/components/schemas/GetConfigurationResponse
+type GetConfigurationResponse struct {
+	Response GetConfigurationResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetConnectionKeysByUuidResponse) GetResponse() GetConnectionKeysByUuidResponseResponse {
+func (s *GetConfigurationResponse) GetResponse() GetConfigurationResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetConnectionKeysByUuidResponse) SetResponse(val GetConnectionKeysByUuidResponseResponse) {
+func (s *GetConfigurationResponse) SetResponse(val GetConfigurationResponseResponse) {
 	s.Response = val
 }
 
-func (*GetConnectionKeysByUuidResponse) subscriptionsGetConnectionKeysByUuidRes() {}
+func (*GetConfigurationResponse) systemGetConfigurationRes() {}
 
-type GetConnectionKeysByUuidResponseResponse struct {
+type GetConfigurationResponseResponse struct {
+	Notifications GetConfigurationResponseResponseNotifications `json:"notifications"`
+	Service       GetConfigurationResponseResponseService       `json:"service"`
+	Misc          GetConfigurationResponseResponseMisc          `json:"misc"`
+}
+
+// GetNotifications returns the value of Notifications.
+func (s *GetConfigurationResponseResponse) GetNotifications() GetConfigurationResponseResponseNotifications {
+	return s.Notifications
+}
+
+// GetService returns the value of Service.
+func (s *GetConfigurationResponseResponse) GetService() GetConfigurationResponseResponseService {
+	return s.Service
+}
+
+// GetMisc returns the value of Misc.
+func (s *GetConfigurationResponseResponse) GetMisc() GetConfigurationResponseResponseMisc {
+	return s.Misc
+}
+
+// SetNotifications sets the value of Notifications.
+func (s *GetConfigurationResponseResponse) SetNotifications(val GetConfigurationResponseResponseNotifications) {
+	s.Notifications = val
+}
+
+// SetService sets the value of Service.
+func (s *GetConfigurationResponseResponse) SetService(val GetConfigurationResponseResponseService) {
+	s.Service = val
+}
+
+// SetMisc sets the value of Misc.
+func (s *GetConfigurationResponseResponse) SetMisc(val GetConfigurationResponseResponseMisc) {
+	s.Misc = val
+}
+
+type GetConfigurationResponseResponseMisc struct {
+	// SHORT_UUID_LENGTH.
+	ShortUuidLength float64 `json:"shortUuidLength"`
+	SubPublicDomain string  `json:"subPublicDomain"`
+	// USER_USAGE_IGNORE_BELOW_BYTES.
+	UserUsageIgnoreBelowBytes float64 `json:"userUsageIgnoreBelowBytes"`
+}
+
+// GetShortUuidLength returns the value of ShortUuidLength.
+func (s *GetConfigurationResponseResponseMisc) GetShortUuidLength() float64 {
+	return s.ShortUuidLength
+}
+
+// GetSubPublicDomain returns the value of SubPublicDomain.
+func (s *GetConfigurationResponseResponseMisc) GetSubPublicDomain() string {
+	return s.SubPublicDomain
+}
+
+// GetUserUsageIgnoreBelowBytes returns the value of UserUsageIgnoreBelowBytes.
+func (s *GetConfigurationResponseResponseMisc) GetUserUsageIgnoreBelowBytes() float64 {
+	return s.UserUsageIgnoreBelowBytes
+}
+
+// SetShortUuidLength sets the value of ShortUuidLength.
+func (s *GetConfigurationResponseResponseMisc) SetShortUuidLength(val float64) {
+	s.ShortUuidLength = val
+}
+
+// SetSubPublicDomain sets the value of SubPublicDomain.
+func (s *GetConfigurationResponseResponseMisc) SetSubPublicDomain(val string) {
+	s.SubPublicDomain = val
+}
+
+// SetUserUsageIgnoreBelowBytes sets the value of UserUsageIgnoreBelowBytes.
+func (s *GetConfigurationResponseResponseMisc) SetUserUsageIgnoreBelowBytes(val float64) {
+	s.UserUsageIgnoreBelowBytes = val
+}
+
+type GetConfigurationResponseResponseNotifications struct {
+	// WEBHOOK_ENABLED.
+	Webhook bool `json:"webhook"`
+	// BANDWIDTH_USAGE_NOTIFICATIONS_THRESHOLD.
+	BandwidthUsage []float64 `json:"bandwidthUsage"`
+	// NOT_CONNECTED_USERS_NOTIFICATIONS_AFTER_HOURS.
+	NotConnectedAfter []float64 `json:"notConnectedAfter"`
+	// EXPIRATION_NOTIFICATIONS.
+	ExpirationNotifications []float64 `json:"expirationNotifications"`
+}
+
+// GetWebhook returns the value of Webhook.
+func (s *GetConfigurationResponseResponseNotifications) GetWebhook() bool {
+	return s.Webhook
+}
+
+// GetBandwidthUsage returns the value of BandwidthUsage.
+func (s *GetConfigurationResponseResponseNotifications) GetBandwidthUsage() []float64 {
+	return s.BandwidthUsage
+}
+
+// GetNotConnectedAfter returns the value of NotConnectedAfter.
+func (s *GetConfigurationResponseResponseNotifications) GetNotConnectedAfter() []float64 {
+	return s.NotConnectedAfter
+}
+
+// GetExpirationNotifications returns the value of ExpirationNotifications.
+func (s *GetConfigurationResponseResponseNotifications) GetExpirationNotifications() []float64 {
+	return s.ExpirationNotifications
+}
+
+// SetWebhook sets the value of Webhook.
+func (s *GetConfigurationResponseResponseNotifications) SetWebhook(val bool) {
+	s.Webhook = val
+}
+
+// SetBandwidthUsage sets the value of BandwidthUsage.
+func (s *GetConfigurationResponseResponseNotifications) SetBandwidthUsage(val []float64) {
+	s.BandwidthUsage = val
+}
+
+// SetNotConnectedAfter sets the value of NotConnectedAfter.
+func (s *GetConfigurationResponseResponseNotifications) SetNotConnectedAfter(val []float64) {
+	s.NotConnectedAfter = val
+}
+
+// SetExpirationNotifications sets the value of ExpirationNotifications.
+func (s *GetConfigurationResponseResponseNotifications) SetExpirationNotifications(val []float64) {
+	s.ExpirationNotifications = val
+}
+
+type GetConfigurationResponseResponseService struct {
+	// SERVICE_CLEAN_USAGE_HISTORY.
+	CleanUsageHistory bool `json:"cleanUsageHistory"`
+	// SERVICE_DISABLE_USER_USAGE_RECORDS.
+	DisableUserUsageRecords bool `json:"disableUserUsageRecords"`
+	// SERVICE_DISABLE_SRH_RECORDS.
+	DisableSrhRecords bool `json:"disableSrhRecords"`
+	// EXPORT_TO_STREAM_ENABLED.
+	ExportToRedisStream bool `json:"exportToRedisStream"`
+}
+
+// GetCleanUsageHistory returns the value of CleanUsageHistory.
+func (s *GetConfigurationResponseResponseService) GetCleanUsageHistory() bool {
+	return s.CleanUsageHistory
+}
+
+// GetDisableUserUsageRecords returns the value of DisableUserUsageRecords.
+func (s *GetConfigurationResponseResponseService) GetDisableUserUsageRecords() bool {
+	return s.DisableUserUsageRecords
+}
+
+// GetDisableSrhRecords returns the value of DisableSrhRecords.
+func (s *GetConfigurationResponseResponseService) GetDisableSrhRecords() bool {
+	return s.DisableSrhRecords
+}
+
+// GetExportToRedisStream returns the value of ExportToRedisStream.
+func (s *GetConfigurationResponseResponseService) GetExportToRedisStream() bool {
+	return s.ExportToRedisStream
+}
+
+// SetCleanUsageHistory sets the value of CleanUsageHistory.
+func (s *GetConfigurationResponseResponseService) SetCleanUsageHistory(val bool) {
+	s.CleanUsageHistory = val
+}
+
+// SetDisableUserUsageRecords sets the value of DisableUserUsageRecords.
+func (s *GetConfigurationResponseResponseService) SetDisableUserUsageRecords(val bool) {
+	s.DisableUserUsageRecords = val
+}
+
+// SetDisableSrhRecords sets the value of DisableSrhRecords.
+func (s *GetConfigurationResponseResponseService) SetDisableSrhRecords(val bool) {
+	s.DisableSrhRecords = val
+}
+
+// SetExportToRedisStream sets the value of ExportToRedisStream.
+func (s *GetConfigurationResponseResponseService) SetExportToRedisStream(val bool) {
+	s.ExportToRedisStream = val
+}
+
+// Ref: #/components/schemas/GetConnectionKeysByUserIdResponse
+type GetConnectionKeysByUserIdResponse struct {
+	Response GetConnectionKeysByUserIdResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetConnectionKeysByUserIdResponse) GetResponse() GetConnectionKeysByUserIdResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetConnectionKeysByUserIdResponse) SetResponse(val GetConnectionKeysByUserIdResponseResponse) {
+	s.Response = val
+}
+
+func (*GetConnectionKeysByUserIdResponse) subscriptionsGetConnectionKeysByUserIdRes() {}
+
+type GetConnectionKeysByUserIdResponseResponse struct {
 	EnabledKeys  []string `json:"enabledKeys"`
 	HiddenKeys   []string `json:"hiddenKeys"`
 	DisabledKeys []string `json:"disabledKeys"`
 }
 
 // GetEnabledKeys returns the value of EnabledKeys.
-func (s *GetConnectionKeysByUuidResponseResponse) GetEnabledKeys() []string {
+func (s *GetConnectionKeysByUserIdResponseResponse) GetEnabledKeys() []string {
 	return s.EnabledKeys
 }
 
 // GetHiddenKeys returns the value of HiddenKeys.
-func (s *GetConnectionKeysByUuidResponseResponse) GetHiddenKeys() []string {
+func (s *GetConnectionKeysByUserIdResponseResponse) GetHiddenKeys() []string {
 	return s.HiddenKeys
 }
 
 // GetDisabledKeys returns the value of DisabledKeys.
-func (s *GetConnectionKeysByUuidResponseResponse) GetDisabledKeys() []string {
+func (s *GetConnectionKeysByUserIdResponseResponse) GetDisabledKeys() []string {
 	return s.DisabledKeys
 }
 
 // SetEnabledKeys sets the value of EnabledKeys.
-func (s *GetConnectionKeysByUuidResponseResponse) SetEnabledKeys(val []string) {
+func (s *GetConnectionKeysByUserIdResponseResponse) SetEnabledKeys(val []string) {
 	s.EnabledKeys = val
 }
 
 // SetHiddenKeys sets the value of HiddenKeys.
-func (s *GetConnectionKeysByUuidResponseResponse) SetHiddenKeys(val []string) {
+func (s *GetConnectionKeysByUserIdResponseResponse) SetHiddenKeys(val []string) {
 	s.HiddenKeys = val
 }
 
 // SetDisabledKeys sets the value of DisabledKeys.
-func (s *GetConnectionKeysByUuidResponseResponse) SetDisabledKeys(val []string) {
+func (s *GetConnectionKeysByUserIdResponseResponse) SetDisabledKeys(val []string) {
 	s.DisabledKeys = val
 }
+
+// Ref: #/components/schemas/GetHostsResponse
+type GetHostsResponse struct {
+	Response []HostItem `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetHostsResponse) GetResponse() []HostItem {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetHostsResponse) SetResponse(val []HostItem) {
+	s.Response = val
+}
+
+func (*GetHostsResponse) hostsGetHostsRes() {}
+
+// Ref: #/components/schemas/GetHttpStatsResponse
+type GetHttpStatsResponse struct {
+	Response GetHttpStatsResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetHttpStatsResponse) GetResponse() GetHttpStatsResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetHttpStatsResponse) SetResponse(val GetHttpStatsResponseResponse) {
+	s.Response = val
+}
+
+func (*GetHttpStatsResponse) systemGetHttpStatsRes() {}
+
+type GetHttpStatsResponseResponse struct {
+	Routes []GetHttpStatsResponseResponseRoutesItem `json:"routes"`
+	Total  int                                      `json:"total"`
+}
+
+// GetRoutes returns the value of Routes.
+func (s *GetHttpStatsResponseResponse) GetRoutes() []GetHttpStatsResponseResponseRoutesItem {
+	return s.Routes
+}
+
+// GetTotal returns the value of Total.
+func (s *GetHttpStatsResponseResponse) GetTotal() int {
+	return s.Total
+}
+
+// SetRoutes sets the value of Routes.
+func (s *GetHttpStatsResponseResponse) SetRoutes(val []GetHttpStatsResponseResponseRoutesItem) {
+	s.Routes = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetHttpStatsResponseResponse) SetTotal(val int) {
+	s.Total = val
+}
+
+type GetHttpStatsResponseResponseRoutesItem struct {
+	Method string `json:"method"`
+	Route  string `json:"route"`
+	Count  int    `json:"count"`
+}
+
+// GetMethod returns the value of Method.
+func (s *GetHttpStatsResponseResponseRoutesItem) GetMethod() string {
+	return s.Method
+}
+
+// GetRoute returns the value of Route.
+func (s *GetHttpStatsResponseResponseRoutesItem) GetRoute() string {
+	return s.Route
+}
+
+// GetCount returns the value of Count.
+func (s *GetHttpStatsResponseResponseRoutesItem) GetCount() int {
+	return s.Count
+}
+
+// SetMethod sets the value of Method.
+func (s *GetHttpStatsResponseResponseRoutesItem) SetMethod(val string) {
+	s.Method = val
+}
+
+// SetRoute sets the value of Route.
+func (s *GetHttpStatsResponseResponseRoutesItem) SetRoute(val string) {
+	s.Route = val
+}
+
+// SetCount sets the value of Count.
+func (s *GetHttpStatsResponseResponseRoutesItem) SetCount(val int) {
+	s.Count = val
+}
+
+// Ref: #/components/schemas/GetHwidDevicesQueryResponse
+type GetHwidDevicesQueryResponse struct {
+	Response HwidDevicesQuery `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetHwidDevicesQueryResponse) GetResponse() HwidDevicesQuery {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetHwidDevicesQueryResponse) SetResponse(val HwidDevicesQuery) {
+	s.Response = val
+}
+
+func (*GetHwidDevicesQueryResponse) hwidUserDevicesGetAllUsersRes() {}
 
 // Ref: #/components/schemas/GetHwidDevicesStatsResponse
 type GetHwidDevicesStatsResponse struct {
@@ -6535,165 +6327,154 @@ func (s *GetInternalSquadAccessibleNodesResponseResponseAccessibleNodesItem) Set
 	s.ActiveInbounds = val
 }
 
-// Ref: #/components/schemas/GetLegacyStatsNodesUsersUsageResponse
-type GetLegacyStatsNodesUsersUsageResponse struct {
-	Response []GetLegacyStatsNodesUsersUsageResponseResponseItem `json:"response"`
+// Ref: #/components/schemas/GetInternalSquadUsageResponse
+type GetInternalSquadUsageResponse struct {
+	Response GetInternalSquadUsageResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetLegacyStatsNodesUsersUsageResponse) GetResponse() []GetLegacyStatsNodesUsersUsageResponseResponseItem {
+func (s *GetInternalSquadUsageResponse) GetResponse() GetInternalSquadUsageResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetLegacyStatsNodesUsersUsageResponse) SetResponse(val []GetLegacyStatsNodesUsersUsageResponseResponseItem) {
+func (s *GetInternalSquadUsageResponse) SetResponse(val GetInternalSquadUsageResponseResponse) {
 	s.Response = val
 }
 
-func (*GetLegacyStatsNodesUsersUsageResponse) bandwidthStatsNodesGetNodeUserUsageRes() {}
+func (*GetInternalSquadUsageResponse) internalSquadGetInternalSquadUsageRes()      {}
+func (*GetInternalSquadUsageResponse) internalSquadStatsGetInternalSquadUsageRes() {}
 
-type GetLegacyStatsNodesUsersUsageResponseResponseItem struct {
-	UserUuid uuid.UUID `json:"userUuid"`
-	Username string    `json:"username"`
-	NodeUuid uuid.UUID `json:"nodeUuid"`
-	Total    float64   `json:"total"`
-	Date     string    `json:"date"`
+type GetInternalSquadUsageResponseResponse struct {
+	SquadUuid uuid.UUID `json:"squadUuid"`
+	Users     []User    `json:"users"`
+	// Cursor to fetch the next page, or null if there are no more results.
+	NextCursor NilString `json:"nextCursor"`
+	// Whether there are more results to fetch.
+	HasMore bool `json:"hasMore"`
 }
 
-// GetUserUuid returns the value of UserUuid.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+// GetSquadUuid returns the value of SquadUuid.
+func (s *GetInternalSquadUsageResponseResponse) GetSquadUuid() uuid.UUID {
+	return s.SquadUuid
 }
 
-// GetUsername returns the value of Username.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) GetUsername() string {
-	return s.Username
+// GetUsers returns the value of Users.
+func (s *GetInternalSquadUsageResponseResponse) GetUsers() []User {
+	return s.Users
 }
 
-// GetNodeUuid returns the value of NodeUuid.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) GetNodeUuid() uuid.UUID {
-	return s.NodeUuid
+// GetNextCursor returns the value of NextCursor.
+func (s *GetInternalSquadUsageResponseResponse) GetNextCursor() NilString {
+	return s.NextCursor
 }
 
-// GetTotal returns the value of Total.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) GetTotal() float64 {
-	return s.Total
+// GetHasMore returns the value of HasMore.
+func (s *GetInternalSquadUsageResponseResponse) GetHasMore() bool {
+	return s.HasMore
 }
 
-// GetDate returns the value of Date.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) GetDate() string {
-	return s.Date
+// SetSquadUuid sets the value of SquadUuid.
+func (s *GetInternalSquadUsageResponseResponse) SetSquadUuid(val uuid.UUID) {
+	s.SquadUuid = val
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
+// SetUsers sets the value of Users.
+func (s *GetInternalSquadUsageResponseResponse) SetUsers(val []User) {
+	s.Users = val
 }
 
-// SetUsername sets the value of Username.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) SetUsername(val string) {
-	s.Username = val
+// SetNextCursor sets the value of NextCursor.
+func (s *GetInternalSquadUsageResponseResponse) SetNextCursor(val NilString) {
+	s.NextCursor = val
 }
 
-// SetNodeUuid sets the value of NodeUuid.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) SetNodeUuid(val uuid.UUID) {
-	s.NodeUuid = val
+// SetHasMore sets the value of HasMore.
+func (s *GetInternalSquadUsageResponseResponse) SetHasMore(val bool) {
+	s.HasMore = val
 }
 
-// SetTotal sets the value of Total.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) SetTotal(val float64) {
-	s.Total = val
-}
-
-// SetDate sets the value of Date.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) SetDate(val string) {
-	s.Date = val
-}
-
-// Ref: #/components/schemas/GetLegacyStatsUserUsageResponse
-type GetLegacyStatsUserUsageResponse struct {
-	Response []GetLegacyStatsUserUsageResponseResponseItem `json:"response"`
+// Ref: #/components/schemas/GetInternalSquadUserUsageResponse
+type GetInternalSquadUserUsageResponse struct {
+	Response GetInternalSquadUserUsageResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetLegacyStatsUserUsageResponse) GetResponse() []GetLegacyStatsUserUsageResponseResponseItem {
+func (s *GetInternalSquadUserUsageResponse) GetResponse() GetInternalSquadUserUsageResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetLegacyStatsUserUsageResponse) SetResponse(val []GetLegacyStatsUserUsageResponseResponseItem) {
+func (s *GetInternalSquadUserUsageResponse) SetResponse(val GetInternalSquadUserUsageResponseResponse) {
 	s.Response = val
 }
 
-func (*GetLegacyStatsUserUsageResponse) bandwidthStatsUsersGetUserUsageByRangeRes() {}
+func (*GetInternalSquadUserUsageResponse) internalSquadStatsGetInternalSquadUserUsageRes() {}
 
-type GetLegacyStatsUserUsageResponseResponseItem struct {
-	UserUuid    uuid.UUID `json:"userUuid"`
-	NodeUuid    uuid.UUID `json:"nodeUuid"`
-	NodeName    string    `json:"nodeName"`
-	CountryCode string    `json:"countryCode"`
-	Total       float64   `json:"total"`
-	Date        string    `json:"date"`
+type GetInternalSquadUserUsageResponseResponse struct {
+	Days []GetInternalSquadUserUsageResponseResponseDaysItem `json:"days"`
 }
 
-// GetUserUuid returns the value of UserUuid.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+// GetDays returns the value of Days.
+func (s *GetInternalSquadUserUsageResponseResponse) GetDays() []GetInternalSquadUserUsageResponseResponseDaysItem {
+	return s.Days
 }
 
-// GetNodeUuid returns the value of NodeUuid.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) GetNodeUuid() uuid.UUID {
-	return s.NodeUuid
+// SetDays sets the value of Days.
+func (s *GetInternalSquadUserUsageResponseResponse) SetDays(val []GetInternalSquadUserUsageResponseResponseDaysItem) {
+	s.Days = val
 }
 
-// GetNodeName returns the value of NodeName.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) GetNodeName() string {
-	return s.NodeName
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// GetTotal returns the value of Total.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) GetTotal() float64 {
-	return s.Total
+type GetInternalSquadUserUsageResponseResponseDaysItem struct {
+	// Day (YYYY-MM-DD).
+	Date  string                                                       `json:"date"`
+	Nodes []GetInternalSquadUserUsageResponseResponseDaysItemNodesItem `json:"nodes"`
 }
 
 // GetDate returns the value of Date.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) GetDate() string {
+func (s *GetInternalSquadUserUsageResponseResponseDaysItem) GetDate() string {
 	return s.Date
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
-// SetNodeUuid sets the value of NodeUuid.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetNodeUuid(val uuid.UUID) {
-	s.NodeUuid = val
-}
-
-// SetNodeName sets the value of NodeName.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetNodeName(val string) {
-	s.NodeName = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-// SetTotal sets the value of Total.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetTotal(val float64) {
-	s.Total = val
+// GetNodes returns the value of Nodes.
+func (s *GetInternalSquadUserUsageResponseResponseDaysItem) GetNodes() []GetInternalSquadUserUsageResponseResponseDaysItemNodesItem {
+	return s.Nodes
 }
 
 // SetDate sets the value of Date.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetDate(val string) {
+func (s *GetInternalSquadUserUsageResponseResponseDaysItem) SetDate(val string) {
 	s.Date = val
+}
+
+// SetNodes sets the value of Nodes.
+func (s *GetInternalSquadUserUsageResponseResponseDaysItem) SetNodes(val []GetInternalSquadUserUsageResponseResponseDaysItemNodesItem) {
+	s.Nodes = val
+}
+
+type GetInternalSquadUserUsageResponseResponseDaysItemNodesItem struct {
+	UUID uuid.UUID `json:"uuid"`
+	// Used bytes on this node that day (raw bytes).
+	TotalBytes float64 `json:"totalBytes"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetInternalSquadUserUsageResponseResponseDaysItemNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetTotalBytes returns the value of TotalBytes.
+func (s *GetInternalSquadUserUsageResponseResponseDaysItemNodesItem) GetTotalBytes() float64 {
+	return s.TotalBytes
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetInternalSquadUserUsageResponseResponseDaysItemNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetTotalBytes sets the value of TotalBytes.
+func (s *GetInternalSquadUserUsageResponseResponseDaysItemNodesItem) SetTotalBytes(val float64) {
+	s.TotalBytes = val
 }
 
 // Ref: #/components/schemas/GetMetadataResponse
@@ -6858,6 +6639,109 @@ func (s *GetMetadataResponseResponseGitFrontend) SetCommitSha(val string) {
 // SetCommitUrl sets the value of CommitUrl.
 func (s *GetMetadataResponseResponseGitFrontend) SetCommitUrl(val string) {
 	s.CommitUrl = val
+}
+
+// Ref: #/components/schemas/GetNodeSecretKeyResponse
+type GetNodeSecretKeyResponse struct {
+	Response GetNodeSecretKeyResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetNodeSecretKeyResponse) GetResponse() GetNodeSecretKeyResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetNodeSecretKeyResponse) SetResponse(val GetNodeSecretKeyResponseResponse) {
+	s.Response = val
+}
+
+func (*GetNodeSecretKeyResponse) keygenGenerateKeyRes() {}
+
+type GetNodeSecretKeyResponseResponse struct {
+	SecretKey string `json:"secretKey"`
+}
+
+// GetSecretKey returns the value of SecretKey.
+func (s *GetNodeSecretKeyResponseResponse) GetSecretKey() string {
+	return s.SecretKey
+}
+
+// SetSecretKey sets the value of SecretKey.
+func (s *GetNodeSecretKeyResponseResponse) SetSecretKey(val string) {
+	s.SecretKey = val
+}
+
+// Ref: #/components/schemas/GetNodeUsageBody
+type GetNodeUsageBody struct {
+	// Node UUIDs to include.
+	NodesUuids []uuid.UUID `json:"nodesUuids"`
+}
+
+// GetNodesUuids returns the value of NodesUuids.
+func (s *GetNodeUsageBody) GetNodesUuids() []uuid.UUID {
+	return s.NodesUuids
+}
+
+// SetNodesUuids sets the value of NodesUuids.
+func (s *GetNodeUsageBody) SetNodesUuids(val []uuid.UUID) {
+	s.NodesUuids = val
+}
+
+// Ref: #/components/schemas/GetNodeUsageResponse
+type GetNodeUsageResponse struct {
+	Response GetNodeUsageResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetNodeUsageResponse) GetResponse() GetNodeUsageResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetNodeUsageResponse) SetResponse(val GetNodeUsageResponseResponse) {
+	s.Response = val
+}
+
+func (*GetNodeUsageResponse) bandwidthStatsNodesGetNodeUsageRes() {}
+
+type GetNodeUsageResponseResponse struct {
+	Nodes []GetNodeUsageResponseResponseNodesItem `json:"nodes"`
+}
+
+// GetNodes returns the value of Nodes.
+func (s *GetNodeUsageResponseResponse) GetNodes() []GetNodeUsageResponseResponseNodesItem {
+	return s.Nodes
+}
+
+// SetNodes sets the value of Nodes.
+func (s *GetNodeUsageResponseResponse) SetNodes(val []GetNodeUsageResponseResponseNodesItem) {
+	s.Nodes = val
+}
+
+type GetNodeUsageResponseResponseNodesItem struct {
+	UUID  uuid.UUID `json:"uuid"`
+	Users []User    `json:"users"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *GetNodeUsageResponseResponseNodesItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetUsers returns the value of Users.
+func (s *GetNodeUsageResponseResponseNodesItem) GetUsers() []User {
+	return s.Users
+}
+
+// SetUUID sets the value of UUID.
+func (s *GetNodeUsageResponseResponseNodesItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetUsers sets the value of Users.
+func (s *GetNodeUsageResponseResponseNodesItem) SetUsers(val []User) {
+	s.Users = val
 }
 
 // Ref: #/components/schemas/GetNodesMetricsResponse
@@ -7036,37 +6920,6 @@ func (s *GetNodesStatisticsResponseResponseLastSevenDaysItem) SetDate(val string
 // SetTotalBytes sets the value of TotalBytes.
 func (s *GetNodesStatisticsResponseResponseLastSevenDaysItem) SetTotalBytes(val string) {
 	s.TotalBytes = val
-}
-
-// Ref: #/components/schemas/GetPubKeyResponse
-type GetPubKeyResponse struct {
-	Response GetPubKeyResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *GetPubKeyResponse) GetResponse() GetPubKeyResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *GetPubKeyResponse) SetResponse(val GetPubKeyResponseResponse) {
-	s.Response = val
-}
-
-func (*GetPubKeyResponse) keygenGenerateKeyRes() {}
-
-type GetPubKeyResponseResponse struct {
-	PubKey string `json:"pubKey"`
-}
-
-// GetPubKey returns the value of PubKey.
-func (s *GetPubKeyResponseResponse) GetPubKey() string {
-	return s.PubKey
-}
-
-// SetPubKey sets the value of PubKey.
-func (s *GetPubKeyResponseResponse) SetPubKey(val string) {
-	s.PubKey = val
 }
 
 // Ref: #/components/schemas/GetRawSubscriptionByShortUuidResponse
@@ -7250,19 +7103,19 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseHeaders) init() GetRawSubs
 }
 
 type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem struct {
-	FinalRemark      string                                                                                  `json:"finalRemark"`
-	Address          string                                                                                  `json:"address"`
-	Port             int                                                                                     `json:"port"`
-	Protocol         GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocol           `json:"protocol"`
-	ProtocolOptions  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions    `json:"protocolOptions"`
-	Transport        GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransport          `json:"transport"`
-	TransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions   `json:"transportOptions"`
-	Security         GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurity           `json:"security"`
-	SecurityOptions  OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions `json:"securityOptions"`
-	StreamOverrides  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemStreamOverrides    `json:"streamOverrides"`
-	Mux              jx.Raw                                                                                  `json:"mux"`
-	ClientOverrides  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverrides    `json:"clientOverrides"`
-	Metadata         GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemMetadata           `json:"metadata"`
+	FinalRemark      string                                                                                `json:"finalRemark"`
+	Address          string                                                                                `json:"address"`
+	Port             int                                                                                   `json:"port"`
+	Protocol         GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocol         `json:"protocol"`
+	ProtocolOptions  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions  `json:"protocolOptions"`
+	Transport        GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransport        `json:"transport"`
+	TransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions `json:"transportOptions"`
+	Security         GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurity         `json:"security"`
+	SecurityOptions  *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions `json:"securityOptions"`
+	StreamOverrides  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemStreamOverrides  `json:"streamOverrides"`
+	Mux              jx.Raw                                                                                `json:"mux"`
+	ClientOverrides  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverrides  `json:"clientOverrides"`
+	Metadata         GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemMetadata         `json:"metadata"`
 }
 
 // GetFinalRemark returns the value of FinalRemark.
@@ -7306,7 +7159,7 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) 
 }
 
 // GetSecurityOptions returns the value of SecurityOptions.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) GetSecurityOptions() OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions {
+func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) GetSecurityOptions() *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions {
 	return s.SecurityOptions
 }
 
@@ -7371,7 +7224,7 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) 
 }
 
 // SetSecurityOptions sets the value of SecurityOptions.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) SetSecurityOptions(val OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) {
+func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) SetSecurityOptions(val *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) {
 	s.SecurityOptions = val
 }
 
@@ -7774,288 +7627,7 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemPr
 	}
 }
 
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions represents sum type.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions struct {
-	Type                                                                                  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType // switch on this field
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3
-}
-
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType is oneOf type of GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType string
-
-// Possible values for GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType.
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3"
-)
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3(v)
-	return s
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0 struct {
-	Encryption string                                                                                    `json:"encryption"`
-	ID         string                                                                                    `json:"id"`
-	Flow       GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow `json:"flow"`
-}
-
-// GetEncryption returns the value of Encryption.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) GetEncryption() string {
-	return s.Encryption
-}
-
-// GetID returns the value of ID.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) GetID() string {
-	return s.ID
-}
-
-// GetFlow returns the value of Flow.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) GetFlow() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow {
-	return s.Flow
-}
-
-// SetEncryption sets the value of Encryption.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) SetEncryption(val string) {
-	s.Encryption = val
-}
-
-// SetID sets the value of ID.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) SetID(val string) {
-	s.ID = val
-}
-
-// SetFlow sets the value of Flow.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) SetFlow(val GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow) {
-	s.Flow = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow string
-
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowEmpty                GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow = ""
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVision       GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow = "xtls-rprx-vision"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVisionUdp443 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow = "xtls-rprx-vision-udp443"
-)
-
-// AllValues returns all GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow values.
-func (GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow) AllValues() []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow {
-	return []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow{
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowEmpty,
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVision,
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVisionUdp443,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow) MarshalText() ([]byte, error) {
-	switch s {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowEmpty:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVision:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVisionUdp443:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow) UnmarshalText(data []byte) error {
-	switch GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow(data) {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowEmpty:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowEmpty
-		return nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVision:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVision
-		return nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVisionUdp443:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowXtlsRprxVisionUdp443
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1 struct {
-	Password string `json:"password"`
-}
-
-// GetPassword returns the value of Password.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1) GetPassword() string {
-	return s.Password
-}
-
-// SetPassword sets the value of Password.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1) SetPassword(val string) {
-	s.Password = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2 struct {
-	Method     string `json:"method"`
-	Password   string `json:"password"`
-	Uot        bool   `json:"uot"`
-	UotVersion int    `json:"uotVersion"`
-}
-
-// GetMethod returns the value of Method.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) GetMethod() string {
-	return s.Method
-}
-
-// GetPassword returns the value of Password.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) GetPassword() string {
-	return s.Password
-}
-
-// GetUot returns the value of Uot.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) GetUot() bool {
-	return s.Uot
-}
-
-// GetUotVersion returns the value of UotVersion.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) GetUotVersion() int {
-	return s.UotVersion
-}
-
-// SetMethod sets the value of Method.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) SetMethod(val string) {
-	s.Method = val
-}
-
-// SetPassword sets the value of Password.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) SetPassword(val string) {
-	s.Password = val
-}
-
-// SetUot sets the value of Uot.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) SetUot(val bool) {
-	s.Uot = val
-}
-
-// SetUotVersion sets the value of UotVersion.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) SetUotVersion(val int) {
-	s.UotVersion = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3 struct {
-	Version int `json:"version"`
-}
-
-// GetVersion returns the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3) GetVersion() int {
-	return s.Version
-}
-
-// SetVersion sets the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3) SetVersion(val int) {
-	s.Version = val
-}
+type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions struct{}
 
 type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurity string
 
@@ -8105,233 +7677,7 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSe
 	}
 }
 
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions represents sum type.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions struct {
-	Type                                                                                  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptionsType // switch on this field
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1
-}
-
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptionsType is oneOf type of GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptionsType string
-
-// Possible values for GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptionsType.
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1"
-)
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1(v)
-	return s
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0 struct {
-	PinnedPeerCertSha256    NilString `json:"pinnedPeerCertSha256"`
-	VerifyPeerCertByName    NilString `json:"verifyPeerCertByName"`
-	Alpn                    NilString `json:"alpn"`
-	EnableSessionResumption bool      `json:"enableSessionResumption"`
-	Fingerprint             NilString `json:"fingerprint"`
-	ServerName              NilString `json:"serverName"`
-	EchConfigList           NilString `json:"echConfigList"`
-	EchForceQuery           NilString `json:"echForceQuery"`
-}
-
-// GetPinnedPeerCertSha256 returns the value of PinnedPeerCertSha256.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetPinnedPeerCertSha256() NilString {
-	return s.PinnedPeerCertSha256
-}
-
-// GetVerifyPeerCertByName returns the value of VerifyPeerCertByName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetVerifyPeerCertByName() NilString {
-	return s.VerifyPeerCertByName
-}
-
-// GetAlpn returns the value of Alpn.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetAlpn() NilString {
-	return s.Alpn
-}
-
-// GetEnableSessionResumption returns the value of EnableSessionResumption.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetEnableSessionResumption() bool {
-	return s.EnableSessionResumption
-}
-
-// GetFingerprint returns the value of Fingerprint.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetFingerprint() NilString {
-	return s.Fingerprint
-}
-
-// GetServerName returns the value of ServerName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetServerName() NilString {
-	return s.ServerName
-}
-
-// GetEchConfigList returns the value of EchConfigList.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetEchConfigList() NilString {
-	return s.EchConfigList
-}
-
-// GetEchForceQuery returns the value of EchForceQuery.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) GetEchForceQuery() NilString {
-	return s.EchForceQuery
-}
-
-// SetPinnedPeerCertSha256 sets the value of PinnedPeerCertSha256.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetPinnedPeerCertSha256(val NilString) {
-	s.PinnedPeerCertSha256 = val
-}
-
-// SetVerifyPeerCertByName sets the value of VerifyPeerCertByName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetVerifyPeerCertByName(val NilString) {
-	s.VerifyPeerCertByName = val
-}
-
-// SetAlpn sets the value of Alpn.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetAlpn(val NilString) {
-	s.Alpn = val
-}
-
-// SetEnableSessionResumption sets the value of EnableSessionResumption.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetEnableSessionResumption(val bool) {
-	s.EnableSessionResumption = val
-}
-
-// SetFingerprint sets the value of Fingerprint.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetFingerprint(val NilString) {
-	s.Fingerprint = val
-}
-
-// SetServerName sets the value of ServerName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetServerName(val NilString) {
-	s.ServerName = val
-}
-
-// SetEchConfigList sets the value of EchConfigList.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetEchConfigList(val NilString) {
-	s.EchConfigList = val
-}
-
-// SetEchForceQuery sets the value of EchForceQuery.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetEchForceQuery(val NilString) {
-	s.EchForceQuery = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1 struct {
-	Fingerprint   string    `json:"fingerprint"`
-	PublicKey     string    `json:"publicKey"`
-	ShortId       NilString `json:"shortId"`
-	ServerName    string    `json:"serverName"`
-	SpiderX       NilString `json:"spiderX"`
-	Mldsa65Verify NilString `json:"mldsa65Verify"`
-}
-
-// GetFingerprint returns the value of Fingerprint.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetFingerprint() string {
-	return s.Fingerprint
-}
-
-// GetPublicKey returns the value of PublicKey.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetPublicKey() string {
-	return s.PublicKey
-}
-
-// GetShortId returns the value of ShortId.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetShortId() NilString {
-	return s.ShortId
-}
-
-// GetServerName returns the value of ServerName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetServerName() string {
-	return s.ServerName
-}
-
-// GetSpiderX returns the value of SpiderX.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetSpiderX() NilString {
-	return s.SpiderX
-}
-
-// GetMldsa65Verify returns the value of Mldsa65Verify.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) GetMldsa65Verify() NilString {
-	return s.Mldsa65Verify
-}
-
-// SetFingerprint sets the value of Fingerprint.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetFingerprint(val string) {
-	s.Fingerprint = val
-}
-
-// SetPublicKey sets the value of PublicKey.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetPublicKey(val string) {
-	s.PublicKey = val
-}
-
-// SetShortId sets the value of ShortId.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetShortId(val NilString) {
-	s.ShortId = val
-}
-
-// SetServerName sets the value of ServerName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetServerName(val string) {
-	s.ServerName = val
-}
-
-// SetSpiderX sets the value of SpiderX.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetSpiderX(val NilString) {
-	s.SpiderX = val
-}
-
-// SetMldsa65Verify sets the value of Mldsa65Verify.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetMldsa65Verify(val NilString) {
-	s.Mldsa65Verify = val
-}
+type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions struct{}
 
 type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemStreamOverrides struct {
 	FinalMask jx.Raw `json:"finalMask"`
@@ -8434,844 +7780,7 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	}
 }
 
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions represents sum type.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions struct {
-	Type                                                                                   GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType // switch on this field
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6
-}
-
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType is oneOf type of GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType string
-
-// Possible values for GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType.
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6"
-)
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6(v)
-	return s
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0 struct {
-	Header NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header `json:"header"`
-}
-
-// GetHeader returns the value of Header.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0) GetHeader() NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header {
-	return s.Header
-}
-
-// SetHeader sets the value of Header.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0) SetHeader(val NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) {
-	s.Header = val
-}
-
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header represents sum type.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header struct {
-	Type                                                                                          GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0HeaderType // switch on this field
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1
-}
-
-// GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0HeaderType is oneOf type of GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header.
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0HeaderType string
-
-// Possible values for GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0HeaderType.
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0HeaderType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0HeaderType = "GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1"
-)
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-}
-
-// IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 reports whether GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1() bool {
-	return s.Type == GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0(v)
-	return s
-}
-
-// SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 sets GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header to GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) {
-	s.Type = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-	s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 = v
-}
-
-// GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 returns GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 and true boolean if GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header is GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) GetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1, ok bool) {
-	if !s.IsGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1() {
-		return v, false
-	}
-	return s.GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1, true
-}
-
-// NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header returns new GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header from GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1.
-func NewGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header {
-	var s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1(v)
-	return s
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0 struct {
-	Type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type `json:"type"`
-}
-
-// GetType returns the value of Type.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0) GetType() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type {
-	return s.Type
-}
-
-// SetType sets the value of Type.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0) SetType(val GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type) {
-	s.Type = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type string
-
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0TypeNone GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type = "none"
-)
-
-// AllValues returns all GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type values.
-func (GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type) AllValues() []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type {
-	return []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type{
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0TypeNone,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type) MarshalText() ([]byte, error) {
-	switch s {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0TypeNone:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type) UnmarshalText(data []byte) error {
-	switch GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type(data) {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0TypeNone:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0TypeNone
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1 struct {
-	Type     GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type        `json:"type"`
-	Request  OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request  `json:"request"`
-	Response OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response `json:"response"`
-}
-
-// GetType returns the value of Type.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) GetType() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type {
-	return s.Type
-}
-
-// GetRequest returns the value of Request.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) GetRequest() OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request {
-	return s.Request
-}
-
-// GetResponse returns the value of Response.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) GetResponse() OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response {
-	return s.Response
-}
-
-// SetType sets the value of Type.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) SetType(val GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type) {
-	s.Type = val
-}
-
-// SetRequest sets the value of Request.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) SetRequest(val OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) {
-	s.Request = val
-}
-
-// SetResponse sets the value of Response.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) SetResponse(val OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) {
-	s.Response = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request struct {
-	Version OptString                                                                                                      `json:"version"`
-	Method  OptString                                                                                                      `json:"method"`
-	Path    []string                                                                                                       `json:"path"`
-	Headers OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders `json:"headers"`
-}
-
-// GetVersion returns the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) GetVersion() OptString {
-	return s.Version
-}
-
-// GetMethod returns the value of Method.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) GetMethod() OptString {
-	return s.Method
-}
-
-// GetPath returns the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) GetPath() []string {
-	return s.Path
-}
-
-// GetHeaders returns the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) GetHeaders() OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders {
-	return s.Headers
-}
-
-// SetVersion sets the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetVersion(val OptString) {
-	s.Version = val
-}
-
-// SetMethod sets the value of Method.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetMethod(val OptString) {
-	s.Method = val
-}
-
-// SetPath sets the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetPath(val []string) {
-	s.Path = val
-}
-
-// SetHeaders sets the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetHeaders(val OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) {
-	s.Headers = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders map[string]jx.Raw
-
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) init() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders {
-	m := *s
-	if m == nil {
-		m = map[string]jx.Raw{}
-		*s = m
-	}
-	return m
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response struct {
-	Version OptString                                                                                                       `json:"version"`
-	Status  OptString                                                                                                       `json:"status"`
-	Reason  OptString                                                                                                       `json:"reason"`
-	Headers OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders `json:"headers"`
-}
-
-// GetVersion returns the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) GetVersion() OptString {
-	return s.Version
-}
-
-// GetStatus returns the value of Status.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) GetStatus() OptString {
-	return s.Status
-}
-
-// GetReason returns the value of Reason.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) GetReason() OptString {
-	return s.Reason
-}
-
-// GetHeaders returns the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) GetHeaders() OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders {
-	return s.Headers
-}
-
-// SetVersion sets the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetVersion(val OptString) {
-	s.Version = val
-}
-
-// SetStatus sets the value of Status.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetStatus(val OptString) {
-	s.Status = val
-}
-
-// SetReason sets the value of Reason.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetReason(val OptString) {
-	s.Reason = val
-}
-
-// SetHeaders sets the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetHeaders(val OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) {
-	s.Headers = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders map[string]jx.Raw
-
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) init() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders {
-	m := *s
-	if m == nil {
-		m = map[string]jx.Raw{}
-		*s = m
-	}
-	return m
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type string
-
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1TypeHTTP GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type = "http"
-)
-
-// AllValues returns all GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type values.
-func (GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type) AllValues() []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type {
-	return []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type{
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1TypeHTTP,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type) MarshalText() ([]byte, error) {
-	switch s {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1TypeHTTP:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type) UnmarshalText(data []byte) error {
-	switch GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type(data) {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1TypeHTTP:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1TypeHTTP
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1 struct {
-	Path  NilString                                                                                      `json:"path"`
-	Host  NilString                                                                                      `json:"host"`
-	Mode  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode     `json:"mode"`
-	Extra NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra `json:"extra"`
-}
-
-// GetPath returns the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) GetPath() NilString {
-	return s.Path
-}
-
-// GetHost returns the value of Host.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) GetHost() NilString {
-	return s.Host
-}
-
-// GetMode returns the value of Mode.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) GetMode() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode {
-	return s.Mode
-}
-
-// GetExtra returns the value of Extra.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) GetExtra() NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra {
-	return s.Extra
-}
-
-// SetPath sets the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) SetPath(val NilString) {
-	s.Path = val
-}
-
-// SetHost sets the value of Host.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) SetHost(val NilString) {
-	s.Host = val
-}
-
-// SetMode sets the value of Mode.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) SetMode(val GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode) {
-	s.Mode = val
-}
-
-// SetExtra sets the value of Extra.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) SetExtra(val NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) {
-	s.Extra = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra map[string]jx.Raw
-
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) init() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra {
-	m := *s
-	if m == nil {
-		m = map[string]jx.Raw{}
-		*s = m
-	}
-	return m
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode string
-
-const (
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeAuto      GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode = "auto"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModePacketUp  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode = "packet-up"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamUp  GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode = "stream-up"
-	GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamOne GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode = "stream-one"
-)
-
-// AllValues returns all GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode values.
-func (GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode) AllValues() []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode {
-	return []GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode{
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeAuto,
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModePacketUp,
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamUp,
-		GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamOne,
-	}
-}
-
-// MarshalText implements encoding.TextMarshaler.
-func (s GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode) MarshalText() ([]byte, error) {
-	switch s {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeAuto:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModePacketUp:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamUp:
-		return []byte(s), nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamOne:
-		return []byte(s), nil
-	default:
-		return nil, errors.Errorf("invalid value: %q", s)
-	}
-}
-
-// UnmarshalText implements encoding.TextUnmarshaler.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode) UnmarshalText(data []byte) error {
-	switch GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode(data) {
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeAuto:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeAuto
-		return nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModePacketUp:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModePacketUp
-		return nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamUp:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamUp
-		return nil
-	case GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamOne:
-		*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeStreamOne
-		return nil
-	default:
-		return errors.Errorf("invalid value: %q", data)
-	}
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2 struct {
-	Path            NilString                                                                                        `json:"path"`
-	Host            NilString                                                                                        `json:"host"`
-	Headers         NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers `json:"headers"`
-	HeartbeatPeriod NilFloat64                                                                                       `json:"heartbeatPeriod"`
-}
-
-// GetPath returns the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) GetPath() NilString {
-	return s.Path
-}
-
-// GetHost returns the value of Host.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) GetHost() NilString {
-	return s.Host
-}
-
-// GetHeaders returns the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) GetHeaders() NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers {
-	return s.Headers
-}
-
-// GetHeartbeatPeriod returns the value of HeartbeatPeriod.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) GetHeartbeatPeriod() NilFloat64 {
-	return s.HeartbeatPeriod
-}
-
-// SetPath sets the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) SetPath(val NilString) {
-	s.Path = val
-}
-
-// SetHost sets the value of Host.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) SetHost(val NilString) {
-	s.Host = val
-}
-
-// SetHeaders sets the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) SetHeaders(val NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) {
-	s.Headers = val
-}
-
-// SetHeartbeatPeriod sets the value of HeartbeatPeriod.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) SetHeartbeatPeriod(val NilFloat64) {
-	s.HeartbeatPeriod = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers map[string]string
-
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) init() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers {
-	m := *s
-	if m == nil {
-		m = map[string]string{}
-		*s = m
-	}
-	return m
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3 struct {
-	Path    NilString                                                                                        `json:"path"`
-	Host    NilString                                                                                        `json:"host"`
-	Headers NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers `json:"headers"`
-}
-
-// GetPath returns the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) GetPath() NilString {
-	return s.Path
-}
-
-// GetHost returns the value of Host.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) GetHost() NilString {
-	return s.Host
-}
-
-// GetHeaders returns the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) GetHeaders() NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers {
-	return s.Headers
-}
-
-// SetPath sets the value of Path.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) SetPath(val NilString) {
-	s.Path = val
-}
-
-// SetHost sets the value of Host.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) SetHost(val NilString) {
-	s.Host = val
-}
-
-// SetHeaders sets the value of Headers.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) SetHeaders(val NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) {
-	s.Headers = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers map[string]string
-
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) init() GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers {
-	m := *s
-	if m == nil {
-		m = map[string]string{}
-		*s = m
-	}
-	return m
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4 struct {
-	Authority   NilString `json:"authority"`
-	ServiceName NilString `json:"serviceName"`
-	MultiMode   bool      `json:"multiMode"`
-}
-
-// GetAuthority returns the value of Authority.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) GetAuthority() NilString {
-	return s.Authority
-}
-
-// GetServiceName returns the value of ServiceName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) GetServiceName() NilString {
-	return s.ServiceName
-}
-
-// GetMultiMode returns the value of MultiMode.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) GetMultiMode() bool {
-	return s.MultiMode
-}
-
-// SetAuthority sets the value of Authority.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) SetAuthority(val NilString) {
-	s.Authority = val
-}
-
-// SetServiceName sets the value of ServiceName.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) SetServiceName(val NilString) {
-	s.ServiceName = val
-}
-
-// SetMultiMode sets the value of MultiMode.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) SetMultiMode(val bool) {
-	s.MultiMode = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5 struct {
-	ClientMtu  int  `json:"clientMtu"`
-	ClientTti  int  `json:"clientTti"`
-	Congestion bool `json:"congestion"`
-}
-
-// GetClientMtu returns the value of ClientMtu.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) GetClientMtu() int {
-	return s.ClientMtu
-}
-
-// GetClientTti returns the value of ClientTti.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) GetClientTti() int {
-	return s.ClientTti
-}
-
-// GetCongestion returns the value of Congestion.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) GetCongestion() bool {
-	return s.Congestion
-}
-
-// SetClientMtu sets the value of ClientMtu.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) SetClientMtu(val int) {
-	s.ClientMtu = val
-}
-
-// SetClientTti sets the value of ClientTti.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) SetClientTti(val int) {
-	s.ClientTti = val
-}
-
-// SetCongestion sets the value of Congestion.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) SetCongestion(val bool) {
-	s.Congestion = val
-}
-
-type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6 struct {
-	Version int    `json:"version"`
-	Auth    string `json:"auth"`
-}
-
-// GetVersion returns the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) GetVersion() int {
-	return s.Version
-}
-
-// GetAuth returns the value of Auth.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) GetAuth() string {
-	return s.Auth
-}
-
-// SetVersion sets the value of Version.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) SetVersion(val int) {
-	s.Version = val
-}
-
-// SetAuth sets the value of Auth.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) SetAuth(val string) {
-	s.Auth = val
-}
+type GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions struct{}
 
 // Ref: #/components/schemas/GetRecapResponse
 type GetRecapResponse struct {
@@ -9608,18 +8117,135 @@ func (s *GetRemnawaveHealthResponseResponseRuntimeMetricsItem) SetInstanceType(v
 	s.InstanceType = val
 }
 
-// Ref: #/components/schemas/GetStatsNodesUsersUsageRequest
-type GetStatsNodesUsersUsageRequest struct {
+// Ref: #/components/schemas/GetStatsDigestResponse
+type GetStatsDigestResponse struct {
+	Response GetStatsDigestResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetStatsDigestResponse) GetResponse() GetStatsDigestResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetStatsDigestResponse) SetResponse(val GetStatsDigestResponseResponse) {
+	s.Response = val
+}
+
+func (*GetStatsDigestResponse) systemGetStatsDigestRes() {}
+
+type GetStatsDigestResponseResponse struct {
+	Users       GetStatsDigestResponseResponseUsers       `json:"users"`
+	Traffic     GetStatsDigestResponseResponseTraffic     `json:"traffic"`
+	HwidDevices GetStatsDigestResponseResponseHwidDevices `json:"hwidDevices"`
+}
+
+// GetUsers returns the value of Users.
+func (s *GetStatsDigestResponseResponse) GetUsers() GetStatsDigestResponseResponseUsers {
+	return s.Users
+}
+
+// GetTraffic returns the value of Traffic.
+func (s *GetStatsDigestResponseResponse) GetTraffic() GetStatsDigestResponseResponseTraffic {
+	return s.Traffic
+}
+
+// GetHwidDevices returns the value of HwidDevices.
+func (s *GetStatsDigestResponseResponse) GetHwidDevices() GetStatsDigestResponseResponseHwidDevices {
+	return s.HwidDevices
+}
+
+// SetUsers sets the value of Users.
+func (s *GetStatsDigestResponseResponse) SetUsers(val GetStatsDigestResponseResponseUsers) {
+	s.Users = val
+}
+
+// SetTraffic sets the value of Traffic.
+func (s *GetStatsDigestResponseResponse) SetTraffic(val GetStatsDigestResponseResponseTraffic) {
+	s.Traffic = val
+}
+
+// SetHwidDevices sets the value of HwidDevices.
+func (s *GetStatsDigestResponseResponse) SetHwidDevices(val GetStatsDigestResponseResponseHwidDevices) {
+	s.HwidDevices = val
+}
+
+type GetStatsDigestResponseResponseHwidDevices struct {
+	CreatedCount float64 `json:"createdCount"`
+}
+
+// GetCreatedCount returns the value of CreatedCount.
+func (s *GetStatsDigestResponseResponseHwidDevices) GetCreatedCount() float64 {
+	return s.CreatedCount
+}
+
+// SetCreatedCount sets the value of CreatedCount.
+func (s *GetStatsDigestResponseResponseHwidDevices) SetCreatedCount(val float64) {
+	s.CreatedCount = val
+}
+
+type GetStatsDigestResponseResponseTraffic struct {
+	TotalBytes                 string `json:"totalBytes"`
+	ByUsersCreatedInRangeBytes string `json:"byUsersCreatedInRangeBytes"`
+}
+
+// GetTotalBytes returns the value of TotalBytes.
+func (s *GetStatsDigestResponseResponseTraffic) GetTotalBytes() string {
+	return s.TotalBytes
+}
+
+// GetByUsersCreatedInRangeBytes returns the value of ByUsersCreatedInRangeBytes.
+func (s *GetStatsDigestResponseResponseTraffic) GetByUsersCreatedInRangeBytes() string {
+	return s.ByUsersCreatedInRangeBytes
+}
+
+// SetTotalBytes sets the value of TotalBytes.
+func (s *GetStatsDigestResponseResponseTraffic) SetTotalBytes(val string) {
+	s.TotalBytes = val
+}
+
+// SetByUsersCreatedInRangeBytes sets the value of ByUsersCreatedInRangeBytes.
+func (s *GetStatsDigestResponseResponseTraffic) SetByUsersCreatedInRangeBytes(val string) {
+	s.ByUsersCreatedInRangeBytes = val
+}
+
+type GetStatsDigestResponseResponseUsers struct {
+	CreatedCount float64 `json:"createdCount"`
+	ExpiredCount float64 `json:"expiredCount"`
+}
+
+// GetCreatedCount returns the value of CreatedCount.
+func (s *GetStatsDigestResponseResponseUsers) GetCreatedCount() float64 {
+	return s.CreatedCount
+}
+
+// GetExpiredCount returns the value of ExpiredCount.
+func (s *GetStatsDigestResponseResponseUsers) GetExpiredCount() float64 {
+	return s.ExpiredCount
+}
+
+// SetCreatedCount sets the value of CreatedCount.
+func (s *GetStatsDigestResponseResponseUsers) SetCreatedCount(val float64) {
+	s.CreatedCount = val
+}
+
+// SetExpiredCount sets the value of ExpiredCount.
+func (s *GetStatsDigestResponseResponseUsers) SetExpiredCount(val float64) {
+	s.ExpiredCount = val
+}
+
+// Ref: #/components/schemas/GetStatsNodesUsersUsageBody
+type GetStatsNodesUsersUsageBody struct {
 	NodesUuids []uuid.UUID `json:"nodesUuids"`
 }
 
 // GetNodesUuids returns the value of NodesUuids.
-func (s *GetStatsNodesUsersUsageRequest) GetNodesUuids() []uuid.UUID {
+func (s *GetStatsNodesUsersUsageBody) GetNodesUuids() []uuid.UUID {
 	return s.NodesUuids
 }
 
 // SetNodesUuids sets the value of NodesUuids.
-func (s *GetStatsNodesUsersUsageRequest) SetNodesUuids(val []uuid.UUID) {
+func (s *GetStatsNodesUsersUsageBody) SetNodesUuids(val []uuid.UUID) {
 	s.NodesUuids = val
 }
 
@@ -9893,6 +8519,8 @@ func (s *GetStatusResponse) SetResponse(val GetStatusResponseResponse) {
 	s.Response = val
 }
 
+func (*GetStatusResponse) authGetStatusRes() {}
+
 type GetStatusResponseResponse struct {
 	IsLoginAllowed    bool                                       `json:"isLoginAllowed"`
 	IsRegisterAllowed bool                                       `json:"isRegisterAllowed"`
@@ -10026,52 +8654,24 @@ func (s *GetStatusResponseResponseBranding) SetLogoUrl(val NilString) {
 	s.LogoUrl = val
 }
 
-// GetStatusResponseStatusCode wraps GetStatusResponse with StatusCode.
-type GetStatusResponseStatusCode struct {
-	StatusCode int
-	Response   GetStatusResponse
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *GetStatusResponseStatusCode) GetStatusCode() int {
-	return s.StatusCode
-}
-
-// GetResponse returns the value of Response.
-func (s *GetStatusResponseStatusCode) GetResponse() GetStatusResponse {
-	return s.Response
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *GetStatusResponseStatusCode) SetStatusCode(val int) {
-	s.StatusCode = val
-}
-
-// SetResponse sets the value of Response.
-func (s *GetStatusResponseStatusCode) SetResponse(val GetStatusResponse) {
-	s.Response = val
-}
-
-func (*GetStatusResponseStatusCode) authGetStatusRes() {}
-
-// Ref: #/components/schemas/GetSubpageConfigByShortUuidRequestBody
-type GetSubpageConfigByShortUuidRequestBody struct {
-	RequestHeaders GetSubpageConfigByShortUuidRequestBodyRequestHeaders `json:"requestHeaders"`
+// Ref: #/components/schemas/GetSubpageConfigByShortUuidBody
+type GetSubpageConfigByShortUuidBody struct {
+	RequestHeaders GetSubpageConfigByShortUuidBodyRequestHeaders `json:"requestHeaders"`
 }
 
 // GetRequestHeaders returns the value of RequestHeaders.
-func (s *GetSubpageConfigByShortUuidRequestBody) GetRequestHeaders() GetSubpageConfigByShortUuidRequestBodyRequestHeaders {
+func (s *GetSubpageConfigByShortUuidBody) GetRequestHeaders() GetSubpageConfigByShortUuidBodyRequestHeaders {
 	return s.RequestHeaders
 }
 
 // SetRequestHeaders sets the value of RequestHeaders.
-func (s *GetSubpageConfigByShortUuidRequestBody) SetRequestHeaders(val GetSubpageConfigByShortUuidRequestBodyRequestHeaders) {
+func (s *GetSubpageConfigByShortUuidBody) SetRequestHeaders(val GetSubpageConfigByShortUuidBodyRequestHeaders) {
 	s.RequestHeaders = val
 }
 
-type GetSubpageConfigByShortUuidRequestBodyRequestHeaders map[string]string
+type GetSubpageConfigByShortUuidBodyRequestHeaders map[string]string
 
-func (s *GetSubpageConfigByShortUuidRequestBodyRequestHeaders) init() GetSubpageConfigByShortUuidRequestBodyRequestHeaders {
+func (s *GetSubpageConfigByShortUuidBodyRequestHeaders) init() GetSubpageConfigByShortUuidBodyRequestHeaders {
 	m := *s
 	if m == nil {
 		m = map[string]string{}
@@ -10124,20 +8724,125 @@ func (s *GetSubpageConfigByShortUuidResponseResponse) SetWebpageAllowed(val bool
 
 // Ref: #/components/schemas/GetSubscriptionRequestHistoryResponse
 type GetSubscriptionRequestHistoryResponse struct {
-	Response UserSubscriptionHistory `json:"response"`
+	Response GetSubscriptionRequestHistoryResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetSubscriptionRequestHistoryResponse) GetResponse() UserSubscriptionHistory {
+func (s *GetSubscriptionRequestHistoryResponse) GetResponse() GetSubscriptionRequestHistoryResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetSubscriptionRequestHistoryResponse) SetResponse(val UserSubscriptionHistory) {
+func (s *GetSubscriptionRequestHistoryResponse) SetResponse(val GetSubscriptionRequestHistoryResponseResponse) {
 	s.Response = val
 }
 
 func (*GetSubscriptionRequestHistoryResponse) userSubscriptionRequestHistoryGetSubscriptionRequestHistoryRes() {
+}
+
+type GetSubscriptionRequestHistoryResponseResponse struct {
+	Records []GetSubscriptionRequestHistoryResponseResponseRecordsItem `json:"records"`
+	Total   float64                                                    `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *GetSubscriptionRequestHistoryResponseResponse) GetRecords() []GetSubscriptionRequestHistoryResponseResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *GetSubscriptionRequestHistoryResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *GetSubscriptionRequestHistoryResponseResponse) SetRecords(val []GetSubscriptionRequestHistoryResponseResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetSubscriptionRequestHistoryResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type GetSubscriptionRequestHistoryResponseResponseRecordsItem struct {
+	ID              float64   `json:"id"`
+	UserId          float64   `json:"userId"`
+	SrrResponseType string    `json:"srrResponseType"`
+	SrrRuleName     NilString `json:"srrRuleName"`
+	RequestIp       NilString `json:"requestIp"`
+	UserAgent       NilString `json:"userAgent"`
+	RequestAt       time.Time `json:"requestAt"`
+}
+
+// GetID returns the value of ID.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetID() float64 {
+	return s.ID
+}
+
+// GetUserId returns the value of UserId.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetUserId() float64 {
+	return s.UserId
+}
+
+// GetSrrResponseType returns the value of SrrResponseType.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetSrrResponseType() string {
+	return s.SrrResponseType
+}
+
+// GetSrrRuleName returns the value of SrrRuleName.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetSrrRuleName() NilString {
+	return s.SrrRuleName
+}
+
+// GetRequestIp returns the value of RequestIp.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetRequestIp() NilString {
+	return s.RequestIp
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetUserAgent() NilString {
+	return s.UserAgent
+}
+
+// GetRequestAt returns the value of RequestAt.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) GetRequestAt() time.Time {
+	return s.RequestAt
+}
+
+// SetID sets the value of ID.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetID(val float64) {
+	s.ID = val
+}
+
+// SetUserId sets the value of UserId.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetUserId(val float64) {
+	s.UserId = val
+}
+
+// SetSrrResponseType sets the value of SrrResponseType.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetSrrResponseType(val string) {
+	s.SrrResponseType = val
+}
+
+// SetSrrRuleName sets the value of SrrRuleName.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetSrrRuleName(val NilString) {
+	s.SrrRuleName = val
+}
+
+// SetRequestIp sets the value of RequestIp.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetRequestIp(val NilString) {
+	s.RequestIp = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetUserAgent(val NilString) {
+	s.UserAgent = val
+}
+
+// SetRequestAt sets the value of RequestAt.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetRequestAt(val time.Time) {
+	s.RequestAt = val
 }
 
 // Ref: #/components/schemas/GetSubscriptionRequestHistoryStatsResponse
@@ -10208,6 +8913,48 @@ func (s *GetSubscriptionRequestHistoryStatsResponseResponseHourlyRequestStatsIte
 	s.RequestCount = val
 }
 
+// Ref: #/components/schemas/GetSubscriptionsResponse
+type GetSubscriptionsResponse struct {
+	Response GetSubscriptionsResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetSubscriptionsResponse) GetResponse() GetSubscriptionsResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetSubscriptionsResponse) SetResponse(val GetSubscriptionsResponseResponse) {
+	s.Response = val
+}
+
+func (*GetSubscriptionsResponse) subscriptionsGetAllSubscriptionsRes() {}
+
+type GetSubscriptionsResponseResponse struct {
+	Subscriptions []Subscription `json:"subscriptions"`
+	Total         float64        `json:"total"`
+}
+
+// GetSubscriptions returns the value of Subscriptions.
+func (s *GetSubscriptionsResponseResponse) GetSubscriptions() []Subscription {
+	return s.Subscriptions
+}
+
+// GetTotal returns the value of Total.
+func (s *GetSubscriptionsResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetSubscriptions sets the value of Subscriptions.
+func (s *GetSubscriptionsResponseResponse) SetSubscriptions(val []Subscription) {
+	s.Subscriptions = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetSubscriptionsResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
 // Ref: #/components/schemas/GetTopUsersByHwidDevicesResponse
 type GetTopUsersByHwidDevicesResponse struct {
 	Response GetTopUsersByHwidDevicesResponseResponse `json:"response"`
@@ -10251,15 +8998,9 @@ func (s *GetTopUsersByHwidDevicesResponseResponse) SetTotal(val float64) {
 }
 
 type GetTopUsersByHwidDevicesResponseResponseUsersItem struct {
-	UserUuid     uuid.UUID `json:"userUuid"`
-	ID           float64   `json:"id"`
-	Username     string    `json:"username"`
-	DevicesCount float64   `json:"devicesCount"`
-}
-
-// GetUserUuid returns the value of UserUuid.
-func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+	ID           float64 `json:"id"`
+	Username     string  `json:"username"`
+	DevicesCount float64 `json:"devicesCount"`
 }
 
 // GetID returns the value of ID.
@@ -10277,11 +9018,6 @@ func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) GetDevicesCount() fl
 	return s.DevicesCount
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
-}
-
 // SetID sets the value of ID.
 func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) SetID(val float64) {
 	s.ID = val
@@ -10295,6 +9031,142 @@ func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) SetUsername(val stri
 // SetDevicesCount sets the value of DevicesCount.
 func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) SetDevicesCount(val float64) {
 	s.DevicesCount = val
+}
+
+// Ref: #/components/schemas/GetTorrentBlockerReportsResponse
+type GetTorrentBlockerReportsResponse struct {
+	Response GetTorrentBlockerReportsResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetTorrentBlockerReportsResponse) GetResponse() GetTorrentBlockerReportsResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetTorrentBlockerReportsResponse) SetResponse(val GetTorrentBlockerReportsResponseResponse) {
+	s.Response = val
+}
+
+func (*GetTorrentBlockerReportsResponse) torrentBlockerReportsGetTorrentBlockerReportsRes() {}
+
+type GetTorrentBlockerReportsResponseResponse struct {
+	Records []GetTorrentBlockerReportsResponseResponseRecordsItem `json:"records"`
+	Total   float64                                               `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *GetTorrentBlockerReportsResponseResponse) GetRecords() []GetTorrentBlockerReportsResponseResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *GetTorrentBlockerReportsResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *GetTorrentBlockerReportsResponseResponse) SetRecords(val []GetTorrentBlockerReportsResponseResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetTorrentBlockerReportsResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type GetTorrentBlockerReportsResponseResponseRecordsItem struct {
+	ID        float64                                                 `json:"id"`
+	UserId    float64                                                 `json:"userId"`
+	NodeId    float64                                                 `json:"nodeId"`
+	User      GetTorrentBlockerReportsResponseResponseRecordsItemUser `json:"user"`
+	Node      Node                                                    `json:"node"`
+	Report    ReportItem                                              `json:"report"`
+	CreatedAt time.Time                                               `json:"createdAt"`
+}
+
+// GetID returns the value of ID.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetID() float64 {
+	return s.ID
+}
+
+// GetUserId returns the value of UserId.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetUserId() float64 {
+	return s.UserId
+}
+
+// GetNodeId returns the value of NodeId.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetNodeId() float64 {
+	return s.NodeId
+}
+
+// GetUser returns the value of User.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetUser() GetTorrentBlockerReportsResponseResponseRecordsItemUser {
+	return s.User
+}
+
+// GetNode returns the value of Node.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetNode() Node {
+	return s.Node
+}
+
+// GetReport returns the value of Report.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetReport() ReportItem {
+	return s.Report
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// SetID sets the value of ID.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetID(val float64) {
+	s.ID = val
+}
+
+// SetUserId sets the value of UserId.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetUserId(val float64) {
+	s.UserId = val
+}
+
+// SetNodeId sets the value of NodeId.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetNodeId(val float64) {
+	s.NodeId = val
+}
+
+// SetUser sets the value of User.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetUser(val GetTorrentBlockerReportsResponseResponseRecordsItemUser) {
+	s.User = val
+}
+
+// SetNode sets the value of Node.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetNode(val Node) {
+	s.Node = val
+}
+
+// SetReport sets the value of Report.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetReport(val ReportItem) {
+	s.Report = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+type GetTorrentBlockerReportsResponseResponseRecordsItemUser struct {
+	Username string `json:"username"`
+}
+
+// GetUsername returns the value of Username.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItemUser) GetUsername() string {
+	return s.Username
+}
+
+// SetUsername sets the value of Username.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItemUser) SetUsername(val string) {
+	s.Username = val
 }
 
 // Ref: #/components/schemas/GetTorrentBlockerReportsStatsResponse
@@ -10399,15 +9271,15 @@ func (s *GetTorrentBlockerReportsStatsResponseResponseStats) SetReportsLast24Hou
 }
 
 type GetTorrentBlockerReportsStatsResponseResponseTopUsersItem struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Color    string    `json:"color"`
-	Username string    `json:"username"`
-	Total    float64   `json:"total"`
+	UserId   float64 `json:"userId"`
+	Color    string  `json:"color"`
+	Username string  `json:"username"`
+	Total    float64 `json:"total"`
 }
 
-// GetUUID returns the value of UUID.
-func (s *GetTorrentBlockerReportsStatsResponseResponseTopUsersItem) GetUUID() uuid.UUID {
-	return s.UUID
+// GetUserId returns the value of UserId.
+func (s *GetTorrentBlockerReportsStatsResponseResponseTopUsersItem) GetUserId() float64 {
+	return s.UserId
 }
 
 // GetColor returns the value of Color.
@@ -10425,9 +9297,9 @@ func (s *GetTorrentBlockerReportsStatsResponseResponseTopUsersItem) GetTotal() f
 	return s.Total
 }
 
-// SetUUID sets the value of UUID.
-func (s *GetTorrentBlockerReportsStatsResponseResponseTopUsersItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
+// SetUserId sets the value of UserId.
+func (s *GetTorrentBlockerReportsStatsResponseResponseTopUsersItem) SetUserId(val float64) {
+	s.UserId = val
 }
 
 // SetColor sets the value of Color.
@@ -10463,13 +9335,13 @@ func (s *GetUserAccessibleNodesResponse) SetResponse(val GetUserAccessibleNodesR
 func (*GetUserAccessibleNodesResponse) usersGetUserAccessibleNodesRes() {}
 
 type GetUserAccessibleNodesResponseResponse struct {
-	UserUuid    uuid.UUID                                               `json:"userUuid"`
+	UserId      float64                                                 `json:"userId"`
 	ActiveNodes []GetUserAccessibleNodesResponseResponseActiveNodesItem `json:"activeNodes"`
 }
 
-// GetUserUuid returns the value of UserUuid.
-func (s *GetUserAccessibleNodesResponseResponse) GetUserUuid() uuid.UUID {
-	return s.UserUuid
+// GetUserId returns the value of UserId.
+func (s *GetUserAccessibleNodesResponseResponse) GetUserId() float64 {
+	return s.UserId
 }
 
 // GetActiveNodes returns the value of ActiveNodes.
@@ -10477,9 +9349,9 @@ func (s *GetUserAccessibleNodesResponseResponse) GetActiveNodes() []GetUserAcces
 	return s.ActiveNodes
 }
 
-// SetUserUuid sets the value of UserUuid.
-func (s *GetUserAccessibleNodesResponseResponse) SetUserUuid(val uuid.UUID) {
-	s.UserUuid = val
+// SetUserId sets the value of UserId.
+func (s *GetUserAccessibleNodesResponseResponse) SetUserId(val float64) {
+	s.UserId = val
 }
 
 // SetActiveNodes sets the value of ActiveNodes.
@@ -10583,20 +9455,167 @@ func (s *GetUserAccessibleNodesResponseResponseActiveNodesItemActiveSquadsItem) 
 
 // Ref: #/components/schemas/GetUserSubscriptionRequestHistoryResponse
 type GetUserSubscriptionRequestHistoryResponse struct {
-	Response UserSubscriptionHistory `json:"response"`
+	Response GetUserSubscriptionRequestHistoryResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *GetUserSubscriptionRequestHistoryResponse) GetResponse() UserSubscriptionHistory {
+func (s *GetUserSubscriptionRequestHistoryResponse) GetResponse() GetUserSubscriptionRequestHistoryResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *GetUserSubscriptionRequestHistoryResponse) SetResponse(val UserSubscriptionHistory) {
+func (s *GetUserSubscriptionRequestHistoryResponse) SetResponse(val GetUserSubscriptionRequestHistoryResponseResponse) {
 	s.Response = val
 }
 
 func (*GetUserSubscriptionRequestHistoryResponse) usersGetUserSubscriptionRequestHistoryRes() {}
+
+type GetUserSubscriptionRequestHistoryResponseResponse struct {
+	Total   float64                                                        `json:"total"`
+	Records []GetUserSubscriptionRequestHistoryResponseResponseRecordsItem `json:"records"`
+}
+
+// GetTotal returns the value of Total.
+func (s *GetUserSubscriptionRequestHistoryResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetRecords returns the value of Records.
+func (s *GetUserSubscriptionRequestHistoryResponseResponse) GetRecords() []GetUserSubscriptionRequestHistoryResponseResponseRecordsItem {
+	return s.Records
+}
+
+// SetTotal sets the value of Total.
+func (s *GetUserSubscriptionRequestHistoryResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetRecords sets the value of Records.
+func (s *GetUserSubscriptionRequestHistoryResponseResponse) SetRecords(val []GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) {
+	s.Records = val
+}
+
+type GetUserSubscriptionRequestHistoryResponseResponseRecordsItem struct {
+	ID              float64      `json:"id"`
+	UserId          float64      `json:"userId"`
+	RequestAt       time.Time    `json:"requestAt"`
+	SrrResponseType string       `json:"srrResponseType"`
+	RequestIp       OptNilString `json:"requestIp"`
+	UserAgent       OptNilString `json:"userAgent"`
+	SrrRuleName     OptNilString `json:"srrRuleName"`
+}
+
+// GetID returns the value of ID.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetID() float64 {
+	return s.ID
+}
+
+// GetUserId returns the value of UserId.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetUserId() float64 {
+	return s.UserId
+}
+
+// GetRequestAt returns the value of RequestAt.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetRequestAt() time.Time {
+	return s.RequestAt
+}
+
+// GetSrrResponseType returns the value of SrrResponseType.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetSrrResponseType() string {
+	return s.SrrResponseType
+}
+
+// GetRequestIp returns the value of RequestIp.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetRequestIp() OptNilString {
+	return s.RequestIp
+}
+
+// GetUserAgent returns the value of UserAgent.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetUserAgent() OptNilString {
+	return s.UserAgent
+}
+
+// GetSrrRuleName returns the value of SrrRuleName.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) GetSrrRuleName() OptNilString {
+	return s.SrrRuleName
+}
+
+// SetID sets the value of ID.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetID(val float64) {
+	s.ID = val
+}
+
+// SetUserId sets the value of UserId.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetUserId(val float64) {
+	s.UserId = val
+}
+
+// SetRequestAt sets the value of RequestAt.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetRequestAt(val time.Time) {
+	s.RequestAt = val
+}
+
+// SetSrrResponseType sets the value of SrrResponseType.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetSrrResponseType(val string) {
+	s.SrrResponseType = val
+}
+
+// SetRequestIp sets the value of RequestIp.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetRequestIp(val OptNilString) {
+	s.RequestIp = val
+}
+
+// SetUserAgent sets the value of UserAgent.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetUserAgent(val OptNilString) {
+	s.UserAgent = val
+}
+
+// SetSrrRuleName sets the value of SrrRuleName.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetSrrRuleName(val OptNilString) {
+	s.SrrRuleName = val
+}
+
+// Ref: #/components/schemas/GetUsersResponse
+type GetUsersResponse struct {
+	Response GetUsersResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *GetUsersResponse) GetResponse() GetUsersResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *GetUsersResponse) SetResponse(val GetUsersResponseResponse) {
+	s.Response = val
+}
+
+func (*GetUsersResponse) usersGetUsersRes() {}
+
+type GetUsersResponseResponse struct {
+	Users []UserItemInfo `json:"users"`
+	Total float64        `json:"total"`
+}
+
+// GetUsers returns the value of Users.
+func (s *GetUsersResponseResponse) GetUsers() []UserItemInfo {
+	return s.Users
+}
+
+// GetTotal returns the value of Total.
+func (s *GetUsersResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetUsers sets the value of Users.
+func (s *GetUsersResponseResponse) SetUsers(val []UserItemInfo) {
+	s.Users = val
+}
+
+// SetTotal sets the value of Total.
+func (s *GetUsersResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
 
 // Ref: #/components/schemas/GetUsersStreamResponse
 type GetUsersStreamResponse struct {
@@ -10701,13 +9720,9 @@ func (s *Github) SetAllowedEmails(val []string) {
 	s.AllowedEmails = val
 }
 
-// {"markdownDescription":"**Key** and **value** of the response header will be added to the response.
-// "}.
 // Ref: #/components/schemas/Header
 type Header struct {
-	// {"markdownDescription":"Key of the response header. Must comply with RFC 7230."}.
-	Key string `json:"key"`
-	// {"markdownDescription":"Value of the response header. "}.
+	Key   string `json:"key"`
 	Value string `json:"value"`
 }
 
@@ -11335,27 +10350,6 @@ func (s *HostItemSecurityLayer) UnmarshalText(data []byte) error {
 	}
 }
 
-// Ref: #/components/schemas/HostListResponse
-type HostListResponse struct {
-	Response []HostItem `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *HostListResponse) GetResponse() []HostItem {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *HostListResponse) SetResponse(val []HostItem) {
-	s.Response = val
-}
-
-func (*HostListResponse) hostsBulkActionsDeleteHostsRes()    {}
-func (*HostListResponse) hostsBulkActionsDisableHostsRes()   {}
-func (*HostListResponse) hostsBulkActionsEnableHostsRes()    {}
-func (*HostListResponse) hostsBulkActionsSetPortToHostsRes() {}
-func (*HostListResponse) hostsGetAllHostsRes()               {}
-
 // Ref: #/components/schemas/HostOverride
 type HostOverride struct {
 	ServerDescription OptNilString `json:"serverDescription"`
@@ -11401,18 +10395,84 @@ func (*HostResponse) hostsCreateHostRes() {}
 func (*HostResponse) hostsGetOneHostRes() {}
 func (*HostResponse) hostsUpdateHostRes() {}
 
+// Ref: #/components/schemas/HostsBodyBulkRequest
+type HostsBodyBulkRequest struct {
+	Uuids []uuid.UUID `json:"uuids"`
+}
+
+// GetUuids returns the value of Uuids.
+func (s *HostsBodyBulkRequest) GetUuids() []uuid.UUID {
+	return s.Uuids
+}
+
+// SetUuids sets the value of Uuids.
+func (s *HostsBodyBulkRequest) SetUuids(val []uuid.UUID) {
+	s.Uuids = val
+}
+
+// HostsBulkActionsDeleteHostsNoContent is response for HostsBulkActionsDeleteHosts operation.
+type HostsBulkActionsDeleteHostsNoContent struct{}
+
+func (*HostsBulkActionsDeleteHostsNoContent) hostsBulkActionsDeleteHostsRes() {}
+
+// HostsBulkActionsDisableHostsNoContent is response for HostsBulkActionsDisableHosts operation.
+type HostsBulkActionsDisableHostsNoContent struct{}
+
+func (*HostsBulkActionsDisableHostsNoContent) hostsBulkActionsDisableHostsRes() {}
+
+// HostsBulkActionsEnableHostsNoContent is response for HostsBulkActionsEnableHosts operation.
+type HostsBulkActionsEnableHostsNoContent struct{}
+
+func (*HostsBulkActionsEnableHostsNoContent) hostsBulkActionsEnableHostsRes() {}
+
+// HostsBulkActionsSetPortToHostsNoContent is response for HostsBulkActionsSetPortToHosts operation.
+type HostsBulkActionsSetPortToHostsNoContent struct{}
+
+func (*HostsBulkActionsSetPortToHostsNoContent) hostsBulkActionsSetPortToHostsRes() {}
+
+// HostsDeleteHostNoContent is response for HostsDeleteHost operation.
+type HostsDeleteHostNoContent struct{}
+
+func (*HostsDeleteHostNoContent) hostsDeleteHostRes() {}
+
+// Ref: #/components/schemas/HwidDevicesQuery
+type HwidDevicesQuery struct {
+	Devices []Device `json:"devices"`
+	Total   float64  `json:"total"`
+}
+
+// GetDevices returns the value of Devices.
+func (s *HwidDevicesQuery) GetDevices() []Device {
+	return s.Devices
+}
+
+// GetTotal returns the value of Total.
+func (s *HwidDevicesQuery) GetTotal() float64 {
+	return s.Total
+}
+
+// SetDevices sets the value of Devices.
+func (s *HwidDevicesQuery) SetDevices(val []Device) {
+	s.Devices = val
+}
+
+// SetTotal sets the value of Total.
+func (s *HwidDevicesQuery) SetTotal(val float64) {
+	s.Total = val
+}
+
 // Ref: #/components/schemas/HwidDevicesResponse
 type HwidDevicesResponse struct {
-	Response AllHwidDevices `json:"response"`
+	Response HwidDevicesQuery `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *HwidDevicesResponse) GetResponse() AllHwidDevices {
+func (s *HwidDevicesResponse) GetResponse() HwidDevicesQuery {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *HwidDevicesResponse) SetResponse(val AllHwidDevices) {
+func (s *HwidDevicesResponse) SetResponse(val HwidDevicesQuery) {
 	s.Response = val
 }
 
@@ -11550,6 +10610,32 @@ func (s *Inbound) SetRawInbound(val jx.Raw) {
 	s.RawInbound = val
 }
 
+// Ref: #/components/schemas/Inbound2
+type Inbound2 struct {
+	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
+	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
+}
+
+// GetConfigProfileUuid returns the value of ConfigProfileUuid.
+func (s *Inbound2) GetConfigProfileUuid() uuid.UUID {
+	return s.ConfigProfileUuid
+}
+
+// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
+func (s *Inbound2) GetConfigProfileInboundUuid() uuid.UUID {
+	return s.ConfigProfileInboundUuid
+}
+
+// SetConfigProfileUuid sets the value of ConfigProfileUuid.
+func (s *Inbound2) SetConfigProfileUuid(val uuid.UUID) {
+	s.ConfigProfileUuid = val
+}
+
+// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
+func (s *Inbound2) SetConfigProfileInboundUuid(val uuid.UUID) {
+	s.ConfigProfileInboundUuid = val
+}
+
 // Ref: #/components/schemas/InboundItem
 type InboundItem struct {
 	ConfigProfileUuid        NilUUID `json:"configProfileUuid"`
@@ -11573,32 +10659,6 @@ func (s *InboundItem) SetConfigProfileUuid(val NilUUID) {
 
 // SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
 func (s *InboundItem) SetConfigProfileInboundUuid(val NilUUID) {
-	s.ConfigProfileInboundUuid = val
-}
-
-// Ref: #/components/schemas/InboundRef
-type InboundRef struct {
-	ConfigProfileUuid        uuid.UUID `json:"configProfileUuid"`
-	ConfigProfileInboundUuid uuid.UUID `json:"configProfileInboundUuid"`
-}
-
-// GetConfigProfileUuid returns the value of ConfigProfileUuid.
-func (s *InboundRef) GetConfigProfileUuid() uuid.UUID {
-	return s.ConfigProfileUuid
-}
-
-// GetConfigProfileInboundUuid returns the value of ConfigProfileInboundUuid.
-func (s *InboundRef) GetConfigProfileInboundUuid() uuid.UUID {
-	return s.ConfigProfileInboundUuid
-}
-
-// SetConfigProfileUuid sets the value of ConfigProfileUuid.
-func (s *InboundRef) SetConfigProfileUuid(val uuid.UUID) {
-	s.ConfigProfileUuid = val
-}
-
-// SetConfigProfileInboundUuid sets the value of ConfigProfileInboundUuid.
-func (s *InboundRef) SetConfigProfileInboundUuid(val uuid.UUID) {
 	s.ConfigProfileInboundUuid = val
 }
 
@@ -11784,6 +10844,158 @@ func (s *InboundsStat) SetDownload(val string) {
 	s.Download = val
 }
 
+// InfraBillingDeleteInfraBillingNodeNoContent is response for InfraBillingDeleteInfraBillingNode operation.
+type InfraBillingDeleteInfraBillingNodeNoContent struct{}
+
+func (*InfraBillingDeleteInfraBillingNodeNoContent) infraBillingDeleteInfraBillingNodeRes() {}
+
+// InfraBillingDeleteInfraBillingRecordNoContent is response for InfraBillingDeleteInfraBillingRecord operation.
+type InfraBillingDeleteInfraBillingRecordNoContent struct{}
+
+func (*InfraBillingDeleteInfraBillingRecordNoContent) infraBillingDeleteInfraBillingRecordRes() {}
+
+// InfraBillingDelteInfraProviderNoContent is response for InfraBillingDelteInfraProvider operation.
+type InfraBillingDelteInfraProviderNoContent struct{}
+
+func (*InfraBillingDelteInfraProviderNoContent) infraBillingDelteInfraProviderRes() {}
+
+// Ref: #/components/schemas/InfraBillingRecordResponseResponse
+type InfraBillingRecordResponseResponse struct {
+	Response InfraBillingRecordResponseResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *InfraBillingRecordResponseResponse) GetResponse() InfraBillingRecordResponseResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *InfraBillingRecordResponseResponse) SetResponse(val InfraBillingRecordResponseResponseResponse) {
+	s.Response = val
+}
+
+func (*InfraBillingRecordResponseResponse) infraBillingCreateInfraBillingRecordRes() {}
+func (*InfraBillingRecordResponseResponse) infraBillingGetInfraBillingRecordsRes()   {}
+
+type InfraBillingRecordResponseResponseResponse struct {
+	Records []InfraBillingRecordResponseResponseResponseRecordsItem `json:"records"`
+	Total   float64                                                 `json:"total"`
+}
+
+// GetRecords returns the value of Records.
+func (s *InfraBillingRecordResponseResponseResponse) GetRecords() []InfraBillingRecordResponseResponseResponseRecordsItem {
+	return s.Records
+}
+
+// GetTotal returns the value of Total.
+func (s *InfraBillingRecordResponseResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// SetRecords sets the value of Records.
+func (s *InfraBillingRecordResponseResponseResponse) SetRecords(val []InfraBillingRecordResponseResponseResponseRecordsItem) {
+	s.Records = val
+}
+
+// SetTotal sets the value of Total.
+func (s *InfraBillingRecordResponseResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+type InfraBillingRecordResponseResponseResponseRecordsItem struct {
+	UUID         uuid.UUID                                                     `json:"uuid"`
+	ProviderUuid uuid.UUID                                                     `json:"providerUuid"`
+	Amount       float64                                                       `json:"amount"`
+	BilledAt     time.Time                                                     `json:"billedAt"`
+	Provider     InfraBillingRecordResponseResponseResponseRecordsItemProvider `json:"provider"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) GetProviderUuid() uuid.UUID {
+	return s.ProviderUuid
+}
+
+// GetAmount returns the value of Amount.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) GetAmount() float64 {
+	return s.Amount
+}
+
+// GetBilledAt returns the value of BilledAt.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) GetBilledAt() time.Time {
+	return s.BilledAt
+}
+
+// GetProvider returns the value of Provider.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) GetProvider() InfraBillingRecordResponseResponseResponseRecordsItemProvider {
+	return s.Provider
+}
+
+// SetUUID sets the value of UUID.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) SetProviderUuid(val uuid.UUID) {
+	s.ProviderUuid = val
+}
+
+// SetAmount sets the value of Amount.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) SetAmount(val float64) {
+	s.Amount = val
+}
+
+// SetBilledAt sets the value of BilledAt.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) SetBilledAt(val time.Time) {
+	s.BilledAt = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) SetProvider(val InfraBillingRecordResponseResponseResponseRecordsItemProvider) {
+	s.Provider = val
+}
+
+type InfraBillingRecordResponseResponseResponseRecordsItemProvider struct {
+	UUID        uuid.UUID `json:"uuid"`
+	Name        string    `json:"name"`
+	FaviconLink NilString `json:"faviconLink"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) GetName() string {
+	return s.Name
+}
+
+// GetFaviconLink returns the value of FaviconLink.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) GetFaviconLink() NilString {
+	return s.FaviconLink
+}
+
+// SetUUID sets the value of UUID.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) SetName(val string) {
+	s.Name = val
+}
+
+// SetFaviconLink sets the value of FaviconLink.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) SetFaviconLink(val NilString) {
+	s.FaviconLink = val
+}
+
 // Ref: #/components/schemas/InfraProviderResponseResponse
 type InfraProviderResponseResponse struct {
 	Response Provider `json:"response"`
@@ -11799,9 +11011,9 @@ func (s *InfraProviderResponseResponse) SetResponse(val Provider) {
 	s.Response = val
 }
 
-func (*InfraProviderResponseResponse) infraBillingCreateInfraProviderRes()    {}
-func (*InfraProviderResponseResponse) infraBillingGetInfraProviderByUuidRes() {}
-func (*InfraProviderResponseResponse) infraBillingUpdateInfraProviderRes()    {}
+func (*InfraProviderResponseResponse) infraBillingCreateInfraProviderRes() {}
+func (*InfraProviderResponseResponse) infraBillingGetInfraProviderRes()    {}
+func (*InfraProviderResponseResponse) infraBillingUpdateInfraProviderRes() {}
 
 // Ref: #/components/schemas/InfraProvidersDetail
 type InfraProvidersDetail struct {
@@ -11936,9 +11148,9 @@ func (s *InternalServerError) SetErrorCode(val OptString) {
 	s.ErrorCode = val
 }
 
-func (*InternalServerError) apiTokensCreateRes()                                                  {}
-func (*InternalServerError) apiTokensDeleteRes()                                                  {}
-func (*InternalServerError) apiTokensFindAllRes()                                                 {}
+func (*InternalServerError) apiTokensCreateApiTokenRes()                                          {}
+func (*InternalServerError) apiTokensDeleteApiTokenRes()                                          {}
+func (*InternalServerError) apiTokensGetApiTokensRes()                                            {}
 func (*InternalServerError) apiTokensGetScopesRes()                                               {}
 func (*InternalServerError) authGetStatusRes()                                                    {}
 func (*InternalServerError) authLoginRes()                                                        {}
@@ -11947,11 +11159,10 @@ func (*InternalServerError) authOauth2CallbackRes()                             
 func (*InternalServerError) authPasskeyAuthenticationOptionsRes()                                 {}
 func (*InternalServerError) authPasskeyAuthenticationVerifyRes()                                  {}
 func (*InternalServerError) authRegisterRes()                                                     {}
-func (*InternalServerError) bandwidthStatsNodesGetNodeUserUsageRes()                              {}
+func (*InternalServerError) bandwidthStatsNodesGetNodeUsageRes()                                  {}
 func (*InternalServerError) bandwidthStatsNodesGetStatsNodeUsersUsageRes()                        {}
 func (*InternalServerError) bandwidthStatsNodesGetStatsNodesUsersUsageRes()                       {}
 func (*InternalServerError) bandwidthStatsUsersGetStatsNodesUsageRes()                            {}
-func (*InternalServerError) bandwidthStatsUsersGetUserUsageByRangeRes()                           {}
 func (*InternalServerError) configProfileCreateConfigProfileRes()                                 {}
 func (*InternalServerError) configProfileDeleteConfigProfileByUuidRes()                           {}
 func (*InternalServerError) configProfileGetAllInboundsRes()                                      {}
@@ -11961,6 +11172,11 @@ func (*InternalServerError) configProfileGetConfigProfilesRes()                 
 func (*InternalServerError) configProfileGetInboundsByProfileUuidRes()                            {}
 func (*InternalServerError) configProfileReorderConfigProfilesRes()                               {}
 func (*InternalServerError) configProfileUpdateConfigProfileRes()                                 {}
+func (*InternalServerError) connectionsConnectionsByNodeRes()                                     {}
+func (*InternalServerError) connectionsConnectionsByNodeResultRes()                               {}
+func (*InternalServerError) connectionsConnectionsByUserRes()                                     {}
+func (*InternalServerError) connectionsConnectionsByUserResultRes()                               {}
+func (*InternalServerError) connectionsDropConnectionsRes()                                       {}
 func (*InternalServerError) externalSquadAddUsersToExternalSquadRes()                             {}
 func (*InternalServerError) externalSquadCreateExternalSquadRes()                                 {}
 func (*InternalServerError) externalSquadDeleteExternalSquadRes()                                 {}
@@ -11975,8 +11191,8 @@ func (*InternalServerError) hostsBulkActionsEnableHostsRes()                    
 func (*InternalServerError) hostsBulkActionsSetPortToHostsRes()                                   {}
 func (*InternalServerError) hostsCreateHostRes()                                                  {}
 func (*InternalServerError) hostsDeleteHostRes()                                                  {}
-func (*InternalServerError) hostsGetAllHostTagsRes()                                              {}
-func (*InternalServerError) hostsGetAllHostsRes()                                                 {}
+func (*InternalServerError) hostsGetHostsRes()                                                    {}
+func (*InternalServerError) hostsGetHostsTagsRes()                                                {}
 func (*InternalServerError) hostsGetOneHostRes()                                                  {}
 func (*InternalServerError) hostsReorderHostsRes()                                                {}
 func (*InternalServerError) hostsUpdateHostRes()                                                  {}
@@ -11987,32 +11203,32 @@ func (*InternalServerError) hwidUserDevicesGetAllUsersRes()                     
 func (*InternalServerError) hwidUserDevicesGetHwidDevicesStatsRes()                               {}
 func (*InternalServerError) hwidUserDevicesGetTopUsersByHwidDevicesRes()                          {}
 func (*InternalServerError) hwidUserDevicesGetUserHwidDevicesRes()                                {}
-func (*InternalServerError) infraBillingCreateInfraBillingHistoryRecordRes()                      {}
 func (*InternalServerError) infraBillingCreateInfraBillingNodeRes()                               {}
+func (*InternalServerError) infraBillingCreateInfraBillingRecordRes()                             {}
 func (*InternalServerError) infraBillingCreateInfraProviderRes()                                  {}
-func (*InternalServerError) infraBillingDeleteInfraBillingHistoryRecordByUuidRes()                {}
-func (*InternalServerError) infraBillingDeleteInfraBillingNodeByUuidRes()                         {}
-func (*InternalServerError) infraBillingDeleteInfraProviderByUuidRes()                            {}
+func (*InternalServerError) infraBillingDeleteInfraBillingNodeRes()                               {}
+func (*InternalServerError) infraBillingDeleteInfraBillingRecordRes()                             {}
+func (*InternalServerError) infraBillingDelteInfraProviderRes()                                   {}
 func (*InternalServerError) infraBillingGetBillingNodesRes()                                      {}
-func (*InternalServerError) infraBillingGetInfraBillingHistoryRecordsRes()                        {}
-func (*InternalServerError) infraBillingGetInfraProviderByUuidRes()                               {}
+func (*InternalServerError) infraBillingGetInfraBillingRecordsRes()                               {}
+func (*InternalServerError) infraBillingGetInfraProviderRes()                                     {}
 func (*InternalServerError) infraBillingGetInfraProvidersRes()                                    {}
 func (*InternalServerError) infraBillingUpdateInfraBillingNodeRes()                               {}
 func (*InternalServerError) infraBillingUpdateInfraProviderRes()                                  {}
+func (*InternalServerError) internalSquadAddManyUsersToInternalSquadRes()                         {}
 func (*InternalServerError) internalSquadAddUsersToInternalSquadRes()                             {}
 func (*InternalServerError) internalSquadCreateInternalSquadRes()                                 {}
 func (*InternalServerError) internalSquadDeleteInternalSquadRes()                                 {}
 func (*InternalServerError) internalSquadGetInternalSquadAccessibleNodesRes()                     {}
 func (*InternalServerError) internalSquadGetInternalSquadByUuidRes()                              {}
+func (*InternalServerError) internalSquadGetInternalSquadUsageRes()                               {}
 func (*InternalServerError) internalSquadGetInternalSquadsRes()                                   {}
+func (*InternalServerError) internalSquadRemoveManyUsersFromInternalSquadRes()                    {}
 func (*InternalServerError) internalSquadRemoveUsersFromInternalSquadRes()                        {}
 func (*InternalServerError) internalSquadReorderInternalSquadsRes()                               {}
+func (*InternalServerError) internalSquadStatsGetInternalSquadUsageRes()                          {}
+func (*InternalServerError) internalSquadStatsGetInternalSquadUserUsageRes()                      {}
 func (*InternalServerError) internalSquadUpdateInternalSquadRes()                                 {}
-func (*InternalServerError) ipControlDropConnectionsRes()                                         {}
-func (*InternalServerError) ipControlFetchUserIpsRes()                                            {}
-func (*InternalServerError) ipControlFetchUsersIpsRes()                                           {}
-func (*InternalServerError) ipControlGetFetchIpsResultRes()                                       {}
-func (*InternalServerError) ipControlGetFetchUsersIpsResultRes()                                  {}
 func (*InternalServerError) keygenGenerateKeyRes()                                                {}
 func (*InternalServerError) metadataGetNodeMetadataRes()                                          {}
 func (*InternalServerError) metadataGetUserMetadataRes()                                          {}
@@ -12032,9 +11248,9 @@ func (*InternalServerError) nodesCreateNodeRes()                                
 func (*InternalServerError) nodesDeleteNodeRes()                                                  {}
 func (*InternalServerError) nodesDisableNodeRes()                                                 {}
 func (*InternalServerError) nodesEnableNodeRes()                                                  {}
-func (*InternalServerError) nodesGetAllNodesRes()                                                 {}
-func (*InternalServerError) nodesGetAllNodesTagsRes()                                             {}
-func (*InternalServerError) nodesGetOneNodeRes()                                                  {}
+func (*InternalServerError) nodesGetNodeRes()                                                     {}
+func (*InternalServerError) nodesGetNodesRes()                                                    {}
+func (*InternalServerError) nodesGetNodesTagsRes()                                                {}
 func (*InternalServerError) nodesProfileModificationRes()                                         {}
 func (*InternalServerError) nodesReorderNodesRes()                                                {}
 func (*InternalServerError) nodesResetNodeTrafficRes()                                            {}
@@ -12053,7 +11269,9 @@ func (*InternalServerError) snippetsCreateSnippetRes()                          
 func (*InternalServerError) snippetsDeleteSnippetByNameRes()                                      {}
 func (*InternalServerError) snippetsGetSnippetsRes()                                              {}
 func (*InternalServerError) snippetsUpdateSnippetRes()                                            {}
+func (*InternalServerError) subscriptionGetSubscriptionByClientTypeRes()                          {}
 func (*InternalServerError) subscriptionGetSubscriptionInfoByShortUuidRes()                       {}
+func (*InternalServerError) subscriptionGetSubscriptionRes()                                      {}
 func (*InternalServerError) subscriptionPageConfigCloneSubscriptionPageConfigRes()                {}
 func (*InternalServerError) subscriptionPageConfigCreateConfigRes()                               {}
 func (*InternalServerError) subscriptionPageConfigDeleteConfigRes()                               {}
@@ -12070,7 +11288,7 @@ func (*InternalServerError) subscriptionTemplateGetTemplateByUuidRes()          
 func (*InternalServerError) subscriptionTemplateReorderSubscriptionTemplatesRes()                 {}
 func (*InternalServerError) subscriptionTemplateUpdateTemplateRes()                               {}
 func (*InternalServerError) subscriptionsGetAllSubscriptionsRes()                                 {}
-func (*InternalServerError) subscriptionsGetConnectionKeysByUuidRes()                             {}
+func (*InternalServerError) subscriptionsGetConnectionKeysByUserIdRes()                           {}
 func (*InternalServerError) subscriptionsGetRawSubscriptionByShortUuidRes()                       {}
 func (*InternalServerError) subscriptionsGetSubpageConfigByShortUuidRes()                         {}
 func (*InternalServerError) subscriptionsGetSubscriptionByShortUuidProtectedRes()                 {}
@@ -12078,11 +11296,14 @@ func (*InternalServerError) subscriptionsGetSubscriptionByUsernameRes()         
 func (*InternalServerError) subscriptionsGetSubscriptionByUuidRes()                               {}
 func (*InternalServerError) systemDebugSrrMatcherRes()                                            {}
 func (*InternalServerError) systemGetBandwidthStatsRes()                                          {}
+func (*InternalServerError) systemGetConfigurationRes()                                           {}
+func (*InternalServerError) systemGetHttpStatsRes()                                               {}
 func (*InternalServerError) systemGetMetadataRes()                                                {}
 func (*InternalServerError) systemGetNodesMetricsRes()                                            {}
 func (*InternalServerError) systemGetNodesStatisticsRes()                                         {}
 func (*InternalServerError) systemGetRecapRes()                                                   {}
 func (*InternalServerError) systemGetRemnawaveHealthRes()                                         {}
+func (*InternalServerError) systemGetStatsDigestRes()                                             {}
 func (*InternalServerError) systemGetStatsRes()                                                   {}
 func (*InternalServerError) systemGetX25519KeypairsRes()                                          {}
 func (*InternalServerError) torrentBlockerReportsGetTorrentBlockerReportsRes()                    {}
@@ -12104,18 +11325,15 @@ func (*InternalServerError) usersCreateUserRes()                                
 func (*InternalServerError) usersDeleteUserRes()                                                  {}
 func (*InternalServerError) usersDisableUserRes()                                                 {}
 func (*InternalServerError) usersEnableUserRes()                                                  {}
-func (*InternalServerError) usersGetAllTagsRes()                                                  {}
-func (*InternalServerError) usersGetAllUsersRes()                                                 {}
+func (*InternalServerError) usersExtendUserExpirationDateRes()                                    {}
 func (*InternalServerError) usersGetUserAccessibleNodesRes()                                      {}
 func (*InternalServerError) usersGetUserByIdRes()                                                 {}
 func (*InternalServerError) usersGetUserByShortUuidRes()                                          {}
-func (*InternalServerError) usersGetUserByTelegramIdRes()                                         {}
 func (*InternalServerError) usersGetUserByUsernameRes()                                           {}
-func (*InternalServerError) usersGetUserByUuidRes()                                               {}
 func (*InternalServerError) usersGetUserSubscriptionRequestHistoryRes()                           {}
-func (*InternalServerError) usersGetUsersByEmailRes()                                             {}
-func (*InternalServerError) usersGetUsersByTagRes()                                               {}
+func (*InternalServerError) usersGetUsersRes()                                                    {}
 func (*InternalServerError) usersGetUsersStreamRes()                                              {}
+func (*InternalServerError) usersGetUsersTagsRes()                                                {}
 func (*InternalServerError) usersResetUserTrafficRes()                                            {}
 func (*InternalServerError) usersResolveUserRes()                                                 {}
 func (*InternalServerError) usersRevokeUserSubscriptionRes()                                      {}
@@ -12202,10 +11420,53 @@ func (s *InternalSquad) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
+// InternalSquadAddManyUsersToInternalSquadAccepted is response for InternalSquadAddManyUsersToInternalSquad operation.
+type InternalSquadAddManyUsersToInternalSquadAccepted struct{}
+
+func (*InternalSquadAddManyUsersToInternalSquadAccepted) internalSquadAddManyUsersToInternalSquadRes() {
+}
+
+// InternalSquadAddUsersToInternalSquadAccepted is response for InternalSquadAddUsersToInternalSquad operation.
+type InternalSquadAddUsersToInternalSquadAccepted struct{}
+
+func (*InternalSquadAddUsersToInternalSquadAccepted) internalSquadAddUsersToInternalSquadRes() {}
+
+// Ref: #/components/schemas/InternalSquadBodyRequest
+type InternalSquadBodyRequest struct {
+	UserIds []float64 `json:"userIds"`
+}
+
+// GetUserIds returns the value of UserIds.
+func (s *InternalSquadBodyRequest) GetUserIds() []float64 {
+	return s.UserIds
+}
+
+// SetUserIds sets the value of UserIds.
+func (s *InternalSquadBodyRequest) SetUserIds(val []float64) {
+	s.UserIds = val
+}
+
 // InternalSquadCreateInternalSquadConflict is response for InternalSquadCreateInternalSquad operation.
 type InternalSquadCreateInternalSquadConflict struct{}
 
 func (*InternalSquadCreateInternalSquadConflict) internalSquadCreateInternalSquadRes() {}
+
+// InternalSquadDeleteInternalSquadNoContent is response for InternalSquadDeleteInternalSquad operation.
+type InternalSquadDeleteInternalSquadNoContent struct{}
+
+func (*InternalSquadDeleteInternalSquadNoContent) internalSquadDeleteInternalSquadRes() {}
+
+// InternalSquadRemoveManyUsersFromInternalSquadAccepted is response for InternalSquadRemoveManyUsersFromInternalSquad operation.
+type InternalSquadRemoveManyUsersFromInternalSquadAccepted struct{}
+
+func (*InternalSquadRemoveManyUsersFromInternalSquadAccepted) internalSquadRemoveManyUsersFromInternalSquadRes() {
+}
+
+// InternalSquadRemoveUsersFromInternalSquadAccepted is response for InternalSquadRemoveUsersFromInternalSquad operation.
+type InternalSquadRemoveUsersFromInternalSquadAccepted struct{}
+
+func (*InternalSquadRemoveUsersFromInternalSquadAccepted) internalSquadRemoveUsersFromInternalSquadRes() {
+}
 
 // Ref: #/components/schemas/InternalSquadResponseResponse
 type InternalSquadResponseResponse struct {
@@ -12326,38 +11587,6 @@ func (s *Ips) SetLastSeen(val time.Time) {
 	s.LastSeen = val
 }
 
-// Ref: #/components/schemas/IpsResponseResponse
-type IpsResponseResponse struct {
-	Response IpsResponseResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *IpsResponseResponse) GetResponse() IpsResponseResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *IpsResponseResponse) SetResponse(val IpsResponseResponseResponse) {
-	s.Response = val
-}
-
-func (*IpsResponseResponse) ipControlFetchUserIpsRes()  {}
-func (*IpsResponseResponse) ipControlFetchUsersIpsRes() {}
-
-type IpsResponseResponseResponse struct {
-	JobId string `json:"jobId"`
-}
-
-// GetJobId returns the value of JobId.
-func (s *IpsResponseResponseResponse) GetJobId() string {
-	return s.JobId
-}
-
-// SetJobId sets the value of JobId.
-func (s *IpsResponseResponseResponse) SetJobId(val string) {
-	s.JobId = val
-}
-
 // Ref: #/components/schemas/Keycloak
 type Keycloak struct {
 	Enabled        bool      `json:"enabled"`
@@ -12439,29 +11668,31 @@ func (s *Keycloak) SetAllowedEmails(val []string) {
 	s.AllowedEmails = val
 }
 
-// Ref: #/components/schemas/LoginRequest
-type LoginRequest struct {
+// Ref: #/components/schemas/LoginBody
+type LoginBody struct {
+	// Username of the user.
 	Username string `json:"username"`
+	// Password of the user.
 	Password string `json:"password"`
 }
 
 // GetUsername returns the value of Username.
-func (s *LoginRequest) GetUsername() string {
+func (s *LoginBody) GetUsername() string {
 	return s.Username
 }
 
 // GetPassword returns the value of Password.
-func (s *LoginRequest) GetPassword() string {
+func (s *LoginBody) GetPassword() string {
 	return s.Password
 }
 
 // SetUsername sets the value of Username.
-func (s *LoginRequest) SetUsername(val string) {
+func (s *LoginBody) SetUsername(val string) {
 	s.Username = val
 }
 
 // SetPassword sets the value of Password.
-func (s *LoginRequest) SetPassword(val string) {
+func (s *LoginBody) SetPassword(val string) {
 	s.Password = val
 }
 
@@ -12504,6 +11735,96 @@ func (o NilBrandingSettings) Get() (v BrandingSettings, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o NilBrandingSettings) Or(d BrandingSettings) BrandingSettings {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilConnectionsByNodeResultResponseResponseResult returns new NilConnectionsByNodeResultResponseResponseResult with value set to v.
+func NewNilConnectionsByNodeResultResponseResponseResult(v ConnectionsByNodeResultResponseResponseResult) NilConnectionsByNodeResultResponseResponseResult {
+	return NilConnectionsByNodeResultResponseResponseResult{
+		Value: v,
+	}
+}
+
+// NilConnectionsByNodeResultResponseResponseResult is nullable ConnectionsByNodeResultResponseResponseResult.
+type NilConnectionsByNodeResultResponseResponseResult struct {
+	Value ConnectionsByNodeResultResponseResponseResult
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilConnectionsByNodeResultResponseResponseResult) SetTo(v ConnectionsByNodeResultResponseResponseResult) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilConnectionsByNodeResultResponseResponseResult) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilConnectionsByNodeResultResponseResponseResult) SetToNull() {
+	o.Null = true
+	var v ConnectionsByNodeResultResponseResponseResult
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilConnectionsByNodeResultResponseResponseResult) Get() (v ConnectionsByNodeResultResponseResponseResult, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilConnectionsByNodeResultResponseResponseResult) Or(d ConnectionsByNodeResultResponseResponseResult) ConnectionsByNodeResultResponseResponseResult {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewNilConnectionsByUserResultResponseResponseResult returns new NilConnectionsByUserResultResponseResponseResult with value set to v.
+func NewNilConnectionsByUserResultResponseResponseResult(v ConnectionsByUserResultResponseResponseResult) NilConnectionsByUserResultResponseResponseResult {
+	return NilConnectionsByUserResultResponseResponseResult{
+		Value: v,
+	}
+}
+
+// NilConnectionsByUserResultResponseResponseResult is nullable ConnectionsByUserResultResponseResponseResult.
+type NilConnectionsByUserResultResponseResponseResult struct {
+	Value ConnectionsByUserResultResponseResponseResult
+	Null  bool
+}
+
+// SetTo sets value to v.
+func (o *NilConnectionsByUserResultResponseResponseResult) SetTo(v ConnectionsByUserResultResponseResponseResult) {
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o NilConnectionsByUserResultResponseResponseResult) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *NilConnectionsByUserResultResponseResponseResult) SetToNull() {
+	o.Null = true
+	var v ConnectionsByUserResultResponseResponseResult
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o NilConnectionsByUserResultResponseResponseResult) Get() (v ConnectionsByUserResultResponseResponseResult, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o NilConnectionsByUserResultResponseResponseResult) Or(d ConnectionsByUserResultResponseResponseResult) ConnectionsByUserResultResponseResponseResult {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -12594,141 +11915,6 @@ func (o NilDateTime) Get() (v time.Time, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o NilDateTime) Or(d time.Time) time.Time {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilExternalSquadResponseHeaders returns new NilExternalSquadResponseHeaders with value set to v.
-func NewNilExternalSquadResponseHeaders(v ExternalSquadResponseHeaders) NilExternalSquadResponseHeaders {
-	return NilExternalSquadResponseHeaders{
-		Value: v,
-	}
-}
-
-// NilExternalSquadResponseHeaders is nullable ExternalSquadResponseHeaders.
-type NilExternalSquadResponseHeaders struct {
-	Value ExternalSquadResponseHeaders
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilExternalSquadResponseHeaders) SetTo(v ExternalSquadResponseHeaders) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilExternalSquadResponseHeaders) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilExternalSquadResponseHeaders) SetToNull() {
-	o.Null = true
-	var v ExternalSquadResponseHeaders
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilExternalSquadResponseHeaders) Get() (v ExternalSquadResponseHeaders, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilExternalSquadResponseHeaders) Or(d ExternalSquadResponseHeaders) ExternalSquadResponseHeaders {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilFetchIpsResultResponseResponseResult returns new NilFetchIpsResultResponseResponseResult with value set to v.
-func NewNilFetchIpsResultResponseResponseResult(v FetchIpsResultResponseResponseResult) NilFetchIpsResultResponseResponseResult {
-	return NilFetchIpsResultResponseResponseResult{
-		Value: v,
-	}
-}
-
-// NilFetchIpsResultResponseResponseResult is nullable FetchIpsResultResponseResponseResult.
-type NilFetchIpsResultResponseResponseResult struct {
-	Value FetchIpsResultResponseResponseResult
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilFetchIpsResultResponseResponseResult) SetTo(v FetchIpsResultResponseResponseResult) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilFetchIpsResultResponseResponseResult) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilFetchIpsResultResponseResponseResult) SetToNull() {
-	o.Null = true
-	var v FetchIpsResultResponseResponseResult
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilFetchIpsResultResponseResponseResult) Get() (v FetchIpsResultResponseResponseResult, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilFetchIpsResultResponseResponseResult) Or(d FetchIpsResultResponseResponseResult) FetchIpsResultResponseResponseResult {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilFetchUsersIpsResultResponseResponseResult returns new NilFetchUsersIpsResultResponseResponseResult with value set to v.
-func NewNilFetchUsersIpsResultResponseResponseResult(v FetchUsersIpsResultResponseResponseResult) NilFetchUsersIpsResultResponseResponseResult {
-	return NilFetchUsersIpsResultResponseResponseResult{
-		Value: v,
-	}
-}
-
-// NilFetchUsersIpsResultResponseResponseResult is nullable FetchUsersIpsResultResponseResponseResult.
-type NilFetchUsersIpsResultResponseResponseResult struct {
-	Value FetchUsersIpsResultResponseResponseResult
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilFetchUsersIpsResultResponseResponseResult) SetTo(v FetchUsersIpsResultResponseResponseResult) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilFetchUsersIpsResultResponseResponseResult) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilFetchUsersIpsResultResponseResponseResult) SetToNull() {
-	o.Null = true
-	var v FetchUsersIpsResultResponseResponseResult
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilFetchUsersIpsResultResponseResponseResult) Get() (v FetchUsersIpsResultResponseResponseResult, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilFetchUsersIpsResultResponseResponseResult) Or(d FetchUsersIpsResultResponseResponseResult) FetchUsersIpsResultResponseResponseResult {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -12868,194 +12054,6 @@ func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem
 
 // Or returns value if set, or given parameter if does not.
 func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMihomoIpVersion) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMihomoIpVersion) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMihomoIpVersion {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header returns new NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header with value set to v.
-func NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header {
-	return NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header{
-		Value: v,
-	}
-}
-
-// NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header is nullable GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header.
-type NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) SetToNull() {
-	o.Null = true
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra returns new NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra with value set to v.
-func NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra {
-	return NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra{
-		Value: v,
-	}
-}
-
-// NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra is nullable GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra.
-type NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) SetToNull() {
-	o.Null = true
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers returns new NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers with value set to v.
-func NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers {
-	return NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers{
-		Value: v,
-	}
-}
-
-// NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers is nullable GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers.
-type NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) SetToNull() {
-	o.Null = true
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers returns new NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers with value set to v.
-func NewNilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers {
-	return NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers{
-		Value: v,
-	}
-}
-
-// NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers is nullable GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers.
-type NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) IsNull() bool {
-	return o.Null
-}
-
-// SetToNull sets value to null.
-func (o *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) SetToNull() {
-	o.Null = true
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -13954,6 +12952,491 @@ func (s *Node) SetCountryCode(val string) {
 	s.CountryCode = val
 }
 
+// Ref: #/components/schemas/NodeBodyRequest
+type NodeBodyRequest struct {
+	ForceRestart bool `json:"forceRestart"`
+}
+
+// GetForceRestart returns the value of ForceRestart.
+func (s *NodeBodyRequest) GetForceRestart() bool {
+	return s.ForceRestart
+}
+
+// SetForceRestart sets the value of ForceRestart.
+func (s *NodeBodyRequest) SetForceRestart(val bool) {
+	s.ForceRestart = val
+}
+
+// Ref: #/components/schemas/NodeDataItem
+type NodeDataItem struct {
+	UUID                      uuid.UUID         `json:"uuid"`
+	ID                        float64           `json:"id"`
+	Name                      string            `json:"name"`
+	Address                   string            `json:"address"`
+	Port                      NilInt            `json:"port"`
+	ProxyUrl                  NilString         `json:"proxyUrl"`
+	IsConnected               bool              `json:"isConnected"`
+	IsDisabled                bool              `json:"isDisabled"`
+	IsConnecting              bool              `json:"isConnecting"`
+	LastStatusChange          NilDateTime       `json:"lastStatusChange"`
+	LastStatusMessage         NilString         `json:"lastStatusMessage"`
+	IsTrafficTrackingActive   bool              `json:"isTrafficTrackingActive"`
+	TrafficResetDay           NilInt            `json:"trafficResetDay"`
+	TrafficLimitBytes         NilFloat64        `json:"trafficLimitBytes"`
+	TrafficUsedBytes          NilFloat64        `json:"trafficUsedBytes"`
+	NotifyPercent             NilInt            `json:"notifyPercent"`
+	ViewPosition              int               `json:"viewPosition"`
+	CountryCode               string            `json:"countryCode"`
+	ConsumptionMultiplier     float64           `json:"consumptionMultiplier"`
+	NodeConsumptionMultiplier float64           `json:"nodeConsumptionMultiplier"`
+	Tags                      []string          `json:"tags"`
+	CreatedAt                 time.Time         `json:"createdAt"`
+	UpdatedAt                 time.Time         `json:"updatedAt"`
+	ConfigProfile             ConfigProfileItem `json:"configProfile"`
+	ProviderUuid              NilUUID           `json:"providerUuid"`
+	Provider                  NilProviderItem   `json:"provider"`
+	ActivePluginUuid          NilUUID           `json:"activePluginUuid"`
+	System                    NilSystemItem     `json:"system"`
+	Versions                  NilVersion        `json:"versions"`
+	XrayUptime                float64           `json:"xrayUptime"`
+	UsersOnline               float64           `json:"usersOnline"`
+	Note                      NilString         `json:"note"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *NodeDataItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetID returns the value of ID.
+func (s *NodeDataItem) GetID() float64 {
+	return s.ID
+}
+
+// GetName returns the value of Name.
+func (s *NodeDataItem) GetName() string {
+	return s.Name
+}
+
+// GetAddress returns the value of Address.
+func (s *NodeDataItem) GetAddress() string {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *NodeDataItem) GetPort() NilInt {
+	return s.Port
+}
+
+// GetProxyUrl returns the value of ProxyUrl.
+func (s *NodeDataItem) GetProxyUrl() NilString {
+	return s.ProxyUrl
+}
+
+// GetIsConnected returns the value of IsConnected.
+func (s *NodeDataItem) GetIsConnected() bool {
+	return s.IsConnected
+}
+
+// GetIsDisabled returns the value of IsDisabled.
+func (s *NodeDataItem) GetIsDisabled() bool {
+	return s.IsDisabled
+}
+
+// GetIsConnecting returns the value of IsConnecting.
+func (s *NodeDataItem) GetIsConnecting() bool {
+	return s.IsConnecting
+}
+
+// GetLastStatusChange returns the value of LastStatusChange.
+func (s *NodeDataItem) GetLastStatusChange() NilDateTime {
+	return s.LastStatusChange
+}
+
+// GetLastStatusMessage returns the value of LastStatusMessage.
+func (s *NodeDataItem) GetLastStatusMessage() NilString {
+	return s.LastStatusMessage
+}
+
+// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
+func (s *NodeDataItem) GetIsTrafficTrackingActive() bool {
+	return s.IsTrafficTrackingActive
+}
+
+// GetTrafficResetDay returns the value of TrafficResetDay.
+func (s *NodeDataItem) GetTrafficResetDay() NilInt {
+	return s.TrafficResetDay
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *NodeDataItem) GetTrafficLimitBytes() NilFloat64 {
+	return s.TrafficLimitBytes
+}
+
+// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
+func (s *NodeDataItem) GetTrafficUsedBytes() NilFloat64 {
+	return s.TrafficUsedBytes
+}
+
+// GetNotifyPercent returns the value of NotifyPercent.
+func (s *NodeDataItem) GetNotifyPercent() NilInt {
+	return s.NotifyPercent
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *NodeDataItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *NodeDataItem) GetCountryCode() string {
+	return s.CountryCode
+}
+
+// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
+func (s *NodeDataItem) GetConsumptionMultiplier() float64 {
+	return s.ConsumptionMultiplier
+}
+
+// GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
+func (s *NodeDataItem) GetNodeConsumptionMultiplier() float64 {
+	return s.NodeConsumptionMultiplier
+}
+
+// GetTags returns the value of Tags.
+func (s *NodeDataItem) GetTags() []string {
+	return s.Tags
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *NodeDataItem) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *NodeDataItem) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *NodeDataItem) GetConfigProfile() ConfigProfileItem {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *NodeDataItem) GetProviderUuid() NilUUID {
+	return s.ProviderUuid
+}
+
+// GetProvider returns the value of Provider.
+func (s *NodeDataItem) GetProvider() NilProviderItem {
+	return s.Provider
+}
+
+// GetActivePluginUuid returns the value of ActivePluginUuid.
+func (s *NodeDataItem) GetActivePluginUuid() NilUUID {
+	return s.ActivePluginUuid
+}
+
+// GetSystem returns the value of System.
+func (s *NodeDataItem) GetSystem() NilSystemItem {
+	return s.System
+}
+
+// GetVersions returns the value of Versions.
+func (s *NodeDataItem) GetVersions() NilVersion {
+	return s.Versions
+}
+
+// GetXrayUptime returns the value of XrayUptime.
+func (s *NodeDataItem) GetXrayUptime() float64 {
+	return s.XrayUptime
+}
+
+// GetUsersOnline returns the value of UsersOnline.
+func (s *NodeDataItem) GetUsersOnline() float64 {
+	return s.UsersOnline
+}
+
+// GetNote returns the value of Note.
+func (s *NodeDataItem) GetNote() NilString {
+	return s.Note
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodeDataItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetID sets the value of ID.
+func (s *NodeDataItem) SetID(val float64) {
+	s.ID = val
+}
+
+// SetName sets the value of Name.
+func (s *NodeDataItem) SetName(val string) {
+	s.Name = val
+}
+
+// SetAddress sets the value of Address.
+func (s *NodeDataItem) SetAddress(val string) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *NodeDataItem) SetPort(val NilInt) {
+	s.Port = val
+}
+
+// SetProxyUrl sets the value of ProxyUrl.
+func (s *NodeDataItem) SetProxyUrl(val NilString) {
+	s.ProxyUrl = val
+}
+
+// SetIsConnected sets the value of IsConnected.
+func (s *NodeDataItem) SetIsConnected(val bool) {
+	s.IsConnected = val
+}
+
+// SetIsDisabled sets the value of IsDisabled.
+func (s *NodeDataItem) SetIsDisabled(val bool) {
+	s.IsDisabled = val
+}
+
+// SetIsConnecting sets the value of IsConnecting.
+func (s *NodeDataItem) SetIsConnecting(val bool) {
+	s.IsConnecting = val
+}
+
+// SetLastStatusChange sets the value of LastStatusChange.
+func (s *NodeDataItem) SetLastStatusChange(val NilDateTime) {
+	s.LastStatusChange = val
+}
+
+// SetLastStatusMessage sets the value of LastStatusMessage.
+func (s *NodeDataItem) SetLastStatusMessage(val NilString) {
+	s.LastStatusMessage = val
+}
+
+// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
+func (s *NodeDataItem) SetIsTrafficTrackingActive(val bool) {
+	s.IsTrafficTrackingActive = val
+}
+
+// SetTrafficResetDay sets the value of TrafficResetDay.
+func (s *NodeDataItem) SetTrafficResetDay(val NilInt) {
+	s.TrafficResetDay = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *NodeDataItem) SetTrafficLimitBytes(val NilFloat64) {
+	s.TrafficLimitBytes = val
+}
+
+// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
+func (s *NodeDataItem) SetTrafficUsedBytes(val NilFloat64) {
+	s.TrafficUsedBytes = val
+}
+
+// SetNotifyPercent sets the value of NotifyPercent.
+func (s *NodeDataItem) SetNotifyPercent(val NilInt) {
+	s.NotifyPercent = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *NodeDataItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *NodeDataItem) SetCountryCode(val string) {
+	s.CountryCode = val
+}
+
+// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
+func (s *NodeDataItem) SetConsumptionMultiplier(val float64) {
+	s.ConsumptionMultiplier = val
+}
+
+// SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
+func (s *NodeDataItem) SetNodeConsumptionMultiplier(val float64) {
+	s.NodeConsumptionMultiplier = val
+}
+
+// SetTags sets the value of Tags.
+func (s *NodeDataItem) SetTags(val []string) {
+	s.Tags = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *NodeDataItem) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *NodeDataItem) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *NodeDataItem) SetConfigProfile(val ConfigProfileItem) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *NodeDataItem) SetProviderUuid(val NilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetProvider sets the value of Provider.
+func (s *NodeDataItem) SetProvider(val NilProviderItem) {
+	s.Provider = val
+}
+
+// SetActivePluginUuid sets the value of ActivePluginUuid.
+func (s *NodeDataItem) SetActivePluginUuid(val NilUUID) {
+	s.ActivePluginUuid = val
+}
+
+// SetSystem sets the value of System.
+func (s *NodeDataItem) SetSystem(val NilSystemItem) {
+	s.System = val
+}
+
+// SetVersions sets the value of Versions.
+func (s *NodeDataItem) SetVersions(val NilVersion) {
+	s.Versions = val
+}
+
+// SetXrayUptime sets the value of XrayUptime.
+func (s *NodeDataItem) SetXrayUptime(val float64) {
+	s.XrayUptime = val
+}
+
+// SetUsersOnline sets the value of UsersOnline.
+func (s *NodeDataItem) SetUsersOnline(val float64) {
+	s.UsersOnline = val
+}
+
+// SetNote sets the value of Note.
+func (s *NodeDataItem) SetNote(val NilString) {
+	s.Note = val
+}
+
+// Ref: #/components/schemas/NodeInfoItem
+type NodeInfoItem struct {
+	Arch              string   `json:"arch"`
+	Cpus              int      `json:"cpus"`
+	CpuModel          string   `json:"cpuModel"`
+	MemoryTotal       float64  `json:"memoryTotal"`
+	Hostname          string   `json:"hostname"`
+	Platform          string   `json:"platform"`
+	Release           string   `json:"release"`
+	Type              string   `json:"type"`
+	Version           string   `json:"version"`
+	NetworkInterfaces []string `json:"networkInterfaces"`
+}
+
+// GetArch returns the value of Arch.
+func (s *NodeInfoItem) GetArch() string {
+	return s.Arch
+}
+
+// GetCpus returns the value of Cpus.
+func (s *NodeInfoItem) GetCpus() int {
+	return s.Cpus
+}
+
+// GetCpuModel returns the value of CpuModel.
+func (s *NodeInfoItem) GetCpuModel() string {
+	return s.CpuModel
+}
+
+// GetMemoryTotal returns the value of MemoryTotal.
+func (s *NodeInfoItem) GetMemoryTotal() float64 {
+	return s.MemoryTotal
+}
+
+// GetHostname returns the value of Hostname.
+func (s *NodeInfoItem) GetHostname() string {
+	return s.Hostname
+}
+
+// GetPlatform returns the value of Platform.
+func (s *NodeInfoItem) GetPlatform() string {
+	return s.Platform
+}
+
+// GetRelease returns the value of Release.
+func (s *NodeInfoItem) GetRelease() string {
+	return s.Release
+}
+
+// GetType returns the value of Type.
+func (s *NodeInfoItem) GetType() string {
+	return s.Type
+}
+
+// GetVersion returns the value of Version.
+func (s *NodeInfoItem) GetVersion() string {
+	return s.Version
+}
+
+// GetNetworkInterfaces returns the value of NetworkInterfaces.
+func (s *NodeInfoItem) GetNetworkInterfaces() []string {
+	return s.NetworkInterfaces
+}
+
+// SetArch sets the value of Arch.
+func (s *NodeInfoItem) SetArch(val string) {
+	s.Arch = val
+}
+
+// SetCpus sets the value of Cpus.
+func (s *NodeInfoItem) SetCpus(val int) {
+	s.Cpus = val
+}
+
+// SetCpuModel sets the value of CpuModel.
+func (s *NodeInfoItem) SetCpuModel(val string) {
+	s.CpuModel = val
+}
+
+// SetMemoryTotal sets the value of MemoryTotal.
+func (s *NodeInfoItem) SetMemoryTotal(val float64) {
+	s.MemoryTotal = val
+}
+
+// SetHostname sets the value of Hostname.
+func (s *NodeInfoItem) SetHostname(val string) {
+	s.Hostname = val
+}
+
+// SetPlatform sets the value of Platform.
+func (s *NodeInfoItem) SetPlatform(val string) {
+	s.Platform = val
+}
+
+// SetRelease sets the value of Release.
+func (s *NodeInfoItem) SetRelease(val string) {
+	s.Release = val
+}
+
+// SetType sets the value of Type.
+func (s *NodeInfoItem) SetType(val string) {
+	s.Type = val
+}
+
+// SetVersion sets the value of Version.
+func (s *NodeInfoItem) SetVersion(val string) {
+	s.Version = val
+}
+
+// SetNetworkInterfaces sets the value of NetworkInterfaces.
+func (s *NodeInfoItem) SetNetworkInterfaces(val []string) {
+	s.NetworkInterfaces = val
+}
+
 // Ref: #/components/schemas/NodePlugin
 type NodePlugin struct {
 	UUID         uuid.UUID `json:"uuid"`
@@ -14001,6 +13484,31 @@ func (s *NodePlugin) SetName(val string) {
 func (s *NodePlugin) SetPluginConfig(val jx.Raw) {
 	s.PluginConfig = val
 }
+
+// Ref: #/components/schemas/NodePluginBodyRequest
+type NodePluginBodyRequest struct {
+	Name string `json:"name"`
+}
+
+// GetName returns the value of Name.
+func (s *NodePluginBodyRequest) GetName() string {
+	return s.Name
+}
+
+// SetName sets the value of Name.
+func (s *NodePluginBodyRequest) SetName(val string) {
+	s.Name = val
+}
+
+// NodePluginDeleteConfigNoContent is response for NodePluginDeleteConfig operation.
+type NodePluginDeleteConfigNoContent struct{}
+
+func (*NodePluginDeleteConfigNoContent) nodePluginDeleteConfigRes() {}
+
+// NodePluginPluginExecutorAccepted is response for NodePluginPluginExecutor operation.
+type NodePluginPluginExecutorAccepted struct{}
+
+func (*NodePluginPluginExecutorAccepted) nodePluginPluginExecutorRes() {}
 
 // Ref: #/components/schemas/NodePluginResponseResponse
 type NodePluginResponseResponse struct {
@@ -14068,6 +13576,47 @@ func (s *NodePluginResponseResponseResponse) SetPluginConfig(val jx.Raw) {
 	s.PluginConfig = val
 }
 
+// Ref: #/components/schemas/NodePluginsBodyRequeItem
+type NodePluginsBodyRequeItem struct {
+	ViewPosition int       `json:"viewPosition"`
+	UUID         uuid.UUID `json:"uuid"`
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *NodePluginsBodyRequeItem) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetUUID returns the value of UUID.
+func (s *NodePluginsBodyRequeItem) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *NodePluginsBodyRequeItem) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetUUID sets the value of UUID.
+func (s *NodePluginsBodyRequeItem) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// Ref: #/components/schemas/NodePluginsBodyRequest
+type NodePluginsBodyRequest struct {
+	Items []NodePluginsBodyRequeItem `json:"items"`
+}
+
+// GetItems returns the value of Items.
+func (s *NodePluginsBodyRequest) GetItems() []NodePluginsBodyRequeItem {
+	return s.Items
+}
+
+// SetItems sets the value of Items.
+func (s *NodePluginsBodyRequest) SetItems(val []NodePluginsBodyRequeItem) {
+	s.Items = val
+}
+
 // Ref: #/components/schemas/NodePluginsResponseResponse
 type NodePluginsResponseResponse struct {
 	Response NodePluginsResponseResponseResponse `json:"response"`
@@ -14111,518 +13660,79 @@ func (s *NodePluginsResponseResponseResponse) SetNodePlugins(val []NodePlugin) {
 	s.NodePlugins = val
 }
 
-// Ref: #/components/schemas/NodeRequestBodyRequest
-type NodeRequestBodyRequest struct {
-	ForceRestart bool `json:"forceRestart"`
-}
-
-// GetForceRestart returns the value of ForceRestart.
-func (s *NodeRequestBodyRequest) GetForceRestart() bool {
-	return s.ForceRestart
-}
-
-// SetForceRestart sets the value of ForceRestart.
-func (s *NodeRequestBodyRequest) SetForceRestart(val bool) {
-	s.ForceRestart = val
-}
-
 // Ref: #/components/schemas/NodeResponse
 type NodeResponse struct {
-	Response NodeResponseDataItem `json:"response"`
+	Response NodeDataItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *NodeResponse) GetResponse() NodeResponseDataItem {
+func (s *NodeResponse) GetResponse() NodeDataItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *NodeResponse) SetResponse(val NodeResponseDataItem) {
+func (s *NodeResponse) SetResponse(val NodeDataItem) {
 	s.Response = val
 }
 
 func (*NodeResponse) nodesCreateNodeRes()  {}
 func (*NodeResponse) nodesDisableNodeRes() {}
 func (*NodeResponse) nodesEnableNodeRes()  {}
-func (*NodeResponse) nodesGetOneNodeRes()  {}
+func (*NodeResponse) nodesGetNodeRes()     {}
 func (*NodeResponse) nodesUpdateNodeRes()  {}
 
-// Ref: #/components/schemas/NodeResponseDataItem
-type NodeResponseDataItem struct {
-	UUID                      uuid.UUID         `json:"uuid"`
-	Name                      string            `json:"name"`
-	Address                   string            `json:"address"`
-	Port                      NilInt            `json:"port"`
-	ProxyUrl                  NilString         `json:"proxyUrl"`
-	IsConnected               bool              `json:"isConnected"`
-	IsDisabled                bool              `json:"isDisabled"`
-	IsConnecting              bool              `json:"isConnecting"`
-	LastStatusChange          NilDateTime       `json:"lastStatusChange"`
-	LastStatusMessage         NilString         `json:"lastStatusMessage"`
-	IsTrafficTrackingActive   bool              `json:"isTrafficTrackingActive"`
-	TrafficResetDay           NilInt            `json:"trafficResetDay"`
-	TrafficLimitBytes         NilFloat64        `json:"trafficLimitBytes"`
-	TrafficUsedBytes          NilFloat64        `json:"trafficUsedBytes"`
-	NotifyPercent             NilInt            `json:"notifyPercent"`
-	ViewPosition              int               `json:"viewPosition"`
-	CountryCode               string            `json:"countryCode"`
-	ConsumptionMultiplier     float64           `json:"consumptionMultiplier"`
-	NodeConsumptionMultiplier float64           `json:"nodeConsumptionMultiplier"`
-	Tags                      []string          `json:"tags"`
-	CreatedAt                 time.Time         `json:"createdAt"`
-	UpdatedAt                 time.Time         `json:"updatedAt"`
-	ConfigProfile             ConfigProfileItem `json:"configProfile"`
-	ProviderUuid              NilUUID           `json:"providerUuid"`
-	Provider                  NilProviderItem   `json:"provider"`
-	ActivePluginUuid          NilUUID           `json:"activePluginUuid"`
-	System                    NilSystemItem     `json:"system"`
-	Versions                  NilVersion        `json:"versions"`
-	XrayUptime                float64           `json:"xrayUptime"`
-	UsersOnline               float64           `json:"usersOnline"`
-	Note                      NilString         `json:"note"`
-}
+// NodesBulkNodesActionsNoContent is response for NodesBulkNodesActions operation.
+type NodesBulkNodesActionsNoContent struct{}
 
-// GetUUID returns the value of UUID.
-func (s *NodeResponseDataItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
+func (*NodesBulkNodesActionsNoContent) nodesBulkNodesActionsRes() {}
 
-// GetName returns the value of Name.
-func (s *NodeResponseDataItem) GetName() string {
-	return s.Name
-}
+// NodesBulkNodesUpdateNoContent is response for NodesBulkNodesUpdate operation.
+type NodesBulkNodesUpdateNoContent struct{}
 
-// GetAddress returns the value of Address.
-func (s *NodeResponseDataItem) GetAddress() string {
-	return s.Address
-}
+func (*NodesBulkNodesUpdateNoContent) nodesBulkNodesUpdateRes() {}
 
-// GetPort returns the value of Port.
-func (s *NodeResponseDataItem) GetPort() NilInt {
-	return s.Port
-}
+// NodesDeleteNodeNoContent is response for NodesDeleteNode operation.
+type NodesDeleteNodeNoContent struct{}
 
-// GetProxyUrl returns the value of ProxyUrl.
-func (s *NodeResponseDataItem) GetProxyUrl() NilString {
-	return s.ProxyUrl
-}
+func (*NodesDeleteNodeNoContent) nodesDeleteNodeRes() {}
 
-// GetIsConnected returns the value of IsConnected.
-func (s *NodeResponseDataItem) GetIsConnected() bool {
-	return s.IsConnected
-}
+// NodesProfileModificationNoContent is response for NodesProfileModification operation.
+type NodesProfileModificationNoContent struct{}
 
-// GetIsDisabled returns the value of IsDisabled.
-func (s *NodeResponseDataItem) GetIsDisabled() bool {
-	return s.IsDisabled
-}
+func (*NodesProfileModificationNoContent) nodesProfileModificationRes() {}
 
-// GetIsConnecting returns the value of IsConnecting.
-func (s *NodeResponseDataItem) GetIsConnecting() bool {
-	return s.IsConnecting
-}
+// NodesResetNodeTrafficNoContent is response for NodesResetNodeTraffic operation.
+type NodesResetNodeTrafficNoContent struct{}
 
-// GetLastStatusChange returns the value of LastStatusChange.
-func (s *NodeResponseDataItem) GetLastStatusChange() NilDateTime {
-	return s.LastStatusChange
-}
+func (*NodesResetNodeTrafficNoContent) nodesResetNodeTrafficRes() {}
 
-// GetLastStatusMessage returns the value of LastStatusMessage.
-func (s *NodeResponseDataItem) GetLastStatusMessage() NilString {
-	return s.LastStatusMessage
-}
-
-// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
-func (s *NodeResponseDataItem) GetIsTrafficTrackingActive() bool {
-	return s.IsTrafficTrackingActive
-}
-
-// GetTrafficResetDay returns the value of TrafficResetDay.
-func (s *NodeResponseDataItem) GetTrafficResetDay() NilInt {
-	return s.TrafficResetDay
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *NodeResponseDataItem) GetTrafficLimitBytes() NilFloat64 {
-	return s.TrafficLimitBytes
-}
-
-// GetTrafficUsedBytes returns the value of TrafficUsedBytes.
-func (s *NodeResponseDataItem) GetTrafficUsedBytes() NilFloat64 {
-	return s.TrafficUsedBytes
-}
-
-// GetNotifyPercent returns the value of NotifyPercent.
-func (s *NodeResponseDataItem) GetNotifyPercent() NilInt {
-	return s.NotifyPercent
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *NodeResponseDataItem) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *NodeResponseDataItem) GetCountryCode() string {
-	return s.CountryCode
-}
-
-// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *NodeResponseDataItem) GetConsumptionMultiplier() float64 {
-	return s.ConsumptionMultiplier
-}
-
-// GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
-func (s *NodeResponseDataItem) GetNodeConsumptionMultiplier() float64 {
-	return s.NodeConsumptionMultiplier
-}
-
-// GetTags returns the value of Tags.
-func (s *NodeResponseDataItem) GetTags() []string {
-	return s.Tags
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *NodeResponseDataItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// GetUpdatedAt returns the value of UpdatedAt.
-func (s *NodeResponseDataItem) GetUpdatedAt() time.Time {
-	return s.UpdatedAt
-}
-
-// GetConfigProfile returns the value of ConfigProfile.
-func (s *NodeResponseDataItem) GetConfigProfile() ConfigProfileItem {
-	return s.ConfigProfile
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *NodeResponseDataItem) GetProviderUuid() NilUUID {
-	return s.ProviderUuid
-}
-
-// GetProvider returns the value of Provider.
-func (s *NodeResponseDataItem) GetProvider() NilProviderItem {
-	return s.Provider
-}
-
-// GetActivePluginUuid returns the value of ActivePluginUuid.
-func (s *NodeResponseDataItem) GetActivePluginUuid() NilUUID {
-	return s.ActivePluginUuid
-}
-
-// GetSystem returns the value of System.
-func (s *NodeResponseDataItem) GetSystem() NilSystemItem {
-	return s.System
-}
-
-// GetVersions returns the value of Versions.
-func (s *NodeResponseDataItem) GetVersions() NilVersion {
-	return s.Versions
-}
-
-// GetXrayUptime returns the value of XrayUptime.
-func (s *NodeResponseDataItem) GetXrayUptime() float64 {
-	return s.XrayUptime
-}
-
-// GetUsersOnline returns the value of UsersOnline.
-func (s *NodeResponseDataItem) GetUsersOnline() float64 {
-	return s.UsersOnline
-}
-
-// GetNote returns the value of Note.
-func (s *NodeResponseDataItem) GetNote() NilString {
-	return s.Note
-}
-
-// SetUUID sets the value of UUID.
-func (s *NodeResponseDataItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *NodeResponseDataItem) SetName(val string) {
-	s.Name = val
-}
-
-// SetAddress sets the value of Address.
-func (s *NodeResponseDataItem) SetAddress(val string) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *NodeResponseDataItem) SetPort(val NilInt) {
-	s.Port = val
-}
-
-// SetProxyUrl sets the value of ProxyUrl.
-func (s *NodeResponseDataItem) SetProxyUrl(val NilString) {
-	s.ProxyUrl = val
-}
-
-// SetIsConnected sets the value of IsConnected.
-func (s *NodeResponseDataItem) SetIsConnected(val bool) {
-	s.IsConnected = val
-}
-
-// SetIsDisabled sets the value of IsDisabled.
-func (s *NodeResponseDataItem) SetIsDisabled(val bool) {
-	s.IsDisabled = val
-}
-
-// SetIsConnecting sets the value of IsConnecting.
-func (s *NodeResponseDataItem) SetIsConnecting(val bool) {
-	s.IsConnecting = val
-}
-
-// SetLastStatusChange sets the value of LastStatusChange.
-func (s *NodeResponseDataItem) SetLastStatusChange(val NilDateTime) {
-	s.LastStatusChange = val
-}
-
-// SetLastStatusMessage sets the value of LastStatusMessage.
-func (s *NodeResponseDataItem) SetLastStatusMessage(val NilString) {
-	s.LastStatusMessage = val
-}
-
-// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
-func (s *NodeResponseDataItem) SetIsTrafficTrackingActive(val bool) {
-	s.IsTrafficTrackingActive = val
-}
-
-// SetTrafficResetDay sets the value of TrafficResetDay.
-func (s *NodeResponseDataItem) SetTrafficResetDay(val NilInt) {
-	s.TrafficResetDay = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *NodeResponseDataItem) SetTrafficLimitBytes(val NilFloat64) {
-	s.TrafficLimitBytes = val
-}
-
-// SetTrafficUsedBytes sets the value of TrafficUsedBytes.
-func (s *NodeResponseDataItem) SetTrafficUsedBytes(val NilFloat64) {
-	s.TrafficUsedBytes = val
-}
-
-// SetNotifyPercent sets the value of NotifyPercent.
-func (s *NodeResponseDataItem) SetNotifyPercent(val NilInt) {
-	s.NotifyPercent = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *NodeResponseDataItem) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *NodeResponseDataItem) SetCountryCode(val string) {
-	s.CountryCode = val
-}
-
-// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *NodeResponseDataItem) SetConsumptionMultiplier(val float64) {
-	s.ConsumptionMultiplier = val
-}
-
-// SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
-func (s *NodeResponseDataItem) SetNodeConsumptionMultiplier(val float64) {
-	s.NodeConsumptionMultiplier = val
-}
-
-// SetTags sets the value of Tags.
-func (s *NodeResponseDataItem) SetTags(val []string) {
-	s.Tags = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *NodeResponseDataItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-// SetUpdatedAt sets the value of UpdatedAt.
-func (s *NodeResponseDataItem) SetUpdatedAt(val time.Time) {
-	s.UpdatedAt = val
-}
-
-// SetConfigProfile sets the value of ConfigProfile.
-func (s *NodeResponseDataItem) SetConfigProfile(val ConfigProfileItem) {
-	s.ConfigProfile = val
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *NodeResponseDataItem) SetProviderUuid(val NilUUID) {
-	s.ProviderUuid = val
-}
-
-// SetProvider sets the value of Provider.
-func (s *NodeResponseDataItem) SetProvider(val NilProviderItem) {
-	s.Provider = val
-}
-
-// SetActivePluginUuid sets the value of ActivePluginUuid.
-func (s *NodeResponseDataItem) SetActivePluginUuid(val NilUUID) {
-	s.ActivePluginUuid = val
-}
-
-// SetSystem sets the value of System.
-func (s *NodeResponseDataItem) SetSystem(val NilSystemItem) {
-	s.System = val
-}
-
-// SetVersions sets the value of Versions.
-func (s *NodeResponseDataItem) SetVersions(val NilVersion) {
-	s.Versions = val
-}
-
-// SetXrayUptime sets the value of XrayUptime.
-func (s *NodeResponseDataItem) SetXrayUptime(val float64) {
-	s.XrayUptime = val
-}
-
-// SetUsersOnline sets the value of UsersOnline.
-func (s *NodeResponseDataItem) SetUsersOnline(val float64) {
-	s.UsersOnline = val
-}
-
-// SetNote sets the value of Note.
-func (s *NodeResponseDataItem) SetNote(val NilString) {
-	s.Note = val
-}
-
-// Ref: #/components/schemas/NodeResponseInfoItem
-type NodeResponseInfoItem struct {
-	Arch              string   `json:"arch"`
-	Cpus              int      `json:"cpus"`
-	CpuModel          string   `json:"cpuModel"`
-	MemoryTotal       float64  `json:"memoryTotal"`
-	Hostname          string   `json:"hostname"`
-	Platform          string   `json:"platform"`
-	Release           string   `json:"release"`
-	Type              string   `json:"type"`
-	Version           string   `json:"version"`
-	NetworkInterfaces []string `json:"networkInterfaces"`
-}
-
-// GetArch returns the value of Arch.
-func (s *NodeResponseInfoItem) GetArch() string {
-	return s.Arch
-}
-
-// GetCpus returns the value of Cpus.
-func (s *NodeResponseInfoItem) GetCpus() int {
-	return s.Cpus
-}
-
-// GetCpuModel returns the value of CpuModel.
-func (s *NodeResponseInfoItem) GetCpuModel() string {
-	return s.CpuModel
-}
-
-// GetMemoryTotal returns the value of MemoryTotal.
-func (s *NodeResponseInfoItem) GetMemoryTotal() float64 {
-	return s.MemoryTotal
-}
-
-// GetHostname returns the value of Hostname.
-func (s *NodeResponseInfoItem) GetHostname() string {
-	return s.Hostname
-}
-
-// GetPlatform returns the value of Platform.
-func (s *NodeResponseInfoItem) GetPlatform() string {
-	return s.Platform
-}
-
-// GetRelease returns the value of Release.
-func (s *NodeResponseInfoItem) GetRelease() string {
-	return s.Release
-}
-
-// GetType returns the value of Type.
-func (s *NodeResponseInfoItem) GetType() string {
-	return s.Type
-}
-
-// GetVersion returns the value of Version.
-func (s *NodeResponseInfoItem) GetVersion() string {
-	return s.Version
-}
-
-// GetNetworkInterfaces returns the value of NetworkInterfaces.
-func (s *NodeResponseInfoItem) GetNetworkInterfaces() []string {
-	return s.NetworkInterfaces
-}
-
-// SetArch sets the value of Arch.
-func (s *NodeResponseInfoItem) SetArch(val string) {
-	s.Arch = val
-}
-
-// SetCpus sets the value of Cpus.
-func (s *NodeResponseInfoItem) SetCpus(val int) {
-	s.Cpus = val
-}
-
-// SetCpuModel sets the value of CpuModel.
-func (s *NodeResponseInfoItem) SetCpuModel(val string) {
-	s.CpuModel = val
-}
-
-// SetMemoryTotal sets the value of MemoryTotal.
-func (s *NodeResponseInfoItem) SetMemoryTotal(val float64) {
-	s.MemoryTotal = val
-}
-
-// SetHostname sets the value of Hostname.
-func (s *NodeResponseInfoItem) SetHostname(val string) {
-	s.Hostname = val
-}
-
-// SetPlatform sets the value of Platform.
-func (s *NodeResponseInfoItem) SetPlatform(val string) {
-	s.Platform = val
-}
-
-// SetRelease sets the value of Release.
-func (s *NodeResponseInfoItem) SetRelease(val string) {
-	s.Release = val
-}
-
-// SetType sets the value of Type.
-func (s *NodeResponseInfoItem) SetType(val string) {
-	s.Type = val
-}
-
-// SetVersion sets the value of Version.
-func (s *NodeResponseInfoItem) SetVersion(val string) {
-	s.Version = val
-}
-
-// SetNetworkInterfaces sets the value of NetworkInterfaces.
-func (s *NodeResponseInfoItem) SetNetworkInterfaces(val []string) {
-	s.NetworkInterfaces = val
-}
-
-// Ref: #/components/schemas/NodesResponse
-type NodesResponse struct {
-	Response []NodeResponseDataItem `json:"response"`
+// Ref: #/components/schemas/NodesResponseResponse
+type NodesResponseResponse struct {
+	Response []NodeDataItem `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *NodesResponse) GetResponse() []NodeResponseDataItem {
+func (s *NodesResponseResponse) GetResponse() []NodeDataItem {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *NodesResponse) SetResponse(val []NodeResponseDataItem) {
+func (s *NodesResponseResponse) SetResponse(val []NodeDataItem) {
 	s.Response = val
 }
 
-func (*NodesResponse) nodesGetAllNodesRes()  {}
-func (*NodesResponse) nodesReorderNodesRes() {}
+func (*NodesResponseResponse) nodesGetNodesRes()     {}
+func (*NodesResponseResponse) nodesReorderNodesRes() {}
+
+// NodesRestartAllNodesAccepted is response for NodesRestartAllNodes operation.
+type NodesRestartAllNodesAccepted struct{}
+
+func (*NodesRestartAllNodesAccepted) nodesRestartAllNodesRes() {}
+
+// NodesRestartNodeAccepted is response for NodesRestartNode operation.
+type NodesRestartNodeAccepted struct{}
+
+func (*NodesRestartNodeAccepted) nodesRestartNodeRes() {}
 
 // Ref: #/components/schemas/NotFoundError
 type NotFoundError struct {
@@ -14650,106 +13760,249 @@ func (s *NotFoundError) SetStatusCode(val float64) {
 	s.StatusCode = val
 }
 
-func (*NotFoundError) bandwidthStatsUsersGetUserUsageByRangeRes()           {}
-func (*NotFoundError) configProfileDeleteConfigProfileByUuidRes()           {}
-func (*NotFoundError) configProfileGetComputedConfigProfileByUuidRes()      {}
-func (*NotFoundError) configProfileGetConfigProfileByUuidRes()              {}
-func (*NotFoundError) configProfileGetInboundsByProfileUuidRes()            {}
-func (*NotFoundError) configProfileUpdateConfigProfileRes()                 {}
-func (*NotFoundError) externalSquadAddUsersToExternalSquadRes()             {}
-func (*NotFoundError) externalSquadDeleteExternalSquadRes()                 {}
-func (*NotFoundError) externalSquadRemoveUsersFromExternalSquadRes()        {}
-func (*NotFoundError) externalSquadUpdateExternalSquadRes()                 {}
-func (*NotFoundError) hostsDeleteHostRes()                                  {}
-func (*NotFoundError) hwidUserDevicesCreateUserHwidDeviceRes()              {}
-func (*NotFoundError) hwidUserDevicesDeleteAllUserHwidDevicesRes()          {}
-func (*NotFoundError) hwidUserDevicesDeleteUserHwidDeviceRes()              {}
-func (*NotFoundError) hwidUserDevicesGetUserHwidDevicesRes()                {}
-func (*NotFoundError) infraBillingGetInfraProviderByUuidRes()               {}
-func (*NotFoundError) internalSquadAddUsersToInternalSquadRes()             {}
-func (*NotFoundError) internalSquadDeleteInternalSquadRes()                 {}
-func (*NotFoundError) internalSquadGetInternalSquadAccessibleNodesRes()     {}
-func (*NotFoundError) internalSquadRemoveUsersFromInternalSquadRes()        {}
-func (*NotFoundError) internalSquadUpdateInternalSquadRes()                 {}
-func (*NotFoundError) ipControlDropConnectionsRes()                         {}
-func (*NotFoundError) ipControlFetchUserIpsRes()                            {}
-func (*NotFoundError) ipControlFetchUsersIpsRes()                           {}
-func (*NotFoundError) ipControlGetFetchIpsResultRes()                       {}
-func (*NotFoundError) ipControlGetFetchUsersIpsResultRes()                  {}
-func (*NotFoundError) metadataGetNodeMetadataRes()                          {}
-func (*NotFoundError) metadataGetUserMetadataRes()                          {}
-func (*NotFoundError) metadataUpsertNodeMetadataRes()                       {}
-func (*NotFoundError) metadataUpsertUserMetadataRes()                       {}
-func (*NotFoundError) snippetsDeleteSnippetByNameRes()                      {}
-func (*NotFoundError) snippetsUpdateSnippetRes()                            {}
-func (*NotFoundError) subscriptionsGetSubscriptionByShortUuidProtectedRes() {}
-func (*NotFoundError) subscriptionsGetSubscriptionByUsernameRes()           {}
-func (*NotFoundError) subscriptionsGetSubscriptionByUuidRes()               {}
-func (*NotFoundError) usersDeleteUserRes()                                  {}
-func (*NotFoundError) usersDisableUserRes()                                 {}
-func (*NotFoundError) usersEnableUserRes()                                  {}
-func (*NotFoundError) usersGetUserAccessibleNodesRes()                      {}
-func (*NotFoundError) usersGetUserByIdRes()                                 {}
-func (*NotFoundError) usersGetUserByShortUuidRes()                          {}
-func (*NotFoundError) usersGetUserByUsernameRes()                           {}
-func (*NotFoundError) usersGetUserByUuidRes()                               {}
-func (*NotFoundError) usersGetUserSubscriptionRequestHistoryRes()           {}
-func (*NotFoundError) usersResetUserTrafficRes()                            {}
-func (*NotFoundError) usersResolveUserRes()                                 {}
-func (*NotFoundError) usersRevokeUserSubscriptionRes()                      {}
+func (*NotFoundError) apiTokensCreateApiTokenRes()                                          {}
+func (*NotFoundError) apiTokensDeleteApiTokenRes()                                          {}
+func (*NotFoundError) apiTokensGetApiTokensRes()                                            {}
+func (*NotFoundError) apiTokensGetScopesRes()                                               {}
+func (*NotFoundError) authGetStatusRes()                                                    {}
+func (*NotFoundError) authLoginRes()                                                        {}
+func (*NotFoundError) authOauth2AuthorizeRes()                                              {}
+func (*NotFoundError) authOauth2CallbackRes()                                               {}
+func (*NotFoundError) authPasskeyAuthenticationOptionsRes()                                 {}
+func (*NotFoundError) authPasskeyAuthenticationVerifyRes()                                  {}
+func (*NotFoundError) authRegisterRes()                                                     {}
+func (*NotFoundError) bandwidthStatsNodesGetNodeUsageRes()                                  {}
+func (*NotFoundError) bandwidthStatsNodesGetStatsNodeUsersUsageRes()                        {}
+func (*NotFoundError) bandwidthStatsNodesGetStatsNodesUsersUsageRes()                       {}
+func (*NotFoundError) bandwidthStatsUsersGetStatsNodesUsageRes()                            {}
+func (*NotFoundError) configProfileCreateConfigProfileRes()                                 {}
+func (*NotFoundError) configProfileDeleteConfigProfileByUuidRes()                           {}
+func (*NotFoundError) configProfileGetAllInboundsRes()                                      {}
+func (*NotFoundError) configProfileGetComputedConfigProfileByUuidRes()                      {}
+func (*NotFoundError) configProfileGetConfigProfileByUuidRes()                              {}
+func (*NotFoundError) configProfileGetConfigProfilesRes()                                   {}
+func (*NotFoundError) configProfileGetInboundsByProfileUuidRes()                            {}
+func (*NotFoundError) configProfileReorderConfigProfilesRes()                               {}
+func (*NotFoundError) configProfileUpdateConfigProfileRes()                                 {}
+func (*NotFoundError) connectionsConnectionsByNodeRes()                                     {}
+func (*NotFoundError) connectionsConnectionsByNodeResultRes()                               {}
+func (*NotFoundError) connectionsConnectionsByUserRes()                                     {}
+func (*NotFoundError) connectionsConnectionsByUserResultRes()                               {}
+func (*NotFoundError) connectionsDropConnectionsRes()                                       {}
+func (*NotFoundError) externalSquadAddUsersToExternalSquadRes()                             {}
+func (*NotFoundError) externalSquadCreateExternalSquadRes()                                 {}
+func (*NotFoundError) externalSquadDeleteExternalSquadRes()                                 {}
+func (*NotFoundError) externalSquadGetExternalSquadByUuidRes()                              {}
+func (*NotFoundError) externalSquadGetExternalSquadsRes()                                   {}
+func (*NotFoundError) externalSquadRemoveUsersFromExternalSquadRes()                        {}
+func (*NotFoundError) externalSquadReorderExternalSquadsRes()                               {}
+func (*NotFoundError) externalSquadUpdateExternalSquadRes()                                 {}
+func (*NotFoundError) hostsBulkActionsDeleteHostsRes()                                      {}
+func (*NotFoundError) hostsBulkActionsDisableHostsRes()                                     {}
+func (*NotFoundError) hostsBulkActionsEnableHostsRes()                                      {}
+func (*NotFoundError) hostsBulkActionsSetPortToHostsRes()                                   {}
+func (*NotFoundError) hostsCreateHostRes()                                                  {}
+func (*NotFoundError) hostsDeleteHostRes()                                                  {}
+func (*NotFoundError) hostsGetHostsRes()                                                    {}
+func (*NotFoundError) hostsGetHostsTagsRes()                                                {}
+func (*NotFoundError) hostsGetOneHostRes()                                                  {}
+func (*NotFoundError) hostsReorderHostsRes()                                                {}
+func (*NotFoundError) hostsUpdateHostRes()                                                  {}
+func (*NotFoundError) hwidUserDevicesCreateUserHwidDeviceRes()                              {}
+func (*NotFoundError) hwidUserDevicesDeleteAllUserHwidDevicesRes()                          {}
+func (*NotFoundError) hwidUserDevicesDeleteUserHwidDeviceRes()                              {}
+func (*NotFoundError) hwidUserDevicesGetAllUsersRes()                                       {}
+func (*NotFoundError) hwidUserDevicesGetHwidDevicesStatsRes()                               {}
+func (*NotFoundError) hwidUserDevicesGetTopUsersByHwidDevicesRes()                          {}
+func (*NotFoundError) hwidUserDevicesGetUserHwidDevicesRes()                                {}
+func (*NotFoundError) infraBillingCreateInfraBillingNodeRes()                               {}
+func (*NotFoundError) infraBillingCreateInfraBillingRecordRes()                             {}
+func (*NotFoundError) infraBillingCreateInfraProviderRes()                                  {}
+func (*NotFoundError) infraBillingDeleteInfraBillingNodeRes()                               {}
+func (*NotFoundError) infraBillingDeleteInfraBillingRecordRes()                             {}
+func (*NotFoundError) infraBillingDelteInfraProviderRes()                                   {}
+func (*NotFoundError) infraBillingGetBillingNodesRes()                                      {}
+func (*NotFoundError) infraBillingGetInfraBillingRecordsRes()                               {}
+func (*NotFoundError) infraBillingGetInfraProviderRes()                                     {}
+func (*NotFoundError) infraBillingGetInfraProvidersRes()                                    {}
+func (*NotFoundError) infraBillingUpdateInfraBillingNodeRes()                               {}
+func (*NotFoundError) infraBillingUpdateInfraProviderRes()                                  {}
+func (*NotFoundError) internalSquadAddManyUsersToInternalSquadRes()                         {}
+func (*NotFoundError) internalSquadAddUsersToInternalSquadRes()                             {}
+func (*NotFoundError) internalSquadCreateInternalSquadRes()                                 {}
+func (*NotFoundError) internalSquadDeleteInternalSquadRes()                                 {}
+func (*NotFoundError) internalSquadGetInternalSquadAccessibleNodesRes()                     {}
+func (*NotFoundError) internalSquadGetInternalSquadByUuidRes()                              {}
+func (*NotFoundError) internalSquadGetInternalSquadUsageRes()                               {}
+func (*NotFoundError) internalSquadGetInternalSquadsRes()                                   {}
+func (*NotFoundError) internalSquadRemoveManyUsersFromInternalSquadRes()                    {}
+func (*NotFoundError) internalSquadRemoveUsersFromInternalSquadRes()                        {}
+func (*NotFoundError) internalSquadReorderInternalSquadsRes()                               {}
+func (*NotFoundError) internalSquadStatsGetInternalSquadUsageRes()                          {}
+func (*NotFoundError) internalSquadStatsGetInternalSquadUserUsageRes()                      {}
+func (*NotFoundError) internalSquadUpdateInternalSquadRes()                                 {}
+func (*NotFoundError) keygenGenerateKeyRes()                                                {}
+func (*NotFoundError) metadataGetNodeMetadataRes()                                          {}
+func (*NotFoundError) metadataGetUserMetadataRes()                                          {}
+func (*NotFoundError) metadataUpsertNodeMetadataRes()                                       {}
+func (*NotFoundError) metadataUpsertUserMetadataRes()                                       {}
+func (*NotFoundError) nodePluginCloneNodePluginRes()                                        {}
+func (*NotFoundError) nodePluginCreateConfigRes()                                           {}
+func (*NotFoundError) nodePluginDeleteConfigRes()                                           {}
+func (*NotFoundError) nodePluginGetAllConfigsRes()                                          {}
+func (*NotFoundError) nodePluginGetConfigByUuidRes()                                        {}
+func (*NotFoundError) nodePluginPluginExecutorRes()                                         {}
+func (*NotFoundError) nodePluginReorderNodePluginsRes()                                     {}
+func (*NotFoundError) nodePluginUpdateConfigRes()                                           {}
+func (*NotFoundError) nodesBulkNodesActionsRes()                                            {}
+func (*NotFoundError) nodesBulkNodesUpdateRes()                                             {}
+func (*NotFoundError) nodesCreateNodeRes()                                                  {}
+func (*NotFoundError) nodesDeleteNodeRes()                                                  {}
+func (*NotFoundError) nodesDisableNodeRes()                                                 {}
+func (*NotFoundError) nodesEnableNodeRes()                                                  {}
+func (*NotFoundError) nodesGetNodeRes()                                                     {}
+func (*NotFoundError) nodesGetNodesRes()                                                    {}
+func (*NotFoundError) nodesGetNodesTagsRes()                                                {}
+func (*NotFoundError) nodesProfileModificationRes()                                         {}
+func (*NotFoundError) nodesReorderNodesRes()                                                {}
+func (*NotFoundError) nodesResetNodeTrafficRes()                                            {}
+func (*NotFoundError) nodesRestartAllNodesRes()                                             {}
+func (*NotFoundError) nodesRestartNodeRes()                                                 {}
+func (*NotFoundError) nodesUpdateNodeRes()                                                  {}
+func (*NotFoundError) nodesUsageHistoryGetStatsNodesUsageRes()                              {}
+func (*NotFoundError) passkeyDeletePasskeyRes()                                             {}
+func (*NotFoundError) passkeyGetActivePasskeysRes()                                         {}
+func (*NotFoundError) passkeyPasskeyRegistrationOptionsRes()                                {}
+func (*NotFoundError) passkeyPasskeyRegistrationVerifyRes()                                 {}
+func (*NotFoundError) passkeyUpdatePasskeyRes()                                             {}
+func (*NotFoundError) remnawaveSettingsGetSettingsRes()                                     {}
+func (*NotFoundError) remnawaveSettingsUpdateSettingsRes()                                  {}
+func (*NotFoundError) snippetsCreateSnippetRes()                                            {}
+func (*NotFoundError) snippetsDeleteSnippetByNameRes()                                      {}
+func (*NotFoundError) snippetsGetSnippetsRes()                                              {}
+func (*NotFoundError) snippetsUpdateSnippetRes()                                            {}
+func (*NotFoundError) subscriptionGetSubscriptionByClientTypeRes()                          {}
+func (*NotFoundError) subscriptionGetSubscriptionInfoByShortUuidRes()                       {}
+func (*NotFoundError) subscriptionGetSubscriptionRes()                                      {}
+func (*NotFoundError) subscriptionPageConfigCloneSubscriptionPageConfigRes()                {}
+func (*NotFoundError) subscriptionPageConfigCreateConfigRes()                               {}
+func (*NotFoundError) subscriptionPageConfigDeleteConfigRes()                               {}
+func (*NotFoundError) subscriptionPageConfigGetAllConfigsRes()                              {}
+func (*NotFoundError) subscriptionPageConfigGetConfigByUuidRes()                            {}
+func (*NotFoundError) subscriptionPageConfigReorderSubscriptionPageConfigsRes()             {}
+func (*NotFoundError) subscriptionPageConfigUpdateConfigRes()                               {}
+func (*NotFoundError) subscriptionSettingsGetSettingsRes()                                  {}
+func (*NotFoundError) subscriptionSettingsUpdateSettingsRes()                               {}
+func (*NotFoundError) subscriptionTemplateCreateTemplateRes()                               {}
+func (*NotFoundError) subscriptionTemplateDeleteTemplateRes()                               {}
+func (*NotFoundError) subscriptionTemplateGetAllTemplatesRes()                              {}
+func (*NotFoundError) subscriptionTemplateGetTemplateByUuidRes()                            {}
+func (*NotFoundError) subscriptionTemplateReorderSubscriptionTemplatesRes()                 {}
+func (*NotFoundError) subscriptionTemplateUpdateTemplateRes()                               {}
+func (*NotFoundError) subscriptionsGetAllSubscriptionsRes()                                 {}
+func (*NotFoundError) subscriptionsGetConnectionKeysByUserIdRes()                           {}
+func (*NotFoundError) subscriptionsGetRawSubscriptionByShortUuidRes()                       {}
+func (*NotFoundError) subscriptionsGetSubpageConfigByShortUuidRes()                         {}
+func (*NotFoundError) subscriptionsGetSubscriptionByShortUuidProtectedRes()                 {}
+func (*NotFoundError) subscriptionsGetSubscriptionByUsernameRes()                           {}
+func (*NotFoundError) subscriptionsGetSubscriptionByUuidRes()                               {}
+func (*NotFoundError) systemDebugSrrMatcherRes()                                            {}
+func (*NotFoundError) systemGetBandwidthStatsRes()                                          {}
+func (*NotFoundError) systemGetConfigurationRes()                                           {}
+func (*NotFoundError) systemGetHttpStatsRes()                                               {}
+func (*NotFoundError) systemGetMetadataRes()                                                {}
+func (*NotFoundError) systemGetNodesMetricsRes()                                            {}
+func (*NotFoundError) systemGetNodesStatisticsRes()                                         {}
+func (*NotFoundError) systemGetRecapRes()                                                   {}
+func (*NotFoundError) systemGetRemnawaveHealthRes()                                         {}
+func (*NotFoundError) systemGetStatsDigestRes()                                             {}
+func (*NotFoundError) systemGetStatsRes()                                                   {}
+func (*NotFoundError) systemGetX25519KeypairsRes()                                          {}
+func (*NotFoundError) torrentBlockerReportsGetTorrentBlockerReportsRes()                    {}
+func (*NotFoundError) torrentBlockerReportsGetTorrentBlockerReportsStatsRes()               {}
+func (*NotFoundError) torrentBlockerReportsTruncateTorrentBlockerReportsRes()               {}
+func (*NotFoundError) userSubscriptionRequestHistoryGetSubscriptionRequestHistoryRes()      {}
+func (*NotFoundError) userSubscriptionRequestHistoryGetSubscriptionRequestHistoryStatsRes() {}
+func (*NotFoundError) usersBulkActionsBulkAllExtendExpirationDateRes()                      {}
+func (*NotFoundError) usersBulkActionsBulkAllResetUserTrafficRes()                          {}
+func (*NotFoundError) usersBulkActionsBulkDeleteUsersByStatusRes()                          {}
+func (*NotFoundError) usersBulkActionsBulkDeleteUsersRes()                                  {}
+func (*NotFoundError) usersBulkActionsBulkExtendExpirationDateRes()                         {}
+func (*NotFoundError) usersBulkActionsBulkResetUserTrafficRes()                             {}
+func (*NotFoundError) usersBulkActionsBulkRevokeUsersSubscriptionRes()                      {}
+func (*NotFoundError) usersBulkActionsBulkUpdateAllUsersRes()                               {}
+func (*NotFoundError) usersBulkActionsBulkUpdateUsersInternalSquadsRes()                    {}
+func (*NotFoundError) usersBulkActionsBulkUpdateUsersRes()                                  {}
+func (*NotFoundError) usersCreateUserRes()                                                  {}
+func (*NotFoundError) usersDeleteUserRes()                                                  {}
+func (*NotFoundError) usersDisableUserRes()                                                 {}
+func (*NotFoundError) usersEnableUserRes()                                                  {}
+func (*NotFoundError) usersExtendUserExpirationDateRes()                                    {}
+func (*NotFoundError) usersGetUserAccessibleNodesRes()                                      {}
+func (*NotFoundError) usersGetUserByIdRes()                                                 {}
+func (*NotFoundError) usersGetUserByShortUuidRes()                                          {}
+func (*NotFoundError) usersGetUserByUsernameRes()                                           {}
+func (*NotFoundError) usersGetUserSubscriptionRequestHistoryRes()                           {}
+func (*NotFoundError) usersGetUsersRes()                                                    {}
+func (*NotFoundError) usersGetUsersStreamRes()                                              {}
+func (*NotFoundError) usersGetUsersTagsRes()                                                {}
+func (*NotFoundError) usersResetUserTrafficRes()                                            {}
+func (*NotFoundError) usersResolveUserRes()                                                 {}
+func (*NotFoundError) usersRevokeUserSubscriptionRes()                                      {}
+func (*NotFoundError) usersUpdateUserRes()                                                  {}
 
-// Ref: #/components/schemas/OAuth2AuthorizeRequest
-type OAuth2AuthorizeRequest struct {
-	Provider OAuth2AuthorizeRequestProvider `json:"provider"`
+// Ref: #/components/schemas/OAuth2AuthorizeBody
+type OAuth2AuthorizeBody struct {
+	Provider OAuth2AuthorizeBodyProvider `json:"provider"`
 }
 
 // GetProvider returns the value of Provider.
-func (s *OAuth2AuthorizeRequest) GetProvider() OAuth2AuthorizeRequestProvider {
+func (s *OAuth2AuthorizeBody) GetProvider() OAuth2AuthorizeBodyProvider {
 	return s.Provider
 }
 
 // SetProvider sets the value of Provider.
-func (s *OAuth2AuthorizeRequest) SetProvider(val OAuth2AuthorizeRequestProvider) {
+func (s *OAuth2AuthorizeBody) SetProvider(val OAuth2AuthorizeBodyProvider) {
 	s.Provider = val
 }
 
-type OAuth2AuthorizeRequestProvider string
+type OAuth2AuthorizeBodyProvider string
 
 const (
-	OAuth2AuthorizeRequestProviderTelegram OAuth2AuthorizeRequestProvider = "telegram"
-	OAuth2AuthorizeRequestProviderGithub   OAuth2AuthorizeRequestProvider = "github"
-	OAuth2AuthorizeRequestProviderPocketid OAuth2AuthorizeRequestProvider = "pocketid"
-	OAuth2AuthorizeRequestProviderYandex   OAuth2AuthorizeRequestProvider = "yandex"
-	OAuth2AuthorizeRequestProviderKeycloak OAuth2AuthorizeRequestProvider = "keycloak"
-	OAuth2AuthorizeRequestProviderGeneric  OAuth2AuthorizeRequestProvider = "generic"
+	OAuth2AuthorizeBodyProviderTelegram OAuth2AuthorizeBodyProvider = "telegram"
+	OAuth2AuthorizeBodyProviderGithub   OAuth2AuthorizeBodyProvider = "github"
+	OAuth2AuthorizeBodyProviderPocketid OAuth2AuthorizeBodyProvider = "pocketid"
+	OAuth2AuthorizeBodyProviderYandex   OAuth2AuthorizeBodyProvider = "yandex"
+	OAuth2AuthorizeBodyProviderKeycloak OAuth2AuthorizeBodyProvider = "keycloak"
+	OAuth2AuthorizeBodyProviderGeneric  OAuth2AuthorizeBodyProvider = "generic"
 )
 
-// AllValues returns all OAuth2AuthorizeRequestProvider values.
-func (OAuth2AuthorizeRequestProvider) AllValues() []OAuth2AuthorizeRequestProvider {
-	return []OAuth2AuthorizeRequestProvider{
-		OAuth2AuthorizeRequestProviderTelegram,
-		OAuth2AuthorizeRequestProviderGithub,
-		OAuth2AuthorizeRequestProviderPocketid,
-		OAuth2AuthorizeRequestProviderYandex,
-		OAuth2AuthorizeRequestProviderKeycloak,
-		OAuth2AuthorizeRequestProviderGeneric,
+// AllValues returns all OAuth2AuthorizeBodyProvider values.
+func (OAuth2AuthorizeBodyProvider) AllValues() []OAuth2AuthorizeBodyProvider {
+	return []OAuth2AuthorizeBodyProvider{
+		OAuth2AuthorizeBodyProviderTelegram,
+		OAuth2AuthorizeBodyProviderGithub,
+		OAuth2AuthorizeBodyProviderPocketid,
+		OAuth2AuthorizeBodyProviderYandex,
+		OAuth2AuthorizeBodyProviderKeycloak,
+		OAuth2AuthorizeBodyProviderGeneric,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s OAuth2AuthorizeRequestProvider) MarshalText() ([]byte, error) {
+func (s OAuth2AuthorizeBodyProvider) MarshalText() ([]byte, error) {
 	switch s {
-	case OAuth2AuthorizeRequestProviderTelegram:
+	case OAuth2AuthorizeBodyProviderTelegram:
 		return []byte(s), nil
-	case OAuth2AuthorizeRequestProviderGithub:
+	case OAuth2AuthorizeBodyProviderGithub:
 		return []byte(s), nil
-	case OAuth2AuthorizeRequestProviderPocketid:
+	case OAuth2AuthorizeBodyProviderPocketid:
 		return []byte(s), nil
-	case OAuth2AuthorizeRequestProviderYandex:
+	case OAuth2AuthorizeBodyProviderYandex:
 		return []byte(s), nil
-	case OAuth2AuthorizeRequestProviderKeycloak:
+	case OAuth2AuthorizeBodyProviderKeycloak:
 		return []byte(s), nil
-	case OAuth2AuthorizeRequestProviderGeneric:
+	case OAuth2AuthorizeBodyProviderGeneric:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -14757,25 +14010,25 @@ func (s OAuth2AuthorizeRequestProvider) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *OAuth2AuthorizeRequestProvider) UnmarshalText(data []byte) error {
-	switch OAuth2AuthorizeRequestProvider(data) {
-	case OAuth2AuthorizeRequestProviderTelegram:
-		*s = OAuth2AuthorizeRequestProviderTelegram
+func (s *OAuth2AuthorizeBodyProvider) UnmarshalText(data []byte) error {
+	switch OAuth2AuthorizeBodyProvider(data) {
+	case OAuth2AuthorizeBodyProviderTelegram:
+		*s = OAuth2AuthorizeBodyProviderTelegram
 		return nil
-	case OAuth2AuthorizeRequestProviderGithub:
-		*s = OAuth2AuthorizeRequestProviderGithub
+	case OAuth2AuthorizeBodyProviderGithub:
+		*s = OAuth2AuthorizeBodyProviderGithub
 		return nil
-	case OAuth2AuthorizeRequestProviderPocketid:
-		*s = OAuth2AuthorizeRequestProviderPocketid
+	case OAuth2AuthorizeBodyProviderPocketid:
+		*s = OAuth2AuthorizeBodyProviderPocketid
 		return nil
-	case OAuth2AuthorizeRequestProviderYandex:
-		*s = OAuth2AuthorizeRequestProviderYandex
+	case OAuth2AuthorizeBodyProviderYandex:
+		*s = OAuth2AuthorizeBodyProviderYandex
 		return nil
-	case OAuth2AuthorizeRequestProviderKeycloak:
-		*s = OAuth2AuthorizeRequestProviderKeycloak
+	case OAuth2AuthorizeBodyProviderKeycloak:
+		*s = OAuth2AuthorizeBodyProviderKeycloak
 		return nil
-	case OAuth2AuthorizeRequestProviderGeneric:
-		*s = OAuth2AuthorizeRequestProviderGeneric
+	case OAuth2AuthorizeBodyProviderGeneric:
+		*s = OAuth2AuthorizeBodyProviderGeneric
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -14797,6 +14050,8 @@ func (s *OAuth2AuthorizeResponse) SetResponse(val OAuth2AuthorizeResponseRespons
 	s.Response = val
 }
 
+func (*OAuth2AuthorizeResponse) authOauth2AuthorizeRes() {}
+
 type OAuth2AuthorizeResponseResponse struct {
 	AuthorizationUrl NilURI `json:"authorizationUrl"`
 }
@@ -14811,108 +14066,80 @@ func (s *OAuth2AuthorizeResponseResponse) SetAuthorizationUrl(val NilURI) {
 	s.AuthorizationUrl = val
 }
 
-// OAuth2AuthorizeResponseStatusCode wraps OAuth2AuthorizeResponse with StatusCode.
-type OAuth2AuthorizeResponseStatusCode struct {
-	StatusCode int
-	Response   OAuth2AuthorizeResponse
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *OAuth2AuthorizeResponseStatusCode) GetStatusCode() int {
-	return s.StatusCode
-}
-
-// GetResponse returns the value of Response.
-func (s *OAuth2AuthorizeResponseStatusCode) GetResponse() OAuth2AuthorizeResponse {
-	return s.Response
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *OAuth2AuthorizeResponseStatusCode) SetStatusCode(val int) {
-	s.StatusCode = val
-}
-
-// SetResponse sets the value of Response.
-func (s *OAuth2AuthorizeResponseStatusCode) SetResponse(val OAuth2AuthorizeResponse) {
-	s.Response = val
-}
-
-func (*OAuth2AuthorizeResponseStatusCode) authOauth2AuthorizeRes() {}
-
-// Ref: #/components/schemas/OAuth2CallbackRequest
-type OAuth2CallbackRequest struct {
-	Provider OAuth2CallbackRequestProvider `json:"provider"`
-	Code     string                        `json:"code"`
-	State    string                        `json:"state"`
+// Ref: #/components/schemas/OAuth2CallbackBody
+type OAuth2CallbackBody struct {
+	Provider OAuth2CallbackBodyProvider `json:"provider"`
+	Code     string                     `json:"code"`
+	State    string                     `json:"state"`
 }
 
 // GetProvider returns the value of Provider.
-func (s *OAuth2CallbackRequest) GetProvider() OAuth2CallbackRequestProvider {
+func (s *OAuth2CallbackBody) GetProvider() OAuth2CallbackBodyProvider {
 	return s.Provider
 }
 
 // GetCode returns the value of Code.
-func (s *OAuth2CallbackRequest) GetCode() string {
+func (s *OAuth2CallbackBody) GetCode() string {
 	return s.Code
 }
 
 // GetState returns the value of State.
-func (s *OAuth2CallbackRequest) GetState() string {
+func (s *OAuth2CallbackBody) GetState() string {
 	return s.State
 }
 
 // SetProvider sets the value of Provider.
-func (s *OAuth2CallbackRequest) SetProvider(val OAuth2CallbackRequestProvider) {
+func (s *OAuth2CallbackBody) SetProvider(val OAuth2CallbackBodyProvider) {
 	s.Provider = val
 }
 
 // SetCode sets the value of Code.
-func (s *OAuth2CallbackRequest) SetCode(val string) {
+func (s *OAuth2CallbackBody) SetCode(val string) {
 	s.Code = val
 }
 
 // SetState sets the value of State.
-func (s *OAuth2CallbackRequest) SetState(val string) {
+func (s *OAuth2CallbackBody) SetState(val string) {
 	s.State = val
 }
 
-type OAuth2CallbackRequestProvider string
+type OAuth2CallbackBodyProvider string
 
 const (
-	OAuth2CallbackRequestProviderTelegram OAuth2CallbackRequestProvider = "telegram"
-	OAuth2CallbackRequestProviderGithub   OAuth2CallbackRequestProvider = "github"
-	OAuth2CallbackRequestProviderPocketid OAuth2CallbackRequestProvider = "pocketid"
-	OAuth2CallbackRequestProviderYandex   OAuth2CallbackRequestProvider = "yandex"
-	OAuth2CallbackRequestProviderKeycloak OAuth2CallbackRequestProvider = "keycloak"
-	OAuth2CallbackRequestProviderGeneric  OAuth2CallbackRequestProvider = "generic"
+	OAuth2CallbackBodyProviderTelegram OAuth2CallbackBodyProvider = "telegram"
+	OAuth2CallbackBodyProviderGithub   OAuth2CallbackBodyProvider = "github"
+	OAuth2CallbackBodyProviderPocketid OAuth2CallbackBodyProvider = "pocketid"
+	OAuth2CallbackBodyProviderYandex   OAuth2CallbackBodyProvider = "yandex"
+	OAuth2CallbackBodyProviderKeycloak OAuth2CallbackBodyProvider = "keycloak"
+	OAuth2CallbackBodyProviderGeneric  OAuth2CallbackBodyProvider = "generic"
 )
 
-// AllValues returns all OAuth2CallbackRequestProvider values.
-func (OAuth2CallbackRequestProvider) AllValues() []OAuth2CallbackRequestProvider {
-	return []OAuth2CallbackRequestProvider{
-		OAuth2CallbackRequestProviderTelegram,
-		OAuth2CallbackRequestProviderGithub,
-		OAuth2CallbackRequestProviderPocketid,
-		OAuth2CallbackRequestProviderYandex,
-		OAuth2CallbackRequestProviderKeycloak,
-		OAuth2CallbackRequestProviderGeneric,
+// AllValues returns all OAuth2CallbackBodyProvider values.
+func (OAuth2CallbackBodyProvider) AllValues() []OAuth2CallbackBodyProvider {
+	return []OAuth2CallbackBodyProvider{
+		OAuth2CallbackBodyProviderTelegram,
+		OAuth2CallbackBodyProviderGithub,
+		OAuth2CallbackBodyProviderPocketid,
+		OAuth2CallbackBodyProviderYandex,
+		OAuth2CallbackBodyProviderKeycloak,
+		OAuth2CallbackBodyProviderGeneric,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s OAuth2CallbackRequestProvider) MarshalText() ([]byte, error) {
+func (s OAuth2CallbackBodyProvider) MarshalText() ([]byte, error) {
 	switch s {
-	case OAuth2CallbackRequestProviderTelegram:
+	case OAuth2CallbackBodyProviderTelegram:
 		return []byte(s), nil
-	case OAuth2CallbackRequestProviderGithub:
+	case OAuth2CallbackBodyProviderGithub:
 		return []byte(s), nil
-	case OAuth2CallbackRequestProviderPocketid:
+	case OAuth2CallbackBodyProviderPocketid:
 		return []byte(s), nil
-	case OAuth2CallbackRequestProviderYandex:
+	case OAuth2CallbackBodyProviderYandex:
 		return []byte(s), nil
-	case OAuth2CallbackRequestProviderKeycloak:
+	case OAuth2CallbackBodyProviderKeycloak:
 		return []byte(s), nil
-	case OAuth2CallbackRequestProviderGeneric:
+	case OAuth2CallbackBodyProviderGeneric:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -14920,25 +14147,25 @@ func (s OAuth2CallbackRequestProvider) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *OAuth2CallbackRequestProvider) UnmarshalText(data []byte) error {
-	switch OAuth2CallbackRequestProvider(data) {
-	case OAuth2CallbackRequestProviderTelegram:
-		*s = OAuth2CallbackRequestProviderTelegram
+func (s *OAuth2CallbackBodyProvider) UnmarshalText(data []byte) error {
+	switch OAuth2CallbackBodyProvider(data) {
+	case OAuth2CallbackBodyProviderTelegram:
+		*s = OAuth2CallbackBodyProviderTelegram
 		return nil
-	case OAuth2CallbackRequestProviderGithub:
-		*s = OAuth2CallbackRequestProviderGithub
+	case OAuth2CallbackBodyProviderGithub:
+		*s = OAuth2CallbackBodyProviderGithub
 		return nil
-	case OAuth2CallbackRequestProviderPocketid:
-		*s = OAuth2CallbackRequestProviderPocketid
+	case OAuth2CallbackBodyProviderPocketid:
+		*s = OAuth2CallbackBodyProviderPocketid
 		return nil
-	case OAuth2CallbackRequestProviderYandex:
-		*s = OAuth2CallbackRequestProviderYandex
+	case OAuth2CallbackBodyProviderYandex:
+		*s = OAuth2CallbackBodyProviderYandex
 		return nil
-	case OAuth2CallbackRequestProviderKeycloak:
-		*s = OAuth2CallbackRequestProviderKeycloak
+	case OAuth2CallbackBodyProviderKeycloak:
+		*s = OAuth2CallbackBodyProviderKeycloak
 		return nil
-	case OAuth2CallbackRequestProviderGeneric:
-		*s = OAuth2CallbackRequestProviderGeneric
+	case OAuth2CallbackBodyProviderGeneric:
+		*s = OAuth2CallbackBodyProviderGeneric
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -15061,38 +14288,38 @@ func (o OptBool) Or(d bool) bool {
 	return d
 }
 
-// NewOptBulkAllUpdateUsersRequestStatus returns new OptBulkAllUpdateUsersRequestStatus with value set to v.
-func NewOptBulkAllUpdateUsersRequestStatus(v BulkAllUpdateUsersRequestStatus) OptBulkAllUpdateUsersRequestStatus {
-	return OptBulkAllUpdateUsersRequestStatus{
+// NewOptBulkAllUpdateUsersBodyStatus returns new OptBulkAllUpdateUsersBodyStatus with value set to v.
+func NewOptBulkAllUpdateUsersBodyStatus(v BulkAllUpdateUsersBodyStatus) OptBulkAllUpdateUsersBodyStatus {
+	return OptBulkAllUpdateUsersBodyStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptBulkAllUpdateUsersRequestStatus is optional BulkAllUpdateUsersRequestStatus.
-type OptBulkAllUpdateUsersRequestStatus struct {
-	Value BulkAllUpdateUsersRequestStatus
+// OptBulkAllUpdateUsersBodyStatus is optional BulkAllUpdateUsersBodyStatus.
+type OptBulkAllUpdateUsersBodyStatus struct {
+	Value BulkAllUpdateUsersBodyStatus
 	Set   bool
 }
 
-// IsSet returns true if OptBulkAllUpdateUsersRequestStatus was set.
-func (o OptBulkAllUpdateUsersRequestStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptBulkAllUpdateUsersBodyStatus was set.
+func (o OptBulkAllUpdateUsersBodyStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptBulkAllUpdateUsersRequestStatus) Reset() {
-	var v BulkAllUpdateUsersRequestStatus
+func (o *OptBulkAllUpdateUsersBodyStatus) Reset() {
+	var v BulkAllUpdateUsersBodyStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptBulkAllUpdateUsersRequestStatus) SetTo(v BulkAllUpdateUsersRequestStatus) {
+func (o *OptBulkAllUpdateUsersBodyStatus) SetTo(v BulkAllUpdateUsersBodyStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptBulkAllUpdateUsersRequestStatus) Get() (v BulkAllUpdateUsersRequestStatus, ok bool) {
+func (o OptBulkAllUpdateUsersBodyStatus) Get() (v BulkAllUpdateUsersBodyStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15100,45 +14327,45 @@ func (o OptBulkAllUpdateUsersRequestStatus) Get() (v BulkAllUpdateUsersRequestSt
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptBulkAllUpdateUsersRequestStatus) Or(d BulkAllUpdateUsersRequestStatus) BulkAllUpdateUsersRequestStatus {
+func (o OptBulkAllUpdateUsersBodyStatus) Or(d BulkAllUpdateUsersBodyStatus) BulkAllUpdateUsersBodyStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptBulkAllUpdateUsersRequestTrafficLimitStrategy returns new OptBulkAllUpdateUsersRequestTrafficLimitStrategy with value set to v.
-func NewOptBulkAllUpdateUsersRequestTrafficLimitStrategy(v BulkAllUpdateUsersRequestTrafficLimitStrategy) OptBulkAllUpdateUsersRequestTrafficLimitStrategy {
-	return OptBulkAllUpdateUsersRequestTrafficLimitStrategy{
+// NewOptBulkAllUpdateUsersBodyTrafficLimitStrategy returns new OptBulkAllUpdateUsersBodyTrafficLimitStrategy with value set to v.
+func NewOptBulkAllUpdateUsersBodyTrafficLimitStrategy(v BulkAllUpdateUsersBodyTrafficLimitStrategy) OptBulkAllUpdateUsersBodyTrafficLimitStrategy {
+	return OptBulkAllUpdateUsersBodyTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptBulkAllUpdateUsersRequestTrafficLimitStrategy is optional BulkAllUpdateUsersRequestTrafficLimitStrategy.
-type OptBulkAllUpdateUsersRequestTrafficLimitStrategy struct {
-	Value BulkAllUpdateUsersRequestTrafficLimitStrategy
+// OptBulkAllUpdateUsersBodyTrafficLimitStrategy is optional BulkAllUpdateUsersBodyTrafficLimitStrategy.
+type OptBulkAllUpdateUsersBodyTrafficLimitStrategy struct {
+	Value BulkAllUpdateUsersBodyTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptBulkAllUpdateUsersRequestTrafficLimitStrategy was set.
-func (o OptBulkAllUpdateUsersRequestTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptBulkAllUpdateUsersBodyTrafficLimitStrategy was set.
+func (o OptBulkAllUpdateUsersBodyTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptBulkAllUpdateUsersRequestTrafficLimitStrategy) Reset() {
-	var v BulkAllUpdateUsersRequestTrafficLimitStrategy
+func (o *OptBulkAllUpdateUsersBodyTrafficLimitStrategy) Reset() {
+	var v BulkAllUpdateUsersBodyTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptBulkAllUpdateUsersRequestTrafficLimitStrategy) SetTo(v BulkAllUpdateUsersRequestTrafficLimitStrategy) {
+func (o *OptBulkAllUpdateUsersBodyTrafficLimitStrategy) SetTo(v BulkAllUpdateUsersBodyTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptBulkAllUpdateUsersRequestTrafficLimitStrategy) Get() (v BulkAllUpdateUsersRequestTrafficLimitStrategy, ok bool) {
+func (o OptBulkAllUpdateUsersBodyTrafficLimitStrategy) Get() (v BulkAllUpdateUsersBodyTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15146,45 +14373,45 @@ func (o OptBulkAllUpdateUsersRequestTrafficLimitStrategy) Get() (v BulkAllUpdate
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptBulkAllUpdateUsersRequestTrafficLimitStrategy) Or(d BulkAllUpdateUsersRequestTrafficLimitStrategy) BulkAllUpdateUsersRequestTrafficLimitStrategy {
+func (o OptBulkAllUpdateUsersBodyTrafficLimitStrategy) Or(d BulkAllUpdateUsersBodyTrafficLimitStrategy) BulkAllUpdateUsersBodyTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptBulkDeleteUsersByStatusRequestStatus returns new OptBulkDeleteUsersByStatusRequestStatus with value set to v.
-func NewOptBulkDeleteUsersByStatusRequestStatus(v BulkDeleteUsersByStatusRequestStatus) OptBulkDeleteUsersByStatusRequestStatus {
-	return OptBulkDeleteUsersByStatusRequestStatus{
+// NewOptBulkUpdateUsersBodyFieldsStatus returns new OptBulkUpdateUsersBodyFieldsStatus with value set to v.
+func NewOptBulkUpdateUsersBodyFieldsStatus(v BulkUpdateUsersBodyFieldsStatus) OptBulkUpdateUsersBodyFieldsStatus {
+	return OptBulkUpdateUsersBodyFieldsStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptBulkDeleteUsersByStatusRequestStatus is optional BulkDeleteUsersByStatusRequestStatus.
-type OptBulkDeleteUsersByStatusRequestStatus struct {
-	Value BulkDeleteUsersByStatusRequestStatus
+// OptBulkUpdateUsersBodyFieldsStatus is optional BulkUpdateUsersBodyFieldsStatus.
+type OptBulkUpdateUsersBodyFieldsStatus struct {
+	Value BulkUpdateUsersBodyFieldsStatus
 	Set   bool
 }
 
-// IsSet returns true if OptBulkDeleteUsersByStatusRequestStatus was set.
-func (o OptBulkDeleteUsersByStatusRequestStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptBulkUpdateUsersBodyFieldsStatus was set.
+func (o OptBulkUpdateUsersBodyFieldsStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptBulkDeleteUsersByStatusRequestStatus) Reset() {
-	var v BulkDeleteUsersByStatusRequestStatus
+func (o *OptBulkUpdateUsersBodyFieldsStatus) Reset() {
+	var v BulkUpdateUsersBodyFieldsStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptBulkDeleteUsersByStatusRequestStatus) SetTo(v BulkDeleteUsersByStatusRequestStatus) {
+func (o *OptBulkUpdateUsersBodyFieldsStatus) SetTo(v BulkUpdateUsersBodyFieldsStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptBulkDeleteUsersByStatusRequestStatus) Get() (v BulkDeleteUsersByStatusRequestStatus, ok bool) {
+func (o OptBulkUpdateUsersBodyFieldsStatus) Get() (v BulkUpdateUsersBodyFieldsStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15192,45 +14419,45 @@ func (o OptBulkDeleteUsersByStatusRequestStatus) Get() (v BulkDeleteUsersByStatu
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptBulkDeleteUsersByStatusRequestStatus) Or(d BulkDeleteUsersByStatusRequestStatus) BulkDeleteUsersByStatusRequestStatus {
+func (o OptBulkUpdateUsersBodyFieldsStatus) Or(d BulkUpdateUsersBodyFieldsStatus) BulkUpdateUsersBodyFieldsStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptBulkUpdateUsersRequestFieldsStatus returns new OptBulkUpdateUsersRequestFieldsStatus with value set to v.
-func NewOptBulkUpdateUsersRequestFieldsStatus(v BulkUpdateUsersRequestFieldsStatus) OptBulkUpdateUsersRequestFieldsStatus {
-	return OptBulkUpdateUsersRequestFieldsStatus{
+// NewOptBulkUpdateUsersBodyFieldsTrafficLimitStrategy returns new OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy with value set to v.
+func NewOptBulkUpdateUsersBodyFieldsTrafficLimitStrategy(v BulkUpdateUsersBodyFieldsTrafficLimitStrategy) OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy {
+	return OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptBulkUpdateUsersRequestFieldsStatus is optional BulkUpdateUsersRequestFieldsStatus.
-type OptBulkUpdateUsersRequestFieldsStatus struct {
-	Value BulkUpdateUsersRequestFieldsStatus
+// OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy is optional BulkUpdateUsersBodyFieldsTrafficLimitStrategy.
+type OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy struct {
+	Value BulkUpdateUsersBodyFieldsTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptBulkUpdateUsersRequestFieldsStatus was set.
-func (o OptBulkUpdateUsersRequestFieldsStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy was set.
+func (o OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptBulkUpdateUsersRequestFieldsStatus) Reset() {
-	var v BulkUpdateUsersRequestFieldsStatus
+func (o *OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) Reset() {
+	var v BulkUpdateUsersBodyFieldsTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptBulkUpdateUsersRequestFieldsStatus) SetTo(v BulkUpdateUsersRequestFieldsStatus) {
+func (o *OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) SetTo(v BulkUpdateUsersBodyFieldsTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptBulkUpdateUsersRequestFieldsStatus) Get() (v BulkUpdateUsersRequestFieldsStatus, ok bool) {
+func (o OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) Get() (v BulkUpdateUsersBodyFieldsTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15238,45 +14465,45 @@ func (o OptBulkUpdateUsersRequestFieldsStatus) Get() (v BulkUpdateUsersRequestFi
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptBulkUpdateUsersRequestFieldsStatus) Or(d BulkUpdateUsersRequestFieldsStatus) BulkUpdateUsersRequestFieldsStatus {
+func (o OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) Or(d BulkUpdateUsersBodyFieldsTrafficLimitStrategy) BulkUpdateUsersBodyFieldsTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptBulkUpdateUsersRequestFieldsTrafficLimitStrategy returns new OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy with value set to v.
-func NewOptBulkUpdateUsersRequestFieldsTrafficLimitStrategy(v BulkUpdateUsersRequestFieldsTrafficLimitStrategy) OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy {
-	return OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy{
+// NewOptConfigProfile2 returns new OptConfigProfile2 with value set to v.
+func NewOptConfigProfile2(v ConfigProfile2) OptConfigProfile2 {
+	return OptConfigProfile2{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy is optional BulkUpdateUsersRequestFieldsTrafficLimitStrategy.
-type OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy struct {
-	Value BulkUpdateUsersRequestFieldsTrafficLimitStrategy
+// OptConfigProfile2 is optional ConfigProfile2.
+type OptConfigProfile2 struct {
+	Value ConfigProfile2
 	Set   bool
 }
 
-// IsSet returns true if OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy was set.
-func (o OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptConfigProfile2 was set.
+func (o OptConfigProfile2) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) Reset() {
-	var v BulkUpdateUsersRequestFieldsTrafficLimitStrategy
+func (o *OptConfigProfile2) Reset() {
+	var v ConfigProfile2
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) SetTo(v BulkUpdateUsersRequestFieldsTrafficLimitStrategy) {
+func (o *OptConfigProfile2) SetTo(v ConfigProfile2) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) Get() (v BulkUpdateUsersRequestFieldsTrafficLimitStrategy, ok bool) {
+func (o OptConfigProfile2) Get() (v ConfigProfile2, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15284,45 +14511,45 @@ func (o OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) Get() (v BulkUpdate
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) Or(d BulkUpdateUsersRequestFieldsTrafficLimitStrategy) BulkUpdateUsersRequestFieldsTrafficLimitStrategy {
+func (o OptConfigProfile2) Or(d ConfigProfile2) ConfigProfile2 {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptConfigProfileRef returns new OptConfigProfileRef with value set to v.
-func NewOptConfigProfileRef(v ConfigProfileRef) OptConfigProfileRef {
-	return OptConfigProfileRef{
+// NewOptCreateHostBodySecurityLayer returns new OptCreateHostBodySecurityLayer with value set to v.
+func NewOptCreateHostBodySecurityLayer(v CreateHostBodySecurityLayer) OptCreateHostBodySecurityLayer {
+	return OptCreateHostBodySecurityLayer{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptConfigProfileRef is optional ConfigProfileRef.
-type OptConfigProfileRef struct {
-	Value ConfigProfileRef
+// OptCreateHostBodySecurityLayer is optional CreateHostBodySecurityLayer.
+type OptCreateHostBodySecurityLayer struct {
+	Value CreateHostBodySecurityLayer
 	Set   bool
 }
 
-// IsSet returns true if OptConfigProfileRef was set.
-func (o OptConfigProfileRef) IsSet() bool { return o.Set }
+// IsSet returns true if OptCreateHostBodySecurityLayer was set.
+func (o OptCreateHostBodySecurityLayer) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptConfigProfileRef) Reset() {
-	var v ConfigProfileRef
+func (o *OptCreateHostBodySecurityLayer) Reset() {
+	var v CreateHostBodySecurityLayer
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptConfigProfileRef) SetTo(v ConfigProfileRef) {
+func (o *OptCreateHostBodySecurityLayer) SetTo(v CreateHostBodySecurityLayer) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptConfigProfileRef) Get() (v ConfigProfileRef, ok bool) {
+func (o OptCreateHostBodySecurityLayer) Get() (v CreateHostBodySecurityLayer, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15330,45 +14557,45 @@ func (o OptConfigProfileRef) Get() (v ConfigProfileRef, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptConfigProfileRef) Or(d ConfigProfileRef) ConfigProfileRef {
+func (o OptCreateHostBodySecurityLayer) Or(d CreateHostBodySecurityLayer) CreateHostBodySecurityLayer {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptCreateHostRequestSecurityLayer returns new OptCreateHostRequestSecurityLayer with value set to v.
-func NewOptCreateHostRequestSecurityLayer(v CreateHostRequestSecurityLayer) OptCreateHostRequestSecurityLayer {
-	return OptCreateHostRequestSecurityLayer{
+// NewOptCreateUserBodyStatus returns new OptCreateUserBodyStatus with value set to v.
+func NewOptCreateUserBodyStatus(v CreateUserBodyStatus) OptCreateUserBodyStatus {
+	return OptCreateUserBodyStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptCreateHostRequestSecurityLayer is optional CreateHostRequestSecurityLayer.
-type OptCreateHostRequestSecurityLayer struct {
-	Value CreateHostRequestSecurityLayer
+// OptCreateUserBodyStatus is optional CreateUserBodyStatus.
+type OptCreateUserBodyStatus struct {
+	Value CreateUserBodyStatus
 	Set   bool
 }
 
-// IsSet returns true if OptCreateHostRequestSecurityLayer was set.
-func (o OptCreateHostRequestSecurityLayer) IsSet() bool { return o.Set }
+// IsSet returns true if OptCreateUserBodyStatus was set.
+func (o OptCreateUserBodyStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptCreateHostRequestSecurityLayer) Reset() {
-	var v CreateHostRequestSecurityLayer
+func (o *OptCreateUserBodyStatus) Reset() {
+	var v CreateUserBodyStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptCreateHostRequestSecurityLayer) SetTo(v CreateHostRequestSecurityLayer) {
+func (o *OptCreateUserBodyStatus) SetTo(v CreateUserBodyStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptCreateHostRequestSecurityLayer) Get() (v CreateHostRequestSecurityLayer, ok bool) {
+func (o OptCreateUserBodyStatus) Get() (v CreateUserBodyStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15376,45 +14603,45 @@ func (o OptCreateHostRequestSecurityLayer) Get() (v CreateHostRequestSecurityLay
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptCreateHostRequestSecurityLayer) Or(d CreateHostRequestSecurityLayer) CreateHostRequestSecurityLayer {
+func (o OptCreateUserBodyStatus) Or(d CreateUserBodyStatus) CreateUserBodyStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptCreateUserRequestStatus returns new OptCreateUserRequestStatus with value set to v.
-func NewOptCreateUserRequestStatus(v CreateUserRequestStatus) OptCreateUserRequestStatus {
-	return OptCreateUserRequestStatus{
+// NewOptCreateUserBodyTrafficLimitStrategy returns new OptCreateUserBodyTrafficLimitStrategy with value set to v.
+func NewOptCreateUserBodyTrafficLimitStrategy(v CreateUserBodyTrafficLimitStrategy) OptCreateUserBodyTrafficLimitStrategy {
+	return OptCreateUserBodyTrafficLimitStrategy{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptCreateUserRequestStatus is optional CreateUserRequestStatus.
-type OptCreateUserRequestStatus struct {
-	Value CreateUserRequestStatus
+// OptCreateUserBodyTrafficLimitStrategy is optional CreateUserBodyTrafficLimitStrategy.
+type OptCreateUserBodyTrafficLimitStrategy struct {
+	Value CreateUserBodyTrafficLimitStrategy
 	Set   bool
 }
 
-// IsSet returns true if OptCreateUserRequestStatus was set.
-func (o OptCreateUserRequestStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptCreateUserBodyTrafficLimitStrategy was set.
+func (o OptCreateUserBodyTrafficLimitStrategy) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptCreateUserRequestStatus) Reset() {
-	var v CreateUserRequestStatus
+func (o *OptCreateUserBodyTrafficLimitStrategy) Reset() {
+	var v CreateUserBodyTrafficLimitStrategy
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptCreateUserRequestStatus) SetTo(v CreateUserRequestStatus) {
+func (o *OptCreateUserBodyTrafficLimitStrategy) SetTo(v CreateUserBodyTrafficLimitStrategy) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptCreateUserRequestStatus) Get() (v CreateUserRequestStatus, ok bool) {
+func (o OptCreateUserBodyTrafficLimitStrategy) Get() (v CreateUserBodyTrafficLimitStrategy, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15422,53 +14649,7 @@ func (o OptCreateUserRequestStatus) Get() (v CreateUserRequestStatus, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptCreateUserRequestStatus) Or(d CreateUserRequestStatus) CreateUserRequestStatus {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptCreateUserRequestTrafficLimitStrategy returns new OptCreateUserRequestTrafficLimitStrategy with value set to v.
-func NewOptCreateUserRequestTrafficLimitStrategy(v CreateUserRequestTrafficLimitStrategy) OptCreateUserRequestTrafficLimitStrategy {
-	return OptCreateUserRequestTrafficLimitStrategy{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptCreateUserRequestTrafficLimitStrategy is optional CreateUserRequestTrafficLimitStrategy.
-type OptCreateUserRequestTrafficLimitStrategy struct {
-	Value CreateUserRequestTrafficLimitStrategy
-	Set   bool
-}
-
-// IsSet returns true if OptCreateUserRequestTrafficLimitStrategy was set.
-func (o OptCreateUserRequestTrafficLimitStrategy) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptCreateUserRequestTrafficLimitStrategy) Reset() {
-	var v CreateUserRequestTrafficLimitStrategy
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptCreateUserRequestTrafficLimitStrategy) SetTo(v CreateUserRequestTrafficLimitStrategy) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptCreateUserRequestTrafficLimitStrategy) Get() (v CreateUserRequestTrafficLimitStrategy, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptCreateUserRequestTrafficLimitStrategy) Or(d CreateUserRequestTrafficLimitStrategy) CreateUserRequestTrafficLimitStrategy {
+func (o OptCreateUserBodyTrafficLimitStrategy) Or(d CreateUserBodyTrafficLimitStrategy) CreateUserBodyTrafficLimitStrategy {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -15521,38 +14702,38 @@ func (o OptDateTime) Or(d time.Time) time.Time {
 	return d
 }
 
-// NewOptDebugSrrMatcherSettings returns new OptDebugSrrMatcherSettings with value set to v.
-func NewOptDebugSrrMatcherSettings(v DebugSrrMatcherSettings) OptDebugSrrMatcherSettings {
-	return OptDebugSrrMatcherSettings{
+// NewOptDebugSrrMatcherBodySettings returns new OptDebugSrrMatcherBodySettings with value set to v.
+func NewOptDebugSrrMatcherBodySettings(v DebugSrrMatcherBodySettings) OptDebugSrrMatcherBodySettings {
+	return OptDebugSrrMatcherBodySettings{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptDebugSrrMatcherSettings is optional DebugSrrMatcherSettings.
-type OptDebugSrrMatcherSettings struct {
-	Value DebugSrrMatcherSettings
+// OptDebugSrrMatcherBodySettings is optional DebugSrrMatcherBodySettings.
+type OptDebugSrrMatcherBodySettings struct {
+	Value DebugSrrMatcherBodySettings
 	Set   bool
 }
 
-// IsSet returns true if OptDebugSrrMatcherSettings was set.
-func (o OptDebugSrrMatcherSettings) IsSet() bool { return o.Set }
+// IsSet returns true if OptDebugSrrMatcherBodySettings was set.
+func (o OptDebugSrrMatcherBodySettings) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptDebugSrrMatcherSettings) Reset() {
-	var v DebugSrrMatcherSettings
+func (o *OptDebugSrrMatcherBodySettings) Reset() {
+	var v DebugSrrMatcherBodySettings
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptDebugSrrMatcherSettings) SetTo(v DebugSrrMatcherSettings) {
+func (o *OptDebugSrrMatcherBodySettings) SetTo(v DebugSrrMatcherBodySettings) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptDebugSrrMatcherSettings) Get() (v DebugSrrMatcherSettings, ok bool) {
+func (o OptDebugSrrMatcherBodySettings) Get() (v DebugSrrMatcherBodySettings, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -15560,7 +14741,7 @@ func (o OptDebugSrrMatcherSettings) Get() (v DebugSrrMatcherSettings, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptDebugSrrMatcherSettings) Or(d DebugSrrMatcherSettings) DebugSrrMatcherSettings {
+func (o OptDebugSrrMatcherBodySettings) Or(d DebugSrrMatcherBodySettings) DebugSrrMatcherBodySettings {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -15705,246 +14886,6 @@ func (o OptGeneric) Or(d Generic) Generic {
 	return d
 }
 
-// NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions returns new OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions {
-	return OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions is optional GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions.
-type OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	Set   bool
-}
-
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request returns new OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request {
-	return OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request is optional GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request.
-type OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request
-	Set   bool
-}
-
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders returns new OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders {
-	return OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders is optional GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders.
-type OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders
-	Set   bool
-}
-
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response returns new OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response {
-	return OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response is optional GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response.
-type OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response
-	Set   bool
-}
-
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders returns new OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders with value set to v.
-func NewOptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders {
-	return OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders is optional GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders.
-type OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders struct {
-	Value GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders
-	Set   bool
-}
-
-// IsSet returns true if OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) IsSet() bool {
-	return o.Set
-}
-
-// Reset unsets value.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) Reset() {
-	var v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) SetTo(v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) Get() (v GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) Or(d GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptHostItemSecurityLayer returns new OptHostItemSecurityLayer with value set to v.
 func NewOptHostItemSecurityLayer(v HostItemSecurityLayer) OptHostItemSecurityLayer {
 	return OptHostItemSecurityLayer{
@@ -15991,38 +14932,38 @@ func (o OptHostItemSecurityLayer) Or(d HostItemSecurityLayer) HostItemSecurityLa
 	return d
 }
 
-// NewOptInboundRef returns new OptInboundRef with value set to v.
-func NewOptInboundRef(v InboundRef) OptInboundRef {
-	return OptInboundRef{
+// NewOptInbound2 returns new OptInbound2 with value set to v.
+func NewOptInbound2(v Inbound2) OptInbound2 {
+	return OptInbound2{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptInboundRef is optional InboundRef.
-type OptInboundRef struct {
-	Value InboundRef
+// OptInbound2 is optional Inbound2.
+type OptInbound2 struct {
+	Value Inbound2
 	Set   bool
 }
 
-// IsSet returns true if OptInboundRef was set.
-func (o OptInboundRef) IsSet() bool { return o.Set }
+// IsSet returns true if OptInbound2 was set.
+func (o OptInbound2) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptInboundRef) Reset() {
-	var v InboundRef
+func (o *OptInbound2) Reset() {
+	var v Inbound2
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptInboundRef) SetTo(v InboundRef) {
+func (o *OptInbound2) SetTo(v Inbound2) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptInboundRef) Get() (v InboundRef, ok bool) {
+func (o OptInbound2) Get() (v Inbound2, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -16030,7 +14971,7 @@ func (o OptInboundRef) Get() (v InboundRef, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptInboundRef) Or(d InboundRef) InboundRef {
+func (o OptInbound2) Or(d Inbound2) Inbound2 {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16192,52 +15133,52 @@ func (o OptNilBrandingSettings) Or(d BrandingSettings) BrandingSettings {
 	return d
 }
 
-// NewOptNilCreateHostRequestAlpn returns new OptNilCreateHostRequestAlpn with value set to v.
-func NewOptNilCreateHostRequestAlpn(v CreateHostRequestAlpn) OptNilCreateHostRequestAlpn {
-	return OptNilCreateHostRequestAlpn{
+// NewOptNilCreateHostBodyAlpn returns new OptNilCreateHostBodyAlpn with value set to v.
+func NewOptNilCreateHostBodyAlpn(v CreateHostBodyAlpn) OptNilCreateHostBodyAlpn {
+	return OptNilCreateHostBodyAlpn{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptNilCreateHostRequestAlpn is optional nullable CreateHostRequestAlpn.
-type OptNilCreateHostRequestAlpn struct {
-	Value CreateHostRequestAlpn
+// OptNilCreateHostBodyAlpn is optional nullable CreateHostBodyAlpn.
+type OptNilCreateHostBodyAlpn struct {
+	Value CreateHostBodyAlpn
 	Set   bool
 	Null  bool
 }
 
-// IsSet returns true if OptNilCreateHostRequestAlpn was set.
-func (o OptNilCreateHostRequestAlpn) IsSet() bool { return o.Set }
+// IsSet returns true if OptNilCreateHostBodyAlpn was set.
+func (o OptNilCreateHostBodyAlpn) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptNilCreateHostRequestAlpn) Reset() {
-	var v CreateHostRequestAlpn
+func (o *OptNilCreateHostBodyAlpn) Reset() {
+	var v CreateHostBodyAlpn
 	o.Value = v
 	o.Set = false
 	o.Null = false
 }
 
 // SetTo sets value to v.
-func (o *OptNilCreateHostRequestAlpn) SetTo(v CreateHostRequestAlpn) {
+func (o *OptNilCreateHostBodyAlpn) SetTo(v CreateHostBodyAlpn) {
 	o.Set = true
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o OptNilCreateHostRequestAlpn) IsNull() bool { return o.Null }
+func (o OptNilCreateHostBodyAlpn) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *OptNilCreateHostRequestAlpn) SetToNull() {
+func (o *OptNilCreateHostBodyAlpn) SetToNull() {
 	o.Set = true
 	o.Null = true
-	var v CreateHostRequestAlpn
+	var v CreateHostBodyAlpn
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptNilCreateHostRequestAlpn) Get() (v CreateHostRequestAlpn, ok bool) {
+func (o OptNilCreateHostBodyAlpn) Get() (v CreateHostBodyAlpn, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -16248,59 +15189,59 @@ func (o OptNilCreateHostRequestAlpn) Get() (v CreateHostRequestAlpn, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptNilCreateHostRequestAlpn) Or(d CreateHostRequestAlpn) CreateHostRequestAlpn {
+func (o OptNilCreateHostBodyAlpn) Or(d CreateHostBodyAlpn) CreateHostBodyAlpn {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptNilCreateHostRequestMihomoIpVersion returns new OptNilCreateHostRequestMihomoIpVersion with value set to v.
-func NewOptNilCreateHostRequestMihomoIpVersion(v CreateHostRequestMihomoIpVersion) OptNilCreateHostRequestMihomoIpVersion {
-	return OptNilCreateHostRequestMihomoIpVersion{
+// NewOptNilCreateHostBodyMihomoIpVersion returns new OptNilCreateHostBodyMihomoIpVersion with value set to v.
+func NewOptNilCreateHostBodyMihomoIpVersion(v CreateHostBodyMihomoIpVersion) OptNilCreateHostBodyMihomoIpVersion {
+	return OptNilCreateHostBodyMihomoIpVersion{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptNilCreateHostRequestMihomoIpVersion is optional nullable CreateHostRequestMihomoIpVersion.
-type OptNilCreateHostRequestMihomoIpVersion struct {
-	Value CreateHostRequestMihomoIpVersion
+// OptNilCreateHostBodyMihomoIpVersion is optional nullable CreateHostBodyMihomoIpVersion.
+type OptNilCreateHostBodyMihomoIpVersion struct {
+	Value CreateHostBodyMihomoIpVersion
 	Set   bool
 	Null  bool
 }
 
-// IsSet returns true if OptNilCreateHostRequestMihomoIpVersion was set.
-func (o OptNilCreateHostRequestMihomoIpVersion) IsSet() bool { return o.Set }
+// IsSet returns true if OptNilCreateHostBodyMihomoIpVersion was set.
+func (o OptNilCreateHostBodyMihomoIpVersion) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptNilCreateHostRequestMihomoIpVersion) Reset() {
-	var v CreateHostRequestMihomoIpVersion
+func (o *OptNilCreateHostBodyMihomoIpVersion) Reset() {
+	var v CreateHostBodyMihomoIpVersion
 	o.Value = v
 	o.Set = false
 	o.Null = false
 }
 
 // SetTo sets value to v.
-func (o *OptNilCreateHostRequestMihomoIpVersion) SetTo(v CreateHostRequestMihomoIpVersion) {
+func (o *OptNilCreateHostBodyMihomoIpVersion) SetTo(v CreateHostBodyMihomoIpVersion) {
 	o.Set = true
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o OptNilCreateHostRequestMihomoIpVersion) IsNull() bool { return o.Null }
+func (o OptNilCreateHostBodyMihomoIpVersion) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *OptNilCreateHostRequestMihomoIpVersion) SetToNull() {
+func (o *OptNilCreateHostBodyMihomoIpVersion) SetToNull() {
 	o.Set = true
 	o.Null = true
-	var v CreateHostRequestMihomoIpVersion
+	var v CreateHostBodyMihomoIpVersion
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptNilCreateHostRequestMihomoIpVersion) Get() (v CreateHostRequestMihomoIpVersion, ok bool) {
+func (o OptNilCreateHostBodyMihomoIpVersion) Get() (v CreateHostBodyMihomoIpVersion, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -16311,7 +15252,7 @@ func (o OptNilCreateHostRequestMihomoIpVersion) Get() (v CreateHostRequestMihomo
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptNilCreateHostRequestMihomoIpVersion) Or(d CreateHostRequestMihomoIpVersion) CreateHostRequestMihomoIpVersion {
+func (o OptNilCreateHostBodyMihomoIpVersion) Or(d CreateHostBodyMihomoIpVersion) CreateHostBodyMihomoIpVersion {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -16375,6 +15316,69 @@ func (o OptNilCustomRemark) Get() (v CustomRemark, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptNilCustomRemark) Or(d CustomRemark) CustomRemark {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilFloat64 returns new OptNilFloat64 with value set to v.
+func NewOptNilFloat64(v float64) OptNilFloat64 {
+	return OptNilFloat64{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilFloat64 is optional nullable float64.
+type OptNilFloat64 struct {
+	Value float64
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilFloat64 was set.
+func (o OptNilFloat64) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilFloat64) Reset() {
+	var v float64
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilFloat64) SetTo(v float64) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilFloat64) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilFloat64) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v float64
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilFloat64) Get() (v float64, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilFloat64) Or(d float64) float64 {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -17011,52 +16015,52 @@ func (o OptNilUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
-// NewOptNilUpdateExternalSquadRequestResponseHeaders returns new OptNilUpdateExternalSquadRequestResponseHeaders with value set to v.
-func NewOptNilUpdateExternalSquadRequestResponseHeaders(v UpdateExternalSquadRequestResponseHeaders) OptNilUpdateExternalSquadRequestResponseHeaders {
-	return OptNilUpdateExternalSquadRequestResponseHeaders{
+// NewOptNilUpdateHostBodyAlpn returns new OptNilUpdateHostBodyAlpn with value set to v.
+func NewOptNilUpdateHostBodyAlpn(v UpdateHostBodyAlpn) OptNilUpdateHostBodyAlpn {
+	return OptNilUpdateHostBodyAlpn{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptNilUpdateExternalSquadRequestResponseHeaders is optional nullable UpdateExternalSquadRequestResponseHeaders.
-type OptNilUpdateExternalSquadRequestResponseHeaders struct {
-	Value UpdateExternalSquadRequestResponseHeaders
+// OptNilUpdateHostBodyAlpn is optional nullable UpdateHostBodyAlpn.
+type OptNilUpdateHostBodyAlpn struct {
+	Value UpdateHostBodyAlpn
 	Set   bool
 	Null  bool
 }
 
-// IsSet returns true if OptNilUpdateExternalSquadRequestResponseHeaders was set.
-func (o OptNilUpdateExternalSquadRequestResponseHeaders) IsSet() bool { return o.Set }
+// IsSet returns true if OptNilUpdateHostBodyAlpn was set.
+func (o OptNilUpdateHostBodyAlpn) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptNilUpdateExternalSquadRequestResponseHeaders) Reset() {
-	var v UpdateExternalSquadRequestResponseHeaders
+func (o *OptNilUpdateHostBodyAlpn) Reset() {
+	var v UpdateHostBodyAlpn
 	o.Value = v
 	o.Set = false
 	o.Null = false
 }
 
 // SetTo sets value to v.
-func (o *OptNilUpdateExternalSquadRequestResponseHeaders) SetTo(v UpdateExternalSquadRequestResponseHeaders) {
+func (o *OptNilUpdateHostBodyAlpn) SetTo(v UpdateHostBodyAlpn) {
 	o.Set = true
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o OptNilUpdateExternalSquadRequestResponseHeaders) IsNull() bool { return o.Null }
+func (o OptNilUpdateHostBodyAlpn) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *OptNilUpdateExternalSquadRequestResponseHeaders) SetToNull() {
+func (o *OptNilUpdateHostBodyAlpn) SetToNull() {
 	o.Set = true
 	o.Null = true
-	var v UpdateExternalSquadRequestResponseHeaders
+	var v UpdateHostBodyAlpn
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptNilUpdateExternalSquadRequestResponseHeaders) Get() (v UpdateExternalSquadRequestResponseHeaders, ok bool) {
+func (o OptNilUpdateHostBodyAlpn) Get() (v UpdateHostBodyAlpn, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -17067,59 +16071,59 @@ func (o OptNilUpdateExternalSquadRequestResponseHeaders) Get() (v UpdateExternal
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptNilUpdateExternalSquadRequestResponseHeaders) Or(d UpdateExternalSquadRequestResponseHeaders) UpdateExternalSquadRequestResponseHeaders {
+func (o OptNilUpdateHostBodyAlpn) Or(d UpdateHostBodyAlpn) UpdateHostBodyAlpn {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptNilUpdateHostRequestAlpn returns new OptNilUpdateHostRequestAlpn with value set to v.
-func NewOptNilUpdateHostRequestAlpn(v UpdateHostRequestAlpn) OptNilUpdateHostRequestAlpn {
-	return OptNilUpdateHostRequestAlpn{
+// NewOptNilUpdateHostBodyMihomoIpVersion returns new OptNilUpdateHostBodyMihomoIpVersion with value set to v.
+func NewOptNilUpdateHostBodyMihomoIpVersion(v UpdateHostBodyMihomoIpVersion) OptNilUpdateHostBodyMihomoIpVersion {
+	return OptNilUpdateHostBodyMihomoIpVersion{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptNilUpdateHostRequestAlpn is optional nullable UpdateHostRequestAlpn.
-type OptNilUpdateHostRequestAlpn struct {
-	Value UpdateHostRequestAlpn
+// OptNilUpdateHostBodyMihomoIpVersion is optional nullable UpdateHostBodyMihomoIpVersion.
+type OptNilUpdateHostBodyMihomoIpVersion struct {
+	Value UpdateHostBodyMihomoIpVersion
 	Set   bool
 	Null  bool
 }
 
-// IsSet returns true if OptNilUpdateHostRequestAlpn was set.
-func (o OptNilUpdateHostRequestAlpn) IsSet() bool { return o.Set }
+// IsSet returns true if OptNilUpdateHostBodyMihomoIpVersion was set.
+func (o OptNilUpdateHostBodyMihomoIpVersion) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptNilUpdateHostRequestAlpn) Reset() {
-	var v UpdateHostRequestAlpn
+func (o *OptNilUpdateHostBodyMihomoIpVersion) Reset() {
+	var v UpdateHostBodyMihomoIpVersion
 	o.Value = v
 	o.Set = false
 	o.Null = false
 }
 
 // SetTo sets value to v.
-func (o *OptNilUpdateHostRequestAlpn) SetTo(v UpdateHostRequestAlpn) {
+func (o *OptNilUpdateHostBodyMihomoIpVersion) SetTo(v UpdateHostBodyMihomoIpVersion) {
 	o.Set = true
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o OptNilUpdateHostRequestAlpn) IsNull() bool { return o.Null }
+func (o OptNilUpdateHostBodyMihomoIpVersion) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *OptNilUpdateHostRequestAlpn) SetToNull() {
+func (o *OptNilUpdateHostBodyMihomoIpVersion) SetToNull() {
 	o.Set = true
 	o.Null = true
-	var v UpdateHostRequestAlpn
+	var v UpdateHostBodyMihomoIpVersion
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptNilUpdateHostRequestAlpn) Get() (v UpdateHostRequestAlpn, ok bool) {
+func (o OptNilUpdateHostBodyMihomoIpVersion) Get() (v UpdateHostBodyMihomoIpVersion, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -17130,59 +16134,59 @@ func (o OptNilUpdateHostRequestAlpn) Get() (v UpdateHostRequestAlpn, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptNilUpdateHostRequestAlpn) Or(d UpdateHostRequestAlpn) UpdateHostRequestAlpn {
+func (o OptNilUpdateHostBodyMihomoIpVersion) Or(d UpdateHostBodyMihomoIpVersion) UpdateHostBodyMihomoIpVersion {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptNilUpdateHostRequestMihomoIpVersion returns new OptNilUpdateHostRequestMihomoIpVersion with value set to v.
-func NewOptNilUpdateHostRequestMihomoIpVersion(v UpdateHostRequestMihomoIpVersion) OptNilUpdateHostRequestMihomoIpVersion {
-	return OptNilUpdateHostRequestMihomoIpVersion{
+// NewOptNilUpdateManyHostsBodyAlpn returns new OptNilUpdateManyHostsBodyAlpn with value set to v.
+func NewOptNilUpdateManyHostsBodyAlpn(v UpdateManyHostsBodyAlpn) OptNilUpdateManyHostsBodyAlpn {
+	return OptNilUpdateManyHostsBodyAlpn{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptNilUpdateHostRequestMihomoIpVersion is optional nullable UpdateHostRequestMihomoIpVersion.
-type OptNilUpdateHostRequestMihomoIpVersion struct {
-	Value UpdateHostRequestMihomoIpVersion
+// OptNilUpdateManyHostsBodyAlpn is optional nullable UpdateManyHostsBodyAlpn.
+type OptNilUpdateManyHostsBodyAlpn struct {
+	Value UpdateManyHostsBodyAlpn
 	Set   bool
 	Null  bool
 }
 
-// IsSet returns true if OptNilUpdateHostRequestMihomoIpVersion was set.
-func (o OptNilUpdateHostRequestMihomoIpVersion) IsSet() bool { return o.Set }
+// IsSet returns true if OptNilUpdateManyHostsBodyAlpn was set.
+func (o OptNilUpdateManyHostsBodyAlpn) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptNilUpdateHostRequestMihomoIpVersion) Reset() {
-	var v UpdateHostRequestMihomoIpVersion
+func (o *OptNilUpdateManyHostsBodyAlpn) Reset() {
+	var v UpdateManyHostsBodyAlpn
 	o.Value = v
 	o.Set = false
 	o.Null = false
 }
 
 // SetTo sets value to v.
-func (o *OptNilUpdateHostRequestMihomoIpVersion) SetTo(v UpdateHostRequestMihomoIpVersion) {
+func (o *OptNilUpdateManyHostsBodyAlpn) SetTo(v UpdateManyHostsBodyAlpn) {
 	o.Set = true
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o OptNilUpdateHostRequestMihomoIpVersion) IsNull() bool { return o.Null }
+func (o OptNilUpdateManyHostsBodyAlpn) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *OptNilUpdateHostRequestMihomoIpVersion) SetToNull() {
+func (o *OptNilUpdateManyHostsBodyAlpn) SetToNull() {
 	o.Set = true
 	o.Null = true
-	var v UpdateHostRequestMihomoIpVersion
+	var v UpdateManyHostsBodyAlpn
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptNilUpdateHostRequestMihomoIpVersion) Get() (v UpdateHostRequestMihomoIpVersion, ok bool) {
+func (o OptNilUpdateManyHostsBodyAlpn) Get() (v UpdateManyHostsBodyAlpn, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -17193,59 +16197,59 @@ func (o OptNilUpdateHostRequestMihomoIpVersion) Get() (v UpdateHostRequestMihomo
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptNilUpdateHostRequestMihomoIpVersion) Or(d UpdateHostRequestMihomoIpVersion) UpdateHostRequestMihomoIpVersion {
+func (o OptNilUpdateManyHostsBodyAlpn) Or(d UpdateManyHostsBodyAlpn) UpdateManyHostsBodyAlpn {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptNilUpdateManyHostsRequestAlpn returns new OptNilUpdateManyHostsRequestAlpn with value set to v.
-func NewOptNilUpdateManyHostsRequestAlpn(v UpdateManyHostsRequestAlpn) OptNilUpdateManyHostsRequestAlpn {
-	return OptNilUpdateManyHostsRequestAlpn{
+// NewOptNilUpdateManyHostsBodyMihomoIpVersion returns new OptNilUpdateManyHostsBodyMihomoIpVersion with value set to v.
+func NewOptNilUpdateManyHostsBodyMihomoIpVersion(v UpdateManyHostsBodyMihomoIpVersion) OptNilUpdateManyHostsBodyMihomoIpVersion {
+	return OptNilUpdateManyHostsBodyMihomoIpVersion{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptNilUpdateManyHostsRequestAlpn is optional nullable UpdateManyHostsRequestAlpn.
-type OptNilUpdateManyHostsRequestAlpn struct {
-	Value UpdateManyHostsRequestAlpn
+// OptNilUpdateManyHostsBodyMihomoIpVersion is optional nullable UpdateManyHostsBodyMihomoIpVersion.
+type OptNilUpdateManyHostsBodyMihomoIpVersion struct {
+	Value UpdateManyHostsBodyMihomoIpVersion
 	Set   bool
 	Null  bool
 }
 
-// IsSet returns true if OptNilUpdateManyHostsRequestAlpn was set.
-func (o OptNilUpdateManyHostsRequestAlpn) IsSet() bool { return o.Set }
+// IsSet returns true if OptNilUpdateManyHostsBodyMihomoIpVersion was set.
+func (o OptNilUpdateManyHostsBodyMihomoIpVersion) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptNilUpdateManyHostsRequestAlpn) Reset() {
-	var v UpdateManyHostsRequestAlpn
+func (o *OptNilUpdateManyHostsBodyMihomoIpVersion) Reset() {
+	var v UpdateManyHostsBodyMihomoIpVersion
 	o.Value = v
 	o.Set = false
 	o.Null = false
 }
 
 // SetTo sets value to v.
-func (o *OptNilUpdateManyHostsRequestAlpn) SetTo(v UpdateManyHostsRequestAlpn) {
+func (o *OptNilUpdateManyHostsBodyMihomoIpVersion) SetTo(v UpdateManyHostsBodyMihomoIpVersion) {
 	o.Set = true
 	o.Null = false
 	o.Value = v
 }
 
 // IsNull returns true if value is Null.
-func (o OptNilUpdateManyHostsRequestAlpn) IsNull() bool { return o.Null }
+func (o OptNilUpdateManyHostsBodyMihomoIpVersion) IsNull() bool { return o.Null }
 
 // SetToNull sets value to null.
-func (o *OptNilUpdateManyHostsRequestAlpn) SetToNull() {
+func (o *OptNilUpdateManyHostsBodyMihomoIpVersion) SetToNull() {
 	o.Set = true
 	o.Null = true
-	var v UpdateManyHostsRequestAlpn
+	var v UpdateManyHostsBodyMihomoIpVersion
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptNilUpdateManyHostsRequestAlpn) Get() (v UpdateManyHostsRequestAlpn, ok bool) {
+func (o OptNilUpdateManyHostsBodyMihomoIpVersion) Get() (v UpdateManyHostsBodyMihomoIpVersion, ok bool) {
 	if o.Null {
 		return v, false
 	}
@@ -17256,70 +16260,7 @@ func (o OptNilUpdateManyHostsRequestAlpn) Get() (v UpdateManyHostsRequestAlpn, o
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptNilUpdateManyHostsRequestAlpn) Or(d UpdateManyHostsRequestAlpn) UpdateManyHostsRequestAlpn {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptNilUpdateManyHostsRequestMihomoIpVersion returns new OptNilUpdateManyHostsRequestMihomoIpVersion with value set to v.
-func NewOptNilUpdateManyHostsRequestMihomoIpVersion(v UpdateManyHostsRequestMihomoIpVersion) OptNilUpdateManyHostsRequestMihomoIpVersion {
-	return OptNilUpdateManyHostsRequestMihomoIpVersion{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptNilUpdateManyHostsRequestMihomoIpVersion is optional nullable UpdateManyHostsRequestMihomoIpVersion.
-type OptNilUpdateManyHostsRequestMihomoIpVersion struct {
-	Value UpdateManyHostsRequestMihomoIpVersion
-	Set   bool
-	Null  bool
-}
-
-// IsSet returns true if OptNilUpdateManyHostsRequestMihomoIpVersion was set.
-func (o OptNilUpdateManyHostsRequestMihomoIpVersion) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptNilUpdateManyHostsRequestMihomoIpVersion) Reset() {
-	var v UpdateManyHostsRequestMihomoIpVersion
-	o.Value = v
-	o.Set = false
-	o.Null = false
-}
-
-// SetTo sets value to v.
-func (o *OptNilUpdateManyHostsRequestMihomoIpVersion) SetTo(v UpdateManyHostsRequestMihomoIpVersion) {
-	o.Set = true
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o OptNilUpdateManyHostsRequestMihomoIpVersion) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *OptNilUpdateManyHostsRequestMihomoIpVersion) SetToNull() {
-	o.Set = true
-	o.Null = true
-	var v UpdateManyHostsRequestMihomoIpVersion
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptNilUpdateManyHostsRequestMihomoIpVersion) Get() (v UpdateManyHostsRequestMihomoIpVersion, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptNilUpdateManyHostsRequestMihomoIpVersion) Or(d UpdateManyHostsRequestMihomoIpVersion) UpdateManyHostsRequestMihomoIpVersion {
+func (o OptNilUpdateManyHostsBodyMihomoIpVersion) Or(d UpdateManyHostsBodyMihomoIpVersion) UpdateManyHostsBodyMihomoIpVersion {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -17602,38 +16543,38 @@ func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
 	return d
 }
 
-// NewOptUpdateHostRequestSecurityLayer returns new OptUpdateHostRequestSecurityLayer with value set to v.
-func NewOptUpdateHostRequestSecurityLayer(v UpdateHostRequestSecurityLayer) OptUpdateHostRequestSecurityLayer {
-	return OptUpdateHostRequestSecurityLayer{
+// NewOptUpdateConfigProfileBodyConfig returns new OptUpdateConfigProfileBodyConfig with value set to v.
+func NewOptUpdateConfigProfileBodyConfig(v UpdateConfigProfileBodyConfig) OptUpdateConfigProfileBodyConfig {
+	return OptUpdateConfigProfileBodyConfig{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUpdateHostRequestSecurityLayer is optional UpdateHostRequestSecurityLayer.
-type OptUpdateHostRequestSecurityLayer struct {
-	Value UpdateHostRequestSecurityLayer
+// OptUpdateConfigProfileBodyConfig is optional UpdateConfigProfileBodyConfig.
+type OptUpdateConfigProfileBodyConfig struct {
+	Value UpdateConfigProfileBodyConfig
 	Set   bool
 }
 
-// IsSet returns true if OptUpdateHostRequestSecurityLayer was set.
-func (o OptUpdateHostRequestSecurityLayer) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateConfigProfileBodyConfig was set.
+func (o OptUpdateConfigProfileBodyConfig) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUpdateHostRequestSecurityLayer) Reset() {
-	var v UpdateHostRequestSecurityLayer
+func (o *OptUpdateConfigProfileBodyConfig) Reset() {
+	var v UpdateConfigProfileBodyConfig
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUpdateHostRequestSecurityLayer) SetTo(v UpdateHostRequestSecurityLayer) {
+func (o *OptUpdateConfigProfileBodyConfig) SetTo(v UpdateConfigProfileBodyConfig) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateHostRequestSecurityLayer) Get() (v UpdateHostRequestSecurityLayer, ok bool) {
+func (o OptUpdateConfigProfileBodyConfig) Get() (v UpdateConfigProfileBodyConfig, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17641,45 +16582,45 @@ func (o OptUpdateHostRequestSecurityLayer) Get() (v UpdateHostRequestSecurityLay
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUpdateHostRequestSecurityLayer) Or(d UpdateHostRequestSecurityLayer) UpdateHostRequestSecurityLayer {
+func (o OptUpdateConfigProfileBodyConfig) Or(d UpdateConfigProfileBodyConfig) UpdateConfigProfileBodyConfig {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUpdateManyHostsRequestSecurityLayer returns new OptUpdateManyHostsRequestSecurityLayer with value set to v.
-func NewOptUpdateManyHostsRequestSecurityLayer(v UpdateManyHostsRequestSecurityLayer) OptUpdateManyHostsRequestSecurityLayer {
-	return OptUpdateManyHostsRequestSecurityLayer{
+// NewOptUpdateExternalSquadBodyResponseHeadersAdd returns new OptUpdateExternalSquadBodyResponseHeadersAdd with value set to v.
+func NewOptUpdateExternalSquadBodyResponseHeadersAdd(v UpdateExternalSquadBodyResponseHeadersAdd) OptUpdateExternalSquadBodyResponseHeadersAdd {
+	return OptUpdateExternalSquadBodyResponseHeadersAdd{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUpdateManyHostsRequestSecurityLayer is optional UpdateManyHostsRequestSecurityLayer.
-type OptUpdateManyHostsRequestSecurityLayer struct {
-	Value UpdateManyHostsRequestSecurityLayer
+// OptUpdateExternalSquadBodyResponseHeadersAdd is optional UpdateExternalSquadBodyResponseHeadersAdd.
+type OptUpdateExternalSquadBodyResponseHeadersAdd struct {
+	Value UpdateExternalSquadBodyResponseHeadersAdd
 	Set   bool
 }
 
-// IsSet returns true if OptUpdateManyHostsRequestSecurityLayer was set.
-func (o OptUpdateManyHostsRequestSecurityLayer) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateExternalSquadBodyResponseHeadersAdd was set.
+func (o OptUpdateExternalSquadBodyResponseHeadersAdd) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUpdateManyHostsRequestSecurityLayer) Reset() {
-	var v UpdateManyHostsRequestSecurityLayer
+func (o *OptUpdateExternalSquadBodyResponseHeadersAdd) Reset() {
+	var v UpdateExternalSquadBodyResponseHeadersAdd
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUpdateManyHostsRequestSecurityLayer) SetTo(v UpdateManyHostsRequestSecurityLayer) {
+func (o *OptUpdateExternalSquadBodyResponseHeadersAdd) SetTo(v UpdateExternalSquadBodyResponseHeadersAdd) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateManyHostsRequestSecurityLayer) Get() (v UpdateManyHostsRequestSecurityLayer, ok bool) {
+func (o OptUpdateExternalSquadBodyResponseHeadersAdd) Get() (v UpdateExternalSquadBodyResponseHeadersAdd, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17687,45 +16628,45 @@ func (o OptUpdateManyHostsRequestSecurityLayer) Get() (v UpdateManyHostsRequestS
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUpdateManyHostsRequestSecurityLayer) Or(d UpdateManyHostsRequestSecurityLayer) UpdateManyHostsRequestSecurityLayer {
+func (o OptUpdateExternalSquadBodyResponseHeadersAdd) Or(d UpdateExternalSquadBodyResponseHeadersAdd) UpdateExternalSquadBodyResponseHeadersAdd {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUpdateSubscriptionSettingsRequestCustomResponseHeaders returns new OptUpdateSubscriptionSettingsRequestCustomResponseHeaders with value set to v.
-func NewOptUpdateSubscriptionSettingsRequestCustomResponseHeaders(v UpdateSubscriptionSettingsRequestCustomResponseHeaders) OptUpdateSubscriptionSettingsRequestCustomResponseHeaders {
-	return OptUpdateSubscriptionSettingsRequestCustomResponseHeaders{
+// NewOptUpdateHostBodySecurityLayer returns new OptUpdateHostBodySecurityLayer with value set to v.
+func NewOptUpdateHostBodySecurityLayer(v UpdateHostBodySecurityLayer) OptUpdateHostBodySecurityLayer {
+	return OptUpdateHostBodySecurityLayer{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUpdateSubscriptionSettingsRequestCustomResponseHeaders is optional UpdateSubscriptionSettingsRequestCustomResponseHeaders.
-type OptUpdateSubscriptionSettingsRequestCustomResponseHeaders struct {
-	Value UpdateSubscriptionSettingsRequestCustomResponseHeaders
+// OptUpdateHostBodySecurityLayer is optional UpdateHostBodySecurityLayer.
+type OptUpdateHostBodySecurityLayer struct {
+	Value UpdateHostBodySecurityLayer
 	Set   bool
 }
 
-// IsSet returns true if OptUpdateSubscriptionSettingsRequestCustomResponseHeaders was set.
-func (o OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateHostBodySecurityLayer was set.
+func (o OptUpdateHostBodySecurityLayer) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) Reset() {
-	var v UpdateSubscriptionSettingsRequestCustomResponseHeaders
+func (o *OptUpdateHostBodySecurityLayer) Reset() {
+	var v UpdateHostBodySecurityLayer
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) SetTo(v UpdateSubscriptionSettingsRequestCustomResponseHeaders) {
+func (o *OptUpdateHostBodySecurityLayer) SetTo(v UpdateHostBodySecurityLayer) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) Get() (v UpdateSubscriptionSettingsRequestCustomResponseHeaders, ok bool) {
+func (o OptUpdateHostBodySecurityLayer) Get() (v UpdateHostBodySecurityLayer, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17733,45 +16674,45 @@ func (o OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) Get() (v Upda
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) Or(d UpdateSubscriptionSettingsRequestCustomResponseHeaders) UpdateSubscriptionSettingsRequestCustomResponseHeaders {
+func (o OptUpdateHostBodySecurityLayer) Or(d UpdateHostBodySecurityLayer) UpdateHostBodySecurityLayer {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUpdateUserRequestStatus returns new OptUpdateUserRequestStatus with value set to v.
-func NewOptUpdateUserRequestStatus(v UpdateUserRequestStatus) OptUpdateUserRequestStatus {
-	return OptUpdateUserRequestStatus{
+// NewOptUpdateManyHostsBodySecurityLayer returns new OptUpdateManyHostsBodySecurityLayer with value set to v.
+func NewOptUpdateManyHostsBodySecurityLayer(v UpdateManyHostsBodySecurityLayer) OptUpdateManyHostsBodySecurityLayer {
+	return OptUpdateManyHostsBodySecurityLayer{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUpdateUserRequestStatus is optional UpdateUserRequestStatus.
-type OptUpdateUserRequestStatus struct {
-	Value UpdateUserRequestStatus
+// OptUpdateManyHostsBodySecurityLayer is optional UpdateManyHostsBodySecurityLayer.
+type OptUpdateManyHostsBodySecurityLayer struct {
+	Value UpdateManyHostsBodySecurityLayer
 	Set   bool
 }
 
-// IsSet returns true if OptUpdateUserRequestStatus was set.
-func (o OptUpdateUserRequestStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateManyHostsBodySecurityLayer was set.
+func (o OptUpdateManyHostsBodySecurityLayer) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUpdateUserRequestStatus) Reset() {
-	var v UpdateUserRequestStatus
+func (o *OptUpdateManyHostsBodySecurityLayer) Reset() {
+	var v UpdateManyHostsBodySecurityLayer
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUpdateUserRequestStatus) SetTo(v UpdateUserRequestStatus) {
+func (o *OptUpdateManyHostsBodySecurityLayer) SetTo(v UpdateManyHostsBodySecurityLayer) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateUserRequestStatus) Get() (v UpdateUserRequestStatus, ok bool) {
+func (o OptUpdateManyHostsBodySecurityLayer) Get() (v UpdateManyHostsBodySecurityLayer, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17779,45 +16720,45 @@ func (o OptUpdateUserRequestStatus) Get() (v UpdateUserRequestStatus, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUpdateUserRequestStatus) Or(d UpdateUserRequestStatus) UpdateUserRequestStatus {
+func (o OptUpdateManyHostsBodySecurityLayer) Or(d UpdateManyHostsBodySecurityLayer) UpdateManyHostsBodySecurityLayer {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUpdateUserRequestTrafficLimitStrategy returns new OptUpdateUserRequestTrafficLimitStrategy with value set to v.
-func NewOptUpdateUserRequestTrafficLimitStrategy(v UpdateUserRequestTrafficLimitStrategy) OptUpdateUserRequestTrafficLimitStrategy {
-	return OptUpdateUserRequestTrafficLimitStrategy{
+// NewOptUpdateSubscriptionSettingsBodyCustomResponseHeaders returns new OptUpdateSubscriptionSettingsBodyCustomResponseHeaders with value set to v.
+func NewOptUpdateSubscriptionSettingsBodyCustomResponseHeaders(v UpdateSubscriptionSettingsBodyCustomResponseHeaders) OptUpdateSubscriptionSettingsBodyCustomResponseHeaders {
+	return OptUpdateSubscriptionSettingsBodyCustomResponseHeaders{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUpdateUserRequestTrafficLimitStrategy is optional UpdateUserRequestTrafficLimitStrategy.
-type OptUpdateUserRequestTrafficLimitStrategy struct {
-	Value UpdateUserRequestTrafficLimitStrategy
+// OptUpdateSubscriptionSettingsBodyCustomResponseHeaders is optional UpdateSubscriptionSettingsBodyCustomResponseHeaders.
+type OptUpdateSubscriptionSettingsBodyCustomResponseHeaders struct {
+	Value UpdateSubscriptionSettingsBodyCustomResponseHeaders
 	Set   bool
 }
 
-// IsSet returns true if OptUpdateUserRequestTrafficLimitStrategy was set.
-func (o OptUpdateUserRequestTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateSubscriptionSettingsBodyCustomResponseHeaders was set.
+func (o OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUpdateUserRequestTrafficLimitStrategy) Reset() {
-	var v UpdateUserRequestTrafficLimitStrategy
+func (o *OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) Reset() {
+	var v UpdateSubscriptionSettingsBodyCustomResponseHeaders
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUpdateUserRequestTrafficLimitStrategy) SetTo(v UpdateUserRequestTrafficLimitStrategy) {
+func (o *OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) SetTo(v UpdateSubscriptionSettingsBodyCustomResponseHeaders) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateUserRequestTrafficLimitStrategy) Get() (v UpdateUserRequestTrafficLimitStrategy, ok bool) {
+func (o OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) Get() (v UpdateSubscriptionSettingsBodyCustomResponseHeaders, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17825,45 +16766,45 @@ func (o OptUpdateUserRequestTrafficLimitStrategy) Get() (v UpdateUserRequestTraf
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUpdateUserRequestTrafficLimitStrategy) Or(d UpdateUserRequestTrafficLimitStrategy) UpdateUserRequestTrafficLimitStrategy {
+func (o OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) Or(d UpdateSubscriptionSettingsBodyCustomResponseHeaders) UpdateSubscriptionSettingsBodyCustomResponseHeaders {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUserItemInfoStatus returns new OptUserItemInfoStatus with value set to v.
-func NewOptUserItemInfoStatus(v UserItemInfoStatus) OptUserItemInfoStatus {
-	return OptUserItemInfoStatus{
+// NewOptUpdateTemplateBodyTemplateJson returns new OptUpdateTemplateBodyTemplateJson with value set to v.
+func NewOptUpdateTemplateBodyTemplateJson(v UpdateTemplateBodyTemplateJson) OptUpdateTemplateBodyTemplateJson {
+	return OptUpdateTemplateBodyTemplateJson{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserItemInfoStatus is optional UserItemInfoStatus.
-type OptUserItemInfoStatus struct {
-	Value UserItemInfoStatus
+// OptUpdateTemplateBodyTemplateJson is optional UpdateTemplateBodyTemplateJson.
+type OptUpdateTemplateBodyTemplateJson struct {
+	Value UpdateTemplateBodyTemplateJson
 	Set   bool
 }
 
-// IsSet returns true if OptUserItemInfoStatus was set.
-func (o OptUserItemInfoStatus) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateTemplateBodyTemplateJson was set.
+func (o OptUpdateTemplateBodyTemplateJson) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserItemInfoStatus) Reset() {
-	var v UserItemInfoStatus
+func (o *OptUpdateTemplateBodyTemplateJson) Reset() {
+	var v UpdateTemplateBodyTemplateJson
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserItemInfoStatus) SetTo(v UserItemInfoStatus) {
+func (o *OptUpdateTemplateBodyTemplateJson) SetTo(v UpdateTemplateBodyTemplateJson) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserItemInfoStatus) Get() (v UserItemInfoStatus, ok bool) {
+func (o OptUpdateTemplateBodyTemplateJson) Get() (v UpdateTemplateBodyTemplateJson, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17871,45 +16812,45 @@ func (o OptUserItemInfoStatus) Get() (v UserItemInfoStatus, ok bool) {
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserItemInfoStatus) Or(d UserItemInfoStatus) UserItemInfoStatus {
+func (o OptUpdateTemplateBodyTemplateJson) Or(d UpdateTemplateBodyTemplateJson) UpdateTemplateBodyTemplateJson {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
 
-// NewOptUserItemInfoTrafficLimitStrategy returns new OptUserItemInfoTrafficLimitStrategy with value set to v.
-func NewOptUserItemInfoTrafficLimitStrategy(v UserItemInfoTrafficLimitStrategy) OptUserItemInfoTrafficLimitStrategy {
-	return OptUserItemInfoTrafficLimitStrategy{
+// NewOptUpdateUserBodyStatus returns new OptUpdateUserBodyStatus with value set to v.
+func NewOptUpdateUserBodyStatus(v UpdateUserBodyStatus) OptUpdateUserBodyStatus {
+	return OptUpdateUserBodyStatus{
 		Value: v,
 		Set:   true,
 	}
 }
 
-// OptUserItemInfoTrafficLimitStrategy is optional UserItemInfoTrafficLimitStrategy.
-type OptUserItemInfoTrafficLimitStrategy struct {
-	Value UserItemInfoTrafficLimitStrategy
+// OptUpdateUserBodyStatus is optional UpdateUserBodyStatus.
+type OptUpdateUserBodyStatus struct {
+	Value UpdateUserBodyStatus
 	Set   bool
 }
 
-// IsSet returns true if OptUserItemInfoTrafficLimitStrategy was set.
-func (o OptUserItemInfoTrafficLimitStrategy) IsSet() bool { return o.Set }
+// IsSet returns true if OptUpdateUserBodyStatus was set.
+func (o OptUpdateUserBodyStatus) IsSet() bool { return o.Set }
 
 // Reset unsets value.
-func (o *OptUserItemInfoTrafficLimitStrategy) Reset() {
-	var v UserItemInfoTrafficLimitStrategy
+func (o *OptUpdateUserBodyStatus) Reset() {
+	var v UpdateUserBodyStatus
 	o.Value = v
 	o.Set = false
 }
 
 // SetTo sets value to v.
-func (o *OptUserItemInfoTrafficLimitStrategy) SetTo(v UserItemInfoTrafficLimitStrategy) {
+func (o *OptUpdateUserBodyStatus) SetTo(v UpdateUserBodyStatus) {
 	o.Set = true
 	o.Value = v
 }
 
 // Get returns value and boolean that denotes whether value was set.
-func (o OptUserItemInfoTrafficLimitStrategy) Get() (v UserItemInfoTrafficLimitStrategy, ok bool) {
+func (o OptUpdateUserBodyStatus) Get() (v UpdateUserBodyStatus, ok bool) {
 	if !o.Set {
 		return v, false
 	}
@@ -17917,12 +16858,155 @@ func (o OptUserItemInfoTrafficLimitStrategy) Get() (v UserItemInfoTrafficLimitSt
 }
 
 // Or returns value if set, or given parameter if does not.
-func (o OptUserItemInfoTrafficLimitStrategy) Or(d UserItemInfoTrafficLimitStrategy) UserItemInfoTrafficLimitStrategy {
+func (o OptUpdateUserBodyStatus) Or(d UpdateUserBodyStatus) UpdateUserBodyStatus {
 	if v, ok := o.Get(); ok {
 		return v
 	}
 	return d
 }
+
+// NewOptUpdateUserBodyTrafficLimitStrategy returns new OptUpdateUserBodyTrafficLimitStrategy with value set to v.
+func NewOptUpdateUserBodyTrafficLimitStrategy(v UpdateUserBodyTrafficLimitStrategy) OptUpdateUserBodyTrafficLimitStrategy {
+	return OptUpdateUserBodyTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateUserBodyTrafficLimitStrategy is optional UpdateUserBodyTrafficLimitStrategy.
+type OptUpdateUserBodyTrafficLimitStrategy struct {
+	Value UpdateUserBodyTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateUserBodyTrafficLimitStrategy was set.
+func (o OptUpdateUserBodyTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateUserBodyTrafficLimitStrategy) Reset() {
+	var v UpdateUserBodyTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateUserBodyTrafficLimitStrategy) SetTo(v UpdateUserBodyTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateUserBodyTrafficLimitStrategy) Get() (v UpdateUserBodyTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateUserBodyTrafficLimitStrategy) Or(d UpdateUserBodyTrafficLimitStrategy) UpdateUserBodyTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUsersGetUsersStreamStatus returns new OptUsersGetUsersStreamStatus with value set to v.
+func NewOptUsersGetUsersStreamStatus(v UsersGetUsersStreamStatus) OptUsersGetUsersStreamStatus {
+	return OptUsersGetUsersStreamStatus{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUsersGetUsersStreamStatus is optional UsersGetUsersStreamStatus.
+type OptUsersGetUsersStreamStatus struct {
+	Value UsersGetUsersStreamStatus
+	Set   bool
+}
+
+// IsSet returns true if OptUsersGetUsersStreamStatus was set.
+func (o OptUsersGetUsersStreamStatus) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUsersGetUsersStreamStatus) Reset() {
+	var v UsersGetUsersStreamStatus
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUsersGetUsersStreamStatus) SetTo(v UsersGetUsersStreamStatus) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUsersGetUsersStreamStatus) Get() (v UsersGetUsersStreamStatus, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUsersGetUsersStreamStatus) Or(d UsersGetUsersStreamStatus) UsersGetUsersStreamStatus {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUsersGetUsersStreamTrafficLimitStrategy returns new OptUsersGetUsersStreamTrafficLimitStrategy with value set to v.
+func NewOptUsersGetUsersStreamTrafficLimitStrategy(v UsersGetUsersStreamTrafficLimitStrategy) OptUsersGetUsersStreamTrafficLimitStrategy {
+	return OptUsersGetUsersStreamTrafficLimitStrategy{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUsersGetUsersStreamTrafficLimitStrategy is optional UsersGetUsersStreamTrafficLimitStrategy.
+type OptUsersGetUsersStreamTrafficLimitStrategy struct {
+	Value UsersGetUsersStreamTrafficLimitStrategy
+	Set   bool
+}
+
+// IsSet returns true if OptUsersGetUsersStreamTrafficLimitStrategy was set.
+func (o OptUsersGetUsersStreamTrafficLimitStrategy) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUsersGetUsersStreamTrafficLimitStrategy) Reset() {
+	var v UsersGetUsersStreamTrafficLimitStrategy
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUsersGetUsersStreamTrafficLimitStrategy) SetTo(v UsersGetUsersStreamTrafficLimitStrategy) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUsersGetUsersStreamTrafficLimitStrategy) Get() (v UsersGetUsersStreamTrafficLimitStrategy, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUsersGetUsersStreamTrafficLimitStrategy) Or(d UsersGetUsersStreamTrafficLimitStrategy) UsersGetUsersStreamTrafficLimitStrategy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// PasskeyDeletePasskeyNoContent is response for PasskeyDeletePasskey operation.
+type PasskeyDeletePasskeyNoContent struct{}
+
+func (*PasskeyDeletePasskeyNoContent) passkeyDeletePasskeyRes() {}
 
 // Ref: #/components/schemas/PasskeyOptions
 type PasskeyOptions struct {
@@ -17939,34 +17023,8 @@ func (s *PasskeyOptions) SetResponse(val jx.Raw) {
 	s.Response = val
 }
 
-// PasskeyOptionsStatusCode wraps PasskeyOptions with StatusCode.
-type PasskeyOptionsStatusCode struct {
-	StatusCode int
-	Response   PasskeyOptions
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *PasskeyOptionsStatusCode) GetStatusCode() int {
-	return s.StatusCode
-}
-
-// GetResponse returns the value of Response.
-func (s *PasskeyOptionsStatusCode) GetResponse() PasskeyOptions {
-	return s.Response
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *PasskeyOptionsStatusCode) SetStatusCode(val int) {
-	s.StatusCode = val
-}
-
-// SetResponse sets the value of Response.
-func (s *PasskeyOptionsStatusCode) SetResponse(val PasskeyOptions) {
-	s.Response = val
-}
-
-func (*PasskeyOptionsStatusCode) authPasskeyAuthenticationOptionsRes()  {}
-func (*PasskeyOptionsStatusCode) passkeyPasskeyRegistrationOptionsRes() {}
+func (*PasskeyOptions) authPasskeyAuthenticationOptionsRes()  {}
+func (*PasskeyOptions) passkeyPasskeyRegistrationOptionsRes() {}
 
 // Ref: #/components/schemas/PasskeySettings
 type PasskeySettings struct {
@@ -18019,6 +17077,9 @@ func (s *PasskeysResponse) GetResponse() PasskeysResponseResponse {
 func (s *PasskeysResponse) SetResponse(val PasskeysResponseResponse) {
 	s.Response = val
 }
+
+func (*PasskeysResponse) passkeyGetActivePasskeysRes() {}
+func (*PasskeysResponse) passkeyUpdatePasskeyRes()     {}
 
 type PasskeysResponseResponse struct {
 	Passkeys []PasskeysResponseResponsePasskeysItem `json:"passkeys"`
@@ -18083,36 +17144,6 @@ func (s *PasskeysResponseResponsePasskeysItem) SetLastUsedAt(val time.Time) {
 	s.LastUsedAt = val
 }
 
-// PasskeysResponseStatusCode wraps PasskeysResponse with StatusCode.
-type PasskeysResponseStatusCode struct {
-	StatusCode int
-	Response   PasskeysResponse
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *PasskeysResponseStatusCode) GetStatusCode() int {
-	return s.StatusCode
-}
-
-// GetResponse returns the value of Response.
-func (s *PasskeysResponseStatusCode) GetResponse() PasskeysResponse {
-	return s.Response
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *PasskeysResponseStatusCode) SetStatusCode(val int) {
-	s.StatusCode = val
-}
-
-// SetResponse sets the value of Response.
-func (s *PasskeysResponseStatusCode) SetResponse(val PasskeysResponse) {
-	s.Response = val
-}
-
-func (*PasskeysResponseStatusCode) passkeyDeletePasskeyRes()     {}
-func (*PasskeysResponseStatusCode) passkeyGetActivePasskeysRes() {}
-func (*PasskeysResponseStatusCode) passkeyUpdatePasskeyRes()     {}
-
 // Ref: #/components/schemas/PasswordSettings
 type PasswordSettings struct {
 	Enabled bool `json:"enabled"`
@@ -18128,171 +17159,171 @@ func (s *PasswordSettings) SetEnabled(val bool) {
 	s.Enabled = val
 }
 
-// Ref: #/components/schemas/PluginExecutorRequest
-type PluginExecutorRequest struct {
-	Command     PluginExecutorRequestCommand     `json:"command"`
-	TargetNodes PluginExecutorRequestTargetNodes `json:"targetNodes"`
+// Ref: #/components/schemas/PluginExecutorBody
+type PluginExecutorBody struct {
+	Command     PluginExecutorBodyCommand     `json:"command"`
+	TargetNodes PluginExecutorBodyTargetNodes `json:"targetNodes"`
 }
 
 // GetCommand returns the value of Command.
-func (s *PluginExecutorRequest) GetCommand() PluginExecutorRequestCommand {
+func (s *PluginExecutorBody) GetCommand() PluginExecutorBodyCommand {
 	return s.Command
 }
 
 // GetTargetNodes returns the value of TargetNodes.
-func (s *PluginExecutorRequest) GetTargetNodes() PluginExecutorRequestTargetNodes {
+func (s *PluginExecutorBody) GetTargetNodes() PluginExecutorBodyTargetNodes {
 	return s.TargetNodes
 }
 
 // SetCommand sets the value of Command.
-func (s *PluginExecutorRequest) SetCommand(val PluginExecutorRequestCommand) {
+func (s *PluginExecutorBody) SetCommand(val PluginExecutorBodyCommand) {
 	s.Command = val
 }
 
 // SetTargetNodes sets the value of TargetNodes.
-func (s *PluginExecutorRequest) SetTargetNodes(val PluginExecutorRequestTargetNodes) {
+func (s *PluginExecutorBody) SetTargetNodes(val PluginExecutorBodyTargetNodes) {
 	s.TargetNodes = val
 }
 
-// PluginExecutorRequestCommand represents sum type.
-type PluginExecutorRequestCommand struct {
-	Type                          PluginExecutorRequestCommandType // switch on this field
-	PluginExecutorRequestCommand0 PluginExecutorRequestCommand0
-	PluginExecutorRequestCommand1 PluginExecutorRequestCommand1
-	PluginExecutorRequestCommand2 PluginExecutorRequestCommand2
+// PluginExecutorBodyCommand represents sum type.
+type PluginExecutorBodyCommand struct {
+	Type                       PluginExecutorBodyCommandType // switch on this field
+	PluginExecutorBodyCommand0 PluginExecutorBodyCommand0
+	PluginExecutorBodyCommand1 PluginExecutorBodyCommand1
+	PluginExecutorBodyCommand2 PluginExecutorBodyCommand2
 }
 
-// PluginExecutorRequestCommandType is oneOf type of PluginExecutorRequestCommand.
-type PluginExecutorRequestCommandType string
+// PluginExecutorBodyCommandType is oneOf type of PluginExecutorBodyCommand.
+type PluginExecutorBodyCommandType string
 
-// Possible values for PluginExecutorRequestCommandType.
+// Possible values for PluginExecutorBodyCommandType.
 const (
-	PluginExecutorRequestCommand0PluginExecutorRequestCommand PluginExecutorRequestCommandType = "PluginExecutorRequestCommand0"
-	PluginExecutorRequestCommand1PluginExecutorRequestCommand PluginExecutorRequestCommandType = "PluginExecutorRequestCommand1"
-	PluginExecutorRequestCommand2PluginExecutorRequestCommand PluginExecutorRequestCommandType = "PluginExecutorRequestCommand2"
+	PluginExecutorBodyCommand0PluginExecutorBodyCommand PluginExecutorBodyCommandType = "PluginExecutorBodyCommand0"
+	PluginExecutorBodyCommand1PluginExecutorBodyCommand PluginExecutorBodyCommandType = "PluginExecutorBodyCommand1"
+	PluginExecutorBodyCommand2PluginExecutorBodyCommand PluginExecutorBodyCommandType = "PluginExecutorBodyCommand2"
 )
 
-// IsPluginExecutorRequestCommand0 reports whether PluginExecutorRequestCommand is PluginExecutorRequestCommand0.
-func (s PluginExecutorRequestCommand) IsPluginExecutorRequestCommand0() bool {
-	return s.Type == PluginExecutorRequestCommand0PluginExecutorRequestCommand
+// IsPluginExecutorBodyCommand0 reports whether PluginExecutorBodyCommand is PluginExecutorBodyCommand0.
+func (s PluginExecutorBodyCommand) IsPluginExecutorBodyCommand0() bool {
+	return s.Type == PluginExecutorBodyCommand0PluginExecutorBodyCommand
 }
 
-// IsPluginExecutorRequestCommand1 reports whether PluginExecutorRequestCommand is PluginExecutorRequestCommand1.
-func (s PluginExecutorRequestCommand) IsPluginExecutorRequestCommand1() bool {
-	return s.Type == PluginExecutorRequestCommand1PluginExecutorRequestCommand
+// IsPluginExecutorBodyCommand1 reports whether PluginExecutorBodyCommand is PluginExecutorBodyCommand1.
+func (s PluginExecutorBodyCommand) IsPluginExecutorBodyCommand1() bool {
+	return s.Type == PluginExecutorBodyCommand1PluginExecutorBodyCommand
 }
 
-// IsPluginExecutorRequestCommand2 reports whether PluginExecutorRequestCommand is PluginExecutorRequestCommand2.
-func (s PluginExecutorRequestCommand) IsPluginExecutorRequestCommand2() bool {
-	return s.Type == PluginExecutorRequestCommand2PluginExecutorRequestCommand
+// IsPluginExecutorBodyCommand2 reports whether PluginExecutorBodyCommand is PluginExecutorBodyCommand2.
+func (s PluginExecutorBodyCommand) IsPluginExecutorBodyCommand2() bool {
+	return s.Type == PluginExecutorBodyCommand2PluginExecutorBodyCommand
 }
 
-// SetPluginExecutorRequestCommand0 sets PluginExecutorRequestCommand to PluginExecutorRequestCommand0.
-func (s *PluginExecutorRequestCommand) SetPluginExecutorRequestCommand0(v PluginExecutorRequestCommand0) {
-	s.Type = PluginExecutorRequestCommand0PluginExecutorRequestCommand
-	s.PluginExecutorRequestCommand0 = v
+// SetPluginExecutorBodyCommand0 sets PluginExecutorBodyCommand to PluginExecutorBodyCommand0.
+func (s *PluginExecutorBodyCommand) SetPluginExecutorBodyCommand0(v PluginExecutorBodyCommand0) {
+	s.Type = PluginExecutorBodyCommand0PluginExecutorBodyCommand
+	s.PluginExecutorBodyCommand0 = v
 }
 
-// GetPluginExecutorRequestCommand0 returns PluginExecutorRequestCommand0 and true boolean if PluginExecutorRequestCommand is PluginExecutorRequestCommand0.
-func (s PluginExecutorRequestCommand) GetPluginExecutorRequestCommand0() (v PluginExecutorRequestCommand0, ok bool) {
-	if !s.IsPluginExecutorRequestCommand0() {
+// GetPluginExecutorBodyCommand0 returns PluginExecutorBodyCommand0 and true boolean if PluginExecutorBodyCommand is PluginExecutorBodyCommand0.
+func (s PluginExecutorBodyCommand) GetPluginExecutorBodyCommand0() (v PluginExecutorBodyCommand0, ok bool) {
+	if !s.IsPluginExecutorBodyCommand0() {
 		return v, false
 	}
-	return s.PluginExecutorRequestCommand0, true
+	return s.PluginExecutorBodyCommand0, true
 }
 
-// NewPluginExecutorRequestCommand0PluginExecutorRequestCommand returns new PluginExecutorRequestCommand from PluginExecutorRequestCommand0.
-func NewPluginExecutorRequestCommand0PluginExecutorRequestCommand(v PluginExecutorRequestCommand0) PluginExecutorRequestCommand {
-	var s PluginExecutorRequestCommand
-	s.SetPluginExecutorRequestCommand0(v)
+// NewPluginExecutorBodyCommand0PluginExecutorBodyCommand returns new PluginExecutorBodyCommand from PluginExecutorBodyCommand0.
+func NewPluginExecutorBodyCommand0PluginExecutorBodyCommand(v PluginExecutorBodyCommand0) PluginExecutorBodyCommand {
+	var s PluginExecutorBodyCommand
+	s.SetPluginExecutorBodyCommand0(v)
 	return s
 }
 
-// SetPluginExecutorRequestCommand1 sets PluginExecutorRequestCommand to PluginExecutorRequestCommand1.
-func (s *PluginExecutorRequestCommand) SetPluginExecutorRequestCommand1(v PluginExecutorRequestCommand1) {
-	s.Type = PluginExecutorRequestCommand1PluginExecutorRequestCommand
-	s.PluginExecutorRequestCommand1 = v
+// SetPluginExecutorBodyCommand1 sets PluginExecutorBodyCommand to PluginExecutorBodyCommand1.
+func (s *PluginExecutorBodyCommand) SetPluginExecutorBodyCommand1(v PluginExecutorBodyCommand1) {
+	s.Type = PluginExecutorBodyCommand1PluginExecutorBodyCommand
+	s.PluginExecutorBodyCommand1 = v
 }
 
-// GetPluginExecutorRequestCommand1 returns PluginExecutorRequestCommand1 and true boolean if PluginExecutorRequestCommand is PluginExecutorRequestCommand1.
-func (s PluginExecutorRequestCommand) GetPluginExecutorRequestCommand1() (v PluginExecutorRequestCommand1, ok bool) {
-	if !s.IsPluginExecutorRequestCommand1() {
+// GetPluginExecutorBodyCommand1 returns PluginExecutorBodyCommand1 and true boolean if PluginExecutorBodyCommand is PluginExecutorBodyCommand1.
+func (s PluginExecutorBodyCommand) GetPluginExecutorBodyCommand1() (v PluginExecutorBodyCommand1, ok bool) {
+	if !s.IsPluginExecutorBodyCommand1() {
 		return v, false
 	}
-	return s.PluginExecutorRequestCommand1, true
+	return s.PluginExecutorBodyCommand1, true
 }
 
-// NewPluginExecutorRequestCommand1PluginExecutorRequestCommand returns new PluginExecutorRequestCommand from PluginExecutorRequestCommand1.
-func NewPluginExecutorRequestCommand1PluginExecutorRequestCommand(v PluginExecutorRequestCommand1) PluginExecutorRequestCommand {
-	var s PluginExecutorRequestCommand
-	s.SetPluginExecutorRequestCommand1(v)
+// NewPluginExecutorBodyCommand1PluginExecutorBodyCommand returns new PluginExecutorBodyCommand from PluginExecutorBodyCommand1.
+func NewPluginExecutorBodyCommand1PluginExecutorBodyCommand(v PluginExecutorBodyCommand1) PluginExecutorBodyCommand {
+	var s PluginExecutorBodyCommand
+	s.SetPluginExecutorBodyCommand1(v)
 	return s
 }
 
-// SetPluginExecutorRequestCommand2 sets PluginExecutorRequestCommand to PluginExecutorRequestCommand2.
-func (s *PluginExecutorRequestCommand) SetPluginExecutorRequestCommand2(v PluginExecutorRequestCommand2) {
-	s.Type = PluginExecutorRequestCommand2PluginExecutorRequestCommand
-	s.PluginExecutorRequestCommand2 = v
+// SetPluginExecutorBodyCommand2 sets PluginExecutorBodyCommand to PluginExecutorBodyCommand2.
+func (s *PluginExecutorBodyCommand) SetPluginExecutorBodyCommand2(v PluginExecutorBodyCommand2) {
+	s.Type = PluginExecutorBodyCommand2PluginExecutorBodyCommand
+	s.PluginExecutorBodyCommand2 = v
 }
 
-// GetPluginExecutorRequestCommand2 returns PluginExecutorRequestCommand2 and true boolean if PluginExecutorRequestCommand is PluginExecutorRequestCommand2.
-func (s PluginExecutorRequestCommand) GetPluginExecutorRequestCommand2() (v PluginExecutorRequestCommand2, ok bool) {
-	if !s.IsPluginExecutorRequestCommand2() {
+// GetPluginExecutorBodyCommand2 returns PluginExecutorBodyCommand2 and true boolean if PluginExecutorBodyCommand is PluginExecutorBodyCommand2.
+func (s PluginExecutorBodyCommand) GetPluginExecutorBodyCommand2() (v PluginExecutorBodyCommand2, ok bool) {
+	if !s.IsPluginExecutorBodyCommand2() {
 		return v, false
 	}
-	return s.PluginExecutorRequestCommand2, true
+	return s.PluginExecutorBodyCommand2, true
 }
 
-// NewPluginExecutorRequestCommand2PluginExecutorRequestCommand returns new PluginExecutorRequestCommand from PluginExecutorRequestCommand2.
-func NewPluginExecutorRequestCommand2PluginExecutorRequestCommand(v PluginExecutorRequestCommand2) PluginExecutorRequestCommand {
-	var s PluginExecutorRequestCommand
-	s.SetPluginExecutorRequestCommand2(v)
+// NewPluginExecutorBodyCommand2PluginExecutorBodyCommand returns new PluginExecutorBodyCommand from PluginExecutorBodyCommand2.
+func NewPluginExecutorBodyCommand2PluginExecutorBodyCommand(v PluginExecutorBodyCommand2) PluginExecutorBodyCommand {
+	var s PluginExecutorBodyCommand
+	s.SetPluginExecutorBodyCommand2(v)
 	return s
 }
 
 // Block IPs.
-type PluginExecutorRequestCommand0 struct {
-	Command PluginExecutorRequestCommand0Command   `json:"command"`
-	Ips     []PluginExecutorRequestCommand0IpsItem `json:"ips"`
+type PluginExecutorBodyCommand0 struct {
+	Command PluginExecutorBodyCommand0Command   `json:"command"`
+	Ips     []PluginExecutorBodyCommand0IpsItem `json:"ips"`
 }
 
 // GetCommand returns the value of Command.
-func (s *PluginExecutorRequestCommand0) GetCommand() PluginExecutorRequestCommand0Command {
+func (s *PluginExecutorBodyCommand0) GetCommand() PluginExecutorBodyCommand0Command {
 	return s.Command
 }
 
 // GetIps returns the value of Ips.
-func (s *PluginExecutorRequestCommand0) GetIps() []PluginExecutorRequestCommand0IpsItem {
+func (s *PluginExecutorBodyCommand0) GetIps() []PluginExecutorBodyCommand0IpsItem {
 	return s.Ips
 }
 
 // SetCommand sets the value of Command.
-func (s *PluginExecutorRequestCommand0) SetCommand(val PluginExecutorRequestCommand0Command) {
+func (s *PluginExecutorBodyCommand0) SetCommand(val PluginExecutorBodyCommand0Command) {
 	s.Command = val
 }
 
 // SetIps sets the value of Ips.
-func (s *PluginExecutorRequestCommand0) SetIps(val []PluginExecutorRequestCommand0IpsItem) {
+func (s *PluginExecutorBodyCommand0) SetIps(val []PluginExecutorBodyCommand0IpsItem) {
 	s.Ips = val
 }
 
-type PluginExecutorRequestCommand0Command string
+type PluginExecutorBodyCommand0Command string
 
 const (
-	PluginExecutorRequestCommand0CommandBlockIps PluginExecutorRequestCommand0Command = "blockIps"
+	PluginExecutorBodyCommand0CommandBlockIps PluginExecutorBodyCommand0Command = "blockIps"
 )
 
-// AllValues returns all PluginExecutorRequestCommand0Command values.
-func (PluginExecutorRequestCommand0Command) AllValues() []PluginExecutorRequestCommand0Command {
-	return []PluginExecutorRequestCommand0Command{
-		PluginExecutorRequestCommand0CommandBlockIps,
+// AllValues returns all PluginExecutorBodyCommand0Command values.
+func (PluginExecutorBodyCommand0Command) AllValues() []PluginExecutorBodyCommand0Command {
+	return []PluginExecutorBodyCommand0Command{
+		PluginExecutorBodyCommand0CommandBlockIps,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s PluginExecutorRequestCommand0Command) MarshalText() ([]byte, error) {
+func (s PluginExecutorBodyCommand0Command) MarshalText() ([]byte, error) {
 	switch s {
-	case PluginExecutorRequestCommand0CommandBlockIps:
+	case PluginExecutorBodyCommand0CommandBlockIps:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -18300,84 +17331,84 @@ func (s PluginExecutorRequestCommand0Command) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *PluginExecutorRequestCommand0Command) UnmarshalText(data []byte) error {
-	switch PluginExecutorRequestCommand0Command(data) {
-	case PluginExecutorRequestCommand0CommandBlockIps:
-		*s = PluginExecutorRequestCommand0CommandBlockIps
+func (s *PluginExecutorBodyCommand0Command) UnmarshalText(data []byte) error {
+	switch PluginExecutorBodyCommand0Command(data) {
+	case PluginExecutorBodyCommand0CommandBlockIps:
+		*s = PluginExecutorBodyCommand0CommandBlockIps
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type PluginExecutorRequestCommand0IpsItem struct {
+type PluginExecutorBodyCommand0IpsItem struct {
 	IP      string  `json:"ip"`
 	Timeout float64 `json:"timeout"`
 }
 
 // GetIP returns the value of IP.
-func (s *PluginExecutorRequestCommand0IpsItem) GetIP() string {
+func (s *PluginExecutorBodyCommand0IpsItem) GetIP() string {
 	return s.IP
 }
 
 // GetTimeout returns the value of Timeout.
-func (s *PluginExecutorRequestCommand0IpsItem) GetTimeout() float64 {
+func (s *PluginExecutorBodyCommand0IpsItem) GetTimeout() float64 {
 	return s.Timeout
 }
 
 // SetIP sets the value of IP.
-func (s *PluginExecutorRequestCommand0IpsItem) SetIP(val string) {
+func (s *PluginExecutorBodyCommand0IpsItem) SetIP(val string) {
 	s.IP = val
 }
 
 // SetTimeout sets the value of Timeout.
-func (s *PluginExecutorRequestCommand0IpsItem) SetTimeout(val float64) {
+func (s *PluginExecutorBodyCommand0IpsItem) SetTimeout(val float64) {
 	s.Timeout = val
 }
 
 // Unblock IPs.
-type PluginExecutorRequestCommand1 struct {
-	Command PluginExecutorRequestCommand1Command `json:"command"`
-	Ips     []string                             `json:"ips"`
+type PluginExecutorBodyCommand1 struct {
+	Command PluginExecutorBodyCommand1Command `json:"command"`
+	Ips     []string                          `json:"ips"`
 }
 
 // GetCommand returns the value of Command.
-func (s *PluginExecutorRequestCommand1) GetCommand() PluginExecutorRequestCommand1Command {
+func (s *PluginExecutorBodyCommand1) GetCommand() PluginExecutorBodyCommand1Command {
 	return s.Command
 }
 
 // GetIps returns the value of Ips.
-func (s *PluginExecutorRequestCommand1) GetIps() []string {
+func (s *PluginExecutorBodyCommand1) GetIps() []string {
 	return s.Ips
 }
 
 // SetCommand sets the value of Command.
-func (s *PluginExecutorRequestCommand1) SetCommand(val PluginExecutorRequestCommand1Command) {
+func (s *PluginExecutorBodyCommand1) SetCommand(val PluginExecutorBodyCommand1Command) {
 	s.Command = val
 }
 
 // SetIps sets the value of Ips.
-func (s *PluginExecutorRequestCommand1) SetIps(val []string) {
+func (s *PluginExecutorBodyCommand1) SetIps(val []string) {
 	s.Ips = val
 }
 
-type PluginExecutorRequestCommand1Command string
+type PluginExecutorBodyCommand1Command string
 
 const (
-	PluginExecutorRequestCommand1CommandUnblockIps PluginExecutorRequestCommand1Command = "unblockIps"
+	PluginExecutorBodyCommand1CommandUnblockIps PluginExecutorBodyCommand1Command = "unblockIps"
 )
 
-// AllValues returns all PluginExecutorRequestCommand1Command values.
-func (PluginExecutorRequestCommand1Command) AllValues() []PluginExecutorRequestCommand1Command {
-	return []PluginExecutorRequestCommand1Command{
-		PluginExecutorRequestCommand1CommandUnblockIps,
+// AllValues returns all PluginExecutorBodyCommand1Command values.
+func (PluginExecutorBodyCommand1Command) AllValues() []PluginExecutorBodyCommand1Command {
+	return []PluginExecutorBodyCommand1Command{
+		PluginExecutorBodyCommand1CommandUnblockIps,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s PluginExecutorRequestCommand1Command) MarshalText() ([]byte, error) {
+func (s PluginExecutorBodyCommand1Command) MarshalText() ([]byte, error) {
 	switch s {
-	case PluginExecutorRequestCommand1CommandUnblockIps:
+	case PluginExecutorBodyCommand1CommandUnblockIps:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -18385,10 +17416,10 @@ func (s PluginExecutorRequestCommand1Command) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *PluginExecutorRequestCommand1Command) UnmarshalText(data []byte) error {
-	switch PluginExecutorRequestCommand1Command(data) {
-	case PluginExecutorRequestCommand1CommandUnblockIps:
-		*s = PluginExecutorRequestCommand1CommandUnblockIps
+func (s *PluginExecutorBodyCommand1Command) UnmarshalText(data []byte) error {
+	switch PluginExecutorBodyCommand1Command(data) {
+	case PluginExecutorBodyCommand1CommandUnblockIps:
+		*s = PluginExecutorBodyCommand1CommandUnblockIps
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -18396,37 +17427,37 @@ func (s *PluginExecutorRequestCommand1Command) UnmarshalText(data []byte) error 
 }
 
 // Recreate tables.
-type PluginExecutorRequestCommand2 struct {
-	Command PluginExecutorRequestCommand2Command `json:"command"`
+type PluginExecutorBodyCommand2 struct {
+	Command PluginExecutorBodyCommand2Command `json:"command"`
 }
 
 // GetCommand returns the value of Command.
-func (s *PluginExecutorRequestCommand2) GetCommand() PluginExecutorRequestCommand2Command {
+func (s *PluginExecutorBodyCommand2) GetCommand() PluginExecutorBodyCommand2Command {
 	return s.Command
 }
 
 // SetCommand sets the value of Command.
-func (s *PluginExecutorRequestCommand2) SetCommand(val PluginExecutorRequestCommand2Command) {
+func (s *PluginExecutorBodyCommand2) SetCommand(val PluginExecutorBodyCommand2Command) {
 	s.Command = val
 }
 
-type PluginExecutorRequestCommand2Command string
+type PluginExecutorBodyCommand2Command string
 
 const (
-	PluginExecutorRequestCommand2CommandRecreateTables PluginExecutorRequestCommand2Command = "recreateTables"
+	PluginExecutorBodyCommand2CommandRecreateTables PluginExecutorBodyCommand2Command = "recreateTables"
 )
 
-// AllValues returns all PluginExecutorRequestCommand2Command values.
-func (PluginExecutorRequestCommand2Command) AllValues() []PluginExecutorRequestCommand2Command {
-	return []PluginExecutorRequestCommand2Command{
-		PluginExecutorRequestCommand2CommandRecreateTables,
+// AllValues returns all PluginExecutorBodyCommand2Command values.
+func (PluginExecutorBodyCommand2Command) AllValues() []PluginExecutorBodyCommand2Command {
+	return []PluginExecutorBodyCommand2Command{
+		PluginExecutorBodyCommand2CommandRecreateTables,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s PluginExecutorRequestCommand2Command) MarshalText() ([]byte, error) {
+func (s PluginExecutorBodyCommand2Command) MarshalText() ([]byte, error) {
 	switch s {
-	case PluginExecutorRequestCommand2CommandRecreateTables:
+	case PluginExecutorBodyCommand2CommandRecreateTables:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -18434,116 +17465,116 @@ func (s PluginExecutorRequestCommand2Command) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *PluginExecutorRequestCommand2Command) UnmarshalText(data []byte) error {
-	switch PluginExecutorRequestCommand2Command(data) {
-	case PluginExecutorRequestCommand2CommandRecreateTables:
-		*s = PluginExecutorRequestCommand2CommandRecreateTables
+func (s *PluginExecutorBodyCommand2Command) UnmarshalText(data []byte) error {
+	switch PluginExecutorBodyCommand2Command(data) {
+	case PluginExecutorBodyCommand2CommandRecreateTables:
+		*s = PluginExecutorBodyCommand2CommandRecreateTables
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// PluginExecutorRequestTargetNodes represents sum type.
-type PluginExecutorRequestTargetNodes struct {
-	Type                              PluginExecutorRequestTargetNodesType // switch on this field
-	PluginExecutorRequestTargetNodes0 PluginExecutorRequestTargetNodes0
-	PluginExecutorRequestTargetNodes1 PluginExecutorRequestTargetNodes1
+// PluginExecutorBodyTargetNodes represents sum type.
+type PluginExecutorBodyTargetNodes struct {
+	Type                           PluginExecutorBodyTargetNodesType // switch on this field
+	PluginExecutorBodyTargetNodes0 PluginExecutorBodyTargetNodes0
+	PluginExecutorBodyTargetNodes1 PluginExecutorBodyTargetNodes1
 }
 
-// PluginExecutorRequestTargetNodesType is oneOf type of PluginExecutorRequestTargetNodes.
-type PluginExecutorRequestTargetNodesType string
+// PluginExecutorBodyTargetNodesType is oneOf type of PluginExecutorBodyTargetNodes.
+type PluginExecutorBodyTargetNodesType string
 
-// Possible values for PluginExecutorRequestTargetNodesType.
+// Possible values for PluginExecutorBodyTargetNodesType.
 const (
-	PluginExecutorRequestTargetNodes0PluginExecutorRequestTargetNodes PluginExecutorRequestTargetNodesType = "PluginExecutorRequestTargetNodes0"
-	PluginExecutorRequestTargetNodes1PluginExecutorRequestTargetNodes PluginExecutorRequestTargetNodesType = "PluginExecutorRequestTargetNodes1"
+	PluginExecutorBodyTargetNodes0PluginExecutorBodyTargetNodes PluginExecutorBodyTargetNodesType = "PluginExecutorBodyTargetNodes0"
+	PluginExecutorBodyTargetNodes1PluginExecutorBodyTargetNodes PluginExecutorBodyTargetNodesType = "PluginExecutorBodyTargetNodes1"
 )
 
-// IsPluginExecutorRequestTargetNodes0 reports whether PluginExecutorRequestTargetNodes is PluginExecutorRequestTargetNodes0.
-func (s PluginExecutorRequestTargetNodes) IsPluginExecutorRequestTargetNodes0() bool {
-	return s.Type == PluginExecutorRequestTargetNodes0PluginExecutorRequestTargetNodes
+// IsPluginExecutorBodyTargetNodes0 reports whether PluginExecutorBodyTargetNodes is PluginExecutorBodyTargetNodes0.
+func (s PluginExecutorBodyTargetNodes) IsPluginExecutorBodyTargetNodes0() bool {
+	return s.Type == PluginExecutorBodyTargetNodes0PluginExecutorBodyTargetNodes
 }
 
-// IsPluginExecutorRequestTargetNodes1 reports whether PluginExecutorRequestTargetNodes is PluginExecutorRequestTargetNodes1.
-func (s PluginExecutorRequestTargetNodes) IsPluginExecutorRequestTargetNodes1() bool {
-	return s.Type == PluginExecutorRequestTargetNodes1PluginExecutorRequestTargetNodes
+// IsPluginExecutorBodyTargetNodes1 reports whether PluginExecutorBodyTargetNodes is PluginExecutorBodyTargetNodes1.
+func (s PluginExecutorBodyTargetNodes) IsPluginExecutorBodyTargetNodes1() bool {
+	return s.Type == PluginExecutorBodyTargetNodes1PluginExecutorBodyTargetNodes
 }
 
-// SetPluginExecutorRequestTargetNodes0 sets PluginExecutorRequestTargetNodes to PluginExecutorRequestTargetNodes0.
-func (s *PluginExecutorRequestTargetNodes) SetPluginExecutorRequestTargetNodes0(v PluginExecutorRequestTargetNodes0) {
-	s.Type = PluginExecutorRequestTargetNodes0PluginExecutorRequestTargetNodes
-	s.PluginExecutorRequestTargetNodes0 = v
+// SetPluginExecutorBodyTargetNodes0 sets PluginExecutorBodyTargetNodes to PluginExecutorBodyTargetNodes0.
+func (s *PluginExecutorBodyTargetNodes) SetPluginExecutorBodyTargetNodes0(v PluginExecutorBodyTargetNodes0) {
+	s.Type = PluginExecutorBodyTargetNodes0PluginExecutorBodyTargetNodes
+	s.PluginExecutorBodyTargetNodes0 = v
 }
 
-// GetPluginExecutorRequestTargetNodes0 returns PluginExecutorRequestTargetNodes0 and true boolean if PluginExecutorRequestTargetNodes is PluginExecutorRequestTargetNodes0.
-func (s PluginExecutorRequestTargetNodes) GetPluginExecutorRequestTargetNodes0() (v PluginExecutorRequestTargetNodes0, ok bool) {
-	if !s.IsPluginExecutorRequestTargetNodes0() {
+// GetPluginExecutorBodyTargetNodes0 returns PluginExecutorBodyTargetNodes0 and true boolean if PluginExecutorBodyTargetNodes is PluginExecutorBodyTargetNodes0.
+func (s PluginExecutorBodyTargetNodes) GetPluginExecutorBodyTargetNodes0() (v PluginExecutorBodyTargetNodes0, ok bool) {
+	if !s.IsPluginExecutorBodyTargetNodes0() {
 		return v, false
 	}
-	return s.PluginExecutorRequestTargetNodes0, true
+	return s.PluginExecutorBodyTargetNodes0, true
 }
 
-// NewPluginExecutorRequestTargetNodes0PluginExecutorRequestTargetNodes returns new PluginExecutorRequestTargetNodes from PluginExecutorRequestTargetNodes0.
-func NewPluginExecutorRequestTargetNodes0PluginExecutorRequestTargetNodes(v PluginExecutorRequestTargetNodes0) PluginExecutorRequestTargetNodes {
-	var s PluginExecutorRequestTargetNodes
-	s.SetPluginExecutorRequestTargetNodes0(v)
+// NewPluginExecutorBodyTargetNodes0PluginExecutorBodyTargetNodes returns new PluginExecutorBodyTargetNodes from PluginExecutorBodyTargetNodes0.
+func NewPluginExecutorBodyTargetNodes0PluginExecutorBodyTargetNodes(v PluginExecutorBodyTargetNodes0) PluginExecutorBodyTargetNodes {
+	var s PluginExecutorBodyTargetNodes
+	s.SetPluginExecutorBodyTargetNodes0(v)
 	return s
 }
 
-// SetPluginExecutorRequestTargetNodes1 sets PluginExecutorRequestTargetNodes to PluginExecutorRequestTargetNodes1.
-func (s *PluginExecutorRequestTargetNodes) SetPluginExecutorRequestTargetNodes1(v PluginExecutorRequestTargetNodes1) {
-	s.Type = PluginExecutorRequestTargetNodes1PluginExecutorRequestTargetNodes
-	s.PluginExecutorRequestTargetNodes1 = v
+// SetPluginExecutorBodyTargetNodes1 sets PluginExecutorBodyTargetNodes to PluginExecutorBodyTargetNodes1.
+func (s *PluginExecutorBodyTargetNodes) SetPluginExecutorBodyTargetNodes1(v PluginExecutorBodyTargetNodes1) {
+	s.Type = PluginExecutorBodyTargetNodes1PluginExecutorBodyTargetNodes
+	s.PluginExecutorBodyTargetNodes1 = v
 }
 
-// GetPluginExecutorRequestTargetNodes1 returns PluginExecutorRequestTargetNodes1 and true boolean if PluginExecutorRequestTargetNodes is PluginExecutorRequestTargetNodes1.
-func (s PluginExecutorRequestTargetNodes) GetPluginExecutorRequestTargetNodes1() (v PluginExecutorRequestTargetNodes1, ok bool) {
-	if !s.IsPluginExecutorRequestTargetNodes1() {
+// GetPluginExecutorBodyTargetNodes1 returns PluginExecutorBodyTargetNodes1 and true boolean if PluginExecutorBodyTargetNodes is PluginExecutorBodyTargetNodes1.
+func (s PluginExecutorBodyTargetNodes) GetPluginExecutorBodyTargetNodes1() (v PluginExecutorBodyTargetNodes1, ok bool) {
+	if !s.IsPluginExecutorBodyTargetNodes1() {
 		return v, false
 	}
-	return s.PluginExecutorRequestTargetNodes1, true
+	return s.PluginExecutorBodyTargetNodes1, true
 }
 
-// NewPluginExecutorRequestTargetNodes1PluginExecutorRequestTargetNodes returns new PluginExecutorRequestTargetNodes from PluginExecutorRequestTargetNodes1.
-func NewPluginExecutorRequestTargetNodes1PluginExecutorRequestTargetNodes(v PluginExecutorRequestTargetNodes1) PluginExecutorRequestTargetNodes {
-	var s PluginExecutorRequestTargetNodes
-	s.SetPluginExecutorRequestTargetNodes1(v)
+// NewPluginExecutorBodyTargetNodes1PluginExecutorBodyTargetNodes returns new PluginExecutorBodyTargetNodes from PluginExecutorBodyTargetNodes1.
+func NewPluginExecutorBodyTargetNodes1PluginExecutorBodyTargetNodes(v PluginExecutorBodyTargetNodes1) PluginExecutorBodyTargetNodes {
+	var s PluginExecutorBodyTargetNodes
+	s.SetPluginExecutorBodyTargetNodes1(v)
 	return s
 }
 
 // Target all connected nodes.
-type PluginExecutorRequestTargetNodes0 struct {
-	Target PluginExecutorRequestTargetNodes0Target `json:"target"`
+type PluginExecutorBodyTargetNodes0 struct {
+	Target PluginExecutorBodyTargetNodes0Target `json:"target"`
 }
 
 // GetTarget returns the value of Target.
-func (s *PluginExecutorRequestTargetNodes0) GetTarget() PluginExecutorRequestTargetNodes0Target {
+func (s *PluginExecutorBodyTargetNodes0) GetTarget() PluginExecutorBodyTargetNodes0Target {
 	return s.Target
 }
 
 // SetTarget sets the value of Target.
-func (s *PluginExecutorRequestTargetNodes0) SetTarget(val PluginExecutorRequestTargetNodes0Target) {
+func (s *PluginExecutorBodyTargetNodes0) SetTarget(val PluginExecutorBodyTargetNodes0Target) {
 	s.Target = val
 }
 
-type PluginExecutorRequestTargetNodes0Target string
+type PluginExecutorBodyTargetNodes0Target string
 
 const (
-	PluginExecutorRequestTargetNodes0TargetAllNodes PluginExecutorRequestTargetNodes0Target = "allNodes"
+	PluginExecutorBodyTargetNodes0TargetAllNodes PluginExecutorBodyTargetNodes0Target = "allNodes"
 )
 
-// AllValues returns all PluginExecutorRequestTargetNodes0Target values.
-func (PluginExecutorRequestTargetNodes0Target) AllValues() []PluginExecutorRequestTargetNodes0Target {
-	return []PluginExecutorRequestTargetNodes0Target{
-		PluginExecutorRequestTargetNodes0TargetAllNodes,
+// AllValues returns all PluginExecutorBodyTargetNodes0Target values.
+func (PluginExecutorBodyTargetNodes0Target) AllValues() []PluginExecutorBodyTargetNodes0Target {
+	return []PluginExecutorBodyTargetNodes0Target{
+		PluginExecutorBodyTargetNodes0TargetAllNodes,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s PluginExecutorRequestTargetNodes0Target) MarshalText() ([]byte, error) {
+func (s PluginExecutorBodyTargetNodes0Target) MarshalText() ([]byte, error) {
 	switch s {
-	case PluginExecutorRequestTargetNodes0TargetAllNodes:
+	case PluginExecutorBodyTargetNodes0TargetAllNodes:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -18551,10 +17582,10 @@ func (s PluginExecutorRequestTargetNodes0Target) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *PluginExecutorRequestTargetNodes0Target) UnmarshalText(data []byte) error {
-	switch PluginExecutorRequestTargetNodes0Target(data) {
-	case PluginExecutorRequestTargetNodes0TargetAllNodes:
-		*s = PluginExecutorRequestTargetNodes0TargetAllNodes
+func (s *PluginExecutorBodyTargetNodes0Target) UnmarshalText(data []byte) error {
+	switch PluginExecutorBodyTargetNodes0Target(data) {
+	case PluginExecutorBodyTargetNodes0TargetAllNodes:
+		*s = PluginExecutorBodyTargetNodes0TargetAllNodes
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -18562,48 +17593,48 @@ func (s *PluginExecutorRequestTargetNodes0Target) UnmarshalText(data []byte) err
 }
 
 // Target specific nodes.
-type PluginExecutorRequestTargetNodes1 struct {
-	Target    PluginExecutorRequestTargetNodes1Target `json:"target"`
-	NodeUuids []uuid.UUID                             `json:"nodeUuids"`
+type PluginExecutorBodyTargetNodes1 struct {
+	Target    PluginExecutorBodyTargetNodes1Target `json:"target"`
+	NodeUuids []uuid.UUID                          `json:"nodeUuids"`
 }
 
 // GetTarget returns the value of Target.
-func (s *PluginExecutorRequestTargetNodes1) GetTarget() PluginExecutorRequestTargetNodes1Target {
+func (s *PluginExecutorBodyTargetNodes1) GetTarget() PluginExecutorBodyTargetNodes1Target {
 	return s.Target
 }
 
 // GetNodeUuids returns the value of NodeUuids.
-func (s *PluginExecutorRequestTargetNodes1) GetNodeUuids() []uuid.UUID {
+func (s *PluginExecutorBodyTargetNodes1) GetNodeUuids() []uuid.UUID {
 	return s.NodeUuids
 }
 
 // SetTarget sets the value of Target.
-func (s *PluginExecutorRequestTargetNodes1) SetTarget(val PluginExecutorRequestTargetNodes1Target) {
+func (s *PluginExecutorBodyTargetNodes1) SetTarget(val PluginExecutorBodyTargetNodes1Target) {
 	s.Target = val
 }
 
 // SetNodeUuids sets the value of NodeUuids.
-func (s *PluginExecutorRequestTargetNodes1) SetNodeUuids(val []uuid.UUID) {
+func (s *PluginExecutorBodyTargetNodes1) SetNodeUuids(val []uuid.UUID) {
 	s.NodeUuids = val
 }
 
-type PluginExecutorRequestTargetNodes1Target string
+type PluginExecutorBodyTargetNodes1Target string
 
 const (
-	PluginExecutorRequestTargetNodes1TargetSpecificNodes PluginExecutorRequestTargetNodes1Target = "specificNodes"
+	PluginExecutorBodyTargetNodes1TargetSpecificNodes PluginExecutorBodyTargetNodes1Target = "specificNodes"
 )
 
-// AllValues returns all PluginExecutorRequestTargetNodes1Target values.
-func (PluginExecutorRequestTargetNodes1Target) AllValues() []PluginExecutorRequestTargetNodes1Target {
-	return []PluginExecutorRequestTargetNodes1Target{
-		PluginExecutorRequestTargetNodes1TargetSpecificNodes,
+// AllValues returns all PluginExecutorBodyTargetNodes1Target values.
+func (PluginExecutorBodyTargetNodes1Target) AllValues() []PluginExecutorBodyTargetNodes1Target {
+	return []PluginExecutorBodyTargetNodes1Target{
+		PluginExecutorBodyTargetNodes1TargetSpecificNodes,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s PluginExecutorRequestTargetNodes1Target) MarshalText() ([]byte, error) {
+func (s PluginExecutorBodyTargetNodes1Target) MarshalText() ([]byte, error) {
 	switch s {
-	case PluginExecutorRequestTargetNodes1TargetSpecificNodes:
+	case PluginExecutorBodyTargetNodes1TargetSpecificNodes:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -18611,10 +17642,10 @@ func (s PluginExecutorRequestTargetNodes1Target) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *PluginExecutorRequestTargetNodes1Target) UnmarshalText(data []byte) error {
-	switch PluginExecutorRequestTargetNodes1Target(data) {
-	case PluginExecutorRequestTargetNodes1TargetSpecificNodes:
-		*s = PluginExecutorRequestTargetNodes1TargetSpecificNodes
+func (s *PluginExecutorBodyTargetNodes1Target) UnmarshalText(data []byte) error {
+	switch PluginExecutorBodyTargetNodes1Target(data) {
+	case PluginExecutorBodyTargetNodes1TargetSpecificNodes:
+		*s = PluginExecutorBodyTargetNodes1TargetSpecificNodes
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
@@ -18623,11 +17654,12 @@ func (s *PluginExecutorRequestTargetNodes1Target) UnmarshalText(data []byte) err
 
 // Ref: #/components/schemas/Pocketid
 type Pocketid struct {
-	Enabled       bool      `json:"enabled"`
-	ClientId      NilString `json:"clientId"`
-	ClientSecret  NilString `json:"clientSecret"`
-	PlainDomain   NilString `json:"plainDomain"`
-	AllowedEmails []string  `json:"allowedEmails"`
+	Enabled        bool      `json:"enabled"`
+	ClientId       NilString `json:"clientId"`
+	ClientSecret   NilString `json:"clientSecret"`
+	FrontendDomain NilString `json:"frontendDomain"`
+	PlainDomain    NilString `json:"plainDomain"`
+	AllowedEmails  []string  `json:"allowedEmails"`
 }
 
 // GetEnabled returns the value of Enabled.
@@ -18643,6 +17675,11 @@ func (s *Pocketid) GetClientId() NilString {
 // GetClientSecret returns the value of ClientSecret.
 func (s *Pocketid) GetClientSecret() NilString {
 	return s.ClientSecret
+}
+
+// GetFrontendDomain returns the value of FrontendDomain.
+func (s *Pocketid) GetFrontendDomain() NilString {
+	return s.FrontendDomain
 }
 
 // GetPlainDomain returns the value of PlainDomain.
@@ -18670,6 +17707,11 @@ func (s *Pocketid) SetClientSecret(val NilString) {
 	s.ClientSecret = val
 }
 
+// SetFrontendDomain sets the value of FrontendDomain.
+func (s *Pocketid) SetFrontendDomain(val NilString) {
+	s.FrontendDomain = val
+}
+
 // SetPlainDomain sets the value of PlainDomain.
 func (s *Pocketid) SetPlainDomain(val NilString) {
 	s.PlainDomain = val
@@ -18680,54 +17722,54 @@ func (s *Pocketid) SetAllowedEmails(val []string) {
 	s.AllowedEmails = val
 }
 
-// Ref: #/components/schemas/ProfileModificationRequest
-type ProfileModificationRequest struct {
-	Uuids         []uuid.UUID                             `json:"uuids"`
-	ConfigProfile ProfileModificationRequestConfigProfile `json:"configProfile"`
+// Ref: #/components/schemas/ProfileModificationBody
+type ProfileModificationBody struct {
+	Uuids         []uuid.UUID                          `json:"uuids"`
+	ConfigProfile ProfileModificationBodyConfigProfile `json:"configProfile"`
 }
 
 // GetUuids returns the value of Uuids.
-func (s *ProfileModificationRequest) GetUuids() []uuid.UUID {
+func (s *ProfileModificationBody) GetUuids() []uuid.UUID {
 	return s.Uuids
 }
 
 // GetConfigProfile returns the value of ConfigProfile.
-func (s *ProfileModificationRequest) GetConfigProfile() ProfileModificationRequestConfigProfile {
+func (s *ProfileModificationBody) GetConfigProfile() ProfileModificationBodyConfigProfile {
 	return s.ConfigProfile
 }
 
 // SetUuids sets the value of Uuids.
-func (s *ProfileModificationRequest) SetUuids(val []uuid.UUID) {
+func (s *ProfileModificationBody) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
 // SetConfigProfile sets the value of ConfigProfile.
-func (s *ProfileModificationRequest) SetConfigProfile(val ProfileModificationRequestConfigProfile) {
+func (s *ProfileModificationBody) SetConfigProfile(val ProfileModificationBodyConfigProfile) {
 	s.ConfigProfile = val
 }
 
-type ProfileModificationRequestConfigProfile struct {
+type ProfileModificationBodyConfigProfile struct {
 	ActiveConfigProfileUuid uuid.UUID   `json:"activeConfigProfileUuid"`
 	ActiveInbounds          []uuid.UUID `json:"activeInbounds"`
 }
 
 // GetActiveConfigProfileUuid returns the value of ActiveConfigProfileUuid.
-func (s *ProfileModificationRequestConfigProfile) GetActiveConfigProfileUuid() uuid.UUID {
+func (s *ProfileModificationBodyConfigProfile) GetActiveConfigProfileUuid() uuid.UUID {
 	return s.ActiveConfigProfileUuid
 }
 
 // GetActiveInbounds returns the value of ActiveInbounds.
-func (s *ProfileModificationRequestConfigProfile) GetActiveInbounds() []uuid.UUID {
+func (s *ProfileModificationBodyConfigProfile) GetActiveInbounds() []uuid.UUID {
 	return s.ActiveInbounds
 }
 
 // SetActiveConfigProfileUuid sets the value of ActiveConfigProfileUuid.
-func (s *ProfileModificationRequestConfigProfile) SetActiveConfigProfileUuid(val uuid.UUID) {
+func (s *ProfileModificationBodyConfigProfile) SetActiveConfigProfileUuid(val uuid.UUID) {
 	s.ActiveConfigProfileUuid = val
 }
 
 // SetActiveInbounds sets the value of ActiveInbounds.
-func (s *ProfileModificationRequestConfigProfile) SetActiveInbounds(val []uuid.UUID) {
+func (s *ProfileModificationBodyConfigProfile) SetActiveInbounds(val []uuid.UUID) {
 	s.ActiveInbounds = val
 }
 
@@ -18893,191 +17935,92 @@ func (s *ProviderItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
 }
 
-// Ref: #/components/schemas/Record
-type Record struct {
-	ID        float64   `json:"id"`
-	UserId    float64   `json:"userId"`
-	RequestAt time.Time `json:"requestAt"`
-	RequestIp NilString `json:"requestIp"`
-	UserAgent NilString `json:"userAgent"`
-}
-
-// GetID returns the value of ID.
-func (s *Record) GetID() float64 {
-	return s.ID
-}
-
-// GetUserId returns the value of UserId.
-func (s *Record) GetUserId() float64 {
-	return s.UserId
-}
-
-// GetRequestAt returns the value of RequestAt.
-func (s *Record) GetRequestAt() time.Time {
-	return s.RequestAt
-}
-
-// GetRequestIp returns the value of RequestIp.
-func (s *Record) GetRequestIp() NilString {
-	return s.RequestIp
-}
-
-// GetUserAgent returns the value of UserAgent.
-func (s *Record) GetUserAgent() NilString {
-	return s.UserAgent
-}
-
-// SetID sets the value of ID.
-func (s *Record) SetID(val float64) {
-	s.ID = val
-}
-
-// SetUserId sets the value of UserId.
-func (s *Record) SetUserId(val float64) {
-	s.UserId = val
-}
-
-// SetRequestAt sets the value of RequestAt.
-func (s *Record) SetRequestAt(val time.Time) {
-	s.RequestAt = val
-}
-
-// SetRequestIp sets the value of RequestIp.
-func (s *Record) SetRequestIp(val NilString) {
-	s.RequestIp = val
-}
-
-// SetUserAgent sets the value of UserAgent.
-func (s *Record) SetUserAgent(val NilString) {
-	s.UserAgent = val
-}
-
-// Ref: #/components/schemas/RegisterRequest
-type RegisterRequest struct {
+// Ref: #/components/schemas/RegisterBody
+type RegisterBody struct {
+	// Username of the user.
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
 // GetUsername returns the value of Username.
-func (s *RegisterRequest) GetUsername() string {
+func (s *RegisterBody) GetUsername() string {
 	return s.Username
 }
 
 // GetPassword returns the value of Password.
-func (s *RegisterRequest) GetPassword() string {
+func (s *RegisterBody) GetPassword() string {
 	return s.Password
 }
 
 // SetUsername sets the value of Username.
-func (s *RegisterRequest) SetUsername(val string) {
+func (s *RegisterBody) SetUsername(val string) {
 	s.Username = val
 }
 
 // SetPassword sets the value of Password.
-func (s *RegisterRequest) SetPassword(val string) {
+func (s *RegisterBody) SetPassword(val string) {
 	s.Password = val
 }
 
-// Ref: #/components/schemas/ReorderHostRequest
-type ReorderHostRequest struct {
-	Hosts []ReorderRequestItem `json:"hosts"`
+// Ref: #/components/schemas/ReorderHostsBody
+type ReorderHostsBody struct {
+	Hosts []NodePluginsBodyRequeItem `json:"hosts"`
 }
 
 // GetHosts returns the value of Hosts.
-func (s *ReorderHostRequest) GetHosts() []ReorderRequestItem {
+func (s *ReorderHostsBody) GetHosts() []NodePluginsBodyRequeItem {
 	return s.Hosts
 }
 
 // SetHosts sets the value of Hosts.
-func (s *ReorderHostRequest) SetHosts(val []ReorderRequestItem) {
+func (s *ReorderHostsBody) SetHosts(val []NodePluginsBodyRequeItem) {
 	s.Hosts = val
 }
 
-// Ref: #/components/schemas/ReorderHostResponse
-type ReorderHostResponse struct {
-	Response ReorderHostResponseResponse `json:"response"`
+// Ref: #/components/schemas/ReorderHostsResponse
+type ReorderHostsResponse struct {
+	Response ReorderHostsResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *ReorderHostResponse) GetResponse() ReorderHostResponseResponse {
+func (s *ReorderHostsResponse) GetResponse() ReorderHostsResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *ReorderHostResponse) SetResponse(val ReorderHostResponseResponse) {
+func (s *ReorderHostsResponse) SetResponse(val ReorderHostsResponseResponse) {
 	s.Response = val
 }
 
-func (*ReorderHostResponse) hostsReorderHostsRes() {}
+func (*ReorderHostsResponse) hostsReorderHostsRes() {}
 
-type ReorderHostResponseResponse struct {
+type ReorderHostsResponseResponse struct {
 	IsUpdated bool `json:"isUpdated"`
 }
 
 // GetIsUpdated returns the value of IsUpdated.
-func (s *ReorderHostResponseResponse) GetIsUpdated() bool {
+func (s *ReorderHostsResponseResponse) GetIsUpdated() bool {
 	return s.IsUpdated
 }
 
 // SetIsUpdated sets the value of IsUpdated.
-func (s *ReorderHostResponseResponse) SetIsUpdated(val bool) {
+func (s *ReorderHostsResponseResponse) SetIsUpdated(val bool) {
 	s.IsUpdated = val
 }
 
-// Ref: #/components/schemas/ReorderNodeRequest
-type ReorderNodeRequest struct {
-	Nodes []ReorderRequestItem `json:"nodes"`
+// Ref: #/components/schemas/ReorderNodesBody
+type ReorderNodesBody struct {
+	Nodes []NodePluginsBodyRequeItem `json:"nodes"`
 }
 
 // GetNodes returns the value of Nodes.
-func (s *ReorderNodeRequest) GetNodes() []ReorderRequestItem {
+func (s *ReorderNodesBody) GetNodes() []NodePluginsBodyRequeItem {
 	return s.Nodes
 }
 
 // SetNodes sets the value of Nodes.
-func (s *ReorderNodeRequest) SetNodes(val []ReorderRequestItem) {
+func (s *ReorderNodesBody) SetNodes(val []NodePluginsBodyRequeItem) {
 	s.Nodes = val
-}
-
-// Ref: #/components/schemas/ReorderRequest
-type ReorderRequest struct {
-	Items []ReorderRequestItem `json:"items"`
-}
-
-// GetItems returns the value of Items.
-func (s *ReorderRequest) GetItems() []ReorderRequestItem {
-	return s.Items
-}
-
-// SetItems sets the value of Items.
-func (s *ReorderRequest) SetItems(val []ReorderRequestItem) {
-	s.Items = val
-}
-
-// Ref: #/components/schemas/ReorderRequestItem
-type ReorderRequestItem struct {
-	ViewPosition int       `json:"viewPosition"`
-	UUID         uuid.UUID `json:"uuid"`
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *ReorderRequestItem) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetUUID returns the value of UUID.
-func (s *ReorderRequestItem) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *ReorderRequestItem) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetUUID sets the value of UUID.
-func (s *ReorderRequestItem) SetUUID(val uuid.UUID) {
-	s.UUID = val
 }
 
 // Ref: #/components/schemas/ReportItem
@@ -19106,51 +18049,40 @@ func (s *ReportItem) SetXrayReport(val XrayReportItem) {
 	s.XrayReport = val
 }
 
-// Ref: #/components/schemas/ResolveUserRequestBody
-type ResolveUserRequestBody struct {
-	UUID      OptUUID    `json:"uuid"`
+// Ref: #/components/schemas/ResolveUserBody
+type ResolveUserBody struct {
 	ID        OptFloat64 `json:"id"`
 	ShortUuid OptString  `json:"shortUuid"`
 	Username  OptString  `json:"username"`
 }
 
-// GetUUID returns the value of UUID.
-func (s *ResolveUserRequestBody) GetUUID() OptUUID {
-	return s.UUID
-}
-
 // GetID returns the value of ID.
-func (s *ResolveUserRequestBody) GetID() OptFloat64 {
+func (s *ResolveUserBody) GetID() OptFloat64 {
 	return s.ID
 }
 
 // GetShortUuid returns the value of ShortUuid.
-func (s *ResolveUserRequestBody) GetShortUuid() OptString {
+func (s *ResolveUserBody) GetShortUuid() OptString {
 	return s.ShortUuid
 }
 
 // GetUsername returns the value of Username.
-func (s *ResolveUserRequestBody) GetUsername() OptString {
+func (s *ResolveUserBody) GetUsername() OptString {
 	return s.Username
 }
 
-// SetUUID sets the value of UUID.
-func (s *ResolveUserRequestBody) SetUUID(val OptUUID) {
-	s.UUID = val
-}
-
 // SetID sets the value of ID.
-func (s *ResolveUserRequestBody) SetID(val OptFloat64) {
+func (s *ResolveUserBody) SetID(val OptFloat64) {
 	s.ID = val
 }
 
 // SetShortUuid sets the value of ShortUuid.
-func (s *ResolveUserRequestBody) SetShortUuid(val OptString) {
+func (s *ResolveUserBody) SetShortUuid(val OptString) {
 	s.ShortUuid = val
 }
 
 // SetUsername sets the value of Username.
-func (s *ResolveUserRequestBody) SetUsername(val OptString) {
+func (s *ResolveUserBody) SetUsername(val OptString) {
 	s.Username = val
 }
 
@@ -19172,20 +18104,9 @@ func (s *ResolveUserResponse) SetResponse(val ResolveUserResponseResponse) {
 func (*ResolveUserResponse) usersResolveUserRes() {}
 
 type ResolveUserResponseResponse struct {
-	UUID      uuid.UUID `json:"uuid"`
-	Username  string    `json:"username"`
-	ID        float64   `json:"id"`
-	ShortUuid string    `json:"shortUuid"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *ResolveUserResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetUsername returns the value of Username.
-func (s *ResolveUserResponseResponse) GetUsername() string {
-	return s.Username
+	ID        float64 `json:"id"`
+	Username  string  `json:"username"`
+	ShortUuid string  `json:"shortUuid"`
 }
 
 // GetID returns the value of ID.
@@ -19193,19 +18114,14 @@ func (s *ResolveUserResponseResponse) GetID() float64 {
 	return s.ID
 }
 
+// GetUsername returns the value of Username.
+func (s *ResolveUserResponseResponse) GetUsername() string {
+	return s.Username
+}
+
 // GetShortUuid returns the value of ShortUuid.
 func (s *ResolveUserResponseResponse) GetShortUuid() string {
 	return s.ShortUuid
-}
-
-// SetUUID sets the value of UUID.
-func (s *ResolveUserResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetUsername sets the value of Username.
-func (s *ResolveUserResponseResponse) SetUsername(val string) {
-	s.Username = val
 }
 
 // SetID sets the value of ID.
@@ -19213,49 +18129,27 @@ func (s *ResolveUserResponseResponse) SetID(val float64) {
 	s.ID = val
 }
 
+// SetUsername sets the value of Username.
+func (s *ResolveUserResponseResponse) SetUsername(val string) {
+	s.Username = val
+}
+
 // SetShortUuid sets the value of ShortUuid.
 func (s *ResolveUserResponseResponse) SetShortUuid(val string) {
 	s.ShortUuid = val
 }
 
-// {"examples":[{"headers":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-// "markdownDescription":"Response modifications to be applied when the rule is matched. Optional."}.
 // Ref: #/components/schemas/ResponseModification
 type ResponseModification struct {
-	// {"defaultSnippets":[{"label":"Examples: Add custom header","markdownDescription":"Add a custom
-	// header to the response","body":[{"key":"X-Custom-Header","value":"CustomValue"}]}],
-	// "markdownDescription":"Array of headers to be added when the rule is matched."}.
-	Headers []Header `json:"headers"`
-	// {"markdownDescription":"By default, headers are added when forming the response. In some cases,
-	// headers set in SRR may be overridden by headers from other parts of the system. If you set this
-	// flag to **true**, headers from SRR will be added at the very end, just before the response is sent.
-	//  In this case, SRR headers may override headers from other sections."}.
-	ApplyHeadersToEnd OptBool `json:"applyHeadersToEnd"`
-	// {"markdownDescription":"Override the subscription template with the given name. If not provided,
-	// the default subscription template will be used. If the template name is not found, the default
-	// subscription template for this type will be used. **This modification have higher priority than
-	// settings from External Squads.**"}.
-	SubscriptionTemplate OptString `json:"subscriptionTemplate"`
-	// {"markdownDescription":"Each Host may have its own Xray Json Template. If you set this flag to
-	// **true**, the Xray Json Template defined by the SRR will be used. **The Host's Xray Json Template
-	// will be ignored.**"}.
-	IgnoreHostXrayJsonTemplate OptBool `json:"ignoreHostXrayJsonTemplate"`
-	// {"markdownDescription":"If you set this flag to **true**, the **Serve JSON at Base Subscription**
-	// setting will be ignored (set to **false**)."}.
-	IgnoreServeJsonAtBaseSubscription OptBool `json:"ignoreServeJsonAtBaseSubscription"`
-	// {"markdownDescription":"Additional regex patterns to match extended clients. Matched clients will
-	// receive `serverDescription` in the subscription response.\n\n**Default Mihomo extended
-	// clients:**\n- `^FlClash ?X/`\n- `^Flowvy/`\n- `^prizrak-box/`\n- `^koala-clash/`\n\n**Default Xray
-	// extended clients:**\n- `^Happ/`\n- `^INCY/`\n\n**Example:** `[\"^MyClient/\",
-	// \"^CustomApp\\\\/v2\"]`"}.
-	AdditionalExtendedClientsRegex []string `json:"additionalExtendedClientsRegex"`
-	// {"markdownDescription":"If you set this flag to **true**, the HWID check will be disabled. **This
-	// modification have higher priority than settings from Subscription Settings.**"}.
-	DisableHwidCheck OptBool           `json:"disableHwidCheck"`
-	Encryption       OptEncryptionItem `json:"encryption"`
-	// {"markdownDescription":"Excludes hosts from the subscription output if at least one tag in the
-	// host matches the given tags."}.
-	ExcludeHostsByTags []string `json:"excludeHostsByTags"`
+	Headers                           []Header          `json:"headers"`
+	ApplyHeadersToEnd                 OptBool           `json:"applyHeadersToEnd"`
+	SubscriptionTemplate              OptString         `json:"subscriptionTemplate"`
+	IgnoreHostXrayJsonTemplate        OptBool           `json:"ignoreHostXrayJsonTemplate"`
+	IgnoreServeJsonAtBaseSubscription OptBool           `json:"ignoreServeJsonAtBaseSubscription"`
+	AdditionalExtendedClientsRegex    []string          `json:"additionalExtendedClientsRegex"`
+	DisableHwidCheck                  OptBool           `json:"disableHwidCheck"`
+	Encryption                        OptEncryptionItem `json:"encryption"`
+	ExcludeHostsByTags                []string          `json:"excludeHostsByTags"`
 }
 
 // GetHeaders returns the value of Headers.
@@ -19350,17 +18244,9 @@ func (s *ResponseModification) SetExcludeHostsByTags(val []string) {
 
 // Ref: #/components/schemas/ResponseRules
 type ResponseRules struct {
-	// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-	// config. Currently supported version is **1**."}.
-	Version  ResponseRulesVersion       `json:"version"`
-	Settings OptDebugSrrMatcherSettings `json:"settings"`
-	// {"title":"Response Rules","markdownDescription":"Array of **response rules**. Rules are evaluated
-	// in order and the first rule that matches is applied. If no rule matches, request will be blocked
-	// by default.\n\n**Example:**\n```json\n[\n  {\n    \"name\": \"Blank rule\",\n    \"description\":
-	// \"Blank rule\",\n    \"operator\": \"AND\",\n    \"enabled\": true,\n    \"conditions\": [],\n
-	// \"responseType\": \"BLOCK\",\n    \"responseModifications\": {\n      \"headers\": []\n    }\n
-	// }\n]\n```","defaultSnippets":[]}.
-	Rules []Rule `json:"rules"`
+	Version  ResponseRulesVersion           `json:"version"`
+	Settings OptDebugSrrMatcherBodySettings `json:"settings"`
+	Rules    []Rule                         `json:"rules"`
 }
 
 // GetVersion returns the value of Version.
@@ -19369,7 +18255,7 @@ func (s *ResponseRules) GetVersion() ResponseRulesVersion {
 }
 
 // GetSettings returns the value of Settings.
-func (s *ResponseRules) GetSettings() OptDebugSrrMatcherSettings {
+func (s *ResponseRules) GetSettings() OptDebugSrrMatcherBodySettings {
 	return s.Settings
 }
 
@@ -19384,7 +18270,7 @@ func (s *ResponseRules) SetVersion(val ResponseRulesVersion) {
 }
 
 // SetSettings sets the value of Settings.
-func (s *ResponseRules) SetSettings(val OptDebugSrrMatcherSettings) {
+func (s *ResponseRules) SetSettings(val OptDebugSrrMatcherBodySettings) {
 	s.Settings = val
 }
 
@@ -19393,8 +18279,6 @@ func (s *ResponseRules) SetRules(val []Rule) {
 	s.Rules = val
 }
 
-// {"title":"Response Rules Config Version","markdownDescription":"Version of the **response rules**
-// config. Currently supported version is **1**."}.
 type ResponseRulesVersion string
 
 const (
@@ -19459,68 +18343,13 @@ func (s *RevokeUserSubscriptionBody) SetShortUuid(val OptString) {
 	s.ShortUuid = val
 }
 
-// {"defaultSnippets":[{"label":"Examples: Blank rule","markdownDescription":"Simple blank rule with
-// no conditions or modifications.\n```json\n{\n  \"name\": \"Blank rule\",\n  \"description\":
-// \"Blank rule\",\n  \"operator\": \"AND\",\n  \"enabled\": true,\n  \"conditions\": [],\n
-// \"responseType\": \"BLOCK\",\n  \"responseModifications\": {\n    \"headers\": []\n  }\n}\n```",
-// "body":{"name":"Blank rule","description":"Blank rule","operator":"AND","enabled":true,
-// "conditions":[],"responseType":"BLOCK","responseModifications":{"headers":[]}}},
-// {"label":"Examples: Block Legacy Clients","markdownDescription":"Block requests from legacy
-// clients\n```json\n{\n  \"name\": \"Block Legacy Clients\",\n  \"description\": \"Block requests
-// from legacy clients\",\n  \"enabled\": true,\n  \"operator\": \"OR\",\n  \"conditions\": [\n
-// {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n      \"value\":
-// \"Hiddify\",\n      \"caseSensitive\": true\n    },\n    {\n      \"headerName\": \"user-agent\",
-// \n      \"operator\": \"CONTAINS\",\n      \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n
-//
-//	}\n  ],\n  \"responseType\": \"BLOCK\"\n}\n```","body":{"name":"Block Legacy Clients",
-//
-// "description":"Block requests from legacy clients","enabled":true,"operator":"OR",
-// "conditions":[{"headerName":"user-agent","operator":"CONTAINS","value":"Hiddify",
-// "caseSensitive":true},{"headerName":"user-agent","operator":"CONTAINS","value":"FoxRay",
-// "caseSensitive":true}],"responseType":"BLOCK"}}],"title":"Response Rule",
-// "markdownDescription":"Response rule configuration.\n\n**Fields:**\n- **name**: Name of the
-// response rule.\n- **description**: Description of the response rule. Optional.\n- **enabled**:
-// Control whether the response rule is enabled or disabled. \n\n - `true` the rule will be applied.
-// \n\n - `false` the rule will be always ignored.\n- **operator**: Operator to use for combining
-// conditions in the rule.\n- **conditions**: Array of conditions to check against the request
-// headers. Conditions are applied with **operator**. If conditions are empty, the rule will be
-// matched.\n- **responseType**: Type of the response. Determines the type of **response** to be
-// returned when the rule is matched.\n- **responseModifications**: Response modifications to be
-// applied when the rule is matched. Optional.\n\n**Example:**\n```json\n{\n  \"name\": \"Block
-// Legacy Clients\",\n  \"description\": \"Block requests from legacy clients\",\n  \"enabled\": true,
-// \n  \"operator\": \"OR\",\n  \"conditions\": [\n    {\n      \"headerName\": \"user-agent\",\n
-//
-//	\"operator\": \"CONTAINS\",\n      \"value\": \"Hiddify\",\n      \"caseSensitive\": true\n    },
-//
-// \n    {\n      \"headerName\": \"user-agent\",\n      \"operator\": \"CONTAINS\",\n
-// \"value\": \"FoxRay\",\n      \"caseSensitive\": true\n    }\n  ],\n  \"responseType\":
-// \"BLOCK\"\n}\n```"}.
 // Ref: #/components/schemas/Rule
 type Rule struct {
-	// {"markdownDescription":"Name of the response rule."}.
-	Name string `json:"name"`
-	// {"markdownDescription":"Description of the response rule. Optional."}.
-	Description OptString `json:"description"`
-	// {"markdownDescription":"Control whether the response rule is enabled or disabled. \n\n - `true`
-	// the rule will be applied. \n\n - `false` the rule will be always ignored."}.
-	Enabled bool `json:"enabled"`
-	// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
-	Operator RuleOperator `json:"operator"`
-	// {"markdownDescription":"Array of conditions to check against the request headers. Conditions are
-	// applied with **operator**. If conditions are empty, the rule will be matched."}.
-	Conditions []Condition `json:"conditions"`
-	// {"errorMessage":"Invalid response type. Please select a valid response type.",
-	// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-	// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-	// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-	// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-	//  (Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-	// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-	// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-	// template) Format which is used by Singbox client application.","Return **subscription** as browser
-	// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-	// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-	// the socket connection."]}.
+	Name                  string                  `json:"name"`
+	Description           OptString               `json:"description"`
+	Enabled               bool                    `json:"enabled"`
+	Operator              RuleOperator            `json:"operator"`
+	Conditions            []Condition             `json:"conditions"`
 	ResponseType          RuleResponseType        `json:"responseType"`
 	ResponseModifications OptResponseModification `json:"responseModifications"`
 }
@@ -19595,7 +18424,6 @@ func (s *Rule) SetResponseModifications(val OptResponseModification) {
 	s.ResponseModifications = val
 }
 
-// {"markdownDescription":"Operator to use for combining conditions in the rule."}.
 type RuleOperator string
 
 const (
@@ -19637,20 +18465,6 @@ func (s *RuleOperator) UnmarshalText(data []byte) error {
 	}
 }
 
-// {"errorMessage":"Invalid response type. Please select a valid response type.",
-// "markdownDescription":"Type of the response. Determines the type of **response** to be returned
-// when the rule is matched.","markdownEnumDescriptions":["Return **subscription** in XRAY-JSON
-// format. (Using `Xray Json` template)","Return **subscription** in BASE64 encoded string.
-// Compatible with most client application with Xray core.","Return **subscription** in Mihomo format.
-//
-//	(Using `Mihomo` template)","Return **subscription** in Stash format. (Using `Stash` template)",
-//
-// "Return **subscription** in Clash format. (Using `Clash` template) Useful for client application
-// that use Legacy Clash core.","Return **subscription** in Singbox format. (Using `Singbox`
-// template) Format which is used by Singbox client application.","Return **subscription** as browser
-// format. The same as on `/info` route.","**Drop** request and return `403` status code.","**Drop**
-// request and return `404` status code.","**Drop** request and return `451` status code.","**Drop**
-// the socket connection."]}.
 type RuleResponseType string
 
 const (
@@ -19820,38 +18634,52 @@ func (s *SettingsResponseResponse) SetBrandingSettings(val NilBrandingSettings) 
 	s.BrandingSettings = val
 }
 
-// Ref: #/components/schemas/SnippetRequest
-type SnippetRequest struct {
-	Name    string                      `json:"name"`
-	Snippet []SnippetRequestSnippetItem `json:"snippet"`
+// Ref: #/components/schemas/SnippetBodyRequest
+type SnippetBodyRequest struct {
+	Name    string                          `json:"name"`
+	Snippet []SnippetBodyRequestSnippetItem `json:"snippet"`
 }
 
 // GetName returns the value of Name.
-func (s *SnippetRequest) GetName() string {
+func (s *SnippetBodyRequest) GetName() string {
 	return s.Name
 }
 
 // GetSnippet returns the value of Snippet.
-func (s *SnippetRequest) GetSnippet() []SnippetRequestSnippetItem {
+func (s *SnippetBodyRequest) GetSnippet() []SnippetBodyRequestSnippetItem {
 	return s.Snippet
 }
 
 // SetName sets the value of Name.
-func (s *SnippetRequest) SetName(val string) {
+func (s *SnippetBodyRequest) SetName(val string) {
 	s.Name = val
 }
 
 // SetSnippet sets the value of Snippet.
-func (s *SnippetRequest) SetSnippet(val []SnippetRequestSnippetItem) {
+func (s *SnippetBodyRequest) SetSnippet(val []SnippetBodyRequestSnippetItem) {
 	s.Snippet = val
 }
 
-type SnippetRequestSnippetItem struct{}
+type SnippetBodyRequestSnippetItem map[string]jx.Raw
+
+func (s *SnippetBodyRequestSnippetItem) init() SnippetBodyRequestSnippetItem {
+	m := *s
+	if m == nil {
+		m = map[string]jx.Raw{}
+		*s = m
+	}
+	return m
+}
 
 // SnippetsCreateSnippetConflict is response for SnippetsCreateSnippet operation.
 type SnippetsCreateSnippetConflict struct{}
 
 func (*SnippetsCreateSnippetConflict) snippetsCreateSnippetRes() {}
+
+// SnippetsDeleteSnippetByNameNoContent is response for SnippetsDeleteSnippetByName operation.
+type SnippetsDeleteSnippetByNameNoContent struct{}
+
+func (*SnippetsDeleteSnippetByNameNoContent) snippetsDeleteSnippetByNameRes() {}
 
 // Ref: #/components/schemas/SnippetsResponse
 type SnippetsResponse struct {
@@ -19868,10 +18696,9 @@ func (s *SnippetsResponse) SetResponse(val SnippetsResponseResponse) {
 	s.Response = val
 }
 
-func (*SnippetsResponse) snippetsCreateSnippetRes()       {}
-func (*SnippetsResponse) snippetsDeleteSnippetByNameRes() {}
-func (*SnippetsResponse) snippetsGetSnippetsRes()         {}
-func (*SnippetsResponse) snippetsUpdateSnippetRes()       {}
+func (*SnippetsResponse) snippetsCreateSnippetRes() {}
+func (*SnippetsResponse) snippetsGetSnippetsRes()   {}
+func (*SnippetsResponse) snippetsUpdateSnippetRes() {}
 
 type SnippetsResponseResponse struct {
 	Total    float64                                `json:"total"`
@@ -20211,6 +19038,115 @@ func (s *StatsUserUsageResponseResponseResponseSeriesItem) SetData(val []float64
 	s.Data = val
 }
 
+// Ref: #/components/schemas/SubpageConfigResponseResponse
+type SubpageConfigResponseResponse struct {
+	Response SubpageConfigResponseResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *SubpageConfigResponseResponse) GetResponse() SubpageConfigResponseResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *SubpageConfigResponseResponse) SetResponse(val SubpageConfigResponseResponseResponse) {
+	s.Response = val
+}
+
+func (*SubpageConfigResponseResponse) subscriptionPageConfigCloneSubscriptionPageConfigRes() {}
+func (*SubpageConfigResponseResponse) subscriptionPageConfigGetConfigByUuidRes()             {}
+func (*SubpageConfigResponseResponse) subscriptionPageConfigUpdateConfigRes()                {}
+
+type SubpageConfigResponseResponseResponse struct {
+	UUID         uuid.UUID `json:"uuid"`
+	ViewPosition int       `json:"viewPosition"`
+	Name         string    `json:"name"`
+	Config       jx.Raw    `json:"config"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *SubpageConfigResponseResponseResponse) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetViewPosition returns the value of ViewPosition.
+func (s *SubpageConfigResponseResponseResponse) GetViewPosition() int {
+	return s.ViewPosition
+}
+
+// GetName returns the value of Name.
+func (s *SubpageConfigResponseResponseResponse) GetName() string {
+	return s.Name
+}
+
+// GetConfig returns the value of Config.
+func (s *SubpageConfigResponseResponseResponse) GetConfig() jx.Raw {
+	return s.Config
+}
+
+// SetUUID sets the value of UUID.
+func (s *SubpageConfigResponseResponseResponse) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetViewPosition sets the value of ViewPosition.
+func (s *SubpageConfigResponseResponseResponse) SetViewPosition(val int) {
+	s.ViewPosition = val
+}
+
+// SetName sets the value of Name.
+func (s *SubpageConfigResponseResponseResponse) SetName(val string) {
+	s.Name = val
+}
+
+// SetConfig sets the value of Config.
+func (s *SubpageConfigResponseResponseResponse) SetConfig(val jx.Raw) {
+	s.Config = val
+}
+
+// Ref: #/components/schemas/SubpageConfigsResponseResponse
+type SubpageConfigsResponseResponse struct {
+	Response SubpageConfigsResponseResponseResponse `json:"response"`
+}
+
+// GetResponse returns the value of Response.
+func (s *SubpageConfigsResponseResponse) GetResponse() SubpageConfigsResponseResponseResponse {
+	return s.Response
+}
+
+// SetResponse sets the value of Response.
+func (s *SubpageConfigsResponseResponse) SetResponse(val SubpageConfigsResponseResponseResponse) {
+	s.Response = val
+}
+
+func (*SubpageConfigsResponseResponse) subscriptionPageConfigGetAllConfigsRes()                  {}
+func (*SubpageConfigsResponseResponse) subscriptionPageConfigReorderSubscriptionPageConfigsRes() {}
+
+type SubpageConfigsResponseResponseResponse struct {
+	Total   float64  `json:"total"`
+	Configs []Config `json:"configs"`
+}
+
+// GetTotal returns the value of Total.
+func (s *SubpageConfigsResponseResponseResponse) GetTotal() float64 {
+	return s.Total
+}
+
+// GetConfigs returns the value of Configs.
+func (s *SubpageConfigsResponseResponseResponse) GetConfigs() []Config {
+	return s.Configs
+}
+
+// SetTotal sets the value of Total.
+func (s *SubpageConfigsResponseResponseResponse) SetTotal(val float64) {
+	s.Total = val
+}
+
+// SetConfigs sets the value of Configs.
+func (s *SubpageConfigsResponseResponseResponse) SetConfigs(val []Config) {
+	s.Configs = val
+}
+
 // Ref: #/components/schemas/Subscription
 type Subscription struct {
 	IsFound         bool                    `json:"isFound"`
@@ -20353,6 +19289,8 @@ func (s SubscriptionGetSubscriptionByClientTypeOK) Read(p []byte) (n int, err er
 	return s.Data.Read(p)
 }
 
+func (*SubscriptionGetSubscriptionByClientTypeOK) subscriptionGetSubscriptionByClientTypeRes() {}
+
 type SubscriptionGetSubscriptionOK struct {
 	Data io.Reader
 }
@@ -20367,116 +19305,12 @@ func (s SubscriptionGetSubscriptionOK) Read(p []byte) (n int, err error) {
 	return s.Data.Read(p)
 }
 
-// Ref: #/components/schemas/SubscriptionPageConfigResponseResponse
-type SubscriptionPageConfigResponseResponse struct {
-	Response SubscriptionPageConfigResponseResponseResponse `json:"response"`
-}
+func (*SubscriptionGetSubscriptionOK) subscriptionGetSubscriptionRes() {}
 
-// GetResponse returns the value of Response.
-func (s *SubscriptionPageConfigResponseResponse) GetResponse() SubscriptionPageConfigResponseResponseResponse {
-	return s.Response
-}
+// SubscriptionPageConfigDeleteConfigNoContent is response for SubscriptionPageConfigDeleteConfig operation.
+type SubscriptionPageConfigDeleteConfigNoContent struct{}
 
-// SetResponse sets the value of Response.
-func (s *SubscriptionPageConfigResponseResponse) SetResponse(val SubscriptionPageConfigResponseResponseResponse) {
-	s.Response = val
-}
-
-func (*SubscriptionPageConfigResponseResponse) subscriptionPageConfigCloneSubscriptionPageConfigRes() {
-}
-func (*SubscriptionPageConfigResponseResponse) subscriptionPageConfigGetConfigByUuidRes() {}
-func (*SubscriptionPageConfigResponseResponse) subscriptionPageConfigUpdateConfigRes()    {}
-
-type SubscriptionPageConfigResponseResponseResponse struct {
-	UUID         uuid.UUID `json:"uuid"`
-	ViewPosition int       `json:"viewPosition"`
-	Name         string    `json:"name"`
-	Config       jx.Raw    `json:"config"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *SubscriptionPageConfigResponseResponseResponse) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetViewPosition returns the value of ViewPosition.
-func (s *SubscriptionPageConfigResponseResponseResponse) GetViewPosition() int {
-	return s.ViewPosition
-}
-
-// GetName returns the value of Name.
-func (s *SubscriptionPageConfigResponseResponseResponse) GetName() string {
-	return s.Name
-}
-
-// GetConfig returns the value of Config.
-func (s *SubscriptionPageConfigResponseResponseResponse) GetConfig() jx.Raw {
-	return s.Config
-}
-
-// SetUUID sets the value of UUID.
-func (s *SubscriptionPageConfigResponseResponseResponse) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetViewPosition sets the value of ViewPosition.
-func (s *SubscriptionPageConfigResponseResponseResponse) SetViewPosition(val int) {
-	s.ViewPosition = val
-}
-
-// SetName sets the value of Name.
-func (s *SubscriptionPageConfigResponseResponseResponse) SetName(val string) {
-	s.Name = val
-}
-
-// SetConfig sets the value of Config.
-func (s *SubscriptionPageConfigResponseResponseResponse) SetConfig(val jx.Raw) {
-	s.Config = val
-}
-
-// Ref: #/components/schemas/SubscriptionPageConfigsResponseResponse
-type SubscriptionPageConfigsResponseResponse struct {
-	Response SubscriptionPageConfigsResponseResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *SubscriptionPageConfigsResponseResponse) GetResponse() SubscriptionPageConfigsResponseResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *SubscriptionPageConfigsResponseResponse) SetResponse(val SubscriptionPageConfigsResponseResponseResponse) {
-	s.Response = val
-}
-
-func (*SubscriptionPageConfigsResponseResponse) subscriptionPageConfigGetAllConfigsRes() {}
-func (*SubscriptionPageConfigsResponseResponse) subscriptionPageConfigReorderSubscriptionPageConfigsRes() {
-}
-
-type SubscriptionPageConfigsResponseResponseResponse struct {
-	Total   float64  `json:"total"`
-	Configs []Config `json:"configs"`
-}
-
-// GetTotal returns the value of Total.
-func (s *SubscriptionPageConfigsResponseResponseResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// GetConfigs returns the value of Configs.
-func (s *SubscriptionPageConfigsResponseResponseResponse) GetConfigs() []Config {
-	return s.Configs
-}
-
-// SetTotal sets the value of Total.
-func (s *SubscriptionPageConfigsResponseResponseResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-// SetConfigs sets the value of Configs.
-func (s *SubscriptionPageConfigsResponseResponseResponse) SetConfigs(val []Config) {
-	s.Configs = val
-}
+func (*SubscriptionPageConfigDeleteConfigNoContent) subscriptionPageConfigDeleteConfigRes() {}
 
 // Ref: #/components/schemas/SubscriptionResponse
 type SubscriptionResponse struct {
@@ -20500,35 +19334,9 @@ func (*SubscriptionResponse) subscriptionsGetSubscriptionByUuidRes()            
 
 // Ref: #/components/schemas/SubscriptionSettings
 type SubscriptionSettings struct {
-	ProfileTitle                OptString    `json:"profileTitle"`
-	SupportLink                 OptString    `json:"supportLink"`
-	ProfileUpdateInterval       OptInt       `json:"profileUpdateInterval"`
-	IsProfileWebpageUrlEnabled  OptBool      `json:"isProfileWebpageUrlEnabled"`
-	ServeJsonAtBaseSubscription OptBool      `json:"serveJsonAtBaseSubscription"`
-	IsShowCustomRemarks         OptBool      `json:"isShowCustomRemarks"`
-	HappAnnounce                OptNilString `json:"happAnnounce"`
-	HappRouting                 OptNilString `json:"happRouting"`
-	RandomizeHosts              OptBool      `json:"randomizeHosts"`
-}
-
-// GetProfileTitle returns the value of ProfileTitle.
-func (s *SubscriptionSettings) GetProfileTitle() OptString {
-	return s.ProfileTitle
-}
-
-// GetSupportLink returns the value of SupportLink.
-func (s *SubscriptionSettings) GetSupportLink() OptString {
-	return s.SupportLink
-}
-
-// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
-func (s *SubscriptionSettings) GetProfileUpdateInterval() OptInt {
-	return s.ProfileUpdateInterval
-}
-
-// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
-func (s *SubscriptionSettings) GetIsProfileWebpageUrlEnabled() OptBool {
-	return s.IsProfileWebpageUrlEnabled
+	ServeJsonAtBaseSubscription OptBool `json:"serveJsonAtBaseSubscription"`
+	IsShowCustomRemarks         OptBool `json:"isShowCustomRemarks"`
+	RandomizeHosts              OptBool `json:"randomizeHosts"`
 }
 
 // GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
@@ -20541,39 +19349,9 @@ func (s *SubscriptionSettings) GetIsShowCustomRemarks() OptBool {
 	return s.IsShowCustomRemarks
 }
 
-// GetHappAnnounce returns the value of HappAnnounce.
-func (s *SubscriptionSettings) GetHappAnnounce() OptNilString {
-	return s.HappAnnounce
-}
-
-// GetHappRouting returns the value of HappRouting.
-func (s *SubscriptionSettings) GetHappRouting() OptNilString {
-	return s.HappRouting
-}
-
 // GetRandomizeHosts returns the value of RandomizeHosts.
 func (s *SubscriptionSettings) GetRandomizeHosts() OptBool {
 	return s.RandomizeHosts
-}
-
-// SetProfileTitle sets the value of ProfileTitle.
-func (s *SubscriptionSettings) SetProfileTitle(val OptString) {
-	s.ProfileTitle = val
-}
-
-// SetSupportLink sets the value of SupportLink.
-func (s *SubscriptionSettings) SetSupportLink(val OptString) {
-	s.SupportLink = val
-}
-
-// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
-func (s *SubscriptionSettings) SetProfileUpdateInterval(val OptInt) {
-	s.ProfileUpdateInterval = val
-}
-
-// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
-func (s *SubscriptionSettings) SetIsProfileWebpageUrlEnabled(val OptBool) {
-	s.IsProfileWebpageUrlEnabled = val
 }
 
 // SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
@@ -20584,16 +19362,6 @@ func (s *SubscriptionSettings) SetServeJsonAtBaseSubscription(val OptBool) {
 // SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
 func (s *SubscriptionSettings) SetIsShowCustomRemarks(val OptBool) {
 	s.IsShowCustomRemarks = val
-}
-
-// SetHappAnnounce sets the value of HappAnnounce.
-func (s *SubscriptionSettings) SetHappAnnounce(val OptNilString) {
-	s.HappAnnounce = val
-}
-
-// SetHappRouting sets the value of HappRouting.
-func (s *SubscriptionSettings) SetHappRouting(val OptNilString) {
-	s.HappRouting = val
 }
 
 // SetRandomizeHosts sets the value of RandomizeHosts.
@@ -20621,15 +19389,9 @@ func (*SubscriptionSettingsResponse) subscriptionSettingsUpdateSettingsRes() {}
 
 type SubscriptionSettingsResponseResponse struct {
 	UUID                        uuid.UUID                                                    `json:"uuid"`
-	ProfileTitle                string                                                       `json:"profileTitle"`
-	SupportLink                 string                                                       `json:"supportLink"`
-	ProfileUpdateInterval       int                                                          `json:"profileUpdateInterval"`
-	IsProfileWebpageUrlEnabled  bool                                                         `json:"isProfileWebpageUrlEnabled"`
 	ServeJsonAtBaseSubscription bool                                                         `json:"serveJsonAtBaseSubscription"`
 	IsShowCustomRemarks         bool                                                         `json:"isShowCustomRemarks"`
 	CustomRemarks               NilCustomRemark                                              `json:"customRemarks"`
-	HappAnnounce                NilString                                                    `json:"happAnnounce"`
-	HappRouting                 NilString                                                    `json:"happRouting"`
 	CustomResponseHeaders       NilSubscriptionSettingsResponseResponseCustomResponseHeaders `json:"customResponseHeaders"`
 	RandomizeHosts              bool                                                         `json:"randomizeHosts"`
 	ResponseRules               ResponseRules                                                `json:"responseRules"`
@@ -20641,26 +19403,6 @@ type SubscriptionSettingsResponseResponse struct {
 // GetUUID returns the value of UUID.
 func (s *SubscriptionSettingsResponseResponse) GetUUID() uuid.UUID {
 	return s.UUID
-}
-
-// GetProfileTitle returns the value of ProfileTitle.
-func (s *SubscriptionSettingsResponseResponse) GetProfileTitle() string {
-	return s.ProfileTitle
-}
-
-// GetSupportLink returns the value of SupportLink.
-func (s *SubscriptionSettingsResponseResponse) GetSupportLink() string {
-	return s.SupportLink
-}
-
-// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
-func (s *SubscriptionSettingsResponseResponse) GetProfileUpdateInterval() int {
-	return s.ProfileUpdateInterval
-}
-
-// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
-func (s *SubscriptionSettingsResponseResponse) GetIsProfileWebpageUrlEnabled() bool {
-	return s.IsProfileWebpageUrlEnabled
 }
 
 // GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
@@ -20676,16 +19418,6 @@ func (s *SubscriptionSettingsResponseResponse) GetIsShowCustomRemarks() bool {
 // GetCustomRemarks returns the value of CustomRemarks.
 func (s *SubscriptionSettingsResponseResponse) GetCustomRemarks() NilCustomRemark {
 	return s.CustomRemarks
-}
-
-// GetHappAnnounce returns the value of HappAnnounce.
-func (s *SubscriptionSettingsResponseResponse) GetHappAnnounce() NilString {
-	return s.HappAnnounce
-}
-
-// GetHappRouting returns the value of HappRouting.
-func (s *SubscriptionSettingsResponseResponse) GetHappRouting() NilString {
-	return s.HappRouting
 }
 
 // GetCustomResponseHeaders returns the value of CustomResponseHeaders.
@@ -20723,26 +19455,6 @@ func (s *SubscriptionSettingsResponseResponse) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetProfileTitle sets the value of ProfileTitle.
-func (s *SubscriptionSettingsResponseResponse) SetProfileTitle(val string) {
-	s.ProfileTitle = val
-}
-
-// SetSupportLink sets the value of SupportLink.
-func (s *SubscriptionSettingsResponseResponse) SetSupportLink(val string) {
-	s.SupportLink = val
-}
-
-// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
-func (s *SubscriptionSettingsResponseResponse) SetProfileUpdateInterval(val int) {
-	s.ProfileUpdateInterval = val
-}
-
-// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
-func (s *SubscriptionSettingsResponseResponse) SetIsProfileWebpageUrlEnabled(val bool) {
-	s.IsProfileWebpageUrlEnabled = val
-}
-
 // SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
 func (s *SubscriptionSettingsResponseResponse) SetServeJsonAtBaseSubscription(val bool) {
 	s.ServeJsonAtBaseSubscription = val
@@ -20756,16 +19468,6 @@ func (s *SubscriptionSettingsResponseResponse) SetIsShowCustomRemarks(val bool) 
 // SetCustomRemarks sets the value of CustomRemarks.
 func (s *SubscriptionSettingsResponseResponse) SetCustomRemarks(val NilCustomRemark) {
 	s.CustomRemarks = val
-}
-
-// SetHappAnnounce sets the value of HappAnnounce.
-func (s *SubscriptionSettingsResponseResponse) SetHappAnnounce(val NilString) {
-	s.HappAnnounce = val
-}
-
-// SetHappRouting sets the value of HappRouting.
-func (s *SubscriptionSettingsResponseResponse) SetHappRouting(val NilString) {
-	s.HappRouting = val
 }
 
 // SetCustomResponseHeaders sets the value of CustomResponseHeaders.
@@ -20820,14 +19522,19 @@ func (s *SubscriptionSsConfLinks) init() SubscriptionSsConfLinks {
 	return m
 }
 
+// SubscriptionTemplateDeleteTemplateNoContent is response for SubscriptionTemplateDeleteTemplate operation.
+type SubscriptionTemplateDeleteTemplateNoContent struct{}
+
+func (*SubscriptionTemplateDeleteTemplateNoContent) subscriptionTemplateDeleteTemplateRes() {}
+
 // Ref: #/components/schemas/SystemItem
 type SystemItem struct {
-	Info  NodeResponseInfoItem `json:"info"`
-	Stats Stat                 `json:"stats"`
+	Info  NodeInfoItem `json:"info"`
+	Stats Stat         `json:"stats"`
 }
 
 // GetInfo returns the value of Info.
-func (s *SystemItem) GetInfo() NodeResponseInfoItem {
+func (s *SystemItem) GetInfo() NodeInfoItem {
 	return s.Info
 }
 
@@ -20837,46 +19544,13 @@ func (s *SystemItem) GetStats() Stat {
 }
 
 // SetInfo sets the value of Info.
-func (s *SystemItem) SetInfo(val NodeResponseInfoItem) {
+func (s *SystemItem) SetInfo(val NodeInfoItem) {
 	s.Info = val
 }
 
 // SetStats sets the value of Stats.
 func (s *SystemItem) SetStats(val Stat) {
 	s.Stats = val
-}
-
-// Ref: #/components/schemas/TagsResponse
-type TagsResponse struct {
-	Response TagsResponseResponse `json:"response"`
-}
-
-// GetResponse returns the value of Response.
-func (s *TagsResponse) GetResponse() TagsResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *TagsResponse) SetResponse(val TagsResponseResponse) {
-	s.Response = val
-}
-
-func (*TagsResponse) hostsGetAllHostTagsRes()  {}
-func (*TagsResponse) nodesGetAllNodesTagsRes() {}
-func (*TagsResponse) usersGetAllTagsRes()      {}
-
-type TagsResponseResponse struct {
-	Tags []string `json:"tags"`
-}
-
-// GetTags returns the value of Tags.
-func (s *TagsResponseResponse) GetTags() []string {
-	return s.Tags
-}
-
-// SetTags sets the value of Tags.
-func (s *TagsResponseResponse) SetTags(val []string) {
-	s.Tags = val
 }
 
 // Ref: #/components/schemas/Telegram
@@ -21249,6 +19923,11 @@ func (s *TokenResponse) SetResponse(val TokenResponseResponse) {
 	s.Response = val
 }
 
+func (*TokenResponse) authLoginRes()                       {}
+func (*TokenResponse) authOauth2CallbackRes()              {}
+func (*TokenResponse) authPasskeyAuthenticationVerifyRes() {}
+func (*TokenResponse) authRegisterRes()                    {}
+
 type TokenResponseResponse struct {
 	AccessToken string `json:"accessToken"`
 }
@@ -21262,37 +19941,6 @@ func (s *TokenResponseResponse) GetAccessToken() string {
 func (s *TokenResponseResponse) SetAccessToken(val string) {
 	s.AccessToken = val
 }
-
-// TokenResponseStatusCode wraps TokenResponse with StatusCode.
-type TokenResponseStatusCode struct {
-	StatusCode int
-	Response   TokenResponse
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *TokenResponseStatusCode) GetStatusCode() int {
-	return s.StatusCode
-}
-
-// GetResponse returns the value of Response.
-func (s *TokenResponseStatusCode) GetResponse() TokenResponse {
-	return s.Response
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *TokenResponseStatusCode) SetStatusCode(val int) {
-	s.StatusCode = val
-}
-
-// SetResponse sets the value of Response.
-func (s *TokenResponseStatusCode) SetResponse(val TokenResponse) {
-	s.Response = val
-}
-
-func (*TokenResponseStatusCode) authLoginRes()                       {}
-func (*TokenResponseStatusCode) authOauth2CallbackRes()              {}
-func (*TokenResponseStatusCode) authPasskeyAuthenticationVerifyRes() {}
-func (*TokenResponseStatusCode) authRegisterRes()                    {}
 
 // Ref: #/components/schemas/TopNode
 type TopNode struct {
@@ -21353,328 +20001,178 @@ func (s *TopNode) SetTotal(val float64) {
 	s.Total = val
 }
 
-// Ref: #/components/schemas/TorrentBlockerReportsResponseResponse
-type TorrentBlockerReportsResponseResponse struct {
-	Response TorrentBlockerReportsResponseResponseResponse `json:"response"`
+// TorrentBlockerReportsTruncateTorrentBlockerReportsNoContent is response for TorrentBlockerReportsTruncateTorrentBlockerReports operation.
+type TorrentBlockerReportsTruncateTorrentBlockerReportsNoContent struct{}
+
+func (*TorrentBlockerReportsTruncateTorrentBlockerReportsNoContent) torrentBlockerReportsTruncateTorrentBlockerReportsRes() {
 }
 
-// GetResponse returns the value of Response.
-func (s *TorrentBlockerReportsResponseResponse) GetResponse() TorrentBlockerReportsResponseResponseResponse {
-	return s.Response
-}
-
-// SetResponse sets the value of Response.
-func (s *TorrentBlockerReportsResponseResponse) SetResponse(val TorrentBlockerReportsResponseResponseResponse) {
-	s.Response = val
-}
-
-func (*TorrentBlockerReportsResponseResponse) torrentBlockerReportsGetTorrentBlockerReportsRes() {}
-func (*TorrentBlockerReportsResponseResponse) torrentBlockerReportsTruncateTorrentBlockerReportsRes() {
-}
-
-type TorrentBlockerReportsResponseResponseResponse struct {
-	Records []TorrentBlockerReportsResponseResponseResponseRecordsItem `json:"records"`
-	Total   float64                                                    `json:"total"`
-}
-
-// GetRecords returns the value of Records.
-func (s *TorrentBlockerReportsResponseResponseResponse) GetRecords() []TorrentBlockerReportsResponseResponseResponseRecordsItem {
-	return s.Records
-}
-
-// GetTotal returns the value of Total.
-func (s *TorrentBlockerReportsResponseResponseResponse) GetTotal() float64 {
-	return s.Total
-}
-
-// SetRecords sets the value of Records.
-func (s *TorrentBlockerReportsResponseResponseResponse) SetRecords(val []TorrentBlockerReportsResponseResponseResponseRecordsItem) {
-	s.Records = val
-}
-
-// SetTotal sets the value of Total.
-func (s *TorrentBlockerReportsResponseResponseResponse) SetTotal(val float64) {
-	s.Total = val
-}
-
-type TorrentBlockerReportsResponseResponseResponseRecordsItem struct {
-	ID        float64                                                      `json:"id"`
-	UserId    float64                                                      `json:"userId"`
-	NodeId    float64                                                      `json:"nodeId"`
-	User      TorrentBlockerReportsResponseResponseResponseRecordsItemUser `json:"user"`
-	Node      Node                                                         `json:"node"`
-	Report    ReportItem                                                   `json:"report"`
-	CreatedAt time.Time                                                    `json:"createdAt"`
-}
-
-// GetID returns the value of ID.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetID() float64 {
-	return s.ID
-}
-
-// GetUserId returns the value of UserId.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetUserId() float64 {
-	return s.UserId
-}
-
-// GetNodeId returns the value of NodeId.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetNodeId() float64 {
-	return s.NodeId
-}
-
-// GetUser returns the value of User.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetUser() TorrentBlockerReportsResponseResponseResponseRecordsItemUser {
-	return s.User
-}
-
-// GetNode returns the value of Node.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetNode() Node {
-	return s.Node
-}
-
-// GetReport returns the value of Report.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetReport() ReportItem {
-	return s.Report
-}
-
-// GetCreatedAt returns the value of CreatedAt.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) GetCreatedAt() time.Time {
-	return s.CreatedAt
-}
-
-// SetID sets the value of ID.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetID(val float64) {
-	s.ID = val
-}
-
-// SetUserId sets the value of UserId.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetUserId(val float64) {
-	s.UserId = val
-}
-
-// SetNodeId sets the value of NodeId.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetNodeId(val float64) {
-	s.NodeId = val
-}
-
-// SetUser sets the value of User.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetUser(val TorrentBlockerReportsResponseResponseResponseRecordsItemUser) {
-	s.User = val
-}
-
-// SetNode sets the value of Node.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetNode(val Node) {
-	s.Node = val
-}
-
-// SetReport sets the value of Report.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetReport(val ReportItem) {
-	s.Report = val
-}
-
-// SetCreatedAt sets the value of CreatedAt.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetCreatedAt(val time.Time) {
-	s.CreatedAt = val
-}
-
-type TorrentBlockerReportsResponseResponseResponseRecordsItemUser struct {
-	UUID     uuid.UUID `json:"uuid"`
-	Username string    `json:"username"`
+// Ref: #/components/schemas/UpdateConfigProfileBody
+type UpdateConfigProfileBody struct {
+	UUID   uuid.UUID                        `json:"uuid"`
+	Name   OptString                        `json:"name"`
+	Config OptUpdateConfigProfileBodyConfig `json:"config"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItemUser) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetUsername returns the value of Username.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItemUser) GetUsername() string {
-	return s.Username
-}
-
-// SetUUID sets the value of UUID.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItemUser) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetUsername sets the value of Username.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItemUser) SetUsername(val string) {
-	s.Username = val
-}
-
-// Ref: #/components/schemas/UnauthorizedError
-type UnauthorizedError struct {
-	Message    string  `json:"message"`
-	StatusCode float64 `json:"statusCode"`
-}
-
-// GetMessage returns the value of Message.
-func (s *UnauthorizedError) GetMessage() string {
-	return s.Message
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *UnauthorizedError) GetStatusCode() float64 {
-	return s.StatusCode
-}
-
-// SetMessage sets the value of Message.
-func (s *UnauthorizedError) SetMessage(val string) {
-	s.Message = val
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *UnauthorizedError) SetStatusCode(val float64) {
-	s.StatusCode = val
-}
-
-func (*UnauthorizedError) authLoginRes() {}
-
-// Ref: #/components/schemas/UpdateConfigProfileRequest
-type UpdateConfigProfileRequest struct {
-	UUID   uuid.UUID                         `json:"uuid"`
-	Name   OptString                         `json:"name"`
-	Config *UpdateConfigProfileRequestConfig `json:"config"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UpdateConfigProfileRequest) GetUUID() uuid.UUID {
+func (s *UpdateConfigProfileBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateConfigProfileRequest) GetName() OptString {
+func (s *UpdateConfigProfileBody) GetName() OptString {
 	return s.Name
 }
 
 // GetConfig returns the value of Config.
-func (s *UpdateConfigProfileRequest) GetConfig() *UpdateConfigProfileRequestConfig {
+func (s *UpdateConfigProfileBody) GetConfig() OptUpdateConfigProfileBodyConfig {
 	return s.Config
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateConfigProfileRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateConfigProfileBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateConfigProfileRequest) SetName(val OptString) {
+func (s *UpdateConfigProfileBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetConfig sets the value of Config.
-func (s *UpdateConfigProfileRequest) SetConfig(val *UpdateConfigProfileRequestConfig) {
+func (s *UpdateConfigProfileBody) SetConfig(val OptUpdateConfigProfileBodyConfig) {
 	s.Config = val
 }
 
-type UpdateConfigProfileRequestConfig struct{}
+type UpdateConfigProfileBodyConfig map[string]jx.Raw
 
-// Ref: #/components/schemas/UpdateExternalSquadRequest
-type UpdateExternalSquadRequest struct {
-	UUID                 uuid.UUID                                       `json:"uuid"`
-	Name                 OptString                                       `json:"name"`
-	Templates            []TemplateRef                                   `json:"templates"`
-	SubscriptionSettings OptNilSubscriptionSettings                      `json:"subscriptionSettings"`
-	HostOverrides        OptNilHostOverride                              `json:"hostOverrides"`
-	ResponseHeaders      OptNilUpdateExternalSquadRequestResponseHeaders `json:"responseHeaders"`
-	HwidSettings         OptNilHwidSettings                              `json:"hwidSettings"`
-	CustomRemarks        OptNilCustomRemark                              `json:"customRemarks"`
-	SubpageConfigUuid    OptNilUUID                                      `json:"subpageConfigUuid"`
+func (s *UpdateConfigProfileBodyConfig) init() UpdateConfigProfileBodyConfig {
+	m := *s
+	if m == nil {
+		m = map[string]jx.Raw{}
+		*s = m
+	}
+	return m
+}
+
+// Ref: #/components/schemas/UpdateExternalSquadBody
+type UpdateExternalSquadBody struct {
+	// UUID of the external squad.
+	UUID                  uuid.UUID                                    `json:"uuid"`
+	Name                  OptString                                    `json:"name"`
+	Templates             []TemplateRef                                `json:"templates"`
+	SubscriptionSettings  OptNilSubscriptionSettings                   `json:"subscriptionSettings"`
+	HostOverrides         OptNilHostOverride                           `json:"hostOverrides"`
+	ResponseHeadersAdd    OptUpdateExternalSquadBodyResponseHeadersAdd `json:"responseHeadersAdd"`
+	ResponseHeadersRemove []string                                     `json:"responseHeadersRemove"`
+	HwidSettings          OptNilHwidSettings                           `json:"hwidSettings"`
+	CustomRemarks         OptNilCustomRemark                           `json:"customRemarks"`
+	SubpageConfigUuid     OptNilUUID                                   `json:"subpageConfigUuid"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateExternalSquadRequest) GetUUID() uuid.UUID {
+func (s *UpdateExternalSquadBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateExternalSquadRequest) GetName() OptString {
+func (s *UpdateExternalSquadBody) GetName() OptString {
 	return s.Name
 }
 
 // GetTemplates returns the value of Templates.
-func (s *UpdateExternalSquadRequest) GetTemplates() []TemplateRef {
+func (s *UpdateExternalSquadBody) GetTemplates() []TemplateRef {
 	return s.Templates
 }
 
 // GetSubscriptionSettings returns the value of SubscriptionSettings.
-func (s *UpdateExternalSquadRequest) GetSubscriptionSettings() OptNilSubscriptionSettings {
+func (s *UpdateExternalSquadBody) GetSubscriptionSettings() OptNilSubscriptionSettings {
 	return s.SubscriptionSettings
 }
 
 // GetHostOverrides returns the value of HostOverrides.
-func (s *UpdateExternalSquadRequest) GetHostOverrides() OptNilHostOverride {
+func (s *UpdateExternalSquadBody) GetHostOverrides() OptNilHostOverride {
 	return s.HostOverrides
 }
 
-// GetResponseHeaders returns the value of ResponseHeaders.
-func (s *UpdateExternalSquadRequest) GetResponseHeaders() OptNilUpdateExternalSquadRequestResponseHeaders {
-	return s.ResponseHeaders
+// GetResponseHeadersAdd returns the value of ResponseHeadersAdd.
+func (s *UpdateExternalSquadBody) GetResponseHeadersAdd() OptUpdateExternalSquadBodyResponseHeadersAdd {
+	return s.ResponseHeadersAdd
+}
+
+// GetResponseHeadersRemove returns the value of ResponseHeadersRemove.
+func (s *UpdateExternalSquadBody) GetResponseHeadersRemove() []string {
+	return s.ResponseHeadersRemove
 }
 
 // GetHwidSettings returns the value of HwidSettings.
-func (s *UpdateExternalSquadRequest) GetHwidSettings() OptNilHwidSettings {
+func (s *UpdateExternalSquadBody) GetHwidSettings() OptNilHwidSettings {
 	return s.HwidSettings
 }
 
 // GetCustomRemarks returns the value of CustomRemarks.
-func (s *UpdateExternalSquadRequest) GetCustomRemarks() OptNilCustomRemark {
+func (s *UpdateExternalSquadBody) GetCustomRemarks() OptNilCustomRemark {
 	return s.CustomRemarks
 }
 
 // GetSubpageConfigUuid returns the value of SubpageConfigUuid.
-func (s *UpdateExternalSquadRequest) GetSubpageConfigUuid() OptNilUUID {
+func (s *UpdateExternalSquadBody) GetSubpageConfigUuid() OptNilUUID {
 	return s.SubpageConfigUuid
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateExternalSquadRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateExternalSquadBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateExternalSquadRequest) SetName(val OptString) {
+func (s *UpdateExternalSquadBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetTemplates sets the value of Templates.
-func (s *UpdateExternalSquadRequest) SetTemplates(val []TemplateRef) {
+func (s *UpdateExternalSquadBody) SetTemplates(val []TemplateRef) {
 	s.Templates = val
 }
 
 // SetSubscriptionSettings sets the value of SubscriptionSettings.
-func (s *UpdateExternalSquadRequest) SetSubscriptionSettings(val OptNilSubscriptionSettings) {
+func (s *UpdateExternalSquadBody) SetSubscriptionSettings(val OptNilSubscriptionSettings) {
 	s.SubscriptionSettings = val
 }
 
 // SetHostOverrides sets the value of HostOverrides.
-func (s *UpdateExternalSquadRequest) SetHostOverrides(val OptNilHostOverride) {
+func (s *UpdateExternalSquadBody) SetHostOverrides(val OptNilHostOverride) {
 	s.HostOverrides = val
 }
 
-// SetResponseHeaders sets the value of ResponseHeaders.
-func (s *UpdateExternalSquadRequest) SetResponseHeaders(val OptNilUpdateExternalSquadRequestResponseHeaders) {
-	s.ResponseHeaders = val
+// SetResponseHeadersAdd sets the value of ResponseHeadersAdd.
+func (s *UpdateExternalSquadBody) SetResponseHeadersAdd(val OptUpdateExternalSquadBodyResponseHeadersAdd) {
+	s.ResponseHeadersAdd = val
+}
+
+// SetResponseHeadersRemove sets the value of ResponseHeadersRemove.
+func (s *UpdateExternalSquadBody) SetResponseHeadersRemove(val []string) {
+	s.ResponseHeadersRemove = val
 }
 
 // SetHwidSettings sets the value of HwidSettings.
-func (s *UpdateExternalSquadRequest) SetHwidSettings(val OptNilHwidSettings) {
+func (s *UpdateExternalSquadBody) SetHwidSettings(val OptNilHwidSettings) {
 	s.HwidSettings = val
 }
 
 // SetCustomRemarks sets the value of CustomRemarks.
-func (s *UpdateExternalSquadRequest) SetCustomRemarks(val OptNilCustomRemark) {
+func (s *UpdateExternalSquadBody) SetCustomRemarks(val OptNilCustomRemark) {
 	s.CustomRemarks = val
 }
 
 // SetSubpageConfigUuid sets the value of SubpageConfigUuid.
-func (s *UpdateExternalSquadRequest) SetSubpageConfigUuid(val OptNilUUID) {
+func (s *UpdateExternalSquadBody) SetSubpageConfigUuid(val OptNilUUID) {
 	s.SubpageConfigUuid = val
 }
 
-type UpdateExternalSquadRequestResponseHeaders map[string]string
+type UpdateExternalSquadBodyResponseHeadersAdd map[string]string
 
-func (s *UpdateExternalSquadRequestResponseHeaders) init() UpdateExternalSquadRequestResponseHeaders {
+func (s *UpdateExternalSquadBodyResponseHeadersAdd) init() UpdateExternalSquadBodyResponseHeadersAdd {
 	m := *s
 	if m == nil {
 		m = map[string]string{}
@@ -21683,390 +20181,390 @@ func (s *UpdateExternalSquadRequestResponseHeaders) init() UpdateExternalSquadRe
 	return m
 }
 
-// Ref: #/components/schemas/UpdateHostRequest
-type UpdateHostRequest struct {
-	UUID                   uuid.UUID                              `json:"uuid"`
-	Inbound                OptInboundRef                          `json:"inbound"`
-	Remark                 OptString                              `json:"remark"`
-	Address                OptString                              `json:"address"`
-	Port                   OptInt                                 `json:"port"`
-	Path                   OptNilString                           `json:"path"`
-	Sni                    OptNilString                           `json:"sni"`
-	Host                   OptNilString                           `json:"host"`
-	Alpn                   OptNilUpdateHostRequestAlpn            `json:"alpn"`
-	Fingerprint            OptNilString                           `json:"fingerprint"`
-	IsDisabled             OptBool                                `json:"isDisabled"`
-	SecurityLayer          OptUpdateHostRequestSecurityLayer      `json:"securityLayer"`
-	XhttpExtraParams       jx.Raw                                 `json:"xhttpExtraParams"`
-	MuxParams              jx.Raw                                 `json:"muxParams"`
-	SockoptParams          jx.Raw                                 `json:"sockoptParams"`
-	FinalMask              jx.Raw                                 `json:"finalMask"`
-	ServerDescription      OptNilString                           `json:"serverDescription"`
-	Tags                   []string                               `json:"tags"`
-	IsHidden               OptBool                                `json:"isHidden"`
-	OverrideSniFromAddress OptBool                                `json:"overrideSniFromAddress"`
-	KeepSniBlank           OptBool                                `json:"keepSniBlank"`
-	VlessRouteId           OptNilInt                              `json:"vlessRouteId"`
-	PinnedPeerCertSha256   OptNilString                           `json:"pinnedPeerCertSha256"`
-	VerifyPeerCertByName   OptNilString                           `json:"verifyPeerCertByName"`
-	ShuffleHost            OptBool                                `json:"shuffleHost"`
-	MihomoX25519           OptBool                                `json:"mihomoX25519"`
-	MihomoIpVersion        OptNilUpdateHostRequestMihomoIpVersion `json:"mihomoIpVersion"`
-	Nodes                  []uuid.UUID                            `json:"nodes"`
-	XrayJsonTemplateUuid   OptNilUUID                             `json:"xrayJsonTemplateUuid"`
+// Ref: #/components/schemas/UpdateHostBody
+type UpdateHostBody struct {
+	UUID                   uuid.UUID                           `json:"uuid"`
+	Inbound                OptInbound2                         `json:"inbound"`
+	Remark                 OptString                           `json:"remark"`
+	Address                OptString                           `json:"address"`
+	Port                   OptInt                              `json:"port"`
+	Path                   OptNilString                        `json:"path"`
+	Sni                    OptNilString                        `json:"sni"`
+	Host                   OptNilString                        `json:"host"`
+	Alpn                   OptNilUpdateHostBodyAlpn            `json:"alpn"`
+	Fingerprint            OptNilString                        `json:"fingerprint"`
+	IsDisabled             OptBool                             `json:"isDisabled"`
+	SecurityLayer          OptUpdateHostBodySecurityLayer      `json:"securityLayer"`
+	XhttpExtraParams       jx.Raw                              `json:"xhttpExtraParams"`
+	MuxParams              jx.Raw                              `json:"muxParams"`
+	SockoptParams          jx.Raw                              `json:"sockoptParams"`
+	FinalMask              jx.Raw                              `json:"finalMask"`
+	ServerDescription      OptNilString                        `json:"serverDescription"`
+	Tags                   []string                            `json:"tags"`
+	IsHidden               OptBool                             `json:"isHidden"`
+	OverrideSniFromAddress OptBool                             `json:"overrideSniFromAddress"`
+	KeepSniBlank           OptBool                             `json:"keepSniBlank"`
+	VlessRouteId           OptNilInt                           `json:"vlessRouteId"`
+	PinnedPeerCertSha256   OptNilString                        `json:"pinnedPeerCertSha256"`
+	VerifyPeerCertByName   OptNilString                        `json:"verifyPeerCertByName"`
+	ShuffleHost            OptBool                             `json:"shuffleHost"`
+	MihomoX25519           OptBool                             `json:"mihomoX25519"`
+	MihomoIpVersion        OptNilUpdateHostBodyMihomoIpVersion `json:"mihomoIpVersion"`
+	Nodes                  []uuid.UUID                         `json:"nodes"`
+	XrayJsonTemplateUuid   OptNilUUID                          `json:"xrayJsonTemplateUuid"`
 	// Optional. Internal squads from which the host will be excluded.
 	ExcludedInternalSquads []uuid.UUID `json:"excludedInternalSquads"`
 	// Optional. Subscription types from which the host will be excluded from.
-	ExcludeFromSubscriptionTypes []UpdateHostRequestExcludeFromSubscriptionTypesItem `json:"excludeFromSubscriptionTypes"`
+	ExcludeFromSubscriptionTypes []UpdateHostBodyExcludeFromSubscriptionTypesItem `json:"excludeFromSubscriptionTypes"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateHostRequest) GetUUID() uuid.UUID {
+func (s *UpdateHostBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetInbound returns the value of Inbound.
-func (s *UpdateHostRequest) GetInbound() OptInboundRef {
+func (s *UpdateHostBody) GetInbound() OptInbound2 {
 	return s.Inbound
 }
 
 // GetRemark returns the value of Remark.
-func (s *UpdateHostRequest) GetRemark() OptString {
+func (s *UpdateHostBody) GetRemark() OptString {
 	return s.Remark
 }
 
 // GetAddress returns the value of Address.
-func (s *UpdateHostRequest) GetAddress() OptString {
+func (s *UpdateHostBody) GetAddress() OptString {
 	return s.Address
 }
 
 // GetPort returns the value of Port.
-func (s *UpdateHostRequest) GetPort() OptInt {
+func (s *UpdateHostBody) GetPort() OptInt {
 	return s.Port
 }
 
 // GetPath returns the value of Path.
-func (s *UpdateHostRequest) GetPath() OptNilString {
+func (s *UpdateHostBody) GetPath() OptNilString {
 	return s.Path
 }
 
 // GetSni returns the value of Sni.
-func (s *UpdateHostRequest) GetSni() OptNilString {
+func (s *UpdateHostBody) GetSni() OptNilString {
 	return s.Sni
 }
 
 // GetHost returns the value of Host.
-func (s *UpdateHostRequest) GetHost() OptNilString {
+func (s *UpdateHostBody) GetHost() OptNilString {
 	return s.Host
 }
 
 // GetAlpn returns the value of Alpn.
-func (s *UpdateHostRequest) GetAlpn() OptNilUpdateHostRequestAlpn {
+func (s *UpdateHostBody) GetAlpn() OptNilUpdateHostBodyAlpn {
 	return s.Alpn
 }
 
 // GetFingerprint returns the value of Fingerprint.
-func (s *UpdateHostRequest) GetFingerprint() OptNilString {
+func (s *UpdateHostBody) GetFingerprint() OptNilString {
 	return s.Fingerprint
 }
 
 // GetIsDisabled returns the value of IsDisabled.
-func (s *UpdateHostRequest) GetIsDisabled() OptBool {
+func (s *UpdateHostBody) GetIsDisabled() OptBool {
 	return s.IsDisabled
 }
 
 // GetSecurityLayer returns the value of SecurityLayer.
-func (s *UpdateHostRequest) GetSecurityLayer() OptUpdateHostRequestSecurityLayer {
+func (s *UpdateHostBody) GetSecurityLayer() OptUpdateHostBodySecurityLayer {
 	return s.SecurityLayer
 }
 
 // GetXhttpExtraParams returns the value of XhttpExtraParams.
-func (s *UpdateHostRequest) GetXhttpExtraParams() jx.Raw {
+func (s *UpdateHostBody) GetXhttpExtraParams() jx.Raw {
 	return s.XhttpExtraParams
 }
 
 // GetMuxParams returns the value of MuxParams.
-func (s *UpdateHostRequest) GetMuxParams() jx.Raw {
+func (s *UpdateHostBody) GetMuxParams() jx.Raw {
 	return s.MuxParams
 }
 
 // GetSockoptParams returns the value of SockoptParams.
-func (s *UpdateHostRequest) GetSockoptParams() jx.Raw {
+func (s *UpdateHostBody) GetSockoptParams() jx.Raw {
 	return s.SockoptParams
 }
 
 // GetFinalMask returns the value of FinalMask.
-func (s *UpdateHostRequest) GetFinalMask() jx.Raw {
+func (s *UpdateHostBody) GetFinalMask() jx.Raw {
 	return s.FinalMask
 }
 
 // GetServerDescription returns the value of ServerDescription.
-func (s *UpdateHostRequest) GetServerDescription() OptNilString {
+func (s *UpdateHostBody) GetServerDescription() OptNilString {
 	return s.ServerDescription
 }
 
 // GetTags returns the value of Tags.
-func (s *UpdateHostRequest) GetTags() []string {
+func (s *UpdateHostBody) GetTags() []string {
 	return s.Tags
 }
 
 // GetIsHidden returns the value of IsHidden.
-func (s *UpdateHostRequest) GetIsHidden() OptBool {
+func (s *UpdateHostBody) GetIsHidden() OptBool {
 	return s.IsHidden
 }
 
 // GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
-func (s *UpdateHostRequest) GetOverrideSniFromAddress() OptBool {
+func (s *UpdateHostBody) GetOverrideSniFromAddress() OptBool {
 	return s.OverrideSniFromAddress
 }
 
 // GetKeepSniBlank returns the value of KeepSniBlank.
-func (s *UpdateHostRequest) GetKeepSniBlank() OptBool {
+func (s *UpdateHostBody) GetKeepSniBlank() OptBool {
 	return s.KeepSniBlank
 }
 
 // GetVlessRouteId returns the value of VlessRouteId.
-func (s *UpdateHostRequest) GetVlessRouteId() OptNilInt {
+func (s *UpdateHostBody) GetVlessRouteId() OptNilInt {
 	return s.VlessRouteId
 }
 
 // GetPinnedPeerCertSha256 returns the value of PinnedPeerCertSha256.
-func (s *UpdateHostRequest) GetPinnedPeerCertSha256() OptNilString {
+func (s *UpdateHostBody) GetPinnedPeerCertSha256() OptNilString {
 	return s.PinnedPeerCertSha256
 }
 
 // GetVerifyPeerCertByName returns the value of VerifyPeerCertByName.
-func (s *UpdateHostRequest) GetVerifyPeerCertByName() OptNilString {
+func (s *UpdateHostBody) GetVerifyPeerCertByName() OptNilString {
 	return s.VerifyPeerCertByName
 }
 
 // GetShuffleHost returns the value of ShuffleHost.
-func (s *UpdateHostRequest) GetShuffleHost() OptBool {
+func (s *UpdateHostBody) GetShuffleHost() OptBool {
 	return s.ShuffleHost
 }
 
 // GetMihomoX25519 returns the value of MihomoX25519.
-func (s *UpdateHostRequest) GetMihomoX25519() OptBool {
+func (s *UpdateHostBody) GetMihomoX25519() OptBool {
 	return s.MihomoX25519
 }
 
 // GetMihomoIpVersion returns the value of MihomoIpVersion.
-func (s *UpdateHostRequest) GetMihomoIpVersion() OptNilUpdateHostRequestMihomoIpVersion {
+func (s *UpdateHostBody) GetMihomoIpVersion() OptNilUpdateHostBodyMihomoIpVersion {
 	return s.MihomoIpVersion
 }
 
 // GetNodes returns the value of Nodes.
-func (s *UpdateHostRequest) GetNodes() []uuid.UUID {
+func (s *UpdateHostBody) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
 // GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
-func (s *UpdateHostRequest) GetXrayJsonTemplateUuid() OptNilUUID {
+func (s *UpdateHostBody) GetXrayJsonTemplateUuid() OptNilUUID {
 	return s.XrayJsonTemplateUuid
 }
 
 // GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
-func (s *UpdateHostRequest) GetExcludedInternalSquads() []uuid.UUID {
+func (s *UpdateHostBody) GetExcludedInternalSquads() []uuid.UUID {
 	return s.ExcludedInternalSquads
 }
 
 // GetExcludeFromSubscriptionTypes returns the value of ExcludeFromSubscriptionTypes.
-func (s *UpdateHostRequest) GetExcludeFromSubscriptionTypes() []UpdateHostRequestExcludeFromSubscriptionTypesItem {
+func (s *UpdateHostBody) GetExcludeFromSubscriptionTypes() []UpdateHostBodyExcludeFromSubscriptionTypesItem {
 	return s.ExcludeFromSubscriptionTypes
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateHostRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateHostBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetInbound sets the value of Inbound.
-func (s *UpdateHostRequest) SetInbound(val OptInboundRef) {
+func (s *UpdateHostBody) SetInbound(val OptInbound2) {
 	s.Inbound = val
 }
 
 // SetRemark sets the value of Remark.
-func (s *UpdateHostRequest) SetRemark(val OptString) {
+func (s *UpdateHostBody) SetRemark(val OptString) {
 	s.Remark = val
 }
 
 // SetAddress sets the value of Address.
-func (s *UpdateHostRequest) SetAddress(val OptString) {
+func (s *UpdateHostBody) SetAddress(val OptString) {
 	s.Address = val
 }
 
 // SetPort sets the value of Port.
-func (s *UpdateHostRequest) SetPort(val OptInt) {
+func (s *UpdateHostBody) SetPort(val OptInt) {
 	s.Port = val
 }
 
 // SetPath sets the value of Path.
-func (s *UpdateHostRequest) SetPath(val OptNilString) {
+func (s *UpdateHostBody) SetPath(val OptNilString) {
 	s.Path = val
 }
 
 // SetSni sets the value of Sni.
-func (s *UpdateHostRequest) SetSni(val OptNilString) {
+func (s *UpdateHostBody) SetSni(val OptNilString) {
 	s.Sni = val
 }
 
 // SetHost sets the value of Host.
-func (s *UpdateHostRequest) SetHost(val OptNilString) {
+func (s *UpdateHostBody) SetHost(val OptNilString) {
 	s.Host = val
 }
 
 // SetAlpn sets the value of Alpn.
-func (s *UpdateHostRequest) SetAlpn(val OptNilUpdateHostRequestAlpn) {
+func (s *UpdateHostBody) SetAlpn(val OptNilUpdateHostBodyAlpn) {
 	s.Alpn = val
 }
 
 // SetFingerprint sets the value of Fingerprint.
-func (s *UpdateHostRequest) SetFingerprint(val OptNilString) {
+func (s *UpdateHostBody) SetFingerprint(val OptNilString) {
 	s.Fingerprint = val
 }
 
 // SetIsDisabled sets the value of IsDisabled.
-func (s *UpdateHostRequest) SetIsDisabled(val OptBool) {
+func (s *UpdateHostBody) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
 }
 
 // SetSecurityLayer sets the value of SecurityLayer.
-func (s *UpdateHostRequest) SetSecurityLayer(val OptUpdateHostRequestSecurityLayer) {
+func (s *UpdateHostBody) SetSecurityLayer(val OptUpdateHostBodySecurityLayer) {
 	s.SecurityLayer = val
 }
 
 // SetXhttpExtraParams sets the value of XhttpExtraParams.
-func (s *UpdateHostRequest) SetXhttpExtraParams(val jx.Raw) {
+func (s *UpdateHostBody) SetXhttpExtraParams(val jx.Raw) {
 	s.XhttpExtraParams = val
 }
 
 // SetMuxParams sets the value of MuxParams.
-func (s *UpdateHostRequest) SetMuxParams(val jx.Raw) {
+func (s *UpdateHostBody) SetMuxParams(val jx.Raw) {
 	s.MuxParams = val
 }
 
 // SetSockoptParams sets the value of SockoptParams.
-func (s *UpdateHostRequest) SetSockoptParams(val jx.Raw) {
+func (s *UpdateHostBody) SetSockoptParams(val jx.Raw) {
 	s.SockoptParams = val
 }
 
 // SetFinalMask sets the value of FinalMask.
-func (s *UpdateHostRequest) SetFinalMask(val jx.Raw) {
+func (s *UpdateHostBody) SetFinalMask(val jx.Raw) {
 	s.FinalMask = val
 }
 
 // SetServerDescription sets the value of ServerDescription.
-func (s *UpdateHostRequest) SetServerDescription(val OptNilString) {
+func (s *UpdateHostBody) SetServerDescription(val OptNilString) {
 	s.ServerDescription = val
 }
 
 // SetTags sets the value of Tags.
-func (s *UpdateHostRequest) SetTags(val []string) {
+func (s *UpdateHostBody) SetTags(val []string) {
 	s.Tags = val
 }
 
 // SetIsHidden sets the value of IsHidden.
-func (s *UpdateHostRequest) SetIsHidden(val OptBool) {
+func (s *UpdateHostBody) SetIsHidden(val OptBool) {
 	s.IsHidden = val
 }
 
 // SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
-func (s *UpdateHostRequest) SetOverrideSniFromAddress(val OptBool) {
+func (s *UpdateHostBody) SetOverrideSniFromAddress(val OptBool) {
 	s.OverrideSniFromAddress = val
 }
 
 // SetKeepSniBlank sets the value of KeepSniBlank.
-func (s *UpdateHostRequest) SetKeepSniBlank(val OptBool) {
+func (s *UpdateHostBody) SetKeepSniBlank(val OptBool) {
 	s.KeepSniBlank = val
 }
 
 // SetVlessRouteId sets the value of VlessRouteId.
-func (s *UpdateHostRequest) SetVlessRouteId(val OptNilInt) {
+func (s *UpdateHostBody) SetVlessRouteId(val OptNilInt) {
 	s.VlessRouteId = val
 }
 
 // SetPinnedPeerCertSha256 sets the value of PinnedPeerCertSha256.
-func (s *UpdateHostRequest) SetPinnedPeerCertSha256(val OptNilString) {
+func (s *UpdateHostBody) SetPinnedPeerCertSha256(val OptNilString) {
 	s.PinnedPeerCertSha256 = val
 }
 
 // SetVerifyPeerCertByName sets the value of VerifyPeerCertByName.
-func (s *UpdateHostRequest) SetVerifyPeerCertByName(val OptNilString) {
+func (s *UpdateHostBody) SetVerifyPeerCertByName(val OptNilString) {
 	s.VerifyPeerCertByName = val
 }
 
 // SetShuffleHost sets the value of ShuffleHost.
-func (s *UpdateHostRequest) SetShuffleHost(val OptBool) {
+func (s *UpdateHostBody) SetShuffleHost(val OptBool) {
 	s.ShuffleHost = val
 }
 
 // SetMihomoX25519 sets the value of MihomoX25519.
-func (s *UpdateHostRequest) SetMihomoX25519(val OptBool) {
+func (s *UpdateHostBody) SetMihomoX25519(val OptBool) {
 	s.MihomoX25519 = val
 }
 
 // SetMihomoIpVersion sets the value of MihomoIpVersion.
-func (s *UpdateHostRequest) SetMihomoIpVersion(val OptNilUpdateHostRequestMihomoIpVersion) {
+func (s *UpdateHostBody) SetMihomoIpVersion(val OptNilUpdateHostBodyMihomoIpVersion) {
 	s.MihomoIpVersion = val
 }
 
 // SetNodes sets the value of Nodes.
-func (s *UpdateHostRequest) SetNodes(val []uuid.UUID) {
+func (s *UpdateHostBody) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
 }
 
 // SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
-func (s *UpdateHostRequest) SetXrayJsonTemplateUuid(val OptNilUUID) {
+func (s *UpdateHostBody) SetXrayJsonTemplateUuid(val OptNilUUID) {
 	s.XrayJsonTemplateUuid = val
 }
 
 // SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
-func (s *UpdateHostRequest) SetExcludedInternalSquads(val []uuid.UUID) {
+func (s *UpdateHostBody) SetExcludedInternalSquads(val []uuid.UUID) {
 	s.ExcludedInternalSquads = val
 }
 
 // SetExcludeFromSubscriptionTypes sets the value of ExcludeFromSubscriptionTypes.
-func (s *UpdateHostRequest) SetExcludeFromSubscriptionTypes(val []UpdateHostRequestExcludeFromSubscriptionTypesItem) {
+func (s *UpdateHostBody) SetExcludeFromSubscriptionTypes(val []UpdateHostBodyExcludeFromSubscriptionTypesItem) {
 	s.ExcludeFromSubscriptionTypes = val
 }
 
-type UpdateHostRequestAlpn string
+type UpdateHostBodyAlpn string
 
 const (
-	UpdateHostRequestAlpnH3         UpdateHostRequestAlpn = "h3"
-	UpdateHostRequestAlpnH2         UpdateHostRequestAlpn = "h2"
-	UpdateHostRequestAlpnHTTP11     UpdateHostRequestAlpn = "http/1.1"
-	UpdateHostRequestAlpnH2HTTP11   UpdateHostRequestAlpn = "h2,http/1.1"
-	UpdateHostRequestAlpnH3H2HTTP11 UpdateHostRequestAlpn = "h3,h2,http/1.1"
-	UpdateHostRequestAlpnH3H2       UpdateHostRequestAlpn = "h3,h2"
+	UpdateHostBodyAlpnH3         UpdateHostBodyAlpn = "h3"
+	UpdateHostBodyAlpnH2         UpdateHostBodyAlpn = "h2"
+	UpdateHostBodyAlpnHTTP11     UpdateHostBodyAlpn = "http/1.1"
+	UpdateHostBodyAlpnH2HTTP11   UpdateHostBodyAlpn = "h2,http/1.1"
+	UpdateHostBodyAlpnH3H2HTTP11 UpdateHostBodyAlpn = "h3,h2,http/1.1"
+	UpdateHostBodyAlpnH3H2       UpdateHostBodyAlpn = "h3,h2"
 )
 
-// AllValues returns all UpdateHostRequestAlpn values.
-func (UpdateHostRequestAlpn) AllValues() []UpdateHostRequestAlpn {
-	return []UpdateHostRequestAlpn{
-		UpdateHostRequestAlpnH3,
-		UpdateHostRequestAlpnH2,
-		UpdateHostRequestAlpnHTTP11,
-		UpdateHostRequestAlpnH2HTTP11,
-		UpdateHostRequestAlpnH3H2HTTP11,
-		UpdateHostRequestAlpnH3H2,
+// AllValues returns all UpdateHostBodyAlpn values.
+func (UpdateHostBodyAlpn) AllValues() []UpdateHostBodyAlpn {
+	return []UpdateHostBodyAlpn{
+		UpdateHostBodyAlpnH3,
+		UpdateHostBodyAlpnH2,
+		UpdateHostBodyAlpnHTTP11,
+		UpdateHostBodyAlpnH2HTTP11,
+		UpdateHostBodyAlpnH3H2HTTP11,
+		UpdateHostBodyAlpnH3H2,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateHostRequestAlpn) MarshalText() ([]byte, error) {
+func (s UpdateHostBodyAlpn) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateHostRequestAlpnH3:
+	case UpdateHostBodyAlpnH3:
 		return []byte(s), nil
-	case UpdateHostRequestAlpnH2:
+	case UpdateHostBodyAlpnH2:
 		return []byte(s), nil
-	case UpdateHostRequestAlpnHTTP11:
+	case UpdateHostBodyAlpnHTTP11:
 		return []byte(s), nil
-	case UpdateHostRequestAlpnH2HTTP11:
+	case UpdateHostBodyAlpnH2HTTP11:
 		return []byte(s), nil
-	case UpdateHostRequestAlpnH3H2HTTP11:
+	case UpdateHostBodyAlpnH3H2HTTP11:
 		return []byte(s), nil
-	case UpdateHostRequestAlpnH3H2:
+	case UpdateHostBodyAlpnH3H2:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22074,68 +20572,68 @@ func (s UpdateHostRequestAlpn) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateHostRequestAlpn) UnmarshalText(data []byte) error {
-	switch UpdateHostRequestAlpn(data) {
-	case UpdateHostRequestAlpnH3:
-		*s = UpdateHostRequestAlpnH3
+func (s *UpdateHostBodyAlpn) UnmarshalText(data []byte) error {
+	switch UpdateHostBodyAlpn(data) {
+	case UpdateHostBodyAlpnH3:
+		*s = UpdateHostBodyAlpnH3
 		return nil
-	case UpdateHostRequestAlpnH2:
-		*s = UpdateHostRequestAlpnH2
+	case UpdateHostBodyAlpnH2:
+		*s = UpdateHostBodyAlpnH2
 		return nil
-	case UpdateHostRequestAlpnHTTP11:
-		*s = UpdateHostRequestAlpnHTTP11
+	case UpdateHostBodyAlpnHTTP11:
+		*s = UpdateHostBodyAlpnHTTP11
 		return nil
-	case UpdateHostRequestAlpnH2HTTP11:
-		*s = UpdateHostRequestAlpnH2HTTP11
+	case UpdateHostBodyAlpnH2HTTP11:
+		*s = UpdateHostBodyAlpnH2HTTP11
 		return nil
-	case UpdateHostRequestAlpnH3H2HTTP11:
-		*s = UpdateHostRequestAlpnH3H2HTTP11
+	case UpdateHostBodyAlpnH3H2HTTP11:
+		*s = UpdateHostBodyAlpnH3H2HTTP11
 		return nil
-	case UpdateHostRequestAlpnH3H2:
-		*s = UpdateHostRequestAlpnH3H2
+	case UpdateHostBodyAlpnH3H2:
+		*s = UpdateHostBodyAlpnH3H2
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type UpdateHostRequestExcludeFromSubscriptionTypesItem string
+type UpdateHostBodyExcludeFromSubscriptionTypesItem string
 
 const (
-	UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON   UpdateHostRequestExcludeFromSubscriptionTypesItem = "XRAY_JSON"
-	UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64 UpdateHostRequestExcludeFromSubscriptionTypesItem = "XRAY_BASE64"
-	UpdateHostRequestExcludeFromSubscriptionTypesItemMIHOMO     UpdateHostRequestExcludeFromSubscriptionTypesItem = "MIHOMO"
-	UpdateHostRequestExcludeFromSubscriptionTypesItemSTASH      UpdateHostRequestExcludeFromSubscriptionTypesItem = "STASH"
-	UpdateHostRequestExcludeFromSubscriptionTypesItemCLASH      UpdateHostRequestExcludeFromSubscriptionTypesItem = "CLASH"
-	UpdateHostRequestExcludeFromSubscriptionTypesItemSINGBOX    UpdateHostRequestExcludeFromSubscriptionTypesItem = "SINGBOX"
+	UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON   UpdateHostBodyExcludeFromSubscriptionTypesItem = "XRAY_JSON"
+	UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64 UpdateHostBodyExcludeFromSubscriptionTypesItem = "XRAY_BASE64"
+	UpdateHostBodyExcludeFromSubscriptionTypesItemMIHOMO     UpdateHostBodyExcludeFromSubscriptionTypesItem = "MIHOMO"
+	UpdateHostBodyExcludeFromSubscriptionTypesItemSTASH      UpdateHostBodyExcludeFromSubscriptionTypesItem = "STASH"
+	UpdateHostBodyExcludeFromSubscriptionTypesItemCLASH      UpdateHostBodyExcludeFromSubscriptionTypesItem = "CLASH"
+	UpdateHostBodyExcludeFromSubscriptionTypesItemSINGBOX    UpdateHostBodyExcludeFromSubscriptionTypesItem = "SINGBOX"
 )
 
-// AllValues returns all UpdateHostRequestExcludeFromSubscriptionTypesItem values.
-func (UpdateHostRequestExcludeFromSubscriptionTypesItem) AllValues() []UpdateHostRequestExcludeFromSubscriptionTypesItem {
-	return []UpdateHostRequestExcludeFromSubscriptionTypesItem{
-		UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON,
-		UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64,
-		UpdateHostRequestExcludeFromSubscriptionTypesItemMIHOMO,
-		UpdateHostRequestExcludeFromSubscriptionTypesItemSTASH,
-		UpdateHostRequestExcludeFromSubscriptionTypesItemCLASH,
-		UpdateHostRequestExcludeFromSubscriptionTypesItemSINGBOX,
+// AllValues returns all UpdateHostBodyExcludeFromSubscriptionTypesItem values.
+func (UpdateHostBodyExcludeFromSubscriptionTypesItem) AllValues() []UpdateHostBodyExcludeFromSubscriptionTypesItem {
+	return []UpdateHostBodyExcludeFromSubscriptionTypesItem{
+		UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON,
+		UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64,
+		UpdateHostBodyExcludeFromSubscriptionTypesItemMIHOMO,
+		UpdateHostBodyExcludeFromSubscriptionTypesItemSTASH,
+		UpdateHostBodyExcludeFromSubscriptionTypesItemCLASH,
+		UpdateHostBodyExcludeFromSubscriptionTypesItemSINGBOX,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateHostRequestExcludeFromSubscriptionTypesItem) MarshalText() ([]byte, error) {
+func (s UpdateHostBodyExcludeFromSubscriptionTypesItem) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON:
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON:
 		return []byte(s), nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64:
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64:
 		return []byte(s), nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemMIHOMO:
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemMIHOMO:
 		return []byte(s), nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemSTASH:
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemSTASH:
 		return []byte(s), nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemCLASH:
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemCLASH:
 		return []byte(s), nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemSINGBOX:
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemSINGBOX:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22143,64 +20641,64 @@ func (s UpdateHostRequestExcludeFromSubscriptionTypesItem) MarshalText() ([]byte
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateHostRequestExcludeFromSubscriptionTypesItem) UnmarshalText(data []byte) error {
-	switch UpdateHostRequestExcludeFromSubscriptionTypesItem(data) {
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON:
-		*s = UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON
+func (s *UpdateHostBodyExcludeFromSubscriptionTypesItem) UnmarshalText(data []byte) error {
+	switch UpdateHostBodyExcludeFromSubscriptionTypesItem(data) {
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON:
+		*s = UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON
 		return nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64:
-		*s = UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYBASE64
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64:
+		*s = UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYBASE64
 		return nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemMIHOMO:
-		*s = UpdateHostRequestExcludeFromSubscriptionTypesItemMIHOMO
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemMIHOMO:
+		*s = UpdateHostBodyExcludeFromSubscriptionTypesItemMIHOMO
 		return nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemSTASH:
-		*s = UpdateHostRequestExcludeFromSubscriptionTypesItemSTASH
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemSTASH:
+		*s = UpdateHostBodyExcludeFromSubscriptionTypesItemSTASH
 		return nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemCLASH:
-		*s = UpdateHostRequestExcludeFromSubscriptionTypesItemCLASH
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemCLASH:
+		*s = UpdateHostBodyExcludeFromSubscriptionTypesItemCLASH
 		return nil
-	case UpdateHostRequestExcludeFromSubscriptionTypesItemSINGBOX:
-		*s = UpdateHostRequestExcludeFromSubscriptionTypesItemSINGBOX
+	case UpdateHostBodyExcludeFromSubscriptionTypesItemSINGBOX:
+		*s = UpdateHostBodyExcludeFromSubscriptionTypesItemSINGBOX
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type UpdateHostRequestMihomoIpVersion string
+type UpdateHostBodyMihomoIpVersion string
 
 const (
-	UpdateHostRequestMihomoIpVersionDual       UpdateHostRequestMihomoIpVersion = "dual"
-	UpdateHostRequestMihomoIpVersionIpv4       UpdateHostRequestMihomoIpVersion = "ipv4"
-	UpdateHostRequestMihomoIpVersionIpv6       UpdateHostRequestMihomoIpVersion = "ipv6"
-	UpdateHostRequestMihomoIpVersionIpv4Prefer UpdateHostRequestMihomoIpVersion = "ipv4-prefer"
-	UpdateHostRequestMihomoIpVersionIpv6Prefer UpdateHostRequestMihomoIpVersion = "ipv6-prefer"
+	UpdateHostBodyMihomoIpVersionDual       UpdateHostBodyMihomoIpVersion = "dual"
+	UpdateHostBodyMihomoIpVersionIpv4       UpdateHostBodyMihomoIpVersion = "ipv4"
+	UpdateHostBodyMihomoIpVersionIpv6       UpdateHostBodyMihomoIpVersion = "ipv6"
+	UpdateHostBodyMihomoIpVersionIpv4Prefer UpdateHostBodyMihomoIpVersion = "ipv4-prefer"
+	UpdateHostBodyMihomoIpVersionIpv6Prefer UpdateHostBodyMihomoIpVersion = "ipv6-prefer"
 )
 
-// AllValues returns all UpdateHostRequestMihomoIpVersion values.
-func (UpdateHostRequestMihomoIpVersion) AllValues() []UpdateHostRequestMihomoIpVersion {
-	return []UpdateHostRequestMihomoIpVersion{
-		UpdateHostRequestMihomoIpVersionDual,
-		UpdateHostRequestMihomoIpVersionIpv4,
-		UpdateHostRequestMihomoIpVersionIpv6,
-		UpdateHostRequestMihomoIpVersionIpv4Prefer,
-		UpdateHostRequestMihomoIpVersionIpv6Prefer,
+// AllValues returns all UpdateHostBodyMihomoIpVersion values.
+func (UpdateHostBodyMihomoIpVersion) AllValues() []UpdateHostBodyMihomoIpVersion {
+	return []UpdateHostBodyMihomoIpVersion{
+		UpdateHostBodyMihomoIpVersionDual,
+		UpdateHostBodyMihomoIpVersionIpv4,
+		UpdateHostBodyMihomoIpVersionIpv6,
+		UpdateHostBodyMihomoIpVersionIpv4Prefer,
+		UpdateHostBodyMihomoIpVersionIpv6Prefer,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateHostRequestMihomoIpVersion) MarshalText() ([]byte, error) {
+func (s UpdateHostBodyMihomoIpVersion) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateHostRequestMihomoIpVersionDual:
+	case UpdateHostBodyMihomoIpVersionDual:
 		return []byte(s), nil
-	case UpdateHostRequestMihomoIpVersionIpv4:
+	case UpdateHostBodyMihomoIpVersionIpv4:
 		return []byte(s), nil
-	case UpdateHostRequestMihomoIpVersionIpv6:
+	case UpdateHostBodyMihomoIpVersionIpv6:
 		return []byte(s), nil
-	case UpdateHostRequestMihomoIpVersionIpv4Prefer:
+	case UpdateHostBodyMihomoIpVersionIpv4Prefer:
 		return []byte(s), nil
-	case UpdateHostRequestMihomoIpVersionIpv6Prefer:
+	case UpdateHostBodyMihomoIpVersionIpv6Prefer:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22208,53 +20706,53 @@ func (s UpdateHostRequestMihomoIpVersion) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateHostRequestMihomoIpVersion) UnmarshalText(data []byte) error {
-	switch UpdateHostRequestMihomoIpVersion(data) {
-	case UpdateHostRequestMihomoIpVersionDual:
-		*s = UpdateHostRequestMihomoIpVersionDual
+func (s *UpdateHostBodyMihomoIpVersion) UnmarshalText(data []byte) error {
+	switch UpdateHostBodyMihomoIpVersion(data) {
+	case UpdateHostBodyMihomoIpVersionDual:
+		*s = UpdateHostBodyMihomoIpVersionDual
 		return nil
-	case UpdateHostRequestMihomoIpVersionIpv4:
-		*s = UpdateHostRequestMihomoIpVersionIpv4
+	case UpdateHostBodyMihomoIpVersionIpv4:
+		*s = UpdateHostBodyMihomoIpVersionIpv4
 		return nil
-	case UpdateHostRequestMihomoIpVersionIpv6:
-		*s = UpdateHostRequestMihomoIpVersionIpv6
+	case UpdateHostBodyMihomoIpVersionIpv6:
+		*s = UpdateHostBodyMihomoIpVersionIpv6
 		return nil
-	case UpdateHostRequestMihomoIpVersionIpv4Prefer:
-		*s = UpdateHostRequestMihomoIpVersionIpv4Prefer
+	case UpdateHostBodyMihomoIpVersionIpv4Prefer:
+		*s = UpdateHostBodyMihomoIpVersionIpv4Prefer
 		return nil
-	case UpdateHostRequestMihomoIpVersionIpv6Prefer:
-		*s = UpdateHostRequestMihomoIpVersionIpv6Prefer
+	case UpdateHostBodyMihomoIpVersionIpv6Prefer:
+		*s = UpdateHostBodyMihomoIpVersionIpv6Prefer
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type UpdateHostRequestSecurityLayer string
+type UpdateHostBodySecurityLayer string
 
 const (
-	UpdateHostRequestSecurityLayerDEFAULT UpdateHostRequestSecurityLayer = "DEFAULT"
-	UpdateHostRequestSecurityLayerTLS     UpdateHostRequestSecurityLayer = "TLS"
-	UpdateHostRequestSecurityLayerNONE    UpdateHostRequestSecurityLayer = "NONE"
+	UpdateHostBodySecurityLayerDEFAULT UpdateHostBodySecurityLayer = "DEFAULT"
+	UpdateHostBodySecurityLayerTLS     UpdateHostBodySecurityLayer = "TLS"
+	UpdateHostBodySecurityLayerNONE    UpdateHostBodySecurityLayer = "NONE"
 )
 
-// AllValues returns all UpdateHostRequestSecurityLayer values.
-func (UpdateHostRequestSecurityLayer) AllValues() []UpdateHostRequestSecurityLayer {
-	return []UpdateHostRequestSecurityLayer{
-		UpdateHostRequestSecurityLayerDEFAULT,
-		UpdateHostRequestSecurityLayerTLS,
-		UpdateHostRequestSecurityLayerNONE,
+// AllValues returns all UpdateHostBodySecurityLayer values.
+func (UpdateHostBodySecurityLayer) AllValues() []UpdateHostBodySecurityLayer {
+	return []UpdateHostBodySecurityLayer{
+		UpdateHostBodySecurityLayerDEFAULT,
+		UpdateHostBodySecurityLayerTLS,
+		UpdateHostBodySecurityLayerNONE,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateHostRequestSecurityLayer) MarshalText() ([]byte, error) {
+func (s UpdateHostBodySecurityLayer) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateHostRequestSecurityLayerDEFAULT:
+	case UpdateHostBodySecurityLayerDEFAULT:
 		return []byte(s), nil
-	case UpdateHostRequestSecurityLayerTLS:
+	case UpdateHostBodySecurityLayerTLS:
 		return []byte(s), nil
-	case UpdateHostRequestSecurityLayerNONE:
+	case UpdateHostBodySecurityLayerNONE:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22262,50 +20760,50 @@ func (s UpdateHostRequestSecurityLayer) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateHostRequestSecurityLayer) UnmarshalText(data []byte) error {
-	switch UpdateHostRequestSecurityLayer(data) {
-	case UpdateHostRequestSecurityLayerDEFAULT:
-		*s = UpdateHostRequestSecurityLayerDEFAULT
+func (s *UpdateHostBodySecurityLayer) UnmarshalText(data []byte) error {
+	switch UpdateHostBodySecurityLayer(data) {
+	case UpdateHostBodySecurityLayerDEFAULT:
+		*s = UpdateHostBodySecurityLayerDEFAULT
 		return nil
-	case UpdateHostRequestSecurityLayerTLS:
-		*s = UpdateHostRequestSecurityLayerTLS
+	case UpdateHostBodySecurityLayerTLS:
+		*s = UpdateHostBodySecurityLayerTLS
 		return nil
-	case UpdateHostRequestSecurityLayerNONE:
-		*s = UpdateHostRequestSecurityLayerNONE
+	case UpdateHostBodySecurityLayerNONE:
+		*s = UpdateHostBodySecurityLayerNONE
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/UpdateInfraBillingNodeRequest
-type UpdateInfraBillingNodeRequest struct {
+// Ref: #/components/schemas/UpdateInfraBillingNodeBody
+type UpdateInfraBillingNodeBody struct {
 	Uuids         []uuid.UUID `json:"uuids"`
 	NextBillingAt time.Time   `json:"nextBillingAt"`
 }
 
 // GetUuids returns the value of Uuids.
-func (s *UpdateInfraBillingNodeRequest) GetUuids() []uuid.UUID {
+func (s *UpdateInfraBillingNodeBody) GetUuids() []uuid.UUID {
 	return s.Uuids
 }
 
 // GetNextBillingAt returns the value of NextBillingAt.
-func (s *UpdateInfraBillingNodeRequest) GetNextBillingAt() time.Time {
+func (s *UpdateInfraBillingNodeBody) GetNextBillingAt() time.Time {
 	return s.NextBillingAt
 }
 
 // SetUuids sets the value of Uuids.
-func (s *UpdateInfraBillingNodeRequest) SetUuids(val []uuid.UUID) {
+func (s *UpdateInfraBillingNodeBody) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
 // SetNextBillingAt sets the value of NextBillingAt.
-func (s *UpdateInfraBillingNodeRequest) SetNextBillingAt(val time.Time) {
+func (s *UpdateInfraBillingNodeBody) SetNextBillingAt(val time.Time) {
 	s.NextBillingAt = val
 }
 
-// Ref: #/components/schemas/UpdateInfraProviderRequest
-type UpdateInfraProviderRequest struct {
+// Ref: #/components/schemas/UpdateInfraProviderBody
+type UpdateInfraProviderBody struct {
 	UUID        uuid.UUID `json:"uuid"`
 	Name        OptString `json:"name"`
 	FaviconLink OptNilURI `json:"faviconLink"`
@@ -22313,466 +20811,466 @@ type UpdateInfraProviderRequest struct {
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateInfraProviderRequest) GetUUID() uuid.UUID {
+func (s *UpdateInfraProviderBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateInfraProviderRequest) GetName() OptString {
+func (s *UpdateInfraProviderBody) GetName() OptString {
 	return s.Name
 }
 
 // GetFaviconLink returns the value of FaviconLink.
-func (s *UpdateInfraProviderRequest) GetFaviconLink() OptNilURI {
+func (s *UpdateInfraProviderBody) GetFaviconLink() OptNilURI {
 	return s.FaviconLink
 }
 
 // GetLoginUrl returns the value of LoginUrl.
-func (s *UpdateInfraProviderRequest) GetLoginUrl() OptNilURI {
+func (s *UpdateInfraProviderBody) GetLoginUrl() OptNilURI {
 	return s.LoginUrl
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateInfraProviderRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateInfraProviderBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateInfraProviderRequest) SetName(val OptString) {
+func (s *UpdateInfraProviderBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetFaviconLink sets the value of FaviconLink.
-func (s *UpdateInfraProviderRequest) SetFaviconLink(val OptNilURI) {
+func (s *UpdateInfraProviderBody) SetFaviconLink(val OptNilURI) {
 	s.FaviconLink = val
 }
 
 // SetLoginUrl sets the value of LoginUrl.
-func (s *UpdateInfraProviderRequest) SetLoginUrl(val OptNilURI) {
+func (s *UpdateInfraProviderBody) SetLoginUrl(val OptNilURI) {
 	s.LoginUrl = val
 }
 
-// Ref: #/components/schemas/UpdateInternalSquadRequest
-type UpdateInternalSquadRequest struct {
+// Ref: #/components/schemas/UpdateInternalSquadBody
+type UpdateInternalSquadBody struct {
 	UUID     uuid.UUID   `json:"uuid"`
 	Name     OptString   `json:"name"`
 	Inbounds []uuid.UUID `json:"inbounds"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateInternalSquadRequest) GetUUID() uuid.UUID {
+func (s *UpdateInternalSquadBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateInternalSquadRequest) GetName() OptString {
+func (s *UpdateInternalSquadBody) GetName() OptString {
 	return s.Name
 }
 
 // GetInbounds returns the value of Inbounds.
-func (s *UpdateInternalSquadRequest) GetInbounds() []uuid.UUID {
+func (s *UpdateInternalSquadBody) GetInbounds() []uuid.UUID {
 	return s.Inbounds
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateInternalSquadRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateInternalSquadBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateInternalSquadRequest) SetName(val OptString) {
+func (s *UpdateInternalSquadBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetInbounds sets the value of Inbounds.
-func (s *UpdateInternalSquadRequest) SetInbounds(val []uuid.UUID) {
+func (s *UpdateInternalSquadBody) SetInbounds(val []uuid.UUID) {
 	s.Inbounds = val
 }
 
-// Ref: #/components/schemas/UpdateManyHostsRequest
-type UpdateManyHostsRequest struct {
-	Inbound                OptInboundRef                               `json:"inbound"`
-	Remark                 OptString                                   `json:"remark"`
-	Address                OptString                                   `json:"address"`
-	Port                   OptInt                                      `json:"port"`
-	Path                   OptNilString                                `json:"path"`
-	Sni                    OptNilString                                `json:"sni"`
-	Host                   OptNilString                                `json:"host"`
-	Alpn                   OptNilUpdateManyHostsRequestAlpn            `json:"alpn"`
-	Fingerprint            OptNilString                                `json:"fingerprint"`
-	IsDisabled             OptBool                                     `json:"isDisabled"`
-	SecurityLayer          OptUpdateManyHostsRequestSecurityLayer      `json:"securityLayer"`
-	XhttpExtraParams       jx.Raw                                      `json:"xhttpExtraParams"`
-	MuxParams              jx.Raw                                      `json:"muxParams"`
-	SockoptParams          jx.Raw                                      `json:"sockoptParams"`
-	FinalMask              jx.Raw                                      `json:"finalMask"`
-	ServerDescription      OptNilString                                `json:"serverDescription"`
-	Tags                   []string                                    `json:"tags"`
-	IsHidden               OptBool                                     `json:"isHidden"`
-	OverrideSniFromAddress OptBool                                     `json:"overrideSniFromAddress"`
-	KeepSniBlank           OptBool                                     `json:"keepSniBlank"`
-	VlessRouteId           OptNilInt                                   `json:"vlessRouteId"`
-	PinnedPeerCertSha256   OptNilString                                `json:"pinnedPeerCertSha256"`
-	VerifyPeerCertByName   OptNilString                                `json:"verifyPeerCertByName"`
-	ShuffleHost            OptBool                                     `json:"shuffleHost"`
-	MihomoX25519           OptBool                                     `json:"mihomoX25519"`
-	MihomoIpVersion        OptNilUpdateManyHostsRequestMihomoIpVersion `json:"mihomoIpVersion"`
-	Nodes                  []uuid.UUID                                 `json:"nodes"`
-	XrayJsonTemplateUuid   OptNilUUID                                  `json:"xrayJsonTemplateUuid"`
+// Ref: #/components/schemas/UpdateManyHostsBody
+type UpdateManyHostsBody struct {
+	Inbound                OptInbound2                              `json:"inbound"`
+	Remark                 OptString                                `json:"remark"`
+	Address                OptString                                `json:"address"`
+	Port                   OptInt                                   `json:"port"`
+	Path                   OptNilString                             `json:"path"`
+	Sni                    OptNilString                             `json:"sni"`
+	Host                   OptNilString                             `json:"host"`
+	Alpn                   OptNilUpdateManyHostsBodyAlpn            `json:"alpn"`
+	Fingerprint            OptNilString                             `json:"fingerprint"`
+	IsDisabled             OptBool                                  `json:"isDisabled"`
+	SecurityLayer          OptUpdateManyHostsBodySecurityLayer      `json:"securityLayer"`
+	XhttpExtraParams       jx.Raw                                   `json:"xhttpExtraParams"`
+	MuxParams              jx.Raw                                   `json:"muxParams"`
+	SockoptParams          jx.Raw                                   `json:"sockoptParams"`
+	FinalMask              jx.Raw                                   `json:"finalMask"`
+	ServerDescription      OptNilString                             `json:"serverDescription"`
+	Tags                   []string                                 `json:"tags"`
+	IsHidden               OptBool                                  `json:"isHidden"`
+	OverrideSniFromAddress OptBool                                  `json:"overrideSniFromAddress"`
+	KeepSniBlank           OptBool                                  `json:"keepSniBlank"`
+	VlessRouteId           OptNilInt                                `json:"vlessRouteId"`
+	PinnedPeerCertSha256   OptNilString                             `json:"pinnedPeerCertSha256"`
+	VerifyPeerCertByName   OptNilString                             `json:"verifyPeerCertByName"`
+	ShuffleHost            OptBool                                  `json:"shuffleHost"`
+	MihomoX25519           OptBool                                  `json:"mihomoX25519"`
+	MihomoIpVersion        OptNilUpdateManyHostsBodyMihomoIpVersion `json:"mihomoIpVersion"`
+	Nodes                  []uuid.UUID                              `json:"nodes"`
+	XrayJsonTemplateUuid   OptNilUUID                               `json:"xrayJsonTemplateUuid"`
 	// Optional. Internal squads from which the host will be excluded.
 	ExcludedInternalSquads []uuid.UUID `json:"excludedInternalSquads"`
 	// Optional. Subscription types from which the host will be excluded from.
-	ExcludeFromSubscriptionTypes []UpdateManyHostsRequestExcludeFromSubscriptionTypesItem `json:"excludeFromSubscriptionTypes"`
-	Uuids                        []uuid.UUID                                              `json:"uuids"`
+	ExcludeFromSubscriptionTypes []UpdateManyHostsBodyExcludeFromSubscriptionTypesItem `json:"excludeFromSubscriptionTypes"`
+	Uuids                        []uuid.UUID                                           `json:"uuids"`
 }
 
 // GetInbound returns the value of Inbound.
-func (s *UpdateManyHostsRequest) GetInbound() OptInboundRef {
+func (s *UpdateManyHostsBody) GetInbound() OptInbound2 {
 	return s.Inbound
 }
 
 // GetRemark returns the value of Remark.
-func (s *UpdateManyHostsRequest) GetRemark() OptString {
+func (s *UpdateManyHostsBody) GetRemark() OptString {
 	return s.Remark
 }
 
 // GetAddress returns the value of Address.
-func (s *UpdateManyHostsRequest) GetAddress() OptString {
+func (s *UpdateManyHostsBody) GetAddress() OptString {
 	return s.Address
 }
 
 // GetPort returns the value of Port.
-func (s *UpdateManyHostsRequest) GetPort() OptInt {
+func (s *UpdateManyHostsBody) GetPort() OptInt {
 	return s.Port
 }
 
 // GetPath returns the value of Path.
-func (s *UpdateManyHostsRequest) GetPath() OptNilString {
+func (s *UpdateManyHostsBody) GetPath() OptNilString {
 	return s.Path
 }
 
 // GetSni returns the value of Sni.
-func (s *UpdateManyHostsRequest) GetSni() OptNilString {
+func (s *UpdateManyHostsBody) GetSni() OptNilString {
 	return s.Sni
 }
 
 // GetHost returns the value of Host.
-func (s *UpdateManyHostsRequest) GetHost() OptNilString {
+func (s *UpdateManyHostsBody) GetHost() OptNilString {
 	return s.Host
 }
 
 // GetAlpn returns the value of Alpn.
-func (s *UpdateManyHostsRequest) GetAlpn() OptNilUpdateManyHostsRequestAlpn {
+func (s *UpdateManyHostsBody) GetAlpn() OptNilUpdateManyHostsBodyAlpn {
 	return s.Alpn
 }
 
 // GetFingerprint returns the value of Fingerprint.
-func (s *UpdateManyHostsRequest) GetFingerprint() OptNilString {
+func (s *UpdateManyHostsBody) GetFingerprint() OptNilString {
 	return s.Fingerprint
 }
 
 // GetIsDisabled returns the value of IsDisabled.
-func (s *UpdateManyHostsRequest) GetIsDisabled() OptBool {
+func (s *UpdateManyHostsBody) GetIsDisabled() OptBool {
 	return s.IsDisabled
 }
 
 // GetSecurityLayer returns the value of SecurityLayer.
-func (s *UpdateManyHostsRequest) GetSecurityLayer() OptUpdateManyHostsRequestSecurityLayer {
+func (s *UpdateManyHostsBody) GetSecurityLayer() OptUpdateManyHostsBodySecurityLayer {
 	return s.SecurityLayer
 }
 
 // GetXhttpExtraParams returns the value of XhttpExtraParams.
-func (s *UpdateManyHostsRequest) GetXhttpExtraParams() jx.Raw {
+func (s *UpdateManyHostsBody) GetXhttpExtraParams() jx.Raw {
 	return s.XhttpExtraParams
 }
 
 // GetMuxParams returns the value of MuxParams.
-func (s *UpdateManyHostsRequest) GetMuxParams() jx.Raw {
+func (s *UpdateManyHostsBody) GetMuxParams() jx.Raw {
 	return s.MuxParams
 }
 
 // GetSockoptParams returns the value of SockoptParams.
-func (s *UpdateManyHostsRequest) GetSockoptParams() jx.Raw {
+func (s *UpdateManyHostsBody) GetSockoptParams() jx.Raw {
 	return s.SockoptParams
 }
 
 // GetFinalMask returns the value of FinalMask.
-func (s *UpdateManyHostsRequest) GetFinalMask() jx.Raw {
+func (s *UpdateManyHostsBody) GetFinalMask() jx.Raw {
 	return s.FinalMask
 }
 
 // GetServerDescription returns the value of ServerDescription.
-func (s *UpdateManyHostsRequest) GetServerDescription() OptNilString {
+func (s *UpdateManyHostsBody) GetServerDescription() OptNilString {
 	return s.ServerDescription
 }
 
 // GetTags returns the value of Tags.
-func (s *UpdateManyHostsRequest) GetTags() []string {
+func (s *UpdateManyHostsBody) GetTags() []string {
 	return s.Tags
 }
 
 // GetIsHidden returns the value of IsHidden.
-func (s *UpdateManyHostsRequest) GetIsHidden() OptBool {
+func (s *UpdateManyHostsBody) GetIsHidden() OptBool {
 	return s.IsHidden
 }
 
 // GetOverrideSniFromAddress returns the value of OverrideSniFromAddress.
-func (s *UpdateManyHostsRequest) GetOverrideSniFromAddress() OptBool {
+func (s *UpdateManyHostsBody) GetOverrideSniFromAddress() OptBool {
 	return s.OverrideSniFromAddress
 }
 
 // GetKeepSniBlank returns the value of KeepSniBlank.
-func (s *UpdateManyHostsRequest) GetKeepSniBlank() OptBool {
+func (s *UpdateManyHostsBody) GetKeepSniBlank() OptBool {
 	return s.KeepSniBlank
 }
 
 // GetVlessRouteId returns the value of VlessRouteId.
-func (s *UpdateManyHostsRequest) GetVlessRouteId() OptNilInt {
+func (s *UpdateManyHostsBody) GetVlessRouteId() OptNilInt {
 	return s.VlessRouteId
 }
 
 // GetPinnedPeerCertSha256 returns the value of PinnedPeerCertSha256.
-func (s *UpdateManyHostsRequest) GetPinnedPeerCertSha256() OptNilString {
+func (s *UpdateManyHostsBody) GetPinnedPeerCertSha256() OptNilString {
 	return s.PinnedPeerCertSha256
 }
 
 // GetVerifyPeerCertByName returns the value of VerifyPeerCertByName.
-func (s *UpdateManyHostsRequest) GetVerifyPeerCertByName() OptNilString {
+func (s *UpdateManyHostsBody) GetVerifyPeerCertByName() OptNilString {
 	return s.VerifyPeerCertByName
 }
 
 // GetShuffleHost returns the value of ShuffleHost.
-func (s *UpdateManyHostsRequest) GetShuffleHost() OptBool {
+func (s *UpdateManyHostsBody) GetShuffleHost() OptBool {
 	return s.ShuffleHost
 }
 
 // GetMihomoX25519 returns the value of MihomoX25519.
-func (s *UpdateManyHostsRequest) GetMihomoX25519() OptBool {
+func (s *UpdateManyHostsBody) GetMihomoX25519() OptBool {
 	return s.MihomoX25519
 }
 
 // GetMihomoIpVersion returns the value of MihomoIpVersion.
-func (s *UpdateManyHostsRequest) GetMihomoIpVersion() OptNilUpdateManyHostsRequestMihomoIpVersion {
+func (s *UpdateManyHostsBody) GetMihomoIpVersion() OptNilUpdateManyHostsBodyMihomoIpVersion {
 	return s.MihomoIpVersion
 }
 
 // GetNodes returns the value of Nodes.
-func (s *UpdateManyHostsRequest) GetNodes() []uuid.UUID {
+func (s *UpdateManyHostsBody) GetNodes() []uuid.UUID {
 	return s.Nodes
 }
 
 // GetXrayJsonTemplateUuid returns the value of XrayJsonTemplateUuid.
-func (s *UpdateManyHostsRequest) GetXrayJsonTemplateUuid() OptNilUUID {
+func (s *UpdateManyHostsBody) GetXrayJsonTemplateUuid() OptNilUUID {
 	return s.XrayJsonTemplateUuid
 }
 
 // GetExcludedInternalSquads returns the value of ExcludedInternalSquads.
-func (s *UpdateManyHostsRequest) GetExcludedInternalSquads() []uuid.UUID {
+func (s *UpdateManyHostsBody) GetExcludedInternalSquads() []uuid.UUID {
 	return s.ExcludedInternalSquads
 }
 
 // GetExcludeFromSubscriptionTypes returns the value of ExcludeFromSubscriptionTypes.
-func (s *UpdateManyHostsRequest) GetExcludeFromSubscriptionTypes() []UpdateManyHostsRequestExcludeFromSubscriptionTypesItem {
+func (s *UpdateManyHostsBody) GetExcludeFromSubscriptionTypes() []UpdateManyHostsBodyExcludeFromSubscriptionTypesItem {
 	return s.ExcludeFromSubscriptionTypes
 }
 
 // GetUuids returns the value of Uuids.
-func (s *UpdateManyHostsRequest) GetUuids() []uuid.UUID {
+func (s *UpdateManyHostsBody) GetUuids() []uuid.UUID {
 	return s.Uuids
 }
 
 // SetInbound sets the value of Inbound.
-func (s *UpdateManyHostsRequest) SetInbound(val OptInboundRef) {
+func (s *UpdateManyHostsBody) SetInbound(val OptInbound2) {
 	s.Inbound = val
 }
 
 // SetRemark sets the value of Remark.
-func (s *UpdateManyHostsRequest) SetRemark(val OptString) {
+func (s *UpdateManyHostsBody) SetRemark(val OptString) {
 	s.Remark = val
 }
 
 // SetAddress sets the value of Address.
-func (s *UpdateManyHostsRequest) SetAddress(val OptString) {
+func (s *UpdateManyHostsBody) SetAddress(val OptString) {
 	s.Address = val
 }
 
 // SetPort sets the value of Port.
-func (s *UpdateManyHostsRequest) SetPort(val OptInt) {
+func (s *UpdateManyHostsBody) SetPort(val OptInt) {
 	s.Port = val
 }
 
 // SetPath sets the value of Path.
-func (s *UpdateManyHostsRequest) SetPath(val OptNilString) {
+func (s *UpdateManyHostsBody) SetPath(val OptNilString) {
 	s.Path = val
 }
 
 // SetSni sets the value of Sni.
-func (s *UpdateManyHostsRequest) SetSni(val OptNilString) {
+func (s *UpdateManyHostsBody) SetSni(val OptNilString) {
 	s.Sni = val
 }
 
 // SetHost sets the value of Host.
-func (s *UpdateManyHostsRequest) SetHost(val OptNilString) {
+func (s *UpdateManyHostsBody) SetHost(val OptNilString) {
 	s.Host = val
 }
 
 // SetAlpn sets the value of Alpn.
-func (s *UpdateManyHostsRequest) SetAlpn(val OptNilUpdateManyHostsRequestAlpn) {
+func (s *UpdateManyHostsBody) SetAlpn(val OptNilUpdateManyHostsBodyAlpn) {
 	s.Alpn = val
 }
 
 // SetFingerprint sets the value of Fingerprint.
-func (s *UpdateManyHostsRequest) SetFingerprint(val OptNilString) {
+func (s *UpdateManyHostsBody) SetFingerprint(val OptNilString) {
 	s.Fingerprint = val
 }
 
 // SetIsDisabled sets the value of IsDisabled.
-func (s *UpdateManyHostsRequest) SetIsDisabled(val OptBool) {
+func (s *UpdateManyHostsBody) SetIsDisabled(val OptBool) {
 	s.IsDisabled = val
 }
 
 // SetSecurityLayer sets the value of SecurityLayer.
-func (s *UpdateManyHostsRequest) SetSecurityLayer(val OptUpdateManyHostsRequestSecurityLayer) {
+func (s *UpdateManyHostsBody) SetSecurityLayer(val OptUpdateManyHostsBodySecurityLayer) {
 	s.SecurityLayer = val
 }
 
 // SetXhttpExtraParams sets the value of XhttpExtraParams.
-func (s *UpdateManyHostsRequest) SetXhttpExtraParams(val jx.Raw) {
+func (s *UpdateManyHostsBody) SetXhttpExtraParams(val jx.Raw) {
 	s.XhttpExtraParams = val
 }
 
 // SetMuxParams sets the value of MuxParams.
-func (s *UpdateManyHostsRequest) SetMuxParams(val jx.Raw) {
+func (s *UpdateManyHostsBody) SetMuxParams(val jx.Raw) {
 	s.MuxParams = val
 }
 
 // SetSockoptParams sets the value of SockoptParams.
-func (s *UpdateManyHostsRequest) SetSockoptParams(val jx.Raw) {
+func (s *UpdateManyHostsBody) SetSockoptParams(val jx.Raw) {
 	s.SockoptParams = val
 }
 
 // SetFinalMask sets the value of FinalMask.
-func (s *UpdateManyHostsRequest) SetFinalMask(val jx.Raw) {
+func (s *UpdateManyHostsBody) SetFinalMask(val jx.Raw) {
 	s.FinalMask = val
 }
 
 // SetServerDescription sets the value of ServerDescription.
-func (s *UpdateManyHostsRequest) SetServerDescription(val OptNilString) {
+func (s *UpdateManyHostsBody) SetServerDescription(val OptNilString) {
 	s.ServerDescription = val
 }
 
 // SetTags sets the value of Tags.
-func (s *UpdateManyHostsRequest) SetTags(val []string) {
+func (s *UpdateManyHostsBody) SetTags(val []string) {
 	s.Tags = val
 }
 
 // SetIsHidden sets the value of IsHidden.
-func (s *UpdateManyHostsRequest) SetIsHidden(val OptBool) {
+func (s *UpdateManyHostsBody) SetIsHidden(val OptBool) {
 	s.IsHidden = val
 }
 
 // SetOverrideSniFromAddress sets the value of OverrideSniFromAddress.
-func (s *UpdateManyHostsRequest) SetOverrideSniFromAddress(val OptBool) {
+func (s *UpdateManyHostsBody) SetOverrideSniFromAddress(val OptBool) {
 	s.OverrideSniFromAddress = val
 }
 
 // SetKeepSniBlank sets the value of KeepSniBlank.
-func (s *UpdateManyHostsRequest) SetKeepSniBlank(val OptBool) {
+func (s *UpdateManyHostsBody) SetKeepSniBlank(val OptBool) {
 	s.KeepSniBlank = val
 }
 
 // SetVlessRouteId sets the value of VlessRouteId.
-func (s *UpdateManyHostsRequest) SetVlessRouteId(val OptNilInt) {
+func (s *UpdateManyHostsBody) SetVlessRouteId(val OptNilInt) {
 	s.VlessRouteId = val
 }
 
 // SetPinnedPeerCertSha256 sets the value of PinnedPeerCertSha256.
-func (s *UpdateManyHostsRequest) SetPinnedPeerCertSha256(val OptNilString) {
+func (s *UpdateManyHostsBody) SetPinnedPeerCertSha256(val OptNilString) {
 	s.PinnedPeerCertSha256 = val
 }
 
 // SetVerifyPeerCertByName sets the value of VerifyPeerCertByName.
-func (s *UpdateManyHostsRequest) SetVerifyPeerCertByName(val OptNilString) {
+func (s *UpdateManyHostsBody) SetVerifyPeerCertByName(val OptNilString) {
 	s.VerifyPeerCertByName = val
 }
 
 // SetShuffleHost sets the value of ShuffleHost.
-func (s *UpdateManyHostsRequest) SetShuffleHost(val OptBool) {
+func (s *UpdateManyHostsBody) SetShuffleHost(val OptBool) {
 	s.ShuffleHost = val
 }
 
 // SetMihomoX25519 sets the value of MihomoX25519.
-func (s *UpdateManyHostsRequest) SetMihomoX25519(val OptBool) {
+func (s *UpdateManyHostsBody) SetMihomoX25519(val OptBool) {
 	s.MihomoX25519 = val
 }
 
 // SetMihomoIpVersion sets the value of MihomoIpVersion.
-func (s *UpdateManyHostsRequest) SetMihomoIpVersion(val OptNilUpdateManyHostsRequestMihomoIpVersion) {
+func (s *UpdateManyHostsBody) SetMihomoIpVersion(val OptNilUpdateManyHostsBodyMihomoIpVersion) {
 	s.MihomoIpVersion = val
 }
 
 // SetNodes sets the value of Nodes.
-func (s *UpdateManyHostsRequest) SetNodes(val []uuid.UUID) {
+func (s *UpdateManyHostsBody) SetNodes(val []uuid.UUID) {
 	s.Nodes = val
 }
 
 // SetXrayJsonTemplateUuid sets the value of XrayJsonTemplateUuid.
-func (s *UpdateManyHostsRequest) SetXrayJsonTemplateUuid(val OptNilUUID) {
+func (s *UpdateManyHostsBody) SetXrayJsonTemplateUuid(val OptNilUUID) {
 	s.XrayJsonTemplateUuid = val
 }
 
 // SetExcludedInternalSquads sets the value of ExcludedInternalSquads.
-func (s *UpdateManyHostsRequest) SetExcludedInternalSquads(val []uuid.UUID) {
+func (s *UpdateManyHostsBody) SetExcludedInternalSquads(val []uuid.UUID) {
 	s.ExcludedInternalSquads = val
 }
 
 // SetExcludeFromSubscriptionTypes sets the value of ExcludeFromSubscriptionTypes.
-func (s *UpdateManyHostsRequest) SetExcludeFromSubscriptionTypes(val []UpdateManyHostsRequestExcludeFromSubscriptionTypesItem) {
+func (s *UpdateManyHostsBody) SetExcludeFromSubscriptionTypes(val []UpdateManyHostsBodyExcludeFromSubscriptionTypesItem) {
 	s.ExcludeFromSubscriptionTypes = val
 }
 
 // SetUuids sets the value of Uuids.
-func (s *UpdateManyHostsRequest) SetUuids(val []uuid.UUID) {
+func (s *UpdateManyHostsBody) SetUuids(val []uuid.UUID) {
 	s.Uuids = val
 }
 
-type UpdateManyHostsRequestAlpn string
+type UpdateManyHostsBodyAlpn string
 
 const (
-	UpdateManyHostsRequestAlpnH3         UpdateManyHostsRequestAlpn = "h3"
-	UpdateManyHostsRequestAlpnH2         UpdateManyHostsRequestAlpn = "h2"
-	UpdateManyHostsRequestAlpnHTTP11     UpdateManyHostsRequestAlpn = "http/1.1"
-	UpdateManyHostsRequestAlpnH2HTTP11   UpdateManyHostsRequestAlpn = "h2,http/1.1"
-	UpdateManyHostsRequestAlpnH3H2HTTP11 UpdateManyHostsRequestAlpn = "h3,h2,http/1.1"
-	UpdateManyHostsRequestAlpnH3H2       UpdateManyHostsRequestAlpn = "h3,h2"
+	UpdateManyHostsBodyAlpnH3         UpdateManyHostsBodyAlpn = "h3"
+	UpdateManyHostsBodyAlpnH2         UpdateManyHostsBodyAlpn = "h2"
+	UpdateManyHostsBodyAlpnHTTP11     UpdateManyHostsBodyAlpn = "http/1.1"
+	UpdateManyHostsBodyAlpnH2HTTP11   UpdateManyHostsBodyAlpn = "h2,http/1.1"
+	UpdateManyHostsBodyAlpnH3H2HTTP11 UpdateManyHostsBodyAlpn = "h3,h2,http/1.1"
+	UpdateManyHostsBodyAlpnH3H2       UpdateManyHostsBodyAlpn = "h3,h2"
 )
 
-// AllValues returns all UpdateManyHostsRequestAlpn values.
-func (UpdateManyHostsRequestAlpn) AllValues() []UpdateManyHostsRequestAlpn {
-	return []UpdateManyHostsRequestAlpn{
-		UpdateManyHostsRequestAlpnH3,
-		UpdateManyHostsRequestAlpnH2,
-		UpdateManyHostsRequestAlpnHTTP11,
-		UpdateManyHostsRequestAlpnH2HTTP11,
-		UpdateManyHostsRequestAlpnH3H2HTTP11,
-		UpdateManyHostsRequestAlpnH3H2,
+// AllValues returns all UpdateManyHostsBodyAlpn values.
+func (UpdateManyHostsBodyAlpn) AllValues() []UpdateManyHostsBodyAlpn {
+	return []UpdateManyHostsBodyAlpn{
+		UpdateManyHostsBodyAlpnH3,
+		UpdateManyHostsBodyAlpnH2,
+		UpdateManyHostsBodyAlpnHTTP11,
+		UpdateManyHostsBodyAlpnH2HTTP11,
+		UpdateManyHostsBodyAlpnH3H2HTTP11,
+		UpdateManyHostsBodyAlpnH3H2,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateManyHostsRequestAlpn) MarshalText() ([]byte, error) {
+func (s UpdateManyHostsBodyAlpn) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateManyHostsRequestAlpnH3:
+	case UpdateManyHostsBodyAlpnH3:
 		return []byte(s), nil
-	case UpdateManyHostsRequestAlpnH2:
+	case UpdateManyHostsBodyAlpnH2:
 		return []byte(s), nil
-	case UpdateManyHostsRequestAlpnHTTP11:
+	case UpdateManyHostsBodyAlpnHTTP11:
 		return []byte(s), nil
-	case UpdateManyHostsRequestAlpnH2HTTP11:
+	case UpdateManyHostsBodyAlpnH2HTTP11:
 		return []byte(s), nil
-	case UpdateManyHostsRequestAlpnH3H2HTTP11:
+	case UpdateManyHostsBodyAlpnH3H2HTTP11:
 		return []byte(s), nil
-	case UpdateManyHostsRequestAlpnH3H2:
+	case UpdateManyHostsBodyAlpnH3H2:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22780,68 +21278,68 @@ func (s UpdateManyHostsRequestAlpn) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateManyHostsRequestAlpn) UnmarshalText(data []byte) error {
-	switch UpdateManyHostsRequestAlpn(data) {
-	case UpdateManyHostsRequestAlpnH3:
-		*s = UpdateManyHostsRequestAlpnH3
+func (s *UpdateManyHostsBodyAlpn) UnmarshalText(data []byte) error {
+	switch UpdateManyHostsBodyAlpn(data) {
+	case UpdateManyHostsBodyAlpnH3:
+		*s = UpdateManyHostsBodyAlpnH3
 		return nil
-	case UpdateManyHostsRequestAlpnH2:
-		*s = UpdateManyHostsRequestAlpnH2
+	case UpdateManyHostsBodyAlpnH2:
+		*s = UpdateManyHostsBodyAlpnH2
 		return nil
-	case UpdateManyHostsRequestAlpnHTTP11:
-		*s = UpdateManyHostsRequestAlpnHTTP11
+	case UpdateManyHostsBodyAlpnHTTP11:
+		*s = UpdateManyHostsBodyAlpnHTTP11
 		return nil
-	case UpdateManyHostsRequestAlpnH2HTTP11:
-		*s = UpdateManyHostsRequestAlpnH2HTTP11
+	case UpdateManyHostsBodyAlpnH2HTTP11:
+		*s = UpdateManyHostsBodyAlpnH2HTTP11
 		return nil
-	case UpdateManyHostsRequestAlpnH3H2HTTP11:
-		*s = UpdateManyHostsRequestAlpnH3H2HTTP11
+	case UpdateManyHostsBodyAlpnH3H2HTTP11:
+		*s = UpdateManyHostsBodyAlpnH3H2HTTP11
 		return nil
-	case UpdateManyHostsRequestAlpnH3H2:
-		*s = UpdateManyHostsRequestAlpnH3H2
+	case UpdateManyHostsBodyAlpnH3H2:
+		*s = UpdateManyHostsBodyAlpnH3H2
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type UpdateManyHostsRequestExcludeFromSubscriptionTypesItem string
+type UpdateManyHostsBodyExcludeFromSubscriptionTypesItem string
 
 const (
-	UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYJSON   UpdateManyHostsRequestExcludeFromSubscriptionTypesItem = "XRAY_JSON"
-	UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYBASE64 UpdateManyHostsRequestExcludeFromSubscriptionTypesItem = "XRAY_BASE64"
-	UpdateManyHostsRequestExcludeFromSubscriptionTypesItemMIHOMO     UpdateManyHostsRequestExcludeFromSubscriptionTypesItem = "MIHOMO"
-	UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSTASH      UpdateManyHostsRequestExcludeFromSubscriptionTypesItem = "STASH"
-	UpdateManyHostsRequestExcludeFromSubscriptionTypesItemCLASH      UpdateManyHostsRequestExcludeFromSubscriptionTypesItem = "CLASH"
-	UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSINGBOX    UpdateManyHostsRequestExcludeFromSubscriptionTypesItem = "SINGBOX"
+	UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYJSON   UpdateManyHostsBodyExcludeFromSubscriptionTypesItem = "XRAY_JSON"
+	UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYBASE64 UpdateManyHostsBodyExcludeFromSubscriptionTypesItem = "XRAY_BASE64"
+	UpdateManyHostsBodyExcludeFromSubscriptionTypesItemMIHOMO     UpdateManyHostsBodyExcludeFromSubscriptionTypesItem = "MIHOMO"
+	UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSTASH      UpdateManyHostsBodyExcludeFromSubscriptionTypesItem = "STASH"
+	UpdateManyHostsBodyExcludeFromSubscriptionTypesItemCLASH      UpdateManyHostsBodyExcludeFromSubscriptionTypesItem = "CLASH"
+	UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSINGBOX    UpdateManyHostsBodyExcludeFromSubscriptionTypesItem = "SINGBOX"
 )
 
-// AllValues returns all UpdateManyHostsRequestExcludeFromSubscriptionTypesItem values.
-func (UpdateManyHostsRequestExcludeFromSubscriptionTypesItem) AllValues() []UpdateManyHostsRequestExcludeFromSubscriptionTypesItem {
-	return []UpdateManyHostsRequestExcludeFromSubscriptionTypesItem{
-		UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYJSON,
-		UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYBASE64,
-		UpdateManyHostsRequestExcludeFromSubscriptionTypesItemMIHOMO,
-		UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSTASH,
-		UpdateManyHostsRequestExcludeFromSubscriptionTypesItemCLASH,
-		UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSINGBOX,
+// AllValues returns all UpdateManyHostsBodyExcludeFromSubscriptionTypesItem values.
+func (UpdateManyHostsBodyExcludeFromSubscriptionTypesItem) AllValues() []UpdateManyHostsBodyExcludeFromSubscriptionTypesItem {
+	return []UpdateManyHostsBodyExcludeFromSubscriptionTypesItem{
+		UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYJSON,
+		UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYBASE64,
+		UpdateManyHostsBodyExcludeFromSubscriptionTypesItemMIHOMO,
+		UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSTASH,
+		UpdateManyHostsBodyExcludeFromSubscriptionTypesItemCLASH,
+		UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSINGBOX,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateManyHostsRequestExcludeFromSubscriptionTypesItem) MarshalText() ([]byte, error) {
+func (s UpdateManyHostsBodyExcludeFromSubscriptionTypesItem) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYJSON:
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYJSON:
 		return []byte(s), nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYBASE64:
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYBASE64:
 		return []byte(s), nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemMIHOMO:
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemMIHOMO:
 		return []byte(s), nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSTASH:
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSTASH:
 		return []byte(s), nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemCLASH:
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemCLASH:
 		return []byte(s), nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSINGBOX:
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSINGBOX:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22849,64 +21347,64 @@ func (s UpdateManyHostsRequestExcludeFromSubscriptionTypesItem) MarshalText() ([
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateManyHostsRequestExcludeFromSubscriptionTypesItem) UnmarshalText(data []byte) error {
-	switch UpdateManyHostsRequestExcludeFromSubscriptionTypesItem(data) {
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYJSON:
-		*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYJSON
+func (s *UpdateManyHostsBodyExcludeFromSubscriptionTypesItem) UnmarshalText(data []byte) error {
+	switch UpdateManyHostsBodyExcludeFromSubscriptionTypesItem(data) {
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYJSON:
+		*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYJSON
 		return nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYBASE64:
-		*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYBASE64
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYBASE64:
+		*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYBASE64
 		return nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemMIHOMO:
-		*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemMIHOMO
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemMIHOMO:
+		*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemMIHOMO
 		return nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSTASH:
-		*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSTASH
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSTASH:
+		*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSTASH
 		return nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemCLASH:
-		*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemCLASH
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemCLASH:
+		*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemCLASH
 		return nil
-	case UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSINGBOX:
-		*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemSINGBOX
+	case UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSINGBOX:
+		*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemSINGBOX
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type UpdateManyHostsRequestMihomoIpVersion string
+type UpdateManyHostsBodyMihomoIpVersion string
 
 const (
-	UpdateManyHostsRequestMihomoIpVersionDual       UpdateManyHostsRequestMihomoIpVersion = "dual"
-	UpdateManyHostsRequestMihomoIpVersionIpv4       UpdateManyHostsRequestMihomoIpVersion = "ipv4"
-	UpdateManyHostsRequestMihomoIpVersionIpv6       UpdateManyHostsRequestMihomoIpVersion = "ipv6"
-	UpdateManyHostsRequestMihomoIpVersionIpv4Prefer UpdateManyHostsRequestMihomoIpVersion = "ipv4-prefer"
-	UpdateManyHostsRequestMihomoIpVersionIpv6Prefer UpdateManyHostsRequestMihomoIpVersion = "ipv6-prefer"
+	UpdateManyHostsBodyMihomoIpVersionDual       UpdateManyHostsBodyMihomoIpVersion = "dual"
+	UpdateManyHostsBodyMihomoIpVersionIpv4       UpdateManyHostsBodyMihomoIpVersion = "ipv4"
+	UpdateManyHostsBodyMihomoIpVersionIpv6       UpdateManyHostsBodyMihomoIpVersion = "ipv6"
+	UpdateManyHostsBodyMihomoIpVersionIpv4Prefer UpdateManyHostsBodyMihomoIpVersion = "ipv4-prefer"
+	UpdateManyHostsBodyMihomoIpVersionIpv6Prefer UpdateManyHostsBodyMihomoIpVersion = "ipv6-prefer"
 )
 
-// AllValues returns all UpdateManyHostsRequestMihomoIpVersion values.
-func (UpdateManyHostsRequestMihomoIpVersion) AllValues() []UpdateManyHostsRequestMihomoIpVersion {
-	return []UpdateManyHostsRequestMihomoIpVersion{
-		UpdateManyHostsRequestMihomoIpVersionDual,
-		UpdateManyHostsRequestMihomoIpVersionIpv4,
-		UpdateManyHostsRequestMihomoIpVersionIpv6,
-		UpdateManyHostsRequestMihomoIpVersionIpv4Prefer,
-		UpdateManyHostsRequestMihomoIpVersionIpv6Prefer,
+// AllValues returns all UpdateManyHostsBodyMihomoIpVersion values.
+func (UpdateManyHostsBodyMihomoIpVersion) AllValues() []UpdateManyHostsBodyMihomoIpVersion {
+	return []UpdateManyHostsBodyMihomoIpVersion{
+		UpdateManyHostsBodyMihomoIpVersionDual,
+		UpdateManyHostsBodyMihomoIpVersionIpv4,
+		UpdateManyHostsBodyMihomoIpVersionIpv6,
+		UpdateManyHostsBodyMihomoIpVersionIpv4Prefer,
+		UpdateManyHostsBodyMihomoIpVersionIpv6Prefer,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateManyHostsRequestMihomoIpVersion) MarshalText() ([]byte, error) {
+func (s UpdateManyHostsBodyMihomoIpVersion) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateManyHostsRequestMihomoIpVersionDual:
+	case UpdateManyHostsBodyMihomoIpVersionDual:
 		return []byte(s), nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv4:
+	case UpdateManyHostsBodyMihomoIpVersionIpv4:
 		return []byte(s), nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv6:
+	case UpdateManyHostsBodyMihomoIpVersionIpv6:
 		return []byte(s), nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv4Prefer:
+	case UpdateManyHostsBodyMihomoIpVersionIpv4Prefer:
 		return []byte(s), nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv6Prefer:
+	case UpdateManyHostsBodyMihomoIpVersionIpv6Prefer:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22914,53 +21412,53 @@ func (s UpdateManyHostsRequestMihomoIpVersion) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateManyHostsRequestMihomoIpVersion) UnmarshalText(data []byte) error {
-	switch UpdateManyHostsRequestMihomoIpVersion(data) {
-	case UpdateManyHostsRequestMihomoIpVersionDual:
-		*s = UpdateManyHostsRequestMihomoIpVersionDual
+func (s *UpdateManyHostsBodyMihomoIpVersion) UnmarshalText(data []byte) error {
+	switch UpdateManyHostsBodyMihomoIpVersion(data) {
+	case UpdateManyHostsBodyMihomoIpVersionDual:
+		*s = UpdateManyHostsBodyMihomoIpVersionDual
 		return nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv4:
-		*s = UpdateManyHostsRequestMihomoIpVersionIpv4
+	case UpdateManyHostsBodyMihomoIpVersionIpv4:
+		*s = UpdateManyHostsBodyMihomoIpVersionIpv4
 		return nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv6:
-		*s = UpdateManyHostsRequestMihomoIpVersionIpv6
+	case UpdateManyHostsBodyMihomoIpVersionIpv6:
+		*s = UpdateManyHostsBodyMihomoIpVersionIpv6
 		return nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv4Prefer:
-		*s = UpdateManyHostsRequestMihomoIpVersionIpv4Prefer
+	case UpdateManyHostsBodyMihomoIpVersionIpv4Prefer:
+		*s = UpdateManyHostsBodyMihomoIpVersionIpv4Prefer
 		return nil
-	case UpdateManyHostsRequestMihomoIpVersionIpv6Prefer:
-		*s = UpdateManyHostsRequestMihomoIpVersionIpv6Prefer
+	case UpdateManyHostsBodyMihomoIpVersionIpv6Prefer:
+		*s = UpdateManyHostsBodyMihomoIpVersionIpv6Prefer
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-type UpdateManyHostsRequestSecurityLayer string
+type UpdateManyHostsBodySecurityLayer string
 
 const (
-	UpdateManyHostsRequestSecurityLayerDEFAULT UpdateManyHostsRequestSecurityLayer = "DEFAULT"
-	UpdateManyHostsRequestSecurityLayerTLS     UpdateManyHostsRequestSecurityLayer = "TLS"
-	UpdateManyHostsRequestSecurityLayerNONE    UpdateManyHostsRequestSecurityLayer = "NONE"
+	UpdateManyHostsBodySecurityLayerDEFAULT UpdateManyHostsBodySecurityLayer = "DEFAULT"
+	UpdateManyHostsBodySecurityLayerTLS     UpdateManyHostsBodySecurityLayer = "TLS"
+	UpdateManyHostsBodySecurityLayerNONE    UpdateManyHostsBodySecurityLayer = "NONE"
 )
 
-// AllValues returns all UpdateManyHostsRequestSecurityLayer values.
-func (UpdateManyHostsRequestSecurityLayer) AllValues() []UpdateManyHostsRequestSecurityLayer {
-	return []UpdateManyHostsRequestSecurityLayer{
-		UpdateManyHostsRequestSecurityLayerDEFAULT,
-		UpdateManyHostsRequestSecurityLayerTLS,
-		UpdateManyHostsRequestSecurityLayerNONE,
+// AllValues returns all UpdateManyHostsBodySecurityLayer values.
+func (UpdateManyHostsBodySecurityLayer) AllValues() []UpdateManyHostsBodySecurityLayer {
+	return []UpdateManyHostsBodySecurityLayer{
+		UpdateManyHostsBodySecurityLayerDEFAULT,
+		UpdateManyHostsBodySecurityLayerTLS,
+		UpdateManyHostsBodySecurityLayerNONE,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateManyHostsRequestSecurityLayer) MarshalText() ([]byte, error) {
+func (s UpdateManyHostsBodySecurityLayer) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateManyHostsRequestSecurityLayerDEFAULT:
+	case UpdateManyHostsBodySecurityLayerDEFAULT:
 		return []byte(s), nil
-	case UpdateManyHostsRequestSecurityLayerTLS:
+	case UpdateManyHostsBodySecurityLayerTLS:
 		return []byte(s), nil
-	case UpdateManyHostsRequestSecurityLayerNONE:
+	case UpdateManyHostsBodySecurityLayerNONE:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -22968,278 +21466,278 @@ func (s UpdateManyHostsRequestSecurityLayer) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateManyHostsRequestSecurityLayer) UnmarshalText(data []byte) error {
-	switch UpdateManyHostsRequestSecurityLayer(data) {
-	case UpdateManyHostsRequestSecurityLayerDEFAULT:
-		*s = UpdateManyHostsRequestSecurityLayerDEFAULT
+func (s *UpdateManyHostsBodySecurityLayer) UnmarshalText(data []byte) error {
+	switch UpdateManyHostsBodySecurityLayer(data) {
+	case UpdateManyHostsBodySecurityLayerDEFAULT:
+		*s = UpdateManyHostsBodySecurityLayerDEFAULT
 		return nil
-	case UpdateManyHostsRequestSecurityLayerTLS:
-		*s = UpdateManyHostsRequestSecurityLayerTLS
+	case UpdateManyHostsBodySecurityLayerTLS:
+		*s = UpdateManyHostsBodySecurityLayerTLS
 		return nil
-	case UpdateManyHostsRequestSecurityLayerNONE:
-		*s = UpdateManyHostsRequestSecurityLayerNONE
+	case UpdateManyHostsBodySecurityLayerNONE:
+		*s = UpdateManyHostsBodySecurityLayerNONE
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/UpdateNodePluginRequest
-type UpdateNodePluginRequest struct {
+// Ref: #/components/schemas/UpdateNodeBody
+type UpdateNodeBody struct {
+	UUID                      uuid.UUID         `json:"uuid"`
+	Name                      OptString         `json:"name"`
+	Address                   OptString         `json:"address"`
+	Port                      OptFloat64        `json:"port"`
+	ProxyUrl                  OptNilString      `json:"proxyUrl"`
+	IsTrafficTrackingActive   OptBool           `json:"isTrafficTrackingActive"`
+	TrafficLimitBytes         OptFloat64        `json:"trafficLimitBytes"`
+	NotifyPercent             OptFloat64        `json:"notifyPercent"`
+	TrafficResetDay           OptFloat64        `json:"trafficResetDay"`
+	CountryCode               OptString         `json:"countryCode"`
+	ConsumptionMultiplier     OptFloat64        `json:"consumptionMultiplier"`
+	NodeConsumptionMultiplier OptFloat64        `json:"nodeConsumptionMultiplier"`
+	ConfigProfile             OptConfigProfile2 `json:"configProfile"`
+	ProviderUuid              OptNilUUID        `json:"providerUuid"`
+	Tags                      []string          `json:"tags"`
+	ActivePluginUuid          OptNilUUID        `json:"activePluginUuid"`
+	Note                      OptNilString      `json:"note"`
+}
+
+// GetUUID returns the value of UUID.
+func (s *UpdateNodeBody) GetUUID() uuid.UUID {
+	return s.UUID
+}
+
+// GetName returns the value of Name.
+func (s *UpdateNodeBody) GetName() OptString {
+	return s.Name
+}
+
+// GetAddress returns the value of Address.
+func (s *UpdateNodeBody) GetAddress() OptString {
+	return s.Address
+}
+
+// GetPort returns the value of Port.
+func (s *UpdateNodeBody) GetPort() OptFloat64 {
+	return s.Port
+}
+
+// GetProxyUrl returns the value of ProxyUrl.
+func (s *UpdateNodeBody) GetProxyUrl() OptNilString {
+	return s.ProxyUrl
+}
+
+// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
+func (s *UpdateNodeBody) GetIsTrafficTrackingActive() OptBool {
+	return s.IsTrafficTrackingActive
+}
+
+// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
+func (s *UpdateNodeBody) GetTrafficLimitBytes() OptFloat64 {
+	return s.TrafficLimitBytes
+}
+
+// GetNotifyPercent returns the value of NotifyPercent.
+func (s *UpdateNodeBody) GetNotifyPercent() OptFloat64 {
+	return s.NotifyPercent
+}
+
+// GetTrafficResetDay returns the value of TrafficResetDay.
+func (s *UpdateNodeBody) GetTrafficResetDay() OptFloat64 {
+	return s.TrafficResetDay
+}
+
+// GetCountryCode returns the value of CountryCode.
+func (s *UpdateNodeBody) GetCountryCode() OptString {
+	return s.CountryCode
+}
+
+// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
+func (s *UpdateNodeBody) GetConsumptionMultiplier() OptFloat64 {
+	return s.ConsumptionMultiplier
+}
+
+// GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
+func (s *UpdateNodeBody) GetNodeConsumptionMultiplier() OptFloat64 {
+	return s.NodeConsumptionMultiplier
+}
+
+// GetConfigProfile returns the value of ConfigProfile.
+func (s *UpdateNodeBody) GetConfigProfile() OptConfigProfile2 {
+	return s.ConfigProfile
+}
+
+// GetProviderUuid returns the value of ProviderUuid.
+func (s *UpdateNodeBody) GetProviderUuid() OptNilUUID {
+	return s.ProviderUuid
+}
+
+// GetTags returns the value of Tags.
+func (s *UpdateNodeBody) GetTags() []string {
+	return s.Tags
+}
+
+// GetActivePluginUuid returns the value of ActivePluginUuid.
+func (s *UpdateNodeBody) GetActivePluginUuid() OptNilUUID {
+	return s.ActivePluginUuid
+}
+
+// GetNote returns the value of Note.
+func (s *UpdateNodeBody) GetNote() OptNilString {
+	return s.Note
+}
+
+// SetUUID sets the value of UUID.
+func (s *UpdateNodeBody) SetUUID(val uuid.UUID) {
+	s.UUID = val
+}
+
+// SetName sets the value of Name.
+func (s *UpdateNodeBody) SetName(val OptString) {
+	s.Name = val
+}
+
+// SetAddress sets the value of Address.
+func (s *UpdateNodeBody) SetAddress(val OptString) {
+	s.Address = val
+}
+
+// SetPort sets the value of Port.
+func (s *UpdateNodeBody) SetPort(val OptFloat64) {
+	s.Port = val
+}
+
+// SetProxyUrl sets the value of ProxyUrl.
+func (s *UpdateNodeBody) SetProxyUrl(val OptNilString) {
+	s.ProxyUrl = val
+}
+
+// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
+func (s *UpdateNodeBody) SetIsTrafficTrackingActive(val OptBool) {
+	s.IsTrafficTrackingActive = val
+}
+
+// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
+func (s *UpdateNodeBody) SetTrafficLimitBytes(val OptFloat64) {
+	s.TrafficLimitBytes = val
+}
+
+// SetNotifyPercent sets the value of NotifyPercent.
+func (s *UpdateNodeBody) SetNotifyPercent(val OptFloat64) {
+	s.NotifyPercent = val
+}
+
+// SetTrafficResetDay sets the value of TrafficResetDay.
+func (s *UpdateNodeBody) SetTrafficResetDay(val OptFloat64) {
+	s.TrafficResetDay = val
+}
+
+// SetCountryCode sets the value of CountryCode.
+func (s *UpdateNodeBody) SetCountryCode(val OptString) {
+	s.CountryCode = val
+}
+
+// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
+func (s *UpdateNodeBody) SetConsumptionMultiplier(val OptFloat64) {
+	s.ConsumptionMultiplier = val
+}
+
+// SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
+func (s *UpdateNodeBody) SetNodeConsumptionMultiplier(val OptFloat64) {
+	s.NodeConsumptionMultiplier = val
+}
+
+// SetConfigProfile sets the value of ConfigProfile.
+func (s *UpdateNodeBody) SetConfigProfile(val OptConfigProfile2) {
+	s.ConfigProfile = val
+}
+
+// SetProviderUuid sets the value of ProviderUuid.
+func (s *UpdateNodeBody) SetProviderUuid(val OptNilUUID) {
+	s.ProviderUuid = val
+}
+
+// SetTags sets the value of Tags.
+func (s *UpdateNodeBody) SetTags(val []string) {
+	s.Tags = val
+}
+
+// SetActivePluginUuid sets the value of ActivePluginUuid.
+func (s *UpdateNodeBody) SetActivePluginUuid(val OptNilUUID) {
+	s.ActivePluginUuid = val
+}
+
+// SetNote sets the value of Note.
+func (s *UpdateNodeBody) SetNote(val OptNilString) {
+	s.Note = val
+}
+
+// Ref: #/components/schemas/UpdateNodePluginBody
+type UpdateNodePluginBody struct {
 	UUID         uuid.UUID `json:"uuid"`
 	Name         OptString `json:"name"`
 	PluginConfig jx.Raw    `json:"pluginConfig"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateNodePluginRequest) GetUUID() uuid.UUID {
+func (s *UpdateNodePluginBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateNodePluginRequest) GetName() OptString {
+func (s *UpdateNodePluginBody) GetName() OptString {
 	return s.Name
 }
 
 // GetPluginConfig returns the value of PluginConfig.
-func (s *UpdateNodePluginRequest) GetPluginConfig() jx.Raw {
+func (s *UpdateNodePluginBody) GetPluginConfig() jx.Raw {
 	return s.PluginConfig
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateNodePluginRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateNodePluginBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateNodePluginRequest) SetName(val OptString) {
+func (s *UpdateNodePluginBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetPluginConfig sets the value of PluginConfig.
-func (s *UpdateNodePluginRequest) SetPluginConfig(val jx.Raw) {
+func (s *UpdateNodePluginBody) SetPluginConfig(val jx.Raw) {
 	s.PluginConfig = val
 }
 
-// Ref: #/components/schemas/UpdateNodeRequest
-type UpdateNodeRequest struct {
-	UUID                      uuid.UUID           `json:"uuid"`
-	Name                      OptString           `json:"name"`
-	Address                   OptString           `json:"address"`
-	Port                      OptFloat64          `json:"port"`
-	ProxyUrl                  OptNilString        `json:"proxyUrl"`
-	IsTrafficTrackingActive   OptBool             `json:"isTrafficTrackingActive"`
-	TrafficLimitBytes         OptFloat64          `json:"trafficLimitBytes"`
-	NotifyPercent             OptFloat64          `json:"notifyPercent"`
-	TrafficResetDay           OptFloat64          `json:"trafficResetDay"`
-	CountryCode               OptString           `json:"countryCode"`
-	ConsumptionMultiplier     OptFloat64          `json:"consumptionMultiplier"`
-	NodeConsumptionMultiplier OptFloat64          `json:"nodeConsumptionMultiplier"`
-	ConfigProfile             OptConfigProfileRef `json:"configProfile"`
-	ProviderUuid              OptNilUUID          `json:"providerUuid"`
-	Tags                      []string            `json:"tags"`
-	ActivePluginUuid          OptNilUUID          `json:"activePluginUuid"`
-	Note                      OptNilString        `json:"note"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UpdateNodeRequest) GetUUID() uuid.UUID {
-	return s.UUID
-}
-
-// GetName returns the value of Name.
-func (s *UpdateNodeRequest) GetName() OptString {
-	return s.Name
-}
-
-// GetAddress returns the value of Address.
-func (s *UpdateNodeRequest) GetAddress() OptString {
-	return s.Address
-}
-
-// GetPort returns the value of Port.
-func (s *UpdateNodeRequest) GetPort() OptFloat64 {
-	return s.Port
-}
-
-// GetProxyUrl returns the value of ProxyUrl.
-func (s *UpdateNodeRequest) GetProxyUrl() OptNilString {
-	return s.ProxyUrl
-}
-
-// GetIsTrafficTrackingActive returns the value of IsTrafficTrackingActive.
-func (s *UpdateNodeRequest) GetIsTrafficTrackingActive() OptBool {
-	return s.IsTrafficTrackingActive
-}
-
-// GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UpdateNodeRequest) GetTrafficLimitBytes() OptFloat64 {
-	return s.TrafficLimitBytes
-}
-
-// GetNotifyPercent returns the value of NotifyPercent.
-func (s *UpdateNodeRequest) GetNotifyPercent() OptFloat64 {
-	return s.NotifyPercent
-}
-
-// GetTrafficResetDay returns the value of TrafficResetDay.
-func (s *UpdateNodeRequest) GetTrafficResetDay() OptFloat64 {
-	return s.TrafficResetDay
-}
-
-// GetCountryCode returns the value of CountryCode.
-func (s *UpdateNodeRequest) GetCountryCode() OptString {
-	return s.CountryCode
-}
-
-// GetConsumptionMultiplier returns the value of ConsumptionMultiplier.
-func (s *UpdateNodeRequest) GetConsumptionMultiplier() OptFloat64 {
-	return s.ConsumptionMultiplier
-}
-
-// GetNodeConsumptionMultiplier returns the value of NodeConsumptionMultiplier.
-func (s *UpdateNodeRequest) GetNodeConsumptionMultiplier() OptFloat64 {
-	return s.NodeConsumptionMultiplier
-}
-
-// GetConfigProfile returns the value of ConfigProfile.
-func (s *UpdateNodeRequest) GetConfigProfile() OptConfigProfileRef {
-	return s.ConfigProfile
-}
-
-// GetProviderUuid returns the value of ProviderUuid.
-func (s *UpdateNodeRequest) GetProviderUuid() OptNilUUID {
-	return s.ProviderUuid
-}
-
-// GetTags returns the value of Tags.
-func (s *UpdateNodeRequest) GetTags() []string {
-	return s.Tags
-}
-
-// GetActivePluginUuid returns the value of ActivePluginUuid.
-func (s *UpdateNodeRequest) GetActivePluginUuid() OptNilUUID {
-	return s.ActivePluginUuid
-}
-
-// GetNote returns the value of Note.
-func (s *UpdateNodeRequest) GetNote() OptNilString {
-	return s.Note
-}
-
-// SetUUID sets the value of UUID.
-func (s *UpdateNodeRequest) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
-// SetName sets the value of Name.
-func (s *UpdateNodeRequest) SetName(val OptString) {
-	s.Name = val
-}
-
-// SetAddress sets the value of Address.
-func (s *UpdateNodeRequest) SetAddress(val OptString) {
-	s.Address = val
-}
-
-// SetPort sets the value of Port.
-func (s *UpdateNodeRequest) SetPort(val OptFloat64) {
-	s.Port = val
-}
-
-// SetProxyUrl sets the value of ProxyUrl.
-func (s *UpdateNodeRequest) SetProxyUrl(val OptNilString) {
-	s.ProxyUrl = val
-}
-
-// SetIsTrafficTrackingActive sets the value of IsTrafficTrackingActive.
-func (s *UpdateNodeRequest) SetIsTrafficTrackingActive(val OptBool) {
-	s.IsTrafficTrackingActive = val
-}
-
-// SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UpdateNodeRequest) SetTrafficLimitBytes(val OptFloat64) {
-	s.TrafficLimitBytes = val
-}
-
-// SetNotifyPercent sets the value of NotifyPercent.
-func (s *UpdateNodeRequest) SetNotifyPercent(val OptFloat64) {
-	s.NotifyPercent = val
-}
-
-// SetTrafficResetDay sets the value of TrafficResetDay.
-func (s *UpdateNodeRequest) SetTrafficResetDay(val OptFloat64) {
-	s.TrafficResetDay = val
-}
-
-// SetCountryCode sets the value of CountryCode.
-func (s *UpdateNodeRequest) SetCountryCode(val OptString) {
-	s.CountryCode = val
-}
-
-// SetConsumptionMultiplier sets the value of ConsumptionMultiplier.
-func (s *UpdateNodeRequest) SetConsumptionMultiplier(val OptFloat64) {
-	s.ConsumptionMultiplier = val
-}
-
-// SetNodeConsumptionMultiplier sets the value of NodeConsumptionMultiplier.
-func (s *UpdateNodeRequest) SetNodeConsumptionMultiplier(val OptFloat64) {
-	s.NodeConsumptionMultiplier = val
-}
-
-// SetConfigProfile sets the value of ConfigProfile.
-func (s *UpdateNodeRequest) SetConfigProfile(val OptConfigProfileRef) {
-	s.ConfigProfile = val
-}
-
-// SetProviderUuid sets the value of ProviderUuid.
-func (s *UpdateNodeRequest) SetProviderUuid(val OptNilUUID) {
-	s.ProviderUuid = val
-}
-
-// SetTags sets the value of Tags.
-func (s *UpdateNodeRequest) SetTags(val []string) {
-	s.Tags = val
-}
-
-// SetActivePluginUuid sets the value of ActivePluginUuid.
-func (s *UpdateNodeRequest) SetActivePluginUuid(val OptNilUUID) {
-	s.ActivePluginUuid = val
-}
-
-// SetNote sets the value of Note.
-func (s *UpdateNodeRequest) SetNote(val OptNilString) {
-	s.Note = val
-}
-
-// Ref: #/components/schemas/UpdatePasskeyRequest
-type UpdatePasskeyRequest struct {
+// Ref: #/components/schemas/UpdatePasskeyBody
+type UpdatePasskeyBody struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 // GetID returns the value of ID.
-func (s *UpdatePasskeyRequest) GetID() string {
+func (s *UpdatePasskeyBody) GetID() string {
 	return s.ID
 }
 
 // GetName returns the value of Name.
-func (s *UpdatePasskeyRequest) GetName() string {
+func (s *UpdatePasskeyBody) GetName() string {
 	return s.Name
 }
 
 // SetID sets the value of ID.
-func (s *UpdatePasskeyRequest) SetID(val string) {
+func (s *UpdatePasskeyBody) SetID(val string) {
 	s.ID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdatePasskeyRequest) SetName(val string) {
+func (s *UpdatePasskeyBody) SetName(val string) {
 	s.Name = val
 }
 
-// Ref: #/components/schemas/UpdateRemnawaveSettingsRequest
-type UpdateRemnawaveSettingsRequest struct {
+// Ref: #/components/schemas/UpdateRemnawaveSettingsBody
+type UpdateRemnawaveSettingsBody struct {
 	PasskeySettings  OptNilPasskeySettings  `json:"passkeySettings"`
 	Oauth2Settings   OptNilOauth2Settings   `json:"oauth2Settings"`
 	PasswordSettings OptNilPasswordSettings `json:"passwordSettings"`
@@ -23247,243 +21745,177 @@ type UpdateRemnawaveSettingsRequest struct {
 }
 
 // GetPasskeySettings returns the value of PasskeySettings.
-func (s *UpdateRemnawaveSettingsRequest) GetPasskeySettings() OptNilPasskeySettings {
+func (s *UpdateRemnawaveSettingsBody) GetPasskeySettings() OptNilPasskeySettings {
 	return s.PasskeySettings
 }
 
 // GetOauth2Settings returns the value of Oauth2Settings.
-func (s *UpdateRemnawaveSettingsRequest) GetOauth2Settings() OptNilOauth2Settings {
+func (s *UpdateRemnawaveSettingsBody) GetOauth2Settings() OptNilOauth2Settings {
 	return s.Oauth2Settings
 }
 
 // GetPasswordSettings returns the value of PasswordSettings.
-func (s *UpdateRemnawaveSettingsRequest) GetPasswordSettings() OptNilPasswordSettings {
+func (s *UpdateRemnawaveSettingsBody) GetPasswordSettings() OptNilPasswordSettings {
 	return s.PasswordSettings
 }
 
 // GetBrandingSettings returns the value of BrandingSettings.
-func (s *UpdateRemnawaveSettingsRequest) GetBrandingSettings() OptNilBrandingSettings {
+func (s *UpdateRemnawaveSettingsBody) GetBrandingSettings() OptNilBrandingSettings {
 	return s.BrandingSettings
 }
 
 // SetPasskeySettings sets the value of PasskeySettings.
-func (s *UpdateRemnawaveSettingsRequest) SetPasskeySettings(val OptNilPasskeySettings) {
+func (s *UpdateRemnawaveSettingsBody) SetPasskeySettings(val OptNilPasskeySettings) {
 	s.PasskeySettings = val
 }
 
 // SetOauth2Settings sets the value of Oauth2Settings.
-func (s *UpdateRemnawaveSettingsRequest) SetOauth2Settings(val OptNilOauth2Settings) {
+func (s *UpdateRemnawaveSettingsBody) SetOauth2Settings(val OptNilOauth2Settings) {
 	s.Oauth2Settings = val
 }
 
 // SetPasswordSettings sets the value of PasswordSettings.
-func (s *UpdateRemnawaveSettingsRequest) SetPasswordSettings(val OptNilPasswordSettings) {
+func (s *UpdateRemnawaveSettingsBody) SetPasswordSettings(val OptNilPasswordSettings) {
 	s.PasswordSettings = val
 }
 
 // SetBrandingSettings sets the value of BrandingSettings.
-func (s *UpdateRemnawaveSettingsRequest) SetBrandingSettings(val OptNilBrandingSettings) {
+func (s *UpdateRemnawaveSettingsBody) SetBrandingSettings(val OptNilBrandingSettings) {
 	s.BrandingSettings = val
 }
 
-// Ref: #/components/schemas/UpdateSubscriptionPageConfigRequest
-type UpdateSubscriptionPageConfigRequest struct {
+// Ref: #/components/schemas/UpdateSubpageConfigBody
+type UpdateSubpageConfigBody struct {
 	UUID   uuid.UUID `json:"uuid"`
 	Name   OptString `json:"name"`
 	Config jx.Raw    `json:"config"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateSubscriptionPageConfigRequest) GetUUID() uuid.UUID {
+func (s *UpdateSubpageConfigBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateSubscriptionPageConfigRequest) GetName() OptString {
+func (s *UpdateSubpageConfigBody) GetName() OptString {
 	return s.Name
 }
 
 // GetConfig returns the value of Config.
-func (s *UpdateSubscriptionPageConfigRequest) GetConfig() jx.Raw {
+func (s *UpdateSubpageConfigBody) GetConfig() jx.Raw {
 	return s.Config
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateSubscriptionPageConfigRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateSubpageConfigBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateSubscriptionPageConfigRequest) SetName(val OptString) {
+func (s *UpdateSubpageConfigBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetConfig sets the value of Config.
-func (s *UpdateSubscriptionPageConfigRequest) SetConfig(val jx.Raw) {
+func (s *UpdateSubpageConfigBody) SetConfig(val jx.Raw) {
 	s.Config = val
 }
 
-// Ref: #/components/schemas/UpdateSubscriptionSettingsRequest
-type UpdateSubscriptionSettingsRequest struct {
-	UUID                        uuid.UUID                                                 `json:"uuid"`
-	ProfileTitle                OptString                                                 `json:"profileTitle"`
-	SupportLink                 OptString                                                 `json:"supportLink"`
-	ProfileUpdateInterval       OptInt                                                    `json:"profileUpdateInterval"`
-	IsProfileWebpageUrlEnabled  OptBool                                                   `json:"isProfileWebpageUrlEnabled"`
-	ServeJsonAtBaseSubscription OptBool                                                   `json:"serveJsonAtBaseSubscription"`
-	HappAnnounce                OptNilString                                              `json:"happAnnounce"`
-	HappRouting                 OptNilString                                              `json:"happRouting"`
-	IsShowCustomRemarks         OptBool                                                   `json:"isShowCustomRemarks"`
-	CustomRemarks               OptNilCustomRemark                                        `json:"customRemarks"`
-	CustomResponseHeaders       OptUpdateSubscriptionSettingsRequestCustomResponseHeaders `json:"customResponseHeaders"`
-	RandomizeHosts              OptBool                                                   `json:"randomizeHosts"`
-	ResponseRules               OptResponseRules                                          `json:"responseRules"`
-	HwidSettings                OptNilHwidSettings                                        `json:"hwidSettings"`
+// Ref: #/components/schemas/UpdateSubscriptionSettingsBody
+type UpdateSubscriptionSettingsBody struct {
+	UUID                        uuid.UUID                                              `json:"uuid"`
+	ServeJsonAtBaseSubscription OptBool                                                `json:"serveJsonAtBaseSubscription"`
+	IsShowCustomRemarks         OptBool                                                `json:"isShowCustomRemarks"`
+	CustomRemarks               OptNilCustomRemark                                     `json:"customRemarks"`
+	CustomResponseHeaders       OptUpdateSubscriptionSettingsBodyCustomResponseHeaders `json:"customResponseHeaders"`
+	RandomizeHosts              OptBool                                                `json:"randomizeHosts"`
+	ResponseRules               OptResponseRules                                       `json:"responseRules"`
+	HwidSettings                OptNilHwidSettings                                     `json:"hwidSettings"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateSubscriptionSettingsRequest) GetUUID() uuid.UUID {
+func (s *UpdateSubscriptionSettingsBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
-// GetProfileTitle returns the value of ProfileTitle.
-func (s *UpdateSubscriptionSettingsRequest) GetProfileTitle() OptString {
-	return s.ProfileTitle
-}
-
-// GetSupportLink returns the value of SupportLink.
-func (s *UpdateSubscriptionSettingsRequest) GetSupportLink() OptString {
-	return s.SupportLink
-}
-
-// GetProfileUpdateInterval returns the value of ProfileUpdateInterval.
-func (s *UpdateSubscriptionSettingsRequest) GetProfileUpdateInterval() OptInt {
-	return s.ProfileUpdateInterval
-}
-
-// GetIsProfileWebpageUrlEnabled returns the value of IsProfileWebpageUrlEnabled.
-func (s *UpdateSubscriptionSettingsRequest) GetIsProfileWebpageUrlEnabled() OptBool {
-	return s.IsProfileWebpageUrlEnabled
-}
-
 // GetServeJsonAtBaseSubscription returns the value of ServeJsonAtBaseSubscription.
-func (s *UpdateSubscriptionSettingsRequest) GetServeJsonAtBaseSubscription() OptBool {
+func (s *UpdateSubscriptionSettingsBody) GetServeJsonAtBaseSubscription() OptBool {
 	return s.ServeJsonAtBaseSubscription
 }
 
-// GetHappAnnounce returns the value of HappAnnounce.
-func (s *UpdateSubscriptionSettingsRequest) GetHappAnnounce() OptNilString {
-	return s.HappAnnounce
-}
-
-// GetHappRouting returns the value of HappRouting.
-func (s *UpdateSubscriptionSettingsRequest) GetHappRouting() OptNilString {
-	return s.HappRouting
-}
-
 // GetIsShowCustomRemarks returns the value of IsShowCustomRemarks.
-func (s *UpdateSubscriptionSettingsRequest) GetIsShowCustomRemarks() OptBool {
+func (s *UpdateSubscriptionSettingsBody) GetIsShowCustomRemarks() OptBool {
 	return s.IsShowCustomRemarks
 }
 
 // GetCustomRemarks returns the value of CustomRemarks.
-func (s *UpdateSubscriptionSettingsRequest) GetCustomRemarks() OptNilCustomRemark {
+func (s *UpdateSubscriptionSettingsBody) GetCustomRemarks() OptNilCustomRemark {
 	return s.CustomRemarks
 }
 
 // GetCustomResponseHeaders returns the value of CustomResponseHeaders.
-func (s *UpdateSubscriptionSettingsRequest) GetCustomResponseHeaders() OptUpdateSubscriptionSettingsRequestCustomResponseHeaders {
+func (s *UpdateSubscriptionSettingsBody) GetCustomResponseHeaders() OptUpdateSubscriptionSettingsBodyCustomResponseHeaders {
 	return s.CustomResponseHeaders
 }
 
 // GetRandomizeHosts returns the value of RandomizeHosts.
-func (s *UpdateSubscriptionSettingsRequest) GetRandomizeHosts() OptBool {
+func (s *UpdateSubscriptionSettingsBody) GetRandomizeHosts() OptBool {
 	return s.RandomizeHosts
 }
 
 // GetResponseRules returns the value of ResponseRules.
-func (s *UpdateSubscriptionSettingsRequest) GetResponseRules() OptResponseRules {
+func (s *UpdateSubscriptionSettingsBody) GetResponseRules() OptResponseRules {
 	return s.ResponseRules
 }
 
 // GetHwidSettings returns the value of HwidSettings.
-func (s *UpdateSubscriptionSettingsRequest) GetHwidSettings() OptNilHwidSettings {
+func (s *UpdateSubscriptionSettingsBody) GetHwidSettings() OptNilHwidSettings {
 	return s.HwidSettings
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateSubscriptionSettingsRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateSubscriptionSettingsBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
-// SetProfileTitle sets the value of ProfileTitle.
-func (s *UpdateSubscriptionSettingsRequest) SetProfileTitle(val OptString) {
-	s.ProfileTitle = val
-}
-
-// SetSupportLink sets the value of SupportLink.
-func (s *UpdateSubscriptionSettingsRequest) SetSupportLink(val OptString) {
-	s.SupportLink = val
-}
-
-// SetProfileUpdateInterval sets the value of ProfileUpdateInterval.
-func (s *UpdateSubscriptionSettingsRequest) SetProfileUpdateInterval(val OptInt) {
-	s.ProfileUpdateInterval = val
-}
-
-// SetIsProfileWebpageUrlEnabled sets the value of IsProfileWebpageUrlEnabled.
-func (s *UpdateSubscriptionSettingsRequest) SetIsProfileWebpageUrlEnabled(val OptBool) {
-	s.IsProfileWebpageUrlEnabled = val
-}
-
 // SetServeJsonAtBaseSubscription sets the value of ServeJsonAtBaseSubscription.
-func (s *UpdateSubscriptionSettingsRequest) SetServeJsonAtBaseSubscription(val OptBool) {
+func (s *UpdateSubscriptionSettingsBody) SetServeJsonAtBaseSubscription(val OptBool) {
 	s.ServeJsonAtBaseSubscription = val
 }
 
-// SetHappAnnounce sets the value of HappAnnounce.
-func (s *UpdateSubscriptionSettingsRequest) SetHappAnnounce(val OptNilString) {
-	s.HappAnnounce = val
-}
-
-// SetHappRouting sets the value of HappRouting.
-func (s *UpdateSubscriptionSettingsRequest) SetHappRouting(val OptNilString) {
-	s.HappRouting = val
-}
-
 // SetIsShowCustomRemarks sets the value of IsShowCustomRemarks.
-func (s *UpdateSubscriptionSettingsRequest) SetIsShowCustomRemarks(val OptBool) {
+func (s *UpdateSubscriptionSettingsBody) SetIsShowCustomRemarks(val OptBool) {
 	s.IsShowCustomRemarks = val
 }
 
 // SetCustomRemarks sets the value of CustomRemarks.
-func (s *UpdateSubscriptionSettingsRequest) SetCustomRemarks(val OptNilCustomRemark) {
+func (s *UpdateSubscriptionSettingsBody) SetCustomRemarks(val OptNilCustomRemark) {
 	s.CustomRemarks = val
 }
 
 // SetCustomResponseHeaders sets the value of CustomResponseHeaders.
-func (s *UpdateSubscriptionSettingsRequest) SetCustomResponseHeaders(val OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) {
+func (s *UpdateSubscriptionSettingsBody) SetCustomResponseHeaders(val OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) {
 	s.CustomResponseHeaders = val
 }
 
 // SetRandomizeHosts sets the value of RandomizeHosts.
-func (s *UpdateSubscriptionSettingsRequest) SetRandomizeHosts(val OptBool) {
+func (s *UpdateSubscriptionSettingsBody) SetRandomizeHosts(val OptBool) {
 	s.RandomizeHosts = val
 }
 
 // SetResponseRules sets the value of ResponseRules.
-func (s *UpdateSubscriptionSettingsRequest) SetResponseRules(val OptResponseRules) {
+func (s *UpdateSubscriptionSettingsBody) SetResponseRules(val OptResponseRules) {
 	s.ResponseRules = val
 }
 
 // SetHwidSettings sets the value of HwidSettings.
-func (s *UpdateSubscriptionSettingsRequest) SetHwidSettings(val OptNilHwidSettings) {
+func (s *UpdateSubscriptionSettingsBody) SetHwidSettings(val OptNilHwidSettings) {
 	s.HwidSettings = val
 }
 
-type UpdateSubscriptionSettingsRequestCustomResponseHeaders map[string]string
+type UpdateSubscriptionSettingsBodyCustomResponseHeaders map[string]string
 
-func (s *UpdateSubscriptionSettingsRequestCustomResponseHeaders) init() UpdateSubscriptionSettingsRequestCustomResponseHeaders {
+func (s *UpdateSubscriptionSettingsBodyCustomResponseHeaders) init() UpdateSubscriptionSettingsBodyCustomResponseHeaders {
 	m := *s
 	if m == nil {
 		m = map[string]string{}
@@ -23492,231 +21924,239 @@ func (s *UpdateSubscriptionSettingsRequestCustomResponseHeaders) init() UpdateSu
 	return m
 }
 
-// Ref: #/components/schemas/UpdateTemplateRequest
-type UpdateTemplateRequest struct {
-	UUID                uuid.UUID                          `json:"uuid"`
-	Name                OptString                          `json:"name"`
-	TemplateJson        *UpdateTemplateRequestTemplateJson `json:"templateJson"`
-	EncodedTemplateYaml OptString                          `json:"encodedTemplateYaml"`
+// Ref: #/components/schemas/UpdateTemplateBody
+type UpdateTemplateBody struct {
+	UUID                uuid.UUID                         `json:"uuid"`
+	Name                OptString                         `json:"name"`
+	TemplateJson        OptUpdateTemplateBodyTemplateJson `json:"templateJson"`
+	EncodedTemplateYaml OptString                         `json:"encodedTemplateYaml"`
 }
 
 // GetUUID returns the value of UUID.
-func (s *UpdateTemplateRequest) GetUUID() uuid.UUID {
+func (s *UpdateTemplateBody) GetUUID() uuid.UUID {
 	return s.UUID
 }
 
 // GetName returns the value of Name.
-func (s *UpdateTemplateRequest) GetName() OptString {
+func (s *UpdateTemplateBody) GetName() OptString {
 	return s.Name
 }
 
 // GetTemplateJson returns the value of TemplateJson.
-func (s *UpdateTemplateRequest) GetTemplateJson() *UpdateTemplateRequestTemplateJson {
+func (s *UpdateTemplateBody) GetTemplateJson() OptUpdateTemplateBodyTemplateJson {
 	return s.TemplateJson
 }
 
 // GetEncodedTemplateYaml returns the value of EncodedTemplateYaml.
-func (s *UpdateTemplateRequest) GetEncodedTemplateYaml() OptString {
+func (s *UpdateTemplateBody) GetEncodedTemplateYaml() OptString {
 	return s.EncodedTemplateYaml
 }
 
 // SetUUID sets the value of UUID.
-func (s *UpdateTemplateRequest) SetUUID(val uuid.UUID) {
+func (s *UpdateTemplateBody) SetUUID(val uuid.UUID) {
 	s.UUID = val
 }
 
 // SetName sets the value of Name.
-func (s *UpdateTemplateRequest) SetName(val OptString) {
+func (s *UpdateTemplateBody) SetName(val OptString) {
 	s.Name = val
 }
 
 // SetTemplateJson sets the value of TemplateJson.
-func (s *UpdateTemplateRequest) SetTemplateJson(val *UpdateTemplateRequestTemplateJson) {
+func (s *UpdateTemplateBody) SetTemplateJson(val OptUpdateTemplateBodyTemplateJson) {
 	s.TemplateJson = val
 }
 
 // SetEncodedTemplateYaml sets the value of EncodedTemplateYaml.
-func (s *UpdateTemplateRequest) SetEncodedTemplateYaml(val OptString) {
+func (s *UpdateTemplateBody) SetEncodedTemplateYaml(val OptString) {
 	s.EncodedTemplateYaml = val
 }
 
-type UpdateTemplateRequestTemplateJson struct{}
+type UpdateTemplateBodyTemplateJson map[string]jx.Raw
 
-// Ref: #/components/schemas/UpdateUserRequest
-type UpdateUserRequest struct {
+func (s *UpdateTemplateBodyTemplateJson) init() UpdateTemplateBodyTemplateJson {
+	m := *s
+	if m == nil {
+		m = map[string]jx.Raw{}
+		*s = m
+	}
+	return m
+}
+
+// Ref: #/components/schemas/UpdateUserBody
+type UpdateUserBody struct {
 	// Username of the user.
 	Username OptString `json:"username"`
-	// UUID of the user. UUID has higher priority than username, so if both are provided, username will
-	// be ignored.
-	UUID   OptUUID                    `json:"uuid"`
-	Status OptUpdateUserRequestStatus `json:"status"`
+	// ID of the user.
+	ID     OptFloat64              `json:"id"`
+	Status OptUpdateUserBodyStatus `json:"status"`
 	// Traffic limit in bytes. 0 - unlimited.
 	TrafficLimitBytes OptFloat64 `json:"trafficLimitBytes"`
-	// Available reset periods.
-	TrafficLimitStrategy OptUpdateUserRequestTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	// Traffic limit reset strategy.
+	TrafficLimitStrategy OptUpdateUserBodyTrafficLimitStrategy `json:"trafficLimitStrategy"`
 	// Expiration date: 2025-01-17T15:38:45.065Z.
-	ExpireAt             OptDateTime  `json:"expireAt"`
-	Description          OptNilString `json:"description"`
-	Tag                  OptNilString `json:"tag"`
-	TelegramId           OptNilInt    `json:"telegramId"`
-	Email                OptNilString `json:"email"`
-	HwidDeviceLimit      OptNilInt    `json:"hwidDeviceLimit"`
-	ActiveInternalSquads []uuid.UUID  `json:"activeInternalSquads"`
+	ExpireAt             OptDateTime   `json:"expireAt"`
+	Description          OptNilString  `json:"description"`
+	Tag                  OptNilString  `json:"tag"`
+	TelegramId           OptNilFloat64 `json:"telegramId"`
+	Email                OptNilString  `json:"email"`
+	HwidDeviceLimit      OptNilInt     `json:"hwidDeviceLimit"`
+	ActiveInternalSquads []uuid.UUID   `json:"activeInternalSquads"`
 	// Optional. External squad UUID.
 	ExternalSquadUuid OptNilUUID `json:"externalSquadUuid"`
 }
 
 // GetUsername returns the value of Username.
-func (s *UpdateUserRequest) GetUsername() OptString {
+func (s *UpdateUserBody) GetUsername() OptString {
 	return s.Username
 }
 
-// GetUUID returns the value of UUID.
-func (s *UpdateUserRequest) GetUUID() OptUUID {
-	return s.UUID
+// GetID returns the value of ID.
+func (s *UpdateUserBody) GetID() OptFloat64 {
+	return s.ID
 }
 
 // GetStatus returns the value of Status.
-func (s *UpdateUserRequest) GetStatus() OptUpdateUserRequestStatus {
+func (s *UpdateUserBody) GetStatus() OptUpdateUserBodyStatus {
 	return s.Status
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UpdateUserRequest) GetTrafficLimitBytes() OptFloat64 {
+func (s *UpdateUserBody) GetTrafficLimitBytes() OptFloat64 {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *UpdateUserRequest) GetTrafficLimitStrategy() OptUpdateUserRequestTrafficLimitStrategy {
+func (s *UpdateUserBody) GetTrafficLimitStrategy() OptUpdateUserBodyTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
 // GetExpireAt returns the value of ExpireAt.
-func (s *UpdateUserRequest) GetExpireAt() OptDateTime {
+func (s *UpdateUserBody) GetExpireAt() OptDateTime {
 	return s.ExpireAt
 }
 
 // GetDescription returns the value of Description.
-func (s *UpdateUserRequest) GetDescription() OptNilString {
+func (s *UpdateUserBody) GetDescription() OptNilString {
 	return s.Description
 }
 
 // GetTag returns the value of Tag.
-func (s *UpdateUserRequest) GetTag() OptNilString {
+func (s *UpdateUserBody) GetTag() OptNilString {
 	return s.Tag
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *UpdateUserRequest) GetTelegramId() OptNilInt {
+func (s *UpdateUserBody) GetTelegramId() OptNilFloat64 {
 	return s.TelegramId
 }
 
 // GetEmail returns the value of Email.
-func (s *UpdateUserRequest) GetEmail() OptNilString {
+func (s *UpdateUserBody) GetEmail() OptNilString {
 	return s.Email
 }
 
 // GetHwidDeviceLimit returns the value of HwidDeviceLimit.
-func (s *UpdateUserRequest) GetHwidDeviceLimit() OptNilInt {
+func (s *UpdateUserBody) GetHwidDeviceLimit() OptNilInt {
 	return s.HwidDeviceLimit
 }
 
 // GetActiveInternalSquads returns the value of ActiveInternalSquads.
-func (s *UpdateUserRequest) GetActiveInternalSquads() []uuid.UUID {
+func (s *UpdateUserBody) GetActiveInternalSquads() []uuid.UUID {
 	return s.ActiveInternalSquads
 }
 
 // GetExternalSquadUuid returns the value of ExternalSquadUuid.
-func (s *UpdateUserRequest) GetExternalSquadUuid() OptNilUUID {
+func (s *UpdateUserBody) GetExternalSquadUuid() OptNilUUID {
 	return s.ExternalSquadUuid
 }
 
 // SetUsername sets the value of Username.
-func (s *UpdateUserRequest) SetUsername(val OptString) {
+func (s *UpdateUserBody) SetUsername(val OptString) {
 	s.Username = val
 }
 
-// SetUUID sets the value of UUID.
-func (s *UpdateUserRequest) SetUUID(val OptUUID) {
-	s.UUID = val
+// SetID sets the value of ID.
+func (s *UpdateUserBody) SetID(val OptFloat64) {
+	s.ID = val
 }
 
 // SetStatus sets the value of Status.
-func (s *UpdateUserRequest) SetStatus(val OptUpdateUserRequestStatus) {
+func (s *UpdateUserBody) SetStatus(val OptUpdateUserBodyStatus) {
 	s.Status = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UpdateUserRequest) SetTrafficLimitBytes(val OptFloat64) {
+func (s *UpdateUserBody) SetTrafficLimitBytes(val OptFloat64) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *UpdateUserRequest) SetTrafficLimitStrategy(val OptUpdateUserRequestTrafficLimitStrategy) {
+func (s *UpdateUserBody) SetTrafficLimitStrategy(val OptUpdateUserBodyTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
 // SetExpireAt sets the value of ExpireAt.
-func (s *UpdateUserRequest) SetExpireAt(val OptDateTime) {
+func (s *UpdateUserBody) SetExpireAt(val OptDateTime) {
 	s.ExpireAt = val
 }
 
 // SetDescription sets the value of Description.
-func (s *UpdateUserRequest) SetDescription(val OptNilString) {
+func (s *UpdateUserBody) SetDescription(val OptNilString) {
 	s.Description = val
 }
 
 // SetTag sets the value of Tag.
-func (s *UpdateUserRequest) SetTag(val OptNilString) {
+func (s *UpdateUserBody) SetTag(val OptNilString) {
 	s.Tag = val
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *UpdateUserRequest) SetTelegramId(val OptNilInt) {
+func (s *UpdateUserBody) SetTelegramId(val OptNilFloat64) {
 	s.TelegramId = val
 }
 
 // SetEmail sets the value of Email.
-func (s *UpdateUserRequest) SetEmail(val OptNilString) {
+func (s *UpdateUserBody) SetEmail(val OptNilString) {
 	s.Email = val
 }
 
 // SetHwidDeviceLimit sets the value of HwidDeviceLimit.
-func (s *UpdateUserRequest) SetHwidDeviceLimit(val OptNilInt) {
+func (s *UpdateUserBody) SetHwidDeviceLimit(val OptNilInt) {
 	s.HwidDeviceLimit = val
 }
 
 // SetActiveInternalSquads sets the value of ActiveInternalSquads.
-func (s *UpdateUserRequest) SetActiveInternalSquads(val []uuid.UUID) {
+func (s *UpdateUserBody) SetActiveInternalSquads(val []uuid.UUID) {
 	s.ActiveInternalSquads = val
 }
 
 // SetExternalSquadUuid sets the value of ExternalSquadUuid.
-func (s *UpdateUserRequest) SetExternalSquadUuid(val OptNilUUID) {
+func (s *UpdateUserBody) SetExternalSquadUuid(val OptNilUUID) {
 	s.ExternalSquadUuid = val
 }
 
-type UpdateUserRequestStatus string
+type UpdateUserBodyStatus string
 
 const (
-	UpdateUserRequestStatusACTIVE   UpdateUserRequestStatus = "ACTIVE"
-	UpdateUserRequestStatusDISABLED UpdateUserRequestStatus = "DISABLED"
+	UpdateUserBodyStatusACTIVE   UpdateUserBodyStatus = "ACTIVE"
+	UpdateUserBodyStatusDISABLED UpdateUserBodyStatus = "DISABLED"
 )
 
-// AllValues returns all UpdateUserRequestStatus values.
-func (UpdateUserRequestStatus) AllValues() []UpdateUserRequestStatus {
-	return []UpdateUserRequestStatus{
-		UpdateUserRequestStatusACTIVE,
-		UpdateUserRequestStatusDISABLED,
+// AllValues returns all UpdateUserBodyStatus values.
+func (UpdateUserBodyStatus) AllValues() []UpdateUserBodyStatus {
+	return []UpdateUserBodyStatus{
+		UpdateUserBodyStatusACTIVE,
+		UpdateUserBodyStatusDISABLED,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateUserRequestStatus) MarshalText() ([]byte, error) {
+func (s UpdateUserBodyStatus) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateUserRequestStatusACTIVE:
+	case UpdateUserBodyStatusACTIVE:
 		return []byte(s), nil
-	case UpdateUserRequestStatusDISABLED:
+	case UpdateUserBodyStatusDISABLED:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -23724,53 +22164,53 @@ func (s UpdateUserRequestStatus) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateUserRequestStatus) UnmarshalText(data []byte) error {
-	switch UpdateUserRequestStatus(data) {
-	case UpdateUserRequestStatusACTIVE:
-		*s = UpdateUserRequestStatusACTIVE
+func (s *UpdateUserBodyStatus) UnmarshalText(data []byte) error {
+	switch UpdateUserBodyStatus(data) {
+	case UpdateUserBodyStatusACTIVE:
+		*s = UpdateUserBodyStatusACTIVE
 		return nil
-	case UpdateUserRequestStatusDISABLED:
-		*s = UpdateUserRequestStatusDISABLED
+	case UpdateUserBodyStatusDISABLED:
+		*s = UpdateUserBodyStatusDISABLED
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Available reset periods.
-type UpdateUserRequestTrafficLimitStrategy string
+// Traffic limit reset strategy.
+type UpdateUserBodyTrafficLimitStrategy string
 
 const (
-	UpdateUserRequestTrafficLimitStrategyNORESET      UpdateUserRequestTrafficLimitStrategy = "NO_RESET"
-	UpdateUserRequestTrafficLimitStrategyDAY          UpdateUserRequestTrafficLimitStrategy = "DAY"
-	UpdateUserRequestTrafficLimitStrategyWEEK         UpdateUserRequestTrafficLimitStrategy = "WEEK"
-	UpdateUserRequestTrafficLimitStrategyMONTH        UpdateUserRequestTrafficLimitStrategy = "MONTH"
-	UpdateUserRequestTrafficLimitStrategyMONTHROLLING UpdateUserRequestTrafficLimitStrategy = "MONTH_ROLLING"
+	UpdateUserBodyTrafficLimitStrategyNORESET      UpdateUserBodyTrafficLimitStrategy = "NO_RESET"
+	UpdateUserBodyTrafficLimitStrategyDAY          UpdateUserBodyTrafficLimitStrategy = "DAY"
+	UpdateUserBodyTrafficLimitStrategyWEEK         UpdateUserBodyTrafficLimitStrategy = "WEEK"
+	UpdateUserBodyTrafficLimitStrategyMONTH        UpdateUserBodyTrafficLimitStrategy = "MONTH"
+	UpdateUserBodyTrafficLimitStrategyMONTHROLLING UpdateUserBodyTrafficLimitStrategy = "MONTH_ROLLING"
 )
 
-// AllValues returns all UpdateUserRequestTrafficLimitStrategy values.
-func (UpdateUserRequestTrafficLimitStrategy) AllValues() []UpdateUserRequestTrafficLimitStrategy {
-	return []UpdateUserRequestTrafficLimitStrategy{
-		UpdateUserRequestTrafficLimitStrategyNORESET,
-		UpdateUserRequestTrafficLimitStrategyDAY,
-		UpdateUserRequestTrafficLimitStrategyWEEK,
-		UpdateUserRequestTrafficLimitStrategyMONTH,
-		UpdateUserRequestTrafficLimitStrategyMONTHROLLING,
+// AllValues returns all UpdateUserBodyTrafficLimitStrategy values.
+func (UpdateUserBodyTrafficLimitStrategy) AllValues() []UpdateUserBodyTrafficLimitStrategy {
+	return []UpdateUserBodyTrafficLimitStrategy{
+		UpdateUserBodyTrafficLimitStrategyNORESET,
+		UpdateUserBodyTrafficLimitStrategyDAY,
+		UpdateUserBodyTrafficLimitStrategyWEEK,
+		UpdateUserBodyTrafficLimitStrategyMONTH,
+		UpdateUserBodyTrafficLimitStrategyMONTHROLLING,
 	}
 }
 
 // MarshalText implements encoding.TextMarshaler.
-func (s UpdateUserRequestTrafficLimitStrategy) MarshalText() ([]byte, error) {
+func (s UpdateUserBodyTrafficLimitStrategy) MarshalText() ([]byte, error) {
 	switch s {
-	case UpdateUserRequestTrafficLimitStrategyNORESET:
+	case UpdateUserBodyTrafficLimitStrategyNORESET:
 		return []byte(s), nil
-	case UpdateUserRequestTrafficLimitStrategyDAY:
+	case UpdateUserBodyTrafficLimitStrategyDAY:
 		return []byte(s), nil
-	case UpdateUserRequestTrafficLimitStrategyWEEK:
+	case UpdateUserBodyTrafficLimitStrategyWEEK:
 		return []byte(s), nil
-	case UpdateUserRequestTrafficLimitStrategyMONTH:
+	case UpdateUserBodyTrafficLimitStrategyMONTH:
 		return []byte(s), nil
-	case UpdateUserRequestTrafficLimitStrategyMONTHROLLING:
+	case UpdateUserBodyTrafficLimitStrategyMONTHROLLING:
 		return []byte(s), nil
 	default:
 		return nil, errors.Errorf("invalid value: %q", s)
@@ -23778,44 +22218,80 @@ func (s UpdateUserRequestTrafficLimitStrategy) MarshalText() ([]byte, error) {
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
-func (s *UpdateUserRequestTrafficLimitStrategy) UnmarshalText(data []byte) error {
-	switch UpdateUserRequestTrafficLimitStrategy(data) {
-	case UpdateUserRequestTrafficLimitStrategyNORESET:
-		*s = UpdateUserRequestTrafficLimitStrategyNORESET
+func (s *UpdateUserBodyTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch UpdateUserBodyTrafficLimitStrategy(data) {
+	case UpdateUserBodyTrafficLimitStrategyNORESET:
+		*s = UpdateUserBodyTrafficLimitStrategyNORESET
 		return nil
-	case UpdateUserRequestTrafficLimitStrategyDAY:
-		*s = UpdateUserRequestTrafficLimitStrategyDAY
+	case UpdateUserBodyTrafficLimitStrategyDAY:
+		*s = UpdateUserBodyTrafficLimitStrategyDAY
 		return nil
-	case UpdateUserRequestTrafficLimitStrategyWEEK:
-		*s = UpdateUserRequestTrafficLimitStrategyWEEK
+	case UpdateUserBodyTrafficLimitStrategyWEEK:
+		*s = UpdateUserBodyTrafficLimitStrategyWEEK
 		return nil
-	case UpdateUserRequestTrafficLimitStrategyMONTH:
-		*s = UpdateUserRequestTrafficLimitStrategyMONTH
+	case UpdateUserBodyTrafficLimitStrategyMONTH:
+		*s = UpdateUserBodyTrafficLimitStrategyMONTH
 		return nil
-	case UpdateUserRequestTrafficLimitStrategyMONTHROLLING:
-		*s = UpdateUserRequestTrafficLimitStrategyMONTHROLLING
+	case UpdateUserBodyTrafficLimitStrategyMONTHROLLING:
+		*s = UpdateUserBodyTrafficLimitStrategyMONTHROLLING
 		return nil
 	default:
 		return errors.Errorf("invalid value: %q", data)
 	}
 }
 
-// Ref: #/components/schemas/UpsertUserMetadataRequestBodyRequest
-type UpsertUserMetadataRequestBodyRequest struct {
-	Metadata UpsertUserMetadataRequestBodyRequestMetadata `json:"metadata"`
+// Ref: #/components/schemas/UpsertUserMetadataBodyRequest
+type UpsertUserMetadataBodyRequest struct {
+	Metadata UpsertUserMetadataBodyRequestMetadata `json:"metadata"`
 }
 
 // GetMetadata returns the value of Metadata.
-func (s *UpsertUserMetadataRequestBodyRequest) GetMetadata() UpsertUserMetadataRequestBodyRequestMetadata {
+func (s *UpsertUserMetadataBodyRequest) GetMetadata() UpsertUserMetadataBodyRequestMetadata {
 	return s.Metadata
 }
 
 // SetMetadata sets the value of Metadata.
-func (s *UpsertUserMetadataRequestBodyRequest) SetMetadata(val UpsertUserMetadataRequestBodyRequestMetadata) {
+func (s *UpsertUserMetadataBodyRequest) SetMetadata(val UpsertUserMetadataBodyRequestMetadata) {
 	s.Metadata = val
 }
 
-type UpsertUserMetadataRequestBodyRequestMetadata struct{}
+type UpsertUserMetadataBodyRequestMetadata map[string]jx.Raw
+
+func (s *UpsertUserMetadataBodyRequestMetadata) init() UpsertUserMetadataBodyRequestMetadata {
+	m := *s
+	if m == nil {
+		m = map[string]jx.Raw{}
+		*s = m
+	}
+	return m
+}
+
+// Ref: #/components/schemas/User
+type User struct {
+	ID float64 `json:"id"`
+	// Total used bytes over the period (raw bytes).
+	TotalBytes float64 `json:"totalBytes"`
+}
+
+// GetID returns the value of ID.
+func (s *User) GetID() float64 {
+	return s.ID
+}
+
+// GetTotalBytes returns the value of TotalBytes.
+func (s *User) GetTotalBytes() float64 {
+	return s.TotalBytes
+}
+
+// SetID sets the value of ID.
+func (s *User) SetID(val float64) {
+	s.ID = val
+}
+
+// SetTotalBytes sets the value of TotalBytes.
+func (s *User) SetTotalBytes(val float64) {
+	s.TotalBytes = val
+}
 
 // Ref: #/components/schemas/UserItem2
 type UserItem2 struct {
@@ -24083,37 +22559,31 @@ func (s *UserItem2UserStatus) UnmarshalText(data []byte) error {
 
 // Ref: #/components/schemas/UserItemInfo
 type UserItemInfo struct {
-	UUID              uuid.UUID             `json:"uuid"`
-	ID                float64               `json:"id"`
-	ShortUuid         string                `json:"shortUuid"`
-	Username          string                `json:"username"`
-	Status            OptUserItemInfoStatus `json:"status"`
-	TrafficLimitBytes OptFloat64            `json:"trafficLimitBytes"`
+	ID                float64            `json:"id"`
+	ShortUuid         string             `json:"shortUuid"`
+	Username          string             `json:"username"`
+	Status            UserItemInfoStatus `json:"status"`
+	TrafficLimitBytes float64            `json:"trafficLimitBytes"`
 	// Available reset periods.
-	TrafficLimitStrategy   OptUserItemInfoTrafficLimitStrategy `json:"trafficLimitStrategy"`
-	ExpireAt               time.Time                           `json:"expireAt"`
-	TelegramId             NilInt                              `json:"telegramId"`
-	Email                  NilString                           `json:"email"`
-	Description            NilString                           `json:"description"`
-	Tag                    NilString                           `json:"tag"`
-	HwidDeviceLimit        NilInt                              `json:"hwidDeviceLimit"`
-	ExternalSquadUuid      NilUUID                             `json:"externalSquadUuid"`
-	TrojanPassword         string                              `json:"trojanPassword"`
-	VlessUuid              uuid.UUID                           `json:"vlessUuid"`
-	SsPassword             string                              `json:"ssPassword"`
-	LastTriggeredThreshold OptInt                              `json:"lastTriggeredThreshold"`
-	SubRevokedAt           NilDateTime                         `json:"subRevokedAt"`
-	LastTrafficResetAt     NilDateTime                         `json:"lastTrafficResetAt"`
-	CreatedAt              time.Time                           `json:"createdAt"`
-	UpdatedAt              time.Time                           `json:"updatedAt"`
-	SubscriptionUrl        string                              `json:"subscriptionUrl"`
-	ActiveInternalSquads   []ActiveInternalSquad               `json:"activeInternalSquads"`
-	UserTraffic            UserTrafficItem                     `json:"userTraffic"`
-}
-
-// GetUUID returns the value of UUID.
-func (s *UserItemInfo) GetUUID() uuid.UUID {
-	return s.UUID
+	TrafficLimitStrategy   UserItemInfoTrafficLimitStrategy `json:"trafficLimitStrategy"`
+	ExpireAt               time.Time                        `json:"expireAt"`
+	TelegramId             NilFloat64                       `json:"telegramId"`
+	Email                  NilString                        `json:"email"`
+	Description            NilString                        `json:"description"`
+	Tag                    NilString                        `json:"tag"`
+	HwidDeviceLimit        NilInt                           `json:"hwidDeviceLimit"`
+	ExternalSquadUuid      NilUUID                          `json:"externalSquadUuid"`
+	TrojanPassword         string                           `json:"trojanPassword"`
+	VlessUuid              uuid.UUID                        `json:"vlessUuid"`
+	SsPassword             string                           `json:"ssPassword"`
+	LastTriggeredThreshold int                              `json:"lastTriggeredThreshold"`
+	SubRevokedAt           NilDateTime                      `json:"subRevokedAt"`
+	LastTrafficResetAt     NilDateTime                      `json:"lastTrafficResetAt"`
+	CreatedAt              time.Time                        `json:"createdAt"`
+	UpdatedAt              time.Time                        `json:"updatedAt"`
+	SubscriptionUrl        string                           `json:"subscriptionUrl"`
+	ActiveInternalSquads   []ActiveInternalSquad            `json:"activeInternalSquads"`
+	UserTraffic            UserTrafficItem                  `json:"userTraffic"`
 }
 
 // GetID returns the value of ID.
@@ -24132,17 +22602,17 @@ func (s *UserItemInfo) GetUsername() string {
 }
 
 // GetStatus returns the value of Status.
-func (s *UserItemInfo) GetStatus() OptUserItemInfoStatus {
+func (s *UserItemInfo) GetStatus() UserItemInfoStatus {
 	return s.Status
 }
 
 // GetTrafficLimitBytes returns the value of TrafficLimitBytes.
-func (s *UserItemInfo) GetTrafficLimitBytes() OptFloat64 {
+func (s *UserItemInfo) GetTrafficLimitBytes() float64 {
 	return s.TrafficLimitBytes
 }
 
 // GetTrafficLimitStrategy returns the value of TrafficLimitStrategy.
-func (s *UserItemInfo) GetTrafficLimitStrategy() OptUserItemInfoTrafficLimitStrategy {
+func (s *UserItemInfo) GetTrafficLimitStrategy() UserItemInfoTrafficLimitStrategy {
 	return s.TrafficLimitStrategy
 }
 
@@ -24152,7 +22622,7 @@ func (s *UserItemInfo) GetExpireAt() time.Time {
 }
 
 // GetTelegramId returns the value of TelegramId.
-func (s *UserItemInfo) GetTelegramId() NilInt {
+func (s *UserItemInfo) GetTelegramId() NilFloat64 {
 	return s.TelegramId
 }
 
@@ -24197,7 +22667,7 @@ func (s *UserItemInfo) GetSsPassword() string {
 }
 
 // GetLastTriggeredThreshold returns the value of LastTriggeredThreshold.
-func (s *UserItemInfo) GetLastTriggeredThreshold() OptInt {
+func (s *UserItemInfo) GetLastTriggeredThreshold() int {
 	return s.LastTriggeredThreshold
 }
 
@@ -24236,11 +22706,6 @@ func (s *UserItemInfo) GetUserTraffic() UserTrafficItem {
 	return s.UserTraffic
 }
 
-// SetUUID sets the value of UUID.
-func (s *UserItemInfo) SetUUID(val uuid.UUID) {
-	s.UUID = val
-}
-
 // SetID sets the value of ID.
 func (s *UserItemInfo) SetID(val float64) {
 	s.ID = val
@@ -24257,17 +22722,17 @@ func (s *UserItemInfo) SetUsername(val string) {
 }
 
 // SetStatus sets the value of Status.
-func (s *UserItemInfo) SetStatus(val OptUserItemInfoStatus) {
+func (s *UserItemInfo) SetStatus(val UserItemInfoStatus) {
 	s.Status = val
 }
 
 // SetTrafficLimitBytes sets the value of TrafficLimitBytes.
-func (s *UserItemInfo) SetTrafficLimitBytes(val OptFloat64) {
+func (s *UserItemInfo) SetTrafficLimitBytes(val float64) {
 	s.TrafficLimitBytes = val
 }
 
 // SetTrafficLimitStrategy sets the value of TrafficLimitStrategy.
-func (s *UserItemInfo) SetTrafficLimitStrategy(val OptUserItemInfoTrafficLimitStrategy) {
+func (s *UserItemInfo) SetTrafficLimitStrategy(val UserItemInfoTrafficLimitStrategy) {
 	s.TrafficLimitStrategy = val
 }
 
@@ -24277,7 +22742,7 @@ func (s *UserItemInfo) SetExpireAt(val time.Time) {
 }
 
 // SetTelegramId sets the value of TelegramId.
-func (s *UserItemInfo) SetTelegramId(val NilInt) {
+func (s *UserItemInfo) SetTelegramId(val NilFloat64) {
 	s.TelegramId = val
 }
 
@@ -24322,7 +22787,7 @@ func (s *UserItemInfo) SetSsPassword(val string) {
 }
 
 // SetLastTriggeredThreshold sets the value of LastTriggeredThreshold.
-func (s *UserItemInfo) SetLastTriggeredThreshold(val OptInt) {
+func (s *UserItemInfo) SetLastTriggeredThreshold(val int) {
 	s.LastTriggeredThreshold = val
 }
 
@@ -24513,7 +22978,16 @@ func (s *UserMetadataResponseResponseResponse) SetMetadata(val UserMetadataRespo
 	s.Metadata = val
 }
 
-type UserMetadataResponseResponseResponseMetadata struct{}
+type UserMetadataResponseResponseResponseMetadata map[string]jx.Raw
+
+func (s *UserMetadataResponseResponseResponseMetadata) init() UserMetadataResponseResponseResponseMetadata {
+	m := *s
+	if m == nil {
+		m = map[string]jx.Raw{}
+		*s = m
+	}
+	return m
+}
 
 // Ref: #/components/schemas/UserResponse
 type UserResponse struct {
@@ -24530,42 +23004,16 @@ func (s *UserResponse) SetResponse(val UserItemInfo) {
 	s.Response = val
 }
 
-func (*UserResponse) usersCreateUserRes()             {}
-func (*UserResponse) usersDisableUserRes()            {}
-func (*UserResponse) usersEnableUserRes()             {}
-func (*UserResponse) usersGetUserByIdRes()            {}
-func (*UserResponse) usersGetUserByShortUuidRes()     {}
-func (*UserResponse) usersGetUserByUsernameRes()      {}
-func (*UserResponse) usersGetUserByUuidRes()          {}
-func (*UserResponse) usersResetUserTrafficRes()       {}
-func (*UserResponse) usersRevokeUserSubscriptionRes() {}
-func (*UserResponse) usersUpdateUserRes()             {}
-
-// Ref: #/components/schemas/UserSubscriptionHistory
-type UserSubscriptionHistory struct {
-	Total   float64  `json:"total"`
-	Records []Record `json:"records"`
-}
-
-// GetTotal returns the value of Total.
-func (s *UserSubscriptionHistory) GetTotal() float64 {
-	return s.Total
-}
-
-// GetRecords returns the value of Records.
-func (s *UserSubscriptionHistory) GetRecords() []Record {
-	return s.Records
-}
-
-// SetTotal sets the value of Total.
-func (s *UserSubscriptionHistory) SetTotal(val float64) {
-	s.Total = val
-}
-
-// SetRecords sets the value of Records.
-func (s *UserSubscriptionHistory) SetRecords(val []Record) {
-	s.Records = val
-}
+func (*UserResponse) usersCreateUserRes()               {}
+func (*UserResponse) usersDisableUserRes()              {}
+func (*UserResponse) usersEnableUserRes()               {}
+func (*UserResponse) usersExtendUserExpirationDateRes() {}
+func (*UserResponse) usersGetUserByIdRes()              {}
+func (*UserResponse) usersGetUserByShortUuidRes()       {}
+func (*UserResponse) usersGetUserByUsernameRes()        {}
+func (*UserResponse) usersResetUserTrafficRes()         {}
+func (*UserResponse) usersRevokeUserSubscriptionRes()   {}
+func (*UserResponse) usersUpdateUserRes()               {}
 
 // Ref: #/components/schemas/UserTrafficItem
 type UserTrafficItem struct {
@@ -24626,24 +23074,231 @@ func (s *UserTrafficItem) SetLastConnectedNodeUuid(val NilUUID) {
 	s.LastConnectedNodeUuid = val
 }
 
-// Ref: #/components/schemas/UsersResponse
-type UsersResponse struct {
-	Response []UserItemInfo `json:"response"`
+// Ref: #/components/schemas/UsersBodyBulkRequest
+type UsersBodyBulkRequest struct {
+	UserIds []float64 `json:"userIds"`
+}
+
+// GetUserIds returns the value of UserIds.
+func (s *UsersBodyBulkRequest) GetUserIds() []float64 {
+	return s.UserIds
+}
+
+// SetUserIds sets the value of UserIds.
+func (s *UsersBodyBulkRequest) SetUserIds(val []float64) {
+	s.UserIds = val
+}
+
+// UsersBulkActionsBulkAllExtendExpirationDateAccepted is response for UsersBulkActionsBulkAllExtendExpirationDate operation.
+type UsersBulkActionsBulkAllExtendExpirationDateAccepted struct{}
+
+func (*UsersBulkActionsBulkAllExtendExpirationDateAccepted) usersBulkActionsBulkAllExtendExpirationDateRes() {
+}
+
+// UsersBulkActionsBulkAllResetUserTrafficAccepted is response for UsersBulkActionsBulkAllResetUserTraffic operation.
+type UsersBulkActionsBulkAllResetUserTrafficAccepted struct{}
+
+func (*UsersBulkActionsBulkAllResetUserTrafficAccepted) usersBulkActionsBulkAllResetUserTrafficRes() {
+}
+
+// UsersBulkActionsBulkDeleteUsersByStatusAccepted is response for UsersBulkActionsBulkDeleteUsersByStatus operation.
+type UsersBulkActionsBulkDeleteUsersByStatusAccepted struct{}
+
+func (*UsersBulkActionsBulkDeleteUsersByStatusAccepted) usersBulkActionsBulkDeleteUsersByStatusRes() {
+}
+
+// UsersBulkActionsBulkDeleteUsersNoContent is response for UsersBulkActionsBulkDeleteUsers operation.
+type UsersBulkActionsBulkDeleteUsersNoContent struct{}
+
+func (*UsersBulkActionsBulkDeleteUsersNoContent) usersBulkActionsBulkDeleteUsersRes() {}
+
+// UsersBulkActionsBulkExtendExpirationDateNoContent is response for UsersBulkActionsBulkExtendExpirationDate operation.
+type UsersBulkActionsBulkExtendExpirationDateNoContent struct{}
+
+func (*UsersBulkActionsBulkExtendExpirationDateNoContent) usersBulkActionsBulkExtendExpirationDateRes() {
+}
+
+// UsersBulkActionsBulkResetUserTrafficAccepted is response for UsersBulkActionsBulkResetUserTraffic operation.
+type UsersBulkActionsBulkResetUserTrafficAccepted struct{}
+
+func (*UsersBulkActionsBulkResetUserTrafficAccepted) usersBulkActionsBulkResetUserTrafficRes() {}
+
+// UsersBulkActionsBulkRevokeUsersSubscriptionAccepted is response for UsersBulkActionsBulkRevokeUsersSubscription operation.
+type UsersBulkActionsBulkRevokeUsersSubscriptionAccepted struct{}
+
+func (*UsersBulkActionsBulkRevokeUsersSubscriptionAccepted) usersBulkActionsBulkRevokeUsersSubscriptionRes() {
+}
+
+// UsersBulkActionsBulkUpdateAllUsersAccepted is response for UsersBulkActionsBulkUpdateAllUsers operation.
+type UsersBulkActionsBulkUpdateAllUsersAccepted struct{}
+
+func (*UsersBulkActionsBulkUpdateAllUsersAccepted) usersBulkActionsBulkUpdateAllUsersRes() {}
+
+// UsersBulkActionsBulkUpdateUsersAccepted is response for UsersBulkActionsBulkUpdateUsers operation.
+type UsersBulkActionsBulkUpdateUsersAccepted struct{}
+
+func (*UsersBulkActionsBulkUpdateUsersAccepted) usersBulkActionsBulkUpdateUsersRes() {}
+
+// UsersBulkActionsBulkUpdateUsersInternalSquadsNoContent is response for UsersBulkActionsBulkUpdateUsersInternalSquads operation.
+type UsersBulkActionsBulkUpdateUsersInternalSquadsNoContent struct{}
+
+func (*UsersBulkActionsBulkUpdateUsersInternalSquadsNoContent) usersBulkActionsBulkUpdateUsersInternalSquadsRes() {
+}
+
+// UsersDeleteUserNoContent is response for UsersDeleteUser operation.
+type UsersDeleteUserNoContent struct{}
+
+func (*UsersDeleteUserNoContent) usersDeleteUserRes() {}
+
+type UsersGetUsersStreamStatus string
+
+const (
+	UsersGetUsersStreamStatusACTIVE   UsersGetUsersStreamStatus = "ACTIVE"
+	UsersGetUsersStreamStatusDISABLED UsersGetUsersStreamStatus = "DISABLED"
+	UsersGetUsersStreamStatusLIMITED  UsersGetUsersStreamStatus = "LIMITED"
+	UsersGetUsersStreamStatusEXPIRED  UsersGetUsersStreamStatus = "EXPIRED"
+)
+
+// AllValues returns all UsersGetUsersStreamStatus values.
+func (UsersGetUsersStreamStatus) AllValues() []UsersGetUsersStreamStatus {
+	return []UsersGetUsersStreamStatus{
+		UsersGetUsersStreamStatusACTIVE,
+		UsersGetUsersStreamStatusDISABLED,
+		UsersGetUsersStreamStatusLIMITED,
+		UsersGetUsersStreamStatusEXPIRED,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UsersGetUsersStreamStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case UsersGetUsersStreamStatusACTIVE:
+		return []byte(s), nil
+	case UsersGetUsersStreamStatusDISABLED:
+		return []byte(s), nil
+	case UsersGetUsersStreamStatusLIMITED:
+		return []byte(s), nil
+	case UsersGetUsersStreamStatusEXPIRED:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UsersGetUsersStreamStatus) UnmarshalText(data []byte) error {
+	switch UsersGetUsersStreamStatus(data) {
+	case UsersGetUsersStreamStatusACTIVE:
+		*s = UsersGetUsersStreamStatusACTIVE
+		return nil
+	case UsersGetUsersStreamStatusDISABLED:
+		*s = UsersGetUsersStreamStatusDISABLED
+		return nil
+	case UsersGetUsersStreamStatusLIMITED:
+		*s = UsersGetUsersStreamStatusLIMITED
+		return nil
+	case UsersGetUsersStreamStatusEXPIRED:
+		*s = UsersGetUsersStreamStatusEXPIRED
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type UsersGetUsersStreamTrafficLimitStrategy string
+
+const (
+	UsersGetUsersStreamTrafficLimitStrategyNORESET      UsersGetUsersStreamTrafficLimitStrategy = "NO_RESET"
+	UsersGetUsersStreamTrafficLimitStrategyDAY          UsersGetUsersStreamTrafficLimitStrategy = "DAY"
+	UsersGetUsersStreamTrafficLimitStrategyWEEK         UsersGetUsersStreamTrafficLimitStrategy = "WEEK"
+	UsersGetUsersStreamTrafficLimitStrategyMONTH        UsersGetUsersStreamTrafficLimitStrategy = "MONTH"
+	UsersGetUsersStreamTrafficLimitStrategyMONTHROLLING UsersGetUsersStreamTrafficLimitStrategy = "MONTH_ROLLING"
+)
+
+// AllValues returns all UsersGetUsersStreamTrafficLimitStrategy values.
+func (UsersGetUsersStreamTrafficLimitStrategy) AllValues() []UsersGetUsersStreamTrafficLimitStrategy {
+	return []UsersGetUsersStreamTrafficLimitStrategy{
+		UsersGetUsersStreamTrafficLimitStrategyNORESET,
+		UsersGetUsersStreamTrafficLimitStrategyDAY,
+		UsersGetUsersStreamTrafficLimitStrategyWEEK,
+		UsersGetUsersStreamTrafficLimitStrategyMONTH,
+		UsersGetUsersStreamTrafficLimitStrategyMONTHROLLING,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UsersGetUsersStreamTrafficLimitStrategy) MarshalText() ([]byte, error) {
+	switch s {
+	case UsersGetUsersStreamTrafficLimitStrategyNORESET:
+		return []byte(s), nil
+	case UsersGetUsersStreamTrafficLimitStrategyDAY:
+		return []byte(s), nil
+	case UsersGetUsersStreamTrafficLimitStrategyWEEK:
+		return []byte(s), nil
+	case UsersGetUsersStreamTrafficLimitStrategyMONTH:
+		return []byte(s), nil
+	case UsersGetUsersStreamTrafficLimitStrategyMONTHROLLING:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UsersGetUsersStreamTrafficLimitStrategy) UnmarshalText(data []byte) error {
+	switch UsersGetUsersStreamTrafficLimitStrategy(data) {
+	case UsersGetUsersStreamTrafficLimitStrategyNORESET:
+		*s = UsersGetUsersStreamTrafficLimitStrategyNORESET
+		return nil
+	case UsersGetUsersStreamTrafficLimitStrategyDAY:
+		*s = UsersGetUsersStreamTrafficLimitStrategyDAY
+		return nil
+	case UsersGetUsersStreamTrafficLimitStrategyWEEK:
+		*s = UsersGetUsersStreamTrafficLimitStrategyWEEK
+		return nil
+	case UsersGetUsersStreamTrafficLimitStrategyMONTH:
+		*s = UsersGetUsersStreamTrafficLimitStrategyMONTH
+		return nil
+	case UsersGetUsersStreamTrafficLimitStrategyMONTHROLLING:
+		*s = UsersGetUsersStreamTrafficLimitStrategyMONTHROLLING
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+// Ref: #/components/schemas/UsersTagsResponseResponse
+type UsersTagsResponseResponse struct {
+	Response UsersTagsResponseResponseResponse `json:"response"`
 }
 
 // GetResponse returns the value of Response.
-func (s *UsersResponse) GetResponse() []UserItemInfo {
+func (s *UsersTagsResponseResponse) GetResponse() UsersTagsResponseResponseResponse {
 	return s.Response
 }
 
 // SetResponse sets the value of Response.
-func (s *UsersResponse) SetResponse(val []UserItemInfo) {
+func (s *UsersTagsResponseResponse) SetResponse(val UsersTagsResponseResponseResponse) {
 	s.Response = val
 }
 
-func (*UsersResponse) usersGetUserByTelegramIdRes() {}
-func (*UsersResponse) usersGetUsersByEmailRes()     {}
-func (*UsersResponse) usersGetUsersByTagRes()       {}
+func (*UsersTagsResponseResponse) hostsGetHostsTagsRes() {}
+func (*UsersTagsResponseResponse) nodesGetNodesTagsRes() {}
+func (*UsersTagsResponseResponse) usersGetUsersTagsRes() {}
+
+type UsersTagsResponseResponseResponse struct {
+	Tags []string `json:"tags"`
+}
+
+// GetTags returns the value of Tags.
+func (s *UsersTagsResponseResponseResponse) GetTags() []string {
+	return s.Tags
+}
+
+// SetTags sets the value of Tags.
+func (s *UsersTagsResponseResponseResponse) SetTags(val []string) {
+	s.Tags = val
+}
 
 // Ref: #/components/schemas/ValidationError
 type ValidationError struct {
@@ -24708,6 +23363,8 @@ func (s *VerifyPasskeyRegistrationResponse) SetResponse(val VerifyPasskeyRegistr
 	s.Response = val
 }
 
+func (*VerifyPasskeyRegistrationResponse) passkeyPasskeyRegistrationVerifyRes() {}
+
 type VerifyPasskeyRegistrationResponseResponse struct {
 	Verified bool `json:"verified"`
 }
@@ -24721,34 +23378,6 @@ func (s *VerifyPasskeyRegistrationResponseResponse) GetVerified() bool {
 func (s *VerifyPasskeyRegistrationResponseResponse) SetVerified(val bool) {
 	s.Verified = val
 }
-
-// VerifyPasskeyRegistrationResponseStatusCode wraps VerifyPasskeyRegistrationResponse with StatusCode.
-type VerifyPasskeyRegistrationResponseStatusCode struct {
-	StatusCode int
-	Response   VerifyPasskeyRegistrationResponse
-}
-
-// GetStatusCode returns the value of StatusCode.
-func (s *VerifyPasskeyRegistrationResponseStatusCode) GetStatusCode() int {
-	return s.StatusCode
-}
-
-// GetResponse returns the value of Response.
-func (s *VerifyPasskeyRegistrationResponseStatusCode) GetResponse() VerifyPasskeyRegistrationResponse {
-	return s.Response
-}
-
-// SetStatusCode sets the value of StatusCode.
-func (s *VerifyPasskeyRegistrationResponseStatusCode) SetStatusCode(val int) {
-	s.StatusCode = val
-}
-
-// SetResponse sets the value of Response.
-func (s *VerifyPasskeyRegistrationResponseStatusCode) SetResponse(val VerifyPasskeyRegistrationResponse) {
-	s.Response = val
-}
-
-func (*VerifyPasskeyRegistrationResponseStatusCode) passkeyPasskeyRegistrationVerifyRes() {}
 
 // Ref: #/components/schemas/Version
 type Version struct {

@@ -10,6 +10,7 @@ A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 
 | API Version | SDK Version | Install |
 |-------------|-------------|---------|
+| 3.2.1 | v3.2.1 | `go get github.com/Jolymmiles/remnawave-api-go/v3@v3.2.1` |
 | 2.8.0 | v2.8.0 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.8.0` |
 | 2.6.1 | v2.6.1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.6.1` |
 | 2.5.3 | v2.5.3 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.5.3` |
@@ -24,13 +25,24 @@ Generated with [**ogen**](https://github.com/ogen-go/ogen) v1.19.0:
 * Per-request options via `RequestOption`
 * Request/response editors (middleware)
 * Organized sub-clients for clean API access
-* Simplified method signatures (no verbose Params structs)
+* Simplified method signatures for common operations, without verbose `Params` structs
 
 ## Installation
 
 ```bash
-go get github.com/Jolymmiles/remnawave-api-go/v2@v2.8.0
+go get github.com/Jolymmiles/remnawave-api-go/v3@v3.2.1
 ```
+
+## Breaking Changes in v3.2.1
+
+This is a major API release. User endpoints now use a numeric `id`; user UUIDs
+are no longer accepted as identifiers. Use `GetUserById`, `DeleteUser`,
+`EnableUser`, `DisableUser`, and other user operations with a numeric ID.
+`shortUuid` is a separate subscription hash and is available through the
+dedicated `GetUserByShortUuid` method.
+
+The OpenAPI specification now documents typed `400`, `404`, and `500` responses.
+Handle these response variants explicitly, in addition to transport errors.
 
 ## Quick Start
 
@@ -38,36 +50,46 @@ go get github.com/Jolymmiles/remnawave-api-go/v2@v2.8.0
 package main
 
 import (
-    "context"
-    "fmt"
-    remapi "github.com/Jolymmiles/remnawave-api-go/v2/api"
+	"context"
+	"fmt"
+	"log"
+	"time"
+
+	remapi "github.com/Jolymmiles/remnawave-api-go/v3/api"
 )
 
 func main() {
-    ctx := context.Background()
+	ctx := context.Background()
 
-    // Create base client
-    baseClient, _ := remapi.NewClient(
-        "https://your-panel.example.com",
-        remapi.StaticToken{Token: "YOUR_JWT_TOKEN"},
-    )
+	baseClient, err := remapi.NewClient(
+		"https://your-panel.example.com",
+		remapi.StaticToken{Token: "YOUR_JWT_TOKEN"},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    // Wrap with organized sub-clients
-    client := remapi.NewClientExt(baseClient)
+	client := remapi.NewClientExt(baseClient)
 
-    // Get user by UUID - simple string argument
-    user, _ := client.Users().GetUserByUuid(ctx, "user-uuid-here")
-    fmt.Printf("User: %s\n", user.(*remapi.UserResponse).Response.Username)
+	// User IDs are numeric in Remnawave 3.2.1.
+	user, err := client.Users().GetUserById(ctx, 123)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if response, ok := user.(*remapi.UserResponse); ok {
+		fmt.Printf("User: %s (ID: %.0f)\n", response.Response.Username, response.Response.ID)
+	}
 
-    // Get node by UUID
-    node, _ := client.Nodes().GetOneNode(ctx, "node-uuid-here")
-    fmt.Printf("Node: %s\n", node.(*remapi.NodeResponse).Response.Name)
-
-    // Create user
-    newUser, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequest{
-        Username: "john_doe",
-    })
-    fmt.Printf("Created: %s\n", newUser.(*remapi.UserResponse).Response.Username)
+	newUser, err := client.Users().CreateUser(ctx, &remapi.CreateUserBody{
+		Username: "john_doe",
+		ExpireAt: time.Now().AddDate(1, 0, 0),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	if response, ok := newUser.(*remapi.UserResponse); ok {
+		fmt.Printf("Created: %s (ID: %.0f)\n", response.Response.Username, response.Response.ID)
+	}
 }
 ```
 
@@ -80,13 +102,17 @@ func main() {
 | `client.BandwidthStatsNodes()` | Node bandwidth statistics |
 | `client.BandwidthStatsUsers()` | User bandwidth statistics |
 | `client.ConfigProfile()` | Config profiles |
+| `client.Connections()` | Active connection management |
 | `client.ExternalSquad()` | External squads |
 | `client.Hosts()` | Host management |
 | `client.HostsBulkActions()` | Bulk host operations |
-| `client.HwidUserDevices()` | HWID devices |![img.png](img.png)
+| `client.HwidUserDevices()` | HWID devices |
 | `client.InfraBilling()` | Infrastructure billing |
 | `client.InternalSquad()` | Internal squads |
+| `client.InternalSquadStats()` | Internal squad statistics |
 | `client.Keygen()` | Key generation |
+| `client.Metadata()` | User and node metadata |
+| `client.NodePlugin()` | Node plugin management |
 | `client.Nodes()` | Node management |
 | `client.NodesUsageHistory()` | Node usage history |
 | `client.Passkey()` | Passkey authentication |
@@ -98,6 +124,7 @@ func main() {
 | `client.SubscriptionTemplate()` | Subscription templates |
 | `client.Subscriptions()` | Multiple subscriptions |
 | `client.System()` | System info |
+| `client.TorrentBlockerReports()` | Torrent blocker reports |
 | `client.UserSubscriptionRequestHistory()` | Request history |
 | `client.Users()` | User management |
 | `client.UsersBulkActions()` | Bulk user operations |
@@ -107,7 +134,7 @@ func main() {
 Unified error types for consistent error handling:
 
 ```go
-resp, err := client.Users().GetUserByUuid(ctx, "invalid-uuid")
+resp, err := client.Users().GetUserById(ctx, 999999)
 if err != nil {
     panic(err)
 }
@@ -140,7 +167,7 @@ case *remapi.InternalServerError:
 
 ```go
 type ValidationError struct {
-    Validation string   // e.g., "uuid"
+    Validation string   // e.g., "number"
     Code       string   // e.g., "invalid_string"
     Message    string   // e.g., "Invalid uuid"
     Path       []string // e.g., ["uuid"]
@@ -152,8 +179,18 @@ type ValidationError struct {
 ### Users
 
 ```go
-// Get by UUID (simplified - just pass the string)
-user, _ := client.Users().GetUserByUuid(ctx, "uuid-here")
+// Get by numeric ID
+user, _ := client.Users().GetUserById(ctx, 123)
+
+// List with simple offset pagination.
+users, _ := client.Users().GetUsers(ctx, 0, 50)
+
+// Use WithParams only for optional JSON filters and sorting.
+users, _ = client.Users().GetUsersWithParams(ctx, remapi.UsersGetUsersParams{
+    Start: remapi.NewOptInt(0),
+    Size: remapi.NewOptInt(50),
+    Filters: remapi.NewOptString(`[{"id":"username","value":"john"}]`),
+})
 
 // Get by username
 user, _ := client.Users().GetUserByUsername(ctx, "john")
@@ -161,39 +198,48 @@ user, _ := client.Users().GetUserByUsername(ctx, "john")
 // Get by short UUID
 user, _ := client.Users().GetUserByShortUuid(ctx, "short-uuid")
 
-// Create
-user, _ := client.Users().CreateUser(ctx, &remapi.CreateUserRequest{
+// Create. ExpireAt is required.
+user, _ := client.Users().CreateUser(ctx, &remapi.CreateUserBody{
     Username: "new_user",
+    ExpireAt: time.Now().AddDate(1, 0, 0),
 })
 
 // Update
-user, _ := client.Users().UpdateUser(ctx, &remapi.UpdateUserRequest{
-    Uuid: "uuid-here",
+user, _ := client.Users().UpdateUser(ctx, &remapi.UpdateUserBody{
+    ID: remapi.NewOptFloat64(123),
+    Username: remapi.NewOptString("new_user"),
 })
 
 // Delete
-client.Users().DeleteUser(ctx, "uuid-here")
+client.Users().DeleteUser(ctx, 123)
 
 // Enable/Disable
-client.Users().EnableUser(ctx, "uuid-here")
-client.Users().DisableUser(ctx, "uuid-here")
+client.Users().EnableUser(ctx, 123)
+client.Users().DisableUser(ctx, 123)
 
 // Reset traffic
-client.Users().ResetUserTraffic(ctx, "uuid-here")
+client.Users().ResetUserTraffic(ctx, 123)
 ```
 
 ### Nodes
 
 ```go
 // List all
-nodes, _ := client.Nodes().GetAllNodes(ctx)
+nodes, _ := client.Nodes().GetNodes(ctx)
 
-// Get one (simplified)
-node, _ := client.Nodes().GetOneNode(ctx, "uuid-here")
+// Get one
+node, _ := client.Nodes().GetNode(ctx, "uuid-here")
 
 // Create
-node, _ := client.Nodes().CreateNode(ctx, &remapi.CreateNodeRequest{
-    Name: "Node-1",
+node, err := client.Nodes().CreateNode(ctx, &remapi.CreateNodeBody{
+    Name:    "Node-1",
+    Address: "203.0.113.10",
+    ConfigProfile: remapi.ConfigProfile2{
+        ActiveConfigProfileUuid: uuid.MustParse("00000000-0000-4000-8000-000000000001"),
+        ActiveInbounds: []uuid.UUID{
+            uuid.MustParse("00000000-0000-4000-8000-000000000002"),
+        },
+    },
 })
 
 // Delete
@@ -204,7 +250,9 @@ client.Nodes().EnableNode(ctx, "uuid-here")
 client.Nodes().DisableNode(ctx, "uuid-here")
 
 // Restart
-client.Nodes().RestartNode(ctx, "uuid-here")
+client.Nodes().RestartNode(ctx, &remapi.NodeBodyRequest{
+    ForceRestart: false,
+}, "uuid-here")
 
 // Reset traffic
 client.Nodes().ResetNodeTraffic(ctx, "uuid-here")
@@ -214,13 +262,21 @@ client.Nodes().ResetNodeTraffic(ctx, "uuid-here")
 
 ```go
 // List all
-hosts, _ := client.Hosts().GetAllHosts(ctx)
+hosts, _ := client.Hosts().GetHosts(ctx)
 
 // Get one
 host, _ := client.Hosts().GetOneHost(ctx, "uuid-here")
 
 // Create
-host, _ := client.Hosts().CreateHost(ctx, &remapi.CreateHostRequest{...})
+host, err := client.Hosts().CreateHost(ctx, &remapi.CreateHostBody{
+    Inbound: remapi.Inbound2{
+        ConfigProfileUuid: uuid.MustParse("00000000-0000-4000-8000-000000000001"),
+        ConfigProfileInboundUuid: uuid.MustParse("00000000-0000-4000-8000-000000000002"),
+    },
+    Remark:  "Edge TLS",
+    Address: "edge.example.com",
+    Port:    443,
+})
 
 // Delete
 client.Hosts().DeleteHost(ctx, "uuid-here")
@@ -230,7 +286,7 @@ client.Hosts().DeleteHost(ctx, "uuid-here")
 
 ```go
 // Login
-resp, _ := client.Auth().Login(ctx, &remapi.LoginRequest{
+resp, _ := client.Auth().Login(ctx, &remapi.LoginBody{
     Username: "admin",
     Password: "password",
 })
@@ -246,7 +302,7 @@ All methods support per-request `RequestOption` for customization:
 
 ```go
 // Pass options as the last variadic argument
-user, err := client.Users().GetUserByUuid(ctx, "uuid-here", opts...)
+user, err := client.Users().GetUserById(ctx, 123, opts...)
 ```
 
 ## Access to Base Client
@@ -268,8 +324,8 @@ See the [`examples/`](examples/) directory for complete working examples:
 
 | Requirement | Version |
 |-------------|---------|
-| Go | 1.21+ |
-| Remnawave API | 2.8.0+ |
+| Go | 1.25+ |
+| Remnawave API | 3.2.1 |
 
 ## License
 

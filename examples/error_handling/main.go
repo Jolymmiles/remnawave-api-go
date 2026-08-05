@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	remapi "github.com/Jolymmiles/remnawave-api-go/v2/api"
+	remapi "github.com/Jolymmiles/remnawave-api-go/v3/api"
 )
 
 func main() {
@@ -22,8 +22,8 @@ func main() {
 
 	// All API methods return a response interface that can be type-switched.
 	// Available error types depend on the endpoint — check the generated
-	// Res interface (e.g. UsersGetUserByUuidRes) for the full list.
-	resp, err := client.Users().GetUserByUuid(ctx, "invalid-uuid")
+	// Res interface (e.g. UsersGetUserByIdRes) for the full list.
+	resp, err := client.Users().GetUserById(ctx, 999999)
 	if err != nil {
 		// Network or protocol error
 		log.Fatal(err)

@@ -6,10 +6,10 @@ package api
 // PaginationHelper provides utilities for manually paginating through results.
 // Use this for more control when ListAll iterator is not sufficient.
 type PaginationHelper struct {
-	Offset   int
-	Limit    int
-	Total    *int
-	HasMore  bool
+	Offset  int
+	Limit   int
+	Total   *int
+	HasMore bool
 }
 
 // NewPaginationHelper creates a new pagination helper with the given page size.

@@ -14,13 +14,17 @@ Usage:
 """
 
 import json
+import re
 import subprocess
 import sys
-import re
 from pathlib import Path
-from typing import Dict, List, Tuple
 
-from smart_consolidate import SmartConsolidator, InlineSchemaExtractor, unify_error_responses, fix_nullable_without_type
+from smart_consolidate import (
+    InlineSchemaExtractor,
+    SmartConsolidator,
+    fix_nullable_without_type,
+    unify_error_responses,
+)
 
 
 class Colors:
@@ -61,7 +65,7 @@ def print_info(message: str):
 # STEP 1: SMART CONSOLIDATE SCHEMAS
 # ============================================================================
 
-def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_extraction: bool = False) -> Tuple[int, int, dict]:
+def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_extraction: bool = False) -> tuple[int, int, dict]:
     """
     Consolidate duplicate schemas using smart analysis.
     Combines old Steps 1 (consolidate) and 2 (rename) into one step.
@@ -69,72 +73,72 @@ def smart_consolidate_schemas(input_file: str, output_file: str, skip_inline_ext
     print_info(f"Loading {input_file}...")
     with open(input_file, 'r') as f:
         spec = json.load(f)
-    
+
     original_count = len(spec.get('components', {}).get('schemas', {}))
-    
+
     print_info("Analyzing schemas with SmartConsolidator...")
     consolidator = SmartConsolidator(spec)
-    
+
     # Analyze duplicates
     report = consolidator.analyze_duplicates()
     print_info(f"Found {report['exact']['count']} exact duplicate groups ({report['exact']['total_schemas']} schemas)")
     print_info(f"Found {report['structural']['count']} structural duplicate groups")
-    
+
     if report['near_duplicates']['count'] > 0:
         print_warning(f"Found {report['near_duplicates']['count']} near-duplicate groups (metadata differs)")
-    
+
     if report['constraint_only']['count'] > 0:
         print_warning(f"Found {report['constraint_only']['count']} constraint-only groups (validation differs)")
-    
+
     # Consolidate
     rename_map, stats = consolidator.consolidate()
-    
+
     if not rename_map:
         print_warning("No duplicates to consolidate")
         return original_count, original_count, {}
-    
+
     # Apply consolidation
     new_spec = consolidator.apply_consolidation(rename_map)
-    
+
     # Unify error responses
     print_info("Unifying error responses...")
     new_spec, error_stats = unify_error_responses(new_spec)
     if error_stats['total_replaced'] > 0:
         print_info(f"Unified {error_stats['total_replaced']} error responses (400: {error_stats['responses_unified'].get('400', 0)}, 401: {error_stats['responses_unified'].get('401', 0)})")
         stats['unified_errors'] = error_stats['total_replaced']
-    
+
     # Fix nullable properties without type (ogen requires type for nullable fields)
     print_info("Fixing nullable properties without type...")
     new_spec, nullable_fixed = fix_nullable_without_type(new_spec)
     if nullable_fixed > 0:
         print_info(f"Fixed {nullable_fixed} nullable properties without type")
         stats['nullable_fixed'] = nullable_fixed
-    
+
     # Extract inline schemas for reuse (optional - can cause conflicts in some specs)
     if not skip_inline_extraction:
         print_info("Extracting inline schemas for reuse...")
         extractor = InlineSchemaExtractor(new_spec)
         new_spec, extract_stats = extractor.extract_inline_schemas()
-        
+
         if extract_stats['extracted_count'] > 0:
             print_info(f"Extracted {extract_stats['extracted_count']} inline schemas")
             stats['extracted_schemas'] = extract_stats['extracted_count']
     else:
         print_info("Skipping inline schema extraction")
-    
+
     print_info(f"Writing {output_file}...")
     with open(output_file, 'w') as f:
         json.dump(new_spec, f, indent=2, ensure_ascii=False)
-    
+
     # Print top consolidated groups
     print_info("Top consolidated groups:")
     for name, schemas in sorted(stats['consolidated_names'].items(), key=lambda x: -len(x[1]))[:5]:
         print(f"    {name} <- {len(schemas)} schemas")
-    
+
     new_count = len(new_spec.get('components', {}).get('schemas', {}))
     stats['final_count'] = new_count
     print_success(f"Consolidated {original_count} → {new_count} schemas (-{original_count - new_count}, -{(original_count-new_count)*100//original_count}%)")
-    
+
     return original_count, new_count, stats
 
 
@@ -158,8 +162,8 @@ def patch_subscription_text_responses(spec: dict) -> int:
     Modifies spec in-place. Returns the number of operations patched.
     """
     patched = 0
-    for path, path_item in spec.get('paths', {}).items():
-        for http_method, op in path_item.items():
+    for path_item in spec.get('paths', {}).values():
+        for op in path_item.values():
             if not isinstance(op, dict):
                 continue
             op_id = op.get('operationId', '')
@@ -196,8 +200,8 @@ def shorten_operation_ids(spec: dict) -> int:
     Modifies spec in-place. Returns the number of operations renamed.
     """
     renamed = 0
-    for path, path_item in spec.get('paths', {}).items():
-        for http_method, op in path_item.items():
+    for path_item in spec.get('paths', {}).values():
+        for op in path_item.values():
             if not isinstance(op, dict):
                 continue
             op_id = op.get('operationId', '')
@@ -271,8 +275,8 @@ def fix_number_query_params(spec: dict) -> int:
     Modifies spec in-place. Returns the number of parameters fixed.
     """
     fixed = 0
-    for path, path_item in spec.get('paths', {}).items():
-        for http_method, op in path_item.items():
+    for path_item in spec.get('paths', {}).values():
+        for op in path_item.values():
             if not isinstance(op, dict):
                 continue
             for param in op.get('parameters', []):
@@ -285,6 +289,70 @@ def fix_number_query_params(spec: dict) -> int:
     return fixed
 
 
+# The Remnawave backend parses these query parameters from JSON strings. Its
+# OpenAPI document describes them as nested structures, which ogen cannot
+# encode as query parameters.
+JSON_STRING_QUERY_PARAMS = {'filters', 'filterModes', 'sorting'}
+
+
+def stringify_complex_query_params(spec: dict) -> int:
+    """Represent JSON-encoded query parameters as strings for ogen."""
+    fixed = 0
+    for path_item in spec.get('paths', {}).values():
+        for op in path_item.values():
+            if not isinstance(op, dict):
+                continue
+            for param in op.get('parameters', []):
+                if param.get('in') != 'query' or param.get('name') not in JSON_STRING_QUERY_PARAMS:
+                    continue
+
+                schema = param.get('schema', {})
+                if schema.get('type') not in {'array', 'object'}:
+                    continue
+
+                param['schema'] = {
+                    'type': 'string',
+                    'format': 'json',
+                    'description': 'JSON-encoded query value.',
+                }
+                param.pop('style', None)
+                param.pop('explode', None)
+                fixed += 1
+    return fixed
+
+
+def simplify_any_of_schemas(spec: dict) -> int:
+    """Replace unsupported anyOf schemas with their safe common representation."""
+    simplified = 0
+
+    def simplify(value):
+        nonlocal simplified
+        if isinstance(value, list):
+            for item in value:
+                simplify(item)
+            return
+
+        if not isinstance(value, dict):
+            return
+
+        if 'anyOf' in value:
+            variants = value.pop('anyOf')
+            variant_types = {
+                variant.get('type')
+                for variant in variants
+                if isinstance(variant, dict) and variant.get('type')
+            }
+            if len(variant_types) == 1:
+                value['type'] = variant_types.pop()
+            simplified += 1
+
+        for child in value.values():
+            simplify(child)
+
+    simplify(spec)
+    return simplified
+
+
 # ============================================================================
 # STEP 2: GENERATE GO CLIENT WITH OGEN
 # ============================================================================
@@ -292,7 +360,7 @@ def fix_number_query_params(spec: dict) -> int:
 def generate_ogen_client(spec_file: str) -> bool:
     """Generate Go client using ogen"""
     print_info(f"Running ogen with {spec_file}...")
-    
+
     try:
         result = subprocess.run(
             [
@@ -304,10 +372,11 @@ def generate_ogen_client(spec_file: str) -> bool:
                 spec_file
             ],
             capture_output=True,
+            check=False,
             text=True,
             timeout=120
         )
-        
+
         if result.returncode == 0:
             print_success(f"Go client generated from {spec_file}")
             return True
@@ -317,7 +386,7 @@ def generate_ogen_client(spec_file: str) -> bool:
     except subprocess.TimeoutExpired:
         print_error("ogen generation timed out")
         return False
-    except Exception as e:
+    except (OSError, subprocess.SubprocessError) as e:
         print_error(f"Error running ogen: {e}")
         return False
 
@@ -370,17 +439,17 @@ def parse_params_structs(params_file: str) -> dict:
     """Parse Params struct fields from oas_parameters_gen.go"""
     with open(params_file, 'r') as f:
         content = f.read()
-    
+
     params_structs = {}
-    
+
     # Match struct definitions with their fields
     # Pattern: type XXXParams struct {\n\tField Type\n}
     pattern = r'type (\w+Params) struct \{([^}]*)\}'
-    
+
     for match in re.finditer(pattern, content, re.DOTALL):
         struct_name = match.group(1)
         fields_block = match.group(2)
-        
+
         fields = []
         # Parse fields: Name Type or Name Type `json:"..."`
         for line in fields_block.strip().split('\n'):
@@ -393,9 +462,9 @@ def parse_params_structs(params_file: str) -> dict:
                 field_name = field_match.group(1)
                 field_type = field_match.group(2)
                 fields.append((field_name, field_type))
-        
+
         params_structs[struct_name] = fields
-    
+
     return params_structs
 
 
@@ -407,8 +476,13 @@ def simplify_param_type(param_type: str) -> str:
         'OptInt': 'int',
         'OptFloat64': 'float64',
         'OptBool': 'bool',
+        'uuid.UUID': 'string',
     }
-    return type_map.get(param_type, param_type)
+    if param_type in type_map:
+        return type_map[param_type]
+    if param_type.startswith('Opt'):
+        return param_type[3:]
+    return param_type
 
 
 # Go reserved keywords that cannot be used as identifiers
@@ -423,6 +497,8 @@ GO_KEYWORDS = {
 def safe_param_name(name: str) -> str:
     """Convert a field name to a safe Go parameter name, avoiding reserved keywords."""
     lower = name.lower()
+    if lower == 'uuid':
+        return 'uuidValue'
     if lower in GO_KEYWORDS:
         return lower + 'Val'
     return lower
@@ -442,7 +518,7 @@ def parse_operations(spec_file: str) -> dict:
 
     operations_by_controller = {}
 
-    for path, path_item in spec.get('paths', {}).items():
+    for path_item in spec.get('paths', {}).values():
         for http_method, op_spec in path_item.items():
             if http_method not in ['get', 'post', 'put', 'patch', 'delete']:
                 continue
@@ -474,26 +550,26 @@ def parse_operations(spec_file: str) -> dict:
     return operations_by_controller
 
 
-def generate_client_ext(spec_file: str, client_file: str, output_file: str) -> Tuple[int, int]:
+def generate_client_ext(spec_file: str, client_file: str, output_file: str) -> tuple[int, int]:
     """Generate client_ext.go wrapper with simplified method signatures"""
     print_info("Parsing oas_client_gen.go...")
     methods = parse_oas_client_methods(client_file)
     print_success(f"Found {len(methods)} client methods")
-    
+
     # Parse params structs for simplification
     params_file = client_file.replace('oas_client_gen.go', 'oas_parameters_gen.go')
     print_info("Parsing oas_parameters_gen.go...")
     params_structs = parse_params_structs(params_file)
     print_success(f"Found {len(params_structs)} param structs")
-    
+
     print_info("Parsing operations from spec...")
     operations_by_controller = parse_operations(spec_file)
     total_ops = sum(len(ops) for ops in operations_by_controller.values())
     print_success(f"Found {total_ops} operations in {len(operations_by_controller)} controllers")
-    
+
     def to_camel(s):
         return s[0].lower() + s[1:] if s else s
-    
+
     def can_simplify_params(params_type: str) -> tuple:
         """
         Check if Params struct can be simplified to individual arguments.
@@ -502,43 +578,74 @@ def generate_client_ext(spec_file: str, client_file: str, output_file: str) -> T
         struct_name = params_type.lstrip('*')
         if struct_name not in params_structs:
             return False, []
-        
+
         fields = params_structs[struct_name]
         if not fields:
             return False, []
-        
-        # Only simplify if all fields are simple types
-        simple_types = {'string', 'int', 'int64', 'float64', 'bool', 
-                       'OptString', 'OptInt', 'OptInt64', 'OptFloat64', 'OptBool'}
-        
+
+        # Keep optional fields in their generated Params struct so callers can
+        # distinguish an omitted query parameter from its zero value.
+        simple_types = {'string', 'int', 'int64', 'float64', 'bool', 'uuid.UUID'}
+
         simplified = []
         for field_name, field_type in fields:
-            if field_type in simple_types or field_type.startswith('Opt'):
+            if field_type in simple_types:
                 simple = simplify_param_type(field_type)
                 simplified.append((field_name, field_type, simple))
             else:
                 # Complex type, don't simplify
                 return False, []
-        
+
         return True, simplified
-    
+
+    def is_filter_pagination_params(params_type: str) -> bool:
+        """Check whether Params contains optional JSON filters and pagination."""
+        fields = params_structs.get(params_type.lstrip('*'), [])
+        field_names = {field_name for field_name, _ in fields}
+        return {
+            'Start',
+            'Size',
+            'Filters',
+            'FilterModes',
+            'GlobalFilterMode',
+            'Sorting',
+        }.issubset(field_names)
+
+    uses_uuid = any(
+        can_simplify_params(params_type)[0]
+        and any(
+            field_type == 'uuid.UUID'
+            for _, field_type in params_structs[params_type]
+        )
+        for params_type in params_structs
+    )
+    imports = 'import "context"'
+    if uses_uuid:
+        imports = '''import (
+\t"context"
+
+\t"github.com/google/uuid"
+)'''
+
     # Generate code
     code = '''// Code generated by pipeline.py. DO NOT EDIT manually.
 
 package api
 
-import "context"
+'''
+    code += imports
+    code += '''
 
 // ClientExt wraps the base Client with organized sub-client access.
 // Use controller methods (e.g., client.Users().GetByUuid()) to call API operations.
 type ClientExt struct {
 \tclient *Client
 '''
-    
+
     for controller in sorted(operations_by_controller.keys()):
         field_name = to_camel(controller)
         code += f'\t{field_name} *{controller}Client\n'
-    
+
     code += '''}
 
 // NewClientExt creates a new ClientExt wrapper.
@@ -546,11 +653,11 @@ func NewClientExt(client *Client) *ClientExt {
 \treturn &ClientExt{
 \t\tclient: client,
 '''
-    
+
     for controller in sorted(operations_by_controller.keys()):
         field_name = to_camel(controller)
         code += f'\t\t{field_name}: New{controller}Client(client),\n'
-    
+
     code += '''\t}
 }
 
@@ -560,7 +667,7 @@ func (ce *ClientExt) Client() *Client {
 }
 
 '''
-    
+
     for controller in sorted(operations_by_controller.keys()):
         field_name = to_camel(controller)
         code += f'''// {controller} returns the {controller}Client.
@@ -569,9 +676,9 @@ func (ce *ClientExt) {controller}() *{controller}Client {{
 }}
 
 '''
-    
+
     matched_methods = 0
-    
+
     for controller in sorted(operations_by_controller.keys()):
         code += f'''// {controller}Client provides {controller} operations.
 type {controller}Client struct {{
@@ -584,15 +691,15 @@ func New{controller}Client(client *Client) *{controller}Client {{
 }}
 
 '''
-        
+
         for op in sorted(operations_by_controller[controller], key=lambda x: x['goMethod']):
             go_method = op['goMethod']
             display_method = op['displayMethod']
             op_id = op['operationId']
-            
+
             if go_method not in methods:
                 continue
-            
+
             matched_methods += 1
             method_info = methods[go_method]
             params = method_info['params']
@@ -606,12 +713,15 @@ func New{controller}Client(client *Client) *{controller}Client {{
             # Check if we can simplify Params struct to individual args
             simplified_params = None
             params_index = None
+            filter_pagination_params_type = None
             for i, (pname, ptype) in enumerate(params):
                 if ptype.endswith('Params'):
                     can_simplify, simplified = can_simplify_params(ptype)
                     if can_simplify:
                         simplified_params = simplified
                         params_index = i
+                    if is_filter_pagination_params(ptype):
+                        filter_pagination_params_type = ptype
                     break
 
             if returns:
@@ -620,6 +730,10 @@ func New{controller}Client(client *Client) *{controller}Client {{
                     ret_type = f'({ret_type})'
             else:
                 ret_type = ''
+
+            wrapped_display_method = display_method
+            if filter_pagination_params_type:
+                wrapped_display_method += 'WithParams'
 
             # Generate method with simplified params or original
             if simplified_params and params_index is not None:
@@ -635,13 +749,27 @@ func New{controller}Client(client *Client) *{controller}Client {{
 
                 simple_args = ', '.join(sig_parts)
 
+                uuid_args = {}
+                uuid_parse_code = ''
+                for field_name, field_type, _ in simplified_params:
+                    if field_type != 'uuid.UUID':
+                        continue
+                    arg_name = safe_param_name(field_name)
+                    parsed_name = f'parsed{field_name}'
+                    uuid_args[field_name] = parsed_name
+                    uuid_parse_code += f'''\t{parsed_name}, err := uuid.Parse({arg_name})
+\tif err != nil {{
+\t\treturn nil, err
+\t}}
+'''
+
                 params_init = f'{params_type}{{\n'
                 for field_name, field_type, simple_type in simplified_params:
                     arg_name = safe_param_name(field_name)
                     if field_type.startswith('Opt'):
-                        params_init += f'\t\t{field_name}: NewOpt{simple_type.title()}({arg_name}),\n'
+                        params_init += f'\t\t{field_name}: New{field_type}({arg_name}),\n'
                     else:
-                        params_init += f'\t\t{field_name}: {arg_name},\n'
+                        params_init += f'\t\t{field_name}: {uuid_args.get(field_name, arg_name)},\n'
                 params_init += '\t}'
 
                 call_args = []
@@ -651,8 +779,9 @@ func New{controller}Client(client *Client) *{controller}Client {{
                     else:
                         call_args.append(pname)
 
-                code += f'''// {display_method} calls {op_id}.
-func (sc *{controller}Client) {display_method}(ctx context.Context, {simple_args}{opts_sig}) {ret_type} {{
+                code += f'''// {wrapped_display_method} calls {op_id}.
+func (sc *{controller}Client) {wrapped_display_method}(ctx context.Context, {simple_args}{opts_sig}) {ret_type} {{
+{uuid_parse_code}
 \treturn sc.client.{go_method}(ctx, {', '.join(call_args)}{opts_call})
 }}
 
@@ -666,8 +795,8 @@ func (sc *{controller}Client) {display_method}(ctx context.Context, {simple_args
                     params_sig = ''
                     params_call = ''
 
-                code += f'''// {display_method} calls {op_id}.
-func (sc *{controller}Client) {display_method}(ctx context.Context'''
+                code += f'''// {wrapped_display_method} calls {op_id}.
+func (sc *{controller}Client) {wrapped_display_method}(ctx context.Context'''
 
                 if params_sig:
                     code += f', {params_sig}'
@@ -688,13 +817,24 @@ func (sc *{controller}Client) {display_method}(ctx context.Context'''
                     code += f', {params_call}'
 
                 code += opts_call + ')\n}\n\n'
-    
+
+            if filter_pagination_params_type:
+                code += f'''// {display_method} lists results with simple offset pagination.
+func (sc *{controller}Client) {display_method}(ctx context.Context, start int, size int{opts_sig}) {ret_type} {{
+\treturn sc.{wrapped_display_method}(ctx, {filter_pagination_params_type}{{
+\t\tStart: NewOptInt(start),
+\t\tSize:  NewOptInt(size),
+\t}}{opts_call})
+}}
+
+'''
+
     print_info(f"Writing {output_file}...")
     with open(output_file, 'w') as f:
         f.write(code)
-    
+
     print_success(f"Generated {matched_methods}/{total_ops} methods")
-    
+
     return len(operations_by_controller), matched_methods
 
 
@@ -706,30 +846,30 @@ def main():
     if len(sys.argv) < 2:
         print_error("Usage: python3 pipeline.py <input_spec.json>")
         sys.exit(1)
-    
+
     input_spec = sys.argv[1]
-    
+
     if not Path(input_spec).exists():
         print_error(f"File not found: {input_spec}")
         sys.exit(1)
-    
+
     print(f"{Colors.BOLD}{Colors.HEADER}")
     print("="*70)
     print(" API PROCESSING PIPELINE")
     print("="*70)
     print(f"{Colors.END}")
     print(f"Input: {input_spec}")
-    
+
     # File paths - now we only need one output file since smart_consolidate does both steps
     final_file = input_spec.replace('.json', '-final.json')
     client_gen_file = 'api/oas_client_gen.go'
     client_ext_file = 'api/client_ext.go'
-    
+
     try:
         # Step 1: Smart consolidate (combines old Steps 1 & 2)
         print_step(1, 3, "SMART CONSOLIDATE SCHEMAS")
         orig_count, new_count, stats = smart_consolidate_schemas(input_spec, final_file)
-        
+
         # Step 1.5: Post-process the consolidated spec (in-memory)
         print_info("Post-processing consolidated spec...")
         with open(final_file, 'r') as f:
@@ -751,6 +891,14 @@ def main():
         if int_count > 0:
             print_success(f"Fixed {int_count} query parameters: number → integer")
 
+        json_query_count = stringify_complex_query_params(final_spec)
+        if json_query_count > 0:
+            print_success(f"Stringified {json_query_count} JSON query parameters for ogen")
+
+        any_of_count = simplify_any_of_schemas(final_spec)
+        if any_of_count > 0:
+            print_success(f"Simplified {any_of_count} anyOf schemas for ogen")
+
         with open(final_file, 'w') as f:
             json.dump(final_spec, f, indent=2, ensure_ascii=False)
 
@@ -759,11 +907,11 @@ def main():
         if not generate_ogen_client(final_file):
             print_error("Failed to generate Go client")
             sys.exit(1)
-        
+
         # Step 3: Generate client_ext
         print_step(3, 3, "GENERATE CLIENT_EXT.GO WRAPPER")
         ctrl_count, method_count = generate_client_ext(final_file, client_gen_file, client_ext_file)
-        
+
         # Summary
         print(f"\n{Colors.BOLD}{Colors.GREEN}")
         print("="*70)
@@ -780,8 +928,8 @@ def main():
         print(f"  • {client_gen_file}")
         print(f"  • {client_ext_file}")
         print()
-        
-    except Exception as e:
+
+    except (OSError, ValueError) as e:
         print_error(f"Pipeline failed: {e}")
         import traceback
         traceback.print_exc()

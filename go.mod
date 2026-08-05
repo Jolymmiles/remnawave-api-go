@@ -1,4 +1,4 @@
-module github.com/Jolymmiles/remnawave-api-go/v2
+module github.com/Jolymmiles/remnawave-api-go/v3
 
 go 1.25
 

@@ -60,27 +60,6 @@ func (s *ActiveInternalSquad) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *AllHwidDevices) SetFake() {
-	{
-		{
-			s.Devices = nil
-			for i := 0; i < 0; i++ {
-				var elem Device
-				{
-					elem.SetFake()
-				}
-				s.Devices = append(s.Devices, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *BadRequestError) SetFake() {
 	{
 		{
@@ -135,84 +114,6 @@ func (s *BillingHistoryItem) SetFake() {
 	{
 		{
 			s.TotalBills = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BillingHistoryResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BillingHistoryResponseResponse) SetFake() {
-	{
-		{
-			s.Records = nil
-			for i := 0; i < 0; i++ {
-				var elem BillingHistoryResponseResponseRecordsItem
-				{
-					elem.SetFake()
-				}
-				s.Records = append(s.Records, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BillingHistoryResponseResponseRecordsItem) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.ProviderUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.Amount = float64(0)
-		}
-	}
-	{
-		{
-			s.BilledAt = time.Now()
-		}
-	}
-	{
-		{
-			s.Provider.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BillingHistoryResponseResponseRecordsItemProvider) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.Name = "string"
-		}
-	}
-	{
-		{
-			s.FaviconLink.SetFake()
 		}
 	}
 }
@@ -390,25 +291,7 @@ func (s *BrandingSettings) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkActionResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BulkActionResponseResponse) SetFake() {
-	{
-		{
-			s.AffectedRows = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BulkAllExtendExpirationDateRequest) SetFake() {
+func (s *BulkAllExtendExpirationDateBody) SetFake() {
 	{
 		{
 			s.ExtendDays = int(0)
@@ -417,7 +300,7 @@ func (s *BulkAllExtendExpirationDateRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkAllUpdateUsersRequest) SetFake() {
+func (s *BulkAllUpdateUsersBody) SetFake() {
 	{
 		{
 			s.Status.SetFake()
@@ -466,17 +349,17 @@ func (s *BulkAllUpdateUsersRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkAllUpdateUsersRequestStatus) SetFake() {
-	*s = BulkAllUpdateUsersRequestStatusACTIVE
+func (s *BulkAllUpdateUsersBodyStatus) SetFake() {
+	*s = BulkAllUpdateUsersBodyStatusACTIVE
 }
 
 // SetFake set fake values.
-func (s *BulkAllUpdateUsersRequestTrafficLimitStrategy) SetFake() {
-	*s = BulkAllUpdateUsersRequestTrafficLimitStrategyNORESET
+func (s *BulkAllUpdateUsersBodyTrafficLimitStrategy) SetFake() {
+	*s = BulkAllUpdateUsersBodyTrafficLimitStrategyNORESET
 }
 
 // SetFake set fake values.
-func (s *BulkDeleteUsersByStatusRequest) SetFake() {
+func (s *BulkDeleteUsersByStatusBody) SetFake() {
 	{
 		{
 			s.Status.SetFake()
@@ -485,21 +368,21 @@ func (s *BulkDeleteUsersByStatusRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkDeleteUsersByStatusRequestStatus) SetFake() {
-	*s = BulkDeleteUsersByStatusRequestStatusACTIVE
+func (s *BulkDeleteUsersByStatusBodyStatus) SetFake() {
+	*s = BulkDeleteUsersByStatusBodyStatusACTIVE
 }
 
 // SetFake set fake values.
-func (s *BulkExtendExpirationDateRequest) SetFake() {
+func (s *BulkExtendExpirationDateBody) SetFake() {
 	{
 		{
-			s.Uuids = nil
+			s.UserIds = nil
 			for i := 0; i < 1; i++ {
-				var elem uuid.UUID
+				var elem float64
 				{
-					elem = uuid.New()
+					elem = float64(0)
 				}
-				s.Uuids = append(s.Uuids, elem)
+				s.UserIds = append(s.UserIds, elem)
 			}
 		}
 	}
@@ -511,7 +394,7 @@ func (s *BulkExtendExpirationDateRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkNodesActionsRequest) SetFake() {
+func (s *BulkNodesActionsBody) SetFake() {
 	{
 		{
 			s.Uuids = nil
@@ -532,12 +415,12 @@ func (s *BulkNodesActionsRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkNodesActionsRequestAction) SetFake() {
-	*s = BulkNodesActionsRequestActionENABLE
+func (s *BulkNodesActionsBodyAction) SetFake() {
+	*s = BulkNodesActionsBodyActionENABLE
 }
 
 // SetFake set fake values.
-func (s *BulkNodesUpdateRequest) SetFake() {
+func (s *BulkNodesUpdateBody) SetFake() {
 	{
 		{
 			s.Uuids = nil
@@ -558,7 +441,7 @@ func (s *BulkNodesUpdateRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkNodesUpdateRequestFields) SetFake() {
+func (s *BulkNodesUpdateBodyFields) SetFake() {
 	{
 		{
 			s.CountryCode.SetFake()
@@ -604,16 +487,16 @@ func (s *BulkNodesUpdateRequestFields) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkUpdateUsersRequest) SetFake() {
+func (s *BulkUpdateUsersBody) SetFake() {
 	{
 		{
-			s.Uuids = nil
+			s.UserIds = nil
 			for i := 0; i < 1; i++ {
-				var elem uuid.UUID
+				var elem float64
 				{
-					elem = uuid.New()
+					elem = float64(0)
 				}
-				s.Uuids = append(s.Uuids, elem)
+				s.UserIds = append(s.UserIds, elem)
 			}
 		}
 	}
@@ -625,7 +508,7 @@ func (s *BulkUpdateUsersRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkUpdateUsersRequestFields) SetFake() {
+func (s *BulkUpdateUsersBodyFields) SetFake() {
 	{
 		{
 			s.Status.SetFake()
@@ -679,26 +562,26 @@ func (s *BulkUpdateUsersRequestFields) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *BulkUpdateUsersRequestFieldsStatus) SetFake() {
-	*s = BulkUpdateUsersRequestFieldsStatusACTIVE
+func (s *BulkUpdateUsersBodyFieldsStatus) SetFake() {
+	*s = BulkUpdateUsersBodyFieldsStatusACTIVE
 }
 
 // SetFake set fake values.
-func (s *BulkUpdateUsersRequestFieldsTrafficLimitStrategy) SetFake() {
-	*s = BulkUpdateUsersRequestFieldsTrafficLimitStrategyNORESET
+func (s *BulkUpdateUsersBodyFieldsTrafficLimitStrategy) SetFake() {
+	*s = BulkUpdateUsersBodyFieldsTrafficLimitStrategyNORESET
 }
 
 // SetFake set fake values.
-func (s *BulkUpdateUsersSquadsRequest) SetFake() {
+func (s *BulkUpdateUsersSquadsBody) SetFake() {
 	{
 		{
-			s.Uuids = nil
+			s.UserIds = nil
 			for i := 0; i < 1; i++ {
-				var elem uuid.UUID
+				var elem float64
 				{
-					elem = uuid.New()
+					elem = float64(0)
 				}
-				s.Uuids = append(s.Uuids, elem)
+				s.UserIds = append(s.UserIds, elem)
 			}
 		}
 	}
@@ -711,38 +594,6 @@ func (s *BulkUpdateUsersSquadsRequest) SetFake() {
 					elem = uuid.New()
 				}
 				s.ActiveInternalSquads = append(s.ActiveInternalSquads, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BulkUuidsRequest) SetFake() {
-	{
-		{
-			s.Uuids = nil
-			for i := 0; i < 1; i++ {
-				var elem uuid.UUID
-				{
-					elem = uuid.New()
-				}
-				s.Uuids = append(s.Uuids, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *BulkUuidsRequest2) SetFake() {
-	{
-		{
-			s.Uuids = nil
-			for i := 0; i < 0; i++ {
-				var elem uuid.UUID
-				{
-					elem = uuid.New()
-				}
-				s.Uuids = append(s.Uuids, elem)
 			}
 		}
 	}
@@ -763,7 +614,7 @@ func (s *ByAppItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CloneNodePluginRequestRequest) SetFake() {
+func (s *CloneNodePluginBodyRequest) SetFake() {
 	{
 		{
 			s.CloneFromUuid = uuid.New()
@@ -883,6 +734,27 @@ func (s *ConfigProfile) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *ConfigProfile2) SetFake() {
+	{
+		{
+			s.ActiveConfigProfileUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.ActiveInbounds = nil
+			for i := 0; i < 0; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.ActiveInbounds = append(s.ActiveInbounds, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *ConfigProfileItem) SetFake() {
 	{
 		{
@@ -896,27 +768,6 @@ func (s *ConfigProfileItem) SetFake() {
 				var elem Inbound
 				{
 					elem.SetFake()
-				}
-				s.ActiveInbounds = append(s.ActiveInbounds, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *ConfigProfileRef) SetFake() {
-	{
-		{
-			s.ActiveConfigProfileUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.ActiveInbounds = nil
-			for i := 0; i < 0; i++ {
-				var elem uuid.UUID
-				{
-					elem = uuid.New()
 				}
 				s.ActiveInbounds = append(s.ActiveInbounds, elem)
 			}
@@ -964,7 +815,209 @@ func (s *ConfigProfilesResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateApiTokenRequest) SetFake() {
+func (s *ConnectionsByNodeResultResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByNodeResultResponseResponse) SetFake() {
+	{
+		{
+			s.IsCompleted = true
+		}
+	}
+	{
+		{
+			s.IsFailed = true
+		}
+	}
+	{
+		{
+			s.Result.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByNodeResultResponseResponseResult) SetFake() {
+	{
+		{
+			s.Success = true
+		}
+	}
+	{
+		{
+			s.NodeUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.Users = nil
+			for i := 0; i < 0; i++ {
+				var elem ConnectionsByNodeResultResponseResponseResultUsersItem
+				{
+					elem.SetFake()
+				}
+				s.Users = append(s.Users, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByNodeResultResponseResponseResultUsersItem) SetFake() {
+	{
+		{
+			s.UserId = float64(0)
+		}
+	}
+	{
+		{
+			s.Ips = nil
+			for i := 0; i < 0; i++ {
+				var elem Ips
+				{
+					elem.SetFake()
+				}
+				s.Ips = append(s.Ips, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResponseResponseResponse) SetFake() {
+	{
+		{
+			s.JobId = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResultResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResultResponseResponse) SetFake() {
+	{
+		{
+			s.IsCompleted = true
+		}
+	}
+	{
+		{
+			s.IsFailed = true
+		}
+	}
+	{
+		{
+			s.Progress.SetFake()
+		}
+	}
+	{
+		{
+			s.Result.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResultResponseResponseProgress) SetFake() {
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+	{
+		{
+			s.Completed = float64(0)
+		}
+	}
+	{
+		{
+			s.Percent = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResultResponseResponseResult) SetFake() {
+	{
+		{
+			s.Success = true
+		}
+	}
+	{
+		{
+			s.UserId = float64(0)
+		}
+	}
+	{
+		{
+			s.Nodes = nil
+			for i := 0; i < 0; i++ {
+				var elem ConnectionsByUserResultResponseResponseResultNodesItem
+				{
+					elem.SetFake()
+				}
+				s.Nodes = append(s.Nodes, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ConnectionsByUserResultResponseResponseResultNodesItem) SetFake() {
+	{
+		{
+			s.NodeUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.NodeName = "string"
+		}
+	}
+	{
+		{
+			s.CountryCode = "string"
+		}
+	}
+	{
+		{
+			s.Ips = nil
+			for i := 0; i < 0; i++ {
+				var elem Ips
+				{
+					elem.SetFake()
+				}
+				s.Ips = append(s.Ips, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateApiTokenBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1045,7 +1098,7 @@ func (s *CreateApiTokenResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateConfigProfileRequest) SetFake() {
+func (s *CreateConfigProfileBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1059,20 +1112,18 @@ func (s *CreateConfigProfileRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateConfigProfileRequestConfig) SetFake() {
-}
-
-// SetFake set fake values.
-func (s *CreateExternalSquadRequest) SetFake() {
-	{
-		{
-			s.Name = "string"
-		}
+func (s *CreateConfigProfileBodyConfig) SetFake() {
+	var (
+		elem jx.Raw
+		m    map[string]jx.Raw = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
 	}
 }
 
 // SetFake set fake values.
-func (s *CreateHostRequest) SetFake() {
+func (s *CreateHostBody) SetFake() {
 	{
 		{
 			s.Inbound.SetFake()
@@ -1243,7 +1294,7 @@ func (s *CreateHostRequest) SetFake() {
 		{
 			s.ExcludeFromSubscriptionTypes = nil
 			for i := 0; i < 0; i++ {
-				var elem CreateHostRequestExcludeFromSubscriptionTypesItem
+				var elem CreateHostBodyExcludeFromSubscriptionTypesItem
 				{
 					elem.SetFake()
 				}
@@ -1254,46 +1305,27 @@ func (s *CreateHostRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateHostRequestAlpn) SetFake() {
-	*s = CreateHostRequestAlpnH3
+func (s *CreateHostBodyAlpn) SetFake() {
+	*s = CreateHostBodyAlpnH3
 }
 
 // SetFake set fake values.
-func (s *CreateHostRequestExcludeFromSubscriptionTypesItem) SetFake() {
-	*s = CreateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON
+func (s *CreateHostBodyExcludeFromSubscriptionTypesItem) SetFake() {
+	*s = CreateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON
 }
 
 // SetFake set fake values.
-func (s *CreateHostRequestMihomoIpVersion) SetFake() {
-	*s = CreateHostRequestMihomoIpVersionDual
+func (s *CreateHostBodyMihomoIpVersion) SetFake() {
+	*s = CreateHostBodyMihomoIpVersionDual
 }
 
 // SetFake set fake values.
-func (s *CreateHostRequestSecurityLayer) SetFake() {
-	*s = CreateHostRequestSecurityLayerDEFAULT
+func (s *CreateHostBodySecurityLayer) SetFake() {
+	*s = CreateHostBodySecurityLayerDEFAULT
 }
 
 // SetFake set fake values.
-func (s *CreateInfraBillingHistoryRecordRequest) SetFake() {
-	{
-		{
-			s.ProviderUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.Amount = float64(0)
-		}
-	}
-	{
-		{
-			s.BilledAt = time.Now()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CreateInfraBillingNodeRequest) SetFake() {
+func (s *CreateInfraBillingNodeBody) SetFake() {
 	{
 		{
 			s.ProviderUuid = uuid.New()
@@ -1317,7 +1349,26 @@ func (s *CreateInfraBillingNodeRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateInfraProviderRequest) SetFake() {
+func (s *CreateInfraBillingRecordBody) SetFake() {
+	{
+		{
+			s.ProviderUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.Amount = float64(0)
+		}
+	}
+	{
+		{
+			s.BilledAt = time.Now()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateInfraProviderBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1336,7 +1387,7 @@ func (s *CreateInfraProviderRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateInternalSquadRequest) SetFake() {
+func (s *CreateInternalSquadBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1357,25 +1408,7 @@ func (s *CreateInternalSquadRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateNodePluginRequest) SetFake() {
-	{
-		{
-			s.Name = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CreateNodePluginResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CreateNodeRequest) SetFake() {
+func (s *CreateNodeBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1466,16 +1499,7 @@ func (s *CreateNodeRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateSubscriptionPageConfigRequest) SetFake() {
-	{
-		{
-			s.Name = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CreateSubscriptionPageConfigResponse) SetFake() {
+func (s *CreateNodePluginResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
@@ -1484,7 +1508,16 @@ func (s *CreateSubscriptionPageConfigResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateSubscriptionTemplateRequest) SetFake() {
+func (s *CreateSubpageConfigResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionTemplateBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1498,51 +1531,12 @@ func (s *CreateSubscriptionTemplateRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CreateSubscriptionTemplateRequestTemplateType) SetFake() {
-	*s = CreateSubscriptionTemplateRequestTemplateTypeXRAYJSON
+func (s *CreateSubscriptionTemplateBodyTemplateType) SetFake() {
+	*s = CreateSubscriptionTemplateBodyTemplateTypeXRAYJSON
 }
 
 // SetFake set fake values.
-func (s *CreateUserHwidDeviceRequest) SetFake() {
-	{
-		{
-			s.Hwid = "string"
-		}
-	}
-	{
-		{
-			s.UserUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.Platform.SetFake()
-		}
-	}
-	{
-		{
-			s.OsVersion.SetFake()
-		}
-	}
-	{
-		{
-			s.DeviceModel.SetFake()
-		}
-	}
-	{
-		{
-			s.UserAgent.SetFake()
-		}
-	}
-	{
-		{
-			s.RequestIp.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CreateUserRequest) SetFake() {
+func (s *CreateUserBody) SetFake() {
 	{
 		{
 			s.Username = "string"
@@ -1637,24 +1631,58 @@ func (s *CreateUserRequest) SetFake() {
 	}
 	{
 		{
-			s.UUID.SetFake()
-		}
-	}
-	{
-		{
 			s.ExternalSquadUuid.SetFake()
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *CreateUserRequestStatus) SetFake() {
-	*s = CreateUserRequestStatusACTIVE
+func (s *CreateUserBodyStatus) SetFake() {
+	*s = CreateUserBodyStatusACTIVE
 }
 
 // SetFake set fake values.
-func (s *CreateUserRequestTrafficLimitStrategy) SetFake() {
-	*s = CreateUserRequestTrafficLimitStrategyNORESET
+func (s *CreateUserBodyTrafficLimitStrategy) SetFake() {
+	*s = CreateUserBodyTrafficLimitStrategyNORESET
+}
+
+// SetFake set fake values.
+func (s *CreateUserHwidDeviceBody) SetFake() {
+	{
+		{
+			s.Hwid = "string"
+		}
+	}
+	{
+		{
+			s.UserId = float64(0)
+		}
+	}
+	{
+		{
+			s.Platform.SetFake()
+		}
+	}
+	{
+		{
+			s.OsVersion.SetFake()
+		}
+	}
+	{
+		{
+			s.DeviceModel.SetFake()
+		}
+	}
+	{
+		{
+			s.UserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.RequestIp.SetFake()
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -1734,10 +1762,19 @@ func (s *CustomRemark) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DebugSrrMatcherRequest) SetFake() {
+func (s *DebugSrrMatcherBody) SetFake() {
 	{
 		{
 			s.ResponseRules.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DebugSrrMatcherBodySettings) SetFake() {
+	{
+		{
+			s.DisableSubscriptionAccessByPath.SetFake()
 		}
 	}
 }
@@ -1808,34 +1845,16 @@ func (s *DebugSrrMatcherResponseResponseResponseType) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DebugSrrMatcherSettings) SetFake() {
+func (s *DeleteAllUserHwidDevicesBody) SetFake() {
 	{
 		{
-			s.DisableSubscriptionAccessByPath.SetFake()
+			s.UserId = float64(0)
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *DeleteAllUserHwidDevicesRequest) SetFake() {
-	{
-		{
-			s.UserUuid = uuid.New()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *DeleteApiTokenResponse) SetFake() {
-	{
-		{
-			s.Response = true
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *DeletePasskeyRequest) SetFake() {
+func (s *DeletePasskeyBody) SetFake() {
 	{
 		{
 			s.ID = "string"
@@ -1844,25 +1863,7 @@ func (s *DeletePasskeyRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DeleteResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *DeleteResponseResponse) SetFake() {
-	{
-		{
-			s.IsDeleted = true
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *DeleteSnippetRequest) SetFake() {
+func (s *DeleteSnippetBody) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -1871,10 +1872,10 @@ func (s *DeleteSnippetRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DeleteUserHwidDeviceRequest) SetFake() {
+func (s *DeleteUserHwidDeviceBody) SetFake() {
 	{
 		{
-			s.UserUuid = uuid.New()
+			s.UserId = float64(0)
 		}
 	}
 	{
@@ -1934,7 +1935,7 @@ func (s *Device) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequest) SetFake() {
+func (s *DropConnectionsBody) SetFake() {
 	{
 		{
 			s.DropBy.SetFake()
@@ -1948,17 +1949,17 @@ func (s *DropConnectionsRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestDropBy) SetFake() {
-	var variant DropConnectionsRequestDropBy0
+func (s *DropConnectionsBodyDropBy) SetFake() {
+	var variant DropConnectionsBodyDropBy0
 
 	{
 		variant.SetFake()
 	}
-	s.SetDropConnectionsRequestDropBy0(variant)
+	s.SetDropConnectionsBodyDropBy0(variant)
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestDropBy0) SetFake() {
+func (s *DropConnectionsBodyDropBy0) SetFake() {
 	{
 		{
 			s.By.SetFake()
@@ -1966,25 +1967,25 @@ func (s *DropConnectionsRequestDropBy0) SetFake() {
 	}
 	{
 		{
-			s.UserUuids = nil
+			s.UserIds = nil
 			for i := 0; i < 1; i++ {
-				var elem uuid.UUID
+				var elem float64
 				{
-					elem = uuid.New()
+					elem = float64(0)
 				}
-				s.UserUuids = append(s.UserUuids, elem)
+				s.UserIds = append(s.UserIds, elem)
 			}
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestDropBy0By) SetFake() {
-	*s = DropConnectionsRequestDropBy0ByUserUuids
+func (s *DropConnectionsBodyDropBy0By) SetFake() {
+	*s = DropConnectionsBodyDropBy0ByUserIds
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestDropBy1) SetFake() {
+func (s *DropConnectionsBodyDropBy1) SetFake() {
 	{
 		{
 			s.By.SetFake()
@@ -2005,22 +2006,22 @@ func (s *DropConnectionsRequestDropBy1) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestDropBy1By) SetFake() {
-	*s = DropConnectionsRequestDropBy1ByIpAddresses
+func (s *DropConnectionsBodyDropBy1By) SetFake() {
+	*s = DropConnectionsBodyDropBy1ByIpAddresses
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestTargetNodes) SetFake() {
-	var variant DropConnectionsRequestTargetNodes0
+func (s *DropConnectionsBodyTargetNodes) SetFake() {
+	var variant DropConnectionsBodyTargetNodes0
 
 	{
 		variant.SetFake()
 	}
-	s.SetDropConnectionsRequestTargetNodes0(variant)
+	s.SetDropConnectionsBodyTargetNodes0(variant)
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestTargetNodes0) SetFake() {
+func (s *DropConnectionsBodyTargetNodes0) SetFake() {
 	{
 		{
 			s.Target.SetFake()
@@ -2029,12 +2030,12 @@ func (s *DropConnectionsRequestTargetNodes0) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestTargetNodes0Target) SetFake() {
-	*s = DropConnectionsRequestTargetNodes0TargetAllNodes
+func (s *DropConnectionsBodyTargetNodes0Target) SetFake() {
+	*s = DropConnectionsBodyTargetNodes0TargetAllNodes
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestTargetNodes1) SetFake() {
+func (s *DropConnectionsBodyTargetNodes1) SetFake() {
 	{
 		{
 			s.Target.SetFake()
@@ -2055,8 +2056,8 @@ func (s *DropConnectionsRequestTargetNodes1) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *DropConnectionsRequestTargetNodes1Target) SetFake() {
-	*s = DropConnectionsRequestTargetNodes1TargetSpecificNodes
+func (s *DropConnectionsBodyTargetNodes1Target) SetFake() {
+	*s = DropConnectionsBodyTargetNodes1TargetSpecificNodes
 }
 
 // SetFake set fake values.
@@ -2079,19 +2080,10 @@ func (s *EncryptionItemMethod) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *EventResponse) SetFake() {
+func (s *ExtendUserBody) SetFake() {
 	{
 		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *EventResponseResponse) SetFake() {
-	{
-		{
-			s.EventSent = true
+			s.Days = float64(0)
 		}
 	}
 }
@@ -2142,7 +2134,19 @@ func (s *ExternalSquad) SetFake() {
 	}
 	{
 		{
-			s.ResponseHeaders.SetFake()
+			s.ResponseHeadersAdd.SetFake()
+		}
+	}
+	{
+		{
+			s.ResponseHeadersRemove = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ResponseHeadersRemove = append(s.ResponseHeadersRemove, elem)
+			}
 		}
 	}
 	{
@@ -2173,7 +2177,7 @@ func (s *ExternalSquad) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ExternalSquadResponseHeaders) SetFake() {
+func (s *ExternalSquadResponseHeadersAdd) SetFake() {
 	var (
 		elem string
 		m    map[string]string = s.init()
@@ -2227,299 +2231,6 @@ func (s *ExternalSquadsResponseResponse) SetFake() {
 				}
 				s.ExternalSquads = append(s.ExternalSquads, elem)
 			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchIpsResultResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchIpsResultResponseResponse) SetFake() {
-	{
-		{
-			s.IsCompleted = true
-		}
-	}
-	{
-		{
-			s.IsFailed = true
-		}
-	}
-	{
-		{
-			s.Progress.SetFake()
-		}
-	}
-	{
-		{
-			s.Result.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchIpsResultResponseResponseProgress) SetFake() {
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-	{
-		{
-			s.Completed = float64(0)
-		}
-	}
-	{
-		{
-			s.Percent = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchIpsResultResponseResponseResult) SetFake() {
-	{
-		{
-			s.Success = true
-		}
-	}
-	{
-		{
-			s.UserUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.UserId = "string"
-		}
-	}
-	{
-		{
-			s.Nodes = nil
-			for i := 0; i < 0; i++ {
-				var elem FetchIpsResultResponseResponseResultNodesItem
-				{
-					elem.SetFake()
-				}
-				s.Nodes = append(s.Nodes, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchIpsResultResponseResponseResultNodesItem) SetFake() {
-	{
-		{
-			s.NodeUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.NodeName = "string"
-		}
-	}
-	{
-		{
-			s.CountryCode = "string"
-		}
-	}
-	{
-		{
-			s.Ips = nil
-			for i := 0; i < 0; i++ {
-				var elem Ips
-				{
-					elem.SetFake()
-				}
-				s.Ips = append(s.Ips, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchUsersIpsResultResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchUsersIpsResultResponseResponse) SetFake() {
-	{
-		{
-			s.IsCompleted = true
-		}
-	}
-	{
-		{
-			s.IsFailed = true
-		}
-	}
-	{
-		{
-			s.Result.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchUsersIpsResultResponseResponseResult) SetFake() {
-	{
-		{
-			s.Success = true
-		}
-	}
-	{
-		{
-			s.NodeUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.Users = nil
-			for i := 0; i < 0; i++ {
-				var elem FetchUsersIpsResultResponseResponseResultUsersItem
-				{
-					elem.SetFake()
-				}
-				s.Users = append(s.Users, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FetchUsersIpsResultResponseResponseResultUsersItem) SetFake() {
-	{
-		{
-			s.UserId = "string"
-		}
-	}
-	{
-		{
-			s.Ips = nil
-			for i := 0; i < 0; i++ {
-				var elem Ips
-				{
-					elem.SetFake()
-				}
-				s.Ips = append(s.Ips, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FindAllApiTokensResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FindAllApiTokensResponseResponse) SetFake() {
-	{
-		{
-			s.Tokens = nil
-			for i := 0; i < 0; i++ {
-				var elem FindAllApiTokensResponseResponseTokensItem
-				{
-					elem.SetFake()
-				}
-				s.Tokens = append(s.Tokens, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Docs.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FindAllApiTokensResponseResponseDocs) SetFake() {
-	{
-		{
-			s.Enabled = true
-		}
-	}
-	{
-		{
-			s.ScalarPath.SetFake()
-		}
-	}
-	{
-		{
-			s.SwaggerPath.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *FindAllApiTokensResponseResponseTokensItem) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.Name = "string"
-		}
-	}
-	{
-		{
-			s.ExpireAt = time.Now()
-		}
-	}
-	{
-		{
-			s.Scopes = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.Scopes = append(s.Scopes, elem)
-			}
-		}
-	}
-	{
-		{
-			s.CreatedAt = time.Now()
-		}
-	}
-	{
-		{
-			s.UpdatedAt = time.Now()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *ForbiddenError) SetFake() {
-	{
-		{
-			s.Message = "string"
-		}
-	}
-	{
-		{
-			s.StatusCode = float64(0)
 		}
 	}
 }
@@ -2610,75 +2321,6 @@ func (s *Generic) SetFake() {
 				}
 				s.AllowedEmails = append(s.AllowedEmails, elem)
 			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetAllHwidDevicesResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetAllSubscriptionsResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetAllSubscriptionsResponseResponse) SetFake() {
-	{
-		{
-			s.Subscriptions = nil
-			for i := 0; i < 0; i++ {
-				var elem Subscription
-				{
-					elem.SetFake()
-				}
-				s.Subscriptions = append(s.Subscriptions, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetAllUsersResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetAllUsersResponseResponse) SetFake() {
-	{
-		{
-			s.Users = nil
-			for i := 0; i < 0; i++ {
-				var elem UserItemInfo
-				{
-					elem.SetFake()
-				}
-				s.Users = append(s.Users, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
 		}
 	}
 }
@@ -2781,6 +2423,72 @@ func (s *GetApiTokenScopesResponseResponseResourcesItemEndpointsItemKind) SetFak
 }
 
 // SetFake set fake values.
+func (s *GetApiTokensResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetApiTokensResponseResponse) SetFake() {
+	{
+		{
+			s.Tokens = nil
+			for i := 0; i < 0; i++ {
+				var elem GetApiTokensResponseResponseTokensItem
+				{
+					elem.SetFake()
+				}
+				s.Tokens = append(s.Tokens, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetApiTokensResponseResponseTokensItem) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.ExpireAt = time.Now()
+		}
+	}
+	{
+		{
+			s.Scopes = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Scopes = append(s.Scopes, elem)
+			}
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *GetBandwidthStatsResponse) SetFake() {
 	{
 		{
@@ -2819,7 +2527,7 @@ func (s *GetBandwidthStatsResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *GetConnectionKeysByUuidResponse) SetFake() {
+func (s *GetConfigurationResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
@@ -2828,7 +2536,123 @@ func (s *GetConnectionKeysByUuidResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *GetConnectionKeysByUuidResponseResponse) SetFake() {
+func (s *GetConfigurationResponseResponse) SetFake() {
+	{
+		{
+			s.Notifications.SetFake()
+		}
+	}
+	{
+		{
+			s.Service.SetFake()
+		}
+	}
+	{
+		{
+			s.Misc.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetConfigurationResponseResponseMisc) SetFake() {
+	{
+		{
+			s.ShortUuidLength = float64(0)
+		}
+	}
+	{
+		{
+			s.SubPublicDomain = "string"
+		}
+	}
+	{
+		{
+			s.UserUsageIgnoreBelowBytes = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetConfigurationResponseResponseNotifications) SetFake() {
+	{
+		{
+			s.Webhook = true
+		}
+	}
+	{
+		{
+			s.BandwidthUsage = nil
+			for i := 0; i < 0; i++ {
+				var elem float64
+				{
+					elem = float64(0)
+				}
+				s.BandwidthUsage = append(s.BandwidthUsage, elem)
+			}
+		}
+	}
+	{
+		{
+			s.NotConnectedAfter = nil
+			for i := 0; i < 0; i++ {
+				var elem float64
+				{
+					elem = float64(0)
+				}
+				s.NotConnectedAfter = append(s.NotConnectedAfter, elem)
+			}
+		}
+	}
+	{
+		{
+			s.ExpirationNotifications = nil
+			for i := 0; i < 0; i++ {
+				var elem float64
+				{
+					elem = float64(0)
+				}
+				s.ExpirationNotifications = append(s.ExpirationNotifications, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetConfigurationResponseResponseService) SetFake() {
+	{
+		{
+			s.CleanUsageHistory = true
+		}
+	}
+	{
+		{
+			s.DisableUserUsageRecords = true
+		}
+	}
+	{
+		{
+			s.DisableSrhRecords = true
+		}
+	}
+	{
+		{
+			s.ExportToRedisStream = true
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetConnectionKeysByUserIdResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetConnectionKeysByUserIdResponseResponse) SetFake() {
 	{
 		{
 			s.EnabledKeys = nil
@@ -2863,6 +2687,80 @@ func (s *GetConnectionKeysByUuidResponseResponse) SetFake() {
 				}
 				s.DisabledKeys = append(s.DisabledKeys, elem)
 			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetHostsResponse) SetFake() {
+	{
+		{
+			s.Response = nil
+			for i := 0; i < 0; i++ {
+				var elem HostItem
+				{
+					elem.SetFake()
+				}
+				s.Response = append(s.Response, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetHttpStatsResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetHttpStatsResponseResponse) SetFake() {
+	{
+		{
+			s.Routes = nil
+			for i := 0; i < 0; i++ {
+				var elem GetHttpStatsResponseResponseRoutesItem
+				{
+					elem.SetFake()
+				}
+				s.Routes = append(s.Routes, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = int(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetHttpStatsResponseResponseRoutesItem) SetFake() {
+	{
+		{
+			s.Method = "string"
+		}
+	}
+	{
+		{
+			s.Route = "string"
+		}
+	}
+	{
+		{
+			s.Count = int(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetHwidDevicesQueryResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
 		}
 	}
 }
@@ -3044,96 +2942,101 @@ func (s *GetInternalSquadAccessibleNodesResponseResponseAccessibleNodesItem) Set
 }
 
 // SetFake set fake values.
-func (s *GetLegacyStatsNodesUsersUsageResponse) SetFake() {
+func (s *GetInternalSquadUsageResponse) SetFake() {
 	{
 		{
-			s.Response = nil
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetInternalSquadUsageResponseResponse) SetFake() {
+	{
+		{
+			s.SquadUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.Users = nil
 			for i := 0; i < 0; i++ {
-				var elem GetLegacyStatsNodesUsersUsageResponseResponseItem
+				var elem User
 				{
 					elem.SetFake()
 				}
-				s.Response = append(s.Response, elem)
+				s.Users = append(s.Users, elem)
+			}
+		}
+	}
+	{
+		{
+			s.NextCursor.SetFake()
+		}
+	}
+	{
+		{
+			s.HasMore = true
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetInternalSquadUserUsageResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetInternalSquadUserUsageResponseResponse) SetFake() {
+	{
+		{
+			s.Days = nil
+			for i := 0; i < 0; i++ {
+				var elem GetInternalSquadUserUsageResponseResponseDaysItem
+				{
+					elem.SetFake()
+				}
+				s.Days = append(s.Days, elem)
 			}
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *GetLegacyStatsNodesUsersUsageResponseResponseItem) SetFake() {
-	{
-		{
-			s.UserUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.Username = "string"
-		}
-	}
-	{
-		{
-			s.NodeUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
+func (s *GetInternalSquadUserUsageResponseResponseDaysItem) SetFake() {
 	{
 		{
 			s.Date = "string"
 		}
 	}
-}
-
-// SetFake set fake values.
-func (s *GetLegacyStatsUserUsageResponse) SetFake() {
 	{
 		{
-			s.Response = nil
+			s.Nodes = nil
 			for i := 0; i < 0; i++ {
-				var elem GetLegacyStatsUserUsageResponseResponseItem
+				var elem GetInternalSquadUserUsageResponseResponseDaysItemNodesItem
 				{
 					elem.SetFake()
 				}
-				s.Response = append(s.Response, elem)
+				s.Nodes = append(s.Nodes, elem)
 			}
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *GetLegacyStatsUserUsageResponseResponseItem) SetFake() {
+func (s *GetInternalSquadUserUsageResponseResponseDaysItemNodesItem) SetFake() {
 	{
 		{
-			s.UserUuid = uuid.New()
+			s.UUID = uuid.New()
 		}
 	}
 	{
 		{
-			s.NodeUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.NodeName = "string"
-		}
-	}
-	{
-		{
-			s.CountryCode = "string"
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-	{
-		{
-			s.Date = "string"
+			s.TotalBytes = float64(0)
 		}
 	}
 }
@@ -3223,6 +3126,86 @@ func (s *GetMetadataResponseResponseGitFrontend) SetFake() {
 	{
 		{
 			s.CommitUrl = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetNodeSecretKeyResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetNodeSecretKeyResponseResponse) SetFake() {
+	{
+		{
+			s.SecretKey = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetNodeUsageBody) SetFake() {
+	{
+		{
+			s.NodesUuids = nil
+			for i := 0; i < 1; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.NodesUuids = append(s.NodesUuids, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetNodeUsageResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetNodeUsageResponseResponse) SetFake() {
+	{
+		{
+			s.Nodes = nil
+			for i := 0; i < 0; i++ {
+				var elem GetNodeUsageResponseResponseNodesItem
+				{
+					elem.SetFake()
+				}
+				s.Nodes = append(s.Nodes, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetNodeUsageResponseResponseNodesItem) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.Users = nil
+			for i := 0; i < 0; i++ {
+				var elem User
+				{
+					elem.SetFake()
+				}
+				s.Users = append(s.Users, elem)
+			}
 		}
 	}
 }
@@ -3345,24 +3328,6 @@ func (s *GetNodesStatisticsResponseResponseLastSevenDaysItem) SetFake() {
 	{
 		{
 			s.TotalBytes = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetPubKeyResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetPubKeyResponseResponse) SetFake() {
-	{
-		{
-			s.PubKey = "string"
 		}
 	}
 }
@@ -3514,8 +3479,8 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItem) 
 		}
 	}
 	{
-		{
-			s.SecurityOptions.SetFake()
+		{ // Keep pointer nil to prevent infinite recursion.
+			s.SecurityOptions = nil
 		}
 	}
 	{
@@ -3664,78 +3629,6 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemPr
 
 // SetFake set fake values.
 func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions) SetFake() {
-	var variant GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0
-
-	{
-		variant.SetFake()
-	}
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0(variant)
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0) SetFake() {
-	{
-		{
-			s.Encryption = "string"
-		}
-	}
-	{
-		{
-			s.ID = "string"
-		}
-	}
-	{
-		{
-			s.Flow.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow) SetFake() {
-	*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0FlowEmpty
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1) SetFake() {
-	{
-		{
-			s.Password = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2) SetFake() {
-	{
-		{
-			s.Method = "string"
-		}
-	}
-	{
-		{
-			s.Password = "string"
-		}
-	}
-	{
-		{
-			s.Uot = true
-		}
-	}
-	{
-		{
-			s.UotVersion = int(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3) SetFake() {
-	{
-		{
-			s.Version = int(0)
-		}
-	}
 }
 
 // SetFake set fake values.
@@ -3745,90 +3638,6 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSe
 
 // SetFake set fake values.
 func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) SetFake() {
-	var variant GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0
-
-	{
-		variant.SetFake()
-	}
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0(variant)
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0) SetFake() {
-	{
-		{
-			s.PinnedPeerCertSha256.SetFake()
-		}
-	}
-	{
-		{
-			s.VerifyPeerCertByName.SetFake()
-		}
-	}
-	{
-		{
-			s.Alpn.SetFake()
-		}
-	}
-	{
-		{
-			s.EnableSessionResumption = true
-		}
-	}
-	{
-		{
-			s.Fingerprint.SetFake()
-		}
-	}
-	{
-		{
-			s.ServerName.SetFake()
-		}
-	}
-	{
-		{
-			s.EchConfigList.SetFake()
-		}
-	}
-	{
-		{
-			s.EchForceQuery.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1) SetFake() {
-	{
-		{
-			s.Fingerprint = "string"
-		}
-	}
-	{
-		{
-			s.PublicKey = "string"
-		}
-	}
-	{
-		{
-			s.ShortId.SetFake()
-		}
-	}
-	{
-		{
-			s.ServerName = "string"
-		}
-	}
-	{
-		{
-			s.SpiderX.SetFake()
-		}
-	}
-	{
-		{
-			s.Mldsa65Verify.SetFake()
-		}
-	}
 }
 
 // SetFake set fake values.
@@ -3852,303 +3661,6 @@ func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 
 // SetFake set fake values.
 func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions) SetFake() {
-	var variant GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0
-
-	{
-		variant.SetFake()
-	}
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0(variant)
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0) SetFake() {
-	{
-		{
-			s.Header.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) SetFake() {
-	var variant GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0
-
-	{
-		variant.SetFake()
-	}
-	s.SetGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0(variant)
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0) SetFake() {
-	{
-		{
-			s.Type.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type) SetFake() {
-	*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0TypeNone
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1) SetFake() {
-	{
-		{
-			s.Type.SetFake()
-		}
-	}
-	{
-		{
-			s.Request.SetFake()
-		}
-	}
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetFake() {
-	{
-		{
-			s.Version.SetFake()
-		}
-	}
-	{
-		{
-			s.Method.SetFake()
-		}
-	}
-	{
-		{
-			s.Path = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.Path = append(s.Path, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Headers.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) SetFake() {
-	var (
-		elem jx.Raw
-		m    map[string]jx.Raw = s.init()
-	)
-	for i := 0; i < 0; i++ {
-		m[fmt.Sprintf("fake%d", i)] = elem
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetFake() {
-	{
-		{
-			s.Version.SetFake()
-		}
-	}
-	{
-		{
-			s.Status.SetFake()
-		}
-	}
-	{
-		{
-			s.Reason.SetFake()
-		}
-	}
-	{
-		{
-			s.Headers.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) SetFake() {
-	var (
-		elem jx.Raw
-		m    map[string]jx.Raw = s.init()
-	)
-	for i := 0; i < 0; i++ {
-		m[fmt.Sprintf("fake%d", i)] = elem
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type) SetFake() {
-	*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1TypeHTTP
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1) SetFake() {
-	{
-		{
-			s.Path.SetFake()
-		}
-	}
-	{
-		{
-			s.Host.SetFake()
-		}
-	}
-	{
-		{
-			s.Mode.SetFake()
-		}
-	}
-	{
-		{
-			s.Extra.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) SetFake() {
-	var (
-		elem jx.Raw
-		m    map[string]jx.Raw = s.init()
-	)
-	for i := 0; i < 0; i++ {
-		m[fmt.Sprintf("fake%d", i)] = elem
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode) SetFake() {
-	*s = GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1ModeAuto
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2) SetFake() {
-	{
-		{
-			s.Path.SetFake()
-		}
-	}
-	{
-		{
-			s.Host.SetFake()
-		}
-	}
-	{
-		{
-			s.Headers.SetFake()
-		}
-	}
-	{
-		{
-			s.HeartbeatPeriod.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) SetFake() {
-	var (
-		elem string
-		m    map[string]string = s.init()
-	)
-	for i := 0; i < 0; i++ {
-		m[fmt.Sprintf("fake%d", i)] = elem
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3) SetFake() {
-	{
-		{
-			s.Path.SetFake()
-		}
-	}
-	{
-		{
-			s.Host.SetFake()
-		}
-	}
-	{
-		{
-			s.Headers.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) SetFake() {
-	var (
-		elem string
-		m    map[string]string = s.init()
-	)
-	for i := 0; i < 0; i++ {
-		m[fmt.Sprintf("fake%d", i)] = elem
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4) SetFake() {
-	{
-		{
-			s.Authority.SetFake()
-		}
-	}
-	{
-		{
-			s.ServiceName.SetFake()
-		}
-	}
-	{
-		{
-			s.MultiMode = true
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5) SetFake() {
-	{
-		{
-			s.ClientMtu = int(0)
-		}
-	}
-	{
-		{
-			s.ClientTti = int(0)
-		}
-	}
-	{
-		{
-			s.Congestion = true
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6) SetFake() {
-	{
-		{
-			s.Version = int(0)
-		}
-	}
-	{
-		{
-			s.Auth = "string"
-		}
-	}
 }
 
 // SetFake set fake values.
@@ -4327,7 +3839,72 @@ func (s *GetRemnawaveHealthResponseResponseRuntimeMetricsItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *GetStatsNodesUsersUsageRequest) SetFake() {
+func (s *GetStatsDigestResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetStatsDigestResponseResponse) SetFake() {
+	{
+		{
+			s.Users.SetFake()
+		}
+	}
+	{
+		{
+			s.Traffic.SetFake()
+		}
+	}
+	{
+		{
+			s.HwidDevices.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetStatsDigestResponseResponseHwidDevices) SetFake() {
+	{
+		{
+			s.CreatedCount = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetStatsDigestResponseResponseTraffic) SetFake() {
+	{
+		{
+			s.TotalBytes = "string"
+		}
+	}
+	{
+		{
+			s.ByUsersCreatedInRangeBytes = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetStatsDigestResponseResponseUsers) SetFake() {
+	{
+		{
+			s.CreatedCount = float64(0)
+		}
+	}
+	{
+		{
+			s.ExpiredCount = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetStatsNodesUsersUsageBody) SetFake() {
 	{
 		{
 			s.NodesUuids = nil
@@ -4568,7 +4145,7 @@ func (s *GetStatusResponseResponseBranding) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *GetSubpageConfigByShortUuidRequestBody) SetFake() {
+func (s *GetSubpageConfigByShortUuidBody) SetFake() {
 	{
 		{
 			s.RequestHeaders.SetFake()
@@ -4577,7 +4154,7 @@ func (s *GetSubpageConfigByShortUuidRequestBody) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *GetSubpageConfigByShortUuidRequestBodyRequestHeaders) SetFake() {
+func (s *GetSubpageConfigByShortUuidBodyRequestHeaders) SetFake() {
 	var (
 		elem string
 		m    map[string]string = s.init()
@@ -4615,6 +4192,66 @@ func (s *GetSubscriptionRequestHistoryResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionRequestHistoryResponseResponse) SetFake() {
+	{
+		{
+			s.Records = nil
+			for i := 0; i < 0; i++ {
+				var elem GetSubscriptionRequestHistoryResponseResponseRecordsItem
+				{
+					elem.SetFake()
+				}
+				s.Records = append(s.Records, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionRequestHistoryResponseResponseRecordsItem) SetFake() {
+	{
+		{
+			s.ID = float64(0)
+		}
+	}
+	{
+		{
+			s.UserId = float64(0)
+		}
+	}
+	{
+		{
+			s.SrrResponseType = "string"
+		}
+	}
+	{
+		{
+			s.SrrRuleName.SetFake()
+		}
+	}
+	{
+		{
+			s.RequestIp.SetFake()
+		}
+	}
+	{
+		{
+			s.UserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.RequestAt = time.Now()
 		}
 	}
 }
@@ -4671,6 +4308,36 @@ func (s *GetSubscriptionRequestHistoryStatsResponseResponseHourlyRequestStatsIte
 }
 
 // SetFake set fake values.
+func (s *GetSubscriptionsResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionsResponseResponse) SetFake() {
+	{
+		{
+			s.Subscriptions = nil
+			for i := 0; i < 0; i++ {
+				var elem Subscription
+				{
+					elem.SetFake()
+				}
+				s.Subscriptions = append(s.Subscriptions, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *GetTopUsersByHwidDevicesResponse) SetFake() {
 	{
 		{
@@ -4704,11 +4371,6 @@ func (s *GetTopUsersByHwidDevicesResponseResponse) SetFake() {
 func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) SetFake() {
 	{
 		{
-			s.UserUuid = uuid.New()
-		}
-	}
-	{
-		{
 			s.ID = float64(0)
 		}
 	}
@@ -4720,6 +4382,84 @@ func (s *GetTopUsersByHwidDevicesResponseResponseUsersItem) SetFake() {
 	{
 		{
 			s.DevicesCount = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetTorrentBlockerReportsResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetTorrentBlockerReportsResponseResponse) SetFake() {
+	{
+		{
+			s.Records = nil
+			for i := 0; i < 0; i++ {
+				var elem GetTorrentBlockerReportsResponseResponseRecordsItem
+				{
+					elem.SetFake()
+				}
+				s.Records = append(s.Records, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItem) SetFake() {
+	{
+		{
+			s.ID = float64(0)
+		}
+	}
+	{
+		{
+			s.UserId = float64(0)
+		}
+	}
+	{
+		{
+			s.NodeId = float64(0)
+		}
+	}
+	{
+		{
+			s.User.SetFake()
+		}
+	}
+	{
+		{
+			s.Node.SetFake()
+		}
+	}
+	{
+		{
+			s.Report.SetFake()
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetTorrentBlockerReportsResponseResponseRecordsItemUser) SetFake() {
+	{
+		{
+			s.Username = "string"
 		}
 	}
 }
@@ -4794,7 +4534,7 @@ func (s *GetTorrentBlockerReportsStatsResponseResponseStats) SetFake() {
 func (s *GetTorrentBlockerReportsStatsResponseResponseTopUsersItem) SetFake() {
 	{
 		{
-			s.UUID = uuid.New()
+			s.UserId = float64(0)
 		}
 	}
 	{
@@ -4827,7 +4567,7 @@ func (s *GetUserAccessibleNodesResponse) SetFake() {
 func (s *GetUserAccessibleNodesResponseResponse) SetFake() {
 	{
 		{
-			s.UserUuid = uuid.New()
+			s.UserId = float64(0)
 		}
 	}
 	{
@@ -4911,6 +4651,96 @@ func (s *GetUserSubscriptionRequestHistoryResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetUserSubscriptionRequestHistoryResponseResponse) SetFake() {
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+	{
+		{
+			s.Records = nil
+			for i := 0; i < 0; i++ {
+				var elem GetUserSubscriptionRequestHistoryResponseResponseRecordsItem
+				{
+					elem.SetFake()
+				}
+				s.Records = append(s.Records, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetUserSubscriptionRequestHistoryResponseResponseRecordsItem) SetFake() {
+	{
+		{
+			s.ID = float64(0)
+		}
+	}
+	{
+		{
+			s.UserId = float64(0)
+		}
+	}
+	{
+		{
+			s.RequestAt = time.Now()
+		}
+	}
+	{
+		{
+			s.SrrResponseType = "string"
+		}
+	}
+	{
+		{
+			s.RequestIp.SetFake()
+		}
+	}
+	{
+		{
+			s.UserAgent.SetFake()
+		}
+	}
+	{
+		{
+			s.SrrRuleName.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetUsersResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetUsersResponseResponse) SetFake() {
+	{
+		{
+			s.Users = nil
+			for i := 0; i < 0; i++ {
+				var elem UserItemInfo
+				{
+					elem.SetFake()
+				}
+				s.Users = append(s.Users, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = float64(0)
 		}
 	}
 }
@@ -5208,22 +5038,6 @@ func (s *HostItemSecurityLayer) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *HostListResponse) SetFake() {
-	{
-		{
-			s.Response = nil
-			for i := 0; i < 0; i++ {
-				var elem HostItem
-				{
-					elem.SetFake()
-				}
-				s.Response = append(s.Response, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *HostOverride) SetFake() {
 	{
 		{
@@ -5242,6 +5056,43 @@ func (s *HostResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *HostsBodyBulkRequest) SetFake() {
+	{
+		{
+			s.Uuids = nil
+			for i := 0; i < 0; i++ {
+				var elem uuid.UUID
+				{
+					elem = uuid.New()
+				}
+				s.Uuids = append(s.Uuids, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *HwidDevicesQuery) SetFake() {
+	{
+		{
+			s.Devices = nil
+			for i := 0; i < 0; i++ {
+				var elem Device
+				{
+					elem.SetFake()
+				}
+				s.Devices = append(s.Devices, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = float64(0)
 		}
 	}
 }
@@ -5319,6 +5170,20 @@ func (s *Inbound) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *Inbound2) SetFake() {
+	{
+		{
+			s.ConfigProfileUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.ConfigProfileInboundUuid = uuid.New()
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *InboundItem) SetFake() {
 	{
 		{
@@ -5328,20 +5193,6 @@ func (s *InboundItem) SetFake() {
 	{
 		{
 			s.ConfigProfileInboundUuid.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *InboundRef) SetFake() {
-	{
-		{
-			s.ConfigProfileUuid = uuid.New()
-		}
-	}
-	{
-		{
-			s.ConfigProfileInboundUuid = uuid.New()
 		}
 	}
 }
@@ -5447,6 +5298,84 @@ func (s *InboundsStat) SetFake() {
 	{
 		{
 			s.Download = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InfraBillingRecordResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InfraBillingRecordResponseResponseResponse) SetFake() {
+	{
+		{
+			s.Records = nil
+			for i := 0; i < 0; i++ {
+				var elem InfraBillingRecordResponseResponseResponseRecordsItem
+				{
+					elem.SetFake()
+				}
+				s.Records = append(s.Records, elem)
+			}
+		}
+	}
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItem) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ProviderUuid = uuid.New()
+		}
+	}
+	{
+		{
+			s.Amount = float64(0)
+		}
+	}
+	{
+		{
+			s.BilledAt = time.Now()
+		}
+	}
+	{
+		{
+			s.Provider.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *InfraBillingRecordResponseResponseResponseRecordsItemProvider) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.FaviconLink.SetFake()
 		}
 	}
 }
@@ -5574,6 +5503,22 @@ func (s *InternalSquad) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *InternalSquadBodyRequest) SetFake() {
+	{
+		{
+			s.UserIds = nil
+			for i := 0; i < 1; i++ {
+				var elem float64
+				{
+					elem = float64(0)
+				}
+				s.UserIds = append(s.UserIds, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *InternalSquadResponseResponse) SetFake() {
 	{
 		{
@@ -5641,24 +5586,6 @@ func (s *Ips) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *IpsResponseResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *IpsResponseResponseResponse) SetFake() {
-	{
-		{
-			s.JobId = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *Keycloak) SetFake() {
 	{
 		{
@@ -5705,7 +5632,7 @@ func (s *Keycloak) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *LoginRequest) SetFake() {
+func (s *LoginBody) SetFake() {
 	{
 		{
 			s.Username = "string"
@@ -5724,27 +5651,22 @@ func (s *NilBrandingSettings) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *NilConnectionsByNodeResultResponseResponseResult) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
+func (s *NilConnectionsByUserResultResponseResponseResult) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
 func (s *NilCustomRemark) SetFake() {
 	s.Null = true
 }
 
 // SetFake set fake values.
 func (s *NilDateTime) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilExternalSquadResponseHeaders) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilFetchIpsResultResponseResponseResult) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilFetchUsersIpsResultResponseResponseResult) SetFake() {
 	s.Null = true
 }
 
@@ -5760,26 +5682,6 @@ func (s *NilGetRawSubscriptionByShortUuidResponseResponseConvertedUserInfoHwidCh
 
 // SetFake set fake values.
 func (s *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMihomoIpVersion) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
-func (s *NilGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers) SetFake() {
 	s.Null = true
 }
 
@@ -5898,94 +5800,7 @@ func (s *Node) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *NodePlugin) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.ViewPosition = int(0)
-		}
-	}
-	{
-		{
-			s.Name = "string"
-		}
-	}
-	{
-		{
-			s.PluginConfig = []byte("null")
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *NodePluginResponseResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *NodePluginResponseResponseResponse) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.ViewPosition = int(0)
-		}
-	}
-	{
-		{
-			s.Name = "string"
-		}
-	}
-	{
-		{
-			s.PluginConfig = []byte("null")
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *NodePluginsResponseResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *NodePluginsResponseResponseResponse) SetFake() {
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-	{
-		{
-			s.NodePlugins = nil
-			for i := 0; i < 0; i++ {
-				var elem NodePlugin
-				{
-					elem.SetFake()
-				}
-				s.NodePlugins = append(s.NodePlugins, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *NodeRequestBodyRequest) SetFake() {
+func (s *NodeBodyRequest) SetFake() {
 	{
 		{
 			s.ForceRestart = true
@@ -5994,19 +5809,15 @@ func (s *NodeRequestBodyRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *NodeResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *NodeResponseDataItem) SetFake() {
+func (s *NodeDataItem) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ID = float64(0)
 		}
 	}
 	{
@@ -6169,7 +5980,7 @@ func (s *NodeResponseDataItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *NodeResponseInfoItem) SetFake() {
+func (s *NodeInfoItem) SetFake() {
 	{
 		{
 			s.Arch = "string"
@@ -6230,12 +6041,147 @@ func (s *NodeResponseInfoItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *NodesResponse) SetFake() {
+func (s *NodePlugin) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.PluginConfig = []byte("null")
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginBodyRequest) SetFake() {
+	{
+		{
+			s.Name = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginResponseResponseResponse) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.PluginConfig = []byte("null")
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginsBodyRequeItem) SetFake() {
+	{
+		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginsBodyRequest) SetFake() {
+	{
+		{
+			s.Items = nil
+			for i := 0; i < 0; i++ {
+				var elem NodePluginsBodyRequeItem
+				{
+					elem.SetFake()
+				}
+				s.Items = append(s.Items, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginsResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodePluginsResponseResponseResponse) SetFake() {
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+	{
+		{
+			s.NodePlugins = nil
+			for i := 0; i < 0; i++ {
+				var elem NodePlugin
+				{
+					elem.SetFake()
+				}
+				s.NodePlugins = append(s.NodePlugins, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodeResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *NodesResponseResponse) SetFake() {
 	{
 		{
 			s.Response = nil
 			for i := 0; i < 0; i++ {
-				var elem NodeResponseDataItem
+				var elem NodeDataItem
 				{
 					elem.SetFake()
 				}
@@ -6260,7 +6206,7 @@ func (s *NotFoundError) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OAuth2AuthorizeRequest) SetFake() {
+func (s *OAuth2AuthorizeBody) SetFake() {
 	{
 		{
 			s.Provider.SetFake()
@@ -6269,8 +6215,8 @@ func (s *OAuth2AuthorizeRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OAuth2AuthorizeRequestProvider) SetFake() {
-	*s = OAuth2AuthorizeRequestProviderTelegram
+func (s *OAuth2AuthorizeBodyProvider) SetFake() {
+	*s = OAuth2AuthorizeBodyProviderTelegram
 }
 
 // SetFake set fake values.
@@ -6292,7 +6238,7 @@ func (s *OAuth2AuthorizeResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OAuth2CallbackRequest) SetFake() {
+func (s *OAuth2CallbackBody) SetFake() {
 	{
 		{
 			s.Provider.SetFake()
@@ -6311,8 +6257,8 @@ func (s *OAuth2CallbackRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OAuth2CallbackRequestProvider) SetFake() {
-	*s = OAuth2CallbackRequestProviderTelegram
+func (s *OAuth2CallbackBodyProvider) SetFake() {
+	*s = OAuth2CallbackBodyProviderTelegram
 }
 
 // SetFake set fake values.
@@ -6359,8 +6305,8 @@ func (s *OptBool) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptBulkAllUpdateUsersRequestStatus) SetFake() {
-	var elem BulkAllUpdateUsersRequestStatus
+func (s *OptBulkAllUpdateUsersBodyStatus) SetFake() {
+	var elem BulkAllUpdateUsersBodyStatus
 	{
 		elem.SetFake()
 	}
@@ -6368,8 +6314,8 @@ func (s *OptBulkAllUpdateUsersRequestStatus) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptBulkAllUpdateUsersRequestTrafficLimitStrategy) SetFake() {
-	var elem BulkAllUpdateUsersRequestTrafficLimitStrategy
+func (s *OptBulkAllUpdateUsersBodyTrafficLimitStrategy) SetFake() {
+	var elem BulkAllUpdateUsersBodyTrafficLimitStrategy
 	{
 		elem.SetFake()
 	}
@@ -6377,8 +6323,8 @@ func (s *OptBulkAllUpdateUsersRequestTrafficLimitStrategy) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptBulkDeleteUsersByStatusRequestStatus) SetFake() {
-	var elem BulkDeleteUsersByStatusRequestStatus
+func (s *OptBulkUpdateUsersBodyFieldsStatus) SetFake() {
+	var elem BulkUpdateUsersBodyFieldsStatus
 	{
 		elem.SetFake()
 	}
@@ -6386,8 +6332,8 @@ func (s *OptBulkDeleteUsersByStatusRequestStatus) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptBulkUpdateUsersRequestFieldsStatus) SetFake() {
-	var elem BulkUpdateUsersRequestFieldsStatus
+func (s *OptBulkUpdateUsersBodyFieldsTrafficLimitStrategy) SetFake() {
+	var elem BulkUpdateUsersBodyFieldsTrafficLimitStrategy
 	{
 		elem.SetFake()
 	}
@@ -6395,8 +6341,8 @@ func (s *OptBulkUpdateUsersRequestFieldsStatus) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) SetFake() {
-	var elem BulkUpdateUsersRequestFieldsTrafficLimitStrategy
+func (s *OptConfigProfile2) SetFake() {
+	var elem ConfigProfile2
 	{
 		elem.SetFake()
 	}
@@ -6404,8 +6350,8 @@ func (s *OptBulkUpdateUsersRequestFieldsTrafficLimitStrategy) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptConfigProfileRef) SetFake() {
-	var elem ConfigProfileRef
+func (s *OptCreateHostBodySecurityLayer) SetFake() {
+	var elem CreateHostBodySecurityLayer
 	{
 		elem.SetFake()
 	}
@@ -6413,8 +6359,8 @@ func (s *OptConfigProfileRef) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptCreateHostRequestSecurityLayer) SetFake() {
-	var elem CreateHostRequestSecurityLayer
+func (s *OptCreateUserBodyStatus) SetFake() {
+	var elem CreateUserBodyStatus
 	{
 		elem.SetFake()
 	}
@@ -6422,17 +6368,8 @@ func (s *OptCreateHostRequestSecurityLayer) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptCreateUserRequestStatus) SetFake() {
-	var elem CreateUserRequestStatus
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptCreateUserRequestTrafficLimitStrategy) SetFake() {
-	var elem CreateUserRequestTrafficLimitStrategy
+func (s *OptCreateUserBodyTrafficLimitStrategy) SetFake() {
+	var elem CreateUserBodyTrafficLimitStrategy
 	{
 		elem.SetFake()
 	}
@@ -6449,8 +6386,8 @@ func (s *OptDateTime) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptDebugSrrMatcherSettings) SetFake() {
-	var elem DebugSrrMatcherSettings
+func (s *OptDebugSrrMatcherBodySettings) SetFake() {
+	var elem DebugSrrMatcherBodySettings
 	{
 		elem.SetFake()
 	}
@@ -6485,51 +6422,6 @@ func (s *OptGeneric) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions) SetFake() {
-	var elem GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request) SetFake() {
-	var elem GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders) SetFake() {
-	var elem GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response) SetFake() {
-	var elem GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders) SetFake() {
-	var elem GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptHostItemSecurityLayer) SetFake() {
 	var elem HostItemSecurityLayer
 	{
@@ -6539,8 +6431,8 @@ func (s *OptHostItemSecurityLayer) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptInboundRef) SetFake() {
-	var elem InboundRef
+func (s *OptInbound2) SetFake() {
+	var elem Inbound2
 	{
 		elem.SetFake()
 	}
@@ -6572,19 +6464,25 @@ func (s *OptNilBrandingSettings) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptNilCreateHostRequestAlpn) SetFake() {
+func (s *OptNilCreateHostBodyAlpn) SetFake() {
 	s.Null = true
 	s.Set = true
 }
 
 // SetFake set fake values.
-func (s *OptNilCreateHostRequestMihomoIpVersion) SetFake() {
+func (s *OptNilCreateHostBodyMihomoIpVersion) SetFake() {
 	s.Null = true
 	s.Set = true
 }
 
 // SetFake set fake values.
 func (s *OptNilCustomRemark) SetFake() {
+	s.Null = true
+	s.Set = true
+}
+
+// SetFake set fake values.
+func (s *OptNilFloat64) SetFake() {
 	s.Null = true
 	s.Set = true
 }
@@ -6650,31 +6548,25 @@ func (s *OptNilUUID) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptNilUpdateExternalSquadRequestResponseHeaders) SetFake() {
+func (s *OptNilUpdateHostBodyAlpn) SetFake() {
 	s.Null = true
 	s.Set = true
 }
 
 // SetFake set fake values.
-func (s *OptNilUpdateHostRequestAlpn) SetFake() {
+func (s *OptNilUpdateHostBodyMihomoIpVersion) SetFake() {
 	s.Null = true
 	s.Set = true
 }
 
 // SetFake set fake values.
-func (s *OptNilUpdateHostRequestMihomoIpVersion) SetFake() {
+func (s *OptNilUpdateManyHostsBodyAlpn) SetFake() {
 	s.Null = true
 	s.Set = true
 }
 
 // SetFake set fake values.
-func (s *OptNilUpdateManyHostsRequestAlpn) SetFake() {
-	s.Null = true
-	s.Set = true
-}
-
-// SetFake set fake values.
-func (s *OptNilUpdateManyHostsRequestMihomoIpVersion) SetFake() {
+func (s *OptNilUpdateManyHostsBodyMihomoIpVersion) SetFake() {
 	s.Null = true
 	s.Set = true
 }
@@ -6734,8 +6626,8 @@ func (s *OptUUID) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUpdateHostRequestSecurityLayer) SetFake() {
-	var elem UpdateHostRequestSecurityLayer
+func (s *OptUpdateConfigProfileBodyConfig) SetFake() {
+	var elem UpdateConfigProfileBodyConfig
 	{
 		elem.SetFake()
 	}
@@ -6743,8 +6635,8 @@ func (s *OptUpdateHostRequestSecurityLayer) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUpdateManyHostsRequestSecurityLayer) SetFake() {
-	var elem UpdateManyHostsRequestSecurityLayer
+func (s *OptUpdateExternalSquadBodyResponseHeadersAdd) SetFake() {
+	var elem UpdateExternalSquadBodyResponseHeadersAdd
 	{
 		elem.SetFake()
 	}
@@ -6752,8 +6644,8 @@ func (s *OptUpdateManyHostsRequestSecurityLayer) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) SetFake() {
-	var elem UpdateSubscriptionSettingsRequestCustomResponseHeaders
+func (s *OptUpdateHostBodySecurityLayer) SetFake() {
+	var elem UpdateHostBodySecurityLayer
 	{
 		elem.SetFake()
 	}
@@ -6761,8 +6653,8 @@ func (s *OptUpdateSubscriptionSettingsRequestCustomResponseHeaders) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUpdateUserRequestStatus) SetFake() {
-	var elem UpdateUserRequestStatus
+func (s *OptUpdateManyHostsBodySecurityLayer) SetFake() {
+	var elem UpdateManyHostsBodySecurityLayer
 	{
 		elem.SetFake()
 	}
@@ -6770,8 +6662,8 @@ func (s *OptUpdateUserRequestStatus) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUpdateUserRequestTrafficLimitStrategy) SetFake() {
-	var elem UpdateUserRequestTrafficLimitStrategy
+func (s *OptUpdateSubscriptionSettingsBodyCustomResponseHeaders) SetFake() {
+	var elem UpdateSubscriptionSettingsBodyCustomResponseHeaders
 	{
 		elem.SetFake()
 	}
@@ -6779,8 +6671,8 @@ func (s *OptUpdateUserRequestTrafficLimitStrategy) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUserItemInfoStatus) SetFake() {
-	var elem UserItemInfoStatus
+func (s *OptUpdateTemplateBodyTemplateJson) SetFake() {
+	var elem UpdateTemplateBodyTemplateJson
 	{
 		elem.SetFake()
 	}
@@ -6788,8 +6680,17 @@ func (s *OptUserItemInfoStatus) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUserItemInfoTrafficLimitStrategy) SetFake() {
-	var elem UserItemInfoTrafficLimitStrategy
+func (s *OptUpdateUserBodyStatus) SetFake() {
+	var elem UpdateUserBodyStatus
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptUpdateUserBodyTrafficLimitStrategy) SetFake() {
+	var elem UpdateUserBodyTrafficLimitStrategy
 	{
 		elem.SetFake()
 	}
@@ -6883,7 +6784,7 @@ func (s *PasswordSettings) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequest) SetFake() {
+func (s *PluginExecutorBody) SetFake() {
 	{
 		{
 			s.Command.SetFake()
@@ -6897,17 +6798,17 @@ func (s *PluginExecutorRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand) SetFake() {
-	var variant PluginExecutorRequestCommand0
+func (s *PluginExecutorBodyCommand) SetFake() {
+	var variant PluginExecutorBodyCommand0
 
 	{
 		variant.SetFake()
 	}
-	s.SetPluginExecutorRequestCommand0(variant)
+	s.SetPluginExecutorBodyCommand0(variant)
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand0) SetFake() {
+func (s *PluginExecutorBodyCommand0) SetFake() {
 	{
 		{
 			s.Command.SetFake()
@@ -6917,7 +6818,7 @@ func (s *PluginExecutorRequestCommand0) SetFake() {
 		{
 			s.Ips = nil
 			for i := 0; i < 1; i++ {
-				var elem PluginExecutorRequestCommand0IpsItem
+				var elem PluginExecutorBodyCommand0IpsItem
 				{
 					elem.SetFake()
 				}
@@ -6928,12 +6829,12 @@ func (s *PluginExecutorRequestCommand0) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand0Command) SetFake() {
-	*s = PluginExecutorRequestCommand0CommandBlockIps
+func (s *PluginExecutorBodyCommand0Command) SetFake() {
+	*s = PluginExecutorBodyCommand0CommandBlockIps
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand0IpsItem) SetFake() {
+func (s *PluginExecutorBodyCommand0IpsItem) SetFake() {
 	{
 		{
 			s.IP = "string"
@@ -6947,7 +6848,7 @@ func (s *PluginExecutorRequestCommand0IpsItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand1) SetFake() {
+func (s *PluginExecutorBodyCommand1) SetFake() {
 	{
 		{
 			s.Command.SetFake()
@@ -6968,12 +6869,12 @@ func (s *PluginExecutorRequestCommand1) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand1Command) SetFake() {
-	*s = PluginExecutorRequestCommand1CommandUnblockIps
+func (s *PluginExecutorBodyCommand1Command) SetFake() {
+	*s = PluginExecutorBodyCommand1CommandUnblockIps
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand2) SetFake() {
+func (s *PluginExecutorBodyCommand2) SetFake() {
 	{
 		{
 			s.Command.SetFake()
@@ -6982,22 +6883,22 @@ func (s *PluginExecutorRequestCommand2) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestCommand2Command) SetFake() {
-	*s = PluginExecutorRequestCommand2CommandRecreateTables
+func (s *PluginExecutorBodyCommand2Command) SetFake() {
+	*s = PluginExecutorBodyCommand2CommandRecreateTables
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestTargetNodes) SetFake() {
-	var variant PluginExecutorRequestTargetNodes0
+func (s *PluginExecutorBodyTargetNodes) SetFake() {
+	var variant PluginExecutorBodyTargetNodes0
 
 	{
 		variant.SetFake()
 	}
-	s.SetPluginExecutorRequestTargetNodes0(variant)
+	s.SetPluginExecutorBodyTargetNodes0(variant)
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestTargetNodes0) SetFake() {
+func (s *PluginExecutorBodyTargetNodes0) SetFake() {
 	{
 		{
 			s.Target.SetFake()
@@ -7006,12 +6907,12 @@ func (s *PluginExecutorRequestTargetNodes0) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestTargetNodes0Target) SetFake() {
-	*s = PluginExecutorRequestTargetNodes0TargetAllNodes
+func (s *PluginExecutorBodyTargetNodes0Target) SetFake() {
+	*s = PluginExecutorBodyTargetNodes0TargetAllNodes
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestTargetNodes1) SetFake() {
+func (s *PluginExecutorBodyTargetNodes1) SetFake() {
 	{
 		{
 			s.Target.SetFake()
@@ -7032,8 +6933,8 @@ func (s *PluginExecutorRequestTargetNodes1) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *PluginExecutorRequestTargetNodes1Target) SetFake() {
-	*s = PluginExecutorRequestTargetNodes1TargetSpecificNodes
+func (s *PluginExecutorBodyTargetNodes1Target) SetFake() {
+	*s = PluginExecutorBodyTargetNodes1TargetSpecificNodes
 }
 
 // SetFake set fake values.
@@ -7051,6 +6952,11 @@ func (s *Pocketid) SetFake() {
 	{
 		{
 			s.ClientSecret.SetFake()
+		}
+	}
+	{
+		{
+			s.FrontendDomain.SetFake()
 		}
 	}
 	{
@@ -7073,7 +6979,7 @@ func (s *Pocketid) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ProfileModificationRequest) SetFake() {
+func (s *ProfileModificationBody) SetFake() {
 	{
 		{
 			s.Uuids = nil
@@ -7094,7 +7000,7 @@ func (s *ProfileModificationRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ProfileModificationRequestConfigProfile) SetFake() {
+func (s *ProfileModificationBodyConfigProfile) SetFake() {
 	{
 		{
 			s.ActiveConfigProfileUuid = uuid.New()
@@ -7200,36 +7106,7 @@ func (s *ProviderItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *Record) SetFake() {
-	{
-		{
-			s.ID = float64(0)
-		}
-	}
-	{
-		{
-			s.UserId = float64(0)
-		}
-	}
-	{
-		{
-			s.RequestAt = time.Now()
-		}
-	}
-	{
-		{
-			s.RequestIp.SetFake()
-		}
-	}
-	{
-		{
-			s.UserAgent.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *RegisterRequest) SetFake() {
+func (s *RegisterBody) SetFake() {
 	{
 		{
 			s.Username = "string"
@@ -7243,12 +7120,12 @@ func (s *RegisterRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ReorderHostRequest) SetFake() {
+func (s *ReorderHostsBody) SetFake() {
 	{
 		{
 			s.Hosts = nil
 			for i := 0; i < 0; i++ {
-				var elem ReorderRequestItem
+				var elem NodePluginsBodyRequeItem
 				{
 					elem.SetFake()
 				}
@@ -7259,7 +7136,7 @@ func (s *ReorderHostRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ReorderHostResponse) SetFake() {
+func (s *ReorderHostsResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
@@ -7268,7 +7145,7 @@ func (s *ReorderHostResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ReorderHostResponseResponse) SetFake() {
+func (s *ReorderHostsResponseResponse) SetFake() {
 	{
 		{
 			s.IsUpdated = true
@@ -7277,47 +7154,17 @@ func (s *ReorderHostResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ReorderNodeRequest) SetFake() {
+func (s *ReorderNodesBody) SetFake() {
 	{
 		{
 			s.Nodes = nil
 			for i := 0; i < 0; i++ {
-				var elem ReorderRequestItem
+				var elem NodePluginsBodyRequeItem
 				{
 					elem.SetFake()
 				}
 				s.Nodes = append(s.Nodes, elem)
 			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *ReorderRequest) SetFake() {
-	{
-		{
-			s.Items = nil
-			for i := 0; i < 0; i++ {
-				var elem ReorderRequestItem
-				{
-					elem.SetFake()
-				}
-				s.Items = append(s.Items, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *ReorderRequestItem) SetFake() {
-	{
-		{
-			s.ViewPosition = int(0)
-		}
-	}
-	{
-		{
-			s.UUID = uuid.New()
 		}
 	}
 }
@@ -7337,12 +7184,7 @@ func (s *ReportItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *ResolveUserRequestBody) SetFake() {
-	{
-		{
-			s.UUID.SetFake()
-		}
-	}
+func (s *ResolveUserBody) SetFake() {
 	{
 		{
 			s.ID.SetFake()
@@ -7373,17 +7215,12 @@ func (s *ResolveUserResponse) SetFake() {
 func (s *ResolveUserResponseResponse) SetFake() {
 	{
 		{
-			s.UUID = uuid.New()
+			s.ID = float64(0)
 		}
 	}
 	{
 		{
 			s.Username = "string"
-		}
-	}
-	{
-		{
-			s.ID = float64(0)
 		}
 	}
 	{
@@ -7598,7 +7435,7 @@ func (s *SettingsResponseResponse) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *SnippetRequest) SetFake() {
+func (s *SnippetBodyRequest) SetFake() {
 	{
 		{
 			s.Name = "string"
@@ -7608,7 +7445,7 @@ func (s *SnippetRequest) SetFake() {
 		{
 			s.Snippet = nil
 			for i := 0; i < 0; i++ {
-				var elem SnippetRequestSnippetItem
+				var elem SnippetBodyRequestSnippetItem
 				{
 					elem.SetFake()
 				}
@@ -7619,7 +7456,14 @@ func (s *SnippetRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *SnippetRequestSnippetItem) SetFake() {
+func (s *SnippetBodyRequestSnippetItem) SetFake() {
+	var (
+		elem jx.Raw
+		m    map[string]jx.Raw = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
+	}
 }
 
 // SetFake set fake values.
@@ -7873,6 +7717,69 @@ func (s *StatsUserUsageResponseResponseResponseSeriesItem) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *SubpageConfigResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubpageConfigResponseResponseResponse) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.ViewPosition = int(0)
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Config = []byte("null")
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubpageConfigsResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *SubpageConfigsResponseResponseResponse) SetFake() {
+	{
+		{
+			s.Total = float64(0)
+		}
+	}
+	{
+		{
+			s.Configs = nil
+			for i := 0; i < 0; i++ {
+				var elem Config
+				{
+					elem.SetFake()
+				}
+				s.Configs = append(s.Configs, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *Subscription) SetFake() {
 	{
 		{
@@ -7909,69 +7816,6 @@ func (s *Subscription) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *SubscriptionPageConfigResponseResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *SubscriptionPageConfigResponseResponseResponse) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.ViewPosition = int(0)
-		}
-	}
-	{
-		{
-			s.Name = "string"
-		}
-	}
-	{
-		{
-			s.Config = []byte("null")
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *SubscriptionPageConfigsResponseResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *SubscriptionPageConfigsResponseResponseResponse) SetFake() {
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-	{
-		{
-			s.Configs = nil
-			for i := 0; i < 0; i++ {
-				var elem Config
-				{
-					elem.SetFake()
-				}
-				s.Configs = append(s.Configs, elem)
-			}
-		}
-	}
-}
-
-// SetFake set fake values.
 func (s *SubscriptionResponse) SetFake() {
 	{
 		{
@@ -7984,42 +7828,12 @@ func (s *SubscriptionResponse) SetFake() {
 func (s *SubscriptionSettings) SetFake() {
 	{
 		{
-			s.ProfileTitle.SetFake()
-		}
-	}
-	{
-		{
-			s.SupportLink.SetFake()
-		}
-	}
-	{
-		{
-			s.ProfileUpdateInterval.SetFake()
-		}
-	}
-	{
-		{
-			s.IsProfileWebpageUrlEnabled.SetFake()
-		}
-	}
-	{
-		{
 			s.ServeJsonAtBaseSubscription.SetFake()
 		}
 	}
 	{
 		{
 			s.IsShowCustomRemarks.SetFake()
-		}
-	}
-	{
-		{
-			s.HappAnnounce.SetFake()
-		}
-	}
-	{
-		{
-			s.HappRouting.SetFake()
 		}
 	}
 	{
@@ -8047,26 +7861,6 @@ func (s *SubscriptionSettingsResponseResponse) SetFake() {
 	}
 	{
 		{
-			s.ProfileTitle = "string"
-		}
-	}
-	{
-		{
-			s.SupportLink = "string"
-		}
-	}
-	{
-		{
-			s.ProfileUpdateInterval = int(0)
-		}
-	}
-	{
-		{
-			s.IsProfileWebpageUrlEnabled = true
-		}
-	}
-	{
-		{
 			s.ServeJsonAtBaseSubscription = true
 		}
 	}
@@ -8078,16 +7872,6 @@ func (s *SubscriptionSettingsResponseResponse) SetFake() {
 	{
 		{
 			s.CustomRemarks.SetFake()
-		}
-	}
-	{
-		{
-			s.HappAnnounce.SetFake()
-		}
-	}
-	{
-		{
-			s.HappRouting.SetFake()
 		}
 	}
 	{
@@ -8154,31 +7938,6 @@ func (s *SystemItem) SetFake() {
 	{
 		{
 			s.Stats.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *TagsResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *TagsResponseResponse) SetFake() {
-	{
-		{
-			s.Tags = nil
-			for i := 0; i < 0; i++ {
-				var elem string
-				{
-					elem = "string"
-				}
-				s.Tags = append(s.Tags, elem)
-			}
 		}
 	}
 }
@@ -8364,104 +8123,7 @@ func (s *TopNode) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *TorrentBlockerReportsResponseResponse) SetFake() {
-	{
-		{
-			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *TorrentBlockerReportsResponseResponseResponse) SetFake() {
-	{
-		{
-			s.Records = nil
-			for i := 0; i < 0; i++ {
-				var elem TorrentBlockerReportsResponseResponseResponseRecordsItem
-				{
-					elem.SetFake()
-				}
-				s.Records = append(s.Records, elem)
-			}
-		}
-	}
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItem) SetFake() {
-	{
-		{
-			s.ID = float64(0)
-		}
-	}
-	{
-		{
-			s.UserId = float64(0)
-		}
-	}
-	{
-		{
-			s.NodeId = float64(0)
-		}
-	}
-	{
-		{
-			s.User.SetFake()
-		}
-	}
-	{
-		{
-			s.Node.SetFake()
-		}
-	}
-	{
-		{
-			s.Report.SetFake()
-		}
-	}
-	{
-		{
-			s.CreatedAt = time.Now()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *TorrentBlockerReportsResponseResponseResponseRecordsItemUser) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.Username = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UnauthorizedError) SetFake() {
-	{
-		{
-			s.Message = "string"
-		}
-	}
-	{
-		{
-			s.StatusCode = float64(0)
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UpdateConfigProfileRequest) SetFake() {
+func (s *UpdateConfigProfileBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -8473,18 +8135,25 @@ func (s *UpdateConfigProfileRequest) SetFake() {
 		}
 	}
 	{
-		{ // Keep pointer nil to prevent infinite recursion.
-			s.Config = nil
+		{
+			s.Config.SetFake()
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *UpdateConfigProfileRequestConfig) SetFake() {
+func (s *UpdateConfigProfileBodyConfig) SetFake() {
+	var (
+		elem jx.Raw
+		m    map[string]jx.Raw = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
+	}
 }
 
 // SetFake set fake values.
-func (s *UpdateExternalSquadRequest) SetFake() {
+func (s *UpdateExternalSquadBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -8519,7 +8188,19 @@ func (s *UpdateExternalSquadRequest) SetFake() {
 	}
 	{
 		{
-			s.ResponseHeaders.SetFake()
+			s.ResponseHeadersAdd.SetFake()
+		}
+	}
+	{
+		{
+			s.ResponseHeadersRemove = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.ResponseHeadersRemove = append(s.ResponseHeadersRemove, elem)
+			}
 		}
 	}
 	{
@@ -8540,7 +8221,7 @@ func (s *UpdateExternalSquadRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateExternalSquadRequestResponseHeaders) SetFake() {
+func (s *UpdateExternalSquadBodyResponseHeadersAdd) SetFake() {
 	var (
 		elem string
 		m    map[string]string = s.init()
@@ -8551,7 +8232,7 @@ func (s *UpdateExternalSquadRequestResponseHeaders) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateHostRequest) SetFake() {
+func (s *UpdateHostBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -8727,7 +8408,7 @@ func (s *UpdateHostRequest) SetFake() {
 		{
 			s.ExcludeFromSubscriptionTypes = nil
 			for i := 0; i < 0; i++ {
-				var elem UpdateHostRequestExcludeFromSubscriptionTypesItem
+				var elem UpdateHostBodyExcludeFromSubscriptionTypesItem
 				{
 					elem.SetFake()
 				}
@@ -8738,27 +8419,27 @@ func (s *UpdateHostRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateHostRequestAlpn) SetFake() {
-	*s = UpdateHostRequestAlpnH3
+func (s *UpdateHostBodyAlpn) SetFake() {
+	*s = UpdateHostBodyAlpnH3
 }
 
 // SetFake set fake values.
-func (s *UpdateHostRequestExcludeFromSubscriptionTypesItem) SetFake() {
-	*s = UpdateHostRequestExcludeFromSubscriptionTypesItemXRAYJSON
+func (s *UpdateHostBodyExcludeFromSubscriptionTypesItem) SetFake() {
+	*s = UpdateHostBodyExcludeFromSubscriptionTypesItemXRAYJSON
 }
 
 // SetFake set fake values.
-func (s *UpdateHostRequestMihomoIpVersion) SetFake() {
-	*s = UpdateHostRequestMihomoIpVersionDual
+func (s *UpdateHostBodyMihomoIpVersion) SetFake() {
+	*s = UpdateHostBodyMihomoIpVersionDual
 }
 
 // SetFake set fake values.
-func (s *UpdateHostRequestSecurityLayer) SetFake() {
-	*s = UpdateHostRequestSecurityLayerDEFAULT
+func (s *UpdateHostBodySecurityLayer) SetFake() {
+	*s = UpdateHostBodySecurityLayerDEFAULT
 }
 
 // SetFake set fake values.
-func (s *UpdateInfraBillingNodeRequest) SetFake() {
+func (s *UpdateInfraBillingNodeBody) SetFake() {
 	{
 		{
 			s.Uuids = nil
@@ -8779,7 +8460,7 @@ func (s *UpdateInfraBillingNodeRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateInfraProviderRequest) SetFake() {
+func (s *UpdateInfraProviderBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -8803,7 +8484,7 @@ func (s *UpdateInfraProviderRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateInternalSquadRequest) SetFake() {
+func (s *UpdateInternalSquadBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -8829,7 +8510,7 @@ func (s *UpdateInternalSquadRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateManyHostsRequest) SetFake() {
+func (s *UpdateManyHostsBody) SetFake() {
 	{
 		{
 			s.Inbound.SetFake()
@@ -9000,7 +8681,7 @@ func (s *UpdateManyHostsRequest) SetFake() {
 		{
 			s.ExcludeFromSubscriptionTypes = nil
 			for i := 0; i < 0; i++ {
-				var elem UpdateManyHostsRequestExcludeFromSubscriptionTypesItem
+				var elem UpdateManyHostsBodyExcludeFromSubscriptionTypesItem
 				{
 					elem.SetFake()
 				}
@@ -9023,46 +8704,27 @@ func (s *UpdateManyHostsRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateManyHostsRequestAlpn) SetFake() {
-	*s = UpdateManyHostsRequestAlpnH3
+func (s *UpdateManyHostsBodyAlpn) SetFake() {
+	*s = UpdateManyHostsBodyAlpnH3
 }
 
 // SetFake set fake values.
-func (s *UpdateManyHostsRequestExcludeFromSubscriptionTypesItem) SetFake() {
-	*s = UpdateManyHostsRequestExcludeFromSubscriptionTypesItemXRAYJSON
+func (s *UpdateManyHostsBodyExcludeFromSubscriptionTypesItem) SetFake() {
+	*s = UpdateManyHostsBodyExcludeFromSubscriptionTypesItemXRAYJSON
 }
 
 // SetFake set fake values.
-func (s *UpdateManyHostsRequestMihomoIpVersion) SetFake() {
-	*s = UpdateManyHostsRequestMihomoIpVersionDual
+func (s *UpdateManyHostsBodyMihomoIpVersion) SetFake() {
+	*s = UpdateManyHostsBodyMihomoIpVersionDual
 }
 
 // SetFake set fake values.
-func (s *UpdateManyHostsRequestSecurityLayer) SetFake() {
-	*s = UpdateManyHostsRequestSecurityLayerDEFAULT
+func (s *UpdateManyHostsBodySecurityLayer) SetFake() {
+	*s = UpdateManyHostsBodySecurityLayerDEFAULT
 }
 
 // SetFake set fake values.
-func (s *UpdateNodePluginRequest) SetFake() {
-	{
-		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
-			s.Name.SetFake()
-		}
-	}
-	{
-		{
-			s.PluginConfig = []byte("null")
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UpdateNodeRequest) SetFake() {
+func (s *UpdateNodeBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -9158,7 +8820,26 @@ func (s *UpdateNodeRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdatePasskeyRequest) SetFake() {
+func (s *UpdateNodePluginBody) SetFake() {
+	{
+		{
+			s.UUID = uuid.New()
+		}
+	}
+	{
+		{
+			s.Name.SetFake()
+		}
+	}
+	{
+		{
+			s.PluginConfig = []byte("null")
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdatePasskeyBody) SetFake() {
 	{
 		{
 			s.ID = "string"
@@ -9172,7 +8853,7 @@ func (s *UpdatePasskeyRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateRemnawaveSettingsRequest) SetFake() {
+func (s *UpdateRemnawaveSettingsBody) SetFake() {
 	{
 		{
 			s.PasskeySettings.SetFake()
@@ -9196,7 +8877,7 @@ func (s *UpdateRemnawaveSettingsRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateSubscriptionPageConfigRequest) SetFake() {
+func (s *UpdateSubpageConfigBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -9215,7 +8896,7 @@ func (s *UpdateSubscriptionPageConfigRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateSubscriptionSettingsRequest) SetFake() {
+func (s *UpdateSubscriptionSettingsBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -9223,37 +8904,7 @@ func (s *UpdateSubscriptionSettingsRequest) SetFake() {
 	}
 	{
 		{
-			s.ProfileTitle.SetFake()
-		}
-	}
-	{
-		{
-			s.SupportLink.SetFake()
-		}
-	}
-	{
-		{
-			s.ProfileUpdateInterval.SetFake()
-		}
-	}
-	{
-		{
-			s.IsProfileWebpageUrlEnabled.SetFake()
-		}
-	}
-	{
-		{
 			s.ServeJsonAtBaseSubscription.SetFake()
-		}
-	}
-	{
-		{
-			s.HappAnnounce.SetFake()
-		}
-	}
-	{
-		{
-			s.HappRouting.SetFake()
 		}
 	}
 	{
@@ -9289,7 +8940,7 @@ func (s *UpdateSubscriptionSettingsRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateSubscriptionSettingsRequestCustomResponseHeaders) SetFake() {
+func (s *UpdateSubscriptionSettingsBodyCustomResponseHeaders) SetFake() {
 	var (
 		elem string
 		m    map[string]string = s.init()
@@ -9300,7 +8951,7 @@ func (s *UpdateSubscriptionSettingsRequestCustomResponseHeaders) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateTemplateRequest) SetFake() {
+func (s *UpdateTemplateBody) SetFake() {
 	{
 		{
 			s.UUID = uuid.New()
@@ -9312,8 +8963,8 @@ func (s *UpdateTemplateRequest) SetFake() {
 		}
 	}
 	{
-		{ // Keep pointer nil to prevent infinite recursion.
-			s.TemplateJson = nil
+		{
+			s.TemplateJson.SetFake()
 		}
 	}
 	{
@@ -9324,11 +8975,18 @@ func (s *UpdateTemplateRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateTemplateRequestTemplateJson) SetFake() {
+func (s *UpdateTemplateBodyTemplateJson) SetFake() {
+	var (
+		elem jx.Raw
+		m    map[string]jx.Raw = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
+	}
 }
 
 // SetFake set fake values.
-func (s *UpdateUserRequest) SetFake() {
+func (s *UpdateUserBody) SetFake() {
 	{
 		{
 			s.Username.SetFake()
@@ -9336,7 +8994,7 @@ func (s *UpdateUserRequest) SetFake() {
 	}
 	{
 		{
-			s.UUID.SetFake()
+			s.ID.SetFake()
 		}
 	}
 	{
@@ -9404,17 +9062,17 @@ func (s *UpdateUserRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpdateUserRequestStatus) SetFake() {
-	*s = UpdateUserRequestStatusACTIVE
+func (s *UpdateUserBodyStatus) SetFake() {
+	*s = UpdateUserBodyStatusACTIVE
 }
 
 // SetFake set fake values.
-func (s *UpdateUserRequestTrafficLimitStrategy) SetFake() {
-	*s = UpdateUserRequestTrafficLimitStrategyNORESET
+func (s *UpdateUserBodyTrafficLimitStrategy) SetFake() {
+	*s = UpdateUserBodyTrafficLimitStrategyNORESET
 }
 
 // SetFake set fake values.
-func (s *UpsertUserMetadataRequestBodyRequest) SetFake() {
+func (s *UpsertUserMetadataBodyRequest) SetFake() {
 	{
 		{
 			s.Metadata.SetFake()
@@ -9423,7 +9081,28 @@ func (s *UpsertUserMetadataRequestBodyRequest) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UpsertUserMetadataRequestBodyRequestMetadata) SetFake() {
+func (s *UpsertUserMetadataBodyRequestMetadata) SetFake() {
+	var (
+		elem jx.Raw
+		m    map[string]jx.Raw = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
+	}
+}
+
+// SetFake set fake values.
+func (s *User) SetFake() {
+	{
+		{
+			s.ID = float64(0)
+		}
+	}
+	{
+		{
+			s.TotalBytes = float64(0)
+		}
+	}
 }
 
 // SetFake set fake values.
@@ -9509,11 +9188,6 @@ func (s *UserItem2UserStatus) SetFake() {
 func (s *UserItemInfo) SetFake() {
 	{
 		{
-			s.UUID = uuid.New()
-		}
-	}
-	{
-		{
 			s.ID = float64(0)
 		}
 	}
@@ -9534,7 +9208,7 @@ func (s *UserItemInfo) SetFake() {
 	}
 	{
 		{
-			s.TrafficLimitBytes.SetFake()
+			s.TrafficLimitBytes = float64(0)
 		}
 	}
 	{
@@ -9594,7 +9268,7 @@ func (s *UserItemInfo) SetFake() {
 	}
 	{
 		{
-			s.LastTriggeredThreshold.SetFake()
+			s.LastTriggeredThreshold = int(0)
 		}
 	}
 	{
@@ -9671,6 +9345,13 @@ func (s *UserMetadataResponseResponseResponse) SetFake() {
 
 // SetFake set fake values.
 func (s *UserMetadataResponseResponseResponseMetadata) SetFake() {
+	var (
+		elem jx.Raw
+		m    map[string]jx.Raw = s.init()
+	)
+	for i := 0; i < 0; i++ {
+		m[fmt.Sprintf("fake%d", i)] = elem
+	}
 }
 
 // SetFake set fake values.
@@ -9678,27 +9359,6 @@ func (s *UserResponse) SetFake() {
 	{
 		{
 			s.Response.SetFake()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *UserSubscriptionHistory) SetFake() {
-	{
-		{
-			s.Total = float64(0)
-		}
-	}
-	{
-		{
-			s.Records = nil
-			for i := 0; i < 0; i++ {
-				var elem Record
-				{
-					elem.SetFake()
-				}
-				s.Records = append(s.Records, elem)
-			}
 		}
 	}
 }
@@ -9733,16 +9393,41 @@ func (s *UserTrafficItem) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *UsersResponse) SetFake() {
+func (s *UsersBodyBulkRequest) SetFake() {
 	{
 		{
-			s.Response = nil
-			for i := 0; i < 0; i++ {
-				var elem UserItemInfo
+			s.UserIds = nil
+			for i := 0; i < 1; i++ {
+				var elem float64
 				{
-					elem.SetFake()
+					elem = float64(0)
 				}
-				s.Response = append(s.Response, elem)
+				s.UserIds = append(s.UserIds, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UsersTagsResponseResponse) SetFake() {
+	{
+		{
+			s.Response.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UsersTagsResponseResponseResponse) SetFake() {
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem string
+				{
+					elem = "string"
+				}
+				s.Tags = append(s.Tags, elem)
 			}
 		}
 	}
