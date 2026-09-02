@@ -10561,6 +10561,73 @@
         ]
       }
     },
+    "/api/hosts/actions/clone": {
+      "post": {
+        "operationId": "Hosts_cloneHost",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloneHostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "summary": "Clone host",
+        "tags": [
+          "Hosts Controller"
+        ]
+      }
+    },
     "/api/hosts/actions/reorder": {
       "post": {
         "operationId": "Hosts_reorderHosts",
@@ -14448,9 +14515,9 @@
     }
   },
   "info": {
-    "title": "Remnawave API v3.4.3",
+    "title": "Remnawave API v3.4.4",
     "description": "\nRemnawave is a powerful proxy management tool, built on top of Xray-core, with a focus on simplicity and ease of use.\n\n## Resources\n* https://t.me/remnawave\n* https://github.com/remnawave\n* https://docs.rw\n",
-    "version": "3.4.3",
+    "version": "3.4.4",
     "contact": {},
     "license": {
       "name": "AGPL-3.0",
@@ -23207,6 +23274,19 @@
           "response"
         ]
       },
+      "CloneHostBody": {
+        "type": "object",
+        "properties": {
+          "cloneFromUuid": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+          }
+        },
+        "required": [
+          "cloneFromUuid"
+        ]
+      },
       "ReorderHostsBody": {
         "type": "object",
         "properties": {
@@ -27169,7 +27249,8 @@
               "Delete shared list error",
               "Create SSH ticket error",
               "Get tags error",
-              "Set tags error"
+              "Set tags error",
+              "Clone host error"
             ],
             "description": "Human-readable error message."
           },
@@ -27349,9 +27430,10 @@
               "A251",
               "A254",
               "A256",
-              "A257"
+              "A257",
+              "A258"
             ],
-            "description": "Error code. Possible values:\n\n- `A001` — Server error\n- `A002` — Login error\n- `A005` — Create API token error\n- `A006` — Delete API token error\n- `A008` — Find all API tokens error\n- `A009` — Get public key error\n- `A010` — Enable node error\n- `A013` — Error updating configuration\n- `A014` — Error retrieving configuration\n- `A015` — Delete many inbounds error\n- `A016` — Create many inbounds error\n- `A017` — Find all inbounds error\n- `A018` — Failed to create user\n- `A022` — User creation successful, but inbound creation failed. User not created.\n- `A023` — User creation successful, but failed to get created user with inbounds.\n- `A024` — Get all users error\n- `A026` — Get user by error\n- `A027` — Revoke user subscription error\n- `A028` — Disable user error\n- `A031` — Enable user error\n- `A032` — Create node error\n- `A035` — Restart node error\n- `A036` — Get config with users error\n- `A037` — Delete user error\n- `A038` — Update node error\n- `A039` — Update user error\n- `A040` — Increment used traffic error\n- `A041` — Get all nodes error\n- `A042` — Get one node error\n- `A043` — Delete node error\n- `A044` — Create host error\n- `A047` — Delete host error\n- `A048` — Get user stats error\n- `A049` — Update user with inbounds error\n- `A050` — Get all hosts error\n- `A051` — Reorder hosts error\n- `A052` — Update host error\n- `A053` — Create config error\n- `A055` — Get nodes usage by range error\n- `A056` — Reset user traffic error\n- `A057` — Reorder nodes error\n- `A058` — Get all inbounds error\n- `A059` — Bulk delete users by status error\n- `A060` — Update inbound error\n- `A064` — Update exceeded traffic users error\n- `A066` — Create admin error\n- `A067` — Get auth status error\n- `A069` — Disable node error\n- `A070` — Get one host error\n- `A072` — Get subscription settings error\n- `A073` — Update subscription settings error\n- `A074` — Add inbound to users error\n- `A075` — Remove inbound from users error\n- `A077` — Add inbound to nodes error\n- `A078` — Remove inbound from nodes error\n- `A079` — Delete hosts error\n- `A080` — Bulk enable hosts error\n- `A081` — Bulk disable hosts error\n- `A084` — Bulk delete users by user IDs error\n- `A085` — Bulk revoke users subscription error\n- `A086` — Bulk reset user traffic error\n- `A087` — Bulk update users error\n- `A088` — Bulk add inbounds to users error\n- `A089` — Bulk update all users error\n- `A090` — Keypair creation error\n- `A091` — Get user usage by range error\n- `A092` — Keypair not found. Restart app.\n- `A093` — Activate all inbounds error\n- `A096` — Create hwid user device error\n- `A097` — Check hwid exists error\n- `A100` — Get user hwid devices error\n- `A101` — Delete hwid user device error\n- `A102` — Upsert hwid user device error\n- `A103` — Get all tags error\n- `A104` — Getting all subscriptions error\n- `A105` — Trigger threshold notification error\n- `A106` — Bulk delete by status error\n- `A107` — Clean old usage records error\n- `A108` — Vacuum table error\n- `A109` — Get config profiles error\n- `A110` — Get config profile by UUID error\n- `A112` — Create config profile error\n- `A115` — Get inbounds by profile UUID error\n- `A116` — Get internal squads error\n- `A117` — Get internal squad by UUID error\n- `A119` — Create internal squad error\n- `A121` — Update internal squad error\n- `A122` — Delete internal squad error\n- `A123` — Create user with internal squad error\n- `A125` — Get user accessible nodes error\n- `A126` — Get infra providers error\n- `A127` — Get infra provider by UUID error\n- `A129` — Delete infra provider by UUID error\n- `A130` — Create infra provider error\n- `A131` — Update infra provider error\n- `A132` — Create infra billing history record error\n- `A133` — Get infra billing history records error\n- `A134` — Delete infra billing history record by UUID error\n- `A135` — Get billing nodes error\n- `A136` — Update infra billing node error\n- `A137` — Create infra billing node error\n- `A138` — Delete infra billing node by UUID error\n- `A139` — Get billing nodes for notifications error\n- `A140` — Add users to internal squad error\n- `A141` — Internal squad bulk actions error\n- `A142` — Remove users from internal squad error\n- `A143` — Delete config profile by UUID error\n- `A146` — Update config profile error\n- `A148` — OAuth2 authorize error\n- `A150` — Sync active profile error\n- `A151` — Get all host tags error\n- `A154` — Get internal squad accessible nodes error\n- `A155` — Delete hwid user devices error\n- `A156` — Create user subscription request history error\n- `A157` — Get user subscription request history error\n- `A158` — Get all hwid devices error\n- `A159` — Get hwid devices stats error\n- `A160` — Get user subscription request history stats error\n- `A161` — Get snippets error\n- `A163` — Delete snippet by name error\n- `A165` — Update snippet error\n- `A168` — Get all subscription templates error\n- `A169` — Get subscription template by UUID error\n- `A171` — Update subscription template error\n- `A177` — Delete subscription template error\n- `A179` — Create subscription template error\n- `A181` — Get external squads error\n- `A183` — Create external squad error\n- `A184` — Update external squad error\n- `A185` — Delete external squad error\n- `A186` — Add users to external squad error\n- `A187` — Remove users from external squad error\n- `A188` — Get external squad by UUID error\n- `A192` — Get Remnawave settings error\n- `A193` — Update Remnawave settings error\n- `A196` — Generate passkey registration options error\n- `A197` — Verify passkey registration error\n- `A198` — Get active passkeys error\n- `A199` — Delete passkey error\n- `A200` — Get computed config profile by UUID error\n- `A201` — Reset node traffic error\n- `A202` — Update passkey error\n- `A203` — Generic reorder error\n- `A205` — Bulk extend expiration date error\n- `A207` — Get subscription page config by UUID error\n- `A208` — Get all subscription page configs error\n- `A211` — Update subscription page config error\n- `A213` — Delete subscription page config error\n- `A214` — Create subscription page config error\n- `A217` — Job creation failed\n- `A219` — Get all node plugins error\n- `A221` — Get node plugin by UUID error\n- `A224` — Update node plugin error\n- `A225` — Create node plugin error\n- `A227` — Get torrent blocker reports error\n- `A228` — Update hosts error\n- `A232` — Get internal squad usage error\n- `A233` — Add many users to internal squad error\n- `A234` — Remove many users from internal squad error\n- `A236` — Get stats digest error\n- `A237` — Sync snippet error\n- `A239` — Get all node integrations error\n- `A240` — Get node integration by UUID error\n- `A241` — Create node integration error\n- `A242` — Update node integration error\n- `A243` — Delete node integration error\n- `A247` — Get all shared lists error\n- `A248` — Get shared list by name error\n- `A249` — Create shared list error\n- `A250` — Update shared list error\n- `A251` — Delete shared list error\n- `A254` — Create SSH ticket error\n- `A256` — Get tags error\n- `A257` — Set tags error"
+            "description": "Error code. Possible values:\n\n- `A001` — Server error\n- `A002` — Login error\n- `A005` — Create API token error\n- `A006` — Delete API token error\n- `A008` — Find all API tokens error\n- `A009` — Get public key error\n- `A010` — Enable node error\n- `A013` — Error updating configuration\n- `A014` — Error retrieving configuration\n- `A015` — Delete many inbounds error\n- `A016` — Create many inbounds error\n- `A017` — Find all inbounds error\n- `A018` — Failed to create user\n- `A022` — User creation successful, but inbound creation failed. User not created.\n- `A023` — User creation successful, but failed to get created user with inbounds.\n- `A024` — Get all users error\n- `A026` — Get user by error\n- `A027` — Revoke user subscription error\n- `A028` — Disable user error\n- `A031` — Enable user error\n- `A032` — Create node error\n- `A035` — Restart node error\n- `A036` — Get config with users error\n- `A037` — Delete user error\n- `A038` — Update node error\n- `A039` — Update user error\n- `A040` — Increment used traffic error\n- `A041` — Get all nodes error\n- `A042` — Get one node error\n- `A043` — Delete node error\n- `A044` — Create host error\n- `A047` — Delete host error\n- `A048` — Get user stats error\n- `A049` — Update user with inbounds error\n- `A050` — Get all hosts error\n- `A051` — Reorder hosts error\n- `A052` — Update host error\n- `A053` — Create config error\n- `A055` — Get nodes usage by range error\n- `A056` — Reset user traffic error\n- `A057` — Reorder nodes error\n- `A058` — Get all inbounds error\n- `A059` — Bulk delete users by status error\n- `A060` — Update inbound error\n- `A064` — Update exceeded traffic users error\n- `A066` — Create admin error\n- `A067` — Get auth status error\n- `A069` — Disable node error\n- `A070` — Get one host error\n- `A072` — Get subscription settings error\n- `A073` — Update subscription settings error\n- `A074` — Add inbound to users error\n- `A075` — Remove inbound from users error\n- `A077` — Add inbound to nodes error\n- `A078` — Remove inbound from nodes error\n- `A079` — Delete hosts error\n- `A080` — Bulk enable hosts error\n- `A081` — Bulk disable hosts error\n- `A084` — Bulk delete users by user IDs error\n- `A085` — Bulk revoke users subscription error\n- `A086` — Bulk reset user traffic error\n- `A087` — Bulk update users error\n- `A088` — Bulk add inbounds to users error\n- `A089` — Bulk update all users error\n- `A090` — Keypair creation error\n- `A091` — Get user usage by range error\n- `A092` — Keypair not found. Restart app.\n- `A093` — Activate all inbounds error\n- `A096` — Create hwid user device error\n- `A097` — Check hwid exists error\n- `A100` — Get user hwid devices error\n- `A101` — Delete hwid user device error\n- `A102` — Upsert hwid user device error\n- `A103` — Get all tags error\n- `A104` — Getting all subscriptions error\n- `A105` — Trigger threshold notification error\n- `A106` — Bulk delete by status error\n- `A107` — Clean old usage records error\n- `A108` — Vacuum table error\n- `A109` — Get config profiles error\n- `A110` — Get config profile by UUID error\n- `A112` — Create config profile error\n- `A115` — Get inbounds by profile UUID error\n- `A116` — Get internal squads error\n- `A117` — Get internal squad by UUID error\n- `A119` — Create internal squad error\n- `A121` — Update internal squad error\n- `A122` — Delete internal squad error\n- `A123` — Create user with internal squad error\n- `A125` — Get user accessible nodes error\n- `A126` — Get infra providers error\n- `A127` — Get infra provider by UUID error\n- `A129` — Delete infra provider by UUID error\n- `A130` — Create infra provider error\n- `A131` — Update infra provider error\n- `A132` — Create infra billing history record error\n- `A133` — Get infra billing history records error\n- `A134` — Delete infra billing history record by UUID error\n- `A135` — Get billing nodes error\n- `A136` — Update infra billing node error\n- `A137` — Create infra billing node error\n- `A138` — Delete infra billing node by UUID error\n- `A139` — Get billing nodes for notifications error\n- `A140` — Add users to internal squad error\n- `A141` — Internal squad bulk actions error\n- `A142` — Remove users from internal squad error\n- `A143` — Delete config profile by UUID error\n- `A146` — Update config profile error\n- `A148` — OAuth2 authorize error\n- `A150` — Sync active profile error\n- `A151` — Get all host tags error\n- `A154` — Get internal squad accessible nodes error\n- `A155` — Delete hwid user devices error\n- `A156` — Create user subscription request history error\n- `A157` — Get user subscription request history error\n- `A158` — Get all hwid devices error\n- `A159` — Get hwid devices stats error\n- `A160` — Get user subscription request history stats error\n- `A161` — Get snippets error\n- `A163` — Delete snippet by name error\n- `A165` — Update snippet error\n- `A168` — Get all subscription templates error\n- `A169` — Get subscription template by UUID error\n- `A171` — Update subscription template error\n- `A177` — Delete subscription template error\n- `A179` — Create subscription template error\n- `A181` — Get external squads error\n- `A183` — Create external squad error\n- `A184` — Update external squad error\n- `A185` — Delete external squad error\n- `A186` — Add users to external squad error\n- `A187` — Remove users from external squad error\n- `A188` — Get external squad by UUID error\n- `A192` — Get Remnawave settings error\n- `A193` — Update Remnawave settings error\n- `A196` — Generate passkey registration options error\n- `A197` — Verify passkey registration error\n- `A198` — Get active passkeys error\n- `A199` — Delete passkey error\n- `A200` — Get computed config profile by UUID error\n- `A201` — Reset node traffic error\n- `A202` — Update passkey error\n- `A203` — Generic reorder error\n- `A205` — Bulk extend expiration date error\n- `A207` — Get subscription page config by UUID error\n- `A208` — Get all subscription page configs error\n- `A211` — Update subscription page config error\n- `A213` — Delete subscription page config error\n- `A214` — Create subscription page config error\n- `A217` — Job creation failed\n- `A219` — Get all node plugins error\n- `A221` — Get node plugin by UUID error\n- `A224` — Update node plugin error\n- `A225` — Create node plugin error\n- `A227` — Get torrent blocker reports error\n- `A228` — Update hosts error\n- `A232` — Get internal squad usage error\n- `A233` — Add many users to internal squad error\n- `A234` — Remove many users from internal squad error\n- `A236` — Get stats digest error\n- `A237` — Sync snippet error\n- `A239` — Get all node integrations error\n- `A240` — Get node integration by UUID error\n- `A241` — Create node integration error\n- `A242` — Update node integration error\n- `A243` — Delete node integration error\n- `A247` — Get all shared lists error\n- `A248` — Get shared list by name error\n- `A249` — Create shared list error\n- `A250` — Update shared list error\n- `A251` — Delete shared list error\n- `A254` — Create SSH ticket error\n- `A256` — Get tags error\n- `A257` — Set tags error\n- `A258` — Clone host error"
           }
         },
         "required": [
@@ -28563,7 +28645,7 @@
             "type": "number"
           },
           "uptime": {
-            "type": "integer"
+            "type": "number"
           },
           "loadAvg": {
             "type": "array",

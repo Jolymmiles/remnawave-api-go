@@ -53,6 +53,7 @@ const (
 	HostsBulkActionsDisableHostsOperation                                     OperationName = "HostsBulkActionsDisableHosts"
 	HostsBulkActionsEnableHostsOperation                                      OperationName = "HostsBulkActionsEnableHosts"
 	HostsBulkActionsSetPortToHostsOperation                                   OperationName = "HostsBulkActionsSetPortToHosts"
+	HostsCloneHostOperation                                                   OperationName = "HostsCloneHost"
 	HostsCreateHostOperation                                                  OperationName = "HostsCreateHost"
 	HostsDeleteHostOperation                                                  OperationName = "HostsDeleteHost"
 	HostsGetHostsOperation                                                    OperationName = "HostsGetHosts"

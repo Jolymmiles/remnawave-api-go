@@ -58,6 +58,7 @@ var operationRolesAuthorization = map[string][]string{
 	HostsBulkActionsDisableHostsOperation:                                     []string{},
 	HostsBulkActionsEnableHostsOperation:                                      []string{},
 	HostsBulkActionsSetPortToHostsOperation:                                   []string{},
+	HostsCloneHostOperation:                                                   []string{},
 	HostsCreateHostOperation:                                                  []string{},
 	HostsDeleteHostOperation:                                                  []string{},
 	HostsGetHostsOperation:                                                    []string{},

@@ -213,7 +213,7 @@ def update_schema_references(spec: dict, rename_map: dict) -> dict:
 def main():
     if len(sys.argv) < 2:
         print("Usage: python3 rename_schemas.py <input_file> [output_file]")
-        print("Example: python3 rename_schemas.py ../specs/3.4.3-final.json ../specs/3.4.3-renamed.json")
+        print("Example: python3 rename_schemas.py ../specs/3.4.4-final.json ../specs/3.4.4-renamed.json")
         sys.exit(1)
     
     input_file = sys.argv[1]

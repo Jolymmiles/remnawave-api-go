@@ -189,6 +189,10 @@ type HostsBulkActionsSetPortToHostsRes interface {
 	hostsBulkActionsSetPortToHostsRes()
 }
 
+type HostsCloneHostRes interface {
+	hostsCloneHostRes()
+}
+
 type HostsCreateHostRes interface {
 	hostsCreateHostRes()
 }

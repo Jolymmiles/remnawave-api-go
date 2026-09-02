@@ -24,7 +24,7 @@ func main() {
 	// Wrap with organized sub-clients
 	client := remapi.NewClientExt(baseClient)
 
-	// Users are identified by their numeric ID in Remnawave 3.4.3.
+	// Users are identified by their numeric ID in Remnawave 3.4.4.
 	resp, err := client.Users().GetUserById(ctx, 123)
 	if err != nil {
 		log.Fatal(err)

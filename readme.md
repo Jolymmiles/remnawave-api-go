@@ -10,7 +10,7 @@ A Go SDK client for interacting with the **[Remnawave API](https://remna.st)**.
 
 | API Version | SDK Version | Install |
 |-------------|-------------|---------|
-| 3.4.3 | v3.4.3 | `go get github.com/Jolymmiles/remnawave-api-go/v3@v3.4.3` |
+| 3.4.4 | v3.4.4 | `go get github.com/Jolymmiles/remnawave-api-go/v3@v3.4.4` |
 | 2.8.0 | v2.8.0 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.8.0` |
 | 2.6.1 | v2.6.1 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.6.1` |
 | 2.5.3 | v2.5.3 | `go get github.com/Jolymmiles/remnawave-api-go/v2@v2.5.3` |
@@ -30,15 +30,15 @@ Generated with [**ogen**](https://github.com/ogen-go/ogen) v1.24.0:
 ## Installation
 
 ```bash
-go get github.com/Jolymmiles/remnawave-api-go/v3@v3.4.3
+go get github.com/Jolymmiles/remnawave-api-go/v3@v3.4.4
 ```
 
-## What's new in v3.4.3
+## What's new in v3.4.4
 
-The SDK is generated from the official Remnawave 3.4.3 OpenAPI document. It
-includes 217 operations across 32 controllers, including resource tags, node
-integrations, shared lists, plugin/snippet sync, geocheck, and the raw
-subscription endpoint.
+The SDK is generated from the official Remnawave 3.4.4 OpenAPI document. It
+includes 218 operations across 32 controllers. This release adds host cloning
+through `Hosts().CloneHost()` and the corresponding `CloneHostBody` request
+model, plus the `Clone host error` / `A258` error contract.
 
 The Go generation pipeline maps integral API values to `int` and RFC3339
 fields to `time.Time`/`OptDateTime`, avoiding `float64` and plain strings for
@@ -110,7 +110,7 @@ func main() {
 
 	client := remapi.NewClientExt(baseClient)
 
-	// User IDs are numeric in Remnawave 3.4.3.
+	// User IDs are numeric in Remnawave 3.4.4.
 	user, err := client.Users().GetUserById(ctx, 123)
 	if err != nil {
 		log.Fatal(err)
@@ -369,13 +369,13 @@ See the [`examples/`](examples/) directory for complete working examples:
 
 ## Regenerating the SDK
 
-The committed generated code is reproducible from the official 3.4.3 document:
+The committed generated code is reproducible from the official 3.4.4 document:
 
 ```bash
-python3 scripts/pipeline.py specs/3.4.3.json
+python3 scripts/pipeline.py specs/3.4.4.json
 ```
 
-The pipeline validates the v3.4.3 contract, normalizes the document for ogen,
+The pipeline validates the v3.4.4 contract, normalizes the document for ogen,
 generates the SDK and verifies that every OpenAPI operation has a Go wrapper.
 
 ## Requirements
@@ -383,7 +383,7 @@ generates the SDK and verifies that every OpenAPI operation has a Go wrapper.
 | Requirement | Version |
 |-------------|---------|
 | Go | 1.26+ |
-| Remnawave API | 3.4.3 |
+| Remnawave API | 3.4.4 |
 
 ## License
 

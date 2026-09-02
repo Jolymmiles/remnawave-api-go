@@ -3,7 +3,7 @@
 
 The old implementation was tied to a removed historical 2.x consolidated
 file. Use the shared generator from ``pipeline.py`` so the wrapper stays aligned
-with the Remnawave 3.4.3 OpenAPI document and the installed ogen version.
+with the Remnawave 3.4.4 OpenAPI document and the installed ogen version.
 
 Usage:
     python3 scripts/generate_clientext_final.py [spec.json]

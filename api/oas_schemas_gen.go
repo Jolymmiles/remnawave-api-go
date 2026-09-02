@@ -255,6 +255,7 @@ func (*BadRequestError) hostsBulkActionsDeleteHostsRes()                        
 func (*BadRequestError) hostsBulkActionsDisableHostsRes()                                     {}
 func (*BadRequestError) hostsBulkActionsEnableHostsRes()                                      {}
 func (*BadRequestError) hostsBulkActionsSetPortToHostsRes()                                   {}
+func (*BadRequestError) hostsCloneHostRes()                                                   {}
 func (*BadRequestError) hostsCreateHostRes()                                                  {}
 func (*BadRequestError) hostsDeleteHostRes()                                                  {}
 func (*BadRequestError) hostsGetHostsRes()                                                    {}
@@ -1647,6 +1648,21 @@ func (s *ByAppItem) SetApp(val string) {
 // SetCount sets the value of Count.
 func (s *ByAppItem) SetCount(val int) {
 	s.Count = val
+}
+
+// Ref: #/components/schemas/CloneHostBody
+type CloneHostBody struct {
+	CloneFromUuid uuid.UUID `json:"cloneFromUuid"`
+}
+
+// GetCloneFromUuid returns the value of CloneFromUuid.
+func (s *CloneHostBody) GetCloneFromUuid() uuid.UUID {
+	return s.CloneFromUuid
+}
+
+// SetCloneFromUuid sets the value of CloneFromUuid.
+func (s *CloneHostBody) SetCloneFromUuid(val uuid.UUID) {
+	s.CloneFromUuid = val
 }
 
 // Ref: #/components/schemas/CloneNodePluginBody
@@ -15597,6 +15613,7 @@ func (s *HostResponse) SetResponse(val HostResponseResponse) {
 	s.Response = val
 }
 
+func (*HostResponse) hostsCloneHostRes()  {}
 func (*HostResponse) hostsCreateHostRes() {}
 func (*HostResponse) hostsGetOneHostRes() {}
 func (*HostResponse) hostsUpdateHostRes() {}
@@ -18246,6 +18263,7 @@ func (*InternalServerError) hostsBulkActionsDeleteHostsRes()                    
 func (*InternalServerError) hostsBulkActionsDisableHostsRes()                                     {}
 func (*InternalServerError) hostsBulkActionsEnableHostsRes()                                      {}
 func (*InternalServerError) hostsBulkActionsSetPortToHostsRes()                                   {}
+func (*InternalServerError) hostsCloneHostRes()                                                   {}
 func (*InternalServerError) hostsCreateHostRes()                                                  {}
 func (*InternalServerError) hostsDeleteHostRes()                                                  {}
 func (*InternalServerError) hostsGetHostsRes()                                                    {}
@@ -21430,6 +21448,7 @@ func (*NotFoundError) hostsBulkActionsDeleteHostsRes()                          
 func (*NotFoundError) hostsBulkActionsDisableHostsRes()                                     {}
 func (*NotFoundError) hostsBulkActionsEnableHostsRes()                                      {}
 func (*NotFoundError) hostsBulkActionsSetPortToHostsRes()                                   {}
+func (*NotFoundError) hostsCloneHostRes()                                                   {}
 func (*NotFoundError) hostsCreateHostRes()                                                  {}
 func (*NotFoundError) hostsDeleteHostRes()                                                  {}
 func (*NotFoundError) hostsGetHostsRes()                                                    {}
@@ -27963,7 +27982,7 @@ func (*SnippetsUpdateSnippetConflict) snippetsUpdateSnippetRes() {}
 type Stat struct {
 	MemoryFree float64          `json:"memoryFree"`
 	MemoryUsed float64          `json:"memoryUsed"`
-	Uptime     int              `json:"uptime"`
+	Uptime     float64          `json:"uptime"`
 	LoadAvg    []float64        `json:"loadAvg"`
 	Interface  NilInterfaceItem `json:"interface"`
 }
@@ -27979,7 +27998,7 @@ func (s *Stat) GetMemoryUsed() float64 {
 }
 
 // GetUptime returns the value of Uptime.
-func (s *Stat) GetUptime() int {
+func (s *Stat) GetUptime() float64 {
 	return s.Uptime
 }
 
@@ -28004,7 +28023,7 @@ func (s *Stat) SetMemoryUsed(val float64) {
 }
 
 // SetUptime sets the value of Uptime.
-func (s *Stat) SetUptime(val int) {
+func (s *Stat) SetUptime(val float64) {
 	s.Uptime = val
 }
 

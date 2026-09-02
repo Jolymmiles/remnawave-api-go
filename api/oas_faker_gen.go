@@ -641,6 +641,15 @@ func (s *ByAppItem) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CloneHostBody) SetFake() {
+	{
+		{
+			s.CloneFromUuid = uuid.New()
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CloneNodePluginBody) SetFake() {
 	{
 		{
@@ -10540,7 +10549,7 @@ func (s *Stat) SetFake() {
 	}
 	{
 		{
-			s.Uptime = int(0)
+			s.Uptime = float64(0)
 		}
 	}
 	{

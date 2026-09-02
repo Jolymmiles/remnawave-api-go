@@ -8,7 +8,7 @@ truth; this compatibility entry point delegates to its wrapper generator.
 Usage:
     python3 scripts/generate_client_ext.py [spec.json]
 
-By default the committed Remnawave 3.4.3 derived specification is used.
+By default the committed Remnawave 3.4.4 derived specification is used.
 """
 
 from pathlib import Path
@@ -18,7 +18,7 @@ from pipeline import generate_client_ext
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SPEC = ROOT / "specs" / "3.4.3-final.json"
+DEFAULT_SPEC = ROOT / "specs" / "3.4.4-final.json"
 
 
 def main() -> int:

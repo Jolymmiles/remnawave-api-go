@@ -359,6 +359,18 @@ func TestByAppItem_EncodeDecode(t *testing.T) {
 	var typ2 ByAppItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestCloneHostBody_EncodeDecode(t *testing.T) {
+	var typ CloneHostBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CloneHostBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestCloneNodePluginBody_EncodeDecode(t *testing.T) {
 	var typ CloneNodePluginBody
 	typ.SetFake()

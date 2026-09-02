@@ -318,6 +318,20 @@ func encodeHostsBulkActionsSetPortToHostsRequest(
 	return nil
 }
 
+func encodeHostsCloneHostRequest(
+	req *CloneHostBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
 func encodeHostsCreateHostRequest(
 	req *CreateHostBody,
 	r *http.Request,

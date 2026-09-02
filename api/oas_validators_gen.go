@@ -15277,6 +15277,17 @@ func (s *Stat) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Uptime)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "uptime",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if s.LoadAvg == nil {
 			return errors.New("nil is invalid value")
 		}

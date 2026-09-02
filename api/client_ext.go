@@ -645,6 +645,11 @@ func NewHostsClient(client *Client) *HostsClient {
 	return &HostsClient{client: client}
 }
 
+// CloneHost calls Hosts_cloneHost.
+func (sc *HostsClient) CloneHost(ctx context.Context, request *CloneHostBody, options ...RequestOption) (HostsCloneHostRes, error) {
+	return sc.client.HostsCloneHost(ctx, request, options...)
+}
+
 // CreateHost calls Hosts_createHost.
 func (sc *HostsClient) CreateHost(ctx context.Context, request *CreateHostBody, options ...RequestOption) (HostsCreateHostRes, error) {
 	return sc.client.HostsCreateHost(ctx, request, options...)

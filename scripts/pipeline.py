@@ -10,7 +10,7 @@ This script processes OpenAPI specs through the complete workflow:
 
 Usage:
     cd /path/to/remnawave-api-go
-    python3 scripts/pipeline.py specs/3.4.3.json
+    python3 scripts/pipeline.py specs/3.4.4.json
 """
 
 import json
@@ -28,7 +28,7 @@ from smart_consolidate import (
 
 
 OGEN_VERSION = "v1.24.0"
-EXPECTED_API_VERSION = "3.4.3"
+EXPECTED_API_VERSION = "3.4.4"
 
 
 def _contains_key(value: object, key: str) -> bool:
@@ -54,6 +54,7 @@ def validate_source_spec(spec: dict) -> None:
         '/api/users/{userId}/actions/extend',
         '/api/connections/drop',
         '/api/connections/geocheck/{nodeUuid}',
+        '/api/hosts/actions/clone',
         '/api/node-integrations',
         '/api/node-plugins/shared-lists',
         '/api/system/stats/digest',
@@ -61,7 +62,7 @@ def validate_source_spec(spec: dict) -> None:
     }
     missing_paths = sorted(required_paths - paths.keys())
     if missing_paths:
-        raise ValueError(f"v3.4.3 spec is missing required paths: {', '.join(missing_paths)}")
+        raise ValueError(f"v{EXPECTED_API_VERSION} spec is missing required paths: {', '.join(missing_paths)}")
 
     removed_paths = {
         '/api/ip-control',
@@ -79,15 +80,18 @@ def validate_source_spec(spec: dict) -> None:
         'RemnawaveBadRequestErrorDto',
         'RemnawaveNotFoundErrorDto',
         'RemnawaveInternalServerErrorDto',
+        'CloneHostBodyDto',
     }
     missing_schemas = sorted(required_schemas - schemas.keys())
     if missing_schemas:
         raise ValueError(
-            f"v3.4.3 spec is missing typed error schemas: {', '.join(missing_schemas)}"
+            f"v{EXPECTED_API_VERSION} spec is missing typed error schemas: {', '.join(missing_schemas)}"
         )
 
     if not _contains_key(spec, 'secretKey') or _contains_key(spec, 'pubKey'):
-        raise ValueError("v3.4.3 keygen contract must use secretKey and not pubKey")
+        raise ValueError(
+            f"v{EXPECTED_API_VERSION} keygen contract must use secretKey and not pubKey"
+        )
 
     legacy_fields = {
         'profileTitle',
@@ -285,7 +289,7 @@ def _merge_schema_objects(target: dict, source: dict) -> None:
 def flatten_allof_with_oneof(spec: dict) -> int:
     """Flatten allOf schemas containing oneOf branches for ogen compatibility.
 
-    The Remnawave 3.4.3 raw subscription model uses this composition for
+    The Remnawave 3.4.x raw subscription model uses this composition for
     protocol, transport and security variants. Merging the object branches
     preserves all fields and keeps heterogeneous values as jx.Raw in the
     generated client.
@@ -341,7 +345,7 @@ RFC3339_PATTERN_MARKERS = (r'\d{4}-', 'T')
 
 
 def restore_datetime_formats(spec: dict) -> int:
-    """Restore date-time formats omitted by the 3.4.3 NestJS OpenAPI output."""
+    """Restore date-time formats omitted by the 3.4.x NestJS OpenAPI output."""
     restored = 0
 
     def walk(value):
@@ -682,6 +686,28 @@ def fix_system_stats_uptime(spec: dict) -> int:
     root_schema = spec.get('components', {}).get('schemas', {}).get(schema_name, {})
     response_schema = root_schema.get('properties', {}).get('response', {})
     uptime_schema = response_schema.get('properties', {}).get('uptime', {})
+    if uptime_schema.get('type') != 'integer':
+        return 0
+
+    uptime_schema['type'] = 'number'
+    return 1
+
+
+def fix_node_stats_uptime(spec: dict) -> int:
+    """Keep the fractional uptime nested in node ``system.stats`` data.
+
+    Remnawave's ``Stat`` schema currently declares this value as an integer,
+    while the nodes endpoint returns seconds with fractional precision.  Keep
+    the correction scoped to this schema so other integral uptime fields are
+    unaffected.
+    """
+    uptime_schema = (
+        spec.get('components', {})
+        .get('schemas', {})
+        .get('Stat', {})
+        .get('properties', {})
+        .get('uptime', {})
+    )
     if uptime_schema.get('type') != 'integer':
         return 0
 
@@ -1419,6 +1445,12 @@ def main():
         if fractional_stats_count > 0:
             print_success(
                 f"Preserved {fractional_stats_count} fractional system stats field: uptime"
+            )
+
+        fractional_node_count = fix_node_stats_uptime(final_spec)
+        if fractional_node_count > 0:
+            print_success(
+                f"Preserved {fractional_node_count} fractional node stats field: uptime"
             )
 
         cursor_count = fix_opaque_cursor_params(final_spec)
