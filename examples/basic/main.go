@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
-	remapi "github.com/Jolymmiles/remnawave-api-go/v2/api"
+	remapi "github.com/Jolymmiles/remnawave-api-go/v3/api"
 )
 
 func main() {
@@ -23,29 +24,30 @@ func main() {
 	// Wrap with organized sub-clients
 	client := remapi.NewClientExt(baseClient)
 
-	// Get user by UUID - simplified parameter (just a string)
-	resp, err := client.Users().GetUserByUuid(ctx, "550e8400-e29b-41d4-a716-446655440000")
+	// Users are identified by their numeric ID in Remnawave 3.4.3.
+	resp, err := client.Users().GetUserById(ctx, 123)
 	if err != nil {
 		log.Fatal(err)
 	}
 	if user, ok := resp.(*remapi.UserResponse); ok {
-		fmt.Printf("User: %s (UUID: %s)\n", user.Response.Username, user.Response.UUID)
+		fmt.Printf("User: %s (ID: %d)\n", user.Response.Username, user.Response.ID)
 	}
 
 	// List all nodes
-	nodesResp, err := client.Nodes().GetAllNodes(ctx)
+	nodesResp, err := client.Nodes().GetNodes(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if nodes, ok := nodesResp.(*remapi.NodesResponse); ok {
+	if nodes, ok := nodesResp.(*remapi.NodesResponseResponse); ok {
 		for _, node := range nodes.Response {
 			fmt.Printf("Node: %s (%s) connected=%v\n", node.Name, node.Address, node.IsConnected)
 		}
 	}
 
 	// Create a user
-	createResp, err := client.Users().CreateUser(ctx, &remapi.CreateUserRequest{
+	createResp, err := client.Users().CreateUser(ctx, &remapi.CreateUserBody{
 		Username: "john_doe",
+		ExpireAt: time.Now().AddDate(1, 0, 0).UTC(),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -54,8 +56,10 @@ func main() {
 		fmt.Printf("Created user: %s\n", created.Response.Username)
 	}
 
-	// Delete a user
-	_, err = client.Users().DeleteUser(ctx, "550e8400-e29b-41d4-a716-446655440000")
+	// Delete the created user by numeric ID
+	if created, ok := createResp.(*remapi.UserResponse); ok {
+		_, err = client.Users().DeleteUser(ctx, created.Response.ID)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}

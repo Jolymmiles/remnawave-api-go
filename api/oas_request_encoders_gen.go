@@ -10,8 +10,8 @@ import (
 	ht "github.com/ogen-go/ogen/http"
 )
 
-func encodeApiTokensCreateRequest(
-	req *CreateApiTokenRequest,
+func encodeApiTokensCreateApiTokenRequest(
+	req *CreateApiTokenBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -25,7 +25,7 @@ func encodeApiTokensCreateRequest(
 }
 
 func encodeAuthLoginRequest(
-	req *LoginRequest,
+	req *LoginBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -39,7 +39,7 @@ func encodeAuthLoginRequest(
 }
 
 func encodeAuthOauth2AuthorizeRequest(
-	req *OAuth2AuthorizeRequest,
+	req *OAuth2AuthorizeBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -53,7 +53,7 @@ func encodeAuthOauth2AuthorizeRequest(
 }
 
 func encodeAuthOauth2CallbackRequest(
-	req *OAuth2CallbackRequest,
+	req *OAuth2CallbackBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -81,7 +81,21 @@ func encodeAuthPasskeyAuthenticationVerifyRequest(
 }
 
 func encodeAuthRegisterRequest(
-	req *RegisterRequest,
+	req *RegisterBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeBandwidthStatsNodesGetNodeUsageRequest(
+	req *GetNodeUsageBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -95,7 +109,7 @@ func encodeAuthRegisterRequest(
 }
 
 func encodeBandwidthStatsNodesGetStatsNodesUsersUsageRequest(
-	req *GetStatsNodesUsersUsageRequest,
+	req *GetStatsNodesUsersUsageBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -109,7 +123,7 @@ func encodeBandwidthStatsNodesGetStatsNodesUsersUsageRequest(
 }
 
 func encodeConfigProfileCreateConfigProfileRequest(
-	req *CreateConfigProfileRequest,
+	req *CreateConfigProfileBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -123,7 +137,21 @@ func encodeConfigProfileCreateConfigProfileRequest(
 }
 
 func encodeConfigProfileReorderConfigProfilesRequest(
-	req *ReorderRequest,
+	req *ReorderConfigProfilesBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeConfigProfileSetTagsRequest(
+	req *SetConfigProfilesTagsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -137,7 +165,35 @@ func encodeConfigProfileReorderConfigProfilesRequest(
 }
 
 func encodeConfigProfileUpdateConfigProfileRequest(
-	req *UpdateConfigProfileRequest,
+	req *UpdateConfigProfileBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeConnectionsDropConnectionsRequest(
+	req *DropConnectionsBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeConnectionsGeocheckByNodeRequest(
+	req *GeocheckByNodeBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -151,7 +207,7 @@ func encodeConfigProfileUpdateConfigProfileRequest(
 }
 
 func encodeExternalSquadCreateExternalSquadRequest(
-	req *CreateExternalSquadRequest,
+	req *CreateExternalSquadBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -165,7 +221,21 @@ func encodeExternalSquadCreateExternalSquadRequest(
 }
 
 func encodeExternalSquadReorderExternalSquadsRequest(
-	req *ReorderRequest,
+	req *ReorderExternalSquadsBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeExternalSquadSetTagsRequest(
+	req *SetExternalSquadsTagsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -179,7 +249,7 @@ func encodeExternalSquadReorderExternalSquadsRequest(
 }
 
 func encodeExternalSquadUpdateExternalSquadRequest(
-	req *UpdateExternalSquadRequest,
+	req *UpdateExternalSquadBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -193,7 +263,7 @@ func encodeExternalSquadUpdateExternalSquadRequest(
 }
 
 func encodeHostsBulkActionsDeleteHostsRequest(
-	req *BulkUuidsRequest2,
+	req *HostsBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -207,7 +277,7 @@ func encodeHostsBulkActionsDeleteHostsRequest(
 }
 
 func encodeHostsBulkActionsDisableHostsRequest(
-	req *BulkUuidsRequest2,
+	req *HostsBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -221,7 +291,7 @@ func encodeHostsBulkActionsDisableHostsRequest(
 }
 
 func encodeHostsBulkActionsEnableHostsRequest(
-	req *BulkUuidsRequest2,
+	req *HostsBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -235,7 +305,7 @@ func encodeHostsBulkActionsEnableHostsRequest(
 }
 
 func encodeHostsBulkActionsSetPortToHostsRequest(
-	req *UpdateManyHostsRequest,
+	req *UpdateManyHostsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -249,7 +319,7 @@ func encodeHostsBulkActionsSetPortToHostsRequest(
 }
 
 func encodeHostsCreateHostRequest(
-	req *CreateHostRequest,
+	req *CreateHostBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -263,7 +333,7 @@ func encodeHostsCreateHostRequest(
 }
 
 func encodeHostsReorderHostsRequest(
-	req *ReorderHostRequest,
+	req *ReorderHostsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -277,7 +347,7 @@ func encodeHostsReorderHostsRequest(
 }
 
 func encodeHostsUpdateHostRequest(
-	req *UpdateHostRequest,
+	req *UpdateHostBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -291,7 +361,7 @@ func encodeHostsUpdateHostRequest(
 }
 
 func encodeHwidUserDevicesCreateUserHwidDeviceRequest(
-	req *CreateUserHwidDeviceRequest,
+	req *CreateUserHwidDeviceBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -305,7 +375,7 @@ func encodeHwidUserDevicesCreateUserHwidDeviceRequest(
 }
 
 func encodeHwidUserDevicesDeleteAllUserHwidDevicesRequest(
-	req *DeleteAllUserHwidDevicesRequest,
+	req *DeleteAllUserHwidDevicesBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -319,21 +389,7 @@ func encodeHwidUserDevicesDeleteAllUserHwidDevicesRequest(
 }
 
 func encodeHwidUserDevicesDeleteUserHwidDeviceRequest(
-	req *DeleteUserHwidDeviceRequest,
-	r *http.Request,
-) error {
-	const contentType = "application/json"
-	e := new(jx.Encoder)
-	{
-		req.Encode(e)
-	}
-	encoded := e.Bytes()
-	ht.SetBody(r, bytes.NewReader(encoded), contentType)
-	return nil
-}
-
-func encodeInfraBillingCreateInfraBillingHistoryRecordRequest(
-	req *CreateInfraBillingHistoryRecordRequest,
+	req *DeleteUserHwidDeviceBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -347,7 +403,21 @@ func encodeInfraBillingCreateInfraBillingHistoryRecordRequest(
 }
 
 func encodeInfraBillingCreateInfraBillingNodeRequest(
-	req *CreateInfraBillingNodeRequest,
+	req *CreateInfraBillingNodeBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInfraBillingCreateInfraBillingRecordRequest(
+	req *CreateInfraBillingRecordBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -361,7 +431,7 @@ func encodeInfraBillingCreateInfraBillingNodeRequest(
 }
 
 func encodeInfraBillingCreateInfraProviderRequest(
-	req *CreateInfraProviderRequest,
+	req *CreateInfraProviderBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -375,7 +445,7 @@ func encodeInfraBillingCreateInfraProviderRequest(
 }
 
 func encodeInfraBillingUpdateInfraBillingNodeRequest(
-	req *UpdateInfraBillingNodeRequest,
+	req *UpdateInfraBillingNodeBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -389,7 +459,21 @@ func encodeInfraBillingUpdateInfraBillingNodeRequest(
 }
 
 func encodeInfraBillingUpdateInfraProviderRequest(
-	req *UpdateInfraProviderRequest,
+	req *UpdateInfraProviderBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInternalSquadAddManyUsersToInternalSquadRequest(
+	req *InternalSquadBodyRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -403,7 +487,21 @@ func encodeInfraBillingUpdateInfraProviderRequest(
 }
 
 func encodeInternalSquadCreateInternalSquadRequest(
-	req *CreateInternalSquadRequest,
+	req *CreateInternalSquadBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInternalSquadRemoveManyUsersFromInternalSquadRequest(
+	req *InternalSquadBodyRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -417,7 +515,21 @@ func encodeInternalSquadCreateInternalSquadRequest(
 }
 
 func encodeInternalSquadReorderInternalSquadsRequest(
-	req *ReorderRequest,
+	req *ReorderInternalSquadsBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeInternalSquadSetTagsRequest(
+	req *SetInternalSquadsTagsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -431,21 +543,7 @@ func encodeInternalSquadReorderInternalSquadsRequest(
 }
 
 func encodeInternalSquadUpdateInternalSquadRequest(
-	req *UpdateInternalSquadRequest,
-	r *http.Request,
-) error {
-	const contentType = "application/json"
-	e := new(jx.Encoder)
-	{
-		req.Encode(e)
-	}
-	encoded := e.Bytes()
-	ht.SetBody(r, bytes.NewReader(encoded), contentType)
-	return nil
-}
-
-func encodeIpControlDropConnectionsRequest(
-	req *DropConnectionsRequest,
+	req *UpdateInternalSquadBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -459,7 +557,7 @@ func encodeIpControlDropConnectionsRequest(
 }
 
 func encodeMetadataUpsertNodeMetadataRequest(
-	req *UpsertUserMetadataRequestBodyRequest,
+	req *UpsertNodeMetadataBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -473,7 +571,35 @@ func encodeMetadataUpsertNodeMetadataRequest(
 }
 
 func encodeMetadataUpsertUserMetadataRequest(
-	req *UpsertUserMetadataRequestBodyRequest,
+	req *UpsertUserMetadataBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodeIntegrationCreateIntegrationRequest(
+	req *CreateNodeIntegrationBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodeIntegrationUpdateIntegrationRequest(
+	req *UpdateNodeIntegrationBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -487,7 +613,7 @@ func encodeMetadataUpsertUserMetadataRequest(
 }
 
 func encodeNodePluginCloneNodePluginRequest(
-	req *CloneNodePluginRequestRequest,
+	req *CloneNodePluginBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -501,7 +627,35 @@ func encodeNodePluginCloneNodePluginRequest(
 }
 
 func encodeNodePluginCreateConfigRequest(
-	req *CreateNodePluginRequest,
+	req *CreateNodePluginBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginCreateSharedListRequest(
+	req *SharedListBodyBulkRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginDeleteSharedListRequest(
+	req *SharedListBodyBulkRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -515,7 +669,7 @@ func encodeNodePluginCreateConfigRequest(
 }
 
 func encodeNodePluginPluginExecutorRequest(
-	req *PluginExecutorRequest,
+	req *PluginExecutorBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -529,7 +683,49 @@ func encodeNodePluginPluginExecutorRequest(
 }
 
 func encodeNodePluginReorderNodePluginsRequest(
-	req *ReorderRequest,
+	req *ReorderNodePluginsBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginSetTagsRequest(
+	req *SetNodePluginsTagsBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginSyncNodePluginRequest(
+	req *SyncNodePluginBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginSyncSharedListRequest(
+	req *SharedListBodyBulkRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -543,7 +739,21 @@ func encodeNodePluginReorderNodePluginsRequest(
 }
 
 func encodeNodePluginUpdateConfigRequest(
-	req *UpdateNodePluginRequest,
+	req *UpdateNodePluginBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeNodePluginUpdateSharedListRequest(
+	req *SharedListBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -557,7 +767,7 @@ func encodeNodePluginUpdateConfigRequest(
 }
 
 func encodeNodesBulkNodesActionsRequest(
-	req *BulkNodesActionsRequest,
+	req *BulkNodesActionsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -571,7 +781,7 @@ func encodeNodesBulkNodesActionsRequest(
 }
 
 func encodeNodesBulkNodesUpdateRequest(
-	req *BulkNodesUpdateRequest,
+	req *BulkNodesUpdateBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -585,7 +795,7 @@ func encodeNodesBulkNodesUpdateRequest(
 }
 
 func encodeNodesCreateNodeRequest(
-	req *CreateNodeRequest,
+	req *CreateNodeBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -599,7 +809,7 @@ func encodeNodesCreateNodeRequest(
 }
 
 func encodeNodesProfileModificationRequest(
-	req *ProfileModificationRequest,
+	req *ProfileModificationBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -613,7 +823,7 @@ func encodeNodesProfileModificationRequest(
 }
 
 func encodeNodesReorderNodesRequest(
-	req *ReorderNodeRequest,
+	req *ReorderNodesBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -627,7 +837,7 @@ func encodeNodesReorderNodesRequest(
 }
 
 func encodeNodesRestartAllNodesRequest(
-	req *NodeRequestBodyRequest,
+	req *NodeBodyRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -641,7 +851,7 @@ func encodeNodesRestartAllNodesRequest(
 }
 
 func encodeNodesRestartNodeRequest(
-	req *NodeRequestBodyRequest,
+	req *NodeBodyRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -655,7 +865,7 @@ func encodeNodesRestartNodeRequest(
 }
 
 func encodeNodesUpdateNodeRequest(
-	req *UpdateNodeRequest,
+	req *UpdateNodeBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -669,7 +879,7 @@ func encodeNodesUpdateNodeRequest(
 }
 
 func encodePasskeyDeletePasskeyRequest(
-	req *DeletePasskeyRequest,
+	req *DeletePasskeyBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -697,7 +907,7 @@ func encodePasskeyPasskeyRegistrationVerifyRequest(
 }
 
 func encodePasskeyUpdatePasskeyRequest(
-	req *UpdatePasskeyRequest,
+	req *UpdatePasskeyBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -711,7 +921,7 @@ func encodePasskeyUpdatePasskeyRequest(
 }
 
 func encodeRemnawaveSettingsUpdateSettingsRequest(
-	req *UpdateRemnawaveSettingsRequest,
+	req *UpdateRemnawaveSettingsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -725,7 +935,7 @@ func encodeRemnawaveSettingsUpdateSettingsRequest(
 }
 
 func encodeSnippetsCreateSnippetRequest(
-	req *SnippetRequest,
+	req *SnippetBodyRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -739,7 +949,21 @@ func encodeSnippetsCreateSnippetRequest(
 }
 
 func encodeSnippetsDeleteSnippetByNameRequest(
-	req *DeleteSnippetRequest,
+	req *SnippetBodyRequest,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSnippetsSyncSnippetRequest(
+	req *SnippetBodyRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -753,7 +977,7 @@ func encodeSnippetsDeleteSnippetByNameRequest(
 }
 
 func encodeSnippetsUpdateSnippetRequest(
-	req *SnippetRequest,
+	req *SnippetBodyRequest2,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -767,7 +991,7 @@ func encodeSnippetsUpdateSnippetRequest(
 }
 
 func encodeSubscriptionPageConfigCloneSubscriptionPageConfigRequest(
-	req *CloneNodePluginRequestRequest,
+	req *CloneSubpageConfigBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -781,7 +1005,7 @@ func encodeSubscriptionPageConfigCloneSubscriptionPageConfigRequest(
 }
 
 func encodeSubscriptionPageConfigCreateConfigRequest(
-	req *CreateSubscriptionPageConfigRequest,
+	req *CreateSubpageConfigBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -795,7 +1019,21 @@ func encodeSubscriptionPageConfigCreateConfigRequest(
 }
 
 func encodeSubscriptionPageConfigReorderSubscriptionPageConfigsRequest(
-	req *ReorderRequest,
+	req *ReorderSubpageConfigsBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSubscriptionPageConfigSetTagsRequest(
+	req *SetSubpageConfigsTagsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -809,7 +1047,7 @@ func encodeSubscriptionPageConfigReorderSubscriptionPageConfigsRequest(
 }
 
 func encodeSubscriptionPageConfigUpdateConfigRequest(
-	req *UpdateSubscriptionPageConfigRequest,
+	req *UpdateSubpageConfigBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -823,7 +1061,7 @@ func encodeSubscriptionPageConfigUpdateConfigRequest(
 }
 
 func encodeSubscriptionSettingsUpdateSettingsRequest(
-	req *UpdateSubscriptionSettingsRequest,
+	req *UpdateSubscriptionSettingsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -837,7 +1075,7 @@ func encodeSubscriptionSettingsUpdateSettingsRequest(
 }
 
 func encodeSubscriptionTemplateCreateTemplateRequest(
-	req *CreateSubscriptionTemplateRequest,
+	req *CreateSubscriptionTemplateBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -851,7 +1089,21 @@ func encodeSubscriptionTemplateCreateTemplateRequest(
 }
 
 func encodeSubscriptionTemplateReorderSubscriptionTemplatesRequest(
-	req *ReorderRequest,
+	req *ReorderSubscriptionTemplatesBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeSubscriptionTemplateSetTagsRequest(
+	req *SetSubscriptionTemplatesTagsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -865,7 +1117,7 @@ func encodeSubscriptionTemplateReorderSubscriptionTemplatesRequest(
 }
 
 func encodeSubscriptionTemplateUpdateTemplateRequest(
-	req *UpdateTemplateRequest,
+	req *UpdateTemplateBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -879,7 +1131,7 @@ func encodeSubscriptionTemplateUpdateTemplateRequest(
 }
 
 func encodeSubscriptionsGetSubpageConfigByShortUuidRequest(
-	req *GetSubpageConfigByShortUuidRequestBody,
+	req *GetSubpageConfigByShortUuidBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -893,7 +1145,7 @@ func encodeSubscriptionsGetSubpageConfigByShortUuidRequest(
 }
 
 func encodeSystemDebugSrrMatcherRequest(
-	req *DebugSrrMatcherRequest,
+	req *DebugSrrMatcherBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -907,7 +1159,7 @@ func encodeSystemDebugSrrMatcherRequest(
 }
 
 func encodeUsersBulkActionsBulkAllExtendExpirationDateRequest(
-	req *BulkAllExtendExpirationDateRequest,
+	req *BulkAllExtendExpirationDateBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -921,7 +1173,7 @@ func encodeUsersBulkActionsBulkAllExtendExpirationDateRequest(
 }
 
 func encodeUsersBulkActionsBulkDeleteUsersRequest(
-	req *BulkUuidsRequest,
+	req *UsersBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -935,7 +1187,7 @@ func encodeUsersBulkActionsBulkDeleteUsersRequest(
 }
 
 func encodeUsersBulkActionsBulkDeleteUsersByStatusRequest(
-	req *BulkDeleteUsersByStatusRequest,
+	req *BulkDeleteUsersByStatusBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -949,7 +1201,7 @@ func encodeUsersBulkActionsBulkDeleteUsersByStatusRequest(
 }
 
 func encodeUsersBulkActionsBulkExtendExpirationDateRequest(
-	req *BulkExtendExpirationDateRequest,
+	req *BulkExtendExpirationDateBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -963,7 +1215,7 @@ func encodeUsersBulkActionsBulkExtendExpirationDateRequest(
 }
 
 func encodeUsersBulkActionsBulkResetUserTrafficRequest(
-	req *BulkUuidsRequest,
+	req *UsersBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -977,7 +1229,7 @@ func encodeUsersBulkActionsBulkResetUserTrafficRequest(
 }
 
 func encodeUsersBulkActionsBulkRevokeUsersSubscriptionRequest(
-	req *BulkUuidsRequest,
+	req *UsersBodyBulkRequest,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -991,7 +1243,7 @@ func encodeUsersBulkActionsBulkRevokeUsersSubscriptionRequest(
 }
 
 func encodeUsersBulkActionsBulkUpdateAllUsersRequest(
-	req *BulkAllUpdateUsersRequest,
+	req *BulkAllUpdateUsersBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -1005,7 +1257,7 @@ func encodeUsersBulkActionsBulkUpdateAllUsersRequest(
 }
 
 func encodeUsersBulkActionsBulkUpdateUsersRequest(
-	req *BulkUpdateUsersRequest,
+	req *BulkUpdateUsersBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -1019,7 +1271,7 @@ func encodeUsersBulkActionsBulkUpdateUsersRequest(
 }
 
 func encodeUsersBulkActionsBulkUpdateUsersInternalSquadsRequest(
-	req *BulkUpdateUsersSquadsRequest,
+	req *BulkUpdateUsersSquadsBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -1033,7 +1285,21 @@ func encodeUsersBulkActionsBulkUpdateUsersInternalSquadsRequest(
 }
 
 func encodeUsersCreateUserRequest(
-	req *CreateUserRequest,
+	req *CreateUserBody,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	e := new(jx.Encoder)
+	{
+		req.Encode(e)
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeUsersExtendUserExpirationDateRequest(
+	req *ExtendUserBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -1047,7 +1313,7 @@ func encodeUsersCreateUserRequest(
 }
 
 func encodeUsersResolveUserRequest(
-	req *ResolveUserRequestBody,
+	req *ResolveUserBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
@@ -1075,7 +1341,7 @@ func encodeUsersRevokeUserSubscriptionRequest(
 }
 
 func encodeUsersUpdateUserRequest(
-	req *UpdateUserRequest,
+	req *UpdateUserBody,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"

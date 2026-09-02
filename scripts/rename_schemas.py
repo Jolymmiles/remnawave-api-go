@@ -8,6 +8,9 @@ Changes patterns like:
 - EventResponseDto → EventResponse
 - BulkActionResponseDto → BulkActionResponse
 - BulkUuidsRequestDto → BulkUuidsRequest
+
+For the current SDK generation flow use ``scripts/pipeline.py``. This
+standalone helper is retained for targeted schema experiments.
 """
 
 import json
@@ -210,7 +213,7 @@ def update_schema_references(spec: dict, rename_map: dict) -> dict:
 def main():
     if len(sys.argv) < 2:
         print("Usage: python3 rename_schemas.py <input_file> [output_file]")
-        print("Example: python3 rename_schemas.py api-2-2-2-consolidated.json api-2-2-2-renamed.json")
+        print("Example: python3 rename_schemas.py ../specs/3.4.3-final.json ../specs/3.4.3-renamed.json")
         sys.exit(1)
     
     input_file = sys.argv[1]

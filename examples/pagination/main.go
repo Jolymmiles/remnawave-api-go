@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	remapi "github.com/Jolymmiles/remnawave-api-go/v2/api"
+	remapi "github.com/Jolymmiles/remnawave-api-go/v3/api"
 )
 
 func main() {
@@ -24,25 +24,22 @@ func main() {
 	pager := remapi.NewPaginationHelper(50) // 50 items per page
 
 	for pager.HasMore {
-		resp, err := client.Users().GetAllUsers(ctx,
-			pager.Limit,  // size
-			pager.Offset, // start
-		)
+		resp, err := client.Users().GetUsers(ctx, pager.Offset, pager.Limit)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		users, ok := resp.(*remapi.GetAllUsersResponse)
+		users, ok := resp.(*remapi.GetUsersResponse)
 		if !ok {
 			log.Fatal("unexpected response type")
 		}
 
 		for _, user := range users.Response.Users {
-			fmt.Printf("User: %s (UUID: %s)\n", user.Username, user.UUID)
+			fmt.Printf("User: %s (ID: %d)\n", user.Username, user.ID)
 		}
 
 		// Advance to next page
-		pager.SetTotal(int(users.Response.Total))
+		pager.SetTotal(users.Response.Total)
 		pager.NextPage()
 	}
 

@@ -4,496 +4,558 @@ package api
 
 import (
 	"time"
+
+	"github.com/google/uuid"
 )
 
-// ApiTokensDeleteParams is parameters of ApiTokens_delete operation.
-type ApiTokensDeleteParams struct {
+// ApiTokensDeleteApiTokenParams is parameters of ApiTokens_deleteApiToken operation.
+type ApiTokensDeleteApiTokenParams struct {
 	// UUID of the API token.
-	UUID string
+	UUID uuid.UUID
 }
 
-// BandwidthStatsNodesGetNodeUserUsageParams is parameters of BandwidthStatsNodes_getNodeUserUsage operation.
-type BandwidthStatsNodesGetNodeUserUsageParams struct {
-	// Start date.
+// BandwidthStatsNodesGetNodeUsageParams is parameters of BandwidthStatsNodes_getNodeUsage operation.
+type BandwidthStatsNodesGetNodeUsageParams struct {
+	// Start date (YYYY-MM-DD).
 	Start time.Time
-	// End date.
+	// End date (YYYY-MM-DD).
 	End time.Time
-	// UUID of the node.
-	UUID string
+	// Only include users whose total usage over the period is >= this (bytes).
+	MinTotalBytes OptInt `json:",omitempty,omitzero"`
 }
 
 // BandwidthStatsNodesGetStatsNodeUsersUsageParams is parameters of BandwidthStatsNodes_getStatsNodeUsersUsage operation.
 type BandwidthStatsNodesGetStatsNodeUsersUsageParams struct {
-	// Limit of top users to return.
-	TopUsersLimit int
 	// Start date (YYYY-MM-DD).
 	Start time.Time
 	// End date (YYYY-MM-DD).
-	End time.Time
-	// UUID of the node.
-	UUID string
+	End           time.Time
+	TopUsersLimit OptInt `json:",omitempty,omitzero"`
+	UUID          uuid.UUID
 }
 
 // BandwidthStatsNodesGetStatsNodesUsersUsageParams is parameters of BandwidthStatsNodes_getStatsNodesUsersUsage operation.
 type BandwidthStatsNodesGetStatsNodesUsersUsageParams struct {
-	// Limit of top users to return.
-	TopUsersLimit int
 	// Start date (YYYY-MM-DD).
 	Start time.Time
 	// End date (YYYY-MM-DD).
-	End time.Time
+	End           time.Time
+	TopUsersLimit OptInt `json:",omitempty,omitzero"`
 }
 
 // BandwidthStatsUsersGetStatsNodesUsageParams is parameters of BandwidthStatsUsers_getStatsNodesUsage operation.
 type BandwidthStatsUsersGetStatsNodesUsageParams struct {
-	// Limit of top nodes to return.
-	TopNodesLimit int
 	// Start date (YYYY-MM-DD).
 	Start time.Time
 	// End date (YYYY-MM-DD).
-	End time.Time
-	// UUID of the user.
-	UUID string
-}
-
-// BandwidthStatsUsersGetUserUsageByRangeParams is parameters of BandwidthStatsUsers_getUserUsageByRange operation.
-type BandwidthStatsUsersGetUserUsageByRangeParams struct {
-	// Start date.
-	Start time.Time
-	// End date.
-	End time.Time
-	// UUID of the user.
-	UUID string
+	End           time.Time
+	TopNodesLimit OptInt `json:",omitempty,omitzero"`
+	// ID of the user.
+	UserId int
 }
 
 // ConfigProfileDeleteConfigProfileByUuidParams is parameters of ConfigProfile_deleteConfigProfileByUuid operation.
 type ConfigProfileDeleteConfigProfileByUuidParams struct {
-	UUID string
+	// UUID of the config profile.
+	UUID uuid.UUID
 }
 
 // ConfigProfileGetComputedConfigProfileByUuidParams is parameters of ConfigProfile_getComputedConfigProfileByUuid operation.
 type ConfigProfileGetComputedConfigProfileByUuidParams struct {
-	UUID string
+	UUID uuid.UUID
 }
 
 // ConfigProfileGetConfigProfileByUuidParams is parameters of ConfigProfile_getConfigProfileByUuid operation.
 type ConfigProfileGetConfigProfileByUuidParams struct {
-	UUID string
+	UUID uuid.UUID
 }
 
 // ConfigProfileGetInboundsByProfileUuidParams is parameters of ConfigProfile_getInboundsByProfileUuid operation.
 type ConfigProfileGetInboundsByProfileUuidParams struct {
-	UUID string
+	// UUID of the config profile.
+	UUID uuid.UUID
+}
+
+// ConnectionsConnectionsByNodeParams is parameters of Connections_connectionsByNode operation.
+type ConnectionsConnectionsByNodeParams struct {
+	// Node UUID.
+	NodeUuid uuid.UUID
+}
+
+// ConnectionsConnectionsByNodeResultParams is parameters of Connections_connectionsByNodeResult operation.
+type ConnectionsConnectionsByNodeResultParams struct {
+	JobId string
+}
+
+// ConnectionsConnectionsByUserParams is parameters of Connections_connectionsByUser operation.
+type ConnectionsConnectionsByUserParams struct {
+	UserId int
+}
+
+// ConnectionsConnectionsByUserResultParams is parameters of Connections_connectionsByUserResult operation.
+type ConnectionsConnectionsByUserResultParams struct {
+	JobId string
+}
+
+// ConnectionsGeocheckByNodeParams is parameters of Connections_geocheckByNode operation.
+type ConnectionsGeocheckByNodeParams struct {
+	// Node UUID.
+	NodeUuid uuid.UUID
+}
+
+// ConnectionsGeocheckByNodeResultParams is parameters of Connections_geocheckByNodeResult operation.
+type ConnectionsGeocheckByNodeResultParams struct {
+	JobId string
 }
 
 // ExternalSquadAddUsersToExternalSquadParams is parameters of ExternalSquad_addUsersToExternalSquad operation.
 type ExternalSquadAddUsersToExternalSquadParams struct {
-	UUID string
+	// UUID of the external squad.
+	UUID uuid.UUID
 }
 
 // ExternalSquadDeleteExternalSquadParams is parameters of ExternalSquad_deleteExternalSquad operation.
 type ExternalSquadDeleteExternalSquadParams struct {
-	UUID string
+	// UUID of the external squad.
+	UUID uuid.UUID
 }
 
 // ExternalSquadGetExternalSquadByUuidParams is parameters of ExternalSquad_getExternalSquadByUuid operation.
 type ExternalSquadGetExternalSquadByUuidParams struct {
-	UUID string
+	// UUID of the external squad.
+	UUID uuid.UUID
 }
 
 // ExternalSquadRemoveUsersFromExternalSquadParams is parameters of ExternalSquad_removeUsersFromExternalSquad operation.
 type ExternalSquadRemoveUsersFromExternalSquadParams struct {
-	UUID string
+	// UUID of the external squad.
+	UUID uuid.UUID
 }
 
 // HostsDeleteHostParams is parameters of Hosts_deleteHost operation.
 type HostsDeleteHostParams struct {
-	// UUID of the host.
-	UUID string
+	UUID uuid.UUID
 }
 
 // HostsGetOneHostParams is parameters of Hosts_getOneHost operation.
 type HostsGetOneHostParams struct {
-	// UUID of the host.
-	UUID string
+	UUID uuid.UUID
 }
 
 // HwidUserDevicesGetAllUsersParams is parameters of HwidUserDevices_getAllUsers operation.
 type HwidUserDevicesGetAllUsersParams struct {
-	// Page size for pagination.
-	Size OptInt `json:",omitempty,omitzero"`
-	// Offset for pagination.
+	// Start index (offset) of the results to return, default is 0.
 	Start OptInt `json:",omitempty,omitzero"`
+	// Number of results to return, no more than 1000.
+	Size             OptInt    `json:",omitempty,omitzero"`
+	Filters          OptString `json:",omitempty,omitzero"`
+	FilterModes      OptString `json:",omitempty,omitzero"`
+	GlobalFilterMode OptString `json:",omitempty,omitzero"`
+	Sorting          OptString `json:",omitempty,omitzero"`
 }
 
 // HwidUserDevicesGetTopUsersByHwidDevicesParams is parameters of HwidUserDevices_getTopUsersByHwidDevices operation.
 type HwidUserDevicesGetTopUsersByHwidDevicesParams struct {
-	// Page size for pagination.
-	Size OptInt `json:",omitempty,omitzero"`
-	// Offset for pagination.
+	// Start index (offset) of the results to return, default is 0.
 	Start OptInt `json:",omitempty,omitzero"`
+	// Number of results to return, no more than 100.
+	Size OptInt `json:",omitempty,omitzero"`
 }
 
 // HwidUserDevicesGetUserHwidDevicesParams is parameters of HwidUserDevices_getUserHwidDevices operation.
 type HwidUserDevicesGetUserHwidDevicesParams struct {
-	// UUID of the user.
-	UserUuid string
+	UserId int
 }
 
-// InfraBillingDeleteInfraBillingHistoryRecordByUuidParams is parameters of InfraBilling_deleteInfraBillingHistoryRecordByUuid operation.
-type InfraBillingDeleteInfraBillingHistoryRecordByUuidParams struct {
-	UUID string
+// InfraBillingDeleteInfraBillingNodeParams is parameters of InfraBilling_deleteInfraBillingNode operation.
+type InfraBillingDeleteInfraBillingNodeParams struct {
+	UUID uuid.UUID
 }
 
-// InfraBillingDeleteInfraBillingNodeByUuidParams is parameters of InfraBilling_deleteInfraBillingNodeByUuid operation.
-type InfraBillingDeleteInfraBillingNodeByUuidParams struct {
-	UUID string
+// InfraBillingDeleteInfraBillingRecordParams is parameters of InfraBilling_deleteInfraBillingRecord operation.
+type InfraBillingDeleteInfraBillingRecordParams struct {
+	UUID uuid.UUID
 }
 
-// InfraBillingDeleteInfraProviderByUuidParams is parameters of InfraBilling_deleteInfraProviderByUuid operation.
-type InfraBillingDeleteInfraProviderByUuidParams struct {
-	UUID string
+// InfraBillingDelteInfraProviderParams is parameters of InfraBilling_delteInfraProvider operation.
+type InfraBillingDelteInfraProviderParams struct {
+	UUID uuid.UUID
 }
 
-// InfraBillingGetInfraProviderByUuidParams is parameters of InfraBilling_getInfraProviderByUuid operation.
-type InfraBillingGetInfraProviderByUuidParams struct {
-	UUID string
+// InfraBillingGetInfraBillingRecordsParams is parameters of InfraBilling_getInfraBillingRecords operation.
+type InfraBillingGetInfraBillingRecordsParams struct {
+	// Start index (offset) of the billing history records to return, default is 0.
+	Start OptInt `json:",omitempty,omitzero"`
+	// Number of billing records to return, no more than 500.
+	Size OptInt `json:",omitempty,omitzero"`
+}
+
+// InfraBillingGetInfraProviderParams is parameters of InfraBilling_getInfraProvider operation.
+type InfraBillingGetInfraProviderParams struct {
+	UUID uuid.UUID
+}
+
+// InternalSquadAddManyUsersToInternalSquadParams is parameters of InternalSquad_addManyUsersToInternalSquad operation.
+type InternalSquadAddManyUsersToInternalSquadParams struct {
+	UUID uuid.UUID
 }
 
 // InternalSquadAddUsersToInternalSquadParams is parameters of InternalSquad_addUsersToInternalSquad operation.
 type InternalSquadAddUsersToInternalSquadParams struct {
-	UUID string
+	UUID uuid.UUID
 }
 
 // InternalSquadDeleteInternalSquadParams is parameters of InternalSquad_deleteInternalSquad operation.
 type InternalSquadDeleteInternalSquadParams struct {
-	UUID string
+	UUID uuid.UUID
 }
 
 // InternalSquadGetInternalSquadAccessibleNodesParams is parameters of InternalSquad_getInternalSquadAccessibleNodes operation.
 type InternalSquadGetInternalSquadAccessibleNodesParams struct {
-	// UUID of the internal squad.
-	UUID string
+	UUID uuid.UUID
 }
 
 // InternalSquadGetInternalSquadByUuidParams is parameters of InternalSquad_getInternalSquadByUuid operation.
 type InternalSquadGetInternalSquadByUuidParams struct {
-	UUID string
+	UUID uuid.UUID
+}
+
+// InternalSquadGetInternalSquadUsageParams is parameters of InternalSquad_getInternalSquadUsage operation.
+type InternalSquadGetInternalSquadUsageParams struct {
+	// Internal squad UUID.
+	UUID uuid.UUID
+	// Start date (YYYY-MM-DD).
+	Start time.Time
+	// End date (YYYY-MM-DD).
+	End time.Time
+	// Only include users whose total usage over the period is >= this (bytes).
+	MinTotalBytes OptInt `json:",omitempty,omitzero"`
+	// Number of users to return, no more than 1000.
+	Limit OptInt `json:",omitempty,omitzero"`
+	// Pass the nextCursor from the previous response. Omit on the first request.
+	Cursor OptString `json:",omitempty,omitzero"`
+}
+
+// InternalSquadRemoveManyUsersFromInternalSquadParams is parameters of InternalSquad_removeManyUsersFromInternalSquad operation.
+type InternalSquadRemoveManyUsersFromInternalSquadParams struct {
+	UUID uuid.UUID
 }
 
 // InternalSquadRemoveUsersFromInternalSquadParams is parameters of InternalSquad_removeUsersFromInternalSquad operation.
 type InternalSquadRemoveUsersFromInternalSquadParams struct {
-	UUID string
+	UUID uuid.UUID
 }
 
-// IpControlFetchUserIpsParams is parameters of IpControl_fetchUserIps operation.
-type IpControlFetchUserIpsParams struct {
-	// UUID of the user.
-	UUID string
+// InternalSquadStatsGetInternalSquadUsageParams is parameters of InternalSquadStats_getInternalSquadUsage operation.
+type InternalSquadStatsGetInternalSquadUsageParams struct {
+	// Internal squad UUID.
+	UUID uuid.UUID
+	// Start date (YYYY-MM-DD).
+	Start time.Time
+	// End date (YYYY-MM-DD).
+	End time.Time
+	// Only include users whose total usage over the period is >= this (bytes).
+	MinTotalBytes OptInt `json:",omitempty,omitzero"`
+	// Number of users to return, no more than 1000.
+	Limit OptInt `json:",omitempty,omitzero"`
+	// Pass the nextCursor from the previous response. Omit on the first request.
+	Cursor OptString `json:",omitempty,omitzero"`
 }
 
-// IpControlFetchUsersIpsParams is parameters of IpControl_fetchUsersIps operation.
-type IpControlFetchUsersIpsParams struct {
-	// UUID of the node.
-	NodeUuid string
-}
-
-// IpControlGetFetchIpsResultParams is parameters of IpControl_getFetchIpsResult operation.
-type IpControlGetFetchIpsResultParams struct {
-	// Job ID.
-	JobId string
-}
-
-// IpControlGetFetchUsersIpsResultParams is parameters of IpControl_getFetchUsersIpsResult operation.
-type IpControlGetFetchUsersIpsResultParams struct {
-	// Job ID.
-	JobId string
-}
-
-// MetadataGetNodeMetadataParams is parameters of Metadata_getNodeMetadata operation.
-type MetadataGetNodeMetadataParams struct {
-	// UUID of the node.
-	UUID string
-}
-
-// MetadataGetUserMetadataParams is parameters of Metadata_getUserMetadata operation.
-type MetadataGetUserMetadataParams struct {
-	// UUID of the user.
-	UUID string
-}
-
-// MetadataUpsertNodeMetadataParams is parameters of Metadata_upsertNodeMetadata operation.
-type MetadataUpsertNodeMetadataParams struct {
-	// UUID of the node.
-	UUID string
-}
-
-// MetadataUpsertUserMetadataParams is parameters of Metadata_upsertUserMetadata operation.
-type MetadataUpsertUserMetadataParams struct {
-	// UUID of the user.
-	UUID string
-}
-
-// NodePluginDeleteConfigParams is parameters of NodePlugin_deleteConfig operation.
-type NodePluginDeleteConfigParams struct {
-	// Node plugin UUID.
-	UUID string
-}
-
-// NodePluginGetConfigByUuidParams is parameters of NodePlugin_getConfigByUuid operation.
-type NodePluginGetConfigByUuidParams struct {
-	// Node plugin UUID.
-	UUID string
-}
-
-// NodesDeleteNodeParams is parameters of Nodes_deleteNode operation.
-type NodesDeleteNodeParams struct {
-	// Node UUID.
-	UUID string
-}
-
-// NodesDisableNodeParams is parameters of Nodes_disableNode operation.
-type NodesDisableNodeParams struct {
-	// Node UUID.
-	UUID string
-}
-
-// NodesEnableNodeParams is parameters of Nodes_enableNode operation.
-type NodesEnableNodeParams struct {
-	// Node UUID.
-	UUID string
-}
-
-// NodesGetOneNodeParams is parameters of Nodes_getOneNode operation.
-type NodesGetOneNodeParams struct {
-	// Node UUID.
-	UUID string
-}
-
-// NodesResetNodeTrafficParams is parameters of Nodes_resetNodeTraffic operation.
-type NodesResetNodeTrafficParams struct {
-	// Node UUID.
-	UUID string
-}
-
-// NodesRestartNodeParams is parameters of Nodes_restartNode operation.
-type NodesRestartNodeParams struct {
-	// Node UUID.
-	UUID string
-}
-
-// NodesUsageHistoryGetStatsNodesUsageParams is parameters of NodesUsageHistory_getStatsNodesUsage operation.
-type NodesUsageHistoryGetStatsNodesUsageParams struct {
-	// Limit of top nodes to return.
-	TopNodesLimit int
+// InternalSquadStatsGetInternalSquadUserUsageParams is parameters of InternalSquadStats_getInternalSquadUserUsage operation.
+type InternalSquadStatsGetInternalSquadUserUsageParams struct {
+	// Internal squad UUID.
+	SquadUuid uuid.UUID
+	UserId    int
 	// Start date (YYYY-MM-DD).
 	Start time.Time
 	// End date (YYYY-MM-DD).
 	End time.Time
 }
 
+// MetadataGetNodeMetadataParams is parameters of Metadata_getNodeMetadata operation.
+type MetadataGetNodeMetadataParams struct {
+	UUID uuid.UUID
+}
+
+// MetadataGetUserMetadataParams is parameters of Metadata_getUserMetadata operation.
+type MetadataGetUserMetadataParams struct {
+	UserId int
+}
+
+// MetadataUpsertNodeMetadataParams is parameters of Metadata_upsertNodeMetadata operation.
+type MetadataUpsertNodeMetadataParams struct {
+	UUID uuid.UUID
+}
+
+// MetadataUpsertUserMetadataParams is parameters of Metadata_upsertUserMetadata operation.
+type MetadataUpsertUserMetadataParams struct {
+	UserId int
+}
+
+// NodeIntegrationDeleteIntegrationParams is parameters of NodeIntegration_deleteIntegration operation.
+type NodeIntegrationDeleteIntegrationParams struct {
+	UUID uuid.UUID
+}
+
+// NodeIntegrationGetIntegrationByUuidParams is parameters of NodeIntegration_getIntegrationByUuid operation.
+type NodeIntegrationGetIntegrationByUuidParams struct {
+	UUID uuid.UUID
+}
+
+// NodePluginDeleteConfigParams is parameters of NodePlugin_deleteConfig operation.
+type NodePluginDeleteConfigParams struct {
+	UUID uuid.UUID
+}
+
+// NodePluginGetConfigByUuidParams is parameters of NodePlugin_getConfigByUuid operation.
+type NodePluginGetConfigByUuidParams struct {
+	UUID uuid.UUID
+}
+
+// NodePluginGetSharedListByNameParams is parameters of NodePlugin_getSharedListByName operation.
+type NodePluginGetSharedListByNameParams struct {
+	Name string
+}
+
+// NodesDeleteNodeParams is parameters of Nodes_deleteNode operation.
+type NodesDeleteNodeParams struct {
+	UUID uuid.UUID
+}
+
+// NodesDisableNodeParams is parameters of Nodes_disableNode operation.
+type NodesDisableNodeParams struct {
+	UUID uuid.UUID
+}
+
+// NodesEnableNodeParams is parameters of Nodes_enableNode operation.
+type NodesEnableNodeParams struct {
+	UUID uuid.UUID
+}
+
+// NodesGetNodeParams is parameters of Nodes_getNode operation.
+type NodesGetNodeParams struct {
+	UUID uuid.UUID
+}
+
+// NodesResetNodeTrafficParams is parameters of Nodes_resetNodeTraffic operation.
+type NodesResetNodeTrafficParams struct {
+	UUID uuid.UUID
+}
+
+// NodesRestartNodeParams is parameters of Nodes_restartNode operation.
+type NodesRestartNodeParams struct {
+	UUID uuid.UUID
+}
+
+// NodesUsageHistoryGetStatsNodesUsageParams is parameters of NodesUsageHistory_getStatsNodesUsage operation.
+type NodesUsageHistoryGetStatsNodesUsageParams struct {
+	// Start date (YYYY-MM-DD).
+	Start time.Time
+	// End date (YYYY-MM-DD).
+	End time.Time
+	// Limit of top nodes to return.
+	TopNodesLimit OptInt `json:",omitempty,omitzero"`
+}
+
 // SubscriptionGetSubscriptionParams is parameters of Subscription_getSubscription operation.
 type SubscriptionGetSubscriptionParams struct {
-	// Short UUID of the user.
 	ShortUuid string
 }
 
 // SubscriptionGetSubscriptionByClientTypeParams is parameters of Subscription_getSubscriptionByClientType operation.
 type SubscriptionGetSubscriptionByClientTypeParams struct {
-	// Client type.
+	ShortUuid  string
 	ClientType SubscriptionGetSubscriptionByClientTypeClientType
-	// Short UUID of the user.
-	ShortUuid string
 }
 
 // SubscriptionGetSubscriptionInfoByShortUuidParams is parameters of Subscription_getSubscriptionInfoByShortUuid operation.
 type SubscriptionGetSubscriptionInfoByShortUuidParams struct {
-	// Short UUID of the user.
 	ShortUuid string
 }
 
 // SubscriptionPageConfigDeleteConfigParams is parameters of SubscriptionPageConfig_deleteConfig operation.
 type SubscriptionPageConfigDeleteConfigParams struct {
-	// Subscription page config UUID.
-	UUID string
+	UUID uuid.UUID
 }
 
 // SubscriptionPageConfigGetConfigByUuidParams is parameters of SubscriptionPageConfig_getConfigByUuid operation.
 type SubscriptionPageConfigGetConfigByUuidParams struct {
-	// Subscription page config UUID.
-	UUID string
+	UUID uuid.UUID
 }
 
 // SubscriptionTemplateDeleteTemplateParams is parameters of SubscriptionTemplate_deleteTemplate operation.
 type SubscriptionTemplateDeleteTemplateParams struct {
-	// Template UUID.
-	UUID string
+	UUID uuid.UUID
 }
 
 // SubscriptionTemplateGetTemplateByUuidParams is parameters of SubscriptionTemplate_getTemplateByUuid operation.
 type SubscriptionTemplateGetTemplateByUuidParams struct {
-	// Template UUID.
-	UUID string
+	UUID uuid.UUID
 }
 
 // SubscriptionsGetAllSubscriptionsParams is parameters of Subscriptions_getAllSubscriptions operation.
 type SubscriptionsGetAllSubscriptionsParams struct {
-	// Number of subscriptions to return, no more than 500.
-	Size OptInt `json:",omitempty,omitzero"`
 	// Start index (offset) of the users to return, default is 0.
 	Start OptInt `json:",omitempty,omitzero"`
+	// Number of subscriptions to return, no more than 500.
+	Size OptInt `json:",omitempty,omitzero"`
 }
 
-// SubscriptionsGetConnectionKeysByUuidParams is parameters of Subscriptions_getConnectionKeysByUuid operation.
-type SubscriptionsGetConnectionKeysByUuidParams struct {
-	// UUID of the user.
-	UUID string
+// SubscriptionsGetConnectionKeysByUserIdParams is parameters of Subscriptions_getConnectionKeysByUserId operation.
+type SubscriptionsGetConnectionKeysByUserIdParams struct {
+	// User ID.
+	UserId int
 }
 
 // SubscriptionsGetRawSubscriptionByShortUuidParams is parameters of Subscriptions_getRawSubscriptionByShortUuid operation.
 type SubscriptionsGetRawSubscriptionByShortUuidParams struct {
-	// Include disabled hosts in the subscription. Default is false.
-	WithDisabledHosts OptBool `json:",omitempty,omitzero"`
-	// Short UUID of the user.
-	ShortUuid string
+	ShortUuid         string
+	WithDisabledHosts OptString `json:",omitempty,omitzero"`
 }
 
 // SubscriptionsGetSubpageConfigByShortUuidParams is parameters of Subscriptions_getSubpageConfigByShortUuid operation.
 type SubscriptionsGetSubpageConfigByShortUuidParams struct {
-	// Short UUID of the user.
 	ShortUuid string
 }
 
 // SubscriptionsGetSubscriptionByShortUuidProtectedParams is parameters of Subscriptions_getSubscriptionByShortUuidProtected operation.
 type SubscriptionsGetSubscriptionByShortUuidProtectedParams struct {
-	// Short uuid of the user.
 	ShortUuid string
 }
 
 // SubscriptionsGetSubscriptionByUsernameParams is parameters of Subscriptions_getSubscriptionByUsername operation.
 type SubscriptionsGetSubscriptionByUsernameParams struct {
-	// Username of the user.
+	// Username.
 	Username string
 }
 
 // SubscriptionsGetSubscriptionByUuidParams is parameters of Subscriptions_getSubscriptionByUuid operation.
 type SubscriptionsGetSubscriptionByUuidParams struct {
-	// Uuid of the user.
-	UUID string
+	// User ID.
+	UserId int
+}
+
+// SystemGetBandwidthStatsParams is parameters of System_getBandwidthStats operation.
+type SystemGetBandwidthStatsParams struct {
+	Tz OptString `json:",omitempty,omitzero"`
+}
+
+// SystemGetStatsDigestParams is parameters of System_getStatsDigest operation.
+type SystemGetStatsDigestParams struct {
+	// Start of the range, ISO 8601 datetime with timezone (e.g. 2026-07-15T00:00:00Z). Inclusive.
+	Start time.Time
+	// End of the range, ISO 8601 datetime with timezone (e.g. 2026-07-16T00:00:00Z). Exclusive.
+	End time.Time
 }
 
 // TorrentBlockerReportsGetTorrentBlockerReportsParams is parameters of TorrentBlockerReports_getTorrentBlockerReports operation.
 type TorrentBlockerReportsGetTorrentBlockerReportsParams struct {
-	// Page size for pagination.
-	Size OptInt `json:",omitempty,omitzero"`
-	// Offset for pagination.
+	// Start index (offset) of the results to return, default is 0.
 	Start OptInt `json:",omitempty,omitzero"`
+	// Number of results to return, no more than 1000.
+	Size             OptInt    `json:",omitempty,omitzero"`
+	Filters          OptString `json:",omitempty,omitzero"`
+	FilterModes      OptString `json:",omitempty,omitzero"`
+	GlobalFilterMode OptString `json:",omitempty,omitzero"`
+	Sorting          OptString `json:",omitempty,omitzero"`
 }
 
 // UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryParams is parameters of UserSubscriptionRequestHistory_getSubscriptionRequestHistory operation.
 type UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryParams struct {
-	// Page size for pagination.
-	Size OptInt `json:",omitempty,omitzero"`
-	// Offset for pagination.
+	// Start index (offset) of the results to return, default is 0.
 	Start OptInt `json:",omitempty,omitzero"`
+	// Number of results to return, no more than 1000.
+	Size             OptInt    `json:",omitempty,omitzero"`
+	Filters          OptString `json:",omitempty,omitzero"`
+	FilterModes      OptString `json:",omitempty,omitzero"`
+	GlobalFilterMode OptString `json:",omitempty,omitzero"`
+	Sorting          OptString `json:",omitempty,omitzero"`
 }
 
 // UsersDeleteUserParams is parameters of Users_deleteUser operation.
 type UsersDeleteUserParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }
 
 // UsersDisableUserParams is parameters of Users_disableUser operation.
 type UsersDisableUserParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }
 
 // UsersEnableUserParams is parameters of Users_enableUser operation.
 type UsersEnableUserParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }
 
-// UsersGetAllUsersParams is parameters of Users_getAllUsers operation.
-type UsersGetAllUsersParams struct {
-	// Page size for pagination.
-	Size OptInt `json:",omitempty,omitzero"`
-	// Offset for pagination.
-	Start OptInt `json:",omitempty,omitzero"`
+// UsersExtendUserExpirationDateParams is parameters of Users_extendUserExpirationDate operation.
+type UsersExtendUserExpirationDateParams struct {
+	UserId int
 }
 
 // UsersGetUserAccessibleNodesParams is parameters of Users_getUserAccessibleNodes operation.
 type UsersGetUserAccessibleNodesParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }
 
 // UsersGetUserByIdParams is parameters of Users_getUserById operation.
 type UsersGetUserByIdParams struct {
-	// ID of the user.
-	ID string
+	UserId int
 }
 
 // UsersGetUserByShortUuidParams is parameters of Users_getUserByShortUuid operation.
 type UsersGetUserByShortUuidParams struct {
-	// Short UUID of the user.
 	ShortUuid string
-}
-
-// UsersGetUserByTelegramIdParams is parameters of Users_getUserByTelegramId operation.
-type UsersGetUserByTelegramIdParams struct {
-	// Telegram ID of the user.
-	TelegramId string
 }
 
 // UsersGetUserByUsernameParams is parameters of Users_getUserByUsername operation.
 type UsersGetUserByUsernameParams struct {
-	// Username of the user.
 	Username string
-}
-
-// UsersGetUserByUuidParams is parameters of Users_getUserByUuid operation.
-type UsersGetUserByUuidParams struct {
-	// UUID of the user.
-	UUID string
 }
 
 // UsersGetUserSubscriptionRequestHistoryParams is parameters of Users_getUserSubscriptionRequestHistory operation.
 type UsersGetUserSubscriptionRequestHistoryParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }
 
-// UsersGetUsersByEmailParams is parameters of Users_getUsersByEmail operation.
-type UsersGetUsersByEmailParams struct {
-	// Email of the user.
-	Email string
-}
-
-// UsersGetUsersByTagParams is parameters of Users_getUsersByTag operation.
-type UsersGetUsersByTagParams struct {
-	// Tag of the user.
-	Tag string
+// UsersGetUsersParams is parameters of Users_getUsers operation.
+type UsersGetUsersParams struct {
+	// Start index (offset) of the results to return, default is 0.
+	Start OptInt `json:",omitempty,omitzero"`
+	// Number of results to return, no more than 1000.
+	Size             OptInt    `json:",omitempty,omitzero"`
+	Filters          OptString `json:",omitempty,omitzero"`
+	FilterModes      OptString `json:",omitempty,omitzero"`
+	GlobalFilterMode OptString `json:",omitempty,omitzero"`
+	Sorting          OptString `json:",omitempty,omitzero"`
 }
 
 // UsersGetUsersStreamParams is parameters of Users_getUsersStream operation.
 type UsersGetUsersStreamParams struct {
-	// Page size, no more than 1000 (default 250).
-	Size OptInt `json:",omitempty,omitzero"`
-	// Cursor from the previous response (nextCursor). Omit on the first request.
+	// Cursor for pagination — pass the nextCursor from the previous response. Omit on the first request.
 	Cursor OptString `json:",omitempty,omitzero"`
+	// Number of results to return, no more than 1000.
+	Size OptInt `json:",omitempty,omitzero"`
+	// Status to filter users by.
+	Status OptUsersGetUsersStreamStatus `json:",omitempty,omitzero"`
+	// Traffic limit strategy to filter users by.
+	TrafficLimitStrategy OptUsersGetUsersStreamTrafficLimitStrategy `json:",omitempty,omitzero"`
+	// Telegram ID to filter users by.
+	TelegramId OptString `json:",omitempty,omitzero"`
+	// Email to filter users by.
+	Email OptString `json:",omitempty,omitzero"`
+	// Tag to filter users by.
+	Tag OptString `json:",omitempty,omitzero"`
+	// External squad UUID to filter users by.
+	ExternalSquadUuid OptUUID `json:",omitempty,omitzero"`
 }
 
 // UsersResetUserTrafficParams is parameters of Users_resetUserTraffic operation.
 type UsersResetUserTrafficParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }
 
 // UsersRevokeUserSubscriptionParams is parameters of Users_revokeUserSubscription operation.
 type UsersRevokeUserSubscriptionParams struct {
-	// UUID of the user.
-	UUID string
+	UserId int
 }

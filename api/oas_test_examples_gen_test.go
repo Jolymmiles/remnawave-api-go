@@ -35,18 +35,6 @@ func TestActiveInternalSquad_EncodeDecode(t *testing.T) {
 	var typ2 ActiveInternalSquad
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestAllHwidDevices_EncodeDecode(t *testing.T) {
-	var typ AllHwidDevices
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 AllHwidDevices
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestBadRequestError_EncodeDecode(t *testing.T) {
 	var typ BadRequestError
 	typ.SetFake()
@@ -81,54 +69,6 @@ func TestBillingHistoryItem_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 BillingHistoryItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBillingHistoryResponse_EncodeDecode(t *testing.T) {
-	var typ BillingHistoryResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BillingHistoryResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBillingHistoryResponseResponse_EncodeDecode(t *testing.T) {
-	var typ BillingHistoryResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BillingHistoryResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBillingHistoryResponseResponseRecordsItem_EncodeDecode(t *testing.T) {
-	var typ BillingHistoryResponseResponseRecordsItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BillingHistoryResponseResponseRecordsItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBillingHistoryResponseResponseRecordsItemProvider_EncodeDecode(t *testing.T) {
-	var typ BillingHistoryResponseResponseRecordsItemProvider
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BillingHistoryResponseResponseRecordsItemProvider
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestBillingNode_EncodeDecode(t *testing.T) {
@@ -215,8 +155,8 @@ func TestBrandingSettings_EncodeDecode(t *testing.T) {
 	var typ2 BrandingSettings
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkActionResponse_EncodeDecode(t *testing.T) {
-	var typ BulkActionResponse
+func TestBulkAllExtendExpirationDateBody_EncodeDecode(t *testing.T) {
+	var typ BulkAllExtendExpirationDateBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -224,11 +164,11 @@ func TestBulkActionResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkActionResponse
+	var typ2 BulkAllExtendExpirationDateBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkActionResponseResponse_EncodeDecode(t *testing.T) {
-	var typ BulkActionResponseResponse
+func TestBulkAllUpdateUsersBody_EncodeDecode(t *testing.T) {
+	var typ BulkAllUpdateUsersBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -236,11 +176,11 @@ func TestBulkActionResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkActionResponseResponse
+	var typ2 BulkAllUpdateUsersBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkAllExtendExpirationDateRequest_EncodeDecode(t *testing.T) {
-	var typ BulkAllExtendExpirationDateRequest
+func TestBulkAllUpdateUsersBodyStatus_EncodeDecode(t *testing.T) {
+	var typ BulkAllUpdateUsersBodyStatus
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -248,11 +188,11 @@ func TestBulkAllExtendExpirationDateRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkAllExtendExpirationDateRequest
+	var typ2 BulkAllUpdateUsersBodyStatus
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkAllUpdateUsersRequest_EncodeDecode(t *testing.T) {
-	var typ BulkAllUpdateUsersRequest
+func TestBulkAllUpdateUsersBodyTrafficLimitStrategy_EncodeDecode(t *testing.T) {
+	var typ BulkAllUpdateUsersBodyTrafficLimitStrategy
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -260,11 +200,11 @@ func TestBulkAllUpdateUsersRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkAllUpdateUsersRequest
+	var typ2 BulkAllUpdateUsersBodyTrafficLimitStrategy
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkAllUpdateUsersRequestStatus_EncodeDecode(t *testing.T) {
-	var typ BulkAllUpdateUsersRequestStatus
+func TestBulkDeleteUsersByStatusBody_EncodeDecode(t *testing.T) {
+	var typ BulkDeleteUsersByStatusBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -272,11 +212,11 @@ func TestBulkAllUpdateUsersRequestStatus_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkAllUpdateUsersRequestStatus
+	var typ2 BulkDeleteUsersByStatusBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkAllUpdateUsersRequestTrafficLimitStrategy_EncodeDecode(t *testing.T) {
-	var typ BulkAllUpdateUsersRequestTrafficLimitStrategy
+func TestBulkDeleteUsersByStatusBodyStatus_EncodeDecode(t *testing.T) {
+	var typ BulkDeleteUsersByStatusBodyStatus
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -284,11 +224,11 @@ func TestBulkAllUpdateUsersRequestTrafficLimitStrategy_EncodeDecode(t *testing.T
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkAllUpdateUsersRequestTrafficLimitStrategy
+	var typ2 BulkDeleteUsersByStatusBodyStatus
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkDeleteUsersByStatusRequest_EncodeDecode(t *testing.T) {
-	var typ BulkDeleteUsersByStatusRequest
+func TestBulkExtendExpirationDateBody_EncodeDecode(t *testing.T) {
+	var typ BulkExtendExpirationDateBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -296,11 +236,11 @@ func TestBulkDeleteUsersByStatusRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkDeleteUsersByStatusRequest
+	var typ2 BulkExtendExpirationDateBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkDeleteUsersByStatusRequestStatus_EncodeDecode(t *testing.T) {
-	var typ BulkDeleteUsersByStatusRequestStatus
+func TestBulkNodesActionsBody_EncodeDecode(t *testing.T) {
+	var typ BulkNodesActionsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -308,11 +248,11 @@ func TestBulkDeleteUsersByStatusRequestStatus_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkDeleteUsersByStatusRequestStatus
+	var typ2 BulkNodesActionsBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkExtendExpirationDateRequest_EncodeDecode(t *testing.T) {
-	var typ BulkExtendExpirationDateRequest
+func TestBulkNodesActionsBodyAction_EncodeDecode(t *testing.T) {
+	var typ BulkNodesActionsBodyAction
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -320,11 +260,11 @@ func TestBulkExtendExpirationDateRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkExtendExpirationDateRequest
+	var typ2 BulkNodesActionsBodyAction
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkNodesActionsRequest_EncodeDecode(t *testing.T) {
-	var typ BulkNodesActionsRequest
+func TestBulkNodesUpdateBody_EncodeDecode(t *testing.T) {
+	var typ BulkNodesUpdateBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -332,11 +272,11 @@ func TestBulkNodesActionsRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkNodesActionsRequest
+	var typ2 BulkNodesUpdateBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkNodesActionsRequestAction_EncodeDecode(t *testing.T) {
-	var typ BulkNodesActionsRequestAction
+func TestBulkNodesUpdateBodyFields_EncodeDecode(t *testing.T) {
+	var typ BulkNodesUpdateBodyFields
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -344,11 +284,11 @@ func TestBulkNodesActionsRequestAction_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkNodesActionsRequestAction
+	var typ2 BulkNodesUpdateBodyFields
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkNodesUpdateRequest_EncodeDecode(t *testing.T) {
-	var typ BulkNodesUpdateRequest
+func TestBulkUpdateUsersBody_EncodeDecode(t *testing.T) {
+	var typ BulkUpdateUsersBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -356,11 +296,11 @@ func TestBulkNodesUpdateRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkNodesUpdateRequest
+	var typ2 BulkUpdateUsersBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkNodesUpdateRequestFields_EncodeDecode(t *testing.T) {
-	var typ BulkNodesUpdateRequestFields
+func TestBulkUpdateUsersBodyFields_EncodeDecode(t *testing.T) {
+	var typ BulkUpdateUsersBodyFields
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -368,11 +308,11 @@ func TestBulkNodesUpdateRequestFields_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkNodesUpdateRequestFields
+	var typ2 BulkUpdateUsersBodyFields
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkUpdateUsersRequest_EncodeDecode(t *testing.T) {
-	var typ BulkUpdateUsersRequest
+func TestBulkUpdateUsersBodyFieldsStatus_EncodeDecode(t *testing.T) {
+	var typ BulkUpdateUsersBodyFieldsStatus
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -380,11 +320,11 @@ func TestBulkUpdateUsersRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkUpdateUsersRequest
+	var typ2 BulkUpdateUsersBodyFieldsStatus
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkUpdateUsersRequestFields_EncodeDecode(t *testing.T) {
-	var typ BulkUpdateUsersRequestFields
+func TestBulkUpdateUsersBodyFieldsTrafficLimitStrategy_EncodeDecode(t *testing.T) {
+	var typ BulkUpdateUsersBodyFieldsTrafficLimitStrategy
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -392,11 +332,11 @@ func TestBulkUpdateUsersRequestFields_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkUpdateUsersRequestFields
+	var typ2 BulkUpdateUsersBodyFieldsTrafficLimitStrategy
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestBulkUpdateUsersRequestFieldsStatus_EncodeDecode(t *testing.T) {
-	var typ BulkUpdateUsersRequestFieldsStatus
+func TestBulkUpdateUsersSquadsBody_EncodeDecode(t *testing.T) {
+	var typ BulkUpdateUsersSquadsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -404,55 +344,7 @@ func TestBulkUpdateUsersRequestFieldsStatus_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 BulkUpdateUsersRequestFieldsStatus
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBulkUpdateUsersRequestFieldsTrafficLimitStrategy_EncodeDecode(t *testing.T) {
-	var typ BulkUpdateUsersRequestFieldsTrafficLimitStrategy
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BulkUpdateUsersRequestFieldsTrafficLimitStrategy
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBulkUpdateUsersSquadsRequest_EncodeDecode(t *testing.T) {
-	var typ BulkUpdateUsersSquadsRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BulkUpdateUsersSquadsRequest
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBulkUuidsRequest_EncodeDecode(t *testing.T) {
-	var typ BulkUuidsRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BulkUuidsRequest
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestBulkUuidsRequest2_EncodeDecode(t *testing.T) {
-	var typ BulkUuidsRequest2
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 BulkUuidsRequest2
+	var typ2 BulkUpdateUsersSquadsBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestByAppItem_EncodeDecode(t *testing.T) {
@@ -467,8 +359,8 @@ func TestByAppItem_EncodeDecode(t *testing.T) {
 	var typ2 ByAppItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCloneNodePluginRequestRequest_EncodeDecode(t *testing.T) {
-	var typ CloneNodePluginRequestRequest
+func TestCloneNodePluginBody_EncodeDecode(t *testing.T) {
+	var typ CloneNodePluginBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -476,7 +368,19 @@ func TestCloneNodePluginRequestRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CloneNodePluginRequestRequest
+	var typ2 CloneNodePluginBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCloneSubpageConfigBody_EncodeDecode(t *testing.T) {
+	var typ CloneSubpageConfigBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CloneSubpageConfigBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCondition_EncodeDecode(t *testing.T) {
@@ -527,6 +431,18 @@ func TestConfigProfile_EncodeDecode(t *testing.T) {
 	var typ2 ConfigProfile
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestConfigProfile2_EncodeDecode(t *testing.T) {
+	var typ ConfigProfile2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConfigProfile2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestConfigProfileItem_EncodeDecode(t *testing.T) {
 	var typ ConfigProfileItem
 	typ.SetFake()
@@ -537,18 +453,6 @@ func TestConfigProfileItem_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 ConfigProfileItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestConfigProfileRef_EncodeDecode(t *testing.T) {
-	var typ ConfigProfileRef
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 ConfigProfileRef
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestConfigProfileResponse_EncodeDecode(t *testing.T) {
@@ -587,8 +491,8 @@ func TestConfigProfilesResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 ConfigProfilesResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateApiTokenRequest_EncodeDecode(t *testing.T) {
-	var typ CreateApiTokenRequest
+func TestConnectionsByNodeResultResponse_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByNodeResultResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -596,7 +500,115 @@ func TestCreateApiTokenRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateApiTokenRequest
+	var typ2 ConnectionsByNodeResultResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByNodeResultResponseResponse_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByNodeResultResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByNodeResultResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByNodeResultResponseResponseResult_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByNodeResultResponseResponseResult
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByNodeResultResponseResponseResult
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByNodeResultResponseResponseResultUsersItem_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByNodeResultResponseResponseResultUsersItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByNodeResultResponseResponseResultUsersItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByUserResultResponse_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByUserResultResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByUserResultResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByUserResultResponseResponse_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByUserResultResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByUserResultResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByUserResultResponseResponseProgress_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByUserResultResponseResponseProgress
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByUserResultResponseResponseProgress
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByUserResultResponseResponseResult_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByUserResultResponseResponseResult
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByUserResultResponseResponseResult
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestConnectionsByUserResultResponseResponseResultNodesItem_EncodeDecode(t *testing.T) {
+	var typ ConnectionsByUserResultResponseResponseResultNodesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ConnectionsByUserResultResponseResponseResultNodesItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateApiTokenBody_EncodeDecode(t *testing.T) {
+	var typ CreateApiTokenBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateApiTokenBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCreateApiTokenResponse_EncodeDecode(t *testing.T) {
@@ -623,8 +635,8 @@ func TestCreateApiTokenResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 CreateApiTokenResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateConfigProfileRequest_EncodeDecode(t *testing.T) {
-	var typ CreateConfigProfileRequest
+func TestCreateConfigProfileBody_EncodeDecode(t *testing.T) {
+	var typ CreateConfigProfileBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -632,11 +644,12 @@ func TestCreateConfigProfileRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateConfigProfileRequest
+	var typ2 CreateConfigProfileBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateConfigProfileRequestConfig_EncodeDecode(t *testing.T) {
-	var typ CreateConfigProfileRequestConfig
+func TestCreateConfigProfileBodyConfig_EncodeDecode(t *testing.T) {
+	var typ CreateConfigProfileBodyConfig
+	typ = make(CreateConfigProfileBodyConfig)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -644,11 +657,12 @@ func TestCreateConfigProfileRequestConfig_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateConfigProfileRequestConfig
+	var typ2 CreateConfigProfileBodyConfig
+	typ2 = make(CreateConfigProfileBodyConfig)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateExternalSquadRequest_EncodeDecode(t *testing.T) {
-	var typ CreateExternalSquadRequest
+func TestCreateExternalSquadBody_EncodeDecode(t *testing.T) {
+	var typ CreateExternalSquadBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -656,11 +670,11 @@ func TestCreateExternalSquadRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateExternalSquadRequest
+	var typ2 CreateExternalSquadBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateHostRequest_EncodeDecode(t *testing.T) {
-	var typ CreateHostRequest
+func TestCreateHostBody_EncodeDecode(t *testing.T) {
+	var typ CreateHostBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -668,11 +682,11 @@ func TestCreateHostRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateHostRequest
+	var typ2 CreateHostBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateHostRequestAlpn_EncodeDecode(t *testing.T) {
-	var typ CreateHostRequestAlpn
+func TestCreateHostBodyAlpn_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyAlpn
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -680,11 +694,11 @@ func TestCreateHostRequestAlpn_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateHostRequestAlpn
+	var typ2 CreateHostBodyAlpn
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateHostRequestExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
-	var typ CreateHostRequestExcludeFromSubscriptionTypesItem
+func TestCreateHostBodyExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyExcludeFromSubscriptionTypesItem
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -692,11 +706,11 @@ func TestCreateHostRequestExcludeFromSubscriptionTypesItem_EncodeDecode(t *testi
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateHostRequestExcludeFromSubscriptionTypesItem
+	var typ2 CreateHostBodyExcludeFromSubscriptionTypesItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateHostRequestMihomoIpVersion_EncodeDecode(t *testing.T) {
-	var typ CreateHostRequestMihomoIpVersion
+func TestCreateHostBodyMapper_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapper
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -704,11 +718,11 @@ func TestCreateHostRequestMihomoIpVersion_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateHostRequestMihomoIpVersion
+	var typ2 CreateHostBodyMapper
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateHostRequestSecurityLayer_EncodeDecode(t *testing.T) {
-	var typ CreateHostRequestSecurityLayer
+func TestCreateHostBodyMapperBase64Item_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -716,11 +730,11 @@ func TestCreateHostRequestSecurityLayer_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateHostRequestSecurityLayer
+	var typ2 CreateHostBodyMapperBase64Item
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateInfraBillingHistoryRecordRequest_EncodeDecode(t *testing.T) {
-	var typ CreateInfraBillingHistoryRecordRequest
+func TestCreateHostBodyMapperBase64Item0_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -728,11 +742,11 @@ func TestCreateInfraBillingHistoryRecordRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateInfraBillingHistoryRecordRequest
+	var typ2 CreateHostBodyMapperBase64Item0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateInfraBillingNodeRequest_EncodeDecode(t *testing.T) {
-	var typ CreateInfraBillingNodeRequest
+func TestCreateHostBodyMapperBase64Item0Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item0Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -740,11 +754,11 @@ func TestCreateInfraBillingNodeRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateInfraBillingNodeRequest
+	var typ2 CreateHostBodyMapperBase64Item0Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateInfraProviderRequest_EncodeDecode(t *testing.T) {
-	var typ CreateInfraProviderRequest
+func TestCreateHostBodyMapperBase64Item1_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -752,11 +766,11 @@ func TestCreateInfraProviderRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateInfraProviderRequest
+	var typ2 CreateHostBodyMapperBase64Item1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateInternalSquadRequest_EncodeDecode(t *testing.T) {
-	var typ CreateInternalSquadRequest
+func TestCreateHostBodyMapperBase64Item1Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item1Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -764,11 +778,11 @@ func TestCreateInternalSquadRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateInternalSquadRequest
+	var typ2 CreateHostBodyMapperBase64Item1Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateNodePluginRequest_EncodeDecode(t *testing.T) {
-	var typ CreateNodePluginRequest
+func TestCreateHostBodyMapperBase64Item2_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -776,7 +790,393 @@ func TestCreateNodePluginRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateNodePluginRequest
+	var typ2 CreateHostBodyMapperBase64Item2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperBase64Item2Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperBase64Item2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperBase64Item2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem0_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem0Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem1_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem1Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem2_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperMihomoItem2Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperMihomoItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperMihomoItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem0_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem0Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem1_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem1Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem2_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperSingboxItem2Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperSingboxItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperSingboxItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem0_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem0Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem1_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem1Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem2_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMapperXrayJsonItem2Op_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMapperXrayJsonItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMapperXrayJsonItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodyMihomoIpVersion_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodyMihomoIpVersion
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodyMihomoIpVersion
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateHostBodySecurityLayer_EncodeDecode(t *testing.T) {
+	var typ CreateHostBodySecurityLayer
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateHostBodySecurityLayer
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateInfraBillingNodeBody_EncodeDecode(t *testing.T) {
+	var typ CreateInfraBillingNodeBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateInfraBillingNodeBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateInfraBillingRecordBody_EncodeDecode(t *testing.T) {
+	var typ CreateInfraBillingRecordBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateInfraBillingRecordBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateInfraProviderBody_EncodeDecode(t *testing.T) {
+	var typ CreateInfraProviderBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateInfraProviderBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateInternalSquadBody_EncodeDecode(t *testing.T) {
+	var typ CreateInternalSquadBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateInternalSquadBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateNodeBody_EncodeDecode(t *testing.T) {
+	var typ CreateNodeBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateNodeBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateNodeIntegrationBody_EncodeDecode(t *testing.T) {
+	var typ CreateNodeIntegrationBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateNodeIntegrationBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateNodeIntegrationBodyConfig_EncodeDecode(t *testing.T) {
+	var typ CreateNodeIntegrationBodyConfig
+	typ = make(CreateNodeIntegrationBodyConfig)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateNodeIntegrationBodyConfig
+	typ2 = make(CreateNodeIntegrationBodyConfig)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateNodePluginBody_EncodeDecode(t *testing.T) {
+	var typ CreateNodePluginBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateNodePluginBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCreateNodePluginResponse_EncodeDecode(t *testing.T) {
@@ -791,8 +1191,8 @@ func TestCreateNodePluginResponse_EncodeDecode(t *testing.T) {
 	var typ2 CreateNodePluginResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateNodeRequest_EncodeDecode(t *testing.T) {
-	var typ CreateNodeRequest
+func TestCreateSubpageConfigBody_EncodeDecode(t *testing.T) {
+	var typ CreateSubpageConfigBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -800,11 +1200,11 @@ func TestCreateNodeRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateNodeRequest
+	var typ2 CreateSubpageConfigBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateSubscriptionPageConfigRequest_EncodeDecode(t *testing.T) {
-	var typ CreateSubscriptionPageConfigRequest
+func TestCreateSubpageConfigResponse_EncodeDecode(t *testing.T) {
+	var typ CreateSubpageConfigResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -812,11 +1212,11 @@ func TestCreateSubscriptionPageConfigRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateSubscriptionPageConfigRequest
+	var typ2 CreateSubpageConfigResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateSubscriptionPageConfigResponse_EncodeDecode(t *testing.T) {
-	var typ CreateSubscriptionPageConfigResponse
+func TestCreateSubscriptionTemplateBody_EncodeDecode(t *testing.T) {
+	var typ CreateSubscriptionTemplateBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -824,11 +1224,11 @@ func TestCreateSubscriptionPageConfigResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateSubscriptionPageConfigResponse
+	var typ2 CreateSubscriptionTemplateBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateSubscriptionTemplateRequest_EncodeDecode(t *testing.T) {
-	var typ CreateSubscriptionTemplateRequest
+func TestCreateSubscriptionTemplateBodyTemplateType_EncodeDecode(t *testing.T) {
+	var typ CreateSubscriptionTemplateBodyTemplateType
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -836,11 +1236,11 @@ func TestCreateSubscriptionTemplateRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateSubscriptionTemplateRequest
+	var typ2 CreateSubscriptionTemplateBodyTemplateType
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateSubscriptionTemplateRequestTemplateType_EncodeDecode(t *testing.T) {
-	var typ CreateSubscriptionTemplateRequestTemplateType
+func TestCreateUserBody_EncodeDecode(t *testing.T) {
+	var typ CreateUserBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -848,11 +1248,11 @@ func TestCreateSubscriptionTemplateRequestTemplateType_EncodeDecode(t *testing.T
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateSubscriptionTemplateRequestTemplateType
+	var typ2 CreateUserBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateUserHwidDeviceRequest_EncodeDecode(t *testing.T) {
-	var typ CreateUserHwidDeviceRequest
+func TestCreateUserBodyStatus_EncodeDecode(t *testing.T) {
+	var typ CreateUserBodyStatus
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -860,11 +1260,11 @@ func TestCreateUserHwidDeviceRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateUserHwidDeviceRequest
+	var typ2 CreateUserBodyStatus
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateUserRequest_EncodeDecode(t *testing.T) {
-	var typ CreateUserRequest
+func TestCreateUserBodyTrafficLimitStrategy_EncodeDecode(t *testing.T) {
+	var typ CreateUserBodyTrafficLimitStrategy
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -872,11 +1272,11 @@ func TestCreateUserRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateUserRequest
+	var typ2 CreateUserBodyTrafficLimitStrategy
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestCreateUserRequestStatus_EncodeDecode(t *testing.T) {
-	var typ CreateUserRequestStatus
+func TestCreateUserHwidDeviceBody_EncodeDecode(t *testing.T) {
+	var typ CreateUserHwidDeviceBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -884,19 +1284,7 @@ func TestCreateUserRequestStatus_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 CreateUserRequestStatus
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestCreateUserRequestTrafficLimitStrategy_EncodeDecode(t *testing.T) {
-	var typ CreateUserRequestTrafficLimitStrategy
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CreateUserRequestTrafficLimitStrategy
+	var typ2 CreateUserHwidDeviceBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCustomRemark_EncodeDecode(t *testing.T) {
@@ -911,8 +1299,8 @@ func TestCustomRemark_EncodeDecode(t *testing.T) {
 	var typ2 CustomRemark
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDebugSrrMatcherRequest_EncodeDecode(t *testing.T) {
-	var typ DebugSrrMatcherRequest
+func TestDebugSrrMatcherBody_EncodeDecode(t *testing.T) {
+	var typ DebugSrrMatcherBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -920,7 +1308,19 @@ func TestDebugSrrMatcherRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DebugSrrMatcherRequest
+	var typ2 DebugSrrMatcherBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestDebugSrrMatcherBodySettings_EncodeDecode(t *testing.T) {
+	var typ DebugSrrMatcherBodySettings
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 DebugSrrMatcherBodySettings
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestDebugSrrMatcherResponse_EncodeDecode(t *testing.T) {
@@ -987,8 +1387,8 @@ func TestDebugSrrMatcherResponseResponseResponseType_EncodeDecode(t *testing.T) 
 	var typ2 DebugSrrMatcherResponseResponseResponseType
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDebugSrrMatcherSettings_EncodeDecode(t *testing.T) {
-	var typ DebugSrrMatcherSettings
+func TestDeleteAllUserHwidDevicesBody_EncodeDecode(t *testing.T) {
+	var typ DeleteAllUserHwidDevicesBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -996,11 +1396,11 @@ func TestDebugSrrMatcherSettings_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DebugSrrMatcherSettings
+	var typ2 DeleteAllUserHwidDevicesBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDeleteAllUserHwidDevicesRequest_EncodeDecode(t *testing.T) {
-	var typ DeleteAllUserHwidDevicesRequest
+func TestDeletePasskeyBody_EncodeDecode(t *testing.T) {
+	var typ DeletePasskeyBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1008,11 +1408,11 @@ func TestDeleteAllUserHwidDevicesRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DeleteAllUserHwidDevicesRequest
+	var typ2 DeletePasskeyBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDeleteApiTokenResponse_EncodeDecode(t *testing.T) {
-	var typ DeleteApiTokenResponse
+func TestDeleteUserHwidDeviceBody_EncodeDecode(t *testing.T) {
+	var typ DeleteUserHwidDeviceBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1020,67 +1420,7 @@ func TestDeleteApiTokenResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DeleteApiTokenResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeletePasskeyRequest_EncodeDecode(t *testing.T) {
-	var typ DeletePasskeyRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeletePasskeyRequest
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteResponse_EncodeDecode(t *testing.T) {
-	var typ DeleteResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteResponseResponse_EncodeDecode(t *testing.T) {
-	var typ DeleteResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteSnippetRequest_EncodeDecode(t *testing.T) {
-	var typ DeleteSnippetRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteSnippetRequest
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteUserHwidDeviceRequest_EncodeDecode(t *testing.T) {
-	var typ DeleteUserHwidDeviceRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteUserHwidDeviceRequest
+	var typ2 DeleteUserHwidDeviceBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestDevice_EncodeDecode(t *testing.T) {
@@ -1095,8 +1435,8 @@ func TestDevice_EncodeDecode(t *testing.T) {
 	var typ2 Device
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequest_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequest
+func TestDropConnectionsBody_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1104,11 +1444,11 @@ func TestDropConnectionsRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequest
+	var typ2 DropConnectionsBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestDropBy_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestDropBy
+func TestDropConnectionsBodyDropBy_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyDropBy
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1116,11 +1456,11 @@ func TestDropConnectionsRequestDropBy_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestDropBy
+	var typ2 DropConnectionsBodyDropBy
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestDropBy0_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestDropBy0
+func TestDropConnectionsBodyDropBy0_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyDropBy0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1128,11 +1468,11 @@ func TestDropConnectionsRequestDropBy0_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestDropBy0
+	var typ2 DropConnectionsBodyDropBy0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestDropBy0By_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestDropBy0By
+func TestDropConnectionsBodyDropBy0By_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyDropBy0By
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1140,11 +1480,11 @@ func TestDropConnectionsRequestDropBy0By_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestDropBy0By
+	var typ2 DropConnectionsBodyDropBy0By
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestDropBy1_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestDropBy1
+func TestDropConnectionsBodyDropBy1_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyDropBy1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1152,11 +1492,11 @@ func TestDropConnectionsRequestDropBy1_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestDropBy1
+	var typ2 DropConnectionsBodyDropBy1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestDropBy1By_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestDropBy1By
+func TestDropConnectionsBodyDropBy1By_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyDropBy1By
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1164,11 +1504,11 @@ func TestDropConnectionsRequestDropBy1By_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestDropBy1By
+	var typ2 DropConnectionsBodyDropBy1By
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestTargetNodes_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestTargetNodes
+func TestDropConnectionsBodyTargetNodes_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyTargetNodes
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1176,11 +1516,11 @@ func TestDropConnectionsRequestTargetNodes_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestTargetNodes
+	var typ2 DropConnectionsBodyTargetNodes
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestTargetNodes0_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestTargetNodes0
+func TestDropConnectionsBodyTargetNodes0_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyTargetNodes0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1188,11 +1528,11 @@ func TestDropConnectionsRequestTargetNodes0_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestTargetNodes0
+	var typ2 DropConnectionsBodyTargetNodes0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestTargetNodes0Target_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestTargetNodes0Target
+func TestDropConnectionsBodyTargetNodes0Target_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyTargetNodes0Target
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1200,11 +1540,11 @@ func TestDropConnectionsRequestTargetNodes0Target_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestTargetNodes0Target
+	var typ2 DropConnectionsBodyTargetNodes0Target
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestTargetNodes1_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestTargetNodes1
+func TestDropConnectionsBodyTargetNodes1_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyTargetNodes1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1212,11 +1552,11 @@ func TestDropConnectionsRequestTargetNodes1_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestTargetNodes1
+	var typ2 DropConnectionsBodyTargetNodes1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestDropConnectionsRequestTargetNodes1Target_EncodeDecode(t *testing.T) {
-	var typ DropConnectionsRequestTargetNodes1Target
+func TestDropConnectionsBodyTargetNodes1Target_EncodeDecode(t *testing.T) {
+	var typ DropConnectionsBodyTargetNodes1Target
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1224,7 +1564,7 @@ func TestDropConnectionsRequestTargetNodes1Target_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DropConnectionsRequestTargetNodes1Target
+	var typ2 DropConnectionsBodyTargetNodes1Target
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestEncryptionItem_EncodeDecode(t *testing.T) {
@@ -1251,8 +1591,8 @@ func TestEncryptionItemMethod_EncodeDecode(t *testing.T) {
 	var typ2 EncryptionItemMethod
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestEventResponse_EncodeDecode(t *testing.T) {
-	var typ EventResponse
+func TestExtendUserBody_EncodeDecode(t *testing.T) {
+	var typ ExtendUserBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1260,19 +1600,7 @@ func TestEventResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 EventResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestEventResponseResponse_EncodeDecode(t *testing.T) {
-	var typ EventResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 EventResponseResponse
+	var typ2 ExtendUserBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestExternalSquad_EncodeDecode(t *testing.T) {
@@ -1287,9 +1615,9 @@ func TestExternalSquad_EncodeDecode(t *testing.T) {
 	var typ2 ExternalSquad
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestExternalSquadResponseHeaders_EncodeDecode(t *testing.T) {
-	var typ ExternalSquadResponseHeaders
-	typ = make(ExternalSquadResponseHeaders)
+func TestExternalSquadResponseHeadersAdd_EncodeDecode(t *testing.T) {
+	var typ ExternalSquadResponseHeadersAdd
+	typ = make(ExternalSquadResponseHeadersAdd)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1297,8 +1625,8 @@ func TestExternalSquadResponseHeaders_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ExternalSquadResponseHeaders
-	typ2 = make(ExternalSquadResponseHeaders)
+	var typ2 ExternalSquadResponseHeadersAdd
+	typ2 = make(ExternalSquadResponseHeadersAdd)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestExternalSquadResponseResponse_EncodeDecode(t *testing.T) {
@@ -1349,174 +1677,6 @@ func TestExternalSquadsResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 ExternalSquadsResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestFetchIpsResultResponse_EncodeDecode(t *testing.T) {
-	var typ FetchIpsResultResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchIpsResultResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchIpsResultResponseResponse_EncodeDecode(t *testing.T) {
-	var typ FetchIpsResultResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchIpsResultResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchIpsResultResponseResponseProgress_EncodeDecode(t *testing.T) {
-	var typ FetchIpsResultResponseResponseProgress
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchIpsResultResponseResponseProgress
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchIpsResultResponseResponseResult_EncodeDecode(t *testing.T) {
-	var typ FetchIpsResultResponseResponseResult
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchIpsResultResponseResponseResult
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchIpsResultResponseResponseResultNodesItem_EncodeDecode(t *testing.T) {
-	var typ FetchIpsResultResponseResponseResultNodesItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchIpsResultResponseResponseResultNodesItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchUsersIpsResultResponse_EncodeDecode(t *testing.T) {
-	var typ FetchUsersIpsResultResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchUsersIpsResultResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchUsersIpsResultResponseResponse_EncodeDecode(t *testing.T) {
-	var typ FetchUsersIpsResultResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchUsersIpsResultResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchUsersIpsResultResponseResponseResult_EncodeDecode(t *testing.T) {
-	var typ FetchUsersIpsResultResponseResponseResult
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchUsersIpsResultResponseResponseResult
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFetchUsersIpsResultResponseResponseResultUsersItem_EncodeDecode(t *testing.T) {
-	var typ FetchUsersIpsResultResponseResponseResultUsersItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FetchUsersIpsResultResponseResponseResultUsersItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFindAllApiTokensResponse_EncodeDecode(t *testing.T) {
-	var typ FindAllApiTokensResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FindAllApiTokensResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFindAllApiTokensResponseResponse_EncodeDecode(t *testing.T) {
-	var typ FindAllApiTokensResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FindAllApiTokensResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFindAllApiTokensResponseResponseDocs_EncodeDecode(t *testing.T) {
-	var typ FindAllApiTokensResponseResponseDocs
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FindAllApiTokensResponseResponseDocs
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestFindAllApiTokensResponseResponseTokensItem_EncodeDecode(t *testing.T) {
-	var typ FindAllApiTokensResponseResponseTokensItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 FindAllApiTokensResponseResponseTokensItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestForbiddenError_EncodeDecode(t *testing.T) {
-	var typ ForbiddenError
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 ForbiddenError
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestGenerateX25519Response_EncodeDecode(t *testing.T) {
 	var typ GenerateX25519Response
 	typ.SetFake()
@@ -1565,8 +1725,8 @@ func TestGeneric_EncodeDecode(t *testing.T) {
 	var typ2 Generic
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetAllHwidDevicesResponse_EncodeDecode(t *testing.T) {
-	var typ GetAllHwidDevicesResponse
+func TestGeocheckByNodeBody_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1574,11 +1734,11 @@ func TestGetAllHwidDevicesResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetAllHwidDevicesResponse
+	var typ2 GeocheckByNodeBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetAllSubscriptionsResponse_EncodeDecode(t *testing.T) {
-	var typ GetAllSubscriptionsResponse
+func TestGeocheckByNodeResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1586,11 +1746,11 @@ func TestGetAllSubscriptionsResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetAllSubscriptionsResponse
+	var typ2 GeocheckByNodeResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetAllSubscriptionsResponseResponse_EncodeDecode(t *testing.T) {
-	var typ GetAllSubscriptionsResponseResponse
+func TestGeocheckByNodeResponseResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResponseResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1598,11 +1758,11 @@ func TestGetAllSubscriptionsResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetAllSubscriptionsResponseResponse
+	var typ2 GeocheckByNodeResponseResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetAllUsersResponse_EncodeDecode(t *testing.T) {
-	var typ GetAllUsersResponse
+func TestGeocheckByNodeResultResponse_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1610,11 +1770,11 @@ func TestGetAllUsersResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetAllUsersResponse
+	var typ2 GeocheckByNodeResultResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetAllUsersResponseResponse_EncodeDecode(t *testing.T) {
-	var typ GetAllUsersResponseResponse
+func TestGeocheckByNodeResultResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1622,7 +1782,81 @@ func TestGetAllUsersResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetAllUsersResponseResponse
+	var typ2 GeocheckByNodeResultResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeocheckByNodeResultResponseResponseResult_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponseResult
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GeocheckByNodeResultResponseResponseResult
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeocheckByNodeResultResponseResponseResultImage_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponseResultImage
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GeocheckByNodeResultResponseResponseResultImage
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeocheckByNodeResultResponseResponseResultImageEncoding_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponseResultImageEncoding
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GeocheckByNodeResultResponseResponseResultImageEncoding
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeocheckByNodeResultResponseResponseResultImageFormat_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponseResultImageFormat
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GeocheckByNodeResultResponseResponseResultImageFormat
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeocheckByNodeResultResponseResponseResultImageMediaType_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponseResultImageMediaType
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GeocheckByNodeResultResponseResponseResultImageMediaType
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGeocheckByNodeResultResponseResponseResultRawReport_EncodeDecode(t *testing.T) {
+	var typ GeocheckByNodeResultResponseResponseResultRawReport
+	typ = make(GeocheckByNodeResultResponseResponseResultRawReport)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GeocheckByNodeResultResponseResponseResultRawReport
+	typ2 = make(GeocheckByNodeResultResponseResponseResultRawReport)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetApiTokenScopesResponse_EncodeDecode(t *testing.T) {
@@ -1685,6 +1919,42 @@ func TestGetApiTokenScopesResponseResponseResourcesItemEndpointsItemKind_EncodeD
 	var typ2 GetApiTokenScopesResponseResponseResourcesItemEndpointsItemKind
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetApiTokensResponse_EncodeDecode(t *testing.T) {
+	var typ GetApiTokensResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetApiTokensResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetApiTokensResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetApiTokensResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetApiTokensResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetApiTokensResponseResponseTokensItem_EncodeDecode(t *testing.T) {
+	var typ GetApiTokensResponseResponseTokensItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetApiTokensResponseResponseTokensItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetBandwidthStatsResponse_EncodeDecode(t *testing.T) {
 	var typ GetBandwidthStatsResponse
 	typ.SetFake()
@@ -1709,8 +1979,8 @@ func TestGetBandwidthStatsResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 GetBandwidthStatsResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetConnectionKeysByUuidResponse_EncodeDecode(t *testing.T) {
-	var typ GetConnectionKeysByUuidResponse
+func TestGetConfigurationResponse_EncodeDecode(t *testing.T) {
+	var typ GetConfigurationResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1718,11 +1988,11 @@ func TestGetConnectionKeysByUuidResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetConnectionKeysByUuidResponse
+	var typ2 GetConfigurationResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetConnectionKeysByUuidResponseResponse_EncodeDecode(t *testing.T) {
-	var typ GetConnectionKeysByUuidResponseResponse
+func TestGetConfigurationResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetConfigurationResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1730,7 +2000,535 @@ func TestGetConnectionKeysByUuidResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetConnectionKeysByUuidResponseResponse
+	var typ2 GetConfigurationResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetConfigurationResponseResponseMisc_EncodeDecode(t *testing.T) {
+	var typ GetConfigurationResponseResponseMisc
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetConfigurationResponseResponseMisc
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetConfigurationResponseResponseNotifications_EncodeDecode(t *testing.T) {
+	var typ GetConfigurationResponseResponseNotifications
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetConfigurationResponseResponseNotifications
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetConfigurationResponseResponseService_EncodeDecode(t *testing.T) {
+	var typ GetConfigurationResponseResponseService
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetConfigurationResponseResponseService
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetConnectionKeysByUserIdResponse_EncodeDecode(t *testing.T) {
+	var typ GetConnectionKeysByUserIdResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetConnectionKeysByUserIdResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetConnectionKeysByUserIdResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetConnectionKeysByUserIdResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetConnectionKeysByUserIdResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponse_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItem_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemAlpn_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemAlpn
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemAlpn
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemExcludeFromSubscriptionTypesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemExcludeFromSubscriptionTypesItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapper_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapper
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapper
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item0_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item0Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item1_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item1Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item2_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperBase64Item2Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperBase64Item2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperBase64Item2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem0_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem0Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem1_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem1Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem2_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperMihomoItem2Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperMihomoItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperMihomoItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem0_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem0Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem1_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem1Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem2_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperSingboxItem2Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperSingboxItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperSingboxItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem0_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem0Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem1_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem1Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem2_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMapperXrayJsonItem2Op_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMapperXrayJsonItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMapperXrayJsonItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemMihomoIpVersion_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemMihomoIpVersion
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemMihomoIpVersion
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHostsResponseResponseItemSecurityLayer_EncodeDecode(t *testing.T) {
+	var typ GetHostsResponseResponseItemSecurityLayer
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHostsResponseResponseItemSecurityLayer
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHttpStatsResponse_EncodeDecode(t *testing.T) {
+	var typ GetHttpStatsResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHttpStatsResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHttpStatsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetHttpStatsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHttpStatsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHttpStatsResponseResponseRoutesItem_EncodeDecode(t *testing.T) {
+	var typ GetHttpStatsResponseResponseRoutesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHttpStatsResponseResponseRoutesItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetHwidDevicesQueryResponse_EncodeDecode(t *testing.T) {
+	var typ GetHwidDevicesQueryResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetHwidDevicesQueryResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetHwidDevicesStatsResponse_EncodeDecode(t *testing.T) {
@@ -1841,8 +2639,8 @@ func TestGetInternalSquadAccessibleNodesResponseResponseAccessibleNodesItem_Enco
 	var typ2 GetInternalSquadAccessibleNodesResponseResponseAccessibleNodesItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetLegacyStatsNodesUsersUsageResponse_EncodeDecode(t *testing.T) {
-	var typ GetLegacyStatsNodesUsersUsageResponse
+func TestGetInternalSquadUsageResponse_EncodeDecode(t *testing.T) {
+	var typ GetInternalSquadUsageResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1850,11 +2648,11 @@ func TestGetLegacyStatsNodesUsersUsageResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetLegacyStatsNodesUsersUsageResponse
+	var typ2 GetInternalSquadUsageResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetLegacyStatsNodesUsersUsageResponseResponseItem_EncodeDecode(t *testing.T) {
-	var typ GetLegacyStatsNodesUsersUsageResponseResponseItem
+func TestGetInternalSquadUsageResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetInternalSquadUsageResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1862,11 +2660,11 @@ func TestGetLegacyStatsNodesUsersUsageResponseResponseItem_EncodeDecode(t *testi
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetLegacyStatsNodesUsersUsageResponseResponseItem
+	var typ2 GetInternalSquadUsageResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetLegacyStatsUserUsageResponse_EncodeDecode(t *testing.T) {
-	var typ GetLegacyStatsUserUsageResponse
+func TestGetInternalSquadUserUsageResponse_EncodeDecode(t *testing.T) {
+	var typ GetInternalSquadUserUsageResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1874,11 +2672,11 @@ func TestGetLegacyStatsUserUsageResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetLegacyStatsUserUsageResponse
+	var typ2 GetInternalSquadUserUsageResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetLegacyStatsUserUsageResponseResponseItem_EncodeDecode(t *testing.T) {
-	var typ GetLegacyStatsUserUsageResponseResponseItem
+func TestGetInternalSquadUserUsageResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetInternalSquadUserUsageResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1886,7 +2684,31 @@ func TestGetLegacyStatsUserUsageResponseResponseItem_EncodeDecode(t *testing.T) 
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetLegacyStatsUserUsageResponseResponseItem
+	var typ2 GetInternalSquadUserUsageResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetInternalSquadUserUsageResponseResponseDaysItem_EncodeDecode(t *testing.T) {
+	var typ GetInternalSquadUserUsageResponseResponseDaysItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetInternalSquadUserUsageResponseResponseDaysItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetInternalSquadUserUsageResponseResponseDaysItemNodesItem_EncodeDecode(t *testing.T) {
+	var typ GetInternalSquadUserUsageResponseResponseDaysItemNodesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetInternalSquadUserUsageResponseResponseDaysItemNodesItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetMetadataResponse_EncodeDecode(t *testing.T) {
@@ -1961,6 +2783,102 @@ func TestGetMetadataResponseResponseGitFrontend_EncodeDecode(t *testing.T) {
 	var typ2 GetMetadataResponseResponseGitFrontend
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetNodeIntegrationsResponse_EncodeDecode(t *testing.T) {
+	var typ GetNodeIntegrationsResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeIntegrationsResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeIntegrationsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetNodeIntegrationsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeIntegrationsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeSecretKeyResponse_EncodeDecode(t *testing.T) {
+	var typ GetNodeSecretKeyResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeSecretKeyResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeSecretKeyResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetNodeSecretKeyResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeSecretKeyResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeUsageBody_EncodeDecode(t *testing.T) {
+	var typ GetNodeUsageBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeUsageBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeUsageResponse_EncodeDecode(t *testing.T) {
+	var typ GetNodeUsageResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeUsageResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeUsageResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetNodeUsageResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeUsageResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetNodeUsageResponseResponseNodesItem_EncodeDecode(t *testing.T) {
+	var typ GetNodeUsageResponseResponseNodesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetNodeUsageResponseResponseNodesItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetNodesMetricsResponse_EncodeDecode(t *testing.T) {
 	var typ GetNodesMetricsResponse
 	typ.SetFake()
@@ -2031,30 +2949,6 @@ func TestGetNodesStatisticsResponseResponseLastSevenDaysItem_EncodeDecode(t *tes
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 GetNodesStatisticsResponseResponseLastSevenDaysItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetPubKeyResponse_EncodeDecode(t *testing.T) {
-	var typ GetPubKeyResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetPubKeyResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetPubKeyResponseResponse_EncodeDecode(t *testing.T) {
-	var typ GetPubKeyResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetPubKeyResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetRawSubscriptionByShortUuidResponse_EncodeDecode(t *testing.T) {
@@ -2143,6 +3037,354 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemCl
 	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverrides
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapper_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapper
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapper
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item0_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item0Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item1_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item1Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item2_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item2Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperBase64Item2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem0_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem0Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem1_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem1Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem2_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem2Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperMihomoItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem0_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem0Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem1_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem1Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem2_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem2Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperSingboxItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem0_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem0Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem1_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem1Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem2_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem2Op_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMapperXrayJsonItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMihomoIpVersion_EncodeDecode(t *testing.T) {
 	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemClientOverridesMihomoIpVersion
 	typ.SetFake()
@@ -2203,8 +3445,8 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemPr
 	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsFlow_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsFlow
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2212,55 +3454,7 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemPr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions0Flow
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions1
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions2
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptions3
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemProtocolOptionsFlow
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurity_EncodeDecode(t *testing.T) {
@@ -2285,30 +3479,6 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSe
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions0
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemSecurityOptions1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemStreamOverrides_EncodeDecode(t *testing.T) {
@@ -2347,8 +3517,9 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsExtra_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsExtra
+	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsExtra)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2356,11 +3527,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsExtra
+	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsExtra)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2368,11 +3540,11 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader0_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2380,11 +3552,11 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader0Type_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader0Type
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2392,11 +3564,11 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header0Type
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader0Type
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2404,11 +3576,11 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Request_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Request
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2416,12 +3588,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Request
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Request
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders
-	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders)
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1RequestHeaders_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1RequestHeaders
+	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1RequestHeaders)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2429,12 +3601,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders
-	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1RequestHeaders)
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1RequestHeaders
+	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1RequestHeaders)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Response_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Response
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2442,12 +3614,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Response
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Response
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders
-	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders)
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1ResponseHeaders_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1ResponseHeaders
+	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1ResponseHeaders)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2455,12 +3627,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders
-	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1ResponseHeaders)
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1ResponseHeaders
+	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1ResponseHeaders)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Type_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Type
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2468,11 +3640,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions0Header1Type
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeader1Type
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeaders_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeaders
+	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeaders)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2480,12 +3653,12 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeaders
+	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsHeaders)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra
-	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra)
+func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsMode_EncodeDecode(t *testing.T) {
+	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsMode
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2493,108 +3666,7 @@ func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTr
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra
-	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Extra)
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions1Mode
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers
-	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers)
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers
-	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions2Headers)
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers
-	typ = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers)
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers
-	typ2 = make(GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions3Headers)
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions4
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions5
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestGetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6_EncodeDecode(t *testing.T) {
-	var typ GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptions6
+	var typ2 GetRawSubscriptionByShortUuidResponseResponseResolvedProxyConfigsItemTransportOptionsMode
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetRecapResponse_EncodeDecode(t *testing.T) {
@@ -2681,8 +3753,8 @@ func TestGetRemnawaveHealthResponseResponseRuntimeMetricsItem_EncodeDecode(t *te
 	var typ2 GetRemnawaveHealthResponseResponseRuntimeMetricsItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetStatsNodesUsersUsageRequest_EncodeDecode(t *testing.T) {
-	var typ GetStatsNodesUsersUsageRequest
+func TestGetSharedListsResponse_EncodeDecode(t *testing.T) {
+	var typ GetSharedListsResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2690,7 +3762,103 @@ func TestGetStatsNodesUsersUsageRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetStatsNodesUsersUsageRequest
+	var typ2 GetSharedListsResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetSharedListsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetSharedListsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetSharedListsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetSharedListsResponseResponseSharedListsItem_EncodeDecode(t *testing.T) {
+	var typ GetSharedListsResponseResponseSharedListsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetSharedListsResponseResponseSharedListsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetStatsDigestResponse_EncodeDecode(t *testing.T) {
+	var typ GetStatsDigestResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetStatsDigestResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetStatsDigestResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetStatsDigestResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetStatsDigestResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetStatsDigestResponseResponseHwidDevices_EncodeDecode(t *testing.T) {
+	var typ GetStatsDigestResponseResponseHwidDevices
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetStatsDigestResponseResponseHwidDevices
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetStatsDigestResponseResponseTraffic_EncodeDecode(t *testing.T) {
+	var typ GetStatsDigestResponseResponseTraffic
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetStatsDigestResponseResponseTraffic
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetStatsDigestResponseResponseUsers_EncodeDecode(t *testing.T) {
+	var typ GetStatsDigestResponseResponseUsers
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetStatsDigestResponseResponseUsers
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetStatsNodesUsersUsageBody_EncodeDecode(t *testing.T) {
+	var typ GetStatsNodesUsersUsageBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetStatsNodesUsersUsageBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetStatsResponse_EncodeDecode(t *testing.T) {
@@ -2865,8 +4033,8 @@ func TestGetStatusResponseResponseBranding_EncodeDecode(t *testing.T) {
 	var typ2 GetStatusResponseResponseBranding
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetSubpageConfigByShortUuidRequestBody_EncodeDecode(t *testing.T) {
-	var typ GetSubpageConfigByShortUuidRequestBody
+func TestGetSubpageConfigByShortUuidBody_EncodeDecode(t *testing.T) {
+	var typ GetSubpageConfigByShortUuidBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2874,12 +4042,12 @@ func TestGetSubpageConfigByShortUuidRequestBody_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetSubpageConfigByShortUuidRequestBody
+	var typ2 GetSubpageConfigByShortUuidBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestGetSubpageConfigByShortUuidRequestBodyRequestHeaders_EncodeDecode(t *testing.T) {
-	var typ GetSubpageConfigByShortUuidRequestBodyRequestHeaders
-	typ = make(GetSubpageConfigByShortUuidRequestBodyRequestHeaders)
+func TestGetSubpageConfigByShortUuidBodyRequestHeaders_EncodeDecode(t *testing.T) {
+	var typ GetSubpageConfigByShortUuidBodyRequestHeaders
+	typ = make(GetSubpageConfigByShortUuidBodyRequestHeaders)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2887,8 +4055,8 @@ func TestGetSubpageConfigByShortUuidRequestBodyRequestHeaders_EncodeDecode(t *te
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 GetSubpageConfigByShortUuidRequestBodyRequestHeaders
-	typ2 = make(GetSubpageConfigByShortUuidRequestBodyRequestHeaders)
+	var typ2 GetSubpageConfigByShortUuidBodyRequestHeaders
+	typ2 = make(GetSubpageConfigByShortUuidBodyRequestHeaders)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetSubpageConfigByShortUuidResponse_EncodeDecode(t *testing.T) {
@@ -2927,6 +4095,30 @@ func TestGetSubscriptionRequestHistoryResponse_EncodeDecode(t *testing.T) {
 	var typ2 GetSubscriptionRequestHistoryResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetSubscriptionRequestHistoryResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetSubscriptionRequestHistoryResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetSubscriptionRequestHistoryResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetSubscriptionRequestHistoryResponseResponseRecordsItem_EncodeDecode(t *testing.T) {
+	var typ GetSubscriptionRequestHistoryResponseResponseRecordsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetSubscriptionRequestHistoryResponseResponseRecordsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetSubscriptionRequestHistoryStatsResponse_EncodeDecode(t *testing.T) {
 	var typ GetSubscriptionRequestHistoryStatsResponse
 	typ.SetFake()
@@ -2963,6 +4155,30 @@ func TestGetSubscriptionRequestHistoryStatsResponseResponseHourlyRequestStatsIte
 	var typ2 GetSubscriptionRequestHistoryStatsResponseResponseHourlyRequestStatsItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetSubscriptionsResponse_EncodeDecode(t *testing.T) {
+	var typ GetSubscriptionsResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetSubscriptionsResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetSubscriptionsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetSubscriptionsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetSubscriptionsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetTopUsersByHwidDevicesResponse_EncodeDecode(t *testing.T) {
 	var typ GetTopUsersByHwidDevicesResponse
 	typ.SetFake()
@@ -2997,6 +4213,54 @@ func TestGetTopUsersByHwidDevicesResponseResponseUsersItem_EncodeDecode(t *testi
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 GetTopUsersByHwidDevicesResponseResponseUsersItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetTorrentBlockerReportsResponse_EncodeDecode(t *testing.T) {
+	var typ GetTorrentBlockerReportsResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetTorrentBlockerReportsResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetTorrentBlockerReportsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetTorrentBlockerReportsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetTorrentBlockerReportsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetTorrentBlockerReportsResponseResponseRecordsItem_EncodeDecode(t *testing.T) {
+	var typ GetTorrentBlockerReportsResponseResponseRecordsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetTorrentBlockerReportsResponseResponseRecordsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetTorrentBlockerReportsResponseResponseRecordsItemUser_EncodeDecode(t *testing.T) {
+	var typ GetTorrentBlockerReportsResponseResponseRecordsItemUser
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetTorrentBlockerReportsResponseResponseRecordsItemUser
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetTorrentBlockerReportsStatsResponse_EncodeDecode(t *testing.T) {
@@ -3107,6 +4371,54 @@ func TestGetUserSubscriptionRequestHistoryResponse_EncodeDecode(t *testing.T) {
 	var typ2 GetUserSubscriptionRequestHistoryResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetUserSubscriptionRequestHistoryResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetUserSubscriptionRequestHistoryResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetUserSubscriptionRequestHistoryResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetUserSubscriptionRequestHistoryResponseResponseRecordsItem_EncodeDecode(t *testing.T) {
+	var typ GetUserSubscriptionRequestHistoryResponseResponseRecordsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetUserSubscriptionRequestHistoryResponseResponseRecordsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetUsersResponse_EncodeDecode(t *testing.T) {
+	var typ GetUsersResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetUsersResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetUsersResponseResponse_EncodeDecode(t *testing.T) {
+	var typ GetUsersResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetUsersResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetUsersStreamResponse_EncodeDecode(t *testing.T) {
 	var typ GetUsersStreamResponse
 	typ.SetFake()
@@ -3155,78 +4467,6 @@ func TestHeader_EncodeDecode(t *testing.T) {
 	var typ2 Header
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestHostItem_EncodeDecode(t *testing.T) {
-	var typ HostItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 HostItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestHostItemAlpn_EncodeDecode(t *testing.T) {
-	var typ HostItemAlpn
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 HostItemAlpn
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestHostItemExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
-	var typ HostItemExcludeFromSubscriptionTypesItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 HostItemExcludeFromSubscriptionTypesItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestHostItemMihomoIpVersion_EncodeDecode(t *testing.T) {
-	var typ HostItemMihomoIpVersion
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 HostItemMihomoIpVersion
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestHostItemSecurityLayer_EncodeDecode(t *testing.T) {
-	var typ HostItemSecurityLayer
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 HostItemSecurityLayer
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestHostListResponse_EncodeDecode(t *testing.T) {
-	var typ HostListResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 HostListResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestHostOverride_EncodeDecode(t *testing.T) {
 	var typ HostOverride
 	typ.SetFake()
@@ -3249,6 +4489,438 @@ func TestHostResponse_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 HostResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponse_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseAlpn_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseAlpn
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseAlpn
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseExcludeFromSubscriptionTypesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseExcludeFromSubscriptionTypesItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapper_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapper
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapper
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item0_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item0Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item1_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item1Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item2_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperBase64Item2Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperBase64Item2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperBase64Item2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem0_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem0Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem1_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem1Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem2_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperMihomoItem2Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperMihomoItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperMihomoItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem0_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem0Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem1_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem1Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem2_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperSingboxItem2Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperSingboxItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperSingboxItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem0_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem0Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem1_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem1Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem2_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMapperXrayJsonItem2Op_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMapperXrayJsonItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMapperXrayJsonItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseMihomoIpVersion_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseMihomoIpVersion
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseMihomoIpVersion
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostResponseResponseSecurityLayer_EncodeDecode(t *testing.T) {
+	var typ HostResponseResponseSecurityLayer
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostResponseResponseSecurityLayer
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHostsBodyBulkRequest_EncodeDecode(t *testing.T) {
+	var typ HostsBodyBulkRequest
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HostsBodyBulkRequest
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestHwidDevicesQuery_EncodeDecode(t *testing.T) {
+	var typ HwidDevicesQuery
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 HwidDevicesQuery
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestHwidDevicesResponse_EncodeDecode(t *testing.T) {
@@ -3287,6 +4959,18 @@ func TestInbound_EncodeDecode(t *testing.T) {
 	var typ2 Inbound
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestInbound2_EncodeDecode(t *testing.T) {
+	var typ Inbound2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 Inbound2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestInboundItem_EncodeDecode(t *testing.T) {
 	var typ InboundItem
 	typ.SetFake()
@@ -3297,18 +4981,6 @@ func TestInboundItem_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 InboundItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestInboundRef_EncodeDecode(t *testing.T) {
-	var typ InboundRef
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 InboundRef
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestInboundsResponse_EncodeDecode(t *testing.T) {
@@ -3357,6 +5029,54 @@ func TestInboundsStat_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 InboundsStat
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestInfraBillingRecordResponseResponse_EncodeDecode(t *testing.T) {
+	var typ InfraBillingRecordResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InfraBillingRecordResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestInfraBillingRecordResponseResponseResponse_EncodeDecode(t *testing.T) {
+	var typ InfraBillingRecordResponseResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InfraBillingRecordResponseResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestInfraBillingRecordResponseResponseResponseRecordsItem_EncodeDecode(t *testing.T) {
+	var typ InfraBillingRecordResponseResponseResponseRecordsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InfraBillingRecordResponseResponseResponseRecordsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestInfraBillingRecordResponseResponseResponseRecordsItemProvider_EncodeDecode(t *testing.T) {
+	var typ InfraBillingRecordResponseResponseResponseRecordsItemProvider
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InfraBillingRecordResponseResponseResponseRecordsItemProvider
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestInfraProviderResponseResponse_EncodeDecode(t *testing.T) {
@@ -3419,6 +5139,42 @@ func TestInternalSquad_EncodeDecode(t *testing.T) {
 	var typ2 InternalSquad
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestInternalSquad2_EncodeDecode(t *testing.T) {
+	var typ InternalSquad2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InternalSquad2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestInternalSquad2Mode_EncodeDecode(t *testing.T) {
+	var typ InternalSquad2Mode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InternalSquad2Mode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestInternalSquadBodyRequest_EncodeDecode(t *testing.T) {
+	var typ InternalSquadBodyRequest
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 InternalSquadBodyRequest
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestInternalSquadResponseResponse_EncodeDecode(t *testing.T) {
 	var typ InternalSquadResponseResponse
 	typ.SetFake()
@@ -3479,8 +5235,8 @@ func TestIps_EncodeDecode(t *testing.T) {
 	var typ2 Ips
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestIpsResponseResponse_EncodeDecode(t *testing.T) {
-	var typ IpsResponseResponse
+func TestIpsInfo_EncodeDecode(t *testing.T) {
+	var typ IpsInfo
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3488,11 +5244,11 @@ func TestIpsResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 IpsResponseResponse
+	var typ2 IpsInfo
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestIpsResponseResponseResponse_EncodeDecode(t *testing.T) {
-	var typ IpsResponseResponseResponse
+func TestIpsStatus_EncodeDecode(t *testing.T) {
+	var typ IpsStatus
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3500,7 +5256,7 @@ func TestIpsResponseResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 IpsResponseResponseResponse
+	var typ2 IpsStatus
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestKeycloak_EncodeDecode(t *testing.T) {
@@ -3515,8 +5271,8 @@ func TestKeycloak_EncodeDecode(t *testing.T) {
 	var typ2 Keycloak
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestLoginRequest_EncodeDecode(t *testing.T) {
-	var typ LoginRequest
+func TestLoginBody_EncodeDecode(t *testing.T) {
+	var typ LoginBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3524,7 +5280,7 @@ func TestLoginRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 LoginRequest
+	var typ2 LoginBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestNode_EncodeDecode(t *testing.T) {
@@ -3537,6 +5293,80 @@ func TestNode_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 Node
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestNodeBodyRequest_EncodeDecode(t *testing.T) {
+	var typ NodeBodyRequest
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 NodeBodyRequest
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestNodeDataItem_EncodeDecode(t *testing.T) {
+	var typ NodeDataItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 NodeDataItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestNodeInfoItem_EncodeDecode(t *testing.T) {
+	var typ NodeInfoItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 NodeInfoItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestNodeIntegration_EncodeDecode(t *testing.T) {
+	var typ NodeIntegration
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 NodeIntegration
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestNodeIntegrationConfig_EncodeDecode(t *testing.T) {
+	var typ NodeIntegrationConfig
+	typ = make(NodeIntegrationConfig)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 NodeIntegrationConfig
+	typ2 = make(NodeIntegrationConfig)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestNodeIntegrationResponseResponse_EncodeDecode(t *testing.T) {
+	var typ NodeIntegrationResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 NodeIntegrationResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestNodePlugin_EncodeDecode(t *testing.T) {
@@ -3599,18 +5429,6 @@ func TestNodePluginsResponseResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 NodePluginsResponseResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestNodeRequestBodyRequest_EncodeDecode(t *testing.T) {
-	var typ NodeRequestBodyRequest
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 NodeRequestBodyRequest
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestNodeResponse_EncodeDecode(t *testing.T) {
 	var typ NodeResponse
 	typ.SetFake()
@@ -3623,8 +5441,8 @@ func TestNodeResponse_EncodeDecode(t *testing.T) {
 	var typ2 NodeResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestNodeResponseDataItem_EncodeDecode(t *testing.T) {
-	var typ NodeResponseDataItem
+func TestNodesResponseResponse_EncodeDecode(t *testing.T) {
+	var typ NodesResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3632,31 +5450,7 @@ func TestNodeResponseDataItem_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 NodeResponseDataItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestNodeResponseInfoItem_EncodeDecode(t *testing.T) {
-	var typ NodeResponseInfoItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 NodeResponseInfoItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestNodesResponse_EncodeDecode(t *testing.T) {
-	var typ NodesResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 NodesResponse
+	var typ2 NodesResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestNotFoundError_EncodeDecode(t *testing.T) {
@@ -3671,8 +5465,8 @@ func TestNotFoundError_EncodeDecode(t *testing.T) {
 	var typ2 NotFoundError
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestOAuth2AuthorizeRequest_EncodeDecode(t *testing.T) {
-	var typ OAuth2AuthorizeRequest
+func TestOAuth2AuthorizeBody_EncodeDecode(t *testing.T) {
+	var typ OAuth2AuthorizeBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3680,11 +5474,11 @@ func TestOAuth2AuthorizeRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 OAuth2AuthorizeRequest
+	var typ2 OAuth2AuthorizeBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestOAuth2AuthorizeRequestProvider_EncodeDecode(t *testing.T) {
-	var typ OAuth2AuthorizeRequestProvider
+func TestOAuth2AuthorizeBodyProvider_EncodeDecode(t *testing.T) {
+	var typ OAuth2AuthorizeBodyProvider
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3692,7 +5486,7 @@ func TestOAuth2AuthorizeRequestProvider_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 OAuth2AuthorizeRequestProvider
+	var typ2 OAuth2AuthorizeBodyProvider
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestOAuth2AuthorizeResponse_EncodeDecode(t *testing.T) {
@@ -3719,8 +5513,8 @@ func TestOAuth2AuthorizeResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 OAuth2AuthorizeResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestOAuth2CallbackRequest_EncodeDecode(t *testing.T) {
-	var typ OAuth2CallbackRequest
+func TestOAuth2CallbackBody_EncodeDecode(t *testing.T) {
+	var typ OAuth2CallbackBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3728,11 +5522,11 @@ func TestOAuth2CallbackRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 OAuth2CallbackRequest
+	var typ2 OAuth2CallbackBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestOAuth2CallbackRequestProvider_EncodeDecode(t *testing.T) {
-	var typ OAuth2CallbackRequestProvider
+func TestOAuth2CallbackBodyProvider_EncodeDecode(t *testing.T) {
+	var typ OAuth2CallbackBodyProvider
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3740,7 +5534,7 @@ func TestOAuth2CallbackRequestProvider_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 OAuth2CallbackRequestProvider
+	var typ2 OAuth2CallbackBodyProvider
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestOauth2Settings_EncodeDecode(t *testing.T) {
@@ -3827,8 +5621,8 @@ func TestPasswordSettings_EncodeDecode(t *testing.T) {
 	var typ2 PasswordSettings
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequest_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequest
+func TestPluginExecutorBody_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3836,11 +5630,11 @@ func TestPluginExecutorRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequest
+	var typ2 PluginExecutorBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand
+func TestPluginExecutorBodyCommand_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3848,11 +5642,11 @@ func TestPluginExecutorRequestCommand_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand
+	var typ2 PluginExecutorBodyCommand
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand0_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand0
+func TestPluginExecutorBodyCommand0_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3860,11 +5654,11 @@ func TestPluginExecutorRequestCommand0_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand0
+	var typ2 PluginExecutorBodyCommand0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand0Command_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand0Command
+func TestPluginExecutorBodyCommand0Command_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand0Command
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3872,11 +5666,11 @@ func TestPluginExecutorRequestCommand0Command_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand0Command
+	var typ2 PluginExecutorBodyCommand0Command
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand0IpsItem_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand0IpsItem
+func TestPluginExecutorBodyCommand0IpsItem_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand0IpsItem
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3884,11 +5678,11 @@ func TestPluginExecutorRequestCommand0IpsItem_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand0IpsItem
+	var typ2 PluginExecutorBodyCommand0IpsItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand1_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand1
+func TestPluginExecutorBodyCommand1_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3896,11 +5690,11 @@ func TestPluginExecutorRequestCommand1_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand1
+	var typ2 PluginExecutorBodyCommand1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand1Command_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand1Command
+func TestPluginExecutorBodyCommand1Command_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand1Command
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3908,11 +5702,11 @@ func TestPluginExecutorRequestCommand1Command_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand1Command
+	var typ2 PluginExecutorBodyCommand1Command
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand2_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand2
+func TestPluginExecutorBodyCommand2_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3920,11 +5714,11 @@ func TestPluginExecutorRequestCommand2_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand2
+	var typ2 PluginExecutorBodyCommand2
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestCommand2Command_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestCommand2Command
+func TestPluginExecutorBodyCommand2Command_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyCommand2Command
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3932,11 +5726,11 @@ func TestPluginExecutorRequestCommand2Command_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestCommand2Command
+	var typ2 PluginExecutorBodyCommand2Command
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestTargetNodes_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestTargetNodes
+func TestPluginExecutorBodyTargetNodes_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyTargetNodes
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3944,11 +5738,11 @@ func TestPluginExecutorRequestTargetNodes_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestTargetNodes
+	var typ2 PluginExecutorBodyTargetNodes
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestTargetNodes0_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestTargetNodes0
+func TestPluginExecutorBodyTargetNodes0_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyTargetNodes0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3956,11 +5750,11 @@ func TestPluginExecutorRequestTargetNodes0_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestTargetNodes0
+	var typ2 PluginExecutorBodyTargetNodes0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestTargetNodes0Target_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestTargetNodes0Target
+func TestPluginExecutorBodyTargetNodes0Target_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyTargetNodes0Target
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3968,11 +5762,11 @@ func TestPluginExecutorRequestTargetNodes0Target_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestTargetNodes0Target
+	var typ2 PluginExecutorBodyTargetNodes0Target
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestTargetNodes1_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestTargetNodes1
+func TestPluginExecutorBodyTargetNodes1_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyTargetNodes1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3980,11 +5774,11 @@ func TestPluginExecutorRequestTargetNodes1_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestTargetNodes1
+	var typ2 PluginExecutorBodyTargetNodes1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestPluginExecutorRequestTargetNodes1Target_EncodeDecode(t *testing.T) {
-	var typ PluginExecutorRequestTargetNodes1Target
+func TestPluginExecutorBodyTargetNodes1Target_EncodeDecode(t *testing.T) {
+	var typ PluginExecutorBodyTargetNodes1Target
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -3992,7 +5786,7 @@ func TestPluginExecutorRequestTargetNodes1Target_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 PluginExecutorRequestTargetNodes1Target
+	var typ2 PluginExecutorBodyTargetNodes1Target
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestPocketid_EncodeDecode(t *testing.T) {
@@ -4007,8 +5801,8 @@ func TestPocketid_EncodeDecode(t *testing.T) {
 	var typ2 Pocketid
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestProfileModificationRequest_EncodeDecode(t *testing.T) {
-	var typ ProfileModificationRequest
+func TestProfileModificationBody_EncodeDecode(t *testing.T) {
+	var typ ProfileModificationBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4016,11 +5810,11 @@ func TestProfileModificationRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ProfileModificationRequest
+	var typ2 ProfileModificationBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestProfileModificationRequestConfigProfile_EncodeDecode(t *testing.T) {
-	var typ ProfileModificationRequestConfigProfile
+func TestProfileModificationBodyConfigProfile_EncodeDecode(t *testing.T) {
+	var typ ProfileModificationBodyConfigProfile
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4028,7 +5822,7 @@ func TestProfileModificationRequestConfigProfile_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ProfileModificationRequestConfigProfile
+	var typ2 ProfileModificationBodyConfigProfile
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestProvider_EncodeDecode(t *testing.T) {
@@ -4055,8 +5849,8 @@ func TestProviderItem_EncodeDecode(t *testing.T) {
 	var typ2 ProviderItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestRecord_EncodeDecode(t *testing.T) {
-	var typ Record
+func TestRegisterBody_EncodeDecode(t *testing.T) {
+	var typ RegisterBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4064,11 +5858,11 @@ func TestRecord_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 Record
+	var typ2 RegisterBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestRegisterRequest_EncodeDecode(t *testing.T) {
-	var typ RegisterRequest
+func TestReorderConfigProfilesBody_EncodeDecode(t *testing.T) {
+	var typ ReorderConfigProfilesBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4076,11 +5870,11 @@ func TestRegisterRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 RegisterRequest
+	var typ2 ReorderConfigProfilesBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestReorderHostRequest_EncodeDecode(t *testing.T) {
-	var typ ReorderHostRequest
+func TestReorderExternalSquadsBody_EncodeDecode(t *testing.T) {
+	var typ ReorderExternalSquadsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4088,11 +5882,11 @@ func TestReorderHostRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ReorderHostRequest
+	var typ2 ReorderExternalSquadsBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestReorderHostResponse_EncodeDecode(t *testing.T) {
-	var typ ReorderHostResponse
+func TestReorderHostsBody_EncodeDecode(t *testing.T) {
+	var typ ReorderHostsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4100,11 +5894,11 @@ func TestReorderHostResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ReorderHostResponse
+	var typ2 ReorderHostsBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestReorderHostResponseResponse_EncodeDecode(t *testing.T) {
-	var typ ReorderHostResponseResponse
+func TestReorderHostsResponse_EncodeDecode(t *testing.T) {
+	var typ ReorderHostsResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4112,11 +5906,11 @@ func TestReorderHostResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ReorderHostResponseResponse
+	var typ2 ReorderHostsResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestReorderNodeRequest_EncodeDecode(t *testing.T) {
-	var typ ReorderNodeRequest
+func TestReorderHostsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ ReorderHostsResponseResponse
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4124,11 +5918,11 @@ func TestReorderNodeRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ReorderNodeRequest
+	var typ2 ReorderHostsResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestReorderRequest_EncodeDecode(t *testing.T) {
-	var typ ReorderRequest
+func TestReorderInternalSquadsBody_EncodeDecode(t *testing.T) {
+	var typ ReorderInternalSquadsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4136,11 +5930,11 @@ func TestReorderRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ReorderRequest
+	var typ2 ReorderInternalSquadsBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestReorderRequestItem_EncodeDecode(t *testing.T) {
-	var typ ReorderRequestItem
+func TestReorderNodePluginsBody_EncodeDecode(t *testing.T) {
+	var typ ReorderNodePluginsBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4148,7 +5942,55 @@ func TestReorderRequestItem_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ReorderRequestItem
+	var typ2 ReorderNodePluginsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestReorderNodesBody_EncodeDecode(t *testing.T) {
+	var typ ReorderNodesBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ReorderNodesBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestReorderSubpageConfigItem_EncodeDecode(t *testing.T) {
+	var typ ReorderSubpageConfigItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ReorderSubpageConfigItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestReorderSubpageConfigsBody_EncodeDecode(t *testing.T) {
+	var typ ReorderSubpageConfigsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ReorderSubpageConfigsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestReorderSubscriptionTemplatesBody_EncodeDecode(t *testing.T) {
+	var typ ReorderSubscriptionTemplatesBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ReorderSubscriptionTemplatesBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestReportItem_EncodeDecode(t *testing.T) {
@@ -4163,8 +6005,8 @@ func TestReportItem_EncodeDecode(t *testing.T) {
 	var typ2 ReportItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestResolveUserRequestBody_EncodeDecode(t *testing.T) {
-	var typ ResolveUserRequestBody
+func TestResolveUserBody_EncodeDecode(t *testing.T) {
+	var typ ResolveUserBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4172,7 +6014,7 @@ func TestResolveUserRequestBody_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 ResolveUserRequestBody
+	var typ2 ResolveUserBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestResolveUserResponse_EncodeDecode(t *testing.T) {
@@ -4283,6 +6125,102 @@ func TestRuleResponseType_EncodeDecode(t *testing.T) {
 	var typ2 RuleResponseType
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestSetConfigProfilesTagsBody_EncodeDecode(t *testing.T) {
+	var typ SetConfigProfilesTagsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetConfigProfilesTagsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetExternalSquadsTagsBody_EncodeDecode(t *testing.T) {
+	var typ SetExternalSquadsTagsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetExternalSquadsTagsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetInternalSquadsTagsBody_EncodeDecode(t *testing.T) {
+	var typ SetInternalSquadsTagsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetInternalSquadsTagsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetNodePluginsTagsBody_EncodeDecode(t *testing.T) {
+	var typ SetNodePluginsTagsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetNodePluginsTagsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetNodePluginsTagsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SetNodePluginsTagsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetNodePluginsTagsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetNodePluginsTagsResponseResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SetNodePluginsTagsResponseResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetNodePluginsTagsResponseResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetSubpageConfigsTagsBody_EncodeDecode(t *testing.T) {
+	var typ SetSubpageConfigsTagsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetSubpageConfigsTagsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSetSubscriptionTemplatesTagsBody_EncodeDecode(t *testing.T) {
+	var typ SetSubscriptionTemplatesTagsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SetSubscriptionTemplatesTagsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestSettingsResponse_EncodeDecode(t *testing.T) {
 	var typ SettingsResponse
 	typ.SetFake()
@@ -4307,8 +6245,8 @@ func TestSettingsResponseResponse_EncodeDecode(t *testing.T) {
 	var typ2 SettingsResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestSnippetRequest_EncodeDecode(t *testing.T) {
-	var typ SnippetRequest
+func TestSharedListBodyBulkRequest_EncodeDecode(t *testing.T) {
+	var typ SharedListBodyBulkRequest
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4316,11 +6254,11 @@ func TestSnippetRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 SnippetRequest
+	var typ2 SharedListBodyBulkRequest
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestSnippetRequestSnippetItem_EncodeDecode(t *testing.T) {
-	var typ SnippetRequestSnippetItem
+func TestSharedListBodyBulkRequest2_EncodeDecode(t *testing.T) {
+	var typ SharedListBodyBulkRequest2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4328,7 +6266,97 @@ func TestSnippetRequestSnippetItem_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 SnippetRequestSnippetItem
+	var typ2 SharedListBodyBulkRequest2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSharedListBodyBulkRequestConfig_EncodeDecode(t *testing.T) {
+	var typ SharedListBodyBulkRequestConfig
+	typ = make(SharedListBodyBulkRequestConfig)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SharedListBodyBulkRequestConfig
+	typ2 = make(SharedListBodyBulkRequestConfig)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSharedListResponseListResponse_EncodeDecode(t *testing.T) {
+	var typ SharedListResponseListResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SharedListResponseListResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSharedListResponseListResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SharedListResponseListResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SharedListResponseListResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSharedListResponseListResponseResponseConfig_EncodeDecode(t *testing.T) {
+	var typ SharedListResponseListResponseResponseConfig
+	typ = make(SharedListResponseListResponseResponseConfig)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SharedListResponseListResponseResponseConfig
+	typ2 = make(SharedListResponseListResponseResponseConfig)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSnippetBodyRequest_EncodeDecode(t *testing.T) {
+	var typ SnippetBodyRequest
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SnippetBodyRequest
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSnippetBodyRequest2_EncodeDecode(t *testing.T) {
+	var typ SnippetBodyRequest2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SnippetBodyRequest2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSnippetBodyRequest2SnippetItem_EncodeDecode(t *testing.T) {
+	var typ SnippetBodyRequest2SnippetItem
+	typ = make(SnippetBodyRequest2SnippetItem)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SnippetBodyRequest2SnippetItem
+	typ2 = make(SnippetBodyRequest2SnippetItem)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestSnippetsResponse_EncodeDecode(t *testing.T) {
@@ -4451,6 +6479,54 @@ func TestStatsUserUsageResponseResponseResponseSeriesItem_EncodeDecode(t *testin
 	var typ2 StatsUserUsageResponseResponseResponseSeriesItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestSubpageConfigResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SubpageConfigResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SubpageConfigResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSubpageConfigResponseResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SubpageConfigResponseResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SubpageConfigResponseResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSubpageConfigsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SubpageConfigsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SubpageConfigsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestSubpageConfigsResponseResponseResponse_EncodeDecode(t *testing.T) {
+	var typ SubpageConfigsResponseResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SubpageConfigsResponseResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestSubscription_EncodeDecode(t *testing.T) {
 	var typ Subscription
 	typ.SetFake()
@@ -4461,54 +6537,6 @@ func TestSubscription_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 Subscription
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestSubscriptionPageConfigResponseResponse_EncodeDecode(t *testing.T) {
-	var typ SubscriptionPageConfigResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 SubscriptionPageConfigResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestSubscriptionPageConfigResponseResponseResponse_EncodeDecode(t *testing.T) {
-	var typ SubscriptionPageConfigResponseResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 SubscriptionPageConfigResponseResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestSubscriptionPageConfigsResponseResponse_EncodeDecode(t *testing.T) {
-	var typ SubscriptionPageConfigsResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 SubscriptionPageConfigsResponseResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestSubscriptionPageConfigsResponseResponseResponse_EncodeDecode(t *testing.T) {
-	var typ SubscriptionPageConfigsResponseResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 SubscriptionPageConfigsResponseResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestSubscriptionResponse_EncodeDecode(t *testing.T) {
@@ -4587,6 +6615,18 @@ func TestSubscriptionSsConfLinks_EncodeDecode(t *testing.T) {
 	typ2 = make(SubscriptionSsConfLinks)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestSyncNodePluginBody_EncodeDecode(t *testing.T) {
+	var typ SyncNodePluginBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 SyncNodePluginBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestSystemItem_EncodeDecode(t *testing.T) {
 	var typ SystemItem
 	typ.SetFake()
@@ -4597,30 +6637,6 @@ func TestSystemItem_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 SystemItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestTagsResponse_EncodeDecode(t *testing.T) {
-	var typ TagsResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 TagsResponse
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestTagsResponseResponse_EncodeDecode(t *testing.T) {
-	var typ TagsResponseResponse
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 TagsResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestTelegram_EncodeDecode(t *testing.T) {
@@ -4755,8 +6771,8 @@ func TestTopNode_EncodeDecode(t *testing.T) {
 	var typ2 TopNode
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestTorrentBlockerReportsResponseResponse_EncodeDecode(t *testing.T) {
-	var typ TorrentBlockerReportsResponseResponse
+func TestUpdateConfigProfileBody_EncodeDecode(t *testing.T) {
+	var typ UpdateConfigProfileBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4764,11 +6780,12 @@ func TestTorrentBlockerReportsResponseResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 TorrentBlockerReportsResponseResponse
+	var typ2 UpdateConfigProfileBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestTorrentBlockerReportsResponseResponseResponse_EncodeDecode(t *testing.T) {
-	var typ TorrentBlockerReportsResponseResponseResponse
+func TestUpdateConfigProfileBodyConfig_EncodeDecode(t *testing.T) {
+	var typ UpdateConfigProfileBodyConfig
+	typ = make(UpdateConfigProfileBodyConfig)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4776,11 +6793,12 @@ func TestTorrentBlockerReportsResponseResponseResponse_EncodeDecode(t *testing.T
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 TorrentBlockerReportsResponseResponseResponse
+	var typ2 UpdateConfigProfileBodyConfig
+	typ2 = make(UpdateConfigProfileBodyConfig)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestTorrentBlockerReportsResponseResponseResponseRecordsItem_EncodeDecode(t *testing.T) {
-	var typ TorrentBlockerReportsResponseResponseResponseRecordsItem
+func TestUpdateExternalSquadBody_EncodeDecode(t *testing.T) {
+	var typ UpdateExternalSquadBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4788,11 +6806,12 @@ func TestTorrentBlockerReportsResponseResponseResponseRecordsItem_EncodeDecode(t
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 TorrentBlockerReportsResponseResponseResponseRecordsItem
+	var typ2 UpdateExternalSquadBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestTorrentBlockerReportsResponseResponseResponseRecordsItemUser_EncodeDecode(t *testing.T) {
-	var typ TorrentBlockerReportsResponseResponseResponseRecordsItemUser
+func TestUpdateExternalSquadBodyResponseHeadersAdd_EncodeDecode(t *testing.T) {
+	var typ UpdateExternalSquadBodyResponseHeadersAdd
+	typ = make(UpdateExternalSquadBodyResponseHeadersAdd)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4800,11 +6819,12 @@ func TestTorrentBlockerReportsResponseResponseResponseRecordsItemUser_EncodeDeco
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 TorrentBlockerReportsResponseResponseResponseRecordsItemUser
+	var typ2 UpdateExternalSquadBodyResponseHeadersAdd
+	typ2 = make(UpdateExternalSquadBodyResponseHeadersAdd)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUnauthorizedError_EncodeDecode(t *testing.T) {
-	var typ UnauthorizedError
+func TestUpdateHostBody_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBody
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4812,11 +6832,11 @@ func TestUnauthorizedError_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UnauthorizedError
+	var typ2 UpdateHostBody
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateConfigProfileRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateConfigProfileRequest
+func TestUpdateHostBodyAlpn_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyAlpn
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4824,11 +6844,11 @@ func TestUpdateConfigProfileRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateConfigProfileRequest
+	var typ2 UpdateHostBodyAlpn
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateConfigProfileRequestConfig_EncodeDecode(t *testing.T) {
-	var typ UpdateConfigProfileRequestConfig
+func TestUpdateHostBodyExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyExcludeFromSubscriptionTypesItem
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4836,11 +6856,11 @@ func TestUpdateConfigProfileRequestConfig_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateConfigProfileRequestConfig
+	var typ2 UpdateHostBodyExcludeFromSubscriptionTypesItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateExternalSquadRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateExternalSquadRequest
+func TestUpdateHostBodyMapper_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapper
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4848,12 +6868,11 @@ func TestUpdateExternalSquadRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateExternalSquadRequest
+	var typ2 UpdateHostBodyMapper
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateExternalSquadRequestResponseHeaders_EncodeDecode(t *testing.T) {
-	var typ UpdateExternalSquadRequestResponseHeaders
-	typ = make(UpdateExternalSquadRequestResponseHeaders)
+func TestUpdateHostBodyMapperBase64Item_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4861,12 +6880,11 @@ func TestUpdateExternalSquadRequestResponseHeaders_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateExternalSquadRequestResponseHeaders
-	typ2 = make(UpdateExternalSquadRequestResponseHeaders)
+	var typ2 UpdateHostBodyMapperBase64Item
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateHostRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateHostRequest
+func TestUpdateHostBodyMapperBase64Item0_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4874,11 +6892,11 @@ func TestUpdateHostRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateHostRequest
+	var typ2 UpdateHostBodyMapperBase64Item0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateHostRequestAlpn_EncodeDecode(t *testing.T) {
-	var typ UpdateHostRequestAlpn
+func TestUpdateHostBodyMapperBase64Item0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item0Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4886,11 +6904,11 @@ func TestUpdateHostRequestAlpn_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateHostRequestAlpn
+	var typ2 UpdateHostBodyMapperBase64Item0Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateHostRequestExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
-	var typ UpdateHostRequestExcludeFromSubscriptionTypesItem
+func TestUpdateHostBodyMapperBase64Item1_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4898,11 +6916,11 @@ func TestUpdateHostRequestExcludeFromSubscriptionTypesItem_EncodeDecode(t *testi
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateHostRequestExcludeFromSubscriptionTypesItem
+	var typ2 UpdateHostBodyMapperBase64Item1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateHostRequestMihomoIpVersion_EncodeDecode(t *testing.T) {
-	var typ UpdateHostRequestMihomoIpVersion
+func TestUpdateHostBodyMapperBase64Item1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item1Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4910,11 +6928,11 @@ func TestUpdateHostRequestMihomoIpVersion_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateHostRequestMihomoIpVersion
+	var typ2 UpdateHostBodyMapperBase64Item1Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateHostRequestSecurityLayer_EncodeDecode(t *testing.T) {
-	var typ UpdateHostRequestSecurityLayer
+func TestUpdateHostBodyMapperBase64Item2_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4922,11 +6940,11 @@ func TestUpdateHostRequestSecurityLayer_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateHostRequestSecurityLayer
+	var typ2 UpdateHostBodyMapperBase64Item2
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateInfraBillingNodeRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateInfraBillingNodeRequest
+func TestUpdateHostBodyMapperBase64Item2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperBase64Item2Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4934,11 +6952,11 @@ func TestUpdateInfraBillingNodeRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateInfraBillingNodeRequest
+	var typ2 UpdateHostBodyMapperBase64Item2Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateInfraProviderRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateInfraProviderRequest
+func TestUpdateHostBodyMapperMihomoItem_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4946,11 +6964,11 @@ func TestUpdateInfraProviderRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateInfraProviderRequest
+	var typ2 UpdateHostBodyMapperMihomoItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateInternalSquadRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateInternalSquadRequest
+func TestUpdateHostBodyMapperMihomoItem0_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4958,11 +6976,11 @@ func TestUpdateInternalSquadRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateInternalSquadRequest
+	var typ2 UpdateHostBodyMapperMihomoItem0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateManyHostsRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateManyHostsRequest
+func TestUpdateHostBodyMapperMihomoItem0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem0Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4970,11 +6988,11 @@ func TestUpdateManyHostsRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateManyHostsRequest
+	var typ2 UpdateHostBodyMapperMihomoItem0Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateManyHostsRequestAlpn_EncodeDecode(t *testing.T) {
-	var typ UpdateManyHostsRequestAlpn
+func TestUpdateHostBodyMapperMihomoItem1_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4982,11 +7000,11 @@ func TestUpdateManyHostsRequestAlpn_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateManyHostsRequestAlpn
+	var typ2 UpdateHostBodyMapperMihomoItem1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateManyHostsRequestExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
-	var typ UpdateManyHostsRequestExcludeFromSubscriptionTypesItem
+func TestUpdateHostBodyMapperMihomoItem1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem1Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -4994,11 +7012,11 @@ func TestUpdateManyHostsRequestExcludeFromSubscriptionTypesItem_EncodeDecode(t *
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateManyHostsRequestExcludeFromSubscriptionTypesItem
+	var typ2 UpdateHostBodyMapperMihomoItem1Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateManyHostsRequestMihomoIpVersion_EncodeDecode(t *testing.T) {
-	var typ UpdateManyHostsRequestMihomoIpVersion
+func TestUpdateHostBodyMapperMihomoItem2_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5006,11 +7024,11 @@ func TestUpdateManyHostsRequestMihomoIpVersion_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateManyHostsRequestMihomoIpVersion
+	var typ2 UpdateHostBodyMapperMihomoItem2
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateManyHostsRequestSecurityLayer_EncodeDecode(t *testing.T) {
-	var typ UpdateManyHostsRequestSecurityLayer
+func TestUpdateHostBodyMapperMihomoItem2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperMihomoItem2Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5018,11 +7036,11 @@ func TestUpdateManyHostsRequestSecurityLayer_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateManyHostsRequestSecurityLayer
+	var typ2 UpdateHostBodyMapperMihomoItem2Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateNodePluginRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateNodePluginRequest
+func TestUpdateHostBodyMapperSingboxItem_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5030,11 +7048,11 @@ func TestUpdateNodePluginRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateNodePluginRequest
+	var typ2 UpdateHostBodyMapperSingboxItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateNodeRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateNodeRequest
+func TestUpdateHostBodyMapperSingboxItem0_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5042,11 +7060,11 @@ func TestUpdateNodeRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateNodeRequest
+	var typ2 UpdateHostBodyMapperSingboxItem0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdatePasskeyRequest_EncodeDecode(t *testing.T) {
-	var typ UpdatePasskeyRequest
+func TestUpdateHostBodyMapperSingboxItem0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem0Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5054,11 +7072,11 @@ func TestUpdatePasskeyRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdatePasskeyRequest
+	var typ2 UpdateHostBodyMapperSingboxItem0Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateRemnawaveSettingsRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateRemnawaveSettingsRequest
+func TestUpdateHostBodyMapperSingboxItem1_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5066,11 +7084,11 @@ func TestUpdateRemnawaveSettingsRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateRemnawaveSettingsRequest
+	var typ2 UpdateHostBodyMapperSingboxItem1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateSubscriptionPageConfigRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateSubscriptionPageConfigRequest
+func TestUpdateHostBodyMapperSingboxItem1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem1Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5078,11 +7096,11 @@ func TestUpdateSubscriptionPageConfigRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateSubscriptionPageConfigRequest
+	var typ2 UpdateHostBodyMapperSingboxItem1Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateSubscriptionSettingsRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateSubscriptionSettingsRequest
+func TestUpdateHostBodyMapperSingboxItem2_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5090,12 +7108,11 @@ func TestUpdateSubscriptionSettingsRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateSubscriptionSettingsRequest
+	var typ2 UpdateHostBodyMapperSingboxItem2
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateSubscriptionSettingsRequestCustomResponseHeaders_EncodeDecode(t *testing.T) {
-	var typ UpdateSubscriptionSettingsRequestCustomResponseHeaders
-	typ = make(UpdateSubscriptionSettingsRequestCustomResponseHeaders)
+func TestUpdateHostBodyMapperSingboxItem2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperSingboxItem2Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5103,12 +7120,11 @@ func TestUpdateSubscriptionSettingsRequestCustomResponseHeaders_EncodeDecode(t *
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateSubscriptionSettingsRequestCustomResponseHeaders
-	typ2 = make(UpdateSubscriptionSettingsRequestCustomResponseHeaders)
+	var typ2 UpdateHostBodyMapperSingboxItem2Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateTemplateRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateTemplateRequest
+func TestUpdateHostBodyMapperXrayJsonItem_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5116,11 +7132,11 @@ func TestUpdateTemplateRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateTemplateRequest
+	var typ2 UpdateHostBodyMapperXrayJsonItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateTemplateRequestTemplateJson_EncodeDecode(t *testing.T) {
-	var typ UpdateTemplateRequestTemplateJson
+func TestUpdateHostBodyMapperXrayJsonItem0_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem0
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5128,11 +7144,11 @@ func TestUpdateTemplateRequestTemplateJson_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateTemplateRequestTemplateJson
+	var typ2 UpdateHostBodyMapperXrayJsonItem0
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateUserRequest_EncodeDecode(t *testing.T) {
-	var typ UpdateUserRequest
+func TestUpdateHostBodyMapperXrayJsonItem0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem0Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5140,11 +7156,11 @@ func TestUpdateUserRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateUserRequest
+	var typ2 UpdateHostBodyMapperXrayJsonItem0Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateUserRequestStatus_EncodeDecode(t *testing.T) {
-	var typ UpdateUserRequestStatus
+func TestUpdateHostBodyMapperXrayJsonItem1_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem1
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5152,11 +7168,11 @@ func TestUpdateUserRequestStatus_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateUserRequestStatus
+	var typ2 UpdateHostBodyMapperXrayJsonItem1
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpdateUserRequestTrafficLimitStrategy_EncodeDecode(t *testing.T) {
-	var typ UpdateUserRequestTrafficLimitStrategy
+func TestUpdateHostBodyMapperXrayJsonItem1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem1Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5164,11 +7180,11 @@ func TestUpdateUserRequestTrafficLimitStrategy_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpdateUserRequestTrafficLimitStrategy
+	var typ2 UpdateHostBodyMapperXrayJsonItem1Op
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpsertUserMetadataRequestBodyRequest_EncodeDecode(t *testing.T) {
-	var typ UpsertUserMetadataRequestBodyRequest
+func TestUpdateHostBodyMapperXrayJsonItem2_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem2
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5176,11 +7192,11 @@ func TestUpsertUserMetadataRequestBodyRequest_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpsertUserMetadataRequestBodyRequest
+	var typ2 UpdateHostBodyMapperXrayJsonItem2
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUpsertUserMetadataRequestBodyRequestMetadata_EncodeDecode(t *testing.T) {
-	var typ UpsertUserMetadataRequestBodyRequestMetadata
+func TestUpdateHostBodyMapperXrayJsonItem2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMapperXrayJsonItem2Op
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5188,7 +7204,713 @@ func TestUpsertUserMetadataRequestBodyRequestMetadata_EncodeDecode(t *testing.T)
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UpsertUserMetadataRequestBodyRequestMetadata
+	var typ2 UpdateHostBodyMapperXrayJsonItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateHostBodyMihomoIpVersion_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodyMihomoIpVersion
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateHostBodyMihomoIpVersion
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateHostBodySecurityLayer_EncodeDecode(t *testing.T) {
+	var typ UpdateHostBodySecurityLayer
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateHostBodySecurityLayer
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateInfraBillingNodeBody_EncodeDecode(t *testing.T) {
+	var typ UpdateInfraBillingNodeBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateInfraBillingNodeBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateInfraProviderBody_EncodeDecode(t *testing.T) {
+	var typ UpdateInfraProviderBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateInfraProviderBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateInternalSquadBody_EncodeDecode(t *testing.T) {
+	var typ UpdateInternalSquadBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateInternalSquadBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBody_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyAlpn_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyAlpn
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyAlpn
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyExcludeFromSubscriptionTypesItem_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyExcludeFromSubscriptionTypesItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyExcludeFromSubscriptionTypesItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapper_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapper
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapper
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item0_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item1_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item2_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperBase64Item2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperBase64Item2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperBase64Item2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem0_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem1_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem2_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperMihomoItem2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperMihomoItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperMihomoItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem0_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem1_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem2_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperSingboxItem2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperSingboxItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperSingboxItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem0_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem0
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem0
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem0Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem0Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem0Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem1_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem1
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem1
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem1Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem1Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem1Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem2_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem2
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem2
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMapperXrayJsonItem2Op_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMapperXrayJsonItem2Op
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMapperXrayJsonItem2Op
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodyMihomoIpVersion_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodyMihomoIpVersion
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodyMihomoIpVersion
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateManyHostsBodySecurityLayer_EncodeDecode(t *testing.T) {
+	var typ UpdateManyHostsBodySecurityLayer
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateManyHostsBodySecurityLayer
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateNodeBody_EncodeDecode(t *testing.T) {
+	var typ UpdateNodeBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateNodeBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateNodeIntegrationBody_EncodeDecode(t *testing.T) {
+	var typ UpdateNodeIntegrationBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateNodeIntegrationBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateNodeIntegrationBodyConfig_EncodeDecode(t *testing.T) {
+	var typ UpdateNodeIntegrationBodyConfig
+	typ = make(UpdateNodeIntegrationBodyConfig)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateNodeIntegrationBodyConfig
+	typ2 = make(UpdateNodeIntegrationBodyConfig)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateNodePluginBody_EncodeDecode(t *testing.T) {
+	var typ UpdateNodePluginBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateNodePluginBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdatePasskeyBody_EncodeDecode(t *testing.T) {
+	var typ UpdatePasskeyBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdatePasskeyBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateRemnawaveSettingsBody_EncodeDecode(t *testing.T) {
+	var typ UpdateRemnawaveSettingsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateRemnawaveSettingsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateSubpageConfigBody_EncodeDecode(t *testing.T) {
+	var typ UpdateSubpageConfigBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateSubpageConfigBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateSubscriptionSettingsBody_EncodeDecode(t *testing.T) {
+	var typ UpdateSubscriptionSettingsBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateSubscriptionSettingsBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateSubscriptionSettingsBodyCustomResponseHeaders_EncodeDecode(t *testing.T) {
+	var typ UpdateSubscriptionSettingsBodyCustomResponseHeaders
+	typ = make(UpdateSubscriptionSettingsBodyCustomResponseHeaders)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateSubscriptionSettingsBodyCustomResponseHeaders
+	typ2 = make(UpdateSubscriptionSettingsBodyCustomResponseHeaders)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateTemplateBody_EncodeDecode(t *testing.T) {
+	var typ UpdateTemplateBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateTemplateBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateTemplateBodyTemplateJson_EncodeDecode(t *testing.T) {
+	var typ UpdateTemplateBodyTemplateJson
+	typ = make(UpdateTemplateBodyTemplateJson)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateTemplateBodyTemplateJson
+	typ2 = make(UpdateTemplateBodyTemplateJson)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateUserBody_EncodeDecode(t *testing.T) {
+	var typ UpdateUserBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateUserBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateUserBodyStatus_EncodeDecode(t *testing.T) {
+	var typ UpdateUserBodyStatus
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateUserBodyStatus
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateUserBodyTrafficLimitStrategy_EncodeDecode(t *testing.T) {
+	var typ UpdateUserBodyTrafficLimitStrategy
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateUserBodyTrafficLimitStrategy
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpsertNodeMetadataBody_EncodeDecode(t *testing.T) {
+	var typ UpsertNodeMetadataBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpsertNodeMetadataBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpsertNodeMetadataBodyMetadata_EncodeDecode(t *testing.T) {
+	var typ UpsertNodeMetadataBodyMetadata
+	typ = make(UpsertNodeMetadataBodyMetadata)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpsertNodeMetadataBodyMetadata
+	typ2 = make(UpsertNodeMetadataBodyMetadata)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpsertUserMetadataBody_EncodeDecode(t *testing.T) {
+	var typ UpsertUserMetadataBody
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpsertUserMetadataBody
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpsertUserMetadataBodyMetadata_EncodeDecode(t *testing.T) {
+	var typ UpsertUserMetadataBodyMetadata
+	typ = make(UpsertUserMetadataBodyMetadata)
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpsertUserMetadataBodyMetadata
+	typ2 = make(UpsertUserMetadataBodyMetadata)
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUser_EncodeDecode(t *testing.T) {
+	var typ User
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 User
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestUserItem2_EncodeDecode(t *testing.T) {
@@ -5289,6 +8011,7 @@ func TestUserMetadataResponseResponseResponse_EncodeDecode(t *testing.T) {
 }
 func TestUserMetadataResponseResponseResponseMetadata_EncodeDecode(t *testing.T) {
 	var typ UserMetadataResponseResponseResponseMetadata
+	typ = make(UserMetadataResponseResponseResponseMetadata)
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5297,6 +8020,7 @@ func TestUserMetadataResponseResponseResponseMetadata_EncodeDecode(t *testing.T)
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 UserMetadataResponseResponseResponseMetadata
+	typ2 = make(UserMetadataResponseResponseResponseMetadata)
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestUserResponse_EncodeDecode(t *testing.T) {
@@ -5311,18 +8035,6 @@ func TestUserResponse_EncodeDecode(t *testing.T) {
 	var typ2 UserResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUserSubscriptionHistory_EncodeDecode(t *testing.T) {
-	var typ UserSubscriptionHistory
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 UserSubscriptionHistory
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestUserTrafficItem_EncodeDecode(t *testing.T) {
 	var typ UserTrafficItem
 	typ.SetFake()
@@ -5335,8 +8047,8 @@ func TestUserTrafficItem_EncodeDecode(t *testing.T) {
 	var typ2 UserTrafficItem
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
-func TestUsersResponse_EncodeDecode(t *testing.T) {
-	var typ UsersResponse
+func TestUsersBodyBulkRequest_EncodeDecode(t *testing.T) {
+	var typ UsersBodyBulkRequest
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -5344,7 +8056,31 @@ func TestUsersResponse_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 UsersResponse
+	var typ2 UsersBodyBulkRequest
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersTagsResponseResponse_EncodeDecode(t *testing.T) {
+	var typ UsersTagsResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersTagsResponseResponse
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUsersTagsResponseResponseResponse_EncodeDecode(t *testing.T) {
+	var typ UsersTagsResponseResponseResponse
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UsersTagsResponseResponseResponse
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestValidationError_EncodeDecode(t *testing.T) {

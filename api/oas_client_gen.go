@@ -4,6 +4,7 @@ package api
 
 import (
 	"context"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -18,7 +19,7 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/metric"
-	semconv "go.opentelemetry.io/otel/semconv/v1.37.0"
+	semconv "go.opentelemetry.io/otel/semconv/v1.39.0"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -87,24 +88,24 @@ func trimTrailingSlashes(u *url.URL) {
 
 // Invoker invokes operations described by OpenAPI v3 specification.
 type Invoker interface {
-	// ApiTokensCreate invokes ApiTokens_create operation.
+	// ApiTokensCreateApiToken invokes ApiTokens_createApiToken operation.
 	//
 	// This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.
 	//
 	// POST /api/tokens
-	ApiTokensCreate(ctx context.Context, request *CreateApiTokenRequest, options ...RequestOption) (ApiTokensCreateRes, error)
-	// ApiTokensDelete invokes ApiTokens_delete operation.
+	ApiTokensCreateApiToken(ctx context.Context, request *CreateApiTokenBody, options ...RequestOption) (ApiTokensCreateApiTokenRes, error)
+	// ApiTokensDeleteApiToken invokes ApiTokens_deleteApiToken operation.
 	//
 	// This endpoint is forbidden to use via "API-key". It can be used only with an admin JWT-token.
 	//
 	// DELETE /api/tokens/{uuid}
-	ApiTokensDelete(ctx context.Context, params ApiTokensDeleteParams, options ...RequestOption) (ApiTokensDeleteRes, error)
-	// ApiTokensFindAll invokes ApiTokens_findAll operation.
+	ApiTokensDeleteApiToken(ctx context.Context, params ApiTokensDeleteApiTokenParams, options ...RequestOption) (ApiTokensDeleteApiTokenRes, error)
+	// ApiTokensGetApiTokens invokes ApiTokens_getApiTokens operation.
 	//
 	// This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.
 	//
 	// GET /api/tokens
-	ApiTokensFindAll(ctx context.Context, options ...RequestOption) (ApiTokensFindAllRes, error)
+	ApiTokensGetApiTokens(ctx context.Context, options ...RequestOption) (ApiTokensGetApiTokensRes, error)
 	// ApiTokensGetScopes invokes ApiTokens_getScopes operation.
 	//
 	// Returns the catalog of scopes that can be granted to an API token, grouped by resource. Forbidden
@@ -123,19 +124,19 @@ type Invoker interface {
 	// Login as superadmin.
 	//
 	// POST /api/auth/login
-	AuthLogin(ctx context.Context, request *LoginRequest, options ...RequestOption) (AuthLoginRes, error)
+	AuthLogin(ctx context.Context, request *LoginBody, options ...RequestOption) (AuthLoginRes, error)
 	// AuthOauth2Authorize invokes Auth_oauth2Authorize operation.
 	//
 	// Initiate OAuth2 authorization.
 	//
 	// POST /api/auth/oauth2/authorize
-	AuthOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequest, options ...RequestOption) (AuthOauth2AuthorizeRes, error)
+	AuthOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeBody, options ...RequestOption) (AuthOauth2AuthorizeRes, error)
 	// AuthOauth2Callback invokes Auth_oauth2Callback operation.
 	//
 	// Callback from OAuth2.
 	//
 	// POST /api/auth/oauth2/callback
-	AuthOauth2Callback(ctx context.Context, request *OAuth2CallbackRequest, options ...RequestOption) (AuthOauth2CallbackRes, error)
+	AuthOauth2Callback(ctx context.Context, request *OAuth2CallbackBody, options ...RequestOption) (AuthOauth2CallbackRes, error)
 	// AuthPasskeyAuthenticationOptions invokes Auth_passkeyAuthenticationOptions operation.
 	//
 	// Get the authentication options for passkey.
@@ -153,13 +154,14 @@ type Invoker interface {
 	// Register as superadmin.
 	//
 	// POST /api/auth/register
-	AuthRegister(ctx context.Context, request *RegisterRequest, options ...RequestOption) (AuthRegisterRes, error)
-	// BandwidthStatsNodesGetNodeUserUsage invokes BandwidthStatsNodes_getNodeUserUsage operation.
+	AuthRegister(ctx context.Context, request *RegisterBody, options ...RequestOption) (AuthRegisterRes, error)
+	// BandwidthStatsNodesGetNodeUsage invokes BandwidthStatsNodes_getNodeUsage operation.
 	//
-	// Get Node User Usage by Range and Node UUID (Legacy).
+	// Returns users whose total usage over the period on the given nodes is >= minTotalBytes. Underlying
+	// usage data is flushed to the database roughly every 2 minutes.
 	//
-	// GET /api/bandwidth-stats/nodes/{uuid}/users/legacy
-	BandwidthStatsNodesGetNodeUserUsage(ctx context.Context, params BandwidthStatsNodesGetNodeUserUsageParams, options ...RequestOption) (BandwidthStatsNodesGetNodeUserUsageRes, error)
+	// POST /api/bandwidth-stats/nodes/usage
+	BandwidthStatsNodesGetNodeUsage(ctx context.Context, request *GetNodeUsageBody, params BandwidthStatsNodesGetNodeUsageParams, options ...RequestOption) (BandwidthStatsNodesGetNodeUsageRes, error)
 	// BandwidthStatsNodesGetStatsNodeUsersUsage invokes BandwidthStatsNodes_getStatsNodeUsersUsage operation.
 	//
 	// Get Node Users Usage by Node UUID.
@@ -171,25 +173,19 @@ type Invoker interface {
 	// Get Nodes Users Usage by Nodes UUIDs.
 	//
 	// POST /api/bandwidth-stats/nodes/users
-	BandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Context, request *GetStatsNodesUsersUsageRequest, params BandwidthStatsNodesGetStatsNodesUsersUsageParams, options ...RequestOption) (BandwidthStatsNodesGetStatsNodesUsersUsageRes, error)
+	BandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Context, request *GetStatsNodesUsersUsageBody, params BandwidthStatsNodesGetStatsNodesUsersUsageParams, options ...RequestOption) (BandwidthStatsNodesGetStatsNodesUsersUsageRes, error)
 	// BandwidthStatsUsersGetStatsNodesUsage invokes BandwidthStatsUsers_getStatsNodesUsage operation.
 	//
 	// Get User Usage by Range.
 	//
-	// GET /api/bandwidth-stats/users/{uuid}
+	// GET /api/bandwidth-stats/users/{userId}
 	BandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, params BandwidthStatsUsersGetStatsNodesUsageParams, options ...RequestOption) (BandwidthStatsUsersGetStatsNodesUsageRes, error)
-	// BandwidthStatsUsersGetUserUsageByRange invokes BandwidthStatsUsers_getUserUsageByRange operation.
-	//
-	// Get User Usage by Range (Legacy).
-	//
-	// GET /api/bandwidth-stats/users/{uuid}/legacy
-	BandwidthStatsUsersGetUserUsageByRange(ctx context.Context, params BandwidthStatsUsersGetUserUsageByRangeParams, options ...RequestOption) (BandwidthStatsUsersGetUserUsageByRangeRes, error)
 	// ConfigProfileCreateConfigProfile invokes ConfigProfile_createConfigProfile operation.
 	//
 	// Create config profile.
 	//
 	// POST /api/config-profiles
-	ConfigProfileCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequest, options ...RequestOption) (ConfigProfileCreateConfigProfileRes, error)
+	ConfigProfileCreateConfigProfile(ctx context.Context, request *CreateConfigProfileBody, options ...RequestOption) (ConfigProfileCreateConfigProfileRes, error)
 	// ConfigProfileDeleteConfigProfileByUuid invokes ConfigProfile_deleteConfigProfileByUuid operation.
 	//
 	// Delete config profile.
@@ -226,18 +222,73 @@ type Invoker interface {
 	//
 	// GET /api/config-profiles/{uuid}/inbounds
 	ConfigProfileGetInboundsByProfileUuid(ctx context.Context, params ConfigProfileGetInboundsByProfileUuidParams, options ...RequestOption) (ConfigProfileGetInboundsByProfileUuidRes, error)
+	// ConfigProfileGetTags invokes ConfigProfile_getTags operation.
+	//
+	// Get tags of Config Profiles.
+	//
+	// GET /api/config-profiles/tags
+	ConfigProfileGetTags(ctx context.Context, options ...RequestOption) (ConfigProfileGetTagsRes, error)
 	// ConfigProfileReorderConfigProfiles invokes ConfigProfile_reorderConfigProfiles operation.
 	//
 	// Reorder config profiles.
 	//
 	// POST /api/config-profiles/actions/reorder
-	ConfigProfileReorderConfigProfiles(ctx context.Context, request *ReorderRequest, options ...RequestOption) (ConfigProfileReorderConfigProfilesRes, error)
+	ConfigProfileReorderConfigProfiles(ctx context.Context, request *ReorderConfigProfilesBody, options ...RequestOption) (ConfigProfileReorderConfigProfilesRes, error)
+	// ConfigProfileSetTags invokes ConfigProfile_setTags operation.
+	//
+	// Set tags of Config Profile.
+	//
+	// PATCH /api/config-profiles/tags
+	ConfigProfileSetTags(ctx context.Context, request *SetConfigProfilesTagsBody, options ...RequestOption) (ConfigProfileSetTagsRes, error)
 	// ConfigProfileUpdateConfigProfile invokes ConfigProfile_updateConfigProfile operation.
 	//
 	// Update Core Config in specific config profile.
 	//
 	// PATCH /api/config-profiles
-	ConfigProfileUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequest, options ...RequestOption) (ConfigProfileUpdateConfigProfileRes, error)
+	ConfigProfileUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileBody, options ...RequestOption) (ConfigProfileUpdateConfigProfileRes, error)
+	// ConnectionsConnectionsByNode invokes Connections_connectionsByNode operation.
+	//
+	// Request Connections for Node.
+	//
+	// POST /api/connections/by-node/{nodeUuid}
+	ConnectionsConnectionsByNode(ctx context.Context, params ConnectionsConnectionsByNodeParams, options ...RequestOption) (ConnectionsConnectionsByNodeRes, error)
+	// ConnectionsConnectionsByNodeResult invokes Connections_connectionsByNodeResult operation.
+	//
+	// Get Connections for Node by Job ID.
+	//
+	// GET /api/connections/by-node/{jobId}
+	ConnectionsConnectionsByNodeResult(ctx context.Context, params ConnectionsConnectionsByNodeResultParams, options ...RequestOption) (ConnectionsConnectionsByNodeResultRes, error)
+	// ConnectionsConnectionsByUser invokes Connections_connectionsByUser operation.
+	//
+	// Request Connections for User.
+	//
+	// POST /api/connections/by-user/{userId}
+	ConnectionsConnectionsByUser(ctx context.Context, params ConnectionsConnectionsByUserParams, options ...RequestOption) (ConnectionsConnectionsByUserRes, error)
+	// ConnectionsConnectionsByUserResult invokes Connections_connectionsByUserResult operation.
+	//
+	// Get Connections for User by Job ID.
+	//
+	// GET /api/connections/by-user/{jobId}
+	ConnectionsConnectionsByUserResult(ctx context.Context, params ConnectionsConnectionsByUserResultParams, options ...RequestOption) (ConnectionsConnectionsByUserResultRes, error)
+	// ConnectionsDropConnections invokes Connections_dropConnections operation.
+	//
+	// Drop Connections for Users or IPs.
+	//
+	// POST /api/connections/drop
+	ConnectionsDropConnections(ctx context.Context, request *DropConnectionsBody, options ...RequestOption) (ConnectionsDropConnectionsRes, error)
+	// ConnectionsGeocheckByNode invokes Connections_geocheckByNode operation.
+	//
+	// Queues a geocheck on the node and returns a job ID. Poll "Get Geocheck for Node by Job ID" for the
+	// result, the node may take up to a minute to answer.
+	//
+	// POST /api/connections/geocheck/{nodeUuid}
+	ConnectionsGeocheckByNode(ctx context.Context, request *GeocheckByNodeBody, params ConnectionsGeocheckByNodeParams, options ...RequestOption) (ConnectionsGeocheckByNodeRes, error)
+	// ConnectionsGeocheckByNodeResult invokes Connections_geocheckByNodeResult operation.
+	//
+	// Get Geocheck for Node by Job ID.
+	//
+	// GET /api/connections/geocheck/{jobId}
+	ConnectionsGeocheckByNodeResult(ctx context.Context, params ConnectionsGeocheckByNodeResultParams, options ...RequestOption) (ConnectionsGeocheckByNodeResultRes, error)
 	// ExternalSquadAddUsersToExternalSquad invokes ExternalSquad_addUsersToExternalSquad operation.
 	//
 	// Add all users to external squad.
@@ -249,7 +300,7 @@ type Invoker interface {
 	// Create external squad.
 	//
 	// POST /api/external-squads
-	ExternalSquadCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequest, options ...RequestOption) (ExternalSquadCreateExternalSquadRes, error)
+	ExternalSquadCreateExternalSquad(ctx context.Context, request *CreateExternalSquadBody, options ...RequestOption) (ExternalSquadCreateExternalSquadRes, error)
 	// ExternalSquadDeleteExternalSquad invokes ExternalSquad_deleteExternalSquad operation.
 	//
 	// Delete external squad.
@@ -268,6 +319,12 @@ type Invoker interface {
 	//
 	// GET /api/external-squads
 	ExternalSquadGetExternalSquads(ctx context.Context, options ...RequestOption) (ExternalSquadGetExternalSquadsRes, error)
+	// ExternalSquadGetTags invokes ExternalSquad_getTags operation.
+	//
+	// Get tags of External Squads.
+	//
+	// GET /api/external-squads/tags
+	ExternalSquadGetTags(ctx context.Context, options ...RequestOption) (ExternalSquadGetTagsRes, error)
 	// ExternalSquadRemoveUsersFromExternalSquad invokes ExternalSquad_removeUsersFromExternalSquad operation.
 	//
 	// Delete users from external squad.
@@ -279,61 +336,67 @@ type Invoker interface {
 	// Reorder external squads.
 	//
 	// POST /api/external-squads/actions/reorder
-	ExternalSquadReorderExternalSquads(ctx context.Context, request *ReorderRequest, options ...RequestOption) (ExternalSquadReorderExternalSquadsRes, error)
+	ExternalSquadReorderExternalSquads(ctx context.Context, request *ReorderExternalSquadsBody, options ...RequestOption) (ExternalSquadReorderExternalSquadsRes, error)
+	// ExternalSquadSetTags invokes ExternalSquad_setTags operation.
+	//
+	// Set tags of External Squad.
+	//
+	// PATCH /api/external-squads/tags
+	ExternalSquadSetTags(ctx context.Context, request *SetExternalSquadsTagsBody, options ...RequestOption) (ExternalSquadSetTagsRes, error)
 	// ExternalSquadUpdateExternalSquad invokes ExternalSquad_updateExternalSquad operation.
 	//
 	// Update external squad.
 	//
 	// PATCH /api/external-squads
-	ExternalSquadUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequest, options ...RequestOption) (ExternalSquadUpdateExternalSquadRes, error)
+	ExternalSquadUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadBody, options ...RequestOption) (ExternalSquadUpdateExternalSquadRes, error)
 	// HostsBulkActionsDeleteHosts invokes HostsBulkActions_deleteHosts operation.
 	//
 	// Delete hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/delete
-	HostsBulkActionsDeleteHosts(ctx context.Context, request *BulkUuidsRequest2, options ...RequestOption) (HostsBulkActionsDeleteHostsRes, error)
+	HostsBulkActionsDeleteHosts(ctx context.Context, request *HostsBodyBulkRequest, options ...RequestOption) (HostsBulkActionsDeleteHostsRes, error)
 	// HostsBulkActionsDisableHosts invokes HostsBulkActions_disableHosts operation.
 	//
 	// Disable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/disable
-	HostsBulkActionsDisableHosts(ctx context.Context, request *BulkUuidsRequest2, options ...RequestOption) (HostsBulkActionsDisableHostsRes, error)
+	HostsBulkActionsDisableHosts(ctx context.Context, request *HostsBodyBulkRequest, options ...RequestOption) (HostsBulkActionsDisableHostsRes, error)
 	// HostsBulkActionsEnableHosts invokes HostsBulkActions_enableHosts operation.
 	//
 	// Enable hosts by UUIDs.
 	//
 	// POST /api/hosts/bulk/enable
-	HostsBulkActionsEnableHosts(ctx context.Context, request *BulkUuidsRequest2, options ...RequestOption) (HostsBulkActionsEnableHostsRes, error)
+	HostsBulkActionsEnableHosts(ctx context.Context, request *HostsBodyBulkRequest, options ...RequestOption) (HostsBulkActionsEnableHostsRes, error)
 	// HostsBulkActionsSetPortToHosts invokes HostsBulkActions_setPortToHosts operation.
 	//
 	// Update many hosts.
 	//
 	// PATCH /api/hosts/bulk/update
-	HostsBulkActionsSetPortToHosts(ctx context.Context, request *UpdateManyHostsRequest, options ...RequestOption) (HostsBulkActionsSetPortToHostsRes, error)
+	HostsBulkActionsSetPortToHosts(ctx context.Context, request *UpdateManyHostsBody, options ...RequestOption) (HostsBulkActionsSetPortToHostsRes, error)
 	// HostsCreateHost invokes Hosts_createHost operation.
 	//
 	// Create a new host.
 	//
 	// POST /api/hosts
-	HostsCreateHost(ctx context.Context, request *CreateHostRequest, options ...RequestOption) (HostsCreateHostRes, error)
+	HostsCreateHost(ctx context.Context, request *CreateHostBody, options ...RequestOption) (HostsCreateHostRes, error)
 	// HostsDeleteHost invokes Hosts_deleteHost operation.
 	//
 	// Delete a host by UUID.
 	//
 	// DELETE /api/hosts/{uuid}
 	HostsDeleteHost(ctx context.Context, params HostsDeleteHostParams, options ...RequestOption) (HostsDeleteHostRes, error)
-	// HostsGetAllHostTags invokes Hosts_getAllHostTags operation.
+	// HostsGetHosts invokes Hosts_getHosts operation.
 	//
-	// Get all existing host tags.
-	//
-	// GET /api/hosts/tags
-	HostsGetAllHostTags(ctx context.Context, options ...RequestOption) (HostsGetAllHostTagsRes, error)
-	// HostsGetAllHosts invokes Hosts_getAllHosts operation.
-	//
-	// Get all hosts.
+	// Get hosts.
 	//
 	// GET /api/hosts
-	HostsGetAllHosts(ctx context.Context, options ...RequestOption) (HostsGetAllHostsRes, error)
+	HostsGetHosts(ctx context.Context, options ...RequestOption) (HostsGetHostsRes, error)
+	// HostsGetHostsTags invokes Hosts_getHostsTags operation.
+	//
+	// Get tags of hosts.
+	//
+	// GET /api/hosts/tags
+	HostsGetHostsTags(ctx context.Context, options ...RequestOption) (HostsGetHostsTagsRes, error)
 	// HostsGetOneHost invokes Hosts_getOneHost operation.
 	//
 	// Get a host by UUID.
@@ -345,34 +408,36 @@ type Invoker interface {
 	// Reorder hosts.
 	//
 	// POST /api/hosts/actions/reorder
-	HostsReorderHosts(ctx context.Context, request *ReorderHostRequest, options ...RequestOption) (HostsReorderHostsRes, error)
+	HostsReorderHosts(ctx context.Context, request *ReorderHostsBody, options ...RequestOption) (HostsReorderHostsRes, error)
 	// HostsUpdateHost invokes Hosts_updateHost operation.
 	//
 	// Update a host.
 	//
 	// PATCH /api/hosts
-	HostsUpdateHost(ctx context.Context, request *UpdateHostRequest, options ...RequestOption) (HostsUpdateHostRes, error)
+	HostsUpdateHost(ctx context.Context, request *UpdateHostBody, options ...RequestOption) (HostsUpdateHostRes, error)
 	// HwidUserDevicesCreateUserHwidDevice invokes HwidUserDevices_createUserHwidDevice operation.
 	//
 	// Create a user HWID device.
 	//
 	// POST /api/hwid/devices
-	HwidUserDevicesCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequest, options ...RequestOption) (HwidUserDevicesCreateUserHwidDeviceRes, error)
+	HwidUserDevicesCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceBody, options ...RequestOption) (HwidUserDevicesCreateUserHwidDeviceRes, error)
 	// HwidUserDevicesDeleteAllUserHwidDevices invokes HwidUserDevices_deleteAllUserHwidDevices operation.
 	//
 	// Delete all user HWID devices.
 	//
 	// POST /api/hwid/devices/delete-all
-	HwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequest, options ...RequestOption) (HwidUserDevicesDeleteAllUserHwidDevicesRes, error)
+	HwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesBody, options ...RequestOption) (HwidUserDevicesDeleteAllUserHwidDevicesRes, error)
 	// HwidUserDevicesDeleteUserHwidDevice invokes HwidUserDevices_deleteUserHwidDevice operation.
 	//
 	// Delete a user HWID device.
 	//
 	// POST /api/hwid/devices/delete
-	HwidUserDevicesDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequest, options ...RequestOption) (HwidUserDevicesDeleteUserHwidDeviceRes, error)
+	HwidUserDevicesDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceBody, options ...RequestOption) (HwidUserDevicesDeleteUserHwidDeviceRes, error)
 	// HwidUserDevicesGetAllUsers invokes HwidUserDevices_getAllUsers operation.
 	//
-	// Get all HWID devices.
+	// Please note that the filters here are primarily intended for use by the frontend and rely on
+	// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+	// performance of your database.
 	//
 	// GET /api/hwid/devices
 	HwidUserDevicesGetAllUsers(ctx context.Context, params HwidUserDevicesGetAllUsersParams, options ...RequestOption) (HwidUserDevicesGetAllUsersRes, error)
@@ -392,62 +457,62 @@ type Invoker interface {
 	//
 	// Get user HWID devices.
 	//
-	// GET /api/hwid/devices/{userUuid}
+	// GET /api/hwid/devices/{userId}
 	HwidUserDevicesGetUserHwidDevices(ctx context.Context, params HwidUserDevicesGetUserHwidDevicesParams, options ...RequestOption) (HwidUserDevicesGetUserHwidDevicesRes, error)
-	// InfraBillingCreateInfraBillingHistoryRecord invokes InfraBilling_createInfraBillingHistoryRecord operation.
-	//
-	// Create infra billing history.
-	//
-	// POST /api/infra-billing/history
-	InfraBillingCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequest, options ...RequestOption) (InfraBillingCreateInfraBillingHistoryRecordRes, error)
 	// InfraBillingCreateInfraBillingNode invokes InfraBilling_createInfraBillingNode operation.
 	//
 	// Create infra billing node.
 	//
 	// POST /api/infra-billing/nodes
-	InfraBillingCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequest, options ...RequestOption) (InfraBillingCreateInfraBillingNodeRes, error)
+	InfraBillingCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeBody, options ...RequestOption) (InfraBillingCreateInfraBillingNodeRes, error)
+	// InfraBillingCreateInfraBillingRecord invokes InfraBilling_createInfraBillingRecord operation.
+	//
+	// Create infra billing history.
+	//
+	// POST /api/infra-billing/history
+	InfraBillingCreateInfraBillingRecord(ctx context.Context, request *CreateInfraBillingRecordBody, options ...RequestOption) (InfraBillingCreateInfraBillingRecordRes, error)
 	// InfraBillingCreateInfraProvider invokes InfraBilling_createInfraProvider operation.
 	//
 	// Create infra provider.
 	//
 	// POST /api/infra-billing/providers
-	InfraBillingCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequest, options ...RequestOption) (InfraBillingCreateInfraProviderRes, error)
-	// InfraBillingDeleteInfraBillingHistoryRecordByUuid invokes InfraBilling_deleteInfraBillingHistoryRecordByUuid operation.
-	//
-	// Delete infra billing history.
-	//
-	// DELETE /api/infra-billing/history/{uuid}
-	InfraBillingDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingDeleteInfraBillingHistoryRecordByUuidParams, options ...RequestOption) (InfraBillingDeleteInfraBillingHistoryRecordByUuidRes, error)
-	// InfraBillingDeleteInfraBillingNodeByUuid invokes InfraBilling_deleteInfraBillingNodeByUuid operation.
+	InfraBillingCreateInfraProvider(ctx context.Context, request *CreateInfraProviderBody, options ...RequestOption) (InfraBillingCreateInfraProviderRes, error)
+	// InfraBillingDeleteInfraBillingNode invokes InfraBilling_deleteInfraBillingNode operation.
 	//
 	// Delete infra billing node.
 	//
 	// DELETE /api/infra-billing/nodes/{uuid}
-	InfraBillingDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingDeleteInfraBillingNodeByUuidParams, options ...RequestOption) (InfraBillingDeleteInfraBillingNodeByUuidRes, error)
-	// InfraBillingDeleteInfraProviderByUuid invokes InfraBilling_deleteInfraProviderByUuid operation.
+	InfraBillingDeleteInfraBillingNode(ctx context.Context, params InfraBillingDeleteInfraBillingNodeParams, options ...RequestOption) (InfraBillingDeleteInfraBillingNodeRes, error)
+	// InfraBillingDeleteInfraBillingRecord invokes InfraBilling_deleteInfraBillingRecord operation.
+	//
+	// Delete infra billing history.
+	//
+	// DELETE /api/infra-billing/history/{uuid}
+	InfraBillingDeleteInfraBillingRecord(ctx context.Context, params InfraBillingDeleteInfraBillingRecordParams, options ...RequestOption) (InfraBillingDeleteInfraBillingRecordRes, error)
+	// InfraBillingDelteInfraProvider invokes InfraBilling_delteInfraProvider operation.
 	//
 	// Delete infra provider by uuid.
 	//
 	// DELETE /api/infra-billing/providers/{uuid}
-	InfraBillingDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingDeleteInfraProviderByUuidParams, options ...RequestOption) (InfraBillingDeleteInfraProviderByUuidRes, error)
+	InfraBillingDelteInfraProvider(ctx context.Context, params InfraBillingDelteInfraProviderParams, options ...RequestOption) (InfraBillingDelteInfraProviderRes, error)
 	// InfraBillingGetBillingNodes invokes InfraBilling_getBillingNodes operation.
 	//
 	// Get infra billing nodes.
 	//
 	// GET /api/infra-billing/nodes
 	InfraBillingGetBillingNodes(ctx context.Context, options ...RequestOption) (InfraBillingGetBillingNodesRes, error)
-	// InfraBillingGetInfraBillingHistoryRecords invokes InfraBilling_getInfraBillingHistoryRecords operation.
+	// InfraBillingGetInfraBillingRecords invokes InfraBilling_getInfraBillingRecords operation.
 	//
 	// Get infra billing history.
 	//
 	// GET /api/infra-billing/history
-	InfraBillingGetInfraBillingHistoryRecords(ctx context.Context, options ...RequestOption) (InfraBillingGetInfraBillingHistoryRecordsRes, error)
-	// InfraBillingGetInfraProviderByUuid invokes InfraBilling_getInfraProviderByUuid operation.
+	InfraBillingGetInfraBillingRecords(ctx context.Context, params InfraBillingGetInfraBillingRecordsParams, options ...RequestOption) (InfraBillingGetInfraBillingRecordsRes, error)
+	// InfraBillingGetInfraProvider invokes InfraBilling_getInfraProvider operation.
 	//
 	// Get infra provider by uuid.
 	//
 	// GET /api/infra-billing/providers/{uuid}
-	InfraBillingGetInfraProviderByUuid(ctx context.Context, params InfraBillingGetInfraProviderByUuidParams, options ...RequestOption) (InfraBillingGetInfraProviderByUuidRes, error)
+	InfraBillingGetInfraProvider(ctx context.Context, params InfraBillingGetInfraProviderParams, options ...RequestOption) (InfraBillingGetInfraProviderRes, error)
 	// InfraBillingGetInfraProviders invokes InfraBilling_getInfraProviders operation.
 	//
 	// Get all infra providers.
@@ -459,13 +524,19 @@ type Invoker interface {
 	// Update infra billing nodes.
 	//
 	// PATCH /api/infra-billing/nodes
-	InfraBillingUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequest, options ...RequestOption) (InfraBillingUpdateInfraBillingNodeRes, error)
+	InfraBillingUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeBody, options ...RequestOption) (InfraBillingUpdateInfraBillingNodeRes, error)
 	// InfraBillingUpdateInfraProvider invokes InfraBilling_updateInfraProvider operation.
 	//
 	// Update infra provider.
 	//
 	// PATCH /api/infra-billing/providers
-	InfraBillingUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequest, options ...RequestOption) (InfraBillingUpdateInfraProviderRes, error)
+	InfraBillingUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderBody, options ...RequestOption) (InfraBillingUpdateInfraProviderRes, error)
+	// InternalSquadAddManyUsersToInternalSquad invokes InternalSquad_addManyUsersToInternalSquad operation.
+	//
+	// Add many users to internal squad.
+	//
+	// POST /api/internal-squads/{uuid}/bulk-actions/add-many-users
+	InternalSquadAddManyUsersToInternalSquad(ctx context.Context, request *InternalSquadBodyRequest, params InternalSquadAddManyUsersToInternalSquadParams, options ...RequestOption) (InternalSquadAddManyUsersToInternalSquadRes, error)
 	// InternalSquadAddUsersToInternalSquad invokes InternalSquad_addUsersToInternalSquad operation.
 	//
 	// Add all users to internal squad.
@@ -477,7 +548,7 @@ type Invoker interface {
 	// Create internal squad.
 	//
 	// POST /api/internal-squads
-	InternalSquadCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequest, options ...RequestOption) (InternalSquadCreateInternalSquadRes, error)
+	InternalSquadCreateInternalSquad(ctx context.Context, request *CreateInternalSquadBody, options ...RequestOption) (InternalSquadCreateInternalSquadRes, error)
 	// InternalSquadDeleteInternalSquad invokes InternalSquad_deleteInternalSquad operation.
 	//
 	// Delete internal squad.
@@ -496,12 +567,32 @@ type Invoker interface {
 	//
 	// GET /api/internal-squads/{uuid}
 	InternalSquadGetInternalSquadByUuid(ctx context.Context, params InternalSquadGetInternalSquadByUuidParams, options ...RequestOption) (InternalSquadGetInternalSquadByUuidRes, error)
+	// InternalSquadGetInternalSquadUsage invokes InternalSquad_getInternalSquadUsage operation.
+	//
+	// Returns users whose total usage over the period on the given nodes is >= minTotalBytes, scoped to
+	// the nodes reachable via the internal squad inbounds. Underlying usage data is flushed to the
+	// database roughly every 2 minutes.
+	//
+	// GET /api/internal-squads/{uuid}/usage
+	InternalSquadGetInternalSquadUsage(ctx context.Context, params InternalSquadGetInternalSquadUsageParams, options ...RequestOption) (InternalSquadGetInternalSquadUsageRes, error)
 	// InternalSquadGetInternalSquads invokes InternalSquad_getInternalSquads operation.
 	//
 	// Get all internal squads.
 	//
 	// GET /api/internal-squads
 	InternalSquadGetInternalSquads(ctx context.Context, options ...RequestOption) (InternalSquadGetInternalSquadsRes, error)
+	// InternalSquadGetTags invokes InternalSquad_getTags operation.
+	//
+	// Get tags of Internal Squads.
+	//
+	// GET /api/internal-squads/tags
+	InternalSquadGetTags(ctx context.Context, options ...RequestOption) (InternalSquadGetTagsRes, error)
+	// InternalSquadRemoveManyUsersFromInternalSquad invokes InternalSquad_removeManyUsersFromInternalSquad operation.
+	//
+	// Delete many users from internal squad.
+	//
+	// DELETE /api/internal-squads/{uuid}/bulk-actions/remove-many-users
+	InternalSquadRemoveManyUsersFromInternalSquad(ctx context.Context, request *InternalSquadBodyRequest, params InternalSquadRemoveManyUsersFromInternalSquadParams, options ...RequestOption) (InternalSquadRemoveManyUsersFromInternalSquadRes, error)
 	// InternalSquadRemoveUsersFromInternalSquad invokes InternalSquad_removeUsersFromInternalSquad operation.
 	//
 	// Delete users from internal squad.
@@ -513,43 +604,35 @@ type Invoker interface {
 	// Reorder internal squads.
 	//
 	// POST /api/internal-squads/actions/reorder
-	InternalSquadReorderInternalSquads(ctx context.Context, request *ReorderRequest, options ...RequestOption) (InternalSquadReorderInternalSquadsRes, error)
+	InternalSquadReorderInternalSquads(ctx context.Context, request *ReorderInternalSquadsBody, options ...RequestOption) (InternalSquadReorderInternalSquadsRes, error)
+	// InternalSquadSetTags invokes InternalSquad_setTags operation.
+	//
+	// Set tags of Internal Squad.
+	//
+	// PATCH /api/internal-squads/tags
+	InternalSquadSetTags(ctx context.Context, request *SetInternalSquadsTagsBody, options ...RequestOption) (InternalSquadSetTagsRes, error)
+	// InternalSquadStatsGetInternalSquadUsage invokes InternalSquadStats_getInternalSquadUsage operation.
+	//
+	// Returns users whose total usage over the period on the given nodes is >= minTotalBytes, scoped to
+	// the nodes reachable via the internal squad inbounds. Underlying usage data is flushed to the
+	// database roughly every 2 minutes.
+	//
+	// GET /api/bandwidth-stats/internal-squads/{uuid}/usage
+	InternalSquadStatsGetInternalSquadUsage(ctx context.Context, params InternalSquadStatsGetInternalSquadUsageParams, options ...RequestOption) (InternalSquadStatsGetInternalSquadUsageRes, error)
+	// InternalSquadStatsGetInternalSquadUserUsage invokes InternalSquadStats_getInternalSquadUserUsage operation.
+	//
+	// Returns users whose total usage over the period on the given nodes is >= minTotalBytes, scoped to
+	// the nodes reachable via the Internal Squad inbounds. Every day in the range is present
+	// (zero-filled). Underlying usage data is flushed to the database roughly every 2 minutes.
+	//
+	// GET /api/bandwidth-stats/internal-squads/{squadUuid}/users/{userId}/usage
+	InternalSquadStatsGetInternalSquadUserUsage(ctx context.Context, params InternalSquadStatsGetInternalSquadUserUsageParams, options ...RequestOption) (InternalSquadStatsGetInternalSquadUserUsageRes, error)
 	// InternalSquadUpdateInternalSquad invokes InternalSquad_updateInternalSquad operation.
 	//
 	// Update internal squad.
 	//
 	// PATCH /api/internal-squads
-	InternalSquadUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequest, options ...RequestOption) (InternalSquadUpdateInternalSquadRes, error)
-	// IpControlDropConnections invokes IpControl_dropConnections operation.
-	//
-	// Drop Connections for Users or IPs.
-	//
-	// POST /api/ip-control/drop-connections
-	IpControlDropConnections(ctx context.Context, request *DropConnectionsRequest, options ...RequestOption) (IpControlDropConnectionsRes, error)
-	// IpControlFetchUserIps invokes IpControl_fetchUserIps operation.
-	//
-	// Request IP List for User.
-	//
-	// POST /api/ip-control/fetch-ips/{uuid}
-	IpControlFetchUserIps(ctx context.Context, params IpControlFetchUserIpsParams, options ...RequestOption) (IpControlFetchUserIpsRes, error)
-	// IpControlFetchUsersIps invokes IpControl_fetchUsersIps operation.
-	//
-	// Request Users IPs List for Node.
-	//
-	// POST /api/ip-control/fetch-users-ips/{nodeUuid}
-	IpControlFetchUsersIps(ctx context.Context, params IpControlFetchUsersIpsParams, options ...RequestOption) (IpControlFetchUsersIpsRes, error)
-	// IpControlGetFetchIpsResult invokes IpControl_getFetchIpsResult operation.
-	//
-	// Get IP List Result by Job ID.
-	//
-	// GET /api/ip-control/fetch-ips/result/{jobId}
-	IpControlGetFetchIpsResult(ctx context.Context, params IpControlGetFetchIpsResultParams, options ...RequestOption) (IpControlGetFetchIpsResultRes, error)
-	// IpControlGetFetchUsersIpsResult invokes IpControl_getFetchUsersIpsResult operation.
-	//
-	// Get Users IPs List Result by Job ID.
-	//
-	// GET /api/ip-control/fetch-users-ips/result/{jobId}
-	IpControlGetFetchUsersIpsResult(ctx context.Context, params IpControlGetFetchUsersIpsResultParams, options ...RequestOption) (IpControlGetFetchUsersIpsResultRes, error)
+	InternalSquadUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadBody, options ...RequestOption) (InternalSquadUpdateInternalSquadRes, error)
 	// KeygenGenerateKey invokes Keygen_generateKey operation.
 	//
 	// Get SECRET_KEY for Remnawave Node.
@@ -566,86 +649,172 @@ type Invoker interface {
 	//
 	// Get user metadata.
 	//
-	// GET /api/metadata/user/{uuid}
+	// GET /api/metadata/user/{userId}
 	MetadataGetUserMetadata(ctx context.Context, params MetadataGetUserMetadataParams, options ...RequestOption) (MetadataGetUserMetadataRes, error)
 	// MetadataUpsertNodeMetadata invokes Metadata_upsertNodeMetadata operation.
 	//
 	// Update or create Node Metadata.
 	//
 	// PUT /api/metadata/node/{uuid}
-	MetadataUpsertNodeMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, params MetadataUpsertNodeMetadataParams, options ...RequestOption) (MetadataUpsertNodeMetadataRes, error)
+	MetadataUpsertNodeMetadata(ctx context.Context, request *UpsertNodeMetadataBody, params MetadataUpsertNodeMetadataParams, options ...RequestOption) (MetadataUpsertNodeMetadataRes, error)
 	// MetadataUpsertUserMetadata invokes Metadata_upsertUserMetadata operation.
 	//
 	// Update or create User Metadata.
 	//
-	// PUT /api/metadata/user/{uuid}
-	MetadataUpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, params MetadataUpsertUserMetadataParams, options ...RequestOption) (MetadataUpsertUserMetadataRes, error)
+	// PUT /api/metadata/user/{userId}
+	MetadataUpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataBody, params MetadataUpsertUserMetadataParams, options ...RequestOption) (MetadataUpsertUserMetadataRes, error)
+	// NodeIntegrationCreateIntegration invokes NodeIntegration_createIntegration operation.
+	//
+	// Create Node Integration.
+	//
+	// POST /api/node-integrations
+	NodeIntegrationCreateIntegration(ctx context.Context, request *CreateNodeIntegrationBody, options ...RequestOption) (NodeIntegrationCreateIntegrationRes, error)
+	// NodeIntegrationDeleteIntegration invokes NodeIntegration_deleteIntegration operation.
+	//
+	// Delete Node Integration.
+	//
+	// DELETE /api/node-integrations/{uuid}
+	NodeIntegrationDeleteIntegration(ctx context.Context, params NodeIntegrationDeleteIntegrationParams, options ...RequestOption) (NodeIntegrationDeleteIntegrationRes, error)
+	// NodeIntegrationGetAllIntegrations invokes NodeIntegration_getAllIntegrations operation.
+	//
+	// Get all Node Integrations.
+	//
+	// GET /api/node-integrations
+	NodeIntegrationGetAllIntegrations(ctx context.Context, options ...RequestOption) (NodeIntegrationGetAllIntegrationsRes, error)
+	// NodeIntegrationGetIntegrationByUuid invokes NodeIntegration_getIntegrationByUuid operation.
+	//
+	// Get Node Integration by uuid.
+	//
+	// GET /api/node-integrations/{uuid}
+	NodeIntegrationGetIntegrationByUuid(ctx context.Context, params NodeIntegrationGetIntegrationByUuidParams, options ...RequestOption) (NodeIntegrationGetIntegrationByUuidRes, error)
+	// NodeIntegrationUpdateIntegration invokes NodeIntegration_updateIntegration operation.
+	//
+	// Update Node Integration.
+	//
+	// PATCH /api/node-integrations
+	NodeIntegrationUpdateIntegration(ctx context.Context, request *UpdateNodeIntegrationBody, options ...RequestOption) (NodeIntegrationUpdateIntegrationRes, error)
 	// NodePluginCloneNodePlugin invokes NodePlugin_cloneNodePlugin operation.
 	//
 	// Clone Node Plugin.
 	//
 	// POST /api/node-plugins/actions/clone
-	NodePluginCloneNodePlugin(ctx context.Context, request *CloneNodePluginRequestRequest, options ...RequestOption) (NodePluginCloneNodePluginRes, error)
+	NodePluginCloneNodePlugin(ctx context.Context, request *CloneNodePluginBody, options ...RequestOption) (NodePluginCloneNodePluginRes, error)
 	// NodePluginCreateConfig invokes NodePlugin_createConfig operation.
 	//
 	// Create Node Plugin.
 	//
 	// POST /api/node-plugins
-	NodePluginCreateConfig(ctx context.Context, request *CreateNodePluginRequest, options ...RequestOption) (NodePluginCreateConfigRes, error)
+	NodePluginCreateConfig(ctx context.Context, request *CreateNodePluginBody, options ...RequestOption) (NodePluginCreateConfigRes, error)
+	// NodePluginCreateSharedList invokes NodePlugin_createSharedList operation.
+	//
+	// Create Shared List.
+	//
+	// POST /api/node-plugins/shared-lists
+	NodePluginCreateSharedList(ctx context.Context, request *SharedListBodyBulkRequest, options ...RequestOption) (NodePluginCreateSharedListRes, error)
 	// NodePluginDeleteConfig invokes NodePlugin_deleteConfig operation.
 	//
 	// Delete Node Plugin.
 	//
 	// DELETE /api/node-plugins/{uuid}
 	NodePluginDeleteConfig(ctx context.Context, params NodePluginDeleteConfigParams, options ...RequestOption) (NodePluginDeleteConfigRes, error)
+	// NodePluginDeleteSharedList invokes NodePlugin_deleteSharedList operation.
+	//
+	// Delete Shared List by name.
+	//
+	// DELETE /api/node-plugins/shared-lists
+	NodePluginDeleteSharedList(ctx context.Context, request *SharedListBodyBulkRequest2, options ...RequestOption) (NodePluginDeleteSharedListRes, error)
 	// NodePluginGetAllConfigs invokes NodePlugin_getAllConfigs operation.
 	//
 	// Get all Node Plugins.
 	//
 	// GET /api/node-plugins
 	NodePluginGetAllConfigs(ctx context.Context, options ...RequestOption) (NodePluginGetAllConfigsRes, error)
+	// NodePluginGetAllSharedLists invokes NodePlugin_getAllSharedLists operation.
+	//
+	// Returns only the name, type and item count of every shared list. Use "Get Shared List by name" to
+	// fetch the items themselves.
+	//
+	// GET /api/node-plugins/shared-lists
+	NodePluginGetAllSharedLists(ctx context.Context, options ...RequestOption) (NodePluginGetAllSharedListsRes, error)
 	// NodePluginGetConfigByUuid invokes NodePlugin_getConfigByUuid operation.
 	//
 	// Get Node Plugin by uuid.
 	//
 	// GET /api/node-plugins/{uuid}
 	NodePluginGetConfigByUuid(ctx context.Context, params NodePluginGetConfigByUuidParams, options ...RequestOption) (NodePluginGetConfigByUuidRes, error)
+	// NodePluginGetSharedListByName invokes NodePlugin_getSharedListByName operation.
+	//
+	// Get Shared List by name.
+	//
+	// GET /api/node-plugins/shared-lists/by-name
+	NodePluginGetSharedListByName(ctx context.Context, params NodePluginGetSharedListByNameParams, options ...RequestOption) (NodePluginGetSharedListByNameRes, error)
+	// NodePluginGetTags invokes NodePlugin_getTags operation.
+	//
+	// Get tags of Node Plugins.
+	//
+	// GET /api/node-plugins/tags
+	NodePluginGetTags(ctx context.Context, options ...RequestOption) (NodePluginGetTagsRes, error)
 	// NodePluginPluginExecutor invokes NodePlugin_pluginExecutor operation.
 	//
 	// Execute command on node plugins.
 	//
 	// POST /api/node-plugins/executor
-	NodePluginPluginExecutor(ctx context.Context, request *PluginExecutorRequest, options ...RequestOption) (NodePluginPluginExecutorRes, error)
+	NodePluginPluginExecutor(ctx context.Context, request *PluginExecutorBody, options ...RequestOption) (NodePluginPluginExecutorRes, error)
 	// NodePluginReorderNodePlugins invokes NodePlugin_reorderNodePlugins operation.
 	//
 	// Reorder Node Plugins.
 	//
 	// POST /api/node-plugins/actions/reorder
-	NodePluginReorderNodePlugins(ctx context.Context, request *ReorderRequest, options ...RequestOption) (NodePluginReorderNodePluginsRes, error)
+	NodePluginReorderNodePlugins(ctx context.Context, request *ReorderNodePluginsBody, options ...RequestOption) (NodePluginReorderNodePluginsRes, error)
+	// NodePluginSetTags invokes NodePlugin_setTags operation.
+	//
+	// Set tags of Node Plugin.
+	//
+	// PATCH /api/node-plugins/tags
+	NodePluginSetTags(ctx context.Context, request *SetNodePluginsTagsBody, options ...RequestOption) (NodePluginSetTagsRes, error)
+	// NodePluginSyncNodePlugin invokes NodePlugin_syncNodePlugin operation.
+	//
+	// Push the current plugin config, including referenced shared lists, to every connected node this
+	// plugin is active on.
+	//
+	// POST /api/node-plugins/actions/sync
+	NodePluginSyncNodePlugin(ctx context.Context, request *SyncNodePluginBody, options ...RequestOption) (NodePluginSyncNodePluginRes, error)
+	// NodePluginSyncSharedList invokes NodePlugin_syncSharedList operation.
+	//
+	// Push every plugin referencing this shared list to the nodes it is active on.
+	//
+	// POST /api/node-plugins/shared-lists/actions/sync
+	NodePluginSyncSharedList(ctx context.Context, request *SharedListBodyBulkRequest2, options ...RequestOption) (NodePluginSyncSharedListRes, error)
 	// NodePluginUpdateConfig invokes NodePlugin_updateConfig operation.
 	//
 	// Update Node Plugin.
 	//
 	// PATCH /api/node-plugins
-	NodePluginUpdateConfig(ctx context.Context, request *UpdateNodePluginRequest, options ...RequestOption) (NodePluginUpdateConfigRes, error)
+	NodePluginUpdateConfig(ctx context.Context, request *UpdateNodePluginBody, options ...RequestOption) (NodePluginUpdateConfigRes, error)
+	// NodePluginUpdateSharedList invokes NodePlugin_updateSharedList operation.
+	//
+	// Update Shared List.
+	//
+	// PATCH /api/node-plugins/shared-lists
+	NodePluginUpdateSharedList(ctx context.Context, request *SharedListBodyBulkRequest, options ...RequestOption) (NodePluginUpdateSharedListRes, error)
 	// NodesBulkNodesActions invokes Nodes_bulkNodesActions operation.
 	//
 	// Perform actions for many nodes.
 	//
 	// POST /api/nodes/bulk-actions
-	NodesBulkNodesActions(ctx context.Context, request *BulkNodesActionsRequest, options ...RequestOption) (NodesBulkNodesActionsRes, error)
+	NodesBulkNodesActions(ctx context.Context, request *BulkNodesActionsBody, options ...RequestOption) (NodesBulkNodesActionsRes, error)
 	// NodesBulkNodesUpdate invokes Nodes_bulkNodesUpdate operation.
 	//
 	// Update many nodes.
 	//
 	// POST /api/nodes/bulk-actions/update
-	NodesBulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateRequest, options ...RequestOption) (NodesBulkNodesUpdateRes, error)
+	NodesBulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateBody, options ...RequestOption) (NodesBulkNodesUpdateRes, error)
 	// NodesCreateNode invokes Nodes_createNode operation.
 	//
 	// Create a new node.
 	//
 	// POST /api/nodes
-	NodesCreateNode(ctx context.Context, request *CreateNodeRequest, options ...RequestOption) (NodesCreateNodeRes, error)
+	NodesCreateNode(ctx context.Context, request *CreateNodeBody, options ...RequestOption) (NodesCreateNodeRes, error)
 	// NodesDeleteNode invokes Nodes_deleteNode operation.
 	//
 	// Delete a node.
@@ -664,36 +833,36 @@ type Invoker interface {
 	//
 	// POST /api/nodes/{uuid}/actions/enable
 	NodesEnableNode(ctx context.Context, params NodesEnableNodeParams, options ...RequestOption) (NodesEnableNodeRes, error)
-	// NodesGetAllNodes invokes Nodes_getAllNodes operation.
-	//
-	// Get all nodes.
-	//
-	// GET /api/nodes
-	NodesGetAllNodes(ctx context.Context, options ...RequestOption) (NodesGetAllNodesRes, error)
-	// NodesGetAllNodesTags invokes Nodes_getAllNodesTags operation.
-	//
-	// Get all existing nodes tags.
-	//
-	// GET /api/nodes/tags
-	NodesGetAllNodesTags(ctx context.Context, options ...RequestOption) (NodesGetAllNodesTagsRes, error)
-	// NodesGetOneNode invokes Nodes_getOneNode operation.
+	// NodesGetNode invokes Nodes_getNode operation.
 	//
 	// Get node by UUID.
 	//
 	// GET /api/nodes/{uuid}
-	NodesGetOneNode(ctx context.Context, params NodesGetOneNodeParams, options ...RequestOption) (NodesGetOneNodeRes, error)
+	NodesGetNode(ctx context.Context, params NodesGetNodeParams, options ...RequestOption) (NodesGetNodeRes, error)
+	// NodesGetNodes invokes Nodes_getNodes operation.
+	//
+	// Get nodes.
+	//
+	// GET /api/nodes
+	NodesGetNodes(ctx context.Context, options ...RequestOption) (NodesGetNodesRes, error)
+	// NodesGetNodesTags invokes Nodes_getNodesTags operation.
+	//
+	// Get nodes tags.
+	//
+	// GET /api/nodes/tags
+	NodesGetNodesTags(ctx context.Context, options ...RequestOption) (NodesGetNodesTagsRes, error)
 	// NodesProfileModification invokes Nodes_profileModification operation.
 	//
 	// Modify Inbounds & Profile for many nodes.
 	//
 	// POST /api/nodes/bulk-actions/profile-modification
-	NodesProfileModification(ctx context.Context, request *ProfileModificationRequest, options ...RequestOption) (NodesProfileModificationRes, error)
+	NodesProfileModification(ctx context.Context, request *ProfileModificationBody, options ...RequestOption) (NodesProfileModificationRes, error)
 	// NodesReorderNodes invokes Nodes_reorderNodes operation.
 	//
 	// Reorder nodes.
 	//
 	// POST /api/nodes/actions/reorder
-	NodesReorderNodes(ctx context.Context, request *ReorderNodeRequest, options ...RequestOption) (NodesReorderNodesRes, error)
+	NodesReorderNodes(ctx context.Context, request *ReorderNodesBody, options ...RequestOption) (NodesReorderNodesRes, error)
 	// NodesResetNodeTraffic invokes Nodes_resetNodeTraffic operation.
 	//
 	// Reset Node Traffic.
@@ -705,19 +874,19 @@ type Invoker interface {
 	// Restart all nodes.
 	//
 	// POST /api/nodes/actions/restart-all
-	NodesRestartAllNodes(ctx context.Context, request *NodeRequestBodyRequest, options ...RequestOption) (NodesRestartAllNodesRes, error)
+	NodesRestartAllNodes(ctx context.Context, request *NodeBodyRequest, options ...RequestOption) (NodesRestartAllNodesRes, error)
 	// NodesRestartNode invokes Nodes_restartNode operation.
 	//
 	// Restart node.
 	//
 	// POST /api/nodes/{uuid}/actions/restart
-	NodesRestartNode(ctx context.Context, request *NodeRequestBodyRequest, params NodesRestartNodeParams, options ...RequestOption) (NodesRestartNodeRes, error)
+	NodesRestartNode(ctx context.Context, request *NodeBodyRequest, params NodesRestartNodeParams, options ...RequestOption) (NodesRestartNodeRes, error)
 	// NodesUpdateNode invokes Nodes_updateNode operation.
 	//
 	// Update node.
 	//
 	// PATCH /api/nodes
-	NodesUpdateNode(ctx context.Context, request *UpdateNodeRequest, options ...RequestOption) (NodesUpdateNodeRes, error)
+	NodesUpdateNode(ctx context.Context, request *UpdateNodeBody, options ...RequestOption) (NodesUpdateNodeRes, error)
 	// NodesUsageHistoryGetStatsNodesUsage invokes NodesUsageHistory_getStatsNodesUsage operation.
 	//
 	// Get Nodes Usage by Range.
@@ -729,10 +898,10 @@ type Invoker interface {
 	// Delete a passkey by ID.
 	//
 	// DELETE /api/passkeys
-	PasskeyDeletePasskey(ctx context.Context, request *DeletePasskeyRequest, options ...RequestOption) (PasskeyDeletePasskeyRes, error)
+	PasskeyDeletePasskey(ctx context.Context, request *DeletePasskeyBody, options ...RequestOption) (PasskeyDeletePasskeyRes, error)
 	// PasskeyGetActivePasskeys invokes Passkey_getActivePasskeys operation.
 	//
-	// Get all passkeys.
+	// Get passkeys.
 	//
 	// GET /api/passkeys
 	PasskeyGetActivePasskeys(ctx context.Context, options ...RequestOption) (PasskeyGetActivePasskeysRes, error)
@@ -753,7 +922,7 @@ type Invoker interface {
 	// Update passkey.
 	//
 	// PATCH /api/passkeys
-	PasskeyUpdatePasskey(ctx context.Context, request *UpdatePasskeyRequest, options ...RequestOption) (PasskeyUpdatePasskeyRes, error)
+	PasskeyUpdatePasskey(ctx context.Context, request *UpdatePasskeyBody, options ...RequestOption) (PasskeyUpdatePasskeyRes, error)
 	// RemnawaveSettingsGetSettings invokes RemnawaveSettings_getSettings operation.
 	//
 	// Get Remnawave settings.
@@ -765,39 +934,46 @@ type Invoker interface {
 	// Update Remnawave settings.
 	//
 	// PATCH /api/remnawave-settings
-	RemnawaveSettingsUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequest, options ...RequestOption) (RemnawaveSettingsUpdateSettingsRes, error)
+	RemnawaveSettingsUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsBody, options ...RequestOption) (RemnawaveSettingsUpdateSettingsRes, error)
 	// SnippetsCreateSnippet invokes Snippets_createSnippet operation.
 	//
 	// Create snippet.
 	//
 	// POST /api/snippets
-	SnippetsCreateSnippet(ctx context.Context, request *SnippetRequest, options ...RequestOption) (SnippetsCreateSnippetRes, error)
+	SnippetsCreateSnippet(ctx context.Context, request *SnippetBodyRequest2, options ...RequestOption) (SnippetsCreateSnippetRes, error)
 	// SnippetsDeleteSnippetByName invokes Snippets_deleteSnippetByName operation.
 	//
 	// Delete snippet.
 	//
 	// DELETE /api/snippets
-	SnippetsDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequest, options ...RequestOption) (SnippetsDeleteSnippetByNameRes, error)
+	SnippetsDeleteSnippetByName(ctx context.Context, request *SnippetBodyRequest, options ...RequestOption) (SnippetsDeleteSnippetByNameRes, error)
 	// SnippetsGetSnippets invokes Snippets_getSnippets operation.
 	//
 	// Get snippets.
 	//
 	// GET /api/snippets
 	SnippetsGetSnippets(ctx context.Context, options ...RequestOption) (SnippetsGetSnippetsRes, error)
+	// SnippetsSyncSnippet invokes Snippets_syncSnippet operation.
+	//
+	// Trigger the sync of a snippet to all config profiles that reference it. Nodes which use affected
+	// config profiles will be restarted.
+	//
+	// POST /api/snippets/actions/sync
+	SnippetsSyncSnippet(ctx context.Context, request *SnippetBodyRequest, options ...RequestOption) (SnippetsSyncSnippetRes, error)
 	// SnippetsUpdateSnippet invokes Snippets_updateSnippet operation.
 	//
 	// Update snippet.
 	//
 	// PATCH /api/snippets
-	SnippetsUpdateSnippet(ctx context.Context, request *SnippetRequest, options ...RequestOption) (SnippetsUpdateSnippetRes, error)
+	SnippetsUpdateSnippet(ctx context.Context, request *SnippetBodyRequest2, options ...RequestOption) (SnippetsUpdateSnippetRes, error)
 	// SubscriptionGetSubscription invokes Subscription_getSubscription operation.
 	//
 	// GET /api/sub/{shortUuid}
-	SubscriptionGetSubscription(ctx context.Context, params SubscriptionGetSubscriptionParams, options ...RequestOption) (SubscriptionGetSubscriptionOK, error)
+	SubscriptionGetSubscription(ctx context.Context, params SubscriptionGetSubscriptionParams, options ...RequestOption) (SubscriptionGetSubscriptionRes, error)
 	// SubscriptionGetSubscriptionByClientType invokes Subscription_getSubscriptionByClientType operation.
 	//
 	// GET /api/sub/{shortUuid}/{clientType}
-	SubscriptionGetSubscriptionByClientType(ctx context.Context, params SubscriptionGetSubscriptionByClientTypeParams, options ...RequestOption) (SubscriptionGetSubscriptionByClientTypeOK, error)
+	SubscriptionGetSubscriptionByClientType(ctx context.Context, params SubscriptionGetSubscriptionByClientTypeParams, options ...RequestOption) (SubscriptionGetSubscriptionByClientTypeRes, error)
 	// SubscriptionGetSubscriptionInfoByShortUuid invokes Subscription_getSubscriptionInfoByShortUuid operation.
 	//
 	// Get Subscription Info by Short UUID.
@@ -809,13 +985,13 @@ type Invoker interface {
 	// Clone subscription page config.
 	//
 	// POST /api/subscription-page-configs/actions/clone
-	SubscriptionPageConfigCloneSubscriptionPageConfig(ctx context.Context, request *CloneNodePluginRequestRequest, options ...RequestOption) (SubscriptionPageConfigCloneSubscriptionPageConfigRes, error)
+	SubscriptionPageConfigCloneSubscriptionPageConfig(ctx context.Context, request *CloneSubpageConfigBody, options ...RequestOption) (SubscriptionPageConfigCloneSubscriptionPageConfigRes, error)
 	// SubscriptionPageConfigCreateConfig invokes SubscriptionPageConfig_createConfig operation.
 	//
 	// Create subscription page config.
 	//
 	// POST /api/subscription-page-configs
-	SubscriptionPageConfigCreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequest, options ...RequestOption) (SubscriptionPageConfigCreateConfigRes, error)
+	SubscriptionPageConfigCreateConfig(ctx context.Context, request *CreateSubpageConfigBody, options ...RequestOption) (SubscriptionPageConfigCreateConfigRes, error)
 	// SubscriptionPageConfigDeleteConfig invokes SubscriptionPageConfig_deleteConfig operation.
 	//
 	// Delete subscription page config.
@@ -834,18 +1010,30 @@ type Invoker interface {
 	//
 	// GET /api/subscription-page-configs/{uuid}
 	SubscriptionPageConfigGetConfigByUuid(ctx context.Context, params SubscriptionPageConfigGetConfigByUuidParams, options ...RequestOption) (SubscriptionPageConfigGetConfigByUuidRes, error)
+	// SubscriptionPageConfigGetTags invokes SubscriptionPageConfig_getTags operation.
+	//
+	// Get tags of Subpage Configs.
+	//
+	// GET /api/subscription-page-configs/tags
+	SubscriptionPageConfigGetTags(ctx context.Context, options ...RequestOption) (SubscriptionPageConfigGetTagsRes, error)
 	// SubscriptionPageConfigReorderSubscriptionPageConfigs invokes SubscriptionPageConfig_reorderSubscriptionPageConfigs operation.
 	//
 	// Reorder subscription page configs.
 	//
 	// POST /api/subscription-page-configs/actions/reorder
-	SubscriptionPageConfigReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderRequest, options ...RequestOption) (SubscriptionPageConfigReorderSubscriptionPageConfigsRes, error)
+	SubscriptionPageConfigReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderSubpageConfigsBody, options ...RequestOption) (SubscriptionPageConfigReorderSubscriptionPageConfigsRes, error)
+	// SubscriptionPageConfigSetTags invokes SubscriptionPageConfig_setTags operation.
+	//
+	// Set tags of Subpage Config.
+	//
+	// PATCH /api/subscription-page-configs/tags
+	SubscriptionPageConfigSetTags(ctx context.Context, request *SetSubpageConfigsTagsBody, options ...RequestOption) (SubscriptionPageConfigSetTagsRes, error)
 	// SubscriptionPageConfigUpdateConfig invokes SubscriptionPageConfig_updateConfig operation.
 	//
 	// Update subscription page config.
 	//
 	// PATCH /api/subscription-page-configs
-	SubscriptionPageConfigUpdateConfig(ctx context.Context, request *UpdateSubscriptionPageConfigRequest, options ...RequestOption) (SubscriptionPageConfigUpdateConfigRes, error)
+	SubscriptionPageConfigUpdateConfig(ctx context.Context, request *UpdateSubpageConfigBody, options ...RequestOption) (SubscriptionPageConfigUpdateConfigRes, error)
 	// SubscriptionSettingsGetSettings invokes SubscriptionSettings_getSettings operation.
 	//
 	// Get subscription settings.
@@ -857,13 +1045,13 @@ type Invoker interface {
 	// Update subscription settings.
 	//
 	// PATCH /api/subscription-settings
-	SubscriptionSettingsUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequest, options ...RequestOption) (SubscriptionSettingsUpdateSettingsRes, error)
+	SubscriptionSettingsUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsBody, options ...RequestOption) (SubscriptionSettingsUpdateSettingsRes, error)
 	// SubscriptionTemplateCreateTemplate invokes SubscriptionTemplate_createTemplate operation.
 	//
 	// Create subscription template.
 	//
 	// POST /api/subscription-templates
-	SubscriptionTemplateCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequest, options ...RequestOption) (SubscriptionTemplateCreateTemplateRes, error)
+	SubscriptionTemplateCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateBody, options ...RequestOption) (SubscriptionTemplateCreateTemplateRes, error)
 	// SubscriptionTemplateDeleteTemplate invokes SubscriptionTemplate_deleteTemplate operation.
 	//
 	// Delete subscription template.
@@ -876,6 +1064,12 @@ type Invoker interface {
 	//
 	// GET /api/subscription-templates
 	SubscriptionTemplateGetAllTemplates(ctx context.Context, options ...RequestOption) (SubscriptionTemplateGetAllTemplatesRes, error)
+	// SubscriptionTemplateGetTags invokes SubscriptionTemplate_getTags operation.
+	//
+	// Get tags of Subscription Templates.
+	//
+	// GET /api/subscription-templates/tags
+	SubscriptionTemplateGetTags(ctx context.Context, options ...RequestOption) (SubscriptionTemplateGetTagsRes, error)
 	// SubscriptionTemplateGetTemplateByUuid invokes SubscriptionTemplate_getTemplateByUuid operation.
 	//
 	// Get subscription template by uuid.
@@ -887,25 +1081,31 @@ type Invoker interface {
 	// Reorder subscription templates.
 	//
 	// POST /api/subscription-templates/actions/reorder
-	SubscriptionTemplateReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest, options ...RequestOption) (SubscriptionTemplateReorderSubscriptionTemplatesRes, error)
+	SubscriptionTemplateReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesBody, options ...RequestOption) (SubscriptionTemplateReorderSubscriptionTemplatesRes, error)
+	// SubscriptionTemplateSetTags invokes SubscriptionTemplate_setTags operation.
+	//
+	// Set tags of Subscription Template.
+	//
+	// PATCH /api/subscription-templates/tags
+	SubscriptionTemplateSetTags(ctx context.Context, request *SetSubscriptionTemplatesTagsBody, options ...RequestOption) (SubscriptionTemplateSetTagsRes, error)
 	// SubscriptionTemplateUpdateTemplate invokes SubscriptionTemplate_updateTemplate operation.
 	//
 	// Update subscription template.
 	//
 	// PATCH /api/subscription-templates
-	SubscriptionTemplateUpdateTemplate(ctx context.Context, request *UpdateTemplateRequest, options ...RequestOption) (SubscriptionTemplateUpdateTemplateRes, error)
+	SubscriptionTemplateUpdateTemplate(ctx context.Context, request *UpdateTemplateBody, options ...RequestOption) (SubscriptionTemplateUpdateTemplateRes, error)
 	// SubscriptionsGetAllSubscriptions invokes Subscriptions_getAllSubscriptions operation.
 	//
 	// Get all subscriptions.
 	//
 	// GET /api/subscriptions
 	SubscriptionsGetAllSubscriptions(ctx context.Context, params SubscriptionsGetAllSubscriptionsParams, options ...RequestOption) (SubscriptionsGetAllSubscriptionsRes, error)
-	// SubscriptionsGetConnectionKeysByUuid invokes Subscriptions_getConnectionKeysByUuid operation.
+	// SubscriptionsGetConnectionKeysByUserId invokes Subscriptions_getConnectionKeysByUserId operation.
 	//
-	// Get connection keys (base64 format) by uuid.
+	// Get connection keys (base64 format) by user id.
 	//
-	// GET /api/subscriptions/connection-keys/{uuid}
-	SubscriptionsGetConnectionKeysByUuid(ctx context.Context, params SubscriptionsGetConnectionKeysByUuidParams, options ...RequestOption) (SubscriptionsGetConnectionKeysByUuidRes, error)
+	// GET /api/subscriptions/connection-keys/{userId}
+	SubscriptionsGetConnectionKeysByUserId(ctx context.Context, params SubscriptionsGetConnectionKeysByUserIdParams, options ...RequestOption) (SubscriptionsGetConnectionKeysByUserIdRes, error)
 	// SubscriptionsGetRawSubscriptionByShortUuid invokes Subscriptions_getRawSubscriptionByShortUuid operation.
 	//
 	// Get Raw Subscription by Short UUID.
@@ -917,7 +1117,7 @@ type Invoker interface {
 	// Get Subpage Config by Short UUID.
 	//
 	// GET /api/subscriptions/subpage-config/{shortUuid}
-	SubscriptionsGetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidRequestBody, params SubscriptionsGetSubpageConfigByShortUuidParams, options ...RequestOption) (SubscriptionsGetSubpageConfigByShortUuidRes, error)
+	SubscriptionsGetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidBody, params SubscriptionsGetSubpageConfigByShortUuidParams, options ...RequestOption) (SubscriptionsGetSubpageConfigByShortUuidRes, error)
 	// SubscriptionsGetSubscriptionByShortUuidProtected invokes Subscriptions_getSubscriptionByShortUuidProtected operation.
 	//
 	// Get subscription by short uuid (protected route).
@@ -932,22 +1132,34 @@ type Invoker interface {
 	SubscriptionsGetSubscriptionByUsername(ctx context.Context, params SubscriptionsGetSubscriptionByUsernameParams, options ...RequestOption) (SubscriptionsGetSubscriptionByUsernameRes, error)
 	// SubscriptionsGetSubscriptionByUuid invokes Subscriptions_getSubscriptionByUuid operation.
 	//
-	// Get subscription by uuid.
+	// Get subscription by User ID.
 	//
-	// GET /api/subscriptions/by-uuid/{uuid}
+	// GET /api/subscriptions/by-id/{userId}
 	SubscriptionsGetSubscriptionByUuid(ctx context.Context, params SubscriptionsGetSubscriptionByUuidParams, options ...RequestOption) (SubscriptionsGetSubscriptionByUuidRes, error)
 	// SystemDebugSrrMatcher invokes System_debugSrrMatcher operation.
 	//
 	// Test SRR Matcher.
 	//
 	// POST /api/system/testers/srr-matcher
-	SystemDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequest, options ...RequestOption) (SystemDebugSrrMatcherRes, error)
+	SystemDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherBody, options ...RequestOption) (SystemDebugSrrMatcherRes, error)
 	// SystemGetBandwidthStats invokes System_getBandwidthStats operation.
 	//
 	// Get Bandwidth Stats.
 	//
 	// GET /api/system/stats/bandwidth
-	SystemGetBandwidthStats(ctx context.Context, options ...RequestOption) (SystemGetBandwidthStatsRes, error)
+	SystemGetBandwidthStats(ctx context.Context, params SystemGetBandwidthStatsParams, options ...RequestOption) (SystemGetBandwidthStatsRes, error)
+	// SystemGetConfiguration invokes System_getConfiguration operation.
+	//
+	// Returns some of the configuration values.
+	//
+	// GET /api/system/configuration
+	SystemGetConfiguration(ctx context.Context, options ...RequestOption) (SystemGetConfigurationRes, error)
+	// SystemGetHttpStats invokes System_getHttpStats operation.
+	//
+	// Get HTTP Stats.
+	//
+	// GET /api/system/stats/http
+	SystemGetHttpStats(ctx context.Context, options ...RequestOption) (SystemGetHttpStatsRes, error)
 	// SystemGetMetadata invokes System_getMetadata operation.
 	//
 	// Get Remnawave Information.
@@ -984,6 +1196,15 @@ type Invoker interface {
 	//
 	// GET /api/system/stats
 	SystemGetStats(ctx context.Context, options ...RequestOption) (SystemGetStatsRes, error)
+	// SystemGetStatsDigest invokes System_getStatsDigest operation.
+	//
+	// Aggregated statistics for a datetime range [start, end): created and expired users, total traffic,
+	// traffic spent by users created within the range and new HWID devices. Per-user traffic history is
+	// stored with daily granularity (UTC), so the "traffic by new users" metric snaps to whole days at the
+	// range edges.
+	//
+	// GET /api/system/stats/digest
+	SystemGetStatsDigest(ctx context.Context, params SystemGetStatsDigestParams, options ...RequestOption) (SystemGetStatsDigestRes, error)
 	// SystemGetX25519Keypairs invokes System_getX25519Keypairs operation.
 	//
 	// Generate 30 X25519 keypairs.
@@ -992,7 +1213,9 @@ type Invoker interface {
 	SystemGetX25519Keypairs(ctx context.Context, options ...RequestOption) (SystemGetX25519KeypairsRes, error)
 	// TorrentBlockerReportsGetTorrentBlockerReports invokes TorrentBlockerReports_getTorrentBlockerReports operation.
 	//
-	// Get Torrent Blocker Reports.
+	// Please note that the filters here are primarily intended for use by the frontend and rely on
+	// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+	// performance of your database.
 	//
 	// GET /api/node-plugins/torrent-blocker
 	TorrentBlockerReportsGetTorrentBlockerReports(ctx context.Context, params TorrentBlockerReportsGetTorrentBlockerReportsParams, options ...RequestOption) (TorrentBlockerReportsGetTorrentBlockerReportsRes, error)
@@ -1010,7 +1233,9 @@ type Invoker interface {
 	TorrentBlockerReportsTruncateTorrentBlockerReports(ctx context.Context, options ...RequestOption) (TorrentBlockerReportsTruncateTorrentBlockerReportsRes, error)
 	// UserSubscriptionRequestHistoryGetSubscriptionRequestHistory invokes UserSubscriptionRequestHistory_getSubscriptionRequestHistory operation.
 	//
-	// Get all subscription request history.
+	// Please note that the filters here are primarily intended for use by the frontend and rely on
+	// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+	// performance of your database.
 	//
 	// GET /api/subscription-request-history
 	UserSubscriptionRequestHistoryGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryParams, options ...RequestOption) (UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryRes, error)
@@ -1022,111 +1247,107 @@ type Invoker interface {
 	UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryStats(ctx context.Context, options ...RequestOption) (UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryStatsRes, error)
 	// UsersBulkActionsBulkAllExtendExpirationDate invokes UsersBulkActions_bulkAllExtendExpirationDate operation.
 	//
-	// Bulk extend all users expiration date.
+	// Extend expiration date for all users by days.
 	//
 	// POST /api/users/bulk/all/extend-expiration-date
-	UsersBulkActionsBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequest, options ...RequestOption) (UsersBulkActionsBulkAllExtendExpirationDateRes, error)
+	UsersBulkActionsBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateBody, options ...RequestOption) (UsersBulkActionsBulkAllExtendExpirationDateRes, error)
 	// UsersBulkActionsBulkAllResetUserTraffic invokes UsersBulkActions_bulkAllResetUserTraffic operation.
 	//
-	// Bulk reset all users traffic.
+	// Reset user used traffic for all users.
 	//
 	// POST /api/users/bulk/all/reset-traffic
 	UsersBulkActionsBulkAllResetUserTraffic(ctx context.Context, options ...RequestOption) (UsersBulkActionsBulkAllResetUserTrafficRes, error)
 	// UsersBulkActionsBulkDeleteUsers invokes UsersBulkActions_bulkDeleteUsers operation.
 	//
-	// Bulk delete users by UUIDs.
+	// Bulk delete users by User IDs.
 	//
 	// POST /api/users/bulk/delete
-	UsersBulkActionsBulkDeleteUsers(ctx context.Context, request *BulkUuidsRequest, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersRes, error)
+	UsersBulkActionsBulkDeleteUsers(ctx context.Context, request *UsersBodyBulkRequest, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersRes, error)
 	// UsersBulkActionsBulkDeleteUsersByStatus invokes UsersBulkActions_bulkDeleteUsersByStatus operation.
 	//
 	// Bulk delete users by status.
 	//
 	// POST /api/users/bulk/delete-by-status
-	UsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequest, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersByStatusRes, error)
+	UsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusBody, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersByStatusRes, error)
 	// UsersBulkActionsBulkExtendExpirationDate invokes UsersBulkActions_bulkExtendExpirationDate operation.
 	//
-	// Bulk extend all users expiration date.
+	// Extend expiration date for specified users by days.
 	//
 	// POST /api/users/bulk/extend-expiration-date
-	UsersBulkActionsBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequest, options ...RequestOption) (UsersBulkActionsBulkExtendExpirationDateRes, error)
+	UsersBulkActionsBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateBody, options ...RequestOption) (UsersBulkActionsBulkExtendExpirationDateRes, error)
 	// UsersBulkActionsBulkResetUserTraffic invokes UsersBulkActions_bulkResetUserTraffic operation.
 	//
-	// Bulk reset traffic users by UUIDs.
+	// Bulk reset traffic users by User IDs.
 	//
 	// POST /api/users/bulk/reset-traffic
-	UsersBulkActionsBulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest, options ...RequestOption) (UsersBulkActionsBulkResetUserTrafficRes, error)
+	UsersBulkActionsBulkResetUserTraffic(ctx context.Context, request *UsersBodyBulkRequest, options ...RequestOption) (UsersBulkActionsBulkResetUserTrafficRes, error)
 	// UsersBulkActionsBulkRevokeUsersSubscription invokes UsersBulkActions_bulkRevokeUsersSubscription operation.
 	//
-	// Revoke users subscription by User UUIDs.
+	// Revoke users subscription by User IDs.
 	//
 	// POST /api/users/bulk/revoke-subscription
-	UsersBulkActionsBulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest, options ...RequestOption) (UsersBulkActionsBulkRevokeUsersSubscriptionRes, error)
+	UsersBulkActionsBulkRevokeUsersSubscription(ctx context.Context, request *UsersBodyBulkRequest, options ...RequestOption) (UsersBulkActionsBulkRevokeUsersSubscriptionRes, error)
 	// UsersBulkActionsBulkUpdateAllUsers invokes UsersBulkActions_bulkUpdateAllUsers operation.
 	//
 	// Bulk update all users.
 	//
 	// POST /api/users/bulk/all/update
-	UsersBulkActionsBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequest, options ...RequestOption) (UsersBulkActionsBulkUpdateAllUsersRes, error)
+	UsersBulkActionsBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersBody, options ...RequestOption) (UsersBulkActionsBulkUpdateAllUsersRes, error)
 	// UsersBulkActionsBulkUpdateUsers invokes UsersBulkActions_bulkUpdateUsers operation.
 	//
-	// Bulk update users by UUIDs.
+	// Bulk update users by User IDs.
 	//
 	// POST /api/users/bulk/update
-	UsersBulkActionsBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequest, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersRes, error)
+	UsersBulkActionsBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersBody, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersRes, error)
 	// UsersBulkActionsBulkUpdateUsersInternalSquads invokes UsersBulkActions_bulkUpdateUsersInternalSquads operation.
 	//
-	// Bulk update users internal squads by UUIDs.
+	// Bulk update users internal squads by User IDs.
 	//
 	// POST /api/users/bulk/update-squads
-	UsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequest, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersInternalSquadsRes, error)
+	UsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsBody, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersInternalSquadsRes, error)
 	// UsersCreateUser invokes Users_createUser operation.
 	//
 	// Create a new user.
 	//
 	// POST /api/users
-	UsersCreateUser(ctx context.Context, request *CreateUserRequest, options ...RequestOption) (UsersCreateUserRes, error)
+	UsersCreateUser(ctx context.Context, request *CreateUserBody, options ...RequestOption) (UsersCreateUserRes, error)
 	// UsersDeleteUser invokes Users_deleteUser operation.
 	//
 	// Delete user.
 	//
-	// DELETE /api/users/{uuid}
+	// DELETE /api/users/{userId}
 	UsersDeleteUser(ctx context.Context, params UsersDeleteUserParams, options ...RequestOption) (UsersDeleteUserRes, error)
 	// UsersDisableUser invokes Users_disableUser operation.
 	//
 	// Disable user.
 	//
-	// POST /api/users/{uuid}/actions/disable
+	// POST /api/users/{userId}/actions/disable
 	UsersDisableUser(ctx context.Context, params UsersDisableUserParams, options ...RequestOption) (UsersDisableUserRes, error)
 	// UsersEnableUser invokes Users_enableUser operation.
 	//
 	// Enable user.
 	//
-	// POST /api/users/{uuid}/actions/enable
+	// POST /api/users/{userId}/actions/enable
 	UsersEnableUser(ctx context.Context, params UsersEnableUserParams, options ...RequestOption) (UsersEnableUserRes, error)
-	// UsersGetAllTags invokes Users_getAllTags operation.
+	// UsersExtendUserExpirationDate invokes Users_extendUserExpirationDate operation.
 	//
-	// Get all existing user tags.
+	// If user status is EXPIRED, the new expiration date is calculated from the current date and the user
+	// becomes ACTIVE. If user status is ACTIVE, the given number of days is added to the existing
+	// expiration date. DISABLED and LIMITED users will be extended, but their status will not change.
 	//
-	// GET /api/users/tags
-	UsersGetAllTags(ctx context.Context, options ...RequestOption) (UsersGetAllTagsRes, error)
-	// UsersGetAllUsers invokes Users_getAllUsers operation.
-	//
-	// Get all users using offset-based pagination.
-	//
-	// GET /api/users
-	UsersGetAllUsers(ctx context.Context, params UsersGetAllUsersParams, options ...RequestOption) (UsersGetAllUsersRes, error)
+	// POST /api/users/{userId}/actions/extend
+	UsersExtendUserExpirationDate(ctx context.Context, request *ExtendUserBody, params UsersExtendUserExpirationDateParams, options ...RequestOption) (UsersExtendUserExpirationDateRes, error)
 	// UsersGetUserAccessibleNodes invokes Users_getUserAccessibleNodes operation.
 	//
 	// Get user accessible nodes.
 	//
-	// GET /api/users/{uuid}/accessible-nodes
+	// GET /api/users/{userId}/accessible-nodes
 	UsersGetUserAccessibleNodes(ctx context.Context, params UsersGetUserAccessibleNodesParams, options ...RequestOption) (UsersGetUserAccessibleNodesRes, error)
 	// UsersGetUserById invokes Users_getUserById operation.
 	//
 	// Get user by ID.
 	//
-	// GET /api/users/by-id/{id}
+	// GET /api/users/{userId}
 	UsersGetUserById(ctx context.Context, params UsersGetUserByIdParams, options ...RequestOption) (UsersGetUserByIdRes, error)
 	// UsersGetUserByShortUuid invokes Users_getUserByShortUuid operation.
 	//
@@ -1134,72 +1355,62 @@ type Invoker interface {
 	//
 	// GET /api/users/by-short-uuid/{shortUuid}
 	UsersGetUserByShortUuid(ctx context.Context, params UsersGetUserByShortUuidParams, options ...RequestOption) (UsersGetUserByShortUuidRes, error)
-	// UsersGetUserByTelegramId invokes Users_getUserByTelegramId operation.
-	//
-	// Get users by telegram ID.
-	//
-	// GET /api/users/by-telegram-id/{telegramId}
-	UsersGetUserByTelegramId(ctx context.Context, params UsersGetUserByTelegramIdParams, options ...RequestOption) (UsersGetUserByTelegramIdRes, error)
 	// UsersGetUserByUsername invokes Users_getUserByUsername operation.
 	//
 	// Get user by username.
 	//
 	// GET /api/users/by-username/{username}
 	UsersGetUserByUsername(ctx context.Context, params UsersGetUserByUsernameParams, options ...RequestOption) (UsersGetUserByUsernameRes, error)
-	// UsersGetUserByUuid invokes Users_getUserByUuid operation.
-	//
-	// Get user by UUID.
-	//
-	// GET /api/users/{uuid}
-	UsersGetUserByUuid(ctx context.Context, params UsersGetUserByUuidParams, options ...RequestOption) (UsersGetUserByUuidRes, error)
 	// UsersGetUserSubscriptionRequestHistory invokes Users_getUserSubscriptionRequestHistory operation.
 	//
 	// Get user subscription request history, recent 24 records.
 	//
-	// GET /api/users/{uuid}/subscription-request-history
+	// GET /api/users/{userId}/subscription-request-history
 	UsersGetUserSubscriptionRequestHistory(ctx context.Context, params UsersGetUserSubscriptionRequestHistoryParams, options ...RequestOption) (UsersGetUserSubscriptionRequestHistoryRes, error)
-	// UsersGetUsersByEmail invokes Users_getUsersByEmail operation.
+	// UsersGetUsers invokes Users_getUsers operation.
 	//
-	// Get users by email.
+	// Please note that the filters here are primarily intended for use by the frontend and rely on
+	// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+	// performance of your database.
 	//
-	// GET /api/users/by-email/{email}
-	UsersGetUsersByEmail(ctx context.Context, params UsersGetUsersByEmailParams, options ...RequestOption) (UsersGetUsersByEmailRes, error)
-	// UsersGetUsersByTag invokes Users_getUsersByTag operation.
-	//
-	// Get users by tag.
-	//
-	// GET /api/users/by-tag/{tag}
-	UsersGetUsersByTag(ctx context.Context, params UsersGetUsersByTagParams, options ...RequestOption) (UsersGetUsersByTagRes, error)
+	// GET /api/users
+	UsersGetUsers(ctx context.Context, params UsersGetUsersParams, options ...RequestOption) (UsersGetUsersRes, error)
 	// UsersGetUsersStream invokes Users_getUsersStream operation.
 	//
-	// Get all users using cursor-based (keyset) pagination.
+	// Get all users using cursor-based (keyset) pagination with filtering options.
 	//
 	// GET /api/users/stream
 	UsersGetUsersStream(ctx context.Context, params UsersGetUsersStreamParams, options ...RequestOption) (UsersGetUsersStreamRes, error)
+	// UsersGetUsersTags invokes Users_getUsersTags operation.
+	//
+	// Get users tags.
+	//
+	// GET /api/users/tags
+	UsersGetUsersTags(ctx context.Context, options ...RequestOption) (UsersGetUsersTagsRes, error)
 	// UsersResetUserTraffic invokes Users_resetUserTraffic operation.
 	//
 	// Reset user traffic.
 	//
-	// POST /api/users/{uuid}/actions/reset-traffic
+	// POST /api/users/{userId}/actions/reset-traffic
 	UsersResetUserTraffic(ctx context.Context, params UsersResetUserTrafficParams, options ...RequestOption) (UsersResetUserTrafficRes, error)
 	// UsersResolveUser invokes Users_resolveUser operation.
 	//
-	// Resolve a user.
+	// Resolve a user by ID, Short UUID or username. Exactly one of the fields must be provided.
 	//
 	// POST /api/users/resolve
-	UsersResolveUser(ctx context.Context, request *ResolveUserRequestBody, options ...RequestOption) (UsersResolveUserRes, error)
+	UsersResolveUser(ctx context.Context, request *ResolveUserBody, options ...RequestOption) (UsersResolveUserRes, error)
 	// UsersRevokeUserSubscription invokes Users_revokeUserSubscription operation.
 	//
 	// Revoke user subscription.
 	//
-	// POST /api/users/{uuid}/actions/revoke
+	// POST /api/users/{userId}/actions/revoke
 	UsersRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBody, params UsersRevokeUserSubscriptionParams, options ...RequestOption) (UsersRevokeUserSubscriptionRes, error)
 	// UsersUpdateUser invokes Users_updateUser operation.
 	//
-	// Update a user by UUID or username.
+	// Update a user by ID or username. Exactly one of the fields must be provided.
 	//
 	// PATCH /api/users
-	UsersUpdateUser(ctx context.Context, request *UpdateUserRequest, options ...RequestOption) (UsersUpdateUserRes, error)
+	UsersUpdateUser(ctx context.Context, request *UpdateUserBody, options ...RequestOption) (UsersUpdateUserRes, error)
 }
 
 // Client implements OAS client.
@@ -1245,17 +1456,17 @@ func (c *Client) onResponse(ctx context.Context, resp *http.Response) error {
 	return nil
 }
 
-// ApiTokensCreate invokes ApiTokens_create operation.
+// ApiTokensCreateApiToken invokes ApiTokens_createApiToken operation.
 //
 // This endpoint is forbidden to use via "API-key". It can only be used with an admin JWT-token.
 //
 // POST /api/tokens
-func (c *Client) ApiTokensCreate(ctx context.Context, request *CreateApiTokenRequest, options ...RequestOption) (ApiTokensCreateRes, error) {
-	res, err := c.sendApiTokensCreate(ctx, request, options...)
+func (c *Client) ApiTokensCreateApiToken(ctx context.Context, request *CreateApiTokenBody, options ...RequestOption) (ApiTokensCreateApiTokenRes, error) {
+	res, err := c.sendApiTokensCreateApiToken(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiTokenRequest, requestOptions ...RequestOption) (res ApiTokensCreateRes, err error) {
+func (c *Client) sendApiTokensCreateApiToken(ctx context.Context, request *CreateApiTokenBody, requestOptions ...RequestOption) (res ApiTokensCreateApiTokenRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -1266,7 +1477,7 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 		return res, errors.Wrap(err, "validate")
 	}
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("ApiTokens_create"),
+		otelogen.OperationID("ApiTokens_createApiToken"),
 		semconv.HTTPRequestMethodKey.String("POST"),
 		semconv.URLTemplateKey.String("/api/tokens"),
 	}
@@ -1284,7 +1495,7 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensCreateOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensCreateApiTokenOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1320,7 +1531,7 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
 	}
-	if err := encodeApiTokensCreateRequest(request, r); err != nil {
+	if err := encodeApiTokensCreateApiTokenRequest(request, r); err != nil {
 		return res, errors.Wrap(err, "encode request")
 	}
 
@@ -1329,7 +1540,7 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, ApiTokensCreateOperation, r); {
+			switch err := c.securityAuthorization(ctx, ApiTokensCreateApiTokenOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -1370,7 +1581,14 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -1381,7 +1599,7 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeApiTokensCreateResponse(resp)
+	result, err := decodeApiTokensCreateApiTokenResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -1389,19 +1607,19 @@ func (c *Client) sendApiTokensCreate(ctx context.Context, request *CreateApiToke
 	return result, nil
 }
 
-// ApiTokensDelete invokes ApiTokens_delete operation.
+// ApiTokensDeleteApiToken invokes ApiTokens_deleteApiToken operation.
 //
 // This endpoint is forbidden to use via "API-key". It can be used only with an admin JWT-token.
 //
 // DELETE /api/tokens/{uuid}
-func (c *Client) ApiTokensDelete(ctx context.Context, params ApiTokensDeleteParams, options ...RequestOption) (ApiTokensDeleteRes, error) {
-	res, err := c.sendApiTokensDelete(ctx, params, options...)
+func (c *Client) ApiTokensDeleteApiToken(ctx context.Context, params ApiTokensDeleteApiTokenParams, options ...RequestOption) (ApiTokensDeleteApiTokenRes, error) {
+	res, err := c.sendApiTokensDeleteApiToken(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDeleteParams, requestOptions ...RequestOption) (res ApiTokensDeleteRes, err error) {
+func (c *Client) sendApiTokensDeleteApiToken(ctx context.Context, params ApiTokensDeleteApiTokenParams, requestOptions ...RequestOption) (res ApiTokensDeleteApiTokenRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("ApiTokens_delete"),
+		otelogen.OperationID("ApiTokens_deleteApiToken"),
 		semconv.HTTPRequestMethodKey.String("DELETE"),
 		semconv.URLTemplateKey.String("/api/tokens/{uuid}"),
 	}
@@ -1419,7 +1637,7 @@ func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDelete
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensDeleteOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensDeleteApiTokenOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1456,7 +1674,7 @@ func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDelete
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -1479,7 +1697,7 @@ func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDelete
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, ApiTokensDeleteOperation, r); {
+			switch err := c.securityAuthorization(ctx, ApiTokensDeleteApiTokenOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -1520,7 +1738,14 @@ func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDelete
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -1531,7 +1756,7 @@ func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDelete
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeApiTokensDeleteResponse(resp)
+	result, err := decodeApiTokensDeleteApiTokenResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -1539,19 +1764,19 @@ func (c *Client) sendApiTokensDelete(ctx context.Context, params ApiTokensDelete
 	return result, nil
 }
 
-// ApiTokensFindAll invokes ApiTokens_findAll operation.
+// ApiTokensGetApiTokens invokes ApiTokens_getApiTokens operation.
 //
 // This endpoint is forbidden to use via "API-key". It can only be used with admin JWT-token.
 //
 // GET /api/tokens
-func (c *Client) ApiTokensFindAll(ctx context.Context, options ...RequestOption) (ApiTokensFindAllRes, error) {
-	res, err := c.sendApiTokensFindAll(ctx, options...)
+func (c *Client) ApiTokensGetApiTokens(ctx context.Context, options ...RequestOption) (ApiTokensGetApiTokensRes, error) {
+	res, err := c.sendApiTokensGetApiTokens(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendApiTokensFindAll(ctx context.Context, requestOptions ...RequestOption) (res ApiTokensFindAllRes, err error) {
+func (c *Client) sendApiTokensGetApiTokens(ctx context.Context, requestOptions ...RequestOption) (res ApiTokensGetApiTokensRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("ApiTokens_findAll"),
+		otelogen.OperationID("ApiTokens_getApiTokens"),
 		semconv.HTTPRequestMethodKey.String("GET"),
 		semconv.URLTemplateKey.String("/api/tokens"),
 	}
@@ -1569,7 +1794,7 @@ func (c *Client) sendApiTokensFindAll(ctx context.Context, requestOptions ...Req
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensFindAllOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, ApiTokensGetApiTokensOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1611,7 +1836,7 @@ func (c *Client) sendApiTokensFindAll(ctx context.Context, requestOptions ...Req
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, ApiTokensFindAllOperation, r); {
+			switch err := c.securityAuthorization(ctx, ApiTokensGetApiTokensOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -1652,7 +1877,14 @@ func (c *Client) sendApiTokensFindAll(ctx context.Context, requestOptions ...Req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -1663,7 +1895,7 @@ func (c *Client) sendApiTokensFindAll(ctx context.Context, requestOptions ...Req
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeApiTokensFindAllResponse(resp)
+	result, err := decodeApiTokensGetApiTokensResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -1785,7 +2017,14 @@ func (c *Client) sendApiTokensGetScopes(ctx context.Context, requestOptions ...R
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -1884,7 +2123,14 @@ func (c *Client) sendAuthGetStatus(ctx context.Context, requestOptions ...Reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -1908,12 +2154,12 @@ func (c *Client) sendAuthGetStatus(ctx context.Context, requestOptions ...Reques
 // Login as superadmin.
 //
 // POST /api/auth/login
-func (c *Client) AuthLogin(ctx context.Context, request *LoginRequest, options ...RequestOption) (AuthLoginRes, error) {
+func (c *Client) AuthLogin(ctx context.Context, request *LoginBody, options ...RequestOption) (AuthLoginRes, error) {
 	res, err := c.sendAuthLogin(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendAuthLogin(ctx context.Context, request *LoginRequest, requestOptions ...RequestOption) (res AuthLoginRes, err error) {
+func (c *Client) sendAuthLogin(ctx context.Context, request *LoginBody, requestOptions ...RequestOption) (res AuthLoginRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Auth_login"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -1986,7 +2232,14 @@ func (c *Client) sendAuthLogin(ctx context.Context, request *LoginRequest, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2010,12 +2263,12 @@ func (c *Client) sendAuthLogin(ctx context.Context, request *LoginRequest, reque
 // Initiate OAuth2 authorization.
 //
 // POST /api/auth/oauth2/authorize
-func (c *Client) AuthOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequest, options ...RequestOption) (AuthOauth2AuthorizeRes, error) {
+func (c *Client) AuthOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeBody, options ...RequestOption) (AuthOauth2AuthorizeRes, error) {
 	res, err := c.sendAuthOauth2Authorize(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendAuthOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeRequest, requestOptions ...RequestOption) (res AuthOauth2AuthorizeRes, err error) {
+func (c *Client) sendAuthOauth2Authorize(ctx context.Context, request *OAuth2AuthorizeBody, requestOptions ...RequestOption) (res AuthOauth2AuthorizeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -2097,7 +2350,14 @@ func (c *Client) sendAuthOauth2Authorize(ctx context.Context, request *OAuth2Aut
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2121,12 +2381,12 @@ func (c *Client) sendAuthOauth2Authorize(ctx context.Context, request *OAuth2Aut
 // Callback from OAuth2.
 //
 // POST /api/auth/oauth2/callback
-func (c *Client) AuthOauth2Callback(ctx context.Context, request *OAuth2CallbackRequest, options ...RequestOption) (AuthOauth2CallbackRes, error) {
+func (c *Client) AuthOauth2Callback(ctx context.Context, request *OAuth2CallbackBody, options ...RequestOption) (AuthOauth2CallbackRes, error) {
 	res, err := c.sendAuthOauth2Callback(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendAuthOauth2Callback(ctx context.Context, request *OAuth2CallbackRequest, requestOptions ...RequestOption) (res AuthOauth2CallbackRes, err error) {
+func (c *Client) sendAuthOauth2Callback(ctx context.Context, request *OAuth2CallbackBody, requestOptions ...RequestOption) (res AuthOauth2CallbackRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -2208,7 +2468,14 @@ func (c *Client) sendAuthOauth2Callback(ctx context.Context, request *OAuth2Call
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2307,7 +2574,14 @@ func (c *Client) sendAuthPasskeyAuthenticationOptions(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2409,7 +2683,14 @@ func (c *Client) sendAuthPasskeyAuthenticationVerify(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2433,12 +2714,12 @@ func (c *Client) sendAuthPasskeyAuthenticationVerify(ctx context.Context, reques
 // Register as superadmin.
 //
 // POST /api/auth/register
-func (c *Client) AuthRegister(ctx context.Context, request *RegisterRequest, options ...RequestOption) (AuthRegisterRes, error) {
+func (c *Client) AuthRegister(ctx context.Context, request *RegisterBody, options ...RequestOption) (AuthRegisterRes, error) {
 	res, err := c.sendAuthRegister(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendAuthRegister(ctx context.Context, request *RegisterRequest, requestOptions ...RequestOption) (res AuthRegisterRes, err error) {
+func (c *Client) sendAuthRegister(ctx context.Context, request *RegisterBody, requestOptions ...RequestOption) (res AuthRegisterRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -2520,7 +2801,14 @@ func (c *Client) sendAuthRegister(ctx context.Context, request *RegisterRequest,
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2539,21 +2827,31 @@ func (c *Client) sendAuthRegister(ctx context.Context, request *RegisterRequest,
 	return result, nil
 }
 
-// BandwidthStatsNodesGetNodeUserUsage invokes BandwidthStatsNodes_getNodeUserUsage operation.
+// BandwidthStatsNodesGetNodeUsage invokes BandwidthStatsNodes_getNodeUsage operation.
 //
-// Get Node User Usage by Range and Node UUID (Legacy).
+// Returns users whose total usage over the period on the given nodes is >= minTotalBytes. Underlying
+// usage data is flushed to the database roughly every 2 minutes.
 //
-// GET /api/bandwidth-stats/nodes/{uuid}/users/legacy
-func (c *Client) BandwidthStatsNodesGetNodeUserUsage(ctx context.Context, params BandwidthStatsNodesGetNodeUserUsageParams, options ...RequestOption) (BandwidthStatsNodesGetNodeUserUsageRes, error) {
-	res, err := c.sendBandwidthStatsNodesGetNodeUserUsage(ctx, params, options...)
+// POST /api/bandwidth-stats/nodes/usage
+func (c *Client) BandwidthStatsNodesGetNodeUsage(ctx context.Context, request *GetNodeUsageBody, params BandwidthStatsNodesGetNodeUsageParams, options ...RequestOption) (BandwidthStatsNodesGetNodeUsageRes, error) {
+	res, err := c.sendBandwidthStatsNodesGetNodeUsage(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, params BandwidthStatsNodesGetNodeUserUsageParams, requestOptions ...RequestOption) (res BandwidthStatsNodesGetNodeUserUsageRes, err error) {
+func (c *Client) sendBandwidthStatsNodesGetNodeUsage(ctx context.Context, request *GetNodeUsageBody, params BandwidthStatsNodesGetNodeUsageParams, requestOptions ...RequestOption) (res BandwidthStatsNodesGetNodeUsageRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("BandwidthStatsNodes_getNodeUserUsage"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/bandwidth-stats/nodes/{uuid}/users/legacy"),
+		otelogen.OperationID("BandwidthStatsNodes_getNodeUsage"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/bandwidth-stats/nodes/usage"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -2569,7 +2867,7 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, BandwidthStatsNodesGetNodeUserUsageOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, BandwidthStatsNodesGetNodeUsageOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2596,27 +2894,8 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [3]string
-	pathParts[0] = "/api/bandwidth-stats/nodes/"
-	{
-		// Encode "uuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	pathParts[2] = "/users/legacy"
+	var pathParts [1]string
+	pathParts[0] = "/api/bandwidth-stats/nodes/usage"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	stage = "EncodeQueryParams"
@@ -2630,7 +2909,7 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Start))
+			return e.EncodeValue(conv.DateToString(params.Start))
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -2644,7 +2923,24 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
+			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "minTotalBytes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "minTotalBytes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.MinTotalBytes.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -2652,9 +2948,12 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 	u.RawQuery = q.Values().Encode()
 
 	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeBandwidthStatsNodesGetNodeUsageRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
 	}
 
 	{
@@ -2662,7 +2961,7 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, BandwidthStatsNodesGetNodeUserUsageOperation, r); {
+			switch err := c.securityAuthorization(ctx, BandwidthStatsNodesGetNodeUsageOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -2703,7 +3002,14 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2714,7 +3020,7 @@ func (c *Client) sendBandwidthStatsNodesGetNodeUserUsage(ctx context.Context, pa
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeBandwidthStatsNodesGetNodeUserUsageResponse(resp)
+	result, err := decodeBandwidthStatsNodesGetNodeUsageResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -2789,7 +3095,7 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodeUsersUsage(ctx context.Conte
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -2804,20 +3110,6 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodeUsersUsage(ctx context.Conte
 
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
-	{
-		// Encode "topUsersLimit" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "topUsersLimit",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.IntToString(params.TopUsersLimit))
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
 	{
 		// Encode "start" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
@@ -2842,6 +3134,23 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodeUsersUsage(ctx context.Conte
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "topUsersLimit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "topUsersLimit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.TopUsersLimit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -2900,7 +3209,14 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodeUsersUsage(ctx context.Conte
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -2924,12 +3240,12 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodeUsersUsage(ctx context.Conte
 // Get Nodes Users Usage by Nodes UUIDs.
 //
 // POST /api/bandwidth-stats/nodes/users
-func (c *Client) BandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Context, request *GetStatsNodesUsersUsageRequest, params BandwidthStatsNodesGetStatsNodesUsersUsageParams, options ...RequestOption) (BandwidthStatsNodesGetStatsNodesUsersUsageRes, error) {
+func (c *Client) BandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Context, request *GetStatsNodesUsersUsageBody, params BandwidthStatsNodesGetStatsNodesUsersUsageParams, options ...RequestOption) (BandwidthStatsNodesGetStatsNodesUsersUsageRes, error) {
 	res, err := c.sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Context, request *GetStatsNodesUsersUsageRequest, params BandwidthStatsNodesGetStatsNodesUsersUsageParams, requestOptions ...RequestOption) (res BandwidthStatsNodesGetStatsNodesUsersUsageRes, err error) {
+func (c *Client) sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Context, request *GetStatsNodesUsersUsageBody, params BandwidthStatsNodesGetStatsNodesUsersUsageParams, requestOptions ...RequestOption) (res BandwidthStatsNodesGetStatsNodesUsersUsageRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -2992,20 +3308,6 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Cont
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
-		// Encode "topUsersLimit" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "topUsersLimit",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.IntToString(params.TopUsersLimit))
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	{
 		// Encode "start" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "start",
@@ -3029,6 +3331,23 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Cont
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "topUsersLimit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "topUsersLimit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.TopUsersLimit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -3090,7 +3409,14 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Cont
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -3113,7 +3439,7 @@ func (c *Client) sendBandwidthStatsNodesGetStatsNodesUsersUsage(ctx context.Cont
 //
 // Get User Usage by Range.
 //
-// GET /api/bandwidth-stats/users/{uuid}
+// GET /api/bandwidth-stats/users/{userId}
 func (c *Client) BandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, params BandwidthStatsUsersGetStatsNodesUsageParams, options ...RequestOption) (BandwidthStatsUsersGetStatsNodesUsageRes, error) {
 	res, err := c.sendBandwidthStatsUsersGetStatsNodesUsage(ctx, params, options...)
 	return res, err
@@ -3123,7 +3449,7 @@ func (c *Client) sendBandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, 
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("BandwidthStatsUsers_getStatsNodesUsage"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/bandwidth-stats/users/{uuid}"),
+		semconv.URLTemplateKey.String("/api/bandwidth-stats/users/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -3169,14 +3495,14 @@ func (c *Client) sendBandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, 
 	var pathParts [2]string
 	pathParts[0] = "/api/bandwidth-stats/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -3190,20 +3516,6 @@ func (c *Client) sendBandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, 
 
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
-	{
-		// Encode "topNodesLimit" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "topNodesLimit",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.IntToString(params.TopNodesLimit))
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
 	{
 		// Encode "start" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
@@ -3228,6 +3540,23 @@ func (c *Client) sendBandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, 
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "topNodesLimit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "topNodesLimit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.TopNodesLimit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -3286,7 +3615,14 @@ func (c *Client) sendBandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, 
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -3305,200 +3641,17 @@ func (c *Client) sendBandwidthStatsUsersGetStatsNodesUsage(ctx context.Context, 
 	return result, nil
 }
 
-// BandwidthStatsUsersGetUserUsageByRange invokes BandwidthStatsUsers_getUserUsageByRange operation.
-//
-// Get User Usage by Range (Legacy).
-//
-// GET /api/bandwidth-stats/users/{uuid}/legacy
-func (c *Client) BandwidthStatsUsersGetUserUsageByRange(ctx context.Context, params BandwidthStatsUsersGetUserUsageByRangeParams, options ...RequestOption) (BandwidthStatsUsersGetUserUsageByRangeRes, error) {
-	res, err := c.sendBandwidthStatsUsersGetUserUsageByRange(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendBandwidthStatsUsersGetUserUsageByRange(ctx context.Context, params BandwidthStatsUsersGetUserUsageByRangeParams, requestOptions ...RequestOption) (res BandwidthStatsUsersGetUserUsageByRangeRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("BandwidthStatsUsers_getUserUsageByRange"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/bandwidth-stats/users/{uuid}/legacy"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, BandwidthStatsUsersGetUserUsageByRangeOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [3]string
-	pathParts[0] = "/api/bandwidth-stats/users/"
-	{
-		// Encode "uuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	pathParts[2] = "/legacy"
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeQueryParams"
-	q := uri.NewQueryEncoder()
-	{
-		// Encode "start" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "start",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.Start))
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	{
-		// Encode "end" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "end",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.DateTimeToString(params.End))
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	u.RawQuery = q.Values().Encode()
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, BandwidthStatsUsersGetUserUsageByRangeOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeBandwidthStatsUsersGetUserUsageByRangeResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
 // ConfigProfileCreateConfigProfile invokes ConfigProfile_createConfigProfile operation.
 //
 // Create config profile.
 //
 // POST /api/config-profiles
-func (c *Client) ConfigProfileCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequest, options ...RequestOption) (ConfigProfileCreateConfigProfileRes, error) {
+func (c *Client) ConfigProfileCreateConfigProfile(ctx context.Context, request *CreateConfigProfileBody, options ...RequestOption) (ConfigProfileCreateConfigProfileRes, error) {
 	res, err := c.sendConfigProfileCreateConfigProfile(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileCreateConfigProfile(ctx context.Context, request *CreateConfigProfileRequest, requestOptions ...RequestOption) (res ConfigProfileCreateConfigProfileRes, err error) {
+func (c *Client) sendConfigProfileCreateConfigProfile(ctx context.Context, request *CreateConfigProfileBody, requestOptions ...RequestOption) (res ConfigProfileCreateConfigProfileRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -3613,7 +3766,14 @@ func (c *Client) sendConfigProfileCreateConfigProfile(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -3699,7 +3859,7 @@ func (c *Client) sendConfigProfileDeleteConfigProfileByUuid(ctx context.Context,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -3763,7 +3923,14 @@ func (c *Client) sendConfigProfileDeleteConfigProfileByUuid(ctx context.Context,
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -3895,7 +4062,14 @@ func (c *Client) sendConfigProfileGetAllInbounds(ctx context.Context, requestOpt
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -3981,7 +4155,7 @@ func (c *Client) sendConfigProfileGetComputedConfigProfileByUuid(ctx context.Con
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -4046,7 +4220,14 @@ func (c *Client) sendConfigProfileGetComputedConfigProfileByUuid(ctx context.Con
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4132,7 +4313,7 @@ func (c *Client) sendConfigProfileGetConfigProfileByUuid(ctx context.Context, pa
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -4196,7 +4377,14 @@ func (c *Client) sendConfigProfileGetConfigProfileByUuid(ctx context.Context, pa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4328,7 +4516,14 @@ func (c *Client) sendConfigProfileGetConfigProfiles(ctx context.Context, request
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4414,7 +4609,7 @@ func (c *Client) sendConfigProfileGetInboundsByProfileUuid(ctx context.Context, 
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -4479,7 +4674,14 @@ func (c *Client) sendConfigProfileGetInboundsByProfileUuid(ctx context.Context, 
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4498,17 +4700,156 @@ func (c *Client) sendConfigProfileGetInboundsByProfileUuid(ctx context.Context, 
 	return result, nil
 }
 
+// ConfigProfileGetTags invokes ConfigProfile_getTags operation.
+//
+// Get tags of Config Profiles.
+//
+// GET /api/config-profiles/tags
+func (c *Client) ConfigProfileGetTags(ctx context.Context, options ...RequestOption) (ConfigProfileGetTagsRes, error) {
+	res, err := c.sendConfigProfileGetTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendConfigProfileGetTags(ctx context.Context, requestOptions ...RequestOption) (res ConfigProfileGetTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfile_getTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/config-profiles/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileGetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/config-profiles/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConfigProfileGetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConfigProfileGetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // ConfigProfileReorderConfigProfiles invokes ConfigProfile_reorderConfigProfiles operation.
 //
 // Reorder config profiles.
 //
 // POST /api/config-profiles/actions/reorder
-func (c *Client) ConfigProfileReorderConfigProfiles(ctx context.Context, request *ReorderRequest, options ...RequestOption) (ConfigProfileReorderConfigProfilesRes, error) {
+func (c *Client) ConfigProfileReorderConfigProfiles(ctx context.Context, request *ReorderConfigProfilesBody, options ...RequestOption) (ConfigProfileReorderConfigProfilesRes, error) {
 	res, err := c.sendConfigProfileReorderConfigProfiles(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileReorderConfigProfiles(ctx context.Context, request *ReorderRequest, requestOptions ...RequestOption) (res ConfigProfileReorderConfigProfilesRes, err error) {
+func (c *Client) sendConfigProfileReorderConfigProfiles(ctx context.Context, request *ReorderConfigProfilesBody, requestOptions ...RequestOption) (res ConfigProfileReorderConfigProfilesRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4623,7 +4964,14 @@ func (c *Client) sendConfigProfileReorderConfigProfiles(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4642,17 +4990,168 @@ func (c *Client) sendConfigProfileReorderConfigProfiles(ctx context.Context, req
 	return result, nil
 }
 
+// ConfigProfileSetTags invokes ConfigProfile_setTags operation.
+//
+// Set tags of Config Profile.
+//
+// PATCH /api/config-profiles/tags
+func (c *Client) ConfigProfileSetTags(ctx context.Context, request *SetConfigProfilesTagsBody, options ...RequestOption) (ConfigProfileSetTagsRes, error) {
+	res, err := c.sendConfigProfileSetTags(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendConfigProfileSetTags(ctx context.Context, request *SetConfigProfilesTagsBody, requestOptions ...RequestOption) (res ConfigProfileSetTagsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ConfigProfile_setTags"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/config-profiles/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConfigProfileSetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/config-profiles/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeConfigProfileSetTagsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConfigProfileSetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConfigProfileSetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // ConfigProfileUpdateConfigProfile invokes ConfigProfile_updateConfigProfile operation.
 //
 // Update Core Config in specific config profile.
 //
 // PATCH /api/config-profiles
-func (c *Client) ConfigProfileUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequest, options ...RequestOption) (ConfigProfileUpdateConfigProfileRes, error) {
+func (c *Client) ConfigProfileUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileBody, options ...RequestOption) (ConfigProfileUpdateConfigProfileRes, error) {
 	res, err := c.sendConfigProfileUpdateConfigProfile(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendConfigProfileUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileRequest, requestOptions ...RequestOption) (res ConfigProfileUpdateConfigProfileRes, err error) {
+func (c *Client) sendConfigProfileUpdateConfigProfile(ctx context.Context, request *UpdateConfigProfileBody, requestOptions ...RequestOption) (res ConfigProfileUpdateConfigProfileRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -4767,7 +5266,14 @@ func (c *Client) sendConfigProfileUpdateConfigProfile(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4779,6 +5285,1103 @@ func (c *Client) sendConfigProfileUpdateConfigProfile(ctx context.Context, reque
 
 	stage = "DecodeResponse"
 	result, err := decodeConfigProfileUpdateConfigProfileResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsConnectionsByNode invokes Connections_connectionsByNode operation.
+//
+// Request Connections for Node.
+//
+// POST /api/connections/by-node/{nodeUuid}
+func (c *Client) ConnectionsConnectionsByNode(ctx context.Context, params ConnectionsConnectionsByNodeParams, options ...RequestOption) (ConnectionsConnectionsByNodeRes, error) {
+	res, err := c.sendConnectionsConnectionsByNode(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsConnectionsByNode(ctx context.Context, params ConnectionsConnectionsByNodeParams, requestOptions ...RequestOption) (res ConnectionsConnectionsByNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_connectionsByNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/connections/by-node/{nodeUuid}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsConnectionsByNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/connections/by-node/"
+	{
+		// Encode "nodeUuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "nodeUuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.NodeUuid))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsConnectionsByNodeOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsConnectionsByNodeResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsConnectionsByNodeResult invokes Connections_connectionsByNodeResult operation.
+//
+// Get Connections for Node by Job ID.
+//
+// GET /api/connections/by-node/{jobId}
+func (c *Client) ConnectionsConnectionsByNodeResult(ctx context.Context, params ConnectionsConnectionsByNodeResultParams, options ...RequestOption) (ConnectionsConnectionsByNodeResultRes, error) {
+	res, err := c.sendConnectionsConnectionsByNodeResult(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsConnectionsByNodeResult(ctx context.Context, params ConnectionsConnectionsByNodeResultParams, requestOptions ...RequestOption) (res ConnectionsConnectionsByNodeResultRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_connectionsByNodeResult"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/connections/by-node/{jobId}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsConnectionsByNodeResultOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/connections/by-node/"
+	{
+		// Encode "jobId" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "jobId",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.JobId))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsConnectionsByNodeResultOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsConnectionsByNodeResultResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsConnectionsByUser invokes Connections_connectionsByUser operation.
+//
+// Request Connections for User.
+//
+// POST /api/connections/by-user/{userId}
+func (c *Client) ConnectionsConnectionsByUser(ctx context.Context, params ConnectionsConnectionsByUserParams, options ...RequestOption) (ConnectionsConnectionsByUserRes, error) {
+	res, err := c.sendConnectionsConnectionsByUser(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsConnectionsByUser(ctx context.Context, params ConnectionsConnectionsByUserParams, requestOptions ...RequestOption) (res ConnectionsConnectionsByUserRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_connectionsByUser"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/connections/by-user/{userId}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsConnectionsByUserOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/connections/by-user/"
+	{
+		// Encode "userId" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "userId",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.IntToString(params.UserId))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsConnectionsByUserOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsConnectionsByUserResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsConnectionsByUserResult invokes Connections_connectionsByUserResult operation.
+//
+// Get Connections for User by Job ID.
+//
+// GET /api/connections/by-user/{jobId}
+func (c *Client) ConnectionsConnectionsByUserResult(ctx context.Context, params ConnectionsConnectionsByUserResultParams, options ...RequestOption) (ConnectionsConnectionsByUserResultRes, error) {
+	res, err := c.sendConnectionsConnectionsByUserResult(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsConnectionsByUserResult(ctx context.Context, params ConnectionsConnectionsByUserResultParams, requestOptions ...RequestOption) (res ConnectionsConnectionsByUserResultRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_connectionsByUserResult"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/connections/by-user/{jobId}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsConnectionsByUserResultOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/connections/by-user/"
+	{
+		// Encode "jobId" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "jobId",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.JobId))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsConnectionsByUserResultOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsConnectionsByUserResultResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsDropConnections invokes Connections_dropConnections operation.
+//
+// Drop Connections for Users or IPs.
+//
+// POST /api/connections/drop
+func (c *Client) ConnectionsDropConnections(ctx context.Context, request *DropConnectionsBody, options ...RequestOption) (ConnectionsDropConnectionsRes, error) {
+	res, err := c.sendConnectionsDropConnections(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsDropConnections(ctx context.Context, request *DropConnectionsBody, requestOptions ...RequestOption) (res ConnectionsDropConnectionsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_dropConnections"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/connections/drop"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsDropConnectionsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/connections/drop"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeConnectionsDropConnectionsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsDropConnectionsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsDropConnectionsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsGeocheckByNode invokes Connections_geocheckByNode operation.
+//
+// Queues a geocheck on the node and returns a job ID. Poll "Get Geocheck for Node by Job ID" for the
+// result, the node may take up to a minute to answer.
+//
+// POST /api/connections/geocheck/{nodeUuid}
+func (c *Client) ConnectionsGeocheckByNode(ctx context.Context, request *GeocheckByNodeBody, params ConnectionsGeocheckByNodeParams, options ...RequestOption) (ConnectionsGeocheckByNodeRes, error) {
+	res, err := c.sendConnectionsGeocheckByNode(ctx, request, params, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsGeocheckByNode(ctx context.Context, request *GeocheckByNodeBody, params ConnectionsGeocheckByNodeParams, requestOptions ...RequestOption) (res ConnectionsGeocheckByNodeRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_geocheckByNode"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/connections/geocheck/{nodeUuid}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsGeocheckByNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/connections/geocheck/"
+	{
+		// Encode "nodeUuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "nodeUuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.NodeUuid))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeConnectionsGeocheckByNodeRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsGeocheckByNodeOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsGeocheckByNodeResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ConnectionsGeocheckByNodeResult invokes Connections_geocheckByNodeResult operation.
+//
+// Get Geocheck for Node by Job ID.
+//
+// GET /api/connections/geocheck/{jobId}
+func (c *Client) ConnectionsGeocheckByNodeResult(ctx context.Context, params ConnectionsGeocheckByNodeResultParams, options ...RequestOption) (ConnectionsGeocheckByNodeResultRes, error) {
+	res, err := c.sendConnectionsGeocheckByNodeResult(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendConnectionsGeocheckByNodeResult(ctx context.Context, params ConnectionsGeocheckByNodeResultParams, requestOptions ...RequestOption) (res ConnectionsGeocheckByNodeResultRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Connections_geocheckByNodeResult"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/connections/geocheck/{jobId}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ConnectionsGeocheckByNodeResultOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/connections/geocheck/"
+	{
+		// Encode "jobId" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "jobId",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.StringToString(params.JobId))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ConnectionsGeocheckByNodeResultOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeConnectionsGeocheckByNodeResultResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -4853,7 +6456,7 @@ func (c *Client) sendExternalSquadAddUsersToExternalSquad(ctx context.Context, p
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -4918,7 +6521,14 @@ func (c *Client) sendExternalSquadAddUsersToExternalSquad(ctx context.Context, p
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -4942,12 +6552,12 @@ func (c *Client) sendExternalSquadAddUsersToExternalSquad(ctx context.Context, p
 // Create external squad.
 //
 // POST /api/external-squads
-func (c *Client) ExternalSquadCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequest, options ...RequestOption) (ExternalSquadCreateExternalSquadRes, error) {
+func (c *Client) ExternalSquadCreateExternalSquad(ctx context.Context, request *CreateExternalSquadBody, options ...RequestOption) (ExternalSquadCreateExternalSquadRes, error) {
 	res, err := c.sendExternalSquadCreateExternalSquad(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadCreateExternalSquad(ctx context.Context, request *CreateExternalSquadRequest, requestOptions ...RequestOption) (res ExternalSquadCreateExternalSquadRes, err error) {
+func (c *Client) sendExternalSquadCreateExternalSquad(ctx context.Context, request *CreateExternalSquadBody, requestOptions ...RequestOption) (res ExternalSquadCreateExternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5062,7 +6672,14 @@ func (c *Client) sendExternalSquadCreateExternalSquad(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5148,7 +6765,7 @@ func (c *Client) sendExternalSquadDeleteExternalSquad(ctx context.Context, param
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -5212,7 +6829,14 @@ func (c *Client) sendExternalSquadDeleteExternalSquad(ctx context.Context, param
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5298,7 +6922,7 @@ func (c *Client) sendExternalSquadGetExternalSquadByUuid(ctx context.Context, pa
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -5362,7 +6986,14 @@ func (c *Client) sendExternalSquadGetExternalSquadByUuid(ctx context.Context, pa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5494,7 +7125,14 @@ func (c *Client) sendExternalSquadGetExternalSquads(ctx context.Context, request
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5506,6 +7144,145 @@ func (c *Client) sendExternalSquadGetExternalSquads(ctx context.Context, request
 
 	stage = "DecodeResponse"
 	result, err := decodeExternalSquadGetExternalSquadsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// ExternalSquadGetTags invokes ExternalSquad_getTags operation.
+//
+// Get tags of External Squads.
+//
+// GET /api/external-squads/tags
+func (c *Client) ExternalSquadGetTags(ctx context.Context, options ...RequestOption) (ExternalSquadGetTagsRes, error) {
+	res, err := c.sendExternalSquadGetTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadGetTags(ctx context.Context, requestOptions ...RequestOption) (res ExternalSquadGetTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquad_getTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/external-squads/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadGetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/external-squads/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ExternalSquadGetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeExternalSquadGetTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -5580,7 +7357,7 @@ func (c *Client) sendExternalSquadRemoveUsersFromExternalSquad(ctx context.Conte
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -5645,7 +7422,14 @@ func (c *Client) sendExternalSquadRemoveUsersFromExternalSquad(ctx context.Conte
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5669,12 +7453,12 @@ func (c *Client) sendExternalSquadRemoveUsersFromExternalSquad(ctx context.Conte
 // Reorder external squads.
 //
 // POST /api/external-squads/actions/reorder
-func (c *Client) ExternalSquadReorderExternalSquads(ctx context.Context, request *ReorderRequest, options ...RequestOption) (ExternalSquadReorderExternalSquadsRes, error) {
+func (c *Client) ExternalSquadReorderExternalSquads(ctx context.Context, request *ReorderExternalSquadsBody, options ...RequestOption) (ExternalSquadReorderExternalSquadsRes, error) {
 	res, err := c.sendExternalSquadReorderExternalSquads(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadReorderExternalSquads(ctx context.Context, request *ReorderRequest, requestOptions ...RequestOption) (res ExternalSquadReorderExternalSquadsRes, err error) {
+func (c *Client) sendExternalSquadReorderExternalSquads(ctx context.Context, request *ReorderExternalSquadsBody, requestOptions ...RequestOption) (res ExternalSquadReorderExternalSquadsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5789,7 +7573,14 @@ func (c *Client) sendExternalSquadReorderExternalSquads(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5808,17 +7599,168 @@ func (c *Client) sendExternalSquadReorderExternalSquads(ctx context.Context, req
 	return result, nil
 }
 
+// ExternalSquadSetTags invokes ExternalSquad_setTags operation.
+//
+// Set tags of External Squad.
+//
+// PATCH /api/external-squads/tags
+func (c *Client) ExternalSquadSetTags(ctx context.Context, request *SetExternalSquadsTagsBody, options ...RequestOption) (ExternalSquadSetTagsRes, error) {
+	res, err := c.sendExternalSquadSetTags(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendExternalSquadSetTags(ctx context.Context, request *SetExternalSquadsTagsBody, requestOptions ...RequestOption) (res ExternalSquadSetTagsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("ExternalSquad_setTags"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/external-squads/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, ExternalSquadSetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/external-squads/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeExternalSquadSetTagsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, ExternalSquadSetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeExternalSquadSetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // ExternalSquadUpdateExternalSquad invokes ExternalSquad_updateExternalSquad operation.
 //
 // Update external squad.
 //
 // PATCH /api/external-squads
-func (c *Client) ExternalSquadUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequest, options ...RequestOption) (ExternalSquadUpdateExternalSquadRes, error) {
+func (c *Client) ExternalSquadUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadBody, options ...RequestOption) (ExternalSquadUpdateExternalSquadRes, error) {
 	res, err := c.sendExternalSquadUpdateExternalSquad(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendExternalSquadUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadRequest, requestOptions ...RequestOption) (res ExternalSquadUpdateExternalSquadRes, err error) {
+func (c *Client) sendExternalSquadUpdateExternalSquad(ctx context.Context, request *UpdateExternalSquadBody, requestOptions ...RequestOption) (res ExternalSquadUpdateExternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -5933,7 +7875,14 @@ func (c *Client) sendExternalSquadUpdateExternalSquad(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -5957,12 +7906,12 @@ func (c *Client) sendExternalSquadUpdateExternalSquad(ctx context.Context, reque
 // Delete hosts by UUIDs.
 //
 // POST /api/hosts/bulk/delete
-func (c *Client) HostsBulkActionsDeleteHosts(ctx context.Context, request *BulkUuidsRequest2, options ...RequestOption) (HostsBulkActionsDeleteHostsRes, error) {
+func (c *Client) HostsBulkActionsDeleteHosts(ctx context.Context, request *HostsBodyBulkRequest, options ...RequestOption) (HostsBulkActionsDeleteHostsRes, error) {
 	res, err := c.sendHostsBulkActionsDeleteHosts(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsDeleteHosts(ctx context.Context, request *BulkUuidsRequest2, requestOptions ...RequestOption) (res HostsBulkActionsDeleteHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsDeleteHosts(ctx context.Context, request *HostsBodyBulkRequest, requestOptions ...RequestOption) (res HostsBulkActionsDeleteHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6077,7 +8026,14 @@ func (c *Client) sendHostsBulkActionsDeleteHosts(ctx context.Context, request *B
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -6101,12 +8057,12 @@ func (c *Client) sendHostsBulkActionsDeleteHosts(ctx context.Context, request *B
 // Disable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/disable
-func (c *Client) HostsBulkActionsDisableHosts(ctx context.Context, request *BulkUuidsRequest2, options ...RequestOption) (HostsBulkActionsDisableHostsRes, error) {
+func (c *Client) HostsBulkActionsDisableHosts(ctx context.Context, request *HostsBodyBulkRequest, options ...RequestOption) (HostsBulkActionsDisableHostsRes, error) {
 	res, err := c.sendHostsBulkActionsDisableHosts(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsDisableHosts(ctx context.Context, request *BulkUuidsRequest2, requestOptions ...RequestOption) (res HostsBulkActionsDisableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsDisableHosts(ctx context.Context, request *HostsBodyBulkRequest, requestOptions ...RequestOption) (res HostsBulkActionsDisableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6221,7 +8177,14 @@ func (c *Client) sendHostsBulkActionsDisableHosts(ctx context.Context, request *
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -6245,12 +8208,12 @@ func (c *Client) sendHostsBulkActionsDisableHosts(ctx context.Context, request *
 // Enable hosts by UUIDs.
 //
 // POST /api/hosts/bulk/enable
-func (c *Client) HostsBulkActionsEnableHosts(ctx context.Context, request *BulkUuidsRequest2, options ...RequestOption) (HostsBulkActionsEnableHostsRes, error) {
+func (c *Client) HostsBulkActionsEnableHosts(ctx context.Context, request *HostsBodyBulkRequest, options ...RequestOption) (HostsBulkActionsEnableHostsRes, error) {
 	res, err := c.sendHostsBulkActionsEnableHosts(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsEnableHosts(ctx context.Context, request *BulkUuidsRequest2, requestOptions ...RequestOption) (res HostsBulkActionsEnableHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsEnableHosts(ctx context.Context, request *HostsBodyBulkRequest, requestOptions ...RequestOption) (res HostsBulkActionsEnableHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6365,7 +8328,14 @@ func (c *Client) sendHostsBulkActionsEnableHosts(ctx context.Context, request *B
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -6389,12 +8359,12 @@ func (c *Client) sendHostsBulkActionsEnableHosts(ctx context.Context, request *B
 // Update many hosts.
 //
 // PATCH /api/hosts/bulk/update
-func (c *Client) HostsBulkActionsSetPortToHosts(ctx context.Context, request *UpdateManyHostsRequest, options ...RequestOption) (HostsBulkActionsSetPortToHostsRes, error) {
+func (c *Client) HostsBulkActionsSetPortToHosts(ctx context.Context, request *UpdateManyHostsBody, options ...RequestOption) (HostsBulkActionsSetPortToHostsRes, error) {
 	res, err := c.sendHostsBulkActionsSetPortToHosts(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsBulkActionsSetPortToHosts(ctx context.Context, request *UpdateManyHostsRequest, requestOptions ...RequestOption) (res HostsBulkActionsSetPortToHostsRes, err error) {
+func (c *Client) sendHostsBulkActionsSetPortToHosts(ctx context.Context, request *UpdateManyHostsBody, requestOptions ...RequestOption) (res HostsBulkActionsSetPortToHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6509,7 +8479,14 @@ func (c *Client) sendHostsBulkActionsSetPortToHosts(ctx context.Context, request
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -6533,12 +8510,12 @@ func (c *Client) sendHostsBulkActionsSetPortToHosts(ctx context.Context, request
 // Create a new host.
 //
 // POST /api/hosts
-func (c *Client) HostsCreateHost(ctx context.Context, request *CreateHostRequest, options ...RequestOption) (HostsCreateHostRes, error) {
+func (c *Client) HostsCreateHost(ctx context.Context, request *CreateHostBody, options ...RequestOption) (HostsCreateHostRes, error) {
 	res, err := c.sendHostsCreateHost(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsCreateHost(ctx context.Context, request *CreateHostRequest, requestOptions ...RequestOption) (res HostsCreateHostRes, err error) {
+func (c *Client) sendHostsCreateHost(ctx context.Context, request *CreateHostBody, requestOptions ...RequestOption) (res HostsCreateHostRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -6653,7 +8630,14 @@ func (c *Client) sendHostsCreateHost(ctx context.Context, request *CreateHostReq
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -6739,7 +8723,7 @@ func (c *Client) sendHostsDeleteHost(ctx context.Context, params HostsDeleteHost
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -6803,7 +8787,14 @@ func (c *Client) sendHostsDeleteHost(ctx context.Context, params HostsDeleteHost
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -6822,151 +8813,19 @@ func (c *Client) sendHostsDeleteHost(ctx context.Context, params HostsDeleteHost
 	return result, nil
 }
 
-// HostsGetAllHostTags invokes Hosts_getAllHostTags operation.
+// HostsGetHosts invokes Hosts_getHosts operation.
 //
-// Get all existing host tags.
-//
-// GET /api/hosts/tags
-func (c *Client) HostsGetAllHostTags(ctx context.Context, options ...RequestOption) (HostsGetAllHostTagsRes, error) {
-	res, err := c.sendHostsGetAllHostTags(ctx, options...)
-	return res, err
-}
-
-func (c *Client) sendHostsGetAllHostTags(ctx context.Context, requestOptions ...RequestOption) (res HostsGetAllHostTagsRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Hosts_getAllHostTags"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/hosts/tags"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, HostsGetAllHostTagsOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [1]string
-	pathParts[0] = "/api/hosts/tags"
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, HostsGetAllHostTagsOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeHostsGetAllHostTagsResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// HostsGetAllHosts invokes Hosts_getAllHosts operation.
-//
-// Get all hosts.
+// Get hosts.
 //
 // GET /api/hosts
-func (c *Client) HostsGetAllHosts(ctx context.Context, options ...RequestOption) (HostsGetAllHostsRes, error) {
-	res, err := c.sendHostsGetAllHosts(ctx, options...)
+func (c *Client) HostsGetHosts(ctx context.Context, options ...RequestOption) (HostsGetHostsRes, error) {
+	res, err := c.sendHostsGetHosts(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsGetAllHosts(ctx context.Context, requestOptions ...RequestOption) (res HostsGetAllHostsRes, err error) {
+func (c *Client) sendHostsGetHosts(ctx context.Context, requestOptions ...RequestOption) (res HostsGetHostsRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Hosts_getAllHosts"),
+		otelogen.OperationID("Hosts_getHosts"),
 		semconv.HTTPRequestMethodKey.String("GET"),
 		semconv.URLTemplateKey.String("/api/hosts"),
 	}
@@ -6984,7 +8843,7 @@ func (c *Client) sendHostsGetAllHosts(ctx context.Context, requestOptions ...Req
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, HostsGetAllHostsOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsGetHostsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7026,7 +8885,7 @@ func (c *Client) sendHostsGetAllHosts(ctx context.Context, requestOptions ...Req
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, HostsGetAllHostsOperation, r); {
+			switch err := c.securityAuthorization(ctx, HostsGetHostsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -7067,7 +8926,14 @@ func (c *Client) sendHostsGetAllHosts(ctx context.Context, requestOptions ...Req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7078,7 +8944,146 @@ func (c *Client) sendHostsGetAllHosts(ctx context.Context, requestOptions ...Req
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeHostsGetAllHostsResponse(resp)
+	result, err := decodeHostsGetHostsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// HostsGetHostsTags invokes Hosts_getHostsTags operation.
+//
+// Get tags of hosts.
+//
+// GET /api/hosts/tags
+func (c *Client) HostsGetHostsTags(ctx context.Context, options ...RequestOption) (HostsGetHostsTagsRes, error) {
+	res, err := c.sendHostsGetHostsTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendHostsGetHostsTags(ctx context.Context, requestOptions ...RequestOption) (res HostsGetHostsTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Hosts_getHostsTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/hosts/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, HostsGetHostsTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/hosts/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, HostsGetHostsTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeHostsGetHostsTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -7153,7 +9158,7 @@ func (c *Client) sendHostsGetOneHost(ctx context.Context, params HostsGetOneHost
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -7217,7 +9222,14 @@ func (c *Client) sendHostsGetOneHost(ctx context.Context, params HostsGetOneHost
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7241,12 +9253,12 @@ func (c *Client) sendHostsGetOneHost(ctx context.Context, params HostsGetOneHost
 // Reorder hosts.
 //
 // POST /api/hosts/actions/reorder
-func (c *Client) HostsReorderHosts(ctx context.Context, request *ReorderHostRequest, options ...RequestOption) (HostsReorderHostsRes, error) {
+func (c *Client) HostsReorderHosts(ctx context.Context, request *ReorderHostsBody, options ...RequestOption) (HostsReorderHostsRes, error) {
 	res, err := c.sendHostsReorderHosts(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsReorderHosts(ctx context.Context, request *ReorderHostRequest, requestOptions ...RequestOption) (res HostsReorderHostsRes, err error) {
+func (c *Client) sendHostsReorderHosts(ctx context.Context, request *ReorderHostsBody, requestOptions ...RequestOption) (res HostsReorderHostsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -7361,7 +9373,14 @@ func (c *Client) sendHostsReorderHosts(ctx context.Context, request *ReorderHost
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7385,12 +9404,12 @@ func (c *Client) sendHostsReorderHosts(ctx context.Context, request *ReorderHost
 // Update a host.
 //
 // PATCH /api/hosts
-func (c *Client) HostsUpdateHost(ctx context.Context, request *UpdateHostRequest, options ...RequestOption) (HostsUpdateHostRes, error) {
+func (c *Client) HostsUpdateHost(ctx context.Context, request *UpdateHostBody, options ...RequestOption) (HostsUpdateHostRes, error) {
 	res, err := c.sendHostsUpdateHost(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHostsUpdateHost(ctx context.Context, request *UpdateHostRequest, requestOptions ...RequestOption) (res HostsUpdateHostRes, err error) {
+func (c *Client) sendHostsUpdateHost(ctx context.Context, request *UpdateHostBody, requestOptions ...RequestOption) (res HostsUpdateHostRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -7505,7 +9524,14 @@ func (c *Client) sendHostsUpdateHost(ctx context.Context, request *UpdateHostReq
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7529,12 +9555,21 @@ func (c *Client) sendHostsUpdateHost(ctx context.Context, request *UpdateHostReq
 // Create a user HWID device.
 //
 // POST /api/hwid/devices
-func (c *Client) HwidUserDevicesCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequest, options ...RequestOption) (HwidUserDevicesCreateUserHwidDeviceRes, error) {
+func (c *Client) HwidUserDevicesCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceBody, options ...RequestOption) (HwidUserDevicesCreateUserHwidDeviceRes, error) {
 	res, err := c.sendHwidUserDevicesCreateUserHwidDevice(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceRequest, requestOptions ...RequestOption) (res HwidUserDevicesCreateUserHwidDeviceRes, err error) {
+func (c *Client) sendHwidUserDevicesCreateUserHwidDevice(ctx context.Context, request *CreateUserHwidDeviceBody, requestOptions ...RequestOption) (res HwidUserDevicesCreateUserHwidDeviceRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("HwidUserDevices_createUserHwidDevice"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -7640,7 +9675,14 @@ func (c *Client) sendHwidUserDevicesCreateUserHwidDevice(ctx context.Context, re
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7664,12 +9706,12 @@ func (c *Client) sendHwidUserDevicesCreateUserHwidDevice(ctx context.Context, re
 // Delete all user HWID devices.
 //
 // POST /api/hwid/devices/delete-all
-func (c *Client) HwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequest, options ...RequestOption) (HwidUserDevicesDeleteAllUserHwidDevicesRes, error) {
+func (c *Client) HwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesBody, options ...RequestOption) (HwidUserDevicesDeleteAllUserHwidDevicesRes, error) {
 	res, err := c.sendHwidUserDevicesDeleteAllUserHwidDevices(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesRequest, requestOptions ...RequestOption) (res HwidUserDevicesDeleteAllUserHwidDevicesRes, err error) {
+func (c *Client) sendHwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context, request *DeleteAllUserHwidDevicesBody, requestOptions ...RequestOption) (res HwidUserDevicesDeleteAllUserHwidDevicesRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("HwidUserDevices_deleteAllUserHwidDevices"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -7775,7 +9817,14 @@ func (c *Client) sendHwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7799,12 +9848,12 @@ func (c *Client) sendHwidUserDevicesDeleteAllUserHwidDevices(ctx context.Context
 // Delete a user HWID device.
 //
 // POST /api/hwid/devices/delete
-func (c *Client) HwidUserDevicesDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequest, options ...RequestOption) (HwidUserDevicesDeleteUserHwidDeviceRes, error) {
+func (c *Client) HwidUserDevicesDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceBody, options ...RequestOption) (HwidUserDevicesDeleteUserHwidDeviceRes, error) {
 	res, err := c.sendHwidUserDevicesDeleteUserHwidDevice(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendHwidUserDevicesDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceRequest, requestOptions ...RequestOption) (res HwidUserDevicesDeleteUserHwidDeviceRes, err error) {
+func (c *Client) sendHwidUserDevicesDeleteUserHwidDevice(ctx context.Context, request *DeleteUserHwidDeviceBody, requestOptions ...RequestOption) (res HwidUserDevicesDeleteUserHwidDeviceRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("HwidUserDevices_deleteUserHwidDevice"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -7910,7 +9959,14 @@ func (c *Client) sendHwidUserDevicesDeleteUserHwidDevice(ctx context.Context, re
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -7931,7 +9987,9 @@ func (c *Client) sendHwidUserDevicesDeleteUserHwidDevice(ctx context.Context, re
 
 // HwidUserDevicesGetAllUsers invokes HwidUserDevices_getAllUsers operation.
 //
-// Get all HWID devices.
+// Please note that the filters here are primarily intended for use by the frontend and rely on
+// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+// performance of your database.
 //
 // GET /api/hwid/devices
 func (c *Client) HwidUserDevicesGetAllUsers(ctx context.Context, params HwidUserDevicesGetAllUsersParams, options ...RequestOption) (HwidUserDevicesGetAllUsersRes, error) {
@@ -7993,6 +10051,23 @@ func (c *Client) sendHwidUserDevicesGetAllUsers(ctx context.Context, params Hwid
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
 		// Encode "size" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "size",
@@ -8010,16 +10085,67 @@ func (c *Client) sendHwidUserDevicesGetAllUsers(ctx context.Context, params Hwid
 		}
 	}
 	{
-		// Encode "start" parameter.
+		// Encode "filters" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "start",
+			Name:    "filters",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Start.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
+			if val, ok := params.Filters.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "filterModes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "filterModes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.FilterModes.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "globalFilterMode" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "globalFilterMode",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.GlobalFilterMode.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "sorting" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "sorting",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Sorting.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
 			}
 			return nil
 		}); err != nil {
@@ -8080,7 +10206,14 @@ func (c *Client) sendHwidUserDevicesGetAllUsers(ctx context.Context, params Hwid
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -8212,7 +10345,14 @@ func (c *Client) sendHwidUserDevicesGetHwidDevicesStats(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -8295,23 +10435,6 @@ func (c *Client) sendHwidUserDevicesGetTopUsersByHwidDevices(ctx context.Context
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
-		// Encode "size" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "size",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Size.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
-			}
-			return nil
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	{
 		// Encode "start" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "start",
@@ -8321,6 +10444,23 @@ func (c *Client) sendHwidUserDevicesGetTopUsersByHwidDevices(ctx context.Context
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
 				return e.EncodeValue(conv.IntToString(val))
 			}
 			return nil
@@ -8382,7 +10522,14 @@ func (c *Client) sendHwidUserDevicesGetTopUsersByHwidDevices(ctx context.Context
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -8405,7 +10552,7 @@ func (c *Client) sendHwidUserDevicesGetTopUsersByHwidDevices(ctx context.Context
 //
 // Get user HWID devices.
 //
-// GET /api/hwid/devices/{userUuid}
+// GET /api/hwid/devices/{userId}
 func (c *Client) HwidUserDevicesGetUserHwidDevices(ctx context.Context, params HwidUserDevicesGetUserHwidDevicesParams, options ...RequestOption) (HwidUserDevicesGetUserHwidDevicesRes, error) {
 	res, err := c.sendHwidUserDevicesGetUserHwidDevices(ctx, params, options...)
 	return res, err
@@ -8415,7 +10562,7 @@ func (c *Client) sendHwidUserDevicesGetUserHwidDevices(ctx context.Context, para
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("HwidUserDevices_getUserHwidDevices"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/hwid/devices/{userUuid}"),
+		semconv.URLTemplateKey.String("/api/hwid/devices/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -8461,14 +10608,14 @@ func (c *Client) sendHwidUserDevicesGetUserHwidDevices(ctx context.Context, para
 	var pathParts [2]string
 	pathParts[0] = "/api/hwid/devices/"
 	{
-		// Encode "userUuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "userUuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UserUuid))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -8532,7 +10679,14 @@ func (c *Client) sendHwidUserDevicesGetUserHwidDevices(ctx context.Context, para
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -8551,161 +10705,17 @@ func (c *Client) sendHwidUserDevicesGetUserHwidDevices(ctx context.Context, para
 	return result, nil
 }
 
-// InfraBillingCreateInfraBillingHistoryRecord invokes InfraBilling_createInfraBillingHistoryRecord operation.
-//
-// Create infra billing history.
-//
-// POST /api/infra-billing/history
-func (c *Client) InfraBillingCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequest, options ...RequestOption) (InfraBillingCreateInfraBillingHistoryRecordRes, error) {
-	res, err := c.sendInfraBillingCreateInfraBillingHistoryRecord(ctx, request, options...)
-	return res, err
-}
-
-func (c *Client) sendInfraBillingCreateInfraBillingHistoryRecord(ctx context.Context, request *CreateInfraBillingHistoryRecordRequest, requestOptions ...RequestOption) (res InfraBillingCreateInfraBillingHistoryRecordRes, err error) {
-	// Validate request before sending.
-	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		return res, errors.Wrap(err, "validate")
-	}
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("InfraBilling_createInfraBillingHistoryRecord"),
-		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/infra-billing/history"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingCreateInfraBillingHistoryRecordOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [1]string
-	pathParts[0] = "/api/infra-billing/history"
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "POST", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-	if err := encodeInfraBillingCreateInfraBillingHistoryRecordRequest(request, r); err != nil {
-		return res, errors.Wrap(err, "encode request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, InfraBillingCreateInfraBillingHistoryRecordOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeInfraBillingCreateInfraBillingHistoryRecordResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
 // InfraBillingCreateInfraBillingNode invokes InfraBilling_createInfraBillingNode operation.
 //
 // Create infra billing node.
 //
 // POST /api/infra-billing/nodes
-func (c *Client) InfraBillingCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequest, options ...RequestOption) (InfraBillingCreateInfraBillingNodeRes, error) {
+func (c *Client) InfraBillingCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeBody, options ...RequestOption) (InfraBillingCreateInfraBillingNodeRes, error) {
 	res, err := c.sendInfraBillingCreateInfraBillingNode(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeRequest, requestOptions ...RequestOption) (res InfraBillingCreateInfraBillingNodeRes, err error) {
+func (c *Client) sendInfraBillingCreateInfraBillingNode(ctx context.Context, request *CreateInfraBillingNodeBody, requestOptions ...RequestOption) (res InfraBillingCreateInfraBillingNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -8820,7 +10830,14 @@ func (c *Client) sendInfraBillingCreateInfraBillingNode(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -8839,17 +10856,168 @@ func (c *Client) sendInfraBillingCreateInfraBillingNode(ctx context.Context, req
 	return result, nil
 }
 
+// InfraBillingCreateInfraBillingRecord invokes InfraBilling_createInfraBillingRecord operation.
+//
+// Create infra billing history.
+//
+// POST /api/infra-billing/history
+func (c *Client) InfraBillingCreateInfraBillingRecord(ctx context.Context, request *CreateInfraBillingRecordBody, options ...RequestOption) (InfraBillingCreateInfraBillingRecordRes, error) {
+	res, err := c.sendInfraBillingCreateInfraBillingRecord(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendInfraBillingCreateInfraBillingRecord(ctx context.Context, request *CreateInfraBillingRecordBody, requestOptions ...RequestOption) (res InfraBillingCreateInfraBillingRecordRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBilling_createInfraBillingRecord"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/infra-billing/history"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingCreateInfraBillingRecordOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/infra-billing/history"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeInfraBillingCreateInfraBillingRecordRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InfraBillingCreateInfraBillingRecordOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInfraBillingCreateInfraBillingRecordResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // InfraBillingCreateInfraProvider invokes InfraBilling_createInfraProvider operation.
 //
 // Create infra provider.
 //
 // POST /api/infra-billing/providers
-func (c *Client) InfraBillingCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequest, options ...RequestOption) (InfraBillingCreateInfraProviderRes, error) {
+func (c *Client) InfraBillingCreateInfraProvider(ctx context.Context, request *CreateInfraProviderBody, options ...RequestOption) (InfraBillingCreateInfraProviderRes, error) {
 	res, err := c.sendInfraBillingCreateInfraProvider(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingCreateInfraProvider(ctx context.Context, request *CreateInfraProviderRequest, requestOptions ...RequestOption) (res InfraBillingCreateInfraProviderRes, err error) {
+func (c *Client) sendInfraBillingCreateInfraProvider(ctx context.Context, request *CreateInfraProviderBody, requestOptions ...RequestOption) (res InfraBillingCreateInfraProviderRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -8964,7 +11132,14 @@ func (c *Client) sendInfraBillingCreateInfraProvider(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -8983,169 +11158,19 @@ func (c *Client) sendInfraBillingCreateInfraProvider(ctx context.Context, reques
 	return result, nil
 }
 
-// InfraBillingDeleteInfraBillingHistoryRecordByUuid invokes InfraBilling_deleteInfraBillingHistoryRecordByUuid operation.
-//
-// Delete infra billing history.
-//
-// DELETE /api/infra-billing/history/{uuid}
-func (c *Client) InfraBillingDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingDeleteInfraBillingHistoryRecordByUuidParams, options ...RequestOption) (InfraBillingDeleteInfraBillingHistoryRecordByUuidRes, error) {
-	res, err := c.sendInfraBillingDeleteInfraBillingHistoryRecordByUuid(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendInfraBillingDeleteInfraBillingHistoryRecordByUuid(ctx context.Context, params InfraBillingDeleteInfraBillingHistoryRecordByUuidParams, requestOptions ...RequestOption) (res InfraBillingDeleteInfraBillingHistoryRecordByUuidRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("InfraBilling_deleteInfraBillingHistoryRecordByUuid"),
-		semconv.HTTPRequestMethodKey.String("DELETE"),
-		semconv.URLTemplateKey.String("/api/infra-billing/history/{uuid}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingDeleteInfraBillingHistoryRecordByUuidOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/infra-billing/history/"
-	{
-		// Encode "uuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "DELETE", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, InfraBillingDeleteInfraBillingHistoryRecordByUuidOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeInfraBillingDeleteInfraBillingHistoryRecordByUuidResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// InfraBillingDeleteInfraBillingNodeByUuid invokes InfraBilling_deleteInfraBillingNodeByUuid operation.
+// InfraBillingDeleteInfraBillingNode invokes InfraBilling_deleteInfraBillingNode operation.
 //
 // Delete infra billing node.
 //
 // DELETE /api/infra-billing/nodes/{uuid}
-func (c *Client) InfraBillingDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingDeleteInfraBillingNodeByUuidParams, options ...RequestOption) (InfraBillingDeleteInfraBillingNodeByUuidRes, error) {
-	res, err := c.sendInfraBillingDeleteInfraBillingNodeByUuid(ctx, params, options...)
+func (c *Client) InfraBillingDeleteInfraBillingNode(ctx context.Context, params InfraBillingDeleteInfraBillingNodeParams, options ...RequestOption) (InfraBillingDeleteInfraBillingNodeRes, error) {
+	res, err := c.sendInfraBillingDeleteInfraBillingNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Context, params InfraBillingDeleteInfraBillingNodeByUuidParams, requestOptions ...RequestOption) (res InfraBillingDeleteInfraBillingNodeByUuidRes, err error) {
+func (c *Client) sendInfraBillingDeleteInfraBillingNode(ctx context.Context, params InfraBillingDeleteInfraBillingNodeParams, requestOptions ...RequestOption) (res InfraBillingDeleteInfraBillingNodeRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("InfraBilling_deleteInfraBillingNodeByUuid"),
+		otelogen.OperationID("InfraBilling_deleteInfraBillingNode"),
 		semconv.HTTPRequestMethodKey.String("DELETE"),
 		semconv.URLTemplateKey.String("/api/infra-billing/nodes/{uuid}"),
 	}
@@ -9163,7 +11188,7 @@ func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Contex
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingDeleteInfraBillingNodeByUuidOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingDeleteInfraBillingNodeOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9200,7 +11225,7 @@ func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Contex
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -9223,7 +11248,7 @@ func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Contex
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, InfraBillingDeleteInfraBillingNodeByUuidOperation, r); {
+			switch err := c.securityAuthorization(ctx, InfraBillingDeleteInfraBillingNodeOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -9264,7 +11289,14 @@ func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Contex
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -9275,7 +11307,7 @@ func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Contex
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeInfraBillingDeleteInfraBillingNodeByUuidResponse(resp)
+	result, err := decodeInfraBillingDeleteInfraBillingNodeResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -9283,19 +11315,176 @@ func (c *Client) sendInfraBillingDeleteInfraBillingNodeByUuid(ctx context.Contex
 	return result, nil
 }
 
-// InfraBillingDeleteInfraProviderByUuid invokes InfraBilling_deleteInfraProviderByUuid operation.
+// InfraBillingDeleteInfraBillingRecord invokes InfraBilling_deleteInfraBillingRecord operation.
+//
+// Delete infra billing history.
+//
+// DELETE /api/infra-billing/history/{uuid}
+func (c *Client) InfraBillingDeleteInfraBillingRecord(ctx context.Context, params InfraBillingDeleteInfraBillingRecordParams, options ...RequestOption) (InfraBillingDeleteInfraBillingRecordRes, error) {
+	res, err := c.sendInfraBillingDeleteInfraBillingRecord(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInfraBillingDeleteInfraBillingRecord(ctx context.Context, params InfraBillingDeleteInfraBillingRecordParams, requestOptions ...RequestOption) (res InfraBillingDeleteInfraBillingRecordRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InfraBilling_deleteInfraBillingRecord"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/infra-billing/history/{uuid}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingDeleteInfraBillingRecordOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/infra-billing/history/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InfraBillingDeleteInfraBillingRecordOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInfraBillingDeleteInfraBillingRecordResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InfraBillingDelteInfraProvider invokes InfraBilling_delteInfraProvider operation.
 //
 // Delete infra provider by uuid.
 //
 // DELETE /api/infra-billing/providers/{uuid}
-func (c *Client) InfraBillingDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingDeleteInfraProviderByUuidParams, options ...RequestOption) (InfraBillingDeleteInfraProviderByUuidRes, error) {
-	res, err := c.sendInfraBillingDeleteInfraProviderByUuid(ctx, params, options...)
+func (c *Client) InfraBillingDelteInfraProvider(ctx context.Context, params InfraBillingDelteInfraProviderParams, options ...RequestOption) (InfraBillingDelteInfraProviderRes, error) {
+	res, err := c.sendInfraBillingDelteInfraProvider(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingDeleteInfraProviderByUuid(ctx context.Context, params InfraBillingDeleteInfraProviderByUuidParams, requestOptions ...RequestOption) (res InfraBillingDeleteInfraProviderByUuidRes, err error) {
+func (c *Client) sendInfraBillingDelteInfraProvider(ctx context.Context, params InfraBillingDelteInfraProviderParams, requestOptions ...RequestOption) (res InfraBillingDelteInfraProviderRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("InfraBilling_deleteInfraProviderByUuid"),
+		otelogen.OperationID("InfraBilling_delteInfraProvider"),
 		semconv.HTTPRequestMethodKey.String("DELETE"),
 		semconv.URLTemplateKey.String("/api/infra-billing/providers/{uuid}"),
 	}
@@ -9313,7 +11502,7 @@ func (c *Client) sendInfraBillingDeleteInfraProviderByUuid(ctx context.Context, 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingDeleteInfraProviderByUuidOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingDelteInfraProviderOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9350,7 +11539,7 @@ func (c *Client) sendInfraBillingDeleteInfraProviderByUuid(ctx context.Context, 
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -9373,7 +11562,7 @@ func (c *Client) sendInfraBillingDeleteInfraProviderByUuid(ctx context.Context, 
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, InfraBillingDeleteInfraProviderByUuidOperation, r); {
+			switch err := c.securityAuthorization(ctx, InfraBillingDelteInfraProviderOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -9414,7 +11603,14 @@ func (c *Client) sendInfraBillingDeleteInfraProviderByUuid(ctx context.Context, 
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -9425,7 +11621,7 @@ func (c *Client) sendInfraBillingDeleteInfraProviderByUuid(ctx context.Context, 
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeInfraBillingDeleteInfraProviderByUuidResponse(resp)
+	result, err := decodeInfraBillingDelteInfraProviderResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -9546,7 +11742,14 @@ func (c *Client) sendInfraBillingGetBillingNodes(ctx context.Context, requestOpt
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -9565,19 +11768,19 @@ func (c *Client) sendInfraBillingGetBillingNodes(ctx context.Context, requestOpt
 	return result, nil
 }
 
-// InfraBillingGetInfraBillingHistoryRecords invokes InfraBilling_getInfraBillingHistoryRecords operation.
+// InfraBillingGetInfraBillingRecords invokes InfraBilling_getInfraBillingRecords operation.
 //
 // Get infra billing history.
 //
 // GET /api/infra-billing/history
-func (c *Client) InfraBillingGetInfraBillingHistoryRecords(ctx context.Context, options ...RequestOption) (InfraBillingGetInfraBillingHistoryRecordsRes, error) {
-	res, err := c.sendInfraBillingGetInfraBillingHistoryRecords(ctx, options...)
+func (c *Client) InfraBillingGetInfraBillingRecords(ctx context.Context, params InfraBillingGetInfraBillingRecordsParams, options ...RequestOption) (InfraBillingGetInfraBillingRecordsRes, error) {
+	res, err := c.sendInfraBillingGetInfraBillingRecords(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Context, requestOptions ...RequestOption) (res InfraBillingGetInfraBillingHistoryRecordsRes, err error) {
+func (c *Client) sendInfraBillingGetInfraBillingRecords(ctx context.Context, params InfraBillingGetInfraBillingRecordsParams, requestOptions ...RequestOption) (res InfraBillingGetInfraBillingRecordsRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("InfraBilling_getInfraBillingHistoryRecords"),
+		otelogen.OperationID("InfraBilling_getInfraBillingRecords"),
 		semconv.HTTPRequestMethodKey.String("GET"),
 		semconv.URLTemplateKey.String("/api/infra-billing/history"),
 	}
@@ -9595,7 +11798,7 @@ func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Conte
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingGetInfraBillingHistoryRecordsOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingGetInfraBillingRecordsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9626,6 +11829,44 @@ func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Conte
 	pathParts[0] = "/api/infra-billing/history"
 	uri.AddPathParts(u, pathParts[:]...)
 
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
 	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
 	if err != nil {
@@ -9637,7 +11878,7 @@ func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Conte
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, InfraBillingGetInfraBillingHistoryRecordsOperation, r); {
+			switch err := c.securityAuthorization(ctx, InfraBillingGetInfraBillingRecordsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -9678,7 +11919,14 @@ func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Conte
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -9689,7 +11937,7 @@ func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Conte
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeInfraBillingGetInfraBillingHistoryRecordsResponse(resp)
+	result, err := decodeInfraBillingGetInfraBillingRecordsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -9697,19 +11945,19 @@ func (c *Client) sendInfraBillingGetInfraBillingHistoryRecords(ctx context.Conte
 	return result, nil
 }
 
-// InfraBillingGetInfraProviderByUuid invokes InfraBilling_getInfraProviderByUuid operation.
+// InfraBillingGetInfraProvider invokes InfraBilling_getInfraProvider operation.
 //
 // Get infra provider by uuid.
 //
 // GET /api/infra-billing/providers/{uuid}
-func (c *Client) InfraBillingGetInfraProviderByUuid(ctx context.Context, params InfraBillingGetInfraProviderByUuidParams, options ...RequestOption) (InfraBillingGetInfraProviderByUuidRes, error) {
-	res, err := c.sendInfraBillingGetInfraProviderByUuid(ctx, params, options...)
+func (c *Client) InfraBillingGetInfraProvider(ctx context.Context, params InfraBillingGetInfraProviderParams, options ...RequestOption) (InfraBillingGetInfraProviderRes, error) {
+	res, err := c.sendInfraBillingGetInfraProvider(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingGetInfraProviderByUuid(ctx context.Context, params InfraBillingGetInfraProviderByUuidParams, requestOptions ...RequestOption) (res InfraBillingGetInfraProviderByUuidRes, err error) {
+func (c *Client) sendInfraBillingGetInfraProvider(ctx context.Context, params InfraBillingGetInfraProviderParams, requestOptions ...RequestOption) (res InfraBillingGetInfraProviderRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("InfraBilling_getInfraProviderByUuid"),
+		otelogen.OperationID("InfraBilling_getInfraProvider"),
 		semconv.HTTPRequestMethodKey.String("GET"),
 		semconv.URLTemplateKey.String("/api/infra-billing/providers/{uuid}"),
 	}
@@ -9727,7 +11975,7 @@ func (c *Client) sendInfraBillingGetInfraProviderByUuid(ctx context.Context, par
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingGetInfraProviderByUuidOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, InfraBillingGetInfraProviderOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9764,7 +12012,7 @@ func (c *Client) sendInfraBillingGetInfraProviderByUuid(ctx context.Context, par
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -9787,7 +12035,7 @@ func (c *Client) sendInfraBillingGetInfraProviderByUuid(ctx context.Context, par
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, InfraBillingGetInfraProviderByUuidOperation, r); {
+			switch err := c.securityAuthorization(ctx, InfraBillingGetInfraProviderOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -9828,7 +12076,14 @@ func (c *Client) sendInfraBillingGetInfraProviderByUuid(ctx context.Context, par
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -9839,7 +12094,7 @@ func (c *Client) sendInfraBillingGetInfraProviderByUuid(ctx context.Context, par
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeInfraBillingGetInfraProviderByUuidResponse(resp)
+	result, err := decodeInfraBillingGetInfraProviderResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -9960,7 +12215,14 @@ func (c *Client) sendInfraBillingGetInfraProviders(ctx context.Context, requestO
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -9984,12 +12246,12 @@ func (c *Client) sendInfraBillingGetInfraProviders(ctx context.Context, requestO
 // Update infra billing nodes.
 //
 // PATCH /api/infra-billing/nodes
-func (c *Client) InfraBillingUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequest, options ...RequestOption) (InfraBillingUpdateInfraBillingNodeRes, error) {
+func (c *Client) InfraBillingUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeBody, options ...RequestOption) (InfraBillingUpdateInfraBillingNodeRes, error) {
 	res, err := c.sendInfraBillingUpdateInfraBillingNode(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeRequest, requestOptions ...RequestOption) (res InfraBillingUpdateInfraBillingNodeRes, err error) {
+func (c *Client) sendInfraBillingUpdateInfraBillingNode(ctx context.Context, request *UpdateInfraBillingNodeBody, requestOptions ...RequestOption) (res InfraBillingUpdateInfraBillingNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10104,7 +12366,14 @@ func (c *Client) sendInfraBillingUpdateInfraBillingNode(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -10128,12 +12397,12 @@ func (c *Client) sendInfraBillingUpdateInfraBillingNode(ctx context.Context, req
 // Update infra provider.
 //
 // PATCH /api/infra-billing/providers
-func (c *Client) InfraBillingUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequest, options ...RequestOption) (InfraBillingUpdateInfraProviderRes, error) {
+func (c *Client) InfraBillingUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderBody, options ...RequestOption) (InfraBillingUpdateInfraProviderRes, error) {
 	res, err := c.sendInfraBillingUpdateInfraProvider(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInfraBillingUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderRequest, requestOptions ...RequestOption) (res InfraBillingUpdateInfraProviderRes, err error) {
+func (c *Client) sendInfraBillingUpdateInfraProvider(ctx context.Context, request *UpdateInfraProviderBody, requestOptions ...RequestOption) (res InfraBillingUpdateInfraProviderRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10248,7 +12517,14 @@ func (c *Client) sendInfraBillingUpdateInfraProvider(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -10260,6 +12536,176 @@ func (c *Client) sendInfraBillingUpdateInfraProvider(ctx context.Context, reques
 
 	stage = "DecodeResponse"
 	result, err := decodeInfraBillingUpdateInfraProviderResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadAddManyUsersToInternalSquad invokes InternalSquad_addManyUsersToInternalSquad operation.
+//
+// Add many users to internal squad.
+//
+// POST /api/internal-squads/{uuid}/bulk-actions/add-many-users
+func (c *Client) InternalSquadAddManyUsersToInternalSquad(ctx context.Context, request *InternalSquadBodyRequest, params InternalSquadAddManyUsersToInternalSquadParams, options ...RequestOption) (InternalSquadAddManyUsersToInternalSquadRes, error) {
+	res, err := c.sendInternalSquadAddManyUsersToInternalSquad(ctx, request, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadAddManyUsersToInternalSquad(ctx context.Context, request *InternalSquadBodyRequest, params InternalSquadAddManyUsersToInternalSquadParams, requestOptions ...RequestOption) (res InternalSquadAddManyUsersToInternalSquadRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquad_addManyUsersToInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}/bulk-actions/add-many-users"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadAddManyUsersToInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/internal-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/bulk-actions/add-many-users"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeInternalSquadAddManyUsersToInternalSquadRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadAddManyUsersToInternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadAddManyUsersToInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -10334,7 +12780,7 @@ func (c *Client) sendInternalSquadAddUsersToInternalSquad(ctx context.Context, p
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -10399,7 +12845,14 @@ func (c *Client) sendInternalSquadAddUsersToInternalSquad(ctx context.Context, p
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -10423,12 +12876,12 @@ func (c *Client) sendInternalSquadAddUsersToInternalSquad(ctx context.Context, p
 // Create internal squad.
 //
 // POST /api/internal-squads
-func (c *Client) InternalSquadCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequest, options ...RequestOption) (InternalSquadCreateInternalSquadRes, error) {
+func (c *Client) InternalSquadCreateInternalSquad(ctx context.Context, request *CreateInternalSquadBody, options ...RequestOption) (InternalSquadCreateInternalSquadRes, error) {
 	res, err := c.sendInternalSquadCreateInternalSquad(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadCreateInternalSquad(ctx context.Context, request *CreateInternalSquadRequest, requestOptions ...RequestOption) (res InternalSquadCreateInternalSquadRes, err error) {
+func (c *Client) sendInternalSquadCreateInternalSquad(ctx context.Context, request *CreateInternalSquadBody, requestOptions ...RequestOption) (res InternalSquadCreateInternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -10543,7 +12996,14 @@ func (c *Client) sendInternalSquadCreateInternalSquad(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -10629,7 +13089,7 @@ func (c *Client) sendInternalSquadDeleteInternalSquad(ctx context.Context, param
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -10693,7 +13153,14 @@ func (c *Client) sendInternalSquadDeleteInternalSquad(ctx context.Context, param
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -10779,7 +13246,7 @@ func (c *Client) sendInternalSquadGetInternalSquadAccessibleNodes(ctx context.Co
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -10844,7 +13311,14 @@ func (c *Client) sendInternalSquadGetInternalSquadAccessibleNodes(ctx context.Co
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -10930,7 +13404,7 @@ func (c *Client) sendInternalSquadGetInternalSquadByUuid(ctx context.Context, pa
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -10994,7 +13468,14 @@ func (c *Client) sendInternalSquadGetInternalSquadByUuid(ctx context.Context, pa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -11006,6 +13487,249 @@ func (c *Client) sendInternalSquadGetInternalSquadByUuid(ctx context.Context, pa
 
 	stage = "DecodeResponse"
 	result, err := decodeInternalSquadGetInternalSquadByUuidResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadGetInternalSquadUsage invokes InternalSquad_getInternalSquadUsage operation.
+//
+// Returns users whose total usage over the period on the given nodes is >= minTotalBytes, scoped to
+// the nodes reachable via the internal squad inbounds. Underlying usage data is flushed to the
+// database roughly every 2 minutes.
+//
+// GET /api/internal-squads/{uuid}/usage
+func (c *Client) InternalSquadGetInternalSquadUsage(ctx context.Context, params InternalSquadGetInternalSquadUsageParams, options ...RequestOption) (InternalSquadGetInternalSquadUsageRes, error) {
+	res, err := c.sendInternalSquadGetInternalSquadUsage(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadGetInternalSquadUsage(ctx context.Context, params InternalSquadGetInternalSquadUsageParams, requestOptions ...RequestOption) (res InternalSquadGetInternalSquadUsageRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquad_getInternalSquadUsage"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}/usage"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadGetInternalSquadUsageOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/internal-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/usage"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateToString(params.Start))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "end" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "end",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "minTotalBytes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "minTotalBytes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.MinTotalBytes.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "limit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "limit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Limit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "cursor" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "cursor",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Cursor.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadGetInternalSquadUsageOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadGetInternalSquadUsageResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -11126,7 +13850,14 @@ func (c *Client) sendInternalSquadGetInternalSquads(ctx context.Context, request
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -11138,6 +13869,315 @@ func (c *Client) sendInternalSquadGetInternalSquads(ctx context.Context, request
 
 	stage = "DecodeResponse"
 	result, err := decodeInternalSquadGetInternalSquadsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadGetTags invokes InternalSquad_getTags operation.
+//
+// Get tags of Internal Squads.
+//
+// GET /api/internal-squads/tags
+func (c *Client) InternalSquadGetTags(ctx context.Context, options ...RequestOption) (InternalSquadGetTagsRes, error) {
+	res, err := c.sendInternalSquadGetTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadGetTags(ctx context.Context, requestOptions ...RequestOption) (res InternalSquadGetTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquad_getTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/internal-squads/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadGetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/internal-squads/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadGetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadGetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadRemoveManyUsersFromInternalSquad invokes InternalSquad_removeManyUsersFromInternalSquad operation.
+//
+// Delete many users from internal squad.
+//
+// DELETE /api/internal-squads/{uuid}/bulk-actions/remove-many-users
+func (c *Client) InternalSquadRemoveManyUsersFromInternalSquad(ctx context.Context, request *InternalSquadBodyRequest, params InternalSquadRemoveManyUsersFromInternalSquadParams, options ...RequestOption) (InternalSquadRemoveManyUsersFromInternalSquadRes, error) {
+	res, err := c.sendInternalSquadRemoveManyUsersFromInternalSquad(ctx, request, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadRemoveManyUsersFromInternalSquad(ctx context.Context, request *InternalSquadBodyRequest, params InternalSquadRemoveManyUsersFromInternalSquadParams, requestOptions ...RequestOption) (res InternalSquadRemoveManyUsersFromInternalSquadRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquad_removeManyUsersFromInternalSquad"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/internal-squads/{uuid}/bulk-actions/remove-many-users"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadRemoveManyUsersFromInternalSquadOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/internal-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/bulk-actions/remove-many-users"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeInternalSquadRemoveManyUsersFromInternalSquadRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadRemoveManyUsersFromInternalSquadOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadRemoveManyUsersFromInternalSquadResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -11212,7 +14252,7 @@ func (c *Client) sendInternalSquadRemoveUsersFromInternalSquad(ctx context.Conte
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -11277,7 +14317,14 @@ func (c *Client) sendInternalSquadRemoveUsersFromInternalSquad(ctx context.Conte
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -11301,12 +14348,12 @@ func (c *Client) sendInternalSquadRemoveUsersFromInternalSquad(ctx context.Conte
 // Reorder internal squads.
 //
 // POST /api/internal-squads/actions/reorder
-func (c *Client) InternalSquadReorderInternalSquads(ctx context.Context, request *ReorderRequest, options ...RequestOption) (InternalSquadReorderInternalSquadsRes, error) {
+func (c *Client) InternalSquadReorderInternalSquads(ctx context.Context, request *ReorderInternalSquadsBody, options ...RequestOption) (InternalSquadReorderInternalSquadsRes, error) {
 	res, err := c.sendInternalSquadReorderInternalSquads(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadReorderInternalSquads(ctx context.Context, request *ReorderRequest, requestOptions ...RequestOption) (res InternalSquadReorderInternalSquadsRes, err error) {
+func (c *Client) sendInternalSquadReorderInternalSquads(ctx context.Context, request *ReorderInternalSquadsBody, requestOptions ...RequestOption) (res InternalSquadReorderInternalSquadsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -11421,7 +14468,14 @@ func (c *Client) sendInternalSquadReorderInternalSquads(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -11440,17 +14494,622 @@ func (c *Client) sendInternalSquadReorderInternalSquads(ctx context.Context, req
 	return result, nil
 }
 
+// InternalSquadSetTags invokes InternalSquad_setTags operation.
+//
+// Set tags of Internal Squad.
+//
+// PATCH /api/internal-squads/tags
+func (c *Client) InternalSquadSetTags(ctx context.Context, request *SetInternalSquadsTagsBody, options ...RequestOption) (InternalSquadSetTagsRes, error) {
+	res, err := c.sendInternalSquadSetTags(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadSetTags(ctx context.Context, request *SetInternalSquadsTagsBody, requestOptions ...RequestOption) (res InternalSquadSetTagsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquad_setTags"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/internal-squads/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadSetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/internal-squads/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeInternalSquadSetTagsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadSetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadSetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadStatsGetInternalSquadUsage invokes InternalSquadStats_getInternalSquadUsage operation.
+//
+// Returns users whose total usage over the period on the given nodes is >= minTotalBytes, scoped to
+// the nodes reachable via the internal squad inbounds. Underlying usage data is flushed to the
+// database roughly every 2 minutes.
+//
+// GET /api/bandwidth-stats/internal-squads/{uuid}/usage
+func (c *Client) InternalSquadStatsGetInternalSquadUsage(ctx context.Context, params InternalSquadStatsGetInternalSquadUsageParams, options ...RequestOption) (InternalSquadStatsGetInternalSquadUsageRes, error) {
+	res, err := c.sendInternalSquadStatsGetInternalSquadUsage(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadStatsGetInternalSquadUsage(ctx context.Context, params InternalSquadStatsGetInternalSquadUsageParams, requestOptions ...RequestOption) (res InternalSquadStatsGetInternalSquadUsageRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadStats_getInternalSquadUsage"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/bandwidth-stats/internal-squads/{uuid}/usage"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadStatsGetInternalSquadUsageOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [3]string
+	pathParts[0] = "/api/bandwidth-stats/internal-squads/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/usage"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateToString(params.Start))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "end" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "end",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "minTotalBytes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "minTotalBytes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.MinTotalBytes.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "limit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "limit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Limit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "cursor" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "cursor",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Cursor.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadStatsGetInternalSquadUsageOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadStatsGetInternalSquadUsageResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// InternalSquadStatsGetInternalSquadUserUsage invokes InternalSquadStats_getInternalSquadUserUsage operation.
+//
+// Returns users whose total usage over the period on the given nodes is >= minTotalBytes, scoped to
+// the nodes reachable via the Internal Squad inbounds. Every day in the range is present
+// (zero-filled). Underlying usage data is flushed to the database roughly every 2 minutes.
+//
+// GET /api/bandwidth-stats/internal-squads/{squadUuid}/users/{userId}/usage
+func (c *Client) InternalSquadStatsGetInternalSquadUserUsage(ctx context.Context, params InternalSquadStatsGetInternalSquadUserUsageParams, options ...RequestOption) (InternalSquadStatsGetInternalSquadUserUsageRes, error) {
+	res, err := c.sendInternalSquadStatsGetInternalSquadUserUsage(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendInternalSquadStatsGetInternalSquadUserUsage(ctx context.Context, params InternalSquadStatsGetInternalSquadUserUsageParams, requestOptions ...RequestOption) (res InternalSquadStatsGetInternalSquadUserUsageRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("InternalSquadStats_getInternalSquadUserUsage"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/bandwidth-stats/internal-squads/{squadUuid}/users/{userId}/usage"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, InternalSquadStatsGetInternalSquadUserUsageOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [5]string
+	pathParts[0] = "/api/bandwidth-stats/internal-squads/"
+	{
+		// Encode "squadUuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "squadUuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.SquadUuid))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/users/"
+	{
+		// Encode "userId" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "userId",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.IntToString(params.UserId))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[3] = encoded
+	}
+	pathParts[4] = "/usage"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateToString(params.Start))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "end" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "end",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, InternalSquadStatsGetInternalSquadUserUsageOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeInternalSquadStatsGetInternalSquadUserUsageResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // InternalSquadUpdateInternalSquad invokes InternalSquad_updateInternalSquad operation.
 //
 // Update internal squad.
 //
 // PATCH /api/internal-squads
-func (c *Client) InternalSquadUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequest, options ...RequestOption) (InternalSquadUpdateInternalSquadRes, error) {
+func (c *Client) InternalSquadUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadBody, options ...RequestOption) (InternalSquadUpdateInternalSquadRes, error) {
 	res, err := c.sendInternalSquadUpdateInternalSquad(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendInternalSquadUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadRequest, requestOptions ...RequestOption) (res InternalSquadUpdateInternalSquadRes, err error) {
+func (c *Client) sendInternalSquadUpdateInternalSquad(ctx context.Context, request *UpdateInternalSquadBody, requestOptions ...RequestOption) (res InternalSquadUpdateInternalSquadRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -11565,7 +15224,14 @@ func (c *Client) sendInternalSquadUpdateInternalSquad(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -11577,750 +15243,6 @@ func (c *Client) sendInternalSquadUpdateInternalSquad(ctx context.Context, reque
 
 	stage = "DecodeResponse"
 	result, err := decodeInternalSquadUpdateInternalSquadResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// IpControlDropConnections invokes IpControl_dropConnections operation.
-//
-// Drop Connections for Users or IPs.
-//
-// POST /api/ip-control/drop-connections
-func (c *Client) IpControlDropConnections(ctx context.Context, request *DropConnectionsRequest, options ...RequestOption) (IpControlDropConnectionsRes, error) {
-	res, err := c.sendIpControlDropConnections(ctx, request, options...)
-	return res, err
-}
-
-func (c *Client) sendIpControlDropConnections(ctx context.Context, request *DropConnectionsRequest, requestOptions ...RequestOption) (res IpControlDropConnectionsRes, err error) {
-	// Validate request before sending.
-	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		return res, errors.Wrap(err, "validate")
-	}
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("IpControl_dropConnections"),
-		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/ip-control/drop-connections"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, IpControlDropConnectionsOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [1]string
-	pathParts[0] = "/api/ip-control/drop-connections"
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "POST", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-	if err := encodeIpControlDropConnectionsRequest(request, r); err != nil {
-		return res, errors.Wrap(err, "encode request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, IpControlDropConnectionsOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeIpControlDropConnectionsResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// IpControlFetchUserIps invokes IpControl_fetchUserIps operation.
-//
-// Request IP List for User.
-//
-// POST /api/ip-control/fetch-ips/{uuid}
-func (c *Client) IpControlFetchUserIps(ctx context.Context, params IpControlFetchUserIpsParams, options ...RequestOption) (IpControlFetchUserIpsRes, error) {
-	res, err := c.sendIpControlFetchUserIps(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendIpControlFetchUserIps(ctx context.Context, params IpControlFetchUserIpsParams, requestOptions ...RequestOption) (res IpControlFetchUserIpsRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("IpControl_fetchUserIps"),
-		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/ip-control/fetch-ips/{uuid}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, IpControlFetchUserIpsOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/ip-control/fetch-ips/"
-	{
-		// Encode "uuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "POST", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, IpControlFetchUserIpsOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeIpControlFetchUserIpsResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// IpControlFetchUsersIps invokes IpControl_fetchUsersIps operation.
-//
-// Request Users IPs List for Node.
-//
-// POST /api/ip-control/fetch-users-ips/{nodeUuid}
-func (c *Client) IpControlFetchUsersIps(ctx context.Context, params IpControlFetchUsersIpsParams, options ...RequestOption) (IpControlFetchUsersIpsRes, error) {
-	res, err := c.sendIpControlFetchUsersIps(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendIpControlFetchUsersIps(ctx context.Context, params IpControlFetchUsersIpsParams, requestOptions ...RequestOption) (res IpControlFetchUsersIpsRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("IpControl_fetchUsersIps"),
-		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/ip-control/fetch-users-ips/{nodeUuid}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, IpControlFetchUsersIpsOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/ip-control/fetch-users-ips/"
-	{
-		// Encode "nodeUuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "nodeUuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.NodeUuid))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "POST", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, IpControlFetchUsersIpsOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeIpControlFetchUsersIpsResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// IpControlGetFetchIpsResult invokes IpControl_getFetchIpsResult operation.
-//
-// Get IP List Result by Job ID.
-//
-// GET /api/ip-control/fetch-ips/result/{jobId}
-func (c *Client) IpControlGetFetchIpsResult(ctx context.Context, params IpControlGetFetchIpsResultParams, options ...RequestOption) (IpControlGetFetchIpsResultRes, error) {
-	res, err := c.sendIpControlGetFetchIpsResult(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendIpControlGetFetchIpsResult(ctx context.Context, params IpControlGetFetchIpsResultParams, requestOptions ...RequestOption) (res IpControlGetFetchIpsResultRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("IpControl_getFetchIpsResult"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/ip-control/fetch-ips/result/{jobId}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, IpControlGetFetchIpsResultOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/ip-control/fetch-ips/result/"
-	{
-		// Encode "jobId" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "jobId",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.JobId))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, IpControlGetFetchIpsResultOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeIpControlGetFetchIpsResultResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// IpControlGetFetchUsersIpsResult invokes IpControl_getFetchUsersIpsResult operation.
-//
-// Get Users IPs List Result by Job ID.
-//
-// GET /api/ip-control/fetch-users-ips/result/{jobId}
-func (c *Client) IpControlGetFetchUsersIpsResult(ctx context.Context, params IpControlGetFetchUsersIpsResultParams, options ...RequestOption) (IpControlGetFetchUsersIpsResultRes, error) {
-	res, err := c.sendIpControlGetFetchUsersIpsResult(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendIpControlGetFetchUsersIpsResult(ctx context.Context, params IpControlGetFetchUsersIpsResultParams, requestOptions ...RequestOption) (res IpControlGetFetchUsersIpsResultRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("IpControl_getFetchUsersIpsResult"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/ip-control/fetch-users-ips/result/{jobId}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, IpControlGetFetchUsersIpsResultOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/ip-control/fetch-users-ips/result/"
-	{
-		// Encode "jobId" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "jobId",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.JobId))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, IpControlGetFetchUsersIpsResultOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeIpControlGetFetchUsersIpsResultResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -12441,7 +15363,14 @@ func (c *Client) sendKeygenGenerateKey(ctx context.Context, requestOptions ...Re
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -12527,7 +15456,7 @@ func (c *Client) sendMetadataGetNodeMetadata(ctx context.Context, params Metadat
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -12591,7 +15520,14 @@ func (c *Client) sendMetadataGetNodeMetadata(ctx context.Context, params Metadat
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -12614,7 +15550,7 @@ func (c *Client) sendMetadataGetNodeMetadata(ctx context.Context, params Metadat
 //
 // Get user metadata.
 //
-// GET /api/metadata/user/{uuid}
+// GET /api/metadata/user/{userId}
 func (c *Client) MetadataGetUserMetadata(ctx context.Context, params MetadataGetUserMetadataParams, options ...RequestOption) (MetadataGetUserMetadataRes, error) {
 	res, err := c.sendMetadataGetUserMetadata(ctx, params, options...)
 	return res, err
@@ -12624,7 +15560,7 @@ func (c *Client) sendMetadataGetUserMetadata(ctx context.Context, params Metadat
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Metadata_getUserMetadata"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/metadata/user/{uuid}"),
+		semconv.URLTemplateKey.String("/api/metadata/user/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -12670,14 +15606,14 @@ func (c *Client) sendMetadataGetUserMetadata(ctx context.Context, params Metadat
 	var pathParts [2]string
 	pathParts[0] = "/api/metadata/user/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -12741,7 +15677,14 @@ func (c *Client) sendMetadataGetUserMetadata(ctx context.Context, params Metadat
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -12765,12 +15708,12 @@ func (c *Client) sendMetadataGetUserMetadata(ctx context.Context, params Metadat
 // Update or create Node Metadata.
 //
 // PUT /api/metadata/node/{uuid}
-func (c *Client) MetadataUpsertNodeMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, params MetadataUpsertNodeMetadataParams, options ...RequestOption) (MetadataUpsertNodeMetadataRes, error) {
+func (c *Client) MetadataUpsertNodeMetadata(ctx context.Context, request *UpsertNodeMetadataBody, params MetadataUpsertNodeMetadataParams, options ...RequestOption) (MetadataUpsertNodeMetadataRes, error) {
 	res, err := c.sendMetadataUpsertNodeMetadata(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendMetadataUpsertNodeMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, params MetadataUpsertNodeMetadataParams, requestOptions ...RequestOption) (res MetadataUpsertNodeMetadataRes, err error) {
+func (c *Client) sendMetadataUpsertNodeMetadata(ctx context.Context, request *UpsertNodeMetadataBody, params MetadataUpsertNodeMetadataParams, requestOptions ...RequestOption) (res MetadataUpsertNodeMetadataRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Metadata_upsertNodeMetadata"),
 		semconv.HTTPRequestMethodKey.String("PUT"),
@@ -12827,7 +15770,7 @@ func (c *Client) sendMetadataUpsertNodeMetadata(ctx context.Context, request *Up
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -12894,7 +15837,14 @@ func (c *Client) sendMetadataUpsertNodeMetadata(ctx context.Context, request *Up
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -12917,17 +15867,17 @@ func (c *Client) sendMetadataUpsertNodeMetadata(ctx context.Context, request *Up
 //
 // Update or create User Metadata.
 //
-// PUT /api/metadata/user/{uuid}
-func (c *Client) MetadataUpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, params MetadataUpsertUserMetadataParams, options ...RequestOption) (MetadataUpsertUserMetadataRes, error) {
+// PUT /api/metadata/user/{userId}
+func (c *Client) MetadataUpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataBody, params MetadataUpsertUserMetadataParams, options ...RequestOption) (MetadataUpsertUserMetadataRes, error) {
 	res, err := c.sendMetadataUpsertUserMetadata(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendMetadataUpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataRequestBodyRequest, params MetadataUpsertUserMetadataParams, requestOptions ...RequestOption) (res MetadataUpsertUserMetadataRes, err error) {
+func (c *Client) sendMetadataUpsertUserMetadata(ctx context.Context, request *UpsertUserMetadataBody, params MetadataUpsertUserMetadataParams, requestOptions ...RequestOption) (res MetadataUpsertUserMetadataRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Metadata_upsertUserMetadata"),
 		semconv.HTTPRequestMethodKey.String("PUT"),
-		semconv.URLTemplateKey.String("/api/metadata/user/{uuid}"),
+		semconv.URLTemplateKey.String("/api/metadata/user/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -12973,14 +15923,14 @@ func (c *Client) sendMetadataUpsertUserMetadata(ctx context.Context, request *Up
 	var pathParts [2]string
 	pathParts[0] = "/api/metadata/user/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -13047,7 +15997,14 @@ func (c *Client) sendMetadataUpsertUserMetadata(ctx context.Context, request *Up
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13066,17 +16023,772 @@ func (c *Client) sendMetadataUpsertUserMetadata(ctx context.Context, request *Up
 	return result, nil
 }
 
+// NodeIntegrationCreateIntegration invokes NodeIntegration_createIntegration operation.
+//
+// Create Node Integration.
+//
+// POST /api/node-integrations
+func (c *Client) NodeIntegrationCreateIntegration(ctx context.Context, request *CreateNodeIntegrationBody, options ...RequestOption) (NodeIntegrationCreateIntegrationRes, error) {
+	res, err := c.sendNodeIntegrationCreateIntegration(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodeIntegrationCreateIntegration(ctx context.Context, request *CreateNodeIntegrationBody, requestOptions ...RequestOption) (res NodeIntegrationCreateIntegrationRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodeIntegration_createIntegration"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/node-integrations"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodeIntegrationCreateIntegrationOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-integrations"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodeIntegrationCreateIntegrationRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodeIntegrationCreateIntegrationOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodeIntegrationCreateIntegrationResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodeIntegrationDeleteIntegration invokes NodeIntegration_deleteIntegration operation.
+//
+// Delete Node Integration.
+//
+// DELETE /api/node-integrations/{uuid}
+func (c *Client) NodeIntegrationDeleteIntegration(ctx context.Context, params NodeIntegrationDeleteIntegrationParams, options ...RequestOption) (NodeIntegrationDeleteIntegrationRes, error) {
+	res, err := c.sendNodeIntegrationDeleteIntegration(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendNodeIntegrationDeleteIntegration(ctx context.Context, params NodeIntegrationDeleteIntegrationParams, requestOptions ...RequestOption) (res NodeIntegrationDeleteIntegrationRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodeIntegration_deleteIntegration"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/node-integrations/{uuid}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodeIntegrationDeleteIntegrationOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/node-integrations/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodeIntegrationDeleteIntegrationOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodeIntegrationDeleteIntegrationResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodeIntegrationGetAllIntegrations invokes NodeIntegration_getAllIntegrations operation.
+//
+// Get all Node Integrations.
+//
+// GET /api/node-integrations
+func (c *Client) NodeIntegrationGetAllIntegrations(ctx context.Context, options ...RequestOption) (NodeIntegrationGetAllIntegrationsRes, error) {
+	res, err := c.sendNodeIntegrationGetAllIntegrations(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendNodeIntegrationGetAllIntegrations(ctx context.Context, requestOptions ...RequestOption) (res NodeIntegrationGetAllIntegrationsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodeIntegration_getAllIntegrations"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/node-integrations"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodeIntegrationGetAllIntegrationsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-integrations"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodeIntegrationGetAllIntegrationsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodeIntegrationGetAllIntegrationsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodeIntegrationGetIntegrationByUuid invokes NodeIntegration_getIntegrationByUuid operation.
+//
+// Get Node Integration by uuid.
+//
+// GET /api/node-integrations/{uuid}
+func (c *Client) NodeIntegrationGetIntegrationByUuid(ctx context.Context, params NodeIntegrationGetIntegrationByUuidParams, options ...RequestOption) (NodeIntegrationGetIntegrationByUuidRes, error) {
+	res, err := c.sendNodeIntegrationGetIntegrationByUuid(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendNodeIntegrationGetIntegrationByUuid(ctx context.Context, params NodeIntegrationGetIntegrationByUuidParams, requestOptions ...RequestOption) (res NodeIntegrationGetIntegrationByUuidRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodeIntegration_getIntegrationByUuid"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/node-integrations/{uuid}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodeIntegrationGetIntegrationByUuidOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/node-integrations/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodeIntegrationGetIntegrationByUuidOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodeIntegrationGetIntegrationByUuidResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodeIntegrationUpdateIntegration invokes NodeIntegration_updateIntegration operation.
+//
+// Update Node Integration.
+//
+// PATCH /api/node-integrations
+func (c *Client) NodeIntegrationUpdateIntegration(ctx context.Context, request *UpdateNodeIntegrationBody, options ...RequestOption) (NodeIntegrationUpdateIntegrationRes, error) {
+	res, err := c.sendNodeIntegrationUpdateIntegration(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodeIntegrationUpdateIntegration(ctx context.Context, request *UpdateNodeIntegrationBody, requestOptions ...RequestOption) (res NodeIntegrationUpdateIntegrationRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodeIntegration_updateIntegration"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/node-integrations"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodeIntegrationUpdateIntegrationOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-integrations"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodeIntegrationUpdateIntegrationRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodeIntegrationUpdateIntegrationOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodeIntegrationUpdateIntegrationResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // NodePluginCloneNodePlugin invokes NodePlugin_cloneNodePlugin operation.
 //
 // Clone Node Plugin.
 //
 // POST /api/node-plugins/actions/clone
-func (c *Client) NodePluginCloneNodePlugin(ctx context.Context, request *CloneNodePluginRequestRequest, options ...RequestOption) (NodePluginCloneNodePluginRes, error) {
+func (c *Client) NodePluginCloneNodePlugin(ctx context.Context, request *CloneNodePluginBody, options ...RequestOption) (NodePluginCloneNodePluginRes, error) {
 	res, err := c.sendNodePluginCloneNodePlugin(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodePluginCloneNodePlugin(ctx context.Context, request *CloneNodePluginRequestRequest, requestOptions ...RequestOption) (res NodePluginCloneNodePluginRes, err error) {
+func (c *Client) sendNodePluginCloneNodePlugin(ctx context.Context, request *CloneNodePluginBody, requestOptions ...RequestOption) (res NodePluginCloneNodePluginRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("NodePlugin_cloneNodePlugin"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -13182,7 +16894,14 @@ func (c *Client) sendNodePluginCloneNodePlugin(ctx context.Context, request *Clo
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13206,12 +16925,12 @@ func (c *Client) sendNodePluginCloneNodePlugin(ctx context.Context, request *Clo
 // Create Node Plugin.
 //
 // POST /api/node-plugins
-func (c *Client) NodePluginCreateConfig(ctx context.Context, request *CreateNodePluginRequest, options ...RequestOption) (NodePluginCreateConfigRes, error) {
+func (c *Client) NodePluginCreateConfig(ctx context.Context, request *CreateNodePluginBody, options ...RequestOption) (NodePluginCreateConfigRes, error) {
 	res, err := c.sendNodePluginCreateConfig(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodePluginCreateConfig(ctx context.Context, request *CreateNodePluginRequest, requestOptions ...RequestOption) (res NodePluginCreateConfigRes, err error) {
+func (c *Client) sendNodePluginCreateConfig(ctx context.Context, request *CreateNodePluginBody, requestOptions ...RequestOption) (res NodePluginCreateConfigRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -13326,7 +17045,14 @@ func (c *Client) sendNodePluginCreateConfig(ctx context.Context, request *Create
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13338,6 +17064,157 @@ func (c *Client) sendNodePluginCreateConfig(ctx context.Context, request *Create
 
 	stage = "DecodeResponse"
 	result, err := decodeNodePluginCreateConfigResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodePluginCreateSharedList invokes NodePlugin_createSharedList operation.
+//
+// Create Shared List.
+//
+// POST /api/node-plugins/shared-lists
+func (c *Client) NodePluginCreateSharedList(ctx context.Context, request *SharedListBodyBulkRequest, options ...RequestOption) (NodePluginCreateSharedListRes, error) {
+	res, err := c.sendNodePluginCreateSharedList(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginCreateSharedList(ctx context.Context, request *SharedListBodyBulkRequest, requestOptions ...RequestOption) (res NodePluginCreateSharedListRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_createSharedList"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/node-plugins/shared-lists"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginCreateSharedListOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/shared-lists"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodePluginCreateSharedListRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginCreateSharedListOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginCreateSharedListResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -13412,7 +17289,7 @@ func (c *Client) sendNodePluginDeleteConfig(ctx context.Context, params NodePlug
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -13476,7 +17353,14 @@ func (c *Client) sendNodePluginDeleteConfig(ctx context.Context, params NodePlug
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13488,6 +17372,157 @@ func (c *Client) sendNodePluginDeleteConfig(ctx context.Context, params NodePlug
 
 	stage = "DecodeResponse"
 	result, err := decodeNodePluginDeleteConfigResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodePluginDeleteSharedList invokes NodePlugin_deleteSharedList operation.
+//
+// Delete Shared List by name.
+//
+// DELETE /api/node-plugins/shared-lists
+func (c *Client) NodePluginDeleteSharedList(ctx context.Context, request *SharedListBodyBulkRequest2, options ...RequestOption) (NodePluginDeleteSharedListRes, error) {
+	res, err := c.sendNodePluginDeleteSharedList(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginDeleteSharedList(ctx context.Context, request *SharedListBodyBulkRequest2, requestOptions ...RequestOption) (res NodePluginDeleteSharedListRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_deleteSharedList"),
+		semconv.HTTPRequestMethodKey.String("DELETE"),
+		semconv.URLTemplateKey.String("/api/node-plugins/shared-lists"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginDeleteSharedListOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/shared-lists"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodePluginDeleteSharedListRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginDeleteSharedListOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginDeleteSharedListResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -13608,7 +17643,14 @@ func (c *Client) sendNodePluginGetAllConfigs(ctx context.Context, requestOptions
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13620,6 +17662,146 @@ func (c *Client) sendNodePluginGetAllConfigs(ctx context.Context, requestOptions
 
 	stage = "DecodeResponse"
 	result, err := decodeNodePluginGetAllConfigsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodePluginGetAllSharedLists invokes NodePlugin_getAllSharedLists operation.
+//
+// Returns only the name, type and item count of every shared list. Use "Get Shared List by name" to
+// fetch the items themselves.
+//
+// GET /api/node-plugins/shared-lists
+func (c *Client) NodePluginGetAllSharedLists(ctx context.Context, options ...RequestOption) (NodePluginGetAllSharedListsRes, error) {
+	res, err := c.sendNodePluginGetAllSharedLists(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginGetAllSharedLists(ctx context.Context, requestOptions ...RequestOption) (res NodePluginGetAllSharedListsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_getAllSharedLists"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/node-plugins/shared-lists"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginGetAllSharedListsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/shared-lists"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginGetAllSharedListsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginGetAllSharedListsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -13694,7 +17876,7 @@ func (c *Client) sendNodePluginGetConfigByUuid(ctx context.Context, params NodeP
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -13758,7 +17940,14 @@ func (c *Client) sendNodePluginGetConfigByUuid(ctx context.Context, params NodeP
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13777,17 +17966,313 @@ func (c *Client) sendNodePluginGetConfigByUuid(ctx context.Context, params NodeP
 	return result, nil
 }
 
+// NodePluginGetSharedListByName invokes NodePlugin_getSharedListByName operation.
+//
+// Get Shared List by name.
+//
+// GET /api/node-plugins/shared-lists/by-name
+func (c *Client) NodePluginGetSharedListByName(ctx context.Context, params NodePluginGetSharedListByNameParams, options ...RequestOption) (NodePluginGetSharedListByNameRes, error) {
+	res, err := c.sendNodePluginGetSharedListByName(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginGetSharedListByName(ctx context.Context, params NodePluginGetSharedListByNameParams, requestOptions ...RequestOption) (res NodePluginGetSharedListByNameRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_getSharedListByName"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/node-plugins/shared-lists/by-name"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginGetSharedListByNameOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/shared-lists/by-name"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "name" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "name",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.StringToString(params.Name))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginGetSharedListByNameOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginGetSharedListByNameResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodePluginGetTags invokes NodePlugin_getTags operation.
+//
+// Get tags of Node Plugins.
+//
+// GET /api/node-plugins/tags
+func (c *Client) NodePluginGetTags(ctx context.Context, options ...RequestOption) (NodePluginGetTagsRes, error) {
+	res, err := c.sendNodePluginGetTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginGetTags(ctx context.Context, requestOptions ...RequestOption) (res NodePluginGetTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_getTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/node-plugins/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginGetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginGetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginGetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // NodePluginPluginExecutor invokes NodePlugin_pluginExecutor operation.
 //
 // Execute command on node plugins.
 //
 // POST /api/node-plugins/executor
-func (c *Client) NodePluginPluginExecutor(ctx context.Context, request *PluginExecutorRequest, options ...RequestOption) (NodePluginPluginExecutorRes, error) {
+func (c *Client) NodePluginPluginExecutor(ctx context.Context, request *PluginExecutorBody, options ...RequestOption) (NodePluginPluginExecutorRes, error) {
 	res, err := c.sendNodePluginPluginExecutor(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodePluginPluginExecutor(ctx context.Context, request *PluginExecutorRequest, requestOptions ...RequestOption) (res NodePluginPluginExecutorRes, err error) {
+func (c *Client) sendNodePluginPluginExecutor(ctx context.Context, request *PluginExecutorBody, requestOptions ...RequestOption) (res NodePluginPluginExecutorRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -13902,7 +18387,14 @@ func (c *Client) sendNodePluginPluginExecutor(ctx context.Context, request *Plug
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -13926,12 +18418,12 @@ func (c *Client) sendNodePluginPluginExecutor(ctx context.Context, request *Plug
 // Reorder Node Plugins.
 //
 // POST /api/node-plugins/actions/reorder
-func (c *Client) NodePluginReorderNodePlugins(ctx context.Context, request *ReorderRequest, options ...RequestOption) (NodePluginReorderNodePluginsRes, error) {
+func (c *Client) NodePluginReorderNodePlugins(ctx context.Context, request *ReorderNodePluginsBody, options ...RequestOption) (NodePluginReorderNodePluginsRes, error) {
 	res, err := c.sendNodePluginReorderNodePlugins(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodePluginReorderNodePlugins(ctx context.Context, request *ReorderRequest, requestOptions ...RequestOption) (res NodePluginReorderNodePluginsRes, err error) {
+func (c *Client) sendNodePluginReorderNodePlugins(ctx context.Context, request *ReorderNodePluginsBody, requestOptions ...RequestOption) (res NodePluginReorderNodePluginsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14046,7 +18538,14 @@ func (c *Client) sendNodePluginReorderNodePlugins(ctx context.Context, request *
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -14065,17 +18564,462 @@ func (c *Client) sendNodePluginReorderNodePlugins(ctx context.Context, request *
 	return result, nil
 }
 
+// NodePluginSetTags invokes NodePlugin_setTags operation.
+//
+// Set tags of Node Plugin.
+//
+// PATCH /api/node-plugins/tags
+func (c *Client) NodePluginSetTags(ctx context.Context, request *SetNodePluginsTagsBody, options ...RequestOption) (NodePluginSetTagsRes, error) {
+	res, err := c.sendNodePluginSetTags(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginSetTags(ctx context.Context, request *SetNodePluginsTagsBody, requestOptions ...RequestOption) (res NodePluginSetTagsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_setTags"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/node-plugins/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginSetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodePluginSetTagsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginSetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginSetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodePluginSyncNodePlugin invokes NodePlugin_syncNodePlugin operation.
+//
+// Push the current plugin config, including referenced shared lists, to every connected node this
+// plugin is active on.
+//
+// POST /api/node-plugins/actions/sync
+func (c *Client) NodePluginSyncNodePlugin(ctx context.Context, request *SyncNodePluginBody, options ...RequestOption) (NodePluginSyncNodePluginRes, error) {
+	res, err := c.sendNodePluginSyncNodePlugin(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginSyncNodePlugin(ctx context.Context, request *SyncNodePluginBody, requestOptions ...RequestOption) (res NodePluginSyncNodePluginRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_syncNodePlugin"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/node-plugins/actions/sync"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginSyncNodePluginOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/actions/sync"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodePluginSyncNodePluginRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginSyncNodePluginOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginSyncNodePluginResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodePluginSyncSharedList invokes NodePlugin_syncSharedList operation.
+//
+// Push every plugin referencing this shared list to the nodes it is active on.
+//
+// POST /api/node-plugins/shared-lists/actions/sync
+func (c *Client) NodePluginSyncSharedList(ctx context.Context, request *SharedListBodyBulkRequest2, options ...RequestOption) (NodePluginSyncSharedListRes, error) {
+	res, err := c.sendNodePluginSyncSharedList(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginSyncSharedList(ctx context.Context, request *SharedListBodyBulkRequest2, requestOptions ...RequestOption) (res NodePluginSyncSharedListRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_syncSharedList"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/node-plugins/shared-lists/actions/sync"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginSyncSharedListOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/shared-lists/actions/sync"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodePluginSyncSharedListRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginSyncSharedListOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginSyncSharedListResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // NodePluginUpdateConfig invokes NodePlugin_updateConfig operation.
 //
 // Update Node Plugin.
 //
 // PATCH /api/node-plugins
-func (c *Client) NodePluginUpdateConfig(ctx context.Context, request *UpdateNodePluginRequest, options ...RequestOption) (NodePluginUpdateConfigRes, error) {
+func (c *Client) NodePluginUpdateConfig(ctx context.Context, request *UpdateNodePluginBody, options ...RequestOption) (NodePluginUpdateConfigRes, error) {
 	res, err := c.sendNodePluginUpdateConfig(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodePluginUpdateConfig(ctx context.Context, request *UpdateNodePluginRequest, requestOptions ...RequestOption) (res NodePluginUpdateConfigRes, err error) {
+func (c *Client) sendNodePluginUpdateConfig(ctx context.Context, request *UpdateNodePluginBody, requestOptions ...RequestOption) (res NodePluginUpdateConfigRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14190,7 +19134,14 @@ func (c *Client) sendNodePluginUpdateConfig(ctx context.Context, request *Update
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -14209,17 +19160,168 @@ func (c *Client) sendNodePluginUpdateConfig(ctx context.Context, request *Update
 	return result, nil
 }
 
+// NodePluginUpdateSharedList invokes NodePlugin_updateSharedList operation.
+//
+// Update Shared List.
+//
+// PATCH /api/node-plugins/shared-lists
+func (c *Client) NodePluginUpdateSharedList(ctx context.Context, request *SharedListBodyBulkRequest, options ...RequestOption) (NodePluginUpdateSharedListRes, error) {
+	res, err := c.sendNodePluginUpdateSharedList(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendNodePluginUpdateSharedList(ctx context.Context, request *SharedListBodyBulkRequest, requestOptions ...RequestOption) (res NodePluginUpdateSharedListRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("NodePlugin_updateSharedList"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/node-plugins/shared-lists"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodePluginUpdateSharedListOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/node-plugins/shared-lists"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeNodePluginUpdateSharedListRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodePluginUpdateSharedListOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodePluginUpdateSharedListResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // NodesBulkNodesActions invokes Nodes_bulkNodesActions operation.
 //
 // Perform actions for many nodes.
 //
 // POST /api/nodes/bulk-actions
-func (c *Client) NodesBulkNodesActions(ctx context.Context, request *BulkNodesActionsRequest, options ...RequestOption) (NodesBulkNodesActionsRes, error) {
+func (c *Client) NodesBulkNodesActions(ctx context.Context, request *BulkNodesActionsBody, options ...RequestOption) (NodesBulkNodesActionsRes, error) {
 	res, err := c.sendNodesBulkNodesActions(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesBulkNodesActions(ctx context.Context, request *BulkNodesActionsRequest, requestOptions ...RequestOption) (res NodesBulkNodesActionsRes, err error) {
+func (c *Client) sendNodesBulkNodesActions(ctx context.Context, request *BulkNodesActionsBody, requestOptions ...RequestOption) (res NodesBulkNodesActionsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14334,7 +19436,14 @@ func (c *Client) sendNodesBulkNodesActions(ctx context.Context, request *BulkNod
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -14358,12 +19467,12 @@ func (c *Client) sendNodesBulkNodesActions(ctx context.Context, request *BulkNod
 // Update many nodes.
 //
 // POST /api/nodes/bulk-actions/update
-func (c *Client) NodesBulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateRequest, options ...RequestOption) (NodesBulkNodesUpdateRes, error) {
+func (c *Client) NodesBulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateBody, options ...RequestOption) (NodesBulkNodesUpdateRes, error) {
 	res, err := c.sendNodesBulkNodesUpdate(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesBulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateRequest, requestOptions ...RequestOption) (res NodesBulkNodesUpdateRes, err error) {
+func (c *Client) sendNodesBulkNodesUpdate(ctx context.Context, request *BulkNodesUpdateBody, requestOptions ...RequestOption) (res NodesBulkNodesUpdateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14478,7 +19587,14 @@ func (c *Client) sendNodesBulkNodesUpdate(ctx context.Context, request *BulkNode
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -14502,12 +19618,12 @@ func (c *Client) sendNodesBulkNodesUpdate(ctx context.Context, request *BulkNode
 // Create a new node.
 //
 // POST /api/nodes
-func (c *Client) NodesCreateNode(ctx context.Context, request *CreateNodeRequest, options ...RequestOption) (NodesCreateNodeRes, error) {
+func (c *Client) NodesCreateNode(ctx context.Context, request *CreateNodeBody, options ...RequestOption) (NodesCreateNodeRes, error) {
 	res, err := c.sendNodesCreateNode(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesCreateNode(ctx context.Context, request *CreateNodeRequest, requestOptions ...RequestOption) (res NodesCreateNodeRes, err error) {
+func (c *Client) sendNodesCreateNode(ctx context.Context, request *CreateNodeBody, requestOptions ...RequestOption) (res NodesCreateNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -14622,7 +19738,14 @@ func (c *Client) sendNodesCreateNode(ctx context.Context, request *CreateNodeReq
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -14708,7 +19831,7 @@ func (c *Client) sendNodesDeleteNode(ctx context.Context, params NodesDeleteNode
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -14772,7 +19895,14 @@ func (c *Client) sendNodesDeleteNode(ctx context.Context, params NodesDeleteNode
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -14858,7 +19988,7 @@ func (c *Client) sendNodesDisableNode(ctx context.Context, params NodesDisableNo
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -14923,7 +20053,14 @@ func (c *Client) sendNodesDisableNode(ctx context.Context, params NodesDisableNo
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15009,7 +20146,7 @@ func (c *Client) sendNodesEnableNode(ctx context.Context, params NodesEnableNode
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -15074,7 +20211,14 @@ func (c *Client) sendNodesEnableNode(ctx context.Context, params NodesEnableNode
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15093,19 +20237,176 @@ func (c *Client) sendNodesEnableNode(ctx context.Context, params NodesEnableNode
 	return result, nil
 }
 
-// NodesGetAllNodes invokes Nodes_getAllNodes operation.
+// NodesGetNode invokes Nodes_getNode operation.
 //
-// Get all nodes.
+// Get node by UUID.
 //
-// GET /api/nodes
-func (c *Client) NodesGetAllNodes(ctx context.Context, options ...RequestOption) (NodesGetAllNodesRes, error) {
-	res, err := c.sendNodesGetAllNodes(ctx, options...)
+// GET /api/nodes/{uuid}
+func (c *Client) NodesGetNode(ctx context.Context, params NodesGetNodeParams, options ...RequestOption) (NodesGetNodeRes, error) {
+	res, err := c.sendNodesGetNode(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesGetAllNodes(ctx context.Context, requestOptions ...RequestOption) (res NodesGetAllNodesRes, err error) {
+func (c *Client) sendNodesGetNode(ctx context.Context, params NodesGetNodeParams, requestOptions ...RequestOption) (res NodesGetNodeRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Nodes_getAllNodes"),
+		otelogen.OperationID("Nodes_getNode"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/nodes/{uuid}"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesGetNodeOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [2]string
+	pathParts[0] = "/api/nodes/"
+	{
+		// Encode "uuid" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "uuid",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, NodesGetNodeOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeNodesGetNodeResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// NodesGetNodes invokes Nodes_getNodes operation.
+//
+// Get nodes.
+//
+// GET /api/nodes
+func (c *Client) NodesGetNodes(ctx context.Context, options ...RequestOption) (NodesGetNodesRes, error) {
+	res, err := c.sendNodesGetNodes(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendNodesGetNodes(ctx context.Context, requestOptions ...RequestOption) (res NodesGetNodesRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Nodes_getNodes"),
 		semconv.HTTPRequestMethodKey.String("GET"),
 		semconv.URLTemplateKey.String("/api/nodes"),
 	}
@@ -15123,7 +20424,7 @@ func (c *Client) sendNodesGetAllNodes(ctx context.Context, requestOptions ...Req
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, NodesGetAllNodesOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesGetNodesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -15165,7 +20466,7 @@ func (c *Client) sendNodesGetAllNodes(ctx context.Context, requestOptions ...Req
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, NodesGetAllNodesOperation, r); {
+			switch err := c.securityAuthorization(ctx, NodesGetNodesOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -15206,7 +20507,14 @@ func (c *Client) sendNodesGetAllNodes(ctx context.Context, requestOptions ...Req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15217,7 +20525,7 @@ func (c *Client) sendNodesGetAllNodes(ctx context.Context, requestOptions ...Req
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeNodesGetAllNodesResponse(resp)
+	result, err := decodeNodesGetNodesResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -15225,19 +20533,19 @@ func (c *Client) sendNodesGetAllNodes(ctx context.Context, requestOptions ...Req
 	return result, nil
 }
 
-// NodesGetAllNodesTags invokes Nodes_getAllNodesTags operation.
+// NodesGetNodesTags invokes Nodes_getNodesTags operation.
 //
-// Get all existing nodes tags.
+// Get nodes tags.
 //
 // GET /api/nodes/tags
-func (c *Client) NodesGetAllNodesTags(ctx context.Context, options ...RequestOption) (NodesGetAllNodesTagsRes, error) {
-	res, err := c.sendNodesGetAllNodesTags(ctx, options...)
+func (c *Client) NodesGetNodesTags(ctx context.Context, options ...RequestOption) (NodesGetNodesTagsRes, error) {
+	res, err := c.sendNodesGetNodesTags(ctx, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesGetAllNodesTags(ctx context.Context, requestOptions ...RequestOption) (res NodesGetAllNodesTagsRes, err error) {
+func (c *Client) sendNodesGetNodesTags(ctx context.Context, requestOptions ...RequestOption) (res NodesGetNodesTagsRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Nodes_getAllNodesTags"),
+		otelogen.OperationID("Nodes_getNodesTags"),
 		semconv.HTTPRequestMethodKey.String("GET"),
 		semconv.URLTemplateKey.String("/api/nodes/tags"),
 	}
@@ -15255,7 +20563,7 @@ func (c *Client) sendNodesGetAllNodesTags(ctx context.Context, requestOptions ..
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, NodesGetAllNodesTagsOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, NodesGetNodesTagsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -15297,7 +20605,7 @@ func (c *Client) sendNodesGetAllNodesTags(ctx context.Context, requestOptions ..
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, NodesGetAllNodesTagsOperation, r); {
+			switch err := c.securityAuthorization(ctx, NodesGetNodesTagsOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -15338,7 +20646,14 @@ func (c *Client) sendNodesGetAllNodesTags(ctx context.Context, requestOptions ..
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15349,157 +20664,7 @@ func (c *Client) sendNodesGetAllNodesTags(ctx context.Context, requestOptions ..
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeNodesGetAllNodesTagsResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// NodesGetOneNode invokes Nodes_getOneNode operation.
-//
-// Get node by UUID.
-//
-// GET /api/nodes/{uuid}
-func (c *Client) NodesGetOneNode(ctx context.Context, params NodesGetOneNodeParams, options ...RequestOption) (NodesGetOneNodeRes, error) {
-	res, err := c.sendNodesGetOneNode(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendNodesGetOneNode(ctx context.Context, params NodesGetOneNodeParams, requestOptions ...RequestOption) (res NodesGetOneNodeRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Nodes_getOneNode"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/nodes/{uuid}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, NodesGetOneNodeOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/nodes/"
-	{
-		// Encode "uuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, NodesGetOneNodeOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeNodesGetOneNodeResponse(resp)
+	result, err := decodeNodesGetNodesTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -15512,12 +20677,12 @@ func (c *Client) sendNodesGetOneNode(ctx context.Context, params NodesGetOneNode
 // Modify Inbounds & Profile for many nodes.
 //
 // POST /api/nodes/bulk-actions/profile-modification
-func (c *Client) NodesProfileModification(ctx context.Context, request *ProfileModificationRequest, options ...RequestOption) (NodesProfileModificationRes, error) {
+func (c *Client) NodesProfileModification(ctx context.Context, request *ProfileModificationBody, options ...RequestOption) (NodesProfileModificationRes, error) {
 	res, err := c.sendNodesProfileModification(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesProfileModification(ctx context.Context, request *ProfileModificationRequest, requestOptions ...RequestOption) (res NodesProfileModificationRes, err error) {
+func (c *Client) sendNodesProfileModification(ctx context.Context, request *ProfileModificationBody, requestOptions ...RequestOption) (res NodesProfileModificationRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -15632,7 +20797,14 @@ func (c *Client) sendNodesProfileModification(ctx context.Context, request *Prof
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15656,12 +20828,12 @@ func (c *Client) sendNodesProfileModification(ctx context.Context, request *Prof
 // Reorder nodes.
 //
 // POST /api/nodes/actions/reorder
-func (c *Client) NodesReorderNodes(ctx context.Context, request *ReorderNodeRequest, options ...RequestOption) (NodesReorderNodesRes, error) {
+func (c *Client) NodesReorderNodes(ctx context.Context, request *ReorderNodesBody, options ...RequestOption) (NodesReorderNodesRes, error) {
 	res, err := c.sendNodesReorderNodes(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesReorderNodes(ctx context.Context, request *ReorderNodeRequest, requestOptions ...RequestOption) (res NodesReorderNodesRes, err error) {
+func (c *Client) sendNodesReorderNodes(ctx context.Context, request *ReorderNodesBody, requestOptions ...RequestOption) (res NodesReorderNodesRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -15776,7 +20948,14 @@ func (c *Client) sendNodesReorderNodes(ctx context.Context, request *ReorderNode
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15862,7 +21041,7 @@ func (c *Client) sendNodesResetNodeTraffic(ctx context.Context, params NodesRese
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -15927,7 +21106,14 @@ func (c *Client) sendNodesResetNodeTraffic(ctx context.Context, params NodesRese
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -15951,12 +21137,12 @@ func (c *Client) sendNodesResetNodeTraffic(ctx context.Context, params NodesRese
 // Restart all nodes.
 //
 // POST /api/nodes/actions/restart-all
-func (c *Client) NodesRestartAllNodes(ctx context.Context, request *NodeRequestBodyRequest, options ...RequestOption) (NodesRestartAllNodesRes, error) {
+func (c *Client) NodesRestartAllNodes(ctx context.Context, request *NodeBodyRequest, options ...RequestOption) (NodesRestartAllNodesRes, error) {
 	res, err := c.sendNodesRestartAllNodes(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesRestartAllNodes(ctx context.Context, request *NodeRequestBodyRequest, requestOptions ...RequestOption) (res NodesRestartAllNodesRes, err error) {
+func (c *Client) sendNodesRestartAllNodes(ctx context.Context, request *NodeBodyRequest, requestOptions ...RequestOption) (res NodesRestartAllNodesRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Nodes_restartAllNodes"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -16062,7 +21248,14 @@ func (c *Client) sendNodesRestartAllNodes(ctx context.Context, request *NodeRequ
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -16086,12 +21279,12 @@ func (c *Client) sendNodesRestartAllNodes(ctx context.Context, request *NodeRequ
 // Restart node.
 //
 // POST /api/nodes/{uuid}/actions/restart
-func (c *Client) NodesRestartNode(ctx context.Context, request *NodeRequestBodyRequest, params NodesRestartNodeParams, options ...RequestOption) (NodesRestartNodeRes, error) {
+func (c *Client) NodesRestartNode(ctx context.Context, request *NodeBodyRequest, params NodesRestartNodeParams, options ...RequestOption) (NodesRestartNodeRes, error) {
 	res, err := c.sendNodesRestartNode(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesRestartNode(ctx context.Context, request *NodeRequestBodyRequest, params NodesRestartNodeParams, requestOptions ...RequestOption) (res NodesRestartNodeRes, err error) {
+func (c *Client) sendNodesRestartNode(ctx context.Context, request *NodeBodyRequest, params NodesRestartNodeParams, requestOptions ...RequestOption) (res NodesRestartNodeRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Nodes_restartNode"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -16148,7 +21341,7 @@ func (c *Client) sendNodesRestartNode(ctx context.Context, request *NodeRequestB
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -16216,7 +21409,14 @@ func (c *Client) sendNodesRestartNode(ctx context.Context, request *NodeRequestB
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -16240,12 +21440,12 @@ func (c *Client) sendNodesRestartNode(ctx context.Context, request *NodeRequestB
 // Update node.
 //
 // PATCH /api/nodes
-func (c *Client) NodesUpdateNode(ctx context.Context, request *UpdateNodeRequest, options ...RequestOption) (NodesUpdateNodeRes, error) {
+func (c *Client) NodesUpdateNode(ctx context.Context, request *UpdateNodeBody, options ...RequestOption) (NodesUpdateNodeRes, error) {
 	res, err := c.sendNodesUpdateNode(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendNodesUpdateNode(ctx context.Context, request *UpdateNodeRequest, requestOptions ...RequestOption) (res NodesUpdateNodeRes, err error) {
+func (c *Client) sendNodesUpdateNode(ctx context.Context, request *UpdateNodeBody, requestOptions ...RequestOption) (res NodesUpdateNodeRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -16360,7 +21560,14 @@ func (c *Client) sendNodesUpdateNode(ctx context.Context, request *UpdateNodeReq
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -16443,20 +21650,6 @@ func (c *Client) sendNodesUsageHistoryGetStatsNodesUsage(ctx context.Context, pa
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
-		// Encode "topNodesLimit" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "topNodesLimit",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			return e.EncodeValue(conv.IntToString(params.TopNodesLimit))
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	{
 		// Encode "start" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "start",
@@ -16480,6 +21673,23 @@ func (c *Client) sendNodesUsageHistoryGetStatsNodesUsage(ctx context.Context, pa
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			return e.EncodeValue(conv.DateToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "topNodesLimit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "topNodesLimit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.TopNodesLimit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
 		}); err != nil {
 			return res, errors.Wrap(err, "encode query")
 		}
@@ -16538,7 +21748,14 @@ func (c *Client) sendNodesUsageHistoryGetStatsNodesUsage(ctx context.Context, pa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -16562,12 +21779,12 @@ func (c *Client) sendNodesUsageHistoryGetStatsNodesUsage(ctx context.Context, pa
 // Delete a passkey by ID.
 //
 // DELETE /api/passkeys
-func (c *Client) PasskeyDeletePasskey(ctx context.Context, request *DeletePasskeyRequest, options ...RequestOption) (PasskeyDeletePasskeyRes, error) {
+func (c *Client) PasskeyDeletePasskey(ctx context.Context, request *DeletePasskeyBody, options ...RequestOption) (PasskeyDeletePasskeyRes, error) {
 	res, err := c.sendPasskeyDeletePasskey(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendPasskeyDeletePasskey(ctx context.Context, request *DeletePasskeyRequest, requestOptions ...RequestOption) (res PasskeyDeletePasskeyRes, err error) {
+func (c *Client) sendPasskeyDeletePasskey(ctx context.Context, request *DeletePasskeyBody, requestOptions ...RequestOption) (res PasskeyDeletePasskeyRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Passkey_deletePasskey"),
 		semconv.HTTPRequestMethodKey.String("DELETE"),
@@ -16673,7 +21890,14 @@ func (c *Client) sendPasskeyDeletePasskey(ctx context.Context, request *DeletePa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -16694,7 +21918,7 @@ func (c *Client) sendPasskeyDeletePasskey(ctx context.Context, request *DeletePa
 
 // PasskeyGetActivePasskeys invokes Passkey_getActivePasskeys operation.
 //
-// Get all passkeys.
+// Get passkeys.
 //
 // GET /api/passkeys
 func (c *Client) PasskeyGetActivePasskeys(ctx context.Context, options ...RequestOption) (PasskeyGetActivePasskeysRes, error) {
@@ -16805,7 +22029,14 @@ func (c *Client) sendPasskeyGetActivePasskeys(ctx context.Context, requestOption
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -16937,7 +22168,14 @@ func (c *Client) sendPasskeyPasskeyRegistrationOptions(ctx context.Context, requ
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17072,7 +22310,14 @@ func (c *Client) sendPasskeyPasskeyRegistrationVerify(ctx context.Context, reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17096,12 +22341,12 @@ func (c *Client) sendPasskeyPasskeyRegistrationVerify(ctx context.Context, reque
 // Update passkey.
 //
 // PATCH /api/passkeys
-func (c *Client) PasskeyUpdatePasskey(ctx context.Context, request *UpdatePasskeyRequest, options ...RequestOption) (PasskeyUpdatePasskeyRes, error) {
+func (c *Client) PasskeyUpdatePasskey(ctx context.Context, request *UpdatePasskeyBody, options ...RequestOption) (PasskeyUpdatePasskeyRes, error) {
 	res, err := c.sendPasskeyUpdatePasskey(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendPasskeyUpdatePasskey(ctx context.Context, request *UpdatePasskeyRequest, requestOptions ...RequestOption) (res PasskeyUpdatePasskeyRes, err error) {
+func (c *Client) sendPasskeyUpdatePasskey(ctx context.Context, request *UpdatePasskeyBody, requestOptions ...RequestOption) (res PasskeyUpdatePasskeyRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -17216,7 +22461,14 @@ func (c *Client) sendPasskeyUpdatePasskey(ctx context.Context, request *UpdatePa
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17348,7 +22600,14 @@ func (c *Client) sendRemnawaveSettingsGetSettings(ctx context.Context, requestOp
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17372,12 +22631,12 @@ func (c *Client) sendRemnawaveSettingsGetSettings(ctx context.Context, requestOp
 // Update Remnawave settings.
 //
 // PATCH /api/remnawave-settings
-func (c *Client) RemnawaveSettingsUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequest, options ...RequestOption) (RemnawaveSettingsUpdateSettingsRes, error) {
+func (c *Client) RemnawaveSettingsUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsBody, options ...RequestOption) (RemnawaveSettingsUpdateSettingsRes, error) {
 	res, err := c.sendRemnawaveSettingsUpdateSettings(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendRemnawaveSettingsUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsRequest, requestOptions ...RequestOption) (res RemnawaveSettingsUpdateSettingsRes, err error) {
+func (c *Client) sendRemnawaveSettingsUpdateSettings(ctx context.Context, request *UpdateRemnawaveSettingsBody, requestOptions ...RequestOption) (res RemnawaveSettingsUpdateSettingsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -17492,7 +22751,14 @@ func (c *Client) sendRemnawaveSettingsUpdateSettings(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17516,12 +22782,12 @@ func (c *Client) sendRemnawaveSettingsUpdateSettings(ctx context.Context, reques
 // Create snippet.
 //
 // POST /api/snippets
-func (c *Client) SnippetsCreateSnippet(ctx context.Context, request *SnippetRequest, options ...RequestOption) (SnippetsCreateSnippetRes, error) {
+func (c *Client) SnippetsCreateSnippet(ctx context.Context, request *SnippetBodyRequest2, options ...RequestOption) (SnippetsCreateSnippetRes, error) {
 	res, err := c.sendSnippetsCreateSnippet(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSnippetsCreateSnippet(ctx context.Context, request *SnippetRequest, requestOptions ...RequestOption) (res SnippetsCreateSnippetRes, err error) {
+func (c *Client) sendSnippetsCreateSnippet(ctx context.Context, request *SnippetBodyRequest2, requestOptions ...RequestOption) (res SnippetsCreateSnippetRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -17636,7 +22902,14 @@ func (c *Client) sendSnippetsCreateSnippet(ctx context.Context, request *Snippet
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17660,12 +22933,12 @@ func (c *Client) sendSnippetsCreateSnippet(ctx context.Context, request *Snippet
 // Delete snippet.
 //
 // DELETE /api/snippets
-func (c *Client) SnippetsDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequest, options ...RequestOption) (SnippetsDeleteSnippetByNameRes, error) {
+func (c *Client) SnippetsDeleteSnippetByName(ctx context.Context, request *SnippetBodyRequest, options ...RequestOption) (SnippetsDeleteSnippetByNameRes, error) {
 	res, err := c.sendSnippetsDeleteSnippetByName(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSnippetsDeleteSnippetByName(ctx context.Context, request *DeleteSnippetRequest, requestOptions ...RequestOption) (res SnippetsDeleteSnippetByNameRes, err error) {
+func (c *Client) sendSnippetsDeleteSnippetByName(ctx context.Context, request *SnippetBodyRequest, requestOptions ...RequestOption) (res SnippetsDeleteSnippetByNameRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -17780,7 +23053,14 @@ func (c *Client) sendSnippetsDeleteSnippetByName(ctx context.Context, request *D
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17912,7 +23192,14 @@ func (c *Client) sendSnippetsGetSnippets(ctx context.Context, requestOptions ...
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -17931,17 +23218,169 @@ func (c *Client) sendSnippetsGetSnippets(ctx context.Context, requestOptions ...
 	return result, nil
 }
 
+// SnippetsSyncSnippet invokes Snippets_syncSnippet operation.
+//
+// Trigger the sync of a snippet to all config profiles that reference it. Nodes which use affected
+// config profiles will be restarted.
+//
+// POST /api/snippets/actions/sync
+func (c *Client) SnippetsSyncSnippet(ctx context.Context, request *SnippetBodyRequest, options ...RequestOption) (SnippetsSyncSnippetRes, error) {
+	res, err := c.sendSnippetsSyncSnippet(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSnippetsSyncSnippet(ctx context.Context, request *SnippetBodyRequest, requestOptions ...RequestOption) (res SnippetsSyncSnippetRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Snippets_syncSnippet"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/snippets/actions/sync"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SnippetsSyncSnippetOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/snippets/actions/sync"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSnippetsSyncSnippetRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SnippetsSyncSnippetOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSnippetsSyncSnippetResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SnippetsUpdateSnippet invokes Snippets_updateSnippet operation.
 //
 // Update snippet.
 //
 // PATCH /api/snippets
-func (c *Client) SnippetsUpdateSnippet(ctx context.Context, request *SnippetRequest, options ...RequestOption) (SnippetsUpdateSnippetRes, error) {
+func (c *Client) SnippetsUpdateSnippet(ctx context.Context, request *SnippetBodyRequest2, options ...RequestOption) (SnippetsUpdateSnippetRes, error) {
 	res, err := c.sendSnippetsUpdateSnippet(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSnippetsUpdateSnippet(ctx context.Context, request *SnippetRequest, requestOptions ...RequestOption) (res SnippetsUpdateSnippetRes, err error) {
+func (c *Client) sendSnippetsUpdateSnippet(ctx context.Context, request *SnippetBodyRequest2, requestOptions ...RequestOption) (res SnippetsUpdateSnippetRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -18056,7 +23495,14 @@ func (c *Client) sendSnippetsUpdateSnippet(ctx context.Context, request *Snippet
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18078,12 +23524,12 @@ func (c *Client) sendSnippetsUpdateSnippet(ctx context.Context, request *Snippet
 // SubscriptionGetSubscription invokes Subscription_getSubscription operation.
 //
 // GET /api/sub/{shortUuid}
-func (c *Client) SubscriptionGetSubscription(ctx context.Context, params SubscriptionGetSubscriptionParams, options ...RequestOption) (SubscriptionGetSubscriptionOK, error) {
+func (c *Client) SubscriptionGetSubscription(ctx context.Context, params SubscriptionGetSubscriptionParams, options ...RequestOption) (SubscriptionGetSubscriptionRes, error) {
 	res, err := c.sendSubscriptionGetSubscription(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionGetSubscription(ctx context.Context, params SubscriptionGetSubscriptionParams, requestOptions ...RequestOption) (res SubscriptionGetSubscriptionOK, err error) {
+func (c *Client) sendSubscriptionGetSubscription(ctx context.Context, params SubscriptionGetSubscriptionParams, requestOptions ...RequestOption) (res SubscriptionGetSubscriptionRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Subscription_getSubscription"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -18171,7 +23617,14 @@ func (c *Client) sendSubscriptionGetSubscription(ctx context.Context, params Sub
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18193,12 +23646,12 @@ func (c *Client) sendSubscriptionGetSubscription(ctx context.Context, params Sub
 // SubscriptionGetSubscriptionByClientType invokes Subscription_getSubscriptionByClientType operation.
 //
 // GET /api/sub/{shortUuid}/{clientType}
-func (c *Client) SubscriptionGetSubscriptionByClientType(ctx context.Context, params SubscriptionGetSubscriptionByClientTypeParams, options ...RequestOption) (SubscriptionGetSubscriptionByClientTypeOK, error) {
+func (c *Client) SubscriptionGetSubscriptionByClientType(ctx context.Context, params SubscriptionGetSubscriptionByClientTypeParams, options ...RequestOption) (SubscriptionGetSubscriptionByClientTypeRes, error) {
 	res, err := c.sendSubscriptionGetSubscriptionByClientType(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionGetSubscriptionByClientType(ctx context.Context, params SubscriptionGetSubscriptionByClientTypeParams, requestOptions ...RequestOption) (res SubscriptionGetSubscriptionByClientTypeOK, err error) {
+func (c *Client) sendSubscriptionGetSubscriptionByClientType(ctx context.Context, params SubscriptionGetSubscriptionByClientTypeParams, requestOptions ...RequestOption) (res SubscriptionGetSubscriptionByClientTypeRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Subscription_getSubscriptionByClientType"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -18305,7 +23758,14 @@ func (c *Client) sendSubscriptionGetSubscriptionByClientType(ctx context.Context
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18423,7 +23883,14 @@ func (c *Client) sendSubscriptionGetSubscriptionInfoByShortUuid(ctx context.Cont
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18447,12 +23914,12 @@ func (c *Client) sendSubscriptionGetSubscriptionInfoByShortUuid(ctx context.Cont
 // Clone subscription page config.
 //
 // POST /api/subscription-page-configs/actions/clone
-func (c *Client) SubscriptionPageConfigCloneSubscriptionPageConfig(ctx context.Context, request *CloneNodePluginRequestRequest, options ...RequestOption) (SubscriptionPageConfigCloneSubscriptionPageConfigRes, error) {
+func (c *Client) SubscriptionPageConfigCloneSubscriptionPageConfig(ctx context.Context, request *CloneSubpageConfigBody, options ...RequestOption) (SubscriptionPageConfigCloneSubscriptionPageConfigRes, error) {
 	res, err := c.sendSubscriptionPageConfigCloneSubscriptionPageConfig(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionPageConfigCloneSubscriptionPageConfig(ctx context.Context, request *CloneNodePluginRequestRequest, requestOptions ...RequestOption) (res SubscriptionPageConfigCloneSubscriptionPageConfigRes, err error) {
+func (c *Client) sendSubscriptionPageConfigCloneSubscriptionPageConfig(ctx context.Context, request *CloneSubpageConfigBody, requestOptions ...RequestOption) (res SubscriptionPageConfigCloneSubscriptionPageConfigRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("SubscriptionPageConfig_cloneSubscriptionPageConfig"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -18558,7 +24025,14 @@ func (c *Client) sendSubscriptionPageConfigCloneSubscriptionPageConfig(ctx conte
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18582,12 +24056,12 @@ func (c *Client) sendSubscriptionPageConfigCloneSubscriptionPageConfig(ctx conte
 // Create subscription page config.
 //
 // POST /api/subscription-page-configs
-func (c *Client) SubscriptionPageConfigCreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequest, options ...RequestOption) (SubscriptionPageConfigCreateConfigRes, error) {
+func (c *Client) SubscriptionPageConfigCreateConfig(ctx context.Context, request *CreateSubpageConfigBody, options ...RequestOption) (SubscriptionPageConfigCreateConfigRes, error) {
 	res, err := c.sendSubscriptionPageConfigCreateConfig(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionPageConfigCreateConfig(ctx context.Context, request *CreateSubscriptionPageConfigRequest, requestOptions ...RequestOption) (res SubscriptionPageConfigCreateConfigRes, err error) {
+func (c *Client) sendSubscriptionPageConfigCreateConfig(ctx context.Context, request *CreateSubpageConfigBody, requestOptions ...RequestOption) (res SubscriptionPageConfigCreateConfigRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -18702,7 +24176,14 @@ func (c *Client) sendSubscriptionPageConfigCreateConfig(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18788,7 +24269,7 @@ func (c *Client) sendSubscriptionPageConfigDeleteConfig(ctx context.Context, par
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -18852,7 +24333,14 @@ func (c *Client) sendSubscriptionPageConfigDeleteConfig(ctx context.Context, par
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -18984,7 +24472,14 @@ func (c *Client) sendSubscriptionPageConfigGetAllConfigs(ctx context.Context, re
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19070,7 +24565,7 @@ func (c *Client) sendSubscriptionPageConfigGetConfigByUuid(ctx context.Context, 
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -19134,7 +24629,14 @@ func (c *Client) sendSubscriptionPageConfigGetConfigByUuid(ctx context.Context, 
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19153,17 +24655,156 @@ func (c *Client) sendSubscriptionPageConfigGetConfigByUuid(ctx context.Context, 
 	return result, nil
 }
 
+// SubscriptionPageConfigGetTags invokes SubscriptionPageConfig_getTags operation.
+//
+// Get tags of Subpage Configs.
+//
+// GET /api/subscription-page-configs/tags
+func (c *Client) SubscriptionPageConfigGetTags(ctx context.Context, options ...RequestOption) (SubscriptionPageConfigGetTagsRes, error) {
+	res, err := c.sendSubscriptionPageConfigGetTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionPageConfigGetTags(ctx context.Context, requestOptions ...RequestOption) (res SubscriptionPageConfigGetTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionPageConfig_getTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-page-configs/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionPageConfigGetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-page-configs/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SubscriptionPageConfigGetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSubscriptionPageConfigGetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SubscriptionPageConfigReorderSubscriptionPageConfigs invokes SubscriptionPageConfig_reorderSubscriptionPageConfigs operation.
 //
 // Reorder subscription page configs.
 //
 // POST /api/subscription-page-configs/actions/reorder
-func (c *Client) SubscriptionPageConfigReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderRequest, options ...RequestOption) (SubscriptionPageConfigReorderSubscriptionPageConfigsRes, error) {
+func (c *Client) SubscriptionPageConfigReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderSubpageConfigsBody, options ...RequestOption) (SubscriptionPageConfigReorderSubscriptionPageConfigsRes, error) {
 	res, err := c.sendSubscriptionPageConfigReorderSubscriptionPageConfigs(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionPageConfigReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderRequest, requestOptions ...RequestOption) (res SubscriptionPageConfigReorderSubscriptionPageConfigsRes, err error) {
+func (c *Client) sendSubscriptionPageConfigReorderSubscriptionPageConfigs(ctx context.Context, request *ReorderSubpageConfigsBody, requestOptions ...RequestOption) (res SubscriptionPageConfigReorderSubscriptionPageConfigsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -19278,7 +24919,14 @@ func (c *Client) sendSubscriptionPageConfigReorderSubscriptionPageConfigs(ctx co
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19297,17 +24945,168 @@ func (c *Client) sendSubscriptionPageConfigReorderSubscriptionPageConfigs(ctx co
 	return result, nil
 }
 
+// SubscriptionPageConfigSetTags invokes SubscriptionPageConfig_setTags operation.
+//
+// Set tags of Subpage Config.
+//
+// PATCH /api/subscription-page-configs/tags
+func (c *Client) SubscriptionPageConfigSetTags(ctx context.Context, request *SetSubpageConfigsTagsBody, options ...RequestOption) (SubscriptionPageConfigSetTagsRes, error) {
+	res, err := c.sendSubscriptionPageConfigSetTags(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionPageConfigSetTags(ctx context.Context, request *SetSubpageConfigsTagsBody, requestOptions ...RequestOption) (res SubscriptionPageConfigSetTagsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionPageConfig_setTags"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/subscription-page-configs/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionPageConfigSetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-page-configs/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSubscriptionPageConfigSetTagsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SubscriptionPageConfigSetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSubscriptionPageConfigSetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SubscriptionPageConfigUpdateConfig invokes SubscriptionPageConfig_updateConfig operation.
 //
 // Update subscription page config.
 //
 // PATCH /api/subscription-page-configs
-func (c *Client) SubscriptionPageConfigUpdateConfig(ctx context.Context, request *UpdateSubscriptionPageConfigRequest, options ...RequestOption) (SubscriptionPageConfigUpdateConfigRes, error) {
+func (c *Client) SubscriptionPageConfigUpdateConfig(ctx context.Context, request *UpdateSubpageConfigBody, options ...RequestOption) (SubscriptionPageConfigUpdateConfigRes, error) {
 	res, err := c.sendSubscriptionPageConfigUpdateConfig(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionPageConfigUpdateConfig(ctx context.Context, request *UpdateSubscriptionPageConfigRequest, requestOptions ...RequestOption) (res SubscriptionPageConfigUpdateConfigRes, err error) {
+func (c *Client) sendSubscriptionPageConfigUpdateConfig(ctx context.Context, request *UpdateSubpageConfigBody, requestOptions ...RequestOption) (res SubscriptionPageConfigUpdateConfigRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -19422,7 +25221,14 @@ func (c *Client) sendSubscriptionPageConfigUpdateConfig(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19554,7 +25360,14 @@ func (c *Client) sendSubscriptionSettingsGetSettings(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19578,12 +25391,12 @@ func (c *Client) sendSubscriptionSettingsGetSettings(ctx context.Context, reques
 // Update subscription settings.
 //
 // PATCH /api/subscription-settings
-func (c *Client) SubscriptionSettingsUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequest, options ...RequestOption) (SubscriptionSettingsUpdateSettingsRes, error) {
+func (c *Client) SubscriptionSettingsUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsBody, options ...RequestOption) (SubscriptionSettingsUpdateSettingsRes, error) {
 	res, err := c.sendSubscriptionSettingsUpdateSettings(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionSettingsUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsRequest, requestOptions ...RequestOption) (res SubscriptionSettingsUpdateSettingsRes, err error) {
+func (c *Client) sendSubscriptionSettingsUpdateSettings(ctx context.Context, request *UpdateSubscriptionSettingsBody, requestOptions ...RequestOption) (res SubscriptionSettingsUpdateSettingsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -19698,7 +25511,14 @@ func (c *Client) sendSubscriptionSettingsUpdateSettings(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19722,12 +25542,12 @@ func (c *Client) sendSubscriptionSettingsUpdateSettings(ctx context.Context, req
 // Create subscription template.
 //
 // POST /api/subscription-templates
-func (c *Client) SubscriptionTemplateCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequest, options ...RequestOption) (SubscriptionTemplateCreateTemplateRes, error) {
+func (c *Client) SubscriptionTemplateCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateBody, options ...RequestOption) (SubscriptionTemplateCreateTemplateRes, error) {
 	res, err := c.sendSubscriptionTemplateCreateTemplate(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateRequest, requestOptions ...RequestOption) (res SubscriptionTemplateCreateTemplateRes, err error) {
+func (c *Client) sendSubscriptionTemplateCreateTemplate(ctx context.Context, request *CreateSubscriptionTemplateBody, requestOptions ...RequestOption) (res SubscriptionTemplateCreateTemplateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -19842,7 +25662,14 @@ func (c *Client) sendSubscriptionTemplateCreateTemplate(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -19928,7 +25755,7 @@ func (c *Client) sendSubscriptionTemplateDeleteTemplate(ctx context.Context, par
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -19992,7 +25819,14 @@ func (c *Client) sendSubscriptionTemplateDeleteTemplate(ctx context.Context, par
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20124,7 +25958,14 @@ func (c *Client) sendSubscriptionTemplateGetAllTemplates(ctx context.Context, re
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20136,6 +25977,145 @@ func (c *Client) sendSubscriptionTemplateGetAllTemplates(ctx context.Context, re
 
 	stage = "DecodeResponse"
 	result, err := decodeSubscriptionTemplateGetAllTemplatesResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SubscriptionTemplateGetTags invokes SubscriptionTemplate_getTags operation.
+//
+// Get tags of Subscription Templates.
+//
+// GET /api/subscription-templates/tags
+func (c *Client) SubscriptionTemplateGetTags(ctx context.Context, options ...RequestOption) (SubscriptionTemplateGetTagsRes, error) {
+	res, err := c.sendSubscriptionTemplateGetTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateGetTags(ctx context.Context, requestOptions ...RequestOption) (res SubscriptionTemplateGetTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplate_getTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/subscription-templates/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateGetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-templates/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateGetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSubscriptionTemplateGetTagsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -20210,7 +26190,7 @@ func (c *Client) sendSubscriptionTemplateGetTemplateByUuid(ctx context.Context, 
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.UUIDToString(params.UUID))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -20274,7 +26254,14 @@ func (c *Client) sendSubscriptionTemplateGetTemplateByUuid(ctx context.Context, 
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20298,12 +26285,12 @@ func (c *Client) sendSubscriptionTemplateGetTemplateByUuid(ctx context.Context, 
 // Reorder subscription templates.
 //
 // POST /api/subscription-templates/actions/reorder
-func (c *Client) SubscriptionTemplateReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest, options ...RequestOption) (SubscriptionTemplateReorderSubscriptionTemplatesRes, error) {
+func (c *Client) SubscriptionTemplateReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesBody, options ...RequestOption) (SubscriptionTemplateReorderSubscriptionTemplatesRes, error) {
 	res, err := c.sendSubscriptionTemplateReorderSubscriptionTemplates(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateReorderSubscriptionTemplates(ctx context.Context, request *ReorderRequest, requestOptions ...RequestOption) (res SubscriptionTemplateReorderSubscriptionTemplatesRes, err error) {
+func (c *Client) sendSubscriptionTemplateReorderSubscriptionTemplates(ctx context.Context, request *ReorderSubscriptionTemplatesBody, requestOptions ...RequestOption) (res SubscriptionTemplateReorderSubscriptionTemplatesRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -20418,7 +26405,14 @@ func (c *Client) sendSubscriptionTemplateReorderSubscriptionTemplates(ctx contex
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20437,17 +26431,168 @@ func (c *Client) sendSubscriptionTemplateReorderSubscriptionTemplates(ctx contex
 	return result, nil
 }
 
+// SubscriptionTemplateSetTags invokes SubscriptionTemplate_setTags operation.
+//
+// Set tags of Subscription Template.
+//
+// PATCH /api/subscription-templates/tags
+func (c *Client) SubscriptionTemplateSetTags(ctx context.Context, request *SetSubscriptionTemplatesTagsBody, options ...RequestOption) (SubscriptionTemplateSetTagsRes, error) {
+	res, err := c.sendSubscriptionTemplateSetTags(ctx, request, options...)
+	return res, err
+}
+
+func (c *Client) sendSubscriptionTemplateSetTags(ctx context.Context, request *SetSubscriptionTemplatesTagsBody, requestOptions ...RequestOption) (res SubscriptionTemplateSetTagsRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("SubscriptionTemplate_setTags"),
+		semconv.HTTPRequestMethodKey.String("PATCH"),
+		semconv.URLTemplateKey.String("/api/subscription-templates/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionTemplateSetTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/subscription-templates/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "PATCH", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeSubscriptionTemplateSetTagsRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SubscriptionTemplateSetTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSubscriptionTemplateSetTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // SubscriptionTemplateUpdateTemplate invokes SubscriptionTemplate_updateTemplate operation.
 //
 // Update subscription template.
 //
 // PATCH /api/subscription-templates
-func (c *Client) SubscriptionTemplateUpdateTemplate(ctx context.Context, request *UpdateTemplateRequest, options ...RequestOption) (SubscriptionTemplateUpdateTemplateRes, error) {
+func (c *Client) SubscriptionTemplateUpdateTemplate(ctx context.Context, request *UpdateTemplateBody, options ...RequestOption) (SubscriptionTemplateUpdateTemplateRes, error) {
 	res, err := c.sendSubscriptionTemplateUpdateTemplate(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionTemplateUpdateTemplate(ctx context.Context, request *UpdateTemplateRequest, requestOptions ...RequestOption) (res SubscriptionTemplateUpdateTemplateRes, err error) {
+func (c *Client) sendSubscriptionTemplateUpdateTemplate(ctx context.Context, request *UpdateTemplateBody, requestOptions ...RequestOption) (res SubscriptionTemplateUpdateTemplateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -20562,7 +26707,14 @@ func (c *Client) sendSubscriptionTemplateUpdateTemplate(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20645,23 +26797,6 @@ func (c *Client) sendSubscriptionsGetAllSubscriptions(ctx context.Context, param
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
-		// Encode "size" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "size",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Size.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
-			}
-			return nil
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	{
 		// Encode "start" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "start",
@@ -20671,6 +26806,23 @@ func (c *Client) sendSubscriptionsGetAllSubscriptions(ctx context.Context, param
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
 				return e.EncodeValue(conv.IntToString(val))
 			}
 			return nil
@@ -20732,7 +26884,14 @@ func (c *Client) sendSubscriptionsGetAllSubscriptions(ctx context.Context, param
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20751,21 +26910,21 @@ func (c *Client) sendSubscriptionsGetAllSubscriptions(ctx context.Context, param
 	return result, nil
 }
 
-// SubscriptionsGetConnectionKeysByUuid invokes Subscriptions_getConnectionKeysByUuid operation.
+// SubscriptionsGetConnectionKeysByUserId invokes Subscriptions_getConnectionKeysByUserId operation.
 //
-// Get connection keys (base64 format) by uuid.
+// Get connection keys (base64 format) by user id.
 //
-// GET /api/subscriptions/connection-keys/{uuid}
-func (c *Client) SubscriptionsGetConnectionKeysByUuid(ctx context.Context, params SubscriptionsGetConnectionKeysByUuidParams, options ...RequestOption) (SubscriptionsGetConnectionKeysByUuidRes, error) {
-	res, err := c.sendSubscriptionsGetConnectionKeysByUuid(ctx, params, options...)
+// GET /api/subscriptions/connection-keys/{userId}
+func (c *Client) SubscriptionsGetConnectionKeysByUserId(ctx context.Context, params SubscriptionsGetConnectionKeysByUserIdParams, options ...RequestOption) (SubscriptionsGetConnectionKeysByUserIdRes, error) {
+	res, err := c.sendSubscriptionsGetConnectionKeysByUserId(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsGetConnectionKeysByUuid(ctx context.Context, params SubscriptionsGetConnectionKeysByUuidParams, requestOptions ...RequestOption) (res SubscriptionsGetConnectionKeysByUuidRes, err error) {
+func (c *Client) sendSubscriptionsGetConnectionKeysByUserId(ctx context.Context, params SubscriptionsGetConnectionKeysByUserIdParams, requestOptions ...RequestOption) (res SubscriptionsGetConnectionKeysByUserIdRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Subscriptions_getConnectionKeysByUuid"),
+		otelogen.OperationID("Subscriptions_getConnectionKeysByUserId"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/subscriptions/connection-keys/{uuid}"),
+		semconv.URLTemplateKey.String("/api/subscriptions/connection-keys/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -20781,7 +26940,7 @@ func (c *Client) sendSubscriptionsGetConnectionKeysByUuid(ctx context.Context, p
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsGetConnectionKeysByUuidOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, SubscriptionsGetConnectionKeysByUserIdOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -20811,14 +26970,14 @@ func (c *Client) sendSubscriptionsGetConnectionKeysByUuid(ctx context.Context, p
 	var pathParts [2]string
 	pathParts[0] = "/api/subscriptions/connection-keys/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -20841,7 +27000,7 @@ func (c *Client) sendSubscriptionsGetConnectionKeysByUuid(ctx context.Context, p
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, SubscriptionsGetConnectionKeysByUuidOperation, r); {
+			switch err := c.securityAuthorization(ctx, SubscriptionsGetConnectionKeysByUserIdOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -20882,7 +27041,14 @@ func (c *Client) sendSubscriptionsGetConnectionKeysByUuid(ctx context.Context, p
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -20893,7 +27059,7 @@ func (c *Client) sendSubscriptionsGetConnectionKeysByUuid(ctx context.Context, p
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeSubscriptionsGetConnectionKeysByUuidResponse(resp)
+	result, err := decodeSubscriptionsGetConnectionKeysByUserIdResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -20993,7 +27159,7 @@ func (c *Client) sendSubscriptionsGetRawSubscriptionByShortUuid(ctx context.Cont
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
 			if val, ok := params.WithDisabledHosts.Get(); ok {
-				return e.EncodeValue(conv.BoolToString(val))
+				return e.EncodeValue(conv.StringToString(val))
 			}
 			return nil
 		}); err != nil {
@@ -21054,7 +27220,14 @@ func (c *Client) sendSubscriptionsGetRawSubscriptionByShortUuid(ctx context.Cont
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21078,12 +27251,12 @@ func (c *Client) sendSubscriptionsGetRawSubscriptionByShortUuid(ctx context.Cont
 // Get Subpage Config by Short UUID.
 //
 // GET /api/subscriptions/subpage-config/{shortUuid}
-func (c *Client) SubscriptionsGetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidRequestBody, params SubscriptionsGetSubpageConfigByShortUuidParams, options ...RequestOption) (SubscriptionsGetSubpageConfigByShortUuidRes, error) {
+func (c *Client) SubscriptionsGetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidBody, params SubscriptionsGetSubpageConfigByShortUuidParams, options ...RequestOption) (SubscriptionsGetSubpageConfigByShortUuidRes, error) {
 	res, err := c.sendSubscriptionsGetSubpageConfigByShortUuid(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendSubscriptionsGetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidRequestBody, params SubscriptionsGetSubpageConfigByShortUuidParams, requestOptions ...RequestOption) (res SubscriptionsGetSubpageConfigByShortUuidRes, err error) {
+func (c *Client) sendSubscriptionsGetSubpageConfigByShortUuid(ctx context.Context, request *GetSubpageConfigByShortUuidBody, params SubscriptionsGetSubpageConfigByShortUuidParams, requestOptions ...RequestOption) (res SubscriptionsGetSubpageConfigByShortUuidRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Subscriptions_getSubpageConfigByShortUuid"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -21207,7 +27380,14 @@ func (c *Client) sendSubscriptionsGetSubpageConfigByShortUuid(ctx context.Contex
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21357,7 +27537,14 @@ func (c *Client) sendSubscriptionsGetSubscriptionByShortUuidProtected(ctx contex
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21507,7 +27694,14 @@ func (c *Client) sendSubscriptionsGetSubscriptionByUsername(ctx context.Context,
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21528,9 +27722,9 @@ func (c *Client) sendSubscriptionsGetSubscriptionByUsername(ctx context.Context,
 
 // SubscriptionsGetSubscriptionByUuid invokes Subscriptions_getSubscriptionByUuid operation.
 //
-// Get subscription by uuid.
+// Get subscription by User ID.
 //
-// GET /api/subscriptions/by-uuid/{uuid}
+// GET /api/subscriptions/by-id/{userId}
 func (c *Client) SubscriptionsGetSubscriptionByUuid(ctx context.Context, params SubscriptionsGetSubscriptionByUuidParams, options ...RequestOption) (SubscriptionsGetSubscriptionByUuidRes, error) {
 	res, err := c.sendSubscriptionsGetSubscriptionByUuid(ctx, params, options...)
 	return res, err
@@ -21540,7 +27734,7 @@ func (c *Client) sendSubscriptionsGetSubscriptionByUuid(ctx context.Context, par
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Subscriptions_getSubscriptionByUuid"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/subscriptions/by-uuid/{uuid}"),
+		semconv.URLTemplateKey.String("/api/subscriptions/by-id/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -21584,16 +27778,16 @@ func (c *Client) sendSubscriptionsGetSubscriptionByUuid(ctx context.Context, par
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/subscriptions/by-uuid/"
+	pathParts[0] = "/api/subscriptions/by-id/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -21657,7 +27851,14 @@ func (c *Client) sendSubscriptionsGetSubscriptionByUuid(ctx context.Context, par
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21681,12 +27882,12 @@ func (c *Client) sendSubscriptionsGetSubscriptionByUuid(ctx context.Context, par
 // Test SRR Matcher.
 //
 // POST /api/system/testers/srr-matcher
-func (c *Client) SystemDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequest, options ...RequestOption) (SystemDebugSrrMatcherRes, error) {
+func (c *Client) SystemDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherBody, options ...RequestOption) (SystemDebugSrrMatcherRes, error) {
 	res, err := c.sendSystemDebugSrrMatcher(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendSystemDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherRequest, requestOptions ...RequestOption) (res SystemDebugSrrMatcherRes, err error) {
+func (c *Client) sendSystemDebugSrrMatcher(ctx context.Context, request *DebugSrrMatcherBody, requestOptions ...RequestOption) (res SystemDebugSrrMatcherRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -21801,7 +28002,14 @@ func (c *Client) sendSystemDebugSrrMatcher(ctx context.Context, request *DebugSr
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21825,12 +28033,12 @@ func (c *Client) sendSystemDebugSrrMatcher(ctx context.Context, request *DebugSr
 // Get Bandwidth Stats.
 //
 // GET /api/system/stats/bandwidth
-func (c *Client) SystemGetBandwidthStats(ctx context.Context, options ...RequestOption) (SystemGetBandwidthStatsRes, error) {
-	res, err := c.sendSystemGetBandwidthStats(ctx, options...)
+func (c *Client) SystemGetBandwidthStats(ctx context.Context, params SystemGetBandwidthStatsParams, options ...RequestOption) (SystemGetBandwidthStatsRes, error) {
+	res, err := c.sendSystemGetBandwidthStats(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendSystemGetBandwidthStats(ctx context.Context, requestOptions ...RequestOption) (res SystemGetBandwidthStatsRes, err error) {
+func (c *Client) sendSystemGetBandwidthStats(ctx context.Context, params SystemGetBandwidthStatsParams, requestOptions ...RequestOption) (res SystemGetBandwidthStatsRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("System_getBandwidthStats"),
 		semconv.HTTPRequestMethodKey.String("GET"),
@@ -21880,6 +28088,27 @@ func (c *Client) sendSystemGetBandwidthStats(ctx context.Context, requestOptions
 	var pathParts [1]string
 	pathParts[0] = "/api/system/stats/bandwidth"
 	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "tz" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "tz",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Tz.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
 
 	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -21933,7 +28162,14 @@ func (c *Client) sendSystemGetBandwidthStats(ctx context.Context, requestOptions
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -21945,6 +28181,284 @@ func (c *Client) sendSystemGetBandwidthStats(ctx context.Context, requestOptions
 
 	stage = "DecodeResponse"
 	result, err := decodeSystemGetBandwidthStatsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SystemGetConfiguration invokes System_getConfiguration operation.
+//
+// Returns some of the configuration values.
+//
+// GET /api/system/configuration
+func (c *Client) SystemGetConfiguration(ctx context.Context, options ...RequestOption) (SystemGetConfigurationRes, error) {
+	res, err := c.sendSystemGetConfiguration(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSystemGetConfiguration(ctx context.Context, requestOptions ...RequestOption) (res SystemGetConfigurationRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("System_getConfiguration"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/configuration"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemGetConfigurationOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/system/configuration"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SystemGetConfigurationOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSystemGetConfigurationResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SystemGetHttpStats invokes System_getHttpStats operation.
+//
+// Get HTTP Stats.
+//
+// GET /api/system/stats/http
+func (c *Client) SystemGetHttpStats(ctx context.Context, options ...RequestOption) (SystemGetHttpStatsRes, error) {
+	res, err := c.sendSystemGetHttpStats(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendSystemGetHttpStats(ctx context.Context, requestOptions ...RequestOption) (res SystemGetHttpStatsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("System_getHttpStats"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/stats/http"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemGetHttpStatsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/system/stats/http"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SystemGetHttpStatsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSystemGetHttpStatsResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -22065,7 +28579,14 @@ func (c *Client) sendSystemGetMetadata(ctx context.Context, requestOptions ...Re
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22197,7 +28718,14 @@ func (c *Client) sendSystemGetNodesMetrics(ctx context.Context, requestOptions .
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22329,7 +28857,14 @@ func (c *Client) sendSystemGetNodesStatistics(ctx context.Context, requestOption
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22461,7 +28996,14 @@ func (c *Client) sendSystemGetRecap(ctx context.Context, requestOptions ...Reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22593,7 +29135,14 @@ func (c *Client) sendSystemGetRemnawaveHealth(ctx context.Context, requestOption
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22725,7 +29274,14 @@ func (c *Client) sendSystemGetStats(ctx context.Context, requestOptions ...Reque
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22737,6 +29293,180 @@ func (c *Client) sendSystemGetStats(ctx context.Context, requestOptions ...Reque
 
 	stage = "DecodeResponse"
 	result, err := decodeSystemGetStatsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// SystemGetStatsDigest invokes System_getStatsDigest operation.
+//
+// Aggregated statistics for a datetime range [start, end): created and expired users, total traffic,
+// traffic spent by users created within the range and new HWID devices. Per-user traffic history is
+// stored with daily granularity (UTC), so the "traffic by new users" metric snaps to whole days at the
+// range edges.
+//
+// GET /api/system/stats/digest
+func (c *Client) SystemGetStatsDigest(ctx context.Context, params SystemGetStatsDigestParams, options ...RequestOption) (SystemGetStatsDigestRes, error) {
+	res, err := c.sendSystemGetStatsDigest(ctx, params, options...)
+	return res, err
+}
+
+func (c *Client) sendSystemGetStatsDigest(ctx context.Context, params SystemGetStatsDigestParams, requestOptions ...RequestOption) (res SystemGetStatsDigestRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("System_getStatsDigest"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/system/stats/digest"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, SystemGetStatsDigestOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/system/stats/digest"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateTimeToString(params.Start))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "end" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "end",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.DateTimeToString(params.End))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, SystemGetStatsDigestOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeSystemGetStatsDigestResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -22857,7 +29587,14 @@ func (c *Client) sendSystemGetX25519Keypairs(ctx context.Context, requestOptions
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -22878,7 +29615,9 @@ func (c *Client) sendSystemGetX25519Keypairs(ctx context.Context, requestOptions
 
 // TorrentBlockerReportsGetTorrentBlockerReports invokes TorrentBlockerReports_getTorrentBlockerReports operation.
 //
-// Get Torrent Blocker Reports.
+// Please note that the filters here are primarily intended for use by the frontend and rely on
+// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+// performance of your database.
 //
 // GET /api/node-plugins/torrent-blocker
 func (c *Client) TorrentBlockerReportsGetTorrentBlockerReports(ctx context.Context, params TorrentBlockerReportsGetTorrentBlockerReportsParams, options ...RequestOption) (TorrentBlockerReportsGetTorrentBlockerReportsRes, error) {
@@ -22940,6 +29679,23 @@ func (c *Client) sendTorrentBlockerReportsGetTorrentBlockerReports(ctx context.C
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
 		// Encode "size" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "size",
@@ -22957,16 +29713,67 @@ func (c *Client) sendTorrentBlockerReportsGetTorrentBlockerReports(ctx context.C
 		}
 	}
 	{
-		// Encode "start" parameter.
+		// Encode "filters" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "start",
+			Name:    "filters",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Start.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
+			if val, ok := params.Filters.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "filterModes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "filterModes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.FilterModes.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "globalFilterMode" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "globalFilterMode",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.GlobalFilterMode.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "sorting" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "sorting",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Sorting.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
 			}
 			return nil
 		}); err != nil {
@@ -23027,7 +29834,14 @@ func (c *Client) sendTorrentBlockerReportsGetTorrentBlockerReports(ctx context.C
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23159,7 +29973,14 @@ func (c *Client) sendTorrentBlockerReportsGetTorrentBlockerReportsStats(ctx cont
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23291,7 +30112,14 @@ func (c *Client) sendTorrentBlockerReportsTruncateTorrentBlockerReports(ctx cont
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23312,7 +30140,9 @@ func (c *Client) sendTorrentBlockerReportsTruncateTorrentBlockerReports(ctx cont
 
 // UserSubscriptionRequestHistoryGetSubscriptionRequestHistory invokes UserSubscriptionRequestHistory_getSubscriptionRequestHistory operation.
 //
-// Get all subscription request history.
+// Please note that the filters here are primarily intended for use by the frontend and rely on
+// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+// performance of your database.
 //
 // GET /api/subscription-request-history
 func (c *Client) UserSubscriptionRequestHistoryGetSubscriptionRequestHistory(ctx context.Context, params UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryParams, options ...RequestOption) (UserSubscriptionRequestHistoryGetSubscriptionRequestHistoryRes, error) {
@@ -23374,6 +30204,23 @@ func (c *Client) sendUserSubscriptionRequestHistoryGetSubscriptionRequestHistory
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
 		// Encode "size" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "size",
@@ -23391,16 +30238,67 @@ func (c *Client) sendUserSubscriptionRequestHistoryGetSubscriptionRequestHistory
 		}
 	}
 	{
-		// Encode "start" parameter.
+		// Encode "filters" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "start",
+			Name:    "filters",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Start.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
+			if val, ok := params.Filters.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "filterModes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "filterModes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.FilterModes.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "globalFilterMode" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "globalFilterMode",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.GlobalFilterMode.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "sorting" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "sorting",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Sorting.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
 			}
 			return nil
 		}); err != nil {
@@ -23461,7 +30359,14 @@ func (c *Client) sendUserSubscriptionRequestHistoryGetSubscriptionRequestHistory
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23593,7 +30498,14 @@ func (c *Client) sendUserSubscriptionRequestHistoryGetSubscriptionRequestHistory
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23614,15 +30526,15 @@ func (c *Client) sendUserSubscriptionRequestHistoryGetSubscriptionRequestHistory
 
 // UsersBulkActionsBulkAllExtendExpirationDate invokes UsersBulkActions_bulkAllExtendExpirationDate operation.
 //
-// Bulk extend all users expiration date.
+// Extend expiration date for all users by days.
 //
 // POST /api/users/bulk/all/extend-expiration-date
-func (c *Client) UsersBulkActionsBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequest, options ...RequestOption) (UsersBulkActionsBulkAllExtendExpirationDateRes, error) {
+func (c *Client) UsersBulkActionsBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateBody, options ...RequestOption) (UsersBulkActionsBulkAllExtendExpirationDateRes, error) {
 	res, err := c.sendUsersBulkActionsBulkAllExtendExpirationDate(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkAllExtendExpirationDateRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkAllExtendExpirationDate(ctx context.Context, request *BulkAllExtendExpirationDateBody, requestOptions ...RequestOption) (res UsersBulkActionsBulkAllExtendExpirationDateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -23737,7 +30649,14 @@ func (c *Client) sendUsersBulkActionsBulkAllExtendExpirationDate(ctx context.Con
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23758,7 +30677,7 @@ func (c *Client) sendUsersBulkActionsBulkAllExtendExpirationDate(ctx context.Con
 
 // UsersBulkActionsBulkAllResetUserTraffic invokes UsersBulkActions_bulkAllResetUserTraffic operation.
 //
-// Bulk reset all users traffic.
+// Reset user used traffic for all users.
 //
 // POST /api/users/bulk/all/reset-traffic
 func (c *Client) UsersBulkActionsBulkAllResetUserTraffic(ctx context.Context, options ...RequestOption) (UsersBulkActionsBulkAllResetUserTrafficRes, error) {
@@ -23869,7 +30788,14 @@ func (c *Client) sendUsersBulkActionsBulkAllResetUserTraffic(ctx context.Context
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -23890,15 +30816,15 @@ func (c *Client) sendUsersBulkActionsBulkAllResetUserTraffic(ctx context.Context
 
 // UsersBulkActionsBulkDeleteUsers invokes UsersBulkActions_bulkDeleteUsers operation.
 //
-// Bulk delete users by UUIDs.
+// Bulk delete users by User IDs.
 //
 // POST /api/users/bulk/delete
-func (c *Client) UsersBulkActionsBulkDeleteUsers(ctx context.Context, request *BulkUuidsRequest, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersRes, error) {
+func (c *Client) UsersBulkActionsBulkDeleteUsers(ctx context.Context, request *UsersBodyBulkRequest, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersRes, error) {
 	res, err := c.sendUsersBulkActionsBulkDeleteUsers(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkDeleteUsers(ctx context.Context, request *BulkUuidsRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkDeleteUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkDeleteUsers(ctx context.Context, request *UsersBodyBulkRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkDeleteUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24013,7 +30939,14 @@ func (c *Client) sendUsersBulkActionsBulkDeleteUsers(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24037,12 +30970,12 @@ func (c *Client) sendUsersBulkActionsBulkDeleteUsers(ctx context.Context, reques
 // Bulk delete users by status.
 //
 // POST /api/users/bulk/delete-by-status
-func (c *Client) UsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequest, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersByStatusRes, error) {
+func (c *Client) UsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusBody, options ...RequestOption) (UsersBulkActionsBulkDeleteUsersByStatusRes, error) {
 	res, err := c.sendUsersBulkActionsBulkDeleteUsersByStatus(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkDeleteUsersByStatusRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context, request *BulkDeleteUsersByStatusBody, requestOptions ...RequestOption) (res UsersBulkActionsBulkDeleteUsersByStatusRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24157,7 +31090,14 @@ func (c *Client) sendUsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24178,15 +31118,15 @@ func (c *Client) sendUsersBulkActionsBulkDeleteUsersByStatus(ctx context.Context
 
 // UsersBulkActionsBulkExtendExpirationDate invokes UsersBulkActions_bulkExtendExpirationDate operation.
 //
-// Bulk extend all users expiration date.
+// Extend expiration date for specified users by days.
 //
 // POST /api/users/bulk/extend-expiration-date
-func (c *Client) UsersBulkActionsBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequest, options ...RequestOption) (UsersBulkActionsBulkExtendExpirationDateRes, error) {
+func (c *Client) UsersBulkActionsBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateBody, options ...RequestOption) (UsersBulkActionsBulkExtendExpirationDateRes, error) {
 	res, err := c.sendUsersBulkActionsBulkExtendExpirationDate(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkExtendExpirationDateRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkExtendExpirationDate(ctx context.Context, request *BulkExtendExpirationDateBody, requestOptions ...RequestOption) (res UsersBulkActionsBulkExtendExpirationDateRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24301,7 +31241,14 @@ func (c *Client) sendUsersBulkActionsBulkExtendExpirationDate(ctx context.Contex
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24322,15 +31269,15 @@ func (c *Client) sendUsersBulkActionsBulkExtendExpirationDate(ctx context.Contex
 
 // UsersBulkActionsBulkResetUserTraffic invokes UsersBulkActions_bulkResetUserTraffic operation.
 //
-// Bulk reset traffic users by UUIDs.
+// Bulk reset traffic users by User IDs.
 //
 // POST /api/users/bulk/reset-traffic
-func (c *Client) UsersBulkActionsBulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest, options ...RequestOption) (UsersBulkActionsBulkResetUserTrafficRes, error) {
+func (c *Client) UsersBulkActionsBulkResetUserTraffic(ctx context.Context, request *UsersBodyBulkRequest, options ...RequestOption) (UsersBulkActionsBulkResetUserTrafficRes, error) {
 	res, err := c.sendUsersBulkActionsBulkResetUserTraffic(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkResetUserTraffic(ctx context.Context, request *BulkUuidsRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkResetUserTrafficRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkResetUserTraffic(ctx context.Context, request *UsersBodyBulkRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkResetUserTrafficRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24445,7 +31392,14 @@ func (c *Client) sendUsersBulkActionsBulkResetUserTraffic(ctx context.Context, r
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24466,15 +31420,15 @@ func (c *Client) sendUsersBulkActionsBulkResetUserTraffic(ctx context.Context, r
 
 // UsersBulkActionsBulkRevokeUsersSubscription invokes UsersBulkActions_bulkRevokeUsersSubscription operation.
 //
-// Revoke users subscription by User UUIDs.
+// Revoke users subscription by User IDs.
 //
 // POST /api/users/bulk/revoke-subscription
-func (c *Client) UsersBulkActionsBulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest, options ...RequestOption) (UsersBulkActionsBulkRevokeUsersSubscriptionRes, error) {
+func (c *Client) UsersBulkActionsBulkRevokeUsersSubscription(ctx context.Context, request *UsersBodyBulkRequest, options ...RequestOption) (UsersBulkActionsBulkRevokeUsersSubscriptionRes, error) {
 	res, err := c.sendUsersBulkActionsBulkRevokeUsersSubscription(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkRevokeUsersSubscription(ctx context.Context, request *BulkUuidsRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkRevokeUsersSubscriptionRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkRevokeUsersSubscription(ctx context.Context, request *UsersBodyBulkRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkRevokeUsersSubscriptionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24589,7 +31543,14 @@ func (c *Client) sendUsersBulkActionsBulkRevokeUsersSubscription(ctx context.Con
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24613,12 +31574,12 @@ func (c *Client) sendUsersBulkActionsBulkRevokeUsersSubscription(ctx context.Con
 // Bulk update all users.
 //
 // POST /api/users/bulk/all/update
-func (c *Client) UsersBulkActionsBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequest, options ...RequestOption) (UsersBulkActionsBulkUpdateAllUsersRes, error) {
+func (c *Client) UsersBulkActionsBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersBody, options ...RequestOption) (UsersBulkActionsBulkUpdateAllUsersRes, error) {
 	res, err := c.sendUsersBulkActionsBulkUpdateAllUsers(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkUpdateAllUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkUpdateAllUsers(ctx context.Context, request *BulkAllUpdateUsersBody, requestOptions ...RequestOption) (res UsersBulkActionsBulkUpdateAllUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24733,7 +31694,14 @@ func (c *Client) sendUsersBulkActionsBulkUpdateAllUsers(ctx context.Context, req
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24754,15 +31722,15 @@ func (c *Client) sendUsersBulkActionsBulkUpdateAllUsers(ctx context.Context, req
 
 // UsersBulkActionsBulkUpdateUsers invokes UsersBulkActions_bulkUpdateUsers operation.
 //
-// Bulk update users by UUIDs.
+// Bulk update users by User IDs.
 //
 // POST /api/users/bulk/update
-func (c *Client) UsersBulkActionsBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequest, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersRes, error) {
+func (c *Client) UsersBulkActionsBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersBody, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersRes, error) {
 	res, err := c.sendUsersBulkActionsBulkUpdateUsers(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkUpdateUsersRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkUpdateUsers(ctx context.Context, request *BulkUpdateUsersBody, requestOptions ...RequestOption) (res UsersBulkActionsBulkUpdateUsersRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -24877,7 +31845,14 @@ func (c *Client) sendUsersBulkActionsBulkUpdateUsers(ctx context.Context, reques
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -24898,15 +31873,15 @@ func (c *Client) sendUsersBulkActionsBulkUpdateUsers(ctx context.Context, reques
 
 // UsersBulkActionsBulkUpdateUsersInternalSquads invokes UsersBulkActions_bulkUpdateUsersInternalSquads operation.
 //
-// Bulk update users internal squads by UUIDs.
+// Bulk update users internal squads by User IDs.
 //
 // POST /api/users/bulk/update-squads
-func (c *Client) UsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequest, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersInternalSquadsRes, error) {
+func (c *Client) UsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsBody, options ...RequestOption) (UsersBulkActionsBulkUpdateUsersInternalSquadsRes, error) {
 	res, err := c.sendUsersBulkActionsBulkUpdateUsersInternalSquads(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsRequest, requestOptions ...RequestOption) (res UsersBulkActionsBulkUpdateUsersInternalSquadsRes, err error) {
+func (c *Client) sendUsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.Context, request *BulkUpdateUsersSquadsBody, requestOptions ...RequestOption) (res UsersBulkActionsBulkUpdateUsersInternalSquadsRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -25021,7 +31996,14 @@ func (c *Client) sendUsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.C
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -25045,12 +32027,12 @@ func (c *Client) sendUsersBulkActionsBulkUpdateUsersInternalSquads(ctx context.C
 // Create a new user.
 //
 // POST /api/users
-func (c *Client) UsersCreateUser(ctx context.Context, request *CreateUserRequest, options ...RequestOption) (UsersCreateUserRes, error) {
+func (c *Client) UsersCreateUser(ctx context.Context, request *CreateUserBody, options ...RequestOption) (UsersCreateUserRes, error) {
 	res, err := c.sendUsersCreateUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersCreateUser(ctx context.Context, request *CreateUserRequest, requestOptions ...RequestOption) (res UsersCreateUserRes, err error) {
+func (c *Client) sendUsersCreateUser(ctx context.Context, request *CreateUserBody, requestOptions ...RequestOption) (res UsersCreateUserRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -25165,7 +32147,14 @@ func (c *Client) sendUsersCreateUser(ctx context.Context, request *CreateUserReq
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -25188,7 +32177,7 @@ func (c *Client) sendUsersCreateUser(ctx context.Context, request *CreateUserReq
 //
 // Delete user.
 //
-// DELETE /api/users/{uuid}
+// DELETE /api/users/{userId}
 func (c *Client) UsersDeleteUser(ctx context.Context, params UsersDeleteUserParams, options ...RequestOption) (UsersDeleteUserRes, error) {
 	res, err := c.sendUsersDeleteUser(ctx, params, options...)
 	return res, err
@@ -25198,7 +32187,7 @@ func (c *Client) sendUsersDeleteUser(ctx context.Context, params UsersDeleteUser
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_deleteUser"),
 		semconv.HTTPRequestMethodKey.String("DELETE"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}"),
+		semconv.URLTemplateKey.String("/api/users/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -25244,14 +32233,14 @@ func (c *Client) sendUsersDeleteUser(ctx context.Context, params UsersDeleteUser
 	var pathParts [2]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -25315,7 +32304,14 @@ func (c *Client) sendUsersDeleteUser(ctx context.Context, params UsersDeleteUser
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -25338,7 +32334,7 @@ func (c *Client) sendUsersDeleteUser(ctx context.Context, params UsersDeleteUser
 //
 // Disable user.
 //
-// POST /api/users/{uuid}/actions/disable
+// POST /api/users/{userId}/actions/disable
 func (c *Client) UsersDisableUser(ctx context.Context, params UsersDisableUserParams, options ...RequestOption) (UsersDisableUserRes, error) {
 	res, err := c.sendUsersDisableUser(ctx, params, options...)
 	return res, err
@@ -25348,7 +32344,7 @@ func (c *Client) sendUsersDisableUser(ctx context.Context, params UsersDisableUs
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_disableUser"),
 		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/disable"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/actions/disable"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -25394,14 +32390,14 @@ func (c *Client) sendUsersDisableUser(ctx context.Context, params UsersDisableUs
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -25466,7 +32462,14 @@ func (c *Client) sendUsersDisableUser(ctx context.Context, params UsersDisableUs
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -25489,7 +32492,7 @@ func (c *Client) sendUsersDisableUser(ctx context.Context, params UsersDisableUs
 //
 // Enable user.
 //
-// POST /api/users/{uuid}/actions/enable
+// POST /api/users/{userId}/actions/enable
 func (c *Client) UsersEnableUser(ctx context.Context, params UsersEnableUserParams, options ...RequestOption) (UsersEnableUserRes, error) {
 	res, err := c.sendUsersEnableUser(ctx, params, options...)
 	return res, err
@@ -25499,7 +32502,7 @@ func (c *Client) sendUsersEnableUser(ctx context.Context, params UsersEnableUser
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_enableUser"),
 		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/enable"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/actions/enable"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -25545,14 +32548,14 @@ func (c *Client) sendUsersEnableUser(ctx context.Context, params UsersEnableUser
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -25617,7 +32620,14 @@ func (c *Client) sendUsersEnableUser(ctx context.Context, params UsersEnableUser
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -25636,21 +32646,32 @@ func (c *Client) sendUsersEnableUser(ctx context.Context, params UsersEnableUser
 	return result, nil
 }
 
-// UsersGetAllTags invokes Users_getAllTags operation.
+// UsersExtendUserExpirationDate invokes Users_extendUserExpirationDate operation.
 //
-// Get all existing user tags.
+// If user status is EXPIRED, the new expiration date is calculated from the current date and the user
+// becomes ACTIVE. If user status is ACTIVE, the given number of days is added to the existing
+// expiration date. DISABLED and LIMITED users will be extended, but their status will not change.
 //
-// GET /api/users/tags
-func (c *Client) UsersGetAllTags(ctx context.Context, options ...RequestOption) (UsersGetAllTagsRes, error) {
-	res, err := c.sendUsersGetAllTags(ctx, options...)
+// POST /api/users/{userId}/actions/extend
+func (c *Client) UsersExtendUserExpirationDate(ctx context.Context, request *ExtendUserBody, params UsersExtendUserExpirationDateParams, options ...RequestOption) (UsersExtendUserExpirationDateRes, error) {
+	res, err := c.sendUsersExtendUserExpirationDate(ctx, request, params, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersGetAllTags(ctx context.Context, requestOptions ...RequestOption) (res UsersGetAllTagsRes, err error) {
+func (c *Client) sendUsersExtendUserExpirationDate(ctx context.Context, request *ExtendUserBody, params UsersExtendUserExpirationDateParams, requestOptions ...RequestOption) (res UsersExtendUserExpirationDateRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if err := request.Validate(); err != nil {
+			return err
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Users_getAllTags"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/tags"),
+		otelogen.OperationID("Users_extendUserExpirationDate"),
+		semconv.HTTPRequestMethodKey.String("POST"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/actions/extend"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -25666,7 +32687,7 @@ func (c *Client) sendUsersGetAllTags(ctx context.Context, requestOptions ...Requ
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetAllTagsOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersExtendUserExpirationDateOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25693,14 +32714,36 @@ func (c *Client) sendUsersGetAllTags(ctx context.Context, requestOptions ...Requ
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [1]string
-	pathParts[0] = "/api/users/tags"
+	var pathParts [3]string
+	pathParts[0] = "/api/users/"
+	{
+		// Encode "userId" parameter.
+		e := uri.NewPathEncoder(uri.PathEncoderConfig{
+			Param:   "userId",
+			Style:   uri.PathStyleSimple,
+			Explode: false,
+		})
+		if err := func() error {
+			return e.EncodeValue(conv.IntToString(params.UserId))
+		}(); err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		encoded, err := e.Result()
+		if err != nil {
+			return res, errors.Wrap(err, "encode path")
+		}
+		pathParts[1] = encoded
+	}
+	pathParts[2] = "/actions/extend"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
+	r, err := ht.NewRequest(ctx, "POST", u)
 	if err != nil {
 		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeUsersExtendUserExpirationDateRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
 	}
 
 	{
@@ -25708,7 +32751,7 @@ func (c *Client) sendUsersGetAllTags(ctx context.Context, requestOptions ...Requ
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, UsersGetAllTagsOperation, r); {
+			switch err := c.securityAuthorization(ctx, UsersExtendUserExpirationDateOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -25749,7 +32792,14 @@ func (c *Client) sendUsersGetAllTags(ctx context.Context, requestOptions ...Requ
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -25760,177 +32810,7 @@ func (c *Client) sendUsersGetAllTags(ctx context.Context, requestOptions ...Requ
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeUsersGetAllTagsResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// UsersGetAllUsers invokes Users_getAllUsers operation.
-//
-// Get all users using offset-based pagination.
-//
-// GET /api/users
-func (c *Client) UsersGetAllUsers(ctx context.Context, params UsersGetAllUsersParams, options ...RequestOption) (UsersGetAllUsersRes, error) {
-	res, err := c.sendUsersGetAllUsers(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendUsersGetAllUsers(ctx context.Context, params UsersGetAllUsersParams, requestOptions ...RequestOption) (res UsersGetAllUsersRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Users_getAllUsers"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetAllUsersOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [1]string
-	pathParts[0] = "/api/users"
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeQueryParams"
-	q := uri.NewQueryEncoder()
-	{
-		// Encode "size" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "size",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Size.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
-			}
-			return nil
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	{
-		// Encode "start" parameter.
-		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "start",
-			Style:   uri.QueryStyleForm,
-			Explode: true,
-		}
-
-		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Start.Get(); ok {
-				return e.EncodeValue(conv.IntToString(val))
-			}
-			return nil
-		}); err != nil {
-			return res, errors.Wrap(err, "encode query")
-		}
-	}
-	u.RawQuery = q.Values().Encode()
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, UsersGetAllUsersOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeUsersGetAllUsersResponse(resp)
+	result, err := decodeUsersExtendUserExpirationDateResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -25942,7 +32822,7 @@ func (c *Client) sendUsersGetAllUsers(ctx context.Context, params UsersGetAllUse
 //
 // Get user accessible nodes.
 //
-// GET /api/users/{uuid}/accessible-nodes
+// GET /api/users/{userId}/accessible-nodes
 func (c *Client) UsersGetUserAccessibleNodes(ctx context.Context, params UsersGetUserAccessibleNodesParams, options ...RequestOption) (UsersGetUserAccessibleNodesRes, error) {
 	res, err := c.sendUsersGetUserAccessibleNodes(ctx, params, options...)
 	return res, err
@@ -25952,7 +32832,7 @@ func (c *Client) sendUsersGetUserAccessibleNodes(ctx context.Context, params Use
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_getUserAccessibleNodes"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}/accessible-nodes"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/accessible-nodes"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -25998,14 +32878,14 @@ func (c *Client) sendUsersGetUserAccessibleNodes(ctx context.Context, params Use
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -26070,7 +32950,14 @@ func (c *Client) sendUsersGetUserAccessibleNodes(ctx context.Context, params Use
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -26093,7 +32980,7 @@ func (c *Client) sendUsersGetUserAccessibleNodes(ctx context.Context, params Use
 //
 // Get user by ID.
 //
-// GET /api/users/by-id/{id}
+// GET /api/users/{userId}
 func (c *Client) UsersGetUserById(ctx context.Context, params UsersGetUserByIdParams, options ...RequestOption) (UsersGetUserByIdRes, error) {
 	res, err := c.sendUsersGetUserById(ctx, params, options...)
 	return res, err
@@ -26103,7 +32990,7 @@ func (c *Client) sendUsersGetUserById(ctx context.Context, params UsersGetUserBy
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_getUserById"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/by-id/{id}"),
+		semconv.URLTemplateKey.String("/api/users/{userId}"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -26147,16 +33034,16 @@ func (c *Client) sendUsersGetUserById(ctx context.Context, params UsersGetUserBy
 	}
 	u = uri.Clone(u)
 	var pathParts [2]string
-	pathParts[0] = "/api/users/by-id/"
+	pathParts[0] = "/api/users/"
 	{
-		// Encode "id" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "id",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.ID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -26220,7 +33107,14 @@ func (c *Client) sendUsersGetUserById(ctx context.Context, params UsersGetUserBy
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -26370,7 +33264,14 @@ func (c *Client) sendUsersGetUserByShortUuid(ctx context.Context, params UsersGe
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -26382,156 +33283,6 @@ func (c *Client) sendUsersGetUserByShortUuid(ctx context.Context, params UsersGe
 
 	stage = "DecodeResponse"
 	result, err := decodeUsersGetUserByShortUuidResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// UsersGetUserByTelegramId invokes Users_getUserByTelegramId operation.
-//
-// Get users by telegram ID.
-//
-// GET /api/users/by-telegram-id/{telegramId}
-func (c *Client) UsersGetUserByTelegramId(ctx context.Context, params UsersGetUserByTelegramIdParams, options ...RequestOption) (UsersGetUserByTelegramIdRes, error) {
-	res, err := c.sendUsersGetUserByTelegramId(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendUsersGetUserByTelegramId(ctx context.Context, params UsersGetUserByTelegramIdParams, requestOptions ...RequestOption) (res UsersGetUserByTelegramIdRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Users_getUserByTelegramId"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/by-telegram-id/{telegramId}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetUserByTelegramIdOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/by-telegram-id/"
-	{
-		// Encode "telegramId" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "telegramId",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.TelegramId))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, UsersGetUserByTelegramIdOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeUsersGetUserByTelegramIdResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -26670,7 +33421,14 @@ func (c *Client) sendUsersGetUserByUsername(ctx context.Context, params UsersGet
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -26689,161 +33447,11 @@ func (c *Client) sendUsersGetUserByUsername(ctx context.Context, params UsersGet
 	return result, nil
 }
 
-// UsersGetUserByUuid invokes Users_getUserByUuid operation.
-//
-// Get user by UUID.
-//
-// GET /api/users/{uuid}
-func (c *Client) UsersGetUserByUuid(ctx context.Context, params UsersGetUserByUuidParams, options ...RequestOption) (UsersGetUserByUuidRes, error) {
-	res, err := c.sendUsersGetUserByUuid(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendUsersGetUserByUuid(ctx context.Context, params UsersGetUserByUuidParams, requestOptions ...RequestOption) (res UsersGetUserByUuidRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Users_getUserByUuid"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetUserByUuidOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/"
-	{
-		// Encode "uuid" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, UsersGetUserByUuidOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeUsersGetUserByUuidResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
 // UsersGetUserSubscriptionRequestHistory invokes Users_getUserSubscriptionRequestHistory operation.
 //
 // Get user subscription request history, recent 24 records.
 //
-// GET /api/users/{uuid}/subscription-request-history
+// GET /api/users/{userId}/subscription-request-history
 func (c *Client) UsersGetUserSubscriptionRequestHistory(ctx context.Context, params UsersGetUserSubscriptionRequestHistoryParams, options ...RequestOption) (UsersGetUserSubscriptionRequestHistoryRes, error) {
 	res, err := c.sendUsersGetUserSubscriptionRequestHistory(ctx, params, options...)
 	return res, err
@@ -26853,7 +33461,7 @@ func (c *Client) sendUsersGetUserSubscriptionRequestHistory(ctx context.Context,
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_getUserSubscriptionRequestHistory"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}/subscription-request-history"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/subscription-request-history"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -26899,14 +33507,14 @@ func (c *Client) sendUsersGetUserSubscriptionRequestHistory(ctx context.Context,
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -26971,7 +33579,14 @@ func (c *Client) sendUsersGetUserSubscriptionRequestHistory(ctx context.Context,
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -26990,21 +33605,23 @@ func (c *Client) sendUsersGetUserSubscriptionRequestHistory(ctx context.Context,
 	return result, nil
 }
 
-// UsersGetUsersByEmail invokes Users_getUsersByEmail operation.
+// UsersGetUsers invokes Users_getUsers operation.
 //
-// Get users by email.
+// Please note that the filters here are primarily intended for use by the frontend and rely on
+// expensive operators such as LIKE under the hood. Misusing these filters may negatively impact the
+// performance of your database.
 //
-// GET /api/users/by-email/{email}
-func (c *Client) UsersGetUsersByEmail(ctx context.Context, params UsersGetUsersByEmailParams, options ...RequestOption) (UsersGetUsersByEmailRes, error) {
-	res, err := c.sendUsersGetUsersByEmail(ctx, params, options...)
+// GET /api/users
+func (c *Client) UsersGetUsers(ctx context.Context, params UsersGetUsersParams, options ...RequestOption) (UsersGetUsersRes, error) {
+	res, err := c.sendUsersGetUsers(ctx, params, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersGetUsersByEmail(ctx context.Context, params UsersGetUsersByEmailParams, requestOptions ...RequestOption) (res UsersGetUsersByEmailRes, err error) {
+func (c *Client) sendUsersGetUsers(ctx context.Context, params UsersGetUsersParams, requestOptions ...RequestOption) (res UsersGetUsersRes, err error) {
 	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Users_getUsersByEmail"),
+		otelogen.OperationID("Users_getUsers"),
 		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/by-email/{email}"),
+		semconv.URLTemplateKey.String("/api/users"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -27020,7 +33637,7 @@ func (c *Client) sendUsersGetUsersByEmail(ctx context.Context, params UsersGetUs
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetUsersByEmailOperation,
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetUsersOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -27047,27 +33664,115 @@ func (c *Client) sendUsersGetUsersByEmail(ctx context.Context, params UsersGetUs
 		u = override
 	}
 	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/by-email/"
-	{
-		// Encode "email" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "email",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.Email))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
+	var pathParts [1]string
+	pathParts[0] = "/api/users"
 	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeQueryParams"
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "start" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "start",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Start.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "size" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "size",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Size.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "filters" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "filters",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Filters.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "filterModes" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "filterModes",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.FilterModes.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "globalFilterMode" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "globalFilterMode",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.GlobalFilterMode.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "sorting" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "sorting",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Sorting.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
 
 	stage = "EncodeRequest"
 	r, err := ht.NewRequest(ctx, "GET", u)
@@ -27080,7 +33785,7 @@ func (c *Client) sendUsersGetUsersByEmail(ctx context.Context, params UsersGetUs
 		var satisfied bitset
 		{
 			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, UsersGetUsersByEmailOperation, r); {
+			switch err := c.securityAuthorization(ctx, UsersGetUsersOperation, r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -27121,7 +33826,14 @@ func (c *Client) sendUsersGetUsersByEmail(ctx context.Context, params UsersGetUs
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -27132,157 +33844,7 @@ func (c *Client) sendUsersGetUsersByEmail(ctx context.Context, params UsersGetUs
 	}
 
 	stage = "DecodeResponse"
-	result, err := decodeUsersGetUsersByEmailResponse(resp)
-	if err != nil {
-		return res, errors.Wrap(err, "decode response")
-	}
-
-	return result, nil
-}
-
-// UsersGetUsersByTag invokes Users_getUsersByTag operation.
-//
-// Get users by tag.
-//
-// GET /api/users/by-tag/{tag}
-func (c *Client) UsersGetUsersByTag(ctx context.Context, params UsersGetUsersByTagParams, options ...RequestOption) (UsersGetUsersByTagRes, error) {
-	res, err := c.sendUsersGetUsersByTag(ctx, params, options...)
-	return res, err
-}
-
-func (c *Client) sendUsersGetUsersByTag(ctx context.Context, params UsersGetUsersByTagParams, requestOptions ...RequestOption) (res UsersGetUsersByTagRes, err error) {
-	otelAttrs := []attribute.KeyValue{
-		otelogen.OperationID("Users_getUsersByTag"),
-		semconv.HTTPRequestMethodKey.String("GET"),
-		semconv.URLTemplateKey.String("/api/users/by-tag/{tag}"),
-	}
-	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
-
-	// Run stopwatch.
-	startTime := time.Now()
-	defer func() {
-		// Use floating point division here for higher precision (instead of Millisecond method).
-		elapsedDuration := time.Since(startTime)
-		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
-	}()
-
-	// Increment request counter.
-	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-
-	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetUsersByTagOperation,
-		trace.WithAttributes(otelAttrs...),
-		clientSpanKind,
-	)
-	// Track stage for error reporting.
-	var stage string
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, stage)
-			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
-		}
-		span.End()
-	}()
-
-	var reqCfg requestConfig
-	reqCfg.setDefaults(c.baseClient)
-	for _, o := range requestOptions {
-		o(&reqCfg)
-	}
-
-	stage = "BuildURL"
-	u := c.serverURL
-	if override := reqCfg.ServerURL; override != nil {
-		u = override
-	}
-	u = uri.Clone(u)
-	var pathParts [2]string
-	pathParts[0] = "/api/users/by-tag/"
-	{
-		// Encode "tag" parameter.
-		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "tag",
-			Style:   uri.PathStyleSimple,
-			Explode: false,
-		})
-		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.Tag))
-		}(); err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		encoded, err := e.Result()
-		if err != nil {
-			return res, errors.Wrap(err, "encode path")
-		}
-		pathParts[1] = encoded
-	}
-	uri.AddPathParts(u, pathParts[:]...)
-
-	stage = "EncodeRequest"
-	r, err := ht.NewRequest(ctx, "GET", u)
-	if err != nil {
-		return res, errors.Wrap(err, "create request")
-	}
-
-	{
-		type bitset = [1]uint8
-		var satisfied bitset
-		{
-			stage = "Security:Authorization"
-			switch err := c.securityAuthorization(ctx, UsersGetUsersByTagOperation, r); {
-			case err == nil: // if NO error
-				satisfied[0] |= 1 << 0
-			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
-				// Skip this security.
-			default:
-				return res, errors.Wrap(err, "security \"Authorization\"")
-			}
-		}
-
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
-		}
-	}
-
-	if err := c.onRequest(ctx, r); err != nil {
-		return res, errors.Wrap(err, "client edit request")
-	}
-
-	if err := reqCfg.onRequest(r); err != nil {
-		return res, errors.Wrap(err, "edit request")
-	}
-
-	stage = "SendRequest"
-	resp, err := reqCfg.Client.Do(r)
-	if err != nil {
-		return res, errors.Wrap(err, "do request")
-	}
-	defer resp.Body.Close()
-
-	if err := c.onResponse(ctx, resp); err != nil {
-		return res, errors.Wrap(err, "client edit response")
-	}
-
-	if err := reqCfg.onResponse(resp); err != nil {
-		return res, errors.Wrap(err, "edit response")
-	}
-
-	stage = "DecodeResponse"
-	result, err := decodeUsersGetUsersByTagResponse(resp)
+	result, err := decodeUsersGetUsersResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}
@@ -27292,7 +33854,7 @@ func (c *Client) sendUsersGetUsersByTag(ctx context.Context, params UsersGetUser
 
 // UsersGetUsersStream invokes Users_getUsersStream operation.
 //
-// Get all users using cursor-based (keyset) pagination.
+// Get all users using cursor-based (keyset) pagination with filtering options.
 //
 // GET /api/users/stream
 func (c *Client) UsersGetUsersStream(ctx context.Context, params UsersGetUsersStreamParams, options ...RequestOption) (UsersGetUsersStreamRes, error) {
@@ -27354,6 +33916,23 @@ func (c *Client) sendUsersGetUsersStream(ctx context.Context, params UsersGetUse
 	stage = "EncodeQueryParams"
 	q := uri.NewQueryEncoder()
 	{
+		// Encode "cursor" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "cursor",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Cursor.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
 		// Encode "size" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
 			Name:    "size",
@@ -27371,16 +33950,101 @@ func (c *Client) sendUsersGetUsersStream(ctx context.Context, params UsersGetUse
 		}
 	}
 	{
-		// Encode "cursor" parameter.
+		// Encode "status" parameter.
 		cfg := uri.QueryParameterEncodingConfig{
-			Name:    "cursor",
+			Name:    "status",
 			Style:   uri.QueryStyleForm,
 			Explode: true,
 		}
 
 		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
-			if val, ok := params.Cursor.Get(); ok {
+			if val, ok := params.Status.Get(); ok {
+				return e.EncodeValue(conv.StringToString(string(val)))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "trafficLimitStrategy" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "trafficLimitStrategy",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.TrafficLimitStrategy.Get(); ok {
+				return e.EncodeValue(conv.StringToString(string(val)))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "telegramId" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "telegramId",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.TelegramId.Get(); ok {
 				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "email" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "email",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Email.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "tag" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "tag",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Tag.Get(); ok {
+				return e.EncodeValue(conv.StringToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "externalSquadUuid" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "externalSquadUuid",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.ExternalSquadUuid.Get(); ok {
+				return e.EncodeValue(conv.UUIDToString(val))
 			}
 			return nil
 		}); err != nil {
@@ -27441,7 +34105,14 @@ func (c *Client) sendUsersGetUsersStream(ctx context.Context, params UsersGetUse
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -27460,11 +34131,150 @@ func (c *Client) sendUsersGetUsersStream(ctx context.Context, params UsersGetUse
 	return result, nil
 }
 
+// UsersGetUsersTags invokes Users_getUsersTags operation.
+//
+// Get users tags.
+//
+// GET /api/users/tags
+func (c *Client) UsersGetUsersTags(ctx context.Context, options ...RequestOption) (UsersGetUsersTagsRes, error) {
+	res, err := c.sendUsersGetUsersTags(ctx, options...)
+	return res, err
+}
+
+func (c *Client) sendUsersGetUsersTags(ctx context.Context, requestOptions ...RequestOption) (res UsersGetUsersTagsRes, err error) {
+	otelAttrs := []attribute.KeyValue{
+		otelogen.OperationID("Users_getUsersTags"),
+		semconv.HTTPRequestMethodKey.String("GET"),
+		semconv.URLTemplateKey.String("/api/users/tags"),
+	}
+	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
+
+	// Run stopwatch.
+	startTime := time.Now()
+	defer func() {
+		// Use floating point division here for higher precision (instead of Millisecond method).
+		elapsedDuration := time.Since(startTime)
+		c.duration.Record(ctx, float64(elapsedDuration)/float64(time.Millisecond), metric.WithAttributes(otelAttrs...))
+	}()
+
+	// Increment request counter.
+	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+
+	// Start a span for this request.
+	ctx, span := c.cfg.Tracer.Start(ctx, UsersGetUsersTagsOperation,
+		trace.WithAttributes(otelAttrs...),
+		clientSpanKind,
+	)
+	// Track stage for error reporting.
+	var stage string
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, stage)
+			c.errors.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
+		}
+		span.End()
+	}()
+
+	var reqCfg requestConfig
+	reqCfg.setDefaults(c.baseClient)
+	for _, o := range requestOptions {
+		o(&reqCfg)
+	}
+
+	stage = "BuildURL"
+	u := c.serverURL
+	if override := reqCfg.ServerURL; override != nil {
+		u = override
+	}
+	u = uri.Clone(u)
+	var pathParts [1]string
+	pathParts[0] = "/api/users/tags"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	stage = "EncodeRequest"
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	{
+		type bitset = [1]uint8
+		var satisfied bitset
+		{
+			stage = "Security:Authorization"
+			switch err := c.securityAuthorization(ctx, UsersGetUsersTagsOperation, r); {
+			case err == nil: // if NO error
+				satisfied[0] |= 1 << 0
+			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
+				// Skip this security.
+			default:
+				return res, errors.Wrap(err, "security \"Authorization\"")
+			}
+		}
+
+		if ok := func() bool {
+		nextRequirement:
+			for _, requirement := range []bitset{
+				{0b00000001},
+			} {
+				for i, mask := range requirement {
+					if satisfied[i]&mask != mask {
+						continue nextRequirement
+					}
+				}
+				return true
+			}
+			return false
+		}(); !ok {
+			return res, ogenerrors.ErrSecurityRequirementIsNotSatisfied
+		}
+	}
+
+	if err := c.onRequest(ctx, r); err != nil {
+		return res, errors.Wrap(err, "client edit request")
+	}
+
+	if err := reqCfg.onRequest(r); err != nil {
+		return res, errors.Wrap(err, "edit request")
+	}
+
+	stage = "SendRequest"
+	resp, err := reqCfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
+
+	if err := c.onResponse(ctx, resp); err != nil {
+		return res, errors.Wrap(err, "client edit response")
+	}
+
+	if err := reqCfg.onResponse(resp); err != nil {
+		return res, errors.Wrap(err, "edit response")
+	}
+
+	stage = "DecodeResponse"
+	result, err := decodeUsersGetUsersTagsResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // UsersResetUserTraffic invokes Users_resetUserTraffic operation.
 //
 // Reset user traffic.
 //
-// POST /api/users/{uuid}/actions/reset-traffic
+// POST /api/users/{userId}/actions/reset-traffic
 func (c *Client) UsersResetUserTraffic(ctx context.Context, params UsersResetUserTrafficParams, options ...RequestOption) (UsersResetUserTrafficRes, error) {
 	res, err := c.sendUsersResetUserTraffic(ctx, params, options...)
 	return res, err
@@ -27474,7 +34284,7 @@ func (c *Client) sendUsersResetUserTraffic(ctx context.Context, params UsersRese
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_resetUserTraffic"),
 		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/reset-traffic"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/actions/reset-traffic"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -27520,14 +34330,14 @@ func (c *Client) sendUsersResetUserTraffic(ctx context.Context, params UsersRese
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -27592,7 +34402,14 @@ func (c *Client) sendUsersResetUserTraffic(ctx context.Context, params UsersRese
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -27613,24 +34430,15 @@ func (c *Client) sendUsersResetUserTraffic(ctx context.Context, params UsersRese
 
 // UsersResolveUser invokes Users_resolveUser operation.
 //
-// Resolve a user.
+// Resolve a user by ID, Short UUID or username. Exactly one of the fields must be provided.
 //
 // POST /api/users/resolve
-func (c *Client) UsersResolveUser(ctx context.Context, request *ResolveUserRequestBody, options ...RequestOption) (UsersResolveUserRes, error) {
+func (c *Client) UsersResolveUser(ctx context.Context, request *ResolveUserBody, options ...RequestOption) (UsersResolveUserRes, error) {
 	res, err := c.sendUsersResolveUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersResolveUser(ctx context.Context, request *ResolveUserRequestBody, requestOptions ...RequestOption) (res UsersResolveUserRes, err error) {
-	// Validate request before sending.
-	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
-		}
-		return nil
-	}(); err != nil {
-		return res, errors.Wrap(err, "validate")
-	}
+func (c *Client) sendUsersResolveUser(ctx context.Context, request *ResolveUserBody, requestOptions ...RequestOption) (res UsersResolveUserRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_resolveUser"),
 		semconv.HTTPRequestMethodKey.String("POST"),
@@ -27736,7 +34544,14 @@ func (c *Client) sendUsersResolveUser(ctx context.Context, request *ResolveUserR
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -27759,7 +34574,7 @@ func (c *Client) sendUsersResolveUser(ctx context.Context, request *ResolveUserR
 //
 // Revoke user subscription.
 //
-// POST /api/users/{uuid}/actions/revoke
+// POST /api/users/{userId}/actions/revoke
 func (c *Client) UsersRevokeUserSubscription(ctx context.Context, request *RevokeUserSubscriptionBody, params UsersRevokeUserSubscriptionParams, options ...RequestOption) (UsersRevokeUserSubscriptionRes, error) {
 	res, err := c.sendUsersRevokeUserSubscription(ctx, request, params, options...)
 	return res, err
@@ -27778,7 +34593,7 @@ func (c *Client) sendUsersRevokeUserSubscription(ctx context.Context, request *R
 	otelAttrs := []attribute.KeyValue{
 		otelogen.OperationID("Users_revokeUserSubscription"),
 		semconv.HTTPRequestMethodKey.String("POST"),
-		semconv.URLTemplateKey.String("/api/users/{uuid}/actions/revoke"),
+		semconv.URLTemplateKey.String("/api/users/{userId}/actions/revoke"),
 	}
 	otelAttrs = append(otelAttrs, c.cfg.Attributes...)
 
@@ -27824,14 +34639,14 @@ func (c *Client) sendUsersRevokeUserSubscription(ctx context.Context, request *R
 	var pathParts [3]string
 	pathParts[0] = "/api/users/"
 	{
-		// Encode "uuid" parameter.
+		// Encode "userId" parameter.
 		e := uri.NewPathEncoder(uri.PathEncoderConfig{
-			Param:   "uuid",
+			Param:   "userId",
 			Style:   uri.PathStyleSimple,
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.StringToString(params.UUID))
+			return e.EncodeValue(conv.IntToString(params.UserId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -27899,7 +34714,14 @@ func (c *Client) sendUsersRevokeUserSubscription(ctx context.Context, request *R
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")
@@ -27920,15 +34742,15 @@ func (c *Client) sendUsersRevokeUserSubscription(ctx context.Context, request *R
 
 // UsersUpdateUser invokes Users_updateUser operation.
 //
-// Update a user by UUID or username.
+// Update a user by ID or username. Exactly one of the fields must be provided.
 //
 // PATCH /api/users
-func (c *Client) UsersUpdateUser(ctx context.Context, request *UpdateUserRequest, options ...RequestOption) (UsersUpdateUserRes, error) {
+func (c *Client) UsersUpdateUser(ctx context.Context, request *UpdateUserBody, options ...RequestOption) (UsersUpdateUserRes, error) {
 	res, err := c.sendUsersUpdateUser(ctx, request, options...)
 	return res, err
 }
 
-func (c *Client) sendUsersUpdateUser(ctx context.Context, request *UpdateUserRequest, requestOptions ...RequestOption) (res UsersUpdateUserRes, err error) {
+func (c *Client) sendUsersUpdateUser(ctx context.Context, request *UpdateUserBody, requestOptions ...RequestOption) (res UsersUpdateUserRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
 		if err := request.Validate(); err != nil {
@@ -28043,7 +34865,14 @@ func (c *Client) sendUsersUpdateUser(ctx context.Context, request *UpdateUserReq
 	if err != nil {
 		return res, errors.Wrap(err, "do request")
 	}
-	defer resp.Body.Close()
+	body := resp.Body
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	if err := c.onResponse(ctx, resp); err != nil {
 		return res, errors.Wrap(err, "client edit response")

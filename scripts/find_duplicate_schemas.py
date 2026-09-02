@@ -8,8 +8,8 @@ schemas and reduce API specification redundancy.
 
 Usage:
     python3 find_duplicate_schemas.py <path_to_openapi.json>
-    python3 find_duplicate_schemas.py api-2-2-2.json
-    python3 find_duplicate_schemas.py api-2-2-0.json
+    python3 find_duplicate_schemas.py ../specs/3.4.3.json
+    python3 find_duplicate_schemas.py ../specs/3.4.3-final.json
 
 Features:
     - Handles malformed JSON files by attempting salvage through truncation
@@ -275,7 +275,7 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: python3 find_duplicate_schemas.py <openapi_file.json>", file=sys.stderr)
         print("\nExamples:", file=sys.stderr)
-        print("  python3 find_duplicate_schemas.py api-2-2-2.json", file=sys.stderr)
+        print("  python3 find_duplicate_schemas.py ../specs/3.4.3.json", file=sys.stderr)
         print("  python3 find_duplicate_schemas.py openapi.json", file=sys.stderr)
         sys.exit(1)
     
