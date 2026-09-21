@@ -3,13 +3,13 @@
 
 package api
 
-// PaginationHelper provides utilities for manually paginating through results.
-// Use this for more control when ListAll iterator is not sufficient.
+// PaginationHelper provides utilities for manually paginating through
+// offset-based list results.
 type PaginationHelper struct {
-	Offset   int
-	Limit    int
-	Total    *int
-	HasMore  bool
+	Offset  int
+	Limit   int
+	Total   *int
+	HasMore bool
 }
 
 // NewPaginationHelper creates a new pagination helper with the given page size.
@@ -30,7 +30,12 @@ func (ph *PaginationHelper) NextPage() bool {
 	if !ph.HasMore {
 		return false
 	}
-	ph.Offset += ph.Limit
+	nextOffset := ph.Offset + ph.Limit
+	if ph.Total != nil && nextOffset >= *ph.Total {
+		ph.HasMore = false
+		return false
+	}
+	ph.Offset = nextOffset
 	return true
 }
 
@@ -41,12 +46,20 @@ func (ph *PaginationHelper) PreviousPage() bool {
 		return false
 	}
 	ph.Offset -= ph.Limit
+	if ph.Total != nil {
+		ph.HasMore = ph.Offset+ph.Limit < *ph.Total
+	}
 	return true
 }
 
 // FirstPage resets to the first page.
 func (ph *PaginationHelper) FirstPage() {
 	ph.Offset = 0
+	if ph.Total != nil {
+		ph.HasMore = *ph.Total > 0
+	} else {
+		ph.HasMore = true
+	}
 }
 
 // CurrentPage returns the current page number (1-indexed).
@@ -57,8 +70,11 @@ func (ph *PaginationHelper) CurrentPage() int {
 // SetTotal sets the total number of items (if known from API response).
 // This can be used to calculate total pages.
 func (ph *PaginationHelper) SetTotal(total int) {
+	if total < 0 {
+		total = 0
+	}
 	ph.Total = &total
-	// If we've fetched less than a full page, we know there are no more pages
+	ph.HasMore = ph.Offset+ph.Limit < total
 }
 
 // TotalPages returns the total number of pages (if Total was set).
@@ -94,31 +110,25 @@ func (ph *PaginationHelper) CanGoPrevious() bool {
 // This example demonstrates using the pagination helper for manual control:
 //
 //   pager := NewPaginationHelper(10) // 10 items per page
-//   for {
-//       resp, err := client.UsersControllerGetAllUsers(ctx, UsersControllerGetAllUsersParams{
-//           Start: NewOptFloat64(float64(pager.Offset)),
-//           Size:  NewOptFloat64(float64(pager.Limit)),
-//       })
+//   for pager.CanGoNext() {
+//       resp, err := client.Users().GetUsers(ctx, pager.Offset, pager.Limit)
 //       if err != nil {
 //           log.Fatal(err)
 //       }
 //
-//       if usersResp, ok := resp.(*GetAllUsersResponseDto); ok {
-//           fmt.Printf("Page %d\n", pager.CurrentPage())
-//           for _, user := range usersResp.Response.Users {
-//               fmt.Println("- ", user.Username)
-//           }
-//           pager.SetTotal(int(usersResp.Response.Total))
-//           pager.HasMore = len(usersResp.Response.Users) >= pager.Limit
+//       usersResp, ok := resp.(*GetUsersResponse)
+//       if !ok {
+//           log.Fatal("unexpected response type")
 //       }
-//
-//       if !pager.CanGoNext() {
-//           break
+//       fmt.Printf("Page %d\n", pager.CurrentPage())
+//       for _, user := range usersResp.Response.Users {
+//           fmt.Println("- ", user.Username)
 //       }
+//       pager.SetTotal(usersResp.Response.Total)
 //       pager.NextPage()
 //   }
 //
 // For simpler iteration without manual control, see the sub-client examples.
 
-// Note: OptFloat64 is already defined in oas_schemas_gen.go
-// Use the NewOptFloat64() function from there for creating pagination parameters.
+// For cursor-based pagination, use UsersClient.GetUsersStream and pass the
+// returned NextCursor unchanged as UsersGetUsersStreamParams.Cursor.

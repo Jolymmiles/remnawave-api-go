@@ -3,37 +3,28 @@
 package api
 
 // setDefaults set default value of fields.
-func (s *BulkAllUpdateUsersRequest) setDefaults() {
+func (s *CreateApiTokenBody) setDefaults() {
 	{
-		val := BulkAllUpdateUsersRequestStatus("ACTIVE")
-		s.Status.SetTo(val)
+		var defaultVal0 []string
+		{
+			var defaultVal0Elem string
+
+			val := string("*")
+			defaultVal0Elem = val
+			defaultVal0 = append(defaultVal0, defaultVal0Elem)
+		}
+		s.Scopes = defaultVal0
 	}
 }
 
 // setDefaults set default value of fields.
-func (s *BulkDeleteUsersByStatusRequest) setDefaults() {
-	{
-		val := BulkDeleteUsersByStatusRequestStatus("ACTIVE")
-		s.Status.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
-func (s *BulkUpdateUsersRequestFields) setDefaults() {
-	{
-		val := BulkUpdateUsersRequestFieldsStatus("ACTIVE")
-		s.Status.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
-func (s *CreateHostRequest) setDefaults() {
+func (s *CreateHostBody) setDefaults() {
 	{
 		val := bool(false)
 		s.IsDisabled.SetTo(val)
 	}
 	{
-		val := CreateHostRequestSecurityLayer("DEFAULT")
+		val := CreateHostBodySecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
 	}
 	{
@@ -59,7 +50,7 @@ func (s *CreateHostRequest) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *CreateNodeRequest) setDefaults() {
+func (s *CreateNodeBody) setDefaults() {
 	{
 		val := bool(false)
 		s.IsTrafficTrackingActive.SetTo(val)
@@ -71,22 +62,50 @@ func (s *CreateNodeRequest) setDefaults() {
 }
 
 // setDefaults set default value of fields.
-func (s *CreateUserRequest) setDefaults() {
+func (s *CreateUserBody) setDefaults() {
 	{
-		val := CreateUserRequestStatus("ACTIVE")
+		val := CreateUserBodyStatus("ACTIVE")
 		s.Status.SetTo(val)
 	}
 	{
-		val := CreateUserRequestTrafficLimitStrategy("NO_RESET")
+		val := CreateUserBodyTrafficLimitStrategy("NO_RESET")
 		s.TrafficLimitStrategy.SetTo(val)
 	}
 }
 
 // setDefaults set default value of fields.
-func (s *HostItem) setDefaults() {
+func (s *GetHostsResponseResponseItem) setDefaults() {
 	{
-		val := HostItemSecurityLayer("DEFAULT")
+		val := GetHostsResponseResponseItemSecurityLayer("DEFAULT")
 		s.SecurityLayer.SetTo(val)
+	}
+	{
+		var defaultVal0 []string
+		s.Tags = defaultVal0
+	}
+	{
+		val := bool(false)
+		s.IsHidden.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.OverrideSniFromAddress.SetTo(val)
+	}
+	{
+		val := bool(false)
+		s.KeepSniBlank.SetTo(val)
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *HostResponseResponse) setDefaults() {
+	{
+		val := HostResponseResponseSecurityLayer("DEFAULT")
+		s.SecurityLayer.SetTo(val)
+	}
+	{
+		var defaultVal0 []string
+		s.Tags = defaultVal0
 	}
 	{
 		val := bool(false)
@@ -107,49 +126,5 @@ func (s *RevokeUserSubscriptionBody) setDefaults() {
 	{
 		val := bool(false)
 		s.RevokeOnlyPasswords.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
-func (s *UpdateHostRequest) setDefaults() {
-	{
-		val := bool(false)
-		s.IsDisabled.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
-func (s *UpdateManyHostsRequest) setDefaults() {
-	{
-		val := bool(false)
-		s.IsDisabled.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
-func (s *UpdateUserRequest) setDefaults() {
-	{
-		val := UpdateUserRequestTrafficLimitStrategy("NO_RESET")
-		s.TrafficLimitStrategy.SetTo(val)
-	}
-}
-
-// setDefaults set default value of fields.
-func (s *UserItemInfo) setDefaults() {
-	{
-		val := UserItemInfoStatus("ACTIVE")
-		s.Status.SetTo(val)
-	}
-	{
-		val := float64(0)
-		s.TrafficLimitBytes.SetTo(val)
-	}
-	{
-		val := UserItemInfoTrafficLimitStrategy("NO_RESET")
-		s.TrafficLimitStrategy.SetTo(val)
-	}
-	{
-		val := int(0)
-		s.LastTriggeredThreshold.SetTo(val)
 	}
 }

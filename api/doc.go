@@ -28,23 +28,23 @@
 //
 // # Simplified Parameters
 //
-// Methods with simple parameters (UUID, string) accept them directly
+// Methods with simple parameters (numeric ID, UUID, string) accept them directly
 // instead of requiring Params structs:
 //
-//	// Instead of: client.Users().GetUserByUuid(ctx, UsersGetUserByUuidParams{UUID: "..."})
-//	user, err := client.Users().GetUserByUuid(ctx, "user-uuid-here")
+//	// Instead of: client.Users().GetUserById(ctx, UsersGetUserByIdParams{UserId: 123})
+//	user, err := client.Users().GetUserById(ctx, 123)
 //
 // # Request Options
 //
 // All methods accept optional RequestOption arguments for per-request customization:
 //
-//	user, err := client.Users().GetUserByUuid(ctx, "uuid", api.WithHeader("X-Custom", "value"))
+//	user, err := client.Users().GetUserById(ctx, 123, api.WithHeader("X-Custom", "value"))
 //
 // # Error Handling
 //
 // API errors are returned as typed responses that can be checked with type switches:
 //
-//	resp, err := client.Users().GetUserByUuid(ctx, "invalid-uuid")
+//	resp, err := client.Users().GetUserById(ctx, 123)
 //	if err != nil {
 //	    log.Fatal(err)
 //	}

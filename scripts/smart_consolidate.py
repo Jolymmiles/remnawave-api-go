@@ -287,6 +287,32 @@ class SmartConsolidator:
     # Each entry is a frozenset of schema names that should remain separate.
     DO_NOT_MERGE = [
         frozenset({'CreateExternalSquadRequestDto', 'CreateSubscriptionPageConfigRequestDto'}),
+        # These request bodies are structurally identical across controllers.
+        # Keep their endpoint-specific names so generated encoders do not
+        # expose a type owned by an unrelated controller.
+        frozenset({
+            'SetSubpageConfigsTagsBodyDto',
+            'SetSubscriptionTemplatesTagsBodyDto',
+            'SetConfigProfilesTagsBodyDto',
+            'SetInternalSquadsTagsBodyDto',
+            'SetExternalSquadsTagsBodyDto',
+            'SetNodePluginsTagsBodyDto',
+        }),
+        frozenset({
+            'CreateSubpageConfigBodyDto',
+            'CreateExternalSquadBodyDto',
+            'CreateNodePluginBodyDto',
+        }),
+        frozenset({
+            'ReorderSubpageConfigsBodyDto',
+            'ReorderSubscriptionTemplatesBodyDto',
+            'ReorderConfigProfilesBodyDto',
+            'ReorderInternalSquadsBodyDto',
+            'ReorderExternalSquadsBodyDto',
+            'ReorderNodePluginsBodyDto',
+        }),
+        frozenset({'CloneSubpageConfigBodyDto', 'CloneNodePluginBodyDto'}),
+        frozenset({'UpsertUserMetadataBodyDto', 'UpsertNodeMetadataBodyDto'}),
     ]
 
     # Known entity groupings (for disambiguation)
@@ -1115,12 +1141,24 @@ def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
     """
     spec = copy.deepcopy(spec)
     
-    # Define common error schemas to extract
+    # Remnawave 3.x uses a NestJS error envelope for business errors.  Some
+    # endpoints also return validation errors with statusCode/errors, so the
+    # shared 400 schema has to accept both response shapes.  The previous
+    # definitions made statusCode and errors mandatory for every error.  That
+    # caused valid 404/400 responses such as
+    # {timestamp, path, message, errorCode} to fail during decoding.
+    #
+    # Keep message required because it is present in both Remnawave error
+    # variants.  The remaining fields are optional to preserve compatibility
+    # with both the business-error envelope and the validation/legacy shape.
     ERROR_SCHEMAS = {
         'BadRequestError': {
             'type': 'object',
             'properties': {
+                'timestamp': {'type': 'string'},
+                'path': {'type': 'string'},
                 'message': {'type': 'string'},
+                'errorCode': {'type': 'string'},
                 'statusCode': {'type': 'number', 'example': 400},
                 'errors': {
                     'type': 'array',
@@ -1129,7 +1167,7 @@ def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
                     }
                 }
             },
-            'required': ['message', 'statusCode', 'errors']
+            'required': ['message']
         },
         'ValidationError': {
             'type': 'object',
@@ -1148,26 +1186,35 @@ def unify_error_responses(spec: dict) -> Tuple[dict, Dict]:
         'UnauthorizedError': {
             'type': 'object',
             'properties': {
+                'timestamp': {'type': 'string'},
+                'path': {'type': 'string'},
                 'message': {'type': 'string', 'example': 'Unauthorized'},
+                'errorCode': {'type': 'string'},
                 'statusCode': {'type': 'number', 'example': 401}
             },
-            'required': ['message', 'statusCode']
+            'required': ['message']
         },
         'ForbiddenError': {
             'type': 'object',
             'properties': {
+                'timestamp': {'type': 'string'},
+                'path': {'type': 'string'},
                 'message': {'type': 'string', 'example': 'Forbidden'},
+                'errorCode': {'type': 'string'},
                 'statusCode': {'type': 'number', 'example': 403}
             },
-            'required': ['message', 'statusCode']
+            'required': ['message']
         },
         'NotFoundError': {
             'type': 'object',
             'properties': {
+                'timestamp': {'type': 'string'},
+                'path': {'type': 'string'},
                 'message': {'type': 'string', 'example': 'Not Found'},
+                'errorCode': {'type': 'string'},
                 'statusCode': {'type': 'number', 'example': 404}
             },
-            'required': ['message', 'statusCode']
+            'required': ['message']
         },
         'InternalServerError': {
             'type': 'object',
